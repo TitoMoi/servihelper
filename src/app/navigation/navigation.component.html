@@ -1,0 +1,111 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav d-print-none"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar></mat-toolbar>
+    <mat-nav-list *ngIf="isLangSeted">
+      <a mat-list-item routerLink="home">
+        <span>{{ "NAV_HOME" | transloco }}</span>
+      </a>
+      <a mat-list-item routerLink="assignType">
+        <span>{{ "NAV_ASSIGN_TYPE" | transloco }}</span>
+        <mat-icon
+          class="mat-icon--margin"
+          svgIcon="abc"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+      </a>
+      <a mat-list-item routerLink="room">
+        <span>{{ "NAV_ROOM" | transloco }}</span>
+        <mat-icon
+          class="mat-icon--margin"
+          svgIcon="room"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+      </a>
+      <a mat-list-item routerLink="note">
+        <span>{{ "NAV_NOTE" | transloco }}</span>
+        <mat-icon
+          class="mat-icon--margin"
+          svgIcon="notes"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+      </a>
+      <a mat-list-item routerLink="participant">
+        <span>{{ "NAV_PARTICIPANT" | transloco }}</span>
+        <mat-icon
+          class="mat-icon--margin"
+          svgIcon="participants"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+      </a>
+      <a mat-list-item routerLink="assignment">
+        <span>{{ "NAV_ASSIGNMENT" | transloco }}</span>
+        <mat-icon
+          class="mat-icon--margin"
+          svgIcon="assignment"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+      </a>
+      <a mat-list-item routerLink="statistics">
+        <span>{{ "NAV_STATISTICS" | transloco }}</span>
+        <mat-icon
+          class="mat-icon--margin"
+          svgIcon="statistics"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+      </a>
+      <a mat-list-item routerLink="config">
+        <span>{{ "NAV_CONFIG" | transloco }}</span>
+        <mat-icon
+          class="mat-icon--margin"
+          svgIcon="config"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+      </a>
+      <a mat-list-item routerLink="qa">
+        <span>{{ "NAV_QA" | transloco }}</span>
+        <mat-icon
+          class="mat-icon--margin"
+          svgIcon="qa"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar
+      class="justify-content-between d-print-none"
+      style="font-size: medium"
+      color="primary"
+    >
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
+      </button>
+      <span>Servihelper</span>
+      <mat-form-field style="text-align: center">
+        <mat-select
+          class="wk-vertical-align"
+          [value]="selectedLang"
+          (selectionChange)="updateLang($event)"
+        >
+          <mat-option *ngFor="let lang of availableLangs" [value]="lang">
+            {{ lang | transloco }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

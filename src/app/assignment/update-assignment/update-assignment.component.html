@@ -1,0 +1,158 @@
+<ng-container *ngIf="isCalculated">
+  <form
+    [formGroup]="assignmentForm"
+    novalidate
+    (ngSubmit)="onSubmit(assignmentForm.value)"
+  >
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>{{ "ASSIGN_UPDATE_TITLE" | transloco }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <mat-form-field appearance="fill">
+            <mat-label>{{ "ASSIGN_UPDATE_DATE" | transloco }}</mat-label>
+            <input
+              required
+              matInput
+              [matDatepicker]="picker"
+              formControlName="date"
+            />
+            <mat-datepicker-toggle
+              matPrefix
+              [for]="picker"
+              class="mr-3"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="col-6 mb-3">
+            <mat-form-field class="full-width">
+              <mat-label>{{ "ASSIGN_UPDATE_ROOM" | transloco }}</mat-label>
+              <mat-select formControlName="room" required>
+                <mat-option *ngFor="let room of rooms" [value]="room.id">
+                  {{ room.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mb-3">
+            <mat-form-field class="full-width">
+              <mat-label>{{
+                "ASSIGN_UPDATE_ASSIGNTYPE" | transloco
+              }}</mat-label>
+              <mat-select formControlName="assignType" required>
+                <mat-option
+                  *ngFor="let assignType of assignTypes"
+                  [value]="assignType.id"
+                >
+                  {{ assignType.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 mb-3">
+            <mat-form-field class="full-width">
+              <mat-label>{{ "ASSIGN_UPDATE_THEME" | transloco }}</mat-label>
+              <input matInput formControlName="theme" />
+            </mat-form-field>
+          </div>
+          <div class="col-3 mb-3">
+            <mat-checkbox
+              labelPosition="before"
+              color="primary"
+              formControlName="onlyWoman"
+              >{{ "ASSIGN_UPDATE_ONLY_WOMEN" | transloco }}</mat-checkbox
+            >
+          </div>
+          <div class="col-3 mb-3">
+            <mat-checkbox
+              labelPosition="before"
+              color="primary"
+              formControlName="onlyMan"
+              >{{ "ASSIGN_UPDATE_ONLY_MEN" | transloco }}</mat-checkbox
+            >
+          </div>
+          <div class="col-12 mb-3">
+            <mat-form-field class="full-width">
+              <mat-label>{{ "ASSIGN_UPDATE_PRINCIPAL" | transloco }}</mat-label>
+              <mat-select formControlName="principal" required>
+                <mat-option
+                  *ngFor="
+                    let participant of principalList;
+                    trackBy: trackByIdFn
+                  "
+                  [value]="participant.id"
+                >
+                  {{ participant.count }} - {{ participant.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <ng-container *ngIf="hasAssignmentsList.length">
+              {{ "ASSIGN_HAS_ASSIGNMENTS" | transloco }}
+              <ul>
+                <li
+                  *ngFor="let assignTypeName of hasAssignmentsList"
+                  class="d-inline-block"
+                >
+                  <span>&#x2022;&nbsp;{{ assignTypeName }}&nbsp;</span>
+                </li>
+              </ul>
+            </ng-container>
+          </div>
+          <div class="col-12 mb-3">
+            <mat-form-field class="full-width">
+              <mat-label>{{ "ASSIGN_UPDATE_ASSISTANT" | transloco }}</mat-label>
+              <mat-select formControlName="assistant">
+                <mat-option
+                  *ngFor="
+                    let participant of assistantList;
+                    trackBy: trackByIdFn
+                  "
+                  [value]="participant.id"
+                >
+                  {{ participant.count }} - {{ participant.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <ng-container *ngIf="hasAssignmentsAssistantList.length">
+              {{ "ASSIGN_ASSISTANT_HAS_ASSIGNMENTS" | transloco }}
+              <ul>
+                <li
+                  *ngFor="let assignTypeName of hasAssignmentsAssistantList"
+                  class="d-inline-block"
+                >
+                  <span>&#x2022;&nbsp;{{ assignTypeName }}&nbsp;</span>
+                </li>
+              </ul>
+            </ng-container>
+          </div>
+          <div class="col-12 mb-3">
+            <mat-form-field class="full-width">
+              <mat-label>{{
+                "ASSIGN_UPDATE_FOOTER_NOTE" | transloco
+              }}</mat-label>
+              <mat-select formControlName="footerNote">
+                <mat-option *ngFor="let note of footerNotes" [value]="note.id">
+                  {{ note.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="button" routerLink="../..">
+          {{ "BUTTON_CANCEL" | transloco }}
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!assignmentForm.valid"
+        >
+          {{ "BUTTON_UPDATE" | transloco }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-container>

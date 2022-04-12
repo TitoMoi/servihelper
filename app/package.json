@@ -1,0 +1,15 @@
+{
+  "name": "servihelper",
+  "version": "1.0.0",
+  "description": "Servihelper",
+  "author": {
+    "name": "Moisés Medina Vicente",
+    "email": "servihelper@gmail.com"
+  },
+  "main": "main.js",
+  "private": true,
+  "dependencies": {
+    "@electron/remote": "1.2.2",
+    "fs-extra": "10.0.1"
+  }
+}

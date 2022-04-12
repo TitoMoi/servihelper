@@ -1,0 +1,25 @@
+div {
+  background-color: white;
+}
+
+#actionBar {
+  background-color: inherit;
+}
+
+#copiedId {
+  background-color: white;
+  padding: 10px;
+  border: 2px solid lightgreen;
+  border-radius: 5px;
+}
+
+.mat-icon {
+  height: 48px;
+  width: 48px;
+}
+
+@media print {
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}

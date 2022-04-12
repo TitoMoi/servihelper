@@ -1,0 +1,31 @@
+.mat-paginator,
+.mat-paginator-page-size .mat-select-trigger {
+  font-size: inherit;
+}
+
+.expanded-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.expanded-element-note {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+tr.expanded-detail-row {
+  height: 0;
+}
+
+.expanded-element-row td {
+  border-bottom-width: 0;
+}
+
+tr {
+  cursor: pointer;
+}
+
+.mat-icon {
+  height: 28px;
+  width: 28px;
+}

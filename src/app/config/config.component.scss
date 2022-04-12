@@ -1,0 +1,35 @@
+.green-msg {
+  background-color: white;
+  border: 2px solid lightgreen;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.light-red-bg {
+  background-color: rgb(240, 179, 179);
+}
+
+#uploadId {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.custom-file-upload-success {
+  border: 1px solid #ccc;
+  background-color: lightgreen;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
