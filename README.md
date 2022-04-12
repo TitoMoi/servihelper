@@ -4,6 +4,10 @@ Servihelper is an executable app that runs on the machine _(Windows or Mac)_ You
 
 Its purpose is for help the Jehovah's witnesses to create and manage assignments for the meetings.
 
+## Download links
+
+Download app section [Download for Windows or Mac](https://github.com/TitoMoi/servihelper/releases).
+
 ## The executable is not recognized on Mac
 
 Thats because i dont have an Apple developer Id, you must need to trust the binary in mac -> security tab -> general tab and below the section are the instructions to allow it.
