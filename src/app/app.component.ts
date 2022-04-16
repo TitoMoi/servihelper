@@ -12,7 +12,7 @@ import { RoomService } from "app/room/service/room.service";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  configFileLoaded: boolean;
+  filesExist: boolean;
 
   constructor(
     private configService: ConfigService,
@@ -22,14 +22,23 @@ export class AppComponent implements OnInit {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService
   ) {
-    this.configFileLoaded = false;
+    this.filesExist = false;
   }
-  async ngOnInit(): Promise<void> {
-    this.configFileLoaded = await this.configService.ensureConfigFile();
-    this.roomService.ensureRoomFile();
-    this.assignTypeService.ensureAssignTypeFile();
-    this.noteService.ensureNoteFile();
-    this.participantService.ensureParticipantFile();
-    this.assignmentService.ensureAssignmentFile();
+  ngOnInit() {
+    Promise.all([
+      this.roomService.ensureRoomFile(),
+      this.assignTypeService.ensureAssignTypeFile(),
+      this.noteService.ensureNoteFile(),
+      this.participantService.ensureParticipantFile(),
+      this.assignmentService.ensureAssignmentFile(),
+      this.configService.ensureConfigFile(),
+    ]).then(() => {
+      this.roomService.getRooms();
+      this.assignTypeService.getAssignTypes();
+      this.noteService.getNotes();
+      this.participantService.getParticipants();
+      this.assignmentService.getAssignments();
+      this.filesExist = true;
+    });
   }
 }

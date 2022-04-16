@@ -30,8 +30,6 @@ export class RoomService {
     this.rooms = [];
 
     this.hasChanged = false;
-
-    this.getRooms();
   }
 
   /**

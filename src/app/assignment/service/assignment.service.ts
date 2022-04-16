@@ -29,7 +29,6 @@ export class AssignmentService {
     this.hasChanged = false;
 
     this.assignments = [];
-    this.getAssignments();
   }
 
   async ensureAssignmentFile() {

@@ -29,8 +29,6 @@ export class AssignTypeService {
     this.assignTypes = [];
 
     this.hasChanged = false;
-
-    this.getAssignTypes();
   }
 
   async ensureAssignTypeFile() {

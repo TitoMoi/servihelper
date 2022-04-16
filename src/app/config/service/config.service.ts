@@ -43,7 +43,6 @@ export class ConfigService {
 
       await this.saveDefaultConfigOptions();
     }
-    return true;
   }
 
   /**

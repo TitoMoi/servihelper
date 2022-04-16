@@ -31,7 +31,6 @@ export class ParticipantService {
       : "./assets/source/participant.json";
 
     this.participants = [];
-    this.getParticipants();
 
     this.hasChanged = false;
   }
