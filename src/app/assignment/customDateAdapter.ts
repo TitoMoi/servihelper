@@ -23,7 +23,7 @@ export class CustomDateAdapter extends NativeDateAdapter {
     };
   }
 
-  getFirstDayOfWeek(): number {
+  override getFirstDayOfWeek(): number {
     const lang = this.translocoService.getActiveLang();
     return this.langAndDay[lang];
   }
