@@ -1,10 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { ConfigService } from "app/config/service/config.service";
-import { ConfigInterface } from "./model/config.model";
 import { FormBuilder } from "@angular/forms";
 import AdmZip from "adm-zip";
-import { APP_CONFIG } from "environments/environment";
+import { ConfigService } from "app/config/service/config.service";
 import { ElectronService } from "app/services/electron.service";
+import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
 @Component({
   selector: "app-config",
@@ -12,28 +11,25 @@ import * as fs from "fs-extra";
   styleUrls: ["./config.component.scss"],
 })
 export class ConfigComponent implements OnInit {
-  //The path of the app
+  // The path of the app
   path: string;
 
-  //Config form
+  // Config form
   configForm;
 
-  //in memory config
-  config: ConfigInterface;
+  // If zip is loaded and saved
+  isZipLoaded = false;
 
-  //If is config loaded
-  isConfigLoaded;
-  isAssignmentHeaderTitleSaved;
+  // If config assignmentHeader key is saved
+  isAssignmentHeaderTitleSaved = false;
 
-  isParticipantSaved;
-  isAssignmentSaved;
-  isNoteSaved;
-  isAssignTypeSaved;
-  isRoomSaved;
-  isConfigSaved;
-  upload;
-  confirmDelete;
+  // Confirm the delete operation
+  confirmDelete = false;
 
+  // If upload button is clicked
+  upload = false;
+
+  // the filesystem api
   fs: typeof fs;
 
   constructor(
@@ -46,36 +42,17 @@ export class ConfigComponent implements OnInit {
         __dirname + "./assets/source"
       : "./assets/source";
 
-    this.isAssignmentHeaderTitleSaved = false;
-    this.isParticipantSaved = false;
-    this.isAssignmentSaved = false;
-    this.isNoteSaved = false;
-    this.isAssignTypeSaved = false;
-    this.isRoomSaved = false;
-    this.isConfigSaved = false;
-    this.upload = false;
-    this.confirmDelete = false;
-
     this.fs = electronService.remote.require("fs-extra");
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
     this.configForm = this.formBuilder.group({
       assignmentHeaderTitle: undefined,
     });
 
-    await this.getConfig();
-  }
-
-  async getConfig() {
-    this.config = await this.configService.getConfig();
-
-    const assignmentHeaderControl = this.configForm.get(
-      "assignmentHeaderTitle"
-    );
-    assignmentHeaderControl.setValue(this.config.assignmentHeaderTitle);
-
-    this.isConfigLoaded = true;
+    this.configForm
+      .get("assignmentHeaderTitle")
+      .setValue(this.configService.getConfig().assignmentHeaderTitle);
   }
 
   async downloadFiles() {
@@ -92,47 +69,56 @@ export class ConfigComponent implements OnInit {
     });
   }
 
-  async getContentFromFileEvent(event: Event): Promise<string> {
+  getZipContentFromFileEvent(event: Event) {
     const target: HTMLInputElement = event.target as HTMLInputElement;
-    const file = target.files[0];
-    const content = await file.text();
-    return JSON.parse(content);
+    return target.files[0];
   }
 
-  async uploadParticipantFile(event: Event) {
-    const content = await this.getContentFromFileEvent(event);
-    this.fs.writeJSON(this.path + "/participant.json", content);
-    this.isParticipantSaved = true;
-  }
-
-  async uploadAssignmentFile(event: Event) {
-    const content = await this.getContentFromFileEvent(event);
-    this.fs.writeJSON(this.path + "/assignment.json", content);
-    this.isAssignmentSaved = true;
-  }
-
-  async uploadRoomFile(event: Event) {
-    const content = await this.getContentFromFileEvent(event);
-    this.fs.writeJSON(this.path + "/room.json", content);
-    this.isRoomSaved = true;
-  }
-
-  async uploadAssignTypeFile(event: Event) {
-    const content = await this.getContentFromFileEvent(event);
-    this.fs.writeJSON(this.path + "/assignType.json", content);
-    this.isAssignTypeSaved = true;
-  }
-
-  async uploadNoteFile(event: Event) {
-    const content = await this.getContentFromFileEvent(event);
-    this.fs.writeJSON(this.path + "/note.json", content);
-    this.isNoteSaved = true;
-  }
-
-  async uploadConfigFile(event: Event) {
-    const content = await this.getContentFromFileEvent(event);
-    this.fs.writeJSON(this.path + "/config.json", content);
-    this.isConfigSaved = true;
+  uploadZipFiles(event: Event) {
+    const zipFile = this.getZipContentFromFileEvent(event);
+    const zip = new AdmZip(zipFile.path);
+    // reading archives
+    zip.getEntries().forEach((zipEntry) => {
+      switch (zipEntry.entryName) {
+        case "assignment.json":
+          this.fs.writeFile(
+            this.path + "/assignment.json",
+            zipEntry.getData().toString("utf8")
+          );
+          break;
+        case "participant.json":
+          this.fs.writeFile(
+            this.path + "/participant.json",
+            zipEntry.getData().toString("utf8")
+          );
+          break;
+        case "room.json":
+          this.fs.writeFile(
+            this.path + "/room.json",
+            zipEntry.getData().toString("utf8")
+          );
+          break;
+        case "assignType.json":
+          this.fs.writeFile(
+            this.path + "/assignType.json",
+            zipEntry.getData().toString("utf8")
+          );
+          break;
+        case "note.json":
+          this.fs.writeFile(
+            this.path + "/note.json",
+            zipEntry.getData().toString("utf8")
+          );
+          break;
+        case "config.json":
+          this.fs.writeFile(
+            this.path + "/config.json",
+            zipEntry.getData().toString("utf8")
+          );
+          break;
+      }
+    });
+    this.isZipLoaded = true;
   }
 
   async eraseAllData() {
@@ -143,16 +129,19 @@ export class ConfigComponent implements OnInit {
     this.electronService.remote.getCurrentWindow().close();
   }
 
-  async handleImageHeaderInput(e: Event) {
+  handleImageHeaderInput(e: Event) {
     const elem: HTMLInputElement = e.target as HTMLInputElement;
-    const config: ConfigInterface = await this.configService.getConfig();
-    config.assignmentHeaderTitle = elem.value;
-    this.configService.updateConfig(config);
+    this.configService.updateConfigByKey("assignmentHeaderTitle", elem.value);
   }
 
-  async onSubmit(config: ConfigInterface): Promise<void> {
-    this.config.assignmentHeaderTitle = config.assignmentHeaderTitle;
-    await this.configService.updateConfig(this.config);
+  async onSubmit(): Promise<void> {
+    const assignmentHeaderTitle = this.configForm.get(
+      "assignmentHeaderTitle"
+    ).value;
+    await this.configService.updateConfigByKey(
+      "assignmentHeaderTitle",
+      assignmentHeaderTitle
+    );
     this.isAssignmentHeaderTitleSaved = true;
   }
 }

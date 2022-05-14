@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { MatIconRegistry } from "@angular/material/icon";
+import { MatSelectChange } from "@angular/material/select";
 import { DomSanitizer } from "@angular/platform-browser";
+import { TranslocoService } from "@ngneat/transloco";
+import { ConfigService } from "app/config/service/config.service";
 import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
-import { MatSelectChange } from "@angular/material/select";
-import { getBrowserLang, TranslocoService } from "@ngneat/transloco";
-import { MatIconRegistry } from "@angular/material/icon";
-import { ConfigService } from "app/config/service/config.service";
-import { ConfigInterface } from "app/config/model/config.model";
 
 @Component({
   selector: "app-navigation",
@@ -23,39 +22,26 @@ export class NavigationComponent implements OnInit {
       shareReplay()
     );
 
-  icons: string[];
-  //The langs available
-  availableLangs;
-  //The selected or browser default lang
-  selectedLang;
-  //Lang seted
-  isLangSeted;
+  icons: string[] = [
+    "menu",
+    "room",
+    "abc",
+    "notes",
+    "participants",
+    "assignment",
+    "statistics",
+    "config",
+    "qa",
+  ];
+  availableLangs = undefined;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private translocoService: TranslocoService,
-    private configService: ConfigService,
+    public translocoService: TranslocoService,
+    public configService: ConfigService,
     private matIconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer
   ) {
-    this.icons = [
-      "menu",
-      "room",
-      "abc",
-      "notes",
-      "participants",
-      "assignment",
-      "statistics",
-      "config",
-      "qa",
-    ];
-    this.isLangSeted = false;
-  }
-  async ngOnInit(): Promise<void> {
-    //Available langs
-    this.availableLangs = this.translocoService.getAvailableLangs();
-
-    //Register icons
     for (const iconFileName of this.icons) {
       this.matIconRegistry.addSvgIcon(
         iconFileName,
@@ -64,37 +50,24 @@ export class NavigationComponent implements OnInit {
         )
       );
     }
-
-    await this.getActiveLangAndSetLangAndLocale();
   }
 
-  async updateLang(languageChange: MatSelectChange) {
-    this.translocoService.setActiveLang(languageChange.value);
+  ngOnInit() {
+    this.availableLangs = this.translocoService.getAvailableLangs();
 
-    //Save the lang config
-    const config: ConfigInterface = await this.configService.getConfig();
-    config.lang = languageChange.value;
-    await this.configService.updateConfig(config);
+    this.translocoService = this.translocoService.setActiveLang(
+      this.configService.getConfig().lang
+    );
   }
 
-  async getActiveLangAndSetLangAndLocale() {
-    const config: ConfigInterface = await this.configService.getConfig();
-    //Set the lang based on the config
-    if (config.lang) {
-      this.translocoService = this.translocoService.setActiveLang(config.lang);
-    }
+  /**
+   *
+   * @param languageChange event of select change
+   */
+  updateLang(matSelectChange: MatSelectChange) {
+    this.translocoService.setActiveLang(matSelectChange.value);
 
-    if (this.translocoService.getActiveLang() === config.lang) {
-      this.isLangSeted = true;
-    }
-
-    //else, set the lang based on the browser
-    if (!this.isLangSeted) {
-      const lang = getBrowserLang();
-      this.translocoService = this.translocoService.setActiveLang(lang);
-      this.isLangSeted = true;
-    }
-
-    this.selectedLang = this.translocoService.getActiveLang();
+    //Save the lang
+    this.configService.updateConfigByKey("lang", matSelectChange.value);
   }
 }

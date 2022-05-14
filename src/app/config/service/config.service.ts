@@ -1,22 +1,21 @@
 import { Injectable } from "@angular/core";
-import { APP_CONFIG } from "environments/environment";
 import { ConfigInterface } from "app/config/model/config.model";
-import * as fs from "fs-extra";
 import { ElectronService } from "app/services/electron.service";
+import { APP_CONFIG } from "environments/environment";
+import * as fs from "fs-extra";
 
 @Injectable({
   providedIn: "root",
 })
 export class ConfigService {
-  //fs-extra api
+  // Filesystem api
   fs: typeof fs;
-  //where the file is depending on the context
+  // Where the file is depending on the context
   path: string;
-
-  //The config in memory object
-  config: ConfigInterface;
-  //flag to indicate that config file has changed
-  hasChanged: boolean;
+  // The config in memory object
+  #config: ConfigInterface = undefined;
+  // Flag to indicate that config file has changed
+  hasChanged: boolean = true;
 
   constructor(electronService: ElectronService) {
     this.fs = electronService.remote.require("fs-extra");
@@ -25,10 +24,6 @@ export class ConfigService {
       ? //__dirname is where the .js file exists
         __dirname + "./assets/source/config.json"
       : "./assets/source/config.json";
-
-    this.config = {};
-
-    this.hasChanged = false;
   }
 
   /**
@@ -62,23 +57,15 @@ export class ConfigService {
 
   /**
    *
-   * @returns ConfigInterface the config or null
+   * @returns ConfigInterface
    */
-  async getConfig(): Promise<ConfigInterface> {
-    try {
-      //Read configs file if hasChanged or initial read
-      if (this.hasChanged || !this.config) {
-        // //Populate object in memory
-        this.config = await this.fs.readJson(this.path);
-        //clear flag
-        this.hasChanged = false;
-      }
-      //return in memory configs
-      return this.config;
-    } catch (err) {
-      console.error("getConfigs", err);
-      return null;
+  getConfig(): ConfigInterface {
+    if (!this.hasChanged) {
+      return this.#config;
     }
+    this.hasChanged = false;
+    this.#config = this.fs.readJSONSync(this.path);
+    return this.#config;
   }
 
   /**
@@ -87,11 +74,21 @@ export class ConfigService {
    */
   async saveConfigToFile(): Promise<boolean> {
     try {
-      //Write configs back to file
-      await this.fs.writeJson(this.path, this.config);
-      //Flag
-      this.hasChanged = true;
-      return true;
+      //Security check that has all the properties
+      if (
+        "assignmentHeaderTitle" in this.#config &&
+        "firstDayOfWeek" in this.#config &&
+        "lang" in this.#config
+      ) {
+        if (this.#config)
+          //Write configs back to file
+          await this.fs.writeJson(this.path, this.#config);
+        //Flag
+        this.hasChanged = true;
+        return true;
+      } else {
+        throw new Error("config file missing properties");
+      }
     } catch (err) {
       console.error("saveConfig", err);
       return false;
@@ -105,7 +102,21 @@ export class ConfigService {
    */
   async updateConfig(config: ConfigInterface): Promise<boolean> {
     //update config
-    this.config = config;
+    this.#config = config;
+    //save configs with the updated config
+    const res = await this.saveConfigToFile();
+    return res;
+  }
+
+  /**
+   *
+   * @param key the key to update
+   * @param value the value of the key to update
+   * @returns true if config is updated and saved false otherwise
+   */
+  async updateConfigByKey(key: string, value: any): Promise<boolean> {
+    //update config
+    this.#config[key] = value;
     //save configs with the updated config
     const res = await this.saveConfigToFile();
     return res;

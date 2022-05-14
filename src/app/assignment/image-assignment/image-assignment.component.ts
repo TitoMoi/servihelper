@@ -1,22 +1,20 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { toPng } from "html-to-image";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { ParticipantInterface } from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { NoteInterface } from "app/note/model/note.model";
-import { NoteService } from "app/note/service/note.service";
-import { RoomInterface } from "app/room/model/room.model";
-import { ConfigInterface } from "app/config/model/config.model";
-import { RoomService } from "app/room/service/room.service";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { ElectronService } from "app/services/electron.service";
-import { ConfigService } from "app/config/service/config.service";
-import { BrowserWindow } from "electron";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+import { ActivatedRoute } from "@angular/router";
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ConfigService } from "app/config/service/config.service";
+import { NoteInterface } from "app/note/model/note.model";
+import { NoteService } from "app/note/service/note.service";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomInterface } from "app/room/model/room.model";
+import { RoomService } from "app/room/service/room.service";
+import { ElectronService } from "app/services/electron.service";
+import { toPng } from "html-to-image";
 
 @Component({
   selector: "app-image-assignment",
@@ -109,8 +107,8 @@ export class ImageAssignmentComponent implements OnInit {
       ]);
 
       //bindings
-      const config: ConfigInterface = await this.configService.getConfig();
-      this.assignmentHeaderTitle = config.assignmentHeaderTitle;
+      this.assignmentHeaderTitle =
+        this.configService.getConfig().assignmentHeaderTitle;
 
       this.date = assignment.date;
       if (assignment.theme) {

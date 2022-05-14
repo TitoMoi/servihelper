@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { ParticipantService } from "app/participant/service/participant.service";
 import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
+import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
 
 @Component({
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
       this.assignmentService.ensureAssignmentFile(),
       this.configService.ensureConfigFile(),
     ]).then(() => {
+      this.configService.getConfig();
       this.roomService.getRooms();
       this.assignTypeService.getAssignTypes();
       this.noteService.getNotes();

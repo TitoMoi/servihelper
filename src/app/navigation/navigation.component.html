@@ -8,8 +8,8 @@
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar></mat-toolbar>
-    <mat-nav-list *ngIf="isLangSeted">
-      <a mat-list-item routerLink="home">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/">
         <span>{{ "NAV_HOME" | transloco }}</span>
       </a>
       <a mat-list-item routerLink="assignType">
@@ -97,7 +97,7 @@
       <mat-form-field style="text-align: center">
         <mat-select
           class="wk-vertical-align"
-          [value]="selectedLang"
+          [value]="configService.getConfig().lang"
           (selectionChange)="updateLang($event)"
         >
           <mat-option *ngFor="let lang of availableLangs" [value]="lang">

@@ -1,228 +1,90 @@
-<ng-container *ngIf="isConfigLoaded">
-  <div class="white-base-background">
-    <form
-      [formGroup]="configForm"
-      novalidate
-      (ngSubmit)="onSubmit(configForm.value)"
-    >
-      <h3 class="">{{ "CONFIG_ASSIGNMENT_TITLE" | transloco }}</h3>
-      <div class="col-12">
-        <mat-form-field class="full-width">
-          <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-          <input matInput formControlName="assignmentHeaderTitle" />
-        </mat-form-field>
-      </div>
-      <button class="" mat-raised-button type="submit" color="primary">
-        {{ "BUTTON_SAVE" | transloco }}
-      </button>
-    </form>
-    <p
-      class="d-inline-block m-3 green-msg"
-      *ngIf="isAssignmentHeaderTitleSaved"
-    >
-      {{ "CONFIG_ASSIGNMENT_HEADER_TITLE_SAVED" | transloco }}
-    </p>
+<div class="white-base-background">
+  <form [formGroup]="configForm" novalidate (ngSubmit)="onSubmit()">
+    <h3 class="">{{ "CONFIG_ASSIGNMENT_TITLE" | transloco }}</h3>
+    <div class="col-12">
+      <mat-form-field class="full-width">
+        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+        <input matInput formControlName="assignmentHeaderTitle" />
+      </mat-form-field>
+    </div>
+    <button class="" mat-raised-button type="submit" color="primary">
+      {{ "BUTTON_SAVE" | transloco }}
+    </button>
+  </form>
+  <p class="d-inline-block m-3 green-msg" *ngIf="isAssignmentHeaderTitleSaved">
+    {{ "CONFIG_ASSIGNMENT_HEADER_TITLE_SAVED" | transloco }}
+  </p>
 
-    <h3 class="m-3">{{ "CONFIG_BACKUP_LABEL_IMPORT" | transloco }}</h3>
+  <h3 class="m-3">{{ "CONFIG_BACKUP_LABEL_IMPORT" | transloco }}</h3>
+  <button
+    class="m-3"
+    mat-raised-button
+    type="button"
+    color="primary"
+    (click)="upload = !upload"
+  >
+    {{ "CONFIG_BACKUP_IMPORT" | transloco }}
+  </button>
+
+  <div *ngIf="upload" class="m-3">
+    <div class="m-3">
+      <label
+        for="zip-upload"
+        [ngClass]="{
+          'custom-file-upload-success': isZipLoaded,
+          'custom-file-upload': !isZipLoaded
+        }"
+      >
+        <span *ngIf="!isZipLoaded"
+          >{{ "CONFIG_ZIP_UPLOAD" | transloco }} ...</span
+        >
+        <span *ngIf="isZipLoaded" class="ml-3 d-inline-block">{{
+          "CONFIG_ZIP_UPLOADED" | transloco
+        }}</span>
+      </label>
+      <input id="zip-upload" type="file" (change)="uploadZipFiles($event)" />
+    </div>
+    <div *ngIf="isZipLoaded" class="pb-3">
+      <p class="d-inline-block m-3 green-msg">
+        {{ "CONFIG_BACKUP_SUCCESS_ALL_FILES" | transloco }}
+      </p>
+    </div>
+  </div>
+  <h3 class="m-3">{{ "CONFIG_BACKUP_LABEL_EXPORT" | transloco }}</h3>
+  <p>
     <button
       class="m-3"
       mat-raised-button
       type="button"
       color="primary"
-      (click)="upload = !upload"
+      (click)="downloadFiles()"
     >
-      {{ "CONFIG_BACKUP_IMPORT" | transloco }}
+      {{ "BUTTON_DOWNLOAD" | transloco }}
     </button>
-
-    <div *ngIf="upload" class="m-3">
-      <p id="uploadId" class="d-inline-block">
-        {{ "CONFIG_UPLOAD_MESSAGE" | transloco }}
-      </p>
-
-      <div class="m-3">
-        <label
-          for="file-upload-config"
-          [ngClass]="{
-            'custom-file-upload-success': isConfigSaved,
-            'custom-file-upload': !isConfigSaved
-          }"
-        >
-          <span *ngIf="!isConfigSaved"
-            >{{ "CONFIG_CONFIG_UPLOAD" | transloco }} ...</span
-          >
-          <span *ngIf="isConfigSaved" class="ml-3 d-inline-block">{{
-            "CONFIG_LOADED" | transloco
-          }}</span>
-        </label>
-        <input
-          id="file-upload-config"
-          type="file"
-          accept=".json"
-          (change)="uploadConfigFile($event)"
-        />
-      </div>
-      <div class="m-3">
-        <label
-          for="file-upload-participants"
-          [ngClass]="{
-            'custom-file-upload-success': isParticipantSaved,
-            'custom-file-upload': !isParticipantSaved
-          }"
-        >
-          <span *ngIf="!isParticipantSaved"
-            >{{ "CONFIG_PARTICIPANTS_UPLOAD" | transloco }} ...</span
-          >
-          <span *ngIf="isParticipantSaved" class="ml-3 d-inline-block">{{
-            "CONFIG_LOADED" | transloco
-          }}</span>
-        </label>
-        <input
-          id="file-upload-participants"
-          type="file"
-          accept=".json"
-          (change)="uploadParticipantFile($event)"
-        />
-      </div>
-      <div class="m-3">
-        <label
-          for="file-upload-assignments"
-          [ngClass]="{
-            'custom-file-upload-success': isAssignmentSaved,
-            'custom-file-upload': !isAssignmentSaved
-          }"
-        >
-          <span *ngIf="!isAssignmentSaved"
-            >{{ "CONFIG_ASSIGNMENTS_UPLOAD" | transloco }} ...</span
-          >
-          <span *ngIf="isAssignmentSaved" class="ml-3 d-inline-block">{{
-            "CONFIG_LOADED" | transloco
-          }}</span>
-        </label>
-        <input
-          id="file-upload-assignments"
-          type="file"
-          accept=".json"
-          (change)="uploadAssignmentFile($event)"
-        />
-      </div>
-      <div class="m-3">
-        <label
-          for="file-upload-rooms"
-          [ngClass]="{
-            'custom-file-upload-success': isRoomSaved,
-            'custom-file-upload': !isRoomSaved
-          }"
-        >
-          <span *ngIf="!isRoomSaved"
-            >{{ "CONFIG_ROOMS_UPLOAD" | transloco }} ...</span
-          >
-          <span *ngIf="isRoomSaved" class="ml-3 d-inline-block">{{
-            "CONFIG_LOADED" | transloco
-          }}</span>
-        </label>
-        <input
-          id="file-upload-rooms"
-          type="file"
-          accept=".json"
-          (change)="uploadRoomFile($event)"
-        />
-      </div>
-      <div class="m-3">
-        <label
-          for="file-upload-assigntypes"
-          [ngClass]="{
-            'custom-file-upload-success': isAssignTypeSaved,
-            'custom-file-upload': !isAssignTypeSaved
-          }"
-        >
-          <span *ngIf="!isAssignTypeSaved"
-            >{{ "CONFIG_ASSIGNTYPES_UPLOAD" | transloco }} ...</span
-          >
-          <span *ngIf="isAssignTypeSaved" class="ml-3 d-inline-block">{{
-            "CONFIG_LOADED" | transloco
-          }}</span>
-        </label>
-
-        <input
-          id="file-upload-assigntypes"
-          type="file"
-          accept=".json"
-          (change)="uploadAssignTypeFile($event)"
-        />
-      </div>
-      <div class="m-3 pb-3">
-        <label
-          for="file-upload-notes"
-          [ngClass]="{
-            'custom-file-upload-success': isNoteSaved,
-            'custom-file-upload': !isNoteSaved
-          }"
-        >
-          <span *ngIf="!isNoteSaved"
-            >{{ "CONFIG_NOTES_UPLOAD" | transloco }} ...</span
-          >
-          <span *ngIf="isNoteSaved" class="ml-3 d-inline-block">{{
-            "CONFIG_LOADED" | transloco
-          }}</span>
-        </label>
-        <input
-          id="file-upload-notes"
-          type="file"
-          accept=".json"
-          (change)="uploadNoteFile($event)"
-        />
-      </div>
-      <div
-        *ngIf="
-          isParticipantSaved &&
-          isAssignmentSaved &&
-          isNoteSaved &&
-          isAssignTypeSaved &&
-          isRoomSaved
-        "
-        class="pb-3"
-      >
-        <p class="d-inline-block m-3 green-msg">
-          {{ "CONFIG_BACKUP_SUCCESS_ALL_FILES" | transloco }}
-        </p>
-      </div>
-    </div>
-    <h3 class="m-3">{{ "CONFIG_BACKUP_LABEL_EXPORT" | transloco }}</h3>
-    <p>
+  </p>
+  <div class="light-red-bg">
+    <h3 class="m-3">{{ "CONFIG_RESTART_LABEL" | transloco }}</h3>
+    <div>
       <button
         class="m-3"
         mat-raised-button
         type="button"
-        color="primary"
-        (click)="downloadFiles()"
+        color="warn"
+        (click)="confirmDelete = !confirmDelete"
       >
-        {{ "BUTTON_DOWNLOAD" | transloco }}
+        {{ "CONFIG_RESET_ALL" | transloco }}
       </button>
-    </p>
-    <div class="light-red-bg">
-      <h3 class="m-3">{{ "CONFIG_RESTART_LABEL" | transloco }}</h3>
-      <div>
-        <button
-          class="m-3"
-          mat-raised-button
-          type="button"
-          color="warn"
-          (click)="confirmDelete = !confirmDelete"
-        >
-          {{ "CONFIG_RESET_ALL" | transloco }}
-        </button>
-      </div>
-      <div *ngIf="confirmDelete">
-        <button
-          class="m-3"
-          mat-raised-button
-          type="button"
-          color="warn"
-          (click)="eraseAllData()"
-        >
-          {{ "CONFIG_RESET_ALL_CONFIRM" | transloco }}
-        </button>
-      </div>
+    </div>
+    <div *ngIf="confirmDelete">
+      <button
+        class="m-3"
+        mat-raised-button
+        type="button"
+        color="warn"
+        (click)="eraseAllData()"
+      >
+        {{ "CONFIG_RESET_ALL_CONFIRM" | transloco }}
+      </button>
     </div>
   </div>
-</ng-container>
+</div>
