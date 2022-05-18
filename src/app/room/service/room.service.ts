@@ -10,63 +10,33 @@ import { nanoid } from "nanoid/non-secure";
 })
 export class RoomService {
   //fs-extra api
-  fs: typeof fs;
+  fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
   path: string;
 
   //The array of rooms in memory
-  rooms: RoomInterface[];
+  #rooms: RoomInterface[] = undefined;
   //flag to indicate that rooms file has changed
-  hasChanged: boolean;
+  hasChanged: boolean = true;
 
-  constructor(electronService: ElectronService) {
-    this.fs = electronService.remote.require("fs-extra");
-
+  constructor(private electronService: ElectronService) {
     this.path = APP_CONFIG.production
       ? //__dirname is where the .js file exists
         __dirname + "./assets/source/room.json"
       : "./assets/source/room.json";
-
-    this.rooms = [];
-
-    this.hasChanged = false;
-  }
-
-  /**
-   * Check if rooms file exists, if not creates it and populates with initial array, then hasChanged is marked.
-   */
-  async ensureRoomFile() {
-    const exists = await this.fs.pathExists(this.path);
-    if (!exists) {
-      //Create file
-      await this.fs.ensureFile(this.path);
-      //Put initial array
-      await this.fs.writeJson(this.path, []);
-
-      this.hasChanged = true;
-    }
   }
 
   /**
    *
    * @returns RoomInterface[] the array of rooms or null
    */
-  async getRooms(): Promise<RoomInterface[]> {
-    try {
-      //Read rooms file if hasChanged or initial read
-      if (this.hasChanged || !this.rooms.length) {
-        const rooms: RoomInterface[] = await this.fs.readJson(this.path);
-        //Populate array in memory
-        this.rooms = rooms;
-        //clear flag
-        this.hasChanged = false;
-      }
-      //return in memory rooms
-      return this.rooms;
-    } catch (err) {
-      console.error("getRooms", err);
-      return null;
+  getRooms(): RoomInterface[] {
+    if (!this.hasChanged) {
+      return this.#rooms;
     }
+    this.hasChanged = false;
+    this.#rooms = this.fs.readJSONSync(this.path);
+    return this.#rooms;
   }
 
   /**
@@ -76,7 +46,7 @@ export class RoomService {
   async saveRoomsToFile(): Promise<boolean> {
     try {
       //Write rooms back to file
-      await this.fs.writeJson(this.path, this.rooms);
+      await this.fs.writeJson(this.path, this.#rooms);
       //Flag
       this.hasChanged = true;
       return true;
@@ -95,7 +65,7 @@ export class RoomService {
     //Generate id for the room
     room.id = nanoid();
     //add room to rooms
-    this.rooms.push(room);
+    this.#rooms.push(room);
     //save rooms with the new room
     return await this.saveRoomsToFile();
   }
@@ -107,7 +77,7 @@ export class RoomService {
    */
   getRoom(id: string): RoomInterface {
     //search room
-    for (const room of this.rooms) {
+    for (const room of this.#rooms) {
       if (room.id === id) {
         return room;
       }
@@ -121,9 +91,9 @@ export class RoomService {
    */
   async updateRoom(room: RoomInterface): Promise<boolean> {
     //update room
-    for (let i = 0; i < this.rooms.length; i++) {
-      if (this.rooms[i].id === room.id) {
-        this.rooms[i] = room;
+    for (let i = 0; i < this.#rooms.length; i++) {
+      if (this.#rooms[i].id === room.id) {
+        this.#rooms[i] = room;
         //save rooms with the updated room
         return await this.saveRoomsToFile();
       }
@@ -138,7 +108,7 @@ export class RoomService {
    */
   async deleteRoom(id: string): Promise<boolean> {
     //delete room
-    this.rooms = this.rooms.filter((b) => b.id !== id);
+    this.#rooms = this.#rooms.filter((b) => b.id !== id);
     //save rooms
     return await this.saveRoomsToFile();
   }

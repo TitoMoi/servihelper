@@ -128,7 +128,7 @@ export class ImageAssignmentComponent implements OnInit {
     });
   }
 
-  getRooms(): Promise<RoomInterface[]> {
+  getRooms(): RoomInterface[] {
     return this.roomService.getRooms();
   }
 

@@ -27,35 +27,6 @@ export class ConfigService {
   }
 
   /**
-   * Check if file exists, if not then creates the file and populates with default values.
-   * @returns boolean
-   */
-  async ensureConfigFile() {
-    const exists = await this.fs.pathExists(this.path);
-    if (!exists) {
-      //Create file
-      await this.fs.ensureFile(this.path);
-
-      await this.saveDefaultConfigOptions();
-    }
-  }
-
-  /**
-   * Save default config options and set hasChanged
-   */
-  async saveDefaultConfigOptions() {
-    //create default object
-    const defaultOptions: ConfigInterface = {
-      lang: "en",
-      firstDayOfWeek: 1, //1 = Monday
-      assignmentHeaderTitle: "",
-    };
-    await this.fs.writeJson(this.path, defaultOptions);
-
-    this.hasChanged = true;
-  }
-
-  /**
    *
    * @returns ConfigInterface
    */

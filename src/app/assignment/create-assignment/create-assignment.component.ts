@@ -142,7 +142,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assignments = data[3];
   }
 
-  getRooms(): Promise<RoomInterface[]> {
+  getRooms(): RoomInterface[] {
     return this.roomService.getRooms();
   }
 

@@ -121,9 +121,18 @@ export class ConfigComponent implements OnInit {
     this.isZipLoaded = true;
   }
 
-  async eraseAllData() {
-    //ITS DELETE
-    this.fs.remove(this.path);
+  eraseAllData() {
+    //Restart data
+    this.fs.writeJsonSync(this.path + "/config.json", {
+      lang: "en",
+      firstDayOfWeek: 1,
+      assignmentHeaderTitle: "",
+    });
+    this.fs.writeJsonSync(this.path + "/note.json", []);
+    this.fs.writeJsonSync(this.path + "/assignType.json", []);
+    this.fs.writeJsonSync(this.path + "/room.json", []);
+    this.fs.writeJsonSync(this.path + "/participant.json", []);
+    this.fs.writeJsonSync(this.path + "/assignment.json", []);
 
     //Close the program
     this.electronService.remote.getCurrentWindow().close();

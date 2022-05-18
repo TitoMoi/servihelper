@@ -164,7 +164,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     });
   }
 
-  getRooms(): Promise<RoomInterface[]> {
+  getRooms(): RoomInterface[] {
     return this.roomService.getRooms();
   }
 
