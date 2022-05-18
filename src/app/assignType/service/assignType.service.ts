@@ -10,59 +10,32 @@ import { nanoid } from "nanoid/non-secure";
 })
 export class AssignTypeService {
   //fs-extra api
-  fs: typeof fs;
+  fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
   path: string;
   //The array of assignTypes in memory
-  assignTypes: AssignTypeInterface[];
+  #assignTypes: AssignTypeInterface[] = undefined;
   //flag to indicate that assignTypes file has changed
-  hasChanged: boolean;
+  hasChanged: boolean = true;
 
-  constructor(electronService: ElectronService) {
-    this.fs = electronService.remote.require("fs-extra");
-
+  constructor(private electronService: ElectronService) {
     this.path = APP_CONFIG.production
       ? //__dirname is where the .js file exists
         __dirname + "./assets/source/assignType.json"
       : "./assets/source/assignType.json";
-
-    this.assignTypes = [];
-
-    this.hasChanged = false;
-  }
-
-  async ensureAssignTypeFile() {
-    const exists = await this.fs.pathExists(this.path);
-    if (!exists) {
-      //Create file
-      await this.fs.ensureFile(this.path);
-      //Put initial array
-      await this.fs.writeJson(this.path, []);
-    }
   }
 
   /**
    *
-   * @returns AssignTypeInterface[] the array of assignTypes or null
+   * @returns AssignTypeInterface[] the array of assignTypes
    */
-  async getAssignTypes(): Promise<AssignTypeInterface[]> {
-    try {
-      //Read assignTypes file if hasChanged or initial read
-      if (this.hasChanged || !this.assignTypes.length) {
-        const assignTypes: AssignTypeInterface[] = await this.fs.readJson(
-          this.path
-        );
-        //Populate array in memory
-        this.assignTypes = assignTypes;
-        //clear flag
-        this.hasChanged = false;
-      }
-      //return in memory assignTypes
-      return this.assignTypes;
-    } catch (err) {
-      console.error("getAssignTypes", err);
-      return null;
+  getAssignTypes(): AssignTypeInterface[] {
+    if (!this.hasChanged) {
+      return this.#assignTypes;
     }
+    this.hasChanged = false;
+    this.#assignTypes = this.fs.readJSONSync(this.path);
+    return this.#assignTypes;
   }
 
   /**
@@ -72,7 +45,7 @@ export class AssignTypeService {
   async saveAssignTypesToFile(): Promise<boolean> {
     try {
       //Write assignTypes back to file
-      await this.fs.writeJson(this.path, this.assignTypes);
+      await this.fs.writeJson(this.path, this.#assignTypes);
       //Flag
       this.hasChanged = true;
       return true;
@@ -91,7 +64,7 @@ export class AssignTypeService {
     //Generate id for the assignType
     assignType.id = nanoid();
     //add assignType to assignTypes
-    this.assignTypes.push(assignType);
+    this.#assignTypes.push(assignType);
     //save assignTypes with the new assignType
     return await this.saveAssignTypesToFile();
   }
@@ -103,7 +76,7 @@ export class AssignTypeService {
    */
   getAssignType(id: string): AssignTypeInterface {
     //search assignType
-    for (const assignType of this.assignTypes) {
+    for (const assignType of this.#assignTypes) {
       if (assignType.id === id) {
         return assignType;
       }
@@ -117,9 +90,9 @@ export class AssignTypeService {
    */
   async updateAssignType(assignType: AssignTypeInterface): Promise<boolean> {
     //update assignType
-    for (let i = 0; i < this.assignTypes.length; i++) {
-      if (this.assignTypes[i].id === assignType.id) {
-        this.assignTypes[i] = assignType;
+    for (let i = 0; i < this.#assignTypes.length; i++) {
+      if (this.#assignTypes[i].id === assignType.id) {
+        this.#assignTypes[i] = assignType;
         //save assignTypes with the updated assignType
         return await this.saveAssignTypesToFile();
       }
@@ -134,7 +107,7 @@ export class AssignTypeService {
    */
   async deleteAssignType(id: string): Promise<boolean> {
     //delete assignType
-    this.assignTypes = this.assignTypes.filter((b) => b.id !== id);
+    this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
     //save assignTypes
     return await this.saveAssignTypesToFile();
   }

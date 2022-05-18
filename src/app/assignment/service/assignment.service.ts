@@ -10,59 +10,32 @@ import { ElectronService } from "app/services/electron.service";
 })
 export class AssignmentService {
   //fs-extra api
-  fs: typeof fs;
+  fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
   path: string;
   //The array of assignments in memory
-  assignments: AssignmentInterface[];
+  #assignments: AssignmentInterface[] = undefined;
   //flag to indicate that assignments file has changed
-  hasChanged: boolean;
+  hasChanged: boolean = true;
 
-  constructor(electronService: ElectronService) {
-    this.fs = electronService.remote.require("fs-extra");
-
+  constructor(private electronService: ElectronService) {
     this.path = APP_CONFIG.production
       ? //__dirname is where the .js file exists
         __dirname + "./assets/source/assignment.json"
       : "./assets/source/assignment.json";
-
-    this.hasChanged = false;
-
-    this.assignments = [];
-  }
-
-  async ensureAssignmentFile() {
-    const exists = await this.fs.pathExists(this.path);
-    if (!exists) {
-      //Create file
-      await this.fs.ensureFile(this.path);
-      //Put initial array
-      await this.fs.writeJson(this.path, []);
-    }
   }
 
   /**
    *
    * @returns AssignmentInterface[] the array of assignments or null
    */
-  async getAssignments(): Promise<AssignmentInterface[]> {
-    try {
-      //Read assignments file if hasChanged or initial read
-      if (this.hasChanged || !this.assignments.length) {
-        const assignments: AssignmentInterface[] = await this.fs.readJson(
-          this.path
-        );
-        //Populate array in memory
-        this.assignments = assignments;
-        //clear flag
-        this.hasChanged = false;
-      }
-      //return in memory assignments
-      return this.assignments;
-    } catch (err) {
-      console.error("getAssignments", err);
-      return null;
+  getAssignments(): AssignmentInterface[] {
+    if (!this.hasChanged) {
+      return this.#assignments;
     }
+    this.hasChanged = false;
+    this.#assignments = this.fs.readJSONSync(this.path);
+    return this.#assignments;
   }
 
   /**
@@ -72,7 +45,7 @@ export class AssignmentService {
   async saveAssignmentsToFile(): Promise<boolean> {
     try {
       //Write assignments back to file
-      await this.fs.writeJson(this.path, this.assignments);
+      await this.fs.writeJson(this.path, this.#assignments);
       //Flag
       this.hasChanged = true;
       return true;
@@ -91,10 +64,10 @@ export class AssignmentService {
     //Generate id for the assignment
     assignment.id = nanoid();
     //add assignment to assignments
-    this.assignments.push(assignment);
+    this.#assignments.push(assignment);
 
     //ORDER THE ASSIGNMENTS BY MOST RECENT DATE
-    this.assignments = this.assignments.sort(this.sortAssignmentsByDate);
+    this.#assignments = this.#assignments.sort(this.sortAssignmentsByDate);
 
     //save assignments with the new assignment
     return await this.saveAssignmentsToFile();
@@ -128,7 +101,7 @@ export class AssignmentService {
    */
   async getAssignment(id: string): Promise<AssignmentInterface> {
     //search assignment
-    for (const assignment of this.assignments) {
+    for (const assignment of this.#assignments) {
       if (assignment.id === id) {
         return assignment;
       }
@@ -142,9 +115,9 @@ export class AssignmentService {
    */
   async updateAssignment(assignment: AssignmentInterface): Promise<boolean> {
     //update assignment
-    for (let i = 0; i < this.assignments.length; i++) {
-      if (this.assignments[i].id === assignment.id) {
-        this.assignments[i] = assignment;
+    for (let i = 0; i < this.#assignments.length; i++) {
+      if (this.#assignments[i].id === assignment.id) {
+        this.#assignments[i] = assignment;
         //save assignments with the updated assignment
         return await this.saveAssignmentsToFile();
       }
@@ -159,7 +132,7 @@ export class AssignmentService {
    */
   async deleteAssignment(id: string): Promise<boolean> {
     //delete assignment
-    this.assignments = this.assignments.filter((b) => b.id !== id);
+    this.#assignments = this.#assignments.filter((b) => b.id !== id);
     //save assignments
     return await this.saveAssignmentsToFile();
   }
@@ -173,10 +146,10 @@ export class AssignmentService {
     //Preventive if being called outside
     await this.checkAssignments();
     //delete assignments of the participant being the principal
-    this.assignments = this.assignments.filter((a) => a.principal !== id);
+    this.#assignments = this.#assignments.filter((a) => a.principal !== id);
 
     //Reset to undefined in assistant
-    for (const assignment of this.assignments) {
+    for (const assignment of this.#assignments) {
       if (assignment.assistant === id) assignment.assistant = undefined;
     }
 
@@ -190,7 +163,7 @@ export class AssignmentService {
    * @returns the assignments of the participant
    */
   findAssignmentsByParticipantId(participantId: string): AssignmentInterface[] {
-    const assignments = this.assignments.filter(
+    const assignments = this.#assignments.filter(
       (assignment) =>
         assignment.principal === participantId ||
         assignment.assistant === participantId
@@ -206,7 +179,7 @@ export class AssignmentService {
   findPrincipalAssignmentsByParticipantId(
     participantId: string
   ): AssignmentInterface[] {
-    const assignments = this.assignments.filter(
+    const assignments = this.#assignments.filter(
       (assignment) => assignment.principal === participantId
     );
     return assignments;
@@ -220,7 +193,7 @@ export class AssignmentService {
   findAssistantAssignmentsByParticipantId(
     participantId: string
   ): AssignmentInterface[] {
-    const assignments = this.assignments.filter(
+    const assignments = this.#assignments.filter(
       (assignment) => assignment.assistant === participantId
     );
     return assignments;
@@ -235,7 +208,7 @@ export class AssignmentService {
     //Preventive if being called outside
     await this.checkAssignments();
     //delete assignments
-    this.assignments = this.assignments.filter((a) => a.room !== id);
+    this.#assignments = this.#assignments.filter((a) => a.room !== id);
     //save assignments
     return await this.saveAssignmentsToFile();
   }
@@ -249,7 +222,7 @@ export class AssignmentService {
     //Preventive if being called outside
     await this.checkAssignments();
     //delete assignments
-    this.assignments = this.assignments.filter((a) => a.assignType !== id);
+    this.#assignments = this.#assignments.filter((a) => a.assignType !== id);
     //save assignments
     return await this.saveAssignmentsToFile();
   }
@@ -263,7 +236,7 @@ export class AssignmentService {
     //Preventive if being called outside
     await this.checkAssignments();
     //reset assignments note
-    for (const assignment of this.assignments) {
+    for (const assignment of this.#assignments) {
       if (assignment.footerNote === id) assignment.footerNote = undefined;
     }
     //save assignments
@@ -271,7 +244,7 @@ export class AssignmentService {
   }
 
   async checkAssignments() {
-    if (!this.assignments.length) {
+    if (!this.#assignments.length) {
       await this.getAssignments();
     }
   }

@@ -168,19 +168,19 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     return this.roomService.getRooms();
   }
 
-  getAssignTypes(): Promise<AssignTypeInterface[]> {
+  getAssignTypes(): AssignTypeInterface[] {
     return this.assignTypeService.getAssignTypes();
   }
 
-  getParticipants(): Promise<ParticipantInterface[]> {
+  getParticipants(): ParticipantInterface[] {
     return this.participantService.getParticipants();
   }
 
-  getAssignments(): Promise<AssignmentInterface[]> {
+  getAssignments(): AssignmentInterface[] {
     return this.assignmentService.getAssignments();
   }
 
-  getFooterNotes(): Promise<NoteInterface[]> {
+  getFooterNotes(): NoteInterface[] {
     return this.noteService.getNotes();
   }
 

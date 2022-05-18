@@ -34,16 +34,18 @@ import { checkIsAssistantAvailable } from "app/functions/checkIsAssistantAvailab
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAssignmentComponent implements OnInit, OnDestroy {
-  rooms: RoomInterface[];
-  assignTypes: AssignTypeInterface[];
-  principalList: ParticipantInterface[];
-  assistantList: ParticipantInterface[];
-  footerNotes: NoteInterface[];
-  assignments: AssignmentInterface[];
-  hasAssignmentsList: string[];
+  rooms: RoomInterface[] = this.roomService.getRooms();
+  assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
+  footerNotes: NoteInterface[] = this.noteService.getNotes();
+  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
+
   hasAssignmentsAssistantList: string[];
 
+  principalList: ParticipantInterface[];
+  assistantList: ParticipantInterface[];
+
   principalsBackup: ParticipantInterface[];
+  hasAssignmentsList: string[];
 
   lastDate: Date;
 
@@ -93,8 +95,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.langSubscription();
-    const data = await this.getInitialData();
-    this.setInitialData(data);
     this.dateSubscription();
     this.onlyWomanSubscription();
     this.onlyManSubscription();
@@ -116,47 +116,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.roomSub$.unsubscribe();
     this.assignTypeSub$.unsubscribe();
     this.langSub$.unsubscribe();
-  }
-
-  /**
-   * Gets the initial data for rooms, assignTypes, footerNotes, assignments
-   */
-  async getInitialData() {
-    const data = await Promise.all([
-      this.getRooms(),
-      this.getAssignTypes(),
-      this.getFooterNotes(),
-      this.getAssignments(),
-    ]);
-    return data;
-  }
-
-  /**
-   * Sets the initial data
-   * @param data the array of data, the order is based on the Promise.all
-   */
-  setInitialData(data) {
-    this.rooms = data[0];
-    this.assignTypes = data[1];
-    this.footerNotes = data[2];
-    this.assignments = data[3];
-  }
-
-  getRooms(): RoomInterface[] {
-    return this.roomService.getRooms();
-  }
-
-  getAssignTypes(): Promise<AssignTypeInterface[]> {
-    return this.assignTypeService.getAssignTypes();
-  }
-
-  getFooterNotes(): Promise<NoteInterface[]> {
-    return this.noteService.getNotes();
-  }
-
-  //Get assignments
-  getAssignments(): Promise<AssignmentInterface[]> {
-    return this.assignmentService.getAssignments();
   }
 
   async onSubmit(assignment: AssignmentInterface): Promise<void> {

@@ -28,7 +28,7 @@ export class RoomService {
 
   /**
    *
-   * @returns RoomInterface[] the array of rooms or null
+   * @returns RoomInterface[] the array of rooms
    */
   getRooms(): RoomInterface[] {
     if (!this.hasChanged) {

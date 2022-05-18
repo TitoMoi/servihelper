@@ -10,63 +10,33 @@ import { nanoid } from "nanoid/non-secure";
 })
 export class NoteService {
   //fs-extra api
-  fs: typeof fs;
+  fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
   path: string;
 
   //The array of notes in memory
-  notes: NoteInterface[];
+  #notes: NoteInterface[] = undefined;
   //flag to indicate that notes file has changed
-  hasChanged: boolean;
+  hasChanged: boolean = true;
 
-  constructor(electronService: ElectronService) {
-    this.fs = electronService.remote.require("fs-extra");
-
+  constructor(private electronService: ElectronService) {
     this.path = APP_CONFIG.production
       ? //__dirname is where the .js file exists
         __dirname + "./assets/source/note.json"
       : "./assets/source/note.json";
-
-    this.notes = [];
-
-    this.hasChanged = false;
-  }
-
-  /**
-   * Check if notes file exists, if not creates it and populates with initial array, then hasChanged is marked.
-   */
-  async ensureNoteFile() {
-    const exists = await this.fs.pathExists(this.path);
-    if (!exists) {
-      //Create file
-      await this.fs.ensureFile(this.path);
-      //Put initial array
-      await this.fs.writeJson(this.path, []);
-
-      this.hasChanged = true;
-    }
   }
 
   /**
    *
-   * @returns NoteInterface[] the array of notes or null
+   * @returns NoteInterface[] the array of notes
    */
-  async getNotes(): Promise<NoteInterface[]> {
-    try {
-      //Read notes file if hasChanged or initial read
-      if (this.hasChanged || !this.notes.length) {
-        const notes: NoteInterface[] = await this.fs.readJson(this.path);
-        //Populate array in memory
-        this.notes = notes;
-        //clear flag
-        this.hasChanged = false;
-      }
-      //return in memory notes
-      return this.notes;
-    } catch (err) {
-      console.error("getNotes", err);
-      return null;
+  getNotes(): NoteInterface[] {
+    if (!this.hasChanged) {
+      return this.#notes;
     }
+    this.hasChanged = false;
+    this.#notes = this.fs.readJSONSync(this.path);
+    return this.#notes;
   }
 
   /**
@@ -76,7 +46,7 @@ export class NoteService {
   async saveNotesToFile(): Promise<boolean> {
     try {
       //Write notes back to file
-      await this.fs.writeJson(this.path, this.notes);
+      await this.fs.writeJson(this.path, this.#notes);
       //Flag
       this.hasChanged = true;
       return true;
@@ -95,7 +65,7 @@ export class NoteService {
     //Generate id for the note
     note.id = nanoid();
     //add note to notes
-    this.notes.push(note);
+    this.#notes.push(note);
     //save notes with the new note
     return await this.saveNotesToFile();
   }
@@ -107,11 +77,11 @@ export class NoteService {
    */
   async getNote(id: string): Promise<NoteInterface> {
     //Preventive maybe this func is called outside note view
-    if (!this.notes.length) {
+    if (!this.#notes.length) {
       await this.getNotes();
     }
     //search note
-    for (const note of this.notes) {
+    for (const note of this.#notes) {
       if (note.id === id) {
         return note;
       }
@@ -125,9 +95,9 @@ export class NoteService {
    */
   async updateNote(note: NoteInterface): Promise<boolean> {
     //update note
-    for (let i = 0; i < this.notes.length; i++) {
-      if (this.notes[i].id === note.id) {
-        this.notes[i] = note;
+    for (let i = 0; i < this.#notes.length; i++) {
+      if (this.#notes[i].id === note.id) {
+        this.#notes[i] = note;
         //save notes with the updated note
         return await this.saveNotesToFile();
       }
@@ -142,7 +112,7 @@ export class NoteService {
    */
   async deleteNote(id: string): Promise<boolean> {
     //delete note
-    this.notes = this.notes.filter((b) => b.id !== id);
+    this.#notes = this.#notes.filter((b) => b.id !== id);
     //save notes
     return await this.saveNotesToFile();
   }
