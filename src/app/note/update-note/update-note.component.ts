@@ -40,12 +40,11 @@ export class UpdateNoteComponent implements OnInit, OnDestroy {
     this.editor = new Editor();
 
     this.activatedRoute.params.subscribe((params) => {
-      this.noteService.getNote(params.id).then((note) => {
-        this.noteForm.setValue({
-          id: params.id,
-          name: note.name,
-          editorContent: note.editorContent,
-        });
+      const note = this.noteService.getNote(params.id);
+      this.noteForm.setValue({
+        id: params.id,
+        name: note.name,
+        editorContent: note.editorContent,
       });
     });
   }

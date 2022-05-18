@@ -12,19 +12,17 @@ export class NoteService {
   //fs-extra api
   fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
-  path: string;
+  path: string = APP_CONFIG.production
+    ? //__dirname is where the .js file exists
+      __dirname + "./assets/source/note.json"
+    : "./assets/source/note.json";
 
   //The array of notes in memory
   #notes: NoteInterface[] = undefined;
   //flag to indicate that notes file has changed
   hasChanged: boolean = true;
 
-  constructor(private electronService: ElectronService) {
-    this.path = APP_CONFIG.production
-      ? //__dirname is where the .js file exists
-        __dirname + "./assets/source/note.json"
-      : "./assets/source/note.json";
-  }
+  constructor(private electronService: ElectronService) {}
 
   /**
    *
@@ -43,10 +41,10 @@ export class NoteService {
    *
    * @returns true if notes are saved to disk or false
    */
-  async saveNotesToFile(): Promise<boolean> {
+  saveNotesToFile(): boolean {
     try {
       //Write notes back to file
-      await this.fs.writeJson(this.path, this.#notes);
+      this.fs.writeJson(this.path, this.#notes);
       //Flag
       this.hasChanged = true;
       return true;
@@ -61,13 +59,13 @@ export class NoteService {
    * @param note the note to create
    * @returns true if note is saved false if not
    */
-  async createNote(note: NoteInterface): Promise<boolean> {
+  createNote(note: NoteInterface): boolean {
     //Generate id for the note
     note.id = nanoid();
     //add note to notes
     this.#notes.push(note);
     //save notes with the new note
-    return await this.saveNotesToFile();
+    return this.saveNotesToFile();
   }
 
   /**
@@ -75,10 +73,10 @@ export class NoteService {
    * @param id the id of the note to search for
    * @returns the note that is ALWAYS found
    */
-  async getNote(id: string): Promise<NoteInterface> {
+  getNote(id: string): NoteInterface {
     //Preventive maybe this func is called outside note view
     if (!this.#notes.length) {
-      await this.getNotes();
+      this.getNotes();
     }
     //search note
     for (const note of this.#notes) {
@@ -93,13 +91,13 @@ export class NoteService {
    * @param note the note to update
    * @returns true if note is updated and saved false otherwise
    */
-  async updateNote(note: NoteInterface): Promise<boolean> {
+  updateNote(note: NoteInterface): boolean {
     //update note
     for (let i = 0; i < this.#notes.length; i++) {
       if (this.#notes[i].id === note.id) {
         this.#notes[i] = note;
         //save notes with the updated note
-        return await this.saveNotesToFile();
+        return this.saveNotesToFile();
       }
     }
     return false;
@@ -110,10 +108,10 @@ export class NoteService {
    * @param note the note to delete
    * @returns true if note is deleted and saved false otherwise
    */
-  async deleteNote(id: string): Promise<boolean> {
+  deleteNote(id: string): boolean {
     //delete note
     this.#notes = this.#notes.filter((b) => b.id !== id);
     //save notes
-    return await this.saveNotesToFile();
+    return this.saveNotesToFile();
   }
 }

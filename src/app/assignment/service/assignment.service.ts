@@ -12,18 +12,16 @@ export class AssignmentService {
   //fs-extra api
   fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
-  path: string;
+  path: string = APP_CONFIG.production
+    ? //__dirname is where the .js file exists
+      __dirname + "./assets/source/assignment.json"
+    : "./assets/source/assignment.json";
   //The array of assignments in memory
   #assignments: AssignmentInterface[] = undefined;
   //flag to indicate that assignments file has changed
   hasChanged: boolean = true;
 
-  constructor(private electronService: ElectronService) {
-    this.path = APP_CONFIG.production
-      ? //__dirname is where the .js file exists
-        __dirname + "./assets/source/assignment.json"
-      : "./assets/source/assignment.json";
-  }
+  constructor(private electronService: ElectronService) {}
 
   /**
    *
@@ -42,10 +40,10 @@ export class AssignmentService {
    *
    * @returns save in memory assignments to file, true if assignments are saved to disk or false if some error happens.
    */
-  async saveAssignmentsToFile(): Promise<boolean> {
+  saveAssignmentsToFile(): boolean {
     try {
       //Write assignments back to file
-      await this.fs.writeJson(this.path, this.#assignments);
+      this.fs.writeJson(this.path, this.#assignments);
       //Flag
       this.hasChanged = true;
       return true;
@@ -60,7 +58,7 @@ export class AssignmentService {
    * @param assignment the assignment to create
    * @returns true if assignment is created and saved, false if not
    */
-  async createAssignment(assignment: AssignmentInterface): Promise<boolean> {
+  createAssignment(assignment: AssignmentInterface): boolean {
     //Generate id for the assignment
     assignment.id = nanoid();
     //add assignment to assignments
@@ -70,7 +68,7 @@ export class AssignmentService {
     this.#assignments = this.#assignments.sort(this.sortAssignmentsByDate);
 
     //save assignments with the new assignment
-    return await this.saveAssignmentsToFile();
+    return this.saveAssignmentsToFile();
   }
 
   /**
@@ -99,7 +97,7 @@ export class AssignmentService {
    * @param id the id of the assignment to search for
    * @returns the assignment that is ALWAYS found
    */
-  async getAssignment(id: string): Promise<AssignmentInterface> {
+  getAssignment(id: string): AssignmentInterface {
     //search assignment
     for (const assignment of this.#assignments) {
       if (assignment.id === id) {
@@ -113,13 +111,13 @@ export class AssignmentService {
    * @param assignment the assignment to update
    * @returns true if assignment is updated and saved false otherwise
    */
-  async updateAssignment(assignment: AssignmentInterface): Promise<boolean> {
+  updateAssignment(assignment: AssignmentInterface): boolean {
     //update assignment
     for (let i = 0; i < this.#assignments.length; i++) {
       if (this.#assignments[i].id === assignment.id) {
         this.#assignments[i] = assignment;
         //save assignments with the updated assignment
-        return await this.saveAssignmentsToFile();
+        return this.saveAssignmentsToFile();
       }
     }
     return false;
@@ -130,11 +128,11 @@ export class AssignmentService {
    * @param assignment the assignment to delete
    * @returns true if assignment is deleted and saved false otherwise
    */
-  async deleteAssignment(id: string): Promise<boolean> {
+  deleteAssignment(id: string): boolean {
     //delete assignment
     this.#assignments = this.#assignments.filter((b) => b.id !== id);
     //save assignments
-    return await this.saveAssignmentsToFile();
+    return this.saveAssignmentsToFile();
   }
 
   /**
@@ -142,9 +140,9 @@ export class AssignmentService {
    * @param id the id of the participant to delete assignments by.
    * @returns true if assignment is deleted and saved false otherwise
    */
-  async deleteAssignmentsByParticipant(id: string): Promise<boolean> {
+  deleteAssignmentsByParticipant(id: string): boolean {
     //Preventive if being called outside
-    await this.checkAssignments();
+    this.checkAssignments();
     //delete assignments of the participant being the principal
     this.#assignments = this.#assignments.filter((a) => a.principal !== id);
 
@@ -154,7 +152,7 @@ export class AssignmentService {
     }
 
     //save assignments
-    return await this.saveAssignmentsToFile();
+    return this.saveAssignmentsToFile();
   }
 
   /**
@@ -204,13 +202,13 @@ export class AssignmentService {
    * @param id the id of the room to delete assignments by.
    * @returns true if assignment is deleted and saved false otherwise
    */
-  async deleteAssignmentsByRoom(id: string): Promise<boolean> {
+  deleteAssignmentsByRoom(id: string): boolean {
     //Preventive if being called outside
-    await this.checkAssignments();
+    this.checkAssignments();
     //delete assignments
     this.#assignments = this.#assignments.filter((a) => a.room !== id);
     //save assignments
-    return await this.saveAssignmentsToFile();
+    return this.saveAssignmentsToFile();
   }
 
   /**
@@ -218,13 +216,13 @@ export class AssignmentService {
    * @param id the id of the assignType to delete assignments by.
    * @returns true if assignment is deleted and saved false otherwise
    */
-  async deleteAssignmentsByAssignType(id: string): Promise<boolean> {
+  deleteAssignmentsByAssignType(id: string): boolean {
     //Preventive if being called outside
-    await this.checkAssignments();
+    this.checkAssignments();
     //delete assignments
     this.#assignments = this.#assignments.filter((a) => a.assignType !== id);
     //save assignments
-    return await this.saveAssignmentsToFile();
+    return this.saveAssignmentsToFile();
   }
 
   /**
@@ -232,20 +230,20 @@ export class AssignmentService {
    * @param id the id of the note to delete assignments by.
    * @returns true if assignment is deleted and saved false otherwise
    */
-  async resetAssignmentsByNote(id: string): Promise<boolean> {
+  resetAssignmentsByNote(id: string): boolean {
     //Preventive if being called outside
-    await this.checkAssignments();
+    this.checkAssignments();
     //reset assignments note
     for (const assignment of this.#assignments) {
       if (assignment.footerNote === id) assignment.footerNote = undefined;
     }
     //save assignments
-    return await this.saveAssignmentsToFile();
+    return this.saveAssignmentsToFile();
   }
 
-  async checkAssignments() {
+  checkAssignments() {
     if (!this.#assignments.length) {
-      await this.getAssignments();
+      this.getAssignments();
     }
   }
 }

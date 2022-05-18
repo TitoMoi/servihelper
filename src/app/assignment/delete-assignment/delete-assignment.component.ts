@@ -24,16 +24,14 @@ export class DeleteAssignmentComponent implements OnInit {
     });
 
     this.activatedRoute.params.subscribe((params) => {
-      this.assignmentService.getAssignment(params.id).then((assignment) => {
-        this.assignmentForm.setValue({
-          id: params.id,
-        });
+      this.assignmentForm.setValue({
+        id: params.id,
       });
     });
   }
 
-  async onSubmit(assignment: AssignmentInterface): Promise<void> {
-    await this.assignmentService.deleteAssignment(assignment.id);
+  onSubmit(assignment: AssignmentInterface): void {
+    this.assignmentService.deleteAssignment(assignment.id);
 
     //navigate to parent
     this.router.navigate(["../.."], {

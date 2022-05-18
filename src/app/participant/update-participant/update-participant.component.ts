@@ -45,10 +45,8 @@ export class UpdateParticipantComponent implements OnInit {
     });
 
     this.activatedRoute.params.subscribe((params) => {
-      this.participantService.getParticipant(params.id).then((participant) => {
-        this.participant = participant;
-        this.setParticipantValues();
-      });
+      this.participant = this.participantService.getParticipant(params.id);
+      this.setParticipantValues();
     });
   }
 

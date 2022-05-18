@@ -12,18 +12,16 @@ export class AssignTypeService {
   //fs-extra api
   fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
-  path: string;
+  path: string = APP_CONFIG.production
+    ? //__dirname is where the .js file exists
+      __dirname + "./assets/source/assignType.json"
+    : "./assets/source/assignType.json";
   //The array of assignTypes in memory
   #assignTypes: AssignTypeInterface[] = undefined;
   //flag to indicate that assignTypes file has changed
   hasChanged: boolean = true;
 
-  constructor(private electronService: ElectronService) {
-    this.path = APP_CONFIG.production
-      ? //__dirname is where the .js file exists
-        __dirname + "./assets/source/assignType.json"
-      : "./assets/source/assignType.json";
-  }
+  constructor(private electronService: ElectronService) {}
 
   /**
    *
@@ -42,10 +40,10 @@ export class AssignTypeService {
    *
    * @returns true if assignTypes are saved to disk or false
    */
-  async saveAssignTypesToFile(): Promise<boolean> {
+  saveAssignTypesToFile(): boolean {
     try {
       //Write assignTypes back to file
-      await this.fs.writeJson(this.path, this.#assignTypes);
+      this.fs.writeJson(this.path, this.#assignTypes);
       //Flag
       this.hasChanged = true;
       return true;
@@ -60,13 +58,13 @@ export class AssignTypeService {
    * @param assignType the assignType to create
    * @returns true if assignType is saved false if not
    */
-  async createAssignType(assignType: AssignTypeInterface): Promise<boolean> {
+  createAssignType(assignType: AssignTypeInterface): boolean {
     //Generate id for the assignType
     assignType.id = nanoid();
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);
     //save assignTypes with the new assignType
-    return await this.saveAssignTypesToFile();
+    return this.saveAssignTypesToFile();
   }
 
   /**
@@ -88,13 +86,13 @@ export class AssignTypeService {
    * @param assignType the assignType to update
    * @returns true if assignType is updated and saved false otherwise
    */
-  async updateAssignType(assignType: AssignTypeInterface): Promise<boolean> {
+  updateAssignType(assignType: AssignTypeInterface): boolean {
     //update assignType
     for (let i = 0; i < this.#assignTypes.length; i++) {
       if (this.#assignTypes[i].id === assignType.id) {
         this.#assignTypes[i] = assignType;
         //save assignTypes with the updated assignType
-        return await this.saveAssignTypesToFile();
+        return this.saveAssignTypesToFile();
       }
     }
     return false;
@@ -105,11 +103,11 @@ export class AssignTypeService {
    * @param assignType the assignType to delete
    * @returns true if assignType is deleted and saved false otherwise
    */
-  async deleteAssignType(id: string): Promise<boolean> {
+  deleteAssignType(id: string): boolean {
     //delete assignType
     this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
     //save assignTypes
-    return await this.saveAssignTypesToFile();
+    return this.saveAssignTypesToFile();
   }
 
   /**

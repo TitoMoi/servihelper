@@ -27,11 +27,10 @@ export class DeleteParticipantComponent implements OnInit {
     });
 
     this.activatedRoute.params.subscribe((params) => {
-      this.participantService.getParticipant(params.id).then((participant) => {
-        this.participantForm.setValue({
-          id: params.id,
-          name: participant.name,
-        });
+      const participant = this.participantService.getParticipant(params.id);
+      this.participantForm.setValue({
+        id: params.id,
+        name: participant.name,
       });
     });
   }

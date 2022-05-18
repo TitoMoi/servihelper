@@ -12,19 +12,17 @@ export class RoomService {
   //fs-extra api
   fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
-  path: string;
+  path: string = APP_CONFIG.production
+    ? //__dirname is where the .js file exists
+      __dirname + "./assets/source/room.json"
+    : "./assets/source/room.json";
 
   //The array of rooms in memory
   #rooms: RoomInterface[] = undefined;
   //flag to indicate that rooms file has changed
   hasChanged: boolean = true;
 
-  constructor(private electronService: ElectronService) {
-    this.path = APP_CONFIG.production
-      ? //__dirname is where the .js file exists
-        __dirname + "./assets/source/room.json"
-      : "./assets/source/room.json";
-  }
+  constructor(private electronService: ElectronService) {}
 
   /**
    *

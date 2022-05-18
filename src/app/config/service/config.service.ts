@@ -1,5 +1,8 @@
 import { Injectable } from "@angular/core";
-import { ConfigInterface } from "app/config/model/config.model";
+import {
+  ConfigInterface,
+  ConfigOptionsType,
+} from "app/config/model/config.model";
 import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
@@ -9,22 +12,18 @@ import * as fs from "fs-extra";
 })
 export class ConfigService {
   // Filesystem api
-  fs: typeof fs;
+  fs: typeof fs = this.electronService.remote.require("fs-extra");
   // Where the file is depending on the context
-  path: string;
+  path: string = APP_CONFIG.production
+    ? //__dirname is where the .js file exists
+      __dirname + "./assets/source/config.json"
+    : "./assets/source/config.json";
   // The config in memory object
   #config: ConfigInterface = undefined;
   // Flag to indicate that config file has changed
   hasChanged: boolean = true;
 
-  constructor(electronService: ElectronService) {
-    this.fs = electronService.remote.require("fs-extra");
-
-    this.path = APP_CONFIG.production
-      ? //__dirname is where the .js file exists
-        __dirname + "./assets/source/config.json"
-      : "./assets/source/config.json";
-  }
+  constructor(private electronService: ElectronService) {}
 
   /**
    *
@@ -43,26 +42,21 @@ export class ConfigService {
    *
    * @returns true if configs are saved to disk or false
    */
-  async saveConfigToFile(): Promise<boolean> {
-    try {
-      //Security check that has all the properties
-      if (
-        "assignmentHeaderTitle" in this.#config &&
-        "firstDayOfWeek" in this.#config &&
-        "lang" in this.#config
-      ) {
-        if (this.#config)
-          //Write configs back to file
-          await this.fs.writeJson(this.path, this.#config);
-        //Flag
-        this.hasChanged = true;
-        return true;
-      } else {
-        throw new Error("config file missing properties");
-      }
-    } catch (err) {
-      console.error("saveConfig", err);
-      return false;
+  saveConfigToFile(): boolean {
+    //Security check that has all the properties
+    if (
+      "assignmentHeaderTitle" in this.#config &&
+      "firstDayOfWeek" in this.#config &&
+      "lang" in this.#config
+    ) {
+      if (this.#config)
+        //Write configs back to file
+        this.fs.writeJson(this.path, this.#config);
+      //Flag
+      this.hasChanged = true;
+      return true;
+    } else {
+      throw new Error("config file missing properties");
     }
   }
 
@@ -71,11 +65,11 @@ export class ConfigService {
    * @param config the config to update
    * @returns true if config is updated and saved false otherwise
    */
-  async updateConfig(config: ConfigInterface): Promise<boolean> {
+  updateConfig(config: ConfigInterface): boolean {
     //update config
     this.#config = config;
     //save configs with the updated config
-    const res = await this.saveConfigToFile();
+    const res = this.saveConfigToFile();
     return res;
   }
 
@@ -85,11 +79,11 @@ export class ConfigService {
    * @param value the value of the key to update
    * @returns true if config is updated and saved false otherwise
    */
-  async updateConfigByKey(key: string, value: any): Promise<boolean> {
+  updateConfigByKey(key: ConfigOptionsType, value: any): boolean {
     //update config
-    this.#config[key] = value;
+    this.#config[key as string] = value;
     //save configs with the updated config
-    const res = await this.saveConfigToFile();
+    const res = this.saveConfigToFile();
     return res;
   }
 }

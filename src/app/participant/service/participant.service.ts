@@ -15,19 +15,17 @@ export class ParticipantService {
   //fs-extra api
   fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
-  path: string;
+  path: string = APP_CONFIG.production
+    ? //__dirname is where the .js file exists
+      __dirname + "./assets/source/participant.json"
+    : "./assets/source/participant.json";
 
   //The array of participants in memory
   #participants: ParticipantInterface[] = undefined;
   //flag to indicate that participants file has changed
   hasChanged: boolean = true;
 
-  constructor(private electronService: ElectronService) {
-    this.path = APP_CONFIG.production
-      ? //__dirname is where the .js file exists
-        __dirname + "./assets/source/participant.json"
-      : "./assets/source/participant.json";
-  }
+  constructor(private electronService: ElectronService) {}
 
   /**
    *
@@ -46,10 +44,10 @@ export class ParticipantService {
    *
    * @returns true if participants are saved to disk or false
    */
-  async saveParticipantsToFile(): Promise<boolean> {
+  saveParticipantsToFile(): boolean {
     try {
       //Write participants back to file
-      await this.fs.writeJson(this.path, this.#participants);
+      this.fs.writeJson(this.path, this.#participants);
       //Flag
       this.hasChanged = true;
       return true;
@@ -64,7 +62,7 @@ export class ParticipantService {
    * @param participant the participant to create
    * @returns true if participant is saved false if not
    */
-  async createParticipant(participant: ParticipantInterface): Promise<boolean> {
+  createParticipant(participant: ParticipantInterface): boolean {
     //Generate id for the participant
     participant.id = nanoid();
     //add participant to participants
@@ -82,7 +80,7 @@ export class ParticipantService {
     });
 
     //save participants with the new participant
-    return await this.saveParticipantsToFile();
+    return this.saveParticipantsToFile();
   }
 
   /**
@@ -90,9 +88,9 @@ export class ParticipantService {
    * @param id the id of the participant to search for
    * @returns the participant that is ALWAYS found
    */
-  async getParticipant(id: string): Promise<ParticipantInterface> {
+  getParticipant(id: string): ParticipantInterface {
     //Preventive maybe this func is called outside participants view
-    await this.checkParticipants();
+    this.checkParticipants();
     //search participant
     for (const participant of this.#participants) {
       if (participant.id === id) {
@@ -106,13 +104,13 @@ export class ParticipantService {
    * @param participant the participant to update
    * @returns true if participant is updated and saved false otherwise
    */
-  async updateParticipant(participant: ParticipantInterface): Promise<boolean> {
+  updateParticipant(participant: ParticipantInterface): boolean {
     //update participant
     for (let i = 0; i < this.#participants.length; i++) {
       if (this.#participants[i].id === participant.id) {
         this.#participants[i] = participant;
         //save participants with the updated participant
-        return await this.saveParticipantsToFile();
+        return this.saveParticipantsToFile();
       }
     }
     return false;
@@ -123,11 +121,11 @@ export class ParticipantService {
    * @param participant the participant to delete
    * @returns true if participant is deleted and saved false otherwise
    */
-  async deleteParticipant(id: string): Promise<boolean> {
+  deleteParticipant(id: string): boolean {
     //delete participant
     this.#participants = this.#participants.filter((b) => b.id !== id);
     //save participants
-    return await this.saveParticipantsToFile();
+    return this.saveParticipantsToFile();
   }
 
   /**
@@ -135,9 +133,9 @@ export class ParticipantService {
    * @param id the id of the new assignType to add
    * @returns
    */
-  async addAssignType(id: string): Promise<boolean> {
+  addAssignType(id: string): boolean {
     //Preventive maybe this func is called outside participants view
-    await this.checkParticipants();
+    this.checkParticipants();
 
     const participantAssignTypesValue: ParticipantAssignTypesInterface = {
       assignTypeId: id,
@@ -152,7 +150,7 @@ export class ParticipantService {
       ];
     }
 
-    return await this.saveParticipantsToFile();
+    return this.saveParticipantsToFile();
   }
 
   /**
@@ -160,16 +158,16 @@ export class ParticipantService {
    * @param id the assignType id to delete for all the participants
    * @returns true if all participants are updated and saved false otherwise
    */
-  async deleteAssignType(id: string): Promise<boolean> {
+  deleteAssignType(id: string): boolean {
     //Preventive maybe this func is called outside participants view
-    await this.checkParticipants();
+    this.checkParticipants();
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].assignTypes = this.#participants[
         i
       ].assignTypes.filter((at) => at.assignTypeId !== id);
     }
-    return await this.saveParticipantsToFile();
+    return this.saveParticipantsToFile();
   }
 
   /**
@@ -177,9 +175,9 @@ export class ParticipantService {
    * @param id the id of the new room to add
    * @returns
    */
-  async addRoom(id: string): Promise<boolean> {
+  addRoom(id: string): boolean {
     //Preventive maybe this func is called outside participants view
-    await this.checkParticipants();
+    this.checkParticipants();
 
     const value = {
       id,
@@ -190,7 +188,7 @@ export class ParticipantService {
       participant.rooms = [...participant.rooms, value];
     }
 
-    return await this.saveParticipantsToFile();
+    return this.saveParticipantsToFile();
   }
 
   /**
@@ -198,21 +196,21 @@ export class ParticipantService {
    * @param id the room id to delete for all the participants
    * @returns true if all participants are updated and saved false otherwise
    */
-  async deleteRoom(id: string): Promise<boolean> {
+  deleteRoom(id: string): boolean {
     //Preventive maybe this func is called outside participants view
-    await this.checkParticipants();
+    this.checkParticipants();
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].rooms = this.#participants[i].rooms.filter(
         (at) => at.id !== id
       );
     }
-    return await this.saveParticipantsToFile();
+    return this.saveParticipantsToFile();
   }
 
-  async checkParticipants() {
+  checkParticipants() {
     if (!this.#participants.length) {
-      await this.getParticipants();
+      this.getParticipants();
     }
   }
 }
