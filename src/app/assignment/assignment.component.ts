@@ -120,46 +120,22 @@ export class AssignmentComponent implements OnInit {
   async fillDataSource(assignmentsPage: AssignmentInterface[]) {
     const dataSourceTemp: AssignmentTableInterface[] = [];
     for (const assignment of assignmentsPage) {
-      //principal
-      const principalPro = this.participantService.getParticipant(
-        assignment.principal
-      );
-
       //assistant is optional
-      const assistantPro = this.participantService.getParticipant(
+      const assistant = this.participantService.getParticipant(
         assignment.assistant
       );
-
-      //room
-      const roomPro = this.roomService.getRoom(assignment.room);
-
-      //assignType
-      const assignTypePro = this.assignTypeService.getAssignType(
-        assignment.assignType
-      );
-      //Footer note
-      const notePro = this.noteService.getNote(assignment.footerNote);
-
-      const values = await Promise.all([
-        principalPro,
-        assistantPro,
-        roomPro,
-        assignTypePro,
-        notePro,
-      ]);
 
       //Populate datasource, values are in order
       dataSourceTemp.push({
         id: assignment.id,
         date: assignment.date,
-        room: values[2].name, //Room name
-        assignType: values[3].name, //AssignType
-        theme: assignment.theme, //Hand note
-        onlyWoman: assignment.onlyWoman,
-        onlyMan: assignment.onlyMan,
-        principal: values[0].name, //participant
-        assistant: values[1] ? values[1].name : undefined, //participant
-        footerNote: values[4] ? values[4].editorHTML : undefined, //Note from service
+        room: this.roomService.getRoom(assignment.room).name,
+        assignType: this.assignTypeService.getAssignType(assignment.assignType)
+          .name,
+        theme: assignment.theme,
+        principal: this.participantService.getParticipant(assignment.principal)
+          .name,
+        assistant: assistant ? assistant.name : undefined,
       });
     }
     //Update the view
