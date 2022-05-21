@@ -27,7 +27,7 @@ export class AssignTypeComponent implements OnInit {
     this.icons = ["garbage", "edit"];
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     //Register icons
     for (const iconFileName of this.icons) {
       this.matIconRegistry.addSvgIcon(
@@ -38,15 +38,15 @@ export class AssignTypeComponent implements OnInit {
       );
     }
 
-    this.assignTypes = await this.assignTypeService.getAssignTypes();
-    await this.fillDataSource(this.assignTypes);
+    this.assignTypes = this.assignTypeService.getAssignTypes();
+    this.fillDataSource(this.assignTypes);
   }
 
   trackByIdFn(index, assignType: AssignTypeInterface) {
     return assignType.id;
   }
 
-  async fillDataSource(assignTypesPage: AssignTypeInterface[]) {
+  fillDataSource(assignTypesPage: AssignTypeInterface[]) {
     const dataSourceTemp: AssignTypeInterface[] = [];
     for (const assignType of assignTypesPage) {
       //Populate datasource, values is in order

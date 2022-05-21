@@ -56,9 +56,9 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
   }
 
-  async initStatistics() {
-    const assignmentList = await this.assignmentService.getAssignments();
-    const temporalGlobalList = await this.participantService.getParticipants();
+  initStatistics() {
+    const assignmentList = this.assignmentService.getAssignments();
+    const temporalGlobalList = this.participantService.getParticipants();
 
     //Global
     setCountById(assignmentList, temporalGlobalList);
@@ -73,7 +73,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = await this.assignTypeService.getAssignType(
+        const assignType = this.assignTypeService.getAssignType(
           assignment.assignType
         );
         participant.lastAssignType = assignType.name;
@@ -90,7 +90,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = await this.assignTypeService.getAssignType(
+        const assignType = this.assignTypeService.getAssignType(
           assignment.assignType
         );
         participant.penultimateAssignType = assignType.name;

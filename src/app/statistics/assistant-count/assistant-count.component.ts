@@ -56,10 +56,9 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
   }
 
-  async initStatistics() {
-    const assignmentList = await this.assignmentService.getAssignments();
-    const temporalAssistantList =
-      await this.participantService.getParticipants();
+  initStatistics() {
+    const assignmentList = this.assignmentService.getAssignments();
+    const temporalAssistantList = this.participantService.getParticipants();
 
     //Assistant
     setAssistantCountById(assignmentList, temporalAssistantList);
@@ -74,7 +73,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = await this.assignTypeService.getAssignType(
+        const assignType = this.assignTypeService.getAssignType(
           assignment.assignType
         );
         participant.lastAssignType = assignType.name;
@@ -91,7 +90,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = await this.assignTypeService.getAssignType(
+        const assignType = this.assignTypeService.getAssignType(
           assignment.assignType
         );
         participant.penultimateAssignType = assignType.name;

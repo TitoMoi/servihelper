@@ -33,8 +33,8 @@ export class UpdateAssignTypeComponent implements OnInit {
     });
   }
 
-  async onSubmit(assignType: AssignTypeInterface): Promise<void> {
-    await this.assignTypeService.updateAssignType(assignType);
+  onSubmit(assignType: AssignTypeInterface): void {
+    this.assignTypeService.updateAssignType(assignType);
 
     //navigate to parent
     this.router.navigate(["../.."], {

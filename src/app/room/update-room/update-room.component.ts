@@ -33,8 +33,8 @@ export class UpdateRoomComponent implements OnInit {
     });
   }
 
-  async onSubmit(room: RoomInterface): Promise<void> {
-    await this.roomService.updateRoom(room);
+  onSubmit(room: RoomInterface): void {
+    this.roomService.updateRoom(room);
 
     //navigate to parent
     this.router.navigate(["../.."], {

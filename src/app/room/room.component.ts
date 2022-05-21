@@ -28,7 +28,7 @@ export class RoomComponent implements OnInit {
     this.icons = ["garbage", "edit"];
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     //Register icons
     for (const iconFileName of this.icons) {
       this.matIconRegistry.addSvgIcon(
@@ -39,15 +39,15 @@ export class RoomComponent implements OnInit {
       );
     }
 
-    this.rooms = await this.roomService.getRooms();
-    await this.fillDataSource(this.rooms);
+    this.rooms = this.roomService.getRooms();
+    this.fillDataSource(this.rooms);
   }
 
   trackByIdFn(index, room: RoomInterface) {
     return room.id;
   }
 
-  async fillDataSource(roomsPage: RoomInterface[]) {
+  fillDataSource(roomsPage: RoomInterface[]) {
     const dataSourceTemp: RoomTableInterface[] = [];
     for (const room of roomsPage) {
       //Populate datasource, values is in order

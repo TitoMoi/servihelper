@@ -18,9 +18,18 @@ import { ParticipantService } from "app/participant/service/participant.service"
 })
 export class UpdateParticipantComponent implements OnInit {
   participant: ParticipantInterface;
-  rooms: RoomInterface[];
-  assignTypes: AssignTypeInterface[];
-  participantForm;
+  rooms: RoomInterface[] = this.roomService.getRooms();
+  assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
+
+  participantForm = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+    isWoman: [undefined],
+    email: [undefined, Validators.email],
+    available: [undefined],
+    rooms: [this.formBuilder.array([])],
+    assignTypes: [this.formBuilder.array([])],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,33 +38,12 @@ export class UpdateParticipantComponent implements OnInit {
     private assignTypeService: AssignTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {
-    this.getRoomsByService();
-    this.getAssignTypesByService();
-  }
+  ) {}
   ngOnInit(): void {
-    this.participantForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-      isWoman: [undefined],
-      email: [undefined, Validators.email],
-      available: [undefined],
-      rooms: [this.formBuilder.array([])],
-      assignTypes: [this.formBuilder.array([])],
-    });
-
     this.activatedRoute.params.subscribe((params) => {
       this.participant = this.participantService.getParticipant(params.id);
       this.setParticipantValues();
     });
-  }
-
-  async getRoomsByService() {
-    this.rooms = await this.roomService.getRooms();
-  }
-
-  async getAssignTypesByService() {
-    this.assignTypes = await this.assignTypeService.getAssignTypes();
   }
 
   getRoomName(id) {
@@ -125,8 +113,8 @@ export class UpdateParticipantComponent implements OnInit {
     );
   }
 
-  async onSubmit(participant: ParticipantInterface): Promise<void> {
-    await this.participantService.updateParticipant(participant);
+  onSubmit(participant: ParticipantInterface): void {
+    this.participantService.updateParticipant(participant);
 
     //navigate to parent
     this.router.navigate(["../.."], {

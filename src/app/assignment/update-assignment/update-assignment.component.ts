@@ -5,7 +5,12 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 import { DateAdapter } from "@angular/material/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslocoService } from "@ngneat/transloco";
@@ -35,16 +40,19 @@ import { sortParticipantsByCount } from "app/functions/sortParticipantsByCount";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateAssignmentComponent implements OnInit, OnDestroy {
-  rooms: RoomInterface[];
-  assignTypes: AssignTypeInterface[];
-  principalList: ParticipantInterface[];
-  assistantList: ParticipantInterface[];
-  footerNotes: NoteInterface[];
-  assignments: AssignmentInterface[];
-  hasAssignmentsList: string[];
-  hasAssignmentsAssistantList: string[];
+  rooms: RoomInterface[] = this.roomService.getRooms();
+  assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
+  principalList: ParticipantInterface[] =
+    this.participantService.getParticipants();
+  assistantList: ParticipantInterface[] = [];
+  footerNotes: NoteInterface[] = this.noteService.getNotes();
+  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
+  hasAssignmentsList: string[] = [];
+  hasAssignmentsAssistantList: string[] = [];
 
-  principalsBackup: ParticipantInterface[];
+  principalsBackup: ParticipantInterface[] = [];
+
+  isCalculated = false;
 
   //Subscriptions
   principalSub$: Subscription;
@@ -55,12 +63,20 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   onlyWomanSub$: Subscription;
   langSub$: Subscription;
 
-  //Subject
-  canContinueSub$: Subject<boolean>;
+  canContinueSub$: Subject<boolean> = new Subject<boolean>();
 
-  assignmentForm;
-
-  isCalculated;
+  assignmentForm: FormGroup = this.formBuilder.group({
+    id: undefined,
+    date: [undefined, Validators.required],
+    room: [undefined, Validators.required], //Room id
+    assignType: [undefined, Validators.required], //AssignType id
+    theme: undefined,
+    onlyWoman: [{ value: undefined, disabled: true }],
+    onlyMan: [{ value: undefined, disabled: true }],
+    principal: [{ value: undefined, disabled: true }, Validators.required], //participant id
+    assistant: [{ value: undefined, disabled: true }], //participant id
+    footerNote: undefined, //Note id
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -74,28 +90,9 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     private dateAdapter: DateAdapter<any>,
     private translocoService: TranslocoService,
     private cdr: ChangeDetectorRef
-  ) {
-    this.isCalculated = false;
-    this.canContinueSub$ = new Subject<boolean>();
-    this.principalsBackup = [];
+  ) {}
 
-    this.assignmentForm = this.formBuilder.group({
-      id: undefined,
-      date: [undefined, Validators.required],
-      room: [undefined, Validators.required], //Room id
-      assignType: [undefined, Validators.required], //AssignType id
-      theme: undefined,
-      onlyWoman: [{ value: undefined, disabled: true }],
-      onlyMan: [{ value: undefined, disabled: true }],
-      principal: [{ value: undefined, disabled: true }, Validators.required], //participant id
-      assistant: [{ value: undefined, disabled: true }], //participant id
-      footerNote: undefined, //Note id
-    });
-    this.hasAssignmentsList = [];
-    this.hasAssignmentsAssistantList = [];
-  }
-
-  async ngOnInit() {
+  ngOnInit() {
     //Prepare the subscriptions for changes
     this.langSubscription();
     this.onlyWomanSubscription();
@@ -104,13 +101,10 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.assignTypeSubscription();
     this.principalSubscription();
     this.assistantSubscription();
-    //Get all the data needed
-    const data = await this.getInitialData();
-    this.setInitialData(data);
 
-    this.activatedRoute.params.subscribe(async (params) => {
+    this.activatedRoute.params.subscribe((params) => {
       //Fill the form with the assignment passed by the router
-      await this.setAssignmentData(params.id);
+      this.setAssignmentData(params.id);
 
       //activate template
       this.isCalculated = true;
@@ -133,8 +127,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
    *
    * @param id the id of the assignment to search
    */
-  async setAssignmentData(id: string) {
-    const assignment = await this.assignmentService.getAssignment(id);
+  setAssignmentData(id: string) {
+    const assignment = this.assignmentService.getAssignment(id);
     this.assignmentForm.get("id").setValue(assignment.id, { emitEvent: false });
     this.assignmentForm
       .get("date")
@@ -164,28 +158,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     });
   }
 
-  getRooms(): RoomInterface[] {
-    return this.roomService.getRooms();
-  }
-
-  getAssignTypes(): AssignTypeInterface[] {
-    return this.assignTypeService.getAssignTypes();
-  }
-
-  getParticipants(): ParticipantInterface[] {
-    return this.participantService.getParticipants();
-  }
-
-  getAssignments(): AssignmentInterface[] {
-    return this.assignmentService.getAssignments();
-  }
-
-  getFooterNotes(): NoteInterface[] {
-    return this.noteService.getNotes();
-  }
-
-  async onSubmit(assignment: AssignmentInterface): Promise<void> {
-    await this.assignmentService.updateAssignment(assignment);
+  onSubmit(assignment: AssignmentInterface): void {
+    this.assignmentService.updateAssignment(assignment);
 
     //navigate to parent, one parent for each fragment
     this.router.navigate(["../.."], {
@@ -217,7 +191,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
    */
   onlyWomanSubscription() {
     this.onlyWomanSub$ = this.getOnlyWomanControl().valueChanges.subscribe(
-      async (isChecked) => {
+      (isChecked) => {
         const onlyManControl = this.getOnlyManControl();
 
         if (isChecked) {
@@ -238,7 +212,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
    */
   onlyManSubscription() {
     this.onlyManSub$ = this.getOnlyManControl().valueChanges.subscribe(
-      async (isChecked) => {
+      (isChecked) => {
         const onlyWomanControl = this.getOnlyWomanControl();
 
         if (isChecked) {
@@ -260,7 +234,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
    */
   assignTypeSubscription() {
     this.assignTypeSub$ = this.getAssignTypeControl().valueChanges.subscribe(
-      async (assignTypeValue) => {
+      (assignTypeValue) => {
         const roomControl = this.getRoomControl();
         const principalControl = this.getPrincipalControl();
 
@@ -271,7 +245,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           this.tryToEnableGenderControls();
 
           //Mandatory to get them every time
-          this.principalList = await this.participantService.getParticipants();
+          this.principalList = this.participantService.getParticipants();
 
           for (const participant of this.principalList) {
             const isAvailable = checkIsPrincipalAvailable(
@@ -319,7 +293,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
    */
   roomSubscription() {
     this.roomSub$ = this.getRoomControl().valueChanges.subscribe(
-      async (roomValue) => {
+      (roomValue) => {
         const assignTypeControl = this.getAssignTypeControl();
         const principalControl = this.getPrincipalControl();
 
@@ -330,7 +304,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           this.tryToEnableGenderControls();
 
           //Mandatory to get them every time
-          this.principalList = await this.participantService.getParticipants();
+          this.principalList = this.participantService.getParticipants();
 
           for (const participant of this.principalList) {
             const isAvailable = checkIsPrincipalAvailable(
@@ -378,14 +352,14 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
    */
   principalSubscription() {
     this.principalSub$ = this.getPrincipalControl().valueChanges.subscribe(
-      async (principalId) => {
+      (principalId) => {
         const assistantControl = this.getAssistantControl();
 
         if (principalId) {
           const roomControl = this.getRoomControl();
           const assignTypeControl = this.getAssignTypeControl();
 
-          this.assistantList = await this.participantService.getParticipants();
+          this.assistantList = this.participantService.getParticipants();
 
           //Remove principal from the list of assistants
           this.assistantList = this.assistantList.filter(
@@ -507,33 +481,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Gets the initial data for rooms, assignTypes, footerNotes, assignments
-   */
-  async getInitialData() {
-    const data = await Promise.all([
-      this.getRooms(),
-      this.getAssignTypes(),
-      this.getFooterNotes(),
-      this.getAssignments(),
-      this.getParticipants(),
-    ]);
-    return data;
-  }
-
-  /**
-   * Sets the initial data
-   * @param data the array of data, the order is based on the Promise.all
-   */
-  setInitialData(data) {
-    this.rooms = data[0];
-    this.assignTypes = data[1];
-    this.footerNotes = data[2];
-    this.assignments = data[3];
-    //Extra participants only for initial update
-    this.principalList = data[4];
-  }
-
-  /**
    * If a gender control is active respect the current values, else activate the controls
    */
   tryToEnableGenderControls() {
@@ -548,49 +495,49 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   /**
    * @returns the date form control
    */
-  getDateControl(): FormControl {
+  getDateControl() {
     return this.assignmentForm.get("date");
   }
 
   /**
    * @returns the onlyWoman form control
    */
-  getOnlyWomanControl(): FormControl {
+  getOnlyWomanControl() {
     return this.assignmentForm.get("onlyWoman");
   }
 
   /**
    * @returns the onlyMan form control
    */
-  getOnlyManControl(): FormControl {
+  getOnlyManControl() {
     return this.assignmentForm.get("onlyMan");
   }
 
   /**
    * @returns the assignType form control
    */
-  getAssignTypeControl(): FormControl {
+  getAssignTypeControl() {
     return this.assignmentForm.get("assignType");
   }
 
   /**
    * @returns the room form control
    */
-  getRoomControl(): FormControl {
+  getRoomControl() {
     return this.assignmentForm.get("room");
   }
 
   /**
    * @returns the principal form control
    */
-  getPrincipalControl(): FormControl {
+  getPrincipalControl() {
     return this.assignmentForm.get("principal");
   }
 
   /**
    * @returns the assistant form control
    */
-  getAssistantControl(): FormControl {
+  getAssistantControl() {
     return this.assignmentForm.get("assistant");
   }
 

@@ -37,15 +37,15 @@ export class DeleteRoomComponent implements OnInit {
     });
   }
 
-  async onSubmit(room: RoomInterface): Promise<void> {
+  onSubmit(room: RoomInterface): void {
     //delete room
-    await this.roomService.deleteRoom(room.id);
+    this.roomService.deleteRoom(room.id);
 
     //delete from participants the room reference
-    await this.participantService.deleteRoom(room.id);
+    this.participantService.deleteRoom(room.id);
 
     //delete all assignments that have the room
-    await this.assignmentService.deleteAssignmentsByRoom(room.id);
+    this.assignmentService.deleteAssignmentsByRoom(room.id);
 
     //navigate to parent
     this.router.navigate(["../.."], {

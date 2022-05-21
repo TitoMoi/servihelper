@@ -55,10 +55,9 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
   }
 
-  async initStatistics() {
-    const assignmentList = await this.assignmentService.getAssignments();
-    const temporalPrincipalList =
-      await this.participantService.getParticipants();
+  initStatistics() {
+    const assignmentList = this.assignmentService.getAssignments();
+    const temporalPrincipalList = this.participantService.getParticipants();
 
     //Principal
     setPrincipalCountById(assignmentList, temporalPrincipalList);
@@ -73,7 +72,7 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = await this.assignTypeService.getAssignType(
+        const assignType = this.assignTypeService.getAssignType(
           assignment.assignType
         );
         participant.lastAssignType = assignType.name;
@@ -90,7 +89,7 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = await this.assignTypeService.getAssignType(
+        const assignType = this.assignTypeService.getAssignType(
           assignment.assignType
         );
         participant.penultimateAssignType = assignType.name;

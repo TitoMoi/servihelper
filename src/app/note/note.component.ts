@@ -28,7 +28,7 @@ export class NoteComponent implements OnInit {
     this.icons = ["garbage", "edit"];
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     //Register icons
     for (const iconFileName of this.icons) {
       this.matIconRegistry.addSvgIcon(
@@ -39,15 +39,15 @@ export class NoteComponent implements OnInit {
       );
     }
 
-    this.notes = await this.noteService.getNotes();
-    await this.fillDataSource(this.notes);
+    this.notes = this.noteService.getNotes();
+    this.fillDataSource(this.notes);
   }
 
   trackByIdFn(index, note: NoteInterface) {
     return note.id;
   }
 
-  async fillDataSource(notesPage: NoteInterface[]) {
+  fillDataSource(notesPage: NoteInterface[]) {
     const dataSourceTemp: NoteTableInterface[] = [];
     for (const note of notesPage) {
       //Populate datasource, values is in order

@@ -61,8 +61,8 @@ export class CreateParticipantComponent implements OnInit {
     return this.participantForm.controls.assignTypes as FormArray;
   }
 
-  async addAssignTypes() {
-    this.assignTypes = await this.assignTypeService.getAssignTypes();
+  addAssignTypes() {
+    this.assignTypes = this.assignTypeService.getAssignTypes();
 
     //Create control
     this.participantForm.setControl("assignTypes", this.formBuilder.array([]));
@@ -86,8 +86,8 @@ export class CreateParticipantComponent implements OnInit {
     fa.push(assignTypeFormGroup);
   }
 
-  async addRooms() {
-    this.rooms = await this.roomService.getRooms();
+  addRooms() {
+    this.rooms = this.roomService.getRooms();
     //Create control
     this.participantForm.setControl("rooms", this.formBuilder.array([]));
     //Populate control with rooms
@@ -106,8 +106,8 @@ export class CreateParticipantComponent implements OnInit {
     const fa = this.participantForm.get("rooms") as FormArray;
     fa.push(room);
   }
-  async onSubmit(participant: ParticipantInterface): Promise<void> {
-    await this.participantService.createParticipant(participant);
+  onSubmit(participant: ParticipantInterface): void {
+    this.participantService.createParticipant(participant);
 
     //navigate to parent
     this.router.navigate([".."], {

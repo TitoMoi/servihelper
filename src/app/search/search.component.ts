@@ -39,8 +39,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.participantSub$.unsubscribe();
   }
 
-  async ngOnInit(): Promise<void> {
-    this.participants = await this.participantService.getParticipants();
+  ngOnInit(): void {
+    this.participants = this.participantService.getParticipants();
 
     this.participantSub$ = this.searchForm.valueChanges.subscribe((values) => {
       const participant = values.participant;

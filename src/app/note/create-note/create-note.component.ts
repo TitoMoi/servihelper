@@ -45,10 +45,10 @@ export class CreateNoteComponent implements OnInit, OnDestroy {
     this.editor.destroy();
   }
 
-  async onSubmit(note: NoteInterface): Promise<void> {
+  onSubmit(note: NoteInterface): void {
     note.editorHTML = editorJsonToHtml(note.editorContent);
 
-    await this.noteService.createNote(note);
+    this.noteService.createNote(note);
 
     //navigate to parent
     this.router.navigate([".."], {

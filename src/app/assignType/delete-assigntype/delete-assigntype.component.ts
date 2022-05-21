@@ -38,14 +38,14 @@ export class DeleteAssignTypeComponent implements OnInit {
     });
   }
 
-  async onSubmit(assignType: AssignTypeInterface): Promise<void> {
+  onSubmit(assignType: AssignTypeInterface): void {
     //save the assignType
-    await this.assignTypeService.deleteAssignType(assignType.id);
+    this.assignTypeService.deleteAssignType(assignType.id);
     //delete from participants assignType
-    await this.participantService.deleteAssignType(assignType.id);
+    this.participantService.deleteAssignType(assignType.id);
 
     //delete all assignments that have the assignType
-    await this.assignmentService.deleteAssignment(assignType.id);
+    this.assignmentService.deleteAssignment(assignType.id);
 
     //navigate to parent
     this.router.navigate(["../.."], {

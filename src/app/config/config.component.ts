@@ -55,7 +55,7 @@ export class ConfigComponent implements OnInit {
       .setValue(this.configService.getConfig().assignmentHeaderTitle);
   }
 
-  async downloadFiles() {
+  downloadFiles() {
     const zip = new AdmZip();
 
     zip.addLocalFolder(this.path);
@@ -143,11 +143,11 @@ export class ConfigComponent implements OnInit {
     this.configService.updateConfigByKey("assignmentHeaderTitle", elem.value);
   }
 
-  async onSubmit(): Promise<void> {
+  onSubmit(): void {
     const assignmentHeaderTitle = this.configForm.get(
       "assignmentHeaderTitle"
     ).value;
-    await this.configService.updateConfigByKey(
+    this.configService.updateConfigByKey(
       "assignmentHeaderTitle",
       assignmentHeaderTitle
     );

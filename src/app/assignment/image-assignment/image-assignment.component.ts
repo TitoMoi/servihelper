@@ -39,12 +39,12 @@ export class ImageAssignmentComponent implements OnInit {
   //Image data bindings
   assignmentHeaderTitle: string;
   date: Date;
-  room: string;
-  assignType: string;
-  principal: string;
-  assistant: string;
+  roomName: string;
+  assignTypeName: string;
+  principalName: string;
+  assistantName: string;
   theme: string;
-  footerNote: string;
+  footerNoteEditorHTML: string;
 
   constructor(
     private assignmentService: AssignmentService,
@@ -75,77 +75,40 @@ export class ImageAssignmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(async (params) => {
+    this.activatedRoute.params.subscribe((params) => {
       //Fill the form with the assignment passed by the router
       const id = params.id;
 
       //Get the assignment
-      const assignment = await this.assignmentService.getAssignment(id);
+      const assignment = this.assignmentService.getAssignment(id);
 
-      //principal
-      const principalPromise = this.participantService.getParticipant(
+      this.principalName = this.participantService.getParticipant(
         assignment.principal
-      );
-      //assistant is optional
-      const assistantPromise = this.participantService.getParticipant(
+      ).name;
+
+      this.assistantName = this.participantService.getParticipant(
         assignment.assistant
-      );
-      //room
-      const roomPromise = this.roomService.getRoom(assignment.room);
-      //assignType
-      const assignTypePromise = this.assignTypeService.getAssignType(
+      )?.name;
+
+      this.roomName = this.roomService.getRoom(assignment.room).name;
+
+      this.assignTypeName = this.assignTypeService.getAssignType(
         assignment.assignType
-      );
-      const footerNotePromise = this.noteService.getNote(assignment.footerNote); //Note is optional
+      ).name;
 
-      const values = await Promise.all([
-        principalPromise,
-        assistantPromise,
-        roomPromise,
-        assignTypePromise,
-        footerNotePromise,
-      ]);
+      this.footerNoteEditorHTML = this.noteService.getNote(
+        assignment.footerNote
+      )?.editorHTML;
 
-      //bindings
       this.assignmentHeaderTitle =
         this.configService.getConfig().assignmentHeaderTitle;
 
       this.date = assignment.date;
-      if (assignment.theme) {
-        this.theme = assignment.theme;
-      }
-      this.principal = values[0].name;
-      if (values[1]) {
-        this.assistant = values[1].name;
-      }
-      this.room = values[2].name;
-      this.assignType = values[3].name;
-      if (values[4]) {
-        this.footerNote = values[4].editorHTML;
-      }
+
+      this.theme = assignment.theme ?? assignment.theme;
 
       this.isLoaded = true;
     });
-  }
-
-  getRooms(): RoomInterface[] {
-    return this.roomService.getRooms();
-  }
-
-  getAssignTypes(): AssignTypeInterface[] {
-    return this.assignTypeService.getAssignTypes();
-  }
-
-  getParticipants(): ParticipantInterface[] {
-    return this.participantService.getParticipants();
-  }
-
-  getAssignments(): AssignmentInterface[] {
-    return this.assignmentService.getAssignments();
-  }
-
-  getFooterNotes(): NoteInterface[] {
-    return this.noteService.getNotes();
   }
 
   /**

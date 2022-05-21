@@ -80,7 +80,7 @@ export class AssignmentComponent implements OnInit {
     this.dataSource = [];
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     //ToDo: No queda claro, getLang pero pongo un locale despues.
     //Set datepicker lang to locale
     const lang = this.translocoService.getActiveLang();
@@ -96,7 +96,7 @@ export class AssignmentComponent implements OnInit {
       );
     }
 
-    this.assignments = await this.assignmentService.getAssignments();
+    this.assignments = this.assignmentService.getAssignments();
 
     //ToDo: Que lo de el servicio ya paginado.
     const begin = 0 * this.pageSizeOptions[0];
@@ -117,7 +117,7 @@ export class AssignmentComponent implements OnInit {
     this.fillDataSource(assignmentsPage);
   }
 
-  async fillDataSource(assignmentsPage: AssignmentInterface[]) {
+  fillDataSource(assignmentsPage: AssignmentInterface[]) {
     const dataSourceTemp: AssignmentTableInterface[] = [];
     for (const assignment of assignmentsPage) {
       //assistant is optional

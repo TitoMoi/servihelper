@@ -35,10 +35,10 @@ export class DeleteParticipantComponent implements OnInit {
     });
   }
 
-  async onSubmit(participant: ParticipantInterface): Promise<void> {
-    await this.participantService.deleteParticipant(participant.id);
+  onSubmit(participant: ParticipantInterface): void {
+    this.participantService.deleteParticipant(participant.id);
 
-    await this.assignmentService.deleteAssignmentsByParticipant(participant.id);
+    this.assignmentService.deleteAssignmentsByParticipant(participant.id);
 
     //navigate to parent
     this.router.navigate(["../.."], {

@@ -32,7 +32,7 @@ export class ParticipantComponent implements OnInit {
     this.icons = ["garbage", "edit"];
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     //Register icons
     for (const iconFileName of this.icons) {
       this.matIconRegistry.addSvgIcon(
@@ -43,15 +43,15 @@ export class ParticipantComponent implements OnInit {
       );
     }
 
-    this.participants = await this.participantService.getParticipants();
-    await this.fillDataSource(this.participants);
+    this.participants = this.participantService.getParticipants();
+    this.fillDataSource(this.participants);
   }
 
   trackByIdFn(index, participant: ParticipantInterface) {
     return participant.id;
   }
 
-  async fillDataSource(participantsPage: ParticipantInterface[]) {
+  fillDataSource(participantsPage: ParticipantInterface[]) {
     const dataSourceTemp: ParticipantTableInterface[] = [];
     for (const participant of participantsPage) {
       //Populate datasource, values is in order

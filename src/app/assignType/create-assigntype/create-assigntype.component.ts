@@ -27,12 +27,12 @@ export class CreateAssignTypeComponent implements OnInit {
     });
   }
 
-  async onSubmit(assignType: AssignTypeInterface): Promise<void> {
+  onSubmit(assignType: AssignTypeInterface): void {
     //save the assign type
-    await this.assignTypeService.createAssignType(assignType);
+    this.assignTypeService.createAssignType(assignType);
 
     //Add the assign type reference for all the participants
-    await this.participantService.addAssignType(assignType.id);
+    this.participantService.addAssignType(assignType.id);
 
     //navigate to parent
     this.router.navigate([".."], {

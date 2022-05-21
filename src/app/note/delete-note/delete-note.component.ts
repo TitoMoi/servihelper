@@ -35,12 +35,12 @@ export class DeleteNoteComponent implements OnInit {
     });
   }
 
-  async onSubmit(note: NoteInterface): Promise<void> {
+  onSubmit(note: NoteInterface): void {
     //Delete the note
-    await this.noteService.deleteNote(note.id);
+    this.noteService.deleteNote(note.id);
 
     //Reset note for the assignments
-    await this.assignmentService.resetAssignmentsByNote(note.id);
+    this.assignmentService.resetAssignmentsByNote(note.id);
 
     //navigate to parent
     this.router.navigate(["../.."], {

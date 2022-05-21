@@ -93,7 +93,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.lastDate = this.lastDateService.getLastDate();
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.langSubscription();
     this.dateSubscription();
     this.onlyWomanSubscription();
@@ -118,8 +118,8 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.langSub$.unsubscribe();
   }
 
-  async onSubmit(assignment: AssignmentInterface): Promise<void> {
-    await this.assignmentService.createAssignment(assignment);
+  onSubmit(assignment: AssignmentInterface): void {
+    this.assignmentService.createAssignment(assignment);
 
     //navigate to parent
     this.router.navigate([".."], {
@@ -210,7 +210,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    */
   assignTypeSubscription() {
     this.assignTypeSub$ = this.getAssignTypeControl().valueChanges.subscribe(
-      async (assignTypeValue) => {
+      (assignTypeValue) => {
         const roomControl = this.getRoomControl();
         const principalControl = this.getPrincipalControl();
 
@@ -220,7 +220,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
           this.tryToEnableGenderControls();
 
-          this.principalList = await this.participantService.getParticipants();
+          this.principalList = this.participantService.getParticipants();
 
           for (const participant of this.principalList) {
             let isAvailable = checkIsPrincipalAvailable(
@@ -267,7 +267,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    */
   roomSubscription() {
     this.roomSub$ = this.getRoomControl().valueChanges.subscribe(
-      async (roomValue) => {
+      (roomValue) => {
         const assignTypeControl = this.getAssignTypeControl();
         const principalControl = this.getPrincipalControl();
 
@@ -277,7 +277,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
           this.tryToEnableGenderControls();
 
-          this.principalList = await this.participantService.getParticipants();
+          this.principalList = this.participantService.getParticipants();
 
           for (const participant of this.principalList) {
             const isAvailable = checkIsPrincipalAvailable(
@@ -325,7 +325,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    */
   principalSubscription() {
     this.principalSub$ = this.getPrincipalControl().valueChanges.subscribe(
-      async (principalId) => {
+      (principalId) => {
         const assistantControl = this.getAssistantControl();
 
         if (principalId) {
@@ -334,7 +334,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           const roomControl = this.getRoomControl();
           const assignTypeControl = this.getAssignTypeControl();
 
-          this.assistantList = await this.participantService.getParticipants();
+          this.assistantList = this.participantService.getParticipants();
 
           //Remove principal from the list of assistants
           this.assistantList = this.assistantList.filter(

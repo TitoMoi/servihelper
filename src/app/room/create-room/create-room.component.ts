@@ -27,12 +27,12 @@ export class CreateRoomComponent implements OnInit {
     });
   }
 
-  async onSubmit(room: RoomInterface): Promise<void> {
+  onSubmit(room: RoomInterface): void {
     //create the room
-    await this.roomService.createRoom(room);
+    this.roomService.createRoom(room);
 
     //Create the room reference for all the participants
-    await this.participantService.addRoom(room.id);
+    this.participantService.addRoom(room.id);
 
     //navigate to parent
     this.router.navigate([".."], {

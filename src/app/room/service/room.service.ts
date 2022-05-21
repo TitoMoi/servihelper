@@ -41,17 +41,12 @@ export class RoomService {
    *
    * @returns true if rooms are saved to disk or false
    */
-  async saveRoomsToFile(): Promise<boolean> {
-    try {
-      //Write rooms back to file
-      await this.fs.writeJson(this.path, this.#rooms);
-      //Flag
-      this.hasChanged = true;
-      return true;
-    } catch (err) {
-      console.error("saveRooms", err);
-      return false;
-    }
+  saveRoomsToFile(): boolean {
+    //Write rooms back to file
+    this.fs.writeJsonSync(this.path, this.#rooms);
+    //Flag
+    this.hasChanged = true;
+    return true;
   }
 
   /**
@@ -59,13 +54,13 @@ export class RoomService {
    * @param room the room to create
    * @returns true if room is saved false if not
    */
-  async createRoom(room: RoomInterface): Promise<boolean> {
+  createRoom(room: RoomInterface): boolean {
     //Generate id for the room
     room.id = nanoid();
     //add room to rooms
     this.#rooms.push(room);
     //save rooms with the new room
-    return await this.saveRoomsToFile();
+    return this.saveRoomsToFile();
   }
 
   /**
@@ -87,13 +82,13 @@ export class RoomService {
    * @param room the room to update
    * @returns true if room is updated and saved false otherwise
    */
-  async updateRoom(room: RoomInterface): Promise<boolean> {
+  updateRoom(room: RoomInterface): boolean {
     //update room
     for (let i = 0; i < this.#rooms.length; i++) {
       if (this.#rooms[i].id === room.id) {
         this.#rooms[i] = room;
         //save rooms with the updated room
-        return await this.saveRoomsToFile();
+        return this.saveRoomsToFile();
       }
     }
     return false;
@@ -104,10 +99,10 @@ export class RoomService {
    * @param room the room to delete
    * @returns true if room is deleted and saved false otherwise
    */
-  async deleteRoom(id: string): Promise<boolean> {
+  deleteRoom(id: string): boolean {
     //delete room
     this.#rooms = this.#rooms.filter((b) => b.id !== id);
     //save rooms
-    return await this.saveRoomsToFile();
+    return this.saveRoomsToFile();
   }
 }

@@ -53,10 +53,10 @@ export class UpdateNoteComponent implements OnInit, OnDestroy {
     this.editor.destroy();
   }
 
-  async onSubmit(note: NoteInterface): Promise<void> {
+  onSubmit(note: NoteInterface): void {
     note.editorHTML = editorJsonToHtml(note.editorContent);
 
-    await this.noteService.updateNote(note);
+    this.noteService.updateNote(note);
 
     //navigate to parent
     this.router.navigate(["../.."], {
