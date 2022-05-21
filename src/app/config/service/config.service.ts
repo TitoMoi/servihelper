@@ -45,19 +45,15 @@ export class ConfigService {
   saveConfigToFile(): boolean {
     //Security check that has all the properties
     if (
-      "assignmentHeaderTitle" in this.#config &&
-      "firstDayOfWeek" in this.#config &&
-      "lang" in this.#config
+      !("assignmentHeaderTitle" in this.#config) ||
+      !("firstDayOfWeek" in this.#config) ||
+      !("lang" in this.#config)
     ) {
-      if (this.#config)
-        //Write configs back to file
-        this.fs.writeJson(this.path, this.#config);
-      //Flag
-      this.hasChanged = true;
-      return true;
-    } else {
       throw new Error("config file missing properties");
     }
+    this.fs.writeJson(this.path, this.#config);
+    this.hasChanged = true;
+    return true;
   }
 
   /**

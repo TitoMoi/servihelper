@@ -252,11 +252,11 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
           /* This means we have principal selected and updating assignType
           so we force the principal subscription to affect the assistants */
-          if (!principalControl.disabled) {
-            principalControl.setValue(principalControl.value);
-          } else {
+          if (principalControl.disabled) {
             principalControl.enable({ emitEvent: false });
+            return;
           }
+          principalControl.setValue(principalControl.value);
         }
       }
     );
@@ -310,11 +310,11 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
           /* This means we have principal selected and updating room
           so we force the principal subscription to affect the assistants */
-          if (!principalControl.disabled) {
-            principalControl.setValue(principalControl.value);
-          } else {
+          if (principalControl.disabled) {
             principalControl.enable({ emitEvent: false });
+            return;
           }
+          principalControl.setValue(principalControl.value);
         }
       }
     );
@@ -328,74 +328,74 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       (principalId) => {
         const assistantControl = this.getAssistantControl();
 
-        if (principalId) {
-          const onlyWomanControl = this.getOnlyWomanControl();
-          const onlyManControl = this.getOnlyManControl();
-          const roomControl = this.getRoomControl();
-          const assignTypeControl = this.getAssignTypeControl();
-
-          this.assistantList = this.participantService.getParticipants();
-
-          //Remove principal from the list of assistants
-          this.assistantList = this.assistantList.filter(
-            (b) => b.id !== principalId
-          );
-
-          for (const participant of this.assistantList) {
-            const isAvailable = checkIsAssistantAvailable(
-              participant,
-              assignTypeControl.value,
-              roomControl.value
-            );
-            this.filterAssistantsByAvailable(participant, isAvailable);
-          }
-
-          //the current count is of the principal, we need to calculate again for the assistant
-          setCount(
-            this.assignments,
-            this.assistantList,
-            roomControl.value,
-            assignTypeControl.value,
-            false
-          );
-
-          /* onlyWoman and onlyMan are enabled after room and assignType so its not possible to have values.
-          This scenario is when onlyWoman or onlyMan is checked and the user wants to change the current room. */
-          if (onlyWomanControl.value) {
-            this.assistantList = setListToOnlyWomen(this.assistantList);
-          }
-          if (onlyManControl.value) {
-            this.assistantList = setListToOnlyMen(this.assistantList);
-          }
-
-          this.assistantList.sort(sortParticipantsByCount);
-
-          assistantControl.enable({ emitEvent: false });
-
-          //Check if participant has more assignments for the date
-          this.hasAssignmentsList = [];
-
-          let assignments =
-            this.assignmentService.findPrincipalAssignmentsByParticipantId(
-              principalId
-            );
-          //Filter the date
-          const dateControl = this.getDateControl();
-          assignments = assignments.filter(
-            (assignment) =>
-              new Date(dateControl.value).getDate() ===
-              new Date(assignment.date).getDate()
-          );
-          //Get name
-          for (const assignment of assignments) {
-            const assignTypeName = this.assignTypeService.getAssignTypeNameById(
-              assignment.assignType
-            );
-            this.hasAssignmentsList.push(assignTypeName);
-          }
-        } else {
+        if (!principalId) {
           assistantControl.reset(undefined, { emitEvent: false });
           assistantControl.disable({ emitEvent: false });
+          return;
+        }
+        const onlyWomanControl = this.getOnlyWomanControl();
+        const onlyManControl = this.getOnlyManControl();
+        const roomControl = this.getRoomControl();
+        const assignTypeControl = this.getAssignTypeControl();
+
+        this.assistantList = this.participantService.getParticipants();
+
+        //Remove principal from the list of assistants
+        this.assistantList = this.assistantList.filter(
+          (b) => b.id !== principalId
+        );
+
+        for (const participant of this.assistantList) {
+          const isAvailable = checkIsAssistantAvailable(
+            participant,
+            assignTypeControl.value,
+            roomControl.value
+          );
+          this.filterAssistantsByAvailable(participant, isAvailable);
+        }
+
+        //the current count is of the principal, we need to calculate again for the assistant
+        setCount(
+          this.assignments,
+          this.assistantList,
+          roomControl.value,
+          assignTypeControl.value,
+          false
+        );
+
+        /* onlyWoman and onlyMan are enabled after room and assignType so its not possible to have values.
+          This scenario is when onlyWoman or onlyMan is checked and the user wants to change the current room. */
+        if (onlyWomanControl.value) {
+          this.assistantList = setListToOnlyWomen(this.assistantList);
+        }
+        if (onlyManControl.value) {
+          this.assistantList = setListToOnlyMen(this.assistantList);
+        }
+
+        this.assistantList.sort(sortParticipantsByCount);
+
+        assistantControl.enable({ emitEvent: false });
+
+        //Check if participant has more assignments for the date
+        this.hasAssignmentsList = [];
+
+        let assignments =
+          this.assignmentService.findPrincipalAssignmentsByParticipantId(
+            principalId
+          );
+        //Filter the date
+        const dateControl = this.getDateControl();
+        assignments = assignments.filter(
+          (assignment) =>
+            new Date(dateControl.value).getDate() ===
+            new Date(assignment.date).getDate()
+        );
+        //Get name
+        for (const assignment of assignments) {
+          const assignTypeName = this.assignTypeService.getAssignTypeNameById(
+            assignment.assignType
+          );
+          this.hasAssignmentsList.push(assignTypeName);
         }
       }
     );
@@ -530,7 +530,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    * resets the value of the principal control
    */
   resetPrincipal() {
-    const principalControl = this.assignmentForm.get("principal");
+    const principalControl: FormControl = this.assignmentForm.get("principal");
     principalControl.reset(undefined);
   }
 

@@ -351,64 +351,64 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       (principalId) => {
         const assistantControl = this.getAssistantControl();
 
-        if (principalId) {
-          const roomControl = this.getRoomControl();
-          const assignTypeControl = this.getAssignTypeControl();
-
-          this.assistantList = this.participantService.getParticipants();
-
-          //Remove principal from the list of assistants
-          this.assistantList = this.assistantList.filter(
-            (b) => b.id !== principalId
-          );
-
-          for (const participant of this.assistantList) {
-            const isAvailable = checkIsAssistantAvailable(
-              participant,
-              assignTypeControl.value,
-              roomControl.value
-            );
-
-            this.filterAssistantsByAvailable(participant, isAvailable);
-          }
-
-          //the current count is of the principal, we need to calculate again for the assistant
-          setCount(
-            this.assignments,
-            this.assistantList,
-            roomControl.value,
-            assignTypeControl.value,
-            false
-          );
-
-          this.assistantList.sort(sortParticipantsByCount);
-
-          assistantControl.enable({ emitEvent: false });
-
-          //Check if participant has more assignments for the date
-          this.hasAssignmentsList = [];
-
-          let assignments =
-            this.assignmentService.findPrincipalAssignmentsByParticipantId(
-              principalId
-            );
-          //Filter the date
-          const dateControl = this.getDateControl();
-          assignments = assignments.filter(
-            (assignment) =>
-              new Date(dateControl.value).getDate() ===
-              new Date(assignment.date).getDate()
-          );
-          //Get name
-          for (const assignment of assignments) {
-            const assignTypeName = this.assignTypeService.getAssignTypeNameById(
-              assignment.assignType
-            );
-            this.hasAssignmentsList.push(assignTypeName);
-          }
-        } else {
+        if (!principalId) {
           assistantControl.reset(undefined, { emitEvent: false });
           assistantControl.disable({ emitEvent: false });
+          return;
+        }
+        const roomControl = this.getRoomControl();
+        const assignTypeControl = this.getAssignTypeControl();
+
+        this.assistantList = this.participantService.getParticipants();
+
+        //Remove principal from the list of assistants
+        this.assistantList = this.assistantList.filter(
+          (b) => b.id !== principalId
+        );
+
+        for (const participant of this.assistantList) {
+          const isAvailable = checkIsAssistantAvailable(
+            participant,
+            assignTypeControl.value,
+            roomControl.value
+          );
+
+          this.filterAssistantsByAvailable(participant, isAvailable);
+        }
+
+        //the current count is of the principal, we need to calculate again for the assistant
+        setCount(
+          this.assignments,
+          this.assistantList,
+          roomControl.value,
+          assignTypeControl.value,
+          false
+        );
+
+        this.assistantList.sort(sortParticipantsByCount);
+
+        assistantControl.enable({ emitEvent: false });
+
+        //Check if participant has more assignments for the date
+        this.hasAssignmentsList = [];
+
+        let assignments =
+          this.assignmentService.findPrincipalAssignmentsByParticipantId(
+            principalId
+          );
+        //Filter the date
+        const dateControl = this.getDateControl();
+        assignments = assignments.filter(
+          (assignment) =>
+            new Date(dateControl.value).getDate() ===
+            new Date(assignment.date).getDate()
+        );
+        //Get name
+        for (const assignment of assignments) {
+          const assignTypeName = this.assignTypeService.getAssignTypeNameById(
+            assignment.assignType
+          );
+          this.hasAssignmentsList.push(assignTypeName);
         }
       }
     );

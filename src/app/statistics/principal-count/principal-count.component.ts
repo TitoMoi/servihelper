@@ -122,31 +122,31 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
    * @param event the change event
    */
   changeWoman(event: MatCheckboxChange): void {
-    if (event.checked) {
-      //First, create a backup
-      this.setBackupState();
-
-      this.principalList = this.principalList.filter(
-        (participant) => participant.isWoman
-      );
-    } else {
+    if (!event.checked) {
       //False, restores the state
       this.principalList = this.getBackupState();
+      return;
     }
+    //First, create a backup
+    this.setBackupState();
+
+    this.principalList = this.principalList.filter(
+      (participant) => participant.isWoman
+    );
   }
 
   changeMan(event: MatCheckboxChange): void {
-    if (event.checked) {
-      //First, create a backup
-      this.setBackupState();
-
-      this.principalList = this.principalList.filter(
-        (participant) => !participant.isWoman
-      );
-    } else {
+    if (!event.checked) {
       //False, restores the state
       this.principalList = this.getBackupState();
+      return;
     }
+    //First, create a backup
+    this.setBackupState();
+
+    this.principalList = this.principalList.filter(
+      (participant) => !participant.isWoman
+    );
   }
 
   /**
