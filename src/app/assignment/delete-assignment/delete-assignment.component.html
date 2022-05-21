@@ -1,8 +1,4 @@
-<form
-  [formGroup]="assignmentForm"
-  novalidate
-  (ngSubmit)="onSubmit(assignmentForm.value)"
->
+<form [formGroup]="assignmentForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card class="shipping-card">
     <mat-card-header>
       <mat-card-title>{{ "ASSIGN_DELETE_TITLE" | transloco }}</mat-card-title>
