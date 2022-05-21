@@ -29,12 +29,12 @@ export class ImageAssignmentComponent implements OnInit {
   footerNotes: NoteInterface[];
   assignments: AssignmentInterface[];
 
-  icons: string[];
+  icons: string[] = ["pdf", "png"];
 
-  copied;
-  isLoaded;
+  copied = false;
+  isLoaded = false;
   pdfOptions;
-  micronMeasure;
+  micronMeasure = 264.5833;
 
   //Image data bindings
   assignmentHeaderTitle: string;
@@ -58,11 +58,6 @@ export class ImageAssignmentComponent implements OnInit {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
-    this.copied = false;
-    this.isLoaded = false;
-    this.micronMeasure = 264.5833;
-    this.icons = ["pdf", "png"];
-
     //Register icons
     for (const iconFileName of this.icons) {
       this.matIconRegistry.addSvgIcon(
@@ -75,40 +70,37 @@ export class ImageAssignmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
-      //Fill the form with the assignment passed by the router
-      const id = params.id;
+    //Get the assignment
+    const assignment = this.assignmentService.getAssignment(
+      this.activatedRoute.snapshot.params.id
+    );
 
-      //Get the assignment
-      const assignment = this.assignmentService.getAssignment(id);
+    this.date = assignment.date;
 
-      this.principalName = this.participantService.getParticipant(
-        assignment.principal
-      ).name;
+    this.principalName = this.participantService.getParticipant(
+      assignment.principal
+    ).name;
 
-      this.assistantName = this.participantService.getParticipant(
-        assignment.assistant
-      )?.name;
+    this.assistantName = this.participantService.getParticipant(
+      assignment.assistant
+    )?.name;
 
-      this.roomName = this.roomService.getRoom(assignment.room).name;
+    this.roomName = this.roomService.getRoom(assignment.room).name;
 
-      this.assignTypeName = this.assignTypeService.getAssignType(
-        assignment.assignType
-      ).name;
+    this.assignTypeName = this.assignTypeService.getAssignType(
+      assignment.assignType
+    ).name;
 
-      this.footerNoteEditorHTML = this.noteService.getNote(
-        assignment.footerNote
-      )?.editorHTML;
+    this.footerNoteEditorHTML = this.noteService.getNote(
+      assignment.footerNote
+    )?.editorHTML;
 
-      this.assignmentHeaderTitle =
-        this.configService.getConfig().assignmentHeaderTitle;
+    this.assignmentHeaderTitle =
+      this.configService.getConfig().assignmentHeaderTitle;
 
-      this.date = assignment.date;
+    this.theme = assignment.theme;
 
-      this.theme = assignment.theme ?? assignment.theme;
-
-      this.isLoaded = true;
-    });
+    this.isLoaded = true;
   }
 
   /**

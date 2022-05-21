@@ -26,12 +26,12 @@ export class DeleteNoteComponent implements OnInit {
       name: [undefined, Validators.required],
     });
 
-    this.activatedRoute.params.subscribe((params) => {
-      const note = this.noteService.getNote(params.id);
-      this.noteForm.setValue({
-        id: params.id,
-        name: note.name,
-      });
+    const note = this.noteService.getNote(
+      this.activatedRoute.snapshot.params.id
+    );
+    this.noteForm.setValue({
+      id: note.id,
+      name: note.name,
     });
   }
 

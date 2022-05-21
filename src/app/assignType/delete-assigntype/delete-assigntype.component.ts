@@ -12,7 +12,10 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
   styleUrls: ["./delete-assigntype.component.css"],
 })
 export class DeleteAssignTypeComponent implements OnInit {
-  assignTypeForm;
+  assignTypeForm = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,17 +27,12 @@ export class DeleteAssignTypeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.assignTypeForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-    });
-
-    this.activatedRoute.params.subscribe((params) => {
-      const assignType = this.assignTypeService.getAssignType(params.id);
-      this.assignTypeForm.setValue({
-        id: params.id,
-        name: assignType.name,
-      });
+    const assignType = this.assignTypeService.getAssignType(
+      this.activatedRoute.snapshot.params.id
+    );
+    this.assignTypeForm.setValue({
+      id: assignType.id,
+      name: assignType.name,
     });
   }
 

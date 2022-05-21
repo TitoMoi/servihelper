@@ -39,21 +39,12 @@ export class UpdateParticipantComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
+
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.participant = this.participantService.getParticipant(params.id);
-      this.setParticipantValues();
-    });
-  }
+    this.participant = this.participantService.getParticipant(
+      this.activatedRoute.snapshot.params.id
+    );
 
-  getRoomName(id) {
-    if (this.rooms) {
-      const room = this.rooms.filter((r) => r.id === id);
-      return room[0].name;
-    }
-  }
-
-  setParticipantValues() {
     this.participantForm.setValue({
       id: this.participant.id,
       name: this.participant.name,
@@ -66,6 +57,13 @@ export class UpdateParticipantComponent implements OnInit {
 
     this.setParticipantRooms();
     this.setParticipantAssignTypes();
+  }
+
+  getRoomName(id) {
+    if (this.rooms) {
+      const room = this.rooms.filter((r) => r.id === id);
+      return room[0].name;
+    }
   }
 
   //Accesor for the template, not working fine on the ts -> use this.participantForm.get

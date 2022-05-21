@@ -11,7 +11,10 @@ import { ParticipantService } from "app/participant/service/participant.service"
   styleUrls: ["./delete-participant.component.css"],
 })
 export class DeleteParticipantComponent implements OnInit {
-  participantForm;
+  participantForm = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,18 +23,14 @@ export class DeleteParticipantComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-  ngOnInit(): void {
-    this.participantForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-    });
 
-    this.activatedRoute.params.subscribe((params) => {
-      const participant = this.participantService.getParticipant(params.id);
-      this.participantForm.setValue({
-        id: params.id,
-        name: participant.name,
-      });
+  ngOnInit(): void {
+    const participant = this.participantService.getParticipant(
+      this.activatedRoute.snapshot.params.id
+    );
+    this.participantForm.setValue({
+      id: participant.id,
+      name: participant.name,
     });
   }
 

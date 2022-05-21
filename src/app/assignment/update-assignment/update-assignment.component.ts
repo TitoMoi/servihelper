@@ -102,38 +102,19 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.principalSubscription();
     this.assistantSubscription();
 
-    this.activatedRoute.params.subscribe((params) => {
-      //Fill the form with the assignment passed by the router
-      this.setAssignmentData(params.id);
+    //Fill the form with the assignment passed by the router
+    const assignment = this.assignmentService.getAssignment(
+      this.activatedRoute.snapshot.params.id
+    );
 
-      //activate template
-      this.isCalculated = true;
-      //this is for isCalculated
-      this.cdr.markForCheck();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.principalSub$.unsubscribe();
-    this.assistantSub$.unsubscribe();
-    this.onlyManSub$.unsubscribe();
-    this.onlyWomanSub$.unsubscribe();
-    this.roomSub$.unsubscribe();
-    this.assignTypeSub$.unsubscribe();
-    this.langSub$.unsubscribe();
-  }
-
-  /**
-   *
-   * @param id the id of the assignment to search
-   */
-  setAssignmentData(id: string) {
-    const assignment = this.assignmentService.getAssignment(id);
     this.assignmentForm.get("id").setValue(assignment.id, { emitEvent: false });
+
     this.assignmentForm
       .get("date")
       .setValue(assignment.date, { emitEvent: false });
+
     this.getRoomControl().setValue(assignment.room, { emitEvent: false });
+
     this.getAssignTypeControl().setValue(assignment.assignType); //Emit
 
     //Wait for assignType subscription executes, only first time
@@ -156,6 +137,21 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
         .get("footerNote")
         .setValue(assignment.footerNote, { emitEvent: false });
     });
+
+    //activate template
+    this.isCalculated = true;
+    //this is for isCalculated
+    this.cdr.markForCheck();
+  }
+
+  ngOnDestroy(): void {
+    this.principalSub$.unsubscribe();
+    this.assistantSub$.unsubscribe();
+    this.onlyManSub$.unsubscribe();
+    this.onlyWomanSub$.unsubscribe();
+    this.roomSub$.unsubscribe();
+    this.assignTypeSub$.unsubscribe();
+    this.langSub$.unsubscribe();
   }
 
   onSubmit(assignment: AssignmentInterface): void {

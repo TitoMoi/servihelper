@@ -12,7 +12,10 @@ import { RoomService } from "app/room/service/room.service";
   styleUrls: ["./delete-room.component.css"],
 })
 export class DeleteRoomComponent implements OnInit {
-  roomForm;
+  roomForm = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,18 +25,14 @@ export class DeleteRoomComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-  ngOnInit(): void {
-    this.roomForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-    });
 
-    this.activatedRoute.params.subscribe((params) => {
-      const room = this.roomService.getRoom(params.id);
-      this.roomForm.setValue({
-        id: params.id,
-        name: room.name,
-      });
+  ngOnInit(): void {
+    const room = this.roomService.getRoom(
+      this.activatedRoute.snapshot.params.id
+    );
+    this.roomForm.setValue({
+      id: room.id,
+      name: room.name,
     });
   }
 

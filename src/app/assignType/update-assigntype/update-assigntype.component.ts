@@ -10,7 +10,10 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
   styleUrls: ["./update-assignType.component.css"],
 })
 export class UpdateAssignTypeComponent implements OnInit {
-  assignTypeForm: FormGroup;
+  assignTypeForm: FormGroup = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,17 +22,12 @@ export class UpdateAssignTypeComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.assignTypeForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-    });
-
-    this.activatedRoute.params.subscribe((params) => {
-      const assignType = this.assignTypeService.getAssignType(params.id);
-      this.assignTypeForm.setValue({
-        id: params.id,
-        name: assignType.name,
-      });
+    const assignType = this.assignTypeService.getAssignType(
+      this.activatedRoute.snapshot.params.id
+    );
+    this.assignTypeForm.setValue({
+      id: assignType.id,
+      name: assignType.name,
     });
   }
 

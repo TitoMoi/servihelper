@@ -16,36 +16,32 @@ import { editorJsonToHtml } from "app/functions/editorJsonToHtml";
   styleUrls: ["./update-note.component.css"],
 })
 export class UpdateNoteComponent implements OnInit, OnDestroy {
-  noteForm: FormGroup;
-  editor: Editor;
+  editor: Editor = new Editor();
+  toolbar: Toolbar = [["bold"], ["italic"], ["underline"]];
 
-  toolbar: Toolbar;
+  noteForm: FormGroup = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+    editorContent: new FormControl(
+      { value: undefined, disabled: false },
+      Validators.required
+    ),
+  });
   constructor(
     private formBuilder: FormBuilder,
     private noteService: NoteService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
+
   ngOnInit(): void {
-    this.noteForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-      editorContent: new FormControl(
-        { value: undefined, disabled: false },
-        Validators.required
-      ),
-    });
-
-    this.toolbar = [["bold"], ["italic"], ["underline"]];
-    this.editor = new Editor();
-
-    this.activatedRoute.params.subscribe((params) => {
-      const note = this.noteService.getNote(params.id);
-      this.noteForm.setValue({
-        id: params.id,
-        name: note.name,
-        editorContent: note.editorContent,
-      });
+    const note = this.noteService.getNote(
+      this.activatedRoute.snapshot.params.id
+    );
+    this.noteForm.setValue({
+      id: note.id,
+      name: note.name,
+      editorContent: note.editorContent,
     });
   }
 

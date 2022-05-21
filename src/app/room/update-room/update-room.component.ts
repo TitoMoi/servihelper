@@ -10,7 +10,10 @@ import { RoomService } from "app/room/service/room.service";
   styleUrls: ["./update-room.component.css"],
 })
 export class UpdateRoomComponent implements OnInit {
-  roomForm: FormGroup;
+  roomForm: FormGroup = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -18,18 +21,14 @@ export class UpdateRoomComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-  ngOnInit(): void {
-    this.roomForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-    });
 
-    this.activatedRoute.params.subscribe((params) => {
-      const room = this.roomService.getRoom(params.id);
-      this.roomForm.setValue({
-        id: params.id,
-        name: room.name,
-      });
+  ngOnInit(): void {
+    const room = this.roomService.getRoom(
+      this.activatedRoute.snapshot.params.id
+    );
+    this.roomForm.setValue({
+      id: room.id,
+      name: room.name,
     });
   }
 
