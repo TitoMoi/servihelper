@@ -1,6 +1,10 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
-import { HomeComponent } from "./home/home.component";
+import { HomeComponent } from "app/home/home.component";
+import { ParticipantComponent } from "app/participant/participant.component";
+import { CreateParticipantComponent } from "app/participant/create-participant/create-participant.component";
+import { UpdateParticipantComponent } from "app/participant/update-participant/update-participant.component";
+import { DeleteParticipantComponent } from "app/participant/delete-participant/delete-participant.component";
 
 const routes: Routes = [
   {
@@ -27,10 +31,19 @@ const routes: Routes = [
   },
   {
     path: "participant",
-    loadChildren: () =>
-      import("./participant/participant.module").then(
-        (m) => m.ParticipantModule
-      ),
+    component: ParticipantComponent,
+  },
+  {
+    path: "participant/create",
+    component: CreateParticipantComponent,
+  },
+  {
+    path: "participant/update/:id",
+    component: UpdateParticipantComponent,
+  },
+  {
+    path: "participant/delete/:id",
+    component: DeleteParticipantComponent,
   },
   {
     path: "assignment",

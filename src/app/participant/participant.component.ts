@@ -16,23 +16,17 @@ export class ParticipantComponent implements OnInit {
   participants: ParticipantInterface[];
 
   //Table
-  displayedColumns: string[];
+  displayedColumns: string[] = ["name", "editIcon", "deleteIcon"];
 
   dataSource: ParticipantTableInterface[];
 
-  //icons
-  icons: string[];
+  icons: string[] = ["garbage", "edit"];
 
   constructor(
     private participantService: ParticipantService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
-    this.displayedColumns = ["name", "editIcon", "deleteIcon"];
-    this.icons = ["garbage", "edit"];
-  }
-
-  ngOnInit(): void {
     //Register icons
     for (const iconFileName of this.icons) {
       this.matIconRegistry.addSvgIcon(
@@ -42,7 +36,9 @@ export class ParticipantComponent implements OnInit {
         )
       );
     }
+  }
 
+  ngOnInit(): void {
     this.participants = this.participantService.getParticipants();
     this.fillDataSource(this.participants);
   }
