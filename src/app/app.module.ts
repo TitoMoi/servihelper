@@ -24,6 +24,15 @@ import { ParticipantComponent } from "./participant/participant.component";
 import { CreateParticipantComponent } from "./participant/create-participant/create-participant.component";
 import { UpdateParticipantComponent } from "./participant/update-participant/update-participant.component";
 import { DeleteParticipantComponent } from "./participant/delete-participant/delete-participant.component";
+import { AssignmentComponent } from "./assignment/assignment.component";
+import { CreateAssignmentComponent } from "./assignment/create-assignment/create-assignment.component";
+import { DeleteAssignmentComponent } from "./assignment/delete-assignment/delete-assignment.component";
+import { ImageAssignmentComponent } from "./assignment/image-assignment/image-assignment.component";
+import { UpdateAssignmentComponent } from "./assignment/update-assignment/update-assignment.component";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { DateAdapter } from "@angular/material/core";
+import { CustomDateAdapter } from "./assignment/customDateAdapter";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -34,11 +43,17 @@ import { DeleteParticipantComponent } from "./participant/delete-participant/del
     CreateParticipantComponent,
     UpdateParticipantComponent,
     DeleteParticipantComponent,
+    AssignmentComponent,
+    CreateAssignmentComponent,
+    UpdateAssignmentComponent,
+    DeleteAssignmentComponent,
+    ImageAssignmentComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
     TranslocoRootModule,
+    TranslocoLocaleModule,
     HttpClientModule,
     ReactiveFormsModule,
     AutoFocusModule,
@@ -53,8 +68,9 @@ import { DeleteParticipantComponent } from "./participant/delete-participant/del
     MatInputModule,
     MatTableModule,
     MatCheckboxModule,
+    MatPaginatorModule,
   ],
-  providers: [],
+  providers: [{ provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent],
   exports: [],
 })

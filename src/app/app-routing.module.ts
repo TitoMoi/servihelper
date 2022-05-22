@@ -5,6 +5,27 @@ import { ParticipantComponent } from "app/participant/participant.component";
 import { CreateParticipantComponent } from "app/participant/create-participant/create-participant.component";
 import { UpdateParticipantComponent } from "app/participant/update-participant/update-participant.component";
 import { DeleteParticipantComponent } from "app/participant/delete-participant/delete-participant.component";
+import { RoomComponent } from "app/room/room.component";
+import { CreateRoomComponent } from "app/room/create-room/create-room.component";
+import { UpdateRoomComponent } from "app/room/update-room/update-room.component";
+import { DeleteRoomComponent } from "app/room/delete-room/delete-room.component";
+import { AssignTypeComponent } from "app/assignType/assignType.component";
+import { CreateAssignTypeComponent } from "app/assignType/create-assigntype/create-assigntype.component";
+import { UpdateAssignTypeComponent } from "app/assignType/update-assigntype/update-assigntype.component";
+import { DeleteAssignTypeComponent } from "app/assignType/delete-assigntype/delete-assigntype.component";
+import { NoteComponent } from "app/note/note.component";
+import { CreateNoteComponent } from "app/note/create-note/create-note.component";
+import { UpdateNoteComponent } from "app/note/update-note/update-note.component";
+import { DeleteNoteComponent } from "app/note/delete-note/delete-note.component";
+import { AssignmentComponent } from "app/assignment/assignment.component";
+import { CreateAssignmentComponent } from "app/assignment/create-assignment/create-assignment.component";
+import { UpdateAssignmentComponent } from "app/assignment/update-assignment/update-assignment.component";
+import { DeleteAssignmentComponent } from "app/assignment/delete-assignment/delete-assignment.component";
+import { ImageAssignmentComponent } from "app/assignment/image-assignment/image-assignment.component";
+import { SearchComponent } from "app/search/search.component";
+import { StatisticsComponent } from "app/statistics/statistics.component";
+import { ConfigComponent } from "app/config/config.component";
+import { QuestionComponent } from "app/question/question.component";
 
 const routes: Routes = [
   {
@@ -18,16 +39,51 @@ const routes: Routes = [
   },
   {
     path: "room",
-    loadChildren: () => import("./room/room.module").then((m) => m.RoomModule),
+    component: RoomComponent,
+  },
+  {
+    path: "room/create",
+    component: CreateRoomComponent,
+  },
+  {
+    path: "room/update/:id",
+    component: UpdateRoomComponent,
+  },
+  {
+    path: "room/delete/:id",
+    component: DeleteRoomComponent,
   },
   {
     path: "assignType",
-    loadChildren: () =>
-      import("./assignType/assigntype.module").then((m) => m.AssignTypeModule),
+    component: AssignTypeComponent,
+  },
+  {
+    path: "assignType/create",
+    component: CreateAssignTypeComponent,
+  },
+  {
+    path: "assignType/update/:id",
+    component: UpdateAssignTypeComponent,
+  },
+  {
+    path: "assignType/delete/:id",
+    component: DeleteAssignTypeComponent,
   },
   {
     path: "note",
-    loadChildren: () => import("./note/note.module").then((m) => m.NoteModule),
+    component: NoteComponent,
+  },
+  {
+    path: "note/create",
+    component: CreateNoteComponent,
+  },
+  {
+    path: "note/update/:id",
+    component: UpdateNoteComponent,
+  },
+  {
+    path: "note/delete/:id",
+    component: DeleteNoteComponent,
   },
   {
     path: "participant",
@@ -47,28 +103,39 @@ const routes: Routes = [
   },
   {
     path: "assignment",
-    loadChildren: () =>
-      import("./assignment/assignment.module").then((m) => m.AssignmentModule),
+    component: AssignmentComponent,
+  },
+  {
+    path: "assignment/create",
+    component: CreateAssignmentComponent,
+  },
+  {
+    path: "assignment/update/:id",
+    component: UpdateAssignmentComponent,
+  },
+  {
+    path: "assignment/delete/:id",
+    component: DeleteAssignmentComponent,
+  },
+  {
+    path: "assignment/image/:id",
+    component: ImageAssignmentComponent,
   },
   {
     path: "search",
-    loadChildren: () =>
-      import("./search/search.module").then((m) => m.SearchModule),
+    component: SearchComponent,
   },
   {
     path: "statistics",
-    loadChildren: () =>
-      import("./statistics/statistics.module").then((m) => m.StatisticsModule),
+    component: StatisticsComponent,
   },
   {
     path: "config",
-    loadChildren: () =>
-      import("./config/config.module").then((m) => m.ConfigModule),
+    component: ConfigComponent,
   },
   {
     path: "qa",
-    loadChildren: () =>
-      import("./question/question.module").then((m) => m.QuestionModule),
+    component: QuestionComponent,
   },
 ];
 
