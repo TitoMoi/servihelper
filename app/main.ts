@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from "electron";
+import { app, screen, BrowserWindow } from "electron";
 import * as path from "path";
 import * as fs from "fs-extra";
 import * as url from "url";
@@ -6,11 +6,11 @@ import * as url from "url";
 // Initialize remote module
 require("@electron/remote/main").initialize();
 
-let win: BrowserWindow = null;
+let win: Electron.BrowserWindow = null;
 const args = process.argv.slice(1),
   serve = args.some((val) => val === "--serve");
 
-function createWindow(): BrowserWindow {
+function createWindow(): Electron.BrowserWindow {
   const electronScreen = screen;
 
   // Create the browser window.
@@ -26,9 +26,10 @@ function createWindow(): BrowserWindow {
       nodeIntegration: true,
       allowRunningInsecureContent: serve ? true : false,
       contextIsolation: false, // false if you want to run e2e test with Spectron
-      enableRemoteModule: true, // true if you want to run e2e test with Spectron or use remote module in renderer context (ie. Angular)
     },
   });
+
+  require("@electron/remote/main").enable(win.webContents);
 
   if (serve) {
     win.webContents.openDevTools();

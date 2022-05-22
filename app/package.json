@@ -9,7 +9,7 @@
   "main": "main.js",
   "private": true,
   "dependencies": {
-    "@electron/remote": "1.2.2",
-    "fs-extra": "10.0.1"
+    "@electron/remote": "2.0.8",
+    "fs-extra": "10.1.0"
   }
 }
