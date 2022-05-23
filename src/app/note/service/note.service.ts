@@ -28,13 +28,13 @@ export class NoteService {
    *
    * @returns NoteInterface[] the array of notes
    */
-  getNotes(): NoteInterface[] {
+  getNotes(deepClone = false): NoteInterface[] {
     if (!this.hasChanged) {
-      return this.#notes;
+      return deepClone ? structuredClone(this.#notes) : this.#notes;
     }
     this.hasChanged = false;
     this.#notes = this.fs.readJSONSync(this.path);
-    return this.#notes;
+    return deepClone ? structuredClone(this.#notes) : this.#notes;
   }
 
   /**

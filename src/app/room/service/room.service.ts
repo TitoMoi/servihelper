@@ -28,13 +28,13 @@ export class RoomService {
    *
    * @returns RoomInterface[] the array of rooms
    */
-  getRooms(): RoomInterface[] {
+  getRooms(deepClone = false): RoomInterface[] {
     if (!this.hasChanged) {
-      return this.#rooms;
+      return deepClone ? structuredClone(this.#rooms) : this.#rooms;
     }
     this.hasChanged = false;
     this.#rooms = this.fs.readJSONSync(this.path);
-    return this.#rooms;
+    return deepClone ? structuredClone(this.#rooms) : this.#rooms;
   }
 
   /**

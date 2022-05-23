@@ -27,13 +27,13 @@ export class AssignTypeService {
    *
    * @returns AssignTypeInterface[] the array of assignTypes
    */
-  getAssignTypes(): AssignTypeInterface[] {
+  getAssignTypes(deepClone = false): AssignTypeInterface[] {
     if (!this.hasChanged) {
-      return this.#assignTypes;
+      return deepClone ? structuredClone(this.#assignTypes) : this.#assignTypes;
     }
     this.hasChanged = false;
     this.#assignTypes = this.fs.readJSONSync(this.path);
-    return this.#assignTypes;
+    return deepClone ? structuredClone(this.#assignTypes) : this.#assignTypes;
   }
 
   /**

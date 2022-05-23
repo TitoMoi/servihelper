@@ -24,16 +24,16 @@ export class AssignmentService {
   constructor(private electronService: ElectronService) {}
 
   /**
-   *
+   * @param deepClone if should be cloned or only return reference
    * @returns AssignmentInterface[] the array of assignments or null
    */
-  getAssignments(): AssignmentInterface[] {
+  getAssignments(deepClone = false): AssignmentInterface[] {
     if (!this.hasChanged) {
-      return this.#assignments;
+      return deepClone ? structuredClone(this.#assignments) : this.#assignments;
     }
     this.hasChanged = false;
     this.#assignments = this.fs.readJSONSync(this.path);
-    return this.#assignments;
+    return deepClone ? structuredClone(this.#assignments) : this.#assignments;
   }
 
   /**

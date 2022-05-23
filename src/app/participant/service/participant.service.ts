@@ -31,13 +31,15 @@ export class ParticipantService {
    *
    * @returns ParticipantInterface[] the array of participants
    */
-  getParticipants(): ParticipantInterface[] {
+  getParticipants(deepClone = false): ParticipantInterface[] {
     if (!this.hasChanged) {
-      return this.#participants;
+      return deepClone
+        ? structuredClone(this.#participants)
+        : this.#participants;
     }
     this.hasChanged = false;
     this.#participants = this.fs.readJSONSync(this.path);
-    return this.#participants;
+    return deepClone ? structuredClone(this.#participants) : this.#participants;
   }
 
   /**
