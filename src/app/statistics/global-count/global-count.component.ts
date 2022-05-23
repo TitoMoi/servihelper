@@ -57,15 +57,15 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
   }
 
   initStatistics() {
-    const assignmentList = this.assignmentService.getAssignments();
-    const temporalGlobalList = this.participantService.getParticipants();
+    const assignments = this.assignmentService.getAssignments(true);
+    const participants = this.participantService.getParticipants(true);
 
     //Global
-    setCountById(assignmentList, temporalGlobalList);
+    setCountById(assignments, participants);
 
-    for (const participant of temporalGlobalList) {
+    for (const participant of participants) {
       const assignment: AssignmentInterface = getLastAssignment(
-        assignmentList,
+        assignments,
         participant
       );
       //Get the lastAssignmentDate
@@ -81,9 +81,9 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     }
 
     //Get the penultimateAssignment
-    for (const participant of temporalGlobalList) {
+    for (const participant of participants) {
       const assignment: AssignmentInterface = getPenultimateAssignment(
-        assignmentList,
+        assignments,
         participant
       );
       participant.penultimateAssignmentDate = assignment?.date;
@@ -99,19 +99,19 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
 
     //Get the distance, i18n sensitive
     getDistanceBetweenPenultimaAndLast(
-      temporalGlobalList,
+      participants,
       this.locales[this.translocoService.getActiveLang()]
     );
 
     //ORDER BY COUNT
-    this.globalList = temporalGlobalList.sort(sortParticipantsByCount);
+    this.globalList = participants.sort(sortParticipantsByCount);
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
     this.subscription$ = this.translocoService.langChanges$.subscribe(
       (lang) => {
         //Assistant
         getDistanceBetweenPenultimaAndLast(
-          temporalGlobalList,
+          participants,
           this.locales[this.translocoService.getActiveLang()]
         );
       }
@@ -120,49 +120,31 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
 
   /**
    *
-   * @param event the change event
+   * @param event the checkbox change event
    */
   changeWoman(event: MatCheckboxChange): void {
     if (!event.checked) {
       //False, restores the state
-      this.globalList = this.getBackupState();
+      this.globalList = this.participantService.getParticipants(true);
     }
-    //First, create a backup
-    this.setBackupState();
 
     this.globalList = this.globalList.filter(
       (participant) => participant.isWoman
     );
   }
 
+  /**
+   *
+   * @param event the checkbox change event
+   */
   changeMan(event: MatCheckboxChange): void {
     if (!event.checked) {
-      //False, restores the state
-      this.globalList = this.getBackupState();
+      this.globalList = this.participantService.getParticipants(true);
       return;
     }
-    //First, create a backup
-    this.setBackupState();
 
     this.globalList = this.globalList.filter(
       (participant) => !participant.isWoman
     );
-  }
-
-  /**
-   * Creates a copy of the participants
-   */
-  setBackupState() {
-    this.globalListBackup = this.globalList.map((participant) => ({
-      ...participant,
-    }));
-  }
-
-  /**
-   *
-   * @returns the reference of the backup
-   */
-  getBackupState() {
-    return this.globalListBackup;
   }
 }

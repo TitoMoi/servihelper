@@ -5,6 +5,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
+import { ConfigInterface } from "./model/config.model";
 @Component({
   selector: "app-config",
   templateUrl: "./config.component.html",
@@ -28,6 +29,13 @@ export class ConfigComponent implements OnInit {
 
   // If upload button is clicked
   upload = false;
+
+  //Restart data
+  config: ConfigInterface = {
+    lang: "en",
+    firstDayOfWeek: 1,
+    assignmentHeaderTitle: "",
+  };
 
   // the filesystem api
   fs: typeof fs;
@@ -122,12 +130,7 @@ export class ConfigComponent implements OnInit {
   }
 
   eraseAllData() {
-    //Restart data
-    this.fs.writeJsonSync(this.path + "/config.json", {
-      lang: "en",
-      firstDayOfWeek: 1,
-      assignmentHeaderTitle: "",
-    });
+    this.fs.writeJsonSync(this.path + "/config.json", this.config);
     this.fs.writeJsonSync(this.path + "/note.json", []);
     this.fs.writeJsonSync(this.path + "/assignType.json", []);
     this.fs.writeJsonSync(this.path + "/room.json", []);

@@ -56,15 +56,15 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
   }
 
   initStatistics() {
-    const assignmentList = this.assignmentService.getAssignments();
-    const temporalPrincipalList = this.participantService.getParticipants();
+    const assignments = this.assignmentService.getAssignments(true);
+    const participants = this.participantService.getParticipants(true);
 
     //Principal
-    setPrincipalCountById(assignmentList, temporalPrincipalList);
+    setPrincipalCountById(assignments, participants);
 
-    for (const participant of temporalPrincipalList) {
+    for (const participant of participants) {
       const assignment: AssignmentInterface = getLastPrincipalAssignment(
-        assignmentList,
+        assignments,
         participant
       );
       //Get the lastAssignmentDate
@@ -80,9 +80,9 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
     }
 
     //Get the penultimateAssignmentDate
-    for (const participant of temporalPrincipalList) {
+    for (const participant of participants) {
       const assignment: AssignmentInterface = getPenultimatePrincipalAssignment(
-        assignmentList,
+        assignments,
         participant
       );
       participant.penultimateAssignmentDate = assignment?.date;
@@ -98,19 +98,19 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
 
     //Get the distance, i18n sensitive
     getDistanceBetweenPenultimaAndLast(
-      temporalPrincipalList,
+      participants,
       this.locales[this.translocoService.getActiveLang()]
     );
 
     //ORDER BY COUNT
-    this.principalList = temporalPrincipalList.sort(sortParticipantsByCount);
+    this.principalList = participants.sort(sortParticipantsByCount);
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
     this.subscription$ = this.translocoService.langChanges$.subscribe(
       (lang) => {
         //Get the distance, i18n sensitive
         getDistanceBetweenPenultimaAndLast(
-          temporalPrincipalList,
+          participants,
           this.locales[this.translocoService.getActiveLang()]
         );
       }
@@ -119,50 +119,31 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
 
   /**
    *
-   * @param event the change event
+   * @param event the checkbox change event
    */
   changeWoman(event: MatCheckboxChange): void {
     if (!event.checked) {
-      //False, restores the state
-      this.principalList = this.getBackupState();
+      this.principalList = this.participantService.getParticipants(true);
       return;
     }
-    //First, create a backup
-    this.setBackupState();
 
     this.principalList = this.principalList.filter(
       (participant) => participant.isWoman
     );
   }
 
+  /**
+   *
+   * @param event the checkbox change event
+   */
   changeMan(event: MatCheckboxChange): void {
     if (!event.checked) {
-      //False, restores the state
-      this.principalList = this.getBackupState();
+      this.principalList = this.participantService.getParticipants(true);
       return;
     }
-    //First, create a backup
-    this.setBackupState();
 
     this.principalList = this.principalList.filter(
       (participant) => !participant.isWoman
     );
-  }
-
-  /**
-   * Creates a copy of the participants
-   */
-  setBackupState() {
-    this.principalListBackup = this.principalList.map((participant) => ({
-      ...participant,
-    }));
-  }
-
-  /**
-   *
-   * @returns the reference of the backup
-   */
-  getBackupState() {
-    return this.principalListBackup;
   }
 }

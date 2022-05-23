@@ -175,6 +175,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.principalList = this.participantService.getParticipants(true);
           onlyManControl.enable({ emitEvent: false });
           this.assignmentForm.get("principal").reset(undefined);
+          return;
         }
 
         this.principalList = setListToOnlyWomen(

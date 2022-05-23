@@ -57,16 +57,16 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
   }
 
   initStatistics() {
-    const assignmentList = this.assignmentService.getAssignments();
-    const temporalAssistantList = this.participantService.getParticipants();
+    const assignments = this.assignmentService.getAssignments(true);
+    const participants = this.participantService.getParticipants(true);
 
     //Assistant
-    setAssistantCountById(assignmentList, temporalAssistantList);
+    setAssistantCountById(assignments, participants);
 
     //Get the lastAssignmentDate
-    for (const participant of temporalAssistantList) {
+    for (const participant of participants) {
       const assignment: AssignmentInterface = getLastAssistantAssignment(
-        assignmentList,
+        assignments,
         participant
       );
       participant.lastAssignmentDate = assignment?.date;
@@ -81,9 +81,9 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     }
 
     //Get the penultimateAssignmentDate
-    for (const participant of temporalAssistantList) {
+    for (const participant of participants) {
       const assignment: AssignmentInterface = getPenultimateAssistantAssignment(
-        assignmentList,
+        assignments,
         participant
       );
       participant.penultimateAssignmentDate = assignment?.date;
@@ -99,19 +99,19 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
 
     //Get the distance, i18n sensitive
     getDistanceBetweenPenultimaAndLast(
-      temporalAssistantList,
+      participants,
       this.locales[this.translocoService.getActiveLang()]
     );
 
     //ORDER BY COUNT
-    this.assistantList = temporalAssistantList.sort(sortParticipantsByCount);
+    this.assistantList = participants.sort(sortParticipantsByCount);
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
     this.subscription$ = this.translocoService.langChanges$.subscribe(
       (lang) => {
         //Assistant
         getDistanceBetweenPenultimaAndLast(
-          temporalAssistantList,
+          participants,
           this.locales[this.translocoService.getActiveLang()]
         );
       }
@@ -120,50 +120,33 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
 
   /**
    *
-   * @param event the change event
+   * @param event the checkbox change event
    */
   changeWoman(event: MatCheckboxChange): void {
     if (!event.checked) {
       //False, restores the state
-      this.assistantList = this.getBackupState();
+      this.assistantList = this.participantService.getParticipants(true);
       return;
     }
-    //First, create a backup
-    this.setBackupState();
 
     this.assistantList = this.assistantList.filter(
       (participant) => participant.isWoman
     );
   }
 
+  /**
+   *
+   * @param event the checkbox change event
+   */
   changeMan(event: MatCheckboxChange): void {
     if (!event.checked) {
       //False, restores the state
-      this.assistantList = this.getBackupState();
+      this.assistantList = this.participantService.getParticipants(true);
       return;
     }
-    //First, create a backup
-    this.setBackupState();
 
     this.assistantList = this.assistantList.filter(
       (participant) => !participant.isWoman
     );
-  }
-
-  /**
-   * Creates a copy of the participants
-   */
-  setBackupState() {
-    this.assistantListBackup = this.assistantList.map((participant) => ({
-      ...participant,
-    }));
-  }
-
-  /**
-   *
-   * @returns the reference of the backup
-   */
-  getBackupState() {
-    return this.assistantListBackup;
   }
 }
