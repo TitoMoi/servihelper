@@ -26,6 +26,7 @@ import { SearchComponent } from "app/search/search.component";
 import { StatisticsComponent } from "app/statistics/statistics.component";
 import { ConfigComponent } from "app/config/config.component";
 import { QuestionComponent } from "app/question/question.component";
+import { SelectionSheetsAssignmentComponent } from "./assignment/selection-sheets-assignment/selection-sheets-assignment.component";
 
 const routes: Routes = [
   {
@@ -120,6 +121,10 @@ const routes: Routes = [
   {
     path: "assignment/image/:id",
     component: ImageAssignmentComponent,
+  },
+  {
+    path: "assignment/selectionSheets",
+    component: SelectionSheetsAssignmentComponent,
   },
   {
     path: "search",

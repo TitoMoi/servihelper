@@ -55,6 +55,7 @@ import { DeleteNoteComponent } from "./note/delete-note/delete-note.component";
 import { ConfigComponent } from "./config/config.component";
 import { NgxEditorModule } from "ngx-editor";
 import { SearchComponent } from "./search/search.component";
+import { SelectionSheetsAssignmentComponent } from './assignment/selection-sheets-assignment/selection-sheets-assignment.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { SearchComponent } from "./search/search.component";
     CreateNoteComponent,
     UpdateNoteComponent,
     DeleteNoteComponent,
+    SelectionSheetsAssignmentComponent,
   ],
   imports: [
     BrowserAnimationsModule,

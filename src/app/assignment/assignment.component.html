@@ -9,6 +9,14 @@
 <div *ngIf="dataSource.length" class="row justify-content-begin m-3">
   <div class="col-1">
     <mat-icon
+      svgIcon="sheets"
+      aria-label="icon"
+      routerLink="selectionSheets"
+      routerLinkActive="active"
+    ></mat-icon>
+  </div>
+  <div class="col-1">
+    <mat-icon
       svgIcon="csvSvg"
       aria-label="icon"
       (click)="exportCsv()"

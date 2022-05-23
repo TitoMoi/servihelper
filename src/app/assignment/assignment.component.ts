@@ -21,7 +21,6 @@ import { AssignmentService } from "app/assignment/service/assignment.service";
 import { TranslocoService } from "@ngneat/transloco";
 import { DateAdapter } from "@angular/material/core";
 import { MyCustomPaginatorI18 } from "app/services/my-custom-paginator-i18.service";
-import { CustomDateAdapter } from "./customDateAdapter";
 
 @Component({
   selector: "app-assignment",
@@ -43,16 +42,32 @@ export class AssignmentComponent implements OnInit {
   //In memory assignments
   assignments: AssignmentInterface[];
   //Pagination
-  pageSizeOptions: number[];
+  pageSizeOptions: number[] = [15, 30];
   //Table
-  displayedColumns: string[];
+  displayedColumns: string[] = [
+    "assignImage",
+    "date",
+    "principal",
+    "assistant",
+    "room",
+    "assignType",
+    "editIcon",
+    "deleteIcon",
+  ];
   //Datasource
-  dataSource: AssignmentTableInterface[];
+  dataSource: AssignmentTableInterface[] = [];
   //Expanded element
   expandedElement: AssignmentInterface | null;
 
   //Icons
-  icons: string[];
+  icons: string[] = [
+    "garbage",
+    "edit",
+    "assignImage",
+    "sheets",
+    "csvSvg",
+    "search",
+  ];
 
   constructor(
     private assignmentService: AssignmentService,
@@ -64,24 +79,10 @@ export class AssignmentComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private translocoService: TranslocoService,
     private dateAdapter: DateAdapter<Date>
-  ) {
-    this.icons = ["garbage", "edit", "assignImage", "csvSvg", "search"];
-    this.pageSizeOptions = [15, 30];
-    this.displayedColumns = [
-      "assignImage",
-      "date",
-      "principal",
-      "assistant",
-      "room",
-      "assignType",
-      "editIcon",
-      "deleteIcon",
-    ];
-    this.dataSource = [];
-  }
+  ) {}
 
   ngOnInit() {
-    //ToDo: No queda claro, getLang pero pongo un locale despues.
+    //ToDo: No queda claro, getLang...pero pongo un locale despues.
     //Set datepicker lang to locale
     const lang = this.translocoService.getActiveLang();
     this.dateAdapter.setLocale(lang);
