@@ -144,7 +144,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="!assignmentForm.valid"
+        [disabled]="assignmentForm.invalid"
       >
         {{ "BUTTON_SAVE" | transloco }}
       </button>
