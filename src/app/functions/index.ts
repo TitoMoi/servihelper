@@ -16,4 +16,3 @@ export { setAssistantCountById } from "./setAssistantCountById";
 export { setCountById } from "./setCountById";
 export { setListToOnlyMen } from "./setListToOnlyMen";
 export { setListToOnlyWomen } from "./setListToOnlyWomen";
-export { copyList } from "./copyList";

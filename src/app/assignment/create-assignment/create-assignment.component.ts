@@ -171,15 +171,17 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       (isChecked) => {
         const onlyManControl = this.getOnlyManControl();
 
-        if (isChecked) {
-          this.setPrincipalsBackupState();
-          onlyManControl.disable({ emitEvent: false });
-          this.principalList = setListToOnlyWomen(this.principalList);
-        } else {
+        if (!isChecked) {
+          this.principalList = this.participantService.getParticipants(true);
           onlyManControl.enable({ emitEvent: false });
-          this.getPrincipalsBackupState();
+          this.assignmentForm.get("principal").reset(undefined);
         }
-        this.resetPrincipal();
+
+        this.principalList = setListToOnlyWomen(
+          this.participantService.getParticipants(true)
+        );
+        onlyManControl.disable({ emitEvent: false });
+        this.assignmentForm.get("principal").reset(undefined);
       }
     );
   }
@@ -192,15 +194,18 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       (isChecked) => {
         const onlyWomanControl = this.getOnlyWomanControl();
 
-        if (isChecked) {
-          this.setPrincipalsBackupState();
-          onlyWomanControl.disable({ emitEvent: false });
-          this.principalList = setListToOnlyMen(this.principalList);
-        } else {
+        if (!isChecked) {
+          this.principalList = this.participantService.getParticipants(true);
           onlyWomanControl.enable({ emitEvent: false });
-          this.getPrincipalsBackupState();
+          this.assignmentForm.get("principal").reset(undefined);
+          return;
         }
-        this.resetPrincipal();
+        this.principalList = setListToOnlyMen(
+          this.participantService.getParticipants(true)
+        );
+        onlyWomanControl.disable({ emitEvent: false });
+
+        this.assignmentForm.get("principal").reset(undefined);
       }
     );
   }
@@ -524,32 +529,5 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    */
   getAssistantControl(): FormControl {
     return this.assignmentForm.get("assistant");
-  }
-
-  /**
-   * resets the value of the principal control
-   */
-  resetPrincipal() {
-    const principalControl: FormControl = this.assignmentForm.get("principal");
-    principalControl.reset(undefined);
-  }
-
-  /**
-   * Creates a backup copy of the participants
-   */
-  setPrincipalsBackupState() {
-    this.principalsBackup = this.principalList.map((participant) => ({
-      ...participant,
-    }));
-  }
-
-  /**
-   *
-   * Creates a new principalList from the backup
-   */
-  getPrincipalsBackupState() {
-    this.principalList = this.principalsBackup.map((participant) => ({
-      ...participant,
-    }));
   }
 }

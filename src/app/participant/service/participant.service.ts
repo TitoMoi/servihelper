@@ -28,7 +28,7 @@ export class ParticipantService {
   constructor(private electronService: ElectronService) {}
 
   /**
-   *
+   * @param deepClone if should return the cloned array or the reference
    * @returns ParticipantInterface[] the array of participants
    */
   getParticipants(deepClone = false): ParticipantInterface[] {
