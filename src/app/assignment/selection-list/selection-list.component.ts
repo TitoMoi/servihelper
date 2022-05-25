@@ -9,7 +9,10 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
 import { Subject } from "rxjs";
-import { AssignmentInterface } from "../model/assignment.model";
+import {
+  AssignmentGroup,
+  AssignmentInterface,
+} from "../model/assignment.model";
 import { AssignmentService } from "../service/assignment.service";
 
 @Component({
@@ -23,7 +26,8 @@ export class SelectionListComponent implements OnChanges {
   @Input("assignTypes") assignTypes: string[];
 
   #assignments: AssignmentInterface[] = [];
-  assignments: AssignmentInterface[] = [];
+
+  assignmentGroup: AssignmentGroup[] = [];
 
   constructor(
     private assignTypeService: AssignTypeService,
@@ -33,6 +37,8 @@ export class SelectionListComponent implements OnChanges {
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
     if (this.startDate && this.endDate && this.assignTypes) {
+      this.#assignments = [];
+      this.assignmentGroup = [];
       this.filterAssignments();
       this.getRelatedData();
     }
@@ -55,8 +61,26 @@ export class SelectionListComponent implements OnChanges {
   }
 
   getRelatedData() {
+    this.#assignments = this.#assignments.sort(
+      this.assignmentService.sortAssignmentsByDate
+    );
+
+    let assignGroup: AssignmentGroup = { date: undefined, assignments: [] };
+
+    let length = this.#assignments.length;
+
     for (let assignment of this.#assignments) {
-      this.assignments.push({
+      --length;
+
+      if (!assignGroup.date) assignGroup.date = assignment.date;
+
+      if (assignGroup.date !== assignment.date) {
+        //save and reset
+        this.assignmentGroup.push(assignGroup);
+        assignGroup = { date: assignment.date, assignments: [] };
+      }
+
+      assignGroup.assignments.push({
         id: assignment.id,
         date: assignment.date,
         room: this.roomService.getRoom(assignment.room).name,
@@ -71,6 +95,9 @@ export class SelectionListComponent implements OnChanges {
           ?.name,
         footerNote: "",
       });
+
+      if (!length) this.assignmentGroup.push(assignGroup);
     }
+    console.log(this.assignmentGroup);
   }
 }

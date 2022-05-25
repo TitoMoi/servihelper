@@ -1,5 +1,17 @@
-<div class="row white-base-background" *ngFor="let assignment of assignments">
-  <div class="col">
-    {{ assignment.date | translocoDate: { dateStyle: "medium" } }}
+<div class="row white-base-background" *ngFor="let ag of assignmentGroup">
+  <div class="col-12 mb-1">
+    {{ ag.date | translocoDate: { dateStyle: "medium" } }}
+  </div>
+  <div *ngFor="let assignment of ag.assignments" class="col-12 mb-1">
+    <div class="row">
+      <div class="col-12">
+        {{ assignment.theme }}
+        <span *ngIf="!assignment.theme">{{ assignment.assignType }}</span>
+      </div>
+      <div class="col-12 mb-1">
+        {{ assignment.principal }}
+        <span *ngIf="assignment.assistant">/ {{ assignment.assistant }}</span>
+      </div>
+    </div>
   </div>
 </div>

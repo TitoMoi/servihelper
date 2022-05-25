@@ -11,6 +11,11 @@ export interface AssignmentInterface {
   footerNote: string;
 }
 
+export interface AssignmentGroup {
+  date: Date;
+  assignments: AssignmentInterface[];
+}
+
 export interface AssignmentTableInterface {
   id: string;
   date: Date;
