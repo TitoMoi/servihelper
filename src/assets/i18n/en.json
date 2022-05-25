@@ -69,6 +69,10 @@
   "ASSIGN_DELETE_TITLE": "Remove assignment",
   "ASSIGN_DELETE_WARNING": "This action is irreversible",
 
+  "ASSIGN_SELECTION_RANGE_TITLE": "Select the date range",
+  "ASSIGN_SELECTION_RANGE_HINT": "Must select two dates to create the range",
+  "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Select the assignment types",
+
   "ASSIGNTYPE_CREATE_TITLE": "Create assignment type",
 
   "ASSIGNTYPE_TABLE_HEADER_NAME": "Name",

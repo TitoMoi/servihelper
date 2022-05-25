@@ -56,6 +56,7 @@ import { ConfigComponent } from "./config/config.component";
 import { NgxEditorModule } from "ngx-editor";
 import { SearchComponent } from "./search/search.component";
 import { SelectionSheetsAssignmentComponent } from './assignment/selection-sheets-assignment/selection-sheets-assignment.component';
+import { SelectionListComponent } from './assignment/selection-list/selection-list.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { SelectionSheetsAssignmentComponent } from './assignment/selection-sheet
     UpdateNoteComponent,
     DeleteNoteComponent,
     SelectionSheetsAssignmentComponent,
+    SelectionListComponent,
   ],
   imports: [
     BrowserAnimationsModule,

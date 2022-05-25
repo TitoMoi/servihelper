@@ -1,0 +1,5 @@
+<div class="row white-base-background" *ngFor="let assignment of assignments">
+  <div class="col">
+    {{ assignment.date | translocoDate: { dateStyle: "medium" } }}
+  </div>
+</div>

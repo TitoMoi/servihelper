@@ -26,7 +26,7 @@ import { SearchComponent } from "app/search/search.component";
 import { StatisticsComponent } from "app/statistics/statistics.component";
 import { ConfigComponent } from "app/config/config.component";
 import { QuestionComponent } from "app/question/question.component";
-import { SelectionSheetsAssignmentComponent } from "./assignment/selection-sheets-assignment/selection-sheets-assignment.component";
+import { SelectionSheetsAssignmentComponent } from "app/assignment/selection-sheets-assignment/selection-sheets-assignment.component";
 
 const routes: Routes = [
   {
