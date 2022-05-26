@@ -21,6 +21,7 @@ export class SelectionListComponent implements OnChanges {
   @Input("startDate") startDate: Date;
   @Input("endDate") endDate: Date;
   @Input("assignTypes") assignTypes: string[];
+  @Input("order") order: string;
 
   #assignments: AssignmentInterface[] = [];
 
@@ -49,10 +50,11 @@ export class SelectionListComponent implements OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.startDate && this.endDate && this.assignTypes) {
+      console.log(changes);
       this.#assignments = [];
       this.assignmentGroup = [];
       this.filterAssignments();
-      this.sortAssignmentByDate();
+      this.sortAssignmentByDate(this.order);
       this.getRelatedData();
       this.sortAssignmentByAssignTypeOrder();
     }
@@ -74,9 +76,16 @@ export class SelectionListComponent implements OnChanges {
       );
   }
 
-  sortAssignmentByDate() {
+  sortAssignmentByDate(order: string) {
+    console.log(order);
+    if (order === "Desc") {
+      this.#assignments = this.#assignments.sort(
+        this.assignmentService.sortAssignmentsByDateDesc
+      );
+      return;
+    }
     this.#assignments = this.#assignments.sort(
-      this.assignmentService.sortAssignmentsByDate
+      this.assignmentService.sortAssignmentsByDateAsc
     );
   }
 

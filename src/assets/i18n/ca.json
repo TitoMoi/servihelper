@@ -72,6 +72,7 @@
   "ASSIGN_SELECTION_RANGE_TITLE": "Selecciona el rang de dates",
   "ASSIGN_SELECTION_RANGE_HINT": "Must select two dates to create the range",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Selecciona els tipus d'assignació",
+  "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Ordre ascendent o descendent",
 
   "ASSIGNTYPE_CREATE_TITLE": "Crear tipus d'assignació",
 

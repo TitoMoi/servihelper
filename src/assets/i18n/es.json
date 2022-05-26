@@ -67,6 +67,7 @@
   "ASSIGN_SELECTION_RANGE_TITLE": "Selecciona el rango de fechas",
   "ASSIGN_SELECTION_RANGE_HINT": "Debes seleccionar dos fechas para crear el rango",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Selecciona los tipos de asignacion",
+  "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Orden ascendente o descendente",
 
   "ASSIGNTYPE_CREATE_TITLE": "Crear tipo de asignación",
   "ASSIGNTYPE_TABLE_HEADER_NAME": "Nombre",

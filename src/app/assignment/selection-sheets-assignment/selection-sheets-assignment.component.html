@@ -1,6 +1,6 @@
 <form [formGroup]="selectionForm" novalidate>
   <div class="row">
-    <div class="col-5">
+    <div class="col-4">
       <mat-form-field appearance="fill">
         <mat-label>{{ "ASSIGN_SELECTION_RANGE_TITLE" | transloco }}</mat-label>
         <mat-date-range-input [rangePicker]="picker">
@@ -27,7 +27,7 @@
         >
       </mat-form-field>
     </div>
-    <div class="col-5">
+    <div class="col-4">
       <mat-form-field>
         <mat-label>{{
           "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE" | transloco
@@ -41,6 +41,18 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div class="col-4">
+      <mat-form-field>
+        <mat-label>{{
+          "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE" | transloco
+        }}</mat-label>
+        <mat-select #orderSelect formControlName="order">
+          <mat-option *ngFor="let order of orderOptions" [value]="order">{{
+            order
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 </form>
 
@@ -51,6 +63,7 @@
       [startDate]="selectionForm.controls.startDate.value"
       [endDate]="selectionForm.controls.endDate.value"
       [assignTypes]="selectionForm.controls.assignTypes.value"
+      [order]="selectionForm.controls.order.value"
     ></app-selection-list>
   </div>
 </div>

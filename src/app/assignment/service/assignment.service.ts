@@ -65,7 +65,7 @@ export class AssignmentService {
     this.#assignments.push(assignment);
 
     //ORDER THE ASSIGNMENTS BY MOST RECENT DATE
-    this.#assignments = this.#assignments.sort(this.sortAssignmentsByDate);
+    this.#assignments = this.#assignments.sort(this.sortAssignmentsByDateDesc);
 
     //save assignments with the new assignment
     return this.saveAssignmentsToFile();
@@ -77,7 +77,7 @@ export class AssignmentService {
    * @param b AssignmentInterface the assignment B
    * @returns number the 1,-1,0 logic for the sort method
    */
-  sortAssignmentsByDate(
+  sortAssignmentsByDateDesc(
     a: AssignmentInterface,
     b: AssignmentInterface
   ): number {
@@ -87,6 +87,27 @@ export class AssignmentService {
       return 1;
     }
     if (dateA > dateB) {
+      return -1;
+    }
+    return 0;
+  }
+
+  /**
+   *
+   * @param a AssignmentInterface the assignment A
+   * @param b AssignmentInterface the assignment B
+   * @returns number the 1,-1,0 logic for the sort method
+   */
+  sortAssignmentsByDateAsc(
+    a: AssignmentInterface,
+    b: AssignmentInterface
+  ): number {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    if (dateA > dateB) {
+      return 1;
+    }
+    if (dateA < dateB) {
       return -1;
     }
     return 0;

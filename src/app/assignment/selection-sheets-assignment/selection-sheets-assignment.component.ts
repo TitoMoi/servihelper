@@ -19,12 +19,16 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
 export class SelectionSheetsAssignmentComponent implements AfterViewInit {
   assignTypes: AssignTypeInterface[] = this.assignTypesService.getAssignTypes();
 
+  orderOptions: string[] = ["Asc", "Desc"];
+
   @ViewChild("assignTypesSelect") select: MatSelect;
+  @ViewChild("orderSelect") order: MatSelect;
 
   selectionForm = new FormGroup({
     startDate: new FormControl(),
     endDate: new FormControl(),
     assignTypes: new FormControl(),
+    order: new FormControl(),
   });
 
   constructor(
@@ -33,6 +37,7 @@ export class SelectionSheetsAssignmentComponent implements AfterViewInit {
   ) {}
   ngAfterViewInit(): void {
     this.select.options.forEach((item: MatOption) => item.select());
+    this.order.options.first.select();
     this.cdr.detectChanges();
   }
 }
