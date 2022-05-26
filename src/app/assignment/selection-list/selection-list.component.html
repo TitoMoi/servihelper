@@ -4,7 +4,8 @@
   aria-label="icon"
   (click)="toPdf()"
 ></mat-icon>
-<div id="resultListDiv">
+
+<div id="resultListDiv" style="width: 25rem">
   <div class="row white-base-background" *ngFor="let ag of assignmentGroup">
     <div class="col-12 mb-3 bold double-font">
       {{ ag.date | translocoDate: { dateStyle: "long" } }}

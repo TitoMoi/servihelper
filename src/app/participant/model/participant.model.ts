@@ -3,7 +3,6 @@ export interface ParticipantInterface {
   name: string;
   isWoman: boolean;
   onlyAssistant: boolean;
-  email: string;
   rooms: ParticipantRoomInterface[];
   assignTypes: ParticipantAssignTypesInterface[];
   available: boolean;

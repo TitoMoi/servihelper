@@ -31,7 +31,7 @@ export class NavigationComponent implements OnInit {
     "assignment",
     "statistics",
     "config",
-    "qa",
+    "info",
   ];
   availableLangs = undefined;
 

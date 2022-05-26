@@ -139,7 +139,7 @@ const routes: Routes = [
     component: ConfigComponent,
   },
   {
-    path: "qa",
+    path: "info",
     component: QuestionComponent,
   },
 ];

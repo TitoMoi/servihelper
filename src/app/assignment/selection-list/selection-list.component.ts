@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from "@angular/core";
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
@@ -12,7 +6,6 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomService } from "app/room/service/room.service";
 import { ElectronService } from "app/services/electron.service";
 import { toPng } from "html-to-image";
-import { Subject } from "rxjs";
 import {
   AssignmentGroup,
   AssignmentInterface,
@@ -180,7 +173,7 @@ export class SelectionListComponent implements OnChanges {
       const blob = new Blob([data], { type: "application/pdf" });
       const link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
-      link.setAttribute("download", "assignment.pdf");
+      link.setAttribute("download", "list.pdf");
       link.click();
     });
     document.body.style.cursor = "default";

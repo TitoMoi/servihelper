@@ -41,7 +41,6 @@ export class CreateParticipantComponent implements OnInit {
       id: undefined,
       name: [undefined, Validators.required],
       isWoman: [false],
-      email: [undefined, Validators.email],
       assignTypes: [this.formBuilder.array([])],
       rooms: [this.formBuilder.array([])],
       available: [true],
