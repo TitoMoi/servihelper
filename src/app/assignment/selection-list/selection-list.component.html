@@ -12,15 +12,16 @@
     </div>
     <div *ngFor="let assignment of ag.assignments" class="col-12 mb-1">
       <div class="row justify-content-center">
-        <div class="col-12 bold">
+        <div class="col-12 bold increase-font">
           {{ assignment.theme }}
           <span *ngIf="!assignment.theme">{{ assignment.assignType }}</span>
         </div>
-        <div class="col-11 mb-1">
+        <div class="col-11 mb-1 increase-font">
           • {{ assignment.principal }}
           <span *ngIf="assignment.assistant">/ {{ assignment.assistant }}</span>
         </div>
       </div>
     </div>
   </div>
+  <hr />
 </div>

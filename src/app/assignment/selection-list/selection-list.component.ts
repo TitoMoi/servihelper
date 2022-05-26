@@ -152,7 +152,8 @@ export class SelectionListComponent implements OnChanges {
   }
 
   async toPdf() {
-    const micronMeasure = 264.5833;
+    /* const micronMeasure = 264.5833; */
+    const micronMeasure = 132.2816;
     //the div
     document.body.style.cursor = "wait";
     const div = document.getElementById("resultListDiv");
@@ -171,7 +172,7 @@ export class SelectionListComponent implements OnChanges {
       marginsType: 1,
       pageSize: {
         width: div.offsetWidth * micronMeasure,
-        height: div.offsetHeight * micronMeasure, //1px = 264.5833 microns (meassure units)
+        height: div.offsetHeight * micronMeasure * 1.05, //1px = 264.5833 microns (meassure units)
       },
       printBackground: false,
       printSelectionOnly: false,
