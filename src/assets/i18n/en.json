@@ -5,6 +5,7 @@
   "pt": "Portuguese",
   "BUTTON_CANCEL": "Cancel",
   "BUTTON_SAVE": "Save",
+  "BUTTON_SAVE_CREATE_ANOTHER": "Save and create another",
   "BUTTON_UPDATE": "Update",
   "BUTTON_DELETE": "Delete",
   "BUTTON_COPY": "Copy",
@@ -12,6 +13,7 @@
 
   "PLACEHOLDER_NAME": "Name",
   "PLACEHOLDER_EMAIL": "Email",
+  "PLACEHOLDER_ORDER": "The order of appearance in the lists, 1 will come out before 2 and so on",
   "NAV_HOME": "Home",
   "NAV_ASSIGN_TYPE": "Types of assignments",
   "NAV_ROOM": "Rooms",
@@ -76,6 +78,7 @@
   "ASSIGNTYPE_CREATE_TITLE": "Create assignment type",
 
   "ASSIGNTYPE_TABLE_HEADER_NAME": "Name",
+  "ASSIGNTYPE_TABLE_HEADER_ORDER": "Order",
   "ASSIGNTYPE_TABLE_HEADER_EDIT": "Update",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Delete",
 

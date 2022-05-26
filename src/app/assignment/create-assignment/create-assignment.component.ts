@@ -39,15 +39,15 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   footerNotes: NoteInterface[] = this.noteService.getNotes();
   assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
 
-  hasAssignmentsAssistantList: string[];
-
   principalList: ParticipantInterface[];
   assistantList: ParticipantInterface[];
 
   principalsBackup: ParticipantInterface[];
-  hasAssignmentsList: string[];
 
-  lastDate: Date;
+  hasAssignmentsList: string[] = [];
+  hasAssignmentsAssistantList: string[] = [];
+
+  lastDate: Date = this.lastDateService.getLastDate();
 
   //Subscriptions
   dateSub$: Subscription;
@@ -59,7 +59,18 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   onlyWomanSub$: Subscription;
   langSub$: Subscription;
 
-  assignmentForm;
+  assignmentForm = this.formBuilder.group({
+    id: undefined,
+    date: [undefined, Validators.required],
+    room: [{ value: undefined, disabled: true }, Validators.required], //Room id
+    assignType: [{ value: undefined, disabled: true }, Validators.required], //AssignType id
+    theme: undefined,
+    onlyWoman: [{ value: undefined, disabled: true }],
+    onlyMan: [{ value: undefined, disabled: true }],
+    principal: [{ value: undefined, disabled: true }, Validators.required], //participant id
+    assistant: [{ value: undefined, disabled: true }], //participant id
+    footerNote: undefined, //Note id
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -73,25 +84,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private translocoService: TranslocoService,
     private dateAdapter: DateAdapter<Date>,
     private lastDateService: LastDateService
-  ) {
-    this.assignmentForm = this.formBuilder.group({
-      id: undefined,
-      date: [undefined, Validators.required],
-      room: [{ value: undefined, disabled: true }, Validators.required], //Room id
-      assignType: [{ value: undefined, disabled: true }, Validators.required], //AssignType id
-      theme: undefined,
-      onlyWoman: [{ value: undefined, disabled: true }],
-      onlyMan: [{ value: undefined, disabled: true }],
-      principal: [{ value: undefined, disabled: true }, Validators.required], //participant id
-      assistant: [{ value: undefined, disabled: true }], //participant id
-      footerNote: undefined, //Note id
-    });
-    this.hasAssignmentsList = [];
-    this.hasAssignmentsAssistantList = [];
-
-    //Check if we have lastSelectedDate
-    this.lastDate = this.lastDateService.getLastDate();
-  }
+  ) {}
 
   ngOnInit() {
     this.langSubscription();
@@ -486,49 +479,49 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   /**
    * @returns the date form control
    */
-  getDateControl(): FormControl {
+  getDateControl() {
     return this.assignmentForm.get("date");
   }
 
   /**
    * @returns the onlyWoman form control
    */
-  getOnlyWomanControl(): FormControl {
+  getOnlyWomanControl() {
     return this.assignmentForm.get("onlyWoman");
   }
 
   /**
    * @returns the onlyMan form control
    */
-  getOnlyManControl(): FormControl {
+  getOnlyManControl() {
     return this.assignmentForm.get("onlyMan");
   }
 
   /**
    * @returns the assignType form control
    */
-  getAssignTypeControl(): FormControl {
+  getAssignTypeControl() {
     return this.assignmentForm.get("assignType");
   }
 
   /**
    * @returns the room form control
    */
-  getRoomControl(): FormControl {
+  getRoomControl() {
     return this.assignmentForm.get("room");
   }
 
   /**
    * @returns the principal form control
    */
-  getPrincipalControl(): FormControl {
+  getPrincipalControl() {
     return this.assignmentForm.get("principal");
   }
 
   /**
    * @returns the assistant form control
    */
-  getAssistantControl(): FormControl {
+  getAssistantControl() {
     return this.assignmentForm.get("assistant");
   }
 }

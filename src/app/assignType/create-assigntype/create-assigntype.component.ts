@@ -10,8 +10,12 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
   templateUrl: "./create-assigntype.component.html",
   styleUrls: ["./create-assigntype.component.css"],
 })
-export class CreateAssignTypeComponent implements OnInit {
-  assignTypeForm;
+export class CreateAssignTypeComponent {
+  assignTypeForm = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+    order: [undefined, Validators.required],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,19 +24,13 @@ export class CreateAssignTypeComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-  ngOnInit(): void {
-    this.assignTypeForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-    });
-  }
 
-  onSubmit(assignType: AssignTypeInterface): void {
+  onSubmit(): void {
     //save the assign type
-    this.assignTypeService.createAssignType(assignType);
+    this.assignTypeService.createAssignType(this.assignTypeForm.value);
 
     //Add the assign type reference for all the participants
-    this.participantService.addAssignType(assignType.id);
+    this.participantService.addAssignType(this.assignTypeForm.get("id").value);
 
     //navigate to parent
     this.router.navigate([".."], {

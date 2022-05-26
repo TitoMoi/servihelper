@@ -5,6 +5,7 @@
   "pt": "Portuguès",
   "BUTTON_CANCEL": "Cancel·lar",
   "BUTTON_SAVE": "Guardar",
+  "BUTTON_SAVE_CREATE_ANOTHER": "Guardar i crear-ne una altra",
   "BUTTON_UPDATE": "Actualitzar",
   "BUTTON_DELETE": "Eliminar",
   "BUTTON_COPY": "Copiar",
@@ -12,6 +13,7 @@
 
   "PLACEHOLDER_NAME": "Nom",
   "PLACEHOLDER_EMAIL": "Email",
+  "PLACEHOLDER_ORDER": "L'ordre d'aparició a les llistes, 1 sortirà abans que el 2 i així successivament",
   "NAV_HOME": "Inici",
   "NAV_ASSIGN_TYPE": "Tipus d'assignacions",
   "NAV_ROOM": "Sales",
@@ -75,6 +77,7 @@
   "ASSIGNTYPE_CREATE_TITLE": "Crear tipus d'assignació",
 
   "ASSIGNTYPE_TABLE_HEADER_NAME": "Nom",
+  "ASSIGNTYPE_TABLE_HEADER_ORDER": "Ordre",
   "ASSIGNTYPE_TABLE_HEADER_EDIT": "Editar",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Eliminar",
 

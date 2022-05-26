@@ -40,6 +40,8 @@ export class SelectionListComponent implements OnChanges {
       this.#assignments = [];
       this.assignmentGroup = [];
       this.filterAssignments();
+      this.sortAssignmentByDate();
+      this.sortAssignmentByAssignTypeOrder();
       this.getRelatedData();
     }
   }
@@ -60,11 +62,30 @@ export class SelectionListComponent implements OnChanges {
       );
   }
 
-  getRelatedData() {
+  sortAssignmentByDate() {
     this.#assignments = this.#assignments.sort(
       this.assignmentService.sortAssignmentsByDate
     );
+  }
 
+  sortAssignmentByAssignTypeOrder() {
+    this.#assignments = this.#assignments.sort(
+      (a: AssignmentInterface, b: AssignmentInterface): number => {
+        const orderA = this.assignTypeService.getAssignType(a.assignType).order;
+        const orderB = this.assignTypeService.getAssignType(b.assignType).order;
+
+        if (orderA > orderB) {
+          return 1;
+        }
+        if (orderA < orderB) {
+          return -1;
+        }
+        return 0;
+      }
+    );
+  }
+
+  getRelatedData() {
     let assignGroup: AssignmentGroup = { date: undefined, assignments: [] };
 
     let length = this.#assignments.length;

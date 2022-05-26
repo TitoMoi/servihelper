@@ -23,7 +23,7 @@ export class AssignTypeComponent implements OnInit {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
-    this.displayedColumns = ["name", "editIcon", "deleteIcon"];
+    this.displayedColumns = ["name", "order", "editIcon", "deleteIcon"];
     this.icons = ["garbage", "edit"];
   }
 
@@ -53,6 +53,7 @@ export class AssignTypeComponent implements OnInit {
       dataSourceTemp.push({
         id: assignType.id,
         name: assignType.name,
+        order: assignType.order,
       });
     }
     //Update the view

@@ -13,6 +13,7 @@ export class UpdateAssignTypeComponent implements OnInit {
   assignTypeForm: FormGroup = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
+    order: [undefined, Validators.required],
   });
 
   constructor(
@@ -28,11 +29,12 @@ export class UpdateAssignTypeComponent implements OnInit {
     this.assignTypeForm.setValue({
       id: assignType.id,
       name: assignType.name,
+      order: assignType.order,
     });
   }
 
-  onSubmit(assignType: AssignTypeInterface): void {
-    this.assignTypeService.updateAssignType(assignType);
+  onSubmit(): void {
+    this.assignTypeService.updateAssignType(this.assignTypeForm.value);
 
     //navigate to parent
     this.router.navigate(["../.."], {
