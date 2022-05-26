@@ -50,7 +50,6 @@ export class SelectionListComponent implements OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.startDate && this.endDate && this.assignTypes) {
-      console.log(changes);
       this.#assignments = [];
       this.assignmentGroup = [];
       this.filterAssignments();
@@ -77,7 +76,6 @@ export class SelectionListComponent implements OnChanges {
   }
 
   sortAssignmentByDate(order: string) {
-    console.log(order);
     if (order === "Desc") {
       this.#assignments = this.#assignments.sort(
         this.assignmentService.sortAssignmentsByDateDesc
