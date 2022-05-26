@@ -5,9 +5,13 @@ import {
   OnInit,
   SimpleChanges,
 } from "@angular/core";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
+import { ElectronService } from "app/services/electron.service";
+import { toPng } from "html-to-image";
 import { Subject } from "rxjs";
 import {
   AssignmentGroup,
@@ -29,12 +33,27 @@ export class SelectionListComponent implements OnChanges {
 
   assignmentGroup: AssignmentGroup[] = [];
 
+  icons: string[] = ["pdf"];
+
   constructor(
     private assignTypeService: AssignTypeService,
     private roomService: RoomService,
     private participantService: ParticipantService,
-    private assignmentService: AssignmentService
-  ) {}
+    private assignmentService: AssignmentService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    private electronService: ElectronService
+  ) {
+    //Register icons
+    for (const iconFileName of this.icons) {
+      this.matIconRegistry.addSvgIcon(
+        iconFileName,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          "assets/icons/" + iconFileName + ".svg"
+        )
+      );
+    }
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.startDate && this.endDate && this.assignTypes) {
       this.#assignments = [];
@@ -91,6 +110,9 @@ export class SelectionListComponent implements OnChanges {
     }
   }
 
+  /**
+   * Covert the id's to names
+   */
   getRelatedData() {
     let assignGroup: AssignmentGroup = { date: undefined, assignments: [] };
 
@@ -125,6 +147,42 @@ export class SelectionListComponent implements OnChanges {
 
       if (!length) this.assignmentGroup.push(assignGroup);
     }
-    console.log(this.assignmentGroup);
+  }
+
+  async toPdf() {
+    const micronMeasure = 264.5833;
+    //the div
+    document.body.style.cursor = "wait";
+    const div = document.getElementById("resultListDiv");
+    const dataUrl = await toPng(div);
+
+    //create window
+    const win = new this.electronService.remote.BrowserWindow({
+      width: div.offsetWidth,
+      height: div.offsetHeight,
+      show: false,
+    });
+
+    await win.loadURL(dataUrl);
+
+    const pdfOptions = {
+      marginsType: 1,
+      pageSize: {
+        width: div.offsetWidth * micronMeasure,
+        height: div.offsetHeight * micronMeasure, //1px = 264.5833 microns (meassure units)
+      },
+      printBackground: false,
+      printSelectionOnly: false,
+      landscape: false,
+    };
+
+    win.webContents.printToPDF(pdfOptions).then((data) => {
+      const blob = new Blob([data], { type: "application/pdf" });
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute("download", "assignment.pdf");
+      link.click();
+    });
+    document.body.style.cursor = "default";
   }
 }

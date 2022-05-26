@@ -33,8 +33,6 @@ export class ImageAssignmentComponent implements OnInit {
 
   copied = false;
   isLoaded = false;
-  pdfOptions;
-  micronMeasure = 264.5833;
 
   //Image data bindings
   assignmentHeaderTitle: string;
@@ -134,6 +132,7 @@ export class ImageAssignmentComponent implements OnInit {
    * Download a pdf from the image
    */
   async toPdf() {
+    const micronMeasure = 264.5833;
     //the div
     document.body.style.cursor = "wait";
     const div = document.getElementById("assignmentDiv");
@@ -148,18 +147,18 @@ export class ImageAssignmentComponent implements OnInit {
 
     await win.loadURL(dataUrl);
 
-    this.pdfOptions = {
+    const pdfOptions = {
       marginsType: 1,
       pageSize: {
-        width: div.offsetWidth * this.micronMeasure,
-        height: div.offsetHeight * this.micronMeasure, //1px = 264.5833 microns (meassure units)
+        width: div.offsetWidth * micronMeasure,
+        height: div.offsetHeight * micronMeasure, //1px = 264.5833 microns (meassure units)
       },
       printBackground: false,
       printSelectionOnly: false,
       landscape: false,
     };
 
-    win.webContents.printToPDF(this.pdfOptions).then((data) => {
+    win.webContents.printToPDF(pdfOptions).then((data) => {
       const blob = new Blob([data], { type: "application/pdf" });
       const link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
