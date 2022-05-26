@@ -11,7 +11,6 @@ import { MatPaginatorIntl, PageEvent } from "@angular/material/paginator";
 import { DomSanitizer } from "@angular/platform-browser";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
-import { NoteService } from "app/note/service/note.service";
 import { RoomService } from "app/room/service/room.service";
 import {
   AssignmentInterface,
@@ -64,7 +63,7 @@ export class AssignmentComponent implements OnInit {
     "garbage",
     "edit",
     "assignImage",
-    "sheets",
+    "lists",
     "csvSvg",
     "search",
   ];
@@ -74,7 +73,6 @@ export class AssignmentComponent implements OnInit {
     private participantService: ParticipantService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
-    private noteService: NoteService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private translocoService: TranslocoService,

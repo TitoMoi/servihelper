@@ -83,6 +83,20 @@ export class AssignTypeService {
 
   /**
    *
+   * @param assignTypeName the name of the assignType to look for
+   * @returns the assignType
+   */
+  getAssignTypeByName(assignTypeName: string) {
+    //search assignType
+    for (const assignType of this.#assignTypes) {
+      if (assignType.name === assignTypeName) {
+        return assignType;
+      }
+    }
+  }
+
+  /**
+   *
    * @param assignType the assignType to update
    * @returns true if assignType is updated and saved false otherwise
    */
