@@ -163,6 +163,8 @@
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "É o número de vezes que você participou daquela sala com aquele tipo de atribuição com aquela função.",
   "INFO__CONTACT": "¿Como faço para relatar um bug ou uma melhoria?",
   "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
+  "INFO_HOW_TO_WORK": "¿Como vários gerentes podem trabalhar ao mesmo tempo?",
+  "INFO_HOW_TO_WORK_ANSWER": "O primeiro cria suas atribuições, exporta os dados da seção 'home' e os deixa em um site compartilhado pelos responsáveis, o segundo importa e cria suas atribuições, e assim por diante.",
 
   "PAGINATOR_FIRST_PAGE_LABEL": "Primeira página",
   "PAGINATOR_ITEMS_PER_PAGE_LABEL": "Items por página:",

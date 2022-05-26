@@ -183,6 +183,8 @@
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "It is the number of times you have participated in that room with that type of assignment with that role.",
   "INFO__CONTACT": "¿How do I report a bug or an improvement?",
   "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
+  "INFO_HOW_TO_WORK": "¿How can several managers work at the same time?",
+  "INFO_HOW_TO_WORK_ANSWER": "The first creates its assignments, exports the data from the 'home' section and leaves it in a site shared by those responsible, the second imports it and creates its assignments, and so on.",
 
   "PAGINATOR_FIRST_PAGE_LABEL": "First page",
   "PAGINATOR_ITEMS_PER_PAGE_LABEL": "Items per page:",

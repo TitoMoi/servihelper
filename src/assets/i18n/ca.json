@@ -182,6 +182,8 @@
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "És les vegades que ha participat en aqueixa sala amb aqueixa mena d'assignació amb aqueix rol.",
   "INFO__CONTACT": "¿Com reporte un error o una millora?",
   "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
+  "INFO_HOW_TO_WORK": "¿Com poden treballar diversos gestors alhora?",
+  "INFO_HOW_TO_WORK_ANSWER": "El primer crea les seves assignacions, exporta les dades de la secció 'Home' i les deixa en un lloc compartit pels responsables, el segon les importa i crea les seves assignacions, etc.",
 
   "PAGINATOR_FIRST_PAGE_LABEL": "Primera pàgina",
   "PAGINATOR_ITEMS_PER_PAGE_LABEL": "Ítems per pàgina:",

@@ -162,6 +162,8 @@
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "Es las veces que ha participado en esa sala con ese tipo de asignación con ese rol.",
   "INFO__CONTACT": "¿Cómo notifico un error o una mejora?",
   "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
+  "INFO_HOW_TO_WORK": "¿Cómo pueden trabajar varios responsables a la vez?",
+  "INFO_HOW_TO_WORK_ANSWER": "El primero crea sus asignaciones, exporta los datos desde la sección 'home' y los deja en un sitio que compartan los responsables, el segundo lo importa y crea sus asignaciones, y asi sucesivamente.",
 
   "PAGINATOR_FIRST_PAGE_LABEL": "Primera página",
   "PAGINATOR_ITEMS_PER_PAGE_LABEL": "Items por página:",
