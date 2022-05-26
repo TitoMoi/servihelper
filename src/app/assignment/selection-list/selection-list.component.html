@@ -1,6 +1,6 @@
 <div class="row white-base-background" *ngFor="let ag of assignmentGroup">
   <div class="col-12 mb-3 bold double-font">
-    {{ ag.date | translocoDate: { dateStyle: "medium" } }}
+    {{ ag.date | translocoDate: { dateStyle: "long" } }}
   </div>
   <div *ngFor="let assignment of ag.assignments" class="col-12 mb-1">
     <div class="row justify-content-center">

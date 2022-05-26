@@ -15,58 +15,6 @@
     {{ "CONFIG_ASSIGNMENT_HEADER_TITLE_SAVED" | transloco }}
   </p>
 
-  <h3 class="m-3">{{ "CONFIG_BACKUP_LABEL_IMPORT" | transloco }}</h3>
-  <button
-    class="m-3"
-    mat-raised-button
-    type="button"
-    color="primary"
-    (click)="upload = !upload"
-  >
-    {{ "CONFIG_BACKUP_IMPORT" | transloco }}
-  </button>
-
-  <div *ngIf="upload" class="m-3">
-    <div class="m-3">
-      <label
-        for="zip-upload"
-        [ngClass]="{
-          'custom-file-upload-success': isZipLoaded,
-          'custom-file-upload': !isZipLoaded
-        }"
-      >
-        <span *ngIf="!isZipLoaded"
-          >{{ "CONFIG_ZIP_UPLOAD" | transloco }} ...</span
-        >
-        <span *ngIf="isZipLoaded" class="ml-3 d-inline-block">{{
-          "CONFIG_ZIP_UPLOADED" | transloco
-        }}</span>
-      </label>
-      <input
-        id="zip-upload"
-        type="file"
-        accept=".zip"
-        (change)="uploadZipFiles($event)"
-      />
-    </div>
-    <div *ngIf="isZipLoaded" class="pb-3">
-      <p class="d-inline-block m-3 green-msg">
-        {{ "CONFIG_BACKUP_SUCCESS_ALL_FILES" | transloco }}
-      </p>
-    </div>
-  </div>
-  <h3 class="m-3">{{ "CONFIG_BACKUP_LABEL_EXPORT" | transloco }}</h3>
-  <p>
-    <button
-      class="m-3"
-      mat-raised-button
-      type="button"
-      color="primary"
-      (click)="downloadFiles()"
-    >
-      {{ "BUTTON_DOWNLOAD" | transloco }}
-    </button>
-  </p>
   <div class="light-red-bg">
     <h3 class="m-3">{{ "CONFIG_RESTART_LABEL" | transloco }}</h3>
     <div>

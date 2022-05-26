@@ -111,13 +111,21 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.langSub$.unsubscribe();
   }
 
-  onSubmit(assignment: AssignmentInterface): void {
-    this.assignmentService.createAssignment(assignment);
+  onSubmit(): void {
+    this.assignmentService.createAssignment(this.assignmentForm.value);
 
     //navigate to parent
     this.router.navigate([".."], {
       relativeTo: this.activatedRoute,
     });
+  }
+
+  submitAndCreate(): void {
+    this.assignmentService.createAssignment(this.assignmentForm.value);
+
+    const date = this.assignmentForm.get("date").value;
+    this.assignmentForm.reset();
+    this.assignmentForm.get("date").setValue(date);
   }
 
   /**

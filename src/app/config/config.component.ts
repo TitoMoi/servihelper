@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
-import AdmZip from "adm-zip";
 import { ConfigService } from "app/config/service/config.service";
 import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
@@ -18,17 +17,11 @@ export class ConfigComponent implements OnInit {
   // Config form
   configForm;
 
-  // If zip is loaded and saved
-  isZipLoaded = false;
-
   // If config assignmentHeader key is saved
   isAssignmentHeaderTitleSaved = false;
 
   // Confirm the delete operation
   confirmDelete = false;
-
-  // If upload button is clicked
-  upload = false;
 
   //Restart data
   config: ConfigInterface = {
@@ -38,7 +31,7 @@ export class ConfigComponent implements OnInit {
   };
 
   // the filesystem api
-  fs: typeof fs;
+  fs: typeof fs = this.electronService.remote.require("fs-extra");
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,8 +42,6 @@ export class ConfigComponent implements OnInit {
       ? //__dirname is where the .json files exists
         __dirname + "./assets/source"
       : "./assets/source";
-
-    this.fs = electronService.remote.require("fs-extra");
   }
 
   ngOnInit() {
@@ -63,72 +54,9 @@ export class ConfigComponent implements OnInit {
       .setValue(this.configService.getConfig().assignmentHeaderTitle);
   }
 
-  downloadFiles() {
-    const zip = new AdmZip();
-
-    zip.addLocalFolder(this.path);
-
-    zip.toBuffer((buffer: Buffer) => {
-      const blob = new Blob([buffer], { type: "application/octet" });
-      const zipLink = document.createElement("a");
-      zipLink.href = window.URL.createObjectURL(blob);
-      zipLink.setAttribute("download", "servihelper-files.zip");
-      zipLink.click();
-    });
-  }
-
-  getZipContentFromFileEvent(event: Event) {
-    const target: HTMLInputElement = event.target as HTMLInputElement;
-    return target.files[0];
-  }
-
-  uploadZipFiles(event: Event) {
-    const zipFile = this.getZipContentFromFileEvent(event);
-    const zip = new AdmZip(zipFile.path);
-    // reading archives
-    zip.getEntries().forEach((zipEntry) => {
-      switch (zipEntry.entryName) {
-        case "assignment.json":
-          this.fs.writeFile(
-            this.path + "/assignment.json",
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case "participant.json":
-          this.fs.writeFile(
-            this.path + "/participant.json",
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case "room.json":
-          this.fs.writeFile(
-            this.path + "/room.json",
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case "assignType.json":
-          this.fs.writeFile(
-            this.path + "/assignType.json",
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case "note.json":
-          this.fs.writeFile(
-            this.path + "/note.json",
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case "config.json":
-          this.fs.writeFile(
-            this.path + "/config.json",
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-      }
-    });
-    this.isZipLoaded = true;
-  }
-
+  /**
+   * Resets data to default
+   */
   eraseAllData() {
     this.fs.writeJsonSync(this.path + "/config.json", this.config);
     this.fs.writeJsonSync(this.path + "/note.json", []);
