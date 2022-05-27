@@ -83,16 +83,16 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       this.participantService.getParticipants(true),
-      this.assignmentForm.get("room").value,
-      this.assignmentForm.get("assignType").value
+      this.assignmentForm.get("assignType").value,
+      this.assignmentForm.get("room").value
     );
 
     console.log(this.principals);
 
     this.assistants = this.sharedService.filterAssistantsByAvailable(
       this.participantService.getParticipants(true),
-      this.assignmentForm.get("room").value,
-      this.assignmentForm.get("assignType").value
+      this.assignmentForm.get("assignType").value,
+      this.assignmentForm.get("room").value
     );
 
     setCount(

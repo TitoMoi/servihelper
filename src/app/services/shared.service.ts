@@ -21,19 +21,17 @@ export class SharedService {
   ): ParticipantInterface[] {
     let principals = structuredClone(participants);
 
-    for (let principal of principals) {
-      principals = principals.filter((p) => principal.available);
+    principals = principals.filter((p) => p.available);
 
-      principals = principals.filter((p) =>
-        p.assignTypes.some(
-          (at) => at.assignTypeId === assignTypeId && at.canPrincipal
-        )
-      );
+    principals = principals.filter((p) =>
+      p.assignTypes.some(
+        (at) => at.assignTypeId === assignTypeId && at.canPrincipal
+      )
+    );
 
-      principals = principals.filter((p) =>
-        p.rooms.some((r) => r.roomId === roomId && r.available)
-      );
-    }
+    principals = principals.filter((p) =>
+      p.rooms.some((r) => r.roomId === roomId && r.available)
+    );
 
     return principals;
   }
