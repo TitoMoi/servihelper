@@ -17,7 +17,7 @@ import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
-import { Subscription } from "rxjs";
+import { pairwise, Subscription, tap } from "rxjs";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
@@ -45,6 +45,10 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.activatedRoute.snapshot.params.id
   );
 
+  //These two vars are for not reset the form "principal" or "assistant" if the changes come from their controls
+  principal: string = this.assignment.principal;
+  assistant: string = this.assignment.assistant;
+
   assignmentForm: FormGroup = this.formBuilder.group({
     id: this.assignment.id,
     date: [this.assignment.date, Validators.required],
@@ -57,13 +61,9 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     assistant: [this.assignment.assistant], //participant id
     footerNote: this.assignment.footerNote, //Note id
   });
+
   //Subscriptions
-  principalSub$: Subscription;
-  assistantSub$: Subscription;
-  roomSub$: Subscription;
-  assignTypeSub$: Subscription;
-  onlyManSub$: Subscription;
-  onlyWomanSub$: Subscription;
+  formSub$: Subscription;
   langSub$: Subscription;
 
   constructor(
@@ -81,19 +81,57 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.getData();
+
+    //Set datepicker lang to locale
+    this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
+      this.dateAdapter.setLocale(lang);
+    });
+
+    this.formSub$ = this.assignmentForm.valueChanges
+      .pipe(pairwise())
+      .subscribe(([prev, next]: [AssignmentInterface, AssignmentInterface]) => {
+        this.getData();
+
+        if (
+          next.principal === prev.principal &&
+          next.assistant === prev.assistant
+        ) {
+          this.assignmentForm
+            .get("principal")
+            .reset(undefined, { emitEvent: false });
+
+          this.assignmentForm
+            .get("assistant")
+            .reset(undefined, { emitEvent: false });
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.langSub$.unsubscribe();
+    this.formSub$.unsubscribe();
+  }
+
+  getData() {
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       this.participantService.getParticipants(true),
       this.assignmentForm.get("assignType").value,
       this.assignmentForm.get("room").value
     );
 
-    console.log(this.principals);
-
     this.assistants = this.sharedService.filterAssistantsByAvailable(
       this.participantService.getParticipants(true),
       this.assignmentForm.get("assignType").value,
       this.assignmentForm.get("room").value
     );
+
+    //remove principal from assistants
+    this.assistants = this.assistants.filter(
+      (a) => a.id !== this.assignmentForm.get("principal").value
+    );
+
+    console.log(this.assistants);
 
     setCount(
       this.assignments,
@@ -111,36 +149,18 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       true
     );
 
+    this.principals.sort(sortParticipantsByCount);
+    this.assistants.sort(sortParticipantsByCount);
+
     if (this.assignmentForm.get("onlyMan").value) {
       this.principals = this.principals.filter((p) => p.isWoman === false);
-      this.principals = this.assistants.filter((a) => a.isWoman === false);
+      this.assistants = this.assistants.filter((a) => a.isWoman === false);
     }
 
     if (this.assignmentForm.get("onlyWoman").value) {
       this.principals = this.principals.filter((p) => p.isWoman === true);
-      this.principals = this.assistants.filter((a) => a.isWoman === true);
+      this.assistants = this.assistants.filter((a) => a.isWoman === true);
     }
-
-    //Set datepicker lang to locale
-    this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
-      this.dateAdapter.setLocale(lang);
-    });
-
-    this.assignmentForm.valueChanges.subscribe(
-      (assignment: AssignmentInterface) => {
-        this.principals = this.principals;
-      }
-    );
-  }
-
-  ngOnDestroy(): void {
-    /*  this.principalSub$.unsubscribe();
-    this.assistantSub$.unsubscribe();
-    this.onlyManSub$.unsubscribe();
-    this.onlyWomanSub$.unsubscribe();
-    this.roomSub$.unsubscribe();
-    this.assignTypeSub$.unsubscribe();
-    this.langSub$.unsubscribe(); */
   }
 
   onSubmit(): void {
