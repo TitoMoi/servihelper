@@ -143,6 +143,16 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       (a) => a.id !== this.assignmentForm.get("principal").value
     );
 
+    if (this.assignmentForm.get("onlyMan").value) {
+      this.principals = this.principals.filter((p) => p.isWoman === false);
+      this.assistants = this.assistants.filter((a) => a.isWoman === false);
+    }
+
+    if (this.assignmentForm.get("onlyWoman").value) {
+      this.principals = this.principals.filter((p) => p.isWoman === true);
+      this.assistants = this.assistants.filter((a) => a.isWoman === true);
+    }
+
     setCount(
       this.assignments,
       this.principals,
@@ -162,15 +172,26 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.principals.sort(sortParticipantsByCount);
     this.assistants.sort(sortParticipantsByCount);
 
-    if (this.assignmentForm.get("onlyMan").value) {
-      this.principals = this.principals.filter((p) => p.isWoman === false);
-      this.assistants = this.assistants.filter((a) => a.isWoman === false);
-    }
+    //colors if already has work
+    const dateValue = this.assignmentForm.get("date").value;
 
-    if (this.assignmentForm.get("onlyWoman").value) {
-      this.principals = this.principals.filter((p) => p.isWoman === true);
-      this.assistants = this.assistants.filter((a) => a.isWoman === true);
-    }
+    this.principals.forEach(
+      (p) =>
+        (p.hasWork = this.assignments
+          .filter(
+            (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
+          )
+          .some((a) => a.principal === p.id))
+    );
+
+    this.assistants.forEach(
+      (p) =>
+        (p.hasWork = this.assignments
+          .filter(
+            (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
+          )
+          .some((a) => a.assistant === p.id))
+    );
   }
 
   onSubmit(): void {

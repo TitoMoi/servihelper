@@ -7,6 +7,7 @@ export interface ParticipantInterface {
   assignTypes: ParticipantAssignTypesInterface[];
   available: boolean;
   count: number; //Dynamic value, undefined by default
+  hasWork: boolean; //Dynamic, if has current assignments for the date
   lastAssignmentDate: Date; //Dynamic value, undefined by default, date of last assignment
   penultimateAssignmentDate: Date; //Dynamic value, undefined by default, date of penultimate assignment
   distanceBetweenPenultimaAndLast: string; //Dynamic value, undefined by default, string in distance
