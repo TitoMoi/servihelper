@@ -1,0 +1,71 @@
+import { Injectable } from "@angular/core";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+
+@Injectable({
+  providedIn: "root",
+})
+export class SharedService {
+  constructor() {}
+
+  /**
+   *
+   * @param participants the array of participants
+   * @param assignTypeId the id of the assignType to participate
+   * @param roomId the id of the room to participate
+   * @returns A new array of participants that meet the criteria
+   */
+  filterPrincipalsByAvailable(
+    participants: ParticipantInterface[],
+    assignTypeId,
+    roomId
+  ): ParticipantInterface[] {
+    let principals = structuredClone(participants);
+
+    for (let principal of principals) {
+      principals = principals.filter((p) => principal.available);
+
+      principals = principals.filter((p) =>
+        p.assignTypes.some(
+          (at) => at.assignTypeId === assignTypeId && at.canPrincipal
+        )
+      );
+
+      principals = principals.filter((p) =>
+        p.rooms.some((r) => r.roomId === roomId && r.available)
+      );
+    }
+
+    return principals;
+  }
+
+  /**
+   *
+   * @param participants the array of participants
+   * @param assignTypeId the id of the assignType to participate
+   * @param roomId the id of the room to participate
+   * @returns A new array of participants that meet the criteria
+   */
+  filterAssistantsByAvailable(
+    participants: ParticipantInterface[],
+    assignTypeId,
+    roomId
+  ): ParticipantInterface[] {
+    let assistants = structuredClone(participants);
+
+    for (let principal of assistants) {
+      assistants = assistants.filter((p) => principal.available);
+
+      assistants = assistants.filter((p) =>
+        p.assignTypes.some(
+          (at) => at.assignTypeId === assignTypeId && at.canAssistant
+        )
+      );
+
+      assistants = assistants.filter((p) =>
+        p.rooms.some((r) => r.roomId === roomId && r.available)
+      );
+    }
+
+    return assistants;
+  }
+}

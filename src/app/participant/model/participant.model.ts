@@ -15,7 +15,7 @@ export interface ParticipantInterface {
 }
 
 export interface ParticipantRoomInterface {
-  id: string; // toDo: change to roomId
+  roomId: string;
   available: boolean;
 }
 

@@ -177,12 +177,12 @@ export class ParticipantService {
    * @param id the id of the new room to add
    * @returns
    */
-  addRoom(id: string): boolean {
+  addRoom(roomId: string): boolean {
     //Preventive maybe this func is called outside participants view
     this.checkParticipants();
 
     const value = {
-      id,
+      roomId,
       available: true,
     };
 
@@ -204,7 +204,7 @@ export class ParticipantService {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].rooms = this.#participants[i].rooms.filter(
-        (at) => at.id !== id
+        (at) => at.roomId !== id
       );
     }
     return this.saveParticipantsToFile();

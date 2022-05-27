@@ -5,7 +5,7 @@ import {
   OnInit,
 } from "@angular/core";
 import { DateAdapter } from "@angular/material/core";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslocoService } from "@ngneat/transloco";
 import { Subscription } from "rxjs";
@@ -15,6 +15,7 @@ import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
+import { SharedService } from "app/services/shared.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
@@ -24,8 +25,6 @@ import { setCount } from "app/functions/setCount";
 import { sortParticipantsByCount } from "app/functions/sortParticipantsByCount";
 import { setListToOnlyMen } from "app/functions/setListToOnlyMen";
 import { setListToOnlyWomen } from "app/functions/setListToOnlyWomen";
-import { checkIsPrincipalAvailable } from "app/functions/checkIsPrincipalAvailable";
-import { checkIsAssistantAvailable } from "app/functions/checkIsAssistantAvailable";
 
 @Component({
   selector: "app-create-assignment",
@@ -79,6 +78,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
     private noteService: NoteService,
+    private sharedService: SharedService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private translocoService: TranslocoService,
@@ -229,15 +229,11 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
           this.principalList = this.participantService.getParticipants();
 
-          for (const participant of this.principalList) {
-            let isAvailable = checkIsPrincipalAvailable(
-              participant,
-              assignTypeValue,
-              roomControl.value
-            );
-
-            this.filterPrincipalsByAvailable(participant, isAvailable);
-          }
+          this.principalList = this.sharedService.filterPrincipalsByAvailable(
+            this.principalList,
+            assignTypeValue,
+            roomControl.value
+          );
 
           setCount(
             this.assignments,
@@ -286,15 +282,11 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
           this.principalList = this.participantService.getParticipants();
 
-          for (const participant of this.principalList) {
-            const isAvailable = checkIsPrincipalAvailable(
-              participant,
-              assignTypeControl.value,
-              roomValue
-            );
-
-            this.filterPrincipalsByAvailable(participant, isAvailable);
-          }
+          this.principalList = this.sharedService.filterPrincipalsByAvailable(
+            this.principalList,
+            assignTypeControl.value,
+            roomValue
+          );
 
           setCount(
             this.assignments,
@@ -352,14 +344,11 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           (b) => b.id !== principalId
         );
 
-        for (const participant of this.assistantList) {
-          const isAvailable = checkIsAssistantAvailable(
-            participant,
-            assignTypeControl.value,
-            roomControl.value
-          );
-          this.filterAssistantsByAvailable(participant, isAvailable);
-        }
+        this.assistantList = this.sharedService.filterAssistantsByAvailable(
+          this.assistantList,
+          assignTypeControl.value,
+          roomControl.value
+        );
 
         //the current count is of the principal, we need to calculate again for the assistant
         setCount(
@@ -438,38 +427,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
         }
       }
     );
-  }
-
-  /**
-   *
-   * @param participant the principal participant of the bucle
-   * @param isAvailable the resolved boolean
-   */
-  filterPrincipalsByAvailable(
-    participant: ParticipantInterface,
-    isAvailable: boolean
-  ) {
-    if (!isAvailable) {
-      this.principalList = this.principalList.filter(
-        (b) => b.id !== participant.id
-      );
-    }
-  }
-
-  /**
-   *
-   * @param participant the assistant participant of the bucle
-   * @param isAvailable the resolved boolean
-   */
-  filterAssistantsByAvailable(
-    participant: ParticipantInterface,
-    isAvailable: boolean
-  ) {
-    if (!isAvailable) {
-      this.assistantList = this.assistantList.filter(
-        (b) => b.id !== participant.id
-      );
-    }
   }
 
   /**

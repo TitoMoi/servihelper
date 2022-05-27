@@ -1,5 +1,3 @@
-export { checkIsAssistantAvailable } from "./checkIsAssistantAvailable";
-export { checkIsPrincipalAvailable } from "./checkIsPrincipalAvailable";
 export { editorJsonToHtml } from "./editorJsonToHtml";
 export { getLastPrincipalAssignment } from "./getLastPrincipalAssignment";
 export { getLastAssistantAssignment } from "./getLastAssistantAssignment";

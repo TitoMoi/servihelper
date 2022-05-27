@@ -81,7 +81,7 @@ export class UpdateParticipantComponent implements OnInit {
     this.participant.rooms.forEach((r) => {
       const room = this.formBuilder.group({
         //ParticipantRoomInterface
-        id: [r.id, Validators.required],
+        id: [r.roomId, Validators.required],
         available: [r.available, Validators.required],
       });
       //Add assignType to the form
