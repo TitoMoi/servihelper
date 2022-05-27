@@ -131,8 +131,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       (a) => a.id !== this.assignmentForm.get("principal").value
     );
 
-    console.log(this.assistants);
-
     setCount(
       this.assignments,
       this.principals,
@@ -146,7 +144,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       this.assistants,
       this.assignmentForm.get("room").value,
       this.assignmentForm.get("assignType").value,
-      true
+      false
     );
 
     this.principals.sort(sortParticipantsByCount);
