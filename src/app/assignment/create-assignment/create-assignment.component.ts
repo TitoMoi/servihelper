@@ -32,8 +32,10 @@ import { SharedService } from "app/services/shared.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAssignmentComponent implements OnInit, OnDestroy {
-  rooms: RoomInterface[] = this.roomService.getRooms();
-  assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
+  rooms: RoomInterface[] = this.roomService.getRooms().sort();
+  assignTypes: AssignTypeInterface[] = this.assignTypeService
+    .getAssignTypes()
+    .sort((a, b) => (a.name.charAt(0) > b.name.charAt(0) ? 1 : -1));
   principals: ParticipantInterface[] = [];
   assistants: ParticipantInterface[] = [];
   footerNotes: NoteInterface[] = this.noteService.getNotes();

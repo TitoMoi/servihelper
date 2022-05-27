@@ -7,7 +7,7 @@
 
 <div id="resultListDiv" style="width: 25rem">
   <div class="row white-base-background" *ngFor="let ag of assignmentGroup">
-    <div class="col-12 mb-3 bold double-font">
+    <div class="col-12 mb-2 bold double-font">
       {{ ag.date | translocoDate: { dateStyle: "long" } }}
     </div>
     <div *ngFor="let assignment of ag.assignments" class="col-12 mb-1">
