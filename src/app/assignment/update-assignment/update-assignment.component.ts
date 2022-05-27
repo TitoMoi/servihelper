@@ -17,7 +17,7 @@ import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
-import { pairwise, skip, skipWhile, startWith, Subscription, tap } from "rxjs";
+import { pairwise, skipWhile, startWith, Subscription } from "rxjs";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
