@@ -70,48 +70,26 @@
             <mat-label>{{ "ASSIGN_UPDATE_PRINCIPAL" | transloco }}</mat-label>
             <mat-select formControlName="principal" required>
               <mat-option
-                *ngFor="let participant of principalList; trackBy: trackByIdFn"
+                *ngFor="let participant of principals; trackBy: trackByIdFn"
                 [value]="participant.id"
               >
                 {{ participant.count }} - {{ participant.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <ng-container *ngIf="hasAssignmentsList.length">
-            {{ "ASSIGN_HAS_ASSIGNMENTS" | transloco }}
-            <ul>
-              <li
-                *ngFor="let assignTypeName of hasAssignmentsList"
-                class="d-inline-block"
-              >
-                <span>&#x2022;&nbsp;{{ assignTypeName }}&nbsp;</span>
-              </li>
-            </ul>
-          </ng-container>
         </div>
         <div class="col-12 mb-3">
           <mat-form-field class="full-width">
             <mat-label>{{ "ASSIGN_UPDATE_ASSISTANT" | transloco }}</mat-label>
             <mat-select formControlName="assistant">
               <mat-option
-                *ngFor="let participant of assistantList; trackBy: trackByIdFn"
+                *ngFor="let participant of assistants; trackBy: trackByIdFn"
                 [value]="participant.id"
               >
                 {{ participant.count }} - {{ participant.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <ng-container *ngIf="hasAssignmentsAssistantList.length">
-            {{ "ASSIGN_ASSISTANT_HAS_ASSIGNMENTS" | transloco }}
-            <ul>
-              <li
-                *ngFor="let assignTypeName of hasAssignmentsAssistantList"
-                class="d-inline-block"
-              >
-                <span>&#x2022;&nbsp;{{ assignTypeName }}&nbsp;</span>
-              </li>
-            </ul>
-          </ng-container>
         </div>
         <div class="col-12 mb-3">
           <mat-form-field class="full-width">

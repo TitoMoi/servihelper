@@ -8,6 +8,7 @@ import { RoomService } from "app/room/service/room.service";
 import {
   ParticipantAssignTypesInterface,
   ParticipantInterface,
+  ParticipantRoomInterface,
 } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 
@@ -96,9 +97,14 @@ export class CreateParticipantComponent implements OnInit {
   }
 
   addRoom(r: RoomInterface) {
+    const fakeParticipantRoom: ParticipantRoomInterface = {
+      roomId: "2",
+      available: false,
+    };
+
     const room = this.formBuilder.group({
-      //ParticipantRoomInterface
-      id: [r.id, Validators.required],
+      //the above fakeParticipantRoom reflects these keys, in interface changes update this
+      roomId: [r.id, Validators.required],
       available: [true, Validators.required],
     });
 

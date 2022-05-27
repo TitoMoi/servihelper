@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  OnInit,
   ViewChild,
 } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";

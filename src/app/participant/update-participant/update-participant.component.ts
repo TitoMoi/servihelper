@@ -8,6 +8,7 @@ import { RoomService } from "app/room/service/room.service";
 import {
   ParticipantAssignTypesInterface,
   ParticipantInterface,
+  ParticipantRoomInterface,
 } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 
@@ -78,15 +79,15 @@ export class UpdateParticipantComponent implements OnInit {
     //Create control
     this.participantForm.setControl("rooms", this.formBuilder.array([]));
     //Populate control with rooms
-    this.participant.rooms.forEach((r) => {
-      const room = this.formBuilder.group({
+    this.participant.rooms.forEach((r: ParticipantRoomInterface) => {
+      const roomGroup = this.formBuilder.group({
         //ParticipantRoomInterface
-        id: [r.roomId, Validators.required],
+        roomId: [r.roomId, Validators.required],
         available: [r.available, Validators.required],
       });
       //Add assignType to the form
       const fa = this.participantForm.get("rooms") as FormArray;
-      fa.push(room);
+      fa.push(roomGroup);
     });
   }
 

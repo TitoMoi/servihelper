@@ -22,9 +22,8 @@ import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
 import { setCount } from "app/functions/setCount";
-import { setListToOnlyMen } from "app/functions/setListToOnlyMen";
-import { setListToOnlyWomen } from "app/functions/setListToOnlyWomen";
-import { sortParticipantsByCount } from "app/functions/sortParticipantsByCount";
+import { sortParticipantsByCount } from "app/functions";
+import { SharedService } from "app/services/shared.service";
 
 @Component({
   selector: "app-update-assignment",
@@ -33,6 +32,14 @@ import { sortParticipantsByCount } from "app/functions/sortParticipantsByCount";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateAssignmentComponent implements OnInit, OnDestroy {
+  rooms: RoomInterface[] = this.roomService.getRooms();
+  assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
+  principals: ParticipantInterface[] = [];
+  assistants: ParticipantInterface[] = [];
+  footerNotes: NoteInterface[] = this.noteService.getNotes();
+  assignments: AssignmentInterface[] =
+    this.assignmentService.getAssignments(true);
+
   //Fill the form with the assignment passed by the router
   assignment: AssignmentInterface = this.assignmentService.getAssignment(
     this.activatedRoute.snapshot.params.id
@@ -50,17 +57,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     assistant: [this.assignment.assistant], //participant id
     footerNote: this.assignment.footerNote, //Note id
   });
-
-  rooms: RoomInterface[] = this.roomService.getRooms();
-  assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
-  principalList: ParticipantInterface[] =
-    this.participantService.getParticipants();
-  assistantList: ParticipantInterface[] = [];
-  footerNotes: NoteInterface[] = this.noteService.getNotes();
-  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
-  hasAssignmentsList: string[] = [];
-  hasAssignmentsAssistantList: string[] = [];
-
   //Subscriptions
   principalSub$: Subscription;
   assistantSub$: Subscription;
@@ -77,27 +73,62 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
     private noteService: NoteService,
+    private sharedService: SharedService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dateAdapter: DateAdapter<any>,
-    private translocoService: TranslocoService,
-    private cdr: ChangeDetectorRef
+    private translocoService: TranslocoService
   ) {}
 
   ngOnInit() {
-    //Prepare the subscriptions for changes
-    /* 
-    this.onlyWomanSubscription();
-    this.onlyManSubscription();
-    this.roomSubscription();
-    this.assignTypeSubscription();
-    this.principalSubscription();
-    this.assistantSubscription();
- */
-    this.langSubscription();
+    this.principals = this.sharedService.filterPrincipalsByAvailable(
+      this.participantService.getParticipants(true),
+      this.assignmentForm.get("room").value,
+      this.assignmentForm.get("assignType").value
+    );
+
+    console.log(this.principals);
+
+    this.assistants = this.sharedService.filterAssistantsByAvailable(
+      this.participantService.getParticipants(true),
+      this.assignmentForm.get("room").value,
+      this.assignmentForm.get("assignType").value
+    );
+
+    setCount(
+      this.assignments,
+      this.principals,
+      this.assignmentForm.get("room").value,
+      this.assignmentForm.get("assignType").value,
+      true
+    );
+
+    setCount(
+      this.assignments,
+      this.assistants,
+      this.assignmentForm.get("room").value,
+      this.assignmentForm.get("assignType").value,
+      true
+    );
+
+    if (this.assignmentForm.get("onlyMan").value) {
+      this.principals = this.principals.filter((p) => p.isWoman === false);
+      this.principals = this.assistants.filter((a) => a.isWoman === false);
+    }
+
+    if (this.assignmentForm.get("onlyWoman").value) {
+      this.principals = this.principals.filter((p) => p.isWoman === true);
+      this.principals = this.assistants.filter((a) => a.isWoman === true);
+    }
+
+    //Set datepicker lang to locale
+    this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
+      this.dateAdapter.setLocale(lang);
+    });
+
     this.assignmentForm.valueChanges.subscribe(
       (assignment: AssignmentInterface) => {
-        console.log(assignment);
+        this.principals = this.principals;
       }
     );
   }
@@ -128,47 +159,5 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
    */
   trackByIdFn(index, participant: ParticipantInterface) {
     return participant.id;
-  }
-
-  /**
-   * Prepare the lang subscription
-   */
-  langSubscription() {
-    //Set datepicker lang to locale
-    this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
-      this.dateAdapter.setLocale(lang);
-    });
-  }
-
-  /**
-   * YA EXISTE UNA FUNCION PARA ESTO?
-   * @param participant the principal participant of the bucle
-   * @param isAvailable the resolved boolean
-   */
-  filterPrincipalsByAvailable(
-    participant: ParticipantInterface,
-    isAvailable: boolean
-  ) {
-    if (!isAvailable) {
-      this.principalList = this.principalList.filter(
-        (b) => b.id !== participant.id
-      );
-    }
-  }
-
-  /**
-   *YA EXISTE UNA FUNCION PARA ESTO?
-   * @param participant the assistant participant of the bucle
-   * @param isAvailable the resolved boolean
-   */
-  filterAssistantsByAvailable(
-    participant: ParticipantInterface,
-    isAvailable: boolean
-  ) {
-    if (!isAvailable) {
-      this.assistantList = this.assistantList.filter(
-        (b) => b.id !== participant.id
-      );
-    }
   }
 }
