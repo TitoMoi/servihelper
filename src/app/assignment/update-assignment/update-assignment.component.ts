@@ -95,7 +95,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
         pairwise(),
         skipWhile(
           ([prev, next]: [AssignmentInterface, AssignmentInterface]) =>
-            prev.theme !== next.theme
+            prev.theme != next.theme
         )
       )
       .subscribe(([prev, next]: [AssignmentInterface, AssignmentInterface]) => {
