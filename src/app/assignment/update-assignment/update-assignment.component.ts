@@ -17,7 +17,7 @@ import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
-import { pairwise, Subscription, tap } from "rxjs";
+import { pairwise, skip, skipWhile, startWith, Subscription, tap } from "rxjs";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
@@ -44,10 +44,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   assignment: AssignmentInterface = this.assignmentService.getAssignment(
     this.activatedRoute.snapshot.params.id
   );
-
-  //These two vars are for not reset the form "principal" or "assistant" if the changes come from their controls
-  principal: string = this.assignment.principal;
-  assistant: string = this.assignment.assistant;
 
   assignmentForm: FormGroup = this.formBuilder.group({
     id: this.assignment.id,
@@ -88,14 +84,28 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       this.dateAdapter.setLocale(lang);
     });
 
+    /*
+      Only when assignType, room, onlyMan or onlyWoman changes principal and assistant must change
+      if theme is getting filled, we dont want a subscribe for each letter so -> "skipWhile"
+      pairwise is used to get the prev and last value, and the initial prev value is the form value
+    */
     this.formSub$ = this.assignmentForm.valueChanges
-      .pipe(pairwise())
+      .pipe(
+        startWith(this.assignmentForm.value),
+        pairwise(),
+        skipWhile(
+          ([prev, next]: [AssignmentInterface, AssignmentInterface]) =>
+            prev.theme !== next.theme
+        )
+      )
       .subscribe(([prev, next]: [AssignmentInterface, AssignmentInterface]) => {
         this.getData();
 
         if (
-          next.principal === prev.principal &&
-          next.assistant === prev.assistant
+          next.assignType !== prev.assignType ||
+          next.room !== prev.room ||
+          next.onlyMan !== prev.onlyMan ||
+          next.onlyWoman !== prev.onlyWoman
         ) {
           this.assignmentForm
             .get("principal")
