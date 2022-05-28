@@ -164,6 +164,8 @@
   "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
   "INFO_HOW_TO_WORK": "¿Cómo pueden trabajar varios responsables a la vez?",
   "INFO_HOW_TO_WORK_ANSWER": "El primero crea sus asignaciones, exporta los datos desde la sección 'home' y los deja en un sitio que compartan los responsables, el segundo lo importa y crea sus asignaciones, y asi sucesivamente.",
+  "INFO_WHAT_IS_YELLOW_COLOR": "Aparece un color amarillo en algunos participantes, ¿qué es?",
+  "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "Aunque el participante pueda ser candidato a la asignación, significa que ya tiene otra u otras asignaciones en dicha fecha.",
 
   "PAGINATOR_FIRST_PAGE_LABEL": "Primera página",
   "PAGINATOR_ITEMS_PER_PAGE_LABEL": "Items por página:",

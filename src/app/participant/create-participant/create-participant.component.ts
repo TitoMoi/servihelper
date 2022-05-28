@@ -18,12 +18,20 @@ import { ParticipantService } from "app/participant/service/participant.service"
   styleUrls: ["./create-participant.component.css"],
 })
 export class CreateParticipantComponent implements OnInit {
-  rooms: RoomInterface[];
-  assignTypes: AssignTypeInterface[];
-  participantForm;
+  rooms: RoomInterface[] = this.roomService.getRooms();
+  assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
 
-  isRoomsAvailable: boolean;
-  isAssignTypesAvailable: boolean;
+  isRoomsAvailable: boolean = false;
+  isAssignTypesAvailable: boolean = false;
+
+  participantForm = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+    isWoman: [false],
+    assignTypes: [this.formBuilder.array([])],
+    rooms: [this.formBuilder.array([])],
+    available: [true],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,21 +40,9 @@ export class CreateParticipantComponent implements OnInit {
     private assignTypeService: AssignTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {
-    this.isRoomsAvailable = false;
-    this.isAssignTypesAvailable = false;
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.participantForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-      isWoman: [false],
-      assignTypes: [this.formBuilder.array([])],
-      rooms: [this.formBuilder.array([])],
-      available: [true],
-    });
-
     this.addRooms();
     this.addAssignTypes();
   }
@@ -62,8 +58,6 @@ export class CreateParticipantComponent implements OnInit {
   }
 
   addAssignTypes() {
-    this.assignTypes = this.assignTypeService.getAssignTypes();
-
     //Create control
     this.participantForm.setControl("assignTypes", this.formBuilder.array([]));
 
@@ -87,7 +81,6 @@ export class CreateParticipantComponent implements OnInit {
   }
 
   addRooms() {
-    this.rooms = this.roomService.getRooms();
     //Create control
     this.participantForm.setControl("rooms", this.formBuilder.array([]));
     //Populate control with rooms
@@ -103,7 +96,7 @@ export class CreateParticipantComponent implements OnInit {
     };
 
     const room = this.formBuilder.group({
-      //the above fakeParticipantRoom reflects these keys, in interface changes update this
+      //the above fakeParticipantRoom reflects these keys, if interface changes update this
       roomId: [r.id, Validators.required],
       available: [true, Validators.required],
     });
@@ -118,5 +111,16 @@ export class CreateParticipantComponent implements OnInit {
     this.router.navigate([".."], {
       relativeTo: this.activatedRoute,
     });
+  }
+
+  submitAndCreate(): void {
+    this.participantService.createParticipant(this.participantForm.value);
+
+    /* const date = this.participantForm.get("date").value; */
+    this.participantForm.get("name").reset();
+    this.participantForm.get("isWoman").reset();
+    this.addAssignTypes();
+    this.addRooms();
+    /* this.assignmentForm.get("date").setValue(date); */
   }
 }

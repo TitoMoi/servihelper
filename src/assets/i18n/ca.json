@@ -184,6 +184,8 @@
   "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
   "INFO_HOW_TO_WORK": "¿Com poden treballar diversos gestors alhora?",
   "INFO_HOW_TO_WORK_ANSWER": "El primer crea les seves assignacions, exporta les dades de la secció 'Home' i les deixa en un lloc compartit pels responsables, el segon les importa i crea les seves assignacions, etc.",
+  "INFO_WHAT_IS_YELLOW_COLOR": "A alguns participants apareix un color groc, què és?",
+  "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "Tot i que el participant pot ser candidat per a la tasca, vol dir que ja té una o més tasques en aquesta data.",
 
   "PAGINATOR_FIRST_PAGE_LABEL": "Primera pàgina",
   "PAGINATOR_ITEMS_PER_PAGE_LABEL": "Ítems per pàgina:",

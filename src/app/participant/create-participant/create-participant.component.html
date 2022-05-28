@@ -118,6 +118,15 @@
         >
           {{ "BUTTON_SAVE" | transloco }}
         </button>
+        <button
+          mat-raised-button
+          color="accent"
+          type="button"
+          (click)="submitAndCreate()"
+          [disabled]="participantForm.invalid"
+        >
+          {{ "BUTTON_SAVE_CREATE_ANOTHER" | transloco }}
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>
