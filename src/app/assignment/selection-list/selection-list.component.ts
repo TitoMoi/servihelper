@@ -150,8 +150,8 @@ export class SelectionListComponent implements OnChanges {
   }
 
   async toPdf() {
-    /* const micronMeasure = 264.5833; */
-    const micronMeasure = 132.2816;
+    /* const micronMeasure = 132.2816; */
+    const micronMeasure = 160.2816;
     //the div
     document.body.style.cursor = "wait";
     const div = document.getElementById("resultListDiv");

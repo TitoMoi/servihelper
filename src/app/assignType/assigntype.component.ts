@@ -11,21 +11,20 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
 })
 export class AssignTypeComponent implements OnInit {
   //In memory assignTypes
-  assignTypes: AssignTypeInterface[];
+  assignTypes: AssignTypeInterface[] = this.assignTypeService
+    .getAssignTypes()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
   //Table
-  displayedColumns: string[];
+  displayedColumns: string[] = ["name", "order", "editIcon", "deleteIcon"];
   //datasource
   dataSource: AssignTypeInterface[];
   //icons
-  icons: string[];
+  icons: string[] = ["garbage", "edit"];
   constructor(
     private assignTypeService: AssignTypeService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
-  ) {
-    this.displayedColumns = ["name", "order", "editIcon", "deleteIcon"];
-    this.icons = ["garbage", "edit"];
-  }
+  ) {}
 
   ngOnInit(): void {
     //Register icons
@@ -37,8 +36,6 @@ export class AssignTypeComponent implements OnInit {
         )
       );
     }
-
-    this.assignTypes = this.assignTypeService.getAssignTypes();
     this.fillDataSource(this.assignTypes);
   }
 

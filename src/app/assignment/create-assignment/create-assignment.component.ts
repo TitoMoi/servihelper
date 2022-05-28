@@ -35,7 +35,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   rooms: RoomInterface[] = this.roomService.getRooms().sort();
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
-    .sort((a, b) => (a.name.charAt(0) > b.name.charAt(0) ? 1 : -1));
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
   principals: ParticipantInterface[] = [];
   assistants: ParticipantInterface[] = [];
   footerNotes: NoteInterface[] = this.noteService.getNotes();
