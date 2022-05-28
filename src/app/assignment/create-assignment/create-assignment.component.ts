@@ -124,6 +124,8 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   getData() {
+    this.assignments = this.assignmentService.getAssignments(true);
+
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       this.participantService.getParticipants(true),
       this.assignmentForm.get("assignType").value,
@@ -190,6 +192,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           )
           .some((a) => a.assistant === p.id))
     );
+    console.log("entrado");
   }
 
   onSubmit(): void {

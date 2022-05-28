@@ -125,6 +125,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   getData() {
+    this.assignments = this.assignmentService.getAssignments(true);
+
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       this.participantService.getParticipants(true),
       this.assignmentForm.get("assignType").value,
