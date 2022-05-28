@@ -17,7 +17,7 @@ import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
-import { pairwise, skipWhile, startWith, Subscription } from "rxjs";
+import { filter, pairwise, startWith, Subscription } from "rxjs";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
@@ -93,9 +93,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       .pipe(
         startWith(this.assignmentForm.value),
         pairwise(),
-        skipWhile(
+        filter(
           ([prev, next]: [AssignmentInterface, AssignmentInterface]) =>
-            prev.theme !== next.theme
+            prev.theme === next.theme
         )
       )
       .subscribe(([prev, next]: [AssignmentInterface, AssignmentInterface]) => {
