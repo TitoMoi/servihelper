@@ -17,7 +17,7 @@ export class ParticipantService {
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
-      __dirname + "./assets/source/participant.json"
+      __dirname + "/assets/source/participant.json"
     : "./assets/source/participant.json";
 
   //The array of participants in memory

@@ -14,7 +14,7 @@ export class AssignTypeService {
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
-      __dirname + "./assets/source/assignType.json"
+      __dirname + "/assets/source/assignType.json"
     : "./assets/source/assignType.json";
   //The array of assignTypes in memory
   #assignTypes: AssignTypeInterface[] = undefined;

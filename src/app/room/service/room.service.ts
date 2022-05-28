@@ -14,7 +14,7 @@ export class RoomService {
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
-      __dirname + "./assets/source/room.json"
+      __dirname + "/assets/source/room.json"
     : "./assets/source/room.json";
 
   //The array of rooms in memory

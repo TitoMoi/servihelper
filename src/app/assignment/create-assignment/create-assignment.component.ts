@@ -196,7 +196,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assignmentService.createAssignment(this.assignmentForm.value);
 
     //navigate to parent, one parent for each fragment
-    this.router.navigate(["../.."], {
+    this.router.navigate([".."], {
       relativeTo: this.activatedRoute,
     });
   }

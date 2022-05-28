@@ -16,7 +16,7 @@ export class ConfigService {
   // Where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
-      __dirname + "./assets/source/config.json"
+      __dirname + "/assets/source/config.json"
     : "./assets/source/config.json";
   // The config in memory object
   #config: ConfigInterface = undefined;

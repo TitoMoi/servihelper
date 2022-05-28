@@ -14,7 +14,7 @@ export class AssignmentService {
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
-      __dirname + "./assets/source/assignment.json"
+      __dirname + "/assets/source/assignment.json"
     : "./assets/source/assignment.json";
   //The array of assignments in memory
   #assignments: AssignmentInterface[] = undefined;
