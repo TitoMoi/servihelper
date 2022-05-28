@@ -1,5 +1,11 @@
 import { Component } from "@angular/core";
 import AdmZip from "adm-zip";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ConfigService } from "app/config/service/config.service";
+import { NoteService } from "app/note/service/note.service";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomService } from "app/room/service/room.service";
 import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
@@ -22,7 +28,15 @@ export class HomeComponent {
   // The path of the app
   path: string;
 
-  constructor(private electronService: ElectronService) {
+  constructor(
+    private configService: ConfigService,
+    private roomService: RoomService,
+    private assignTypeService: AssignTypeService,
+    private noteService: NoteService,
+    private participantService: ParticipantService,
+    private assignmentService: AssignmentService,
+    private electronService: ElectronService
+  ) {
     this.path = APP_CONFIG.production
       ? //__dirname is where the .json files exists
         __dirname + "./assets/source"
@@ -92,6 +106,21 @@ export class HomeComponent {
           break;
       }
     });
+
+    this.configService.hasChanged = true;
+    this.roomService.hasChanged = true;
+    this.assignTypeService.hasChanged = true;
+    this.assignmentService.hasChanged = true;
+    this.participantService.hasChanged = true;
+    this.noteService.hasChanged = true;
+
+    this.configService.getConfig();
+    this.roomService.getRooms();
+    this.assignTypeService.getAssignTypes();
+    this.noteService.getNotes();
+    this.participantService.getParticipants();
+    this.assignmentService.getAssignments();
+
     this.isZipLoaded = true;
   }
 }
