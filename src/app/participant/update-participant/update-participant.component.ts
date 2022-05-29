@@ -25,7 +25,7 @@ export class UpdateParticipantComponent implements OnInit {
   participantForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
-    isWoman: [undefined],
+    isWoman: [false],
     available: [undefined],
     rooms: [this.formBuilder.array([])],
     assignTypes: [this.formBuilder.array([])],
