@@ -1,9 +1,5 @@
 <ng-container *ngIf="isRoomsAvailable && isAssignTypesAvailable">
-  <form
-    [formGroup]="participantForm"
-    novalidate
-    (ngSubmit)="onSubmit(participantForm.value)"
-  >
+  <form [formGroup]="participantForm" novalidate (ngSubmit)="submitAndCreate()">
     <mat-card class="shipping-card">
       <mat-card-header>
         <mat-card-title>{{
@@ -114,6 +110,7 @@
           mat-raised-button
           color="primary"
           type="button"
+          (click)="onSubmit()"
           [disabled]="participantForm.invalid"
         >
           {{ "BUTTON_SAVE" | transloco }}
@@ -122,7 +119,6 @@
           mat-raised-button
           color="accent"
           type="submit"
-          (click)="submitAndCreate()"
           [disabled]="participantForm.invalid"
         >
           {{ "BUTTON_SAVE_CREATE_ANOTHER" | transloco }}

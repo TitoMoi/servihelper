@@ -84,6 +84,10 @@ form {
 .mat-option.no-hover.mat-active {
   background: inherit;
   color: inherit;
+
+  &.bg-color-lightyellow {
+    background-color: lightyellow;
+  }
 }
 
 .mat-option.no-hover {
@@ -92,8 +96,10 @@ form {
     background: inherit;
     color: inherit;
   }
-  &.bg-color-lightyellow:hover {
-    background-color: lightyellow;
+  &.bg-color-lightyellow {
+    &:hover {
+      background-color: lightyellow;
+    }
   }
 }
 

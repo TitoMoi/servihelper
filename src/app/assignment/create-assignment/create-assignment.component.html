@@ -1,4 +1,4 @@
-<form [formGroup]="assignmentForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="assignmentForm" novalidate (ngSubmit)="submitAndCreate()">
   <mat-card class="shipping-card">
     <mat-card-header>
       <mat-card-title>{{
@@ -126,6 +126,7 @@
         mat-raised-button
         color="primary"
         type="button"
+        (click)="onSubmit()"
         [disabled]="assignmentForm.invalid"
       >
         {{ "BUTTON_SAVE" | transloco }}
@@ -134,7 +135,6 @@
         mat-raised-button
         color="accent"
         type="submit"
-        (click)="submitAndCreate()"
         [disabled]="assignmentForm.invalid"
       >
         {{ "BUTTON_SAVE_CREATE_ANOTHER" | transloco }}

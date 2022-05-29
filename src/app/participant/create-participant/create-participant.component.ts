@@ -110,8 +110,8 @@ export class CreateParticipantComponent implements OnInit {
     const fa = this.participantForm.get("rooms") as FormArray;
     fa.push(room);
   }
-  onSubmit(participant: ParticipantInterface): void {
-    this.participantService.createParticipant(participant);
+  onSubmit(): void {
+    this.participantService.createParticipant(this.participantForm.value);
 
     //navigate to parent
     this.router.navigate([".."], {
