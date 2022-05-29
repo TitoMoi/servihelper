@@ -50,8 +50,8 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     room: [undefined, Validators.required], //Room id
     assignType: [undefined, Validators.required], //AssignType id
     theme: "",
-    onlyWoman: [undefined],
-    onlyMan: [undefined],
+    onlyWoman: [false],
+    onlyMan: [false],
     principal: [undefined, Validators.required], //participant id
     assistant: [undefined], //participant id
     footerNote: undefined, //Note id
