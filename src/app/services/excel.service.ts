@@ -48,10 +48,6 @@ export class ExcelService {
     return workbook;
   }
 
-  private addSheet(workbook: ExcelJS.Workbook): ExcelJS.Worksheet {
-    return workbook.addWorksheet("Hoja1");
-  }
-
   private addSheetA4AndPortrait(workbook: ExcelJS.Workbook): ExcelJS.Worksheet {
     // create new sheet with pageSetup settings for A4 - landscape
     const worksheet = workbook.addWorksheet("Hoja1", {
@@ -60,26 +56,6 @@ export class ExcelService {
     return worksheet;
   }
 
-  /* 
-  <div class="row white-base-background" *ngFor="let ag of assignmentGroup">
-    <div class="col-12 mb-2 bold double-font bg-color-lightskyblue">
-      {{ ag.date | translocoDate: { dateStyle: "long" } }}
-    </div>
-    <div *ngFor="let assignment of ag.assignments" class="col-12 mb-1">
-      <div class="row justify-content-center">
-        <div class="col-12 bold increase-font">
-          {{ assignment.theme }}
-          <span *ngIf="!assignment.theme">{{ assignment.assignType }}</span>
-        </div>
-        <div class="col-11 mb-1 increase-font">
-          • {{ assignment.principal }}
-          <span *ngIf="assignment.assistant">/ {{ assignment.assistant }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-   */
-
   private addAssignmentsToSheet(
     ags: AssignmentGroupInterface[],
     assignments: AssignmentInterface[]
@@ -87,51 +63,46 @@ export class ExcelService {
     ags.forEach((ag) => {
       const row = this.sheet.addRow({});
       const cell = row.getCell(1);
+      cell.fill = {
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "87CEFA" },
+      }; /* 
+      cell.font = {
+        size: 46,
+      }; */
       cell.value = this.translocoLocaleService.localizeDate(
         ag.date,
         undefined,
         { dateStyle: "long" }
       );
 
-      assignments.forEach((a) => {
+      ag.assignments.forEach((a) => {
+        console.log(a);
         const row = this.sheet.addRow({});
         const cell = row.getCell(1);
-        cell.value = a.theme
-          ? a.theme
-          : this.assignTypeService.getAssignType(a.assignType).name;
+
+        cell.alignment = {
+          wrapText: true,
+        };
+
+        cell.font = {
+          bold: true,
+          /* size: 32, */
+        };
+        cell.value = a.theme ? a.theme : a.assignType;
+
         const row2 = this.sheet.addRow({});
         const cell2 = row2.getCell(1);
-        cell2.value = this.participantService.getParticipant(a.principal).name;
-        if (a.assistant)
-          cell2.value +=
-            "/" + this.participantService.getParticipant(a.assistant).name;
+
+        /*  cell2.font = {
+          size: 32,
+        };
+ */
+        cell2.value = "    • " + a.principal;
+        if (a.assistant) cell2.value += " / " + a.assistant;
       });
     });
-  }
-
-  /**
-   * dark blue foreground with white text
-   */
-  private addHeaderModel1() {
-    const firstRow = this.sheet.addRow({});
-    const cell = firstRow.getCell(1);
-    cell.value = "TERRITORI";
-    cell.style = {
-      font: {
-        size: 24,
-        bold: true,
-        color: { argb: "FFFFFFFF" },
-        name: "arial",
-      },
-      fill: {
-        type: "pattern",
-        pattern: "solid",
-        fgColor: { argb: "0b5394" },
-      },
-      alignment: {
-        horizontal: "center",
-      },
-    };
   }
 
   mergeCells(from: string, to: string) {
@@ -156,7 +127,7 @@ export class ExcelService {
       const anchor = document.createElement("a");
       const url = URL.createObjectURL(blob);
       anchor.href = url;
-      anchor.download = "catastro" + ".xlsx";
+      anchor.download = "list" + ".xlsx";
       anchor.click();
     });
   }
@@ -180,6 +151,12 @@ export class ExcelService {
     this.addAssignmentsToSheet(assignmentGroups, assignments);
 
     this.autoSizeColumnWidth();
+
+    this.sheet.views[0] = {
+      showGridLines: false,
+      showRowColHeaders: false,
+      showRuler: false,
+    };
 
     this.writeBufferToFile(workbook);
   }
