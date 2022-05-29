@@ -1,5 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
@@ -27,7 +33,7 @@ export class CreateParticipantComponent implements OnInit {
   participantForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
-    isWoman: [false],
+    isWoman: false,
     assignTypes: [this.formBuilder.array([])],
     rooms: [this.formBuilder.array([])],
     available: [true],
@@ -118,7 +124,7 @@ export class CreateParticipantComponent implements OnInit {
 
     /* const date = this.participantForm.get("date").value; */
     this.participantForm.get("name").reset();
-    this.participantForm.get("isWoman").reset();
+    this.participantForm.get("isWoman").reset(false);
     this.addAssignTypes();
     this.addRooms();
     /* this.assignmentForm.get("date").setValue(date); */

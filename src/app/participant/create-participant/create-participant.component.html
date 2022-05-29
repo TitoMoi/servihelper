@@ -113,7 +113,7 @@
         <button
           mat-raised-button
           color="primary"
-          type="submit"
+          type="button"
           [disabled]="participantForm.invalid"
         >
           {{ "BUTTON_SAVE" | transloco }}
@@ -121,7 +121,7 @@
         <button
           mat-raised-button
           color="accent"
-          type="button"
+          type="submit"
           (click)="submitAndCreate()"
           [disabled]="participantForm.invalid"
         >
