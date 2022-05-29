@@ -10,8 +10,11 @@ import { RoomService } from "app/room/service/room.service";
   templateUrl: "./create-room.component.html",
   styleUrls: ["./create-room.component.css"],
 })
-export class CreateRoomComponent implements OnInit {
-  roomForm;
+export class CreateRoomComponent {
+  roomForm = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,19 +23,13 @@ export class CreateRoomComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-  ngOnInit(): void {
-    this.roomForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-    });
-  }
 
-  onSubmit(room: RoomInterface): void {
+  onSubmit(): void {
     //create the room
-    this.roomService.createRoom(room);
+    const id = this.roomService.createRoom(this.roomForm.value);
 
     //Create the room reference for all the participants
-    this.participantService.addRoom(room.id);
+    this.participantService.addRoom(id);
 
     //navigate to parent
     this.router.navigate([".."], {

@@ -27,10 +27,12 @@ export class CreateAssignTypeComponent {
 
   onSubmit(): void {
     //save the assign type
-    this.assignTypeService.createAssignType(this.assignTypeForm.value);
+    const id = this.assignTypeService.createAssignType(
+      this.assignTypeForm.value
+    );
 
     //Add the assign type reference for all the participants
-    this.participantService.addAssignType(this.assignTypeForm.get("id").value);
+    this.participantService.addAssignType(id);
 
     //navigate to parent
     this.router.navigate([".."], {

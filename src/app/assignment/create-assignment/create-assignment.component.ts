@@ -192,7 +192,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           )
           .some((a) => a.assistant === p.id))
     );
-    console.log("entrado");
   }
 
   onSubmit(): void {

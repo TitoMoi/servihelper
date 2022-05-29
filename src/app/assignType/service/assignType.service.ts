@@ -58,13 +58,15 @@ export class AssignTypeService {
    * @param assignType the assignType to create
    * @returns true if assignType is saved false if not
    */
-  createAssignType(assignType: AssignTypeInterface): boolean {
+  createAssignType(assignType: AssignTypeInterface): string {
     //Generate id for the assignType
     assignType.id = nanoid();
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);
     //save assignTypes with the new assignType
-    return this.saveAssignTypesToFile();
+    this.saveAssignTypesToFile();
+
+    return assignType.id;
   }
 
   /**

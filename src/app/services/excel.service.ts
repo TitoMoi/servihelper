@@ -67,10 +67,10 @@ export class ExcelService {
         type: "pattern",
         pattern: "solid",
         fgColor: { argb: "87CEFA" },
-      }; /* 
+      };
       cell.font = {
-        size: 46,
-      }; */
+        size: 32,
+      };
       cell.value = this.translocoLocaleService.localizeDate(
         ag.date,
         undefined,
@@ -78,7 +78,6 @@ export class ExcelService {
       );
 
       ag.assignments.forEach((a) => {
-        console.log(a);
         const row = this.sheet.addRow({});
         const cell = row.getCell(1);
 
@@ -88,17 +87,17 @@ export class ExcelService {
 
         cell.font = {
           bold: true,
-          /* size: 32, */
+          size: 22,
         };
         cell.value = a.theme ? a.theme : a.assignType;
 
         const row2 = this.sheet.addRow({});
         const cell2 = row2.getCell(1);
 
-        /*  cell2.font = {
-          size: 32,
+        cell2.font = {
+          size: 22,
         };
- */
+
         cell2.value = "    • " + a.principal;
         if (a.assistant) cell2.value += " / " + a.assistant;
       });

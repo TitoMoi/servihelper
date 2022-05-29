@@ -64,13 +64,15 @@ export class RoomService {
    * @param room the room to create
    * @returns true if room is saved false if not
    */
-  createRoom(room: RoomInterface): boolean {
+  createRoom(room: RoomInterface): string {
     //Generate id for the room
     room.id = nanoid();
     //add room to rooms
     this.#rooms.push(room);
     //save rooms with the new room
-    return this.saveRoomsToFile();
+    this.saveRoomsToFile();
+
+    return room.id;
   }
 
   /**
