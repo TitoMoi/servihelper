@@ -181,7 +181,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           .filter(
             (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
           )
-          .some((a) => a.principal === p.id))
+          .some((a) => a.principal === p.id || a.assistant === p.id))
     );
 
     this.assistants.forEach(
@@ -190,7 +190,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           .filter(
             (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
           )
-          .some((a) => a.assistant === p.id))
+          .some((a) => a.principal === p.id || a.assistant === p.id))
     );
   }
 

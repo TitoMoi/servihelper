@@ -72,6 +72,10 @@
               <mat-option
                 *ngFor="let participant of principals; trackBy: trackByIdFn"
                 [value]="participant.id"
+                [ngClass]="{
+                  'bg-color-lightyellow': participant.hasWork,
+                  'no-hover': true
+                }"
               >
                 {{ participant.count }} - {{ participant.name }}
               </mat-option>
@@ -85,6 +89,10 @@
               <mat-option
                 *ngFor="let participant of assistants; trackBy: trackByIdFn"
                 [value]="participant.id"
+                [ngClass]="{
+                  'bg-color-lightyellow': participant.hasWork,
+                  'no-hover': true
+                }"
               >
                 {{ participant.count }} - {{ participant.name }}
               </mat-option>

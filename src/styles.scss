@@ -81,6 +81,22 @@ form {
   background-color: white;
 }
 
+.mat-option.no-hover.mat-active {
+  background: inherit;
+  color: inherit;
+}
+
+.mat-option.no-hover {
+  &:hover {
+    border: 1px solid lightgray;
+    background: inherit;
+    color: inherit;
+  }
+  &.bg-color-lightyellow:hover {
+    background-color: lightyellow;
+  }
+}
+
 .bold {
   font-weight: 600;
 }
