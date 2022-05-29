@@ -4,9 +4,15 @@
   aria-label="icon"
   (click)="toPdf()"
 ></mat-icon>
+<mat-icon
+  class="m-3"
+  svgIcon="excel"
+  aria-label="icon"
+  (click)="toExcel()"
+></mat-icon>
 
 <div id="resultListDiv" style="width: 25rem">
-  <div class="row white-base-background" *ngFor="let ag of assignmentGroup">
+  <div class="row white-base-background" *ngFor="let ag of assignmentGroups">
     <div class="col-12 mb-2 bold double-font bg-color-lightskyblue">
       {{ ag.date | translocoDate: { dateStyle: "long" } }}
     </div>

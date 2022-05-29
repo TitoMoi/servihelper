@@ -7,10 +7,11 @@ import { RoomService } from "app/room/service/room.service";
 import { ElectronService } from "app/services/electron.service";
 import { toPng } from "html-to-image";
 import {
-  AssignmentGroup,
+  AssignmentGroupInterface,
   AssignmentInterface,
 } from "../model/assignment.model";
 import { AssignmentService } from "../service/assignment.service";
+import { ExcelService } from "app/services/excel.service";
 
 @Component({
   selector: "app-selection-list",
@@ -25,9 +26,9 @@ export class SelectionListComponent implements OnChanges {
 
   #assignments: AssignmentInterface[] = [];
 
-  assignmentGroup: AssignmentGroup[] = [];
+  assignmentGroups: AssignmentGroupInterface[] = [];
 
-  icons: string[] = ["pdf"];
+  icons: string[] = ["pdf", "excel"];
 
   constructor(
     private assignTypeService: AssignTypeService,
@@ -36,6 +37,7 @@ export class SelectionListComponent implements OnChanges {
     private assignmentService: AssignmentService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
+    private excelService: ExcelService,
     private electronService: ElectronService
   ) {
     //Register icons
@@ -51,7 +53,7 @@ export class SelectionListComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.startDate && this.endDate && this.assignTypes) {
       this.#assignments = [];
-      this.assignmentGroup = [];
+      this.assignmentGroups = [];
       this.filterAssignments();
       this.sortAssignmentByDate(this.order);
       this.getRelatedData();
@@ -88,7 +90,7 @@ export class SelectionListComponent implements OnChanges {
   }
 
   sortAssignmentByAssignTypeOrder() {
-    for (let ag of this.assignmentGroup) {
+    for (let ag of this.assignmentGroups) {
       ag.assignments.sort(
         (a: AssignmentInterface, b: AssignmentInterface): number => {
           const orderA = this.assignTypeService.getAssignTypeByName(
@@ -114,7 +116,10 @@ export class SelectionListComponent implements OnChanges {
    * Covert the id's to names
    */
   getRelatedData() {
-    let assignGroup: AssignmentGroup = { date: undefined, assignments: [] };
+    let assignGroup: AssignmentGroupInterface = {
+      date: undefined,
+      assignments: [],
+    };
 
     let length = this.#assignments.length;
 
@@ -125,7 +130,7 @@ export class SelectionListComponent implements OnChanges {
 
       if (assignGroup.date !== assignment.date) {
         //save and reset
-        this.assignmentGroup.push(assignGroup);
+        this.assignmentGroups.push(assignGroup);
         assignGroup = { date: assignment.date, assignments: [] };
       }
 
@@ -145,7 +150,7 @@ export class SelectionListComponent implements OnChanges {
         footerNote: "",
       });
 
-      if (!length) this.assignmentGroup.push(assignGroup);
+      if (!length) this.assignmentGroups.push(assignGroup);
     }
   }
 
@@ -185,5 +190,9 @@ export class SelectionListComponent implements OnChanges {
       link.click();
     });
     document.body.style.cursor = "default";
+  }
+
+  async toExcel() {
+    this.excelService.addAsignments(this.assignmentGroups, this.#assignments);
   }
 }
