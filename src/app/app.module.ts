@@ -57,6 +57,7 @@ import { NgxEditorModule } from "ngx-editor";
 import { SearchComponent } from "./search/search.component";
 import { SelectionSheetsAssignmentComponent } from './assignment/selection-sheets-assignment/selection-sheets-assignment.component';
 import { SelectionListComponent } from './assignment/selection-list/selection-list.component';
+import { SelectionListHorComponent } from './assignment/selection-list-hor/selection-list-hor.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { SelectionListComponent } from './assignment/selection-list/selection-li
     DeleteNoteComponent,
     SelectionSheetsAssignmentComponent,
     SelectionListComponent,
+    SelectionListHorComponent,
   ],
   imports: [
     BrowserAnimationsModule,
