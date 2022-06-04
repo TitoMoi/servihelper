@@ -193,6 +193,6 @@ export class SelectionListComponent implements OnChanges {
   }
 
   async toExcel() {
-    this.excelService.addAsignments(this.assignmentGroups, this.#assignments);
+    this.excelService.addAsignmentsVertical(this.assignmentGroups);
   }
 }

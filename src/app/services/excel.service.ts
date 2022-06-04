@@ -38,8 +38,8 @@ export class ExcelService {
       {
         x: 0,
         y: 0,
-        width: 10000,
-        height: 20000,
+        width: 0,
+        height: 0,
         firstSheet: 0,
         activeTab: 1,
         visibility: "visible",
@@ -51,15 +51,22 @@ export class ExcelService {
   private addSheetA4AndPortrait(workbook: ExcelJS.Workbook): ExcelJS.Worksheet {
     // create new sheet with pageSetup settings for A4 - landscape
     const worksheet = workbook.addWorksheet("Hoja1", {
+      pageSetup: { paperSize: 9, orientation: "portrait" },
+    });
+    return worksheet;
+  }
+
+  private addSheetA4AndLandscape(
+    workbook: ExcelJS.Workbook
+  ): ExcelJS.Worksheet {
+    // create new sheet with pageSetup settings for A4 - landscape
+    const worksheet = workbook.addWorksheet("Hoja1", {
       pageSetup: { paperSize: 9, orientation: "landscape" },
     });
     return worksheet;
   }
 
-  private addAssignmentsToSheet(
-    ags: AssignmentGroupInterface[],
-    assignments: AssignmentInterface[]
-  ) {
+  private addAssignmentsToSheetVertical(ags: AssignmentGroupInterface[]) {
     ags.forEach((ag) => {
       const row = this.sheet.addRow({});
       const cell = row.getCell(1);
@@ -89,6 +96,15 @@ export class ExcelService {
           bold: true,
           size: 22,
         };
+
+        cell.fill = {
+          type: "pattern",
+          pattern: "solid",
+          fgColor: {
+            argb: "D3D3D3", //lightgray
+          },
+        };
+
         cell.value = a.theme ? a.theme : a.assignType;
 
         const row2 = this.sheet.addRow({});
@@ -98,8 +114,66 @@ export class ExcelService {
           size: 22,
         };
 
-        cell2.value = "    • " + a.principal;
-        if (a.assistant) cell2.value += " / " + a.assistant;
+        cell2.value = a.principal;
+        if (a.assistant) cell2.value += " / " + "\n" + a.assistant;
+
+        cell2.alignment = {
+          wrapText: true,
+        };
+      });
+    });
+  }
+
+  private addAssignmentsToSheetHorizontal(ags: AssignmentGroupInterface[]) {
+    ags.forEach((ag) => {
+      let row = this.sheet.addRow({});
+      const cell = row.getCell(1);
+
+      cell.fill = {
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "87CEFA" },
+      };
+
+      cell.font = {
+        bold: true,
+      };
+
+      cell.value = this.translocoLocaleService.localizeDate(
+        ag.date,
+        undefined,
+        { dateStyle: "long" }
+      );
+
+      let i = 2;
+      ag.assignments.forEach((assign) => {
+        const cell = row.getCell(i);
+        cell.value = assign.assignType;
+
+        cell.fill = {
+          type: "pattern",
+          pattern: "solid",
+          fgColor: { argb: "D3D3D3" },
+        };
+
+        i++;
+      });
+
+      i = 2;
+      let row2 = this.sheet.addRow({});
+
+      ag.assignments.forEach((assign) => {
+        const cell = row2.getCell(i);
+        cell.value = assign.principal;
+        if (assign.assistant) {
+          cell.value += " / " + "\n" + assign.assistant;
+        }
+
+        cell.alignment = {
+          wrapText: true,
+        };
+
+        i++;
       });
     });
   }
@@ -133,12 +207,9 @@ export class ExcelService {
 
   /**
    *
-   * @param bicos the array of bicos to add in the model1
+   * @param bicos the array of bicos to add in the vertical template
    */
-  addAsignments(
-    assignmentGroups: AssignmentGroupInterface[],
-    assignments: AssignmentInterface[]
-  ) {
+  addAsignmentsVertical(assignmentGroups: AssignmentGroupInterface[]) {
     let workbook = this.createWorkbook();
 
     workbook = this.setInitialProperties(workbook);
@@ -147,7 +218,7 @@ export class ExcelService {
 
     this.sheet = this.addSheetA4AndPortrait(workbook);
 
-    this.addAssignmentsToSheet(assignmentGroups, assignments);
+    this.addAssignmentsToSheetVertical(assignmentGroups);
 
     this.autoSizeColumnWidth();
 
@@ -156,6 +227,32 @@ export class ExcelService {
       showRowColHeaders: false,
       showRuler: false,
     };
+
+    this.writeBufferToFile(workbook);
+  }
+
+  /**
+   *
+   * @param bicos the array of bicos to add in the horizontal template
+   */
+  addAsignmentsHorizontal(assignmentGroups: AssignmentGroupInterface[]) {
+    let workbook = this.createWorkbook();
+
+    workbook = this.setInitialProperties(workbook);
+
+    workbook = this.setInitialViews(workbook);
+
+    this.sheet = this.addSheetA4AndLandscape(workbook);
+
+    this.addAssignmentsToSheetHorizontal(assignmentGroups);
+
+    this.autoSizeColumnWidth();
+
+    /* this.sheet.views[0] = {
+      showGridLines: false,
+      showRowColHeaders: false,
+      showRuler: false,
+    }; */
 
     this.writeBufferToFile(workbook);
   }

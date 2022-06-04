@@ -14,7 +14,7 @@ import { AssignmentService } from "../service/assignment.service";
 import { ExcelService } from "app/services/excel.service";
 
 @Component({
-  selector: "app-selection-list",
+  selector: "app-selection-list-hor",
   templateUrl: "./selection-list-hor.component.html",
   styleUrls: ["./selection-list-hor.component.scss"],
 })
@@ -193,6 +193,6 @@ export class SelectionListHorComponent implements OnChanges {
   }
 
   async toExcel() {
-    this.excelService.addAsignments(this.assignmentGroups, this.#assignments);
+    this.excelService.addAsignmentsHorizontal(this.assignmentGroups);
   }
 }

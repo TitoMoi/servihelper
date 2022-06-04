@@ -1,6 +1,6 @@
 <form [formGroup]="selectionForm" novalidate>
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <mat-form-field appearance="fill">
         <mat-label>{{ "ASSIGN_SELECTION_RANGE_TITLE" | transloco }}</mat-label>
         <mat-date-range-input [rangePicker]="picker">
@@ -27,7 +27,7 @@
         >
       </mat-form-field>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <mat-form-field>
         <mat-label>{{
           "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE" | transloco
@@ -41,7 +41,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <mat-form-field>
         <mat-label>{{
           "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE" | transloco
@@ -53,17 +53,46 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>{{
+          "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_TITLE" | transloco
+        }}</mat-label>
+        <mat-select #templateSelect formControlName="template">
+          <mat-option
+            *ngFor="let template of templateOptions"
+            [value]="template"
+            >{{ template }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 </form>
 
 <div class="row">
   <div class="col">
     <app-selection-list
-      *ngIf="selectionForm.controls.endDate.value"
+      *ngIf="
+        selectionForm.controls.endDate.value &&
+        selectionForm.controls.template.value ===
+          ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL' | transloco)
+      "
       [startDate]="selectionForm.controls.startDate.value"
       [endDate]="selectionForm.controls.endDate.value"
       [assignTypes]="selectionForm.controls.assignTypes.value"
       [order]="selectionForm.controls.order.value"
     ></app-selection-list>
+    <app-selection-list-hor
+      *ngIf="
+        selectionForm.controls.endDate.value &&
+        selectionForm.controls.template.value ===
+          ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL' | transloco)
+      "
+      [startDate]="selectionForm.controls.startDate.value"
+      [endDate]="selectionForm.controls.endDate.value"
+      [assignTypes]="selectionForm.controls.assignTypes.value"
+      [order]="selectionForm.controls.order.value"
+    ></app-selection-list-hor>
   </div>
 </div>

@@ -1,3 +1,19 @@
+table {
+  width: 98%;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid lightgrey;
+  text-align: left;
+  padding: 4px;
+}
+
+tr:nth-child(odd) {
+  background: lightgray;
+}
+
 .increase-font {
   font-size: 22px;
 }

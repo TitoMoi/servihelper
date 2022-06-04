@@ -11,22 +11,29 @@
   (click)="toExcel()"
 ></mat-icon>
 
-<div id="resultListDiv" style="width: 25rem">
-  <div class="row white-base-background" *ngFor="let ag of assignmentGroups">
-    <div class="col-12 mb-2 bold double-font bg-color-lightskyblue">
-      {{ ag.date | translocoDate: { dateStyle: "long" } }}
-    </div>
-    <div *ngFor="let assignment of ag.assignments" class="col-12 mb-1">
-      <div class="row justify-content-center">
-        <div class="col-12 bold increase-font">
-          {{ assignment.theme }}
-          <span *ngIf="!assignment.theme">{{ assignment.assignType }}</span>
-        </div>
-        <div class="col-11 mb-1 increase-font">
-          • {{ assignment.principal }}
-          <span *ngIf="assignment.assistant">/ {{ assignment.assistant }}</span>
-        </div>
-      </div>
+<div id="resultListDiv">
+  <div class="row">
+    <div class="col-12">
+      <table>
+        <ng-container *ngFor="let ag of assignmentGroups">
+          <tr>
+            <td class="bold bg-color-lightskyblue">
+              {{ ag.date | translocoDate: { dateStyle: "long" } }}
+            </td>
+            <td *ngFor="let assignment of ag.assignments">
+              {{ assignment.assignType }}
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td *ngFor="let assignment of ag.assignments">
+              {{ assignment.principal }}
+              <span *ngIf="assignment.assistant">/</span>
+              <div *ngIf="assignment.assistant">{{ assignment.assistant }}</div>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
     </div>
   </div>
   <hr />

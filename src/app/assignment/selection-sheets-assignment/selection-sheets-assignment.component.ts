@@ -7,6 +7,7 @@ import {
 import { FormControl, FormGroup } from "@angular/forms";
 import { MatOption } from "@angular/material/core";
 import { MatSelect } from "@angular/material/select";
+import { TranslocoService } from "@ngneat/transloco";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 
@@ -20,6 +21,15 @@ export class SelectionSheetsAssignmentComponent implements AfterViewInit {
 
   orderOptions: string[] = ["Asc", "Desc"];
 
+  templateOptions: string[] = [
+    this.translocoService.translate(
+      "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL"
+    ),
+    this.translocoService.translate(
+      "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL"
+    ),
+  ];
+
   @ViewChild("assignTypesSelect") select: MatSelect;
   @ViewChild("orderSelect") order: MatSelect;
 
@@ -28,10 +38,12 @@ export class SelectionSheetsAssignmentComponent implements AfterViewInit {
     endDate: new FormControl(),
     assignTypes: new FormControl(),
     order: new FormControl(),
+    template: new FormControl(),
   });
 
   constructor(
     private assignTypesService: AssignTypeService,
+    private translocoService: TranslocoService,
     private cdr: ChangeDetectorRef
   ) {}
   ngAfterViewInit(): void {
