@@ -68,12 +68,13 @@ export class ExcelService {
 
   private addAssignmentsToSheetVertical(ags: AssignmentGroupInterface[]) {
     ags.forEach((ag) => {
+      //date
       const row = this.sheet.addRow({});
       const cell = row.getCell(1);
       cell.fill = {
         type: "pattern",
         pattern: "solid",
-        fgColor: { argb: "87CEFA" },
+        fgColor: { argb: "87CEFA" }, //lightskyblue
       };
       cell.font = {
         size: 32,
@@ -84,6 +85,7 @@ export class ExcelService {
         { dateStyle: "long" }
       );
 
+      //assign type titles
       ag.assignments.forEach((a) => {
         const row = this.sheet.addRow({});
         const cell = row.getCell(1);
@@ -97,16 +99,21 @@ export class ExcelService {
           size: 22,
         };
 
+        const color = this.assignTypeService
+          .getAssignTypeByName(a.assignType)
+          .color?.substring(1);
+
         cell.fill = {
           type: "pattern",
           pattern: "solid",
           fgColor: {
-            argb: "D3D3D3", //lightgray
+            argb: color || "D3D3D3",
           },
         };
 
         cell.value = a.theme ? a.theme : a.assignType;
 
+        //participants
         const row2 = this.sheet.addRow({});
         const cell2 = row2.getCell(1);
 
@@ -126,6 +133,7 @@ export class ExcelService {
 
   private addAssignmentsToSheetHorizontal(ags: AssignmentGroupInterface[]) {
     ags.forEach((ag) => {
+      //date
       let row = this.sheet.addRow({});
       const cell = row.getCell(1);
 
@@ -145,28 +153,41 @@ export class ExcelService {
         { dateStyle: "long" }
       );
 
+      //assign type titles
+
       let i = 2;
-      ag.assignments.forEach((assign) => {
+      ag.assignments.forEach((a) => {
         const cell = row.getCell(i);
-        cell.value = assign.assignType;
+        cell.value = a.assignType;
+
+        const color = this.assignTypeService
+          .getAssignTypeByName(a.assignType)
+          .color?.substring(1);
+
+        cell.font = {
+          bold: true,
+        };
 
         cell.fill = {
           type: "pattern",
           pattern: "solid",
-          fgColor: { argb: "D3D3D3" },
+          fgColor: {
+            argb: color || "D3D3D3",
+          },
         };
 
         i++;
       });
 
+      //participants
       i = 2;
       let row2 = this.sheet.addRow({});
 
-      ag.assignments.forEach((assign) => {
+      ag.assignments.forEach((a) => {
         const cell = row2.getCell(i);
-        cell.value = assign.principal;
-        if (assign.assistant) {
-          cell.value += " / " + "\n" + assign.assistant;
+        cell.value = a.principal;
+        if (a.assistant) {
+          cell.value += " / " + "\n" + a.assistant;
         }
 
         cell.alignment = {

@@ -11,6 +11,8 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
   styleUrls: ["./create-assigntype.component.css"],
 })
 export class CreateAssignTypeComponent {
+  color;
+
   assignTypeForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
@@ -26,10 +28,13 @@ export class CreateAssignTypeComponent {
   ) {}
 
   onSubmit(): void {
+    console.log({ ...this.assignTypeForm.value, color: this.color });
+
     //save the assign type
-    const id = this.assignTypeService.createAssignType(
-      this.assignTypeForm.value
-    );
+    const id = this.assignTypeService.createAssignType({
+      ...this.assignTypeForm.value,
+      color: this.color,
+    });
 
     //Add the assign type reference for all the participants
     this.participantService.addAssignType(id);

@@ -20,7 +20,14 @@
             <td class="bold bg-color-lightskyblue">
               {{ ag.date | translocoDate: { dateStyle: "long" } }}
             </td>
-            <td *ngFor="let assignment of ag.assignments">
+            <td
+              *ngFor="let assignment of ag.assignments"
+              class="bold"
+              [style.background]="
+                assignTypeService.getAssignTypeByName(assignment.assignType)
+                  .color
+              "
+            >
               {{ assignment.assignType }}
             </td>
           </tr>

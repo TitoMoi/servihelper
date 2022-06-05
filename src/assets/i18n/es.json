@@ -12,6 +12,7 @@
   "BUTTON_DOWNLOAD": "Exportar",
   "PLACEHOLDER_NAME": "Nombre",
   "PLACEHOLDER_ORDER": "El orden de aparición en las listas, 1 saldrá antes que el 2 y así sucesivamente",
+  "PLACEHOLDER_COLOR": "El color para este tipo de asignación en las listas",
   "NAV_HOME": "Inicio",
   "NAV_ASSIGN_TYPE": "Tipos de asignaciones",
   "NAV_ROOM": "Salas",

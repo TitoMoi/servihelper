@@ -31,7 +31,7 @@ export class SelectionListHorComponent implements OnChanges {
   icons: string[] = ["pdf", "excel"];
 
   constructor(
-    private assignTypeService: AssignTypeService,
+    public assignTypeService: AssignTypeService,
     private roomService: RoomService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,

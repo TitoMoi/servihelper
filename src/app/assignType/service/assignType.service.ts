@@ -88,7 +88,7 @@ export class AssignTypeService {
    * @param assignTypeName the name of the assignType to look for
    * @returns the assignType
    */
-  getAssignTypeByName(assignTypeName: string) {
+  getAssignTypeByName(assignTypeName: string): AssignTypeInterface {
     //search assignType
     for (const assignType of this.#assignTypes) {
       if (assignType.name === assignTypeName) {

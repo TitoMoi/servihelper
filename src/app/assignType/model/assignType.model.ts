@@ -5,4 +5,5 @@ export interface AssignTypeInterface {
   id: string;
   name: string;
   order: number;
+  color?: string;
 }

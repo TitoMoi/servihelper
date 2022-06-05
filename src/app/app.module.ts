@@ -22,6 +22,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatCardModule } from "@angular/material/card";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { NgxEditorModule } from "ngx-editor";
+import { ColorPickerModule } from "ngx-color-picker";
 import { ParticipantComponent } from "./participant/participant.component";
 import { CreateParticipantComponent } from "./participant/create-participant/create-participant.component";
 import { UpdateParticipantComponent } from "./participant/update-participant/update-participant.component";
@@ -53,11 +55,10 @@ import { CreateNoteComponent } from "./note/create-note/create-note.component";
 import { UpdateNoteComponent } from "./note/update-note/update-note.component";
 import { DeleteNoteComponent } from "./note/delete-note/delete-note.component";
 import { ConfigComponent } from "./config/config.component";
-import { NgxEditorModule } from "ngx-editor";
 import { SearchComponent } from "./search/search.component";
-import { SelectionSheetsAssignmentComponent } from './assignment/selection-sheets-assignment/selection-sheets-assignment.component';
-import { SelectionListComponent } from './assignment/selection-list/selection-list.component';
-import { SelectionListHorComponent } from './assignment/selection-list-hor/selection-list-hor.component';
+import { SelectionSheetsAssignmentComponent } from "./assignment/selection-sheets-assignment/selection-sheets-assignment.component";
+import { SelectionListComponent } from "./assignment/selection-list/selection-list.component";
+import { SelectionListHorComponent } from "./assignment/selection-list-hor/selection-list-hor.component";
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { SelectionListHorComponent } from './assignment/selection-list-hor/selec
     MatDatepickerModule,
     MatNativeDateModule,
     NgxEditorModule,
+    ColorPickerModule,
   ],
   providers: [{ provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent],
