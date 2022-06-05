@@ -25,8 +25,12 @@
     "electron:serve": "wait-on tcp:4200 && npm run electron:serve-tsc && npx electron . --serve",
     "electron:local": "npm run build:prod && npx electron .",
     "electron:build": "electron-builder build --publish=never",
+    "electron:build:mac:intel": "electron-builder build --publish=never --x64",
+    "electron:build:mac:apple": "electron-builder build --publish=never --arm64",
+    "electron:builder": "electron-builder",
     "prepare:publish:windows": "npm run build:prod && node scripts/clean-release.js && npm run electron:build && node scripts/zip-release-windows.js",
-    "prepare:publish:mac": "npm run build:prod && node scripts/clean-release.js && npm run electron:build && node scripts/zip-release-mac.js",
+    "prepare:publish:mac:intel": "npm run build:prod && node scripts/clean-release.js && npm run electron:build:mac:intel",
+    "prepare:publish:mac:apple": "npm run build:prod && node scripts/clean-release.js && npm run electron:build:mac:apple",
     "test": "ng test --watch=false",
     "test:watch": "ng test",
     "lint": "ng lint"
