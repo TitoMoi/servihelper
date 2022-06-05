@@ -100,6 +100,45 @@
               >{{ "PARTICIPANT_CREATE_AVAILABLE" | transloco }}</mat-checkbox
             >
           </div>
+          <div class="col-12 mb-2">
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-chip-list
+                #chipList
+                aria-label="PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE"
+                (click)="picker.open()"
+              >
+                <mat-chip
+                  *ngFor="let date of notAvailableDates"
+                  [selectable]="false"
+                  [removable]="true"
+                  (removed)="remove(date)"
+                >
+                  {{ date | translocoDate: { dateStyle: "short" } }}
+                  <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
+                </mat-chip>
+                <mat-label *ngIf="!notAvailableDates.length">{{
+                  "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE" | transloco
+                }}</mat-label>
+                <input
+                  [value]="resetModel"
+                  matInput
+                  [matDatepicker]="picker"
+                  (dateChange)="dateChanged($event)"
+                  [matChipInputFor]="chipList"
+                  hidden
+                />
+              </mat-chip-list>
+              <mat-datepicker-toggle
+                matPrefix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #picker
+                [startAt]="init"
+                [dateClass]="dateClass"
+              ></mat-datepicker>
+            </mat-form-field>
+          </div>
         </div>
       </mat-card-content>
       <mat-card-actions>

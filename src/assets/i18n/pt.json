@@ -91,6 +91,8 @@
   "SEARCH_ASSIGNTYPE": "Tipo de atribuição",
   "SEARCH_ROOM": "Sala",
 
+  "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Escolha os dias não está disponível",
+
   "PARTICIPANT_TABLE_HEADER_PRINCIPAL": "Nome",
   "PARTICIPANT_TABLE_HEADER_EDIT": "Editar",
   "PARTICIPANT_TABLE_HEADER_DELETE": "Eliminar",

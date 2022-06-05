@@ -14,6 +14,7 @@
   "PLACEHOLDER_NAME": "Name",
   "PLACEHOLDER_ORDER": "The order of appearance in the lists, 1 will come out before 2 and so on",
   "PLACEHOLDER_COLOR": "The color for this assignment type in the lists",
+
   "NAV_HOME": "Home",
   "NAV_ASSIGN_TYPE": "Types of assignments",
   "NAV_ROOM": "Rooms",
@@ -105,6 +106,8 @@
   "PARTICIPANT_TABLE_HEADER_PRINCIPAL": "Name",
   "PARTICIPANT_TABLE_HEADER_EDIT": "Update",
   "PARTICIPANT_TABLE_HEADER_DELETE": "Delete",
+
+  "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Choose the days is not available",
 
   "PARTICIPANT_CREATE_TITLE": "Create participant",
   "PARTICIPANT_CREATE_ISWOMAN": "Woman",

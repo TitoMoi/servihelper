@@ -10,6 +10,9 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
   styleUrls: ["./update-assignType.component.css"],
 })
 export class UpdateAssignTypeComponent implements OnInit {
+  //for the color component that doesnt support reactive forms
+  color;
+
   assignTypeForm: FormGroup = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
@@ -22,6 +25,7 @@ export class UpdateAssignTypeComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
+
   ngOnInit(): void {
     const assignType = this.assignTypeService.getAssignType(
       this.activatedRoute.snapshot.params.id
@@ -31,10 +35,14 @@ export class UpdateAssignTypeComponent implements OnInit {
       name: assignType.name,
       order: assignType.order,
     });
+    this.color = assignType.color;
   }
 
   onSubmit(): void {
-    this.assignTypeService.updateAssignType(this.assignTypeForm.value);
+    this.assignTypeService.updateAssignType({
+      ...this.assignTypeForm.value,
+      color: this.color,
+    });
 
     //navigate to parent
     this.router.navigate(["../.."], {

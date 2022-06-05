@@ -11,6 +11,7 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
   styleUrls: ["./create-assigntype.component.css"],
 })
 export class CreateAssignTypeComponent {
+  //for the color component that doesnt support reactive forms
   color;
 
   assignTypeForm = this.formBuilder.group({
@@ -28,8 +29,6 @@ export class CreateAssignTypeComponent {
   ) {}
 
   onSubmit(): void {
-    console.log({ ...this.assignTypeForm.value, color: this.color });
-
     //save the assign type
     const id = this.assignTypeService.createAssignType({
       ...this.assignTypeForm.value,

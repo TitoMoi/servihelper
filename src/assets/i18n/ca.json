@@ -13,7 +13,8 @@
 
   "PLACEHOLDER_NAME": "Nom",
   "PLACEHOLDER_ORDER": "L'ordre d'aparició a les llistes, 1 sortirà abans que el 2 i així successivament",
-  "PLACEHOLDER_COLOR": "El color d'aquest tipus d'assignació' a les llistes",
+  "PLACEHOLDER_COLOR": "El color d'aquest tipus d'assignació a les llistes",
+
   "NAV_HOME": "Inici",
   "NAV_ASSIGN_TYPE": "Tipus d'assignacions",
   "NAV_ROOM": "Sales",
@@ -104,6 +105,8 @@
   "PARTICIPANT_TABLE_HEADER_PRINCIPAL": "Nom",
   "PARTICIPANT_TABLE_HEADER_EDIT": "Editar",
   "PARTICIPANT_TABLE_HEADER_DELETE": "Eliminar",
+
+  "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Tria els dies que no està disponible",
 
   "PARTICIPANT_CREATE_TITLE": "Crear participant",
   "PARTICIPANT_CREATE_ISWOMAN": "Dona",

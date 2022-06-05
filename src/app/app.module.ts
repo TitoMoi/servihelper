@@ -22,8 +22,10 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatCardModule } from "@angular/material/card";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatChipsModule } from "@angular/material/chips";
 import { NgxEditorModule } from "ngx-editor";
 import { ColorPickerModule } from "ngx-color-picker";
+
 import { ParticipantComponent } from "./participant/participant.component";
 import { CreateParticipantComponent } from "./participant/create-participant/create-participant.component";
 import { UpdateParticipantComponent } from "./participant/update-participant/update-participant.component";
@@ -120,6 +122,7 @@ import { SelectionListHorComponent } from "./assignment/selection-list-hor/selec
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatChipsModule,
     NgxEditorModule,
     ColorPickerModule,
   ],

@@ -6,6 +6,7 @@ export interface ParticipantInterface {
   rooms: ParticipantRoomInterface[];
   assignTypes: ParticipantAssignTypesInterface[];
   available: boolean;
+  notAvailableDates?: string[];
   count: number; //Dynamic value, undefined by default
   hasWork: boolean; //Dynamic, if has current assignments for the date
   lastAssignmentDate: Date; //Dynamic value, undefined by default, date of last assignment

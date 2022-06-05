@@ -92,6 +92,7 @@
   "SEARCH_DATE": "Fecha",
   "SEARCH_ASSIGNTYPE": "Tipo de asignación",
   "SEARCH_ROOM": "Sala",
+  "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Elige los días que no está disponible",
   "PARTICIPANT_TABLE_HEADER_PRINCIPAL": "Nombre",
   "PARTICIPANT_TABLE_HEADER_EDIT": "Editar",
   "PARTICIPANT_TABLE_HEADER_DELETE": "Eliminar",

@@ -1,4 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { FormArray, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
@@ -11,16 +17,39 @@ import {
   ParticipantRoomInterface,
 } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
+import {
+  MatDatepicker,
+  MatDatepickerInputEvent,
+} from "@angular/material/datepicker";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
+import { DateAdapter } from "@angular/material/core";
+import { TranslocoService } from "@ngneat/transloco";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-update-participant",
   templateUrl: "./update-participant.component.html",
   styleUrls: ["./update-participant.component.css"],
 })
-export class UpdateParticipantComponent implements OnInit {
+export class UpdateParticipantComponent implements OnInit, OnDestroy {
   participant: ParticipantInterface;
   rooms: RoomInterface[] = this.roomService.getRooms();
   assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
+
+  //Icons
+  icons: string[] = ["garbage"];
+
+  @ViewChild(MatDatepicker) _picker: MatDatepicker<Date>;
+
+  CLOSE_ON_SELECTED = false;
+  init = new Date();
+  resetModel = new Date(0);
+  notAvailableDates = [];
+
+  timeoutRef;
+
+  langSub$: Subscription;
 
   participantForm = this.formBuilder.group({
     id: undefined,
@@ -36,9 +65,24 @@ export class UpdateParticipantComponent implements OnInit {
     private participantService: ParticipantService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private dateAdapter: DateAdapter<Date>,
+    private translocoService: TranslocoService,
+    private cdr: ChangeDetectorRef
+  ) {
+    //Register icons
+    for (const iconFileName of this.icons) {
+      this.matIconRegistry.addSvgIcon(
+        iconFileName,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          "assets/icons/" + iconFileName + ".svg"
+        )
+      );
+    }
+  }
 
   ngOnInit(): void {
     this.participant = this.participantService.getParticipant(
@@ -56,6 +100,19 @@ export class UpdateParticipantComponent implements OnInit {
 
     this.setParticipantRooms();
     this.setParticipantAssignTypes();
+
+    this.notAvailableDates = this.participant.notAvailableDates;
+
+    this.dateAdapter.setLocale(this.translocoService.getActiveLang());
+
+    this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
+      this.dateAdapter.setLocale(lang);
+    });
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.timeoutRef);
+    this.langSub$.unsubscribe();
   }
 
   getRoomName(id) {
@@ -110,12 +167,54 @@ export class UpdateParticipantComponent implements OnInit {
     );
   }
 
-  onSubmit(participant: ParticipantInterface): void {
-    this.participantService.updateParticipant(participant);
+  onSubmit(): void {
+    this.participantService.updateParticipant({
+      ...this.participantForm.value,
+      notAvailableDates: this.notAvailableDates,
+    });
 
     //navigate to parent
     this.router.navigate(["../.."], {
       relativeTo: this.activatedRoute,
     });
+  }
+
+  public dateClass = (date: Date) => {
+    if (this.findDate(date) !== -1) {
+      return ["selected"];
+    }
+    return [];
+  };
+
+  public dateChanged(event: MatDatepickerInputEvent<Date>): void {
+    if (event.value) {
+      const date = event.value;
+      const index = this.findDate(date);
+      if (index === -1) {
+        this.notAvailableDates.push(date);
+      } else {
+        this.notAvailableDates.splice(index, 1);
+      }
+      this.resetModel = new Date(0);
+      if (!this.CLOSE_ON_SELECTED) {
+        const closeFn = this._picker.close;
+        this._picker.close = () => {};
+
+        this.cdr.detectChanges();
+
+        this.timeoutRef = setTimeout(() => {
+          this._picker.close = closeFn;
+        });
+      }
+    }
+  }
+
+  public remove(date: Date): void {
+    const index = this.findDate(date);
+    this.notAvailableDates.splice(index, 1);
+  }
+
+  private findDate(date: Date): number {
+    return this.notAvailableDates.map((m) => +m).indexOf(+date);
   }
 }
