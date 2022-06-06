@@ -201,12 +201,14 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
       if (!this.CLOSE_ON_SELECTED) {
         const closeFn = this._picker.close;
         this._picker.close = () => {};
-
-        this.cdr.detectChanges();
+        this._picker[
+          "_componentRef"
+        ].instance._calendar.monthView._createWeekCells();
 
         this.timeoutRef = setTimeout(() => {
           this._picker.close = closeFn;
         });
+        this.cdr.detectChanges();
       }
     }
   }
