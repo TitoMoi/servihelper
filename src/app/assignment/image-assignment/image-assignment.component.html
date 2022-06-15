@@ -1,59 +1,59 @@
 <div class="row">
   <div class="col-12 col-md-7 col-xl-12">
     <div id="assignmentDiv" class="d-inline-block" style="width: 23rem">
-      <h4 class="m-3" *ngIf="!assignmentHeaderTitle">
+      <h4 class="m-2" *ngIf="!assignmentHeaderTitle">
         {{ "ASSIGN_IMAGE_TITLE" | transloco }}
       </h4>
-      <h4 class="m-3" *ngIf="assignmentHeaderTitle">
+      <h4 class="m-2" *ngIf="assignmentHeaderTitle">
         {{ assignmentHeaderTitle }}
       </h4>
-      <hr class="m-3" />
-      <div class="m-3">
+      <hr class="m-2" />
+      <div class="m-2">
         <b>{{ "ASSIGN_IMAGE_NAME" | transloco }}</b>
       </div>
-      <div class="m-3">{{ principalName }}</div>
+      <div class="m-2">{{ principalName }}</div>
       <ng-container *ngIf="assistantName">
-        <div class="m-3">
+        <div class="m-2">
           <b>{{ "ASSIGN_IMAGE_ASSISTANT" | transloco }}</b>
         </div>
-        <div class="m-3">{{ assistantName }}</div>
+        <div class="m-2">{{ assistantName }}</div>
       </ng-container>
-      <div class="m-3">
+      <div class="m-2">
         <b>{{ "ASSIGN_IMAGE_DATE" | transloco }}</b>
       </div>
-      <div class="m-3">
+      <div class="m-2">
         {{ date | translocoDate: { dateStyle: "long" } }}
       </div>
-      <div class="m-3">
+      <div class="m-2">
         <b>{{ "ASSIGN_IMAGE_ASSIGNTYPE" | transloco }}</b>
       </div>
-      <div class="m-3">{{ assignTypeName }}</div>
+      <div class="m-2">{{ assignTypeName }}</div>
       <ng-container *ngIf="theme"
-        ><div class="m-3">
+        ><div class="m-2">
           <b>{{ "ASSIGN_IMAGE_NOTE" | transloco }}</b>
         </div>
-        <div class="m-3">{{ theme }}</div></ng-container
+        <div class="m-2">{{ theme }}</div></ng-container
       >
 
-      <div class="m-3">
+      <div class="m-2">
         <b>{{ "ASSIGN_IMAGE_ROOM_PRESENTATION" | transloco }}</b>
       </div>
-      <div class="m-3">{{ roomName }}</div>
+      <div class="m-2">{{ roomName }}</div>
       <ng-container *ngIf="footerNoteEditorHTML"
-        ><div class="m-3">
+        ><div class="m-2">
           <b>{{ "ASSIGN_IMAGE_FOOTER_NOTE" | transloco }}</b>
         </div>
-        <div class="text-justify m-3" [innerHTML]="footerNoteEditorHTML"></div
+        <div class="text-justify m-2" [innerHTML]="footerNoteEditorHTML"></div
       ></ng-container>
     </div>
   </div>
   <div class="col d-print-none">
     <div class="col-12">
-      <button class="m-3" mat-raised-button type="button" routerLink="../..">
+      <button class="m-2" mat-raised-button type="button" routerLink="../..">
         {{ "BUTTON_CANCEL" | transloco }}
       </button>
       <button
-        class="m-3"
+        class="m-2"
         mat-raised-button
         type="button"
         color="primary"
@@ -64,13 +64,13 @@
     </div>
     <div class="col-12 col-md-5">
       <mat-icon
-        class="m-3"
+        class="m-2"
         svgIcon="pdf"
         aria-label="icon"
         (click)="toPdf()"
       ></mat-icon>
       <mat-icon
-        class="m-3"
+        class="m-2"
         svgIcon="png"
         aria-label="icon"
         (click)="toPng()"
@@ -78,7 +78,7 @@
     </div>
   </div>
   <div class="col-12 col-md-5 col-xl-12">
-    <p id="copiedId" class="m-3 d-inline-block" *ngIf="copied">
+    <p id="copiedId" class="m-2 d-inline-block" *ngIf="copied">
       {{ "ASSIGN_IMAGE_COPIED" | transloco }}
     </p>
   </div>

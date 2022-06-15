@@ -11,6 +11,7 @@
     <div class="col-12 mb-2">
       <mat-form-field class="full-width">
         <mat-select formControlName="defaultFooterNoteId" required>
+          <mat-option [value]="undefined"> </mat-option>
           <mat-option *ngFor="let note of notes" [value]="note.id">
             {{ note.name }}
           </mat-option>
