@@ -24,6 +24,7 @@ import { AssignmentService } from "app/assignment/service/assignment.service";
 import { setCount } from "app/functions/setCount";
 import { sortParticipantsByCount } from "app/functions";
 import { SharedService } from "app/services/shared.service";
+import { ConfigService } from "app/config/service/config.service";
 
 @Component({
   selector: "app-create-assignment",
@@ -54,7 +55,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     onlyMan: [false],
     principal: [undefined, Validators.required], //participant id
     assistant: [undefined], //participant id
-    footerNote: undefined, //Note id
+    footerNote: this.configService.getConfig().defaultFooterNoteId, //Note id
   });
 
   //Subscriptions
@@ -68,6 +69,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
     private noteService: NoteService,
+    private configService: ConfigService,
     private sharedService: SharedService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -217,8 +219,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assignmentService.createAssignment(this.assignmentForm.value);
 
     const date = this.assignmentForm.get("date").value;
+    const note = this.assignmentForm.get("footerNote").value;
     this.assignmentForm.reset();
     this.assignmentForm.get("date").setValue(date);
+    this.assignmentForm.get("footerNote").setValue(note);
   }
 
   /**

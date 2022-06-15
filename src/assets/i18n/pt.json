@@ -152,7 +152,8 @@
   "CONFIG_ASSIGNMENT_TITLE": "Título das designações",
   "CONFIG_BACKUP_LABEL_EXPORT": "Backup de exportação",
   "CONFIG_BACKUP_LABEL_IMPORT": "Backup de importação",
-  "CONFIG_ASSIGNMENT_HEADER_TITLE_SAVED": "Título da tarefa salvo",
+  "CONFIG_DEFAULT_FOOTER_NOTE": "Selecione a nota padrão",
+  "CONFIG_FORM_SAVED": "Configuração salva",
   "CONFIG_RESTART_LABEL": "Reiniciar programa",
 
   "INFO__WHAT_IS_SERVIHELPER": "¿O que é servihelper?",

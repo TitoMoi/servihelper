@@ -7,12 +7,22 @@
         <input matInput formControlName="assignmentHeaderTitle" />
       </mat-form-field>
     </div>
+    <h3 class="">{{ "CONFIG_DEFAULT_FOOTER_NOTE" | transloco }}</h3>
+    <div class="col-12 mb-2">
+      <mat-form-field class="full-width">
+        <mat-select formControlName="defaultFooterNoteId" required>
+          <mat-option *ngFor="let note of notes" [value]="note.id">
+            {{ note.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <button class="" mat-raised-button type="submit" color="primary">
       {{ "BUTTON_SAVE" | transloco }}
     </button>
   </form>
-  <p class="d-inline-block m-3 green-msg" *ngIf="isAssignmentHeaderTitleSaved">
-    {{ "CONFIG_ASSIGNMENT_HEADER_TITLE_SAVED" | transloco }}
+  <p class="d-inline-block m-3 green-msg" *ngIf="isFormSaved">
+    {{ "CONFIG_FORM_SAVED" | transloco }}
   </p>
 
   <div class="light-red-bg">

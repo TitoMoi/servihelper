@@ -47,7 +47,8 @@ export class ConfigService {
     if (
       !("assignmentHeaderTitle" in this.#config) ||
       !("firstDayOfWeek" in this.#config) ||
-      !("lang" in this.#config)
+      !("lang" in this.#config) ||
+      !("defaultFooterNoteId" in this.#config)
     ) {
       throw new Error("config file missing properties");
     }

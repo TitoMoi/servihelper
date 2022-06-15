@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { ConfigService } from "app/config/service/config.service";
+import { NoteInterface } from "app/note/model/note.model";
+import { NoteService } from "app/note/service/note.service";
 import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
@@ -10,15 +12,18 @@ import { ConfigInterface } from "./model/config.model";
   templateUrl: "./config.component.html",
   styleUrls: ["./config.component.scss"],
 })
-export class ConfigComponent implements OnInit {
+export class ConfigComponent {
   // The path of the app
   path: string;
 
   // Config form
-  configForm;
+  configForm = this.formBuilder.group({
+    assignmentHeaderTitle: this.configService.getConfig().assignmentHeaderTitle,
+    defaultFooterNoteId: this.configService.getConfig().defaultFooterNoteId,
+  });
 
   // If config assignmentHeader key is saved
-  isAssignmentHeaderTitleSaved = false;
+  isFormSaved = false;
 
   // Confirm the delete operation
   confirmDelete = false;
@@ -28,7 +33,10 @@ export class ConfigComponent implements OnInit {
     lang: "en",
     firstDayOfWeek: 1,
     assignmentHeaderTitle: "",
+    defaultFooterNoteId: undefined,
   };
+
+  notes: NoteInterface[] = this.noteService.getNotes();
 
   // the filesystem api
   fs: typeof fs = this.electronService.remote.require("fs-extra");
@@ -36,22 +44,13 @@ export class ConfigComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private configService: ConfigService,
+    private noteService: NoteService,
     private electronService: ElectronService
   ) {
     this.path = APP_CONFIG.production
       ? //__dirname is where the .json files exists
         __dirname + "./assets/source"
       : "./assets/source";
-  }
-
-  ngOnInit() {
-    this.configForm = this.formBuilder.group({
-      assignmentHeaderTitle: undefined,
-    });
-
-    this.configForm
-      .get("assignmentHeaderTitle")
-      .setValue(this.configService.getConfig().assignmentHeaderTitle);
   }
 
   /**
@@ -75,13 +74,16 @@ export class ConfigComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const assignmentHeaderTitle = this.configForm.get(
-      "assignmentHeaderTitle"
-    ).value;
     this.configService.updateConfigByKey(
       "assignmentHeaderTitle",
-      assignmentHeaderTitle
+      this.configForm.get("assignmentHeaderTitle").value
     );
-    this.isAssignmentHeaderTitleSaved = true;
+
+    this.configService.updateConfigByKey(
+      "defaultFooterNoteId",
+      this.configForm.get("defaultFooterNoteId").value
+    );
+
+    this.isFormSaved = true;
   }
 }

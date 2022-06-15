@@ -151,7 +151,8 @@
   "CONFIG_BACKUP_LABEL_EXPORT": "Exportar copia de seguridad",
   "CONFIG_BACKUP_LABEL_IMPORT": "Importar copia de seguridad",
   "CONFIG_RESTART_LABEL": "Reiniciar programa",
-  "CONFIG_ASSIGNMENT_HEADER_TITLE_SAVED": "Titulo de las asignaciones guardado",
+  "CONFIG_DEFAULT_FOOTER_NOTE": "Selecciona la nota por defecto",
+  "CONFIG_FORM_SAVED": "Configuración guardada",
   "CONFIG_ASSIGNMENT_TITLE": "Titulo de las asignaciones",
 
   "INFO__WHAT_IS_SERVIHELPER": "¿Qué es servihelper?",

@@ -1,10 +1,12 @@
 export type ConfigOptionsType =
-  | "assignmentHeaderTitle"
+  | "lang"
   | "firstDayOfWeek"
-  | "lang";
+  | "assignmentHeaderTitle"
+  | "defaultFooterNoteId";
 
 export interface ConfigInterface {
   lang?: string;
   firstDayOfWeek?: number;
   assignmentHeaderTitle?: string;
+  defaultFooterNoteId?: string;
 }

@@ -1,1 +1,6 @@
-{ "lang": "en", "firstDayOfWeek": 1, "assignmentHeaderTitle": "" }
+{
+  "lang": "en",
+  "firstDayOfWeek": 1,
+  "assignmentHeaderTitle": "",
+  "defaultFooterNoteId": ""
+}
