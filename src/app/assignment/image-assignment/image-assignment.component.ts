@@ -32,7 +32,6 @@ export class ImageAssignmentComponent implements OnInit {
   icons: string[] = ["pdf", "png"];
 
   copied = false;
-  isLoaded = false;
 
   //Image data bindings
   assignmentHeaderTitle: string;
@@ -97,8 +96,6 @@ export class ImageAssignmentComponent implements OnInit {
       this.configService.getConfig().assignmentHeaderTitle;
 
     this.theme = assignment.theme;
-
-    this.isLoaded = true;
   }
 
   /**

@@ -39,22 +39,30 @@ export class ConfigService {
   }
 
   /**
-   *
-   * @returns true if configs are saved to disk or false
+   * Check that has all the properties
+   * @returns true if exist, else throws error
    */
-  saveConfigToFile(): boolean {
-    //Security check that has all the properties
+  allPropertiesExist() {
     if (
       !("assignmentHeaderTitle" in this.#config) ||
       !("firstDayOfWeek" in this.#config) ||
       !("lang" in this.#config) ||
       !("defaultFooterNoteId" in this.#config)
     ) {
-      throw new Error("config file missing properties");
+      throw new Error("config file missing key properties");
     }
-    this.fs.writeJson(this.path, this.#config);
-    this.hasChanged = true;
     return true;
+  }
+  /**
+   *
+   * @returns true if configs are saved to disk or false
+   */
+  saveConfigToFile(): boolean {
+    if (this.allPropertiesExist()) {
+      this.fs.writeJson(this.path, this.#config);
+      this.hasChanged = true;
+      return true;
+    }
   }
 
   /**
@@ -77,7 +85,6 @@ export class ConfigService {
    * @returns true if config is updated and saved false otherwise
    */
   updateConfigByKey(key: ConfigOptionsType, value: any): boolean {
-    //update config
     this.#config[key as string] = value;
     //save configs with the updated config
     const res = this.saveConfigToFile();

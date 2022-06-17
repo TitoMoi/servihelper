@@ -113,7 +113,7 @@ export class SelectionListHorComponent implements OnChanges {
   }
 
   /**
-   * Covert the id's to names
+   * Convert the id's to names
    */
   getRelatedData() {
     let assignGroup: AssignmentGroupInterface = {

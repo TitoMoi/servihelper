@@ -90,10 +90,9 @@ export class ExcelService {
         const row = this.sheet.addRow({});
         const cell = row.getCell(1);
 
-        /* cell.font = {
+        cell.font = {
           bold: true,
-          size: 22,
-        }; */
+        };
 
         const color = this.assignTypeService
           .getAssignTypeByName(a.assignType)
@@ -103,7 +102,7 @@ export class ExcelService {
           type: "pattern",
           pattern: "solid",
           fgColor: {
-            argb: color || "D3D3D3",
+            argb: color || "FFFFFF",
           },
         };
 
@@ -164,7 +163,7 @@ export class ExcelService {
           type: "pattern",
           pattern: "solid",
           fgColor: {
-            argb: color || "D3D3D3",
+            argb: color || "FFFFFF",
           },
         };
 

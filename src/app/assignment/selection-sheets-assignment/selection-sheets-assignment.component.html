@@ -1,5 +1,5 @@
 <form [formGroup]="selectionForm" novalidate>
-  <div class="row">
+  <div class="row d-print-none">
     <div class="col-3">
       <mat-form-field appearance="fill">
         <mat-label>{{ "ASSIGN_SELECTION_RANGE_TITLE" | transloco }}</mat-label>
@@ -94,5 +94,16 @@
       [assignTypes]="selectionForm.controls.assignTypes.value"
       [order]="selectionForm.controls.order.value"
     ></app-selection-list-hor>
+    <app-multiple-image-assignment
+      *ngIf="
+        selectionForm.controls.endDate.value &&
+        selectionForm.controls.template.value ===
+          ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET' | transloco)
+      "
+      [startDate]="selectionForm.controls.startDate.value"
+      [endDate]="selectionForm.controls.endDate.value"
+      [assignTypes]="selectionForm.controls.assignTypes.value"
+      [order]="selectionForm.controls.order.value"
+    ></app-multiple-image-assignment>
   </div>
 </div>

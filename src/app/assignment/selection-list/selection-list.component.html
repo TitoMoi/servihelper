@@ -19,7 +19,7 @@
     <div *ngFor="let assignment of ag.assignments" class="col-12 mb-1">
       <div class="row justify-content-center">
         <div
-          class="col-12 bg-color-lightgray bold increase-font"
+          class="col-12 bold increase-font"
           [style.background]="
             assignTypeService.getAssignTypeByName(assignment.assignType).color
           "

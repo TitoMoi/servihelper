@@ -28,6 +28,9 @@ export class SelectionSheetsAssignmentComponent implements AfterViewInit {
     this.translocoService.translate(
       "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL"
     ),
+    this.translocoService.translate(
+      "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET"
+    ),
   ];
 
   @ViewChild("assignTypesSelect") select: MatSelect;
