@@ -17,8 +17,23 @@
       <table>
         <ng-container *ngFor="let ag of assignmentGroups">
           <tr>
-            <td class="bold bg-color-lightskyblue">
-              {{ ag.date | translocoDate: { dateStyle: "long" } }}
+            <td
+              class="bold"
+              [style.background]="
+                configService.getConfig().defaultReportDateColor
+              "
+              [style.fontSize]="
+                configService.getConfig().defaultReportFontSize + 'px'
+              "
+            >
+              {{
+                ag.date
+                  | translocoDate
+                    : {
+                        dateStyle:
+                          configService.getConfig().defaultReportDateFormat
+                      }
+              }}
             </td>
             <td
               *ngFor="let assignment of ag.assignments"
@@ -33,7 +48,12 @@
           </tr>
           <tr>
             <td></td>
-            <td *ngFor="let assignment of ag.assignments">
+            <td
+              *ngFor="let assignment of ag.assignments"
+              [style.fontSize]="
+                configService.getConfig().defaultReportFontSize + 'px'
+              "
+            >
               {{ assignment.principal }}
               <span *ngIf="assignment.assistant">/</span>
               <div *ngIf="assignment.assistant">{{ assignment.assistant }}</div>

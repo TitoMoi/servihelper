@@ -1,13 +1,10 @@
 import { Injectable } from "@angular/core";
 import { TranslocoLocaleService } from "@ngneat/transloco-locale";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ConfigService } from "app/config/service/config.service";
 import * as ExcelJS from "exceljs";
 
-import {
-  AssignmentGroupInterface,
-  AssignmentInterface,
-} from "../assignment/model/assignment.model";
-import { ParticipantService } from "../participant/service/participant.service";
+import { AssignmentGroupInterface } from "../assignment/model/assignment.model";
 
 @Injectable({
   providedIn: "root",
@@ -15,7 +12,7 @@ import { ParticipantService } from "../participant/service/participant.service";
 export class ExcelService {
   private sheet!: ExcelJS.Worksheet;
   constructor(
-    private participantService: ParticipantService,
+    private configService: ConfigService,
     private translocoLocaleService: TranslocoLocaleService,
     private assignTypeService: AssignTypeService
   ) {}
@@ -74,15 +71,23 @@ export class ExcelService {
       cell.fill = {
         type: "pattern",
         pattern: "solid",
-        fgColor: { argb: "87CEFA" }, //lightskyblue
-      }; /* 
+        fgColor: {
+          argb:
+            this.configService
+              .getConfig()
+              .defaultReportDateColor.substring(1) || "FFFFFF",
+        }, //remove #
+      };
+
       cell.font = {
-        size: 32,
-      }; */
+        size:
+          Number(this.configService.getConfig().defaultReportFontSize) || 16,
+      };
+
       cell.value = this.translocoLocaleService.localizeDate(
         ag.date,
         undefined,
-        { dateStyle: "long" }
+        { dateStyle: this.configService.getConfig().defaultReportDateFormat }
       );
 
       //assign type titles
@@ -92,6 +97,8 @@ export class ExcelService {
 
         cell.font = {
           bold: true,
+          size:
+            Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
         const color = this.assignTypeService
@@ -112,9 +119,10 @@ export class ExcelService {
         const row2 = this.sheet.addRow({});
         const cell2 = row2.getCell(1);
 
-        /* cell2.font = {
-          size: 22,
-        }; */
+        cell2.font = {
+          size:
+            Number(this.configService.getConfig().defaultReportFontSize) || 16,
+        };
 
         cell2.value = a.principal;
         if (a.assistant) cell2.value += " / " + "\n" + a.assistant;
@@ -131,17 +139,24 @@ export class ExcelService {
       cell.fill = {
         type: "pattern",
         pattern: "solid",
-        fgColor: { argb: "87CEFA" },
+        fgColor: {
+          argb:
+            this.configService
+              .getConfig()
+              .defaultReportDateColor.substring(1) || "FFFFFF",
+        },
       };
 
       cell.font = {
         bold: true,
+        size:
+          Number(this.configService.getConfig().defaultReportFontSize) || 16,
       };
 
       cell.value = this.translocoLocaleService.localizeDate(
         ag.date,
         undefined,
-        { dateStyle: "long" }
+        { dateStyle: this.configService.getConfig().defaultReportDateFormat }
       );
 
       //assign type titles
@@ -157,6 +172,8 @@ export class ExcelService {
 
         cell.font = {
           bold: true,
+          size:
+            Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
         cell.fill = {
@@ -176,14 +193,20 @@ export class ExcelService {
 
       ag.assignments.forEach((a) => {
         const cell = row2.getCell(i);
-        cell.value = a.principal;
-        if (a.assistant) {
-          cell.value += " / " + "\n" + a.assistant;
-        }
+
+        cell.font = {
+          size:
+            Number(this.configService.getConfig().defaultReportFontSize) || 16,
+        };
 
         cell.alignment = {
           wrapText: true,
         };
+
+        cell.value = a.principal;
+        if (a.assistant) {
+          cell.value += " / " + "\n" + a.assistant;
+        }
 
         i++;
       });
@@ -197,11 +220,11 @@ export class ExcelService {
   autoSizeColumnWidth() {
     this.sheet.columns.forEach((column) => {
       const lengths = column.values!.map((v) => v!.toString().length);
-      console.log(lengths);
+
       const maxLength = Math.max(
         ...lengths.filter((v) => typeof v === "number")
       );
-      column.width = maxLength * 1.2;
+      column.width = maxLength;
     });
   }
 

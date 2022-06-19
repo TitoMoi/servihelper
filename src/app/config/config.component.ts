@@ -17,10 +17,23 @@ export class ConfigComponent {
   // The path of the app
   path: string;
 
+  translocoDateFormats: DateFormatStyles[] = [
+    "short",
+    "medium",
+    "long",
+    "full",
+  ];
+
+  //is part of the form
+  defaultReportDateColor: string =
+    this.configService.getConfig().defaultReportDateColor;
+
   // Config form
   configForm = this.formBuilder.group({
     assignmentHeaderTitle: this.configService.getConfig().assignmentHeaderTitle,
     defaultFooterNoteId: this.configService.getConfig().defaultFooterNoteId,
+    defaultReportFontSize: this.configService.getConfig().defaultReportFontSize,
+    defaultReportDateFormat: this.translocoDateFormats[0],
   });
 
   // If config assignmentHeader key is saved
@@ -28,8 +41,6 @@ export class ConfigComponent {
 
   // Confirm the delete operation
   confirmDelete = false;
-
-  translocoDateFormatStyle: DateFormatStyles = "short";
 
   //Restart data
   config: ConfigInterface = {
@@ -39,7 +50,7 @@ export class ConfigComponent {
     defaultFooterNoteId: undefined,
     defaultReportFontSize: undefined,
     defaultReportDateColor: undefined,
-    defaultReportDateFormat: this.translocoDateFormatStyle,
+    defaultReportDateFormat: this.translocoDateFormats[0],
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();
@@ -51,7 +62,6 @@ export class ConfigComponent {
     private formBuilder: FormBuilder,
     private configService: ConfigService,
     private noteService: NoteService,
-    private dateFormatStyles: DateFormatStyles,
     private electronService: ElectronService
   ) {
     this.path = APP_CONFIG.production
@@ -81,7 +91,13 @@ export class ConfigComponent {
   }
 
   onSubmit(): void {
-    this.configService.updateConfigByKey(
+    this.configService.updateConfig({
+      ...this.configService.getConfig(),
+      ...this.configForm.value,
+      defaultReportDateColor: this.defaultReportDateColor,
+    });
+
+    /* this.configService.updateConfigByKey(
       "assignmentHeaderTitle",
       this.configForm.get("assignmentHeaderTitle").value
     );
@@ -89,7 +105,7 @@ export class ConfigComponent {
     this.configService.updateConfigByKey(
       "defaultFooterNoteId",
       this.configForm.get("defaultFooterNoteId").value
-    );
+    ); */
 
     this.isFormSaved = true;
   }

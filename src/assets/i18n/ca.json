@@ -14,6 +14,7 @@
   "PLACEHOLDER_NAME": "Nom",
   "PLACEHOLDER_ORDER": "L'ordre d'aparició a les llistes, 1 sortirà abans que el 2 i així successivament",
   "PLACEHOLDER_COLOR": "El color d'aquest tipus d'assignació a les llistes",
+  "PLACEHOLDER_REPORT_DATE_COLOR": "Color de fons predeterminat per a la data",
 
   "NAV_HOME": "Inici",
   "NAV_ASSIGN_TYPE": "Tipus d'assignacions",
@@ -175,6 +176,9 @@
   "CONFIG_BACKUP_LABEL_IMPORT": "Importar copia de seguretat",
   "CONFIG_RESTART_LABEL": "Reiniciar el programa",
   "CONFIG_DEFAULT_FOOTER_NOTE": "Seleccioneu la nota de peu per defecte al crear assignacions",
+  "CONFIG_DEFAULT_REPORT_DATE_FORMAT": "Trieu el format predeterminat per a la data",
+  "CONFIG_DEFAULT_REPORT_DATE_COLOR": "Trieu el color predeterminat per a la data",
+  "CONFIG_DEFAULT_FONT_SIZE": "La mida de lletra predeterminada és 16",
   "CONFIG_FORM_SAVED": "Configuració guardada",
   "CONFIG_ASSIGNMENT_TITLE": "Títol de les assignacions",
 

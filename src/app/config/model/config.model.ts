@@ -1,3 +1,5 @@
+import { DateFormatStyles } from "@ngneat/transloco-locale";
+
 export type ConfigOptionsType =
   | "lang"
   | "firstDayOfWeek"
@@ -14,5 +16,5 @@ export interface ConfigInterface {
   defaultFooterNoteId?: string;
   defaultReportFontSize?: string;
   defaultReportDateColor?: string;
-  defaultReportDateFormat?: string;
+  defaultReportDateFormat?: DateFormatStyles;
 }

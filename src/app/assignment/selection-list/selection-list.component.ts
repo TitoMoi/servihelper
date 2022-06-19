@@ -12,6 +12,7 @@ import {
 } from "../model/assignment.model";
 import { AssignmentService } from "../service/assignment.service";
 import { ExcelService } from "app/services/excel.service";
+import { ConfigService } from "app/config/service/config.service";
 
 @Component({
   selector: "app-selection-list",
@@ -32,6 +33,7 @@ export class SelectionListComponent implements OnChanges {
 
   constructor(
     public assignTypeService: AssignTypeService,
+    public configService: ConfigService,
     private roomService: RoomService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,

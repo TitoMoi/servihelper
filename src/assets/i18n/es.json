@@ -13,6 +13,8 @@
   "PLACEHOLDER_NAME": "Nombre",
   "PLACEHOLDER_ORDER": "El orden de aparición en las listas, 1 saldrá antes que el 2 y así sucesivamente",
   "PLACEHOLDER_COLOR": "El color para este tipo de asignación en las listas",
+  "PLACEHOLDER_REPORT_DATE_COLOR": "Color de fondo predeterminado para la fecha",
+
   "NAV_HOME": "Inicio",
   "NAV_ASSIGN_TYPE": "Tipos de asignaciones",
   "NAV_ROOM": "Salas",
@@ -153,6 +155,9 @@
   "CONFIG_BACKUP_LABEL_IMPORT": "Importar copia de seguridad",
   "CONFIG_RESTART_LABEL": "Reiniciar programa",
   "CONFIG_DEFAULT_FOOTER_NOTE": "Selecciona la nota de pie por defecto al crear asignaciones",
+  "CONFIG_DEFAULT_REPORT_DATE_FORMAT": "Elija el formato predeterminado para la fecha",
+  "CONFIG_DEFAULT_REPORT_DATE_COLOR": "Elija el color predeterminado para la fecha",
+  "CONFIG_DEFAULT_FONT_SIZE": "El tamaño de fuente predeterminado es 16",
   "CONFIG_FORM_SAVED": "Configuración guardada",
   "CONFIG_ASSIGNMENT_TITLE": "Titulo de las asignaciones",
 
