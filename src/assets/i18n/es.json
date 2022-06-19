@@ -152,7 +152,7 @@
   "CONFIG_BACKUP_LABEL_EXPORT": "Exportar copia de seguridad",
   "CONFIG_BACKUP_LABEL_IMPORT": "Importar copia de seguridad",
   "CONFIG_RESTART_LABEL": "Reiniciar programa",
-  "CONFIG_DEFAULT_FOOTER_NOTE": "Selecciona la nota por defecto",
+  "CONFIG_DEFAULT_FOOTER_NOTE": "Selecciona la nota de pie por defecto al crear asignaciones",
   "CONFIG_FORM_SAVED": "Configuración guardada",
   "CONFIG_ASSIGNMENT_TITLE": "Titulo de las asignaciones",
 

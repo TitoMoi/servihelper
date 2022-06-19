@@ -153,7 +153,7 @@
   "CONFIG_ASSIGNMENT_TITLE": "Título das designações",
   "CONFIG_BACKUP_LABEL_EXPORT": "Backup de exportação",
   "CONFIG_BACKUP_LABEL_IMPORT": "Backup de importação",
-  "CONFIG_DEFAULT_FOOTER_NOTE": "Selecione a nota padrão",
+  "CONFIG_DEFAULT_FOOTER_NOTE": "Selecione a nota de rodapé padrão ao criar atribuições",
   "CONFIG_FORM_SAVED": "Configuração salva",
   "CONFIG_RESTART_LABEL": "Reiniciar programa",
 

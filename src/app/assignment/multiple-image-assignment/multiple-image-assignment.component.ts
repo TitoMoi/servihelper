@@ -73,7 +73,7 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
    */
   filterAssignments() {
     this.#assignments = this.assignmentService
-      .getAssignments(true)
+      .getAssignments()
       .filter((assignment) => this.assignTypes.includes(assignment.assignType))
       .filter(
         (assignment) =>

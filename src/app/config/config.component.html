@@ -18,6 +18,39 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <h3 class="">{{ "CONFIG_DEFAULT_REPORT_DATE_FORMAT" | transloco }}</h3>
+    <div class="col-12 mb-2">
+      <mat-form-field class="full-width">
+        <mat-select formControlName="defaultReportDateFormat" required>
+          <mat-option [value]="undefined"> </mat-option>
+          <mat-option *ngFor="let note of notes" [value]="note.id">
+            {{ note.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <h3 class="">{{ "CONFIG_DEFAULT_REPORT_DATE_COLOR" | transloco }}</h3>
+    <div class="col-12 mb-2">
+      <mat-form-field class="full-width">
+        <mat-select formControlName="defaultReportDateColor" required>
+          <mat-option [value]="undefined"> </mat-option>
+          <mat-option *ngFor="let note of notes" [value]="note.id">
+            {{ note.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <h3 class="">{{ "CONFIG_DEFAULT_FONT_SIZE" | transloco }}</h3>
+    <div class="col-12 mb-2">
+      <mat-form-field class="full-width">
+        <mat-select formControlName="defaultReportFontSize" required>
+          <mat-option [value]="undefined"> </mat-option>
+          <mat-option *ngFor="let note of notes" [value]="note.id">
+            {{ note.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <button class="" mat-raised-button type="submit" color="primary">
       {{ "BUTTON_SAVE" | transloco }}
     </button>

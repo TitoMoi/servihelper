@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
+import { DateFormatStyles } from "@ngneat/transloco-locale";
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
@@ -28,12 +29,17 @@ export class ConfigComponent {
   // Confirm the delete operation
   confirmDelete = false;
 
+  translocoDateFormatStyle: DateFormatStyles = "short";
+
   //Restart data
   config: ConfigInterface = {
     lang: "en",
     firstDayOfWeek: 1,
     assignmentHeaderTitle: "",
     defaultFooterNoteId: undefined,
+    defaultReportFontSize: undefined,
+    defaultReportDateColor: undefined,
+    defaultReportDateFormat: this.translocoDateFormatStyle,
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();
@@ -45,6 +51,7 @@ export class ConfigComponent {
     private formBuilder: FormBuilder,
     private configService: ConfigService,
     private noteService: NoteService,
+    private dateFormatStyles: DateFormatStyles,
     private electronService: ElectronService
   ) {
     this.path = APP_CONFIG.production

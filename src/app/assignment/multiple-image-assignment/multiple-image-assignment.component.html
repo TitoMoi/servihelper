@@ -23,9 +23,15 @@
   <div id="assignmentDiv">
     <div class="col-12">
       <div class="d-flex flex-wrap align-items-start">
+        <!-- this style is for the print option that doesnt support class-->
         <div
           class="flex-child-size"
-          style="width: 20rem; display: inline-block; margin-right: 4px"
+          style="
+            width: 20rem;
+            display: inline-block;
+            margin-right: 4px;
+            font-family: 'Open Sans';
+          "
           *ngFor="let a of assignmentsWithNames"
         >
           <h4 class="m-2" *ngIf="!assignmentHeaderTitle">

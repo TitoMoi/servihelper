@@ -174,7 +174,7 @@
   "CONFIG_IMAGE_HEADER": "Assignment image title",
   "CONFIG_BACKUP_LABEL_EXPORT": "Export backup",
   "CONFIG_BACKUP_LABEL_IMPORT": "Import backup",
-  "CONFIG_DEFAULT_FOOTER_NOTE": "Select the default note",
+  "CONFIG_DEFAULT_FOOTER_NOTE": "Select default footnote when creating assignments",
   "CONFIG_RESTART_LABEL": "Reset program",
   "CONFIG_FORM_SAVED": "Configuration saved",
   "CONFIG_ASSIGNMENT_TITLE": "Assignment title",
