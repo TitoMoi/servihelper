@@ -1,152 +1,161 @@
-<form [formGroup]="assignmentForm" novalidate (ngSubmit)="submitAndCreate()">
-  <mat-card class="shipping-card">
-    <mat-card-header>
-      <mat-card-title>{{
-        "ASSIGN_CREATE_ASSIGN_TITLE" | transloco
-      }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <mat-form-field appearance="fill">
-          <mat-label>{{ "ASSIGN_CREATE_CHOOSE_DATE" | transloco }}</mat-label>
-          <input
-            required
-            appautofocus
-            matInput
-            [matDatepicker]="picker"
-            formControlName="date"
-          />
-          <mat-datepicker-toggle
-            matPrefix
-            [for]="picker"
-            class="mr-3"
-          ></mat-datepicker-toggle>
-          <mat-datepicker
-            id="assignmentDatepickerId"
-            #picker
-            [startAt]="lastDate ? lastDate : undefined"
-          ></mat-datepicker>
-        </mat-form-field>
-        <div class="col-6 mb-2">
-          <mat-form-field class="full-width">
-            <mat-label>{{ "ASSIGN_CREATE_ROOM" | transloco }}</mat-label>
-            <mat-select formControlName="room" required [disableRipple]="true">
-              <mat-option *ngFor="let room of rooms" [value]="room.id">
-                {{ room.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-6 mb-2">
-          <mat-form-field class="full-width">
-            <mat-label>{{ "ASSIGN_CREATE_ASSIGNTYPE" | transloco }}</mat-label>
-            <mat-select
-              formControlName="assignType"
+<ng-container *transloco="let t">
+  <form [formGroup]="assignmentForm" novalidate (ngSubmit)="submitAndCreate()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>{{ t("ASSIGN_CREATE_ASSIGN_TITLE") }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <mat-form-field appearance="fill">
+            <mat-label>{{ t("ASSIGN_CREATE_CHOOSE_DATE") }}</mat-label>
+            <input
               required
-              [disableRipple]="true"
+              appautofocus
+              matInput
+              [matDatepicker]="picker"
+              formControlName="date"
+            />
+            <mat-datepicker-toggle
+              matPrefix
+              [for]="picker"
+              class="mr-3"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              id="assignmentDatepickerId"
+              #picker
+              [startAt]="lastDate ? lastDate : undefined"
+            ></mat-datepicker>
+          </mat-form-field>
+          <div class="col-6 mb-2">
+            <mat-form-field class="full-width">
+              <mat-label>{{ t("ASSIGN_CREATE_ROOM") }}</mat-label>
+              <mat-select
+                formControlName="room"
+                required
+                [disableRipple]="true"
+              >
+                <mat-option *ngFor="let room of rooms" [value]="room.id">
+                  {{ room.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mb-2">
+            <mat-form-field class="full-width">
+              <mat-label>{{ t("ASSIGN_CREATE_ASSIGNTYPE") }}</mat-label>
+              <mat-select
+                formControlName="assignType"
+                required
+                [disableRipple]="true"
+              >
+                <mat-option
+                  *ngFor="let assignType of assignTypes"
+                  [value]="assignType.id"
+                >
+                  {{ assignType.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 mb-2">
+            <mat-form-field class="full-width">
+              <mat-label>{{ t("ASSIGN_CREATE_THEME") }}</mat-label>
+              <input matInput formControlName="theme" />
+            </mat-form-field>
+          </div>
+          <div class="col-3 mb-2">
+            <mat-checkbox
+              labelPosition="before"
+              color="primary"
+              formControlName="onlyWoman"
+              >{{ t("ASSIGN_CREATE_ONLY_WOMEN") }}</mat-checkbox
             >
-              <mat-option
-                *ngFor="let assignType of assignTypes"
-                [value]="assignType.id"
-              >
-                {{ assignType.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-12 mb-2">
-          <mat-form-field class="full-width">
-            <mat-label>{{ "ASSIGN_CREATE_THEME" | transloco }}</mat-label>
-            <input matInput formControlName="theme" />
-          </mat-form-field>
-        </div>
-        <div class="col-3 mb-2">
-          <mat-checkbox
-            labelPosition="before"
-            color="primary"
-            formControlName="onlyWoman"
-            >{{ "ASSIGN_CREATE_ONLY_WOMEN" | transloco }}</mat-checkbox
-          >
-        </div>
-        <div class="col-3 mb-2">
-          <mat-checkbox
-            labelPosition="before"
-            color="primary"
-            formControlName="onlyMan"
-            >{{ "ASSIGN_CREATE_ONLY_MEN" | transloco }}</mat-checkbox
-          >
-        </div>
-        <div class="col-12 mb-2">
-          <mat-form-field class="full-width">
-            <mat-label>{{ "ASSIGN_CREATE_PRINCIPAL" | transloco }}</mat-label>
-            <mat-select
-              formControlName="principal"
-              required
-              [disableRipple]="true"
+          </div>
+          <div class="col-3 mb-2">
+            <mat-checkbox
+              labelPosition="before"
+              color="primary"
+              formControlName="onlyMan"
+              >{{ t("ASSIGN_CREATE_ONLY_MEN") }}</mat-checkbox
             >
-              <mat-option
-                *ngFor="let participant of principals; trackBy: trackByIdFn"
-                [value]="participant.id"
-                [ngClass]="{
-                  'bg-color-lightyellow': participant.hasWork,
-                  'no-hover': true
-                }"
+          </div>
+          <div class="col-12 mb-2">
+            <mat-form-field class="full-width">
+              <mat-label>{{ t("ASSIGN_CREATE_PRINCIPAL") }}</mat-label>
+              <mat-select
+                formControlName="principal"
+                required
+                [disableRipple]="true"
               >
-                {{ participant.count }} - {{ participant.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+                <mat-option
+                  *ngFor="let participant of principals; trackBy: trackByIdFn"
+                  [value]="participant.id"
+                  [ngClass]="{
+                    'bg-color-lightyellow': participant.hasWork,
+                    'no-hover': true
+                  }"
+                >
+                  {{ participant.count }} - {{ participant.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 mb-2">
+            <mat-form-field class="full-width">
+              <mat-label>{{ t("ASSIGN_CREATE_ASSISTANT") }}</mat-label>
+              <mat-select formControlName="assistant" [disableRipple]="true">
+                <mat-option
+                  *ngFor="let participant of assistants; trackBy: trackByIdFn"
+                  [value]="participant.id"
+                  [ngClass]="{
+                    'bg-color-lightyellow': participant.hasWork,
+                    'no-hover': true
+                  }"
+                >
+                  {{ participant.count }} - {{ participant.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 mb-2">
+            <mat-form-field class="full-width">
+              <mat-label>{{ t("ASSIGN_CREATE_FOOTER_NOTE") }}</mat-label>
+              <mat-select formControlName="footerNote" [disableRipple]="true">
+                <mat-option *ngFor="let note of footerNotes" [value]="note.id">
+                  {{ note.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col-12 mb-2">
-          <mat-form-field class="full-width">
-            <mat-label>{{ "ASSIGN_CREATE_ASSISTANT" | transloco }}</mat-label>
-            <mat-select formControlName="assistant" [disableRipple]="true">
-              <mat-option
-                *ngFor="let participant of assistants; trackBy: trackByIdFn"
-                [value]="participant.id"
-                [ngClass]="{
-                  'bg-color-lightyellow': participant.hasWork,
-                  'no-hover': true
-                }"
-              >
-                {{ participant.count }} - {{ participant.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-12 mb-2">
-          <mat-form-field class="full-width">
-            <mat-label>{{ "ASSIGN_CREATE_FOOTER_NOTE" | transloco }}</mat-label>
-            <mat-select formControlName="footerNote" [disableRipple]="true">
-              <mat-option *ngFor="let note of footerNotes" [value]="note.id">
-                {{ note.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button type="button" routerLink="..">
-        {{ "BUTTON_CANCEL" | transloco }}
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        type="button"
-        (click)="onSubmit()"
-        [disabled]="assignmentForm.invalid"
-      >
-        {{ "BUTTON_SAVE" | transloco }}
-      </button>
-      <button
-        mat-raised-button
-        color="accent"
-        type="submit"
-        [disabled]="assignmentForm.invalid"
-      >
-        {{ "BUTTON_SAVE_CREATE_ANOTHER" | transloco }}
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          [disableRipple]="true"
+          type="button"
+          routerLink=".."
+        >
+          {{ t("BUTTON_CANCEL") }}
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="onSubmit()"
+          [disabled]="assignmentForm.invalid"
+        >
+          {{ t("BUTTON_SAVE") }}
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="assignmentForm.invalid"
+        >
+          {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-container>
