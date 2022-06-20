@@ -25,6 +25,7 @@ import { setCount } from "app/functions/setCount";
 import { sortParticipantsByCount } from "app/functions";
 import { SharedService } from "app/services/shared.service";
 import { ConfigService } from "app/config/service/config.service";
+import { NgZone } from "@angular/core";
 
 @Component({
   selector: "app-create-assignment",
@@ -75,12 +76,11 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private dateAdapter: DateAdapter<any>,
     private lastDateService: LastDateService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit() {
-    this.getData();
-
     //Set datepicker lang to locale
     this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
       this.dateAdapter.setLocale(lang);
@@ -88,7 +88,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
     /*
       Only when assignType, room, onlyMan or onlyWoman changes principal and assistant must change
-      if theme is getting filled, we dont want a subscribe for each letter so -> "skipWhile"
+      if theme is getting filled, we dont want a subscribe for each letter so -> "filter"
       pairwise is used to get the prev and last value, and the initial prev value is the form value
     */
     this.formSub$ = this.assignmentForm.valueChanges
@@ -126,7 +126,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    this.assignments = this.assignmentService.getAssignments(true);
+    this.assignments = this.assignmentService.getAssignments();
 
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       this.participantService.getParticipants(true),
@@ -150,7 +150,17 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       this.assignmentForm.get("room").value
     );
 
-    //remove principal from assistants
+    //remove not available dates from assistants
+    this.assistants = this.assistants.filter(
+      (p) =>
+        !p.notAvailableDates.some(
+          (date) =>
+            new Date(this.assignmentForm.get("date").value).getTime() ===
+            new Date(date).getTime()
+        )
+    );
+
+    //remove selected principal from assistants
     this.assistants = this.assistants.filter(
       (a) => a.id !== this.assignmentForm.get("principal").value
     );
@@ -196,14 +206,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           .some((a) => a.principal === p.id || a.assistant === p.id))
     );
 
-    this.assistants.forEach(
-      (p) =>
-        (p.hasWork = this.assignments
-          .filter(
-            (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
-          )
-          .some((a) => a.principal === p.id || a.assistant === p.id))
-    );
+    this.assistants.forEach((as) => {
+      as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
+    });
   }
 
   onSubmit(): void {

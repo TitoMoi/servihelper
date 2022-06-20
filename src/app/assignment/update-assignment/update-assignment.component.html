@@ -23,7 +23,7 @@
         <div class="col-6 mb-2">
           <mat-form-field class="full-width">
             <mat-label>{{ "ASSIGN_UPDATE_ROOM" | transloco }}</mat-label>
-            <mat-select formControlName="room" required>
+            <mat-select formControlName="room" required [disableRipple]="true">
               <mat-option *ngFor="let room of rooms" [value]="room.id">
                 {{ room.name }}
               </mat-option>
@@ -33,7 +33,11 @@
         <div class="col-6 mb-2">
           <mat-form-field class="full-width">
             <mat-label>{{ "ASSIGN_UPDATE_ASSIGNTYPE" | transloco }}</mat-label>
-            <mat-select formControlName="assignType" required>
+            <mat-select
+              formControlName="assignType"
+              required
+              [disableRipple]="true"
+            >
               <mat-option
                 *ngFor="let assignType of assignTypes"
                 [value]="assignType.id"
@@ -68,7 +72,11 @@
         <div class="col-12 mb-2">
           <mat-form-field class="full-width">
             <mat-label>{{ "ASSIGN_UPDATE_PRINCIPAL" | transloco }}</mat-label>
-            <mat-select formControlName="principal" required>
+            <mat-select
+              formControlName="principal"
+              required
+              [disableRipple]="true"
+            >
               <mat-option
                 *ngFor="let participant of principals; trackBy: trackByIdFn"
                 [value]="participant.id"
@@ -85,7 +93,7 @@
         <div class="col-12 mb-2">
           <mat-form-field class="full-width">
             <mat-label>{{ "ASSIGN_UPDATE_ASSISTANT" | transloco }}</mat-label>
-            <mat-select formControlName="assistant">
+            <mat-select formControlName="assistant" [disableRipple]="true">
               <mat-option
                 *ngFor="let participant of assistants; trackBy: trackByIdFn"
                 [value]="participant.id"
@@ -102,7 +110,7 @@
         <div class="col-12 mb-2">
           <mat-form-field class="full-width">
             <mat-label>{{ "ASSIGN_UPDATE_FOOTER_NOTE" | transloco }}</mat-label>
-            <mat-select formControlName="footerNote">
+            <mat-select formControlName="footerNote" [disableRipple]="true">
               <mat-option *ngFor="let note of footerNotes" [value]="note.id">
                 {{ note.name }}
               </mat-option>

@@ -2,5 +2,8 @@
   "lang": "en",
   "firstDayOfWeek": 1,
   "assignmentHeaderTitle": "",
-  "defaultFooterNoteId": ""
+  "defaultFooterNoteId": "",
+  "defaultReportFontSize": "",
+  "defaultReportDateColor": "",
+  "defaultReportDateFormat": "short"
 }
