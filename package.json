@@ -17,7 +17,7 @@
     "tsc:main": "tsc ./app/main.ts",
     "start": "electron-forge start",
     "build:old": "npm run electron:serve-tsc && ng build --base-href ./",
-    "build": "npm run build -- -c production",
+    "build": "ng build -c production --base-href ./ ",
     "build:dev": "npm run build -- -c dev",
     "build:prod": "npm run build -- -c production",
     "ng:serve": "ng serve -c dev",
