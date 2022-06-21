@@ -12,7 +12,6 @@
   "main": "app/main.js",
   "private": true,
   "scripts": {
-    "postinstall": "electron-builder install-app-deps",
     "ng": "ng",
     "tsc": "tsc",
     "tsc:main": "tsc ./app/main.ts",
