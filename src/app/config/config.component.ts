@@ -33,7 +33,8 @@ export class ConfigComponent {
     assignmentHeaderTitle: this.configService.getConfig().assignmentHeaderTitle,
     defaultFooterNoteId: this.configService.getConfig().defaultFooterNoteId,
     defaultReportFontSize: this.configService.getConfig().defaultReportFontSize,
-    defaultReportDateFormat: this.translocoDateFormats[0],
+    defaultReportDateFormat:
+      this.configService.getConfig().defaultReportDateFormat,
   });
 
   // If config assignmentHeader key is saved
@@ -96,16 +97,6 @@ export class ConfigComponent {
       ...this.configForm.value,
       defaultReportDateColor: this.defaultReportDateColor,
     });
-
-    /* this.configService.updateConfigByKey(
-      "assignmentHeaderTitle",
-      this.configForm.get("assignmentHeaderTitle").value
-    );
-
-    this.configService.updateConfigByKey(
-      "defaultFooterNoteId",
-      this.configForm.get("defaultFooterNoteId").value
-    ); */
 
     this.isFormSaved = true;
   }
