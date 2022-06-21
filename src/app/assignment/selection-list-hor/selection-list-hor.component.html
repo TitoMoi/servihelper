@@ -42,6 +42,9 @@
                 assignTypeService.getAssignTypeByName(assignment.assignType)
                   .color
               "
+              [style.fontSize]="
+                configService.getConfig().defaultReportFontSize + 'px'
+              "
             >
               {{ assignment.assignType }}
             </td>

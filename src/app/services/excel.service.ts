@@ -72,10 +72,9 @@ export class ExcelService {
         type: "pattern",
         pattern: "solid",
         fgColor: {
-          argb:
-            this.configService
-              .getConfig()
-              .defaultReportDateColor.substring(1) || "FFFFFF",
+          argb: this.configService
+            .getConfig()
+            .defaultReportDateColor.substring(1),
         }, //remove #
       };
 
@@ -109,7 +108,7 @@ export class ExcelService {
           type: "pattern",
           pattern: "solid",
           fgColor: {
-            argb: color || "FFFFFF",
+            argb: color,
           },
         };
 
@@ -140,10 +139,9 @@ export class ExcelService {
         type: "pattern",
         pattern: "solid",
         fgColor: {
-          argb:
-            this.configService
-              .getConfig()
-              .defaultReportDateColor.substring(1) || "FFFFFF",
+          argb: this.configService
+            .getConfig()
+            .defaultReportDateColor.substring(1),
         },
       };
 
@@ -180,7 +178,7 @@ export class ExcelService {
           type: "pattern",
           pattern: "solid",
           fgColor: {
-            argb: color || "FFFFFF",
+            argb: color,
           },
         };
 
@@ -258,11 +256,11 @@ export class ExcelService {
 
     this.autoSizeColumnWidth();
 
-    this.sheet.views[0] = {
+    /* this.sheet.views[0] = {
       showGridLines: false,
       showRowColHeaders: false,
       showRuler: false,
-    };
+    }; */
 
     this.writeBufferToFile(workbook);
   }
