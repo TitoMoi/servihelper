@@ -5,6 +5,7 @@
 /dist.
 /assets
 /tmp
+/out
 /out-tsc
 /app-builds
 /release
