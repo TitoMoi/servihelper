@@ -50,10 +50,7 @@ Yes, fix, perf, refactor, test and docs are welcome.
 
 ### Images
 
-![1](./pictures/1.png)
-![2](./pictures/2.png)
-![3](./pictures/3.png)
-![4](./pictures/4.png)
-![5](./pictures/5.png)
-![6](./pictures/6.png)
-![7](./pictures/7.png)
+![1](./pictures/servihelper-flow.jpg)
+![2](./pictures/print.jpg)
+![3](./pictures/vertical.jpg)
+![4](./pictures/horizontal.jpg)
