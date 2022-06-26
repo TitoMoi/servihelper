@@ -1,1 +1,57 @@
-<p>selection-list-ver-col works!</p>
+<mat-icon
+  class="m-3"
+  svgIcon="pdf"
+  aria-label="icon"
+  (click)="toPdf()"
+></mat-icon>
+<mat-icon
+  class="m-3"
+  svgIcon="excel"
+  aria-label="icon"
+  (click)="toExcel()"
+></mat-icon>
+
+<div id="resultListDiv" style="width: 25rem">
+  <div class="row white-base-background" *ngFor="let ag of assignmentGroups">
+    <div
+      class="col-12 mb-2 bold"
+      [style.background]="configService.getConfig().defaultReportDateColor"
+      [style.fontSize]="configService.getConfig().defaultReportFontSize + 'px'"
+    >
+      {{
+        ag.date
+          | translocoDate
+            : { dateStyle: configService.getConfig().defaultReportDateFormat }
+      }}
+    </div>
+    <div *ngFor="let assignment of ag.assignments" class="col-12 mb-1">
+      <div class="row justify-content-center">
+        <div
+          class="col-12 bold"
+          [style.background]="
+            assignTypeService.getAssignTypeByName(assignment.assignType).color
+          "
+          [style.fontSize]="
+            configService.getConfig().defaultReportFontSize + 'px'
+          "
+        >
+          {{ assignment.theme }}
+          <span *ngIf="!assignment.theme">{{ assignment.assignType }}</span>
+        </div>
+        <div
+          class="col-11 mb-1"
+          [style.fontSize]="
+            configService.getConfig().defaultReportFontSize + 'px'
+          "
+        >
+          {{ assignment.principal
+          }}<span *ngIf="assignment.assistant">
+            / <br />
+            {{ assignment.assistant }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
