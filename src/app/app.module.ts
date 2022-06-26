@@ -62,6 +62,7 @@ import { SelectionSheetsAssignmentComponent } from "./assignment/selection-sheet
 import { SelectionListComponent } from "./assignment/selection-list/selection-list.component";
 import { SelectionListHorComponent } from "./assignment/selection-list-hor/selection-list-hor.component";
 import { MultipleImageAssignmentComponent } from './assignment/multiple-image-assignment/multiple-image-assignment.component';
+import { SelectionListVerColComponent } from './assignment/selection-list-ver-col/selection-list-ver-col.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { MultipleImageAssignmentComponent } from './assignment/multiple-image-as
     SelectionListComponent,
     SelectionListHorComponent,
     MultipleImageAssignmentComponent,
+    SelectionListVerColComponent,
   ],
   imports: [
     BrowserAnimationsModule,
