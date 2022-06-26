@@ -83,6 +83,18 @@
       [assignTypes]="selectionForm.controls.assignTypes.value"
       [order]="selectionForm.controls.order.value"
     ></app-selection-list>
+    <app-selection-list-ver-col
+      *ngIf="
+        selectionForm.controls.endDate.value &&
+        selectionForm.controls.template.value ===
+          ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL_COLUMNS' | transloco)
+      "
+      [startDate]="selectionForm.controls.startDate.value"
+      [endDate]="selectionForm.controls.endDate.value"
+      [assignTypes]="selectionForm.controls.assignTypes.value"
+      [order]="selectionForm.controls.order.value"
+    >
+    </app-selection-list-ver-col>
     <app-selection-list-hor
       *ngIf="
         selectionForm.controls.endDate.value &&

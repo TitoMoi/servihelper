@@ -52,6 +52,7 @@
     "electron-squirrel-startup": "1.0.0",
     "exceljs": "4.3.0",
     "html-to-image": "1.9.0",
+    "jspdf": "2.5.1",
     "nanoid": "3.3.4",
     "ngx-color-picker": "12.0.1",
     "ngx-editor": "12.4.1",

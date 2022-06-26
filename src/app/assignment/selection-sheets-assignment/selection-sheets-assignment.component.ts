@@ -26,6 +26,9 @@ export class SelectionSheetsAssignmentComponent implements AfterViewInit {
       "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL"
     ),
     this.translocoService.translate(
+      "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL_COLUMNS"
+    ),
+    this.translocoService.translate(
       "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL"
     ),
     this.translocoService.translate(
