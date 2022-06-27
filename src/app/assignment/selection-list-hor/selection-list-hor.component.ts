@@ -14,6 +14,9 @@ import { AssignmentService } from "../service/assignment.service";
 import { ExcelService } from "app/services/excel.service";
 import { ConfigService } from "app/config/service/config.service";
 
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
 @Component({
   selector: "app-selection-list-hor",
   templateUrl: "./selection-list-hor.component.html",
@@ -154,6 +157,19 @@ export class SelectionListHorComponent implements OnChanges {
 
       if (!length) this.assignmentGroups.push(assignGroup);
     }
+  }
+
+  toPdf2() {
+    const doc = new jsPDF("landscape");
+
+    // It can parse html:
+    // <table id="my-table"><!-- ... --></table>
+
+    for (let i = 0; i < this.assignmentGroups.length; i++) {
+      autoTable(doc, { html: `#table${i}` });
+    }
+
+    doc.save("table.pdf");
   }
 
   async toPdf() {

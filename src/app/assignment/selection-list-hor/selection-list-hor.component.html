@@ -2,7 +2,7 @@
   class="m-3"
   svgIcon="pdf"
   aria-label="icon"
-  (click)="toPdf()"
+  (click)="toPdf2()"
 ></mat-icon>
 <mat-icon
   class="m-3"
@@ -14,10 +14,10 @@
 <div id="resultListDiv">
   <div class="row">
     <div class="col-12">
-      <table>
-        <ng-container *ngFor="let ag of assignmentGroups">
+      <ng-container *ngFor="let ag of assignmentGroups; index as i">
+        <table [id]="'table' + i">
           <tr>
-            <td
+            <th
               class="bold"
               [style.background]="
                 configService.getConfig().defaultReportDateColor
@@ -34,8 +34,8 @@
                           configService.getConfig().defaultReportDateFormat
                       }
               }}
-            </td>
-            <td
+            </th>
+            <th
               *ngFor="let assignment of ag.assignments"
               class="bold"
               [style.background]="
@@ -47,7 +47,7 @@
               "
             >
               {{ assignment.assignType }}
-            </td>
+            </th>
           </tr>
           <tr>
             <td></td>
@@ -62,8 +62,8 @@
               <div *ngIf="assignment.assistant">{{ assignment.assistant }}</div>
             </td>
           </tr>
-        </ng-container>
-      </table>
+        </table>
+      </ng-container>
     </div>
   </div>
   <hr />
