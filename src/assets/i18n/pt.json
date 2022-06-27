@@ -159,7 +159,7 @@
   "CONFIG_DEFAULT_FOOTER_NOTE": "Selecione a nota de rodapé padrão ao criar atribuições",
   "CONFIG_DEFAULT_REPORT_DATE_FORMAT": "Escolha o formato padrão para a data",
   "CONFIG_DEFAULT_REPORT_DATE_COLOR": "Escolha a cor padrão para a data",
-  "CONFIG_DEFAULT_FONT_SIZE": "O tamanho padrão da fonte é 16",
+  "CONFIG_DEFAULT_FONT_SIZE": "Tamanho de fonte padrão para imagem e relatório do Excel (exceto pdf)",
   "CONFIG_FORM_SAVED": "Configuração salva",
   "CONFIG_RESTART_LABEL": "Reiniciar programa",
 

@@ -4,7 +4,6 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
-import { ElectronService } from "app/services/electron.service";
 import { toPng } from "html-to-image";
 import {
   AssignmentGroupInterface,
@@ -32,7 +31,7 @@ export class SelectionListHorComponent implements OnChanges {
 
   assignmentGroups: AssignmentGroupInterface[] = [];
 
-  icons: string[] = ["pdf", "excel"];
+  icons: string[] = ["pdf", "png", "excel"];
 
   constructor(
     public assignTypeService: AssignTypeService,
@@ -42,8 +41,7 @@ export class SelectionListHorComponent implements OnChanges {
     private assignmentService: AssignmentService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private excelService: ExcelService,
-    private electronService: ElectronService
+    private excelService: ExcelService
   ) {
     //Register icons
     for (const iconFileName of this.icons) {
@@ -159,54 +157,41 @@ export class SelectionListHorComponent implements OnChanges {
     }
   }
 
-  toPdf2() {
+  toPdf() {
     const doc = new jsPDF("landscape");
 
-    // It can parse html:
-    // <table id="my-table"><!-- ... --></table>
-
     for (let i = 0; i < this.assignmentGroups.length; i++) {
-      autoTable(doc, { html: `#table${i}` });
+      autoTable(doc, {
+        html: `#table${i}`,
+        didParseCell: (data) => {
+          const text = data.cell.raw["innerText"];
+          const assignType = this.assignTypeService.getAssignTypeByName(text);
+          if (assignType) {
+            data.cell.styles.fillColor = assignType.color;
+            data.cell.styles.fontStyle = "bold";
+          }
+          if (Date.parse(text)) {
+            data.cell.styles.fillColor =
+              this.configService.getConfig().defaultReportDateColor;
+            data.cell.styles.fontStyle = "bold";
+          }
+        },
+      });
     }
-
-    doc.save("table.pdf");
+    doc.save("assignments.pdf");
   }
 
-  async toPdf() {
-    /* const micronMeasure = 132.2816; */
-    const micronMeasure = 160.2816;
+  async toPng() {
     //the div
     document.body.style.cursor = "wait";
     const div = document.getElementById("resultListDiv");
     const dataUrl = await toPng(div);
 
-    //create window
-    const win = new this.electronService.remote.BrowserWindow({
-      width: div.offsetWidth,
-      height: div.offsetHeight,
-      show: false,
-    });
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.setAttribute("download", "assignments.png");
+    link.click();
 
-    await win.loadURL(dataUrl);
-
-    const pdfOptions = {
-      marginsType: 1,
-      pageSize: {
-        width: div.offsetWidth * micronMeasure,
-        height: div.offsetHeight * micronMeasure * 1.05, //1px = 264.5833 microns (meassure units)
-      },
-      printBackground: false,
-      printSelectionOnly: false,
-      landscape: false,
-    };
-
-    win.webContents.printToPDF(pdfOptions).then((data) => {
-      const blob = new Blob([data], { type: "application/pdf" });
-      const link = document.createElement("a");
-      link.href = window.URL.createObjectURL(blob);
-      link.setAttribute("download", "list.pdf");
-      link.click();
-    });
     document.body.style.cursor = "default";
   }
 

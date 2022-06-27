@@ -2,7 +2,13 @@
   class="m-3"
   svgIcon="pdf"
   aria-label="icon"
-  (click)="toPdf2()"
+  (click)="toPdf()"
+></mat-icon>
+<mat-icon
+  class="m-3"
+  svgIcon="png"
+  aria-label="icon"
+  (click)="toPng()"
 ></mat-icon>
 <mat-icon
   class="m-3"
@@ -11,7 +17,7 @@
   (click)="toExcel()"
 ></mat-icon>
 
-<div id="resultListDiv">
+<div id="resultListDiv" class="bg-color-white">
   <div class="row">
     <div class="col-12">
       <ng-container *ngFor="let ag of assignmentGroups; index as i">

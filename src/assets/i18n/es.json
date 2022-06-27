@@ -158,7 +158,7 @@
   "CONFIG_DEFAULT_FOOTER_NOTE": "Selecciona la nota de pie por defecto al crear asignaciones",
   "CONFIG_DEFAULT_REPORT_DATE_FORMAT": "Elija el formato predeterminado para la fecha",
   "CONFIG_DEFAULT_REPORT_DATE_COLOR": "Elija el color predeterminado para la fecha",
-  "CONFIG_DEFAULT_FONT_SIZE": "El tamaño de fuente predeterminado es 16",
+  "CONFIG_DEFAULT_FONT_SIZE": "Tamaño de fuente para la imagen y el informe de Excel (excepto pdf)",
   "CONFIG_FORM_SAVED": "Configuración guardada",
   "CONFIG_ASSIGNMENT_TITLE": "Titulo de las asignaciones",
 

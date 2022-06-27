@@ -179,7 +179,7 @@
   "CONFIG_DEFAULT_FOOTER_NOTE": "Seleccioneu la nota de peu per defecte al crear assignacions",
   "CONFIG_DEFAULT_REPORT_DATE_FORMAT": "Trieu el format predeterminat per a la data",
   "CONFIG_DEFAULT_REPORT_DATE_COLOR": "Trieu el color predeterminat per a la data",
-  "CONFIG_DEFAULT_FONT_SIZE": "La mida de lletra predeterminada és 16",
+  "CONFIG_DEFAULT_FONT_SIZE": "Mida de lletra per a la imatge i l'informe Excel (no pdf)",
   "CONFIG_FORM_SAVED": "Configuració guardada",
   "CONFIG_ASSIGNMENT_TITLE": "Títol de les assignacions",
 

@@ -178,7 +178,7 @@
   "CONFIG_DEFAULT_FOOTER_NOTE": "Select default footnote when creating assignments",
   "CONFIG_DEFAULT_REPORT_DATE_FORMAT": "Choose default format for date",
   "CONFIG_DEFAULT_REPORT_DATE_COLOR": "Choose default color for date",
-  "CONFIG_DEFAULT_FONT_SIZE": "Default font size is 16",
+  "CONFIG_DEFAULT_FONT_SIZE": "Default font size for image and excel report (except pdf)",
   "CONFIG_RESTART_LABEL": "Reset program",
   "CONFIG_FORM_SAVED": "Configuration saved",
   "CONFIG_ASSIGNMENT_TITLE": "Assignment title",
