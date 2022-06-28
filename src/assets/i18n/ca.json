@@ -8,7 +8,6 @@
   "ASSIGNTYPE_TABLE_HEADER_NAME": "Nom",
   "ASSIGNTYPE_TABLE_HEADER_ORDER": "Ordre",
   "ASSIGNTYPE_UPDATE_TITLE": "Actualitzar tipus d'assignació",
-  "ASSIGN_ASSISTANT_HAS_ASSIGNMENTS": "Atenció: el participant ja té assignacions com a asistent per a la data seleccionada:",
   "ASSIGN_CREATE_ASSIGNTYPE": "Tipus d'assignació",
   "ASSIGN_CREATE_ASSIGN_BUTTON": "Crear assignació",
   "ASSIGN_CREATE_ASSIGN_TITLE": "Crear assignació",
@@ -180,5 +179,6 @@
   "ca": "Català",
   "en": "Anglés",
   "es": "Espanyol",
-  "pt": "Portuguès"
+  "pt": "Portuguès",
+  "fr": "Francès"
 }

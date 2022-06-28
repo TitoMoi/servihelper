@@ -8,7 +8,6 @@
   "ASSIGNTYPE_TABLE_HEADER_NAME": "Name",
   "ASSIGNTYPE_TABLE_HEADER_ORDER": "Order",
   "ASSIGNTYPE_UPDATE_TITLE": "Update assignment type",
-  "ASSIGN_ASSISTANT_HAS_ASSIGNMENTS": "Attention: the participant already has assignments as assistant for the selected date:",
   "ASSIGN_CREATE_ASSIGNTYPE": "Assignment type",
   "ASSIGN_CREATE_ASSIGN_BUTTON": "Create assignment",
   "ASSIGN_CREATE_ASSIGN_TITLE": "Create assignment",
@@ -22,7 +21,6 @@
   "ASSIGN_CREATE_THEME": "Theme",
   "ASSIGN_DELETE_TITLE": "Remove assignment",
   "ASSIGN_DELETE_WARNING": "This action is irreversible",
-  "ASSIGN_HAS_ASSIGNMENTS": "Attention: the participant already has assignments as principal for the selected date:",
   "ASSIGN_IMAGE_ASSIGNTYPE": "Type of assignment:",
   "ASSIGN_IMAGE_ASSISTANT": "Assistant:",
   "ASSIGN_IMAGE_COPIED": "Assignment copied to clipboard",
@@ -180,5 +178,6 @@
   "ca": "Catalan",
   "en": "English",
   "es": "Spanish",
-  "pt": "Portuguese"
+  "pt": "Portuguese",
+  "fr": "French"
 }

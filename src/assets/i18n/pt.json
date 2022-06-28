@@ -8,7 +8,6 @@
   "ASSIGNTYPE_TABLE_HEADER_NAME": "Nome",
   "ASSIGNTYPE_TABLE_HEADER_ORDER": "Ordenação",
   "ASSIGNTYPE_UPDATE_TITLE": "Atualizar tipo de designação",
-  "ASSIGN_ASSISTANT_HAS_ASSIGNMENTS": "Atenção: o participante já tem atribuições como ajudante para a data selecionada:",
   "ASSIGN_CREATE_ASSIGNTYPE": "Tipo de designação",
   "ASSIGN_CREATE_ASSIGN_BUTTON": "Criar designação",
   "ASSIGN_CREATE_ASSIGN_TITLE": "Criar Designação",
@@ -181,5 +180,6 @@
   "ca": "Catalão",
   "en": "Inglês",
   "es": "Espanhol",
-  "pt": "Português"
+  "pt": "Português",
+  "fr": "Francês"
 }
