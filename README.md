@@ -8,6 +8,10 @@ Its purpose is for help the Jehovah's witnesses to create and manage assignments
 
 Download app section [Download for Windows or Mac](https://github.com/TitoMoi/servihelper/releases).
 
+## Languages
+
+Available languages are at the end of the page.
+
 ## The executable is not recognized on Mac
 
 Thats because i dont have an Apple developer Id, you must need to trust the binary in mac -> security tab -> general tab and below the section are the instructions to allow it.
@@ -54,3 +58,13 @@ Yes, fix, perf, refactor, test and docs are welcome.
 ![2](./pictures/print.jpg)
 ![3](./pictures/vertical.jpg)
 ![4](./pictures/horizontal.jpg)
+
+### Available languages
+
+- English
+- Spanish
+- French
+- Catalan
+- Portuguese
+- Italian
+- German
