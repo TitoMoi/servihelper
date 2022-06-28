@@ -224,10 +224,12 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assignmentService.createAssignment(this.assignmentForm.value);
 
     const date = this.assignmentForm.get("date").value;
-    const note = this.assignmentForm.get("footerNote").value;
+    const footerNote = this.assignmentForm.get("footerNote").value;
+    const room = this.assignmentForm.get("room").value;
     this.assignmentForm.reset();
     this.assignmentForm.get("date").setValue(date);
-    this.assignmentForm.get("footerNote").setValue(note);
+    this.assignmentForm.get("footerNote").setValue(footerNote);
+    this.assignmentForm.get("room").setValue(room);
   }
 
   /**

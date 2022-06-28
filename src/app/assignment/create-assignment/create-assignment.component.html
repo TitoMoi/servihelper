@@ -151,6 +151,7 @@
           mat-raised-button
           color="accent"
           type="submit"
+          [disableRipple]="true"
           [disabled]="assignmentForm.invalid"
         >
           {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
