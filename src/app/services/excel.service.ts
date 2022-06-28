@@ -115,7 +115,6 @@ export class ExcelService {
         cell.value = a.theme ? a.theme : a.assignType;
 
         //participants
-        /*  const row2 = this.sheet.addRow({}); */
         const cell2 = row.getCell(2);
 
         cell2.font = {
