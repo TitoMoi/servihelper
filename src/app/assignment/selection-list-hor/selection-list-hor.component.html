@@ -64,8 +64,10 @@
               "
             >
               {{ assignment.principal }}
-              <span *ngIf="assignment.assistant">/</span>
-              <div *ngIf="assignment.assistant">{{ assignment.assistant }}</div>
+              <span *ngIf="assignment.assistant"
+                >/ <br />
+                {{ assignment.assistant }}</span
+              >
             </td>
           </tr>
         </table>

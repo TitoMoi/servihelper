@@ -13,6 +13,8 @@ import {
 import { AssignmentService } from "../service/assignment.service";
 import { ExcelService } from "app/services/excel.service";
 import { ConfigService } from "app/config/service/config.service";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 @Component({
   selector: "app-selection-list",
@@ -29,7 +31,7 @@ export class SelectionListComponent implements OnChanges {
 
   assignmentGroups: AssignmentGroupInterface[] = [];
 
-  icons: string[] = ["pdf", "excel"];
+  icons: string[] = ["pdf", "png", "excel"];
 
   constructor(
     public assignTypeService: AssignTypeService,
@@ -115,7 +117,7 @@ export class SelectionListComponent implements OnChanges {
   }
 
   /**
-   * Covert the id's to names
+   * Convert the id's to names
    */
   getRelatedData() {
     let assignGroup: AssignmentGroupInterface = {
@@ -156,45 +158,45 @@ export class SelectionListComponent implements OnChanges {
     }
   }
 
-  async toPdf() {
-    /* const micronMeasure = 132.2816; */
-    const micronMeasure = 160.2816;
+  toPdf() {
+    const doc = new jsPDF("portrait");
+
+    for (let i = 0; i < this.assignmentGroups.length; i++) {
+      autoTable(doc, {
+        html: `#table${i}`,
+        didParseCell: (data) => {
+          const text = data.cell.raw["innerText"];
+          const assignType = this.assignTypeService.getAssignTypeByName(text);
+          if (assignType) {
+            data.cell.styles.fillColor = assignType.color;
+            data.cell.styles.fontStyle = "bold";
+          }
+          if (Date.parse(text)) {
+            data.cell.styles.fillColor =
+              this.configService.getConfig().defaultReportDateColor;
+            data.cell.styles.fontStyle = "bold";
+          }
+        },
+      });
+    }
+    doc.save("assignments.pdf");
+  }
+
+  async toPng() {
     //the div
     document.body.style.cursor = "wait";
     const div = document.getElementById("resultListDiv");
     const dataUrl = await toPng(div);
 
-    //create window
-    const win = new this.electronService.remote.BrowserWindow({
-      width: div.offsetWidth,
-      height: div.offsetHeight,
-      show: false,
-    });
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.setAttribute("download", "assignments.png");
+    link.click();
 
-    await win.loadURL(dataUrl);
-
-    const pdfOptions = {
-      marginsType: 1,
-      pageSize: {
-        width: div.offsetWidth * micronMeasure,
-        height: div.offsetHeight * micronMeasure * 1.05, //1px = 264.5833 microns (meassure units)
-      },
-      printBackground: false,
-      printSelectionOnly: false,
-      landscape: false,
-    };
-
-    win.webContents.printToPDF(pdfOptions).then((data) => {
-      const blob = new Blob([data], { type: "application/pdf" });
-      const link = document.createElement("a");
-      link.href = window.URL.createObjectURL(blob);
-      link.setAttribute("download", "list.pdf");
-      link.click();
-    });
     document.body.style.cursor = "default";
   }
 
-  async toExcel() {
+  toExcel() {
     this.excelService.addAsignmentsVertical(this.assignmentGroups);
   }
 }

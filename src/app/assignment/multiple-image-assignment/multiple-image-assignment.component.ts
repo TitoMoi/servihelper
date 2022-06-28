@@ -34,7 +34,7 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
 
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
 
-  icons: string[] = ["pdf", "printer"];
+  icons: string[] = ["pdf", "png", "printer"];
 
   constructor(
     public assignTypeService: AssignTypeService,
@@ -140,6 +140,20 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
       link.setAttribute("download", "assignments.pdf");
       link.click();
     });
+    document.body.style.cursor = "default";
+  }
+
+  async toPng() {
+    //the div
+    document.body.style.cursor = "wait";
+    const div = document.getElementById("assignmentDiv");
+    const dataUrl = await toPng(div);
+
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.setAttribute("download", "assignments.png");
+    link.click();
+
     document.body.style.cursor = "default";
   }
 

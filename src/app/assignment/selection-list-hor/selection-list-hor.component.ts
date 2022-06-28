@@ -195,7 +195,7 @@ export class SelectionListHorComponent implements OnChanges {
     document.body.style.cursor = "default";
   }
 
-  async toExcel() {
+  toExcel() {
     this.excelService.addAsignmentsHorizontal(this.assignmentGroups);
   }
 }
