@@ -21,6 +21,7 @@ export class CustomDateAdapter extends NativeDateAdapter {
       ca: 1,
       pt: 1,
       fr: 1,
+      it: 1,
     };
   }
 

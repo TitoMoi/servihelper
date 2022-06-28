@@ -82,7 +82,7 @@
   "CONFIG_ZIP_UPLOAD": "Upload Zip file",
   "CONFIG_ZIP_UPLOADED": "Zip uploaded",
   "INFO_HOW_TO_WORK": "¿How can several managers work at the same time?",
-  "INFO_HOW_TO_WORK_ANSWER": "The first creates its assignments, exports the data from the 'home' section and leaves it in a site shared by those responsible, the second imports it and creates its assignments, and so on.",
+  "INFO_HOW_TO_WORK_ANSWER": "The first creates its assignments, exports the data from the home section and leaves it in a site shared by those responsible, the second imports it and creates its assignments, and so on.",
   "INFO_WHAT_IS_YELLOW_COLOR": "A yellow color appears in some participants, what is it?",
   "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "Although the participant may be a candidate for the assignment, it means that he or she already has one or more other assignments on that date.",
   "INFO__CONTACT": "¿How do I report a bug or an improvement?",
@@ -179,5 +179,6 @@
   "en": "English",
   "es": "Spanish",
   "pt": "Portuguese",
-  "fr": "French"
+  "fr": "French",
+  "it": "Italian"
 }

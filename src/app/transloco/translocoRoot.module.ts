@@ -33,6 +33,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
         ca: "ca-ES",
         pt: "pt-PT",
         fr: "fr-FR",
+        it: "it-IT",
       },
     }),
   ],
@@ -41,7 +42,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
     {
       provide: TRANSLOCO_CONFIG,
       useValue: translocoConfig({
-        availableLangs: ["en", "es", "ca", "pt", "fr"],
+        availableLangs: ["en", "es", "ca", "pt", "fr", "it"],
         defaultLang: "en",
         reRenderOnLangChange: true,
         prodMode: APP_CONFIG.production,
