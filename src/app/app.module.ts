@@ -61,8 +61,7 @@ import { SearchComponent } from "./search/search.component";
 import { SelectionSheetsAssignmentComponent } from "./assignment/selection-sheets-assignment/selection-sheets-assignment.component";
 import { SelectionListComponent } from "./assignment/selection-list/selection-list.component";
 import { SelectionListHorComponent } from "./assignment/selection-list-hor/selection-list-hor.component";
-import { MultipleImageAssignmentComponent } from './assignment/multiple-image-assignment/multiple-image-assignment.component';
-import { SelectionListVerColComponent } from './assignment/selection-list-ver-col/selection-list-ver-col.component';
+import { MultipleImageAssignmentComponent } from "./assignment/multiple-image-assignment/multiple-image-assignment.component";
 
 @NgModule({
   declarations: [
@@ -101,7 +100,6 @@ import { SelectionListVerColComponent } from './assignment/selection-list-ver-co
     SelectionListComponent,
     SelectionListHorComponent,
     MultipleImageAssignmentComponent,
-    SelectionListVerColComponent,
   ],
   imports: [
     BrowserAnimationsModule,
