@@ -22,6 +22,7 @@ export class CustomDateAdapter extends NativeDateAdapter {
       pt: 1,
       fr: 1,
       it: 1,
+      de: 1,
     };
   }
 
