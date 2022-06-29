@@ -165,12 +165,14 @@ export class SelectionListHorComponent implements OnChanges {
         html: `#table${i}`,
         didParseCell: (data) => {
           const text = data.cell.raw["innerText"];
+          const localName = data.cell.raw["localName"];
+
           const assignType = this.assignTypeService.getAssignTypeByName(text);
           if (assignType) {
             data.cell.styles.fillColor = assignType.color;
             data.cell.styles.fontStyle = "bold";
           }
-          if (Date.parse(text)) {
+          if (localName === "th" && !assignType) {
             data.cell.styles.fillColor =
               this.configService.getConfig().defaultReportDateColor;
             data.cell.styles.fontStyle = "bold";

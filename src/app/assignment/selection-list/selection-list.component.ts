@@ -166,12 +166,14 @@ export class SelectionListComponent implements OnChanges {
         html: `#table${i}`,
         didParseCell: (data) => {
           const text = data.cell.raw["innerText"];
+          const localName = data.cell.raw["localName"];
+          const classList: DOMTokenList = data.cell.raw["classList"];
           const assignType = this.assignTypeService.getAssignTypeByName(text);
           if (assignType) {
             data.cell.styles.fillColor = assignType.color;
             data.cell.styles.fontStyle = "bold";
           }
-          if (Date.parse(text)) {
+          if (localName === "th" && classList.contains("bold")) {
             data.cell.styles.fillColor =
               this.configService.getConfig().defaultReportDateColor;
             data.cell.styles.fontStyle = "bold";
