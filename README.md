@@ -22,7 +22,9 @@ All kinds of assignments can be created. You need to create the assignment types
 
 ## What cannot be done or implemented?
 
-Multiwork is not possible, as sensitive data cannot be uploaded to cloud environments.
+Diferent actors working at the same time is not possible, as sensitive data cannot be uploaded to cloud environments and keep being free.
+
+But, they can work exporting the app data from actor one and importing in the app of the actor two.
 
 ## ¿Can I distribute it?
 
@@ -36,9 +38,11 @@ We click on it and we can preview the assignment.
 
 Then below, we can copy it to the clipboard to later paste it in whatsapp web, generate a .png image or generate a pdf.
 
+Massive printing of assignments is supported too.
+
 ## When I create an assignment, when selecting the participant, a number is displayed next to it, what is it?
 
-It is the number of times you have participated in that room with that type of assignment with that role.
+It is the number of times the participant has participated in that room with that type of assignment with that role.
 
 ## ¿How do I report a bug or ask for a feature?
 
