@@ -1,6 +1,10 @@
+![1](./pictures/servihelper-logo.png)
+
 # Introduction
 
-Servihelper is an executable app that runs on the machine _(Windows or Mac)_ Your data is managed internally, so it never goes to the internet.
+Servihelper is a free executable app that runs on the machine _(Windows or Mac)_
+
+Your data is managed internally on the local device, so it never goes to the internet.
 
 Its purpose is for help the Jehovah's witnesses to create and manage assignments for the meetings.
 
