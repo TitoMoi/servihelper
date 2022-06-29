@@ -26,6 +26,7 @@
     "electron:local": "npm run build && npx electron .",
     "electron:build": "electron-builder build --publish=never",
     "prepare:publish:windows": "npm run build:prod && node scripts/clean-release.js && npm run electron:build && node scripts/zip-release-windows.js",
+    "prepare:publish:mac": "npm run build:prod && node scripts/clean-release.js && npm run electron:build",
     "test": "ng test --watch=false",
     "test:watch": "ng test",
     "lint": "ng lint",
