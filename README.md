@@ -60,12 +60,9 @@ Yes, send me the file located on assets/i18n/en.json translated attached by emai
 
 Yes, fix, perf, refactor, test and docs are welcome.
 
-### Images
+### Recommend workflow
 
 ![1](./pictures/servihelper-flow.jpg)
-![2](./pictures/print.jpg)
-![3](./pictures/vertical.jpg)
-![4](./pictures/horizontal.jpg)
 
 ### Available languages
 
