@@ -47,16 +47,11 @@ export class ParticipantService {
    * @returns true if participants are saved to disk or false
    */
   saveParticipantsToFile(): boolean {
-    try {
-      //Write participants back to file
-      this.fs.writeJson(this.path, this.#participants);
-      //Flag
-      this.hasChanged = true;
-      return true;
-    } catch (err) {
-      console.error("saveParticipants", err);
-      return false;
-    }
+    //Write participants back to file
+    this.fs.writeJson(this.path, this.#participants);
+    //Flag
+    this.hasChanged = true;
+    return true;
   }
 
   /**
@@ -91,8 +86,10 @@ export class ParticipantService {
    * @returns the participant that is ALWAYS found
    */
   getParticipant(id: string): ParticipantInterface {
-    //Preventive maybe this func is called outside participants view
-    this.checkParticipants();
+    if (this.hasChanged) {
+      this.getParticipants();
+    }
+
     //search participant
     for (const participant of this.#participants) {
       if (participant.id === id) {
@@ -137,7 +134,9 @@ export class ParticipantService {
    */
   addAssignType(id: string): boolean {
     //Preventive maybe this func is called outside participants view
-    this.checkParticipants();
+    if (this.hasChanged) {
+      this.getParticipants();
+    }
 
     const participantAssignTypesValue: ParticipantAssignTypesInterface = {
       assignTypeId: id,
@@ -162,7 +161,9 @@ export class ParticipantService {
    */
   deleteAssignType(id: string): boolean {
     //Preventive maybe this func is called outside participants view
-    this.checkParticipants();
+    if (this.hasChanged) {
+      this.getParticipants();
+    }
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].assignTypes = this.#participants[
@@ -179,7 +180,9 @@ export class ParticipantService {
    */
   addRoom(roomId: string): boolean {
     //Preventive maybe this func is called outside participants view
-    this.checkParticipants();
+    if (this.hasChanged) {
+      this.getParticipants();
+    }
 
     const value = {
       roomId,
@@ -200,7 +203,9 @@ export class ParticipantService {
    */
   deleteRoom(id: string): boolean {
     //Preventive maybe this func is called outside participants view
-    this.checkParticipants();
+    if (this.hasChanged) {
+      this.getParticipants();
+    }
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].rooms = this.#participants[i].rooms.filter(
@@ -208,11 +213,5 @@ export class ParticipantService {
       );
     }
     return this.saveParticipantsToFile();
-  }
-
-  checkParticipants() {
-    if (!this.#participants.length) {
-      this.getParticipants();
-    }
   }
 }

@@ -81,6 +81,9 @@ export class RoomService {
    * @returns the room that is ALWAYS found
    */
   getRoom(id: string): RoomInterface {
+    if (this.hasChanged) {
+      this.getRooms();
+    }
     //search room
     for (const room of this.#rooms) {
       if (room.id === id) {

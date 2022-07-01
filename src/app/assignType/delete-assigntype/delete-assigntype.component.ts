@@ -36,14 +36,16 @@ export class DeleteAssignTypeComponent implements OnInit {
     });
   }
 
-  onSubmit(assignType: AssignTypeInterface): void {
+  onSubmit(): void {
+    //get id
+    const id = this.assignTypeForm.get("id").value;
     //save the assignType
-    this.assignTypeService.deleteAssignType(assignType.id);
+    this.assignTypeService.deleteAssignType(id);
     //delete from participants assignType
-    this.participantService.deleteAssignType(assignType.id);
+    this.participantService.deleteAssignType(id);
 
     //delete all assignments that have the assignType
-    this.assignmentService.deleteAssignment(assignType.id);
+    this.assignmentService.deleteAssignmentsByAssignType(id);
 
     //navigate to parent
     this.router.navigate(["../.."], {

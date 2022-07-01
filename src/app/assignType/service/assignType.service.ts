@@ -41,16 +41,11 @@ export class AssignTypeService {
    * @returns true if assignTypes are saved to disk or false
    */
   saveAssignTypesToFile(): boolean {
-    try {
-      //Write assignTypes back to file
-      this.fs.writeJson(this.path, this.#assignTypes);
-      //Flag
-      this.hasChanged = true;
-      return true;
-    } catch (err) {
-      console.error("saveAssignTypes", err);
-      return false;
-    }
+    //Write assignTypes back to file
+    this.fs.writeJson(this.path, this.#assignTypes);
+    //Flag
+    this.hasChanged = true;
+    return true;
   }
 
   /**
@@ -75,6 +70,9 @@ export class AssignTypeService {
    * @returns the assignType that is ALWAYS found
    */
   getAssignType(id: string): AssignTypeInterface {
+    if (this.hasChanged) {
+      this.getAssignTypes();
+    }
     //search assignType
     for (const assignType of this.#assignTypes) {
       if (assignType.id === id) {

@@ -41,16 +41,11 @@ export class AssignmentService {
    * @returns save in memory assignments to file, true if assignments are saved to disk or false if some error happens.
    */
   saveAssignmentsToFile(): boolean {
-    try {
-      //Write assignments back to file
-      this.fs.writeJson(this.path, this.#assignments);
-      //Flag
-      this.hasChanged = true;
-      return true;
-    } catch (err) {
-      console.error("saveAssignments", err);
-      return false;
-    }
+    //Write assignments back to file
+    this.fs.writeJson(this.path, this.#assignments);
+    //Flag
+    this.hasChanged = true;
+    return true;
   }
 
   /**
@@ -151,7 +146,7 @@ export class AssignmentService {
    */
   deleteAssignment(id: string): boolean {
     //delete assignment
-    this.#assignments = this.#assignments.filter((b) => b.id !== id);
+    this.#assignments = this.#assignments.filter((a) => a.id !== id);
     //save assignments
     return this.saveAssignmentsToFile();
   }
@@ -172,6 +167,34 @@ export class AssignmentService {
       if (assignment.assistant === id) assignment.assistant = undefined;
     }
 
+    //save assignments
+    return this.saveAssignmentsToFile();
+  }
+
+  /**
+   *
+   * @param id the id of the room to delete assignments by.
+   * @returns true if assignment is deleted and saved false otherwise
+   */
+  deleteAssignmentsByRoom(id: string): boolean {
+    //Preventive if being called outside
+    this.checkAssignments();
+    //delete assignments
+    this.#assignments = this.#assignments.filter((a) => a.room !== id);
+    //save assignments
+    return this.saveAssignmentsToFile();
+  }
+
+  /**
+   *
+   * @param id the id of the assignType to delete assignments by.
+   * @returns true if assignment is deleted and saved false otherwise
+   */
+  deleteAssignmentsByAssignType(id: string): boolean {
+    //Preventive if being called outside
+    this.checkAssignments();
+    //delete assignments
+    this.#assignments = this.#assignments.filter((a) => a.assignType !== id);
     //save assignments
     return this.saveAssignmentsToFile();
   }
@@ -216,34 +239,6 @@ export class AssignmentService {
       (assignment) => assignment.assistant === participantId
     );
     return assignments;
-  }
-
-  /**
-   *
-   * @param id the id of the room to delete assignments by.
-   * @returns true if assignment is deleted and saved false otherwise
-   */
-  deleteAssignmentsByRoom(id: string): boolean {
-    //Preventive if being called outside
-    this.checkAssignments();
-    //delete assignments
-    this.#assignments = this.#assignments.filter((a) => a.room !== id);
-    //save assignments
-    return this.saveAssignmentsToFile();
-  }
-
-  /**
-   *
-   * @param id the id of the assignType to delete assignments by.
-   * @returns true if assignment is deleted and saved false otherwise
-   */
-  deleteAssignmentsByAssignType(id: string): boolean {
-    //Preventive if being called outside
-    this.checkAssignments();
-    //delete assignments
-    this.#assignments = this.#assignments.filter((a) => a.assignType !== id);
-    //save assignments
-    return this.saveAssignmentsToFile();
   }
 
   /**

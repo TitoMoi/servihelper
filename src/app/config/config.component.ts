@@ -48,9 +48,9 @@ export class ConfigComponent {
     lang: "en",
     firstDayOfWeek: 1,
     assignmentHeaderTitle: "",
-    defaultFooterNoteId: undefined,
-    defaultReportFontSize: undefined,
-    defaultReportDateColor: undefined,
+    defaultFooterNoteId: "",
+    defaultReportFontSize: "",
+    defaultReportDateColor: "",
     defaultReportDateFormat: this.translocoDateFormats[0],
   };
 

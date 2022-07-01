@@ -42,16 +42,11 @@ export class NoteService {
    * @returns true if notes are saved to disk or false
    */
   saveNotesToFile(): boolean {
-    try {
-      //Write notes back to file
-      this.fs.writeJson(this.path, this.#notes);
-      //Flag
-      this.hasChanged = true;
-      return true;
-    } catch (err) {
-      console.error("saveNotes", err);
-      return false;
-    }
+    //Write notes back to file
+    this.fs.writeJson(this.path, this.#notes);
+    //Flag
+    this.hasChanged = true;
+    return true;
   }
 
   /**
@@ -75,7 +70,7 @@ export class NoteService {
    */
   getNote(id: string): NoteInterface {
     //Preventive maybe this func is called outside note view
-    if (!this.#notes.length) {
+    if (this.hasChanged) {
       this.getNotes();
     }
     //search note
