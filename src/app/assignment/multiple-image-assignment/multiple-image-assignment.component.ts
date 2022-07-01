@@ -158,7 +158,6 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
   }
 
   async toPrinter() {
-    /*  window.print(); */
     //the div
     const div = document.getElementById("assignmentDiv");
     //create window
@@ -169,11 +168,18 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
       },
     });
 
+    /* win.webContents.openDevTools(); */
+
     await win.loadFile("assets/web/blank.html");
+
+    await win.webContents.once("dom-ready", async (event) => {
+      console.log("dom ready");
+    });
 
     await win.webContents.executeJavaScript(
       `document.getElementsByTagName('body')[0].innerHTML = \`${div.innerHTML}\` `
     );
+
     await win.webContents.executeJavaScript("window.print()");
 
     await win.webContents.executeJavaScript("window.close()");
