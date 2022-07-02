@@ -172,16 +172,15 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
 
     await win.loadFile("assets/web/blank.html");
 
-    await win.webContents.once("dom-ready", async (event) => {
-      console.log("dom ready");
-    });
-
     await win.webContents.executeJavaScript(
-      `document.getElementsByTagName('body')[0].innerHTML = \`${div.innerHTML}\` `
+      `document.getElementsByTagName('body')[0].innerHTML = \`${div.innerHTML}\``
     );
 
-    await win.webContents.executeJavaScript("window.print()");
-
-    await win.webContents.executeJavaScript("window.close()");
+    await win.webContents.executeJavaScript(
+      `document.fonts.ready.then(() => {
+        window.print();
+        window.close();
+      })`
+    );
   }
 }
