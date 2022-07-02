@@ -83,8 +83,10 @@
             <mat-form-field class="full-width">
               <mat-label>{{ t("ASSIGN_CREATE_PRINCIPAL") }}</mat-label>
               <mat-select
+                #principalSelect
                 formControlName="principal"
                 required
+                (selectionChange)="onSelectionChangePrincipal()"
                 [disableRipple]="true"
               >
                 <mat-option
@@ -103,7 +105,12 @@
           <div class="col-12 mb-2">
             <mat-form-field class="full-width">
               <mat-label>{{ t("ASSIGN_CREATE_ASSISTANT") }}</mat-label>
-              <mat-select formControlName="assistant" [disableRipple]="true">
+              <mat-select
+                #assistantSelect
+                formControlName="assistant"
+                [disableRipple]="true"
+                (selectionChange)="onSelectionChangeAssistant()"
+              >
                 <mat-option
                   *ngFor="let participant of assistants; trackBy: trackByIdFn"
                   [value]="participant.id"
@@ -148,6 +155,7 @@
           {{ t("BUTTON_SAVE") }}
         </button>
         <button
+          #btnSaveCreateAnother
           mat-raised-button
           color="accent"
           type="submit"

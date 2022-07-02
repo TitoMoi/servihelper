@@ -3,6 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DateAdapter } from "@angular/material/core";
@@ -26,6 +27,8 @@ import { sortParticipantsByCount } from "app/functions";
 import { SharedService } from "app/services/shared.service";
 import { ConfigService } from "app/config/service/config.service";
 import { NgZone } from "@angular/core";
+import { MatSelect } from "@angular/material/select";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: "app-create-assignment",
@@ -34,6 +37,10 @@ import { NgZone } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAssignmentComponent implements OnInit, OnDestroy {
+  @ViewChild("principalSelect") principalSelect: MatSelect;
+  @ViewChild("assistantSelect") assistantSelect: MatSelect;
+  @ViewChild("btnSaveCreateAnother") btnSaveCreateAnother: MatButton;
+
   rooms: RoomInterface[] = this.roomService.getRooms().sort();
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
@@ -230,6 +237,17 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assignmentForm.get("date").setValue(date);
     this.assignmentForm.get("footerNote").setValue(footerNote);
     this.assignmentForm.get("room").setValue(room);
+  }
+
+  onSelectionChangePrincipal() {
+    this.principalSelect.close();
+    //Wait until button is enabled otherwise not works
+    setTimeout(() => this.btnSaveCreateAnother.focus(), 0);
+  }
+
+  onSelectionChangeAssistant() {
+    this.assistantSelect.close();
+    this.btnSaveCreateAnother.focus();
   }
 
   /**
