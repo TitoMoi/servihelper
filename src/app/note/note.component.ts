@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 import { NoteInterface, NoteTableInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 
@@ -17,28 +15,9 @@ export class NoteComponent implements OnInit {
 
   dataSource: NoteTableInterface[];
 
-  //icons
-  icons: string[];
-
-  constructor(
-    private noteService: NoteService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-  ) {
-    this.icons = ["garbage", "edit"];
-  }
+  constructor(private noteService: NoteService) {}
 
   ngOnInit(): void {
-    //Register icons
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.addSvgIcon(
-        iconFileName,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
-        )
-      );
-    }
-
     this.notes = this.noteService.getNotes();
     this.fillDataSource(this.notes);
   }

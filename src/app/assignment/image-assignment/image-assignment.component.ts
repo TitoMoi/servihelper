@@ -29,8 +29,6 @@ export class ImageAssignmentComponent implements OnInit {
   footerNotes: NoteInterface[];
   assignments: AssignmentInterface[];
 
-  icons: string[] = ["pdf", "png"];
-
   copied = false;
 
   //Image data bindings
@@ -51,20 +49,8 @@ export class ImageAssignmentComponent implements OnInit {
     private noteService: NoteService,
     private activatedRoute: ActivatedRoute,
     private electronService: ElectronService,
-    private configService: ConfigService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-  ) {
-    //Register icons
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.addSvgIcon(
-        iconFileName,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
-        )
-      );
-    }
-  }
+    private configService: ConfigService
+  ) {}
 
   ngOnInit() {
     //Get the assignment

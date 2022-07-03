@@ -1,6 +1,4 @@
 import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
@@ -31,28 +29,14 @@ export class SelectionListHorComponent implements OnChanges {
 
   assignmentGroups: AssignmentGroupInterface[] = [];
 
-  icons: string[] = ["pdf", "png", "excel"];
-
   constructor(
     public assignTypeService: AssignTypeService,
     public configService: ConfigService,
     private roomService: RoomService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
     private excelService: ExcelService
-  ) {
-    //Register icons
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.addSvgIcon(
-        iconFileName,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
-        )
-      );
-    }
-  }
+  ) {}
   ngOnChanges(changes: SimpleChanges): void {
     if (this.startDate && this.endDate && this.assignTypes) {
       this.#assignments = [];

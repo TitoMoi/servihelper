@@ -58,23 +58,11 @@ export class AssignmentComponent implements OnInit {
   //Expanded element
   expandedElement: AssignmentInterface | null;
 
-  //Icons
-  icons: string[] = [
-    "garbage",
-    "edit",
-    "assignImage",
-    "lists",
-    "csvSvg",
-    "search",
-  ];
-
   constructor(
     private assignmentService: AssignmentService,
     private participantService: ParticipantService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
     private translocoService: TranslocoService,
     private dateAdapter: DateAdapter<Date>
   ) {}
@@ -84,16 +72,6 @@ export class AssignmentComponent implements OnInit {
     //Set datepicker lang to locale
     const lang = this.translocoService.getActiveLang();
     this.dateAdapter.setLocale(lang);
-
-    //Register icons
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.addSvgIcon(
-        iconFileName,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
-        )
-      );
-    }
 
     this.assignments = this.assignmentService.getAssignments();
 

@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 
@@ -18,24 +16,10 @@ export class AssignTypeComponent implements OnInit {
   displayedColumns: string[] = ["name", "order", "editIcon", "deleteIcon"];
   //datasource
   dataSource: AssignTypeInterface[];
-  //icons
-  icons: string[] = ["garbage", "edit"];
-  constructor(
-    private assignTypeService: AssignTypeService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-  ) {}
+
+  constructor(private assignTypeService: AssignTypeService) {}
 
   ngOnInit(): void {
-    //Register icons
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.addSvgIcon(
-        iconFileName,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
-        )
-      );
-    }
     this.fillDataSource(this.assignTypes);
   }
 

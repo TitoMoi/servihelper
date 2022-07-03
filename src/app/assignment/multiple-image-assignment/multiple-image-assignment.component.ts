@@ -5,8 +5,6 @@ import {
   OnInit,
   SimpleChanges,
 } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
@@ -34,8 +32,6 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
 
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
 
-  icons: string[] = ["pdf", "png", "printer"];
-
   constructor(
     public assignTypeService: AssignTypeService,
     private roomService: RoomService,
@@ -43,20 +39,8 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
     private assignmentService: AssignmentService,
     private noteService: NoteService,
     private configService: ConfigService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
     private electronService: ElectronService
-  ) {
-    //Register icons
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.addSvgIcon(
-        iconFileName,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
-        )
-      );
-    }
-  }
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.startDate && this.endDate && this.assignTypes) {

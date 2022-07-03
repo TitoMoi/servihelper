@@ -1,8 +1,6 @@
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
 import { MatSelectChange } from "@angular/material/select";
-import { DomSanitizer } from "@angular/platform-browser";
 import { TranslocoService } from "@ngneat/transloco";
 import { ConfigService } from "app/config/service/config.service";
 import { Observable } from "rxjs";
@@ -21,36 +19,13 @@ export class NavigationComponent implements OnInit {
       map((result) => result.matches),
       shareReplay()
     );
-
-  icons: string[] = [
-    "menu",
-    "room",
-    "abc",
-    "notes",
-    "participants",
-    "assignment",
-    "statistics",
-    "config",
-    "info",
-  ];
   availableLangs = undefined;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     public translocoService: TranslocoService,
-    public configService: ConfigService,
-    private matIconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer
-  ) {
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.addSvgIcon(
-        iconFileName,
-        this.sanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
-        )
-      );
-    }
-  }
+    public configService: ConfigService
+  ) {}
 
   ngOnInit() {
     this.availableLangs = this.translocoService.getAvailableLangs();

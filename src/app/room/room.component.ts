@@ -1,6 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 import { RoomInterface, RoomTableInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 
@@ -17,28 +15,11 @@ export class RoomComponent implements OnInit {
 
   dataSource: RoomTableInterface[];
 
-  //icons
-  icons: string[];
-  constructor(
-    private roomService: RoomService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-  ) {
+  constructor(private roomService: RoomService) {
     this.displayedColumns = ["name", "editIcon", "deleteIcon"];
-    this.icons = ["garbage", "edit"];
   }
 
   ngOnInit(): void {
-    //Register icons
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.addSvgIcon(
-        iconFileName,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
-        )
-      );
-    }
-
     this.rooms = this.roomService.getRooms();
     this.fillDataSource(this.rooms);
   }

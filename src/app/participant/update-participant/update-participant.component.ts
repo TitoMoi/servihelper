@@ -21,8 +21,6 @@ import {
   MatDatepicker,
   MatDatepickerInputEvent,
 } from "@angular/material/datepicker";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 import { DateAdapter } from "@angular/material/core";
 import { TranslocoService } from "@ngneat/transloco";
 import { Subscription } from "rxjs";
@@ -36,9 +34,6 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
   participant: ParticipantInterface;
   rooms: RoomInterface[] = this.roomService.getRooms();
   assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
-
-  //Icons
-  icons: string[] = ["garbage"];
 
   @ViewChild(MatDatepicker) _picker: MatDatepicker<Date>;
 
@@ -65,24 +60,12 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
     private participantService: ParticipantService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dateAdapter: DateAdapter<Date>,
     private translocoService: TranslocoService,
     private cdr: ChangeDetectorRef
-  ) {
-    //Register icons
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.addSvgIcon(
-        iconFileName,
-        this.domSanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
-        )
-      );
-    }
-  }
+  ) {}
 
   ngOnInit(): void {
     this.participant = this.participantService.getParticipant(
