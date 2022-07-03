@@ -20,9 +20,8 @@ import { AssignmentService } from "../service/assignment.service";
   templateUrl: "./multiple-image-assignment.component.html",
   styleUrls: ["./multiple-image-assignment.component.scss"],
 })
-export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
-  @Input("startDate") startDate: Date;
-  @Input("endDate") endDate: Date;
+export class MultipleImageAssignmentComponent implements OnChanges {
+  @Input("selectedDates") selectedDates: Date[];
   @Input("assignTypes") assignTypes: string[];
   @Input("order") order: string;
 
@@ -43,14 +42,12 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.startDate && this.endDate && this.assignTypes) {
+    if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];
       this.filterAssignments();
       this.prepareAssignmentsData();
     }
   }
-
-  ngOnInit(): void {}
 
   /**
    * Filters the assignments based on the range date and assign types
@@ -61,8 +58,9 @@ export class MultipleImageAssignmentComponent implements OnInit, OnChanges {
       .filter((assignment) => this.assignTypes.includes(assignment.assignType))
       .filter(
         (assignment) =>
-          new Date(assignment.date) >= new Date(this.startDate) &&
-          new Date(assignment.date) <= new Date(this.endDate)
+          new Date(assignment.date) >= new Date(this.selectedDates[0]) &&
+          new Date(assignment.date) <=
+            new Date(this.selectedDates[this.selectedDates.length - 1])
       );
   }
 

@@ -1,30 +1,20 @@
 <form [formGroup]="selectionForm" novalidate>
   <div class="row d-print-none">
     <div class="col-3">
-      <mat-form-field appearance="fill">
-        <mat-label>{{ "ASSIGN_SELECTION_RANGE_TITLE" | transloco }}</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input
-            matStartDate
-            formControlName="startDate"
-            placeholder="Start date"
-          />
-          <input matEndDate formControlName="endDate" placeholder="End date" />
-        </mat-date-range-input>
-        <mat-hint>{{ "ASSIGN_SELECTION_RANGE_HINT" | transloco }}</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-
-        <mat-error
-          *ngIf="
-            selectionForm.controls.startDate.hasError('matStartDateInvalid')
-          "
-          >Invalid start date</mat-error
-        >
-        <mat-error
-          *ngIf="selectionForm.controls.endDate.hasError('matEndDateInvalid')"
-          >Invalid end date</mat-error
-        >
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Select multiple dates</mat-label>
+        <input
+          [value]="resetModel"
+          matInput
+          [matDatepicker]="picker"
+          (dateChange)="dateChanged($event)"
+        />
+        <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker
+          #picker
+          [startAt]="init"
+          [dateClass]="dateClass"
+        ></mat-datepicker>
       </mat-form-field>
     </div>
     <div class="col-3">
@@ -74,34 +64,31 @@
   <div class="col">
     <app-selection-list
       *ngIf="
-        selectionForm.controls.endDate.value &&
+        selectedDates.length &&
         selectionForm.controls.template.value ===
           ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL' | transloco)
       "
-      [startDate]="selectionForm.controls.startDate.value"
-      [endDate]="selectionForm.controls.endDate.value"
+      [selectedDates]="selectedDates"
       [assignTypes]="selectionForm.controls.assignTypes.value"
       [order]="selectionForm.controls.order.value"
     ></app-selection-list>
     <app-selection-list-hor
       *ngIf="
-        selectionForm.controls.endDate.value &&
+        selectedDates.length &&
         selectionForm.controls.template.value ===
           ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL' | transloco)
       "
-      [startDate]="selectionForm.controls.startDate.value"
-      [endDate]="selectionForm.controls.endDate.value"
+      [selectedDates]="selectedDates"
       [assignTypes]="selectionForm.controls.assignTypes.value"
       [order]="selectionForm.controls.order.value"
     ></app-selection-list-hor>
     <app-multiple-image-assignment
       *ngIf="
-        selectionForm.controls.endDate.value &&
+        selectedDates.length &&
         selectionForm.controls.template.value ===
           ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET' | transloco)
       "
-      [startDate]="selectionForm.controls.startDate.value"
-      [endDate]="selectionForm.controls.endDate.value"
+      [selectedDates]="selectedDates"
       [assignTypes]="selectionForm.controls.assignTypes.value"
       [order]="selectionForm.controls.order.value"
     ></app-multiple-image-assignment>

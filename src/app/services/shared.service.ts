@@ -66,4 +66,16 @@ export class SharedService {
 
     return assistants;
   }
+
+  sortDates(a: string, b: string): number {
+    const dateA = new Date(a);
+    const dateB = new Date(b);
+    if (dateA > dateB) {
+      return 1;
+    }
+    if (dateA < dateB) {
+      return -1;
+    }
+    return 0;
+  }
 }

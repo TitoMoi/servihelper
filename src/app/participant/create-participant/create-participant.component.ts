@@ -33,13 +33,12 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
   isRoomsAvailable: boolean = false;
   isAssignTypesAvailable: boolean = false;
 
+  //Angular material datepicker hacked
   @ViewChild(MatDatepicker) _picker: MatDatepicker<Date>;
-
   CLOSE_ON_SELECTED = false;
   init = new Date();
   resetModel = new Date(0);
   notAvailableDates = [];
-
   timeoutRef;
 
   langSub$: Subscription;

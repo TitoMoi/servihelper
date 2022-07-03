@@ -20,8 +20,7 @@ import autoTable from "jspdf-autotable";
   styleUrls: ["./selection-list-hor.component.scss"],
 })
 export class SelectionListHorComponent implements OnChanges {
-  @Input("startDate") startDate: Date;
-  @Input("endDate") endDate: Date;
+  @Input("selectedDates") selectedDates: Date[];
   @Input("assignTypes") assignTypes: string[];
   @Input("order") order: string;
 
@@ -38,7 +37,7 @@ export class SelectionListHorComponent implements OnChanges {
     private excelService: ExcelService
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.startDate && this.endDate && this.assignTypes) {
+    if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];
       this.assignmentGroups = [];
       this.filterAssignments();
@@ -47,8 +46,6 @@ export class SelectionListHorComponent implements OnChanges {
       this.sortAssignmentByAssignTypeOrder();
     }
   }
-
-  ngOnInit(): void {}
 
   /**
    * Filters the assignments based on the range date and assign types
@@ -59,8 +56,9 @@ export class SelectionListHorComponent implements OnChanges {
       .filter((assignment) => this.assignTypes.includes(assignment.assignType))
       .filter(
         (assignment) =>
-          new Date(assignment.date) >= new Date(this.startDate) &&
-          new Date(assignment.date) <= new Date(this.endDate)
+          new Date(assignment.date) >= new Date(this.selectedDates[0]) &&
+          new Date(assignment.date) <=
+            new Date(this.selectedDates[this.selectedDates.length - 1])
       );
   }
 
