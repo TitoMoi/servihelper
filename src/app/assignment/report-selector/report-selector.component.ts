@@ -82,10 +82,10 @@ export class ReportSelectorComponent implements AfterViewInit {
       } else {
         this.selectedDates.splice(index, 1);
       }
-      //prepare sorted dates for the reports
-      this.selectedDates = this.selectedDates.sort(
-        this.sharedService.sortDates
-      );
+      //prepare sorted dates for the reports and new reference for the input components
+      this.selectedDates = [
+        ...this.selectedDates.sort(this.sharedService.sortDates),
+      ];
 
       this.resetModel = "Multiple dates";
       if (!this.CLOSE_ON_SELECTED) {
