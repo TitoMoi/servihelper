@@ -58,7 +58,7 @@ import { UpdateNoteComponent } from "./note/update-note/update-note.component";
 import { DeleteNoteComponent } from "./note/delete-note/delete-note.component";
 import { ConfigComponent } from "./config/config.component";
 import { SearchComponent } from "./search/search.component";
-import { SelectionSheetsAssignmentComponent } from "./assignment/selection-sheets-assignment/selection-sheets-assignment.component";
+import { ReportSelectorComponent } from "./assignment/report-selector/report-selector.component";
 import { SelectionListComponent } from "./assignment/selection-list/selection-list.component";
 import { SelectionListHorComponent } from "./assignment/selection-list-hor/selection-list-hor.component";
 import { MultipleImageAssignmentComponent } from "./assignment/multiple-image-assignment/multiple-image-assignment.component";
@@ -96,7 +96,7 @@ import { MultipleImageAssignmentComponent } from "./assignment/multiple-image-as
     CreateNoteComponent,
     UpdateNoteComponent,
     DeleteNoteComponent,
-    SelectionSheetsAssignmentComponent,
+    ReportSelectorComponent,
     SelectionListComponent,
     SelectionListHorComponent,
     MultipleImageAssignmentComponent,

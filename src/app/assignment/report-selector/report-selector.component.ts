@@ -13,10 +13,10 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
 
 @Component({
   selector: "app-selection-sheets-assignment",
-  templateUrl: "./selection-sheets-assignment.component.html",
-  styleUrls: ["./selection-sheets-assignment.component.scss"],
+  templateUrl: "./report-selector.component.html",
+  styleUrls: ["./report-selector.component.scss"],
 })
-export class SelectionSheetsAssignmentComponent implements AfterViewInit {
+export class ReportSelectorComponent implements AfterViewInit {
   assignTypes: AssignTypeInterface[] = this.assignTypesService.getAssignTypes();
 
   orderOptions: string[] = ["Asc", "Desc"];
