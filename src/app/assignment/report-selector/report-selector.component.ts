@@ -50,8 +50,6 @@ export class ReportSelectorComponent implements AfterViewInit {
   @ViewChild("orderSelect") order: MatSelect;
 
   selectionForm = new FormGroup({
-    startDate: new FormControl(),
-    endDate: new FormControl(),
     assignTypes: new FormControl(),
     order: new FormControl(),
     template: new FormControl(),

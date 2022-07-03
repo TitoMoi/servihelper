@@ -54,11 +54,11 @@ export class SelectionListHorComponent implements OnChanges {
     this.#assignments = this.assignmentService
       .getAssignments(true)
       .filter((assignment) => this.assignTypes.includes(assignment.assignType))
-      .filter(
-        (assignment) =>
-          new Date(assignment.date) >= new Date(this.selectedDates[0]) &&
-          new Date(assignment.date) <=
-            new Date(this.selectedDates[this.selectedDates.length - 1])
+      .filter((assignment) =>
+        this.selectedDates.some(
+          (date) =>
+            new Date(date).getTime() === new Date(assignment.date).getTime()
+        )
       );
   }
 

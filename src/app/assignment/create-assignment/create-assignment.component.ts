@@ -26,7 +26,6 @@ import { setCount } from "app/functions/setCount";
 import { sortParticipantsByCount } from "app/functions";
 import { SharedService } from "app/services/shared.service";
 import { ConfigService } from "app/config/service/config.service";
-import { NgZone } from "@angular/core";
 import { MatSelect } from "@angular/material/select";
 import { MatButton } from "@angular/material/button";
 
@@ -83,8 +82,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private dateAdapter: DateAdapter<any>,
     private lastDateService: LastDateService,
-    private translocoService: TranslocoService,
-    private ngZone: NgZone
+    private translocoService: TranslocoService
   ) {}
 
   ngOnInit() {
