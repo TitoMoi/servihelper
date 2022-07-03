@@ -81,6 +81,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     //Set datepicker lang to locale
     this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
       this.dateAdapter.setLocale(lang);
+      //Only in update assignment, create not necessary
+      this.getData();
     });
 
     /*
@@ -130,6 +132,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       this.assignmentForm.get("assignType").value,
       this.assignmentForm.get("room").value
     );
+    console.log(this.principals);
 
     //remove not available dates from principals
     this.principals = this.principals.filter(
