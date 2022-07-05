@@ -8,7 +8,7 @@
       </mat-form-field>
     </div>
     <h4 class="">{{ "CONFIG_DEFAULT_FOOTER_NOTE" | transloco }}</h4>
-    <div class="col-12 mb-2">
+    <div class="col-6 mb-2">
       <mat-form-field class="full-width">
         <mat-select formControlName="defaultFooterNoteId" required>
           <mat-option [value]="undefined"> </mat-option>
@@ -19,7 +19,7 @@
       </mat-form-field>
     </div>
     <h4 class="">{{ "CONFIG_DEFAULT_REPORT_DATE_FORMAT" | transloco }}</h4>
-    <div class="col-12 mb-2">
+    <div class="col-6 mb-2">
       <mat-form-field class="full-width">
         <mat-select formControlName="defaultReportDateFormat" required>
           <mat-option *ngFor="let df of translocoDateFormats" [value]="df">
@@ -29,8 +29,8 @@
       </mat-form-field>
     </div>
     <h4 class="">{{ "CONFIG_DEFAULT_REPORT_DATE_COLOR" | transloco }}</h4>
-    <div class="col-12 mb-2">
-      <mat-form-field>
+    <div class="col-6 mb-2">
+      <mat-form-field class="full-width">
         <mat-label>{{ "PLACEHOLDER_REPORT_DATE_COLOR" | transloco }}</mat-label>
         <input
           matInput
@@ -43,7 +43,7 @@
       </mat-form-field>
     </div>
     <h4 class="">{{ "CONFIG_DEFAULT_FONT_SIZE" | transloco }}</h4>
-    <div class="col-12 mb-2">
+    <div class="col-6 mb-2">
       <mat-form-field class="full-width">
         <input
           matInput
