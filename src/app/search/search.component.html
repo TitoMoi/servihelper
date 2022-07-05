@@ -15,7 +15,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <div class="row mt-3" *ngIf="results.length">
+        <div class="row mt-2" *ngIf="results.length">
           <div class="col-3">
             {{ "SEARCH_ISPRINCIPAL" | transloco }}
           </div>
@@ -30,7 +30,7 @@
           </div>
           <hr />
         </div>
-        <div class="row mt-3" *ngFor="let r of results">
+        <div class="row mt-2" *ngFor="let r of results">
           <div class="col-3">
             {{ r.isPrincipalResult | transloco }}
           </div>

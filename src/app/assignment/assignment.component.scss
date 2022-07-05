@@ -3,12 +3,17 @@
   font-size: inherit;
 }
 
+.mat-icon {
+  height: 28px;
+  width: 28px;
+}
+
 .expanded-element-detail {
   overflow: hidden;
   display: flex;
 }
 
-.expanded-element-note {
+.expanded-element-theme {
   margin-top: 4px;
   margin-bottom: 4px;
 }
@@ -23,9 +28,4 @@ tr.expanded-detail-row {
 
 tr {
   cursor: pointer;
-}
-
-.mat-icon {
-  height: 28px;
-  width: 28px;
 }

@@ -1,36 +1,40 @@
 <ng-container *transloco="let t">
-  <a
-    class="m-3"
-    mat-raised-button
-    [disableRipple]="true"
-    color="primary"
-    routerLink="create"
-    routerLinkActive="active"
-    >{{ t("ASSIGN_CREATE_ASSIGN_BUTTON") }}</a
-  >
-  <div *ngIf="dataSource.length" class="row justify-content-begin m-3">
-    <div class="col-1">
-      <mat-icon
-        svgIcon="lists"
-        aria-label="icon"
-        routerLink="selectionSheets"
-        routerLinkActive="active"
-      ></mat-icon>
-    </div>
-    <div class="col-1">
-      <mat-icon
-        svgIcon="csvSvg"
-        aria-label="icon"
-        (click)="exportCsv()"
-      ></mat-icon>
-    </div>
-    <div class="col-1">
-      <mat-icon
-        svgIcon="search"
-        aria-label="icon"
-        routerLink="../search"
-        routerLinkActive="active"
-      ></mat-icon>
+  <div class="row gx-0 align-items-center">
+    <div class="col">
+      <div class="d-flex">
+        <a
+          class="m-3"
+          mat-raised-button
+          [disableRipple]="true"
+          color="primary"
+          routerLink="create"
+          routerLinkActive="active"
+        >
+          {{ t("ASSIGN_CREATE_ASSIGN_BUTTON") }}
+        </a>
+        <ng-container *ngIf="dataSource.length">
+          <mat-icon
+            class="m-3"
+            svgIcon="lists"
+            aria-label="icon"
+            routerLink="selectionSheets"
+            routerLinkActive="active"
+          ></mat-icon>
+          <mat-icon
+            class="m-3"
+            svgIcon="csvSvg"
+            aria-label="icon"
+            (click)="exportCsv()"
+          ></mat-icon>
+          <mat-icon
+            class="m-3"
+            svgIcon="search"
+            aria-label="icon"
+            routerLink="../search"
+            routerLinkActive="active"
+          ></mat-icon>
+        </ng-container>
+      </div>
     </div>
   </div>
   <table
@@ -39,7 +43,7 @@
     mat-table
     [dataSource]="dataSource"
     multiTemplateDataRows
-    class="mt-3 mat-elevation-z8"
+    class="mt-2 mat-elevation-z8"
   >
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -147,7 +151,7 @@
             element === expandedElement ? 'expanded' : 'collapsed'
           "
         >
-          <div class="expanded-element-note">
+          <div class="expanded-element-theme">
             <div>
               {{ t("ASSIGN_TABLE_EXPANDED_THEME") }}
               {{ element.theme }}
@@ -170,14 +174,13 @@
       class="expanded-detail-row"
     ></tr>
   </table>
-
   <mat-paginator
     *ngIf="dataSource.length"
     [length]="assignments?.length"
     [pageSize]="pageSizeOptions[0]"
     [pageSizeOptions]="pageSizeOptions"
     (page)="handlePageEvent($event)"
-    aria-label="Selecciona la página"
+    aria-label="Select the page"
   >
   </mat-paginator>
 </ng-container>
