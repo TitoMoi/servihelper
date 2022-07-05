@@ -158,6 +158,8 @@ export class SelectionListComponent implements OnChanges {
               this.configService.getConfig().defaultReportDateColor;
             data.cell.styles.fontStyle = "bold";
           }
+          if (!assignType && !classList.contains("bold"))
+            data.cell.styles.fillColor = "#FFFFFF";
         },
       });
     }
