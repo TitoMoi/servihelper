@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ViewChild,
@@ -20,6 +21,7 @@ import { SharedService } from "app/services/shared.service";
   selector: "app-selection-sheets-assignment",
   templateUrl: "./report-selector.component.html",
   styleUrls: ["./report-selector.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportSelectorComponent implements AfterViewInit {
   assignTypes: AssignTypeInterface[] = this.assignTypesService.getAssignTypes();
@@ -28,7 +30,6 @@ export class ReportSelectorComponent implements AfterViewInit {
   @ViewChild(MatDatepicker) picker: MatDatepicker<Date>;
   CLOSE_ON_SELECTED = false;
   init = new Date();
-  resetModel = "Multiple dates";
   selectedDates = [];
   timeoutRef;
 
@@ -61,11 +62,13 @@ export class ReportSelectorComponent implements AfterViewInit {
     private sharedService: SharedService,
     private cdr: ChangeDetectorRef
   ) {}
+
   ngAfterViewInit(): void {
     this.select.options.forEach((item: MatOption) => item.select());
     this.order.options.first.select();
     this.cdr.detectChanges();
   }
+
   public dateClass = (date: Date) => {
     if (this.findDate(date) !== -1) {
       return ["selected"];
@@ -87,7 +90,6 @@ export class ReportSelectorComponent implements AfterViewInit {
         ...this.selectedDates.sort(this.sharedService.sortDates),
       ];
 
-      this.resetModel = "Multiple dates";
       if (!this.CLOSE_ON_SELECTED) {
         const closeFn = this.picker.close;
         this.picker.close = () => {};
@@ -98,7 +100,6 @@ export class ReportSelectorComponent implements AfterViewInit {
         this.timeoutRef = setTimeout(() => {
           this.picker.close = closeFn;
         });
-        this.cdr.detectChanges();
       }
     }
   }

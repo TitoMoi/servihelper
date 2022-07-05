@@ -41,7 +41,7 @@ export class AssignmentComponent implements OnInit {
   //In memory assignments
   assignments: AssignmentInterface[];
   //Pagination
-  pageSizeOptions: number[] = [15, 30];
+  pageSizeOptions: number[] = [10, 15, 30];
   //Table
   displayedColumns: string[] = [
     "assignImage",
