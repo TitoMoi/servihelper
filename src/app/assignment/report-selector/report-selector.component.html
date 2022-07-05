@@ -5,6 +5,7 @@
         <mat-label>Select multiple dates</mat-label>
         <input
           matInput
+          [value]="resetModel"
           [matDatepicker]="picker"
           (dateChange)="dateChanged($event)"
         />

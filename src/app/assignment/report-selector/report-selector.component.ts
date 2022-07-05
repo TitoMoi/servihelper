@@ -8,6 +8,7 @@ import {
 import { FormControl, FormGroup } from "@angular/forms";
 import { MatOption } from "@angular/material/core";
 import {
+  MatCalendar,
   MatDatepicker,
   MatDatepickerInputEvent,
 } from "@angular/material/datepicker";
@@ -32,6 +33,7 @@ export class ReportSelectorComponent implements AfterViewInit {
   init = new Date();
   selectedDates = [];
   timeoutRef;
+  public resetModel = new Date(0);
 
   orderOptions: string[] = ["Asc", "Desc"];
 
@@ -85,6 +87,7 @@ export class ReportSelectorComponent implements AfterViewInit {
       } else {
         this.selectedDates.splice(index, 1);
       }
+      this.resetModel = new Date(0);
       //prepare sorted dates for the reports and new reference for the input components
       this.selectedDates = [
         ...this.selectedDates.sort(this.sharedService.sortDates),
