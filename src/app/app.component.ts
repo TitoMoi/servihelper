@@ -62,6 +62,9 @@ export class AppComponent implements OnInit {
         )
       );
     }
+    for (const iconFileName of this.icons) {
+      this.matIconRegistry.getNamedSvgIcon(iconFileName).subscribe();
+    }
   }
 
   ngOnInit() {
