@@ -89,7 +89,7 @@ export class ImageAssignmentComponent implements OnInit {
    */
   async copyImage() {
     document.body.style.cursor = "wait";
-    const node = document.getElementById("assignmentDiv");
+    const node = document.getElementById("assignmentTableId");
     const dataUrl = await toPng(node);
     const natImage =
       this.electronService.remote.nativeImage.createFromDataURL(dataUrl);
@@ -99,13 +99,14 @@ export class ImageAssignmentComponent implements OnInit {
   }
 
   async toPng() {
+    //the div
     document.body.style.cursor = "wait";
-    const node = document.getElementById("assignmentDiv");
-    const dataUrl = await toPng(node);
+    const div = document.getElementById("assignmentTableId");
+    const dataUrl = await toPng(div);
 
     const link = document.createElement("a");
     link.href = dataUrl;
-    link.setAttribute("download", "image.png");
+    link.setAttribute("download", "assignment.png");
     link.click();
 
     document.body.style.cursor = "default";
@@ -150,4 +151,32 @@ export class ImageAssignmentComponent implements OnInit {
     });
     document.body.style.cursor = "default";
   }
+
+  /* toPdf() {
+    const doc = new jsPDF("portrait");
+
+    for (let i = 0; i < this.assignmentGroups.length; i++) {
+      autoTable(doc, {
+        html: `#assignmentTableId`,
+        didParseCell: (data) => {
+          const text = data.cell.raw["innerText"];
+          const localName = data.cell.raw["localName"];
+          const classList: DOMTokenList = data.cell.raw["classList"];
+          const assignType = this.assignTypeService.getAssignTypeByName(text);
+          if (assignType) {
+            data.cell.styles.fillColor = assignType.color;
+            data.cell.styles.fontStyle = "bold";
+          }
+          if (localName === "th" && classList.contains("bold")) {
+            data.cell.styles.fillColor =
+              this.configService.getConfig().defaultReportDateColor;
+            data.cell.styles.fontStyle = "bold";
+          }
+          if (!assignType && !classList.contains("bold"))
+            data.cell.styles.fillColor = "#FFFFFF";
+        },
+      });
+    }
+    doc.save("assignments.pdf");
+  } */
 }

@@ -1,54 +1,103 @@
 <div class="row">
-  <div class="col-12 col-md-7 col-xl-12">
-    <div id="assignmentDiv" class="d-inline-block" style="width: 23rem">
-      <h4 class="m-2" *ngIf="!assignmentHeaderTitle">
-        {{ "ASSIGN_IMAGE_TITLE" | transloco }}
-      </h4>
-      <h4 class="m-2" *ngIf="assignmentHeaderTitle">
-        {{ assignmentHeaderTitle }}
-      </h4>
-      <hr class="m-2" />
-      <div class="m-2">
-        <b>{{ "ASSIGN_IMAGE_NAME" | transloco }}</b>
-      </div>
-      <div class="m-2">{{ principalName }}</div>
-      <ng-container *ngIf="assistantName">
-        <div class="m-2">
-          <b>{{ "ASSIGN_IMAGE_ASSISTANT" | transloco }}</b>
-        </div>
-        <div class="m-2">{{ assistantName }}</div>
-      </ng-container>
-      <div class="m-2">
-        <b>{{ "ASSIGN_IMAGE_DATE" | transloco }}</b>
-      </div>
-      <div class="m-2">
-        {{ date | translocoDate: { dateStyle: "long" } }}
-      </div>
-      <div class="m-2">
-        <b>{{ "ASSIGN_IMAGE_ASSIGNTYPE" | transloco }}</b>
-      </div>
-      <div class="m-2">{{ assignTypeName }}</div>
-      <ng-container *ngIf="theme"
-        ><div class="m-2">
-          <b>{{ "ASSIGN_IMAGE_NOTE" | transloco }}</b>
-        </div>
-        <div class="m-2">{{ theme }}</div></ng-container
-      >
-
-      <div class="m-2">
-        <b>{{ "ASSIGN_IMAGE_ROOM_PRESENTATION" | transloco }}</b>
-      </div>
-      <div class="m-2">{{ roomName }}</div>
-      <ng-container *ngIf="footerNoteEditorHTML"
-        ><div class="m-2">
-          <b>{{ "ASSIGN_IMAGE_FOOTER_NOTE" | transloco }}</b>
-        </div>
-        <div class="text-justify m-2" [innerHTML]="footerNoteEditorHTML"></div
-      ></ng-container>
-    </div>
+  <div class="col-12">
+    <table id="assignmentTableId" class="bg-color-white" style="width: 23rem">
+      <tr>
+        <th>
+          <h4 *ngIf="!assignmentHeaderTitle">
+            {{ "ASSIGN_IMAGE_TITLE" | transloco }}
+          </h4>
+          <h4 *ngIf="assignmentHeaderTitle">
+            {{ assignmentHeaderTitle }}
+          </h4>
+        </th>
+      </tr>
+      <hr />
+      <tr>
+        <td>
+          <div>
+            <b>{{ "ASSIGN_IMAGE_NAME" | transloco }}</b>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>{{ principalName }}</div>
+        </td>
+      </tr>
+      <tr *ngIf="assistantName">
+        <td>
+          <div>
+            <b>{{ "ASSIGN_IMAGE_ASSISTANT" | transloco }}</b>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="assistantName">
+        <td>
+          <div>{{ assistantName }}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>
+            <b>{{ "ASSIGN_IMAGE_DATE" | transloco }}</b>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>
+            {{ date | translocoDate: { dateStyle: "long" } }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>
+            <b>{{ "ASSIGN_IMAGE_ASSIGNTYPE" | transloco }}</b>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>{{ assignTypeName }}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <ng-container *ngIf="theme"
+            ><div>
+              <b>{{ "ASSIGN_IMAGE_NOTE" | transloco }}</b>
+            </div>
+            <div>{{ theme }}</div></ng-container
+          >
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>
+            <b>{{ "ASSIGN_IMAGE_ROOM_PRESENTATION" | transloco }}</b>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>{{ roomName }}</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <ng-container *ngIf="footerNoteEditorHTML"
+            ><div>
+              <b>{{ "ASSIGN_IMAGE_FOOTER_NOTE" | transloco }}</b>
+            </div>
+            <div class="text-justify" [innerHTML]="footerNoteEditorHTML"></div
+          ></ng-container>
+        </td>
+      </tr>
+    </table>
   </div>
-  <div class="col d-print-none">
-    <div class="col-12">
+  <div class="col-12 d-print-none">
+    <div class="d-flex app-align-items-center">
       <button class="m-2" mat-raised-button type="button" routerLink="../..">
         {{ "BUTTON_CANCEL" | transloco }}
       </button>
@@ -61,8 +110,6 @@
       >
         {{ "BUTTON_COPY" | transloco }}
       </button>
-    </div>
-    <div class="col-12 col-md-5">
       <mat-icon
         class="m-2"
         svgIcon="pdf"
