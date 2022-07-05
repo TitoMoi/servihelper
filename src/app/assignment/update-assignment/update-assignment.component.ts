@@ -132,7 +132,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       this.assignmentForm.get("assignType").value,
       this.assignmentForm.get("room").value
     );
-    console.log(this.principals);
 
     //remove not available dates from principals
     this.principals = this.principals.filter(
