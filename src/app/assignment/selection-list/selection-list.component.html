@@ -1,22 +1,30 @@
-<mat-icon
-  class="m-3"
-  svgIcon="pdf"
-  aria-label="icon"
-  (click)="toPdf()"
-></mat-icon>
-<mat-icon
-  class="m-3"
-  svgIcon="png"
-  aria-label="icon"
-  (click)="toPng()"
-></mat-icon>
-<mat-icon
-  class="m-3"
-  svgIcon="excel"
-  aria-label="icon"
-  (click)="toExcel()"
-></mat-icon>
-
+<div class="row gx-0">
+  <div class="col-12">
+    <div class="d-flex">
+      <button class="m-2" mat-raised-button type="button" routerLink="..">
+        {{ "BUTTON_CANCEL" | transloco }}
+      </button>
+      <mat-icon
+        class="m-2"
+        svgIcon="pdf"
+        aria-label="icon"
+        (click)="toPdf()"
+      ></mat-icon>
+      <mat-icon
+        class="m-2"
+        svgIcon="png"
+        aria-label="icon"
+        (click)="toPng()"
+      ></mat-icon>
+      <mat-icon
+        class="m-2"
+        svgIcon="excel"
+        aria-label="icon"
+        (click)="toExcel()"
+      ></mat-icon>
+    </div>
+  </div>
+</div>
 <div id="resultListDiv" style="width: 25rem" class="bg-color-white">
   <ng-container *ngFor="let ag of assignmentGroups; index as i">
     <table [id]="'table' + i">
