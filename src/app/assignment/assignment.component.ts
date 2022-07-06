@@ -20,6 +20,7 @@ import { AssignmentService } from "app/assignment/service/assignment.service";
 import { TranslocoService } from "@ngneat/transloco";
 import { DateAdapter } from "@angular/material/core";
 import { MyCustomPaginatorI18 } from "app/services/my-custom-paginator-i18.service";
+import { ConfigService } from "app/config/service/config.service";
 
 @Component({
   selector: "app-assignment",
@@ -40,6 +41,8 @@ import { MyCustomPaginatorI18 } from "app/services/my-custom-paginator-i18.servi
 export class AssignmentComponent implements OnInit {
   //In memory assignments
   assignments: AssignmentInterface[];
+
+  currentPageSize = this.configService.getConfig().assignmentsItemsPerPage;
   //Pagination
   pageSizeOptions: number[] = [10, 15, 30];
   //Table
@@ -59,6 +62,7 @@ export class AssignmentComponent implements OnInit {
   expandedElement: AssignmentInterface | null;
 
   constructor(
+    private configService: ConfigService,
     private assignmentService: AssignmentService,
     private participantService: ParticipantService,
     private roomService: RoomService,
@@ -75,9 +79,10 @@ export class AssignmentComponent implements OnInit {
 
     this.assignments = this.assignmentService.getAssignments();
 
+    const itemsPerPage = this.configService.getConfig().assignmentsItemsPerPage;
     //ToDo: Que lo de el servicio ya paginado.
-    const begin = 0 * this.pageSizeOptions[0];
-    const end = begin + this.pageSizeOptions[0];
+    const begin = 0 * itemsPerPage;
+    const end = begin + itemsPerPage;
     const assignmentsPage = this.assignments.slice(begin, end);
     this.fillDataSource(assignmentsPage);
   }
@@ -87,6 +92,14 @@ export class AssignmentComponent implements OnInit {
   }
 
   handlePageEvent(pageEvent: PageEvent) {
+    //Save page size if changes
+    if (this.currentPageSize !== pageEvent.pageSize) {
+      let config = this.configService.getConfig();
+      config = { ...config, assignmentsItemsPerPage: pageEvent.pageSize };
+      this.configService.updateConfig(config);
+      this.currentPageSize = pageEvent.pageSize;
+    }
+
     //ToDo: Codigo duplicado, que lo de el servicio ya paginado.
     const begin = pageEvent.pageIndex * pageEvent.pageSize;
     const end = begin + pageEvent.pageSize;

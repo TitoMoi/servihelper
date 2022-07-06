@@ -7,7 +7,8 @@ export type ConfigOptionsType =
   | "defaultFooterNoteId"
   | "defaultReportFontSize"
   | "defaultReportDateColor"
-  | "defaultReportDateFormat";
+  | "defaultReportDateFormat"
+  | "assignmentsItemsPerPage";
 
 export interface ConfigInterface {
   lang?: string;
@@ -17,4 +18,5 @@ export interface ConfigInterface {
   defaultReportFontSize?: string;
   defaultReportDateColor?: string;
   defaultReportDateFormat?: DateFormatStyles;
+  assignmentsItemsPerPage: number;
 }

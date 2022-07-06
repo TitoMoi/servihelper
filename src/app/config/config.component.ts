@@ -52,6 +52,7 @@ export class ConfigComponent {
     defaultReportFontSize: "",
     defaultReportDateColor: "",
     defaultReportDateFormat: this.translocoDateFormats[0],
+    assignmentsItemsPerPage: 10,
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();
