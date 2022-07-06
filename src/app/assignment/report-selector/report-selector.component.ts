@@ -33,7 +33,7 @@ export class ReportSelectorComponent implements AfterViewInit {
   init = new Date();
   selectedDates = [];
   timeoutRef;
-  public resetModel = new Date(0);
+  resetModel = new Date(0);
 
   orderOptions: string[] = ["Asc", "Desc"];
 
