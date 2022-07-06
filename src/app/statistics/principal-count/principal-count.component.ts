@@ -129,10 +129,10 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
    */
   changeWoman(event: MatCheckboxChange): void {
     if (!event.checked) {
-      this.principalList = this.participantService.getParticipants(true);
+      this.initStatistics();
       return;
     }
-
+    this.initStatistics();
     this.principalList = this.principalList.filter(
       (participant) => participant.isWoman
     );
@@ -144,10 +144,10 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
    */
   changeMan(event: MatCheckboxChange): void {
     if (!event.checked) {
-      this.principalList = this.participantService.getParticipants(true);
+      this.initStatistics();
       return;
     }
-
+    this.initStatistics();
     this.principalList = this.principalList.filter(
       (participant) => !participant.isWoman
     );

@@ -130,10 +130,10 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
    */
   changeWoman(event: MatCheckboxChange): void {
     if (!event.checked) {
-      //False, restores the state
-      this.globalList = this.participantService.getParticipants(true);
+      this.initStatistics();
+      return;
     }
-
+    this.initStatistics();
     this.globalList = this.globalList.filter(
       (participant) => participant.isWoman
     );
@@ -145,10 +145,10 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
    */
   changeMan(event: MatCheckboxChange): void {
     if (!event.checked) {
-      this.globalList = this.participantService.getParticipants(true);
+      this.initStatistics();
       return;
     }
-
+    this.initStatistics();
     this.globalList = this.globalList.filter(
       (participant) => !participant.isWoman
     );

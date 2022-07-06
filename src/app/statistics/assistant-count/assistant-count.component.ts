@@ -130,11 +130,10 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
    */
   changeWoman(event: MatCheckboxChange): void {
     if (!event.checked) {
-      //False, restores the state
-      this.assistantList = this.participantService.getParticipants(true);
+      this.initStatistics();
       return;
     }
-
+    this.initStatistics();
     this.assistantList = this.assistantList.filter(
       (participant) => participant.isWoman
     );
@@ -146,11 +145,10 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
    */
   changeMan(event: MatCheckboxChange): void {
     if (!event.checked) {
-      //False, restores the state
-      this.assistantList = this.participantService.getParticipants(true);
+      this.initStatistics();
       return;
     }
-
+    this.initStatistics();
     this.assistantList = this.assistantList.filter(
       (participant) => !participant.isWoman
     );
