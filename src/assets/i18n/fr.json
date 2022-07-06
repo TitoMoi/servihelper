@@ -86,7 +86,7 @@
   "INFO_WHAT_IS_YELLOW_COLOR": "Une couleur jaune apparaît chez certains participants, qu'est-ce que c'est?",
   "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "Bien que le participant puisse être candidat à la mission, cela signifie qu'il a déjà une ou plusieurs autres missions à cette date.",
   "INFO__CONTACT": "¿Comment signaler un bug ou une amélioration?",
-  "INFO__CONTACT_ANSWER": "Servihelper@gmail.com",
+  "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
   "INFO__DISTRIBUTION": "¿Puis-je le distribuer?",
   "INFO__DISTRIBUTION_ANSWER": "Oui, bien qu'il soit recommandé de distribuer le lien de téléchargement, car une nouvelle version a peut-être été publiée avec une correction.",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "¿Comment diffuser les affectations?",
@@ -182,5 +182,7 @@
   "fr": "Français",
   "it": "Italien",
   "de": "Allemand",
-  "ru": "Russe"
+  "ru": "Russe",
+  "ja": "Japonais",
+  "kr": "Coréen"
 }

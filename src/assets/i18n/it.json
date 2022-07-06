@@ -86,7 +86,7 @@
   "INFO_WHAT_IS_YELLOW_COLOR": "Un colore giallo appare in alcuni partecipanti, che cos'è?",
   "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "Sebbene il partecipante possa essere un candidato per l'incarico, significa che ha già uno o più altri incarichi in quella data.",
   "INFO__CONTACT": "¿Come faccio a segnalare un bug o un miglioramento?",
-  "INFO__CONTACT_ANSWER": "servihelper@gmailCom",
+  "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
   "INFO__DISTRIBUTION": "¿Posso distribuirlo?",
   "INFO__DISTRIBUTION_ANSWER": "Sì, anche se si consiglia di distribuire il link per il download, poiché una nuova versione potrebbe essere uscita con una certa correzione.",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "¿Come distribuisci gli incarichi?",
@@ -182,5 +182,7 @@
   "fr": "Francese",
   "it": "Italiano",
   "de": "Tedesco",
-  "ru": "Russo"
+  "ru": "Russo",
+  "ja": "Giapponese",
+  "kr": "Coreano"
 }

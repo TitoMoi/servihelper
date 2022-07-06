@@ -86,7 +86,7 @@
   "INFO_WHAT_IS_YELLOW_COLOR": "Bei einigen Teilnehmern erscheint eine gelbe Farbe, was ist das?",
   "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "Obwohl der Teilnehmer ein Kandidat für die Aufgabe sein kann, bedeutet dies, dass er zu diesem Zeitpunkt bereits eine oder mehrere andere Aufgaben hat.",
   "INFO__CONTACT": "Wie melde ich einen Fehler oder eine Verbesserung?",
-  "INFO__CONTACT_ANSWER": "servihelper@gmailCom",
+  "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
   "INFO__DISTRIBUTION": "Kann ich es verteilen?",
   "INFO__DISTRIBUTION_ANSWER": "Ja, obwohl empfohlen wird, den Download -Link zu verteilen, als eine neue Version möglicherweise mit etwas Korrektur herausgekommen ist.",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "Wie verteile ich die Aufgaben?",
@@ -182,5 +182,7 @@
   "fr": "Französisch",
   "it": "Italienisch",
   "de": "Deutsch",
-  "ru": "Russisch"
+  "ru": "Russisch",
+  "ja": "Japanisch",
+  "kr": "Koreanisch"
 }

@@ -14,16 +14,18 @@ export class CustomDateAdapter extends NativeDateAdapter {
     super(translocoService.getActiveLang(), platform);
 
     this.translocoService = translocoService;
-    //The first day of the week
+    //The first day of the week for the diferent langs
     this.langAndDay = {
-      es: 1,
       en: 0,
+      ja: 0,
+      es: 1,
       ca: 1,
       pt: 1,
       fr: 1,
       it: 1,
       de: 1,
       ru: 1,
+      ko: 1,
     };
   }
 

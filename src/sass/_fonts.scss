@@ -29,3 +29,35 @@
   font-display: swap;
   src: url("../assets/fonts/noto-sans-700.woff2") format("woff2");
 }
+
+@font-face {
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/noto-sans-jp-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/noto-sans-jp-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/noto-sans-kr-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/noto-sans-kr-700.woff2") format("woff2");
+}

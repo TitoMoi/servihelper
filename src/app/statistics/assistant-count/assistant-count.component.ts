@@ -13,7 +13,7 @@ import {
 } from "app/functions";
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
-import { ca, enGB, es, pt, de, fr, it, ru } from "date-fns/locale";
+import { ca, enGB, es, pt, de, fr, it, ru, ja, ko } from "date-fns/locale";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -43,10 +43,12 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
       ca, //Catalan
       en: enGB, //English
       pt, //Portuguese
-      de,
-      fr,
-      it,
-      ru,
+      de, //German
+      fr, //French
+      it, //Italian
+      ru, //Russian
+      ja, //Japanese
+      ko, //Korean
     };
 
     this.panelOpenState = false;

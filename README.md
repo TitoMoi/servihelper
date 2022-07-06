@@ -74,3 +74,5 @@ Yes, fix, perf, refactor, test and docs are welcome.
 - Italian
 - German
 - Russian
+- Japanese
+- Korean
