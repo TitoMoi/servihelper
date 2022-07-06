@@ -177,7 +177,7 @@
   <mat-paginator
     *ngIf="dataSource.length"
     [length]="assignments?.length"
-    [pageSize]="configService.getConfig().assignmentsItemsPerPage"
+    [pageSize]="currentPageSize"
     [pageSizeOptions]="pageSizeOptions"
     (page)="handlePageEvent($event)"
     aria-label="Select the page"
