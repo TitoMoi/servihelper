@@ -184,5 +184,8 @@
   "de": "German",
   "ru": "Russian",
   "ja": "Japanese",
-  "ko": "Korean"
+  "ko": "Korean",
+  "zhCN": "Chinese",
+  "el": "Greek",
+  "hi": "Hindi"
 }
