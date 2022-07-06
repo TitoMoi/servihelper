@@ -153,6 +153,7 @@ export class SelectionListHorComponent implements OnChanges {
           if (assignType) {
             data.cell.styles.fillColor = assignType.color;
             data.cell.styles.fontStyle = "bold";
+            return;
           }
           if (localName === "th" && !assignType) {
             data.cell.styles.fillColor =

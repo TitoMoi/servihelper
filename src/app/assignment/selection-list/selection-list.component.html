@@ -44,7 +44,9 @@
                   }
           }}
         </th>
-        <th></th>
+        <th
+          [style.background]="configService.getConfig().defaultReportDateColor"
+        ></th>
       </tr>
       <tr *ngFor="let assignment of ag.assignments">
         <td
@@ -56,7 +58,7 @@
             configService.getConfig().defaultReportFontSize + 'px'
           "
         >
-          {{ assignment.theme }}
+          <div>{{ assignment.theme }}</div>
           <span *ngIf="!assignment.theme">{{ assignment.assignType }}</span>
         </td>
         <td

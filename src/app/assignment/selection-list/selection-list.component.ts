@@ -152,11 +152,21 @@ export class SelectionListComponent implements OnChanges {
           if (assignType) {
             data.cell.styles.fillColor = assignType.color;
             data.cell.styles.fontStyle = "bold";
+            return;
           }
-          if (localName === "th" && classList.contains("bold")) {
+          //date
+          if (localName === "th") {
             data.cell.styles.fillColor =
               this.configService.getConfig().defaultReportDateColor;
             data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          //theme
+          if (!assignType && localName === "td" && classList.contains("bold")) {
+            data.cell.styles.fillColor = "#FFFFFF";
+            data.cell.styles.fontStyle = "bold";
+            data.cell.styles.overflow = "hidden";
+            return;
           }
           if (!assignType && !classList.contains("bold"))
             data.cell.styles.fillColor = "#FFFFFF";
