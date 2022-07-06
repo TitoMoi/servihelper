@@ -73,6 +73,9 @@ Yes, fix, perf, refactor, test and docs are welcome.
 - Portuguese
 - Italian
 - German
+- Greek
 - Russian
 - Japanese
 - Korean
+- Chinese simplified
+- Hindi

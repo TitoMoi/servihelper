@@ -13,7 +13,21 @@ import {
 } from "app/functions";
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
-import { ca, de, enGB, es, fr, pt, ru, it, ja, ko } from "date-fns/locale";
+import {
+  ca,
+  de,
+  enGB,
+  es,
+  fr,
+  pt,
+  ru,
+  it,
+  ja,
+  ko,
+  zhCN,
+  hi,
+  el,
+} from "date-fns/locale";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -49,6 +63,9 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
       ru,
       ja,
       ko, //Korean
+      zhCN,
+      hi,
+      el,
     };
 
     this.panelOpenState = false;
