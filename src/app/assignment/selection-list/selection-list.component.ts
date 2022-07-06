@@ -165,7 +165,6 @@ export class SelectionListComponent implements OnChanges {
           if (!assignType && localName === "td" && classList.contains("bold")) {
             data.cell.styles.fillColor = "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
-            data.cell.styles.overflow = "hidden";
             return;
           }
           if (!assignType && !classList.contains("bold"))

@@ -3,10 +3,10 @@
     <table id="assignmentTableId" class="bg-color-white" style="width: 23rem">
       <tr>
         <th>
-          <div *ngIf="!assignmentHeaderTitle" class="mt-1 mb-1">
+          <div *ngIf="!assignmentHeaderTitle" class="mt-1 mb-1 border-bottom">
             {{ "ASSIGN_IMAGE_TITLE" | transloco }}
           </div>
-          <div *ngIf="assignmentHeaderTitle" class="mt-1 mb-1">
+          <div *ngIf="assignmentHeaderTitle" class="mt-1 mb-1 border-bottom">
             {{ assignmentHeaderTitle }}
           </div>
         </th>

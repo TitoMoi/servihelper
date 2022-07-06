@@ -2,6 +2,10 @@
   background-color: inherit;
 }
 
+.border-bottom {
+  border-bottom: 1px solid black;
+}
+
 #copiedId {
   background-color: white;
   padding: 10px;
