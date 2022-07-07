@@ -231,12 +231,20 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     const date = this.assignmentForm.get("date").value;
     const footerNote = this.assignmentForm.get("footerNote").value;
     const room = this.assignmentForm.get("room").value;
-    this.assignmentForm.reset();
+    const onlyMan = this.assignmentForm.get("onlyMan").value;
+    const onlyWoman = this.assignmentForm.get("onlyWoman").value;
+
+    this.assignmentForm.reset({ emitEvent: false });
+
     this.assignmentForm.get("date").setValue(date, { emitEvent: false });
     this.assignmentForm
       .get("footerNote")
       .setValue(footerNote, { emitEvent: false });
     this.assignmentForm.get("room").setValue(room, { emitEvent: false });
+    this.assignmentForm.get("onlyMan").setValue(onlyMan, { emitEvent: false });
+    this.assignmentForm
+      .get("onlyWoman")
+      .setValue(onlyWoman, { emitEvent: false });
   }
 
   onSelectionChangePrincipal() {
