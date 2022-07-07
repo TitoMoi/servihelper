@@ -19,6 +19,7 @@
               matPrefix
               [for]="picker"
               class="mr-3"
+              [disableRipple]="true"
             ></mat-datepicker-toggle>
             <mat-datepicker
               id="assignmentDatepickerId"
@@ -68,6 +69,7 @@
               labelPosition="before"
               color="primary"
               formControlName="onlyWoman"
+              [disableRipple]="true"
               >{{ t("ASSIGN_CREATE_ONLY_WOMEN") }}</mat-checkbox
             >
           </div>
@@ -76,6 +78,7 @@
               labelPosition="before"
               color="primary"
               formControlName="onlyMan"
+              [disableRipple]="true"
               >{{ t("ASSIGN_CREATE_ONLY_MEN") }}</mat-checkbox
             >
           </div>
