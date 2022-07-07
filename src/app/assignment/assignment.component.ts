@@ -115,13 +115,17 @@ export class AssignmentComponent implements OnInit {
         assignment.assistant
       );
 
+      const assignType = this.assignTypeService.getAssignType(
+        assignment.assignType
+      );
+
       //Populate datasource, values are in order
       dataSourceTemp.push({
         id: assignment.id,
         date: assignment.date,
         room: this.roomService.getRoom(assignment.room).name,
-        assignType: this.assignTypeService.getAssignType(assignment.assignType)
-          .name,
+        assignType: assignType.name,
+        assignTypeColor: assignType.color,
         theme: assignment.theme,
         principal: this.participantService.getParticipant(assignment.principal)
           .name,

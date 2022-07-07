@@ -21,6 +21,7 @@ export interface AssignmentTableInterface {
   date: Date;
   room: string;
   assignType: string;
+  assignTypeColor: string;
   theme: string;
   principal: string;
   assistant: string;
