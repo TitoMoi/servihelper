@@ -1,3 +1,15 @@
+tr {
+  cursor: pointer;
+}
+
+tr.expanded-detail-row {
+  height: 0;
+}
+
+.expanded-element-row td {
+  border-bottom-width: 0;
+}
+
 .mat-paginator,
 .mat-paginator-page-size .mat-select-trigger {
   font-size: inherit;
@@ -16,16 +28,4 @@
 .expanded-element-theme {
   margin-top: 4px;
   margin-bottom: 4px;
-}
-
-tr.expanded-detail-row {
-  height: 0;
-}
-
-.expanded-element-row td {
-  border-bottom-width: 0;
-}
-
-tr {
-  cursor: pointer;
 }

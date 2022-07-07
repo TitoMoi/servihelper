@@ -51,8 +51,8 @@ export class AssignmentComponent implements OnInit {
     "date",
     "principal",
     "assistant",
-    "room",
     "assignType",
+    "room",
     "editIcon",
     "deleteIcon",
   ];
