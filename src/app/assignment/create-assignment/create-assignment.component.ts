@@ -216,7 +216,14 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeGremlings() {
+    const themeControl = this.assignmentForm.get("theme");
+    const value = themeControl.value;
+    themeControl.patchValue(value.replace(/\u200B/g, ""), { emitEvent: false });
+  }
+
   onSubmit(): void {
+    this.removeGremlings();
     this.assignmentService.createAssignment(this.assignmentForm.value);
 
     //navigate to parent, one parent for each fragment
@@ -226,6 +233,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   submitAndCreate(): void {
+    this.removeGremlings();
     this.assignmentService.createAssignment(this.assignmentForm.value);
 
     const date = this.assignmentForm.get("date").value;

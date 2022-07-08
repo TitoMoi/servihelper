@@ -169,7 +169,7 @@ export class SelectionListHorComponent implements OnChanges {
   async toPng() {
     //the div
     document.body.style.cursor = "wait";
-    const div = document.getElementById("resultListDiv");
+    const div = document.getElementById("toPngDivId");
     const dataUrl = await toPng(div);
 
     const link = document.createElement("a");

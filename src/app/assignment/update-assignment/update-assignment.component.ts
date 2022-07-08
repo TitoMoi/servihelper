@@ -210,7 +210,14 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeGremlings() {
+    const themeControl = this.assignmentForm.get("theme");
+    const value = themeControl.value;
+    themeControl.patchValue(value.replace(/\u200B/g, ""), { emitEvent: false });
+  }
+
   onSubmit(): void {
+    this.removeGremlings();
     this.assignmentService.updateAssignment(this.assignmentForm.value);
 
     //navigate to parent, one parent for each fragment
