@@ -75,6 +75,7 @@ export class AssignmentComponent implements OnInit {
     //ToDo: No queda claro, getLang...pero pongo un locale despues.
     //Set datepicker lang to locale
     const lang = this.translocoService.getActiveLang();
+    // https://angular-doc.ru/guide/i18n
     this.dateAdapter.setLocale(lang);
 
     this.assignments = this.assignmentService.getAssignments();
