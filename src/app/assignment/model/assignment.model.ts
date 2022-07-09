@@ -19,6 +19,7 @@ export interface AssignmentGroupInterface {
 export interface AssignmentTableInterface {
   id: string;
   date: Date;
+  hasDateSeparator: boolean; //To separate dates from one day to another
   room: string;
   assignType: string;
   assignTypeColor: string;

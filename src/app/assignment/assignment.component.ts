@@ -5,10 +5,8 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-import { Component, OnInit } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatPaginatorIntl, PageEvent } from "@angular/material/paginator";
-import { DomSanitizer } from "@angular/platform-browser";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
@@ -36,6 +34,7 @@ import { ConfigService } from "app/config/service/config.service";
       ),
     ]),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignmentComponent implements OnInit {
   //In memory assignments
@@ -70,8 +69,6 @@ export class AssignmentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const lang = this.translocoService.getActiveLang();
-
     this.assignments = this.assignmentService.getAssignments();
 
     const itemsPerPage = this.configService.getConfig().assignmentsItemsPerPage;
@@ -118,6 +115,7 @@ export class AssignmentComponent implements OnInit {
       dataSourceTemp.push({
         id: assignment.id,
         date: assignment.date,
+        hasDateSeparator: undefined,
         room: this.roomService.getRoom(assignment.room).name,
         assignType: assignType.name,
         assignTypeColor: assignType.color,
@@ -127,6 +125,20 @@ export class AssignmentComponent implements OnInit {
         assistant: assistant ? assistant.name : undefined,
       });
     }
+
+    //Separate dates from one day to another
+    let filteredLastDate: Date = dataSourceTemp[0].date;
+    dataSourceTemp.forEach((tableRow: AssignmentTableInterface) => {
+      if (
+        new Date(tableRow.date).getTime() !==
+        new Date(filteredLastDate).getTime()
+      ) {
+        console.log("isDiferent");
+        tableRow.hasDateSeparator = true;
+        filteredLastDate = tableRow.date;
+      }
+    });
+
     //Update the view
     this.dataSource = dataSourceTemp;
   }
