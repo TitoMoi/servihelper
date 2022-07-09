@@ -8,6 +8,8 @@ Your data is managed internally on the local device, so it never goes to the int
 
 Its purpose is for help the Jehovah's witnesses to create and manage assignments for the meetings.
 
+[Examples](https://drive.google.com/drive/folders/1h3LLPwzKukYT3AXiMMLlcggHyi4ZafNH?usp=sharing)
+
 ## Download links
 
 Download app section [Download for Windows or Mac](https://github.com/TitoMoi/servihelper/releases).
