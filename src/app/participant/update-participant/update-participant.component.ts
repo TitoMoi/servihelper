@@ -21,9 +21,6 @@ import {
   MatDatepicker,
   MatDatepickerInputEvent,
 } from "@angular/material/datepicker";
-import { DateAdapter } from "@angular/material/core";
-import { TranslocoService } from "@ngneat/transloco";
-import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-update-participant",
@@ -44,8 +41,6 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
 
   timeoutRef;
 
-  langSub$: Subscription;
-
   participantForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
@@ -62,8 +57,6 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
     private assignTypeService: AssignTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private dateAdapter: DateAdapter<Date>,
-    private translocoService: TranslocoService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -85,17 +78,10 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
     this.setParticipantAssignTypes();
 
     this.notAvailableDates = this.participant.notAvailableDates;
-
-    this.dateAdapter.setLocale(this.translocoService.getActiveLang());
-
-    this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
-      this.dateAdapter.setLocale(lang);
-    });
   }
 
   ngOnDestroy(): void {
     clearTimeout(this.timeoutRef);
-    this.langSub$.unsubscribe();
   }
 
   getRoomName(id) {

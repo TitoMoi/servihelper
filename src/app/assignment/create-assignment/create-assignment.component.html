@@ -24,7 +24,7 @@
             <mat-datepicker
               id="assignmentDatepickerId"
               #picker
-              [startAt]="lastDate ? lastDate : undefined"
+              [startAt]="this.lastDateService.lastDate$ | async"
             ></mat-datepicker>
           </mat-form-field>
           <div class="col-6 mb-2">

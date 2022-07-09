@@ -5,9 +5,7 @@ import {
   OnInit,
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { DateAdapter } from "@angular/material/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { TranslocoService } from "@ngneat/transloco";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantInterface } from "app/participant/model/participant.model";
@@ -61,7 +59,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
 
   //Subscriptions
   formSub$: Subscription;
-  langSub$: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,19 +69,11 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     private noteService: NoteService,
     private sharedService: SharedService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private dateAdapter: DateAdapter<any>,
-    private translocoService: TranslocoService
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    //Set datepicker lang to locale
-    this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
-      this.dateAdapter.setLocale(lang);
-      //Only in update assignment, create not necessary
-      this.getData();
-    });
-
+    this.getData();
     /*
       Only when assignType, room, onlyMan or onlyWoman changes principal and assistant must change
       if theme is getting filled, we dont want a subscribe for each letter so -> "filter"
@@ -120,7 +109,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.langSub$.unsubscribe();
     this.formSub$.unsubscribe();
   }
 

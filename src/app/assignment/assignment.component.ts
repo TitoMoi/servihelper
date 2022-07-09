@@ -18,7 +18,6 @@ import {
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { TranslocoService } from "@ngneat/transloco";
-import { DateAdapter } from "@angular/material/core";
 import { MyCustomPaginatorI18 } from "app/services/my-custom-paginator-i18.service";
 import { ConfigService } from "app/config/service/config.service";
 
@@ -67,16 +66,11 @@ export class AssignmentComponent implements OnInit {
     private participantService: ParticipantService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
-    private translocoService: TranslocoService,
-    private dateAdapter: DateAdapter<Date>
+    private translocoService: TranslocoService
   ) {}
 
   ngOnInit() {
-    //ToDo: No queda claro, getLang...pero pongo un locale despues.
-    //Set datepicker lang to locale
     const lang = this.translocoService.getActiveLang();
-    // https://angular-doc.ru/guide/i18n
-    this.dateAdapter.setLocale(lang);
 
     this.assignments = this.assignmentService.getAssignments();
 

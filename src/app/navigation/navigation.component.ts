@@ -1,5 +1,6 @@
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { DateAdapter } from "@angular/material/core";
 import { MatSelectChange } from "@angular/material/select";
 import { TranslocoService } from "@ngneat/transloco";
 import { ConfigService } from "app/config/service/config.service";
@@ -24,6 +25,7 @@ export class NavigationComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public translocoService: TranslocoService,
+    private dateAdapter: DateAdapter<any>,
     public configService: ConfigService
   ) {}
 
@@ -40,9 +42,30 @@ export class NavigationComponent implements OnInit {
    * @param languageChange event of select change
    */
   updateLang(matSelectChange: MatSelectChange) {
-    this.translocoService.setActiveLang(matSelectChange.value);
+    this.setLang(matSelectChange.value);
 
-    //Save the lang
+    //Save the lang to the config
     this.configService.updateConfigByKey("lang", matSelectChange.value);
+
+    this.setLocale(matSelectChange.value);
+  }
+
+  /**
+   *
+   * @param lang the lang
+   */
+  setLang(lang) {
+    this.translocoService = this.translocoService.setActiveLang(lang);
+  }
+
+  /**
+   * https://www.loc.gov/standards/iso639-2/php/code_list.php
+   *
+   * @param locale
+   */
+  setLocale(locale) {
+    //Save the locale
+    if (locale === "zhCN") locale = "zh";
+    this.dateAdapter.setLocale(locale);
   }
 }

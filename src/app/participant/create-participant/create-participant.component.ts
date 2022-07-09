@@ -17,9 +17,6 @@ import {
   MatDatepicker,
   MatDatepickerInputEvent,
 } from "@angular/material/datepicker";
-import { DateAdapter } from "@angular/material/core";
-import { TranslocoService } from "@ngneat/transloco";
-import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-create-participant",
@@ -41,8 +38,6 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
   notAvailableDates = [];
   timeoutRef;
 
-  langSub$: Subscription;
-
   participantForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
@@ -59,25 +54,16 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
     private assignTypeService: AssignTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private dateAdapter: DateAdapter<Date>,
-    private translocoService: TranslocoService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.addRooms();
     this.addAssignTypes();
-
-    this.dateAdapter.setLocale(this.translocoService.getActiveLang());
-
-    this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
-      this.dateAdapter.setLocale(lang);
-    });
   }
 
   ngOnDestroy(): void {
     clearTimeout(this.timeoutRef);
-    this.langSub$.unsubscribe();
   }
 
   //Accesor for the template, not working fine on the ts -> use this.participantForm.get

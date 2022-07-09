@@ -6,9 +6,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { DateAdapter } from "@angular/material/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { TranslocoService } from "@ngneat/transloco";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantInterface } from "app/participant/model/participant.model";
@@ -18,7 +16,7 @@ import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
-import { filter, pairwise, startWith, Subscription } from "rxjs";
+import { filter, Observable, pairwise, startWith, Subscription } from "rxjs";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
@@ -50,8 +48,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   assignments: AssignmentInterface[] =
     this.assignmentService.getAssignments(true);
 
-  lastDate: Date = this.lastDateService.getLastDate();
-
   assignmentForm: FormGroup = this.formBuilder.group({
     id: undefined,
     date: [undefined, Validators.required],
@@ -67,9 +63,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   //Subscriptions
   formSub$: Subscription;
-  langSub$: Subscription;
+  lastDateSub$: Subscription;
 
   constructor(
+    public lastDateService: LastDateService,
     private formBuilder: FormBuilder,
     private assignmentService: AssignmentService,
     private roomService: RoomService,
@@ -79,17 +76,15 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private sharedService: SharedService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private dateAdapter: DateAdapter<any>,
-    private lastDateService: LastDateService,
-    private translocoService: TranslocoService
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    //Set datepicker lang to locale
-    this.langSub$ = this.translocoService.langChanges$.subscribe((lang) => {
-      this.dateAdapter.setLocale(lang);
-    });
+    this.lastDateSub$ = this.assignmentForm
+      .get("date")
+      .valueChanges.subscribe((date) => {
+        this.lastDateService.lastDate = date;
+      });
 
     /*
       Only when assignType, room, onlyMan or onlyWoman changes principal and assistant must change
@@ -126,8 +121,8 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.langSub$.unsubscribe();
     this.formSub$.unsubscribe();
+    this.lastDateSub$.unsubscribe();
   }
 
   getData() {
