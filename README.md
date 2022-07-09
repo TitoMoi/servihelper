@@ -79,3 +79,4 @@ Yes, fix, perf, refactor, test and docs are welcome.
 - Korean
 - Chinese simplified
 - Hindi
+- Bengali

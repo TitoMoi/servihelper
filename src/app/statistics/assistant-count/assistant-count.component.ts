@@ -27,6 +27,7 @@ import {
   zhCN,
   hi,
   el,
+  bn,
 } from "date-fns/locale";
 import { Subscription } from "rxjs";
 
@@ -65,7 +66,8 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
       ko, //Korean
       zhCN, //Chinese simplified
       hi, //Hindi
-      el,
+      el, //Greek
+      bn, //Bengali
     };
 
     this.panelOpenState = false;

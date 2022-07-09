@@ -23,7 +23,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
     );
   }
 }
-
+/* https://www.loc.gov/standards/iso639-2/php/code_list.php */
 @NgModule({
   imports: [
     TranslocoLocaleModule.forRoot({
@@ -41,6 +41,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
         zhCN: "zh-CN",
         hi: "hi-HI",
         el: "el-EL",
+        bn: "bn-BN",
       },
     }),
   ],
@@ -63,6 +64,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
           "ko",
           "hi",
           "zhCN",
+          "bn",
         ],
         defaultLang: "en",
         reRenderOnLangChange: true,
