@@ -214,7 +214,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   removeGremlings() {
     const themeControl = this.assignmentForm.get("theme");
     const value = themeControl.value;
-    themeControl.patchValue(value.replace(/\u200B/g, ""), { emitEvent: false });
+    if (value)
+      themeControl.patchValue(value.replace(/\u200B/g, ""), {
+        emitEvent: false,
+      });
   }
 
   onSubmit(): void {

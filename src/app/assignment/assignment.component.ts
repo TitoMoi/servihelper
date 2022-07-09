@@ -133,7 +133,6 @@ export class AssignmentComponent implements OnInit {
         new Date(tableRow.date).getTime() !==
         new Date(filteredLastDate).getTime()
       ) {
-        console.log("isDiferent");
         tableRow.hasDateSeparator = true;
         filteredLastDate = tableRow.date;
       }
