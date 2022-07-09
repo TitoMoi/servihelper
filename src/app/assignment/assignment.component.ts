@@ -127,7 +127,7 @@ export class AssignmentComponent implements OnInit {
     }
 
     //Separate dates from one day to another
-    let filteredLastDate: Date = dataSourceTemp[0].date;
+    let filteredLastDate: Date = dataSourceTemp[0]?.date;
     dataSourceTemp.forEach((tableRow: AssignmentTableInterface) => {
       if (
         new Date(tableRow.date).getTime() !==
