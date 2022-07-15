@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import {
   FormBuilder,
   FormControl,
@@ -14,6 +19,7 @@ import { editorJsonToHtml } from "app/functions/editorJsonToHtml";
   selector: "app-update-note",
   templateUrl: "./update-note.component.html",
   styleUrls: ["./update-note.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateNoteComponent implements OnInit, OnDestroy {
   editor: Editor = new Editor();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
@@ -8,6 +8,7 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
   selector: "app-update-assign-type",
   templateUrl: "./update-assignType.component.html",
   styleUrls: ["./update-assignType.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateAssignTypeComponent implements OnInit {
   //for the color component that doesnt support reactive forms

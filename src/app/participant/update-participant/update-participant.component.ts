@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnDestroy,
@@ -26,15 +27,16 @@ import {
   selector: "app-update-participant",
   templateUrl: "./update-participant.component.html",
   styleUrls: ["./update-participant.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateParticipantComponent implements OnInit, OnDestroy {
+  @ViewChild(MatDatepicker) datePickerRef: MatDatepicker<Date>;
+
   participant: ParticipantInterface;
   rooms: RoomInterface[] = this.roomService.getRooms();
   assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
 
-  @ViewChild(MatDatepicker) _picker: MatDatepicker<Date>;
-
-  CLOSE_ON_SELECTED = false;
+  closeOnSelected = false;
   init = new Date();
   resetModel = new Date(0);
   notAvailableDates = [];
@@ -59,6 +61,16 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private cdr: ChangeDetectorRef
   ) {}
+
+  //Accesor for the template, not working fine on the ts -> use this.participantForm.get
+  get getRoomsForm(): FormArray {
+    return this.participantForm.controls.rooms as FormArray;
+  }
+
+  //Accesor for the template, not working fine on the ts -> use this.participantForm.get
+  get getAssignTypesForm(): FormArray {
+    return this.participantForm.controls.assignTypes as FormArray;
+  }
 
   ngOnInit(): void {
     this.participant = this.participantService.getParticipant(
@@ -89,16 +101,6 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
       const room = this.rooms.filter((r) => r.id === id);
       return room[0].name;
     }
-  }
-
-  //Accesor for the template, not working fine on the ts -> use this.participantForm.get
-  get getRoomsForm(): FormArray {
-    return this.participantForm.controls.rooms as FormArray;
-  }
-
-  //Accesor for the template, not working fine on the ts -> use this.participantForm.get
-  get getAssignTypesForm(): FormArray {
-    return this.participantForm.controls.assignTypes as FormArray;
   }
 
   setParticipantRooms() {
@@ -165,14 +167,16 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
         this.notAvailableDates.splice(index, 1);
       }
       this.resetModel = new Date(0);
-      if (!this.CLOSE_ON_SELECTED) {
-        const closeFn = this._picker.close;
-        this._picker.close = () => {};
-        this._picker[
+      if (!this.closeOnSelected) {
+        const closeFn = this.datePickerRef.close;
+        this.datePickerRef.close = () => {};
+        // eslint-disable-next-line no-underscore-dangle
+        this.datePickerRef[
+          // eslint-disable-next-line @typescript-eslint/dot-notation
           "_componentRef"
         ].instance._calendar.monthView._createWeekCells();
         this.timeoutRef = setTimeout(() => {
-          this._picker.close = closeFn;
+          this.datePickerRef.close = closeFn;
         });
         this.cdr.detectChanges();
       }

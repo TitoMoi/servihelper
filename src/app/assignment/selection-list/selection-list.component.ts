@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from "@angular/core";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
@@ -17,11 +23,12 @@ import autoTable from "jspdf-autotable";
   selector: "app-selection-list",
   templateUrl: "./selection-list.component.html",
   styleUrls: ["./selection-list.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectionListComponent implements OnChanges {
-  @Input("selectedDates") selectedDates: Date[];
-  @Input("assignTypes") assignTypes: string[];
-  @Input("order") order: string;
+  @Input() selectedDates: Date[];
+  @Input() assignTypes: string[];
+  @Input() order: string;
 
   #assignments: AssignmentInterface[] = [];
 
@@ -74,7 +81,7 @@ export class SelectionListComponent implements OnChanges {
   }
 
   sortAssignmentByAssignTypeOrder() {
-    for (let ag of this.assignmentGroups) {
+    for (const ag of this.assignmentGroups) {
       ag.assignments.sort(
         (a: AssignmentInterface, b: AssignmentInterface): number => {
           const orderA = this.assignTypeService.getAssignTypeByName(
@@ -107,7 +114,7 @@ export class SelectionListComponent implements OnChanges {
 
     let length = this.#assignments.length;
 
-    for (let assignment of this.#assignments) {
+    for (const assignment of this.#assignments) {
       --length;
 
       if (!assignGroup.date) assignGroup.date = assignment.date;
@@ -145,8 +152,11 @@ export class SelectionListComponent implements OnChanges {
       autoTable(doc, {
         html: `#table${i}`,
         didParseCell: (data) => {
+          // eslint-disable-next-line @typescript-eslint/dot-notation
           const text = data.cell.raw["innerText"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
           const localName = data.cell.raw["localName"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
           const classList: DOMTokenList = data.cell.raw["classList"];
           const assignType = this.assignTypeService.getAssignTypeByName(text);
           if (assignType) {

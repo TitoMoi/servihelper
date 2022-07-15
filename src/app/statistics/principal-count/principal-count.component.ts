@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { TranslocoService } from "@ngneat/transloco";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
@@ -35,6 +40,7 @@ import { Subscription } from "rxjs";
   selector: "app-principal-count",
   templateUrl: "./principal-count.component.html",
   styleUrls: ["./principal-count.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrincipalCountComponent implements OnInit, OnDestroy {
   principalListBackup: ParticipantInterface[];

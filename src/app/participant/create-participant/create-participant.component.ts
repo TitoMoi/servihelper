@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnDestroy,
@@ -22,17 +23,19 @@ import {
   selector: "app-create-participant",
   templateUrl: "./create-participant.component.html",
   styleUrls: ["./create-participant.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateParticipantComponent implements OnInit, OnDestroy {
+  //Angular material datepicker hacked
+  @ViewChild(MatDatepicker) datePickerRef: MatDatepicker<Date>;
+
   rooms: RoomInterface[] = this.roomService.getRooms();
   assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
 
-  isRoomsAvailable: boolean = false;
-  isAssignTypesAvailable: boolean = false;
+  isRoomsAvailable = false;
+  isAssignTypesAvailable = false;
 
-  //Angular material datepicker hacked
-  @ViewChild(MatDatepicker) _picker: MatDatepicker<Date>;
-  CLOSE_ON_SELECTED = false;
+  closeOnSelected = false;
   init = new Date();
   resetModel = new Date(0);
   notAvailableDates = [];
@@ -57,15 +60,6 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
-    this.addRooms();
-    this.addAssignTypes();
-  }
-
-  ngOnDestroy(): void {
-    clearTimeout(this.timeoutRef);
-  }
-
   //Accesor for the template, not working fine on the ts -> use this.participantForm.get
   get getRoomsForm(): FormArray {
     return this.participantForm.controls.rooms as FormArray;
@@ -74,6 +68,15 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
   //Accesor for the template, not working fine on the ts -> use this.participantForm.get
   get getAssignTypesForm(): FormArray {
     return this.participantForm.controls.assignTypes as FormArray;
+  }
+
+  ngOnInit(): void {
+    this.addRooms();
+    this.addAssignTypes();
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.timeoutRef);
   }
 
   addAssignTypes() {
@@ -166,15 +169,17 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
         this.notAvailableDates.splice(index, 1);
       }
       this.resetModel = new Date(0);
-      if (!this.CLOSE_ON_SELECTED) {
-        const closeFn = this._picker.close;
-        this._picker.close = () => {};
-        this._picker[
+      if (!this.closeOnSelected) {
+        const closeFn = this.datePickerRef.close;
+        this.datePickerRef.close = () => {};
+        // eslint-disable-next-line no-underscore-dangle
+        this.datePickerRef[
+          // eslint-disable-next-line @typescript-eslint/dot-notation
           "_componentRef"
         ].instance._calendar.monthView._createWeekCells();
 
         this.timeoutRef = setTimeout(() => {
-          this._picker.close = closeFn;
+          this.datePickerRef.close = closeFn;
         });
         this.cdr.detectChanges();
       }

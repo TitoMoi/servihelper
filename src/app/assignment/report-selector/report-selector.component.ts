@@ -25,11 +25,14 @@ import { SharedService } from "app/services/shared.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportSelectorComponent implements AfterViewInit {
+  //Angular material datepicker hacked
+  @ViewChild(MatDatepicker) datePickerRef: MatDatepicker<Date>;
+  @ViewChild("assignTypesSelect") select: MatSelect;
+  @ViewChild("orderSelect") order: MatSelect;
+
   assignTypes: AssignTypeInterface[] = this.assignTypesService.getAssignTypes();
 
-  //Angular material datepicker hacked
-  @ViewChild(MatDatepicker) picker: MatDatepicker<Date>;
-  CLOSE_ON_SELECTED = false;
+  closeOnSelected = false;
   init = new Date();
   selectedDates = [];
   timeoutRef;
@@ -48,9 +51,6 @@ export class ReportSelectorComponent implements AfterViewInit {
       "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET"
     ),
   ];
-
-  @ViewChild("assignTypesSelect") select: MatSelect;
-  @ViewChild("orderSelect") order: MatSelect;
 
   selectionForm = new FormGroup({
     assignTypes: new FormControl(),
@@ -93,15 +93,17 @@ export class ReportSelectorComponent implements AfterViewInit {
         ...this.selectedDates.sort(this.sharedService.sortDates),
       ];
 
-      if (!this.CLOSE_ON_SELECTED) {
-        const closeFn = this.picker.close;
-        this.picker.close = () => {};
-        this.picker[
+      if (!this.closeOnSelected) {
+        const closeFn = this.datePickerRef.close;
+        this.datePickerRef.close = () => {};
+        // eslint-disable-next-line no-underscore-dangle
+        this.datePickerRef[
+          // eslint-disable-next-line @typescript-eslint/dot-notation
           "_componentRef"
         ].instance._calendar.monthView._createWeekCells();
 
         this.timeoutRef = setTimeout(() => {
-          this.picker.close = closeFn;
+          this.datePickerRef.close = closeFn;
         });
       }
     }

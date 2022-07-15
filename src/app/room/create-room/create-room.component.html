@@ -8,7 +8,12 @@
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-            <input matInput appautofocus formControlName="name" />
+            <input
+              matInput
+              appautofocus
+              spellcheck="false"
+              formControlName="name"
+            />
           </mat-form-field>
         </div>
       </div>

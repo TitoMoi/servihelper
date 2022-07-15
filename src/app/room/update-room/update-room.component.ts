@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RoomInterface } from "app/room/model/room.model";
@@ -8,6 +8,7 @@ import { RoomService } from "app/room/service/room.service";
   selector: "app-update-room",
   templateUrl: "./update-room.component.html",
   styleUrls: ["./update-room.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateRoomComponent implements OnInit {
   roomForm: FormGroup = this.formBuilder.group({

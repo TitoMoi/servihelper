@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ParticipantService } from "app/participant/service/participant.service";
@@ -9,6 +9,7 @@ import { RoomService } from "app/room/service/room.service";
   selector: "app-create-room",
   templateUrl: "./create-room.component.html",
   styleUrls: ["./create-room.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateRoomComponent {
   roomForm = this.formBuilder.group({

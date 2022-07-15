@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Input,
   OnChanges,
@@ -19,11 +20,12 @@ import { AssignmentService } from "../service/assignment.service";
   selector: "app-multiple-image-assignment",
   templateUrl: "./multiple-image-assignment.component.html",
   styleUrls: ["./multiple-image-assignment.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
-  @Input("selectedDates") selectedDates: Date[];
-  @Input("assignTypes") assignTypes: string[];
-  @Input("order") order: string;
+  @Input() selectedDates: Date[];
+  @Input() assignTypes: string[];
+  @Input() order: string;
 
   #assignments: AssignmentInterface[] = [];
 

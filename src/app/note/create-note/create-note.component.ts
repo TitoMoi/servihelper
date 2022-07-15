@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import {
   FormBuilder,
   FormControl,
@@ -14,6 +19,7 @@ import { Editor, Toolbar, toHTML } from "ngx-editor";
   selector: "app-create-note",
   templateUrl: "./create-note.component.html",
   styleUrls: ["./create-note.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateNoteComponent implements OnInit, OnDestroy {
   noteForm: FormGroup;

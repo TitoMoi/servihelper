@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { TranslocoService } from "@ngneat/transloco";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
@@ -35,6 +40,7 @@ import { Subscription } from "rxjs";
   selector: "app-assistant-count",
   templateUrl: "./assistant-count.component.html",
   styleUrls: ["./assistant-count.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssistantCountComponent implements OnInit, OnDestroy {
   assistantListBackup: ParticipantInterface[];

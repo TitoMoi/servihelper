@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { TranslocoService } from "@ngneat/transloco";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
@@ -35,6 +40,7 @@ import { Subscription } from "rxjs";
   selector: "app-global-count",
   templateUrl: "./global-count.component.html",
   styleUrls: ["./global-count.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlobalCountComponent implements OnInit, OnDestroy {
   globalListBackup: ParticipantInterface[];

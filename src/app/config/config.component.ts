@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
 import { ConfigService } from "app/config/service/config.service";
@@ -12,6 +12,7 @@ import { ConfigInterface } from "./model/config.model";
   selector: "app-config",
   templateUrl: "./config.component.html",
   styleUrls: ["./config.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfigComponent {
   // The path of the app
