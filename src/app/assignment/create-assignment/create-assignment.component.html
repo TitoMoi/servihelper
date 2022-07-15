@@ -1,5 +1,9 @@
 <ng-container *transloco="let t">
-  <form [formGroup]="assignmentForm" novalidate (ngSubmit)="submitAndCreate()">
+  <form
+    [formGroup]="assignmentForm"
+    novalidate
+    (ngSubmit)="submitAndCreate($event)"
+  >
     <mat-card class="shipping-card">
       <mat-card-header>
         <mat-card-title>{{ t("ASSIGN_CREATE_ASSIGN_TITLE") }}</mat-card-title>
@@ -12,6 +16,7 @@
               required
               appautofocus
               matInput
+              (click)="$event.stopPropagation()"
               [matDatepicker]="picker"
               formControlName="date"
             />
@@ -19,11 +24,13 @@
               matPrefix
               [for]="picker"
               class="mr-3"
+              (click)="$event.stopPropagation()"
               [disableRipple]="true"
             ></mat-datepicker-toggle>
             <mat-datepicker
               id="assignmentDatepickerId"
               #picker
+              (click)="$event.stopPropagation()"
               [startAt]="this.lastDateService.lastDate$ | async"
             ></mat-datepicker>
           </mat-form-field>
@@ -52,6 +59,7 @@
                 <mat-option
                   *ngFor="let assignType of assignTypes"
                   [value]="assignType.id"
+                  (click)="$event.stopPropagation()"
                   [style.backgroundColor]="assignType.color"
                 >
                   {{ assignType.name }}
@@ -95,6 +103,7 @@
               >
                 <mat-option
                   *ngFor="let participant of principals; trackBy: trackByIdFn"
+                  (click)="$event.stopPropagation()"
                   [value]="participant.id"
                   [ngClass]="{
                     'bg-color-lightyellow': participant.hasWork,
@@ -112,11 +121,12 @@
               <mat-select
                 #assistantSelect
                 formControlName="assistant"
-                [disableRipple]="true"
                 (selectionChange)="onSelectionChangeAssistant()"
+                [disableRipple]="true"
               >
                 <mat-option
                   *ngFor="let participant of assistants; trackBy: trackByIdFn"
+                  (click)="$event.stopPropagation()"
                   [value]="participant.id"
                   [ngClass]="{
                     'bg-color-lightyellow': participant.hasWork,
@@ -153,7 +163,7 @@
           mat-raised-button
           color="primary"
           type="button"
-          (click)="onSubmit()"
+          (click)="onSubmit($event)"
           [disabled]="assignmentForm.invalid"
         >
           {{ t("BUTTON_SAVE") }}

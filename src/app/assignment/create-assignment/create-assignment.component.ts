@@ -220,7 +220,8 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSubmit(): void {
+  onSubmit(event: Event): void {
+    event.stopPropagation();
     this.removeGremlings();
     this.assignmentService.createAssignment(this.assignmentForm.value);
 
@@ -230,7 +231,8 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     });
   }
 
-  submitAndCreate(): void {
+  submitAndCreate(event: Event): void {
+    event.stopPropagation();
     this.removeGremlings();
     this.assignmentService.createAssignment(this.assignmentForm.value);
 

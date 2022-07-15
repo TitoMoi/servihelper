@@ -207,7 +207,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSubmit(): void {
+  onSubmit(event: Event): void {
+    event.stopPropagation();
     this.removeGremlings();
     this.assignmentService.updateAssignment(this.assignmentForm.value);
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import {
   ParticipantInterface,
   ParticipantTableInterface,
@@ -9,6 +9,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
   selector: "app-participant",
   templateUrl: "./participant.component.html",
   styleUrls: ["./participant.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ParticipantComponent implements OnInit {
   participants: ParticipantInterface[];
