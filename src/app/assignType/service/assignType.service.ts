@@ -19,7 +19,7 @@ export class AssignTypeService {
   //The array of assignTypes in memory
   #assignTypes: AssignTypeInterface[] = undefined;
   //flag to indicate that assignTypes file has changed
-  hasChanged: boolean = true;
+  hasChanged = true;
 
   constructor(private electronService: ElectronService) {}
 

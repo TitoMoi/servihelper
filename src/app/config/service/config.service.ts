@@ -21,7 +21,7 @@ export class ConfigService {
   // The config in memory object
   #config: ConfigInterface = undefined;
   // Flag to indicate that config file has changed
-  hasChanged: boolean = true;
+  hasChanged = true;
 
   constructor(private electronService: ElectronService) {}
 
@@ -40,6 +40,7 @@ export class ConfigService {
 
   /**
    * Check that has all the properties
+   *
    * @returns true if exist, else throws error
    */
   allPropertiesExist() {

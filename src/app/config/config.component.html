@@ -28,6 +28,16 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <h4 class="">{{ "CONFIG_DEFAULT_WEEKDAY_BEGINS" | transloco }}</h4>
+    <div class="col-6 mb-2">
+      <mat-form-field class="full-width">
+        <mat-select formControlName="defaultWeekDayBegins" required>
+          <mat-option *ngFor="let day of weekDayBegins" [value]="day.value">
+            {{ day.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <h4 class="">{{ "CONFIG_DEFAULT_REPORT_DATE_COLOR" | transloco }}</h4>
     <div class="col-6 mb-2">
       <mat-form-field class="full-width">

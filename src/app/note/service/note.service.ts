@@ -20,7 +20,7 @@ export class NoteService {
   //The array of notes in memory
   #notes: NoteInterface[] = undefined;
   //flag to indicate that notes file has changed
-  hasChanged: boolean = true;
+  hasChanged = true;
 
   constructor(private electronService: ElectronService) {}
 

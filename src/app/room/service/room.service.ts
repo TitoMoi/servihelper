@@ -20,7 +20,7 @@ export class RoomService {
   //The array of rooms in memory
   #rooms: RoomInterface[] = undefined;
   //flag to indicate that rooms file has changed
-  hasChanged: boolean = true;
+  hasChanged = true;
 
   constructor(private electronService: ElectronService) {}
 

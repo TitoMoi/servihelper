@@ -7,8 +7,14 @@ export type ConfigOptionsType =
   | "defaultFooterNoteId"
   | "defaultReportFontSize"
   | "defaultReportDateColor"
+  | "defaultWeekDayBegins"
   | "defaultReportDateFormat"
   | "assignmentsItemsPerPage";
+
+export interface WeekDaysBegin {
+  name: string;
+  value: number;
+}
 
 export interface ConfigInterface {
   lang?: string;
@@ -17,6 +23,7 @@ export interface ConfigInterface {
   defaultFooterNoteId?: string;
   defaultReportFontSize?: string;
   defaultReportDateColor?: string;
+  defaultWeekDayBegins: number;
   defaultReportDateFormat?: DateFormatStyles;
   assignmentsItemsPerPage: number;
 }

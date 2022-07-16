@@ -19,7 +19,7 @@ export class AssignmentService {
   //The array of assignments in memory
   #assignments: AssignmentInterface[] = undefined;
   //flag to indicate that assignments file has changed
-  hasChanged: boolean = true;
+  hasChanged = true;
 
   constructor(private electronService: ElectronService) {}
 

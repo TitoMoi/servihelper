@@ -50,7 +50,7 @@ export class SharedService {
   ): ParticipantInterface[] {
     let assistants = structuredClone(participants);
 
-    for (let principal of assistants) {
+    for (const principal of assistants) {
       assistants = assistants.filter((p) => principal.available);
 
       assistants = assistants.filter((p) =>

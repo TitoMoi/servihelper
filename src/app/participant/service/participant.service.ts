@@ -23,7 +23,7 @@ export class ParticipantService {
   //The array of participants in memory
   #participants: ParticipantInterface[] = undefined;
   //flag to indicate that participants file has changed
-  hasChanged: boolean = true;
+  hasChanged = true;
 
   constructor(private electronService: ElectronService) {}
 

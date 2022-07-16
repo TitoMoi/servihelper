@@ -3,6 +3,7 @@
   "firstDayOfWeek": 1,
   "assignmentHeaderTitle": "",
   "defaultFooterNoteId": "",
+  "defaultWeekDayBegins": 1,
   "defaultReportFontSize": "",
   "defaultReportDateColor": "",
   "defaultReportDateFormat": "short",

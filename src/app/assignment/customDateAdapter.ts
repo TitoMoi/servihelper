@@ -2,39 +2,21 @@ import { Platform } from "@angular/cdk/platform";
 import { Injectable } from "@angular/core";
 import { NativeDateAdapter } from "@angular/material/core";
 import { TranslocoService } from "@ngneat/transloco";
+import { ConfigService } from "app/config/service/config.service";
 
 /** Adapts the native JS Date for use with cdk-based components that work with dates. */
 @Injectable()
 export class CustomDateAdapter extends NativeDateAdapter {
-  langAndDay;
-
-  translocoService: TranslocoService;
-
-  constructor(translocoService: TranslocoService, platform: Platform) {
+  constructor(
+    translocoService: TranslocoService,
+    platform: Platform,
+    private configService: ConfigService
+  ) {
     super(translocoService.getActiveLang(), platform);
-
-    this.translocoService = translocoService;
-    //The first day of the week for the diferent langs, 0 Sunday 1 Monday
-    this.langAndDay = {
-      en: 0,
-      ja: 0,
-      bn: 0,
-      es: 1,
-      ca: 1,
-      pt: 1,
-      fr: 1,
-      it: 1,
-      de: 1,
-      ru: 1,
-      ko: 1,
-      zhCN: 1,
-      hi: 1,
-      el: 1,
-    };
   }
 
   override getFirstDayOfWeek(): number {
-    const lang = this.translocoService.getActiveLang();
-    return this.langAndDay[lang];
+    //temporal "nullish" condition, remove in the long future
+    return this.configService.getConfig().defaultWeekDayBegins ?? 1;
   }
 }

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
+import { TranslocoService } from "@ngneat/transloco";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
@@ -7,7 +8,7 @@ import { NoteService } from "app/note/service/note.service";
 import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
-import { ConfigInterface } from "./model/config.model";
+import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 @Component({
   selector: "app-config",
   templateUrl: "./config.component.html",
@@ -25,6 +26,17 @@ export class ConfigComponent {
     "full",
   ];
 
+  weekDayBegins: WeekDaysBegin[] = [
+    {
+      name: this.translocoService.translate("CONFIG_DATE_SUNDAY"),
+      value: 0, //Sunday
+    },
+    {
+      name: this.translocoService.translate("CONFIG_DATE_MONDAY"),
+      value: 1, //Monday
+    },
+  ];
+
   //is part of the form
   defaultReportDateColor: string =
     this.configService.getConfig().defaultReportDateColor;
@@ -36,6 +48,7 @@ export class ConfigComponent {
     defaultReportFontSize: this.configService.getConfig().defaultReportFontSize,
     defaultReportDateFormat:
       this.configService.getConfig().defaultReportDateFormat,
+    defaultWeekDayBegins: this.configService.getConfig().defaultWeekDayBegins,
   });
 
   // If config assignmentHeader key is saved
@@ -52,6 +65,7 @@ export class ConfigComponent {
     defaultFooterNoteId: "",
     defaultReportFontSize: "",
     defaultReportDateColor: "",
+    defaultWeekDayBegins: 1,
     defaultReportDateFormat: this.translocoDateFormats[0],
     assignmentsItemsPerPage: 10,
   };
@@ -65,6 +79,7 @@ export class ConfigComponent {
     private formBuilder: FormBuilder,
     private configService: ConfigService,
     private noteService: NoteService,
+    private translocoService: TranslocoService,
     private electronService: ElectronService
   ) {
     this.path = APP_CONFIG.production

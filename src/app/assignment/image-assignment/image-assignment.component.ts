@@ -118,6 +118,7 @@ export class ImageAssignmentComponent implements OnInit {
     autoTable(doc, {
       html: `#assignmentTableId`,
       didParseCell: (data) => {
+        // eslint-disable-next-line @typescript-eslint/dot-notation
         const classList: DOMTokenList = data.cell.raw["classList"];
         if (classList.contains("bold")) {
           data.cell.styles.fontStyle = "bold";
