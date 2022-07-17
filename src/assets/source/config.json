@@ -6,6 +6,5 @@
   "defaultWeekDayBegins": 1,
   "defaultReportFontSize": "",
   "defaultReportDateColor": "",
-  "defaultReportDateFormat": "short",
-  "assignmentsItemsPerPage": 10
+  "defaultReportDateFormat": "short"
 }

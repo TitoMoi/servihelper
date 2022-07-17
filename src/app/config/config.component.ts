@@ -67,7 +67,6 @@ export class ConfigComponent {
     defaultReportDateColor: "",
     defaultWeekDayBegins: 1,
     defaultReportDateFormat: this.translocoDateFormats[0],
-    assignmentsItemsPerPage: 10,
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();

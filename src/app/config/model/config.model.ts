@@ -8,8 +8,7 @@ export type ConfigOptionsType =
   | "defaultReportFontSize"
   | "defaultReportDateColor"
   | "defaultWeekDayBegins"
-  | "defaultReportDateFormat"
-  | "assignmentsItemsPerPage";
+  | "defaultReportDateFormat";
 
 export interface WeekDaysBegin {
   name: string;
@@ -25,5 +24,4 @@ export interface ConfigInterface {
   defaultReportDateColor?: string;
   defaultWeekDayBegins: number;
   defaultReportDateFormat?: DateFormatStyles;
-  assignmentsItemsPerPage: number;
 }
