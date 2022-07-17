@@ -165,8 +165,10 @@ export class SelectionListHorComponent implements OnChanges {
             return;
           }
           if (localName === "th" && !assignType) {
+            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fillColor =
-              this.configService.getConfig().defaultReportDateColor;
+              this.configService.getConfig().defaultReportDateColor ||
+              "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
           }
         },
