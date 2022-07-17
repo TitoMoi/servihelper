@@ -5,8 +5,15 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { MatPaginatorIntl, PageEvent } from "@angular/material/paginator";
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
+import { MatPaginatorIntl } from "@angular/material/paginator";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
@@ -15,9 +22,7 @@ import {
   AssignmentTableInterface,
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
-import { TranslocoService } from "@ngneat/transloco";
 import { MyCustomPaginatorI18 } from "app/services/my-custom-paginator-i18.service";
-import { ConfigService } from "app/config/service/config.service";
 
 @Component({
   selector: "app-assignment",
@@ -36,13 +41,12 @@ import { ConfigService } from "app/config/service/config.service";
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssignmentComponent implements OnInit {
+export class AssignmentComponent
+  implements OnInit, OnDestroy, AfterViewChecked
+{
   //In memory assignments
   assignments: AssignmentInterface[];
 
-  currentPageSize = this.configService.getConfig().assignmentsItemsPerPage;
-  //Pagination
-  pageSizeOptions: number[] = [10, 15, 30];
   //Table
   displayedColumns: string[] = [
     "assignImage",
@@ -59,47 +63,74 @@ export class AssignmentComponent implements OnInit {
   //Expanded element
   expandedElement: AssignmentInterface | null;
 
+  pageIndex = 0;
+  itemsPerPage = 20;
+
+  rows: NodeListOf<Element> = undefined;
+
+  observer: IntersectionObserver = new IntersectionObserver((entries) => {
+    //Always observe the last row, forEach only has 1 entry
+    entries.forEach((entry) => {
+      console.log(entry);
+      if (entry.isIntersecting) {
+        //Virtual pagination
+        this.pageIndex = this.pageIndex + 1;
+        const begin = this.pageIndex * this.itemsPerPage;
+        const end = begin + this.itemsPerPage;
+        const assignmentsPage = this.assignments.slice(begin, end);
+
+        this.dataSource = [
+          ...this.dataSource,
+          ...this.fillDataSource(assignmentsPage),
+        ];
+        this.observer.unobserve(entry.target);
+        this.cdr.detectChanges();
+      }
+    });
+  });
+
   constructor(
-    private configService: ConfigService,
     private assignmentService: AssignmentService,
     private participantService: ParticipantService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
-    private translocoService: TranslocoService
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.assignments = this.assignmentService.getAssignments();
 
-    const itemsPerPage = this.configService.getConfig().assignmentsItemsPerPage;
-    //ToDo: Que lo de el servicio ya paginado.
-    const begin = 0 * itemsPerPage;
-    const end = begin + itemsPerPage;
+    //Initial pagination
+    const begin = this.pageIndex * this.itemsPerPage;
+    const end = begin + this.itemsPerPage;
     const assignmentsPage = this.assignments.slice(begin, end);
-    this.fillDataSource(assignmentsPage);
+    this.dataSource = this.fillDataSource(assignmentsPage);
+    /* this.cdr.detectChanges(); */
   }
 
-  trackByIdFn(index, assignment: AssignmentInterface) {
+  ngAfterViewChecked(): void {
+    this.queryAllMatRows();
+
+    //Multiply by 2 because each assignment has two rows, the "theme row" is hidden
+    if (this.rows.length !== this.assignments.length * 2)
+      this.observer.observe(this.rows[this.rows.length - 1]);
+  }
+
+  ngOnDestroy(): void {
+    this.observer.disconnect();
+  }
+
+  queryAllMatRows() {
+    this.rows = document.querySelectorAll(".mat-row");
+  }
+
+  trackByIdFn(index, assignment: AssignmentTableInterface) {
     return assignment.id;
   }
 
-  handlePageEvent(pageEvent: PageEvent) {
-    //Save page size if changes
-    if (this.currentPageSize !== pageEvent.pageSize) {
-      let config = this.configService.getConfig();
-      config = { ...config, assignmentsItemsPerPage: pageEvent.pageSize };
-      this.configService.updateConfig(config);
-      this.currentPageSize = pageEvent.pageSize;
-    }
-
-    //ToDo: Codigo duplicado, que lo de el servicio ya paginado.
-    const begin = pageEvent.pageIndex * pageEvent.pageSize;
-    const end = begin + pageEvent.pageSize;
-    const assignmentsPage = this.assignments.slice(begin, end);
-    this.fillDataSource(assignmentsPage);
-  }
-
-  fillDataSource(assignmentsPage: AssignmentInterface[]) {
+  fillDataSource(
+    assignmentsPage: AssignmentInterface[]
+  ): AssignmentTableInterface[] {
     const dataSourceTemp: AssignmentTableInterface[] = [];
     for (const assignment of assignmentsPage) {
       //assistant is optional
@@ -139,7 +170,7 @@ export class AssignmentComponent implements OnInit {
     });
 
     //Update the view
-    this.dataSource = dataSourceTemp;
+    return dataSourceTemp;
   }
 
   exportCsv() {

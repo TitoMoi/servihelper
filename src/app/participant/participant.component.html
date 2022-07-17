@@ -12,6 +12,7 @@
     id="tableDiv"
     *ngIf="dataSource.length"
     mat-table
+    [trackBy]="trackByIdFn"
     [dataSource]="dataSource"
     class="mt-2 mat-elevation-z8"
   >

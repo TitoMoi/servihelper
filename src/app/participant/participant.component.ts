@@ -26,7 +26,7 @@ export class ParticipantComponent implements OnInit {
     this.fillDataSource(this.participants);
   }
 
-  trackByIdFn(index, participant: ParticipantInterface) {
+  trackByIdFn(index, participant: ParticipantTableInterface) {
     return participant.id;
   }
 

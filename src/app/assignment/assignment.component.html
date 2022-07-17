@@ -39,11 +39,12 @@
   </div>
   <table
     id="tableDiv"
+    class="mt-2 mat-elevation-z8"
     *ngIf="dataSource.length"
     mat-table
-    [dataSource]="dataSource"
     multiTemplateDataRows
-    class="mt-2 mat-elevation-z8"
+    [trackBy]="trackByIdFn"
+    [dataSource]="dataSource"
   >
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -184,13 +185,4 @@
       class="expanded-detail-row"
     ></tr>
   </table>
-  <mat-paginator
-    *ngIf="dataSource.length"
-    [length]="assignments?.length"
-    [pageSize]="currentPageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    (page)="handlePageEvent($event)"
-    aria-label="Select the page"
-  >
-  </mat-paginator>
 </ng-container>

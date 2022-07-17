@@ -38,7 +38,6 @@ import { UpdateAssignmentComponent } from "./assignment/update-assignment/update
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { DateAdapter, MatNativeDateModule } from "@angular/material/core";
 import { CustomDateAdapter } from "./assignment/customDateAdapter";
-import { MatPaginatorModule } from "@angular/material/paginator";
 import { RoomComponent } from "./room/room.component";
 import { CreateRoomComponent } from "./room/create-room/create-room.component";
 import { UpdateRoomComponent } from "./room/update-room/update-room.component";
@@ -120,7 +119,6 @@ import { MultipleImageAssignmentComponent } from "./assignment/multiple-image-as
     MatInputModule,
     MatTableModule,
     MatCheckboxModule,
-    MatPaginatorModule,
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,

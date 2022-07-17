@@ -19,18 +19,11 @@ p {
   width: -webkit-fill-available;
   margin: 1rem;
 }
-/* table {
-  width: 100%;
-} */
 
 tr {
   &:hover {
     background-color: whitesmoke;
   }
-}
-
-mat-paginator {
-  margin: 1rem;
 }
 
 form {
