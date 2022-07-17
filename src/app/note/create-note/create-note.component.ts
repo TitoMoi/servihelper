@@ -19,13 +19,19 @@ import { Editor, Toolbar, toHTML } from "ngx-editor";
   selector: "app-create-note",
   templateUrl: "./create-note.component.html",
   styleUrls: ["./create-note.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateNoteComponent implements OnInit, OnDestroy {
-  noteForm: FormGroup;
-  editor: Editor;
+export class CreateNoteComponent implements OnDestroy {
+  noteForm: FormGroup = this.formBuilder.group({
+    id: undefined,
+    name: [undefined, Validators.required],
+    editorContent: new FormControl(
+      { value: undefined, disabled: false },
+      Validators.required
+    ),
+  });
+  editor: Editor = new Editor();
 
-  toolbar: Toolbar;
+  toolbar: Toolbar = [["bold"], ["italic"], ["underline"]];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,19 +40,6 @@ export class CreateNoteComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.noteForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-      editorContent: new FormControl(
-        { value: undefined, disabled: false },
-        Validators.required
-      ),
-    });
-
-    this.toolbar = [["bold"], ["italic"], ["underline"]];
-    this.editor = new Editor();
-  }
   ngOnDestroy(): void {
     this.editor.destroy();
   }
