@@ -1,5 +1,5 @@
 <div *ngIf="assistantList" class="row white-base-background">
-  <div class="col-12">
+  <div class="col-12 g-0">
     <ng-container>
       <mat-accordion>
         <mat-expansion-panel
@@ -26,11 +26,21 @@
             </div>
           </div>
           <div class="row m-3">
-            <div class="col-2">{{ "STATISTICS_NAME" | transloco }}</div>
-            <div class="col-2">{{ "STATISTICS_COUNT" | transloco }}</div>
-            <div class="col-2">{{ "STATISTICS_PENULTIMA" | transloco }}</div>
-            <div class="col-2">{{ "STATISTICS_LAST" | transloco }}</div>
-            <div class="col-4">{{ "STATISTICS_DISTANCE" | transloco }}</div>
+            <div class="col-2">
+              <b>{{ "STATISTICS_NAME" | transloco }}</b>
+            </div>
+            <div class="col-2">
+              <b>{{ "STATISTICS_COUNT" | transloco }}</b>
+            </div>
+            <div class="col-2">
+              <b>{{ "STATISTICS_PENULTIMA" | transloco }}</b>
+            </div>
+            <div class="col-2">
+              <b>{{ "STATISTICS_LAST" | transloco }}</b>
+            </div>
+            <div class="col-4">
+              <b>{{ "STATISTICS_DISTANCE" | transloco }}</b>
+            </div>
           </div>
           <div class="row m-3" *ngFor="let participant of assistantList">
             <div class="col-2">

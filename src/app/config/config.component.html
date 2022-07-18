@@ -1,99 +1,109 @@
-<div class="white-base-background">
-  <form [formGroup]="configForm" novalidate (ngSubmit)="onSubmit()">
-    <h4 class="">{{ "CONFIG_ASSIGNMENT_TITLE" | transloco }}</h4>
+<form
+  class="mat-elevation-z8"
+  [formGroup]="configForm"
+  novalidate
+  (ngSubmit)="onSubmit()"
+>
+  <div class="row justify-items-center m-2">
     <div class="col-12">
+      <h4>{{ "CONFIG_ASSIGNMENT_TITLE" | transloco }}</h4>
       <mat-form-field class="full-width">
         <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
         <input matInput formControlName="assignmentHeaderTitle" />
       </mat-form-field>
     </div>
-    <h4 class="">{{ "CONFIG_DEFAULT_FOOTER_NOTE" | transloco }}</h4>
-    <div class="col-6 mb-2">
-      <mat-form-field class="full-width">
-        <mat-select formControlName="defaultFooterNoteId" required>
-          <mat-option [value]="undefined"> </mat-option>
-          <mat-option *ngFor="let note of notes" [value]="note.id">
-            {{ note.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <h4 class="">{{ "CONFIG_DEFAULT_REPORT_DATE_FORMAT" | transloco }}</h4>
-    <div class="col-6 mb-2">
-      <mat-form-field class="full-width">
-        <mat-select formControlName="defaultReportDateFormat" required>
-          <mat-option *ngFor="let df of translocoDateFormats" [value]="df">
-            {{ df }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <h4 class="">{{ "CONFIG_DEFAULT_WEEKDAY_BEGINS" | transloco }}</h4>
-    <div class="col-6 mb-2">
-      <mat-form-field class="full-width">
-        <mat-select formControlName="defaultWeekDayBegins" required>
-          <mat-option *ngFor="let day of weekDayBegins" [value]="day.value">
-            {{ day.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <h4 class="">{{ "CONFIG_DEFAULT_REPORT_DATE_COLOR" | transloco }}</h4>
-    <div class="col-6 mb-2">
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_REPORT_DATE_COLOR" | transloco }}</mat-label>
-        <input
-          matInput
-          [cpOKButton]="true"
-          [cpOKButtonClass]="'cp-ok-btn'"
-          cpAlphaChannel="disabled"
-          [(colorPicker)]="defaultReportDateColor"
-          [style.background]="defaultReportDateColor"
-        />
-      </mat-form-field>
-    </div>
-    <h4 class="">{{ "CONFIG_DEFAULT_FONT_SIZE" | transloco }}</h4>
-    <div class="col-6 mb-2">
-      <mat-form-field class="full-width">
-        <input
-          matInput
-          type="number"
-          formControlName="defaultReportFontSize"
-          placeholder="16"
-        />
-      </mat-form-field>
-    </div>
-    <button class="" mat-raised-button type="submit" color="primary">
-      {{ "BUTTON_SAVE" | transloco }}
-    </button>
-  </form>
-  <p class="d-inline-block m-3 green-msg" *ngIf="isFormSaved">
-    {{ "CONFIG_FORM_SAVED" | transloco }}
-  </p>
-
-  <div class="col-6 light-red-bg">
-    <h4 class="m-3">{{ "CONFIG_RESTART_LABEL" | transloco }}</h4>
-    <div>
-      <button
-        class="m-3"
-        mat-raised-button
-        type="button"
-        color="warn"
-        (click)="confirmDelete = !confirmDelete"
-      >
-        {{ "CONFIG_RESET_ALL" | transloco }}
-      </button>
-    </div>
-    <div *ngIf="confirmDelete">
-      <button
-        class="m-3"
-        mat-raised-button
-        type="button"
-        color="warn"
-        (click)="eraseAllData()"
-      >
-        {{ "CONFIG_RESET_ALL_CONFIRM" | transloco }}
-      </button>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6">
+          <h4>{{ "CONFIG_DEFAULT_FOOTER_NOTE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-select formControlName="defaultFooterNoteId" required>
+              <mat-option [value]="undefined"> </mat-option>
+              <mat-option *ngFor="let note of notes" [value]="note.id">
+                {{ note.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <h4>{{ "CONFIG_DEFAULT_WEEKDAY_BEGINS" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-select formControlName="defaultWeekDayBegins" required>
+              <mat-option *ngFor="let day of weekDayBegins" [value]="day.value">
+                {{ day.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <h4>{{ "CONFIG_DEFAULT_REPORT_DATE_FORMAT" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-select formControlName="defaultReportDateFormat" required>
+              <mat-option *ngFor="let df of translocoDateFormats" [value]="df">
+                {{ df }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <h4>{{ "CONFIG_DEFAULT_REPORT_DATE_COLOR" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{
+              "PLACEHOLDER_REPORT_DATE_COLOR" | transloco
+            }}</mat-label>
+            <input
+              matInput
+              [cpOKButton]="true"
+              [cpOKButtonClass]="'cp-ok-btn'"
+              cpAlphaChannel="disabled"
+              [(colorPicker)]="defaultReportDateColor"
+              [style.background]="defaultReportDateColor"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <h4>{{ "CONFIG_DEFAULT_FONT_SIZE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              type="number"
+              formControlName="defaultReportFontSize"
+              placeholder="16"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <button mat-raised-button type="submit" color="primary">
+            {{ "BUTTON_SAVE" | transloco }}
+          </button>
+          <span class="ms-2 green-msg" *ngIf="isFormSaved">
+            {{ "CONFIG_FORM_SAVED" | transloco }}
+          </span>
+        </div>
+        <div class="col-6">
+          <h4>{{ "CONFIG_RESTART_LABEL" | transloco }}</h4>
+          <div>
+            <button
+              mat-raised-button
+              type="button"
+              color="warn"
+              (click)="confirmDelete = !confirmDelete"
+            >
+              {{ "CONFIG_RESET_ALL" | transloco }}
+            </button>
+            <button
+              *ngIf="confirmDelete"
+              class="ms-2"
+              mat-raised-button
+              type="button"
+              color="warn"
+              (click)="eraseAllData()"
+            >
+              {{ "CONFIG_RESET_ALL_CONFIRM" | transloco }}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</form>
