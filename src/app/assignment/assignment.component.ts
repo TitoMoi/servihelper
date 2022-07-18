@@ -71,7 +71,6 @@ export class AssignmentComponent
   observer: IntersectionObserver = new IntersectionObserver((entries) => {
     //Always observe the last row, forEach only has 1 entry
     entries.forEach((entry) => {
-      console.log(entry);
       if (entry.isIntersecting) {
         //Virtual pagination
         this.pageIndex = this.pageIndex + 1;

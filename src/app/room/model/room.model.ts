@@ -1,6 +1,7 @@
 export interface RoomInterface {
   id: string;
   name: string;
+  order: number;
 }
 export interface RoomAvailableInterface {
   id: number;

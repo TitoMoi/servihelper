@@ -14,6 +14,7 @@ export class UpdateRoomComponent implements OnInit {
   roomForm: FormGroup = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
+    order: [undefined, Validators.required],
   });
 
   constructor(
@@ -30,6 +31,7 @@ export class UpdateRoomComponent implements OnInit {
     this.roomForm.setValue({
       id: room.id,
       name: room.name,
+      order: room.order,
     });
   }
 

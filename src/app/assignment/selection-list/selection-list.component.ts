@@ -109,6 +109,7 @@ export class SelectionListComponent implements OnChanges {
   getRelatedData() {
     let assignGroup: AssignmentGroupInterface = {
       date: undefined,
+      room: undefined,
       assignments: [],
     };
 
@@ -120,9 +121,13 @@ export class SelectionListComponent implements OnChanges {
       if (!assignGroup.date) assignGroup.date = assignment.date;
 
       if (assignGroup.date !== assignment.date) {
-        //save and reset
+        //save and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
-        assignGroup = { date: assignment.date, assignments: [] };
+        assignGroup = {
+          date: assignment.date,
+          room: undefined,
+          assignments: [],
+        };
       }
 
       assignGroup.assignments.push({

@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 
 @Component({
@@ -15,6 +14,7 @@ export class CreateRoomComponent {
   roomForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
+    order: [undefined, Validators.required],
   });
 
   constructor(

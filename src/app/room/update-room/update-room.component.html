@@ -11,6 +11,12 @@
             <input matInput spellcheck="false" formControlName="name" />
           </mat-form-field>
         </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_ORDER" | transloco }}</mat-label>
+            <input matInput type="number" formControlName="order" />
+          </mat-form-field>
+        </div>
       </div>
     </mat-card-content>
     <mat-card-actions>

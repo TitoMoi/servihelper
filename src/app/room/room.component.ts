@@ -20,7 +20,9 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.rooms = this.roomService.getRooms();
+    this.rooms = this.roomService
+      .getRooms()
+      .sort((a, b) => (a.order > b.order ? 1 : -1));
     this.fillDataSource(this.rooms);
   }
 

@@ -13,6 +13,7 @@ export interface AssignmentInterface {
 
 export interface AssignmentGroupInterface {
   date: Date;
+  room: string;
   assignments: AssignmentInterface[];
 }
 
