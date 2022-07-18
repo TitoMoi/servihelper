@@ -18,6 +18,7 @@ import { ExcelService } from "app/services/excel.service";
 import { ConfigService } from "app/config/service/config.service";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { SortService } from "app/services/sort.service";
 
 @Component({
   selector: "app-selection-list",
@@ -40,6 +41,7 @@ export class SelectionListComponent implements OnChanges {
     private roomService: RoomService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
+    private sortService: SortService,
     private excelService: ExcelService
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
@@ -48,8 +50,10 @@ export class SelectionListComponent implements OnChanges {
       this.assignmentGroups = [];
       this.filterAssignments();
       this.sortAssignmentByDate(this.order);
+      this.#assignments = this.sortService.sortAssignmentsByRoomAndAssignType(
+        this.#assignments
+      );
       this.getRelatedData();
-      this.sortAssignmentByAssignTypeOrder();
     }
   }
 
@@ -126,6 +130,19 @@ export class SelectionListComponent implements OnChanges {
         assignGroup = {
           date: assignment.date,
           room: undefined,
+          assignments: [],
+        };
+      }
+
+      if (!assignGroup.room)
+        assignGroup.room = this.roomService.getRoom(assignment.room).name;
+
+      if (assignGroup.room !== this.roomService.getRoom(assignment.room).name) {
+        //save and prepare another assignGroup
+        this.assignmentGroups.push(assignGroup);
+        assignGroup = {
+          date: assignment.date,
+          room: this.roomService.getRoom(assignment.room).name,
           assignments: [],
         };
       }

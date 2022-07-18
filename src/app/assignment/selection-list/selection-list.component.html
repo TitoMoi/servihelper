@@ -47,7 +47,9 @@
         </th>
         <th
           [style.background]="configService.getConfig().defaultReportDateColor"
-        ></th>
+        >
+          {{ ag.room }}
+        </th>
       </tr>
       <tr *ngFor="let assignment of ag.assignments">
         <td
