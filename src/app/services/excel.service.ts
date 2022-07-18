@@ -169,6 +169,16 @@ export class ExcelService {
         { dateStyle: this.configService.getConfig().defaultReportDateFormat }
       );
 
+      //room
+      const cellRoom = row.getCell(2);
+      cellRoom.font = {
+        bold: true,
+        size:
+          Number(this.configService.getConfig().defaultReportFontSize) || 16,
+      };
+
+      cellRoom.value = ag.room;
+
       //assign type titles
       ag.assignments.forEach((a) => {
         // eslint-disable-next-line @typescript-eslint/no-shadow
@@ -239,7 +249,6 @@ export class ExcelService {
       );
 
       //assign type titles
-
       let i = 2;
       ag.assignments.forEach((a) => {
         // eslint-disable-next-line @typescript-eslint/no-shadow
@@ -270,6 +279,15 @@ export class ExcelService {
       //participants
       i = 2;
       const row2 = this.sheet.addRow({});
+
+      //room
+      const cellRoom = row2.getCell(1);
+      cellRoom.font = {
+        bold: true,
+        size:
+          Number(this.configService.getConfig().defaultReportFontSize) || 16,
+      };
+      cellRoom.value = ag.room;
 
       ag.assignments.forEach((a) => {
         // eslint-disable-next-line @typescript-eslint/no-shadow
