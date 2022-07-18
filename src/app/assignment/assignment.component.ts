@@ -23,6 +23,8 @@ import {
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { MyCustomPaginatorI18 } from "app/services/my-custom-paginator-i18.service";
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { RoomInterface } from "app/room/model/room.model";
 
 @Component({
   selector: "app-assignment",
@@ -104,7 +106,6 @@ export class AssignmentComponent
     const end = begin + this.itemsPerPage;
     const assignmentsPage = this.assignments.slice(begin, end);
     this.dataSource = this.fillDataSource(assignmentsPage);
-    /* this.cdr.detectChanges(); */
   }
 
   ngAfterViewChecked(): void {
@@ -130,8 +131,51 @@ export class AssignmentComponent
   fillDataSource(
     assignmentsPage: AssignmentInterface[]
   ): AssignmentTableInterface[] {
-    const dataSourceTemp: AssignmentTableInterface[] = [];
-    for (const assignment of assignmentsPage) {
+    const assignmentsTable: AssignmentTableInterface[] = [];
+
+    //Diferent sort, first separate date into arrays, then double sort first room and then assign type
+    let assignmentsByDate: [AssignmentInterface[]] = [[]];
+    let index = 0;
+    let lastDate = assignmentsPage[0]?.date;
+
+    assignmentsPage.forEach((assignment) => {
+      if (
+        new Date(assignment.date).getTime() === new Date(lastDate).getTime()
+      ) {
+        assignmentsByDate[index].push(assignment);
+      } else {
+        lastDate = assignment.date;
+        index = index + 1;
+        assignmentsByDate.push([]);
+        assignmentsByDate[index].push(assignment);
+      }
+    });
+
+    assignmentsByDate.forEach((assignGroupByDate: AssignmentInterface[]) => {
+      assignGroupByDate = assignGroupByDate.sort(
+        (a: AssignmentInterface, b: AssignmentInterface) => {
+          const assignTypeAOrder = this.assignTypeService.getAssignType(
+            a.assignType
+          ).order;
+          const assignTypeBOrder = this.assignTypeService.getAssignType(
+            b.assignType
+          ).order;
+          const roomAOrder = this.roomService.getRoom(a.room).order;
+          const roomBOrder = this.roomService.getRoom(b.room).order;
+
+          if (roomAOrder === roomBOrder) {
+            if (assignTypeAOrder === assignTypeBOrder) return 0;
+            return assignTypeAOrder > assignTypeBOrder ? 1 : -1;
+          } else {
+            return roomAOrder > roomBOrder ? 1 : -1;
+          }
+        }
+      );
+    });
+
+    const assignmentsSorted = assignmentsByDate.flat();
+
+    for (const assignment of assignmentsSorted) {
       //assistant is optional
       const assistant = this.participantService.getParticipant(
         assignment.assistant
@@ -142,7 +186,7 @@ export class AssignmentComponent
       );
 
       //Populate datasource, values are in order
-      dataSourceTemp.push({
+      assignmentsTable.push({
         id: assignment.id,
         date: assignment.date,
         hasDateSeparator: undefined,
@@ -156,9 +200,9 @@ export class AssignmentComponent
       });
     }
 
-    //Separate dates from one day to another
-    let filteredLastDate: Date = dataSourceTemp[0]?.date;
-    dataSourceTemp.forEach((tableRow: AssignmentTableInterface) => {
+    //Separate dates from one day to another with a black border
+    let filteredLastDate: Date = assignmentsTable[0]?.date;
+    assignmentsTable.forEach((tableRow: AssignmentTableInterface) => {
       if (
         new Date(tableRow.date).getTime() !==
         new Date(filteredLastDate).getTime()
@@ -169,7 +213,7 @@ export class AssignmentComponent
     });
 
     //Update the view
-    return dataSourceTemp;
+    return assignmentsTable;
   }
 
   exportCsv() {

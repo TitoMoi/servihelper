@@ -29,7 +29,9 @@ import { SharedService } from "app/services/shared.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateAssignmentComponent implements OnInit, OnDestroy {
-  rooms: RoomInterface[] = this.roomService.getRooms().sort();
+  rooms: RoomInterface[] = this.roomService
+    .getRooms()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
