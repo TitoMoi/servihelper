@@ -13,7 +13,6 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { MatPaginatorIntl } from "@angular/material/paginator";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
@@ -22,15 +21,12 @@ import {
   AssignmentTableInterface,
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
-import { MyCustomPaginatorI18 } from "app/services/my-custom-paginator-i18.service";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { RoomInterface } from "app/room/model/room.model";
+import { SortService } from "app/services/sort.service";
 
 @Component({
   selector: "app-assignment",
   templateUrl: "./assignment.component.html",
   styleUrls: ["./assignment.component.scss"],
-  providers: [{ provide: MatPaginatorIntl, useClass: MyCustomPaginatorI18 }],
   animations: [
     trigger("detailExpand", [
       state("collapsed", style({ height: "0px", minHeight: "0" })),
@@ -95,6 +91,7 @@ export class AssignmentComponent
     private participantService: ParticipantService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
+    private sortService: SortService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -133,47 +130,8 @@ export class AssignmentComponent
   ): AssignmentTableInterface[] {
     const assignmentsTable: AssignmentTableInterface[] = [];
 
-    //Diferent sort, first separate date into arrays, then double sort first room and then assign type
-    let assignmentsByDate: [AssignmentInterface[]] = [[]];
-    let index = 0;
-    let lastDate = assignmentsPage[0]?.date;
-
-    assignmentsPage.forEach((assignment) => {
-      if (
-        new Date(assignment.date).getTime() === new Date(lastDate).getTime()
-      ) {
-        assignmentsByDate[index].push(assignment);
-      } else {
-        lastDate = assignment.date;
-        index = index + 1;
-        assignmentsByDate.push([]);
-        assignmentsByDate[index].push(assignment);
-      }
-    });
-
-    assignmentsByDate.forEach((assignGroupByDate: AssignmentInterface[]) => {
-      assignGroupByDate = assignGroupByDate.sort(
-        (a: AssignmentInterface, b: AssignmentInterface) => {
-          const assignTypeAOrder = this.assignTypeService.getAssignType(
-            a.assignType
-          ).order;
-          const assignTypeBOrder = this.assignTypeService.getAssignType(
-            b.assignType
-          ).order;
-          const roomAOrder = this.roomService.getRoom(a.room).order;
-          const roomBOrder = this.roomService.getRoom(b.room).order;
-
-          if (roomAOrder === roomBOrder) {
-            if (assignTypeAOrder === assignTypeBOrder) return 0;
-            return assignTypeAOrder > assignTypeBOrder ? 1 : -1;
-          } else {
-            return roomAOrder > roomBOrder ? 1 : -1;
-          }
-        }
-      );
-    });
-
-    const assignmentsSorted = assignmentsByDate.flat();
+    const assignmentsSorted =
+      this.sortService.sortAssignmentsByRoomAndAssignType(assignmentsPage);
 
     for (const assignment of assignmentsSorted) {
       //assistant is optional
