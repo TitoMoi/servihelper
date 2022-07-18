@@ -16,7 +16,6 @@ export class CustomDateAdapter extends NativeDateAdapter {
   }
 
   override getFirstDayOfWeek(): number {
-    //temporal "nullish" condition, remove in the long future
-    return this.configService.getConfig().defaultWeekDayBegins ?? 1;
+    return this.configService.getConfig().defaultWeekDayBegins;
   }
 }
