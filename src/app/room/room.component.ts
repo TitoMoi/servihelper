@@ -16,7 +16,7 @@ export class RoomComponent implements OnInit {
   dataSource: RoomTableInterface[];
 
   constructor(private roomService: RoomService) {
-    this.displayedColumns = ["name", "editIcon", "deleteIcon"];
+    this.displayedColumns = ["name", "order", "editIcon", "deleteIcon"];
   }
 
   ngOnInit(): void {
@@ -37,6 +37,7 @@ export class RoomComponent implements OnInit {
       dataSourceTemp.push({
         id: room.id,
         name: room.name,
+        order: room.order,
       });
     }
     //Update the view

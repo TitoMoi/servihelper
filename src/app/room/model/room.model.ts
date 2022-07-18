@@ -11,4 +11,5 @@ export interface RoomAvailableInterface {
 export interface RoomTableInterface {
   id: string;
   name: string;
+  order: number;
 }
