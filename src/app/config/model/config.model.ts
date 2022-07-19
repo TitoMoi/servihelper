@@ -16,6 +16,7 @@ export interface WeekDaysBegin {
 }
 
 export interface ConfigInterface {
+  appVersion: string;
   lang?: string;
   firstDayOfWeek?: number;
   assignmentHeaderTitle?: string;
