@@ -31,6 +31,13 @@ export class SelectionListComponent implements OnChanges {
   @Input() assignTypes: string[];
   @Input() order: string;
 
+  defaultReportFontSize =
+    this.configService.getConfig().defaultReportFontSize + "px";
+  defaultReportDateFormat =
+    this.configService.getConfig().defaultReportDateFormat;
+  defaultReportDateColor =
+    this.configService.getConfig().defaultReportDateColor;
+
   #assignments: AssignmentInterface[] = [];
 
   assignmentGroups: AssignmentGroupInterface[] = [];

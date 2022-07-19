@@ -34,19 +34,14 @@
           <tr>
             <th
               class="bold"
-              [style.background]="
-                configService.getConfig().defaultReportDateColor
-              "
-              [style.fontSize]="
-                configService.getConfig().defaultReportFontSize + 'px'
-              "
+              [style.background]="defaultReportDateColor"
+              [style.fontSize]="defaultReportFontSize"
             >
               {{
                 ag.date
                   | translocoDate
                     : {
-                        dateStyle:
-                          configService.getConfig().defaultReportDateFormat
+                        dateStyle: defaultReportDateFormat
                       }
               }}
             </th>
@@ -57,9 +52,7 @@
                 assignTypeService.getAssignTypeByName(assignment.assignType)
                   .color
               "
-              [style.fontSize]="
-                configService.getConfig().defaultReportFontSize + 'px'
-              "
+              [style.fontSize]="defaultReportFontSize"
             >
               {{ assignment.assignType }}
             </th>
@@ -68,9 +61,7 @@
             <td>{{ ag.room }}</td>
             <td
               *ngFor="let assignment of ag.assignments"
-              [style.fontSize]="
-                configService.getConfig().defaultReportFontSize + 'px'
-              "
+              [style.fontSize]="defaultReportFontSize"
             >
               {{ assignment.principal }}
               <span *ngIf="assignment.assistant"
