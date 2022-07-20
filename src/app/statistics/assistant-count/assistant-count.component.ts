@@ -33,6 +33,7 @@ import {
   hi,
   el,
   bn,
+  nl,
 } from "date-fns/locale";
 import { Subscription } from "rxjs";
 
@@ -74,6 +75,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
       hi, //Hindi
       el, //Greek
       bn, //Bengali
+      nl, //Deutch
     };
 
     this.panelOpenState = false;

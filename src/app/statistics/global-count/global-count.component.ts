@@ -33,6 +33,7 @@ import {
   hi,
   el,
   bn,
+  nl,
 } from "date-fns/locale";
 import { Subscription } from "rxjs";
 
@@ -60,20 +61,21 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     private translocoService: TranslocoService
   ) {
     this.locales = {
-      es, //Spanish
-      ca, //Catalan
-      en: enGB, //English
-      pt, //Portuguese
+      es,
+      ca,
+      en: enGB,
+      pt,
       de,
       fr,
       it,
       ru,
       ja,
-      ko, //Korean
+      ko,
       zhCN,
       hi,
       el,
       bn,
+      nl,
     };
 
     this.panelOpenState = false;
