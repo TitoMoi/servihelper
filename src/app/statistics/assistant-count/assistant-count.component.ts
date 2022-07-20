@@ -34,6 +34,9 @@ import {
   el,
   bn,
   nl,
+  ro,
+  tr,
+  pl,
 } from "date-fns/locale";
 import { Subscription } from "rxjs";
 
@@ -76,6 +79,9 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
       el, //Greek
       bn, //Bengali
       nl, //Deutch
+      ro, //Romanian
+      tr, //Turkish
+      pl, //Polish
     };
 
     this.panelOpenState = false;

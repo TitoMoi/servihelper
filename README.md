@@ -73,6 +73,9 @@ Yes, fix, perf, refactor, test and docs are welcome.
 - German
 - Deutch
 - Greek
+- Romanian
+- Polish
+- Turkish
 - Russian
 - Japanese
 - Korean

@@ -34,6 +34,9 @@ import {
   el,
   bn,
   nl,
+  ro,
+  tr,
+  pl,
 } from "date-fns/locale";
 import { Subscription } from "rxjs";
 
@@ -76,6 +79,9 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
       el,
       bn,
       nl,
+      ro,
+      tr,
+      pl,
     };
     this.panelOpenState = false;
   }
