@@ -73,7 +73,6 @@ export class ConfigComponent {
   config: ConfigInterface = {
     appVersion: "2.5.0",
     lang: "en",
-    firstDayOfWeek: 1,
     assignmentHeaderTitle: "",
     assignmentPrincipalTitle: "",
     assignmentAssistantTitle: "",
@@ -129,8 +128,9 @@ export class ConfigComponent {
 
   onSubmit(): void {
     this.configService.updateConfig({
-      ...this.configService.getConfig(),
-      ...this.configForm.value,
+      ...this.config, //Default config
+      ...this.configService.getConfig(), //Current config
+      ...this.configForm.value, //Incoming config
       defaultReportDateColor: this.defaultReportDateColor,
     });
 
