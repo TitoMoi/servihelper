@@ -94,8 +94,6 @@
   "INFO__DISTRIBUTION_ANSWER": "是的，尽管建议您分发下载链接，因为新版本可能会进行一些更正。",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "�如何分发作业？",
   "INFO__HOW_TO_SEND_ASSIGNMENTS_ANSWER": "在-Assignments-部分生成分配时，将显示一个分配表中的图片列中。我们单击它，我们可以预览作业。然后在下面，我们可以将其复制到剪贴板上，以稍后将其粘贴到WhatsApp Web中，生成.png映像或生成PDF。",
-  "INFO__HOW_TO_UPDATE": "�我该如何更新？",
-  "INFO__HOW_TO_UPDATE_ANSWER": "从“配置”部分中导出内部数据。然后在新的下载版本中，在“配置”部分中 - 导入先前导出的数据。",
   "INFO__WHAT_CAN_BE_DONE": "�可以做什么？",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "可以创建各种作业。您需要提前创建作业类型，房间和参与者。",
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "当我创建一个作业时，选择参与者时，旁边显示一个数字，这是什么？",

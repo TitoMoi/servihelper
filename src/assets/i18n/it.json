@@ -93,8 +93,6 @@
   "INFO__DISTRIBUTION_ANSWER": "Sì, anche se si consiglia di distribuire il link per il download, poiché una nuova versione potrebbe essere uscita con una certa correzione.",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "¿Come distribuisci gli incarichi?",
   "INFO__HOW_TO_SEND_ASSIGNMENTS_ANSWER": "Quando si genera un incarico nella sezione -Assignments, viene visualizzato un foglio di assegnazione nella colonna -Image. Facciamo clic su di esso e possiamo visualizzare in anteprima l'assegnazione. Quindi di seguito, possiamo copiarlo negli appunti per incollarlo successivo inWhatsApp Web, genera un'immagine .png o genera un PDF.",
-  "INFO__HOW_TO_UPDATE": "¿Come lo aggiorni?",
-  "INFO__HOW_TO_UPDATE_ANSWER": "Dalla sezione -Configuration- Esporta i dati interni. Quindi nella nuova versione scaricata, nella sezione -Configurazione- Importa i dati precedentemente esportati.",
   "INFO__WHAT_CAN_BE_DONE": "Cosa si può fare?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "È possibile creare tutti i tipi di incarichi. È necessario creare in anticipo i tipi di assegnazione, le stanze e i partecipanti.",
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Quando creo un incarico, quando seleziono il partecipante, un numero viene visualizzato accanto ad esso, che cos'è?",

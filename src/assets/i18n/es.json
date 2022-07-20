@@ -96,8 +96,6 @@
   "INFO__DISTRIBUTION_ANSWER": "Si, aunque es recomendable que distribuyas el enlace de descarga, pues puede haber salido una versión nueva con alguna corrección.",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "¿Cómo distribuyo las asignaciones?",
   "INFO__HOW_TO_SEND_ASSIGNMENTS_ANSWER": "Al generar una asignación en la sección -Asignaciones-, en la columna -Imagen- aparece una hoja de asignación. Hacemos click en ella y podemos previsualizar la asignación. Luego abajo, podemos copiarla al portapapeles para posteriormente pegarla en whatsapp web, generar una imagen .png o generar un pdf.",
-  "INFO__HOW_TO_UPDATE": "¿Cómo lo actualizo?",
-  "INFO__HOW_TO_UPDATE_ANSWER": "Desde la sección -configuración- exporta los datos internos. Luego en la nueva versión descargada, en la sección -configuración- importa los datos previamente exportados.",
   "INFO__WHAT_CAN_BE_DONE": "¿Qué se puede hacer?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Se pueden crear todo tipo de asignaciones. Es necesario crear los tipos de asignaciones, las salas y los participantes previamente.",
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Cuando creo una asignación, al seleccionar el participante sale un número a su lado, qué es?",

@@ -94,8 +94,6 @@
   "INFO__DISTRIBUTION_ANSWER": "Oui, bien qu'il soit recommandé de distribuer le lien de téléchargement, car une nouvelle version a peut-être été publiée avec une correction.",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "¿Comment diffuser les affectations?",
   "INFO__HOW_TO_SEND_ASSIGNMENTS_ANSWER": "Lors de la génération d'une affectation dans la section -Sissignments-, une feuille d'affectation apparaît dans la colonne -image-.Nous cliquons dessus et nous pouvons prévisualiser l'affectation.Ci-dessous, nous pouvons le copier dans le presse-papiers pour le coller plus tard dans WhatsApp Web, générer une image .png ou générer un PDF.",
-  "INFO__HOW_TO_UPDATE": "¿Comment puis-je le mettre à jour?",
-  "INFO__HOW_TO_UPDATE_ANSWER": "De la section - Configuration - exportez les données internes.Ensuite, dans la nouvelle version téléchargée, dans la section - Configuration - Importez les données précédemment exportées.",
   "INFO__WHAT_CAN_BE_DONE": "Ce qui peut être fait?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Toutes sortes de missions peuvent être créées.Vous devez créer à l'avance les types d'affectation, les chambres et les participants.",
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Lorsque je crée une affectation, lors de la sélection du participant, un numéro s'affiche à côté, qu'est-ce que c'est?",

@@ -94,8 +94,6 @@
   "INFO__DISTRIBUTION_ANSWER": "はい、ダウンロードリンクを配布することをお勧めしますが、新しいバージョンには修正が表示されている可能性があります。",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "¿課題を配布するにはどうすればよいですか？",
   "INFO__HOW_TO_SEND_ASSIGNMENTS_ANSWER": "-Insignments -セクションで割り当てを生成すると、-image-列に割り当てシートが表示されます。クリックすると、割り当てをプレビューできます。次に、以下でクリップボードにコピーして、後でWhatsApp Webに貼り付けたり、.png画像を生成したり、PDFを生成したりできます。",
-  "INFO__HOW_TO_UPDATE": "¿どうすれば更新できますか？",
-  "INFO__HOW_TO_UPDATE_ANSWER": "セクションから - 構成 - 内部データをエクスポートします。次に、新しいダウンロードされたバージョンで、セクション-Configuration-以前にエクスポートされたデータをインポートします。",
   "INFO__WHAT_CAN_BE_DONE": "¿何ができるの？",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "あらゆる種類の割り当てを作成できます。事前に割り当ての種類、部屋、参加者を作成する必要があります。",
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "割り当てを作成すると、参加者を選択すると、その隣に番号が表示されますが、それは何ですか？",

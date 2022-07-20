@@ -101,8 +101,6 @@
   "INFO__DISTRIBUTION_ANSWER": "Yes, although it is recommended that you distribute the download link, as a new version may have come out with some correction.",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "¿How do I distribute the assignments?",
   "INFO__HOW_TO_SEND_ASSIGNMENTS_ANSWER": "When generating an assignment in the -Assignments- section, an assignment sheet appears in the -Image- column. We click on it and we can preview the assignment. Then below, we can copy it to the clipboard to later paste it in whatsapp web, generate a .png image or generate a pdf.",
-  "INFO__HOW_TO_UPDATE": "¿How do I update it?",
-  "INFO__HOW_TO_UPDATE_ANSWER": "From the section -Configuration- export the internal data. Then in the new downloaded version, in the section -Configuration- import the previously exported data.",
   "INFO__WHAT_CAN_BE_DONE": "¿What can be done?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "All kinds of assignments can be created. You need to create the assignment types, rooms, and participants in advance.",
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "When I create an assignment, when selecting the participant, a number is displayed next to it, what is it?",

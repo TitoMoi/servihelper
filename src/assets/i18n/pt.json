@@ -96,8 +96,6 @@
   "INFO__DISTRIBUTION_ANSWER": "Sim, embora seja recomendado que você distribua o link de download, pois uma nova versão pode ter saído com algumas correções.",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "¿Como faço para distribuir as atribuições?",
   "INFO__HOW_TO_SEND_ASSIGNMENTS_ANSWER": "Ao gerar uma atribuição na seção -Assignments-, uma folha de atribuição aparece na coluna -Image-. Clicamos nele e podemos visualizar a tarefa. A seguir, podemos copiá-lo para a área de transferência para depois colá-lo no whatsapp web, gerar uma imagem .png ou gerar um pdf.",
-  "INFO__HOW_TO_UPDATE": "¿Como faço para atualizá-lo?",
-  "INFO__HOW_TO_UPDATE_ANSWER": "Da seção -configuration- exporte os dados internos. Em seguida, na nova versão baixada, na seção -configuração- importe os dados exportados anteriormente.",
   "INFO__WHAT_CAN_BE_DONE": "¿O que se pode fazer?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Todos os tipos de atribuições podem ser criados. Você precisa criar os tipos de tarefas, salas e participantes com antecedência.",
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Quando eu crio uma tarefa, ao selecionar o participante, um número é exibido ao lado dela, o que é?",

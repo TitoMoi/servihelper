@@ -94,8 +94,6 @@
   "INFO__DISTRIBUTION_ANSWER": "Ja, obwohl empfohlen wird, den Download -Link zu verteilen, als eine neue Version möglicherweise mit etwas Korrektur herausgekommen ist.",
   "INFO__HOW_TO_SEND_ASSIGNMENTS": "Wie verteile ich die Aufgaben?",
   "INFO__HOW_TO_SEND_ASSIGNMENTS_ANSWER": "Wenn eine Zuordnung im Abschnitt -Signments generiert wird, wird in der Spalte -image ein Zuordnungsblatt angezeigt. Wir klicken darauf und können die Zuordnung vorschau machen. Dann können wir sie in die Zwischenablage kopieren, um sie später einzufügen.WhatsApp -Web, generieren Sie ein .png -Bild oder generieren Sie ein PDF.",
-  "INFO__HOW_TO_UPDATE": "Wie aktualisiere ich es?",
-  "INFO__HOW_TO_UPDATE_ANSWER": "Aus dem Abschnitt - Konfiguration - Exportieren Sie die internen Daten. Dann in der neuen heruntergeladenen Version im Abschnitt - Konfiguration - Importieren Sie die zuvor exportierten Daten.",
   "INFO__WHAT_CAN_BE_DONE": "Was kann getan werden?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Es können alle Arten von Aufträgen erstellt werden. Sie müssen die Zuordnertypen, Räume und Teilnehmer im Voraus erstellen.",
   "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Wenn ich eine Zuordnung erstelle, bei der Auswahl des Teilnehmers wird eine Nummer daneben angezeigt, was ist das?",
