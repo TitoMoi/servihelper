@@ -45,12 +45,22 @@ export class ConfigComponent {
 
   // Config form
   configForm = this.formBuilder.group({
-    assignmentHeaderTitle: this.configService.getConfig().assignmentHeaderTitle,
     defaultFooterNoteId: this.configService.getConfig().defaultFooterNoteId,
     defaultReportFontSize: this.configService.getConfig().defaultReportFontSize,
     defaultReportDateFormat:
       this.configService.getConfig().defaultReportDateFormat,
     defaultWeekDayBegins: this.configService.getConfig().defaultWeekDayBegins,
+    assignmentHeaderTitle: this.configService.getConfig().assignmentHeaderTitle,
+    assignmentPrincipalTitle:
+      this.configService.getConfig().assignmentPrincipalTitle,
+    assignmentAssistantTitle:
+      this.configService.getConfig().assignmentAssistantTitle,
+    assignmentDateTitle: this.configService.getConfig().assignmentDateTitle,
+    assignmentAssignTypeTitle:
+      this.configService.getConfig().assignmentAssignTypeTitle,
+    assignmentThemeTitle: this.configService.getConfig().assignmentThemeTitle,
+    assignmentRoomTitle: this.configService.getConfig().assignmentRoomTitle,
+    assignmentNoteTitle: this.configService.getConfig().assignmentNoteTitle,
   });
 
   // If config assignmentHeader key is saved
@@ -65,6 +75,13 @@ export class ConfigComponent {
     lang: "en",
     firstDayOfWeek: 1,
     assignmentHeaderTitle: "",
+    assignmentPrincipalTitle: "",
+    assignmentAssistantTitle: "",
+    assignmentDateTitle: "",
+    assignmentAssignTypeTitle: "",
+    assignmentThemeTitle: "",
+    assignmentRoomTitle: "",
+    assignmentNoteTitle: "",
     defaultFooterNoteId: "",
     defaultReportFontSize: "",
     defaultReportDateColor: "",

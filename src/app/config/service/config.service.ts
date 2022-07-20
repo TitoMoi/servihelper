@@ -37,33 +37,14 @@ export class ConfigService {
     this.#config = this.fs.readJSONSync(this.path);
     return this.#config;
   }
-
-  /**
-   * Check that has all the properties
-   *
-   * @returns true if exist, else throws error
-   */
-  allPropertiesExist() {
-    if (
-      !("assignmentHeaderTitle" in this.#config) ||
-      !("firstDayOfWeek" in this.#config) ||
-      !("lang" in this.#config) ||
-      !("defaultFooterNoteId" in this.#config)
-    ) {
-      throw new Error("config file missing key properties");
-    }
-    return true;
-  }
   /**
    *
    * @returns true if configs are saved to disk or false
    */
   saveConfigToFile(): boolean {
-    if (this.allPropertiesExist()) {
-      this.fs.writeJson(this.path, this.#config);
-      this.hasChanged = true;
-      return true;
-    }
+    this.fs.writeJson(this.path, this.#config);
+    this.hasChanged = true;
+    return true;
   }
 
   /**

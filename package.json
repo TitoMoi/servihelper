@@ -29,9 +29,7 @@
     "prepare:publish:mac:universal": "npm run build:prod && node scripts/clean-release.js && npm run electron:build -- --universal",
     "test": "ng test --watch=false",
     "test:watch": "ng test",
-    "lint": "ng lint",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "lint": "ng lint"
   },
   "dependencies": {
     "@angular/animations": "^13.3.10",

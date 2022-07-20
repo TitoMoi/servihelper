@@ -13,7 +13,12 @@
       </tr>
       <tr>
         <td class="bold">
-          <span class="ms-1 mb-1">{{ "ASSIGN_IMAGE_NAME" | transloco }}</span>
+          <span *ngIf="!assignmentPrincipalTitle" class="ms-1 mb-1">{{
+            "ASSIGN_IMAGE_NAME" | transloco
+          }}</span>
+          <span *ngIf="assignmentPrincipalTitle" class="ms-1 mb-1">{{
+            assignmentPrincipalTitle
+          }}</span>
         </td>
       </tr>
       <tr>
@@ -23,8 +28,11 @@
       </tr>
       <tr *ngIf="assistantName">
         <td class="bold">
-          <span class="ms-1 mb-1">{{
+          <span *ngIf="!assignmentAssistantTitle" class="ms-1 mb-1">{{
             "ASSIGN_IMAGE_ASSISTANT" | transloco
+          }}</span>
+          <span *ngIf="assignmentAssistantTitle" class="ms-1 mb-1">{{
+            assignmentAssistantTitle
           }}</span>
         </td>
       </tr>
@@ -35,7 +43,12 @@
       </tr>
       <tr>
         <td class="bold">
-          <span class="ms-1 mb-1">{{ "ASSIGN_IMAGE_DATE" | transloco }}</span>
+          <span *ngIf="!assignmentDateTitle" class="ms-1 mb-1">{{
+            "ASSIGN_IMAGE_DATE" | transloco
+          }}</span>
+          <span *ngIf="assignmentDateTitle" class="ms-1 mb-1">{{
+            assignmentDateTitle
+          }}</span>
         </td>
       </tr>
       <tr>
@@ -47,8 +60,11 @@
       </tr>
       <tr>
         <td class="bold">
-          <span class="ms-1 mb-1">{{
+          <span *ngIf="!assignmentAssignTypeTitle" class="ms-1 mb-1">{{
             "ASSIGN_IMAGE_ASSIGNTYPE" | transloco
+          }}</span>
+          <span *ngIf="assignmentAssignTypeTitle" class="ms-1 mb-1">{{
+            assignmentAssignTypeTitle
           }}</span>
         </td>
       </tr>
@@ -57,7 +73,12 @@
       </tr>
       <tr *ngIf="theme">
         <td class="bold">
-          <div class="ms-1 mb-1">{{ "ASSIGN_IMAGE_NOTE" | transloco }}</div>
+          <div *ngIf="!assignmentThemeTitle" class="ms-1 mb-1">
+            {{ "ASSIGN_IMAGE_NOTE" | transloco }}
+          </div>
+          <div *ngIf="assignmentThemeTitle" class="ms-1 mb-1">
+            {{ assignmentThemeTitle }}
+          </div>
         </td>
       </tr>
       <tr *ngIf="theme">
@@ -67,8 +88,11 @@
       </tr>
       <tr>
         <td class="bold">
-          <span class="ms-1 mb-1">{{
+          <span *ngIf="!assignmentRoomTitle" class="ms-1 mb-1">{{
             "ASSIGN_IMAGE_ROOM_PRESENTATION" | transloco
+          }}</span>
+          <span *ngIf="assignmentRoomTitle" class="ms-1 mb-1">{{
+            assignmentRoomTitle
           }}</span>
         </td>
       </tr>
@@ -79,8 +103,11 @@
       </tr>
       <tr *ngIf="footerNoteEditorHTML">
         <td class="bold">
-          <span class="ms-1 mb-1">{{
+          <span *ngIf="!assignmentNoteTitle" class="ms-1 mb-1">{{
             "ASSIGN_IMAGE_FOOTER_NOTE" | transloco
+          }}</span>
+          <span *ngIf="assignmentNoteTitle" class="ms-1 mb-1">{{
+            assignmentNoteTitle
           }}</span>
         </td>
       </tr>

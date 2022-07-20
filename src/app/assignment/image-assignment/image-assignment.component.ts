@@ -31,8 +31,20 @@ export class ImageAssignmentComponent implements OnInit {
 
   copied = false;
 
+  //Title bindings
+  assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
+  assignmentPrincipalTitle =
+    this.configService.getConfig().assignmentPrincipalTitle;
+  assignmentAssistantTitle =
+    this.configService.getConfig().assignmentAssistantTitle;
+  assignmentDateTitle = this.configService.getConfig().assignmentDateTitle;
+  assignmentAssignTypeTitle =
+    this.configService.getConfig().assignmentAssignTypeTitle;
+  assignmentThemeTitle = this.configService.getConfig().assignmentThemeTitle;
+  assignmentRoomTitle = this.configService.getConfig().assignmentRoomTitle;
+  assignmentNoteTitle = this.configService.getConfig().assignmentNoteTitle;
+
   //Image data bindings
-  assignmentHeaderTitle: string;
   date: Date;
   roomName: string;
   assignTypeName: string;
@@ -40,7 +52,6 @@ export class ImageAssignmentComponent implements OnInit {
   assistantName: string;
   theme: string;
   footerNoteEditorHTML: string;
-  assignmentGroups: any;
 
   constructor(
     private assignmentService: AssignmentService,
@@ -78,9 +89,6 @@ export class ImageAssignmentComponent implements OnInit {
     this.footerNoteEditorHTML = this.noteService.getNote(
       assignment.footerNote
     )?.editorHTML;
-
-    this.assignmentHeaderTitle =
-      this.configService.getConfig().assignmentHeaderTitle;
 
     this.theme = assignment.theme;
   }

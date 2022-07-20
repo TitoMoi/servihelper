@@ -2,8 +2,16 @@ import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 export type ConfigOptionsType =
   | "lang"
+  | "appVersion"
   | "firstDayOfWeek"
   | "assignmentHeaderTitle"
+  | "assignmentPrincipalTitle"
+  | "assignmentAssistantTitle"
+  | "assignmentDateTitle"
+  | "assignmentAssignTypeTitle"
+  | "assignmentThemeTitle"
+  | "assignmentRoomTitle"
+  | "assignmentNoteTitle"
   | "defaultFooterNoteId"
   | "defaultReportFontSize"
   | "defaultReportDateColor"
@@ -19,10 +27,17 @@ export interface ConfigInterface {
   appVersion: string;
   lang?: string;
   firstDayOfWeek?: number;
-  assignmentHeaderTitle?: string;
   defaultFooterNoteId?: string;
   defaultReportFontSize?: string;
   defaultReportDateColor?: string;
   defaultWeekDayBegins: number;
   defaultReportDateFormat?: DateFormatStyles;
+  assignmentHeaderTitle?: string;
+  assignmentPrincipalTitle?: string;
+  assignmentAssistantTitle?: string;
+  assignmentDateTitle?: string;
+  assignmentAssignTypeTitle?: string;
+  assignmentThemeTitle?: string;
+  assignmentRoomTitle?: string;
+  assignmentNoteTitle?: string;
 }
