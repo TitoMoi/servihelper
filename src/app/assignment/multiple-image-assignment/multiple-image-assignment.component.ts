@@ -31,7 +31,18 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
   assignmentsWithNames: AssignmentInterface[] = [];
 
+  //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
+  assignmentPrincipalTitle =
+    this.configService.getConfig().assignmentPrincipalTitle;
+  assignmentAssistantTitle =
+    this.configService.getConfig().assignmentAssistantTitle;
+  assignmentDateTitle = this.configService.getConfig().assignmentDateTitle;
+  assignmentAssignTypeTitle =
+    this.configService.getConfig().assignmentAssignTypeTitle;
+  assignmentThemeTitle = this.configService.getConfig().assignmentThemeTitle;
+  assignmentRoomTitle = this.configService.getConfig().assignmentRoomTitle;
+  assignmentNoteTitle = this.configService.getConfig().assignmentNoteTitle;
 
   constructor(
     public assignTypeService: AssignTypeService,
@@ -85,46 +96,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       };
       this.assignmentsWithNames.push(assignmentWithData);
     });
-  }
-
-  /**
-   * Download a pdf from the image
-   */
-  async toPdf() {
-    const micronMeasure = 60;
-    //the div
-    document.body.style.cursor = "wait";
-    const div = document.getElementById("assignmentDiv");
-    const dataUrl = await toPng(div);
-
-    //create window
-    const win = new this.electronService.remote.BrowserWindow({
-      width: div.offsetWidth,
-      height: div.offsetHeight,
-      show: false,
-    });
-
-    await win.loadURL(dataUrl);
-
-    const pdfOptions = {
-      marginsType: 1,
-      pageSize: {
-        width: div.offsetWidth * micronMeasure,
-        height: div.offsetHeight * micronMeasure, //1px = 264.5833 microns (meassure units)
-      },
-      printBackground: false,
-      printSelectionOnly: false,
-      landscape: false,
-    };
-
-    win.webContents.printToPDF(pdfOptions).then((data) => {
-      const blob = new Blob([data], { type: "application/pdf" });
-      const link = document.createElement("a");
-      link.href = window.URL.createObjectURL(blob);
-      link.setAttribute("download", "assignments.pdf");
-      link.click();
-    });
-    document.body.style.cursor = "default";
   }
 
   async toPng() {

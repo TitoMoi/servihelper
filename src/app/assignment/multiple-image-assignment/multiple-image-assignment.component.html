@@ -33,47 +33,72 @@
         "
         *ngFor="let a of assignmentsWithNames"
       >
-        <h4 class="m-1" *ngIf="!assignmentHeaderTitle">
-          {{ "ASSIGN_IMAGE_TITLE" | transloco }}
-        </h4>
-        <h4 class="m-1" *ngIf="assignmentHeaderTitle">
-          {{ assignmentHeaderTitle }}
+        <h4 class="m-1">
+          <span *ngIf="!assignmentHeaderTitle">{{
+            "ASSIGN_IMAGE_TITLE" | transloco
+          }}</span>
+          <span *ngIf="assignmentHeaderTitle">{{ assignmentHeaderTitle }}</span>
         </h4>
         <hr class="m-1" />
         <div class="m-1">
-          <b>{{ "ASSIGN_IMAGE_NAME" | transloco }}</b>
+          <b *ngIf="!assignmentPrincipalTitle">{{
+            "ASSIGN_IMAGE_NAME" | transloco
+          }}</b>
+          <b *ngIf="assignmentPrincipalTitle">{{ assignmentPrincipalTitle }}</b>
         </div>
         <div class="m-1">{{ a.principal }}</div>
         <ng-container *ngIf="a.assistant">
           <div class="m-1">
-            <b>{{ "ASSIGN_IMAGE_ASSISTANT" | transloco }}</b>
+            <b *ngIf="!assignmentAssistantTitle">{{
+              "ASSIGN_IMAGE_ASSISTANT" | transloco
+            }}</b>
+            <b *ngIf="assignmentAssistantTitle">{{
+              assignmentAssistantTitle
+            }}</b>
           </div>
           <div class="m-1">{{ a.assistant }}</div>
         </ng-container>
         <div class="m-1">
-          <b>{{ "ASSIGN_IMAGE_DATE" | transloco }}</b>
+          <b *ngIf="!assignmentDateTitle">{{
+            "ASSIGN_IMAGE_DATE" | transloco
+          }}</b>
+          <b *ngIf="assignmentDateTitle">{{ assignmentDateTitle }}</b>
         </div>
         <div class="m-1">
           {{ a.date | translocoDate: { dateStyle: "long" } }}
         </div>
         <div class="m-1">
-          <b>{{ "ASSIGN_IMAGE_ASSIGNTYPE" | transloco }}</b>
+          <b *ngIf="!assignmentAssignTypeTitle">{{
+            "ASSIGN_IMAGE_ASSIGNTYPE" | transloco
+          }}</b>
+          <b *ngIf="assignmentAssignTypeTitle">{{
+            assignmentAssignTypeTitle
+          }}</b>
         </div>
         <div class="m-1">{{ a.assignType }}</div>
         <ng-container *ngIf="a.theme"
           ><div class="m-1">
-            <b>{{ "ASSIGN_IMAGE_NOTE" | transloco }}</b>
+            <b *ngIf="!assignmentThemeTitle">{{
+              "ASSIGN_IMAGE_NOTE" | transloco
+            }}</b>
+            <b *ngIf="assignmentThemeTitle">{{ assignmentThemeTitle }}</b>
           </div>
           <div class="m-1">{{ a.theme }}</div></ng-container
         >
 
         <div class="m-1">
-          <b>{{ "ASSIGN_IMAGE_ROOM_PRESENTATION" | transloco }}</b>
+          <b *ngIf="!assignmentRoomTitle">{{
+            "ASSIGN_IMAGE_ROOM_PRESENTATION" | transloco
+          }}</b>
+          <b *ngIf="assignmentRoomTitle">{{ assignmentRoomTitle }}</b>
         </div>
         <div class="m-1">{{ a.room }}</div>
         <ng-container *ngIf="a.footerNote"
           ><div class="m-1">
-            <b>{{ "ASSIGN_IMAGE_FOOTER_NOTE" | transloco }}</b>
+            <b *ngIf="!assignmentNoteTitle">{{
+              "ASSIGN_IMAGE_FOOTER_NOTE" | transloco
+            }}</b>
+            <b *ngIf="assignmentNoteTitle">{{ assignmentNoteTitle }}</b>
           </div>
           <div class="text-justify m-1" [innerHTML]="a.footerNote"></div
         ></ng-container>
