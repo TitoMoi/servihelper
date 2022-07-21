@@ -28,7 +28,7 @@
 
 <div id="toPngDivId" style="width: 35rem; height: 100%" class="bg-color-white">
   <ng-container *ngFor="let ag of assignmentGroups; index as i">
-    <table [id]="'table' + i">
+    <table [id]="'table' + i" style="width: 100%">
       <tr>
         <th
           class="bold"
@@ -49,7 +49,7 @@
       </tr>
       <tr *ngFor="let assignment of ag.assignments">
         <td
-          class="bold"
+          class="bold me-3"
           [style.background]="
             assignTypeService.getAssignTypeByName(assignment.assignType).color
           "
