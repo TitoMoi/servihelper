@@ -16,7 +16,9 @@ Download app section [Download for Windows or Mac](https://github.com/TitoMoi/se
 
 ## Languages
 
-Available languages are at the end of the page.
+Available interface languages are at the end of the page.
+
+The sheet (assignment) to distribute can be customized, so you can add your language when distributing.
 
 ## The executable is not recognized on Mac
 
