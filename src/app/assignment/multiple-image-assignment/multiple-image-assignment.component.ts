@@ -58,6 +58,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];
+      this.assignmentsWithNames = [];
       this.filterAssignments();
       this.prepareAssignmentsData();
     }
