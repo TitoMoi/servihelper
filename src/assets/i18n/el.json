@@ -200,5 +200,7 @@
   "zhCN": "κινέζικα",
   "ro": "ρουμανικός",
   "pl": "Στίλβωση",
-  "tr": "τούρκικος"
+  "tr": "τούρκικος",
+  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
+  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms"
 }

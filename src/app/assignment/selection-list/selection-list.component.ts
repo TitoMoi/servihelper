@@ -29,6 +29,7 @@ import { SortService } from "app/services/sort.service";
 export class SelectionListComponent implements OnChanges {
   @Input() selectedDates: Date[];
   @Input() assignTypes: string[];
+  @Input() rooms: string[];
   @Input() order: string;
 
   defaultReportFontSize =
@@ -65,12 +66,13 @@ export class SelectionListComponent implements OnChanges {
   }
 
   /**
-   * Filters the assignments based on the range date and assign types
+   * Filters the assignments based on the range date and assign types and rooms
    */
   filterAssignments() {
     this.#assignments = this.assignmentService
       .getAssignments(true)
       .filter((assignment) => this.assignTypes.includes(assignment.assignType))
+      .filter((assignment) => this.rooms.includes(assignment.room))
       .filter((assignment) =>
         this.selectedDates.some(
           (date) =>
@@ -89,29 +91,6 @@ export class SelectionListComponent implements OnChanges {
     this.#assignments = this.#assignments.sort(
       this.assignmentService.sortAssignmentsByDateAsc
     );
-  }
-
-  sortAssignmentByAssignTypeOrder() {
-    for (const ag of this.assignmentGroups) {
-      ag.assignments.sort(
-        (a: AssignmentInterface, b: AssignmentInterface): number => {
-          const orderA = this.assignTypeService.getAssignTypeByName(
-            a.assignType
-          ).order;
-          const orderB = this.assignTypeService.getAssignTypeByName(
-            b.assignType
-          ).order;
-
-          if (orderA > orderB) {
-            return 1;
-          }
-          if (orderA < orderB) {
-            return -1;
-          }
-          return 0;
-        }
-      );
-    }
   }
 
   /**

@@ -30,6 +30,7 @@ import autoTable from "jspdf-autotable";
 export class SelectionListHorComponent implements OnChanges {
   @Input() selectedDates: Date[];
   @Input() assignTypes: string[];
+  @Input() rooms: string[];
   @Input() order: string;
 
   defaultReportFontSize =
@@ -72,6 +73,7 @@ export class SelectionListHorComponent implements OnChanges {
     this.#assignments = this.assignmentService
       .getAssignments(true)
       .filter((assignment) => this.assignTypes.includes(assignment.assignType))
+      .filter((assignment) => this.rooms.includes(assignment.room))
       .filter((assignment) =>
         this.selectedDates.some(
           (date) =>

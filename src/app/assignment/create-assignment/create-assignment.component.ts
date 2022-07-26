@@ -148,6 +148,15 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
             a.room === this.assignmentForm.get("room").value
         )
     );
+    //Reset if assignType selected not in new assignTypes
+    if (
+      !this.assignTypes.some(
+        (at) => at.id === this.assignmentForm.get("assignType").value
+      )
+    )
+      this.assignmentForm
+        .get("assignType")
+        .reset(undefined, { emitEvent: false });
   }
 
   getData() {

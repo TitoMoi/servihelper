@@ -1,10 +1,13 @@
 <form [formGroup]="selectionForm" novalidate>
   <div class="row d-print-none">
-    <div class="col-3">
+    <div class="col">
       <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Select multiple dates</mat-label>
+        <mat-label>{{
+          "ASSIGN_SELECTION_DATES_SELECT_TITLE" | transloco
+        }}</mat-label>
         <input
           matInput
+          formControlName="dates"
           [value]="resetModel"
           [matDatepicker]="picker"
           (dateChange)="dateChanged($event)"
@@ -17,7 +20,19 @@
         ></mat-datepicker>
       </mat-form-field>
     </div>
-    <div class="col-3">
+    <div class="col">
+      <mat-form-field>
+        <mat-label>{{
+          "ASSIGN_SELECTION_ROOMS_SELECT_TITLE" | transloco
+        }}</mat-label>
+        <mat-select #roomsSelect formControlName="rooms" multiple>
+          <mat-option *ngFor="let room of rooms" [value]="room.id">{{
+            room.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col">
       <mat-form-field>
         <mat-label>{{
           "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE" | transloco
@@ -31,7 +46,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-3">
+    <div class="col">
       <mat-form-field>
         <mat-label>{{
           "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE" | transloco
@@ -43,7 +58,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-3">
+    <div class="col">
       <mat-form-field>
         <mat-label>{{
           "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_TITLE" | transloco
@@ -70,6 +85,7 @@
       "
       [selectedDates]="selectedDates"
       [assignTypes]="selectionForm.controls.assignTypes.value"
+      [rooms]="selectionForm.controls.rooms.value"
       [order]="selectionForm.controls.order.value"
     ></app-selection-list>
     <app-selection-list-hor
@@ -80,6 +96,7 @@
       "
       [selectedDates]="selectedDates"
       [assignTypes]="selectionForm.controls.assignTypes.value"
+      [rooms]="selectionForm.controls.rooms.value"
       [order]="selectionForm.controls.order.value"
     ></app-selection-list-hor>
     <app-multiple-image-assignment
@@ -90,6 +107,7 @@
       "
       [selectedDates]="selectedDates"
       [assignTypes]="selectionForm.controls.assignTypes.value"
+      [rooms]="selectionForm.controls.rooms.value"
       [order]="selectionForm.controls.order.value"
     ></app-multiple-image-assignment>
   </div>

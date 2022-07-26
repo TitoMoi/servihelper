@@ -200,5 +200,7 @@
   "zhCN": "Chiński",
   "ro": "Rumuński",
   "pl": "Polski",
-  "tr": "Turecki"
+  "tr": "Turecki",
+  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
+  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms"
 }

@@ -3,12 +3,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnInit,
   ViewChild,
 } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatOption } from "@angular/material/core";
 import {
-  MatCalendar,
   MatDatepicker,
   MatDatepickerInputEvent,
 } from "@angular/material/datepicker";
@@ -16,6 +16,8 @@ import { MatSelect } from "@angular/material/select";
 import { TranslocoService } from "@ngneat/transloco";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { RoomInterface } from "app/room/model/room.model";
+import { RoomService } from "app/room/service/room.service";
 import { SharedService } from "app/services/shared.service";
 
 @Component({
@@ -24,19 +26,26 @@ import { SharedService } from "app/services/shared.service";
   styleUrls: ["./report-selector.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReportSelectorComponent implements AfterViewInit {
+export class ReportSelectorComponent implements OnInit, AfterViewInit {
   //Angular material datepicker hacked
   @ViewChild(MatDatepicker) datePickerRef: MatDatepicker<Date>;
-  @ViewChild("assignTypesSelect") select: MatSelect;
+  @ViewChild("assignTypesSelect") assignTypesSelectRef: MatSelect;
+  @ViewChild("roomsSelect") roomsSelectRef: MatSelect;
   @ViewChild("orderSelect") order: MatSelect;
 
-  assignTypes: AssignTypeInterface[] = this.assignTypesService.getAssignTypes();
+  rooms: RoomInterface[] = this.roomService
+    .getRooms()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
+
+  assignTypes: AssignTypeInterface[] = this.assignTypeService
+    .getAssignTypes()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
 
   closeOnSelected = false;
   init = new Date();
   selectedDates = [];
   timeoutRef;
-  resetModel = new Date(0);
+  resetModel = undefined;
 
   orderOptions: string[] = ["Asc", "Desc"];
 
@@ -52,21 +61,32 @@ export class ReportSelectorComponent implements AfterViewInit {
     ),
   ];
 
-  selectionForm = new FormGroup({
-    assignTypes: new FormControl(),
-    order: new FormControl(),
-    template: new FormControl(),
+  selectionForm: FormGroup = this.formBuilder.group({
+    dates: [undefined, Validators.required],
+    rooms: [undefined, Validators.required],
+    assignTypes: [undefined, Validators.required],
+    order: [undefined, Validators.required],
+    template: [undefined, Validators.required],
   });
 
   constructor(
-    private assignTypesService: AssignTypeService,
+    private assignTypeService: AssignTypeService,
+    private roomService: RoomService,
     private translocoService: TranslocoService,
     private sharedService: SharedService,
+    private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef
   ) {}
+  ngOnInit(): void {
+    this.selectionForm.markAllAsTouched();
+  }
 
-  ngAfterViewInit(): void {
-    this.select.options.forEach((item: MatOption) => item.select());
+  ngAfterViewInit() {
+    this.assignTypesSelectRef.options.forEach((item: MatOption) =>
+      item.select()
+    );
+
+    this.roomsSelectRef.options.forEach((item: MatOption) => item.select());
     this.order.options.first.select();
     this.cdr.detectChanges();
   }

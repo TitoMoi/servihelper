@@ -200,5 +200,7 @@
   "zhCN": "중국인",
   "ro": "Romanian",
   "pl": "Polish",
-  "tr": "Turkish"
+  "tr": "Turkish",
+  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
+  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms"
 }

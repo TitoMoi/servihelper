@@ -200,5 +200,7 @@
   "zhCN": "चीनी",
   "ro": "रोमानियाई",
   "pl": "पोलिश",
-  "tr": "तुर्की"
+  "tr": "तुर्की",
+  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
+  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms"
 }
