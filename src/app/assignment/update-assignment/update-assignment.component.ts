@@ -114,8 +114,31 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.formSub$.unsubscribe();
   }
 
-  getData() {
+  /**
+   * Remove assignTypes from select that already have assignment in the selected room
+   * this piece of code is separated due to in create assignment must be rerun after submitAndCreate
+   * depends on: assignments, selected room, selected date
+   */
+  removeAssignTypesThatAlreadyExistOnAssignment() {
     this.assignments = this.assignmentService.getAssignments();
+    this.assignTypes = this.assignTypeService
+      .getAssignTypes()
+      .sort((a, b) => (a.order > b.order ? 1 : -1));
+
+    this.assignTypes = this.assignTypes.filter(
+      (at) =>
+        !this.assignments.some(
+          (a) =>
+            new Date(a.date).getTime() ===
+              new Date(this.assignmentForm.get("date").value).getTime() &&
+            a.assignType === at.id &&
+            a.room === this.assignmentForm.get("room").value
+        )
+    );
+  }
+
+  getData() {
+    this.removeAssignTypesThatAlreadyExistOnAssignment();
 
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       this.participantService.getParticipants(true),
@@ -164,6 +187,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       this.assistants = this.assistants.filter((a) => a.isWoman === true);
     }
 
+    //Set count for principals
     setCount(
       this.assignments,
       this.principals,
@@ -172,6 +196,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       true
     );
 
+    //Set count for assistants
     setCount(
       this.assignments,
       this.assistants,
@@ -200,6 +225,9 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Special characters that are not visual and are hidden, even for code editors.
+   */
   removeGremlings() {
     const themeControl = this.assignmentForm.get("theme");
     const value = themeControl.value;
