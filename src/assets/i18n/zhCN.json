@@ -200,5 +200,8 @@
   "zhCN": "中国人",
   "ro": "罗马尼亚人",
   "pl": "抛光",
-  "tr": "土耳其"
+  "tr": "土耳其",
+  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
+  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms",
+  "NAV_REPORTS": "Reports"
 }

@@ -52,6 +52,14 @@
           aria-label="Side nav toggle icon"
         ></mat-icon>
       </a>
+      <a mat-list-item routerLink="selectionSheets" [disableRipple]="true">
+        <span>{{ "NAV_REPORTS" | transloco }}</span>
+        <mat-icon
+          class="mat-icon--margin"
+          svgIcon="lists"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+      </a>
       <a mat-list-item routerLink="statistics" [disableRipple]="true">
         <span>{{ "NAV_STATISTICS" | transloco }}</span>
         <mat-icon

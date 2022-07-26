@@ -123,7 +123,7 @@ const routes: Routes = [
     component: ImageAssignmentComponent,
   },
   {
-    path: "assignment/selectionSheets",
+    path: "selectionSheets",
     component: ReportSelectorComponent,
   },
   {

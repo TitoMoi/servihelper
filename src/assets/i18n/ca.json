@@ -203,5 +203,6 @@
   "pl": "Polonès",
   "tr": "Turc",
   "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
-  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms"
+  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms",
+  "NAV_REPORTS": "Reports"
 }
