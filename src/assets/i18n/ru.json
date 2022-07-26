@@ -201,7 +201,7 @@
   "ro": "румынский",
   "pl": "Лак",
   "tr": "турецкий",
-  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
-  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms",
-  "NAV_REPORTS": "Reports"
+  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Выберите несколько дат",
+  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Выберите комнаты",
+  "NAV_REPORTS": "Отчеты"
 }

@@ -201,7 +201,7 @@
   "ro": "Romanya",
   "pl": "Lehçe",
   "tr": "Türk",
-  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
-  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms",
-  "NAV_REPORTS": "Reports"
+  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Birden Fazla Tarih Seçin",
+  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Odaları Seçin",
+  "NAV_REPORTS": "Raporlar"
 }

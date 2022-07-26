@@ -201,7 +201,7 @@
   "ro": "Romanian",
   "pl": "Polish",
   "tr": "Turkish",
-  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
-  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Select the rooms",
-  "NAV_REPORTS": "Reports"
+  "ASSIGN_SELECTION_DATES_SELECT_TITLE": "複数の日付を選択します",
+  "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "部屋を選択します",
+  "NAV_REPORTS": "報告"
 }
