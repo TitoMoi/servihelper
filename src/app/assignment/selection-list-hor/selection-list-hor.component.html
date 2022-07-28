@@ -1,77 +1,68 @@
-<div class="row gx-0">
-  <div class="col-12">
-    <div class="d-flex">
-      <button class="m-2" mat-raised-button type="button" routerLink="..">
-        {{ "BUTTON_CANCEL" | transloco }}
-      </button>
-      <mat-icon
-        class="m-2"
-        svgIcon="pdf"
-        aria-label="icon"
-        (click)="toPdf()"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="png"
-        aria-label="icon"
-        (click)="toPng()"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="excel"
-        aria-label="icon"
-        (click)="toExcel()"
-      ></mat-icon>
-    </div>
-  </div>
+<div class="d-flex">
+  <button class="m-2" mat-raised-button type="button" routerLink="..">
+    {{ "BUTTON_CANCEL" | transloco }}
+  </button>
+  <mat-icon
+    class="m-2"
+    svgIcon="pdf"
+    aria-label="icon"
+    (click)="toPdf()"
+  ></mat-icon>
+  <mat-icon
+    class="m-2"
+    svgIcon="png"
+    aria-label="icon"
+    (click)="toPng()"
+  ></mat-icon>
+  <mat-icon
+    class="m-2"
+    svgIcon="excel"
+    aria-label="icon"
+    (click)="toExcel()"
+  ></mat-icon>
 </div>
 
 <div id="toPngDivId" style="height: 100%" class="bg-color-white">
-  <div class="row">
-    <div class="col-12">
-      <ng-container *ngFor="let ag of assignmentGroups; index as i">
-        <table [id]="'table' + i">
-          <tr>
-            <th
-              class="bold"
-              [style.background]="defaultReportDateColor"
-              [style.fontSize]="defaultReportFontSize"
-            >
-              {{
-                ag.date
-                  | translocoDate
-                    : {
-                        dateStyle: defaultReportDateFormat
-                      }
-              }}
-            </th>
-            <th
-              *ngFor="let assignment of ag.assignments"
-              class="bold"
-              [style.background]="
-                assignTypeService.getAssignTypeByName(assignment.assignType)
-                  .color
-              "
-              [style.fontSize]="defaultReportFontSize"
-            >
-              {{ assignment.assignType }}
-            </th>
-          </tr>
-          <tr>
-            <td>{{ ag.room }}</td>
-            <td
-              *ngFor="let assignment of ag.assignments"
-              [style.fontSize]="defaultReportFontSize"
-            >
-              {{ assignment.principal }}
-              <span *ngIf="assignment.assistant"
-                >/ <br />
-                {{ assignment.assistant }}</span
-              >
-            </td>
-          </tr>
-        </table>
-      </ng-container>
-    </div>
-  </div>
+  <ng-container *ngFor="let ag of assignmentGroups; index as i">
+    <table [id]="'table' + i">
+      <tr>
+        <th
+          class="bold"
+          [style.background]="defaultReportDateColor"
+          [style.fontSize]="defaultReportFontSize"
+        >
+          {{
+            ag.date
+              | translocoDate
+                : {
+                    dateStyle: defaultReportDateFormat
+                  }
+          }}
+        </th>
+        <th
+          *ngFor="let assignment of ag.assignments"
+          class="bold"
+          [style.background]="
+            assignTypeService.getAssignTypeByName(assignment.assignType).color
+          "
+          [style.fontSize]="defaultReportFontSize"
+        >
+          {{ assignment.assignType }}
+        </th>
+      </tr>
+      <tr>
+        <td [style.fontSize]="defaultReportFontSize">{{ ag.room }}</td>
+        <td
+          *ngFor="let assignment of ag.assignments"
+          [style.fontSize]="defaultReportFontSize"
+        >
+          {{ assignment.principal }}
+          <ng-container *ngIf="assignment.assistant"
+            >/ <br />
+            {{ assignment.assistant }}</ng-container
+          >
+        </td>
+      </tr>
+    </table>
+  </ng-container>
 </div>

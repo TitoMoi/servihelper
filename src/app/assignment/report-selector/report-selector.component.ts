@@ -21,7 +21,7 @@ import { RoomService } from "app/room/service/room.service";
 import { SharedService } from "app/services/shared.service";
 
 @Component({
-  selector: "app-selection-sheets-assignment",
+  selector: "app-report-selector",
   templateUrl: "./report-selector.component.html",
   styleUrls: ["./report-selector.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

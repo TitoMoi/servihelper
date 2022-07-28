@@ -1,29 +1,25 @@
-<div class="row gx-0">
-  <div class="col-12">
-    <div class="d-flex">
-      <button class="m-2" mat-raised-button type="button" routerLink="..">
-        {{ "BUTTON_CANCEL" | transloco }}
-      </button>
-      <mat-icon
-        class="m-2"
-        svgIcon="pdf"
-        aria-label="icon"
-        (click)="toPdf()"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="png"
-        aria-label="icon"
-        (click)="toPng()"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="excel"
-        aria-label="icon"
-        (click)="toExcel()"
-      ></mat-icon>
-    </div>
-  </div>
+<div class="d-flex">
+  <button class="m-2" mat-raised-button type="button" routerLink="..">
+    {{ "BUTTON_CANCEL" | transloco }}
+  </button>
+  <mat-icon
+    class="m-2"
+    svgIcon="pdf"
+    aria-label="icon"
+    (click)="toPdf()"
+  ></mat-icon>
+  <mat-icon
+    class="m-2"
+    svgIcon="png"
+    aria-label="icon"
+    (click)="toPng()"
+  ></mat-icon>
+  <mat-icon
+    class="m-2"
+    svgIcon="excel"
+    aria-label="icon"
+    (click)="toExcel()"
+  ></mat-icon>
 </div>
 
 <div id="toPngDivId" style="width: 40rem; height: 100%" class="bg-color-white">
@@ -43,7 +39,10 @@
                   }
           }}
         </th>
-        <th [style.background]="defaultReportDateColor">
+        <th
+          [style.background]="defaultReportDateColor"
+          [style.fontSize]="defaultReportFontSize"
+        >
           {{ ag.room }}
         </th>
       </tr>

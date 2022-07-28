@@ -75,8 +75,8 @@ export class AssignmentService {
     a: AssignmentInterface,
     b: AssignmentInterface
   ): number {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
     if (dateA < dateB) {
       return 1;
     }

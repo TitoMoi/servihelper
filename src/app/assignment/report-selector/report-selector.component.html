@@ -74,41 +74,36 @@
     </div>
   </div>
 </form>
-
-<div class="row">
-  <div class="col">
-    <app-selection-list
-      *ngIf="
-        selectedDates.length &&
-        selectionForm.controls.template.value ===
-          ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL' | transloco)
-      "
-      [selectedDates]="selectedDates"
-      [assignTypes]="selectionForm.controls.assignTypes.value"
-      [rooms]="selectionForm.controls.rooms.value"
-      [order]="selectionForm.controls.order.value"
-    ></app-selection-list>
-    <app-selection-list-hor
-      *ngIf="
-        selectedDates.length &&
-        selectionForm.controls.template.value ===
-          ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL' | transloco)
-      "
-      [selectedDates]="selectedDates"
-      [assignTypes]="selectionForm.controls.assignTypes.value"
-      [rooms]="selectionForm.controls.rooms.value"
-      [order]="selectionForm.controls.order.value"
-    ></app-selection-list-hor>
-    <app-multiple-image-assignment
-      *ngIf="
-        selectedDates.length &&
-        selectionForm.controls.template.value ===
-          ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET' | transloco)
-      "
-      [selectedDates]="selectedDates"
-      [assignTypes]="selectionForm.controls.assignTypes.value"
-      [rooms]="selectionForm.controls.rooms.value"
-      [order]="selectionForm.controls.order.value"
-    ></app-multiple-image-assignment>
-  </div>
-</div>
+<app-selection-list
+  *ngIf="
+    selectedDates.length &&
+    selectionForm.controls.template.value ===
+      ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL' | transloco)
+  "
+  [selectedDates]="selectedDates"
+  [assignTypes]="selectionForm.controls.assignTypes.value"
+  [rooms]="selectionForm.controls.rooms.value"
+  [order]="selectionForm.controls.order.value"
+></app-selection-list>
+<app-selection-list-hor
+  *ngIf="
+    selectedDates.length &&
+    selectionForm.controls.template.value ===
+      ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL' | transloco)
+  "
+  [selectedDates]="selectedDates"
+  [assignTypes]="selectionForm.controls.assignTypes.value"
+  [rooms]="selectionForm.controls.rooms.value"
+  [order]="selectionForm.controls.order.value"
+></app-selection-list-hor>
+<app-multiple-image-assignment
+  *ngIf="
+    selectedDates.length &&
+    selectionForm.controls.template.value ===
+      ('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET' | transloco)
+  "
+  [selectedDates]="selectedDates"
+  [assignTypes]="selectionForm.controls.assignTypes.value"
+  [rooms]="selectionForm.controls.rooms.value"
+  [order]="selectionForm.controls.order.value"
+></app-multiple-image-assignment>

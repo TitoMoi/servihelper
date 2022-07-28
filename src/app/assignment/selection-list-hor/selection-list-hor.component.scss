@@ -1,18 +1,13 @@
 table {
-  width: max-content;
+  width: min-content;
   border-collapse: collapse;
 }
 
 td,
 th {
-  width: 5vw;
   text-align: left;
   vertical-align: top;
   padding-left: 2px;
-}
-
-.increase-font {
-  font-size: 22px;
 }
 
 .mat-icon {

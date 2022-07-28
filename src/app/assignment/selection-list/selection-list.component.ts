@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {
   ChangeDetectionStrategy,
   Component,
@@ -159,6 +160,7 @@ export class SelectionListComponent implements OnChanges {
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       autoTable(doc, {
         html: `#table${i}`,
+        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const text = data.cell.raw["innerText"];
