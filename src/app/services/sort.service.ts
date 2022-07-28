@@ -14,7 +14,7 @@ export class SortService {
 
   sortAssignmentsByRoomAndAssignType(assignments: AssignmentInterface[]) {
     //Diferent sort, first separate date into arrays, then double sort, first room and then assign type
-    let assignmentsByDate: [AssignmentInterface[]] = [[]];
+    const assignmentsByDate: [AssignmentInterface[]] = [[]];
     let index = 0;
     let lastDate = assignments[0]?.date;
 

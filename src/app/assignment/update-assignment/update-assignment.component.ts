@@ -38,8 +38,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   principals: ParticipantInterface[] = [];
   assistants: ParticipantInterface[] = [];
   footerNotes: NoteInterface[] = this.noteService.getNotes();
-  assignments: AssignmentInterface[] =
-    this.assignmentService.getAssignments(true);
+  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
 
   //Fill the form with the assignment passed by the router
   assignment: AssignmentInterface = this.assignmentService.getAssignment(
@@ -114,42 +113,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.formSub$.unsubscribe();
   }
 
-  /**
-   * Remove assignTypes from select that already have assignment in the selected room
-   * this piece of code is separated due to in create assignment must be rerun after submitAndCreate
-   * depends on: assignments, selected room, selected date
-   */
-  removeAssignTypesThatAlreadyExistOnAssignment() {
-    this.assignments = this.assignmentService.getAssignments();
-    this.assignTypes = this.assignTypeService
-      .getAssignTypes()
-      .sort((a, b) => (a.order > b.order ? 1 : -1));
-
-    this.assignTypes = this.assignTypes.filter(
-      (at) =>
-        !this.assignments.some(
-          (a) =>
-            new Date(a.date).getTime() ===
-              new Date(this.assignmentForm.get("date").value).getTime() &&
-            a.assignType === at.id &&
-            a.room === this.assignmentForm.get("room").value
-        )
-    );
-
-    //Reset if assignType selected not in new assignTypes
-    if (
-      !this.assignTypes.some(
-        (at) => at.id === this.assignmentForm.get("assignType").value
-      )
-    )
-      this.assignmentForm
-        .get("assignType")
-        .reset(undefined, { emitEvent: false });
-  }
-
   getData() {
-    this.removeAssignTypesThatAlreadyExistOnAssignment();
-
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       this.participantService.getParticipants(true),
       this.assignmentForm.get("assignType").value,

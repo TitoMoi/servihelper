@@ -1,12 +1,14 @@
 table {
-  width: fit-content;
+  width: max-content;
   border-collapse: collapse;
 }
 
 td,
 th {
+  width: 5vw;
   text-align: left;
-  padding: 4px;
+  vertical-align: top;
+  padding-left: 2px;
 }
 
 .increase-font {
