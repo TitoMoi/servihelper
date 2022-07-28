@@ -44,8 +44,6 @@ export class NoteService {
   saveNotesToFile(): boolean {
     //Write notes back to file
     this.fs.writeJson(this.path, this.#notes);
-    //Flag
-    this.hasChanged = true;
     return true;
   }
 
@@ -69,10 +67,6 @@ export class NoteService {
    * @returns the note that is ALWAYS found
    */
   getNote(id: string): NoteInterface {
-    //Preventive maybe this func is called outside note view
-    if (this.hasChanged) {
-      this.getNotes();
-    }
     //search note
     for (const note of this.#notes) {
       if (note.id === id) {

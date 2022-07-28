@@ -49,8 +49,6 @@ export class ParticipantService {
   saveParticipantsToFile(): boolean {
     //Write participants back to file
     this.fs.writeJson(this.path, this.#participants);
-    //Flag
-    this.hasChanged = true;
     return true;
   }
 
@@ -86,10 +84,6 @@ export class ParticipantService {
    * @returns the participant that is ALWAYS found
    */
   getParticipant(id: string): ParticipantInterface {
-    if (this.hasChanged) {
-      this.getParticipants();
-    }
-
     //search participant
     for (const participant of this.#participants) {
       if (participant.id === id) {
