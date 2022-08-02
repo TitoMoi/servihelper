@@ -38,12 +38,9 @@
                   *ngFor="let r of getRoomsForm.controls; let i = index"
                 >
                   <div class="col-12 col-md-3 mb-2" [formGroupName]="i">
-                    <mat-checkbox
-                      labelPosition="before"
-                      color="primary"
-                      formControlName="available"
-                      >{{ rooms[i].name }}</mat-checkbox
-                    >
+                    <mat-checkbox color="primary" formControlName="available">{{
+                      rooms[i].name
+                    }}</mat-checkbox>
                   </div>
                 </ng-container>
               </ng-container>
@@ -62,7 +59,6 @@
                 >
                   <div class="col-12 col-md-3 mb-2" [formGroupName]="j">
                     <mat-checkbox
-                      labelPosition="before"
                       color="primary"
                       formControlName="canPrincipal"
                       >{{ assignTypes[j].name }}</mat-checkbox
@@ -89,7 +85,6 @@
                     [formGroupName]="z"
                   >
                     <mat-checkbox
-                      labelPosition="before"
                       color="primary"
                       formControlName="canAssistant"
                       >{{ assignTypes[z].name }}</mat-checkbox
