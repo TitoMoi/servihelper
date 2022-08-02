@@ -1,24 +1,17 @@
+import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { RoomInterface } from 'app/room/model/room.model';
+import { RoomService } from 'app/room/service/room.service';
+import { SharedService } from 'app/services/shared.service';
+
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatOption } from "@angular/material/core";
-import {
-  MatDatepicker,
-  MatDatepickerInputEvent,
-} from "@angular/material/datepicker";
-import { MatSelect } from "@angular/material/select";
-import { TranslocoService } from "@ngneat/transloco";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { RoomInterface } from "app/room/model/room.model";
-import { RoomService } from "app/room/service/room.service";
-import { SharedService } from "app/services/shared.service";
+    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
+import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatSelect } from '@angular/material/select';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: "app-report-selector",

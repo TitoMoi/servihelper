@@ -1,31 +1,25 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { ParticipantInterface } from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { LastDateService } from "app/assignment/service/last-date.service";
-import { NoteInterface } from "app/note/model/note.model";
-import { NoteService } from "app/note/service/note.service";
-import { RoomInterface } from "app/room/model/room.model";
-import { RoomService } from "app/room/service/room.service";
-import { filter, pairwise, startWith, Subscription } from "rxjs";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignmentInterface } from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { LastDateService } from 'app/assignment/service/last-date.service';
+import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { sortParticipantsByCount } from 'app/functions';
+import { setCount } from 'app/functions/setCount';
+import { NoteInterface } from 'app/note/model/note.model';
+import { NoteService } from 'app/note/service/note.service';
+import { ParticipantInterface } from 'app/participant/model/participant.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomInterface } from 'app/room/model/room.model';
+import { RoomService } from 'app/room/service/room.service';
+import { SharedService } from 'app/services/shared.service';
+import { filter, pairwise, startWith, Subscription } from 'rxjs';
 
-import { setCount } from "app/functions/setCount";
-import { sortParticipantsByCount } from "app/functions";
-import { SharedService } from "app/services/shared.service";
-import { ConfigService } from "app/config/service/config.service";
-import { MatSelect } from "@angular/material/select";
-import { MatButton } from "@angular/material/button";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatSelect } from '@angular/material/select';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-create-assignment",

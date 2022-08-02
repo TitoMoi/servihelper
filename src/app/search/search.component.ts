@@ -1,13 +1,16 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { ParticipantInterface } from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomService } from "app/room/service/room.service";
-import { Subscription } from "rxjs";
-import { SearchResultInterface } from "./model/search.model";
+import { AssignmentInterface } from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { ParticipantInterface } from 'app/participant/model/participant.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomService } from 'app/room/service/room.service';
+import { Subscription } from 'rxjs';
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+import { SearchResultInterface } from './model/search.model';
+
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",

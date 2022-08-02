@@ -1,5 +1,5 @@
-import { ParticipantInterface } from "app/participant/model/participant.model";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentInterface } from 'app/assignment/model/assignment.model';
+import { ParticipantInterface } from 'app/participant/model/participant.model';
 
 /**
  *

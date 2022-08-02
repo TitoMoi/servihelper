@@ -1,26 +1,18 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from "@angular/core";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomService } from "app/room/service/room.service";
-import { toPng } from "html-to-image";
-import {
-  AssignmentGroupInterface,
-  AssignmentInterface,
-} from "../model/assignment.model";
-import { AssignmentService } from "../service/assignment.service";
-import { ExcelService } from "app/services/excel.service";
-import { ConfigService } from "app/config/service/config.service";
-import { SortService } from "app/services/sort.service";
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomService } from 'app/room/service/room.service';
+import { ExcelService } from 'app/services/excel.service';
+import { SortService } from 'app/services/sort.service';
+import { toPng } from 'html-to-image';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+/* eslint-disable @typescript-eslint/naming-convention */
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+
+import { AssignmentGroupInterface, AssignmentInterface } from '../model/assignment.model';
+import { AssignmentService } from '../service/assignment.service';
 
 @Component({
   selector: "app-selection-list-hor",

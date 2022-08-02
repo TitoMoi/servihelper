@@ -1,5 +1,6 @@
-import { Injectable } from "@angular/core";
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantInterface } from 'app/participant/model/participant.model';
+
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: "root",

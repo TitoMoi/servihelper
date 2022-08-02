@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import {
-  ParticipantInterface,
-  ParticipantTableInterface,
-} from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
+    ParticipantInterface, ParticipantTableInterface
+} from 'app/participant/model/participant.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
+
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: "app-participant",

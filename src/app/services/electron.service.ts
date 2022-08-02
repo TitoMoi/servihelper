@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-
+import * as childProcess from 'child_process';
 // If you import a module but never use any of the imported values other than as TypeScript types,
 // the resulting javascript file will look as if you never imported the module at all.
-import { ipcRenderer, webFrame } from "electron";
-import * as remote from "@electron/remote";
-import * as childProcess from "child_process";
-import * as fs from "fs-extra";
+import { ipcRenderer, webFrame } from 'electron';
+import * as fs from 'fs-extra';
+
+import { Injectable } from '@angular/core';
+import * as remote from '@electron/remote';
 
 @Injectable({
   providedIn: "root",

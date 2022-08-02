@@ -1,27 +1,16 @@
 import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from "@angular/animations";
+    AssignmentInterface, AssignmentTableInterface
+} from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomService } from 'app/room/service/room.service';
+import { SortService } from 'app/services/sort.service';
+
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
-  AfterViewChecked,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-} from "@angular/core";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomService } from "app/room/service/room.service";
-import {
-  AssignmentInterface,
-  AssignmentTableInterface,
-} from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { SortService } from "app/services/sort.service";
+    AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit
+} from '@angular/core';
 
 @Component({
   selector: "app-assignment",

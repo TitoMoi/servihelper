@@ -1,4 +1,5 @@
-import { toHTML } from "ngx-editor";
+import { toHTML } from 'ngx-editor';
+
 /**
  *
  * @param editorContent the content in record json format

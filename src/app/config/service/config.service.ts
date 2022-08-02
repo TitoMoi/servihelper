@@ -1,11 +1,9 @@
-import { Injectable } from "@angular/core";
-import {
-  ConfigInterface,
-  ConfigOptionsType,
-} from "app/config/model/config.model";
-import { ElectronService } from "app/services/electron.service";
-import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import { ConfigInterface, ConfigOptionsType } from 'app/config/model/config.model';
+import { ElectronService } from 'app/services/electron.service';
+import { APP_CONFIG } from 'environments/environment';
+import * as fs from 'fs-extra';
+
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: "root",

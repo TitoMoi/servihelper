@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-delete-assign-type",

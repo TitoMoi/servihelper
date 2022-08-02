@@ -1,44 +1,20 @@
+import { AssignmentInterface } from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from "@angular/core";
-import { MatCheckboxChange } from "@angular/material/checkbox";
-import { TranslocoService } from "@ngneat/transloco";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+    getDistanceBetweenPenultimaAndLast, getLastPrincipalAssignment,
+    getPenultimatePrincipalAssignment, setPrincipalCountById, sortParticipantsByCount
+} from 'app/functions';
+import { ParticipantInterface } from 'app/participant/model/participant.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
 import {
-  getDistanceBetweenPenultimaAndLast,
-  getLastPrincipalAssignment,
-  getPenultimatePrincipalAssignment,
-  setPrincipalCountById,
-  sortParticipantsByCount,
-} from "app/functions";
-import { ParticipantInterface } from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
-import {
-  ca,
-  de,
-  enGB,
-  es,
-  fr,
-  pt,
-  ru,
-  it,
-  ja,
-  ko,
-  zhCN,
-  hi,
-  el,
-  bn,
-  nl,
-  ro,
-  tr,
-  pl,
-} from "date-fns/locale";
-import { Subscription } from "rxjs";
+    bn, ca, de, el, enGB, es, fr, hi, it, ja, ko, nl, pl, pt, ro, ru, tr, zhCN
+} from 'date-fns/locale';
+import { Subscription } from 'rxjs';
+
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: "app-principal-count",

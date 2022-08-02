@@ -1,9 +1,10 @@
-import { Injectable } from "@angular/core";
-import { APP_CONFIG } from "environments/environment";
-import { nanoid } from "nanoid/non-secure";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import * as fs from "fs-extra";
-import { ElectronService } from "app/services/electron.service";
+import { AssignmentInterface } from 'app/assignment/model/assignment.model';
+import { ElectronService } from 'app/services/electron.service';
+import { APP_CONFIG } from 'environments/environment';
+import * as fs from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
+
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: "root",

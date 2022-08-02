@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { RoomInterface, RoomTableInterface } from "app/room/model/room.model";
-import { RoomService } from "app/room/service/room.service";
+import { RoomInterface, RoomTableInterface } from 'app/room/model/room.model';
+import { RoomService } from 'app/room/service/room.service';
+
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: "app-room",

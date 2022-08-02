@@ -1,4 +1,4 @@
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantInterface } from 'app/participant/model/participant.model';
 
 /**
  * @param list the list to filter only men

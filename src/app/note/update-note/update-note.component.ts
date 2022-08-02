@@ -1,20 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { NoteInterface } from "app/note/model/note.model";
-import { NoteService } from "app/note/service/note.service";
-import { Editor, Toolbar } from "ngx-editor";
-import { editorJsonToHtml } from "app/functions/editorJsonToHtml";
+import { editorJsonToHtml } from 'app/functions/editorJsonToHtml';
+import { NoteInterface } from 'app/note/model/note.model';
+import { NoteService } from 'app/note/service/note.service';
+import { Editor, Toolbar } from 'ngx-editor';
+
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: "app-update-note",
   templateUrl: "./update-note.component.html",

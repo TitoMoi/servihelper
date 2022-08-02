@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { RoomInterface } from "app/room/model/room.model";
-import { RoomService } from "app/room/service/room.service";
+import { RoomInterface } from 'app/room/model/room.model';
+import { RoomService } from 'app/room/service/room.service';
+
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-update-room",

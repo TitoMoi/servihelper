@@ -1,23 +1,16 @@
+import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { ParticipantRoomInterface } from 'app/participant/model/participant.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomInterface } from 'app/room/model/room.model';
+import { RoomService } from 'app/room/service/room.service';
+
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
-import { FormArray, FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { RoomInterface } from "app/room/model/room.model";
-import { RoomService } from "app/room/service/room.service";
-import { ParticipantRoomInterface } from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
-import {
-  MatDatepicker,
-  MatDatepickerInputEvent,
-} from "@angular/material/datepicker";
+    ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild
+} from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-create-participant",

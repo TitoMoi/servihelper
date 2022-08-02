@@ -1,10 +1,11 @@
-import { Injectable } from "@angular/core";
-import { TranslocoLocaleService } from "@ngneat/transloco-locale";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { ConfigService } from "app/config/service/config.service";
-import * as ExcelJS from "exceljs";
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { ConfigService } from 'app/config/service/config.service';
+import * as ExcelJS from 'exceljs';
 
-import { AssignmentGroupInterface } from "../assignment/model/assignment.model";
+import { Injectable } from '@angular/core';
+import { TranslocoLocaleService } from '@ngneat/transloco-locale';
+
+import { AssignmentGroupInterface } from '../assignment/model/assignment.model';
 
 @Injectable({
   providedIn: "root",

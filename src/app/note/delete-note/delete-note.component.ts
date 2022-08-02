@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { NoteInterface } from "app/note/model/note.model";
-import { NoteService } from "app/note/service/note.service";
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { NoteInterface } from 'app/note/model/note.model';
+import { NoteService } from 'app/note/service/note.service';
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-delete-note",

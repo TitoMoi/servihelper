@@ -1,11 +1,3 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from "@angular/core";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
@@ -13,6 +5,15 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomService } from "app/room/service/room.service";
 import { ElectronService } from "app/services/electron.service";
 import { toPng } from "html-to-image";
+
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from "@angular/core";
+
 import { AssignmentInterface } from "../model/assignment.model";
 import { AssignmentService } from "../service/assignment.service";
 
@@ -55,7 +56,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private electronService: ElectronService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];
       this.assignmentsWithNames = [];

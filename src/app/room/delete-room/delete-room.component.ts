@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomInterface } from "app/room/model/room.model";
-import { RoomService } from "app/room/service/room.service";
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomInterface } from 'app/room/model/room.model';
+import { RoomService } from 'app/room/service/room.service';
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-delete-room",

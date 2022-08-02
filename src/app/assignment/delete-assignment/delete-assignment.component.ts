@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignmentInterface } from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-delete-assignment",

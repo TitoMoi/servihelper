@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { ParticipantInterface } from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { ParticipantInterface } from 'app/participant/model/participant.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-delete-participant",

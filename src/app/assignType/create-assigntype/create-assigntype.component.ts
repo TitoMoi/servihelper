@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-create-assign-type",

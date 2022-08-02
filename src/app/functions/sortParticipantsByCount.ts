@@ -1,4 +1,4 @@
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantInterface } from 'app/participant/model/participant.model';
 
 export function sortParticipantsByCount(
   a: ParticipantInterface,

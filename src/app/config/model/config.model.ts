@@ -1,4 +1,4 @@
-import { DateFormatStyles } from "@ngneat/transloco-locale";
+import { DateFormatStyles } from '@ngneat/transloco-locale';
 
 export type ConfigOptionsType =
   | "lang"

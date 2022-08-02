@@ -1,14 +1,15 @@
-import { Component } from "@angular/core";
-import AdmZip from "adm-zip";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { ConfigService } from "app/config/service/config.service";
-import { NoteService } from "app/note/service/note.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomService } from "app/room/service/room.service";
-import { ElectronService } from "app/services/electron.service";
-import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import AdmZip from 'adm-zip';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { NoteService } from 'app/note/service/note.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomService } from 'app/room/service/room.service';
+import { ElectronService } from 'app/services/electron.service';
+import { APP_CONFIG } from 'environments/environment';
+import * as fs from 'fs-extra';
+
+import { Component } from '@angular/core';
 
 @Component({
   selector: "app-home",

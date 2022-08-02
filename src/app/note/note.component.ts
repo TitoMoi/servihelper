@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { NoteInterface, NoteTableInterface } from "app/note/model/note.model";
-import { NoteService } from "app/note/service/note.service";
+import { NoteInterface, NoteTableInterface } from 'app/note/model/note.model';
+import { NoteService } from 'app/note/service/note.service';
+
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: "app-note",
