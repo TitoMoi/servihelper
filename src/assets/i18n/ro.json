@@ -203,5 +203,6 @@
   "tr": "Turc",
   "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Selectați mai multe date",
   "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Selectați camerele",
-  "NAV_REPORTS": "Rapoarte"
+  "NAV_REPORTS": "Rapoarte",
+  "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant"
 }

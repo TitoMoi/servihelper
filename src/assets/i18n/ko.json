@@ -203,5 +203,6 @@
   "tr": "터키",
   "ASSIGN_SELECTION_DATES_SELECT_TITLE": "여러 날짜를 선택하십시오",
   "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "방을 선택하십시오",
-  "NAV_REPORTS": "보고서"
+  "NAV_REPORTS": "보고서",
+  "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant"
 }

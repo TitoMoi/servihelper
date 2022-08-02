@@ -83,7 +83,11 @@
                 <ng-container
                   *ngFor="let at of getAssignTypesForm.controls; let z = index"
                 >
-                  <div class="col-12 col-md-3 mb-2" [formGroupName]="z">
+                  <div
+                    *ngIf="assignTypes[z].hasAssistant"
+                    class="col-12 col-md-3 mb-2"
+                    [formGroupName]="z"
+                  >
                     <mat-checkbox
                       labelPosition="before"
                       color="primary"

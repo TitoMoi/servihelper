@@ -203,5 +203,6 @@
   "tr": "Türk",
   "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Birden Fazla Tarih Seçin",
   "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Odaları Seçin",
-  "NAV_REPORTS": "Raporlar"
+  "NAV_REPORTS": "Raporlar",
+  "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant"
 }

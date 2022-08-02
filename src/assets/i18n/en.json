@@ -2,6 +2,7 @@
   "ASSIGNTYPE_CREATE_BUTTON": "Create assignment type",
   "ASSIGNTYPE_CREATE_TITLE": "Create assignment type",
   "ASSIGNTYPE_DELETE_TITLE": "Delete assignment type",
+  "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant",
   "ASSIGNTYPE_DELETE_WARNING": "This action is irreversible",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Delete",
   "ASSIGNTYPE_TABLE_HEADER_EDIT": "Update",

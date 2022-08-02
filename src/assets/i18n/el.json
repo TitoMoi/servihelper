@@ -203,5 +203,6 @@
   "tr": "τούρκικος",
   "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Επιλέξτε πολλές ημερομηνίες",
   "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Επιλέξτε τα δωμάτια",
-  "NAV_REPORTS": "Αναφορές"
+  "NAV_REPORTS": "Αναφορές",
+  "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant"
 }

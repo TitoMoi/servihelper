@@ -1,9 +1,9 @@
-import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
 
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-update-assign-type",
@@ -18,6 +18,7 @@ export class UpdateAssignTypeComponent implements OnInit {
   assignTypeForm: FormGroup = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
+    hasAssistant: [false],
     order: [undefined, Validators.required],
   });
 
@@ -35,6 +36,7 @@ export class UpdateAssignTypeComponent implements OnInit {
     this.assignTypeForm.setValue({
       id: assignType.id,
       name: assignType.name,
+      hasAssistant: assignType.hasAssistant || false,
       order: assignType.order,
     });
     this.color = assignType.color;

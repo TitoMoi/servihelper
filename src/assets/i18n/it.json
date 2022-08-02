@@ -203,5 +203,6 @@
   "tr": "Turca",
   "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Seleziona più date",
   "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Seleziona le stanze",
-  "NAV_REPORTS": "Rapporti"
+  "NAV_REPORTS": "Rapporti",
+  "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant"
 }

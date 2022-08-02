@@ -4,6 +4,7 @@
 export interface AssignTypeInterface {
   id: string;
   name: string;
+  hasAssistant?: boolean;
   order: number;
   color?: string;
 }

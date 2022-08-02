@@ -203,5 +203,6 @@
   "tr": "Turks",
   "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Selecteer meerdere datums",
   "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "Selecteer de kamers",
-  "NAV_REPORTS": "Rapporten"
+  "NAV_REPORTS": "Rapporten",
+  "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant"
 }

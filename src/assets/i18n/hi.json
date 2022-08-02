@@ -203,5 +203,6 @@
   "tr": "तुर्की",
   "ASSIGN_SELECTION_DATES_SELECT_TITLE": "कई तिथियों का चयन करें",
   "ASSIGN_SELECTION_ROOMS_SELECT_TITLE": "कमरों का चयन करें",
-  "NAV_REPORTS": "रिपोर्टों"
+  "NAV_REPORTS": "रिपोर्टों",
+  "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant"
 }
