@@ -1,16 +1,16 @@
-import { ConfigService } from 'app/config/service/config.service';
-import { NoteInterface } from 'app/note/model/note.model';
-import { NoteService } from 'app/note/service/note.service';
-import { ElectronService } from 'app/services/electron.service';
-import { APP_CONFIG } from 'environments/environment';
-import * as fs from 'fs-extra';
+import { ConfigService } from "app/config/service/config.service";
+import { NoteInterface } from "app/note/model/note.model";
+import { NoteService } from "app/note/service/note.service";
+import { ElectronService } from "app/services/electron.service";
+import { APP_CONFIG } from "environments/environment";
+import * as fs from "fs-extra";
 
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { TranslocoService } from '@ngneat/transloco';
-import { DateFormatStyles } from '@ngneat/transloco-locale';
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { TranslocoService } from "@ngneat/transloco";
+import { DateFormatStyles } from "@ngneat/transloco-locale";
 
-import { ConfigInterface, WeekDaysBegin } from './model/config.model';
+import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 
 @Component({
   selector: "app-config",
@@ -74,7 +74,7 @@ export class ConfigComponent {
 
   //Restart data
   config: ConfigInterface = {
-    appVersion: "3.0.0",
+    appVersion: "3.2.0",
     lang: "en",
     assignmentHeaderTitle: "",
     assignmentPrincipalTitle: "",
