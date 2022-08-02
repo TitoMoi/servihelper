@@ -21,16 +21,13 @@ export class SharedService {
   ): ParticipantInterface[] {
     let principals = structuredClone(participants);
 
-    principals = principals.filter((p) => p.available);
-
-    principals = principals.filter((p) =>
-      p.assignTypes.some(
-        (at) => at.assignTypeId === assignTypeId && at.canPrincipal
-      )
-    );
-
-    principals = principals.filter((p) =>
-      p.rooms.some((r) => r.roomId === roomId && r.available)
+    principals = principals.filter(
+      (p) =>
+        p.available &&
+        p.assignTypes.some(
+          (at) => at.assignTypeId === assignTypeId && at.canPrincipal
+        ) &&
+        p.rooms.some((r) => r.roomId === roomId && r.available)
     );
 
     return principals;
@@ -51,16 +48,13 @@ export class SharedService {
     let assistants = structuredClone(participants);
 
     for (const principal of assistants) {
-      assistants = assistants.filter((p) => principal.available);
-
-      assistants = assistants.filter((p) =>
-        p.assignTypes.some(
-          (at) => at.assignTypeId === assignTypeId && at.canAssistant
-        )
-      );
-
-      assistants = assistants.filter((p) =>
-        p.rooms.some((r) => r.roomId === roomId && r.available)
+      assistants = assistants.filter(
+        (a) =>
+          principal.available &&
+          a.assignTypes.some(
+            (at) => at.assignTypeId === assignTypeId && at.canAssistant
+          ) &&
+          a.rooms.some((r) => r.roomId === roomId && r.available)
       );
     }
 

@@ -169,12 +169,13 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     );
 
     //remove not available dates from principals
+    const formSelectedDate = new Date(
+      this.assignmentForm.get("date").value
+    ).getTime();
     this.principals = this.principals.filter(
       (p) =>
         !p.notAvailableDates.some(
-          (date) =>
-            new Date(this.assignmentForm.get("date").value).getTime() ===
-            new Date(date).getTime()
+          (date) => formSelectedDate === new Date(date).getTime()
         )
     );
 
@@ -188,16 +189,13 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assistants = this.assistants.filter(
       (p) =>
         !p.notAvailableDates.some(
-          (date) =>
-            new Date(this.assignmentForm.get("date").value).getTime() ===
-            new Date(date).getTime()
+          (date) => formSelectedDate === new Date(date).getTime()
         )
     );
 
     //remove selected principal from assistants
-    this.assistants = this.assistants.filter(
-      (a) => a.id !== this.assignmentForm.get("principal").value
-    );
+    const principalSelected = this.assignmentForm.get("principal").value;
+    this.assistants = this.assistants.filter((a) => a.id !== principalSelected);
 
     if (this.assignmentForm.get("onlyMan").value) {
       this.principals = this.principals.filter((p) => p.isWoman === false);

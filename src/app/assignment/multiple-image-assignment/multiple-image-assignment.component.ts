@@ -70,13 +70,14 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   filterAssignments() {
     this.#assignments = this.assignmentService
       .getAssignments()
-      .filter((assignment) => this.assignTypes.includes(assignment.assignType))
-      .filter((assignment) => this.rooms.includes(assignment.room))
-      .filter((assignment) =>
-        this.selectedDates.some(
-          (date) =>
-            new Date(date).getTime() === new Date(assignment.date).getTime()
-        )
+      .filter(
+        (assignment) =>
+          this.assignTypes.includes(assignment.assignType) &&
+          this.rooms.includes(assignment.room) &&
+          this.selectedDates.some(
+            (date) =>
+              new Date(date).getTime() === new Date(assignment.date).getTime()
+          )
       );
   }
 
