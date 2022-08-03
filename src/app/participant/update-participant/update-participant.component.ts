@@ -1,18 +1,28 @@
-import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
 import {
-    ParticipantAssignTypesInterface, ParticipantInterface, ParticipantRoomInterface
-} from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomInterface } from 'app/room/model/room.model';
-import { RoomService } from 'app/room/service/room.service';
+  ParticipantAssignTypesInterface,
+  ParticipantInterface,
+  ParticipantRoomInterface,
+} from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomInterface } from "app/room/model/room.model";
+import { RoomService } from "app/room/service/room.service";
 
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild
-} from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { ActivatedRoute, Router } from '@angular/router';
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { FormArray, FormBuilder, Validators } from "@angular/forms";
+import {
+  MatDatepicker,
+  MatDatepickerInputEvent,
+} from "@angular/material/datepicker";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-update-participant",
@@ -24,8 +34,12 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
   @ViewChild(MatDatepicker) datePickerRef: MatDatepicker<Date>;
 
   participant: ParticipantInterface;
-  rooms: RoomInterface[] = this.roomService.getRooms();
-  assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
+  rooms: RoomInterface[] = this.roomService
+    .getRooms()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
+  assignTypes: AssignTypeInterface[] = this.assignTypeService
+    .getAssignTypes()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
 
   closeOnSelected = false;
   init = new Date();
@@ -120,7 +134,7 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
           //ParticipantAssignTypesInterface
           assignTypeId: [at.assignTypeId, Validators.required],
           canPrincipal: [at.canPrincipal, Validators.required],
-          canAssistant: [at.canAssistant, Validators.required],
+          canAssistant: [at.canAssistant],
         });
         //Add assignType to the form
         const fa = this.participantForm.get("assignTypes") as FormArray;

@@ -48,7 +48,7 @@
                 <ng-container
                   *ngFor="let at of getAssignTypesForm.controls; let j = index"
                 >
-                  <div class="col-12 col-md-3 mb-2" [formGroupName]="j">
+                  <div class="col-auto mb-2" [formGroupName]="j">
                     <mat-checkbox
                       color="primary"
                       formControlName="canPrincipal"
@@ -70,7 +70,11 @@
                 <ng-container
                   *ngFor="let at of getAssignTypesForm.controls; let z = index"
                 >
-                  <div class="col-12 col-md-3 mb-2" [formGroupName]="z">
+                  <div
+                    class="col-auto mb-2"
+                    *ngIf="assignTypes[z].hasAssistant"
+                    [formGroupName]="z"
+                  >
                     <mat-checkbox
                       color="primary"
                       formControlName="canAssistant"

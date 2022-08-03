@@ -1,25 +1,31 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { LastDateService } from 'app/assignment/service/last-date.service';
-import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { ConfigService } from 'app/config/service/config.service';
-import { sortParticipantsByCount } from 'app/functions';
-import { setCount } from 'app/functions/setCount';
-import { NoteInterface } from 'app/note/model/note.model';
-import { NoteService } from 'app/note/service/note.service';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomInterface } from 'app/room/model/room.model';
-import { RoomService } from 'app/room/service/room.service';
-import { SharedService } from 'app/services/shared.service';
-import { filter, pairwise, startWith, Subscription } from 'rxjs';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { LastDateService } from "app/assignment/service/last-date.service";
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ConfigService } from "app/config/service/config.service";
+import { sortParticipantsByCount } from "app/functions";
+import { setCount } from "app/functions/setCount";
+import { NoteInterface } from "app/note/model/note.model";
+import { NoteService } from "app/note/service/note.service";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomInterface } from "app/room/model/room.model";
+import { RoomService } from "app/room/service/room.service";
+import { SharedService } from "app/services/shared.service";
+import { filter, pairwise, startWith, Subscription } from "rxjs";
 
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatSelect } from '@angular/material/select';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatButton } from "@angular/material/button";
+import { MatSelect } from "@angular/material/select";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-create-assignment",
@@ -97,7 +103,20 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe(([prev, next]: [AssignmentInterface, AssignmentInterface]) => {
-        this.getData();
+        if (next.principal !== prev.principal) {
+          //remove selected principal from assistants
+          const principalSelected = this.assignmentForm.get("principal").value;
+          this.assistants = this.assistants.filter(
+            (a) => a.id !== principalSelected
+          );
+          return;
+        }
+
+        if (next.assistant !== prev.assistant) {
+          return;
+        }
+
+        if (next.assignType && next.room && next.date) this.getData();
 
         if (
           next.assignType !== prev.assignType ||
@@ -154,6 +173,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   getData() {
+    const initGetData = performance.now();
     this.removeAssignTypesThatAlreadyExistOnAssignment();
 
     this.principals = this.sharedService.filterPrincipalsByAvailable(
@@ -186,10 +206,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           (date) => formSelectedDate === new Date(date).getTime()
         )
     );
-
-    //remove selected principal from assistants
-    const principalSelected = this.assignmentForm.get("principal").value;
-    this.assistants = this.assistants.filter((a) => a.id !== principalSelected);
 
     if (this.assignmentForm.get("onlyMan").value) {
       this.principals = this.principals.filter((p) => p.isWoman === false);
@@ -237,6 +253,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assistants.forEach((as) => {
       as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
     });
+    console.log(performance.now() - initGetData);
   }
 
   /**

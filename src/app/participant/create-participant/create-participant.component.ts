@@ -30,8 +30,12 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
   //Angular material datepicker hacked
   @ViewChild(MatDatepicker) datePickerRef: MatDatepicker<Date>;
 
-  rooms: RoomInterface[] = this.roomService.getRooms();
-  assignTypes: AssignTypeInterface[] = this.assignTypeService.getAssignTypes();
+  rooms: RoomInterface[] = this.roomService
+    .getRooms()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
+  assignTypes: AssignTypeInterface[] = this.assignTypeService
+    .getAssignTypes()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
 
   isRoomsAvailable = false;
   isAssignTypesAvailable = false;
@@ -96,7 +100,7 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
       //ParticipantAssignTypesInterface
       assignTypeId: [a.id, Validators.required],
       canPrincipal: [true, Validators.required],
-      canAssistant: [a.hasAssistant, Validators.required],
+      canAssistant: [a.hasAssistant],
     });
 
     const fa = this.participantForm.get("assignTypes") as FormArray;
