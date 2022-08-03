@@ -128,6 +128,26 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Highlight the participant if already has work
+   */
+  highlightIfAlreadyHasWork() {
+    const dateValue = this.assignmentForm.get("date").value;
+
+    this.principals.forEach(
+      (p) =>
+        (p.hasWork = this.assignments
+          .filter(
+            (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
+          )
+          .some((a) => a.principal === p.id || a.assistant === p.id))
+    );
+
+    this.assistants.forEach((as) => {
+      as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
+    });
+  }
+
+  /**
    * Remove assignTypes from select that already have assignment in the selected room
    * this piece of code is separated due to in create assignment must be rerun after submitAndCreate
    * depends on: assignments, selected room, selected date
@@ -226,20 +246,8 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assistants.sort(sortParticipantsByCount);
 
     //colors if already has work
-    const dateValue = this.assignmentForm.get("date").value;
+    this.highlightIfAlreadyHasWork();
 
-    this.principals.forEach(
-      (p) =>
-        (p.hasWork = this.assignments
-          .filter(
-            (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
-          )
-          .some((a) => a.principal === p.id || a.assistant === p.id))
-    );
-
-    this.assistants.forEach((as) => {
-      as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
-    });
     console.log(performance.now() - initGetData);
   }
 
