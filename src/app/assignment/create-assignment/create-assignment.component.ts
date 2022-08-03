@@ -50,22 +50,25 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   assignments: AssignmentInterface[] =
     this.assignmentService.getAssignments(true);
 
+  //For onlyWoman and onlyMan
+  principalsBK: ParticipantInterface[] = [];
+  assistantsBK: ParticipantInterface[] = [];
+
   assignmentForm: FormGroup = this.formBuilder.group({
     id: undefined,
     date: [undefined, Validators.required],
-    room: [undefined, Validators.required], //Room id
-    assignType: [undefined, Validators.required], //AssignType id
+    room: [{ value: undefined, disabled: true }, Validators.required], //Room id
+    assignType: [{ value: undefined, disabled: true }, Validators.required], //AssignType id
     theme: "",
-    onlyWoman: [false],
-    onlyMan: [false],
-    principal: [undefined, Validators.required], //participant id
-    assistant: [undefined], //participant id
+    onlyWoman: [{ value: false, disabled: true }],
+    onlyMan: [{ value: false, disabled: true }],
+    principal: [{ value: undefined, disabled: true }, Validators.required], //participant id
+    assistant: [{ value: undefined, disabled: true }], //participant id
     footerNote: this.configService.getConfig().defaultFooterNoteId, //Note id
   });
 
   //Subscriptions
-  formSub$: Subscription;
-  lastDateSub$: Subscription;
+  subscription: Subscription;
 
   constructor(
     public lastDateService: LastDateService,
@@ -82,18 +85,39 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.lastDateSub$ = this.assignmentForm
+    this.subscription = this.assignmentForm
       .get("date")
       .valueChanges.subscribe((date) => {
         this.lastDateService.lastDate = date;
+        this.assignmentForm.get("room").enable({ emitEvent: false });
       });
+
+    this.subscription.add(
+      this.assignmentForm.get("room").valueChanges.subscribe(() => {
+        this.assignmentForm.get("assignType").enable({ emitEvent: false });
+      })
+    );
+
+    this.subscription.add(
+      this.assignmentForm.get("assignType").valueChanges.subscribe(() => {
+        this.assignmentForm.get("onlyWoman").enable({ emitEvent: false });
+        this.assignmentForm.get("onlyMan").enable({ emitEvent: false });
+        this.assignmentForm.get("principal").enable({ emitEvent: false });
+      })
+    );
+
+    this.subscription.add(
+      this.assignmentForm.get("principal").valueChanges.subscribe(() => {
+        this.assignmentForm.get("assistant").enable({ emitEvent: false });
+      })
+    );
 
     /*
       Only when assignType, room, onlyMan or onlyWoman changes principal and assistant must change
       if theme is getting filled, we dont want a subscribe for each letter so -> "filter"
-      pairwise is used to get the prev and last value, and the initial prev value is the form value
+      pairwise is used to get the prev and last value, and the initial prev value is the initial form value
     */
-    this.formSub$ = this.assignmentForm.valueChanges
+    this.subscription = this.assignmentForm.valueChanges
       .pipe(
         startWith(this.assignmentForm.value),
         pairwise(),
@@ -103,16 +127,49 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe(([prev, next]: [AssignmentInterface, AssignmentInterface]) => {
-        if (next.principal !== prev.principal) {
+        //Selecting the principal doesnt have to trigger the whole calculations nor the assistant or the note
+        if (next.principal && next.principal !== prev.principal) {
           //remove selected principal from assistants
           const principalSelected = this.assignmentForm.get("principal").value;
           this.assistants = this.assistants.filter(
             (a) => a.id !== principalSelected
           );
+          //remove selected principal from the form
+          this.assignmentForm
+            .get("assistant")
+            .reset(undefined, { emitEvent: false });
           return;
         }
 
-        if (next.assistant !== prev.assistant) {
+        if (next.assistant && next.assistant !== prev.assistant) {
+          return;
+        }
+        if (next.footerNote !== prev.footerNote) {
+          return;
+        }
+
+        this.removeAssignTypesThatAlreadyExistOnAssignment();
+        this.assignmentForm.markAllAsTouched();
+
+        if (next.onlyMan != prev.onlyMan) {
+          if (!next.onlyMan) {
+            this.principals = structuredClone(this.principalsBK);
+            this.assistants = structuredClone(this.assistantsBK);
+            return;
+          }
+          this.principals = this.principals.filter((p) => p.isWoman === false);
+          this.assistants = this.assistants.filter((a) => a.isWoman === false);
+          return;
+        }
+
+        if (next.onlyWoman != prev.onlyWoman) {
+          if (!next.onlyWoman) {
+            this.principals = structuredClone(this.principalsBK);
+            this.assistants = structuredClone(this.assistantsBK);
+            return;
+          }
+          this.principals = this.principals.filter((p) => p.isWoman === true);
+          this.assistants = this.assistants.filter((a) => a.isWoman === true);
           return;
         }
 
@@ -136,8 +193,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.formSub$.unsubscribe();
-    this.lastDateSub$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   /**
@@ -174,7 +230,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   getData() {
     const initGetData = performance.now();
-    this.removeAssignTypesThatAlreadyExistOnAssignment();
 
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       this.participantService.getParticipants(true),
@@ -206,16 +261,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           (date) => formSelectedDate === new Date(date).getTime()
         )
     );
-
-    if (this.assignmentForm.get("onlyMan").value) {
-      this.principals = this.principals.filter((p) => p.isWoman === false);
-      this.assistants = this.assistants.filter((a) => a.isWoman === false);
-    }
-
-    if (this.assignmentForm.get("onlyWoman").value) {
-      this.principals = this.principals.filter((p) => p.isWoman === true);
-      this.assistants = this.assistants.filter((a) => a.isWoman === true);
-    }
 
     //Set count for principals
     setCount(
@@ -253,6 +298,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assistants.forEach((as) => {
       as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
     });
+
+    //Backup for onlyWoman and onlyMan
+    this.principalsBK = structuredClone(this.principals);
+    this.assistantsBK = structuredClone(this.assistants);
     console.log(performance.now() - initGetData);
   }
 
