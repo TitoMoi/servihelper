@@ -103,20 +103,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe(([prev, next]: [AssignmentInterface, AssignmentInterface]) => {
-        if (next.principal !== prev.principal) {
-          //remove selected principal from assistants
-          const principalSelected = this.assignmentForm.get("principal").value;
-          this.assistants = this.assistants.filter(
-            (a) => a.id !== principalSelected
-          );
-          return;
-        }
-
-        if (next.assistant !== prev.assistant) {
-          return;
-        }
-
-        if (next.assignType && next.room && next.date) this.getData();
+        this.getData();
 
         if (
           next.assignType !== prev.assignType ||
