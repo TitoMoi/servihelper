@@ -17,7 +17,6 @@ import { filter, pairwise, startWith, Subscription } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -100,50 +99,16 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(
-      this.assignmentForm.get("assignType").valueChanges.subscribe((at) => {
-        if (at) {
-          this.assignmentForm.get("onlyWoman").enable({ emitEvent: false });
-          this.assignmentForm.get("onlyMan").enable({ emitEvent: false });
-          this.assignmentForm.get("principal").enable({ emitEvent: false });
-        } else {
-          this.assignmentForm.get("onlyWoman").disable({ emitEvent: false });
-          this.assignmentForm.get("onlyMan").disable({ emitEvent: false });
-          this.assignmentForm.get("principal").disable({ emitEvent: false });
-        }
+      this.assignmentForm.get("assignType").valueChanges.subscribe(() => {
+        this.assignmentForm.get("onlyWoman").enable({ emitEvent: false });
+        this.assignmentForm.get("onlyMan").enable({ emitEvent: false });
+        this.assignmentForm.get("principal").enable({ emitEvent: false });
       })
     );
 
     this.subscription.add(
       this.assignmentForm.get("principal").valueChanges.subscribe(() => {
         this.assignmentForm.get("assistant").enable({ emitEvent: false });
-      })
-    );
-
-    this.subscription.add(
-      this.assignmentForm
-        .get("onlyWoman")
-        .valueChanges.subscribe((onlyWoman) => {
-          if (!onlyWoman) {
-            this.principals = structuredClone(this.principalsBK);
-            this.assistants = structuredClone(this.assistantsBK);
-            return;
-          }
-          this.principals = this.principals.filter((p) => p.isWoman === true);
-          this.assistants = this.assistants.filter((a) => a.isWoman === true);
-          return;
-        })
-    );
-
-    this.subscription.add(
-      this.assignmentForm.get("onlyMan").valueChanges.subscribe((onlyMan) => {
-        if (!onlyMan) {
-          this.principals = structuredClone(this.principalsBK);
-          this.assistants = structuredClone(this.assistantsBK);
-          return;
-        }
-        this.principals = this.principals.filter((p) => p.isWoman === false);
-        this.assistants = this.assistants.filter((a) => a.isWoman === false);
-        return;
       })
     );
 
@@ -179,21 +144,34 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
         if (next.assistant && next.assistant !== prev.assistant) {
           return;
         }
-
-        if (next.footerNote && next.footerNote !== prev.footerNote) {
-          return;
-        }
-
-        if (Boolean(next.onlyMan) !== Boolean(prev.onlyMan)) {
-          return;
-        }
-
-        if (Boolean(next.onlyWoman) !== Boolean(prev.onlyWoman)) {
+        if (next.footerNote !== prev.footerNote) {
           return;
         }
 
         this.removeAssignTypesThatAlreadyExistOnAssignment();
         this.assignmentForm.markAllAsTouched();
+
+        if (next.onlyMan != prev.onlyMan) {
+          if (!next.onlyMan) {
+            this.principals = structuredClone(this.principalsBK);
+            this.assistants = structuredClone(this.assistantsBK);
+            return;
+          }
+          this.principals = this.principals.filter((p) => p.isWoman === false);
+          this.assistants = this.assistants.filter((a) => a.isWoman === false);
+          return;
+        }
+
+        if (next.onlyWoman != prev.onlyWoman) {
+          if (!next.onlyWoman) {
+            this.principals = structuredClone(this.principalsBK);
+            this.assistants = structuredClone(this.assistantsBK);
+            return;
+          }
+          this.principals = this.principals.filter((p) => p.isWoman === true);
+          this.assistants = this.assistants.filter((a) => a.isWoman === true);
+          return;
+        }
 
         if (next.assignType && next.room && next.date) this.getData();
 
@@ -247,7 +225,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     )
       this.assignmentForm
         .get("assignType")
-        .reset(undefined, { onlySelf: true });
+        .reset(undefined, { emitEvent: false });
   }
 
   getData() {
