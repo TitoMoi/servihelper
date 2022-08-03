@@ -1,16 +1,16 @@
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { ConfigService } from 'app/config/service/config.service';
-import { NoteService } from 'app/note/service/note.service';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomService } from 'app/room/service/room.service';
-import * as fs from 'fs-extra';
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ConfigService } from "app/config/service/config.service";
+import { NoteService } from "app/note/service/note.service";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomService } from "app/room/service/room.service";
+import * as fs from "fs-extra";
 
-import { Component, OnInit } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit } from "@angular/core";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
-import { ElectronService } from './services/electron.service';
+import { ElectronService } from "./services/electron.service";
 
 @Component({
   selector: "app-root",

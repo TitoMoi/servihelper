@@ -1,6 +1,7 @@
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { LastDateService } from "app/assignment/service/last-date.service";
+import { AssignmentWorkerService } from "app/assignment/service/worker.service";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ConfigService } from "app/config/service/config.service";
@@ -78,10 +79,13 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private sharedService: SharedService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private assignmentWorkerService: AssignmentWorkerService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.assignmentWorkerService.getData();
+
     this.lastDateSub$ = this.assignmentForm
       .get("date")
       .valueChanges.subscribe((date) => {

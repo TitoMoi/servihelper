@@ -30,7 +30,8 @@
             "customWebpackConfig": {
               "path": "./angular.webpack.js"
             },
-            "allowedCommonJsDependencies": ["adm-zip", "rxjs", "rxjs/operators"]
+            "allowedCommonJsDependencies": ["adm-zip", "rxjs", "rxjs/operators"],
+            "webWorkerTsConfig": "tsconfig.worker.json"
           },
           "configurations": {
             "dev": {
@@ -115,7 +116,8 @@
             "karmaConfig": "src/karma.conf.js",
             "scripts": [],
             "styles": ["src/styles.scss"],
-            "assets": ["src/assets"]
+            "assets": ["src/assets"],
+            "webWorkerTsConfig": "tsconfig.worker.json"
           }
         },
         "lint": {
