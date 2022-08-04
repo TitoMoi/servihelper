@@ -233,7 +233,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   prepareAssignTypeSub() {
     this.subscription = this.assignmentForm
       .get("assignType")
-      .valueChanges.subscribe(async (assignType) => {
+      .valueChanges.subscribe((assignType) => {
         this.assignmentForm
           .get("principal")
           .reset(undefined, { emitEvent: false });
@@ -281,7 +281,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
 
-          await this.highlightIfAlreadyHasWork();
+          this.highlightIfAlreadyHasWork();
 
           this.principalsBK = structuredClone(this.principals);
           this.assistantsBK = structuredClone(this.assistants);
@@ -348,58 +348,55 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   /**
    * Highlight the participant if already has work
    */
-  async highlightIfAlreadyHasWork(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const dateValue = this.gfv("date");
+  highlightIfAlreadyHasWork() {
+    const dateValue = this.gfv("date");
 
-      const filteredAssignments: AssignmentInterface[] = [];
-      let z = 0;
-      const length = this.assignments.length;
-      let found = false;
-      let outOfRange = false;
+    const filteredAssignments: AssignmentInterface[] = [];
+    let z = 0;
+    const length = this.assignments.length;
+    let found = false;
+    let outOfRange = false;
 
-      //This is like a "filter" but breaks when we are out of the date range we are looking for
-      //Cannot use "some" as it stops on the first ocurrence and we need the range
-      while (z < length) {
+    //This is like a "filter" but breaks when we are out of the date range we are looking for
+    //Cannot use "some" as it stops on the first ocurrence and we need the range
+    while (z < length) {
+      if (
+        new Date(this.assignments[z].date).getTime() ===
+        new Date(dateValue).getTime()
+      ) {
+        found = true;
+        filteredAssignments.push(this.assignments[z]);
+      } else {
+        outOfRange = true;
+      }
+      if (found && outOfRange) {
+        break;
+      }
+      z++;
+    }
+
+    for (let i = 0; i < this.principals.length; i++) {
+      for (let j = 0; j < filteredAssignments.length; j++) {
         if (
-          new Date(this.assignments[z].date).getTime() ===
-          new Date(dateValue).getTime()
+          this.principals[i].id === filteredAssignments[j].principal ||
+          this.principals[i].id === filteredAssignments[j].assistant
         ) {
-          found = true;
-          filteredAssignments.push(this.assignments[z]);
-        } else {
-          outOfRange = true;
-        }
-        if (found && outOfRange) {
+          this.principals[i].hasWork = true;
           break;
         }
-        z++;
       }
+    }
 
-      for (let i = 0; i < this.principals.length; i++) {
-        for (let j = 0; j < filteredAssignments.length; j++) {
-          if (
-            this.principals[i].id === filteredAssignments[j].principal ||
-            this.principals[i].id === filteredAssignments[j].assistant
-          ) {
-            this.principals[i].hasWork = true;
-            break;
-          }
+    for (let i = 0; i < this.assistants.length; i++) {
+      for (let j = 0; j < this.principals.length; j++) {
+        if (
+          this.principals[j].id === this.assistants[i].id &&
+          this.principals[j].hasWork
+        ) {
+          this.assistants[i].hasWork = true;
         }
       }
-
-      for (let i = 0; i < this.assistants.length; i++) {
-        for (let j = 0; j < this.principals.length; j++) {
-          if (
-            this.principals[j].id === this.assistants[i].id &&
-            this.principals[j].hasWork
-          ) {
-            this.assistants[i].hasWork = true;
-          }
-        }
-      }
-      resolve();
-    });
+    }
   }
 
   /**
