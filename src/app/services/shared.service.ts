@@ -11,52 +11,85 @@ export class SharedService {
   /**
    *
    * @param participants the array of participants
+   * @param dateTimeValue the dateTime value from the selected form date in milliseconds
    * @param assignTypeId the id of the assignType to participate
    * @param roomId the id of the room to participate
    * @returns A new array of participants that meet the criteria
+   *
+   * The participant must be global available, able to participate in the room and assigntype selected
+   * and be available in the selected date
    */
   filterPrincipalsByAvailable(
-    participants: ParticipantInterface[],
+    principals: ParticipantInterface[],
+    dateTimeValue,
     assignTypeId,
-    roomId
+    roomId,
+    onlyMan,
+    onlyWoman
   ): ParticipantInterface[] {
-    let principals = structuredClone(participants);
+    return principals.filter((p) => {
+      const isAvailable = p.available;
+      const canAssignType = p.assignTypes.some(
+        (at) => at.assignTypeId === assignTypeId && at.canPrincipal
+      );
+      const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
+      const canDate = !p.notAvailableDates.some(
+        (date) => dateTimeValue === new Date(date).getTime()
+      );
+      const canOnlyMan = onlyMan ? p.isWoman === false : true;
+      const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
 
-    principals = principals.filter(
-      (p) =>
-        p.available &&
-        p.assignTypes.some(
-          (at) => at.assignTypeId === assignTypeId && at.canPrincipal
-        ) &&
-        p.rooms.some((r) => r.roomId === roomId && r.available)
-    );
-
-    return principals;
+      return (
+        isAvailable &&
+        canAssignType &&
+        canRoom &&
+        canDate &&
+        canOnlyMan &&
+        canOnlyWoman
+      );
+    });
   }
 
   /**
    *
    * @param participants the array of participants
+   * @param dateTimeValue the dateTime value from the selected form date
    * @param assignTypeId the id of the assignType to participate
    * @param roomId the id of the room to participate
    * @returns A new array of participants that meet the criteria
+   *
+   * The participant must be global available, able to participate in the room and assigntype selected
+   * and be available in the selected date
    */
   filterAssistantsByAvailable(
-    participants: ParticipantInterface[],
+    assistants: ParticipantInterface[],
+    dateTimeValue,
     assignTypeId,
-    roomId
+    roomId,
+    onlyMan,
+    onlyWoman
   ): ParticipantInterface[] {
-    let assistants = structuredClone(participants);
-    assistants = assistants.filter(
-      (a) =>
-        a.available &&
-        a.assignTypes.some(
-          (at) => at.assignTypeId === assignTypeId && at.canAssistant
-        ) &&
-        a.rooms.some((r) => r.roomId === roomId && r.available)
-    );
+    return assistants.filter((p) => {
+      const isAvailable = p.available;
+      const canAssignType = p.assignTypes.some(
+        (at) => at.assignTypeId === assignTypeId && at.canAssistant
+      );
+      const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
+      const canDate = !p.notAvailableDates.some(
+        (date) => dateTimeValue === new Date(date).getTime()
+      );
+      const canOnlyMan = onlyMan ? p.isWoman === false : true;
+      const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
 
-    return assistants;
+      return (
+        isAvailable &&
+        canAssignType &&
+        canRoom &&
+        canDate &&
+        canOnlyMan &&
+        canOnlyWoman
+      );
+    });
   }
 
   sortDates(a: string, b: string): number {

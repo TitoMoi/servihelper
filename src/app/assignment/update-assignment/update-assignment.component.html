@@ -11,20 +11,15 @@
             <input
               required
               matInput
-              (click)="$event.stopPropagation()"
               [matDatepicker]="picker"
               formControlName="date"
             />
             <mat-datepicker-toggle
               matPrefix
-              (click)="$event.stopPropagation()"
               [for]="picker"
               class="mr-3"
             ></mat-datepicker-toggle>
-            <mat-datepicker
-              #picker
-              (click)="$event.stopPropagation()"
-            ></mat-datepicker>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <div class="col-6 mb-2">
             <mat-form-field class="full-width">
@@ -34,11 +29,7 @@
                 required
                 [disableRipple]="true"
               >
-                <mat-option
-                  *ngFor="let room of rooms"
-                  [value]="room.id"
-                  (click)="$event.stopPropagation()"
-                >
+                <mat-option *ngFor="let room of rooms" [value]="room.id">
                   {{ room.name }}
                 </mat-option>
               </mat-select>
@@ -47,14 +38,9 @@
           <div class="col-6 mb-2">
             <mat-form-field class="full-width">
               <mat-label>{{ t("ASSIGN_UPDATE_ASSIGNTYPE") }}</mat-label>
-              <mat-select
-                formControlName="assignType"
-                required
-                [disableRipple]="true"
-              >
+              <mat-select formControlName="assignType" required>
                 <mat-option
                   *ngFor="let assignType of assignTypes"
-                  (click)="$event.stopPropagation()"
                   [value]="assignType.id"
                   [style.backgroundColor]="assignType.color"
                 >
@@ -66,11 +52,7 @@
           <div class="col-12 mb-2">
             <mat-form-field class="full-width">
               <mat-label>{{ t("ASSIGN_UPDATE_THEME") }}</mat-label>
-              <input
-                matInput
-                formControlName="theme"
-                (click)="$event.stopPropagation()"
-              />
+              <input matInput formControlName="theme" />
             </mat-form-field>
           </div>
           <div class="col-3 mb-2">
@@ -99,7 +81,6 @@
               >
                 <mat-option
                   *ngFor="let participant of principals; trackBy: trackByIdFn"
-                  (click)="$event.stopPropagation()"
                   [value]="participant.id"
                   [ngClass]="{
                     'bg-color-lightyellow': participant.hasWork,
@@ -118,7 +99,6 @@
                 <mat-option [value]="undefined"></mat-option>
                 <mat-option
                   *ngFor="let participant of assistants; trackBy: trackByIdFn"
-                  (click)="$event.stopPropagation()"
                   [value]="participant.id"
                   [ngClass]="{
                     'bg-color-lightyellow': participant.hasWork,
@@ -134,11 +114,7 @@
             <mat-form-field class="full-width">
               <mat-label>{{ t("ASSIGN_UPDATE_FOOTER_NOTE") }}</mat-label>
               <mat-select formControlName="footerNote" [disableRipple]="true">
-                <mat-option
-                  *ngFor="let note of footerNotes"
-                  [value]="note.id"
-                  (click)="$event.stopPropagation()"
-                >
+                <mat-option *ngFor="let note of footerNotes" [value]="note.id">
                   {{ note.name }}
                 </mat-option>
               </mat-select>
