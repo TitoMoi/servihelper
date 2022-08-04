@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-for-of */
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { LastDateService } from "app/assignment/service/last-date.service";
@@ -13,12 +14,11 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 import { SharedService } from "app/services/shared.service";
-import { filter, pairwise, startWith, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
   Component,
-  NgZone,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -79,8 +79,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private sharedService: SharedService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private ngZone: NgZone
+    private activatedRoute: ActivatedRoute
   ) {}
 
   /**
@@ -93,14 +92,12 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.ngZone.runOutsideAngular(() => {
-      this.prepareDateSub();
-      this.prepareRoomSub();
-      this.prepareAssignTypeSub();
-      this.prepareOnlyManSub();
-      this.prepareOnlyWomanSub();
-      this.preparePrincipalSub();
-    });
+    this.prepareDateSub();
+    this.prepareRoomSub();
+    this.prepareAssignTypeSub();
+    this.prepareOnlyManSub();
+    this.prepareOnlyWomanSub();
+    this.preparePrincipalSub();
   }
 
   ngOnDestroy(): void {
@@ -110,34 +107,37 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   prepareDateSub() {
     this.subscription = this.assignmentForm
       .get("date")
-      .valueChanges.subscribe(async (date) => {
+      .valueChanges.subscribe((date) => {
         this.lastDateService.lastDate = date;
+
+        this.assignmentForm
+          .get("principal")
+          .reset(undefined, { emitEvent: false });
+        this.assignmentForm
+          .get("assistant")
+          .reset(undefined, { emitEvent: false });
 
         if (this.gfv("room")) {
           this.removeAssignTypesThatAlreadyExistOnAssignment();
         }
         if (this.gfv("room") && this.gfv("assignType")) {
-          setTimeout(async () => {
-            this.principals =
-              await this.sharedService.filterPrincipalsByAvailable(
-                this.participantService.getParticipants(true),
-                date.getTime(),
-                this.gfv("assignType"),
-                this.gfv("room"),
-                this.gfv("onlyMan"),
-                this.gfv("onlyWoman")
-              );
-          }, 0);
+          this.principals = this.sharedService.filterPrincipalsByAvailable(
+            this.participantService.getParticipants(true),
+            date.getTime(),
+            this.gfv("assignType"),
+            this.gfv("room"),
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
-          this.assistants =
-            await this.sharedService.filterAssistantsByAvailable(
-              this.participantService.getParticipants(true),
-              date.getTime(),
-              this.gfv("assignType"),
-              this.gfv("room"),
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+          this.assistants = this.sharedService.filterAssistantsByAvailable(
+            this.participantService.getParticipants(true),
+            date.getTime(),
+            this.gfv("assignType"),
+            this.gfv("room"),
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
           //Set count for principals
           setCount(
@@ -160,7 +160,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
 
-          await this.highlightIfAlreadyHasWork();
+          this.highlightIfAlreadyHasWork();
 
           this.principalsBK = structuredClone(this.principals);
           this.assistantsBK = structuredClone(this.assistants);
@@ -171,30 +171,35 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   prepareRoomSub() {
     this.subscription = this.assignmentForm
       .get("room")
-      .valueChanges.subscribe(async (room) => {
+      .valueChanges.subscribe((room) => {
+        this.assignmentForm
+          .get("principal")
+          .reset(undefined, { emitEvent: false });
+        this.assignmentForm
+          .get("assistant")
+          .reset(undefined, { emitEvent: false });
+
         if (this.gfv("date")) {
           this.removeAssignTypesThatAlreadyExistOnAssignment();
         }
         if (this.gfv("date") && this.gfv("assignType")) {
-          this.principals =
-            await this.sharedService.filterPrincipalsByAvailable(
-              this.participantService.getParticipants(true),
-              this.gfv("date").getTime(),
-              this.gfv("assignType"),
-              room,
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+          this.principals = this.sharedService.filterPrincipalsByAvailable(
+            this.participantService.getParticipants(true),
+            this.gfv("date").getTime(),
+            this.gfv("assignType"),
+            room,
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
-          this.assistants =
-            await this.sharedService.filterAssistantsByAvailable(
-              this.participantService.getParticipants(true),
-              this.gfv("date").getTime(),
-              this.gfv("assignType"),
-              room,
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+          this.assistants = this.sharedService.filterAssistantsByAvailable(
+            this.participantService.getParticipants(true),
+            this.gfv("date").getTime(),
+            this.gfv("assignType"),
+            room,
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
           //Set count for principals
           setCount(
@@ -217,7 +222,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
 
-          await this.highlightIfAlreadyHasWork();
+          this.highlightIfAlreadyHasWork();
 
           this.principalsBK = structuredClone(this.principals);
           this.assistantsBK = structuredClone(this.assistants);
@@ -229,26 +234,31 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription = this.assignmentForm
       .get("assignType")
       .valueChanges.subscribe(async (assignType) => {
-        if (this.gfv("date") && this.gfv("room")) {
-          this.principals =
-            await this.sharedService.filterPrincipalsByAvailable(
-              this.participantService.getParticipants(true),
-              this.gfv("date").getTime(),
-              assignType,
-              this.gfv("room"),
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+        this.assignmentForm
+          .get("principal")
+          .reset(undefined, { emitEvent: false });
+        this.assignmentForm
+          .get("assistant")
+          .reset(undefined, { emitEvent: false });
 
-          this.assistants =
-            await this.sharedService.filterAssistantsByAvailable(
-              this.participantService.getParticipants(true),
-              this.gfv("date").getTime(),
-              assignType,
-              this.gfv("room"),
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+        if (this.gfv("date") && this.gfv("room")) {
+          this.principals = this.sharedService.filterPrincipalsByAvailable(
+            this.participantService.getParticipants(true),
+            this.gfv("date").getTime(),
+            assignType,
+            this.gfv("room"),
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
+
+          this.assistants = this.sharedService.filterAssistantsByAvailable(
+            this.participantService.getParticipants(true),
+            this.gfv("date").getTime(),
+            assignType,
+            this.gfv("room"),
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
           //Set count for principals
           setCount(
@@ -343,39 +353,51 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       const dateValue = this.gfv("date");
 
       const filteredAssignments: AssignmentInterface[] = [];
-      let i = 0;
+      let z = 0;
       const length = this.assignments.length;
       let found = false;
       let outOfRange = false;
 
       //This is like a "filter" but breaks when we are out of the date range we are looking for
       //Cannot use "some" as it stops on the first ocurrence and we need the range
-      while (i < length) {
+      while (z < length) {
         if (
-          new Date(this.assignments[i].date).getTime() ===
+          new Date(this.assignments[z].date).getTime() ===
           new Date(dateValue).getTime()
         ) {
           found = true;
-          filteredAssignments.push(this.assignments[i]);
+          filteredAssignments.push(this.assignments[z]);
         } else {
           outOfRange = true;
         }
         if (found && outOfRange) {
           break;
         }
-        i++;
+        z++;
       }
 
-      this.principals.forEach(
-        (p) =>
-          (p.hasWork = filteredAssignments.some(
-            (a) => a.principal === p.id || a.assistant === p.id
-          ))
-      );
+      for (let i = 0; i < this.principals.length; i++) {
+        for (let j = 0; j < filteredAssignments.length; j++) {
+          if (
+            this.principals[i].id === filteredAssignments[j].principal ||
+            this.principals[i].id === filteredAssignments[j].assistant
+          ) {
+            this.principals[i].hasWork = true;
+            break;
+          }
+        }
+      }
 
-      this.assistants.forEach((as) => {
-        as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
-      });
+      for (let i = 0; i < this.assistants.length; i++) {
+        for (let j = 0; j < this.principals.length; j++) {
+          if (
+            this.principals[j].id === this.assistants[i].id &&
+            this.principals[j].hasWork
+          ) {
+            this.assistants[i].hasWork = true;
+          }
+        }
+      }
       resolve();
     });
   }
@@ -445,7 +467,21 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     const onlyMan = this.assignmentForm.get("onlyMan").value;
     const onlyWoman = this.assignmentForm.get("onlyWoman").value;
 
-    this.assignmentForm.reset({ emitEvent: false });
+    this.assignmentForm.reset(
+      {
+        id: undefined,
+        date: [undefined, Validators.required],
+        room: [undefined, Validators.required], //Room id
+        assignType: [undefined, Validators.required], //AssignType id
+        theme: "",
+        onlyWoman: [false],
+        onlyMan: [false],
+        principal: [undefined, Validators.required], //participant id
+        assistant: [undefined], //participant id
+        footerNote: this.configService.getConfig().defaultFooterNoteId, //Note id
+      },
+      { emitEvent: false }
+    );
 
     this.assignmentForm.get("date").setValue(date, { emitEvent: false });
     this.assignmentForm

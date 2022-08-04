@@ -16,7 +16,6 @@
               required
               appautofocus
               matInput
-              (click)="$event.stopPropagation()"
               [matDatepicker]="picker"
               formControlName="date"
             />
@@ -24,13 +23,11 @@
               matPrefix
               [for]="picker"
               class="mr-3"
-              (click)="$event.stopPropagation()"
               [disableRipple]="true"
             ></mat-datepicker-toggle>
             <mat-datepicker
               id="assignmentDatepickerId"
               #picker
-              (click)="$event.stopPropagation()"
               [startAt]="this.lastDateService.lastDate$ | async"
             ></mat-datepicker>
           </mat-form-field>
@@ -51,15 +48,10 @@
           <div class="col-6 mb-2">
             <mat-form-field class="full-width">
               <mat-label>{{ t("ASSIGN_CREATE_ASSIGNTYPE") }}</mat-label>
-              <mat-select
-                formControlName="assignType"
-                required
-                [disableRipple]="true"
-              >
+              <mat-select formControlName="assignType" required>
                 <mat-option
                   *ngFor="let assignType of assignTypes"
                   [value]="assignType.id"
-                  (click)="$event.stopPropagation()"
                   [style.backgroundColor]="assignType.color"
                 >
                   {{ assignType.name }}
@@ -103,7 +95,6 @@
               >
                 <mat-option
                   *ngFor="let participant of principals; trackBy: trackByIdFn"
-                  (click)="$event.stopPropagation()"
                   [value]="participant.id"
                   [ngClass]="{
                     'bg-color-lightyellow': participant.hasWork,
@@ -126,7 +117,6 @@
               >
                 <mat-option
                   *ngFor="let participant of assistants; trackBy: trackByIdFn"
-                  (click)="$event.stopPropagation()"
                   [value]="participant.id"
                   [ngClass]="{
                     'bg-color-lightyellow': participant.hasWork,

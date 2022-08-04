@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-for-of */
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
@@ -101,30 +102,35 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   prepareDateSub() {
     this.subscription = this.assignmentForm
       .get("date")
-      .valueChanges.subscribe(async (date) => {
+      .valueChanges.subscribe((date) => {
+        this.assignmentForm
+          .get("principal")
+          .reset(undefined, { emitEvent: false });
+        this.assignmentForm
+          .get("assistant")
+          .reset(undefined, { emitEvent: false });
+
         if (this.gfv("room")) {
           this.removeAssignTypesThatAlreadyExistOnAssignment();
         }
         if (this.gfv("room") && this.gfv("assignType")) {
-          this.principals =
-            await this.sharedService.filterPrincipalsByAvailable(
-              this.participantService.getParticipants(true),
-              date.getTime(),
-              this.gfv("assignType"),
-              this.gfv("room"),
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+          this.principals = this.sharedService.filterPrincipalsByAvailable(
+            this.participantService.getParticipants(),
+            date.getTime(),
+            this.gfv("assignType"),
+            this.gfv("room"),
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
-          this.assistants =
-            await this.sharedService.filterAssistantsByAvailable(
-              this.participantService.getParticipants(true),
-              date.getTime(),
-              this.gfv("assignType"),
-              this.gfv("room"),
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+          this.assistants = this.sharedService.filterAssistantsByAvailable(
+            this.participantService.getParticipants(),
+            date.getTime(),
+            this.gfv("assignType"),
+            this.gfv("room"),
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
           //Set count for principals
           setCount(
@@ -147,7 +153,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
 
-          await this.highlightIfAlreadyHasWork();
+          this.highlightIfAlreadyHasWork();
 
           this.principalsBK = structuredClone(this.principals);
           this.assistantsBK = structuredClone(this.assistants);
@@ -158,30 +164,35 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   prepareRoomSub() {
     this.subscription = this.assignmentForm
       .get("room")
-      .valueChanges.subscribe(async (room) => {
+      .valueChanges.subscribe((room) => {
+        this.assignmentForm
+          .get("principal")
+          .reset(undefined, { emitEvent: false });
+        this.assignmentForm
+          .get("assistant")
+          .reset(undefined, { emitEvent: false });
+
         if (this.gfv("date")) {
           this.removeAssignTypesThatAlreadyExistOnAssignment();
         }
         if (this.gfv("date") && this.gfv("assignType")) {
-          this.principals =
-            await this.sharedService.filterPrincipalsByAvailable(
-              this.participantService.getParticipants(true),
-              this.gfv("date").getTime(),
-              this.gfv("assignType"),
-              room,
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+          this.principals = this.sharedService.filterPrincipalsByAvailable(
+            this.participantService.getParticipants(),
+            this.gfv("date").getTime(),
+            this.gfv("assignType"),
+            room,
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
-          this.assistants =
-            await this.sharedService.filterAssistantsByAvailable(
-              this.participantService.getParticipants(true),
-              this.gfv("date").getTime(),
-              this.gfv("assignType"),
-              room,
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+          this.assistants = this.sharedService.filterAssistantsByAvailable(
+            this.participantService.getParticipants(),
+            this.gfv("date").getTime(),
+            this.gfv("assignType"),
+            room,
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
           //Set count for principals
           setCount(
@@ -204,7 +215,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
 
-          await this.highlightIfAlreadyHasWork();
+          this.highlightIfAlreadyHasWork();
 
           this.principalsBK = structuredClone(this.principals);
           this.assistantsBK = structuredClone(this.assistants);
@@ -216,28 +227,31 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription = this.assignmentForm
       .get("assignType")
       .valueChanges.subscribe(async (assignType) => {
+        this.assignmentForm
+          .get("principal")
+          .reset(undefined, { emitEvent: false });
+        this.assignmentForm
+          .get("assistant")
+          .reset(undefined, { emitEvent: false });
+
         if (this.gfv("date") && this.gfv("room")) {
-          this.removeAssignTypesThatAlreadyExistOnAssignment();
+          this.principals = this.sharedService.filterPrincipalsByAvailable(
+            this.participantService.getParticipants(),
+            this.gfv("date").getTime(),
+            assignType,
+            this.gfv("room"),
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
-          this.principals =
-            await this.sharedService.filterPrincipalsByAvailable(
-              this.participantService.getParticipants(true),
-              this.gfv("date").getTime(),
-              assignType,
-              this.gfv("room"),
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
-
-          this.assistants =
-            await this.sharedService.filterAssistantsByAvailable(
-              this.participantService.getParticipants(true),
-              this.gfv("date").getTime(),
-              assignType,
-              this.gfv("room"),
-              this.gfv("onlyMan"),
-              this.gfv("onlyWoman")
-            );
+          this.assistants = this.sharedService.filterAssistantsByAvailable(
+            this.participantService.getParticipants(),
+            this.gfv("date").getTime(),
+            assignType,
+            this.gfv("room"),
+            this.gfv("onlyMan"),
+            this.gfv("onlyWoman")
+          );
 
           //Set count for principals
           setCount(
@@ -272,6 +286,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription = this.assignmentForm
       .get("onlyMan")
       .valueChanges.subscribe((onlyMan) => {
+        this.assignmentForm
+          .get("principal")
+          .reset(undefined, { emitEvent: false });
+        this.assignmentForm
+          .get("assistant")
+          .reset(undefined, { emitEvent: false });
+
         if (!onlyMan) {
           this.principals = structuredClone(this.principalsBK);
           this.assistants = structuredClone(this.assistantsBK);
@@ -285,6 +306,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription = this.assignmentForm
       .get("onlyWoman")
       .valueChanges.subscribe((onlyWoman) => {
+        this.assignmentForm
+          .get("principal")
+          .reset(undefined, { emitEvent: false });
+        this.assignmentForm
+          .get("assistant")
+          .reset(undefined, { emitEvent: false });
+
         if (!onlyWoman) {
           this.principals = structuredClone(this.principalsBK);
           this.assistants = structuredClone(this.assistantsBK);
@@ -318,39 +346,51 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       const dateValue = this.gfv("date");
 
       const filteredAssignments: AssignmentInterface[] = [];
-      let i = 0;
+      let z = 0;
       const length = this.assignments.length;
       let found = false;
       let outOfRange = false;
 
       //This is like a "filter" but breaks when we are out of the date range we are looking for
       //Cannot use "some" as it stops on the first ocurrence and we need the range
-      while (i < length) {
+      while (z < length) {
         if (
-          new Date(this.assignments[i].date).getDate() ===
+          new Date(this.assignments[z].date).getTime() ===
           new Date(dateValue).getTime()
         ) {
           found = true;
-          filteredAssignments.push(this.assignments[i]);
+          filteredAssignments.push(this.assignments[z]);
         } else {
           outOfRange = true;
         }
         if (found && outOfRange) {
           break;
         }
-        i++;
+        z++;
       }
 
-      this.principals.forEach(
-        (p) =>
-          (p.hasWork = filteredAssignments.some(
-            (a) => a.principal === p.id || a.assistant === p.id
-          ))
-      );
+      for (let i = 0; i < this.principals.length; i++) {
+        for (let j = 0; j < filteredAssignments.length; j++) {
+          if (
+            this.principals[i].id === filteredAssignments[j].principal ||
+            this.principals[i].id === filteredAssignments[j].assistant
+          ) {
+            this.principals[i].hasWork = true;
+            break;
+          }
+        }
+      }
 
-      this.assistants.forEach((as) => {
-        as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
-      });
+      for (let i = 0; i < this.assistants.length; i++) {
+        for (let j = 0; j < this.principals.length; j++) {
+          if (
+            this.principals[j].id === this.assistants[i].id &&
+            this.principals[j].hasWork
+          ) {
+            this.assistants[i].hasWork = true;
+          }
+        }
+      }
       resolve();
     });
   }

@@ -19,31 +19,34 @@ export class SharedService {
    * The participant must be global available, able to participate in the room and assigntype selected
    * and be available in the selected date
    */
-  async filterPrincipalsByAvailable(
+  filterPrincipalsByAvailable(
     principals: ParticipantInterface[],
     dateTimeValue,
     assignTypeId,
     roomId,
     onlyMan,
     onlyWoman
-  ): Promise<ParticipantInterface[]> {
-    return new Promise((resolve, reject) => {
-      principals = principals.filter((p) =>
-        p.available &&
-        p.assignTypes.some(
-          (at) => at.assignTypeId === assignTypeId && at.canPrincipal
-        ) &&
-        p.rooms.some((r) => r.roomId === roomId && r.available) &&
-        !p.notAvailableDates.some(
-          (date) => dateTimeValue === new Date(date).getTime()
-        ) &&
-        onlyMan
-          ? p.isWoman === false
-          : true && onlyWoman
-          ? p.isWoman === true
-          : true
+  ): ParticipantInterface[] {
+    return principals.filter((p) => {
+      const isAvailable = p.available;
+      const canAssignType = p.assignTypes.some(
+        (at) => at.assignTypeId === assignTypeId && at.canPrincipal
       );
-      resolve(principals);
+      const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
+      const canDate = !p.notAvailableDates.some(
+        (date) => dateTimeValue === new Date(date).getTime()
+      );
+      const canOnlyMan = onlyMan ? p.isWoman === false : true;
+      const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
+
+      return (
+        isAvailable &&
+        canAssignType &&
+        canRoom &&
+        canDate &&
+        canOnlyMan &&
+        canOnlyWoman
+      );
     });
   }
 
@@ -58,31 +61,34 @@ export class SharedService {
    * The participant must be global available, able to participate in the room and assigntype selected
    * and be available in the selected date
    */
-  async filterAssistantsByAvailable(
+  filterAssistantsByAvailable(
     assistants: ParticipantInterface[],
     dateTimeValue,
     assignTypeId,
     roomId,
     onlyMan,
     onlyWoman
-  ): Promise<ParticipantInterface[]> {
-    return new Promise((resolve, reject) => {
-      assistants = assistants.filter((a) =>
-        a.available &&
-        a.assignTypes.some(
-          (at) => at.assignTypeId === assignTypeId && at.canAssistant
-        ) &&
-        a.rooms.some((r) => r.roomId === roomId && r.available) &&
-        !a.notAvailableDates.some(
-          (date) => dateTimeValue === new Date(date).getTime()
-        ) &&
-        onlyMan
-          ? a.isWoman === false
-          : true && onlyWoman
-          ? a.isWoman === true
-          : true
+  ): ParticipantInterface[] {
+    return assistants.filter((p) => {
+      const isAvailable = p.available;
+      const canAssignType = p.assignTypes.some(
+        (at) => at.assignTypeId === assignTypeId && at.canAssistant
       );
-      resolve(assistants);
+      const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
+      const canDate = !p.notAvailableDates.some(
+        (date) => dateTimeValue === new Date(date).getTime()
+      );
+      const canOnlyMan = onlyMan ? p.isWoman === false : true;
+      const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
+
+      return (
+        isAvailable &&
+        canAssignType &&
+        canRoom &&
+        canDate &&
+        canOnlyMan &&
+        canOnlyWoman
+      );
     });
   }
 
