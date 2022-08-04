@@ -11,7 +11,7 @@ export class SharedService {
   /**
    *
    * @param participants the array of participants
-   * @param dateTimeValue the dateTime value from the selected form date
+   * @param dateTimeValue the dateTime value from the selected form date in milliseconds
    * @param assignTypeId the id of the assignType to participate
    * @param roomId the id of the room to participate
    * @returns A new array of participants that meet the criteria
