@@ -52,6 +52,10 @@ Massive printing of assignments is supported too.
 
 It is the number of times the participant has participated in that room with that type of assignment with that role.
 
+## When I create an assignment, when selecting the participant, a yellow color appears on some participants, what is it?
+
+It is that the participant already has another assignment for that day, can be selected, but will work more than others.
+
 ## ¿How do I report a bug or ask for a feature?
 
 You can use github issues or send me an email to servihelper@gmail.com
