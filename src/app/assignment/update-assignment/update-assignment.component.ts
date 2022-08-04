@@ -1,21 +1,26 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { sortParticipantsByCount } from 'app/functions';
-import { setCount } from 'app/functions/setCount';
-import { NoteInterface } from 'app/note/model/note.model';
-import { NoteService } from 'app/note/service/note.service';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomInterface } from 'app/room/model/room.model';
-import { RoomService } from 'app/room/service/room.service';
-import { SharedService } from 'app/services/shared.service';
-import { filter, pairwise, startWith, Subscription } from 'rxjs';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { sortParticipantsByCount } from "app/functions";
+import { setCount } from "app/functions/setCount";
+import { NoteInterface } from "app/note/model/note.model";
+import { NoteService } from "app/note/service/note.service";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomInterface } from "app/room/model/room.model";
+import { RoomService } from "app/room/service/room.service";
+import { SharedService } from "app/services/shared.service";
+import { filter, pairwise, startWith, Subscription } from "rxjs";
 
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-update-assignment",
@@ -34,6 +39,9 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   assistants: ParticipantInterface[] = [];
   footerNotes: NoteInterface[] = this.noteService.getNotes();
   assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
+
+  principalsBK: ParticipantInterface[] = [];
+  assistantsBK: ParticipantInterface[] = [];
 
   //Fill the form with the assignment passed by the router
   assignment: AssignmentInterface = this.assignmentService.getAssignment(
@@ -54,7 +62,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   });
 
   //Subscriptions
-  formSub$: Subscription;
+  subscription: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -68,128 +76,314 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  /**
+   *
+   * @param formControlName the form control name to get the value
+   * @returns the value for the form control
+   */
+  gfv(formControlName) {
+    return this.assignmentForm.get(formControlName).value;
+  }
+
   ngOnInit() {
-    this.getData();
-    /*
-      Only when assignType, room, onlyMan or onlyWoman changes principal and assistant must change
-      if theme is getting filled, we dont want a subscribe for each letter so -> "filter"
-      pairwise is used to get the prev and last value, and the initial prev value is the form value
-    */
-    this.formSub$ = this.assignmentForm.valueChanges
-      .pipe(
-        startWith(this.assignmentForm.value),
-        pairwise(),
-        filter(
-          ([prev, next]: [AssignmentInterface, AssignmentInterface]) =>
-            prev.theme === next.theme
-        )
-      )
-      .subscribe(([prev, next]: [AssignmentInterface, AssignmentInterface]) => {
-        this.getData();
+    this.prepareDateSub();
+    this.prepareRoomSub();
+    this.prepareAssignTypeSub();
+    this.prepareOnlyManSub();
+    this.prepareOnlyWomanSub();
+    this.preparePrincipalSub();
+  }
 
-        if (
-          next.assignType !== prev.assignType ||
-          next.room !== prev.room ||
-          next.onlyMan !== prev.onlyMan ||
-          next.onlyWoman !== prev.onlyWoman
-        ) {
-          this.assignmentForm
-            .get("principal")
-            .reset(undefined, { emitEvent: false });
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
-          this.assignmentForm
-            .get("assistant")
-            .reset(undefined, { emitEvent: false });
+  prepareDateSub() {
+    this.subscription = this.assignmentForm
+      .get("date")
+      .valueChanges.subscribe(async (date) => {
+        if (this.gfv("room")) {
+          this.removeAssignTypesThatAlreadyExistOnAssignment();
+        }
+        if (this.gfv("room") && this.gfv("assignType")) {
+          this.principals =
+            await this.sharedService.filterPrincipalsByAvailable(
+              this.participantService.getParticipants(true),
+              date.getTime(),
+              this.gfv("assignType"),
+              this.gfv("room"),
+              this.gfv("onlyMan"),
+              this.gfv("onlyWoman")
+            );
+
+          this.assistants =
+            await this.sharedService.filterAssistantsByAvailable(
+              this.participantService.getParticipants(true),
+              date.getTime(),
+              this.gfv("assignType"),
+              this.gfv("room"),
+              this.gfv("onlyMan"),
+              this.gfv("onlyWoman")
+            );
+
+          //Set count for principals
+          setCount(
+            this.assignments,
+            this.principals,
+            this.gfv("room"),
+            this.gfv("assignType"),
+            true
+          );
+
+          //Set count for assistants
+          setCount(
+            this.assignments,
+            this.assistants,
+            this.gfv("room"),
+            this.gfv("assignType"),
+            false
+          );
+
+          this.principals.sort(sortParticipantsByCount);
+          this.assistants.sort(sortParticipantsByCount);
+
+          await this.highlightIfAlreadyHasWork();
+
+          this.principalsBK = structuredClone(this.principals);
+          this.assistantsBK = structuredClone(this.assistants);
         }
       });
   }
 
-  ngOnDestroy(): void {
-    this.formSub$.unsubscribe();
+  prepareRoomSub() {
+    this.subscription = this.assignmentForm
+      .get("room")
+      .valueChanges.subscribe(async (room) => {
+        if (this.gfv("date")) {
+          this.removeAssignTypesThatAlreadyExistOnAssignment();
+        }
+        if (this.gfv("date") && this.gfv("assignType")) {
+          this.principals =
+            await this.sharedService.filterPrincipalsByAvailable(
+              this.participantService.getParticipants(true),
+              this.gfv("date").getTime(),
+              this.gfv("assignType"),
+              room,
+              this.gfv("onlyMan"),
+              this.gfv("onlyWoman")
+            );
+
+          this.assistants =
+            await this.sharedService.filterAssistantsByAvailable(
+              this.participantService.getParticipants(true),
+              this.gfv("date").getTime(),
+              this.gfv("assignType"),
+              room,
+              this.gfv("onlyMan"),
+              this.gfv("onlyWoman")
+            );
+
+          //Set count for principals
+          setCount(
+            this.assignments,
+            this.principals,
+            room,
+            this.gfv("assignType"),
+            true
+          );
+
+          //Set count for assistants
+          setCount(
+            this.assignments,
+            this.assistants,
+            room,
+            this.gfv("assignType"),
+            false
+          );
+
+          this.principals.sort(sortParticipantsByCount);
+          this.assistants.sort(sortParticipantsByCount);
+
+          await this.highlightIfAlreadyHasWork();
+
+          this.principalsBK = structuredClone(this.principals);
+          this.assistantsBK = structuredClone(this.assistants);
+        }
+      });
   }
 
-  getData() {
-    this.principals = this.sharedService.filterPrincipalsByAvailable(
-      this.participantService.getParticipants(true),
-      this.assignmentForm.get("assignType").value,
-      this.assignmentForm.get("room").value
-    );
+  prepareAssignTypeSub() {
+    this.subscription = this.assignmentForm
+      .get("assignType")
+      .valueChanges.subscribe(async (assignType) => {
+        if (this.gfv("date") && this.gfv("room")) {
+          this.removeAssignTypesThatAlreadyExistOnAssignment();
 
-    //remove not available dates from principals
-    const formSelectedDate = new Date(
-      this.assignmentForm.get("date").value
-    ).getTime();
-    this.principals = this.principals.filter(
-      (p) =>
-        !p.notAvailableDates.some(
-          (date) => formSelectedDate === new Date(date).getTime()
-        )
-    );
+          this.principals =
+            await this.sharedService.filterPrincipalsByAvailable(
+              this.participantService.getParticipants(true),
+              this.gfv("date").getTime(),
+              assignType,
+              this.gfv("room"),
+              this.gfv("onlyMan"),
+              this.gfv("onlyWoman")
+            );
 
-    this.assistants = this.sharedService.filterAssistantsByAvailable(
-      this.participantService.getParticipants(true),
-      this.assignmentForm.get("assignType").value,
-      this.assignmentForm.get("room").value
-    );
+          this.assistants =
+            await this.sharedService.filterAssistantsByAvailable(
+              this.participantService.getParticipants(true),
+              this.gfv("date").getTime(),
+              assignType,
+              this.gfv("room"),
+              this.gfv("onlyMan"),
+              this.gfv("onlyWoman")
+            );
 
-    //remove not available dates from assistants
-    this.assistants = this.assistants.filter(
-      (p) =>
-        !p.notAvailableDates.some(
-          (date) => formSelectedDate === new Date(date).getTime()
-        )
-    );
+          //Set count for principals
+          setCount(
+            this.assignments,
+            this.principals,
+            this.gfv("room"),
+            assignType,
+            true
+          );
 
-    //remove selected principal from assistants
-    const principalSelected = this.assignmentForm.get("principal").value;
-    this.assistants = this.assistants.filter((a) => a.id !== principalSelected);
+          //Set count for assistants
+          setCount(
+            this.assignments,
+            this.assistants,
+            this.gfv("room"),
+            assignType,
+            false
+          );
 
-    if (this.assignmentForm.get("onlyMan").value) {
-      this.principals = this.principals.filter((p) => p.isWoman === false);
-      this.assistants = this.assistants.filter((a) => a.isWoman === false);
-    }
+          this.principals.sort(sortParticipantsByCount);
+          this.assistants.sort(sortParticipantsByCount);
 
-    if (this.assignmentForm.get("onlyWoman").value) {
-      this.principals = this.principals.filter((p) => p.isWoman === true);
-      this.assistants = this.assistants.filter((a) => a.isWoman === true);
-    }
+          await this.highlightIfAlreadyHasWork();
 
-    //Set count for principals
-    setCount(
-      this.assignments,
-      this.principals,
-      this.assignmentForm.get("room").value,
-      this.assignmentForm.get("assignType").value,
-      true
-    );
+          this.principalsBK = structuredClone(this.principals);
+          this.assistantsBK = structuredClone(this.assistants);
+        }
+      });
+  }
 
-    //Set count for assistants
-    setCount(
-      this.assignments,
-      this.assistants,
-      this.assignmentForm.get("room").value,
-      this.assignmentForm.get("assignType").value,
-      false
-    );
+  prepareOnlyManSub() {
+    this.subscription = this.assignmentForm
+      .get("onlyMan")
+      .valueChanges.subscribe((onlyMan) => {
+        if (!onlyMan) {
+          this.principals = structuredClone(this.principalsBK);
+          this.assistants = structuredClone(this.assistantsBK);
+          return;
+        }
+        this.principals = this.principals.filter((p) => p.isWoman === false);
+        this.assistants = this.assistants.filter((a) => a.isWoman === false);
+      });
+  }
+  prepareOnlyWomanSub() {
+    this.subscription = this.assignmentForm
+      .get("onlyWoman")
+      .valueChanges.subscribe((onlyWoman) => {
+        if (!onlyWoman) {
+          this.principals = structuredClone(this.principalsBK);
+          this.assistants = structuredClone(this.assistantsBK);
+          return;
+        }
+        this.principals = this.principals.filter((p) => p.isWoman === true);
+        this.assistants = this.assistants.filter((a) => a.isWoman === true);
+      });
+  }
 
-    this.principals.sort(sortParticipantsByCount);
-    this.assistants.sort(sortParticipantsByCount);
+  preparePrincipalSub() {
+    this.subscription = this.assignmentForm
+      .get("principal")
+      .valueChanges.subscribe((principalId) => {
+        //remove selected principal from assistants
+        let i = this.assistants.length;
+        while (i--) {
+          if (this.assistants[i].id === principalId) {
+            this.assistants.splice(i, 1);
+            break;
+          }
+        }
+      });
+  }
 
-    //colors if already has work
-    const dateValue = this.assignmentForm.get("date").value;
+  /**
+   * Highlight the participant if already has work
+   */
+  async highlightIfAlreadyHasWork(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const dateValue = this.gfv("date");
 
-    this.principals.forEach(
-      (p) =>
-        (p.hasWork = this.assignments
-          .filter(
-            (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
-          )
-          .some((a) => a.principal === p.id || a.assistant === p.id))
-    );
+      const filteredAssignments: AssignmentInterface[] = [];
+      let i = 0;
+      const length = this.assignments.length;
+      let found = false;
+      let outOfRange = false;
 
-    this.assistants.forEach((as) => {
-      as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
+      //This is like a "filter" but breaks when we are out of the date range we are looking for
+      //Cannot use "some" as it stops on the first ocurrence and we need the range
+      while (i < length) {
+        if (
+          new Date(this.assignments[i].date).getDate() ===
+          new Date(dateValue).getTime()
+        ) {
+          found = true;
+          filteredAssignments.push(this.assignments[i]);
+        } else {
+          outOfRange = true;
+        }
+        if (found && outOfRange) {
+          break;
+        }
+        i++;
+      }
+
+      this.principals.forEach(
+        (p) =>
+          (p.hasWork = filteredAssignments.some(
+            (a) => a.principal === p.id || a.assistant === p.id
+          ))
+      );
+
+      this.assistants.forEach((as) => {
+        as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
+      });
+      resolve();
     });
+  }
+
+  /**
+   * Remove assignTypes from select that already have assignment in the selected room
+   * this piece of code is separated due to in create assignment must be rerun after submitAndCreate
+   * depends on: assignments, selected room, selected date
+   */
+  removeAssignTypesThatAlreadyExistOnAssignment() {
+    this.assignTypes = this.assignTypeService
+      .getAssignTypes()
+      .sort((a, b) => (a.order > b.order ? 1 : -1));
+
+    this.assignTypes = this.assignTypes.filter(
+      (at) =>
+        !this.assignments.some(
+          (a) =>
+            new Date(a.date).getTime() ===
+              new Date(this.assignmentForm.get("date").value).getTime() &&
+            a.assignType === at.id &&
+            a.room === this.assignmentForm.get("room").value
+        )
+    );
+    //Reset if assignType selected not in new assignTypes
+    if (
+      !this.assignTypes.some(
+        (at) => at.id === this.assignmentForm.get("assignType").value
+      )
+    )
+      this.assignmentForm
+        .get("assignType")
+        .reset(undefined, { emitEvent: false });
   }
 
   /**
