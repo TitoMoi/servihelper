@@ -1,6 +1,6 @@
-import { ParticipantInterface } from 'app/participant/model/participant.model';
+import { ParticipantInterface } from "app/participant/model/participant.model";
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
@@ -47,17 +47,14 @@ export class SharedService {
     roomId
   ): ParticipantInterface[] {
     let assistants = structuredClone(participants);
-
-    for (const principal of assistants) {
-      assistants = assistants.filter(
-        (a) =>
-          principal.available &&
-          a.assignTypes.some(
-            (at) => at.assignTypeId === assignTypeId && at.canAssistant
-          ) &&
-          a.rooms.some((r) => r.roomId === roomId && r.available)
-      );
-    }
+    assistants = assistants.filter(
+      (a) =>
+        a.available &&
+        a.assignTypes.some(
+          (at) => at.assignTypeId === assignTypeId && at.canAssistant
+        ) &&
+        a.rooms.some((r) => r.roomId === roomId && r.available)
+    );
 
     return assistants;
   }
