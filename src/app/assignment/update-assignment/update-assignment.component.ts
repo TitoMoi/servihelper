@@ -326,7 +326,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
 
   getPrincipalAndAssistant() {
     this.principals = this.sharedService.filterPrincipalsByAvailable(
-      this.participantService.getParticipants(true),
+      this.participantService.getParticipants(),
       new Date(this.gfv("date")).getTime(),
       this.gfv("assignType"),
       this.gfv("room"),
@@ -335,7 +335,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     );
 
     this.assistants = this.sharedService.filterAssistantsByAvailable(
-      this.participantService.getParticipants(true),
+      this.participantService.getParticipants(),
       new Date(this.gfv("date")).getTime(),
       this.gfv("assignType"),
       this.gfv("room"),
