@@ -12,7 +12,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 import { SharedService } from "app/services/shared.service";
-import { filter, pairwise, startWith, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
@@ -36,6 +36,10 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
+
+  //For filter available dates
+  participants: ParticipantInterface[] = [];
+
   principals: ParticipantInterface[] = [];
   assistants: ParticipantInterface[] = [];
   footerNotes: NoteInterface[] = this.noteService.getNotes();
@@ -94,6 +98,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.prepareOnlyWomanSub();
     this.preparePrincipalSub();
 
+    this.checkAvailableDates();
+
     this.getPrincipalAndAssistant();
 
     //Set count for principals
@@ -138,9 +144,10 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           .get("assistant")
           .reset(undefined, { emitEvent: false });
 
-        if (this.gfv("room")) {
-          this.removeAssignTypesThatAlreadyExistOnAssignment();
+        if (this.gfv("date")) {
+          this.checkAvailableDates();
         }
+
         if (this.gfv("room") && this.gfv("assignType")) {
           this.getPrincipalAndAssistant();
 
@@ -165,8 +172,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
 
-          this.highlightIfAlreadyHasWork();
-
           this.principalsBK = structuredClone(this.principals);
           this.assistantsBK = structuredClone(this.assistants);
         }
@@ -183,9 +188,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           .get("assistant")
           .reset(undefined, { emitEvent: false });
 
-        if (this.gfv("date")) {
-          this.removeAssignTypesThatAlreadyExistOnAssignment();
-        }
         if (this.gfv("date") && this.gfv("assignType")) {
           this.getPrincipalAndAssistant();
 
@@ -209,8 +211,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
 
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
-
-          this.highlightIfAlreadyHasWork();
 
           this.principalsBK = structuredClone(this.principals);
           this.assistantsBK = structuredClone(this.assistants);
@@ -254,8 +254,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
 
             this.principals.sort(sortParticipantsByCount);
             this.assistants.sort(sortParticipantsByCount);
-
-            this.highlightIfAlreadyHasWork();
 
             this.principalsBK = structuredClone(this.principals);
             this.assistantsBK = structuredClone(this.assistants);
@@ -326,8 +324,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
 
   getPrincipalAndAssistant() {
     this.principals = this.sharedService.filterPrincipalsByAvailable(
-      this.participantService.getParticipants(),
-      new Date(this.gfv("date")).getTime(),
+      this.participants,
       this.gfv("assignType"),
       this.gfv("room"),
       this.gfv("onlyMan"),
@@ -335,8 +332,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     );
 
     this.assistants = this.sharedService.filterAssistantsByAvailable(
-      this.participantService.getParticipants(),
-      new Date(this.gfv("date")).getTime(),
+      this.participants,
       this.gfv("assignType"),
       this.gfv("room"),
       this.gfv("onlyMan"),
@@ -344,55 +340,43 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
+  checkAvailableDates() {
+    this.participants = this.participantService.getParticipants();
+    this.participants = this.participants.filter(
+      (p) =>
+        !p.notAvailableDates.some(
+          (date) =>
+            new Date(this.gfv("date")).getTime() === new Date(date).getTime()
+        )
+    );
+    this.highlightIfAlreadyHasWork();
+  }
+
   /**
    * Highlight the participant if already has work
    */
   highlightIfAlreadyHasWork() {
-    const dateValue = this.assignmentForm.get("date").value;
+    const dateValue = this.gfv("date");
+    const room = this.gfv("room");
+    const assignType = this.gfv("assignType");
 
-    this.principals.forEach(
-      (p) =>
-        (p.hasWork = this.assignments
+    if (dateValue && room && assignType) {
+      for (const p of this.principals) {
+        const hasWork = this.assignments
           .filter(
             (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
           )
-          .some((a) => a.principal === p.id || a.assistant === p.id))
-    );
+          .some((a) => a.principal === p.id || a.assistant === p.id);
+        p.hasWork = hasWork;
+      }
 
-    this.assistants.forEach((as) => {
-      as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
-    });
-  }
+      for (const as of this.assistants) {
+        as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
+      }
 
-  /**
-   * Remove assignTypes from select that already have assignment in the selected room
-   * this piece of code is separated due to in create assignment must be rerun after submitAndCreate
-   * depends on: assignments, selected room, selected date
-   */
-  removeAssignTypesThatAlreadyExistOnAssignment() {
-    this.assignTypes = this.assignTypeService
-      .getAssignTypes()
-      .sort((a, b) => (a.order > b.order ? 1 : -1));
-
-    this.assignTypes = this.assignTypes.filter(
-      (at) =>
-        !this.assignments.some(
-          (a) =>
-            new Date(a.date).getTime() ===
-              new Date(this.assignmentForm.get("date").value).getTime() &&
-            a.assignType === at.id &&
-            a.room === this.assignmentForm.get("room").value
-        )
-    );
-    //Reset if assignType selected not in new assignTypes
-    if (
-      !this.assignTypes.some(
-        (at) => at.id === this.assignmentForm.get("assignType").value
-      )
-    )
-      this.assignmentForm
-        .get("assignType")
-        .reset(undefined, { emitEvent: false });
+      this.principalsBK = structuredClone(this.principals);
+      this.assistantsBK = structuredClone(this.assistants);
+    }
   }
 
   /**
@@ -425,5 +409,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
    */
   trackByIdFn(index, participant: ParticipantInterface) {
     return participant.id;
+  }
+
+  trackByIdRoomFn(index, room: RoomInterface) {
+    return room.id;
+  }
+
+  trackByIdAssignTypeFn(index, assignType: AssignTypeInterface) {
+    return assignType.id;
   }
 }

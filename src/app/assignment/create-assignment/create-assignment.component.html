@@ -23,12 +23,12 @@
               matPrefix
               [for]="picker"
               class="mr-3"
-              [disableRipple]="true"
             ></mat-datepicker-toggle>
             <mat-datepicker
               id="assignmentDatepickerId"
               #picker
               [startAt]="this.lastDateService.lastDate$ | async"
+              (closed)="highlightIfAlreadyHasWork()"
             ></mat-datepicker>
           </mat-form-field>
           <div class="col-6 mb-2">
@@ -37,9 +37,12 @@
               <mat-select
                 formControlName="room"
                 required
-                [disableRipple]="true"
+                (closed)="highlightIfAlreadyHasWork()"
               >
-                <mat-option *ngFor="let room of rooms" [value]="room.id">
+                <mat-option
+                  *ngFor="let room of rooms; trackBy: trackByIdRoomFn"
+                  [value]="room.id"
+                >
                   {{ room.name }}
                 </mat-option>
               </mat-select>
@@ -48,9 +51,16 @@
           <div class="col-6 mb-2">
             <mat-form-field class="full-width">
               <mat-label>{{ t("ASSIGN_CREATE_ASSIGNTYPE") }}</mat-label>
-              <mat-select formControlName="assignType" required>
+              <mat-select
+                formControlName="assignType"
+                required
+                (closed)="highlightIfAlreadyHasWork()"
+              >
                 <mat-option
-                  *ngFor="let assignType of assignTypes"
+                  *ngFor="
+                    let assignType of assignTypes;
+                    trackBy: trackByIdAssignTypeFn
+                  "
                   [value]="assignType.id"
                   [style.backgroundColor]="assignType.color"
                 >

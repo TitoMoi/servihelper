@@ -1,16 +1,28 @@
 import {
-    AssignmentInterface, AssignmentTableInterface
-} from 'app/assignment/model/assignment.model';
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomService } from 'app/room/service/room.service';
-import { SortService } from 'app/services/sort.service';
+  AssignmentInterface,
+  AssignmentTableInterface,
+} from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomService } from "app/room/service/room.service";
+import { SortService } from "app/services/sort.service";
 
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
-    AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit
-} from '@angular/core';
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from "@angular/animations";
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 
 @Component({
   selector: "app-assignment",
@@ -57,7 +69,8 @@ export class AssignmentComponent
 
   observer: IntersectionObserver = new IntersectionObserver((entries) => {
     //Always observe the last row, forEach only has 1 entry
-    entries.forEach((entry) => {
+
+    for (const entry of entries) {
       if (entry.isIntersecting) {
         //Virtual pagination
         this.pageIndex = this.pageIndex + 1;
@@ -72,7 +85,7 @@ export class AssignmentComponent
         this.observer.unobserve(entry.target);
         this.cdr.detectChanges();
       }
-    });
+    }
   });
 
   constructor(
@@ -147,7 +160,7 @@ export class AssignmentComponent
 
     //Separate dates from one day to another with a black border
     let filteredLastDate: Date = assignmentsTable[0]?.date;
-    assignmentsTable.forEach((tableRow: AssignmentTableInterface) => {
+    for (const tableRow of assignmentsTable) {
       if (
         new Date(tableRow.date).getTime() !==
         new Date(filteredLastDate).getTime()
@@ -155,7 +168,7 @@ export class AssignmentComponent
         tableRow.hasDateSeparator = true;
         filteredLastDate = tableRow.date;
       }
-    });
+    }
 
     //Update the view
     return assignmentsTable;

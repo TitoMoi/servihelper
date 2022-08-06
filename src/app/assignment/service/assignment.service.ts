@@ -19,6 +19,8 @@ export class AssignmentService {
     : "./assets/source/assignment.json";
   //The array of assignments in memory
   #assignments: AssignmentInterface[] = undefined;
+  //The map of assignments for look up of by id
+  #assignmentsMap: Map<string, AssignmentInterface> = new Map();
   //flag to indicate that assignments file has changed
   hasChanged = true;
 
@@ -34,6 +36,9 @@ export class AssignmentService {
     }
     this.hasChanged = false;
     this.#assignments = this.fs.readJSONSync(this.path);
+    for (const assignment of this.#assignments) {
+      this.#assignmentsMap.set(assignment.id, assignment);
+    }
     return deepClone ? structuredClone(this.#assignments) : this.#assignments;
   }
 
@@ -56,6 +61,7 @@ export class AssignmentService {
   createAssignment(assignment: AssignmentInterface): boolean {
     //Generate id for the assignment
     assignment.id = nanoid();
+    this.#assignmentsMap.set(assignment.id, assignment);
     //add assignment to assignments
     this.#assignments.push(assignment);
 
@@ -114,12 +120,7 @@ export class AssignmentService {
    * @returns the assignment that is ALWAYS found
    */
   getAssignment(id: string): AssignmentInterface {
-    //search assignment
-    for (const assignment of this.#assignments) {
-      if (assignment.id === id) {
-        return assignment;
-      }
-    }
+    return this.#assignmentsMap.get(id);
   }
 
   /**
@@ -132,6 +133,7 @@ export class AssignmentService {
     for (let i = 0; i < this.#assignments.length; i++) {
       if (this.#assignments[i].id === assignment.id) {
         this.#assignments[i] = assignment;
+        this.#assignmentsMap.set(assignment.id, assignment);
         //save assignments with the updated assignment
         return this.saveAssignmentsToFile();
       }
@@ -147,6 +149,7 @@ export class AssignmentService {
   deleteAssignment(id: string): boolean {
     //delete assignment
     this.#assignments = this.#assignments.filter((a) => a.id !== id);
+    this.#assignmentsMap.delete(id);
     //save assignments
     return this.saveAssignmentsToFile();
   }
@@ -156,15 +159,23 @@ export class AssignmentService {
    * @param id the id of the participant to delete assignments by.
    * @returns true if assignment is deleted and saved false otherwise
    */
-  deleteAssignmentsByParticipant(id: string): boolean {
-    //Preventive if being called outside
-    this.checkAssignments();
+  deleteAssignmentsByParticipant(participantId: string): boolean {
     //delete assignments of the participant being the principal
-    this.#assignments = this.#assignments.filter((a) => a.principal !== id);
+    this.#assignments = this.#assignments.filter(
+      (a) => a.principal !== participantId
+    );
+
+    this.#assignmentsMap = new Map();
+    for (const assignment of this.#assignments) {
+      this.#assignmentsMap.set(assignment.id, assignment);
+    }
 
     //Reset to undefined in assistant
     for (const assignment of this.#assignments) {
-      if (assignment.assistant === id) assignment.assistant = undefined;
+      if (assignment.assistant === participantId) {
+        assignment.assistant = undefined;
+        this.#assignmentsMap.set(assignment.id, assignment);
+      }
     }
 
     //save assignments
@@ -177,10 +188,14 @@ export class AssignmentService {
    * @returns true if assignment is deleted and saved false otherwise
    */
   deleteAssignmentsByRoom(id: string): boolean {
-    //Preventive if being called outside
-    this.checkAssignments();
     //delete assignments
     this.#assignments = this.#assignments.filter((a) => a.room !== id);
+
+    this.#assignmentsMap = new Map();
+    for (const assignment of this.#assignments) {
+      this.#assignmentsMap.set(assignment.id, assignment);
+    }
+
     //save assignments
     return this.saveAssignmentsToFile();
   }
@@ -191,10 +206,14 @@ export class AssignmentService {
    * @returns true if assignment is deleted and saved false otherwise
    */
   deleteAssignmentsByAssignType(id: string): boolean {
-    //Preventive if being called outside
-    this.checkAssignments();
     //delete assignments
     this.#assignments = this.#assignments.filter((a) => a.assignType !== id);
+
+    this.#assignmentsMap = new Map();
+    for (const assignment of this.#assignments) {
+      this.#assignmentsMap.set(assignment.id, assignment);
+    }
+
     //save assignments
     return this.saveAssignmentsToFile();
   }
@@ -218,28 +237,28 @@ export class AssignmentService {
    * @param participantId the participant id to search assignments
    * @returns the assignments of the participant
    */
-  findPrincipalAssignmentsByParticipantId(
+  /* findPrincipalAssignmentsByParticipantId(
     participantId: string
   ): AssignmentInterface[] {
     const assignments = this.#assignments.filter(
       (assignment) => assignment.principal === participantId
     );
     return assignments;
-  }
+  } */
 
   /**
    *
    * @param participantId the participant id to search assignments
    * @returns the assignments of the participant
    */
-  findAssistantAssignmentsByParticipantId(
+  /* findAssistantAssignmentsByParticipantId(
     participantId: string
   ): AssignmentInterface[] {
     const assignments = this.#assignments.filter(
       (assignment) => assignment.assistant === participantId
     );
     return assignments;
-  }
+  } */
 
   /**
    *
@@ -247,19 +266,14 @@ export class AssignmentService {
    * @returns true if assignment is deleted and saved false otherwise
    */
   resetAssignmentsByNote(id: string): boolean {
-    //Preventive if being called outside
-    this.checkAssignments();
     //reset assignments note
     for (const assignment of this.#assignments) {
-      if (assignment.footerNote === id) assignment.footerNote = undefined;
+      if (assignment.footerNote === id) {
+        assignment.footerNote = undefined;
+        this.#assignmentsMap.set(assignment.id, assignment);
+      }
     }
     //save assignments
     return this.saveAssignmentsToFile();
-  }
-
-  checkAssignments() {
-    if (!this.#assignments.length) {
-      this.getAssignments();
-    }
   }
 }

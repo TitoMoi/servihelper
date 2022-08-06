@@ -21,7 +21,6 @@ export class SharedService {
    */
   filterPrincipalsByAvailable(
     principals: ParticipantInterface[],
-    dateTimeValue,
     assignTypeId,
     roomId,
     onlyMan,
@@ -33,19 +32,11 @@ export class SharedService {
         (at) => at.assignTypeId === assignTypeId && at.canPrincipal
       );
       const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
-      const canDate = !p.notAvailableDates.some(
-        (date) => dateTimeValue === new Date(date).getTime()
-      );
       const canOnlyMan = onlyMan ? p.isWoman === false : true;
       const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
 
       return (
-        isAvailable &&
-        canAssignType &&
-        canRoom &&
-        canDate &&
-        canOnlyMan &&
-        canOnlyWoman
+        isAvailable && canAssignType && canRoom && canOnlyMan && canOnlyWoman
       );
     });
   }
@@ -63,7 +54,6 @@ export class SharedService {
    */
   filterAssistantsByAvailable(
     assistants: ParticipantInterface[],
-    dateTimeValue,
     assignTypeId,
     roomId,
     onlyMan,
@@ -75,19 +65,11 @@ export class SharedService {
         (at) => at.assignTypeId === assignTypeId && at.canAssistant
       );
       const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
-      const canDate = !p.notAvailableDates.some(
-        (date) => dateTimeValue === new Date(date).getTime()
-      );
       const canOnlyMan = onlyMan ? p.isWoman === false : true;
       const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
 
       return (
-        isAvailable &&
-        canAssignType &&
-        canRoom &&
-        canDate &&
-        canOnlyMan &&
-        canOnlyWoman
+        isAvailable && canAssignType && canRoom && canOnlyMan && canOnlyWoman
       );
     });
   }

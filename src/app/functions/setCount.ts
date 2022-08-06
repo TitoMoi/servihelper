@@ -1,5 +1,5 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { ParticipantInterface } from "app/participant/model/participant.model";
 
 /**
  *
@@ -17,7 +17,11 @@ export function setCount(
   isPrincipal: boolean
 ): void {
   //set "count" to 0
-  participantList.forEach((b) => (b.count = 0));
+  let i = participantList.length;
+  while (--i) {
+    participantList[i].count = 0;
+  }
+  participantList[0].count = 0;
 
   //Aply count
   for (const assignment of assignmentList) {

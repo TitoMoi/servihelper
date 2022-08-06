@@ -44,10 +44,15 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     .sort((a, b) => (a.order > b.order ? 1 : -1));
   assignTypes: AssignTypeInterface[] = [];
 
+  //For filter available dates
+  participants: ParticipantInterface[] = [];
+
   principals: ParticipantInterface[] = [];
   assistants: ParticipantInterface[] = [];
   footerNotes: NoteInterface[] = this.noteService.getNotes();
   assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
+
+  assignmentsBySelectedDate: AssignmentInterface[] = [];
 
   principalsBK: ParticipantInterface[] = [];
   assistantsBK: ParticipantInterface[] = [];
@@ -117,6 +122,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           .get("assistant")
           .reset(undefined, { emitEvent: false });
 
+        if (this.gfv("date")) {
+          this.checkAvailableDates();
+        }
+
         if (this.gfv("room")) {
           this.removeAssignTypesThatAlreadyExistOnAssignment();
         }
@@ -143,8 +152,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
-
-          this.highlightIfAlreadyHasWork();
 
           this.principalsBK = structuredClone(this.principals);
           this.assistantsBK = structuredClone(this.assistants);
@@ -189,8 +196,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
 
-          this.highlightIfAlreadyHasWork();
-
           this.principalsBK = structuredClone(this.principals);
           this.assistantsBK = structuredClone(this.assistants);
         }
@@ -233,11 +238,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
             this.principals.sort(sortParticipantsByCount);
             this.assistants.sort(sortParticipantsByCount);
-
-            this.highlightIfAlreadyHasWork();
-
-            this.principalsBK = structuredClone(this.principals);
-            this.assistantsBK = structuredClone(this.assistants);
           }
         })
     );
@@ -305,8 +305,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   getPrincipalAndAssistant() {
     this.principals = this.sharedService.filterPrincipalsByAvailable(
-      this.participantService.getParticipants(),
-      new Date(this.gfv("date")).getTime(),
+      this.participants,
       this.gfv("assignType"),
       this.gfv("room"),
       this.gfv("onlyMan"),
@@ -314,8 +313,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     );
 
     this.assistants = this.sharedService.filterAssistantsByAvailable(
-      this.participantService.getParticipants(),
-      new Date(this.gfv("date")).getTime(),
+      this.participants,
       this.gfv("assignType"),
       this.gfv("room"),
       this.gfv("onlyMan"),
@@ -324,23 +322,57 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Filter available participants by selected date and create a map of assignments by selected date.
+   */
+  checkAvailableDates() {
+    this.participants = this.participantService
+      .getParticipants()
+      .filter(
+        (p) =>
+          !p.notAvailableDates.some(
+            (date) =>
+              new Date(this.gfv("date")).getTime() === new Date(date).getTime()
+          )
+      );
+
+    for (const a of this.assignments) {
+      if (new Date(this.gfv("date")).getTime() === new Date(a.date).getTime()) {
+        this.assignmentsBySelectedDate.push(a);
+      }
+    }
+    this.highlightIfAlreadyHasWork();
+  }
+
+  /**
    * Highlight the participant if already has work
    */
   highlightIfAlreadyHasWork() {
-    const dateValue = this.assignmentForm.get("date").value;
+    const dateValue = this.gfv("date");
+    const room = this.gfv("room");
+    const assignType = this.gfv("assignType");
 
-    this.principals.forEach(
-      (p) =>
-        (p.hasWork = this.assignments
+    const principalsMap: Map<string, ParticipantInterface> = new Map();
+
+    if (dateValue && room && assignType) {
+      for (const p of this.principals) {
+        principalsMap.set(p.id, p);
+      }
+      for (const p of this.principals) {
+        const hasWork = this.assignments
           .filter(
             (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
           )
-          .some((a) => a.principal === p.id || a.assistant === p.id))
-    );
+          .some((a) => a.principal === p.id || a.assistant === p.id);
+        p.hasWork = hasWork;
+      }
 
-    this.assistants.forEach((as) => {
-      as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
-    });
+      for (const as of this.assistants) {
+        if (principalsMap.get(as.id).hasWork) as.hasWork = true;
+      }
+
+      this.principalsBK = structuredClone(this.principals);
+      this.assistantsBK = structuredClone(this.assistants);
+    }
   }
 
   /**
@@ -353,22 +385,18 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       .getAssignTypes()
       .sort((a, b) => (a.order > b.order ? 1 : -1));
 
-    this.assignTypes = this.assignTypes.filter(
-      (at) =>
-        !this.assignments.some(
-          (a) =>
-            new Date(a.date).getTime() ===
-              new Date(this.assignmentForm.get("date").value).getTime() &&
-            a.assignType === at.id &&
-            a.room === this.assignmentForm.get("room").value
-        )
-    );
+    this.assignTypes = this.assignTypes.filter((at) => {
+      let notExists = true;
+      for (const a of this.assignmentsBySelectedDate) {
+        if (a.assignType === at.id && a.room === this.gfv("room")) {
+          notExists = false;
+          break;
+        }
+      }
+      return notExists;
+    });
     //Reset if assignType selected not in new assignTypes
-    if (
-      !this.assignTypes.some(
-        (at) => at.id === this.assignmentForm.get("assignType").value
-      )
-    )
+    if (!this.assignTypes.some((at) => at.id === this.gfv("assignType")))
       this.assignmentForm
         .get("assignType")
         .reset(undefined, { emitEvent: false });
@@ -402,11 +430,11 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.removeGremlings();
     this.assignmentService.createAssignment(this.assignmentForm.value);
 
-    const date = this.assignmentForm.get("date").value;
-    const footerNote = this.assignmentForm.get("footerNote").value;
-    const room = this.assignmentForm.get("room").value;
-    const onlyMan = this.assignmentForm.get("onlyMan").value;
-    const onlyWoman = this.assignmentForm.get("onlyWoman").value;
+    const date = this.gfv("date");
+    const footerNote = this.gfv("footerNote");
+    const room = this.gfv("room");
+    const onlyMan = this.gfv("onlyMan");
+    const onlyWoman = this.gfv("onlyWoman");
 
     this.assignmentForm.reset(
       {
@@ -456,5 +484,13 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    */
   trackByIdFn(index, participant: ParticipantInterface) {
     return participant.id;
+  }
+
+  trackByIdRoomFn(index, room: RoomInterface) {
+    return room.id;
+  }
+
+  trackByIdAssignTypeFn(index, assignType: AssignTypeInterface) {
+    return assignType.id;
   }
 }

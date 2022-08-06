@@ -1,12 +1,13 @@
 import {
-    ParticipantAssignTypesInterface, ParticipantInterface
-} from 'app/participant/model/participant.model';
-import { ElectronService } from 'app/services/electron.service';
-import { APP_CONFIG } from 'environments/environment';
-import * as fs from 'fs-extra';
-import { nanoid } from 'nanoid/non-secure';
+  ParticipantAssignTypesInterface,
+  ParticipantInterface,
+} from "app/participant/model/participant.model";
+import { ElectronService } from "app/services/electron.service";
+import { APP_CONFIG } from "environments/environment";
+import * as fs from "fs-extra";
+import { nanoid } from "nanoid/non-secure";
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
@@ -22,6 +23,8 @@ export class ParticipantService {
 
   //The array of participants in memory
   #participants: ParticipantInterface[] = undefined;
+  //The map of participants for look up by id
+  #participantsMap: Map<string, ParticipantInterface> = new Map();
   //flag to indicate that participants file has changed
   hasChanged = true;
 
@@ -39,6 +42,9 @@ export class ParticipantService {
     }
     this.hasChanged = false;
     this.#participants = this.fs.readJSONSync(this.path);
+    for (const participant of this.#participants) {
+      this.#participantsMap.set(participant.id, participant);
+    }
     return deepClone ? structuredClone(this.#participants) : this.#participants;
   }
 
@@ -62,6 +68,7 @@ export class ParticipantService {
     participant.id = nanoid();
     //add participant to participants
     this.#participants.push(participant);
+    this.#participantsMap.set(participant.id, participant);
 
     //ORDER THE PARTICIPANTS BY A to Z
     this.#participants = this.#participants.sort(function (a, b) {
@@ -84,12 +91,7 @@ export class ParticipantService {
    * @returns the participant that is ALWAYS found
    */
   getParticipant(id: string): ParticipantInterface {
-    //search participant
-    for (const participant of this.#participants) {
-      if (participant.id === id) {
-        return participant;
-      }
-    }
+    return this.#participantsMap.get(id);
   }
 
   /**
@@ -102,6 +104,7 @@ export class ParticipantService {
     for (let i = 0; i < this.#participants.length; i++) {
       if (this.#participants[i].id === participant.id) {
         this.#participants[i] = participant;
+        this.#participantsMap.set(participant.id, participant);
         //save participants with the updated participant
         return this.saveParticipantsToFile();
       }
@@ -117,6 +120,7 @@ export class ParticipantService {
   deleteParticipant(id: string): boolean {
     //delete participant
     this.#participants = this.#participants.filter((b) => b.id !== id);
+    this.#participantsMap.delete(id);
     //save participants
     return this.saveParticipantsToFile();
   }
@@ -127,11 +131,6 @@ export class ParticipantService {
    * @returns
    */
   addAssignType(id: string): boolean {
-    //Preventive maybe this func is called outside participants view
-    if (this.hasChanged) {
-      this.getParticipants();
-    }
-
     const participantAssignTypesValue: ParticipantAssignTypesInterface = {
       assignTypeId: id,
       canPrincipal: true,
@@ -143,6 +142,7 @@ export class ParticipantService {
         ...participant.assignTypes,
         participantAssignTypesValue,
       ];
+      this.#participantsMap.set(participant.id, participant);
     }
 
     return this.saveParticipantsToFile();
@@ -154,15 +154,16 @@ export class ParticipantService {
    * @returns true if all participants are updated and saved false otherwise
    */
   deleteAssignType(id: string): boolean {
-    //Preventive maybe this func is called outside participants view
-    if (this.hasChanged) {
-      this.getParticipants();
-    }
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].assignTypes = this.#participants[
         i
       ].assignTypes.filter((at) => at.assignTypeId !== id);
+
+      this.#participantsMap.set(
+        this.#participants[i].id,
+        this.#participants[i]
+      );
     }
     return this.saveParticipantsToFile();
   }
@@ -173,11 +174,6 @@ export class ParticipantService {
    * @returns
    */
   addRoom(roomId: string): boolean {
-    //Preventive maybe this func is called outside participants view
-    if (this.hasChanged) {
-      this.getParticipants();
-    }
-
     const value = {
       roomId,
       available: true,
@@ -185,6 +181,7 @@ export class ParticipantService {
 
     for (const participant of this.#participants) {
       participant.rooms = [...participant.rooms, value];
+      this.#participantsMap.set(participant.id, participant);
     }
 
     return this.saveParticipantsToFile();
@@ -196,14 +193,15 @@ export class ParticipantService {
    * @returns true if all participants are updated and saved false otherwise
    */
   deleteRoom(id: string): boolean {
-    //Preventive maybe this func is called outside participants view
-    if (this.hasChanged) {
-      this.getParticipants();
-    }
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].rooms = this.#participants[i].rooms.filter(
         (at) => at.roomId !== id
+      );
+
+      this.#participantsMap.set(
+        this.#participants[i].id,
+        this.#participants[i]
       );
     }
     return this.saveParticipantsToFile();

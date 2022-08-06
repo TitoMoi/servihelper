@@ -1,10 +1,10 @@
-import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
-import { ElectronService } from 'app/services/electron.service';
-import { APP_CONFIG } from 'environments/environment';
-import * as fs from 'fs-extra';
-import { nanoid } from 'nanoid/non-secure';
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { ElectronService } from "app/services/electron.service";
+import { APP_CONFIG } from "environments/environment";
+import * as fs from "fs-extra";
+import { nanoid } from "nanoid/non-secure";
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
@@ -19,6 +19,10 @@ export class AssignTypeService {
     : "./assets/source/assignType.json";
   //The array of assignTypes in memory
   #assignTypes: AssignTypeInterface[] = undefined;
+  //The map of assignTypes for look up of by id
+  #assignTypesMap: Map<string, AssignTypeInterface> = new Map();
+  //The map of assignTypes for look up of by name
+  #assignTypesMapByName: Map<string, AssignTypeInterface> = new Map();
   //flag to indicate that assignTypes file has changed
   hasChanged = true;
 
@@ -34,6 +38,12 @@ export class AssignTypeService {
     }
     this.hasChanged = false;
     this.#assignTypes = this.fs.readJSONSync(this.path);
+    for (const assignType of this.#assignTypes) {
+      this.#assignTypesMap.set(assignType.id, assignType);
+    }
+    for (const assignType of this.#assignTypes) {
+      this.#assignTypesMapByName.set(assignType.name, assignType);
+    }
     return deepClone ? structuredClone(this.#assignTypes) : this.#assignTypes;
   }
 
@@ -57,6 +67,8 @@ export class AssignTypeService {
     assignType.id = nanoid();
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);
+    this.#assignTypesMap.set(assignType.id, assignType);
+    this.#assignTypesMapByName.set(assignType.name, assignType);
     //save assignTypes with the new assignType
     this.saveAssignTypesToFile();
 
@@ -69,12 +81,7 @@ export class AssignTypeService {
    * @returns the assignType that is ALWAYS found
    */
   getAssignType(id: string): AssignTypeInterface {
-    //search assignType
-    for (const assignType of this.#assignTypes) {
-      if (assignType.id === id) {
-        return assignType;
-      }
-    }
+    return this.#assignTypesMap.get(id);
   }
 
   /**
@@ -83,12 +90,7 @@ export class AssignTypeService {
    * @returns the assignType
    */
   getAssignTypeByName(assignTypeName: string): AssignTypeInterface {
-    //search assignType
-    for (const assignType of this.#assignTypes) {
-      if (assignType.name === assignTypeName) {
-        return assignType;
-      }
-    }
+    return this.#assignTypesMapByName.get(assignTypeName);
   }
 
   /**
@@ -101,6 +103,8 @@ export class AssignTypeService {
     for (let i = 0; i < this.#assignTypes.length; i++) {
       if (this.#assignTypes[i].id === assignType.id) {
         this.#assignTypes[i] = assignType;
+        this.#assignTypesMap.set(assignType.id, assignType);
+        this.#assignTypesMapByName.set(assignType.name, assignType);
         //save assignTypes with the updated assignType
         return this.saveAssignTypesToFile();
       }
@@ -116,17 +120,9 @@ export class AssignTypeService {
   deleteAssignType(id: string): boolean {
     //delete assignType
     this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
+    this.#assignTypesMap.delete(id);
+    this.#assignTypesMapByName.delete(this.getAssignType(id).name);
     //save assignTypes
     return this.saveAssignTypesToFile();
-  }
-
-  /**
-   *
-   * @param assignTypeId the assignType id to search
-   * @returns the assign type name
-   */
-  getAssignTypeNameById(assignTypeId: string) {
-    const name = this.getAssignType(assignTypeId).name;
-    return name;
   }
 }

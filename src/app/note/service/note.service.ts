@@ -1,10 +1,10 @@
-import { NoteInterface } from 'app/note/model/note.model';
-import { ElectronService } from 'app/services/electron.service';
-import { APP_CONFIG } from 'environments/environment';
-import * as fs from 'fs-extra';
-import { nanoid } from 'nanoid/non-secure';
+import { NoteInterface } from "app/note/model/note.model";
+import { ElectronService } from "app/services/electron.service";
+import { APP_CONFIG } from "environments/environment";
+import * as fs from "fs-extra";
+import { nanoid } from "nanoid/non-secure";
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
@@ -20,6 +20,8 @@ export class NoteService {
 
   //The array of notes in memory
   #notes: NoteInterface[] = undefined;
+  //The map of notes for look up of by id
+  #notesMap: Map<string, NoteInterface> = new Map();
   //flag to indicate that notes file has changed
   hasChanged = true;
 
@@ -35,6 +37,9 @@ export class NoteService {
     }
     this.hasChanged = false;
     this.#notes = this.fs.readJSONSync(this.path);
+    for (const note of this.#notes) {
+      this.#notesMap.set(note.id, note);
+    }
     return deepClone ? structuredClone(this.#notes) : this.#notes;
   }
 
@@ -58,6 +63,7 @@ export class NoteService {
     note.id = nanoid();
     //add note to notes
     this.#notes.push(note);
+    this.#notesMap.set(note.id, note);
     //save notes with the new note
     return this.saveNotesToFile();
   }
@@ -68,12 +74,7 @@ export class NoteService {
    * @returns the note that is ALWAYS found
    */
   getNote(id: string): NoteInterface {
-    //search note
-    for (const note of this.#notes) {
-      if (note.id === id) {
-        return note;
-      }
-    }
+    return this.#notesMap.get(id);
   }
 
   /**
@@ -86,6 +87,7 @@ export class NoteService {
     for (let i = 0; i < this.#notes.length; i++) {
       if (this.#notes[i].id === note.id) {
         this.#notes[i] = note;
+        this.#notesMap.set(note.id, note);
         //save notes with the updated note
         return this.saveNotesToFile();
       }
@@ -101,6 +103,7 @@ export class NoteService {
   deleteNote(id: string): boolean {
     //delete note
     this.#notes = this.#notes.filter((b) => b.id !== id);
+    this.#notesMap.delete(id);
     //save notes
     return this.saveNotesToFile();
   }

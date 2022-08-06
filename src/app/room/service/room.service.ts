@@ -1,10 +1,10 @@
-import { RoomInterface } from 'app/room/model/room.model';
-import { ElectronService } from 'app/services/electron.service';
-import { APP_CONFIG } from 'environments/environment';
-import * as fs from 'fs-extra';
-import { nanoid } from 'nanoid/non-secure';
+import { RoomInterface } from "app/room/model/room.model";
+import { ElectronService } from "app/services/electron.service";
+import { APP_CONFIG } from "environments/environment";
+import * as fs from "fs-extra";
+import { nanoid } from "nanoid/non-secure";
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
@@ -20,6 +20,8 @@ export class RoomService {
 
   //The array of rooms in memory
   #rooms: RoomInterface[] = undefined;
+  //The map of rooms for look up of rooms
+  #roomsMap: Map<string, RoomInterface> = new Map();
   //flag to indicate that rooms file has changed
   hasChanged = true;
 
@@ -35,6 +37,9 @@ export class RoomService {
     }
     this.hasChanged = false;
     this.#rooms = this.fs.readJSONSync(this.path);
+    for (const room of this.#rooms) {
+      this.#roomsMap.set(room.id, room);
+    }
     return deepClone ? structuredClone(this.#rooms) : this.#rooms;
   }
 
@@ -44,8 +49,7 @@ export class RoomService {
    * @returns the name of the room
    */
   getRoomNameById(roomId: string): string {
-    const name = this.getRoom(roomId).name;
-    return name;
+    return this.#roomsMap.get(roomId).name;
   }
 
   /**
@@ -68,6 +72,7 @@ export class RoomService {
     room.id = nanoid();
     //add room to rooms
     this.#rooms.push(room);
+    this.#roomsMap.set(room.id, room);
     //save rooms with the new room
     this.saveRoomsToFile();
 
@@ -81,11 +86,7 @@ export class RoomService {
    */
   getRoom(id: string): RoomInterface {
     //search room
-    for (const room of this.#rooms) {
-      if (room.id === id) {
-        return room;
-      }
-    }
+    return this.#roomsMap.get(id);
   }
 
   /**
@@ -98,6 +99,7 @@ export class RoomService {
     for (let i = 0; i < this.#rooms.length; i++) {
       if (this.#rooms[i].id === room.id) {
         this.#rooms[i] = room;
+        this.#roomsMap.set(room.id, room);
         //save rooms with the updated room
         return this.saveRoomsToFile();
       }
@@ -113,6 +115,7 @@ export class RoomService {
   deleteRoom(id: string): boolean {
     //delete room
     this.#rooms = this.#rooms.filter((b) => b.id !== id);
+    this.#roomsMap.delete(id);
     //save rooms
     return this.saveRoomsToFile();
   }

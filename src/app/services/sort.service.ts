@@ -1,8 +1,10 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { RoomService } from 'app/room/service/room.service';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { RoomService } from "app/room/service/room.service";
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { RoomInterface } from "app/room/model/room.model";
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 
 @Injectable({
   providedIn: "root",
@@ -19,7 +21,7 @@ export class SortService {
     let index = 0;
     let lastDate = assignments[0]?.date;
 
-    assignments.forEach((assignment) => {
+    for (const assignment of assignments) {
       if (
         new Date(assignment.date).getTime() === new Date(lastDate).getTime()
       ) {
@@ -30,9 +32,9 @@ export class SortService {
         assignmentsByDate.push([]);
         assignmentsByDate[index].push(assignment);
       }
-    });
+    }
 
-    assignmentsByDate.forEach((assignGroupByDate: AssignmentInterface[]) => {
+    for (let assignGroupByDate of assignmentsByDate) {
       assignGroupByDate = assignGroupByDate.sort(
         (a: AssignmentInterface, b: AssignmentInterface) => {
           const assignTypeAOrder = this.assignTypeService.getAssignType(
@@ -52,7 +54,7 @@ export class SortService {
           }
         }
       );
-    });
+    }
 
     return assignmentsByDate.flat();
   }
