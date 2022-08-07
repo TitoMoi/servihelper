@@ -335,6 +335,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           )
       );
 
+    this.assignmentsBySelectedDate = [];
     for (const a of this.assignments) {
       if (new Date(this.gfv("date")).getTime() === new Date(a.date).getTime()) {
         this.assignmentsBySelectedDate.push(a);
@@ -461,6 +462,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assignmentForm
       .get("onlyWoman")
       .setValue(onlyWoman, { emitEvent: false });
+
+    //
+    this.checkAvailableDates();
 
     //Reset assign types select
     this.removeAssignTypesThatAlreadyExistOnAssignment();

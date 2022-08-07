@@ -58,7 +58,7 @@ export class RoomService {
    */
   saveRoomsToFile(): boolean {
     //Write rooms back to file
-    this.fs.writeJsonSync(this.path, this.#rooms);
+    this.fs.writeJson(this.path, this.#rooms);
     return true;
   }
 

@@ -1,16 +1,13 @@
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { ConfigService } from 'app/config/service/config.service';
-import { NoteService } from 'app/note/service/note.service';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomService } from 'app/room/service/room.service';
-import * as fs from 'fs-extra';
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ConfigService } from "app/config/service/config.service";
+import { NoteService } from "app/note/service/note.service";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomService } from "app/room/service/room.service";
 
-import { Component, OnInit } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
-
-import { ElectronService } from './services/electron.service';
+import { Component, OnInit } from "@angular/core";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: "app-root",
@@ -18,9 +15,6 @@ import { ElectronService } from './services/electron.service';
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  // Filesystem api
-  fs: typeof fs = this.electronService.remote.require("fs-extra");
-
   //Icons
   icons: string[] = [
     "menu",
@@ -52,8 +46,7 @@ export class AppComponent implements OnInit {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
-    private electronService: ElectronService
+    private domSanitizer: DomSanitizer
   ) {
     //Register icons
     for (const iconFileName of this.icons) {
