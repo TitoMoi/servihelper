@@ -1,21 +1,22 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { ConfigService } from 'app/config/service/config.service';
-import { NoteInterface } from 'app/note/model/note.model';
-import { NoteService } from 'app/note/service/note.service';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomInterface } from 'app/room/model/room.model';
-import { RoomService } from 'app/room/service/room.service';
-import { ElectronService } from 'app/services/electron.service';
-import { toPng } from 'html-to-image';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ConfigService } from "app/config/service/config.service";
+import { NoteInterface } from "app/note/model/note.model";
+import { NoteService } from "app/note/service/note.service";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomInterface } from "app/room/model/room.model";
+import { RoomService } from "app/room/service/room.service";
+import { ElectronService } from "app/services/electron.service";
+import { toPng } from "html-to-image";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-image-assignment",
@@ -126,6 +127,7 @@ export class ImageAssignmentComponent implements OnInit {
     const doc = new jsPDF("portrait");
     autoTable(doc, {
       html: `#assignmentTableId`,
+      columnStyles: { 0: { cellWidth: 60 } },
       didParseCell: (data) => {
         // eslint-disable-next-line @typescript-eslint/dot-notation
         const classList: DOMTokenList = data.cell.raw["classList"];
