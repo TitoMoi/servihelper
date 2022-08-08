@@ -17,11 +17,9 @@ export function setCount(
   isPrincipal: boolean
 ): void {
   //set "count" to 0
-  let i = participantList.length;
-  while (--i) {
-    participantList[i].count = 0;
+  for (const p of participantList) {
+    p.count = 0;
   }
-  participantList[0].count = 0;
 
   //Aply count
   for (const assignment of assignmentList) {

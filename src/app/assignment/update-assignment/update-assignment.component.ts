@@ -360,18 +360,21 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     const room = this.gfv("room");
     const assignType = this.gfv("assignType");
 
+    const principalsMap: Map<string, ParticipantInterface> = new Map();
+
     if (dateValue && room && assignType) {
       for (const p of this.principals) {
-        const hasWork = this.assignments
-          .filter(
-            (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
-          )
+        principalsMap.set(p.id, p);
+      }
+      for (const p of this.principals) {
+        const hasWork = this.assignmentService
+          .getAssignmentsByDate(dateValue)
           .some((a) => a.principal === p.id || a.assistant === p.id);
         p.hasWork = hasWork;
       }
 
       for (const as of this.assistants) {
-        as.hasWork = this.principals.some((p) => p.id === as.id && p.hasWork);
+        if (principalsMap.get(as.id).hasWork) as.hasWork = true;
       }
 
       this.principalsBK = structuredClone(this.principals);

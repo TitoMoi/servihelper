@@ -21,6 +21,8 @@ export class AssignmentService {
   #assignments: AssignmentInterface[] = undefined;
   //The map of assignments for look up of by id
   #assignmentsMap: Map<string, AssignmentInterface> = new Map();
+  //The map of assignments for look up of by date
+  #assignmentsByDateMap: Map<Date | string, AssignmentInterface[]> = new Map();
   //flag to indicate that assignments file has changed
   hasChanged = true;
 
@@ -35,11 +37,66 @@ export class AssignmentService {
       return deepClone ? structuredClone(this.#assignments) : this.#assignments;
     }
     this.hasChanged = false;
+    //populate maps first run
     this.#assignments = this.fs.readJSONSync(this.path);
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
+
+      this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
     }
+
     return deepClone ? structuredClone(this.#assignments) : this.#assignments;
+  }
+
+  /**
+   *
+   * @param date the date to return all the assignments, must be converted to ISO-8601
+   * because saving as json uses internally DateTimeConverter for handling date time and save it
+   * as string.
+   * So, when we get something on runtime its a Date...and needs to be serialized to string, thats why
+   * Map interface supports <Date | string, ...>
+   * @returns an array of assignments by date
+   */
+  getAssignmentsByDate(date: Date): AssignmentInterface[] {
+    const isoDate = new Date(date).toISOString();
+    return this.#assignmentsByDateMap.get(isoDate) ?? [];
+  }
+
+  /**
+   *
+   * @param assignment that can be get from serialized json or runtime, if
+   * from serialized json its ok, saves the key as string
+   * if from runtime, date must be serialized first
+   * so for no doubt, always check with serialized isoDate
+   */
+  addOrUpdateAssignmentToAssignmentByDateMap(assignment: AssignmentInterface) {
+    const isoDate = new Date(assignment.date).toISOString();
+    if (this.#assignmentsByDateMap.has(isoDate)) {
+      const assignmentsByDate = this.#assignmentsByDateMap.get(isoDate);
+      //create or update
+      let isUpdate = false;
+      for (let i = 0; i < assignmentsByDate.length; i++) {
+        if (assignmentsByDate[i].id === assignment.id) {
+          isUpdate = true;
+          assignmentsByDate[i] = assignment;
+          break;
+        }
+      }
+      if (!isUpdate) {
+        assignmentsByDate.push(assignment);
+      }
+      //After modify the array, return it to the map
+      this.#assignmentsByDateMap.set(isoDate, assignmentsByDate);
+    } else {
+      this.#assignmentsByDateMap.set(isoDate, [assignment]);
+    }
+  }
+
+  deleteAssignmentToAssignmentByDateMap(assignment: AssignmentInterface) {
+    const isoDate = new Date(assignment.date).toISOString();
+    let assignmentsByDate = this.#assignmentsByDateMap.get(isoDate);
+    assignmentsByDate = assignmentsByDate.filter((a) => a.id !== assignment.id);
+    this.#assignmentsByDateMap.set(isoDate, assignmentsByDate);
   }
 
   /**
@@ -61,10 +118,10 @@ export class AssignmentService {
   createAssignment(assignment: AssignmentInterface): boolean {
     //Generate id for the assignment
     assignment.id = nanoid();
-    this.#assignmentsMap.set(assignment.id, assignment);
     //add assignment to assignments
     this.#assignments.push(assignment);
-
+    this.#assignmentsMap.set(assignment.id, assignment);
+    this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
     //ORDER THE ASSIGNMENTS BY MOST RECENT DATE
     this.#assignments = this.#assignments.sort(this.sortAssignmentsByDateDesc);
 
@@ -134,6 +191,7 @@ export class AssignmentService {
       if (this.#assignments[i].id === assignment.id) {
         this.#assignments[i] = assignment;
         this.#assignmentsMap.set(assignment.id, assignment);
+        this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
         //save assignments with the updated assignment
         return this.saveAssignmentsToFile();
       }
@@ -149,7 +207,10 @@ export class AssignmentService {
   deleteAssignment(id: string): boolean {
     //delete assignment
     this.#assignments = this.#assignments.filter((a) => a.id !== id);
+    //this map delete order is important because AssignmentByDateMap needs an assignment not an id
+    this.deleteAssignmentToAssignmentByDateMap(this.#assignmentsMap.get(id));
     this.#assignmentsMap.delete(id);
+
     //save assignments
     return this.saveAssignmentsToFile();
   }
@@ -160,22 +221,21 @@ export class AssignmentService {
    * @returns true if assignment is deleted and saved false otherwise
    */
   deleteAssignmentsByParticipant(participantId: string): boolean {
+    this.#assignmentsMap = new Map();
+    this.#assignmentsByDateMap = new Map();
+
     //delete assignments of the participant being the principal
     this.#assignments = this.#assignments.filter(
       (a) => a.principal !== participantId
     );
 
-    this.#assignmentsMap = new Map();
-    for (const assignment of this.#assignments) {
-      this.#assignmentsMap.set(assignment.id, assignment);
-    }
-
     //Reset to undefined in assistant
     for (const assignment of this.#assignments) {
       if (assignment.assistant === participantId) {
         assignment.assistant = undefined;
-        this.#assignmentsMap.set(assignment.id, assignment);
       }
+      this.#assignmentsMap.set(assignment.id, assignment);
+      this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
     }
 
     //save assignments
@@ -188,12 +248,14 @@ export class AssignmentService {
    * @returns true if assignment is deleted and saved false otherwise
    */
   deleteAssignmentsByRoom(id: string): boolean {
+    this.#assignmentsMap = new Map();
+    this.#assignmentsByDateMap = new Map();
     //delete assignments
     this.#assignments = this.#assignments.filter((a) => a.room !== id);
 
-    this.#assignmentsMap = new Map();
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
+      this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
     }
 
     //save assignments
@@ -206,12 +268,14 @@ export class AssignmentService {
    * @returns true if assignment is deleted and saved false otherwise
    */
   deleteAssignmentsByAssignType(id: string): boolean {
+    this.#assignmentsMap = new Map();
+
     //delete assignments
     this.#assignments = this.#assignments.filter((a) => a.assignType !== id);
 
-    this.#assignmentsMap = new Map();
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
+      this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
     }
 
     //save assignments
@@ -234,34 +298,6 @@ export class AssignmentService {
 
   /**
    *
-   * @param participantId the participant id to search assignments
-   * @returns the assignments of the participant
-   */
-  /* findPrincipalAssignmentsByParticipantId(
-    participantId: string
-  ): AssignmentInterface[] {
-    const assignments = this.#assignments.filter(
-      (assignment) => assignment.principal === participantId
-    );
-    return assignments;
-  } */
-
-  /**
-   *
-   * @param participantId the participant id to search assignments
-   * @returns the assignments of the participant
-   */
-  /* findAssistantAssignmentsByParticipantId(
-    participantId: string
-  ): AssignmentInterface[] {
-    const assignments = this.#assignments.filter(
-      (assignment) => assignment.assistant === participantId
-    );
-    return assignments;
-  } */
-
-  /**
-   *
    * @param id the id of the note to delete assignments by.
    * @returns true if assignment is deleted and saved false otherwise
    */
@@ -271,6 +307,7 @@ export class AssignmentService {
       if (assignment.footerNote === id) {
         assignment.footerNote = undefined;
         this.#assignmentsMap.set(assignment.id, assignment);
+        this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
       }
     }
     //save assignments

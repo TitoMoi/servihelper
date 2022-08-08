@@ -335,12 +335,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           )
       );
 
-    this.assignmentsBySelectedDate = [];
-    for (const a of this.assignments) {
-      if (new Date(this.gfv("date")).getTime() === new Date(a.date).getTime()) {
-        this.assignmentsBySelectedDate.push(a);
-      }
-    }
     this.highlightIfAlreadyHasWork();
   }
 
@@ -355,14 +349,18 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     const principalsMap: Map<string, ParticipantInterface> = new Map();
 
     if (dateValue && room && assignType) {
+      console.log("values:", dateValue, room, assignType);
+      console.log(
+        "assignmentsByDate",
+        this.assignmentService.getAssignmentsByDate(dateValue)
+      );
+
       for (const p of this.principals) {
         principalsMap.set(p.id, p);
       }
       for (const p of this.principals) {
-        const hasWork = this.assignments
-          .filter(
-            (a) => new Date(a.date).getTime() === new Date(dateValue).getTime()
-          )
+        const hasWork = this.assignmentService
+          .getAssignmentsByDate(dateValue)
           .some((a) => a.principal === p.id || a.assistant === p.id);
         p.hasWork = hasWork;
       }
@@ -388,7 +386,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
     this.assignTypes = this.assignTypes.filter((at) => {
       let notExists = true;
-      for (const a of this.assignmentsBySelectedDate) {
+      for (const a of this.assignmentService.getAssignmentsByDate(
+        this.gfv("date")
+      )) {
         if (a.assignType === at.id && a.room === this.gfv("room")) {
           notExists = false;
           break;
