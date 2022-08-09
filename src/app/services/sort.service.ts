@@ -15,6 +15,11 @@ export class SortService {
     private roomService: RoomService
   ) {}
 
+  /**
+   *
+   * @param assignments a paginated assignments result, not all the assignments
+   * @returns
+   */
   sortAssignmentsByRoomAndAssignType(assignments: AssignmentInterface[]) {
     //Diferent sort, first separate date into arrays, then double sort, first room and then assign type
     const assignmentsByDate: [AssignmentInterface[]] = [[]];
