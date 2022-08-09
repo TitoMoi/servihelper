@@ -115,12 +115,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       .valueChanges.subscribe((date) => {
         this.lastDateService.lastDate = date;
 
-        this.assignmentForm
-          .get("principal")
-          .reset(undefined, { emitEvent: false });
-        this.assignmentForm
-          .get("assistant")
-          .reset(undefined, { emitEvent: false });
+        this.cleanPrincipalAndAssistant();
 
         if (this.gfv("date")) {
           this.checkAvailableDates();
@@ -162,12 +157,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   prepareRoomSub() {
     this.subscription.add(
       this.assignmentForm.get("room").valueChanges.subscribe((room) => {
-        this.assignmentForm
-          .get("principal")
-          .reset(undefined, { emitEvent: false });
-        this.assignmentForm
-          .get("assistant")
-          .reset(undefined, { emitEvent: false });
+        this.cleanPrincipalAndAssistant();
 
         if (this.gfv("date")) {
           this.removeAssignTypesThatAlreadyExistOnAssignment();
@@ -208,14 +198,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       this.assignmentForm
         .get("assignType")
         .valueChanges.subscribe((assignType) => {
-          this.assignmentForm
-            .get("principal")
-            .reset(undefined, { emitEvent: false });
-          this.assignmentForm
-            .get("assistant")
-            .reset(undefined, { emitEvent: false });
+          this.cleanPrincipalAndAssistant();
 
-          if (this.gfv("date") && this.gfv("room")) {
+          if (this.gfv("date") && this.gfv("room") && this.gfv("assignType")) {
             this.getPrincipalAndAssistant();
 
             //Set count for principals
@@ -303,6 +288,14 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
+  cleanPrincipalAndAssistant() {
+    this.assignmentForm.get("principal").reset(undefined, { emitEvent: false });
+    this.assignmentForm.get("assistant").reset(undefined, { emitEvent: false });
+
+    this.principals = [];
+    this.assistants = [];
+  }
+
   getPrincipalAndAssistant() {
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       this.participants,
@@ -349,12 +342,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     const principalsMap: Map<string, ParticipantInterface> = new Map();
 
     if (dateValue && room && assignType) {
-      console.log("values:", dateValue, room, assignType);
-      console.log(
-        "assignmentsByDate",
-        this.assignmentService.getAssignmentsByDate(dateValue)
-      );
-
       for (const p of this.principals) {
         principalsMap.set(p.id, p);
       }
@@ -398,9 +385,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     });
     //Reset if assignType selected not in new assignTypes
     if (!this.assignTypes.some((at) => at.id === this.gfv("assignType")))
-      this.assignmentForm
-        .get("assignType")
-        .reset(undefined, { emitEvent: false });
+      this.assignmentForm.get("assignType").reset(undefined);
   }
 
   /**
