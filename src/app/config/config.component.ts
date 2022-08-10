@@ -88,7 +88,7 @@ export class ConfigComponent {
     defaultReportFontSize: "",
     defaultReportDateColor: "",
     defaultWeekDayBegins: 1,
-    defaultReportDateFormat: this.translocoDateFormats[0],
+    defaultReportDateFormat: this.translocoDateFormats[2],
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();

@@ -183,7 +183,7 @@ export class SelectionListHorComponent implements OnChanges {
   }
 
   toPdf() {
-    const doc = this.pdfService.getJsPdf("landscape");
+    const doc = this.pdfService.getJsPdf({ orientation: "landscape" });
 
     const font = this.pdfService.getFontForLang();
 

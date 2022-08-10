@@ -160,7 +160,7 @@ export class SelectionListComponent implements OnChanges {
   }
 
   toPdf() {
-    const doc = this.pdfService.getJsPdf("portrait");
+    const doc = this.pdfService.getJsPdf({ orientation: "portrait" });
 
     const font = this.pdfService.getFontForLang();
 

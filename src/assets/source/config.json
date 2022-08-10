@@ -13,5 +13,5 @@
   "defaultWeekDayBegins": 1,
   "defaultReportFontSize": "",
   "defaultReportDateColor": "",
-  "defaultReportDateFormat": "short"
+  "defaultReportDateFormat": "long"
 }
