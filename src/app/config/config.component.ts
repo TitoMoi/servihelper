@@ -74,7 +74,7 @@ export class ConfigComponent {
 
   //Restart data
   config: ConfigInterface = {
-    appVersion: "3.2.4",
+    appVersion: "3.2.5",
     lang: "en",
     assignmentHeaderTitle: "",
     assignmentPrincipalTitle: "",
