@@ -9,7 +9,6 @@
 /out-tsc
 /app-builds
 /release
-src/**/*.js
 !src/karma.conf.js
 *.js.map
 
