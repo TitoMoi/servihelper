@@ -8,6 +8,7 @@ import { RoomService } from "app/room/service/room.service";
 import { Component, OnInit } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+import { PdfService } from "./services/pdf.service";
 
 @Component({
   selector: "app-root",
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
     "excel",
   ];
 
+  //Require pdfService here to force the service be provided with main chunk and initialized
   constructor(
     private configService: ConfigService,
     private roomService: RoomService,
@@ -46,7 +48,8 @@ export class AppComponent implements OnInit {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private pdfService: PdfService
   ) {
     //Register icons
     for (const iconFileName of this.icons) {

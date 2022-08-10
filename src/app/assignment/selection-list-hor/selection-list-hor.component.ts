@@ -1,18 +1,28 @@
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { ConfigService } from 'app/config/service/config.service';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomService } from 'app/room/service/room.service';
-import { ExcelService } from 'app/services/excel.service';
-import { SortService } from 'app/services/sort.service';
-import { toPng } from 'html-to-image';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ConfigService } from "app/config/service/config.service";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomService } from "app/room/service/room.service";
+import { ExcelService } from "app/services/excel.service";
+import { SortService } from "app/services/sort.service";
+import { toPng } from "html-to-image";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 /* eslint-disable @typescript-eslint/naming-convention */
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from "@angular/core";
 
-import { AssignmentGroupInterface, AssignmentInterface } from '../model/assignment.model';
-import { AssignmentService } from '../service/assignment.service';
+import {
+  AssignmentGroupInterface,
+  AssignmentInterface,
+} from "../model/assignment.model";
+import { AssignmentService } from "../service/assignment.service";
+import { PdfService } from "app/services/pdf.service";
 
 @Component({
   selector: "app-selection-list-hor",
@@ -44,7 +54,8 @@ export class SelectionListHorComponent implements OnChanges {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private sortService: SortService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    private pdfService: PdfService
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedDates.length && this.assignTypes) {
@@ -172,11 +183,14 @@ export class SelectionListHorComponent implements OnChanges {
   }
 
   toPdf() {
-    const doc = new jsPDF("landscape");
+    const doc = this.pdfService.getJsPdf("landscape");
+
+    const font = this.pdfService.getFontForLang();
 
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       autoTable(doc, {
         html: `#table${i}`,
+        styles: { font },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const text = data.cell.raw["innerText"];

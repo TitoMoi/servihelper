@@ -29,4 +29,13 @@ Servihelper doesnt use lazy load as it is a desktop app and network is not an is
 ## Build
 
 Currently using electron-builder for windows and mac apple, the version of the app generated is in the ./app/package.json version field
-For windows use script `prepare:publish:windows`
+
+- For windows use script `prepare:publish:windows`
+- For mac use script `prepare:publish:mac:universal`
+
+## Fonts
+
+The available fonts for pdf are in resources, Meiryo for japanese, malgun for korean, simsun for simplified chinese and notosans for all the others.
+The base64 fonts are in resources/base64fonts and not in assets because is not needed that each user has the base64 fonts
+they are already imported as base64 in the pdfService and in main chunk.
+The fonts are converted to base64 using the parallax \jsPDF\fontconverter\fontconverter.html

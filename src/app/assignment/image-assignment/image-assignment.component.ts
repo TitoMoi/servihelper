@@ -17,6 +17,7 @@ import autoTable from "jspdf-autotable";
 
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { PdfService } from "app/services/pdf.service";
 
 @Component({
   selector: "app-image-assignment",
@@ -63,7 +64,8 @@ export class ImageAssignmentComponent implements OnInit {
     private noteService: NoteService,
     private activatedRoute: ActivatedRoute,
     private electronService: ElectronService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private pdfService: PdfService
   ) {}
 
   ngOnInit() {
@@ -124,9 +126,13 @@ export class ImageAssignmentComponent implements OnInit {
   }
 
   toPdf() {
-    const doc = new jsPDF("portrait");
+    const doc = this.pdfService.getJsPdf("portrait");
+
+    const font = this.pdfService.getFontForLang();
+
     autoTable(doc, {
       html: `#assignmentTableId`,
+      styles: { font },
       columnStyles: { 0: { cellWidth: 60 } },
       didParseCell: (data) => {
         // eslint-disable-next-line @typescript-eslint/dot-notation

@@ -1,88 +1,66 @@
-import { HomeComponent } from 'app/home/home.component';
-import { NavigationComponent } from 'app/navigation/navigation.component';
-import { ColorPickerModule } from 'ngx-color-picker';
-import { NgxEditorModule } from 'ngx-editor';
+import { HomeComponent } from "app/home/home.component";
+import { NavigationComponent } from "app/navigation/navigation.component";
+import { ColorPickerModule } from "ngx-color-picker";
+import { NgxEditorModule } from "ngx-editor";
 
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatChipsModule } from '@angular/material/chips';
-import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatChipsModule } from "@angular/material/chips";
+import { DateAdapter, MatNativeDateModule } from "@angular/material/core";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { MatListModule } from "@angular/material/list";
+import { MatSelectModule } from "@angular/material/select";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatTableModule } from "@angular/material/table";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AssignmentComponent } from './assignment/assignment.component';
-import {
-    CreateAssignmentComponent
-} from './assignment/create-assignment/create-assignment.component';
-import { CustomDateAdapter } from './assignment/customDateAdapter';
-import {
-    DeleteAssignmentComponent
-} from './assignment/delete-assignment/delete-assignment.component';
-import { ImageAssignmentComponent } from './assignment/image-assignment/image-assignment.component';
-import {
-    MultipleImageAssignmentComponent
-} from './assignment/multiple-image-assignment/multiple-image-assignment.component';
-import { ReportSelectorComponent } from './assignment/report-selector/report-selector.component';
-import {
-    SelectionListHorComponent
-} from './assignment/selection-list-hor/selection-list-hor.component';
-import { SelectionListComponent } from './assignment/selection-list/selection-list.component';
-import {
-    UpdateAssignmentComponent
-} from './assignment/update-assignment/update-assignment.component';
-import { AssignTypeComponent } from './assignType/assignType.component';
-import {
-    CreateAssignTypeComponent
-} from './assignType/create-assigntype/create-assigntype.component';
-import {
-    DeleteAssignTypeComponent
-} from './assignType/delete-assigntype/delete-assigntype.component';
-import {
-    UpdateAssignTypeComponent
-} from './assignType/update-assigntype/update-assigntype.component';
-import { AutoFocusModule } from './autofocus/autofocus.module';
-import { ConfigComponent } from './config/config.component';
-import { CreateNoteComponent } from './note/create-note/create-note.component';
-import { DeleteNoteComponent } from './note/delete-note/delete-note.component';
-import { NoteComponent } from './note/note.component';
-import { UpdateNoteComponent } from './note/update-note/update-note.component';
-import {
-    CreateParticipantComponent
-} from './participant/create-participant/create-participant.component';
-import {
-    DeleteParticipantComponent
-} from './participant/delete-participant/delete-participant.component';
-import { ParticipantComponent } from './participant/participant.component';
-import {
-    UpdateParticipantComponent
-} from './participant/update-participant/update-participant.component';
-import { QuestionComponent } from './question/question.component';
-import { CreateRoomComponent } from './room/create-room/create-room.component';
-import { DeleteRoomComponent } from './room/delete-room/delete-room.component';
-import { RoomComponent } from './room/room.component';
-import { UpdateRoomComponent } from './room/update-room/update-room.component';
-import { SearchComponent } from './search/search.component';
-import { AssistantCountComponent } from './statistics/assistant-count/assistant-count.component';
-import { GlobalCountComponent } from './statistics/global-count/global-count.component';
-import { PrincipalCountComponent } from './statistics/principal-count/principal-count.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { TranslocoRootModule } from './transloco/translocoRoot.module';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { AssignmentComponent } from "./assignment/assignment.component";
+import { CreateAssignmentComponent } from "./assignment/create-assignment/create-assignment.component";
+import { CustomDateAdapter } from "./assignment/customDateAdapter";
+import { DeleteAssignmentComponent } from "./assignment/delete-assignment/delete-assignment.component";
+import { ImageAssignmentComponent } from "./assignment/image-assignment/image-assignment.component";
+import { MultipleImageAssignmentComponent } from "./assignment/multiple-image-assignment/multiple-image-assignment.component";
+import { ReportSelectorComponent } from "./assignment/report-selector/report-selector.component";
+import { SelectionListHorComponent } from "./assignment/selection-list-hor/selection-list-hor.component";
+import { SelectionListComponent } from "./assignment/selection-list/selection-list.component";
+import { UpdateAssignmentComponent } from "./assignment/update-assignment/update-assignment.component";
+import { AssignTypeComponent } from "./assignType/assignType.component";
+import { CreateAssignTypeComponent } from "./assignType/create-assigntype/create-assigntype.component";
+import { DeleteAssignTypeComponent } from "./assignType/delete-assigntype/delete-assigntype.component";
+import { UpdateAssignTypeComponent } from "./assignType/update-assigntype/update-assigntype.component";
+import { AutoFocusModule } from "./autofocus/autofocus.module";
+import { ConfigComponent } from "./config/config.component";
+import { CreateNoteComponent } from "./note/create-note/create-note.component";
+import { DeleteNoteComponent } from "./note/delete-note/delete-note.component";
+import { NoteComponent } from "./note/note.component";
+import { UpdateNoteComponent } from "./note/update-note/update-note.component";
+import { CreateParticipantComponent } from "./participant/create-participant/create-participant.component";
+import { DeleteParticipantComponent } from "./participant/delete-participant/delete-participant.component";
+import { ParticipantComponent } from "./participant/participant.component";
+import { UpdateParticipantComponent } from "./participant/update-participant/update-participant.component";
+import { QuestionComponent } from "./question/question.component";
+import { CreateRoomComponent } from "./room/create-room/create-room.component";
+import { DeleteRoomComponent } from "./room/delete-room/delete-room.component";
+import { RoomComponent } from "./room/room.component";
+import { UpdateRoomComponent } from "./room/update-room/update-room.component";
+import { SearchComponent } from "./search/search.component";
+import { AssistantCountComponent } from "./statistics/assistant-count/assistant-count.component";
+import { GlobalCountComponent } from "./statistics/global-count/global-count.component";
+import { PrincipalCountComponent } from "./statistics/principal-count/principal-count.component";
+import { StatisticsComponent } from "./statistics/statistics.component";
+import { TranslocoRootModule } from "./transloco/translocoRoot.module";
 
 @NgModule({
   declarations: [
