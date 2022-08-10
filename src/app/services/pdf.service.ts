@@ -25,33 +25,56 @@ export class PdfService {
     this.translocoService.langChanges$.subscribe((lang) => {
       this.font = this.langToFont[lang];
       if (!this.font) this.font = "notosans";
+      this.jsPdfPortrait = new jsPDF("portrait");
+      this.jsPdfLandscape = new jsPDF("landscape");
+
+      if (this.font === "meiryo") {
+        this.addJapaneseFont();
+      }
+      if (this.font === "malgun") {
+        this.addKoreanFont();
+      }
+      if (this.font === "simsun") {
+        this.addSimplifiedChineseFont();
+      }
+      if (this.font === "notosans") {
+        this.addNotoSansFont();
+      }
     });
+  }
 
-    this.jsPdfPortrait = new jsPDF("portrait");
-    this.jsPdfLandscape = new jsPDF("landscape");
-
+  addJapaneseFont() {
+    console.log("japanese added");
     //Japanese
-
     this.jsPdfPortrait.addFileToVFS("meiryo-normal.ttf", meiryo);
     this.jsPdfPortrait.addFont("meiryo-normal.ttf", "meiryo", "normal");
 
     this.jsPdfLandscape.addFileToVFS("meiryo-normal.ttf", meiryo);
     this.jsPdfLandscape.addFont("meiryo-normal.ttf", "meiryo", "normal");
+  }
 
+  addKoreanFont() {
+    console.log("korean added");
     //Korean
     this.jsPdfPortrait.addFileToVFS("malgun.ttf", malgun);
     this.jsPdfPortrait.addFont("malgun.ttf", "malgun", "normal");
 
     this.jsPdfLandscape.addFileToVFS("malgun.ttf", malgun);
     this.jsPdfLandscape.addFont("malgun.ttf", "malgun", "normal");
+  }
 
+  addSimplifiedChineseFont() {
+    console.log("chinese added");
     //Simplified Chinese
     this.jsPdfPortrait.addFileToVFS("simsun.ttf", simsun);
     this.jsPdfPortrait.addFont("simsun.ttf", "simsun", "normal");
 
     this.jsPdfLandscape.addFileToVFS("simsun.ttf", simsun);
     this.jsPdfLandscape.addFont("simsun.ttf", "simsun", "normal");
+  }
 
+  addNotoSansFont() {
+    console.log("notosans added");
     //Latin, Cyrilic
     this.jsPdfPortrait.addFileToVFS("notosans.ttf", notosans);
     this.jsPdfPortrait.addFont("notosans.ttf", "notosans", "normal");
