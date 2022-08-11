@@ -6,6 +6,7 @@ import meiryo from "../../resources/base64fonts/meiryo";
 import malgun from "../../resources/base64fonts/malgun";
 import simsun from "../../resources/base64fonts/simsun";
 import notosans from "../../resources/base64fonts/notosans";
+import notosansbold from "../../resources/base64fonts/notosansbold";
 
 @Injectable({
   providedIn: "root",
@@ -57,28 +58,27 @@ export class PdfService {
     //Japanese
     this.jsPdf.addFileToVFS("meiryo-normal.ttf", meiryo);
     this.jsPdf.addFont("meiryo-normal.ttf", "meiryo", "normal");
-    this.lastFont = "meiryo";
   }
 
   addKoreanFont() {
     //Korean
     this.jsPdf.addFileToVFS("malgun.ttf", malgun);
     this.jsPdf.addFont("malgun.ttf", "malgun", "normal");
-    this.lastFont = "malgun";
   }
 
   addSimplifiedChineseFont() {
     //Simplified Chinese
     this.jsPdf.addFileToVFS("simsun.ttf", simsun);
     this.jsPdf.addFont("simsun.ttf", "simsun", "normal");
-    this.lastFont = "simsun";
   }
 
   addNotoSansFont() {
     //Latin, Cyrilic
     this.jsPdf.addFileToVFS("notosans.ttf", notosans);
     this.jsPdf.addFont("notosans.ttf", "notosans", "normal");
-    this.lastFont = "notosans";
+    //Bold
+    this.jsPdf.addFileToVFS("notosansbold.ttf", notosansbold);
+    this.jsPdf.addFont("notosansbold.ttf", "notosans", "normal", 700);
   }
 
   /**
