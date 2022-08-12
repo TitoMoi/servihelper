@@ -1,12 +1,12 @@
-import { ConfigService } from 'app/config/service/config.service';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { ConfigService } from "app/config/service/config.service";
+import { Observable } from "rxjs";
+import { map, shareReplay } from "rxjs/operators";
 
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DateAdapter } from '@angular/material/core';
-import { MatSelectChange } from '@angular/material/select';
-import { TranslocoService } from '@ngneat/transloco';
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { DateAdapter } from "@angular/material/core";
+import { MatSelectChange } from "@angular/material/select";
+import { TranslocoService } from "@ngneat/transloco";
 
 @Component({
   selector: "app-navigation",
@@ -31,11 +31,12 @@ export class NavigationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const lang = this.configService.getConfig().lang;
+
     this.availableLangs = this.translocoService.getAvailableLangs();
 
-    this.translocoService = this.translocoService.setActiveLang(
-      this.configService.getConfig().lang
-    );
+    this.setLang(lang);
+    this.setLocale(lang);
   }
 
   /**

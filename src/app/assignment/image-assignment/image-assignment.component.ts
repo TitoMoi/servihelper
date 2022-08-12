@@ -144,6 +144,6 @@ export class ImageAssignmentComponent implements OnInit {
       },
     });
 
-    doc.save("assignment.pdf");
+    doc.save("assignment");
   }
 }
