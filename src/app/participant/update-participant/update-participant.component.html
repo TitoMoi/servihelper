@@ -1,4 +1,6 @@
-<ng-container *ngIf="participant">
+<ng-container
+  *ngIf="participant && this.hasLoadedRooms && this.hasLoadedAssignTypes"
+>
   <form [formGroup]="participantForm" novalidate (ngSubmit)="onSubmit()">
     <mat-card class="shipping-card">
       <mat-card-header>
@@ -52,7 +54,9 @@
                     <mat-checkbox
                       color="primary"
                       formControlName="canPrincipal"
-                      >{{ assignTypes[j].name }}</mat-checkbox
+                      >{{
+                        getAssignTypeName(at.value.assignTypeId)
+                      }}</mat-checkbox
                     >
                   </div>
                 </ng-container>
@@ -78,7 +82,9 @@
                     <mat-checkbox
                       color="primary"
                       formControlName="canAssistant"
-                      >{{ assignTypes[z].name }}</mat-checkbox
+                      >{{
+                        getAssignTypeName(at.value.assignTypeId)
+                      }}</mat-checkbox
                     >
                   </div>
                 </ng-container>

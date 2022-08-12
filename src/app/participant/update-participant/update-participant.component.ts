@@ -48,6 +48,9 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
 
   timeoutRef;
 
+  hasLoadedRooms = false;
+  hasLoadedAssignTypes = false;
+
   participantForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
@@ -101,11 +104,12 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
     clearTimeout(this.timeoutRef);
   }
 
-  getRoomName(id) {
-    if (this.rooms) {
-      const room = this.rooms.filter((r) => r.id === id);
-      return room[0].name;
-    }
+  getRoomName(id): string {
+    return this.roomService.getRoom(id).name;
+  }
+
+  getAssignTypeName(id): string {
+    return this.assignTypeService.getAssignType(id).name;
   }
 
   setParticipantRooms() {
@@ -122,6 +126,7 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
       const fa = this.participantForm.get("rooms") as FormArray;
       fa.push(roomGroup);
     });
+    this.hasLoadedRooms = true;
   }
 
   setParticipantAssignTypes() {
@@ -141,6 +146,7 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
         fa.push(assignType);
       }
     );
+    this.hasLoadedAssignTypes = true;
   }
 
   onSubmit(): void {

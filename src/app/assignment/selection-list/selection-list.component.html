@@ -43,25 +43,29 @@
           [style.background]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
         >
-          {{ ag.room }}
+          {{ ag.roomName }}
         </th>
       </tr>
       <tr *ngFor="let assignment of ag.assignments">
+        <!-- td id is to find assignType later, not always has name, sometimes has theme -->
         <td
+          [id]="assignment.assignType.id"
           class="bold me-3"
           [style.background]="
-            assignTypeService.getAssignTypeByName(assignment.assignType).color
+            assignTypeService.getAssignType(assignment.assignType.id).color
           "
           [style.fontSize]="defaultReportFontSize"
         >
           <div>{{ assignment.theme }}</div>
-          <span *ngIf="!assignment.theme">{{ assignment.assignType }}</span>
+          <span *ngIf="!assignment.theme">{{
+            assignment.assignType.name
+          }}</span>
         </td>
         <td [style.fontSize]="defaultReportFontSize">
-          {{ assignment.principal
+          {{ assignment.principal.name
           }}<span *ngIf="assignment.assistant">
             / <br />
-            {{ assignment.assistant }}</span
+            {{ assignment.assistant.name }}</span
           >
         </td>
       </tr>

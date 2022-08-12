@@ -1,11 +1,11 @@
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { ConfigService } from 'app/config/service/config.service';
-import * as ExcelJS from 'exceljs';
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ConfigService } from "app/config/service/config.service";
+import * as ExcelJS from "exceljs";
 
-import { Injectable } from '@angular/core';
-import { TranslocoLocaleService } from '@ngneat/transloco-locale';
+import { Injectable } from "@angular/core";
+import { TranslocoLocaleService } from "@ngneat/transloco-locale";
 
-import { AssignmentGroupInterface } from '../assignment/model/assignment.model';
+import { AssignmentGroupInterface } from "../assignment/model/assignment.model";
 
 @Injectable({
   providedIn: "root",
@@ -178,7 +178,7 @@ export class ExcelService {
           Number(this.configService.getConfig().defaultReportFontSize) || 16,
       };
 
-      cellRoom.value = ag.room;
+      cellRoom.value = ag.roomName;
 
       //assign type titles
       ag.assignments.forEach((a) => {
@@ -194,7 +194,7 @@ export class ExcelService {
         };
 
         const color = this.assignTypeService
-          .getAssignTypeByName(a.assignType)
+          .getAssignType(a.assignType.id)
           .color?.substring(1);
 
         cell.fill = {
@@ -205,7 +205,7 @@ export class ExcelService {
           },
         };
 
-        cell.value = a.theme ? a.theme : a.assignType;
+        cell.value = a.theme ? a.theme : a.assignType.name;
 
         //participants
         const cell2 = row.getCell(2);
@@ -215,8 +215,8 @@ export class ExcelService {
             Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
-        cell2.value = a.principal;
-        if (a.assistant) cell2.value += " / " + "\n" + a.assistant;
+        cell2.value = a.principal.name;
+        if (a.assistant) cell2.value += " / " + "\n" + a.assistant.name;
       });
     });
   }
@@ -254,10 +254,10 @@ export class ExcelService {
       ag.assignments.forEach((a) => {
         // eslint-disable-next-line @typescript-eslint/no-shadow
         const cell = row.getCell(i);
-        cell.value = a.assignType;
+        cell.value = a.assignType.name;
 
         const color = this.assignTypeService
-          .getAssignTypeByName(a.assignType)
+          .getAssignType(a.assignType.id)
           .color?.substring(1);
 
         cell.font = {
@@ -288,7 +288,7 @@ export class ExcelService {
         size:
           Number(this.configService.getConfig().defaultReportFontSize) || 16,
       };
-      cellRoom.value = ag.room;
+      cellRoom.value = ag.roomName;
 
       ag.assignments.forEach((a) => {
         // eslint-disable-next-line @typescript-eslint/no-shadow
@@ -303,9 +303,9 @@ export class ExcelService {
           wrapText: true,
         };
 
-        cell.value = a.principal;
+        cell.value = a.principal.name;
         if (a.assistant) {
-          cell.value += " / " + "\n" + a.assistant;
+          cell.value += " / " + "\n" + a.assistant.name;
         }
 
         i++;

@@ -20,6 +20,7 @@ import {
 import {
   AssignmentGroupInterface,
   AssignmentInterface,
+  AssignmentReportInterface,
 } from "../model/assignment.model";
 import { AssignmentService } from "../service/assignment.service";
 import { PdfService } from "app/services/pdf.service";
@@ -102,12 +103,15 @@ export class SelectionListHorComponent implements OnChanges {
   sortAssignmentByAssignTypeOrder() {
     for (const ag of this.assignmentGroups) {
       ag.assignments.sort(
-        (a: AssignmentInterface, b: AssignmentInterface): number => {
-          const orderA = this.assignTypeService.getAssignTypeByName(
-            a.assignType
+        (
+          a: AssignmentReportInterface,
+          b: AssignmentReportInterface
+        ): number => {
+          const orderA = this.assignTypeService.getAssignType(
+            a.assignType.id
           ).order;
-          const orderB = this.assignTypeService.getAssignTypeByName(
-            b.assignType
+          const orderB = this.assignTypeService.getAssignType(
+            b.assignType.id
           ).order;
 
           if (orderA > orderB) {
@@ -128,7 +132,7 @@ export class SelectionListHorComponent implements OnChanges {
   getRelatedData() {
     let assignGroup: AssignmentGroupInterface = {
       date: undefined,
-      room: undefined,
+      roomName: undefined,
       assignments: [],
     };
 
@@ -144,20 +148,22 @@ export class SelectionListHorComponent implements OnChanges {
         this.assignmentGroups.push(assignGroup);
         assignGroup = {
           date: assignment.date,
-          room: undefined,
+          roomName: undefined,
           assignments: [],
         };
       }
 
-      if (!assignGroup.room)
-        assignGroup.room = this.roomService.getRoom(assignment.room).name;
+      if (!assignGroup.roomName)
+        assignGroup.roomName = this.roomService.getRoom(assignment.room).name;
 
-      if (assignGroup.room !== this.roomService.getRoom(assignment.room).name) {
+      if (
+        assignGroup.roomName !== this.roomService.getRoom(assignment.room).name
+      ) {
         //save and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
         assignGroup = {
           date: assignment.date,
-          room: this.roomService.getRoom(assignment.room).name,
+          roomName: this.roomService.getRoom(assignment.room).name,
           assignments: [],
         };
       }
@@ -165,16 +171,13 @@ export class SelectionListHorComponent implements OnChanges {
       assignGroup.assignments.push({
         id: assignment.id,
         date: assignment.date,
-        room: this.roomService.getRoom(assignment.room).name,
-        assignType: this.assignTypeService.getAssignType(assignment.assignType)
-          .name,
+        room: this.roomService.getRoom(assignment.room),
+        assignType: this.assignTypeService.getAssignType(assignment.assignType),
         theme: assignment.theme,
         onlyWoman: false,
         onlyMan: false,
-        principal: this.participantService.getParticipant(assignment.principal)
-          .name,
-        assistant: this.participantService.getParticipant(assignment.assistant)
-          ?.name,
+        principal: this.participantService.getParticipant(assignment.principal),
+        assistant: this.participantService.getParticipant(assignment.assistant),
         footerNote: "",
       });
 
@@ -195,9 +198,11 @@ export class SelectionListHorComponent implements OnChanges {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const text = data.cell.raw["innerText"];
           // eslint-disable-next-line @typescript-eslint/dot-notation
+          const id = data.cell.raw["id"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
           const localName = data.cell.raw["localName"];
 
-          const assignType = this.assignTypeService.getAssignTypeByName(text);
+          const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
             data.cell.styles.fillColor = assignType.color;
             data.cell.styles.fontStyle = "bold";
@@ -213,7 +218,7 @@ export class SelectionListHorComponent implements OnChanges {
         },
       });
     }
-    doc.save("assignments.pdf");
+    doc.save("assignments");
   }
 
   async toPng() {

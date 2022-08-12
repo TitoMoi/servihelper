@@ -1,3 +1,7 @@
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { RoomInterface } from "app/room/model/room.model";
+
 export interface AssignmentInterface {
   id: string;
   date: Date;
@@ -11,10 +15,23 @@ export interface AssignmentInterface {
   footerNote: string;
 }
 
+export interface AssignmentReportInterface {
+  id: string;
+  date: Date;
+  room: RoomInterface;
+  assignType: AssignTypeInterface;
+  theme: string;
+  onlyWoman: boolean;
+  onlyMan: boolean;
+  principal: ParticipantInterface;
+  assistant: ParticipantInterface;
+  footerNote: string;
+}
+
 export interface AssignmentGroupInterface {
   date: Date;
-  room: string;
-  assignments: AssignmentInterface[];
+  roomName: string;
+  assignments: AssignmentReportInterface[];
 }
 
 export interface AssignmentTableInterface {
