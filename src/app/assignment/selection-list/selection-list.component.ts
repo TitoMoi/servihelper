@@ -116,7 +116,10 @@ export class SelectionListComponent implements OnChanges {
 
       if (!assignGroup.date) assignGroup.date = assignment.date;
 
-      if (assignGroup.date !== assignment.date) {
+      if (
+        new Date(assignGroup.date).toISOString() !==
+        new Date(assignment.date).toISOString()
+      ) {
         //save and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
         assignGroup = {

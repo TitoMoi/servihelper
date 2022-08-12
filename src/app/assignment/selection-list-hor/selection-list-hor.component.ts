@@ -143,7 +143,10 @@ export class SelectionListHorComponent implements OnChanges {
 
       if (!assignGroup.date) assignGroup.date = assignment.date;
 
-      if (assignGroup.date !== assignment.date) {
+      if (
+        new Date(assignGroup.date).toISOString() !==
+        new Date(assignment.date).toISOString()
+      ) {
         //save and reset
         this.assignmentGroups.push(assignGroup);
         assignGroup = {
