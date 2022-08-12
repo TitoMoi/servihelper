@@ -33,7 +33,7 @@
                 >
                   <div class="col-12 col-md-3 mb-2" [formGroupName]="i">
                     <mat-checkbox color="primary" formControlName="available">{{
-                      getRoomName(r.value.roomId)
+                      getRoom(r.value.roomId).name
                     }}</mat-checkbox>
                   </div>
                 </ng-container>
@@ -55,7 +55,7 @@
                       color="primary"
                       formControlName="canPrincipal"
                       >{{
-                        getAssignTypeName(at.value.assignTypeId)
+                        getAssignType(at.value.assignTypeId).name
                       }}</mat-checkbox
                     >
                   </div>
@@ -76,14 +76,14 @@
                 >
                   <div
                     class="col-auto mb-2"
-                    *ngIf="assignTypes[z].hasAssistant"
+                    *ngIf="getAssignType(at.value.assignTypeId).hasAssistant"
                     [formGroupName]="z"
                   >
                     <mat-checkbox
                       color="primary"
                       formControlName="canAssistant"
                       >{{
-                        getAssignTypeName(at.value.assignTypeId)
+                        getAssignType(at.value.assignTypeId).name
                       }}</mat-checkbox
                     >
                   </div>

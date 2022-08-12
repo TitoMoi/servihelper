@@ -104,12 +104,12 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
     clearTimeout(this.timeoutRef);
   }
 
-  getRoomName(id): string {
-    return this.roomService.getRoom(id).name;
+  getRoom(id): RoomInterface {
+    return this.roomService.getRoom(id);
   }
 
-  getAssignTypeName(id): string {
-    return this.assignTypeService.getAssignType(id).name;
+  getAssignType(id): AssignTypeInterface {
+    return this.assignTypeService.getAssignType(id);
   }
 
   setParticipantRooms() {

@@ -39,7 +39,7 @@
                 >
                   <div class="col-12 col-md-3 mb-2" [formGroupName]="i">
                     <mat-checkbox color="primary" formControlName="available">{{
-                      rooms[i].name
+                      getRoom(r.value.roomId).name
                     }}</mat-checkbox>
                   </div>
                 </ng-container>
@@ -61,7 +61,9 @@
                     <mat-checkbox
                       color="primary"
                       formControlName="canPrincipal"
-                      >{{ assignTypes[j].name }}</mat-checkbox
+                      >{{
+                        getAssignType(at.value.assignTypeId).name
+                      }}</mat-checkbox
                     >
                   </div>
                 </ng-container>
@@ -80,14 +82,16 @@
                   *ngFor="let at of getAssignTypesForm.controls; let z = index"
                 >
                   <div
-                    *ngIf="assignTypes[z].hasAssistant"
+                    *ngIf="getAssignType(at.value.assignTypeId).hasAssistant"
                     class="col-auto mb-2"
                     [formGroupName]="z"
                   >
                     <mat-checkbox
                       color="primary"
                       formControlName="canAssistant"
-                      >{{ assignTypes[z].name }}</mat-checkbox
+                      >{{
+                        getAssignType(at.value.assignTypeId).name
+                      }}</mat-checkbox
                     >
                   </div>
                 </ng-container>

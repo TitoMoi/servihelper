@@ -365,18 +365,23 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    * Remove assignTypes from select that already have assignment in the selected room
    * this piece of code is separated due to in create assignment must be rerun after submitAndCreate
    * depends on: assignments, selected room, selected date
+   *
+   * This method doesnt exist on update assignment because can be selected any assignment while updating
    */
   removeAssignTypesThatAlreadyExistOnAssignment() {
     this.assignTypes = this.assignTypeService
       .getAssignTypes()
       .sort((a, b) => (a.order > b.order ? 1 : -1));
 
+    const dateValue = this.gfv("date");
+    const roomValue = this.gfv("room");
+    const assignTypeValue = this.gfv("assignType");
+
     this.assignTypes = this.assignTypes.filter((at) => {
       let notExists = true;
-      for (const a of this.assignmentService.getAssignmentsByDate(
-        this.gfv("date")
-      )) {
-        if (a.assignType === at.id && a.room === this.gfv("room")) {
+
+      for (const a of this.assignmentService.getAssignmentsByDate(dateValue)) {
+        if (a.assignType === at.id && a.room === roomValue) {
           notExists = false;
           break;
         }
@@ -384,7 +389,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       return notExists;
     });
     //Reset if assignType selected not in new assignTypes
-    if (!this.assignTypes.some((at) => at.id === this.gfv("assignType")))
+    if (!this.assignTypes.some((at) => at.id === assignTypeValue))
       this.assignmentForm.get("assignType").reset(undefined);
   }
 

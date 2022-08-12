@@ -132,6 +132,14 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
     fa.push(room);
   }
 
+  getRoom(id): RoomInterface {
+    return this.roomService.getRoom(id);
+  }
+
+  getAssignType(id): AssignTypeInterface {
+    return this.assignTypeService.getAssignType(id);
+  }
+
   createParticipant() {
     this.participantService.createParticipant({
       ...this.participantForm.value,
