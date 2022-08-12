@@ -10,6 +10,8 @@ import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
 
 import { Component } from "@angular/core";
+import { TranslocoService } from "@ngneat/transloco";
+import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
 
 @Component({
   selector: "app-home",
@@ -36,6 +38,8 @@ export class HomeComponent {
     private noteService: NoteService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
+    private translocoService: TranslocoService,
+    private dateAdapter: DateAdapter<NativeDateAdapter>,
     private electronService: ElectronService
   ) {
     this.path = APP_CONFIG.production
@@ -121,6 +125,11 @@ export class HomeComponent {
     this.noteService.getNotes();
     this.participantService.getParticipants();
     this.assignmentService.getAssignments();
+
+    let lang = this.configService.getConfig().lang;
+    this.translocoService = this.translocoService.setActiveLang(lang);
+    if (lang === "zhCN") lang = "zh";
+    this.dateAdapter.setLocale(lang);
 
     this.isZipLoaded = true;
   }

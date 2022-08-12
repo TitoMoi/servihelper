@@ -4,7 +4,7 @@ import { map, shareReplay } from "rxjs/operators";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { DateAdapter } from "@angular/material/core";
+import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
 import { MatSelectChange } from "@angular/material/select";
 import { TranslocoService } from "@ngneat/transloco";
 
@@ -26,7 +26,7 @@ export class NavigationComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public translocoService: TranslocoService,
-    private dateAdapter: DateAdapter<any>,
+    private dateAdapter: DateAdapter<NativeDateAdapter>,
     public configService: ConfigService
   ) {}
 
