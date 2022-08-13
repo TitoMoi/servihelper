@@ -353,7 +353,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       }
 
       for (const as of this.assistants) {
-        if (principalsMap.get(as.id).hasWork) as.hasWork = true;
+        const p = principalsMap.get(as.id);
+        if (p && p.hasWork) {
+          as.hasWork = true;
+        }
       }
 
       this.principalsBK = structuredClone(this.principals);
