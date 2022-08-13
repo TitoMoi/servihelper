@@ -25,12 +25,7 @@
         "CONFIG_ZIP_UPLOADED" | transloco
       }}</span>
     </label>
-    <input
-      id="zip-upload"
-      type="file"
-      accept=".zip"
-      (change)="uploadZipFiles($event)"
-    />
+    <input id="zip-upload" type="file" (change)="uploadZipFiles($event)" />
   </div>
   <div *ngIf="isZipLoaded" class="pb-3">
     <p class="d-inline-block m-3 green-msg">
