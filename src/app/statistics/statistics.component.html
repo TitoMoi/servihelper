@@ -1,3 +1,24 @@
 <app-global-count></app-global-count>
-<app-principal-count></app-principal-count>
-<app-assistant-count></app-assistant-count>
+<ng-container *ngIf="isAppGlobalCountRendered">
+  <ng-container *ngTemplateOutlet="appPrincipalCountTpl"></ng-container>
+</ng-container>
+<ng-container *ngIf="!isAppGlobalCountRendered">
+  <ng-container *ngTemplateOutlet="loading"></ng-container>
+</ng-container>
+<ng-container *ngIf="isAppPrincipalCountRendered" else loading>
+  <ng-container *ngTemplateOutlet="appAssistantCountTpl"></ng-container>
+</ng-container>
+<ng-container *ngIf="!isAppPrincipalCountRendered">
+  <ng-container *ngTemplateOutlet="loading"></ng-container>
+</ng-container>
+
+<ng-template #appPrincipalCountTpl>
+  <app-principal-count></app-principal-count>
+</ng-template>
+<ng-template #appAssistantCountTpl>
+  <app-assistant-count></app-assistant-count>
+</ng-template>
+
+<ng-template #loading>
+  <div class="ms-3 mt-3 spinner"></div>
+</ng-template>

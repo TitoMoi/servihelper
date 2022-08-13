@@ -1,20 +1,47 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
 import {
-    getDistanceBetweenPenultimaAndLast, getLastAssignment, getPenultimateAssignment, setCountById,
-    sortParticipantsByCount
-} from 'app/functions';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
+  getDistanceBetweenPenultimaAndLast,
+  getLastAssignment,
+  getPenultimateAssignment,
+  setCountById,
+  sortParticipantsByCount,
+} from "app/functions";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
 import {
-    bn, ca, de, el, enGB, es, fr, hi, it, ja, ko, nl, pl, pt, ro, ru, tr, zhCN
-} from 'date-fns/locale';
-import { Subscription } from 'rxjs';
+  bn,
+  ca,
+  de,
+  el,
+  enGB,
+  es,
+  fr,
+  hi,
+  it,
+  ja,
+  ko,
+  nl,
+  pl,
+  pt,
+  ro,
+  ru,
+  tr,
+  zhCN,
+} from "date-fns/locale";
+import { Subscription } from "rxjs";
 
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { TranslocoService } from '@ngneat/transloco';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
+import { MatCheckboxChange } from "@angular/material/checkbox";
+import { TranslocoService } from "@ngneat/transloco";
+import { StatisticsComponent } from "../statistics.component";
 
 @Component({
   selector: "app-global-count",
@@ -22,7 +49,7 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ["./global-count.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlobalCountComponent implements OnInit, OnDestroy {
+export class GlobalCountComponent implements OnInit, OnDestroy, AfterViewInit {
   globalListBackup: ParticipantInterface[];
 
   globalList: ParticipantInterface[];
@@ -34,6 +61,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
   subscription$: Subscription;
 
   constructor(
+    private statisticsComponent: StatisticsComponent,
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
@@ -61,6 +89,10 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     };
 
     this.panelOpenState = false;
+  }
+
+  ngAfterViewInit(): void {
+    this.statisticsComponent.isAppGlobalCountRendered = true;
   }
 
   ngOnInit(): void {

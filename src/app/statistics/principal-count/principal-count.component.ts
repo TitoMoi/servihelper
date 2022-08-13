@@ -1,20 +1,47 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
 import {
-    getDistanceBetweenPenultimaAndLast, getLastPrincipalAssignment,
-    getPenultimatePrincipalAssignment, setPrincipalCountById, sortParticipantsByCount
-} from 'app/functions';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
+  getDistanceBetweenPenultimaAndLast,
+  getLastPrincipalAssignment,
+  getPenultimatePrincipalAssignment,
+  setPrincipalCountById,
+  sortParticipantsByCount,
+} from "app/functions";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
 import {
-    bn, ca, de, el, enGB, es, fr, hi, it, ja, ko, nl, pl, pt, ro, ru, tr, zhCN
-} from 'date-fns/locale';
-import { Subscription } from 'rxjs';
+  bn,
+  ca,
+  de,
+  el,
+  enGB,
+  es,
+  fr,
+  hi,
+  it,
+  ja,
+  ko,
+  nl,
+  pl,
+  pt,
+  ro,
+  ru,
+  tr,
+  zhCN,
+} from "date-fns/locale";
+import { Subscription } from "rxjs";
 
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { TranslocoService } from '@ngneat/transloco';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
+import { MatCheckboxChange } from "@angular/material/checkbox";
+import { TranslocoService } from "@ngneat/transloco";
+import { StatisticsComponent } from "../statistics.component";
 
 @Component({
   selector: "app-principal-count",
@@ -22,7 +49,9 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ["./principal-count.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PrincipalCountComponent implements OnInit, OnDestroy {
+export class PrincipalCountComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   principalListBackup: ParticipantInterface[];
 
   principalList: ParticipantInterface[];
@@ -34,6 +63,7 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
   subscription$: Subscription;
 
   constructor(
+    private statisticsComponent: StatisticsComponent,
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
@@ -60,6 +90,9 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
       pl,
     };
     this.panelOpenState = false;
+  }
+  ngAfterViewInit(): void {
+    this.statisticsComponent.isAppPrincipalCountRendered = true;
   }
 
   ngOnInit(): void {
