@@ -1,20 +1,47 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
 import {
-    getDistanceBetweenPenultimaAndLast, getLastAssistantAssignment,
-    getPenultimateAssistantAssignment, setAssistantCountById, sortParticipantsByCount
-} from 'app/functions';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
+  getDistanceBetweenPenultimaAndLast,
+  getLastAssistantAssignment,
+  getPenultimateAssistantAssignment,
+  setAssistantCountById,
+  sortParticipantsByCount,
+} from "app/functions";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
 import {
-    bn, ca, de, el, enGB, es, fr, hi, it, ja, ko, nl, pl, pt, ro, ru, tr, zhCN
-} from 'date-fns/locale';
-import { Subscription } from 'rxjs';
+  bn,
+  ca,
+  de,
+  el,
+  enGB,
+  es,
+  fr,
+  hi,
+  it,
+  ja,
+  ko,
+  nl,
+  pl,
+  pt,
+  ro,
+  ru,
+  tr,
+  zhCN,
+} from "date-fns/locale";
+import { Subscription } from "rxjs";
 
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { TranslocoService } from '@ngneat/transloco';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
+import { MatCheckboxChange } from "@angular/material/checkbox";
+import { TranslocoService } from "@ngneat/transloco";
+import { SortService } from "app/services/sort.service";
+import { toPng } from "html-to-image";
 
 @Component({
   selector: "app-assistant-count",
@@ -37,7 +64,8 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private sortService: SortService
   ) {
     this.locales = {
       es, //Spanish
@@ -118,8 +146,10 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
       this.locales[this.translocoService.getActiveLang()]
     );
 
-    //ORDER BY COUNT
-    this.assistantList = participants.sort(sortParticipantsByCount);
+    //Order by count and distance
+    this.assistantList = participants.sort(
+      this.sortService.sortByCountAndByDistance
+    );
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
     this.subscription$ = this.translocoService.langChanges$.subscribe(
@@ -161,5 +191,19 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     this.assistantList = this.assistantList.filter(
       (participant) => !participant.isWoman
     );
+  }
+
+  async toPng() {
+    //the div
+    document.body.style.cursor = "wait";
+    const div = document.getElementById("toPngDivId");
+    const dataUrl = await toPng(div);
+
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.setAttribute("download", "statistics-assistant");
+    link.click();
+
+    document.body.style.cursor = "default";
   }
 }

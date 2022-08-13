@@ -5,6 +5,7 @@ import { RoomService } from "app/room/service/room.service";
 import { Injectable } from "@angular/core";
 import { RoomInterface } from "app/room/model/room.model";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { ParticipantInterface } from "app/participant/model/participant.model";
 
 @Injectable({
   providedIn: "root",
@@ -62,5 +63,34 @@ export class SortService {
     }
 
     return assignmentsByDate.flat();
+  }
+
+  sortByCountAndByDistance(
+    a: ParticipantInterface,
+    b: ParticipantInterface
+  ): number {
+    if (a.count < b.count) {
+      return -1;
+    }
+    if (a.count > b.count) {
+      return 1;
+    }
+    if (
+      new Date(a.lastAssignmentDate).getTime() -
+        new Date(a.penultimateAssignmentDate).getTime() <
+      new Date(b.lastAssignmentDate).getTime() -
+        new Date(b.penultimateAssignmentDate).getTime()
+    ) {
+      return -1;
+    }
+    if (
+      new Date(a.lastAssignmentDate).getTime() -
+        new Date(a.penultimateAssignmentDate).getTime() >
+      new Date(b.lastAssignmentDate).getTime() -
+        new Date(b.penultimateAssignmentDate).getTime()
+    ) {
+      return 1;
+    }
+    return 0;
   }
 }

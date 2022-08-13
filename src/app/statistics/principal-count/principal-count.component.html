@@ -13,7 +13,7 @@
               </h3>
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <div class="row m-3">
+          <div class="row m-3 align-items-center">
             <div class="col-3">
               <mat-checkbox color="primary" (change)="changeWoman($event)">{{
                 "STATISTICS_ONLY_WOMAN" | transloco
@@ -24,47 +24,57 @@
                 "STATISTICS_ONLY_MAN" | transloco
               }}</mat-checkbox>
             </div>
-          </div>
-          <div class="row m-3">
+
             <div class="col-2">
-              <b> {{ "STATISTICS_NAME" | transloco }}</b>
-            </div>
-            <div class="col-2">
-              <b>{{ "STATISTICS_COUNT" | transloco }}</b>
-            </div>
-            <div class="col-2">
-              <b>{{ "STATISTICS_PENULTIMA" | transloco }}</b>
-            </div>
-            <div class="col-2">
-              <b>{{ "STATISTICS_LAST" | transloco }}</b>
-            </div>
-            <div class="col-4">
-              <b>{{ "STATISTICS_DISTANCE" | transloco }}</b>
+              <mat-icon
+                svgIcon="png"
+                aria-label="icon"
+                (click)="toPng()"
+              ></mat-icon>
             </div>
           </div>
-          <div class="row m-3" *ngFor="let participant of principalList">
-            <div class="col-2">
-              {{ participant.name }}
+          <div id="toPngDivId" class="white-base-background">
+            <div class="row m-3">
+              <div class="col-2">
+                <b> {{ "STATISTICS_NAME" | transloco }}</b>
+              </div>
+              <div class="col-2">
+                <b>{{ "STATISTICS_COUNT" | transloco }}</b>
+              </div>
+              <div class="col-2">
+                <b>{{ "STATISTICS_PENULTIMA" | transloco }}</b>
+              </div>
+              <div class="col-2">
+                <b>{{ "STATISTICS_LAST" | transloco }}</b>
+              </div>
+              <div class="col-4">
+                <b>{{ "STATISTICS_DISTANCE" | transloco }}</b>
+              </div>
             </div>
-            <div class="col-2">
-              {{ participant.count }}
-            </div>
-            <div class="col-2">
-              {{
-                participant.penultimateAssignmentDate
-                  | translocoDate: { dateStyle: "medium" }
-              }}
-              - {{ participant.penultimateAssignType }}
-            </div>
-            <div class="col-2">
-              {{
-                participant.lastAssignmentDate
-                  | translocoDate: { dateStyle: "medium" }
-              }}
-              - {{ participant.lastAssignType }}
-            </div>
-            <div class="col-4">
-              {{ participant.distanceBetweenPenultimaAndLast }}
+            <div class="row m-3" *ngFor="let participant of principalList">
+              <div class="col-2">
+                {{ participant.name }}
+              </div>
+              <div class="col-2">
+                {{ participant.count }}
+              </div>
+              <div class="col-2">
+                {{
+                  participant.penultimateAssignmentDate
+                    | translocoDate: { dateStyle: "medium" }
+                }}
+                - {{ participant.penultimateAssignType }}
+              </div>
+              <div class="col-2">
+                {{
+                  participant.lastAssignmentDate
+                    | translocoDate: { dateStyle: "medium" }
+                }}
+                - {{ participant.lastAssignType }}
+              </div>
+              <div class="col-4">
+                {{ participant.distanceBetweenPenultimaAndLast }}
+              </div>
             </div>
           </div>
         </mat-expansion-panel>

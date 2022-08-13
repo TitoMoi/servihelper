@@ -1,6 +1,6 @@
-import { formatDistanceStrict, Locale } from 'date-fns';
+import { formatDistanceStrict, Locale } from "date-fns";
 
-import { ParticipantInterface } from '../participant/model/participant.model';
+import { ParticipantInterface } from "../participant/model/participant.model";
 
 /**
  *

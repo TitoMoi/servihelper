@@ -42,6 +42,8 @@ import {
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { TranslocoService } from "@ngneat/transloco";
 import { StatisticsComponent } from "../statistics.component";
+import { toPng } from "html-to-image";
+import { SortService } from "app/services/sort.service";
 
 @Component({
   selector: "app-global-count",
@@ -65,7 +67,8 @@ export class GlobalCountComponent implements OnInit, OnDestroy, AfterViewInit {
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private sortService: SortService
   ) {
     this.locales = {
       es,
@@ -150,8 +153,10 @@ export class GlobalCountComponent implements OnInit, OnDestroy, AfterViewInit {
       this.locales[this.translocoService.getActiveLang()]
     );
 
-    //ORDER BY COUNT
-    this.globalList = participants.sort(sortParticipantsByCount);
+    //Order by count and distance
+    this.globalList = participants.sort(
+      this.sortService.sortByCountAndByDistance
+    );
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
     this.subscription$ = this.translocoService.langChanges$.subscribe(
@@ -193,5 +198,19 @@ export class GlobalCountComponent implements OnInit, OnDestroy, AfterViewInit {
     this.globalList = this.globalList.filter(
       (participant) => !participant.isWoman
     );
+  }
+
+  async toPng() {
+    //the div
+    document.body.style.cursor = "wait";
+    const div = document.getElementById("toPngDivId");
+    const dataUrl = await toPng(div);
+
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.setAttribute("download", "statistics-global");
+    link.click();
+
+    document.body.style.cursor = "default";
   }
 }

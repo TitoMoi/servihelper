@@ -42,6 +42,8 @@ import {
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { TranslocoService } from "@ngneat/transloco";
 import { StatisticsComponent } from "../statistics.component";
+import { SortService } from "app/services/sort.service";
+import { toPng } from "html-to-image";
 
 @Component({
   selector: "app-principal-count",
@@ -67,7 +69,8 @@ export class PrincipalCountComponent
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private sortService: SortService
   ) {
     this.locales = {
       es, //Spanish
@@ -150,8 +153,10 @@ export class PrincipalCountComponent
       this.locales[this.translocoService.getActiveLang()]
     );
 
-    //ORDER BY COUNT
-    this.principalList = participants.sort(sortParticipantsByCount);
+    //Order by count and distance
+    this.principalList = participants.sort(
+      this.sortService.sortByCountAndByDistance
+    );
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
     this.subscription$ = this.translocoService.langChanges$.subscribe(
@@ -193,5 +198,19 @@ export class PrincipalCountComponent
     this.principalList = this.principalList.filter(
       (participant) => !participant.isWoman
     );
+  }
+
+  async toPng() {
+    //the div
+    document.body.style.cursor = "wait";
+    const div = document.getElementById("toPngDivId");
+    const dataUrl = await toPng(div);
+
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.setAttribute("download", "statistics-principal");
+    link.click();
+
+    document.body.style.cursor = "default";
   }
 }
