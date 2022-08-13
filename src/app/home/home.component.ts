@@ -57,7 +57,8 @@ export class HomeComponent {
       const blob = new Blob([buffer], { type: "application/octet" });
       const zipLink = document.createElement("a");
       zipLink.href = window.URL.createObjectURL(blob);
-      zipLink.setAttribute("download", "servihelper-files.zip");
+      //With .rar extension to prevent mac to auto unzip folder
+      zipLink.setAttribute("download", "servihelper-files.rar");
       zipLink.click();
     });
   }
