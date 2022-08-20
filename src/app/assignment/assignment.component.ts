@@ -23,6 +23,7 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-assignment",
@@ -89,6 +90,7 @@ export class AssignmentComponent
   });
 
   constructor(
+    public activatedRoute: ActivatedRoute,
     private assignmentService: AssignmentService,
     private participantService: ParticipantService,
     private roomService: RoomService,

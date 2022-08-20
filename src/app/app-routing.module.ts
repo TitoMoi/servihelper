@@ -1,53 +1,33 @@
-import { AssignmentComponent } from 'app/assignment/assignment.component';
-import {
-    CreateAssignmentComponent
-} from 'app/assignment/create-assignment/create-assignment.component';
-import {
-    DeleteAssignmentComponent
-} from 'app/assignment/delete-assignment/delete-assignment.component';
-import {
-    ImageAssignmentComponent
-} from 'app/assignment/image-assignment/image-assignment.component';
-import { ReportSelectorComponent } from 'app/assignment/report-selector/report-selector.component';
-import {
-    UpdateAssignmentComponent
-} from 'app/assignment/update-assignment/update-assignment.component';
-import { AssignTypeComponent } from 'app/assignType/assignType.component';
-import {
-    CreateAssignTypeComponent
-} from 'app/assignType/create-assigntype/create-assigntype.component';
-import {
-    DeleteAssignTypeComponent
-} from 'app/assignType/delete-assigntype/delete-assigntype.component';
-import {
-    UpdateAssignTypeComponent
-} from 'app/assignType/update-assigntype/update-assigntype.component';
-import { ConfigComponent } from 'app/config/config.component';
-import { HomeComponent } from 'app/home/home.component';
-import { CreateNoteComponent } from 'app/note/create-note/create-note.component';
-import { DeleteNoteComponent } from 'app/note/delete-note/delete-note.component';
-import { NoteComponent } from 'app/note/note.component';
-import { UpdateNoteComponent } from 'app/note/update-note/update-note.component';
-import {
-    CreateParticipantComponent
-} from 'app/participant/create-participant/create-participant.component';
-import {
-    DeleteParticipantComponent
-} from 'app/participant/delete-participant/delete-participant.component';
-import { ParticipantComponent } from 'app/participant/participant.component';
-import {
-    UpdateParticipantComponent
-} from 'app/participant/update-participant/update-participant.component';
-import { QuestionComponent } from 'app/question/question.component';
-import { CreateRoomComponent } from 'app/room/create-room/create-room.component';
-import { DeleteRoomComponent } from 'app/room/delete-room/delete-room.component';
-import { RoomComponent } from 'app/room/room.component';
-import { UpdateRoomComponent } from 'app/room/update-room/update-room.component';
-import { SearchComponent } from 'app/search/search.component';
-import { StatisticsComponent } from 'app/statistics/statistics.component';
+import { AssignmentComponent } from "app/assignment/assignment.component";
+import { CreateAssignmentComponent } from "app/assignment/create-assignment/create-assignment.component";
+import { DeleteAssignmentComponent } from "app/assignment/delete-assignment/delete-assignment.component";
+import { ImageAssignmentComponent } from "app/assignment/image-assignment/image-assignment.component";
+import { ReportSelectorComponent } from "app/assignment/report-selector/report-selector.component";
+import { UpdateAssignmentComponent } from "app/assignment/update-assignment/update-assignment.component";
+import { AssignTypeComponent } from "app/assignType/assignType.component";
+import { CreateAssignTypeComponent } from "app/assignType/create-assigntype/create-assigntype.component";
+import { DeleteAssignTypeComponent } from "app/assignType/delete-assigntype/delete-assigntype.component";
+import { UpdateAssignTypeComponent } from "app/assignType/update-assigntype/update-assigntype.component";
+import { ConfigComponent } from "app/config/config.component";
+import { HomeComponent } from "app/home/home.component";
+import { CreateNoteComponent } from "app/note/create-note/create-note.component";
+import { DeleteNoteComponent } from "app/note/delete-note/delete-note.component";
+import { NoteComponent } from "app/note/note.component";
+import { UpdateNoteComponent } from "app/note/update-note/update-note.component";
+import { CreateParticipantComponent } from "app/participant/create-participant/create-participant.component";
+import { DeleteParticipantComponent } from "app/participant/delete-participant/delete-participant.component";
+import { ParticipantComponent } from "app/participant/participant.component";
+import { UpdateParticipantComponent } from "app/participant/update-participant/update-participant.component";
+import { QuestionComponent } from "app/question/question.component";
+import { CreateRoomComponent } from "app/room/create-room/create-room.component";
+import { DeleteRoomComponent } from "app/room/delete-room/delete-room.component";
+import { RoomComponent } from "app/room/room.component";
+import { UpdateRoomComponent } from "app/room/update-room/update-room.component";
+import { SearchComponent } from "app/search/search.component";
+import { StatisticsComponent } from "app/statistics/statistics.component";
 
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   {
@@ -126,6 +106,12 @@ const routes: Routes = [
   {
     path: "assignment",
     component: AssignmentComponent,
+    children: [
+      {
+        path: "image/:id",
+        component: ImageAssignmentComponent,
+      },
+    ],
   },
   {
     path: "assignment/create",
@@ -138,10 +124,6 @@ const routes: Routes = [
   {
     path: "assignment/delete/:id",
     component: DeleteAssignmentComponent,
-  },
-  {
-    path: "assignment/image/:id",
-    component: ImageAssignmentComponent,
   },
   {
     path: "selectionSheets",
