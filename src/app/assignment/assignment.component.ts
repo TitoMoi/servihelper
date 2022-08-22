@@ -150,6 +150,7 @@ export class AssignmentComponent
         id: assignment.id,
         date: assignment.date,
         hasDateSeparator: undefined,
+        hasBeenClicked: undefined,
         room: this.roomService.getRoom(assignment.room).name,
         assignType: assignType.name,
         assignTypeColor: assignType.color,
@@ -174,6 +175,11 @@ export class AssignmentComponent
 
     //Update the view
     return assignmentsTable;
+  }
+
+  highlightRow(event, element: AssignmentTableInterface) {
+    event.stopPropagation();
+    element.hasBeenClicked = true;
   }
 
   exportCsv() {

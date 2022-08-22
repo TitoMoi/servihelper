@@ -50,10 +50,14 @@
           <th mat-header-cell *matHeaderCellDef>
             {{ t("ASSIGN_TABLE_HEADER_IMAGE") }}
           </th>
-          <td mat-cell *matCellDef="let element">
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [ngClass]="{ hasBeenClicked: element.hasBeenClicked }"
+          >
             <mat-icon
               class="m-auto"
-              (click)="$event.stopPropagation()"
+              (click)="highlightRow($event, element)"
               [routerLink]="['image', element.id]"
               routerLinkActive="active"
               svgIcon="assignImage"

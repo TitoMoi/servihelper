@@ -38,6 +38,7 @@ export interface AssignmentTableInterface {
   id: string;
   date: Date;
   hasDateSeparator: boolean; //To separate dates from one day to another
+  hasBeenClicked: boolean; //To highlight last row when clicked the sheet
   room: string;
   assignType: string;
   assignTypeColor: string;
