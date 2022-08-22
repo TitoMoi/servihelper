@@ -65,7 +65,7 @@
           <b *ngIf="assignmentDateTitle">{{ assignmentDateTitle }}</b>
         </div>
         <div class="m-1">
-          {{ a.date | translocoDate: { dateStyle: "long" } }}
+          {{ a.date | translocoDate: { dateStyle: "full" } }}
         </div>
         <div class="m-1">
           <b *ngIf="!assignmentAssignTypeTitle">{{
