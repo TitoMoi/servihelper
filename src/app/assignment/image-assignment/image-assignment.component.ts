@@ -133,7 +133,7 @@ export class ImageAssignmentComponent implements OnInit {
     autoTable(doc, {
       html: `#assignmentTableId`,
       styles: { font },
-      columnStyles: { 0: { cellWidth: 60 } },
+      columnStyles: { 0: { cellWidth: 65 } },
       didParseCell: (data) => {
         // eslint-disable-next-line @typescript-eslint/dot-notation
         const classList: DOMTokenList = data.cell.raw["classList"];

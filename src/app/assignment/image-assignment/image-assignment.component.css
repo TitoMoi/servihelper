@@ -3,7 +3,9 @@
 }
 
 .border-bottom {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid gray;
+  border-collapse: separate;
+  border-spacing: 15px;
 }
 
 #copiedId {
