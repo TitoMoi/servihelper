@@ -12,12 +12,12 @@ import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 import { ElectronService } from "app/services/electron.service";
 import { toPng } from "html-to-image";
-import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, UrlSerializer } from "@angular/router";
 import { PdfService } from "app/services/pdf.service";
+import { clipboard } from "electron";
 
 @Component({
   selector: "app-image-assignment",
@@ -109,6 +109,31 @@ export class ImageAssignmentComponent implements OnInit {
     this.electronService.remote.clipboard.writeImage(natImage, "selection");
     this.copied = true;
     document.body.style.cursor = "default";
+  }
+
+  /**
+   * Experimental, this feature can be disabled by google at any moment
+   * date is a ISO date, to get the local day, month use normal "getDate" "getMonth"
+   * getMonth is 0-11 index but google api is 1-12
+   */
+  async toGoogleCalendarUrl() {
+    const date = new Date(this.date);
+    const dateNextDay = new Date(this.date);
+    dateNextDay.setDate(dateNextDay.getDate() + 1); //Add +1 to be full day event
+    let url = `https://www.google.com/calendar/render?action=TEMPLATE
+    &text=${encodeURI(this.assignTypeName)}
+    &details=${encodeURI(this.theme)}
+    &dates=${encodeURI(
+      date.getFullYear().toString() +
+        (date.getMonth() + 1).toString().padStart(2, "0") +
+        date.getDate().toString().padStart(2, "0") +
+        "/" +
+        dateNextDay.getFullYear().toString() +
+        (dateNextDay.getMonth() + 1).toString().padStart(2, "0") +
+        dateNextDay.getDate().toString().padStart(2, "0")
+    )}`;
+    url = url.replace(/\s/g, "");
+    clipboard.writeText(url, "selection");
   }
 
   async toPng() {

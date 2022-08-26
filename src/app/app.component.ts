@@ -37,9 +37,9 @@ export class AppComponent implements OnInit {
     "png",
     "printer",
     "excel",
+    "googlecalendar",
   ];
 
-  //Require pdfService here to force the service be provided with main chunk and initialized
   constructor(
     private configService: ConfigService,
     private roomService: RoomService,
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     private assignmentService: AssignmentService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private pdfService: PdfService
+    private pdfService: PdfService //Require pdfService here to force the service be provided with main chunk to be initialized
   ) {
     //Register icons
     for (const iconFileName of this.icons) {

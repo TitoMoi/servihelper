@@ -127,6 +127,7 @@
             <mat-form-field class="full-width">
               <mat-label>{{ t("ASSIGN_UPDATE_FOOTER_NOTE") }}</mat-label>
               <mat-select formControlName="footerNote" [disableRipple]="true">
+                <mat-option [value]="undefined"></mat-option>
                 <mat-option *ngFor="let note of footerNotes" [value]="note.id">
                   {{ note.name }}
                 </mat-option>

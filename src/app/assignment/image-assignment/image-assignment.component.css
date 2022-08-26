@@ -6,6 +6,10 @@
   border-bottom: 2px solid gray;
 }
 
+.font-15 {
+  font-size: 15px;
+}
+
 #copiedId {
   background-color: white;
   padding: 10px;

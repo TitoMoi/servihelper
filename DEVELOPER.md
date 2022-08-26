@@ -39,3 +39,7 @@ The available fonts for pdf are in resources, Meiryo for japanese, malgun for ko
 The base64 fonts are in resources/base64fonts and not in assets because is not needed that each user has the base64 fonts
 they are already imported as base64 in the pdfService and in main chunk.
 The fonts are converted to base64 using the parallax \jsPDF\fontconverter\fontconverter.html
+
+## Reminders
+
+Create a google event: https://support.google.com/calendar/thread/128416249/calendar-url-generator-which-parameters?hl=en
