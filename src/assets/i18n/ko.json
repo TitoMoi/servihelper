@@ -188,7 +188,7 @@
   "STATISTICS_ONLY_WOMAN": "여성 만",
   "STATISTICS_PENULTIMA": "두 번째 날짜",
   "bn": "벵골 사람",
-  "ca": "Catalan",
+  "ca": "카탈로니아 사람",
   "de": "독일 사람",
   "el": "그리스 어",
   "en": "영어",
@@ -204,5 +204,6 @@
   "ro": "루마니아 사람",
   "ru": "러시아인",
   "tr": "터키",
-  "zhCN": "중국인"
+  "zhCN": "중국인",
+  "ASSIGN_REMINDER_COPIED": "알림 링크 복사, 사용자는 Google Calendar 앱을 갖고 로그인해야합니다."
 }

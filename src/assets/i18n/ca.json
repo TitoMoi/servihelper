@@ -205,5 +205,6 @@
   "ro": "Romanès",
   "ru": "Rus",
   "tr": "Turc",
-  "zhCN": "Xinès"
+  "zhCN": "Xinès",
+  "ASSIGN_REMINDER_COPIED": "Enllaç de recordatori copiat, l'usuari ha de tenir l'aplicació de Google Calendar i s'ha de iniciar la sessió"
 }

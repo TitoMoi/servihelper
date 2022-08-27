@@ -204,5 +204,6 @@
   "ro": "Romanya",
   "ru": "Rusça",
   "tr": "Türk",
-  "zhCN": "Çince"
+  "zhCN": "Çince",
+  "ASSIGN_REMINDER_COPIED": "Hatırlatma bağlantısı kopyalandı, kullanıcının Google Takvim uygulamasına sahip olması ve giriş yapması gerekiyor"
 }

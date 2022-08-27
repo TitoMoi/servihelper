@@ -204,5 +204,6 @@
   "ro": "Română",
   "ru": "Rusă",
   "tr": "Turc",
-  "zhCN": "Chinez"
+  "zhCN": "Chinez",
+  "ASSIGN_REMINDER_COPIED": "Link de memento copiat, utilizatorul trebuie să aibă aplicația Google Calendar și să fie conectat"
 }

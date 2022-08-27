@@ -204,5 +204,6 @@
   "ro": "Rumänisch",
   "ru": "Russisch",
   "tr": "Türkisch",
-  "zhCN": "Chinesisch"
+  "zhCN": "Chinesisch",
+  "ASSIGN_REMINDER_COPIED": "Reminder -Link kopiert, muss der Benutzer die Google -Kalender -App haben und angemeldet sein"
 }

@@ -139,15 +139,15 @@
       </button>
       <mat-icon
         class="m-2"
-        svgIcon="pdf"
-        aria-label="icon"
-        (click)="toPdf()"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
         svgIcon="googlecalendar"
         aria-label="icon"
         (click)="toGoogleCalendarUrl()"
+      ></mat-icon>
+      <mat-icon
+        class="m-2"
+        svgIcon="pdf"
+        aria-label="icon"
+        (click)="toPdf()"
       ></mat-icon>
       <mat-icon
         class="m-2"
@@ -158,8 +158,11 @@
     </div>
   </div>
   <div class="col-12 col-md-5 col-xl-12">
-    <p id="copiedId" class="m-2 d-inline-block" *ngIf="copied">
+    <p class="m-2 d-inline-block copied" *ngIf="copied">
       {{ "ASSIGN_IMAGE_COPIED" | transloco }}
+    </p>
+    <p class="m-2 d-inline-block copied" *ngIf="copiedCalendarReminder">
+      {{ "ASSIGN_REMINDER_COPIED" | transloco }}
     </p>
   </div>
 </div>

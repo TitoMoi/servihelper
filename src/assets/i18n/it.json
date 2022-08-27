@@ -204,5 +204,6 @@
   "ro": "Rumena",
   "ru": "Russo",
   "tr": "Turca",
-  "zhCN": "Cinese"
+  "zhCN": "Cinese",
+  "ASSIGN_REMINDER_COPIED": "Link di promemoria copiato, l'utente deve avere l'app Google Calendar ed essere effettuato l'accesso"
 }

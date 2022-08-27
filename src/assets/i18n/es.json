@@ -206,5 +206,6 @@
   "ro": "Rumano",
   "ru": "Ruso",
   "tr": "Turco",
-  "zhCN": "Chino"
+  "zhCN": "Chino",
+  "ASSIGN_REMINDER_COPIED": "Link de recordatorio copiado, el usuario debe tener la aplicación de calendario de Google y iniciar sesión"
 }

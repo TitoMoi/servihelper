@@ -204,5 +204,6 @@
   "ro": "Roemeense",
   "ru": "Russisch",
   "tr": "Turks",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "ASSIGN_REMINDER_COPIED": "Herinneringslink gekopieerd, de gebruiker moet de Google Agenda -app hebben en worden aangemeld"
 }

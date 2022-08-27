@@ -204,5 +204,6 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "ASSIGN_REMINDER_COPIED": "Reminder link copied, the user needs to have the google calendar app and be logged in"
 }

@@ -14,10 +14,10 @@ import { ElectronService } from "app/services/electron.service";
 import { toPng } from "html-to-image";
 import autoTable from "jspdf-autotable";
 
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, UrlSerializer } from "@angular/router";
 import { PdfService } from "app/services/pdf.service";
-import { clipboard } from "electron";
+import { clipboard, Data, NativeImage } from "electron";
 
 @Component({
   selector: "app-image-assignment",
@@ -33,6 +33,7 @@ export class ImageAssignmentComponent implements OnInit {
   assignments: AssignmentInterface[];
 
   copied = false;
+  copiedCalendarReminder = false;
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
@@ -65,7 +66,8 @@ export class ImageAssignmentComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private electronService: ElectronService,
     private configService: ConfigService,
-    private pdfService: PdfService
+    private pdfService: PdfService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -104,19 +106,26 @@ export class ImageAssignmentComponent implements OnInit {
     document.body.style.cursor = "wait";
     const node = document.getElementById("assignmentTableId");
     const dataUrl = await toPng(node);
-    const natImage =
+    const natImage: NativeImage =
       this.electronService.remote.nativeImage.createFromDataURL(dataUrl);
-    this.electronService.remote.clipboard.writeImage(natImage, "selection");
-    this.copied = true;
+    clipboard.write(
+      {
+        image: natImage,
+      },
+      "selection"
+    );
     document.body.style.cursor = "default";
+    this.copied = true;
+    this.cdr.detectChanges();
   }
 
   /**
    * Experimental, this feature can be disabled by google at any moment
    * date is a ISO date, to get the local day, month use normal "getDate" "getMonth"
-   * getMonth is 0-11 index but google api is 1-12
+   * getMonth is 0-11 index but google api is 1-12 so we add +1
+   * The reminder appears the night before the assignment
    */
-  async toGoogleCalendarUrl() {
+  toGoogleCalendarUrl() {
     const date = new Date(this.date);
     const dateNextDay = new Date(this.date);
     dateNextDay.setDate(dateNextDay.getDate() + 1); //Add +1 to be full day event
@@ -124,16 +133,26 @@ export class ImageAssignmentComponent implements OnInit {
     &text=${encodeURI(this.assignTypeName)}
     &details=${encodeURI(this.theme)}
     &dates=${encodeURI(
-      date.getFullYear().toString() +
-        (date.getMonth() + 1).toString().padStart(2, "0") +
-        date.getDate().toString().padStart(2, "0") +
+      date
+        .toISOString()
+        .replace(/-/g, "")
+        .replace(/:/g, "")
+        .replace(/\./g, "") +
         "/" +
-        dateNextDay.getFullYear().toString() +
-        (dateNextDay.getMonth() + 1).toString().padStart(2, "0") +
-        dateNextDay.getDate().toString().padStart(2, "0")
+        dateNextDay
+          .toISOString()
+          .replace(/-/g, "")
+          .replace(/:/g, "")
+          .replace(/\./g, "")
     )}`;
     url = url.replace(/\s/g, "");
-    clipboard.writeText(url, "selection");
+    clipboard.write(
+      {
+        text: url,
+      },
+      "selection"
+    );
+    this.copiedCalendarReminder = true;
   }
 
   async toPng() {

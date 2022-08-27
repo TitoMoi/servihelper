@@ -204,5 +204,6 @@
   "ro": "Rumuński",
   "ru": "Rosyjski",
   "tr": "Turecki",
-  "zhCN": "Chiński"
+  "zhCN": "Chiński",
+  "ASSIGN_REMINDER_COPIED": "Kopiowany link przypomnienia, użytkownik musi mieć aplikację Google Calendar i być zalogowany"
 }
