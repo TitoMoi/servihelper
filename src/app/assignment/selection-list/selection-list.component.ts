@@ -161,8 +161,10 @@ export class SelectionListComponent implements OnChanges {
     }
   }
 
-  toPdf() {
-    const doc = this.pdfService.getJsPdf({ orientation: "portrait" });
+  toPdfForPrint() {
+    const doc = this.pdfService.getJsPdf({
+      orientation: "portrait",
+    });
 
     const font = this.pdfService.getFontForLang();
 
@@ -173,7 +175,120 @@ export class SelectionListComponent implements OnChanges {
         columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
-          const text = data.cell.raw["innerText"];
+          const id = data.cell.raw["id"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const localName = data.cell.raw["localName"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const classList: DOMTokenList = data.cell.raw["classList"];
+          const assignType = this.assignTypeService.getAssignType(id);
+          if (assignType) {
+            data.cell.styles.fillColor = assignType.color;
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          //date
+          if (localName === "th") {
+            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
+            data.cell.styles.fillColor =
+              this.configService.getConfig().defaultReportDateColor ||
+              "#FFFFFF";
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          //theme
+          if (!assignType && localName === "td" && classList.contains("bold")) {
+            data.cell.styles.fillColor = "#FFFFFF";
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          if (!assignType && !classList.contains("bold"))
+            data.cell.styles.fillColor = "#FFFFFF";
+        },
+      });
+    }
+    doc.save("assignmentsPrint");
+  }
+
+  /**
+   * pass to jsPdf a very long height so he thinks the has 90000 millimeters to draw, after each table "didDrawPage"
+   * will put the pointer Y more down, the last Y pointer is the height
+   * If we dont pass 90000 to draw will output diferent Y positions, because A4 height is 270 so if the table doesnt fit
+   * will output something like 237 and 98 this is last 2 pages pointers because in last 1 page doesnt fit.
+   *
+   * @returns the total height
+   */
+  getPdfHeight(): number {
+    const doc = this.pdfService.getJsPdf({
+      orientation: "portrait",
+      format: [210, 90000],
+    });
+
+    const font = this.pdfService.getFontForLang();
+
+    let totalHeight = 0;
+
+    for (let i = 0; i < this.assignmentGroups.length; i++) {
+      autoTable(doc, {
+        html: `#table${i}`,
+        styles: { font },
+        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
+        didParseCell: (data) => {
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const id = data.cell.raw["id"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const localName = data.cell.raw["localName"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const classList: DOMTokenList = data.cell.raw["classList"];
+          const assignType = this.assignTypeService.getAssignType(id);
+          if (assignType) {
+            data.cell.styles.fillColor = assignType.color;
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          //date
+          if (localName === "th") {
+            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
+            data.cell.styles.fillColor =
+              this.configService.getConfig().defaultReportDateColor ||
+              "#FFFFFF";
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          //theme
+          if (!assignType && localName === "td" && classList.contains("bold")) {
+            data.cell.styles.fillColor = "#FFFFFF";
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          if (!assignType && !classList.contains("bold"))
+            data.cell.styles.fillColor = "#FFFFFF";
+        },
+        didDrawPage: (data) => {
+          totalHeight = data.cursor.y;
+        },
+      });
+    }
+    return totalHeight;
+  }
+
+  /**
+   * To digital pdf, give 50 extra space at the end
+   */
+  toPdf() {
+    const height = this.getPdfHeight();
+    const doc = this.pdfService.getJsPdf({
+      orientation: "portrait",
+      format: [210, height + 50],
+    });
+
+    const font = this.pdfService.getFontForLang();
+
+    for (let i = 0; i < this.assignmentGroups.length; i++) {
+      autoTable(doc, {
+        html: `#table${i}`,
+        styles: { font },
+        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
+        didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
           // eslint-disable-next-line @typescript-eslint/dot-notation

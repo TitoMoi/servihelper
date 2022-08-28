@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
     "csvSvg",
     "search",
     "pdf",
+    "pdfblue",
     "png",
     "printer",
     "excel",
