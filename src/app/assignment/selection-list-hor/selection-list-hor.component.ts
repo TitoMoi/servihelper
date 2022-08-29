@@ -194,9 +194,11 @@ export class SelectionListHorComponent implements OnChanges {
    * If we dont pass 90000 to draw will output diferent Y positions, because A4 height is 270 so if the table doesnt fit
    * will output something like 237 and 98 this is last 2 pages pointers because in last 1 page doesnt fit.
    *
+   * For the X axis is not consistent, so we count the cells that are assignments and multiply by something it fits a big title
+   *
    * @returns the total height
    */
-  getPdfHeight(): number {
+  getPdfFormat(): Record<"maxTotalCells" | "totalHeight", number> {
     const doc = this.pdfService.getJsPdf({
       orientation: "landscape",
       format: [297, 90000],
@@ -205,8 +207,11 @@ export class SelectionListHorComponent implements OnChanges {
     const font = this.pdfService.getFontForLang();
 
     let totalHeight = 0;
+    let maxTotalCells = 0;
 
     for (let i = 0; i < this.assignmentGroups.length; i++) {
+      let totalCells = 1; //Begins in 1 because date is not an assignment so we count it in advance
+
       autoTable(doc, {
         html: `#table${i}`,
         styles: { font },
@@ -220,6 +225,8 @@ export class SelectionListHorComponent implements OnChanges {
 
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
+            totalCells++;
+
             data.cell.styles.fillColor = assignType.color;
             data.cell.styles.fontStyle = "bold";
             return;
@@ -236,16 +243,18 @@ export class SelectionListHorComponent implements OnChanges {
           totalHeight = data.cursor.y;
         },
       });
+      maxTotalCells = totalCells > maxTotalCells ? totalCells : maxTotalCells;
     }
-    return totalHeight;
+    return { maxTotalCells, totalHeight };
   }
 
   toPdf() {
-    const height = this.getPdfHeight();
+    const pdfFormat = this.getPdfFormat();
 
     const doc = this.pdfService.getJsPdf({
       orientation: "landscape",
-      format: [550, height + 50],
+      unit: "mm",
+      format: [pdfFormat.maxTotalCells * 35 + 35, pdfFormat.totalHeight + 100], //Extra cell 35 for the margins
     });
 
     const font = this.pdfService.getFontForLang();
@@ -253,7 +262,7 @@ export class SelectionListHorComponent implements OnChanges {
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       autoTable(doc, {
         html: `#table${i}`,
-        styles: { font },
+        styles: { font, cellWidth: 35 },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const text = data.cell.raw["innerText"];
