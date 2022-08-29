@@ -130,11 +130,11 @@ export class ParticipantService {
    * @param id the id of the new assignType to add
    * @returns
    */
-  addAssignType(id: string): boolean {
+  addAssignType(id: string, hasAssistant: boolean): boolean {
     const participantAssignTypesValue: ParticipantAssignTypesInterface = {
       assignTypeId: id,
       canPrincipal: true,
-      canAssistant: true,
+      canAssistant: hasAssistant,
     };
 
     for (const participant of this.#participants) {

@@ -38,7 +38,10 @@ export class CreateAssignTypeComponent {
     });
 
     //Add the assign type reference for all the participants
-    this.participantService.addAssignType(id);
+    this.participantService.addAssignType(
+      id,
+      this.assignTypeForm.get("hasAssistant").value
+    );
 
     //navigate to parent
     this.router.navigate([".."], {
