@@ -114,8 +114,8 @@ export class RoomService {
    */
   deleteRoom(id: string): boolean {
     //delete room
-    this.#rooms = this.#rooms.filter((b) => b.id !== id);
     this.#roomsMap.delete(id);
+    this.#rooms = this.#rooms.filter((b) => b.id !== id);
     //save rooms
     return this.saveRoomsToFile();
   }

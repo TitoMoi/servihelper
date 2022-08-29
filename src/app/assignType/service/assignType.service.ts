@@ -119,9 +119,10 @@ export class AssignTypeService {
    */
   deleteAssignType(id: string): boolean {
     //delete assignType
-    this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
+    const assignType = this.getAssignType(id);
     this.#assignTypesMap.delete(id);
-    this.#assignTypesMapByName.delete(this.getAssignType(id).name);
+    this.#assignTypesMapByName.delete(assignType.name);
+    this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
     //save assignTypes
     return this.saveAssignTypesToFile();
   }
