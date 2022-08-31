@@ -379,17 +379,32 @@ export class SelectionListComponent implements OnChanges {
     this.excelService.addAsignmentsVertical(this.assignmentGroups);
   }
 
+  /**
+   *
+   * @param event the pointerEvent
+   * Override assignment styles and date styles and apply same background for all the day
+   */
   changeBackgroundColor(event) {
     const targetId = event.currentTarget.id;
     const tableElem: HTMLTableElement = document.getElementById(
       targetId
     ) as HTMLTableElement;
 
-    tableElem.style.backgroundColor = this.colorpicker;
-
     const selectedColor = this.colorpicker;
-    //Save color for the selected table
 
+    //Override assignment and date colors and reset
+    const trList: HTMLCollection = tableElem.children; //tr
+    const length = trList.length;
+    for (let i = 0; i < length; i++) {
+      const childNodes: NodeList = trList[i].childNodes; //th, td
+      childNodes.forEach((child: HTMLTableElement) => {
+        child.style.backgroundColor = ""; //must be empty string
+      });
+    }
+    //Apply background for all the table
+    tableElem.style.backgroundColor = selectedColor;
+
+    //Save color for the selected table
     this.tableWithColor[targetId] = selectedColor;
   }
 }
