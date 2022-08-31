@@ -397,7 +397,9 @@ export class SelectionListComponent implements OnChanges {
     for (let i = 0; i < length; i++) {
       const childNodes: NodeList = trList[i].childNodes; //th, td
       childNodes.forEach((child: HTMLTableElement) => {
-        child.style.backgroundColor = ""; //must be empty string
+        if (child.style) {
+          child.style.backgroundColor = ""; //must be empty string
+        }
       });
     }
     //Apply background for all the table
