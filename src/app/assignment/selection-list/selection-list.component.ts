@@ -46,6 +46,8 @@ export class SelectionListComponent implements OnChanges {
   defaultReportDateColor =
     this.configService.getConfig().defaultReportDateColor;
 
+  reportTitle = this.configService.getConfig().reportTitle;
+
   #assignments: AssignmentInterface[] = [];
 
   assignmentGroups: AssignmentGroupInterface[] = [];
@@ -164,54 +166,6 @@ export class SelectionListComponent implements OnChanges {
     }
   }
 
-  toPdfForPrint() {
-    const doc = this.pdfService.getJsPdf({
-      orientation: "portrait",
-    });
-
-    const font = this.pdfService.getFontForLang();
-
-    for (let i = 0; i < this.assignmentGroups.length; i++) {
-      autoTable(doc, {
-        html: `#table${i}`,
-        styles: { font },
-        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
-        didParseCell: (data) => {
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const id = data.cell.raw["id"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const localName = data.cell.raw["localName"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const classList: DOMTokenList = data.cell.raw["classList"];
-          const assignType = this.assignTypeService.getAssignType(id);
-          if (assignType) {
-            data.cell.styles.fillColor = assignType.color;
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          //date
-          if (localName === "th") {
-            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
-            data.cell.styles.fillColor =
-              this.configService.getConfig().defaultReportDateColor ||
-              "#FFFFFF";
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          //theme
-          if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fillColor = "#FFFFFF";
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          if (!assignType && !classList.contains("bold"))
-            data.cell.styles.fillColor = "#FFFFFF";
-        },
-      });
-    }
-    doc.save("assignmentsPrint");
-  }
-
   /**
    * pass to jsPdf a very long height so he thinks the has 90000 millimeters to draw, after each table "didDrawPage"
    * will put the pointer Y more down, the last Y pointer is the height
@@ -230,10 +184,13 @@ export class SelectionListComponent implements OnChanges {
 
     let totalHeight = 0;
 
+    let firstTable = true;
+
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       autoTable(doc, {
         html: `#table${i}`,
         styles: { font },
+        margin: firstTable ? { top: 30 } : undefined,
         columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
@@ -270,8 +227,70 @@ export class SelectionListComponent implements OnChanges {
           totalHeight = data.cursor.y;
         },
       });
+      firstTable = false;
     }
     return totalHeight;
+  }
+
+  toPdfForPrint() {
+    const doc = this.pdfService.getJsPdf({
+      orientation: "portrait",
+    });
+
+    const font = this.pdfService.getFontForLang();
+
+    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 20, {
+      align: "center",
+    });
+
+    let firstTable = true;
+
+    for (let i = 0; i < this.assignmentGroups.length; i++) {
+      const tableId = `table${i}`;
+      autoTable(doc, {
+        html: "#" + tableId,
+        styles: { font },
+        margin: firstTable ? { top: 30 } : undefined,
+        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
+        didParseCell: (data) => {
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const id = data.cell.raw["id"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const localName = data.cell.raw["localName"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const classList: DOMTokenList = data.cell.raw["classList"];
+          const assignType = this.assignTypeService.getAssignType(id);
+          if (assignType) {
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] || assignType.color;
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          //date
+          if (localName === "th") {
+            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] ||
+              this.configService.getConfig().defaultReportDateColor ||
+              "#FFFFFF";
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          //theme
+          if (!assignType && localName === "td" && classList.contains("bold")) {
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] || "#FFFFFF";
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          if (!assignType && !classList.contains("bold"))
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] || "#FFFFFF";
+        },
+      });
+      firstTable = false;
+    }
+    doc.save("assignmentsPrint");
   }
 
   /**
@@ -287,14 +306,9 @@ export class SelectionListComponent implements OnChanges {
 
     const font = this.pdfService.getFontForLang();
 
-    doc.text(
-      this.configService.getConfig().reportTitle,
-      doc.internal.pageSize.width / 2,
-      20,
-      {
-        align: "center",
-      }
-    );
+    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 20, {
+      align: "center",
+    });
 
     let firstTable = true;
 

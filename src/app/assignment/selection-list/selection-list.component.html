@@ -44,6 +44,7 @@
 </div>
 
 <div id="toPngDivId" style="width: 40rem" class="bg-color-white">
+  <h3 [style.textAlign]="'center'">{{ reportTitle }}</h3>
   <ng-container *ngFor="let ag of assignmentGroups; index as i">
     <table
       [id]="'table' + i"
