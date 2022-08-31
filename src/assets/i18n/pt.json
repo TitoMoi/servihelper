@@ -32,6 +32,7 @@
   "ASSIGN_IMAGE_NOTE": "Tema:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "Vai ser presentado em:",
   "ASSIGN_IMAGE_TITLE": "DESIGANÇÃO PARA A REUNIÃO VIDA Y MINISTERIO CRISTÃOS",
+  "ASSIGN_REMINDER_COPIED": "Link de lembrete copiado, o usuário precisa ter o aplicativo do Google Calendar e ser conectado",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Ordem crescente ou decrescente",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Selecione os tipos de atribuição",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "Horizontal",
@@ -90,6 +91,7 @@
   "CONFIG_DEFAULT_REPORT_DATE_FORMAT": "Escolha o formato padrão para a data",
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "O dia da semana começa",
   "CONFIG_FORM_SAVED": "Configuração salva",
+  "CONFIG_REPORT_TITLE": "Título para os relatórios",
   "CONFIG_RESET_ALL": "Reiniciar o programa",
   "CONFIG_RESET_ALL_CONFIRM": "Confirmar reiniciar o programa",
   "CONFIG_RESTART": "O programa foi reiniciado",
@@ -206,6 +208,5 @@
   "ro": "Romena",
   "ru": "Russo",
   "tr": "Turca",
-  "zhCN": "Chinês",
-  "ASSIGN_REMINDER_COPIED": "Link de lembrete copiado, o usuário precisa ter o aplicativo do Google Calendar e ser conectado"
+  "zhCN": "Chinês"
 }

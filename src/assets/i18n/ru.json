@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "Тема:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "Представлено в:",
   "ASSIGN_IMAGE_TITLE": "Вы можете изменить это заголовок в разделе конфигурации",
+  "ASSIGN_REMINDER_COPIED": "Ссылка напоминания о копировании, пользователю необходимо иметь приложение Google Calendar и войти в систему",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Восходящий или нисходящий порядок",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Выберите типы назначений",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "Горизонтальный",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "Будний день начинается",
   "CONFIG_FORM_SAVED": "Конфигурация сохранена",
   "CONFIG_IMAGE_HEADER": "Название изображения задания",
+  "CONFIG_REPORT_TITLE": "Название для отчетов",
   "CONFIG_RESET_ALL": "Перезагрузить программу",
   "CONFIG_RESET_ALL_CONFIRM": "Подтвердите перезагрузить программу",
   "CONFIG_RESTART_LABEL": "Сброс программы",
@@ -204,6 +206,5 @@
   "ro": "румынский",
   "ru": "Русский",
   "tr": "турецкий",
-  "zhCN": "китайский язык",
-  "ASSIGN_REMINDER_COPIED": "Ссылка напоминания о копировании, пользователю необходимо иметь приложение Google Calendar и войти в систему"
+  "zhCN": "китайский язык"
 }

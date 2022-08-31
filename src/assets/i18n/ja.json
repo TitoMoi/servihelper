@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "テーマ：",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "提示：",
   "ASSIGN_IMAGE_TITLE": "このタイトルを構成セクションで変更できます",
+  "ASSIGN_REMINDER_COPIED": "コピーされたリマインダーリンク、ユーザーはGoogleカレンダーアプリを持ってログインする必要があります",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "昇順または降順",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "割り当てタイプを選択します",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "水平",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "平日が始まります",
   "CONFIG_FORM_SAVED": "構成が保存されました",
   "CONFIG_IMAGE_HEADER": "割り当て画像タイトル",
+  "CONFIG_REPORT_TITLE": "レポートのタイトル",
   "CONFIG_RESET_ALL": "プログラムを再起動します",
   "CONFIG_RESET_ALL_CONFIRM": "Confirm restart the program",
   "CONFIG_RESTART_LABEL": "プログラムをリセットします",
@@ -204,6 +206,5 @@
   "ro": "ルーマニア人",
   "ru": "ロシア",
   "tr": "トルコ語",
-  "zhCN": "中国語",
-  "ASSIGN_REMINDER_COPIED": "コピーされたリマインダーリンク、ユーザーはGoogleカレンダーアプリを持ってログインする必要があります"
+  "zhCN": "中国語"
 }

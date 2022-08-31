@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "Motyw:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "zaprezentowane w:",
   "ASSIGN_IMAGE_TITLE": "Możesz zmienić ten tytuł w sekcji konfiguracji",
+  "ASSIGN_REMINDER_COPIED": "Kopiowany link przypomnienia, użytkownik musi mieć aplikację Google Calendar i być zalogowany",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Zamówienie rosnące lub malejące",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Wybierz typy przypisań",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "Poziomy",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "Dzień powszedni zaczyna się",
   "CONFIG_FORM_SAVED": "Zapisana konfiguracja",
   "CONFIG_IMAGE_HEADER": "Tytuł obrazu przypisania",
+  "CONFIG_REPORT_TITLE": "Tytuł raportów",
   "CONFIG_RESET_ALL": "Uruchom ponownie program",
   "CONFIG_RESET_ALL_CONFIRM": "Potwierdź ponownie uruchom program",
   "CONFIG_RESTART_LABEL": "Resetuj program",
@@ -204,6 +206,5 @@
   "ro": "Rumuński",
   "ru": "Rosyjski",
   "tr": "Turecki",
-  "zhCN": "Chiński",
-  "ASSIGN_REMINDER_COPIED": "Kopiowany link przypomnienia, użytkownik musi mieć aplikację Google Calendar i być zalogowany"
+  "zhCN": "Chiński"
 }

@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "Theme:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "presented in:",
   "ASSIGN_IMAGE_TITLE": "YOU CAN CHANGE THIS TITLE IN THE CONFIG SECTION",
+  "ASSIGN_REMINDER_COPIED": "Reminder link copied, the user needs to have the google calendar app and be logged in",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Ascending or descending order",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Select the assignment types",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "Horizontal",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "Weekday begins on",
   "CONFIG_FORM_SAVED": "Configuration saved",
   "CONFIG_IMAGE_HEADER": "Assignment image title",
+  "CONFIG_REPORT_TITLE": "Title for the reports",
   "CONFIG_RESET_ALL": "Restart the program",
   "CONFIG_RESET_ALL_CONFIRM": "Confirm restart the program",
   "CONFIG_RESTART_LABEL": "Reset program",
@@ -204,6 +206,5 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese",
-  "ASSIGN_REMINDER_COPIED": "Reminder link copied, the user needs to have the google calendar app and be logged in"
+  "zhCN": "Chinese"
 }

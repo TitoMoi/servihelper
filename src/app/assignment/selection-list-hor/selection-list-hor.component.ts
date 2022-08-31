@@ -255,6 +255,7 @@ export class SelectionListHorComponent implements OnChanges {
       orientation: "landscape",
       unit: "mm",
       format: [pdfFormat.maxTotalCells * 35 + 35, pdfFormat.totalHeight + 100], //Extra cell 35 for the margins
+      compress: true,
     });
 
     const font = this.pdfService.getFontForLang();

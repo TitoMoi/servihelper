@@ -62,6 +62,13 @@
       </mat-form-field>
     </div>
     <div class="col-12">
+      <h4>{{ "CONFIG_REPORT_TITLE" | transloco }}</h4>
+      <mat-form-field class="full-width">
+        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+        <input matInput formControlName="reportTitle" />
+      </mat-form-field>
+    </div>
+    <div class="col-12">
       <div class="row">
         <div class="col-6">
           <h4>{{ "CONFIG_DEFAULT_FOOTER_NOTE" | transloco }}</h4>

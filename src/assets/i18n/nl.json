@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "Thema:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "gepresenteerd in:",
   "ASSIGN_IMAGE_TITLE": "U kunt deze titel wijzigen in de configuratie -sectie",
+  "ASSIGN_REMINDER_COPIED": "Herinneringslink gekopieerd, de gebruiker moet de Google Agenda -app hebben en worden aangemeld",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Oplopende of dalende bestelling",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Selecteer de toewijzingstypen",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "Horizontaal",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "Weekdag begint op",
   "CONFIG_FORM_SAVED": "Configuratie opgeslagen",
   "CONFIG_IMAGE_HEADER": "Titel Titel opdracht",
+  "CONFIG_REPORT_TITLE": "Titel voor de rapporten",
   "CONFIG_RESET_ALL": "Start het programma opnieuw op",
   "CONFIG_RESET_ALL_CONFIRM": "Bevestig het programma opnieuw opstarten",
   "CONFIG_RESTART_LABEL": "Reset -programma",
@@ -204,6 +206,5 @@
   "ro": "Roemeense",
   "ru": "Russisch",
   "tr": "Turks",
-  "zhCN": "Chinese",
-  "ASSIGN_REMINDER_COPIED": "Herinneringslink gekopieerd, de gebruiker moet de Google Agenda -app hebben en worden aangemeld"
+  "zhCN": "Chinese"
 }

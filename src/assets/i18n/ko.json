@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "주제:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "발표 :",
   "ASSIGN_IMAGE_TITLE": "구성 섹션 에서이 제목을 변경할 수 있습니다",
+  "ASSIGN_REMINDER_COPIED": "알림 링크 복사, 사용자는 Google Calendar 앱을 갖고 로그인해야합니다.",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "오름차순 또는 내림차순 주문",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "할당 유형을 선택하십시오",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "수평의",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "평일은 시작됩니다",
   "CONFIG_FORM_SAVED": "구성 저장",
   "CONFIG_IMAGE_HEADER": "할당 이미지 제목",
+  "CONFIG_REPORT_TITLE": "보고서 제목",
   "CONFIG_RESET_ALL": "프로그램을 다시 시작하십시오",
   "CONFIG_RESET_ALL_CONFIRM": "프로그램을 다시 시작하십시오",
   "CONFIG_RESTART_LABEL": "프로그램을 재설정하십시오",
@@ -204,6 +206,5 @@
   "ro": "루마니아 사람",
   "ru": "러시아인",
   "tr": "터키",
-  "zhCN": "중국인",
-  "ASSIGN_REMINDER_COPIED": "알림 링크 복사, 사용자는 Google Calendar 앱을 갖고 로그인해야합니다."
+  "zhCN": "중국인"
 }

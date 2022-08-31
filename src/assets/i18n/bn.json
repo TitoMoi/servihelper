@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "থিম:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "উপস্থাপিত:",
   "ASSIGN_IMAGE_TITLE": "আপনি কনফিগার বিভাগে এই শিরোনাম পরিবর্তন করতে পারেন",
+  "ASSIGN_REMINDER_COPIED": "অনুস্মারক লিঙ্কটি অনুলিপি করা হয়েছে, ব্যবহারকারীর গুগল ক্যালেন্ডার অ্যাপ্লিকেশন থাকতে হবে এবং লগ ইন করা উচিত",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "আরোহী বা অবতরণ ক্রম",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "অ্যাসাইনমেন্ট প্রকারগুলি নির্বাচন করুন",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "অনুভূমিক",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "সপ্তাহের দিন শুরু হয়",
   "CONFIG_FORM_SAVED": "কনফিগারেশন সংরক্ষণ করা হয়েছে",
   "CONFIG_IMAGE_HEADER": "অ্যাসাইনমেন্ট ইমেজ শিরোনাম",
+  "CONFIG_REPORT_TITLE": "প্রতিবেদনের জন্য শিরোনাম",
   "CONFIG_RESET_ALL": "প্রোগ্রাম পুনরায় চালু করুন",
   "CONFIG_RESET_ALL_CONFIRM": "প্রোগ্রামটি পুনরায় চালু করুন নিশ্চিত করুন",
   "CONFIG_RESTART_LABEL": "পুনরায় সেট প্রোগ্রাম",
@@ -204,6 +206,5 @@
   "ro": "রোমানিয়ান",
   "ru": "রাশিয়ান",
   "tr": "তুর্কি",
-  "zhCN": "চাইনিজ",
-  "ASSIGN_REMINDER_COPIED": "অনুস্মারক লিঙ্কটি অনুলিপি করা হয়েছে, ব্যবহারকারীর গুগল ক্যালেন্ডার অ্যাপ্লিকেশন থাকতে হবে এবং লগ ইন করা উচিত"
+  "zhCN": "চাইনিজ"
 }

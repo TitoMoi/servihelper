@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "Thème:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "Présenté dans:",
   "ASSIGN_IMAGE_TITLE": "Vous pouvez modifier ce titre dans la section config",
+  "ASSIGN_REMINDER_COPIED": "Lien de rappel copié, l'utilisateur doit avoir l'application Google Calendar et être connecté",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Ordre ascendant ou décroissant",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Sélectionnez les types d'affectation",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "Horizontale",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "La semaine commence",
   "CONFIG_FORM_SAVED": "Configuration enregistrée",
   "CONFIG_IMAGE_HEADER": "Titre de l'image d'affectation",
+  "CONFIG_REPORT_TITLE": "Titre des rapports",
   "CONFIG_RESET_ALL": "Redémarrer le programme",
   "CONFIG_RESET_ALL_CONFIRM": "Confirmer redémarrer le programme",
   "CONFIG_RESTART_LABEL": "Programme de réinitialisation",
@@ -204,6 +206,5 @@
   "ro": "Roumaine",
   "ru": "Russe",
   "tr": "Turque",
-  "zhCN": "Chinois",
-  "ASSIGN_REMINDER_COPIED": "Lien de rappel copié, l'utilisateur doit avoir l'application Google Calendar et être connecté"
+  "zhCN": "Chinois"
 }

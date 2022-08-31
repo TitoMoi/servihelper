@@ -64,6 +64,7 @@ export class ConfigComponent {
     assignmentThemeTitle: this.configService.getConfig().assignmentThemeTitle,
     assignmentRoomTitle: this.configService.getConfig().assignmentRoomTitle,
     assignmentNoteTitle: this.configService.getConfig().assignmentNoteTitle,
+    reportTitle: this.configService.getConfig().reportTitle,
   });
 
   // If config assignmentHeader key is saved
@@ -84,6 +85,7 @@ export class ConfigComponent {
     assignmentThemeTitle: "",
     assignmentRoomTitle: "",
     assignmentNoteTitle: "",
+    reportTitle: "",
     defaultFooterNoteId: "",
     defaultReportFontSize: "",
     defaultReportDateColor: "",

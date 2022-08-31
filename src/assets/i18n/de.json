@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "Thema:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "vorgestellt in:",
   "ASSIGN_IMAGE_TITLE": "Sie können diesen Titel im Konfigurationsbereich ändern",
+  "ASSIGN_REMINDER_COPIED": "Reminder -Link kopiert, muss der Benutzer die Google -Kalender -App haben und angemeldet sein",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Aufsteigende oder absteigende Reihenfolge",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Wählen Sie die Zuordnertypen aus",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "horizontal",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "Wochentag beginnt weiter",
   "CONFIG_FORM_SAVED": "Konfiguration gespeichert",
   "CONFIG_IMAGE_HEADER": "Zuweisungsbildentitel",
+  "CONFIG_REPORT_TITLE": "Titel für die Berichte",
   "CONFIG_RESET_ALL": "Starten Sie das Programm neu",
   "CONFIG_RESET_ALL_CONFIRM": "Bestätigen Sie das Programm neu",
   "CONFIG_RESTART_LABEL": "Programm zurücksetzen",
@@ -204,6 +206,5 @@
   "ro": "Rumänisch",
   "ru": "Russisch",
   "tr": "Türkisch",
-  "zhCN": "Chinesisch",
-  "ASSIGN_REMINDER_COPIED": "Reminder -Link kopiert, muss der Benutzer die Google -Kalender -App haben und angemeldet sein"
+  "zhCN": "Chinesisch"
 }

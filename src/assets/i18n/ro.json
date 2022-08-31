@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "Temă:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "Prezentat în:",
   "ASSIGN_IMAGE_TITLE": "Puteți schimba acest titlu în secțiunea Configurare",
+  "ASSIGN_REMINDER_COPIED": "Link de memento copiat, utilizatorul trebuie să aibă aplicația Google Calendar și să fie conectat",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Ordine ascendentă sau descendentă",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Selectați tipurile de atribuire",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "Orizontală",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "Ziua săptămânii începe",
   "CONFIG_FORM_SAVED": "Configurare salvată",
   "CONFIG_IMAGE_HEADER": "Titlul imaginii de atribuire",
+  "CONFIG_REPORT_TITLE": "Titlu pentru rapoarte",
   "CONFIG_RESET_ALL": "Reporniți programul",
   "CONFIG_RESET_ALL_CONFIRM": "Confirmați reporniți programul",
   "CONFIG_RESTART_LABEL": "Programul de resetare",
@@ -204,6 +206,5 @@
   "ro": "Română",
   "ru": "Rusă",
   "tr": "Turc",
-  "zhCN": "Chinez",
-  "ASSIGN_REMINDER_COPIED": "Link de memento copiat, utilizatorul trebuie să aibă aplicația Google Calendar și să fie conectat"
+  "zhCN": "Chinez"
 }

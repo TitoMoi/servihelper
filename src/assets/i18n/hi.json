@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "थीम:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "में प्रस्तुत:",
   "ASSIGN_IMAGE_TITLE": "आप इस शीर्षक को कॉन्फ़िगरेशन अनुभाग में बदल सकते हैं",
+  "ASSIGN_REMINDER_COPIED": "अनुस्मारक लिंक कॉपी किया गया, उपयोगकर्ता को Google कैलेंडर ऐप की आवश्यकता है और लॉग इन किया जाना चाहिए",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "आरोही या अवरोही आदेश",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "असाइनमेंट प्रकार का चयन करें",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "क्षैतिज",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "कार्यदिवस शुरू होता है",
   "CONFIG_FORM_SAVED": "कॉन्फ़िगरेशन सहेजा गया",
   "CONFIG_IMAGE_HEADER": "असाइनमेंट छवि शीर्षक",
+  "CONFIG_REPORT_TITLE": "रिपोर्ट के लिए शीर्षक",
   "CONFIG_RESET_ALL": "कार्यक्रम को फिर से शुरू करें",
   "CONFIG_RESET_ALL_CONFIRM": "कार्यक्रम को पुनरारंभ करें",
   "CONFIG_RESTART_LABEL": "पुनर्विक्रय कार्यक्रम",
@@ -204,6 +206,5 @@
   "ro": "रोमानियाई",
   "ru": "रूसी",
   "tr": "तुर्की",
-  "zhCN": "चीनी",
-  "ASSIGN_REMINDER_COPIED": "अनुस्मारक लिंक कॉपी किया गया, उपयोगकर्ता को Google कैलेंडर ऐप की आवश्यकता है और लॉग इन किया जाना चाहिए"
+  "zhCN": "चीनी"
 }

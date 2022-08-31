@@ -31,6 +31,7 @@
   "ASSIGN_IMAGE_NOTE": "Θέμα:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "Παρουσιάστηκε:",
   "ASSIGN_IMAGE_TITLE": "Μπορείτε να αλλάξετε αυτόν τον τίτλο στην ενότητα Config",
+  "ASSIGN_REMINDER_COPIED": "Ο σύνδεσμος υπενθύμισης αντιγράφηκε, ο χρήστης πρέπει να έχει την εφαρμογή ημερολογίου Google και να συνδεθεί",
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Ανερχόμενη ή φθίνουσα παραγγελία",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Επιλέξτε τους τύπους εκχώρησης",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "Οριζόντιος",
@@ -89,6 +90,7 @@
   "CONFIG_DEFAULT_WEEKDAY_BEGINS": "Η εβδομάδα ξεκινά",
   "CONFIG_FORM_SAVED": "Αποθηκευμένη διαμόρφωση",
   "CONFIG_IMAGE_HEADER": "Τίτλος εικόνας ανάθεσης",
+  "CONFIG_REPORT_TITLE": "Τίτλος για τις αναφορές",
   "CONFIG_RESET_ALL": "Επανεκκινήστε το πρόγραμμα",
   "CONFIG_RESET_ALL_CONFIRM": "Επιβεβαιώστε την επανεκκίνηση του προγράμματος",
   "CONFIG_RESTART_LABEL": "Επαναφορά του προγράμματος",
@@ -204,6 +206,5 @@
   "ro": "ρουμανικός",
   "ru": "Ρωσική",
   "tr": "τούρκικος",
-  "zhCN": "κινέζικα",
-  "ASSIGN_REMINDER_COPIED": "Ο σύνδεσμος υπενθύμισης αντιγράφηκε, ο χρήστης πρέπει να έχει την εφαρμογή ημερολογίου Google και να συνδεθεί"
+  "zhCN": "κινέζικα"
 }

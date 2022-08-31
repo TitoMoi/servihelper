@@ -36,6 +36,9 @@ export class SelectionListComponent implements OnChanges {
   @Input() rooms: string[];
   @Input() order: string;
 
+  colorpicker: string = undefined;
+  tableWithColor = {};
+
   defaultReportFontSize =
     this.configService.getConfig().defaultReportFontSize + "px";
   defaultReportDateFormat =
@@ -278,15 +281,29 @@ export class SelectionListComponent implements OnChanges {
     const height = this.getPdfHeight();
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
+      compress: true,
       format: [210, height + 50],
     });
 
     const font = this.pdfService.getFontForLang();
 
+    doc.text(
+      this.configService.getConfig().reportTitle,
+      doc.internal.pageSize.width / 2,
+      20,
+      {
+        align: "center",
+      }
+    );
+
+    let firstTable = true;
+
     for (let i = 0; i < this.assignmentGroups.length; i++) {
+      const tableId = `table${i}`;
       autoTable(doc, {
-        html: `#table${i}`,
+        html: "#" + tableId,
         styles: { font },
+        margin: firstTable ? { top: 30 } : undefined,
         columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
@@ -297,7 +314,8 @@ export class SelectionListComponent implements OnChanges {
           const classList: DOMTokenList = data.cell.raw["classList"];
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
-            data.cell.styles.fillColor = assignType.color;
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] || assignType.color;
             data.cell.styles.fontStyle = "bold";
             return;
           }
@@ -305,6 +323,7 @@ export class SelectionListComponent implements OnChanges {
           if (localName === "th") {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fillColor =
+              this.tableWithColor[tableId] ||
               this.configService.getConfig().defaultReportDateColor ||
               "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
@@ -312,15 +331,19 @@ export class SelectionListComponent implements OnChanges {
           }
           //theme
           if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fillColor = "#FFFFFF";
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] || "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
             return;
           }
           if (!assignType && !classList.contains("bold"))
-            data.cell.styles.fillColor = "#FFFFFF";
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] || "#FFFFFF";
         },
       });
+      firstTable = false;
     }
+
     doc.save("assignments");
   }
 
@@ -340,5 +363,19 @@ export class SelectionListComponent implements OnChanges {
 
   toExcel() {
     this.excelService.addAsignmentsVertical(this.assignmentGroups);
+  }
+
+  changeBackgroundColor(event) {
+    const targetId = event.currentTarget.id;
+    const tableElem: HTMLTableElement = document.getElementById(
+      targetId
+    ) as HTMLTableElement;
+
+    tableElem.style.backgroundColor = this.colorpicker;
+
+    const selectedColor = this.colorpicker;
+    //Save color for the selected table
+
+    this.tableWithColor[targetId] = selectedColor;
   }
 }

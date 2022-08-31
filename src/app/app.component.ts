@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
     "printer",
     "excel",
     "googlecalendar",
+    "colorpicker",
   ];
 
   constructor(
