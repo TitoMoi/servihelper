@@ -106,10 +106,15 @@ export class HomeComponent {
           );
           break;
         case "config.json":
-          this.fs.writeFile(
-            this.path + "/config.json",
+          const currentConfig = this.configService.getConfig(); //Default config
+          const incomingConfig = JSON.parse(
             zipEntry.getData().toString("utf8")
-          );
+          ); //Incoming config
+
+          this.fs.writeJson(this.path + "/config.json", {
+            ...currentConfig,
+            ...incomingConfig,
+          });
           break;
       }
     });
