@@ -26,15 +26,36 @@
     aria-label="icon"
     (click)="toExcel()"
   ></mat-icon>
+  <mat-icon
+    class="m-2"
+    svgIcon="colorpicker"
+    cpColorMode="presets"
+    [(colorPicker)]="colorpicker"
+    cpAlphaChannel="disabled"
+    [cpPresetColors]="[
+      '#fff',
+      '#dbf7fa',
+      '#dbfae5',
+      '#fcffe6',
+      '#ffebe6',
+      '#f5e6ff'
+    ]"
+    aria-label="icon"
+  ></mat-icon>
 </div>
 
 <div id="toPngDivId" class="bg-color-white">
+  <h3 [style.textAlign]="'center'">{{ reportTitle }}</h3>
   <ng-container *ngFor="let ag of assignmentGroups; index as i">
-    <table [id]="'table' + i">
+    <table
+      [id]="'table' + i"
+      [style.cursor]="colorpicker ? 'cell' : 'default'"
+      (click)="changeBackgroundColor($event)"
+    >
       <tr>
         <th
           class="bold"
-          [style.background]="defaultReportDateColor"
+          [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
         >
           {{
@@ -49,7 +70,7 @@
           *ngFor="let assignment of ag.assignments"
           [id]="assignment.assignType.id"
           class="bold"
-          [style.background]="
+          [style.backgroundColor]="
             assignTypeService.getAssignType(assignment.assignType.id).color
           "
           [style.fontSize]="defaultReportFontSize"

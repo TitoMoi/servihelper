@@ -5,7 +5,6 @@ import { RoomService } from "app/room/service/room.service";
 import { ExcelService } from "app/services/excel.service";
 import { SortService } from "app/services/sort.service";
 import { toPng } from "html-to-image";
-import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -37,12 +36,16 @@ export class SelectionListHorComponent implements OnChanges {
   @Input() rooms: string[];
   @Input() order: string;
 
+  colorpicker: string = undefined;
+  tableWithColor = {};
+
   defaultReportFontSize =
     this.configService.getConfig().defaultReportFontSize + "px";
   defaultReportDateFormat =
     this.configService.getConfig().defaultReportDateFormat;
   defaultReportDateColor =
     this.configService.getConfig().defaultReportDateColor;
+  reportTitle = this.configService.getConfig().reportTitle;
 
   #assignments: AssignmentInterface[] = [];
 
@@ -209,15 +212,16 @@ export class SelectionListHorComponent implements OnChanges {
     let totalHeight = 0;
     let maxTotalCells = 0;
 
+    let firstTable = true;
+
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       let totalCells = 1; //Begins in 1 because date is not an assignment so we count it in advance
 
       autoTable(doc, {
         html: `#table${i}`,
         styles: { font },
+        margin: firstTable ? { top: 30 } : undefined,
         didParseCell: (data) => {
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const text = data.cell.raw["innerText"];
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
           // eslint-disable-next-line @typescript-eslint/dot-notation
@@ -244,6 +248,7 @@ export class SelectionListHorComponent implements OnChanges {
         },
       });
       maxTotalCells = totalCells > maxTotalCells ? totalCells : maxTotalCells;
+      firstTable = false;
     }
     return { maxTotalCells, totalHeight };
   }
@@ -260,13 +265,20 @@ export class SelectionListHorComponent implements OnChanges {
 
     const font = this.pdfService.getFontForLang();
 
+    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 20, {
+      align: "center",
+    });
+
+    let firstTable = true;
+
     for (let i = 0; i < this.assignmentGroups.length; i++) {
+      const tableId = `table${i}`;
       autoTable(doc, {
-        html: `#table${i}`,
+        html: "#" + tableId,
         styles: { font, cellWidth: 35 },
+        margin: firstTable ? { top: 30 } : undefined,
         didParseCell: (data) => {
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const text = data.cell.raw["innerText"];
+          data.cell.styles.fillColor = this.tableWithColor[tableId];
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
           // eslint-disable-next-line @typescript-eslint/dot-notation
@@ -274,19 +286,22 @@ export class SelectionListHorComponent implements OnChanges {
 
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
-            data.cell.styles.fillColor = assignType.color;
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] || assignType.color;
             data.cell.styles.fontStyle = "bold";
             return;
           }
           if (localName === "th" && !assignType) {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fillColor =
+              this.tableWithColor[tableId] ||
               this.configService.getConfig().defaultReportDateColor ||
               "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
           }
         },
       });
+      firstTable = false;
     }
     doc.save("assignments");
   }
@@ -296,13 +311,19 @@ export class SelectionListHorComponent implements OnChanges {
 
     const font = this.pdfService.getFontForLang();
 
+    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 20, {
+      align: "center",
+    });
+
+    let firstTable = true;
+
     for (let i = 0; i < this.assignmentGroups.length; i++) {
+      const tableId = `table${i}`;
       autoTable(doc, {
-        html: `#table${i}`,
+        html: "#" + tableId,
         styles: { font },
+        margin: firstTable ? { top: 30 } : undefined,
         didParseCell: (data) => {
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const text = data.cell.raw["innerText"];
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
           // eslint-disable-next-line @typescript-eslint/dot-notation
@@ -310,19 +331,22 @@ export class SelectionListHorComponent implements OnChanges {
 
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
-            data.cell.styles.fillColor = assignType.color;
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] || assignType.color;
             data.cell.styles.fontStyle = "bold";
             return;
           }
           if (localName === "th" && !assignType) {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fillColor =
+              this.tableWithColor[tableId] ||
               this.configService.getConfig().defaultReportDateColor ||
               "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
           }
         },
       });
+      firstTable = false;
     }
     doc.save("assignmentsPrint");
   }
@@ -343,5 +367,38 @@ export class SelectionListHorComponent implements OnChanges {
 
   toExcel() {
     this.excelService.addAsignmentsHorizontal(this.assignmentGroups);
+  }
+  /**
+   *
+   * @param event the pointerEvent
+   * Override assignment styles and date styles and apply same background for all the day
+   */
+  changeBackgroundColor(event) {
+    const targetId = event.currentTarget.id;
+    const tableElem: HTMLTableElement = document.getElementById(
+      targetId
+    ) as HTMLTableElement;
+
+    const selectedColor = this.colorpicker;
+
+    //Override assignment and date colors and reset
+    const trList: HTMLCollection = tableElem.children; //tr
+    console.log("tr", trList);
+    const length = trList.length;
+    for (let i = 0; i < length; i++) {
+      const childNodes: NodeList = trList[i].childNodes; //th, td
+      console.log("childthtd", childNodes);
+
+      childNodes.forEach((child: HTMLTableElement) => {
+        if (child.style) {
+          child.style.backgroundColor = ""; //must be empty string
+        }
+      });
+    }
+    //Apply background for all the table
+    tableElem.style.backgroundColor = selectedColor;
+
+    //Save color for the selected table
+    this.tableWithColor[targetId] = selectedColor;
   }
 }

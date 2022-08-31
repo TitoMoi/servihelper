@@ -6,7 +6,6 @@ import { ExcelService } from "app/services/excel.service";
 import { SortService } from "app/services/sort.service";
 import { PdfService } from "app/services/pdf.service";
 import { toPng } from "html-to-image";
-import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 /* eslint-disable @typescript-eslint/naming-convention */
