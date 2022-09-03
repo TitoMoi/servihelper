@@ -10,14 +10,13 @@ import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
-import { ElectronService } from "app/services/electron.service";
 import { toPng } from "html-to-image";
 import autoTable from "jspdf-autotable";
 
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { ActivatedRoute, UrlSerializer } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { PdfService } from "app/services/pdf.service";
-import { clipboard, Data, NativeImage } from "electron";
+import { clipboard, nativeImage, NativeImage } from "electron";
 
 @Component({
   selector: "app-image-assignment",
@@ -64,7 +63,6 @@ export class ImageAssignmentComponent implements OnInit {
     private participantService: ParticipantService,
     private noteService: NoteService,
     private activatedRoute: ActivatedRoute,
-    private electronService: ElectronService,
     private configService: ConfigService,
     private pdfService: PdfService,
     private cdr: ChangeDetectorRef
@@ -106,8 +104,7 @@ export class ImageAssignmentComponent implements OnInit {
     document.body.style.cursor = "wait";
     const node = document.getElementById("assignmentTableId");
     const dataUrl = await toPng(node);
-    const natImage: NativeImage =
-      this.electronService.remote.nativeImage.createFromDataURL(dataUrl);
+    const natImage: NativeImage = nativeImage.createFromDataURL(dataUrl);
     clipboard.write(
       {
         image: natImage,

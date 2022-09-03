@@ -5,7 +5,6 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
-import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
 
@@ -25,9 +24,6 @@ export class HomeComponent {
   // If upload button is clicked
   upload = false;
 
-  // the filesystem api
-  fs: typeof fs = this.electronService.remote.require("fs-extra");
-
   // The path of the app
   path: string;
 
@@ -39,8 +35,7 @@ export class HomeComponent {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private translocoService: TranslocoService,
-    private dateAdapter: DateAdapter<NativeDateAdapter>,
-    private electronService: ElectronService
+    private dateAdapter: DateAdapter<NativeDateAdapter>
   ) {
     this.path = APP_CONFIG.production
       ? //__dirname is where the .json files exists
@@ -76,31 +71,31 @@ export class HomeComponent {
     zip.getEntries().forEach((zipEntry) => {
       switch (zipEntry.entryName) {
         case "assignment.json":
-          this.fs.writeFile(
+          fs.writeFile(
             this.path + "/assignment.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "participant.json":
-          this.fs.writeFile(
+          fs.writeFile(
             this.path + "/participant.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "room.json":
-          this.fs.writeFile(
+          fs.writeFile(
             this.path + "/room.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "assignType.json":
-          this.fs.writeFile(
+          fs.writeFile(
             this.path + "/assignType.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "note.json":
-          this.fs.writeFile(
+          fs.writeFile(
             this.path + "/note.json",
             zipEntry.getData().toString("utf8")
           );
@@ -109,12 +104,9 @@ export class HomeComponent {
           const currentConfig = this.configService.getConfig(); //Default config
           const incomingConfig = JSON.parse(
             zipEntry.getData().toString("utf8")
-          ); //Incoming config
-
-          this.fs.writeJson(this.path + "/config.json", {
-            ...currentConfig,
-            ...incomingConfig,
-          });
+          );
+          const finalConfig = { ...currentConfig, ...incomingConfig };
+          fs.writeFile(this.path + "/config.json", JSON.stringify(finalConfig));
           break;
       }
     });
@@ -125,7 +117,6 @@ export class HomeComponent {
     this.assignmentService.hasChanged = true;
     this.participantService.hasChanged = true;
     this.noteService.hasChanged = true;
-
     this.configService.getConfig();
     this.roomService.getRooms();
     this.assignTypeService.getAssignTypes();

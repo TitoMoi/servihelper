@@ -1,16 +1,16 @@
-import { ConfigInterface, ConfigOptionsType } from 'app/config/model/config.model';
-import { ElectronService } from 'app/services/electron.service';
-import { APP_CONFIG } from 'environments/environment';
-import * as fs from 'fs-extra';
+import {
+  ConfigInterface,
+  ConfigOptionsType,
+} from "app/config/model/config.model";
+import { APP_CONFIG } from "environments/environment";
+import * as fs from "fs-extra";
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
 })
 export class ConfigService {
-  // Filesystem api
-  fs: typeof fs = this.electronService.remote.require("fs-extra");
   // Where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
@@ -21,7 +21,7 @@ export class ConfigService {
   // Flag to indicate that config file has changed
   hasChanged = true;
 
-  constructor(private electronService: ElectronService) {}
+  constructor() {}
 
   /**
    *
@@ -32,7 +32,7 @@ export class ConfigService {
       return this.#config;
     }
     this.hasChanged = false;
-    this.#config = this.fs.readJSONSync(this.path);
+    this.#config = fs.readJSONSync(this.path);
     return this.#config;
   }
   /**
@@ -40,7 +40,7 @@ export class ConfigService {
    * @returns true if configs are saved to disk or false
    */
   saveConfigToFile(): boolean {
-    this.fs.writeJson(this.path, this.#config);
+    fs.writeJson(this.path, this.#config);
     this.hasChanged = true;
     return true;
   }

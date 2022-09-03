@@ -11,7 +11,6 @@ import {
   Component,
   Input,
   OnChanges,
-  SimpleChanges,
 } from "@angular/core";
 
 import { AssignmentInterface } from "../model/assignment.model";

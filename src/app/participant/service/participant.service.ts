@@ -2,7 +2,6 @@ import {
   ParticipantAssignTypesInterface,
   ParticipantInterface,
 } from "app/participant/model/participant.model";
-import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -13,8 +12,6 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class ParticipantService {
-  //fs-extra api
-  fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
@@ -28,7 +25,7 @@ export class ParticipantService {
   //flag to indicate that participants file has changed
   hasChanged = true;
 
-  constructor(private electronService: ElectronService) {}
+  constructor() {}
 
   /**
    * @param deepClone if should return the cloned array or the reference
@@ -41,7 +38,7 @@ export class ParticipantService {
         : this.#participants;
     }
     this.hasChanged = false;
-    this.#participants = this.fs.readJSONSync(this.path);
+    this.#participants = fs.readJSONSync(this.path);
     for (const participant of this.#participants) {
       this.#participantsMap.set(participant.id, participant);
     }
@@ -54,7 +51,7 @@ export class ParticipantService {
    */
   saveParticipantsToFile(): boolean {
     //Write participants back to file
-    this.fs.writeJson(this.path, this.#participants);
+    fs.writeJson(this.path, this.#participants);
     return true;
   }
 

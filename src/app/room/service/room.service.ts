@@ -1,5 +1,4 @@
 import { RoomInterface } from "app/room/model/room.model";
-import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -10,8 +9,6 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class RoomService {
-  //fs-extra api
-  fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
@@ -25,7 +22,7 @@ export class RoomService {
   //flag to indicate that rooms file has changed
   hasChanged = true;
 
-  constructor(private electronService: ElectronService) {}
+  constructor() {}
 
   /**
    *
@@ -36,7 +33,7 @@ export class RoomService {
       return deepClone ? structuredClone(this.#rooms) : this.#rooms;
     }
     this.hasChanged = false;
-    this.#rooms = this.fs.readJSONSync(this.path);
+    this.#rooms = fs.readJSONSync(this.path);
     for (const room of this.#rooms) {
       this.#roomsMap.set(room.id, room);
     }
@@ -58,7 +55,7 @@ export class RoomService {
    */
   saveRoomsToFile(): boolean {
     //Write rooms back to file
-    this.fs.writeJson(this.path, this.#rooms);
+    fs.writeJson(this.path, this.#rooms);
     return true;
   }
 

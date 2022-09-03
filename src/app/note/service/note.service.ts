@@ -1,5 +1,4 @@
 import { NoteInterface } from "app/note/model/note.model";
-import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -10,8 +9,6 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class NoteService {
-  //fs-extra api
-  fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
@@ -25,7 +22,7 @@ export class NoteService {
   //flag to indicate that notes file has changed
   hasChanged = true;
 
-  constructor(private electronService: ElectronService) {}
+  constructor() {}
 
   /**
    *
@@ -36,7 +33,7 @@ export class NoteService {
       return deepClone ? structuredClone(this.#notes) : this.#notes;
     }
     this.hasChanged = false;
-    this.#notes = this.fs.readJSONSync(this.path);
+    this.#notes = fs.readJSONSync(this.path);
     for (const note of this.#notes) {
       this.#notesMap.set(note.id, note);
     }
@@ -49,7 +46,7 @@ export class NoteService {
    */
   saveNotesToFile(): boolean {
     //Write notes back to file
-    this.fs.writeJson(this.path, this.#notes);
+    fs.writeJson(this.path, this.#notes);
     return true;
   }
 

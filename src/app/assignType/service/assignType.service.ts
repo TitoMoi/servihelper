@@ -1,5 +1,4 @@
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -10,8 +9,6 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class AssignTypeService {
-  //fs-extra api
-  fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
@@ -26,7 +23,7 @@ export class AssignTypeService {
   //flag to indicate that assignTypes file has changed
   hasChanged = true;
 
-  constructor(private electronService: ElectronService) {}
+  constructor() {}
 
   /**
    *
@@ -37,7 +34,7 @@ export class AssignTypeService {
       return deepClone ? structuredClone(this.#assignTypes) : this.#assignTypes;
     }
     this.hasChanged = false;
-    this.#assignTypes = this.fs.readJSONSync(this.path);
+    this.#assignTypes = fs.readJSONSync(this.path);
     for (const assignType of this.#assignTypes) {
       this.#assignTypesMap.set(assignType.id, assignType);
     }
@@ -53,7 +50,7 @@ export class AssignTypeService {
    */
   saveAssignTypesToFile(): boolean {
     //Write assignTypes back to file
-    this.fs.writeJson(this.path, this.#assignTypes);
+    fs.writeJson(this.path, this.#assignTypes);
     return true;
   }
 

@@ -1,5 +1,4 @@
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -10,8 +9,6 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class AssignmentService {
-  //fs-extra api
-  fs: typeof fs = this.electronService.remote.require("fs-extra");
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
@@ -26,7 +23,7 @@ export class AssignmentService {
   //flag to indicate that assignments file has changed
   hasChanged = true;
 
-  constructor(private electronService: ElectronService) {}
+  constructor() {}
 
   /**
    * @param deepClone if should be cloned or only return reference
@@ -38,7 +35,7 @@ export class AssignmentService {
     }
     this.hasChanged = false;
     //populate maps first run
-    this.#assignments = this.fs.readJSONSync(this.path);
+    this.#assignments = fs.readJSONSync(this.path);
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
 
@@ -106,7 +103,7 @@ export class AssignmentService {
    */
   saveAssignmentsToFile(): boolean {
     //Write assignments back to file
-    this.fs.writeJson(this.path, this.#assignments);
+    fs.writeJson(this.path, this.#assignments);
     return true;
   }
 

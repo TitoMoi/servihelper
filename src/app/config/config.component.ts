@@ -94,9 +94,6 @@ export class ConfigComponent {
 
   notes: NoteInterface[] = this.noteService.getNotes();
 
-  // the filesystem api
-  fs: typeof fs = this.electronService.remote.require("fs-extra");
-
   constructor(
     private formBuilder: FormBuilder,
     private configService: ConfigService,
@@ -114,12 +111,12 @@ export class ConfigComponent {
    * Resets data to default
    */
   eraseAllData() {
-    this.fs.writeJsonSync(this.path + "/config.json", this.config);
-    this.fs.writeJsonSync(this.path + "/note.json", []);
-    this.fs.writeJsonSync(this.path + "/assignType.json", []);
-    this.fs.writeJsonSync(this.path + "/room.json", []);
-    this.fs.writeJsonSync(this.path + "/participant.json", []);
-    this.fs.writeJsonSync(this.path + "/assignment.json", []);
+    fs.writeJsonSync(this.path + "/config.json", this.config);
+    fs.writeJsonSync(this.path + "/note.json", []);
+    fs.writeJsonSync(this.path + "/assignType.json", []);
+    fs.writeJsonSync(this.path + "/room.json", []);
+    fs.writeJsonSync(this.path + "/participant.json", []);
+    fs.writeJsonSync(this.path + "/assignment.json", []);
 
     //Close the program
     this.electronService.remote.getCurrentWindow().close();

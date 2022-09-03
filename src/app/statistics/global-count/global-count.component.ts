@@ -6,7 +6,6 @@ import {
   getLastAssignment,
   getPenultimateAssignment,
   setCountById,
-  sortParticipantsByCount,
 } from "app/functions";
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
