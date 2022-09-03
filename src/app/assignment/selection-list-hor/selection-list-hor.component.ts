@@ -219,7 +219,7 @@ export class SelectionListHorComponent implements OnChanges {
 
       autoTable(doc, {
         html: `#table${i}`,
-        styles: { font },
+        styles: { font, fontSize: 16 },
         margin: firstTable ? { top: 30 } : undefined,
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
@@ -275,7 +275,7 @@ export class SelectionListHorComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font, cellWidth: 35 },
+        styles: { font, fontSize: 16, cellWidth: 35 },
         margin: firstTable ? { top: 30 } : undefined,
         didParseCell: (data) => {
           data.cell.styles.fillColor = this.tableWithColor[tableId];
@@ -321,7 +321,7 @@ export class SelectionListHorComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font },
+        styles: { font, fontSize: 14 },
         margin: firstTable ? { top: 30 } : undefined,
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
@@ -366,7 +366,10 @@ export class SelectionListHorComponent implements OnChanges {
   }
 
   toExcel() {
-    this.excelService.addAsignmentsHorizontal(this.assignmentGroups);
+    this.excelService.addAsignmentsHorizontal(
+      this.assignmentGroups,
+      this.tableWithColor
+    );
   }
   /**
    *
@@ -383,11 +386,9 @@ export class SelectionListHorComponent implements OnChanges {
 
     //Override assignment and date colors and reset
     const trList: HTMLCollection = tableElem.children; //tr
-    console.log("tr", trList);
     const length = trList.length;
     for (let i = 0; i < length; i++) {
       const childNodes: NodeList = trList[i].childNodes; //th, td
-      console.log("childthtd", childNodes);
 
       childNodes.forEach((child: HTMLTableElement) => {
         if (child.style) {

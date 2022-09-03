@@ -188,7 +188,7 @@ export class SelectionListComponent implements OnChanges {
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       autoTable(doc, {
         html: `#table${i}`,
-        styles: { font },
+        styles: { font, fontSize: 16 },
         margin: firstTable ? { top: 30 } : undefined,
         columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
@@ -248,7 +248,7 @@ export class SelectionListComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font },
+        styles: { font, fontSize: 14 },
         margin: firstTable ? { top: 30 } : undefined,
         columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
@@ -315,7 +315,7 @@ export class SelectionListComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font },
+        styles: { font, fontSize: 16 },
         margin: firstTable ? { top: 30 } : undefined,
         columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
@@ -375,7 +375,10 @@ export class SelectionListComponent implements OnChanges {
   }
 
   toExcel() {
-    this.excelService.addAsignmentsVertical(this.assignmentGroups);
+    this.excelService.addAsignmentsVertical(
+      this.assignmentGroups,
+      this.tableWithColor
+    );
   }
 
   /**
