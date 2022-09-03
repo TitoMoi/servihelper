@@ -2,7 +2,6 @@ import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 export type ConfigOptionsType =
   | "lang"
-  | "appVersion"
   | "assignmentHeaderTitle"
   | "assignmentPrincipalTitle"
   | "assignmentAssistantTitle"
@@ -23,7 +22,6 @@ export interface WeekDaysBegin {
 }
 
 export interface ConfigInterface {
-  appVersion: string;
   lang?: string;
   defaultFooterNoteId?: string;
   defaultReportFontSize?: string;

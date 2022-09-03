@@ -22,7 +22,7 @@ export class ConfigComponent {
   // The path of the app
   path: string;
 
-  version = this.configService.getConfig().appVersion;
+  version = "3.7.0";
 
   translocoDateFormats: DateFormatStyles[] = [
     "short",
@@ -75,7 +75,6 @@ export class ConfigComponent {
 
   //Restart data
   config: ConfigInterface = {
-    appVersion: "3.7.0",
     lang: "en",
     assignmentHeaderTitle: "",
     assignmentPrincipalTitle: "",
