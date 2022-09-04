@@ -6,7 +6,7 @@ import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
 import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import { writeFileSync } from "fs-extra";
 
 import { Component } from "@angular/core";
 import { TranslocoService } from "@ngneat/transloco";
@@ -69,31 +69,31 @@ export class HomeComponent {
     zip.getEntries().forEach((zipEntry) => {
       switch (zipEntry.entryName) {
         case "assignment.json":
-          fs.writeFileSync(
+          writeFileSync(
             this.path + "/assignment.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "participant.json":
-          fs.writeFileSync(
+          writeFileSync(
             this.path + "/participant.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "room.json":
-          fs.writeFileSync(
+          writeFileSync(
             this.path + "/room.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "assignType.json":
-          fs.writeFileSync(
+          writeFileSync(
             this.path + "/assignType.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "note.json":
-          fs.writeFileSync(
+          writeFileSync(
             this.path + "/note.json",
             zipEntry.getData().toString("utf8")
           );
@@ -104,7 +104,7 @@ export class HomeComponent {
             zipEntry.getData().toString("utf8")
           );
           const finalConfig = { ...currentConfig, ...incomingConfig };
-          fs.writeFileSync(
+          writeFileSync(
             this.path + "/config.json",
             JSON.stringify(finalConfig)
           );

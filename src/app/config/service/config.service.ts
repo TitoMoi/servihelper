@@ -3,7 +3,7 @@ import {
   ConfigOptionsType,
 } from "app/config/model/config.model";
 import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import { writeJson, readJSONSync } from "fs-extra";
 
 import { Injectable } from "@angular/core";
 
@@ -32,7 +32,7 @@ export class ConfigService {
       return this.#config;
     }
     this.hasChanged = false;
-    this.#config = fs.readJSONSync(this.path);
+    this.#config = readJSONSync(this.path);
     return this.#config;
   }
   /**
@@ -40,7 +40,7 @@ export class ConfigService {
    * @returns true if configs are saved to disk or false
    */
   saveConfigToFile(): boolean {
-    fs.writeJson(this.path, this.#config);
+    writeJson(this.path, this.#config);
     this.hasChanged = true;
     return true;
   }
