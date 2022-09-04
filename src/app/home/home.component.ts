@@ -71,31 +71,31 @@ export class HomeComponent {
     zip.getEntries().forEach((zipEntry) => {
       switch (zipEntry.entryName) {
         case "assignment.json":
-          fs.writeFile(
+          fs.writeFileSync(
             this.path + "/assignment.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "participant.json":
-          fs.writeFile(
+          fs.writeFileSync(
             this.path + "/participant.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "room.json":
-          fs.writeFile(
+          fs.writeFileSync(
             this.path + "/room.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "assignType.json":
-          fs.writeFile(
+          fs.writeFileSync(
             this.path + "/assignType.json",
             zipEntry.getData().toString("utf8")
           );
           break;
         case "note.json":
-          fs.writeFile(
+          fs.writeFileSync(
             this.path + "/note.json",
             zipEntry.getData().toString("utf8")
           );
@@ -106,7 +106,10 @@ export class HomeComponent {
             zipEntry.getData().toString("utf8")
           );
           const finalConfig = { ...currentConfig, ...incomingConfig };
-          fs.writeFile(this.path + "/config.json", JSON.stringify(finalConfig));
+          fs.writeFileSync(
+            this.path + "/config.json",
+            JSON.stringify(finalConfig)
+          );
           break;
       }
     });
