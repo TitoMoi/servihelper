@@ -1,6 +1,6 @@
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
@@ -35,7 +35,7 @@ export class AssignmentService {
     }
     this.hasChanged = false;
     //populate maps first run
-    this.#assignments = fs.readJSONSync(this.path);
+    this.#assignments = readJSONSync(this.path);
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
 
@@ -103,7 +103,7 @@ export class AssignmentService {
    */
   saveAssignmentsToFile(): boolean {
     //Write assignments back to file
-    fs.writeJson(this.path, this.#assignments);
+    writeJson(this.path, this.#assignments);
     return true;
   }
 

@@ -1,6 +1,6 @@
 import { app, screen, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
-import * as fs from "fs";
+import { existsSync } from "fs";
 import * as url from "url";
 
 // Initialize remote module
@@ -41,7 +41,7 @@ function createWindow(): Electron.BrowserWindow {
     // Path when running electron executable
     let pathIndex = "./index.html";
 
-    if (fs.existsSync(path.join(__dirname, "../dist/index.html"))) {
+    if (existsSync(path.join(__dirname, "../dist/index.html"))) {
       // Path when running electron in local folder
       pathIndex = "../dist/index.html";
     }

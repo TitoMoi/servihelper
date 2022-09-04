@@ -1,6 +1,6 @@
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
@@ -34,7 +34,7 @@ export class AssignTypeService {
       return deepClone ? structuredClone(this.#assignTypes) : this.#assignTypes;
     }
     this.hasChanged = false;
-    this.#assignTypes = fs.readJSONSync(this.path);
+    this.#assignTypes = readJSONSync(this.path);
     for (const assignType of this.#assignTypes) {
       this.#assignTypesMap.set(assignType.id, assignType);
     }
@@ -50,7 +50,7 @@ export class AssignTypeService {
    */
   saveAssignTypesToFile(): boolean {
     //Write assignTypes back to file
-    fs.writeJson(this.path, this.#assignTypes);
+    writeJson(this.path, this.#assignTypes);
     return true;
   }
 

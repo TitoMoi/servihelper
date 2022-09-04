@@ -1,6 +1,6 @@
 import { NoteInterface } from "app/note/model/note.model";
 import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
@@ -33,7 +33,7 @@ export class NoteService {
       return deepClone ? structuredClone(this.#notes) : this.#notes;
     }
     this.hasChanged = false;
-    this.#notes = fs.readJSONSync(this.path);
+    this.#notes = readJSONSync(this.path);
     for (const note of this.#notes) {
       this.#notesMap.set(note.id, note);
     }
@@ -46,7 +46,7 @@ export class NoteService {
    */
   saveNotesToFile(): boolean {
     //Write notes back to file
-    fs.writeJson(this.path, this.#notes);
+    writeJson(this.path, this.#notes);
     return true;
   }
 

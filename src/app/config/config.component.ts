@@ -2,7 +2,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import { writeJsonSync } from "fs-extra";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { TranslocoService } from "@ngneat/transloco";
@@ -107,12 +107,12 @@ export class ConfigComponent {
    * Resets data to default
    */
   eraseAllData() {
-    fs.writeJsonSync(this.path + "/config.json", this.config);
-    fs.writeJsonSync(this.path + "/note.json", []);
-    fs.writeJsonSync(this.path + "/assignType.json", []);
-    fs.writeJsonSync(this.path + "/room.json", []);
-    fs.writeJsonSync(this.path + "/participant.json", []);
-    fs.writeJsonSync(this.path + "/assignment.json", []);
+    writeJsonSync(this.path + "/config.json", this.config);
+    writeJsonSync(this.path + "/note.json", []);
+    writeJsonSync(this.path + "/assignType.json", []);
+    writeJsonSync(this.path + "/room.json", []);
+    writeJsonSync(this.path + "/participant.json", []);
+    writeJsonSync(this.path + "/assignment.json", []);
 
     //Close the program
     ipcRenderer.send("closeApp");

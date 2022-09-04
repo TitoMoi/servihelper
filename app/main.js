@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var electron_1 = require("electron");
 var path = require("path");
-var fs = require("fs");
+var fs_1 = require("fs");
 var url = require("url");
 // Initialize remote module
 /* require("@electron/remote/main").initialize(); */
@@ -73,7 +73,7 @@ function createWindow() {
     else {
         // Path when running electron executable
         var pathIndex = "./index.html";
-        if (fs.existsSync(path.join(__dirname, "../dist/index.html"))) {
+        if ((0, fs_1.existsSync)(path.join(__dirname, "../dist/index.html"))) {
             // Path when running electron in local folder
             pathIndex = "../dist/index.html";
         }

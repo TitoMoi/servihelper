@@ -1,6 +1,6 @@
 import { RoomInterface } from "app/room/model/room.model";
 import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
@@ -33,7 +33,7 @@ export class RoomService {
       return deepClone ? structuredClone(this.#rooms) : this.#rooms;
     }
     this.hasChanged = false;
-    this.#rooms = fs.readJSONSync(this.path);
+    this.#rooms = readJSONSync(this.path);
     for (const room of this.#rooms) {
       this.#roomsMap.set(room.id, room);
     }
@@ -55,7 +55,7 @@ export class RoomService {
    */
   saveRoomsToFile(): boolean {
     //Write rooms back to file
-    fs.writeJson(this.path, this.#rooms);
+    writeJson(this.path, this.#rooms);
     return true;
   }
 

@@ -3,7 +3,7 @@ import {
   ParticipantInterface,
 } from "app/participant/model/participant.model";
 import { APP_CONFIG } from "environments/environment";
-import * as fs from "fs-extra";
+import { writeJson, readJSONSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
@@ -38,7 +38,7 @@ export class ParticipantService {
         : this.#participants;
     }
     this.hasChanged = false;
-    this.#participants = fs.readJSONSync(this.path);
+    this.#participants = readJSONSync(this.path);
     for (const participant of this.#participants) {
       this.#participantsMap.set(participant.id, participant);
     }
@@ -51,7 +51,7 @@ export class ParticipantService {
    */
   saveParticipantsToFile(): boolean {
     //Write participants back to file
-    fs.writeJson(this.path, this.#participants);
+    writeJson(this.path, this.#participants);
     return true;
   }
 
