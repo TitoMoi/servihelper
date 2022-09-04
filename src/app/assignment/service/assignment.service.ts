@@ -1,6 +1,6 @@
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { APP_CONFIG } from "environments/environment";
-import { readJSONSync, writeJson } from "fs-extra";
+import { readJSON, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
@@ -29,13 +29,13 @@ export class AssignmentService {
    * @param deepClone if should be cloned or only return reference
    * @returns AssignmentInterface[] the array of assignments or null
    */
-  getAssignments(deepClone = false): AssignmentInterface[] {
+  async getAssignments(deepClone = false): Promise<AssignmentInterface[]> {
     if (!this.hasChanged) {
       return deepClone ? structuredClone(this.#assignments) : this.#assignments;
     }
     this.hasChanged = false;
     //populate maps first run
-    this.#assignments = readJSONSync(this.path);
+    this.#assignments = await readJSON(this.path);
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
 

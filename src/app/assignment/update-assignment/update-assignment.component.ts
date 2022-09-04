@@ -43,7 +43,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   principals: ParticipantInterface[] = [];
   assistants: ParticipantInterface[] = [];
   footerNotes: NoteInterface[] = this.noteService.getNotes();
-  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
+  assignments: AssignmentInterface[];
 
   principalsBK: ParticipantInterface[] = [];
   assistantsBK: ParticipantInterface[] = [];
@@ -79,8 +79,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.getAssignments();
+  }
 
+  async getAssignments() {
+    this.assignments = await this.assignmentService.getAssignments();
+  }
   /**
    *
    * @param formControlName the form control name to get the value

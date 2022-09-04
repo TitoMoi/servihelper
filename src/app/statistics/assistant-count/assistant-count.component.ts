@@ -98,8 +98,8 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
   }
 
-  initStatistics() {
-    const assignments = this.assignmentService.getAssignments(true);
+  async initStatistics() {
+    const assignments = await this.assignmentService.getAssignments(true);
     const participants = this.participantService.getParticipants(true);
 
     //Assistant

@@ -10,6 +10,7 @@ import autoTable from "jspdf-autotable";
 /* eslint-disable @typescript-eslint/naming-convention */
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -59,36 +60,38 @@ export class SelectionListHorComponent implements OnChanges {
     private assignmentService: AssignmentService,
     private sortService: SortService,
     private excelService: ExcelService,
-    private pdfService: PdfService
+    private pdfService: PdfService,
+    private cdr: ChangeDetectorRef
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];
       this.assignmentGroups = [];
-      this.filterAssignments();
-      this.sortAssignmentByDate(this.order);
-      this.#assignments = this.sortService.sortAssignmentsByRoomAndAssignType(
-        this.#assignments
-      );
-      this.getRelatedData();
+      this.filterAssignments().then(() => {
+        this.sortAssignmentByDate(this.order);
+        this.#assignments = this.sortService.sortAssignmentsByRoomAndAssignType(
+          this.#assignments
+        );
+        this.getRelatedData();
+        this.cdr.detectChanges();
+      });
     }
   }
 
   /**
    * Filters the assignments based on the range date and assign types
    */
-  filterAssignments() {
-    this.#assignments = this.assignmentService
-      .getAssignments(true)
-      .filter(
-        (assignment) =>
-          this.assignTypes.includes(assignment.assignType) &&
-          this.rooms.includes(assignment.room) &&
-          this.selectedDates.some(
-            (date) =>
-              new Date(date).getTime() === new Date(assignment.date).getTime()
-          )
-      );
+  async filterAssignments() {
+    this.#assignments = await this.assignmentService.getAssignments(true);
+    this.#assignments = this.#assignments.filter(
+      (assignment) =>
+        this.assignTypes.includes(assignment.assignType) &&
+        this.rooms.includes(assignment.room) &&
+        this.selectedDates.some(
+          (date) =>
+            new Date(date).getTime() === new Date(assignment.date).getTime()
+        )
+    );
   }
 
   sortAssignmentByDate(order: string) {

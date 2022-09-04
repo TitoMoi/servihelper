@@ -5,7 +5,4 @@ import { Component } from "@angular/core";
   templateUrl: "./statistics.component.html",
   styleUrls: ["./statistics.component.scss"],
 })
-export class StatisticsComponent {
-  isAppGlobalCountRendered = false;
-  isAppPrincipalCountRendered = false;
-}
+export class StatisticsComponent {}

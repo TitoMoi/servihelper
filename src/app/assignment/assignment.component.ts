@@ -45,7 +45,7 @@ export class AssignmentComponent
   implements OnInit, OnDestroy, AfterViewChecked
 {
   //In memory assignments
-  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
+  assignments: AssignmentInterface[];
 
   //Table
   displayedColumns: string[] = [
@@ -97,7 +97,13 @@ export class AssignmentComponent
     private assignTypeService: AssignTypeService,
     private sortService: SortService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+    this.getAssignments();
+  }
+
+  async getAssignments() {
+    this.assignments = await this.assignmentService.getAssignments();
+  }
 
   ngOnInit() {
     //Initial pagination

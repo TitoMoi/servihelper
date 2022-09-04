@@ -50,7 +50,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   principals: ParticipantInterface[] = [];
   assistants: ParticipantInterface[] = [];
   footerNotes: NoteInterface[] = this.noteService.getNotes();
-  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
+  assignments: AssignmentInterface[];
 
   assignmentsBySelectedDate: AssignmentInterface[] = [];
 
@@ -85,8 +85,13 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.getAssignments();
+  }
 
+  async getAssignments() {
+    this.assignments = await this.assignmentService.getAssignments();
+  }
   /**
    *
    * @param formControlName the form control name to get the value

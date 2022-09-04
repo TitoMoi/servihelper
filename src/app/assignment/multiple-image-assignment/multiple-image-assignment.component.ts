@@ -6,6 +6,7 @@ import { RoomService } from "app/room/service/room.service";
 import { toPng } from "html-to-image";
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -50,33 +51,36 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private noteService: NoteService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnChanges(): void {
     if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];
       this.assignmentsWithNames = [];
-      this.filterAssignments();
-      this.prepareAssignmentsData();
+      this.filterAssignments().then(() => {
+        this.prepareAssignmentsData();
+        this.cdr.detectChanges();
+      });
     }
   }
 
   /**
    * Filters the assignments based on the range date and assign types
    */
-  filterAssignments() {
-    this.#assignments = this.assignmentService
-      .getAssignments()
-      .filter(
-        (assignment) =>
-          this.assignTypes.includes(assignment.assignType) &&
-          this.rooms.includes(assignment.room) &&
-          this.selectedDates.some(
-            (date) =>
-              new Date(date).getTime() === new Date(assignment.date).getTime()
-          )
-      );
+  async filterAssignments() {
+    this.#assignments = await this.assignmentService.getAssignments();
+
+    this.#assignments = this.#assignments.filter(
+      (assignment) =>
+        this.assignTypes.includes(assignment.assignType) &&
+        this.rooms.includes(assignment.room) &&
+        this.selectedDates.some(
+          (date) =>
+            new Date(date).getTime() === new Date(assignment.date).getTime()
+        )
+    );
   }
 
   /**

@@ -32,7 +32,6 @@ import {
 import { Subscription } from "rxjs";
 
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
@@ -40,7 +39,6 @@ import {
 } from "@angular/core";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { TranslocoService } from "@ngneat/transloco";
-import { StatisticsComponent } from "../statistics.component";
 import { SortService } from "app/services/sort.service";
 import { toPng } from "html-to-image";
 
@@ -50,9 +48,7 @@ import { toPng } from "html-to-image";
   styleUrls: ["./principal-count.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PrincipalCountComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class PrincipalCountComponent implements OnInit, OnDestroy {
   principalListBackup: ParticipantInterface[];
 
   principalList: ParticipantInterface[];
@@ -64,7 +60,6 @@ export class PrincipalCountComponent
   subscription$: Subscription;
 
   constructor(
-    private statisticsComponent: StatisticsComponent,
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
@@ -93,9 +88,6 @@ export class PrincipalCountComponent
     };
     this.panelOpenState = false;
   }
-  ngAfterViewInit(): void {
-    this.statisticsComponent.isAppPrincipalCountRendered = true;
-  }
 
   ngOnInit(): void {
     this.initStatistics();
@@ -105,8 +97,8 @@ export class PrincipalCountComponent
     this.subscription$.unsubscribe();
   }
 
-  initStatistics() {
-    const assignments = this.assignmentService.getAssignments(true);
+  async initStatistics() {
+    const assignments = await this.assignmentService.getAssignments(true);
     const participants = this.participantService.getParticipants(true);
 
     //Principal

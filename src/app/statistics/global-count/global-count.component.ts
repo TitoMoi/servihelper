@@ -32,7 +32,6 @@ import {
 import { Subscription } from "rxjs";
 
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
@@ -40,7 +39,6 @@ import {
 } from "@angular/core";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { TranslocoService } from "@ngneat/transloco";
-import { StatisticsComponent } from "../statistics.component";
 import { toPng } from "html-to-image";
 import { SortService } from "app/services/sort.service";
 
@@ -50,7 +48,7 @@ import { SortService } from "app/services/sort.service";
   styleUrls: ["./global-count.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlobalCountComponent implements OnInit, OnDestroy, AfterViewInit {
+export class GlobalCountComponent implements OnInit, OnDestroy {
   globalListBackup: ParticipantInterface[];
 
   globalList: ParticipantInterface[];
@@ -62,7 +60,6 @@ export class GlobalCountComponent implements OnInit, OnDestroy, AfterViewInit {
   subscription$: Subscription;
 
   constructor(
-    private statisticsComponent: StatisticsComponent,
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
@@ -93,10 +90,6 @@ export class GlobalCountComponent implements OnInit, OnDestroy, AfterViewInit {
     this.panelOpenState = false;
   }
 
-  ngAfterViewInit(): void {
-    this.statisticsComponent.isAppGlobalCountRendered = true;
-  }
-
   ngOnInit(): void {
     this.initStatistics();
   }
@@ -105,8 +98,8 @@ export class GlobalCountComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscription$.unsubscribe();
   }
 
-  initStatistics() {
-    const assignments = this.assignmentService.getAssignments(true);
+  async initStatistics() {
+    const assignments = await this.assignmentService.getAssignments(true);
     const participants = this.participantService.getParticipants(true);
 
     //Global
