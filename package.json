@@ -43,7 +43,6 @@
     "@angular/platform-browser": "^13.3.10",
     "@angular/platform-browser-dynamic": "^13.3.10",
     "@angular/router": "^13.3.10",
-    "@electron/remote": "2.0.8",
     "@ngneat/transloco": "3.2.0",
     "@ngneat/transloco-locale": "^3.0.1",
     "date-fns": "2.28.0",

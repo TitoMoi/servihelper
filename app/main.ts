@@ -1,10 +1,10 @@
-import { app, screen, BrowserWindow } from "electron";
+import { app, screen, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
-import * as fs from "fs-extra";
+import * as fs from "fs";
 import * as url from "url";
 
 // Initialize remote module
-require("@electron/remote/main").initialize();
+/* require("@electron/remote/main").initialize(); */
 
 let win: Electron.BrowserWindow = null;
 const args = process.argv.slice(1),
@@ -25,11 +25,11 @@ function createWindow(): Electron.BrowserWindow {
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: serve ? true : false,
-      contextIsolation: true,
+      contextIsolation: false,
     },
   });
 
-  require("@electron/remote/main").enable(win.webContents);
+  /* require("@electron/remote/main").enable(win.webContents); */
 
   if (serve) {
     win.webContents.openDevTools();
@@ -61,6 +61,32 @@ function createWindow(): Electron.BrowserWindow {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     win = null;
+  });
+
+  //Event from renderer process
+  ipcMain.on("closeApp", () => win.close());
+
+  //Create hidden window for print assignments
+  ipcMain.on("createHiddenWindowForPrint", async (event, content) => {
+    const winPrint = new BrowserWindow({
+      show: false,
+      webPreferences: {
+        javascript: true,
+      },
+    });
+
+    await winPrint.loadFile("assets/web/blank.html");
+
+    await winPrint.webContents.executeJavaScript(
+      `document.getElementsByTagName('body')[0].innerHTML = \`${content.innerHTML}\``
+    );
+
+    await winPrint.webContents.executeJavaScript(
+      `document.fonts.ready.then(() => {
+        window.print();
+        window.close();
+      })`
+    );
   });
 
   return win;

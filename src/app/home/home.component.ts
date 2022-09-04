@@ -25,7 +25,10 @@ export class HomeComponent {
   upload = false;
 
   // The path of the app
-  path: string;
+  path: string = APP_CONFIG.production
+    ? //__dirname is where the .json files exists
+      __dirname + "/assets/source"
+    : "./assets/source";
 
   constructor(
     private configService: ConfigService,
@@ -36,12 +39,7 @@ export class HomeComponent {
     private assignmentService: AssignmentService,
     private translocoService: TranslocoService,
     private dateAdapter: DateAdapter<NativeDateAdapter>
-  ) {
-    this.path = APP_CONFIG.production
-      ? //__dirname is where the .json files exists
-        __dirname + "/assets/source"
-      : "./assets/source";
-  }
+  ) {}
 
   downloadFiles() {
     const zip = new AdmZip();

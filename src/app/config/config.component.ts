@@ -1,16 +1,15 @@
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import { ElectronService } from "app/services/electron.service";
 import { APP_CONFIG } from "environments/environment";
 import * as fs from "fs-extra";
-
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
+import { ipcRenderer } from "electron";
 
 @Component({
   selector: "app-config",
@@ -20,7 +19,10 @@ import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 })
 export class ConfigComponent {
   // The path of the app
-  path: string;
+  path: string = APP_CONFIG.production
+    ? //__dirname is where the .json files exists
+      __dirname + "/assets/source"
+    : "./assets/source";
 
   version = "3.7.0";
 
@@ -98,14 +100,8 @@ export class ConfigComponent {
     private formBuilder: FormBuilder,
     private configService: ConfigService,
     private noteService: NoteService,
-    private translocoService: TranslocoService,
-    private electronService: ElectronService
-  ) {
-    this.path = APP_CONFIG.production
-      ? //__dirname is where the .json files exists
-        __dirname + "./assets/source"
-      : "./assets/source";
-  }
+    private translocoService: TranslocoService
+  ) {}
 
   /**
    * Resets data to default
@@ -119,7 +115,7 @@ export class ConfigComponent {
     fs.writeJsonSync(this.path + "/assignment.json", []);
 
     //Close the program
-    this.electronService.remote.getCurrentWindow().close();
+    ipcRenderer.send("closeApp");
   }
 
   handleImageHeaderInput(e: Event) {

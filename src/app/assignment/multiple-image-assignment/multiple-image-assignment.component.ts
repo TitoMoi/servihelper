@@ -3,9 +3,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
-import { ElectronService } from "app/services/electron.service";
 import { toPng } from "html-to-image";
-
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,6 +13,7 @@ import {
 
 import { AssignmentInterface } from "../model/assignment.model";
 import { AssignmentService } from "../service/assignment.service";
+import { ipcRenderer } from "electron";
 
 @Component({
   selector: "app-multiple-image-assignment",
@@ -51,8 +50,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private noteService: NoteService,
-    private configService: ConfigService,
-    private electronService: ElectronService
+    private configService: ConfigService
   ) {}
 
   ngOnChanges(): void {
@@ -116,30 +114,15 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     document.body.style.cursor = "default";
   }
 
-  async toPrinter() {
+  /**
+   * Send to main the creation of new window and print div
+   */
+  async createHiddenWindowForPrint() {
     //the div
     const div = document.getElementById("assignmentDiv");
     //create window
-    const win = new this.electronService.remote.BrowserWindow({
-      show: false,
-      webPreferences: {
-        javascript: true,
-      },
+    await ipcRenderer.send("createHiddenWindowForPrint", {
+      innerHTML: div.innerHTML,
     });
-
-    /* win.webContents.openDevTools(); */
-
-    await win.loadFile("assets/web/blank.html");
-
-    await win.webContents.executeJavaScript(
-      `document.getElementsByTagName('body')[0].innerHTML = \`${div.innerHTML}\``
-    );
-
-    await win.webContents.executeJavaScript(
-      `document.fonts.ready.then(() => {
-        window.print();
-        window.close();
-      })`
-    );
   }
 }
