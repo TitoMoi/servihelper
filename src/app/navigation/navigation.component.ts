@@ -7,6 +7,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
 import { MatSelectChange } from "@angular/material/select";
 import { TranslocoService } from "@ngneat/transloco";
+import { shell } from "electron";
+import { SharedService } from "app/services/shared.service";
+import { HttpClient } from "@angular/common/http";
+import { GitHubDataInterface } from "./model/navigation.model";
 
 @Component({
   selector: "app-navigation",
@@ -23,11 +27,21 @@ export class NavigationComponent implements OnInit {
     );
   availableLangs = undefined;
 
+  isNewVersion = false;
+
+  appVersion = this.sharedService.appVersion;
+
+  queryGitHub$ = this.httpClient.get<GitHubDataInterface>(
+    "https://api.github.com/repos/titoMoi/servihelper/releases/latest"
+  );
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     public translocoService: TranslocoService,
     private dateAdapter: DateAdapter<NativeDateAdapter>,
-    public configService: ConfigService
+    public configService: ConfigService,
+    private sharedService: SharedService,
+    private httpClient: HttpClient
   ) {}
 
   ngOnInit() {
@@ -69,5 +83,9 @@ export class NavigationComponent implements OnInit {
     //Save the locale
     if (locale === "zhCN") locale = "zh";
     this.dateAdapter.setLocale(locale);
+  }
+
+  openExternalServihelperRepository() {
+    shell.openExternal("https://github.com/TitoMoi/servihelper/releases");
   }
 }

@@ -10,6 +10,7 @@ import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 import { ipcRenderer } from "electron";
+import { SharedService } from "app/services/shared.service";
 
 @Component({
   selector: "app-config",
@@ -24,7 +25,7 @@ export class ConfigComponent {
       __dirname + "/assets/source"
     : "./assets/source";
 
-  version = "3.7.0";
+  appVersion = this.sharedService.appVersion;
 
   translocoDateFormats: DateFormatStyles[] = [
     "short",
@@ -100,7 +101,8 @@ export class ConfigComponent {
     private formBuilder: FormBuilder,
     private configService: ConfigService,
     private noteService: NoteService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private sharedService: SharedService
   ) {}
 
   /**

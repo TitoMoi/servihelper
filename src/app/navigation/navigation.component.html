@@ -7,7 +7,15 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar></mat-toolbar>
+    <mat-toolbar class="font-small"
+      ><a
+        *ngIf="(queryGitHub$ | async)?.tag_name !== appVersion"
+        href="#"
+        (click)="openExternalServihelperRepository()"
+      >
+        {{ "NEW_VERSION_AVAILABLE" | transloco }}
+      </a></mat-toolbar
+    >
     <mat-nav-list>
       <a mat-list-item routerLink="/">
         <span>{{ "NAV_HOME" | transloco }}</span>
@@ -88,8 +96,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar
-      class="justify-content-between d-print-none"
-      style="font-size: medium"
+      class="justify-content-between font-medium d-print-none"
       color="primary"
     >
       <button

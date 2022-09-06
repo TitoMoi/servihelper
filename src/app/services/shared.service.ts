@@ -6,6 +6,8 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class SharedService {
+  appVersion = "3.7.0";
+
   constructor() {}
 
   /**
