@@ -60,6 +60,17 @@ export class AssignmentService {
   }
 
   /**
+   * Returns an previously ordered array with length of the assignments
+   */
+  getDateAndAssignmentsLength(): number[] {
+    const dateAndAssignLength = [];
+    for (const [date, assignments] of this.#assignmentsByDateMap) {
+      dateAndAssignLength.push(assignments.length);
+    }
+    return dateAndAssignLength;
+  }
+
+  /**
    *
    * @param assignment that can be get from serialized json or runtime, if
    * from serialized json its ok, saves the key as string
@@ -93,7 +104,12 @@ export class AssignmentService {
     const isoDate = new Date(assignment.date).toISOString();
     let assignmentsByDate = this.#assignmentsByDateMap.get(isoDate);
     assignmentsByDate = assignmentsByDate.filter((a) => a.id !== assignment.id);
-    this.#assignmentsByDateMap.set(isoDate, assignmentsByDate);
+    if (assignmentsByDate.length) {
+      this.#assignmentsByDateMap.set(isoDate, assignmentsByDate);
+    } else {
+      //dont need the key if we have 0 assignments
+      this.#assignmentsByDateMap.delete(isoDate);
+    }
   }
 
   /**

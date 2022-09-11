@@ -77,16 +77,16 @@
         <!-- td id is to find assignType later, not always has name, sometimes has theme -->
         <td
           [id]="assignment.assignType.id"
-          class="bold me-3"
+          class="bold"
           [style.backgroundColor]="
             assignTypeService.getAssignType(assignment.assignType.id).color
           "
           [style.fontSize]="defaultReportFontSize"
         >
-          <div>{{ assignment.theme }}</div>
-          <span *ngIf="!assignment.theme">{{
-            assignment.assignType.name
-          }}</span>
+          <div class="ms-lg-3">{{ assignment.theme }}</div>
+          <div *ngIf="!assignment.theme" class="ms-3">
+            {{ assignment.assignType.name }}
+          </div>
         </td>
         <td [style.fontSize]="defaultReportFontSize">
           {{ assignment.principal.name

@@ -38,6 +38,7 @@
         class="mt-2 mat-elevation-z8"
         *ngIf="dataSource.length"
         mat-table
+        recycleRows
         multiTemplateDataRows
         [trackBy]="trackByIdFn"
         [dataSource]="dataSource"

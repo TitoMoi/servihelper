@@ -63,8 +63,11 @@ export class AssignmentComponent
   //Expanded element
   expandedElement: AssignmentInterface | null;
 
-  pageIndex = 0;
-  itemsPerPage = 20;
+  dayIndex = 0;
+  lastItemsPerPageIndex = 0;
+  //For each day has the length of assignments
+  dateAndAssignmentsLength =
+    this.assignmentService.getDateAndAssignmentsLength();
 
   rows: NodeListOf<Element> = undefined;
 
@@ -73,11 +76,21 @@ export class AssignmentComponent
 
     for (const entry of entries) {
       if (entry.isIntersecting) {
-        //Virtual pagination
-        this.pageIndex = this.pageIndex + 1;
-        const begin = this.pageIndex * this.itemsPerPage;
-        const end = begin + this.itemsPerPage;
-        const assignmentsPage = this.assignments.slice(begin, end);
+        let itemsPerPage = 0;
+        //Get a 7 days assignments, days can jump as could not be assignments between
+        for (let i = this.dayIndex; i < this.dayIndex + 7; i++) {
+          itemsPerPage += this.dateAndAssignmentsLength[i];
+        }
+
+        const assignmentsPage = this.assignments.slice(
+          this.lastItemsPerPageIndex,
+          this.lastItemsPerPageIndex + itemsPerPage
+        );
+
+        //update index for next week
+        this.dayIndex += 7;
+        //update last items per page
+        this.lastItemsPerPageIndex = this.lastItemsPerPageIndex + itemsPerPage;
 
         this.dataSource = [
           ...this.dataSource,
@@ -106,11 +119,18 @@ export class AssignmentComponent
   }
 
   ngOnInit() {
-    //Initial pagination
-    const begin = this.pageIndex * this.itemsPerPage;
-    const end = begin + this.itemsPerPage;
-    const assignmentsPage = this.assignments.slice(begin, end);
+    //Initial pagination, get a week of assignments
+    let itemsPerPage = 0;
+    for (let i = this.dayIndex; i < this.dayIndex + 7; i++) {
+      itemsPerPage += this.dateAndAssignmentsLength[i];
+    }
+    const assignmentsPage = this.assignments.slice(0, itemsPerPage); //+1 for the slice method that doesnt include last
     this.dataSource = this.fillDataSource(assignmentsPage);
+
+    //update index for next week
+    this.dayIndex += 7;
+    //update index of last items per page
+    this.lastItemsPerPageIndex = this.lastItemsPerPageIndex + itemsPerPage; //prepare index for next day
   }
 
   ngAfterViewChecked(): void {
