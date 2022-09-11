@@ -18,6 +18,7 @@ import { Subscription } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -84,7 +85,8 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private sharedService: SharedService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
   }
@@ -470,8 +472,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   onSelectionChangePrincipal() {
     this.principalSelect.close();
-    //Wait until button is enabled otherwise not works
-    setTimeout(() => this.btnSaveCreateAnother.focus(), 0);
+    //Wait until button is enabled to focus it otherwise not works
+    this.cdr.detectChanges();
+    this.btnSaveCreateAnother.focus();
   }
 
   onSelectionChangeAssistant() {
