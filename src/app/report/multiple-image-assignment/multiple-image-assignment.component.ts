@@ -12,8 +12,8 @@ import {
   OnChanges,
 } from "@angular/core";
 
-import { AssignmentInterface } from "../model/assignment.model";
-import { AssignmentService } from "../service/assignment.service";
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
 import { ipcRenderer } from "electron";
 
 @Component({

@@ -4,7 +4,6 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomService } from "app/room/service/room.service";
 import { ExcelService } from "app/services/excel.service";
 import { SortService } from "app/services/sort.service";
-import { PdfService } from "app/services/pdf.service";
 import { toPng } from "html-to-image";
 import autoTable from "jspdf-autotable";
 
@@ -21,16 +20,18 @@ import {
 import {
   AssignmentGroupInterface,
   AssignmentInterface,
-} from "../model/assignment.model";
-import { AssignmentService } from "../service/assignment.service";
+  AssignmentReportInterface,
+} from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { PdfService } from "app/services/pdf.service";
 
 @Component({
-  selector: "app-selection-list",
-  templateUrl: "./selection-list.component.html",
-  styleUrls: ["./selection-list.component.scss"],
+  selector: "app-selection-list-hor",
+  templateUrl: "./selection-list-hor.component.html",
+  styleUrls: ["./selection-list-hor.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectionListComponent implements OnChanges {
+export class SelectionListHorComponent implements OnChanges {
   @Input() selectedDates: Date[];
   @Input() assignTypes: string[];
   @Input() rooms: string[];
@@ -45,7 +46,6 @@ export class SelectionListComponent implements OnChanges {
     this.configService.getConfig().defaultReportDateFormat;
   defaultReportDateColor =
     this.configService.getConfig().defaultReportDateColor;
-
   reportTitle = this.configService.getConfig().reportTitle;
 
   #assignments: AssignmentInterface[] = [];
@@ -63,7 +63,7 @@ export class SelectionListComponent implements OnChanges {
     private pdfService: PdfService,
     private cdr: ChangeDetectorRef
   ) {}
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];
       this.assignmentGroups = [];
@@ -79,11 +79,10 @@ export class SelectionListComponent implements OnChanges {
   }
 
   /**
-   * Filters the assignments based on the range date and assign types and rooms
+   * Filters the assignments based on the range date and assign types
    */
   async filterAssignments() {
     this.#assignments = await this.assignmentService.getAssignments(true);
-
     this.#assignments = this.#assignments.filter(
       (assignment) =>
         this.assignTypes.includes(assignment.assignType) &&
@@ -107,6 +106,32 @@ export class SelectionListComponent implements OnChanges {
     );
   }
 
+  sortAssignmentByAssignTypeOrder() {
+    for (const ag of this.assignmentGroups) {
+      ag.assignments.sort(
+        (
+          a: AssignmentReportInterface,
+          b: AssignmentReportInterface
+        ): number => {
+          const orderA = this.assignTypeService.getAssignType(
+            a.assignType.id
+          ).order;
+          const orderB = this.assignTypeService.getAssignType(
+            b.assignType.id
+          ).order;
+
+          if (orderA > orderB) {
+            return 1;
+          }
+          if (orderA < orderB) {
+            return -1;
+          }
+          return 0;
+        }
+      );
+    }
+  }
+
   /**
    * Convert the id's to names
    */
@@ -128,7 +153,7 @@ export class SelectionListComponent implements OnChanges {
         new Date(assignGroup.date).toISOString() !==
         new Date(assignment.date).toISOString()
       ) {
-        //save and prepare another assignGroup
+        //save and reset
         this.assignmentGroups.push(assignGroup);
         assignGroup = {
           date: assignment.date,
@@ -175,70 +200,117 @@ export class SelectionListComponent implements OnChanges {
    * If we dont pass 90000 to draw will output diferent Y positions, because A4 height is 270 so if the table doesnt fit
    * will output something like 237 and 98 this is last 2 pages pointers because in last 1 page doesnt fit.
    *
+   * For the X axis is not consistent, so we count the cells that are assignments and multiply by something it fits a big title
+   *
    * @returns the total height
    */
-  getPdfHeight(): number {
+  getPdfFormat(): Record<"maxTotalCells" | "totalHeight", number> {
     const doc = this.pdfService.getJsPdf({
-      orientation: "portrait",
-      format: [210, 90000],
+      orientation: "landscape",
+      format: [297, 90000],
     });
 
     const font = this.pdfService.getFontForLang();
 
     let totalHeight = 0;
+    let maxTotalCells = 0;
 
     let firstTable = true;
 
     for (let i = 0; i < this.assignmentGroups.length; i++) {
+      let totalCells = 1; //Begins in 1 because date is not an assignment so we count it in advance
+
       autoTable(doc, {
         html: `#table${i}`,
         styles: { font, fontSize: 16 },
         margin: firstTable ? { top: 30 } : undefined,
-        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const localName = data.cell.raw["localName"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const classList: DOMTokenList = data.cell.raw["classList"];
+
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
+            totalCells++;
+
             data.cell.styles.fillColor = assignType.color;
             data.cell.styles.fontStyle = "bold";
             return;
           }
-          //date
-          if (localName === "th") {
+          if (localName === "th" && !assignType) {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fillColor =
               this.configService.getConfig().defaultReportDateColor ||
               "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
-            return;
           }
-          //theme
-          if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fillColor = "#FFFFFF";
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          if (!assignType && !classList.contains("bold"))
-            data.cell.styles.fillColor = "#FFFFFF";
         },
         didDrawPage: (data) => {
           totalHeight = data.cursor.y;
         },
       });
+      maxTotalCells = totalCells > maxTotalCells ? totalCells : maxTotalCells;
       firstTable = false;
     }
-    return totalHeight;
+    return { maxTotalCells, totalHeight };
+  }
+
+  toPdf() {
+    const pdfFormat = this.getPdfFormat();
+
+    const doc = this.pdfService.getJsPdf({
+      orientation: "landscape",
+      unit: "mm",
+      format: [pdfFormat.maxTotalCells * 35 + 35, pdfFormat.totalHeight + 100], //Extra cell 35 for the margins
+      compress: true,
+    });
+
+    const font = this.pdfService.getFontForLang();
+
+    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 20, {
+      align: "center",
+    });
+
+    let firstTable = true;
+
+    for (let i = 0; i < this.assignmentGroups.length; i++) {
+      const tableId = `table${i}`;
+      autoTable(doc, {
+        html: "#" + tableId,
+        styles: { font, fontSize: 16, cellWidth: 35 },
+        margin: firstTable ? { top: 30 } : undefined,
+        didParseCell: (data) => {
+          data.cell.styles.fillColor = this.tableWithColor[tableId];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const id = data.cell.raw["id"];
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const localName = data.cell.raw["localName"];
+
+          const assignType = this.assignTypeService.getAssignType(id);
+          if (assignType) {
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] || assignType.color;
+            data.cell.styles.fontStyle = "bold";
+            return;
+          }
+          if (localName === "th" && !assignType) {
+            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
+            data.cell.styles.fillColor =
+              this.tableWithColor[tableId] ||
+              this.configService.getConfig().defaultReportDateColor ||
+              "#FFFFFF";
+            data.cell.styles.fontStyle = "bold";
+          }
+        },
+      });
+      firstTable = false;
+    }
+    doc.save("assignments");
   }
 
   toPdfForPrint() {
-    const doc = this.pdfService.getJsPdf({
-      orientation: "portrait",
-    });
+    const doc = this.pdfService.getJsPdf({ orientation: "landscape" });
 
     const font = this.pdfService.getFontForLang();
 
@@ -254,14 +326,12 @@ export class SelectionListComponent implements OnChanges {
         html: "#" + tableId,
         styles: { font, fontSize: 14 },
         margin: firstTable ? { top: 30 } : undefined,
-        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const localName = data.cell.raw["localName"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const classList: DOMTokenList = data.cell.raw["classList"];
+
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
             data.cell.styles.fillColor =
@@ -269,99 +339,19 @@ export class SelectionListComponent implements OnChanges {
             data.cell.styles.fontStyle = "bold";
             return;
           }
-          //date
-          if (localName === "th") {
+          if (localName === "th" && !assignType) {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fillColor =
               this.tableWithColor[tableId] ||
               this.configService.getConfig().defaultReportDateColor ||
               "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
-            return;
           }
-          //theme
-          if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || "#FFFFFF";
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          if (!assignType && !classList.contains("bold"))
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || "#FFFFFF";
         },
       });
       firstTable = false;
     }
     doc.save("assignmentsPrint");
-  }
-
-  /**
-   * To digital pdf, give 50 extra space at the end
-   */
-  toPdf() {
-    const height = this.getPdfHeight();
-    const doc = this.pdfService.getJsPdf({
-      orientation: "portrait",
-      compress: true,
-      format: [210, height + 50],
-    });
-
-    const font = this.pdfService.getFontForLang();
-
-    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 20, {
-      align: "center",
-    });
-
-    let firstTable = true;
-
-    for (let i = 0; i < this.assignmentGroups.length; i++) {
-      const tableId = `table${i}`;
-      autoTable(doc, {
-        html: "#" + tableId,
-        styles: { font, fontSize: 16 },
-        margin: firstTable ? { top: 30 } : undefined,
-        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
-        didParseCell: (data) => {
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const id = data.cell.raw["id"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const localName = data.cell.raw["localName"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const classList: DOMTokenList = data.cell.raw["classList"];
-          const assignType = this.assignTypeService.getAssignType(id);
-          if (assignType) {
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || assignType.color;
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          //date
-          if (localName === "th") {
-            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] ||
-              this.configService.getConfig().defaultReportDateColor ||
-              "#FFFFFF";
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          //theme
-          if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || "#FFFFFF";
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          if (!assignType && !classList.contains("bold"))
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || "#FFFFFF";
-        },
-      });
-      firstTable = false;
-    }
-
-    doc.save("assignments");
   }
 
   async toPng() {
@@ -379,12 +369,11 @@ export class SelectionListComponent implements OnChanges {
   }
 
   toExcel() {
-    this.excelService.addAsignmentsVertical(
+    this.excelService.addAsignmentsHorizontal(
       this.assignmentGroups,
       this.tableWithColor
     );
   }
-
   /**
    *
    * @param event the pointerEvent
@@ -403,6 +392,7 @@ export class SelectionListComponent implements OnChanges {
     const length = trList.length;
     for (let i = 0; i < length; i++) {
       const childNodes: NodeList = trList[i].childNodes; //th, td
+
       childNodes.forEach((child: HTMLTableElement) => {
         if (child.style) {
           child.style.backgroundColor = ""; //must be empty string

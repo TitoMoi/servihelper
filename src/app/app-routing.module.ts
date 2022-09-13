@@ -2,7 +2,7 @@ import { AssignmentComponent } from "app/assignment/assignment.component";
 import { CreateAssignmentComponent } from "app/assignment/create-assignment/create-assignment.component";
 import { DeleteAssignmentComponent } from "app/assignment/delete-assignment/delete-assignment.component";
 import { ImageAssignmentComponent } from "app/assignment/image-assignment/image-assignment.component";
-import { ReportSelectorComponent } from "app/assignment/report-selector/report-selector.component";
+import { ReportSelectorComponent } from "app/report/report-selector/report-selector.component";
 import { UpdateAssignmentComponent } from "app/assignment/update-assignment/update-assignment.component";
 import { AssignTypeComponent } from "app/assignType/assignType.component";
 import { CreateAssignTypeComponent } from "app/assignType/create-assigntype/create-assigntype.component";
