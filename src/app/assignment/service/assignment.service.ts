@@ -214,6 +214,24 @@ export class AssignmentService {
 
   /**
    *
+   * @param originDate the origin date to change
+   * @param destinyDate the destiny date to have
+   * @returns
+   */
+  massiveDateChange(originDate: Date, destinyDate: Date) {
+    for (const assignment of this.#assignments) {
+      if (new Date(assignment.date).getTime() === originDate.getTime()) {
+        assignment.date = destinyDate;
+        this.#assignmentsMap.set(assignment.id, assignment);
+        this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
+      }
+    }
+    //save assignments with the updated date
+    return this.saveAssignmentsToFile();
+  }
+
+  /**
+   *
    * @param assignment the assignment to delete
    * @returns true if assignment is deleted and saved false otherwise
    */

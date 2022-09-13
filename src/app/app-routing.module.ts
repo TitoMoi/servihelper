@@ -2,6 +2,7 @@ import { AssignmentComponent } from "app/assignment/assignment.component";
 import { CreateAssignmentComponent } from "app/assignment/create-assignment/create-assignment.component";
 import { DeleteAssignmentComponent } from "app/assignment/delete-assignment/delete-assignment.component";
 import { ImageAssignmentComponent } from "app/assignment/image-assignment/image-assignment.component";
+import { MoveAssignmentComponent } from "app/assignment/move-assignment/move-assignment.component";
 import { ReportSelectorComponent } from "app/report/report-selector/report-selector.component";
 import { UpdateAssignmentComponent } from "app/assignment/update-assignment/update-assignment.component";
 import { AssignTypeComponent } from "app/assignType/assignType.component";
@@ -121,6 +122,11 @@ const routes: Routes = [
     path: "assignment/update/:id",
     component: UpdateAssignmentComponent,
   },
+  {
+    path: "assignment/move",
+    component: MoveAssignmentComponent,
+  },
+
   {
     path: "assignment/delete/:id",
     component: DeleteAssignmentComponent,
