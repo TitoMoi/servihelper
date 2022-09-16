@@ -24,6 +24,7 @@ import {
   OnInit,
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-assignment",
@@ -102,6 +103,8 @@ export class AssignmentComponent
     }
   });
 
+  subscription: Subscription;
+
   constructor(
     public activatedRoute: ActivatedRoute,
     private assignmentService: AssignmentService,
@@ -131,6 +134,25 @@ export class AssignmentComponent
     this.dayIndex += 7;
     //update index of last items per page
     this.lastItemsPerPageIndex = this.lastItemsPerPageIndex + itemsPerPage; //prepare index for next day
+
+    //Listen for assignments updates
+    this.subscription.add(
+      this.assignmentService.assignmentHasChanged$.subscribe(
+        (assignment: AssignmentInterface) => {
+          const index = this.dataSource.findIndex(
+            (dataElement: AssignmentTableInterface) =>
+              dataElement.id === assignment.id
+          );
+          //Prepare assignment for the datasource
+          const assignmentTable: AssignmentTableInterface[] =
+            this.fillDataSource([assignment]);
+          //Change it
+          this.dataSource[index] = assignmentTable[0];
+          //Update reference to refresh the view
+          this.dataSource = [...this.dataSource];
+        }
+      )
+    );
   }
 
   ngAfterViewChecked(): void {
@@ -143,6 +165,7 @@ export class AssignmentComponent
 
   ngOnDestroy(): void {
     this.observer.disconnect();
+    this.subscription.unsubscribe();
   }
 
   queryAllMatRows() {
@@ -206,6 +229,10 @@ export class AssignmentComponent
   highlightRow(event, element: AssignmentTableInterface) {
     event.stopPropagation();
     element.hasBeenClicked = true;
+  }
+
+  preventDefault(event) {
+    event.stopPropagation();
   }
 
   exportCsv() {

@@ -4,6 +4,7 @@ import { readJSON, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -20,6 +21,10 @@ export class AssignmentService {
   #assignmentsMap: Map<string, AssignmentInterface> = new Map();
   //The map of assignments for look up of by date
   #assignmentsByDateMap: Map<Date | string, AssignmentInterface[]> = new Map();
+  //Observable for the assignment table to track assignments updates
+  #changes$ = new Subject<AssignmentInterface>();
+  assignmentHasChanged$: Observable<AssignmentInterface> =
+    this.#changes$.asObservable();
   //flag to indicate that assignments file has changed
   hasChanged = true;
 
@@ -198,7 +203,7 @@ export class AssignmentService {
    * @param assignment the assignment to update
    * @returns true if assignment is updated and saved false otherwise
    */
-  updateAssignment(assignment: AssignmentInterface): boolean {
+  updateAssignment(assignment: AssignmentInterface) {
     //update assignment
     for (let i = 0; i < this.#assignments.length; i++) {
       if (this.#assignments[i].id === assignment.id) {
@@ -206,10 +211,11 @@ export class AssignmentService {
         this.#assignmentsMap.set(assignment.id, assignment);
         this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
         //save assignments with the updated assignment
-        return this.saveAssignmentsToFile();
+        this.saveAssignmentsToFile();
       }
     }
-    return false;
+    //For the assignment table
+    this.#changes$.next(assignment);
   }
 
   /**

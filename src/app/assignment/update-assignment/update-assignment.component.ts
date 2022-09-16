@@ -55,7 +55,10 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
 
   assignmentForm: FormGroup = this.formBuilder.group({
     id: this.assignment.id,
-    date: [this.assignment.date, Validators.required],
+    date: [
+      { value: this.assignment.date, disabled: true },
+      Validators.required,
+    ],
     room: [this.assignment.room, Validators.required], //Room id
     assignType: [this.assignment.assignType, Validators.required], //AssignType id
     theme: this.assignment.theme,
@@ -405,7 +408,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   onSubmit(event: Event): void {
     event.stopPropagation();
     this.removeGremlings();
-    this.assignmentService.updateAssignment(this.assignmentForm.value);
+    this.assignmentService.updateAssignment(this.assignmentForm.getRawValue());
 
     //navigate to parent, one parent for each fragment
     this.router.navigate(["../.."], {

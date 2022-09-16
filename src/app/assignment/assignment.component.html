@@ -134,6 +134,7 @@
           <td mat-cell *matCellDef="let element">
             <mat-icon
               class="m-auto"
+              (click)="preventDefault($event)"
               [routerLink]="['update', element.id]"
               routerLinkActive="active"
               svgIcon="edit"

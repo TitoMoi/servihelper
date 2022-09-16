@@ -112,6 +112,10 @@ const routes: Routes = [
         path: "image/:id",
         component: ImageAssignmentComponent,
       },
+      {
+        path: "update/:id",
+        component: UpdateAssignmentComponent,
+      },
     ],
   },
   {
@@ -119,14 +123,9 @@ const routes: Routes = [
     component: CreateAssignmentComponent,
   },
   {
-    path: "assignment/update/:id",
-    component: UpdateAssignmentComponent,
-  },
-  {
     path: "assignment/move",
     component: MoveAssignmentComponent,
   },
-
   {
     path: "assignment/delete/:id",
     component: DeleteAssignmentComponent,
