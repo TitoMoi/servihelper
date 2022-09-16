@@ -103,7 +103,7 @@ export class AssignmentComponent
     }
   });
 
-  subscription: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor(
     public activatedRoute: ActivatedRoute,
