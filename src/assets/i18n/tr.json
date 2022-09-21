@@ -210,5 +210,8 @@
   "ro": "Romanya",
   "ru": "Rusça",
   "tr": "Türk",
-  "zhCN": "Çince"
+  "zhCN": "Çince",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "Dıştır",
+  "PARTICIPANT_SHOW_EXTERNAL": "Harici katılımcıları göster",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "Sadece dışsallar"
 }

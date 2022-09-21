@@ -210,5 +210,8 @@
   "ro": "ルーマニア人",
   "ru": "ロシア",
   "tr": "トルコ語",
-  "zhCN": "中国語"
+  "zhCN": "中国語",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "外部です",
+  "PARTICIPANT_SHOW_EXTERNAL": "外部の参加者を表示します",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "外部のみ"
 }

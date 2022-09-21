@@ -210,5 +210,8 @@
   "ro": "Rumänisch",
   "ru": "Russisch",
   "tr": "Türkisch",
-  "zhCN": "Chinesisch"
+  "zhCN": "Chinesisch",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "Ist extern",
+  "PARTICIPANT_SHOW_EXTERNAL": "Zeigen Sie externe Teilnehmer",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "Nur extern"
 }

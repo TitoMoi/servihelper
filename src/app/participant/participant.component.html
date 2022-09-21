@@ -9,7 +9,7 @@
     >
       {{ "PARTICIPANT_BUTTON_TITLE" | transloco }}
     </button>
-    <div class="m-3">
+    <div class="m-3" *ngIf="dataSource.length">
       <mat-checkbox
         labelPosition="before"
         color="primary"

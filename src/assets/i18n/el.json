@@ -210,5 +210,8 @@
   "ro": "ρουμανικός",
   "ru": "Ρωσική",
   "tr": "τούρκικος",
-  "zhCN": "κινέζικα"
+  "zhCN": "κινέζικα",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "Είναι εξωτερικός",
+  "PARTICIPANT_SHOW_EXTERNAL": "Εμφάνιση εξωτερικών συμμετεχόντων",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "Μόνο εξωτερικά"
 }

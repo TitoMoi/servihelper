@@ -210,5 +210,8 @@
   "ro": "রোমানিয়ান",
   "ru": "রাশিয়ান",
   "tr": "তুর্কি",
-  "zhCN": "চাইনিজ"
+  "zhCN": "চাইনিজ",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "বাহ্যিক",
+  "PARTICIPANT_SHOW_EXTERNAL": "বাহ্যিক অংশগ্রহণকারীদের দেখান",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "শুধুমাত্র বাহ্যিক"
 }

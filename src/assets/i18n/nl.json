@@ -210,5 +210,8 @@
   "ro": "Roemeense",
   "ru": "Russisch",
   "tr": "Turks",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "Is extern",
+  "PARTICIPANT_SHOW_EXTERNAL": "Toon externe deelnemers",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "Alleen externe"
 }

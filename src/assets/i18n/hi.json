@@ -210,5 +210,8 @@
   "ro": "रोमानियाई",
   "ru": "रूसी",
   "tr": "तुर्की",
-  "zhCN": "चीनी"
+  "zhCN": "चीनी",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "बाहरी है",
+  "PARTICIPANT_SHOW_EXTERNAL": "बाहरी प्रतिभागियों को दिखाएं",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "केवल बाहरी"
 }

@@ -211,5 +211,8 @@
   "ro": "Romanès",
   "ru": "Rus",
   "tr": "Turc",
-  "zhCN": "Xinès"
+  "zhCN": "Xinès",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "És extern",
+  "PARTICIPANT_SHOW_EXTERNAL": "Mostra participants externs",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "Només externs"
 }

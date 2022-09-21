@@ -210,5 +210,8 @@
   "ro": "Română",
   "ru": "Rusă",
   "tr": "Turc",
-  "zhCN": "Chinez"
+  "zhCN": "Chinez",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "Este extern",
+  "PARTICIPANT_SHOW_EXTERNAL": "Arată participanții externi",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "Doar externe"
 }

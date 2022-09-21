@@ -210,5 +210,8 @@
   "ro": "루마니아 사람",
   "ru": "러시아인",
   "tr": "터키",
-  "zhCN": "중국인"
+  "zhCN": "중국인",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "외부입니다",
+  "PARTICIPANT_SHOW_EXTERNAL": "외부 참가자를 보여줍니다",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "외부"
 }

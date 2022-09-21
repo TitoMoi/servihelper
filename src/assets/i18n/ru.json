@@ -210,5 +210,8 @@
   "ro": "румынский",
   "ru": "Русский",
   "tr": "турецкий",
-  "zhCN": "китайский язык"
+  "zhCN": "китайский язык",
+  "PARTICIPANT_CREATE_ISEXTERNAL": "Внешний",
+  "PARTICIPANT_SHOW_EXTERNAL": "Показать внешние участники",
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "Только внешние"
 }
