@@ -50,6 +50,7 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
     id: undefined,
     name: [undefined, Validators.required],
     isWoman: false,
+    isExternal: false,
     assignTypes: [this.formBuilder.array([])],
     rooms: [this.formBuilder.array([])],
     available: [true],
@@ -159,6 +160,7 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
 
     this.participantForm.get("name").reset();
     this.participantForm.get("isWoman").reset(false);
+    this.participantForm.get("isExternal").reset(false);
     this.addAssignTypes();
     this.addRooms();
 

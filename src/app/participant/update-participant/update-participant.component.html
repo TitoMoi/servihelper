@@ -16,12 +16,19 @@
               <input matInput spellcheck="false" formControlName="name" />
             </mat-form-field>
           </div>
-          <div class="col-12 mb-2">
+          <div class="col-6 mb-2">
             <mat-checkbox color="primary" formControlName="isWoman">{{
               "PARTICIPANT_UPDATE_ISWOMAN" | transloco
             }}</mat-checkbox>
           </div>
-
+          <div class="col-6 mb-2">
+            <mat-checkbox
+              labelPosition="before"
+              color="primary"
+              formControlName="isExternal"
+              >{{ "PARTICIPANT_CREATE_ISEXTERNAL" | transloco }}</mat-checkbox
+            >
+          </div>
           <div class="col-12 mb-2 mr-auto">
             <h3 *ngIf="participant.rooms.length">
               {{ "PARTICIPANT_UPDATE_ROOMS_TITLE" | transloco }}

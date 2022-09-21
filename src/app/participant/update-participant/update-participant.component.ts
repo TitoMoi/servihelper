@@ -55,6 +55,7 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
     id: undefined,
     name: [undefined, Validators.required],
     isWoman: [false],
+    isExternal: false,
     available: [undefined],
     rooms: [this.formBuilder.array([])],
     assignTypes: [this.formBuilder.array([])],
@@ -85,10 +86,12 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
       this.activatedRoute.snapshot.params.id
     );
 
+    //ToDo: Remove the OR condition on major update
     this.participantForm.setValue({
       id: this.participant.id,
       name: this.participant.name,
       isWoman: this.participant.isWoman,
+      isExternal: this.participant.isExternal || false,
       available: this.participant.available,
       rooms: [this.formBuilder.array([])],
       assignTypes: [this.formBuilder.array([])],

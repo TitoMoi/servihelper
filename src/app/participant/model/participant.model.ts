@@ -2,6 +2,7 @@ export interface ParticipantInterface {
   id: string;
   name: string;
   isWoman: boolean;
+  isExternal: boolean;
   onlyAssistant: boolean;
   rooms: ParticipantRoomInterface[];
   assignTypes: ParticipantAssignTypesInterface[];

@@ -66,6 +66,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     theme: "",
     onlyWoman: [false],
     onlyMan: [false],
+    onlyExternals: [false],
     principal: [undefined, Validators.required], //participant id
     assistant: [undefined], //participant id
     footerNote: this.configService.getConfig().defaultFooterNoteId, //Note id
@@ -109,6 +110,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.prepareAssignTypeSub();
     this.prepareOnlyManSub();
     this.prepareOnlyWomanSub();
+    this.prepareOnlyExternalsSub();
     this.preparePrincipalSub();
   }
 
@@ -159,6 +161,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.assistantsBK = structuredClone(this.assistants);
         }
       });
+    this.cdr.detectChanges();
   }
 
   prepareRoomSub() {
@@ -198,6 +201,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
         }
       })
     );
+    this.cdr.detectChanges();
   }
 
   prepareAssignTypeSub() {
@@ -233,6 +237,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           }
         })
     );
+    this.cdr.detectChanges();
   }
 
   prepareOnlyManSub() {
@@ -278,6 +283,14 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
+  prepareOnlyExternalsSub() {
+    this.subscription.add(
+      this.assignmentForm
+        .get("onlyExternals")
+        .valueChanges.subscribe((onlyExternals) => {})
+    );
+  }
+
   preparePrincipalSub() {
     this.subscription.add(
       this.assignmentForm
@@ -305,7 +318,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   getPrincipalAndAssistant() {
     this.principals = this.sharedService.filterPrincipalsByAvailable(
-      this.participants,
+      structuredClone(this.participants),
       this.gfv("assignType"),
       this.gfv("room"),
       this.gfv("onlyMan"),
@@ -313,7 +326,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     );
 
     this.assistants = this.sharedService.filterAssistantsByAvailable(
-      this.participants,
+      structuredClone(this.participants),
       this.gfv("assignType"),
       this.gfv("room"),
       this.gfv("onlyMan"),

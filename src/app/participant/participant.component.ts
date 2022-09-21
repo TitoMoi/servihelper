@@ -1,9 +1,11 @@
 import {
-    ParticipantInterface, ParticipantTableInterface
-} from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
+  ParticipantInterface,
+  ParticipantTableInterface,
+} from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
 
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { MatCheckboxChange } from "@angular/material/checkbox";
 
 @Component({
   selector: "app-participant",
@@ -22,12 +24,30 @@ export class ParticipantComponent implements OnInit {
   constructor(private participantService: ParticipantService) {}
 
   ngOnInit(): void {
-    this.participants = this.participantService.getParticipants();
+    this.participants = this.participantService
+      .getParticipants()
+      .filter((participant) => !participant.isExternal);
     this.fillDataSource(this.participants);
   }
 
   trackByIdFn(index, participant: ParticipantTableInterface) {
     return participant.id;
+  }
+
+  toggleParticipants(event: MatCheckboxChange) {
+    if (event.checked) {
+      this.fillDataSource(
+        this.participantService
+          .getParticipants()
+          .filter((participant) => participant.isExternal)
+      );
+    } else {
+      this.fillDataSource(
+        this.participantService
+          .getParticipants()
+          .filter((participant) => !participant.isExternal)
+      );
+    }
   }
 
   fillDataSource(participantsPage: ParticipantInterface[]) {

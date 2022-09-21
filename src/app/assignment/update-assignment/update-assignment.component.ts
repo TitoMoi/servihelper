@@ -332,7 +332,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
 
   getPrincipalAndAssistant() {
     this.principals = this.sharedService.filterPrincipalsByAvailable(
-      this.participants,
+      structuredClone(this.participants),
       this.gfv("assignType"),
       this.gfv("room"),
       this.gfv("onlyMan"),
@@ -340,7 +340,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     );
 
     this.assistants = this.sharedService.filterAssistantsByAvailable(
-      this.participants,
+      structuredClone(this.participants),
       this.gfv("assignType"),
       this.gfv("room"),
       this.gfv("onlyMan"),

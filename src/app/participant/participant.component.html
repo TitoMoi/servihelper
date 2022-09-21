@@ -1,13 +1,23 @@
 <ng-container *ngIf="dataSource">
-  <a
-    mat-raised-button
-    class="m-3"
-    color="primary"
-    routerLink="create"
-    routerLinkActive="active"
-    >{{ "PARTICIPANT_BUTTON_TITLE" | transloco }}
-  </a>
-
+  <div class="d-flex align-items-baseline">
+    <button
+      mat-raised-button
+      class="m-3"
+      color="primary"
+      routerLink="create"
+      routerLinkActive="active"
+    >
+      {{ "PARTICIPANT_BUTTON_TITLE" | transloco }}
+    </button>
+    <div class="m-3">
+      <mat-checkbox
+        labelPosition="before"
+        color="primary"
+        (change)="toggleParticipants($event)"
+        >{{ "PARTICIPANT_SHOW_EXTERNAL" | transloco }}</mat-checkbox
+      >
+    </div>
+  </div>
   <table
     id="tableDiv"
     *ngIf="dataSource.length"

@@ -41,6 +41,8 @@ export class AppComponent implements OnInit {
     "googlecalendar",
     "colorpicker",
     "switch",
+    "man",
+    "woman",
   ];
 
   constructor(
