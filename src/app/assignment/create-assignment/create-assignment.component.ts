@@ -287,7 +287,15 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.assignmentForm
         .get("onlyExternals")
-        .valueChanges.subscribe((onlyExternals) => {})
+        .valueChanges.subscribe((onlyExternals) => {
+          if (!onlyExternals) {
+            this.principals = structuredClone(this.principalsBK);
+            this.assistants = structuredClone(this.assistantsBK);
+            return;
+          }
+          this.principals = this.principals.filter((p) => p.isExternal);
+          this.assistants = this.assistants.filter((p) => p.isExternal);
+        })
     );
   }
 
@@ -449,6 +457,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     const room = this.gfv("room");
     const onlyMan = this.gfv("onlyMan");
     const onlyWoman = this.gfv("onlyWoman");
+    const onlyExternals = this.gfv("onlyExternals");
 
     this.assignmentForm.reset(
       {
@@ -459,6 +468,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
         theme: "",
         onlyWoman: [false],
         onlyMan: [false],
+        onlyExternals: [false],
         principal: [undefined, Validators.required], //participant id
         assistant: [undefined], //participant id
         footerNote: this.configService.getConfig().defaultFooterNoteId, //Note id
@@ -475,6 +485,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.assignmentForm
       .get("onlyWoman")
       .setValue(onlyWoman, { emitEvent: false });
+    this.assignmentForm
+      .get("onlyExternals")
+      .setValue(onlyExternals, { emitEvent: false });
 
     //
     this.checkAvailableDates();

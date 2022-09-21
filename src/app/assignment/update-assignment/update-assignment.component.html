@@ -68,21 +68,47 @@
               <input matInput spellcheck="false" formControlName="theme" />
             </mat-form-field>
           </div>
-          <div class="col-3 mb-2">
-            <mat-checkbox
-              labelPosition="before"
-              color="primary"
-              formControlName="onlyWoman"
-              >{{ t("ASSIGN_UPDATE_ONLY_WOMEN") }}</mat-checkbox
-            >
-          </div>
-          <div class="col-3 mb-2">
-            <mat-checkbox
-              labelPosition="before"
-              color="primary"
-              formControlName="onlyMan"
-              >{{ t("ASSIGN_UPDATE_ONLY_MEN") }}</mat-checkbox
-            >
+
+          <div class="col-12 mb-2">
+            <div class="d-flex align-items-baseline justify-content-start">
+              <span class="d-inline-block me-3">
+                <mat-icon
+                  class="me-2"
+                  svgIcon="woman"
+                  aria-label="icon"
+                ></mat-icon>
+                <mat-checkbox
+                  labelPosition="before"
+                  color="primary"
+                  formControlName="onlyWoman"
+                  [disableRipple]="true"
+                  >{{ t("ASSIGN_CREATE_ONLY_WOMEN") }}</mat-checkbox
+                >
+              </span>
+              <span class="d-inline-block me-3">
+                <mat-icon
+                  class="me-2"
+                  svgIcon="man"
+                  aria-label="icon"
+                ></mat-icon>
+                <mat-checkbox
+                  labelPosition="before"
+                  color="primary"
+                  formControlName="onlyMan"
+                  [disableRipple]="true"
+                  >{{ t("ASSIGN_CREATE_ONLY_MEN") }}</mat-checkbox
+                >
+              </span>
+              <span>
+                <mat-checkbox
+                  labelPosition="before"
+                  color="primary"
+                  formControlName="onlyExternals"
+                  [disableRipple]="true"
+                  >{{ t("ASSIGN_CREATE_ONLY_EXTERNALS") }}</mat-checkbox
+                >
+              </span>
+            </div>
           </div>
           <div class="col-12 mb-2">
             <mat-form-field class="full-width">

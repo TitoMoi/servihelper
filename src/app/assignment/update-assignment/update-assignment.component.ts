@@ -64,6 +64,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     theme: this.assignment.theme,
     onlyWoman: [this.assignment.onlyWoman],
     onlyMan: [this.assignment.onlyMan],
+    onlyExternals: [this.assignment.onlyMan || false],
     principal: [this.assignment.principal, Validators.required], //participant id
     assistant: [this.assignment.assistant], //participant id
     footerNote: this.assignment.footerNote, //Note id
@@ -104,6 +105,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.prepareAssignTypeSub();
     this.prepareOnlyManSub();
     this.prepareOnlyWomanSub();
+    this.prepareOnlyExternalsSub();
     this.preparePrincipalSub();
 
     this.checkAvailableDates();
@@ -309,6 +311,21 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           }
           this.principals = this.principals.filter((p) => p.isWoman === true);
           this.assistants = this.assistants.filter((a) => a.isWoman === true);
+        })
+    );
+  }
+  prepareOnlyExternalsSub() {
+    this.subscription.add(
+      this.assignmentForm
+        .get("onlyExternals")
+        .valueChanges.subscribe((onlyExternals) => {
+          if (!onlyExternals) {
+            this.principals = structuredClone(this.principalsBK);
+            this.assistants = structuredClone(this.assistantsBK);
+            return;
+          }
+          this.principals = this.principals.filter((p) => p.isExternal);
+          this.assistants = this.assistants.filter((p) => p.isExternal);
         })
     );
   }
