@@ -3,9 +3,7 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { RoomService } from "app/room/service/room.service";
 
 import { Injectable } from "@angular/core";
-import { RoomInterface } from "app/room/model/room.model";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
 
 @Injectable({
   providedIn: "root",
@@ -66,8 +64,8 @@ export class SortService {
   }
 
   sortByCountAndByDistance(
-    a: ParticipantInterface,
-    b: ParticipantInterface
+    a: ParticipantDynamicInterface,
+    b: ParticipantDynamicInterface
   ): number {
     if (a.count < b.count) {
       return -1;

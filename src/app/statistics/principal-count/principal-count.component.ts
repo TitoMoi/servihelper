@@ -7,7 +7,10 @@ import {
   getPenultimatePrincipalAssignment,
   setPrincipalCountById,
 } from "app/functions";
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import {
+  ParticipantDynamicInterface,
+  ParticipantInterface,
+} from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import {
   bn,
@@ -55,8 +58,6 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
 
   locales;
 
-  panelOpenState;
-
   subscription$: Subscription;
 
   constructor(
@@ -86,7 +87,6 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
       tr,
       pl,
     };
-    this.panelOpenState = false;
   }
 
   ngOnInit(): void {
@@ -99,7 +99,8 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
 
   async initStatistics() {
     const assignments = await this.assignmentService.getAssignments(true);
-    const participants = this.participantService.getParticipants(true);
+    const participants: ParticipantDynamicInterface[] =
+      this.participantService.getParticipants(true);
 
     //Principal
     setPrincipalCountById(assignments, participants);

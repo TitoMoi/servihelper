@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
     "switch",
     "man",
     "woman",
+    "calendar-delete",
   ];
 
   constructor(

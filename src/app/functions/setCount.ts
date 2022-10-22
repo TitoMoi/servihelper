@@ -1,5 +1,5 @@
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
 
 /**
  *
@@ -11,7 +11,7 @@ import { ParticipantInterface } from "app/participant/model/participant.model";
  */
 export function setCount(
   assignmentList: AssignmentInterface[],
-  participantList: ParticipantInterface[],
+  participantList: ParticipantDynamicInterface[],
   roomId: string,
   assignTypeId: string,
   isPrincipal: boolean

@@ -9,12 +9,15 @@ import { sortParticipantsByCount } from "app/functions";
 import { setCount } from "app/functions/setCount";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import {
+  ParticipantDynamicInterface,
+  ParticipantInterface,
+} from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 import { SharedService } from "app/services/shared.service";
-import { Subscription } from "rxjs";
+import { Subscription, of } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
@@ -48,15 +51,12 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   //For filter available dates
   participants: ParticipantInterface[] = [];
 
-  principals: ParticipantInterface[] = [];
-  assistants: ParticipantInterface[] = [];
+  principals: ParticipantDynamicInterface[] = [];
+  assistants: ParticipantDynamicInterface[] = [];
   footerNotes: NoteInterface[] = this.noteService.getNotes();
   assignments: AssignmentInterface[];
 
   assignmentsBySelectedDate: AssignmentInterface[] = [];
-
-  principalsBK: ParticipantInterface[] = [];
-  assistantsBK: ParticipantInterface[] = [];
 
   assignmentForm: FormGroup = this.formBuilder.group({
     id: undefined,
@@ -118,6 +118,27 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  setPrincipalsCount() {
+    setCount(
+      this.assignments,
+      this.principals,
+      this.gfv("room"),
+      this.gfv("assignType"),
+      true
+    );
+  }
+
+  setAssistantsCount() {
+    //Set count for assistants
+    setCount(
+      this.assignments,
+      this.assistants,
+      this.gfv("room"),
+      this.gfv("assignType"),
+      false
+    );
+  }
+
   prepareDateSub() {
     this.subscription = this.assignmentForm
       .get("date")
@@ -137,28 +158,13 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.getPrincipalAndAssistant();
 
           //Set count for principals
-          setCount(
-            this.assignments,
-            this.principals,
-            this.gfv("room"),
-            this.gfv("assignType"),
-            true
-          );
+          this.setPrincipalsCount();
 
           //Set count for assistants
-          setCount(
-            this.assignments,
-            this.assistants,
-            this.gfv("room"),
-            this.gfv("assignType"),
-            false
-          );
+          this.setAssistantsCount();
 
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
-
-          this.principalsBK = structuredClone(this.principals);
-          this.assistantsBK = structuredClone(this.assistants);
         }
       });
     this.cdr.detectChanges();
@@ -176,28 +182,13 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.getPrincipalAndAssistant();
 
           //Set count for principals
-          setCount(
-            this.assignments,
-            this.principals,
-            room,
-            this.gfv("assignType"),
-            true
-          );
+          this.setPrincipalsCount();
 
           //Set count for assistants
-          setCount(
-            this.assignments,
-            this.assistants,
-            room,
-            this.gfv("assignType"),
-            false
-          );
+          this.setAssistantsCount();
 
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
-
-          this.principalsBK = structuredClone(this.principals);
-          this.assistantsBK = structuredClone(this.assistants);
         }
       })
     );
@@ -215,22 +206,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
             this.getPrincipalAndAssistant();
 
             //Set count for principals
-            setCount(
-              this.assignments,
-              this.principals,
-              this.gfv("room"),
-              assignType,
-              true
-            );
+            this.setPrincipalsCount();
 
             //Set count for assistants
-            setCount(
-              this.assignments,
-              this.assistants,
-              this.gfv("room"),
-              assignType,
-              false
-            );
+            this.setAssistantsCount();
 
             this.principals.sort(sortParticipantsByCount);
             this.assistants.sort(sortParticipantsByCount);
@@ -251,8 +230,13 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           .reset(undefined, { emitEvent: false });
 
         if (!onlyMan) {
-          this.principals = structuredClone(this.principalsBK);
-          this.assistants = structuredClone(this.assistantsBK);
+          this.getPrincipalAndAssistant();
+          //Set count for principals
+          this.setPrincipalsCount();
+          //Set count for assistants
+          this.setAssistantsCount();
+          this.principals.sort(sortParticipantsByCount);
+          this.assistants.sort(sortParticipantsByCount);
           return;
         }
         this.principals = this.principals.filter((p) => p.isWoman === false);
@@ -273,8 +257,14 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
             .reset(undefined, { emitEvent: false });
 
           if (!onlyWoman) {
-            this.principals = structuredClone(this.principalsBK);
-            this.assistants = structuredClone(this.assistantsBK);
+            this.getPrincipalAndAssistant();
+            //Set count for principals
+            this.setPrincipalsCount();
+
+            //Set count for assistants
+            this.setAssistantsCount();
+            this.principals.sort(sortParticipantsByCount);
+            this.assistants.sort(sortParticipantsByCount);
             return;
           }
           this.principals = this.principals.filter((p) => p.isWoman === true);
@@ -289,8 +279,15 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
         .get("onlyExternals")
         .valueChanges.subscribe((onlyExternals) => {
           if (!onlyExternals) {
-            this.principals = structuredClone(this.principalsBK);
-            this.assistants = structuredClone(this.assistantsBK);
+            this.getPrincipalAndAssistant();
+            //Set count for principals
+            this.setPrincipalsCount();
+
+            //Set count for assistants
+            this.setAssistantsCount();
+            this.principals.sort(sortParticipantsByCount);
+            this.assistants.sort(sortParticipantsByCount);
+
             return;
           }
           this.principals = this.principals.filter((p) => p.isExternal);
@@ -347,7 +344,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    */
   checkAvailableDates() {
     this.participants = this.participantService
-      .getParticipants()
+      .getParticipants(true)
       .filter(
         (p) =>
           !p.notAvailableDates.some(
@@ -355,8 +352,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
               new Date(this.gfv("date")).getTime() === new Date(date).getTime()
           )
       );
-
-    this.highlightIfAlreadyHasWork();
   }
 
   /**
@@ -367,9 +362,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     const room = this.gfv("room");
     const assignType = this.gfv("assignType");
 
-    const principalsMap: Map<string, ParticipantInterface> = new Map();
-
     if (dateValue && room && assignType) {
+      const principalsMap: Map<string, ParticipantDynamicInterface> = new Map();
+
       for (const p of this.principals) {
         principalsMap.set(p.id, p);
       }
@@ -386,9 +381,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           as.hasWork = true;
         }
       }
-
-      this.principalsBK = structuredClone(this.principals);
-      this.assistantsBK = structuredClone(this.assistants);
     }
   }
 

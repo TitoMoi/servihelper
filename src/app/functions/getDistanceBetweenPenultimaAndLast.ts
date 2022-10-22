@@ -1,6 +1,6 @@
 import { formatDistanceStrict, Locale } from "date-fns";
 
-import { ParticipantInterface } from "../participant/model/participant.model";
+import { ParticipantDynamicInterface } from "../participant/model/participant.model";
 
 /**
  *
@@ -9,7 +9,7 @@ import { ParticipantInterface } from "../participant/model/participant.model";
  * @returns the penultimate date or undefined
  */
 export function getDistanceBetweenPenultimaAndLast(
-  participantList: ParticipantInterface[],
+  participantList: ParticipantDynamicInterface[],
   locale: Locale
 ): void {
   //Get the distance, i18n sensitive

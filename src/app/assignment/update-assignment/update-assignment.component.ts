@@ -7,7 +7,10 @@ import { sortParticipantsByCount } from "app/functions";
 import { setCount } from "app/functions/setCount";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import {
+  ParticipantDynamicInterface,
+  ParticipantInterface,
+} from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
@@ -40,13 +43,11 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   //For filter available dates
   participants: ParticipantInterface[] = [];
 
-  principals: ParticipantInterface[] = [];
-  assistants: ParticipantInterface[] = [];
+  principals: ParticipantDynamicInterface[] = [];
+  assistants: ParticipantDynamicInterface[] = [];
+
   footerNotes: NoteInterface[] = this.noteService.getNotes();
   assignments: AssignmentInterface[];
-
-  principalsBK: ParticipantInterface[] = [];
-  assistantsBK: ParticipantInterface[] = [];
 
   //Fill the form with the assignment passed by the router
   assignment: AssignmentInterface = this.assignmentService.getAssignment(
@@ -134,13 +135,31 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.assistants.sort(sortParticipantsByCount);
 
     this.highlightIfAlreadyHasWork();
-
-    this.principalsBK = structuredClone(this.principals);
-    this.assistantsBK = structuredClone(this.assistants);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  setPrincipalsCount() {
+    setCount(
+      this.assignments,
+      this.principals,
+      this.gfv("room"),
+      this.gfv("assignType"),
+      true
+    );
+  }
+
+  setAssistantsCount() {
+    //Set count for assistants
+    setCount(
+      this.assignments,
+      this.assistants,
+      this.gfv("room"),
+      this.gfv("assignType"),
+      false
+    );
   }
 
   prepareDateSub() {
@@ -162,28 +181,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           this.getPrincipalAndAssistant();
 
           //Set count for principals
-          setCount(
-            this.assignments,
-            this.principals,
-            this.gfv("room"),
-            this.gfv("assignType"),
-            true
-          );
+          this.setPrincipalsCount();
 
           //Set count for assistants
-          setCount(
-            this.assignments,
-            this.assistants,
-            this.gfv("room"),
-            this.gfv("assignType"),
-            false
-          );
+          this.setAssistantsCount();
 
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
-
-          this.principalsBK = structuredClone(this.principals);
-          this.assistantsBK = structuredClone(this.assistants);
         }
       });
   }
@@ -202,28 +206,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           this.getPrincipalAndAssistant();
 
           //Set count for principals
-          setCount(
-            this.assignments,
-            this.principals,
-            room,
-            this.gfv("assignType"),
-            true
-          );
+          this.setPrincipalsCount();
 
           //Set count for assistants
-          setCount(
-            this.assignments,
-            this.assistants,
-            room,
-            this.gfv("assignType"),
-            false
-          );
+          this.setAssistantsCount();
 
           this.principals.sort(sortParticipantsByCount);
           this.assistants.sort(sortParticipantsByCount);
-
-          this.principalsBK = structuredClone(this.principals);
-          this.assistantsBK = structuredClone(this.assistants);
         }
       })
     );
@@ -245,28 +234,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
             this.getPrincipalAndAssistant();
 
             //Set count for principals
-            setCount(
-              this.assignments,
-              this.principals,
-              this.gfv("room"),
-              assignType,
-              true
-            );
+            this.setPrincipalsCount();
 
             //Set count for assistants
-            setCount(
-              this.assignments,
-              this.assistants,
-              this.gfv("room"),
-              assignType,
-              false
-            );
+            this.setAssistantsCount();
 
             this.principals.sort(sortParticipantsByCount);
             this.assistants.sort(sortParticipantsByCount);
-
-            this.principalsBK = structuredClone(this.principals);
-            this.assistantsBK = structuredClone(this.assistants);
           }
         })
     );
@@ -283,8 +257,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           .reset(undefined, { emitEvent: false });
 
         if (!onlyMan) {
-          this.principals = structuredClone(this.principalsBK);
-          this.assistants = structuredClone(this.assistantsBK);
+          this.getPrincipalAndAssistant();
+          //Set count for principals
+          this.setPrincipalsCount();
+          //Set count for assistants
+          this.setAssistantsCount();
+          this.principals.sort(sortParticipantsByCount);
+          this.assistants.sort(sortParticipantsByCount);
           return;
         }
         this.principals = this.principals.filter((p) => p.isWoman === false);
@@ -305,8 +284,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
             .reset(undefined, { emitEvent: false });
 
           if (!onlyWoman) {
-            this.principals = structuredClone(this.principalsBK);
-            this.assistants = structuredClone(this.assistantsBK);
+            this.getPrincipalAndAssistant();
+            //Set count for principals
+            this.setPrincipalsCount();
+            //Set count for assistants
+            this.setAssistantsCount();
+            this.principals.sort(sortParticipantsByCount);
+            this.assistants.sort(sortParticipantsByCount);
             return;
           }
           this.principals = this.principals.filter((p) => p.isWoman === true);
@@ -320,8 +304,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
         .get("onlyExternals")
         .valueChanges.subscribe((onlyExternals) => {
           if (!onlyExternals) {
-            this.principals = structuredClone(this.principalsBK);
-            this.assistants = structuredClone(this.assistantsBK);
+            this.getPrincipalAndAssistant();
+            //Set count for principals
+            this.setPrincipalsCount();
+            //Set count for assistants
+            this.setAssistantsCount();
+            this.principals.sort(sortParticipantsByCount);
+            this.assistants.sort(sortParticipantsByCount);
             return;
           }
           this.principals = this.principals.filter((p) => p.isExternal);
@@ -385,7 +374,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     const room = this.gfv("room");
     const assignType = this.gfv("assignType");
 
-    const principalsMap: Map<string, ParticipantInterface> = new Map();
+    const principalsMap: Map<string, ParticipantDynamicInterface> = new Map();
 
     if (dateValue && room && assignType) {
       for (const p of this.principals) {
@@ -404,9 +393,6 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           as.hasWork = true;
         }
       }
-
-      this.principalsBK = structuredClone(this.principals);
-      this.assistantsBK = structuredClone(this.assistants);
     }
   }
 

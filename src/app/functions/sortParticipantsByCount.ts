@@ -1,8 +1,8 @@
-import { ParticipantInterface } from 'app/participant/model/participant.model';
+import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
 
 export function sortParticipantsByCount(
-  a: ParticipantInterface,
-  b: ParticipantInterface
+  a: ParticipantDynamicInterface,
+  b: ParticipantDynamicInterface
 ): number {
   if (a.count < b.count) {
     return -1;

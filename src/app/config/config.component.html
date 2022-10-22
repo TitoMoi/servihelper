@@ -1,76 +1,56 @@
-<form
-  class="mat-elevation-z8"
-  [formGroup]="configForm"
-  novalidate
-  (ngSubmit)="onSubmit()"
->
-  <div class="row justify-items-center m-2">
+<form [formGroup]="configForm" novalidate (ngSubmit)="onSubmit()">
+  <div class="row mb-3">
     <div class="col-12">
-      <h4>{{ "CONFIG_ASSIGNMENT_TITLE" | transloco }}</h4>
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-        <input matInput formControlName="assignmentHeaderTitle" />
-      </mat-form-field>
-    </div>
-    <div class="col-6">
-      <h4>{{ "CONFIG_ASSIGNMENT_PRINCIPAL_TITLE" | transloco }}</h4>
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-        <input matInput formControlName="assignmentPrincipalTitle" />
-      </mat-form-field>
-    </div>
-    <div class="col-6">
-      <h4>{{ "CONFIG_ASSIGNMENT_ASSISTANT_TITLE" | transloco }}</h4>
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-        <input matInput formControlName="assignmentAssistantTitle" />
-      </mat-form-field>
-    </div>
-    <div class="col-6">
-      <h4>{{ "CONFIG_ASSIGNMENT_DATE_TITLE" | transloco }}</h4>
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-        <input matInput formControlName="assignmentDateTitle" />
-      </mat-form-field>
-    </div>
-    <div class="col-6">
-      <h4>{{ "CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE" | transloco }}</h4>
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-        <input matInput formControlName="assignmentAssignTypeTitle" />
-      </mat-form-field>
-    </div>
-    <div class="col-6">
-      <h4>{{ "CONFIG_ASSIGNMENT_THEME_TITLE" | transloco }}</h4>
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-        <input matInput formControlName="assignmentThemeTitle" />
-      </mat-form-field>
-    </div>
-    <div class="col-6">
-      <h4>{{ "CONFIG_ASSIGNMENT_ROOM_TITLE" | transloco }}</h4>
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-        <input matInput formControlName="assignmentRoomTitle" />
-      </mat-form-field>
-    </div>
-    <div class="col-6">
-      <h4>{{ "CONFIG_ASSIGNMENT_NOTE_TITLE" | transloco }}</h4>
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-        <input matInput formControlName="assignmentNoteTitle" />
-      </mat-form-field>
-    </div>
-    <div class="col-12">
-      <h4>{{ "CONFIG_REPORT_TITLE" | transloco }}</h4>
-      <mat-form-field class="full-width">
-        <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
-        <input matInput formControlName="reportTitle" />
-      </mat-form-field>
-    </div>
-    <div class="col-12">
-      <div class="row">
-        <div class="col-6">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h3 class="m-3">
+                {{ "CONFIG_ACCORDION_SHEET_TITLE" | transloco }}
+              </h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <h4>{{ "CONFIG_ASSIGNMENT_TITLE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="assignmentHeaderTitle" />
+          </mat-form-field>
+          <h4>{{ "CONFIG_ASSIGNMENT_PRINCIPAL_TITLE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="assignmentPrincipalTitle" />
+          </mat-form-field>
+          <h4>{{ "CONFIG_ASSIGNMENT_ASSISTANT_TITLE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="assignmentAssistantTitle" />
+          </mat-form-field>
+          <h4>{{ "CONFIG_ASSIGNMENT_DATE_TITLE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="assignmentDateTitle" />
+          </mat-form-field>
+          <h4>{{ "CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="assignmentAssignTypeTitle" />
+          </mat-form-field>
+          <h4>{{ "CONFIG_ASSIGNMENT_THEME_TITLE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="assignmentThemeTitle" />
+          </mat-form-field>
+          <h4>{{ "CONFIG_ASSIGNMENT_ROOM_TITLE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="assignmentRoomTitle" />
+          </mat-form-field>
+          <h4>{{ "CONFIG_ASSIGNMENT_NOTE_TITLE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="assignmentNoteTitle" />
+          </mat-form-field>
           <h4>{{ "CONFIG_DEFAULT_FOOTER_NOTE" | transloco }}</h4>
           <mat-form-field class="full-width">
             <mat-select formControlName="defaultFooterNoteId" required>
@@ -80,8 +60,27 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-        <div class="col-6">
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h3 class="m-3">
+                {{ "CONFIG_ACCORDION_REPORT_TITLE" | transloco }}
+              </h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <h4>{{ "CONFIG_REPORT_TITLE" | transloco }}</h4>
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="reportTitle" />
+          </mat-form-field>
           <h4>{{ "CONFIG_DEFAULT_WEEKDAY_BEGINS" | transloco }}</h4>
           <mat-form-field class="full-width">
             <mat-select formControlName="defaultWeekDayBegins" required>
@@ -90,8 +89,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-        <div class="col-6">
+
           <h4>{{ "CONFIG_DEFAULT_REPORT_DATE_FORMAT" | transloco }}</h4>
           <mat-form-field class="full-width">
             <mat-select formControlName="defaultReportDateFormat" required>
@@ -100,8 +98,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-        <div class="col-6">
+
           <h4>{{ "CONFIG_DEFAULT_REPORT_DATE_COLOR" | transloco }}</h4>
           <mat-form-field class="full-width">
             <mat-label>{{
@@ -116,8 +113,7 @@
               [style.background]="defaultReportDateColor"
             />
           </mat-form-field>
-        </div>
-        <div class="col-6">
+
           <h4>{{ "CONFIG_DEFAULT_FONT_SIZE" | transloco }}</h4>
           <mat-form-field class="full-width">
             <input
@@ -127,42 +123,54 @@
               placeholder="16"
             />
           </mat-form-field>
-        </div>
-        <div class="col-12">
-          <button mat-raised-button type="submit" color="primary">
-            {{ "BUTTON_SAVE" | transloco }}
-          </button>
-          <span class="ms-2 green-msg" *ngIf="isFormSaved">
-            {{ "CONFIG_FORM_SAVED" | transloco }}
-          </span>
-        </div>
-        <div class="col-6 mb-2">
-          <h4>{{ "CONFIG_RESTART_LABEL" | transloco }}</h4>
-          <div>
-            <button
-              mat-raised-button
-              type="button"
-              color="warn"
-              (click)="confirmDelete = !confirmDelete"
-            >
-              {{ "CONFIG_RESET_ALL" | transloco }}
-            </button>
-            <button
-              *ngIf="confirmDelete"
-              class="ms-2"
-              mat-raised-button
-              type="button"
-              color="warn"
-              (click)="eraseAllData()"
-            >
-              {{ "CONFIG_RESET_ALL_CONFIRM" | transloco }}
-            </button>
-          </div>
-        </div>
-        <div class="col-6 mb-2 text-align-end">
-          {{ appVersion }}
-        </div>
-      </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <mat-accordion>
+      <mat-expansion-panel class="hover-lightcoral">
+        <mat-expansion-panel-header tabIndex="3" class="bg-color-lightcoral">
+          <mat-panel-title>
+            <h3 class="m-3">
+              {{ "CONFIG_RESTART_LABEL" | transloco }}
+            </h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button
+          mat-raised-button
+          type="button"
+          color="warn"
+          (click)="confirmDelete = !confirmDelete"
+        >
+          {{ "CONFIG_RESET_ALL" | transloco }}
+        </button>
+        <button
+          *ngIf="confirmDelete"
+          class="ms-2"
+          mat-raised-button
+          type="button"
+          color="warn"
+          (click)="eraseAllData()"
+        >
+          {{ "CONFIG_RESET_ALL_CONFIRM" | transloco }}
+        </button>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <button mat-raised-button type="submit" color="primary">
+        {{ "BUTTON_SAVE" | transloco }}
+      </button>
+      <span class="ms-2 green-msg" *ngIf="isFormSaved">
+        {{ "CONFIG_FORM_SAVED" | transloco }}
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 mb-2 text-align-end">
+      {{ appVersion }}
     </div>
   </div>
 </form>

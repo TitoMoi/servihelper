@@ -1,5 +1,5 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
 
 /**
  *
@@ -8,7 +8,7 @@ import { ParticipantInterface } from 'app/participant/model/participant.model';
  */
 export function setPrincipalCountById(
   assignmentList: AssignmentInterface[],
-  participantList: ParticipantInterface[]
+  participantList: ParticipantDynamicInterface[]
 ): void {
   //reset "count" to 0
   participantList.forEach((participant) => (participant.count = 0));

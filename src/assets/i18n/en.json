@@ -213,5 +213,7 @@
   "zhCN": "Chinese",
   "PARTICIPANT_CREATE_ISEXTERNAL": "Is external",
   "PARTICIPANT_SHOW_EXTERNAL": "Show external participants",
-  "ASSIGN_CREATE_ONLY_EXTERNALS": "Only externals"
+  "ASSIGN_CREATE_ONLY_EXTERNALS": "Only externals",
+  "CONFIG_ACCORDION_SHEET_TITLE": "Config the sheet",
+  "CONFIG_ACCORDION_REPORT_TITLE": "Config reports title, day of the week, date format, colors and fonts"
 }

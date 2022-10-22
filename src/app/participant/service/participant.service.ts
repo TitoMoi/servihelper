@@ -1,6 +1,7 @@
 import {
   ParticipantAssignTypesInterface,
   ParticipantInterface,
+  ParticipantModel,
 } from "app/participant/model/participant.model";
 import { APP_CONFIG } from "environments/environment";
 import { writeJson, readJSONSync } from "fs-extra";
@@ -100,7 +101,11 @@ export class ParticipantService {
     //update participant
     for (let i = 0; i < this.#participants.length; i++) {
       if (this.#participants[i].id === participant.id) {
-        this.#participants[i] = participant;
+        //Clean incoming participant first, maybe has dynamic data from assignments section
+        const pModel = new ParticipantModel(participant);
+        //Convert class to obj
+        this.#participants[i] = { ...pModel };
+
         this.#participantsMap.set(participant.id, participant);
         //save participants with the updated participant
         return this.saveParticipantsToFile();

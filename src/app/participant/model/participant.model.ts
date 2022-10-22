@@ -8,13 +8,41 @@ export interface ParticipantInterface {
   assignTypes: ParticipantAssignTypesInterface[];
   available: boolean;
   notAvailableDates?: string[];
-  count: number; //Dynamic value, undefined by default
-  hasWork: boolean; //Dynamic, if has current assignments for the date
-  lastAssignmentDate: Date; //Dynamic value, undefined by default, date of last assignment
-  penultimateAssignmentDate: Date; //Dynamic value, undefined by default, date of penultimate assignment
-  distanceBetweenPenultimaAndLast: string; //Dynamic value, undefined by default, string in distance
-  lastAssignType: string; //Dynamic value, undefined by default, the name of the assignType
-  penultimateAssignType: string; //Dynamic value, undefined by default, the name of the assignType
+}
+
+//These values are calculated under assignments and statistics pages but shouldnt be saved on json file
+export interface ParticipantDynamicInterface extends ParticipantInterface {
+  count?: number; //Dynamic value, undefined by default
+  hasWork?: boolean; //Dynamic, if has current assignments for the date
+  lastAssignmentDate?: Date; //Dynamic value, undefined by default, date of last assignment
+  penultimateAssignmentDate?: Date; //Dynamic value, undefined by default, date of penultimate assignment
+  distanceBetweenPenultimaAndLast?: string; //Dynamic value, undefined by default, string in distance
+  lastAssignType?: string; //Dynamic value, undefined by default, the name of the assignType
+  penultimateAssignType?: string; //Dynamic value, undefined by default, the name of the assignType
+}
+
+export class ParticipantModel {
+  id: string;
+  name: string;
+  isWoman: boolean;
+  isExternal: boolean;
+  onlyAssistant: boolean;
+  rooms: ParticipantRoomInterface[];
+  assignTypes: ParticipantAssignTypesInterface[];
+  available: boolean;
+  notAvailableDates?: string[];
+
+  constructor(participant: ParticipantInterface) {
+    this.id = participant.id;
+    this.name = participant.name;
+    this.isWoman = participant.isWoman;
+    this.isExternal = participant.isExternal;
+    this.onlyAssistant = participant.onlyAssistant;
+    this.rooms = participant.rooms;
+    this.assignTypes = participant.assignTypes;
+    this.available = participant.available;
+    this.notAvailableDates = participant.notAvailableDates;
+  }
 }
 
 export interface ParticipantRoomInterface {
