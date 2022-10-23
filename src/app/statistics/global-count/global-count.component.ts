@@ -7,10 +7,7 @@ import {
   getPenultimateAssignment,
   setCountById,
 } from "app/functions";
-import {
-  ParticipantDynamicInterface,
-  ParticipantInterface,
-} from "app/participant/model/participant.model";
+import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import {
   bn,
@@ -36,6 +33,7 @@ import { Subscription } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -52,13 +50,11 @@ import { SortService } from "app/services/sort.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlobalCountComponent implements OnInit, OnDestroy {
-  globalListBackup: ParticipantInterface[];
-
-  globalList: ParticipantInterface[];
+  globalList: ParticipantDynamicInterface[];
 
   locales;
 
-  subscription$: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor(
     private assignmentService: AssignmentService,
@@ -94,7 +90,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   async initStatistics() {
@@ -151,14 +147,14 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     );
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
-    this.subscription$ = this.translocoService.langChanges$.subscribe(
-      (lang) => {
+    this.subscription.add(
+      this.translocoService.langChanges$.subscribe((lang) => {
         //Assistant
         getDistanceBetweenPenultimaAndLast(
           participants,
           this.locales[this.translocoService.getActiveLang()]
         );
-      }
+      })
     );
   }
 
@@ -166,12 +162,11 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
    *
    * @param event the checkbox change event
    */
-  changeWoman(event: MatCheckboxChange): void {
+  async changeWoman(event: MatCheckboxChange): Promise<void> {
+    await this.initStatistics();
     if (!event.checked) {
-      this.initStatistics();
       return;
     }
-    this.initStatistics();
     this.globalList = this.globalList.filter(
       (participant) => participant.isWoman
     );
@@ -181,12 +176,11 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
    *
    * @param event the checkbox change event
    */
-  changeMan(event: MatCheckboxChange): void {
+  async changeMan(event: MatCheckboxChange): Promise<void> {
+    await this.initStatistics();
     if (!event.checked) {
-      this.initStatistics();
       return;
     }
-    this.initStatistics();
     this.globalList = this.globalList.filter(
       (participant) => !participant.isWoman
     );

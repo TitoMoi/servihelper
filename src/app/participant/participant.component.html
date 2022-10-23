@@ -18,6 +18,9 @@
       >
     </div>
   </div>
+  <div *ngIf="dataSource.length">
+    toDo translation: total participants : {{ dataSource.length }}
+  </div>
   <table
     id="tableDiv"
     *ngIf="dataSource.length"

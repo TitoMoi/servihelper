@@ -52,8 +52,6 @@ import { toPng } from "html-to-image";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrincipalCountComponent implements OnInit, OnDestroy {
-  principalListBackup: ParticipantInterface[];
-
   principalList: ParticipantInterface[];
 
   locales;
@@ -166,12 +164,11 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
    *
    * @param event the checkbox change event
    */
-  changeWoman(event: MatCheckboxChange): void {
+  async changeWoman(event: MatCheckboxChange): Promise<void> {
+    await this.initStatistics();
     if (!event.checked) {
-      this.initStatistics();
       return;
     }
-    this.initStatistics();
     this.principalList = this.principalList.filter(
       (participant) => participant.isWoman
     );
@@ -181,12 +178,11 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
    *
    * @param event the checkbox change event
    */
-  changeMan(event: MatCheckboxChange): void {
+  async changeMan(event: MatCheckboxChange): Promise<void> {
+    await this.initStatistics();
     if (!event.checked) {
-      this.initStatistics();
       return;
     }
-    this.initStatistics();
     this.principalList = this.principalList.filter(
       (participant) => !participant.isWoman
     );

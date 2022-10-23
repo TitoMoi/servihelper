@@ -162,6 +162,18 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
+  //Batch function
+  getCountSortAndHighlightProcess() {
+    this.getPrincipalAndAssistant();
+    //Set count for principals
+    this.setPrincipalsCount();
+    //Set count for assistants
+    this.setAssistantsCount();
+    this.principals.sort(sortParticipantsByCount);
+    this.assistants.sort(sortParticipantsByCount);
+    this.highlightIfAlreadyHasWork();
+  }
+
   prepareDateSub() {
     this.subscription = this.assignmentForm
       .get("date")
@@ -257,13 +269,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           .reset(undefined, { emitEvent: false });
 
         if (!onlyMan) {
-          this.getPrincipalAndAssistant();
-          //Set count for principals
-          this.setPrincipalsCount();
-          //Set count for assistants
-          this.setAssistantsCount();
-          this.principals.sort(sortParticipantsByCount);
-          this.assistants.sort(sortParticipantsByCount);
+          this.getCountSortAndHighlightProcess();
           return;
         }
         this.principals = this.principals.filter((p) => p.isWoman === false);
@@ -284,13 +290,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
             .reset(undefined, { emitEvent: false });
 
           if (!onlyWoman) {
-            this.getPrincipalAndAssistant();
-            //Set count for principals
-            this.setPrincipalsCount();
-            //Set count for assistants
-            this.setAssistantsCount();
-            this.principals.sort(sortParticipantsByCount);
-            this.assistants.sort(sortParticipantsByCount);
+            this.getCountSortAndHighlightProcess();
             return;
           }
           this.principals = this.principals.filter((p) => p.isWoman === true);
@@ -304,13 +304,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
         .get("onlyExternals")
         .valueChanges.subscribe((onlyExternals) => {
           if (!onlyExternals) {
-            this.getPrincipalAndAssistant();
-            //Set count for principals
-            this.setPrincipalsCount();
-            //Set count for assistants
-            this.setAssistantsCount();
-            this.principals.sort(sortParticipantsByCount);
-            this.assistants.sort(sortParticipantsByCount);
+            this.getCountSortAndHighlightProcess();
             return;
           }
           this.principals = this.principals.filter((p) => p.isExternal);
