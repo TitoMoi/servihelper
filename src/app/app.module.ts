@@ -61,7 +61,8 @@ import { GlobalCountComponent } from "./statistics/global-count/global-count.com
 import { PrincipalCountComponent } from "./statistics/principal-count/principal-count.component";
 import { StatisticsComponent } from "./statistics/statistics.component";
 import { TranslocoRootModule } from "./transloco/translocoRoot.module";
-import { MoveAssignmentComponent } from './assignment/move-assignment/move-assignment.component';
+import { MoveAssignmentComponent } from "./assignment/move-assignment/move-assignment.component";
+import { GroupDeleteAssignmentComponent } from "./assignment/group-delete-assignment/group-delete-assignment.component";
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { MoveAssignmentComponent } from './assignment/move-assignment/move-assig
     SelectionListHorComponent,
     MultipleImageAssignmentComponent,
     MoveAssignmentComponent,
+    GroupDeleteAssignmentComponent,
   ],
   imports: [
     BrowserAnimationsModule,

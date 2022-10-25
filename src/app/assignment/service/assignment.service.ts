@@ -238,6 +238,21 @@ export class AssignmentService {
 
   /**
    *
+   * @param date the date we want to delete all assignments
+   */
+  massiveAssignmentDelete(date: Date) {
+    this.#assignments = this.#assignments.filter((a) => {
+      if (new Date(a.date).getTime() === date.getTime()) {
+        this.#assignmentsMap.delete(a.id);
+        this.deleteAssignmentToAssignmentByDateMap(a);
+        return false;
+      }
+      return true;
+    });
+  }
+
+  /**
+   *
    * @param assignment the assignment to delete
    * @returns true if assignment is deleted and saved false otherwise
    */
