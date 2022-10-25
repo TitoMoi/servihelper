@@ -249,6 +249,8 @@ export class AssignmentService {
       }
       return true;
     });
+    //save assignments
+    return this.saveAssignmentsToFile();
   }
 
   /**
