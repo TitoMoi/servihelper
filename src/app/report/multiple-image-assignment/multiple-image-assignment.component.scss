@@ -13,8 +13,11 @@
   font-size: 15px;
 }
 
-.flex-child-size {
-  flex: 0 0 45%;
+.open-folder {
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 2px solid lightgreen;
+  cursor: pointer;
 }
 
 .mat-icon {

@@ -3,7 +3,12 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
-import { toPng } from "html-to-image";
+import { toPng, toBlob } from "html-to-image";
+import { filenamifyPath } from "filenamify";
+const os = require("os");
+const path = require("path");
+import { shell } from "electron";
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -15,6 +20,12 @@ import {
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { ipcRenderer } from "electron";
+import {
+  ensureDirSync,
+  ensureFileSync,
+  removeSync,
+  writeFileSync,
+} from "fs-extra";
 
 @Component({
   selector: "app-multiple-image-assignment",
@@ -31,6 +42,11 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   #assignments: AssignmentInterface[] = [];
 
   assignmentsWithNames: AssignmentInterface[] = [];
+
+  assignmentsInFolderCreated = false;
+
+  //The user home
+  homeDir = os.homedir();
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
@@ -102,6 +118,18 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       };
       this.assignmentsWithNames.push(assignmentWithData);
     });
+
+    //Sort
+    if (this.order === "Desc") {
+      this.assignmentsWithNames = this.assignmentsWithNames.sort(
+        this.assignmentService.sortAssignmentsByDateDesc
+      );
+    } else {
+      this.assignmentsWithNames = this.assignmentsWithNames.sort(
+        this.assignmentService.sortAssignmentsByDateAsc
+      );
+    }
+    this.cdr.detectChanges();
   }
 
   async toPng() {
@@ -123,10 +151,85 @@ export class MultipleImageAssignmentComponent implements OnChanges {
    */
   async createHiddenWindowForPrint() {
     //the div
-    const div = document.getElementById("assignmentDiv");
+    const div: HTMLDivElement = document.getElementById(
+      "assignmentDiv"
+    ) as HTMLDivElement;
     //create window
     await ipcRenderer.send("createHiddenWindowForPrint", {
       innerHTML: div.innerHTML,
     });
+  }
+
+  async imageToBlob(): Promise<Blob> {
+    //the div
+    document.body.style.cursor = "wait";
+    const div = document.getElementById("assignmentDiv");
+    const dataBlob = await toBlob(div);
+    document.body.style.cursor = "default";
+    return dataBlob;
+  }
+
+  async createAssignmentsInFolder() {
+    this.assignmentsInFolderCreated = false;
+    const assignmentsWithNamesBK = structuredClone(this.assignmentsWithNames);
+    const div: HTMLDivElement = document.getElementById(
+      "assignmentDiv"
+    ) as HTMLDivElement;
+    div.classList.remove("col-xl-6");
+    div.classList.add("col-xl-3");
+    div.classList.remove("col");
+    div.classList.add("col-6");
+    //Create a map for every name and their assignments
+    const assignByNameMap = new Map<string, AssignmentInterface[]>();
+    for (const a of this.assignmentsWithNames) {
+      if (assignByNameMap.has(a.principal)) {
+        const assignments = assignByNameMap.get(a.principal);
+        assignments.push(a);
+        assignByNameMap.set(a.principal, assignments);
+      } else {
+        assignByNameMap.set(a.principal, [a]);
+      }
+    }
+
+    //Clean directory "assignments" first
+    removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
+
+    for (const [key, assignments] of assignByNameMap.entries()) {
+      //Ensure participant folder name
+      const pathName = filenamifyPath(
+        path.join(this.homeDir, "assignments", key)
+      );
+      //Create again
+      ensureDirSync(pathName);
+      for (const a of assignments) {
+        //update the UI with only 1 assignment each time
+        this.assignmentsWithNames = [a];
+        this.cdr.detectChanges();
+        //Ensure the filename is valid for the system
+        const fileName = filenamifyPath(
+          path.join(this.homeDir, "assignments", key, a.assignType + ".png")
+        );
+        ensureFileSync(fileName);
+        //Create the blob and save it to the fs
+        const blob = await this.imageToBlob();
+        const ab = await blob.arrayBuffer();
+        const view = new Uint8Array(ab);
+        writeFileSync(fileName, view);
+      }
+    }
+    //restore width
+    div.classList.remove("col-xl-3");
+    div.classList.add("col-xl-6");
+    div.classList.remove("col-6");
+    div.classList.add("col");
+
+    //Restore assignments view
+    this.assignmentsWithNames = assignmentsWithNamesBK;
+    this.assignmentsInFolderCreated = true;
+    this.cdr.detectChanges();
+  }
+
+  openAssignmentsFolder() {
+    shell.openExternal(path.join(this.homeDir, "assignments"));
   }
 }

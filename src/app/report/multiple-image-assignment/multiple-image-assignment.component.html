@@ -1,6 +1,6 @@
 <div class="row gx-0 align-items-center">
   <div class="col-12">
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
       <button class="m-2" mat-raised-button type="button" routerLink="..">
         {{ "BUTTON_CANCEL" | transloco }}
       </button>
@@ -16,13 +16,25 @@
         aria-label="icon"
         (click)="createHiddenWindowForPrint()"
       ></mat-icon>
+      <mat-icon
+        class="m-2"
+        svgIcon="folder"
+        aria-label="icon"
+        (click)="createAssignmentsInFolder()"
+      ></mat-icon>
+      <div
+        *ngIf="assignmentsInFolderCreated"
+        class="open-folder"
+        (click)="openAssignmentsFolder()"
+      >
+        Click me to open the assignments folder...
+      </div>
     </div>
   </div>
   <div id="assignmentDiv" class="col col-xl-6 bg-color-white">
     <div class="d-flex flex-wrap align-items-start">
       <!-- this style is for the print option that doesnt support class-->
       <div
-        class="flex-child-size"
         style="
           width: 20rem;
           display: inline-block;

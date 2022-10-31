@@ -1,17 +1,25 @@
-import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { RoomInterface } from 'app/room/model/room.model';
-import { RoomService } from 'app/room/service/room.service';
-import { SharedService } from 'app/services/shared.service';
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { RoomInterface } from "app/room/model/room.model";
+import { RoomService } from "app/room/service/room.service";
+import { SharedService } from "app/services/shared.service";
 
 import {
-    AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild
-} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatOption } from '@angular/material/core';
-import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { MatSelect } from '@angular/material/select';
-import { TranslocoService } from '@ngneat/transloco';
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatOption } from "@angular/material/core";
+import {
+  MatDatepicker,
+  MatDatepickerInputEvent,
+} from "@angular/material/datepicker";
+import { MatSelect } from "@angular/material/select";
+import { TranslocoService } from "@ngneat/transloco";
 
 @Component({
   selector: "app-report-selector",
@@ -34,6 +42,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
+  //props for datepicker hack
   closeOnSelected = false;
   init = new Date();
   selectedDates = [];
@@ -84,6 +93,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
   }
 
+  //for Datepicker hack
   public dateClass = (date: Date) => {
     if (this.findDate(date) !== -1) {
       return ["selected"];
@@ -91,6 +101,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     return [];
   };
 
+  //for Datepicker hack
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
     if (event.value) {
       const date = event.value;
@@ -122,11 +133,13 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     }
   }
 
+  //for Datepicker hack
   public remove(date: Date): void {
     const index = this.findDate(date);
     this.selectedDates.splice(index, 1);
   }
 
+  //for Datepicker hack
   private findDate(date: Date): number {
     return this.selectedDates.map((m) => +m).indexOf(+date);
   }
