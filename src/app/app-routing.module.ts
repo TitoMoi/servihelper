@@ -30,6 +30,7 @@ import { StatisticsComponent } from "app/statistics/statistics.component";
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { GroupDeleteAssignmentComponent } from "./assignment/group-delete-assignment/group-delete-assignment.component";
+import { CreateFromParticipantComponent } from "./participant/create-from-participant/create-from-participant.component";
 
 const routes: Routes = [
   {
@@ -96,6 +97,10 @@ const routes: Routes = [
   {
     path: "participant/create",
     component: CreateParticipantComponent,
+  },
+  {
+    path: "participant/create-from",
+    component: CreateFromParticipantComponent,
   },
   {
     path: "participant/update/:id",

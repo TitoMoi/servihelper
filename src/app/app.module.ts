@@ -63,6 +63,7 @@ import { StatisticsComponent } from "./statistics/statistics.component";
 import { TranslocoRootModule } from "./transloco/translocoRoot.module";
 import { MoveAssignmentComponent } from "./assignment/move-assignment/move-assignment.component";
 import { GroupDeleteAssignmentComponent } from "./assignment/group-delete-assignment/group-delete-assignment.component";
+import { CreateFromParticipantComponent } from './participant/create-from-participant/create-from-participant.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { GroupDeleteAssignmentComponent } from "./assignment/group-delete-assign
     MultipleImageAssignmentComponent,
     MoveAssignmentComponent,
     GroupDeleteAssignmentComponent,
+    CreateFromParticipantComponent,
   ],
   imports: [
     BrowserAnimationsModule,
