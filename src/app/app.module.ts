@@ -64,6 +64,8 @@ import { TranslocoRootModule } from "./transloco/translocoRoot.module";
 import { MoveAssignmentComponent } from "./assignment/move-assignment/move-assignment.component";
 import { GroupDeleteAssignmentComponent } from "./assignment/group-delete-assignment/group-delete-assignment.component";
 import { CreateFromParticipantComponent } from './participant/create-from-participant/create-from-participant.component';
+import { RolesComponent } from './roles/roles.component';
+import { CreateRoleComponent } from './roles/create-role/create-role.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +107,8 @@ import { CreateFromParticipantComponent } from './participant/create-from-partic
     MoveAssignmentComponent,
     GroupDeleteAssignmentComponent,
     CreateFromParticipantComponent,
+    RolesComponent,
+    CreateRoleComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,6 +1,6 @@
 import { ConfigService } from "app/config/service/config.service";
-import { Observable } from "rxjs";
-import { map, shareReplay } from "rxjs/operators";
+import { Observable, of } from "rxjs";
+import { filter, first, map, shareReplay } from "rxjs/operators";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
@@ -11,6 +11,8 @@ import { shell } from "electron";
 import { SharedService } from "app/services/shared.service";
 import { HttpClient } from "@angular/common/http";
 import { GitHubDataInterface } from "./model/navigation.model";
+import { ConfigInterface } from "app/config/model/config.model";
+import { RoleInterface } from "app/roles/model/role.model";
 
 @Component({
   selector: "app-navigation",
@@ -25,6 +27,10 @@ export class NavigationComponent implements OnInit {
       map((result) => result.matches),
       shareReplay()
     );
+  lang = this.configService.getConfig().lang;
+
+  role = this.configService.getConfig().role;
+
   availableLangs = undefined;
 
   isNewVersion = false;
@@ -34,6 +40,10 @@ export class NavigationComponent implements OnInit {
   queryGitHub$ = this.httpClient.get<GitHubDataInterface>(
     "https://api.github.com/repos/titoMoi/servihelper/releases/latest"
   );
+
+  config$: Observable<ConfigInterface> = this.configService.config$;
+
+  roles$: Observable<RoleInterface[]>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -45,14 +55,13 @@ export class NavigationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const lang = this.configService.getConfig().lang;
-
     this.availableLangs = this.translocoService.getAvailableLangs();
 
-    this.setLang(lang);
-    this.setLocale(lang);
-  }
+    this.setLang(this.lang);
+    this.setLocale(this.lang);
 
+    this.roles$ = this.config$.pipe(map((config) => config.roles));
+  }
   /**
    *
    * @param languageChange event of select change
@@ -83,6 +92,12 @@ export class NavigationComponent implements OnInit {
     //Save the locale
     if (locale === "zhCN") locale = "zh";
     this.dateAdapter.setLocale(locale);
+  }
+
+  updateRole(event: MatSelectChange) {
+    const config = this.configService.getConfig();
+    config.role = event.value;
+    this.configService.updateConfig(config);
   }
 
   openExternalServihelperRepository() {

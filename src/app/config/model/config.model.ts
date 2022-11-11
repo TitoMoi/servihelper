@@ -1,4 +1,5 @@
 import { DateFormatStyles } from "@ngneat/transloco-locale";
+import { RoleInterface } from "app/roles/model/role.model";
 
 export type ConfigOptionsType =
   | "lang"
@@ -14,7 +15,10 @@ export type ConfigOptionsType =
   | "defaultReportFontSize"
   | "defaultReportDateColor"
   | "defaultWeekDayBegins"
-  | "defaultReportDateFormat";
+  | "defaultReportDateFormat"
+  | "reportTitle"
+  | "roles"
+  | "role";
 
 export interface WeekDaysBegin {
   name: string;
@@ -37,4 +41,6 @@ export interface ConfigInterface {
   assignmentRoomTitle?: string;
   assignmentNoteTitle?: string;
   reportTitle?: string;
+  roles?: RoleInterface[];
+  role?: string;
 }

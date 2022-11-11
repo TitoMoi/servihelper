@@ -1,0 +1,53 @@
+<form [formGroup]="roleForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>{{ "ROLE_CREATE_TITLE" | transloco }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input
+              matInput
+              appautofocus
+              spellcheck="false"
+              formControlName="name"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h3 *ngIf="assignTypes.length">
+            {{ "PARTICIPANT_CREATE_ASSIGNTYPE_PRINCIPAL" | transloco }}
+          </h3>
+          <div class="row mb-2">
+            <ng-container *ngFor="let at of assignTypes">
+              <div class="col-auto mb-2">
+                <mat-checkbox
+                  color="primary"
+                  (change)="changeCheckbox(at.id)"
+                  >{{ at.name }}</mat-checkbox
+                >
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="button" routerLink="..">
+        {{ "BUTTON_CANCEL" | transloco }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="roleForm.invalid"
+      >
+        {{ "BUTTON_SAVE" | transloco }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -93,6 +93,8 @@ export class ConfigComponent {
     defaultReportDateColor: "",
     defaultWeekDayBegins: 1,
     defaultReportDateFormat: this.translocoDateFormats[3],
+    roles: [],
+    role: undefined,
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();

@@ -31,6 +31,8 @@ import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { GroupDeleteAssignmentComponent } from "./assignment/group-delete-assignment/group-delete-assignment.component";
 import { CreateFromParticipantComponent } from "./participant/create-from-participant/create-from-participant.component";
+import { RolesComponent } from "./roles/roles.component";
+import { CreateRoleComponent } from "./roles/create-role/create-role.component";
 
 const routes: Routes = [
   {
@@ -155,6 +157,14 @@ const routes: Routes = [
   {
     path: "config",
     component: ConfigComponent,
+  },
+  {
+    path: "roles",
+    component: RolesComponent,
+  },
+  {
+    path: "roles/create",
+    component: CreateRoleComponent,
   },
   {
     path: "info",

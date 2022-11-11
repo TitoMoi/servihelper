@@ -99,28 +99,52 @@
       class="justify-content-between font-medium d-print-none"
       color="primary"
     >
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
-        <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
-      </button>
-      <span>Servihelper</span>
-      <mat-form-field style="text-align: center">
-        <mat-select
-          class="wk-vertical-align"
-          [value]="configService.getConfig().lang"
-          (selectionChange)="updateLang($event)"
+      <div>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
         >
-          <mat-option *ngFor="let lang of availableLangs" [value]="lang">
-            {{ lang | transloco }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
+        </button>
+        <span>Servihelper</span>
+      </div>
+
+      <div class="d-flex align-items-center">
+        <mat-form-field class="me-3" style="text-align: center">
+          <mat-select
+            class="wk-vertical-align"
+            [value]="lang"
+            (selectionChange)="updateLang($event)"
+          >
+            <mat-option *ngFor="let lang of availableLangs" [value]="lang">
+              {{ lang | transloco }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="me-3">
+          <mat-select
+            class="wk-vertical-align"
+            [value]="role"
+            (selectionChange)="updateRole($event)"
+          >
+            <mat-option *ngFor="let role of roles$ | async" [value]="role.id">
+              {{ role.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-icon
+          class="m-2"
+          svgIcon="avatar"
+          aria-label="icon"
+          routerLink="roles"
+        ></mat-icon>
+      </div>
     </mat-toolbar>
+    <!-- <pre>{{ config$ | async | json }}</pre>
+    <pre>{{ roles$ | async | json }}</pre> -->
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

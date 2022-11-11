@@ -18,6 +18,7 @@ import { PdfService } from "./services/pdf.service";
 export class AppComponent implements OnInit {
   //Icons
   icons: string[] = [
+    "avatar",
     "menu",
     "room",
     "abc",
