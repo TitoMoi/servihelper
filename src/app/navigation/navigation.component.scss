@@ -24,7 +24,12 @@
   margin-inline-start: auto;
 }
 
-.mat-icon {
+mat-icon {
   height: 32px;
   width: 32px;
+
+  &#avatarIconId {
+    height: 28px;
+    width: 28px;
+  }
 }

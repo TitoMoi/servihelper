@@ -86,10 +86,19 @@ export class ConfigService {
     return res;
   }
 
+  getRoles() {
+    return this.#config.roles;
+  }
+
   addRole(role: RoleInterface) {
     role.id = nanoid();
     this.#config.roles.push(role);
     this.saveConfigToFile();
-    this.configSubject$.next(this.#config);
+  }
+
+  updateRole(role: RoleInterface) {
+    const index = this.#config.roles.findIndex((r) => r.id === role.id);
+    this.#config.roles[index] = role;
+    this.saveConfigToFile();
   }
 }

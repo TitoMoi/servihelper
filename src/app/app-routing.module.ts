@@ -33,6 +33,8 @@ import { GroupDeleteAssignmentComponent } from "./assignment/group-delete-assign
 import { CreateFromParticipantComponent } from "./participant/create-from-participant/create-from-participant.component";
 import { RolesComponent } from "./roles/roles.component";
 import { CreateRoleComponent } from "./roles/create-role/create-role.component";
+import { UpdateRoleComponent } from "./roles/update-role/update-role.component";
+import { DeleteRoleComponent } from "./roles/delete-role/delete-role.component";
 
 const routes: Routes = [
   {
@@ -159,12 +161,20 @@ const routes: Routes = [
     component: ConfigComponent,
   },
   {
-    path: "roles",
+    path: "role",
     component: RolesComponent,
   },
   {
-    path: "roles/create",
+    path: "role/create",
     component: CreateRoleComponent,
+  },
+  {
+    path: "role/update/:id",
+    component: UpdateRoleComponent,
+  },
+  {
+    path: "role/delete/:id",
+    component: DeleteRoleComponent,
   },
   {
     path: "info",

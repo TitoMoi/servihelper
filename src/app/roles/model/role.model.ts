@@ -7,5 +7,4 @@ export interface RoleInterface {
 export interface RoleTableInterface {
   id: string;
   name: string;
-  order: number;
 }

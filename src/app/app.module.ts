@@ -63,9 +63,12 @@ import { StatisticsComponent } from "./statistics/statistics.component";
 import { TranslocoRootModule } from "./transloco/translocoRoot.module";
 import { MoveAssignmentComponent } from "./assignment/move-assignment/move-assignment.component";
 import { GroupDeleteAssignmentComponent } from "./assignment/group-delete-assignment/group-delete-assignment.component";
-import { CreateFromParticipantComponent } from './participant/create-from-participant/create-from-participant.component';
-import { RolesComponent } from './roles/roles.component';
-import { CreateRoleComponent } from './roles/create-role/create-role.component';
+import { CreateFromParticipantComponent } from "./participant/create-from-participant/create-from-participant.component";
+import { RolesComponent } from "./roles/roles.component";
+import { CreateRoleComponent } from "./roles/create-role/create-role.component";
+import { UpdateRoleComponent } from "./roles/update-role/update-role.component";
+import { DeleteRoleComponent } from "./roles/delete-role/delete-role.component";
+import { IsRoleCheckedPipe } from "./roles/pipe/is-role-checked.pipe";
 
 @NgModule({
   declarations: [
@@ -109,6 +112,9 @@ import { CreateRoleComponent } from './roles/create-role/create-role.component';
     CreateFromParticipantComponent,
     RolesComponent,
     CreateRoleComponent,
+    UpdateRoleComponent,
+    DeleteRoleComponent,
+    IsRoleCheckedPipe,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -10,6 +10,7 @@
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input
               matInput
+              required
               appautofocus
               spellcheck="false"
               formControlName="name"
@@ -20,7 +21,7 @@
       <div class="row">
         <div class="col">
           <h3 *ngIf="assignTypes.length">
-            {{ "PARTICIPANT_CREATE_ASSIGNTYPE_PRINCIPAL" | transloco }}
+            {{ "ROLES_CREATE_SUBTITLE" | transloco }}
           </h3>
           <div class="row mb-2">
             <ng-container *ngFor="let at of assignTypes">

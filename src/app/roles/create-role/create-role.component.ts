@@ -10,7 +10,7 @@ import { ConfigService } from "app/config/service/config.service";
   styleUrls: ["./create-role.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateRoleComponent implements OnInit {
+export class CreateRoleComponent {
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
@@ -18,7 +18,6 @@ export class CreateRoleComponent implements OnInit {
   roleForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
-    selected: [false],
     assignTypesId: [[], Validators.required],
   });
 
@@ -28,13 +27,17 @@ export class CreateRoleComponent implements OnInit {
     private assignTypeService: AssignTypeService
   ) {}
 
-  ngOnInit(): void {}
-
+  //Add or remove
   changeCheckbox(assignTypeId: string) {
     const atCtrl = this.roleForm.get("assignTypesId");
-    const assignTypes: string[] = atCtrl.value;
-    assignTypes.push(assignTypeId);
-    atCtrl.patchValue(assignTypes);
+    let assignTypesId: string[] = atCtrl.value;
+    const index = assignTypesId.indexOf(assignTypeId);
+    if (index > -1) {
+      assignTypesId = assignTypesId.filter((atId) => atId !== assignTypeId);
+    } else {
+      assignTypesId.push(assignTypeId);
+    }
+    atCtrl.patchValue(assignTypesId);
   }
 
   onSubmit() {
