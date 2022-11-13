@@ -1,21 +1,28 @@
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { ParticipantService } from 'app/participant/service/participant.service';
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ParticipantService } from "app/participant/service/participant.service";
 
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-delete-assign-type",
   templateUrl: "./delete-assigntype.component.html",
   styleUrls: ["./delete-assigntype.component.css"],
 })
-export class DeleteAssignTypeComponent implements OnInit {
+export class DeleteAssignTypeComponent {
+  assignType = this.assignTypeService.getAssignType(
+    this.activatedRoute.snapshot.params.id
+  );
+
   assignTypeForm = this.formBuilder.group({
-    id: undefined,
-    name: [undefined, Validators.required],
+    id: this.assignType.id,
+    name: [
+      { value: this.assignType.name, disabled: true },
+      Validators.required,
+    ],
   });
 
   constructor(
@@ -26,16 +33,6 @@ export class DeleteAssignTypeComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-
-  ngOnInit(): void {
-    const assignType = this.assignTypeService.getAssignType(
-      this.activatedRoute.snapshot.params.id
-    );
-    this.assignTypeForm.setValue({
-      id: assignType.id,
-      name: assignType.name,
-    });
-  }
 
   onSubmit(): void {
     //get id

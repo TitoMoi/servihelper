@@ -1,13 +1,12 @@
+<a
+  mat-raised-button
+  color="primary"
+  class="m-3"
+  routerLink="create"
+  routerLinkActive="active"
+  >{{ "ROOM_BUTTON_CREATE_TITLE" | transloco }}</a
+>
 <ng-container *ngIf="dataSource">
-  <a
-    mat-raised-button
-    color="primary"
-    class="m-3"
-    routerLink="create"
-    routerLinkActive="active"
-    >{{ "ROOM_BUTTON_CREATE_TITLE" | transloco }}</a
-  >
-
   <table
     id="tableDiv"
     *ngIf="dataSource.length"

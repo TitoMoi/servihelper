@@ -11,6 +11,7 @@ import { DateFormatStyles } from "@ngneat/transloco-locale";
 import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 import { ipcRenderer } from "electron";
 import { SharedService } from "app/services/shared.service";
+import { RoleInterface } from "app/roles/model/role.model";
 
 @Component({
   selector: "app-config",
@@ -94,7 +95,7 @@ export class ConfigComponent {
     defaultWeekDayBegins: 1,
     defaultReportDateFormat: this.translocoDateFormats[3],
     roles: [],
-    role: undefined,
+    role: this.configService.administratorKey,
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();

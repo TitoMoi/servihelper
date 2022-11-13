@@ -3,7 +3,13 @@ import { Observable, of } from "rxjs";
 import { filter, first, map, shareReplay } from "rxjs/operators";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from "@angular/core";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
 import { MatSelectChange } from "@angular/material/select";
 import { TranslocoService } from "@ngneat/transloco";
@@ -13,6 +19,7 @@ import { HttpClient } from "@angular/common/http";
 import { GitHubDataInterface } from "./model/navigation.model";
 import { ConfigInterface } from "app/config/model/config.model";
 import { RoleInterface } from "app/roles/model/role.model";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-navigation",
@@ -27,9 +34,14 @@ export class NavigationComponent implements OnInit {
       map((result) => result.matches),
       shareReplay()
     );
-  lang = this.configService.getConfig().lang;
 
-  role = this.configService.getConfig().role;
+  config = this.configService.getConfig();
+
+  lang = this.config.lang;
+
+  currentRoleId = this.config.role;
+
+  administratorKey = this.configService.administratorKey;
 
   availableLangs = undefined;
 
@@ -43,9 +55,20 @@ export class NavigationComponent implements OnInit {
 
   config$: Observable<ConfigInterface> = this.configService.config$;
 
-  roles$: Observable<RoleInterface[]>;
+  roles$: Observable<RoleInterface[]> = this.config$.pipe(
+    map((config) => config.roles)
+  );
+
+  currentRoleId$: Observable<string> = this.config$.pipe(
+    map((config) => config.role)
+  );
+
+  roleForm = this.formBuilder.group({
+    roleId: [this.administratorKey],
+  });
 
   constructor(
+    private formBuilder: FormBuilder,
     private breakpointObserver: BreakpointObserver,
     public translocoService: TranslocoService,
     private dateAdapter: DateAdapter<NativeDateAdapter>,
@@ -59,9 +82,8 @@ export class NavigationComponent implements OnInit {
 
     this.setLang(this.lang);
     this.setLocale(this.lang);
-
-    this.roles$ = this.config$.pipe(map((config) => config.roles));
   }
+
   /**
    *
    * @param languageChange event of select change

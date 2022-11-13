@@ -1,15 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { Router, ActivatedRoute } from "@angular/router";
+import { ConfigService } from "app/config/service/config.service";
+import { Validators } from "ngx-editor";
+import { RoleInterface } from "../model/role.model";
 
 @Component({
-  selector: 'app-delete-role',
-  templateUrl: './delete-role.component.html',
-  styleUrls: ['./delete-role.component.scss']
+  selector: "app-delete-role",
+  templateUrl: "./delete-role.component.html",
+  styleUrls: ["./delete-role.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeleteRoleComponent implements OnInit {
+export class DeleteRoleComponent {
+  role = this.configService.getRole(this.activatedRoute.snapshot.params.id);
 
-  constructor() { }
+  roleForm = this.formBuilder.group({
+    id: this.role.id,
+    name: [{ value: this.role.name, disabled: true }, Validators.required],
+  });
 
-  ngOnInit(): void {
+  constructor(
+    private formBuilder: FormBuilder,
+    private configService: ConfigService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  onSubmit() {
+    const role: RoleInterface = this.roleForm.value;
+    //delete role
+    this.configService.deleteRole(role.id);
+
+    //if deleted role is existing role then set the administrator as default
+    if (this.configService.getCurrentRole() === role.id) {
+      this.configService.setAdminRole();
+    }
+
+    //navigate to parent
+    this.router.navigate(["../.."], {
+      relativeTo: this.activatedRoute,
+    });
   }
-
 }

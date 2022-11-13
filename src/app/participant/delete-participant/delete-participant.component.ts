@@ -1,20 +1,27 @@
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
 
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-delete-participant",
   templateUrl: "./delete-participant.component.html",
   styleUrls: ["./delete-participant.component.css"],
 })
-export class DeleteParticipantComponent implements OnInit {
+export class DeleteParticipantComponent {
+  participant = this.participantService.getParticipant(
+    this.activatedRoute.snapshot.params.id
+  );
+
   participantForm = this.formBuilder.group({
-    id: undefined,
-    name: [undefined, Validators.required],
+    id: this.participant.id,
+    name: [
+      { value: this.participant.name, disabled: true },
+      Validators.required,
+    ],
   });
 
   constructor(
@@ -24,16 +31,6 @@ export class DeleteParticipantComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-
-  ngOnInit(): void {
-    const participant = this.participantService.getParticipant(
-      this.activatedRoute.snapshot.params.id
-    );
-    this.participantForm.setValue({
-      id: participant.id,
-      name: participant.name,
-    });
-  }
 
   onSubmit(participant: ParticipantInterface): void {
     this.participantService.deleteParticipant(participant.id);

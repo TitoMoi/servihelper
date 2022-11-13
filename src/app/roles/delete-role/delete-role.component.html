@@ -1,1 +1,28 @@
-<p>delete-role works!</p>
+<form [formGroup]="roleForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>{{ "ROLE_DELETE_TITLE" | transloco }}</mat-card-title>
+      <mat-card-subtitle>{{
+        "ROLE_DELETE_WARNING" | transloco
+      }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="button" routerLink="../..">
+        {{ "BUTTON_CANCEL" | transloco }}
+      </button>
+      <button mat-raised-button color="warn" type="submit">
+        {{ "BUTTON_DELETE" | transloco }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

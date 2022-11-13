@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { Router, ActivatedRoute } from "@angular/router";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ConfigService } from "app/config/service/config.service";
@@ -24,7 +25,9 @@ export class CreateRoleComponent {
   constructor(
     private formBuilder: FormBuilder,
     private configService: ConfigService,
-    private assignTypeService: AssignTypeService
+    private assignTypeService: AssignTypeService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   //Add or remove
@@ -44,5 +47,10 @@ export class CreateRoleComponent {
     const value = this.roleForm.value;
 
     this.configService.addRole(value);
+
+    //navigate to parent
+    this.router.navigate([".."], {
+      relativeTo: this.activatedRoute,
+    });
   }
 }

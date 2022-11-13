@@ -1,18 +1,23 @@
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { NoteInterface } from 'app/note/model/note.model';
-import { NoteService } from 'app/note/service/note.service';
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { NoteInterface } from "app/note/model/note.model";
+import { NoteService } from "app/note/service/note.service";
 
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-delete-note",
   templateUrl: "./delete-note.component.html",
   styleUrls: ["./delete-note.component.css"],
 })
-export class DeleteNoteComponent implements OnInit {
-  noteForm;
+export class DeleteNoteComponent {
+  note = this.noteService.getNote(this.activatedRoute.snapshot.params.id);
+
+  noteForm = this.formBuilder.group({
+    id: this.note.id,
+    name: [{ value: this.note.name, disabled: true }, Validators.required],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,22 +26,9 @@ export class DeleteNoteComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-  ngOnInit(): void {
-    this.noteForm = this.formBuilder.group({
-      id: undefined,
-      name: [undefined, Validators.required],
-    });
 
-    const note = this.noteService.getNote(
-      this.activatedRoute.snapshot.params.id
-    );
-    this.noteForm.setValue({
-      id: note.id,
-      name: note.name,
-    });
-  }
-
-  onSubmit(note: NoteInterface): void {
+  onSubmit(): void {
+    const note = this.noteForm.value;
     //Delete the note
     this.noteService.deleteNote(note.id);
 

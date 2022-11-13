@@ -1,21 +1,23 @@
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomInterface } from 'app/room/model/room.model';
-import { RoomService } from 'app/room/service/room.service';
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomInterface } from "app/room/model/room.model";
+import { RoomService } from "app/room/service/room.service";
 
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-delete-room",
   templateUrl: "./delete-room.component.html",
   styleUrls: ["./delete-room.component.css"],
 })
-export class DeleteRoomComponent implements OnInit {
+export class DeleteRoomComponent {
+  room = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);
+
   roomForm = this.formBuilder.group({
-    id: undefined,
-    name: [undefined, Validators.required],
+    id: this.room.id,
+    name: [{ value: this.room.name, disabled: true }, Validators.required],
   });
 
   constructor(
@@ -26,16 +28,6 @@ export class DeleteRoomComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
-
-  ngOnInit(): void {
-    const room = this.roomService.getRoom(
-      this.activatedRoute.snapshot.params.id
-    );
-    this.roomForm.setValue({
-      id: room.id,
-      name: room.name,
-    });
-  }
 
   onSubmit(room: RoomInterface): void {
     //delete room

@@ -228,5 +228,11 @@
   "ROLE_CREATE_TITLE": "Create role",
   "ROLE_TABLE_HEADER_NAME": "Name",
   "ROLE_TABLE_HEADER_EDIT": "Edit",
-  "ROLE_TABLE_HEADER_DELETE": "Delete"
+  "ROLE_TABLE_HEADER_DELETE": "Delete",
+  "ROLE_CREATE_SUBTITLE": "When selecting this role only the checked assignments will be shown when creating assignments",
+  "ROLE_UPDATE_TITLE": "Update role",
+  "ROLE_UPDATE_SUBTITLE": "When selecting this role only the checked assignments will be shown when creating assignments",
+  "ROLE_DELETE_TITLE": "Delete role",
+  "ROLE_DELETE_WARNING": "This action is irreversible",
+  "ROLE_ADMINISTRATOR": "Administrator"
 }
