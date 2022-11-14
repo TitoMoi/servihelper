@@ -22,14 +22,20 @@
         aria-label="icon"
         (click)="createAssignmentsInFolder()"
       ></mat-icon>
-      <div
+      <button
         *ngIf="assignmentsInFolderCreated"
-        class="open-folder"
+        mat-raised-button
+        color="primary"
+        class="m-2"
+        type="button"
         (click)="openAssignmentsFolder()"
       >
-        Click me to open the assignments folder...
-      </div>
+        {{ "OPEN_ASSIGNMENTS_SHEET_FOLDER" | transloco }}
+      </button>
     </div>
+  </div>
+  <div class="m-2">
+    {{ ("NUMBER_OF_ASSIGNMENTS" | transloco) + assignmentsWithNames.length }}
   </div>
   <div id="assignmentDiv" class="col col-xl-6 bg-color-white">
     <div class="d-flex flex-wrap align-items-start">

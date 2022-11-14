@@ -229,10 +229,14 @@
   "ROLE_TABLE_HEADER_NAME": "Name",
   "ROLE_TABLE_HEADER_EDIT": "Edit",
   "ROLE_TABLE_HEADER_DELETE": "Delete",
-  "ROLE_CREATE_SUBTITLE": "When selecting this role only the checked assignments will be shown when creating assignments",
+  "ROLE_CREATE_SUBTITLE": "When selecting this new role only the checked assignments will be shown when creating assignments",
   "ROLE_UPDATE_TITLE": "Update role",
   "ROLE_UPDATE_SUBTITLE": "When selecting this role only the checked assignments will be shown when creating assignments",
   "ROLE_DELETE_TITLE": "Delete role",
   "ROLE_DELETE_WARNING": "This action is irreversible",
-  "ROLE_ADMINISTRATOR": "Administrator"
+  "ROLE_ADMINISTRATOR": "Administrator",
+  "OPEN_ASSIGNMENTS_SHEET_FOLDER": "Click me to open the assignments folder...",
+  "NUMBER_OF_ASSIGNMENTS": "Number of assignments selected: ",
+  "ROLE_EXPLANATION": "When we have many assignment types, lets say 30, its not comfortable to loop through all of them when creating an assignment.",
+  "ROLE_EXPLANATION2": "Roles help the user to focus only with their assignments responsability and displaying only the ones he wants to work on."
 }

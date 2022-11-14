@@ -17,7 +17,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 import { SharedService } from "app/services/shared.service";
-import { Subscription, of } from "rxjs";
+import { Subscription, map } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
@@ -31,6 +31,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatButton } from "@angular/material/button";
 import { MatSelect } from "@angular/material/select";
 import { ActivatedRoute, Router } from "@angular/router";
+import { RoleInterface } from "app/roles/model/role.model";
 
 @Component({
   selector: "app-create-assignment",
@@ -58,6 +59,14 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   assignmentsBySelectedDate: AssignmentInterface[] = [];
 
+  role$ = this.configService.config$.pipe(
+    map((config) =>
+      this.configService.getRole(this.configService.getCurrentRole())
+    )
+  );
+
+  role: RoleInterface;
+
   assignmentForm: FormGroup = this.formBuilder.group({
     id: undefined,
     date: [undefined, Validators.required],
@@ -73,7 +82,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   });
 
   //Subscriptions
-  subscription: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor(
     public lastDateService: LastDateService,
@@ -105,6 +114,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.prepareRole();
     this.prepareDateSub();
     this.prepareRoomSub();
     this.prepareAssignTypeSub();
@@ -116,6 +126,19 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  prepareRole() {
+    this.subscription.add(
+      this.role$.subscribe((r) => {
+        this.role = r;
+
+        //If date and room are selected, when click the assignTypes select is not working, so we need to call it manually
+        if (this.gfv("date") && this.gfv("room")) {
+          this.removeAssignTypesThatAlreadyExistOnAssignment();
+        }
+      })
+    );
   }
 
   setPrincipalsCount() {
@@ -383,9 +406,19 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    * This method doesnt exist on update assignment because can be selected any assignment while updating
    */
   removeAssignTypesThatAlreadyExistOnAssignment() {
-    this.assignTypes = this.assignTypeService
-      .getAssignTypes()
-      .sort((a, b) => (a.order > b.order ? 1 : -1));
+    //Filter assignTypes by permissions
+    this.assignTypes = this.assignTypeService.getAssignTypes();
+
+    //administrator is undefined
+    if (this.role) {
+      this.assignTypes = this.assignTypes.filter((at) =>
+        this.role.assignTypesId.includes(at.id)
+      );
+    }
+
+    this.assignTypes = this.assignTypes.sort((a, b) =>
+      a.order > b.order ? 1 : -1
+    );
 
     const dateValue = this.gfv("date");
     const roomValue = this.gfv("room");

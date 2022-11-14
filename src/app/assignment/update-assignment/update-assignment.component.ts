@@ -72,7 +72,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   });
 
   //Subscriptions
-  subscription: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor(
     private formBuilder: FormBuilder,

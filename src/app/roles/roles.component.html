@@ -6,6 +6,8 @@
   routerLinkActive="active"
   >{{ "ROLE_BUTTON_CREATE" | transloco }}</a
 >
+<div class="mx-3 my-1">{{ "ROLE_EXPLANATION" | transloco }}</div>
+<div class="mx-3 my-1">{{ "ROLE_EXPLANATION2" | transloco }}</div>
 <ng-container *ngIf="(roles$ | async).length">
   <table
     id="tableDiv"
