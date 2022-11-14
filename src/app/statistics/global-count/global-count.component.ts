@@ -33,7 +33,6 @@ import { Subscription } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -50,7 +49,7 @@ import { SortService } from "app/services/sort.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GlobalCountComponent implements OnInit, OnDestroy {
-  globalList: ParticipantDynamicInterface[];
+  globalList: ParticipantDynamicInterface[] & ParticipantDynamicInterface[];
 
   locales;
 

@@ -52,11 +52,11 @@ import { toPng } from "html-to-image";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssistantCountComponent implements OnInit, OnDestroy {
-  assistantList: ParticipantInterface[];
+  assistantList: ParticipantInterface[] & ParticipantDynamicInterface[];
 
   locales;
 
-  subscription$: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor(
     private assignmentService: AssignmentService,
@@ -92,7 +92,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   async initStatistics() {
@@ -149,15 +149,13 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     );
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
-    this.subscription$ = this.translocoService.langChanges$.subscribe(
-      (lang) => {
-        //Assistant
-        getDistanceBetweenPenultimaAndLast(
-          participants,
-          this.locales[this.translocoService.getActiveLang()]
-        );
-      }
-    );
+    this.subscription = this.translocoService.langChanges$.subscribe((lang) => {
+      //Assistant
+      getDistanceBetweenPenultimaAndLast(
+        participants,
+        this.locales[this.translocoService.getActiveLang()]
+      );
+    });
   }
 
   /**
