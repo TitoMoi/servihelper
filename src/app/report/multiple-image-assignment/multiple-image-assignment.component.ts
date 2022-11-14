@@ -230,6 +230,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   }
 
   openAssignmentsFolder() {
-    shell.openExternal(path.join(this.homeDir, "assignments"));
+    shell.openPath(path.join(this.homeDir, "assignments"));
   }
 }
