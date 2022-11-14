@@ -13,5 +13,7 @@
   "defaultWeekDayBegins": 1,
   "defaultReportFontSize": "",
   "defaultReportDateColor": "",
-  "defaultReportDateFormat": "full"
+  "defaultReportDateFormat": "full",
+  "roles": [],
+  "role": "administrator"
 }

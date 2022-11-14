@@ -116,7 +116,7 @@
         <mat-form-field class="me-3" style="text-align: center">
           <mat-select
             class="wk-vertical-align"
-            [value]="lang"
+            [value]="(config$ | async).lang"
             (selectionChange)="updateLang($event)"
           >
             <mat-option *ngFor="let lang of availableLangs" [value]="lang">
