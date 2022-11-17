@@ -3,7 +3,7 @@ import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { sortParticipantsByCount } from "app/functions";
+import { sortParticipantsByCountOrDate } from "app/functions";
 import { setCount } from "app/functions/setCount";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
@@ -131,8 +131,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       false
     );
 
-    this.principals.sort(sortParticipantsByCount);
-    this.assistants.sort(sortParticipantsByCount);
+    this.principals.sort(sortParticipantsByCountOrDate);
+    this.assistants.sort(sortParticipantsByCountOrDate);
 
     this.highlightIfAlreadyHasWork();
   }
@@ -169,8 +169,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.setPrincipalsCount();
     //Set count for assistants
     this.setAssistantsCount();
-    this.principals.sort(sortParticipantsByCount);
-    this.assistants.sort(sortParticipantsByCount);
+    this.principals.sort(sortParticipantsByCountOrDate);
+    this.assistants.sort(sortParticipantsByCountOrDate);
     this.highlightIfAlreadyHasWork();
   }
 
@@ -198,8 +198,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           //Set count for assistants
           this.setAssistantsCount();
 
-          this.principals.sort(sortParticipantsByCount);
-          this.assistants.sort(sortParticipantsByCount);
+          this.principals.sort(sortParticipantsByCountOrDate);
+          this.assistants.sort(sortParticipantsByCountOrDate);
         }
       });
   }
@@ -223,8 +223,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           //Set count for assistants
           this.setAssistantsCount();
 
-          this.principals.sort(sortParticipantsByCount);
-          this.assistants.sort(sortParticipantsByCount);
+          this.principals.sort(sortParticipantsByCountOrDate);
+          this.assistants.sort(sortParticipantsByCountOrDate);
         }
       })
     );
@@ -251,8 +251,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
             //Set count for assistants
             this.setAssistantsCount();
 
-            this.principals.sort(sortParticipantsByCount);
-            this.assistants.sort(sortParticipantsByCount);
+            this.principals.sort(sortParticipantsByCountOrDate);
+            this.assistants.sort(sortParticipantsByCountOrDate);
           }
         })
     );

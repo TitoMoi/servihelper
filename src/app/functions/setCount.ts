@@ -21,7 +21,7 @@ export function setCount(
     p.count = 0;
   }
 
-  //Aply count
+  //Apply count
   for (const assignment of assignmentList) {
     //match the room and the assignType
     if (assignment.assignType === assignTypeId && assignment.room === roomId) {
@@ -33,6 +33,14 @@ export function setCount(
         ) {
           //Add +1 for every matching room and assignType to the participants count
           participant.count += 1;
+          //Add the date of the last assignment
+          if (!participant.lastAssignmentDate) {
+            participant.lastAssignmentDate = assignment.date;
+          } else if (
+            new Date(participant.lastAssignmentDate) < new Date(assignment.date)
+          ) {
+            participant.lastAssignmentDate = assignment.date;
+          }
           break;
         }
       }
