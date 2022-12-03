@@ -1,10 +1,7 @@
 @use "@angular/material" as mat;
+@include mat.core();
 // Custom Theming for Angular Material
 @import "@angular/material/theming";
-
-$custom-typography: mat.define-legacy-typography-config(
-  $font-family: "Noto Sans, sans-serif",
-);
 
 // Be sure that you only ever include this mixin once!
 // TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
@@ -15,28 +12,36 @@ $custom-typography: mat.define-legacy-typography-config(
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy($custom-typography);`
-@include mat.all-legacy-component-typographies($custom-typography);
-@include mat.legacy-core();
 
 //Available color palettes: https://material.io/design/color/
 $servihelper-primary: mat.define-palette(mat.$deep-purple-palette);
 $servihelper-accent: mat.define-palette(mat.$yellow-palette);
-
 // The warn palette is optional (defaults to red).
-$servihelper-warn: mat.define-palette(mat.$red-palette);
+/* $servihelper-warn: mat.define-palette(mat.$red-palette); */
+
+$custom-typography: mat.define-typography-config(
+  $font-family: "Noto Sans, sans-serif",
+);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $servihelper-theme: mat.define-light-theme(
-  $servihelper-primary,
-  $servihelper-accent,
-  $servihelper-warn
+  (
+    color: (
+      primary: $servihelper-primary,
+      accent: $servihelper-accent,
+    ),
+    typography: $custom-typography,
+    density: 0,
+  )
 );
-
+@include mat.core-theme($servihelper-theme);
 // Include theme styles for core and each component used in your app.
-@include mat.all-legacy-component-themes($servihelper-theme);
+@include mat.all-component-themes($servihelper-theme);
 
+@include mat.all-component-typographies($custom-typography);
 // Define an alternate dark theme.
-$dark-primary: mat.define-palette(mat.$grey-palette, 50, 900);
+
+/* $dark-primary: mat.define-palette(mat.$grey-palette, 50, 900);
 $dark-accent: mat.define-palette(mat.$amber-palette, 50, 100, 200);
 $dark-warn: mat.define-palette(mat.$red-palette);
 $dark-theme: mat.define-dark-theme(
@@ -51,4 +56,4 @@ $dark-theme: mat.define-dark-theme(
 
 .servihelper-contrast-theme {
   @include mat.all-legacy-component-colors($dark-theme);
-}
+} */

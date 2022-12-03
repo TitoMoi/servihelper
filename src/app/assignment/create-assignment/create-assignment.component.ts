@@ -28,8 +28,8 @@ import {
   ViewChild,
 } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
-import { MatLegacyButton as MatButton } from "@angular/material/legacy-button";
-import { MatLegacySelect as MatSelect } from "@angular/material/legacy-select";
+import { MatButton } from "@angular/material/button";
+import { MatSelect } from "@angular/material/select";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RoleInterface } from "app/roles/model/role.model";
 

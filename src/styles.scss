@@ -30,7 +30,7 @@ form {
   margin: 1rem;
 }
 
-.mat-card-content {
+.mat-mdc-card-content {
   font-size: inherit;
 }
 
@@ -41,12 +41,12 @@ form {
 .mat-calendar-body-cell {
   font-size: 16px;
 }
-.mat-header-cell {
+.mat-mdc-header-cell {
   font-size: inherit;
 }
 
-.mat-cell,
-.mat-footer-cell {
+.mat-mdc-cell,
+.mat-mdc-footer-cell {
   font-size: inherit;
 }
 
@@ -54,7 +54,7 @@ form {
   cursor: pointer;
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   line-height: inherit;
 }
 
@@ -99,7 +99,7 @@ form {
   background-color: white;
 }
 
-.mat-option.no-hover.mat-active {
+.mat-mdc-option.no-hover.mat-active {
   background: inherit;
   color: inherit;
 
@@ -108,7 +108,7 @@ form {
   }
 }
 
-.mat-option.no-hover {
+.mat-mdc-option.no-hover {
   &:hover {
     border: 1px solid lightgray;
     background: inherit;

@@ -13,12 +13,12 @@ import {
   ViewChild,
 } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
-import { MatLegacyOption as MatOption } from "@angular/material/legacy-core";
+import { MatOption } from "@angular/material/core";
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
 } from "@angular/material/datepicker";
-import { MatLegacySelect as MatSelect } from "@angular/material/legacy-select";
+import { MatSelect } from "@angular/material/select";
 import { TranslocoService } from "@ngneat/transloco";
 
 @Component({

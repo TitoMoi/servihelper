@@ -1,6 +1,6 @@
 <ng-container *ngIf="isRoomsAvailable && isAssignTypesAvailable">
   <form [formGroup]="participantForm" novalidate (ngSubmit)="submitAndCreate()">
-    <mat-card class="shipping-card">
+    <mat-card appearance="outlined" class="shipping-card">
       <mat-card-header>
         <mat-card-title>{{
           "PARTICIPANT_CREATE_TITLE" | transloco
@@ -117,12 +117,12 @@
           </div>
           <div class="col-12 mb-2">
             <mat-form-field class="full-width" appearance="fill">
-              <mat-chip-list
+              <mat-chip-grid
                 #chipList
                 aria-label="PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE"
                 (click)="picker.open()"
               >
-                <mat-chip
+                <mat-chip-row
                   *ngFor="let date of notAvailableDates"
                   [selectable]="false"
                   [removable]="true"
@@ -130,7 +130,7 @@
                 >
                   {{ date | translocoDate: { dateStyle: "short" } }}
                   <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
-                </mat-chip>
+                </mat-chip-row>
                 <mat-label *ngIf="!notAvailableDates.length">{{
                   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE" | transloco
                 }}</mat-label>
@@ -142,7 +142,7 @@
                   [matChipInputFor]="chipList"
                   hidden
                 />
-              </mat-chip-list>
+              </mat-chip-grid>
               <mat-datepicker-toggle
                 matPrefix
                 [for]="picker"
