@@ -1,4 +1,4 @@
-<mat-sidenav-container *transloco="let t" class="sidenav-container">
+<mat-sidenav-container *transloco="let t">
   <mat-sidenav
     #drawer
     class="sidenav d-print-none"
@@ -7,7 +7,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar class="font-small"
+    <mat-toolbar
       ><a
         *ngIf="(queryGitHub$ | async)?.tag_name !== appVersion"
         href="#"
@@ -135,57 +135,62 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar
-      class="justify-content-around font-medium d-print-none"
-      color="primary"
-    >
-      <div>
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="isHandset$ | async"
-        >
-          <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
-        </button>
+    <mat-toolbar color="primary" class="justify-content-between">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
+      </button>
+
+      <div class="col-3">
         <span>Servihelper</span>
       </div>
-
-      <div class="d-flex align-items-center">
-        <mat-form-field class="me-3" style="text-align: center">
-          <mat-select
-            class="wk-vertical-align"
-            [value]="(config$ | async).lang"
-            (selectionChange)="updateLang($event)"
-          >
-            <mat-option *ngFor="let lang of availableLangs" [value]="lang">
-              {{ t(lang) }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="me-3" style="text-align: center">
-          <mat-select
-            class="wk-vertical-align"
-            [value]="currentRoleId$ | async"
-            (selectionChange)="updateRole($event)"
-          >
-            <mat-option [value]="administratorKey">{{
-              t("ROLE_ADMINISTRATOR")
-            }}</mat-option>
-            <mat-option *ngFor="let role of roles$ | async" [value]="role.id">
-              {{ role.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-icon
-          id="avatarIconId"
-          class="m-2"
-          svgIcon="avatar"
-          aria-label="icon"
-          routerLink="role"
-        ></mat-icon>
+      <div class="col-9">
+        <div class="row justify-content-end align-items-center">
+          <div class="col-auto">
+            <mat-form-field>
+              <mat-select
+                [value]="(config$ | async).lang"
+                (selectionChange)="updateLang($event)"
+              >
+                <mat-option *ngFor="let lang of availableLangs" [value]="lang">
+                  {{ t(lang) }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-auto">
+            <mat-form-field>
+              <mat-select
+                color="primary"
+                [value]="currentRoleId$ | async"
+                (selectionChange)="updateRole($event)"
+              >
+                <mat-option [value]="administratorKey">{{
+                  t("ROLE_ADMINISTRATOR")
+                }}</mat-option>
+                <mat-option
+                  *ngFor="let role of roles$ | async"
+                  [value]="role.id"
+                >
+                  {{ role.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-auto">
+            <mat-icon
+              id="avatarIconId"
+              svgIcon="avatar"
+              aria-label="icon"
+              routerLink="role"
+            ></mat-icon>
+          </div>
+        </div>
       </div>
     </mat-toolbar>
     <ng-content></ng-content>

@@ -34,11 +34,11 @@ $servihelper-theme: mat.define-light-theme(
     density: 0,
   )
 );
+
 @include mat.core-theme($servihelper-theme);
 // Include theme styles for core and each component used in your app.
 @include mat.all-component-themes($servihelper-theme);
 
-@include mat.all-component-typographies($custom-typography);
 // Define an alternate dark theme.
 
 /* $dark-primary: mat.define-palette(mat.$grey-palette, 50, 900);
