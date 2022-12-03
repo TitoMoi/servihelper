@@ -4,7 +4,7 @@ import { readJSON, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
