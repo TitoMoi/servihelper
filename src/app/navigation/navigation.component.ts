@@ -11,7 +11,7 @@ import {
   OnInit,
 } from "@angular/core";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
-import { MatSelectChange } from "@angular/material/select";
+import { MatLegacySelectChange as MatSelectChange } from "@angular/material/legacy-select";
 import { TranslocoService } from "@ngneat/transloco";
 import { shell } from "electron";
 import { SharedService } from "app/services/shared.service";
