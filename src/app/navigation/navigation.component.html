@@ -17,86 +17,126 @@
       </a></mat-toolbar
     >
     <mat-nav-list>
-      <a mat-list-item routerLink="/">
-        <span>{{ t("NAV_HOME") }}</span>
-      </a>
-      <a mat-list-item routerLink="assignType">
-        <span>{{ t("NAV_ASSIGN_TYPE") }}</span>
-        <mat-icon
-          class="mat-icon--margin"
-          svgIcon="abc"
-          aria-label="Side nav toggle icon"
-        ></mat-icon>
-      </a>
-      <a mat-list-item routerLink="room">
-        <span>{{ t("NAV_ROOM") }}</span>
-        <mat-icon
-          class="mat-icon--margin"
-          svgIcon="room"
-          aria-label="Side nav toggle icon"
-        ></mat-icon>
-      </a>
-      <a mat-list-item routerLink="note">
-        <span>{{ t("NAV_NOTE") }}</span>
-        <mat-icon
-          class="mat-icon--margin"
-          svgIcon="notes"
-          aria-label="Side nav toggle icon"
-        ></mat-icon>
-      </a>
-      <a mat-list-item routerLink="participant">
-        <span>{{ t("NAV_PARTICIPANT") }}</span>
-        <mat-icon
-          class="mat-icon--margin"
-          svgIcon="participants"
-          aria-label="Side nav toggle icon"
-        ></mat-icon>
-      </a>
-      <a mat-list-item routerLink="assignment" [disableRipple]="true">
-        <span>{{ t("NAV_ASSIGNMENT") }}</span>
-        <mat-icon
-          class="mat-icon--margin"
-          svgIcon="assignment"
-          aria-label="Side nav toggle icon"
-        ></mat-icon>
-      </a>
-      <a mat-list-item routerLink="selectionSheets" [disableRipple]="true">
-        <span>{{ t("NAV_REPORTS") }}</span>
-        <mat-icon
-          class="mat-icon--margin"
-          svgIcon="lists"
-          aria-label="Side nav toggle icon"
-        ></mat-icon>
-      </a>
-      <a mat-list-item routerLink="statistics" [disableRipple]="true">
-        <span>{{ t("NAV_STATISTICS") }}</span>
-        <mat-icon
-          class="mat-icon--margin"
-          svgIcon="statistics"
-          aria-label="Side nav toggle icon"
-        ></mat-icon>
-      </a>
-      <a mat-list-item routerLink="config">
-        <span>{{ t("NAV_CONFIG") }}</span>
-        <mat-icon
-          class="mat-icon--margin"
-          svgIcon="config"
-          aria-label="Side nav toggle icon"
-        ></mat-icon>
-      </a>
-      <a mat-list-item routerLink="info">
-        <span>{{ t("NAV_INFO") }}</span>
-        <mat-icon
-          class="mat-icon--margin"
-          svgIcon="info"
-          aria-label="Side nav toggle icon"
-        ></mat-icon>
-      </a>
+      <div class="row g-0 justify-content-around align-items-center">
+        <div class="col-12">
+          <a mat-list-item routerLink="/">
+            <span>{{ t("NAV_HOME") }}</span>
+          </a>
+        </div>
+      </div>
+      <div class="row g-0 justify-content-around align-items-center">
+        <div class="col-10">
+          <a mat-list-item routerLink="assignType">
+            <span>{{ t("NAV_ASSIGN_TYPE") }}</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <mat-icon svgIcon="abc" aria-label="Side nav toggle icon"></mat-icon>
+        </div>
+      </div>
+      <div class="row g-0 justify-content-around align-items-center">
+        <div class="col-10">
+          <a mat-list-item routerLink="room">
+            <span>{{ t("NAV_ROOM") }}</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <mat-icon svgIcon="room" aria-label="Side nav toggle icon"></mat-icon>
+        </div>
+      </div>
+      <div class="row g-0 justify-content-around align-items-center">
+        <div class="col-10">
+          <a mat-list-item routerLink="note">
+            <span>{{ t("NAV_NOTE") }}</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <mat-icon
+            svgIcon="notes"
+            aria-label="Side nav toggle icon"
+          ></mat-icon>
+        </div>
+      </div>
+      <div class="row g-0 justify-content-around align-items-center">
+        <div class="col-10">
+          <a mat-list-item routerLink="participant">
+            <span>{{ t("NAV_PARTICIPANT") }}</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <mat-icon
+            svgIcon="participants"
+            aria-label="Side nav toggle icon"
+          ></mat-icon>
+        </div>
+      </div>
+      <div class="row g-0 justify-content-around align-items-center">
+        <div class="col-10">
+          <a mat-list-item routerLink="assignment" [disableRipple]="true">
+            <span>{{ t("NAV_ASSIGNMENT") }}</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <mat-icon
+            svgIcon="assignment"
+            aria-label="Side nav toggle icon"
+          ></mat-icon>
+        </div>
+      </div>
+      <div class="row g-0 justify-content-around align-items-center">
+        <div class="col-10">
+          <a mat-list-item routerLink="selectionSheets" [disableRipple]="true">
+            <span>{{ t("NAV_REPORTS") }}</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <mat-icon
+            svgIcon="lists"
+            aria-label="Side nav toggle icon"
+          ></mat-icon>
+        </div>
+      </div>
+      <div class="row g-0 justify-content-around align-items-center">
+        <div class="col-10">
+          <a mat-list-item routerLink="statistics" [disableRipple]="true">
+            <span>{{ t("NAV_STATISTICS") }}</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <mat-icon
+            svgIcon="statistics"
+            aria-label="Side nav toggle icon"
+          ></mat-icon>
+        </div>
+      </div>
+      <div class="row g-0 justify-content-around align-items-center">
+        <div class="col-10">
+          <a mat-list-item routerLink="config">
+            <span>{{ t("NAV_CONFIG") }}</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <mat-icon
+            svgIcon="config"
+            aria-label="Side nav toggle icon"
+          ></mat-icon>
+        </div>
+      </div>
+      <div class="row g-0 justify-content align-items-center">
+        <div class="col-10">
+          <a mat-list-item routerLink="info">
+            <span>{{ t("NAV_INFO") }}</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <mat-icon svgIcon="info" aria-label="Side nav toggle icon"></mat-icon>
+        </div>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar
-      class="justify-content-between font-medium d-print-none"
+      class="justify-content-around font-medium d-print-none"
       color="primary"
     >
       <div>

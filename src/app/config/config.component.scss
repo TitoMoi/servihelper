@@ -13,12 +13,3 @@
   text-align: end;
   align-self: end;
 }
-
-mat-expansion-panel.hover-lightcoral {
-  &:hover {
-    background-color: lightcoral;
-  }
-  &:focus {
-    background-color: lightcoral;
-  }
-}

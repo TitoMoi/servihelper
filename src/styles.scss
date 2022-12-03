@@ -30,34 +30,6 @@ form {
   margin: 1rem;
 }
 
-.mat-mdc-card-content {
-  font-size: inherit;
-}
-
-.mat-calendar-table-header th {
-  font-size: 14px;
-}
-
-.mat-calendar-body-cell {
-  font-size: 16px;
-}
-.mat-mdc-header-cell {
-  font-size: inherit;
-}
-
-.mat-mdc-cell,
-.mat-mdc-footer-cell {
-  font-size: inherit;
-}
-
-.mat-icon {
-  cursor: pointer;
-}
-
-.mat-mdc-form-field {
-  line-height: inherit;
-}
-
 .full-width {
   width: 100%;
 }
@@ -99,6 +71,7 @@ form {
   background-color: white;
 }
 
+//ToDo: try to remove this override
 .mat-mdc-option.no-hover.mat-active {
   background: inherit;
   color: inherit;
@@ -123,12 +96,4 @@ form {
 
 .bold {
   font-weight: 600;
-}
-
-.font-medium {
-  font-size: medium;
-}
-
-.font-small {
-  font-size: small;
 }

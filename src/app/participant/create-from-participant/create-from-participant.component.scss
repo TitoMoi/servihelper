@@ -3,11 +3,6 @@
   margin: 20px auto;
 }
 
-.mat-mdc-radio-button {
-  display: block;
-  margin: 5px 0;
-}
-
 .row {
   display: flex;
   flex-direction: row;
@@ -22,13 +17,15 @@
   margin-right: 0;
 }
 
-::ng-deep .mat-calendar-body-cell.selected > .mat-calendar-body-cell-content,
 ::ng-deep
-  .mat-calendar-body-cell.selected:hover
-  > .mat-calendar-body-cell-content,
+  .mat-mdc-calendar-body-cell.selected
+  > .mat-mdc-calendar-body-cell-content,
 ::ng-deep
-  .mat-calendar-body-cell.selected
-  > .mat-calendar-body-cell-content:hover {
+  .mat-mdc-calendar-body-cell.selected:hover
+  > .mat-mdc-calendar-body-cell-content,
+::ng-deep
+  .mat-mdc-calendar-body-cell.selected
+  > .mat-mdc-calendar-body-cell-content:hover {
   background-color: #673ab7 !important;
   color: #fff !important;
 }
