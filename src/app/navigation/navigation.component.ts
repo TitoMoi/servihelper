@@ -19,7 +19,7 @@ import { HttpClient } from "@angular/common/http";
 import { GitHubDataInterface } from "./model/navigation.model";
 import { ConfigInterface } from "app/config/model/config.model";
 import { RoleInterface } from "app/roles/model/role.model";
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-navigation",
@@ -68,7 +68,7 @@ export class NavigationComponent implements OnInit {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private breakpointObserver: BreakpointObserver,
     public translocoService: TranslocoService,
     private dateAdapter: DateAdapter<NativeDateAdapter>,

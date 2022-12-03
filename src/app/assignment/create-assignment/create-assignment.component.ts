@@ -27,7 +27,7 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { MatButton } from "@angular/material/button";
 import { MatSelect } from "@angular/material/select";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -67,7 +67,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   role: RoleInterface;
 
-  assignmentForm: FormGroup = this.formBuilder.group({
+  assignmentForm: UntypedFormGroup = this.formBuilder.group({
     id: undefined,
     date: [undefined, Validators.required],
     room: [undefined, Validators.required], //Room id
@@ -86,7 +86,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
   constructor(
     public lastDateService: LastDateService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private assignmentService: AssignmentService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,

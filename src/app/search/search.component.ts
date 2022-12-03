@@ -7,7 +7,7 @@ import { RoomService } from 'app/room/service/room.service';
 import { Subscription } from 'rxjs';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 import { SearchResultInterface } from './model/search.model';
 
@@ -17,14 +17,14 @@ import { SearchResultInterface } from './model/search.model';
   styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  searchForm: FormGroup;
+  searchForm: UntypedFormGroup;
   participants: ParticipantInterface[];
   assignments: AssignmentInterface[];
   results: SearchResultInterface[];
   isPrincipal: boolean;
   participantSub$: Subscription;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,

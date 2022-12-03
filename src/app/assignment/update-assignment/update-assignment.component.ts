@@ -23,7 +23,7 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -54,7 +54,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.activatedRoute.snapshot.params.id
   );
 
-  assignmentForm: FormGroup = this.formBuilder.group({
+  assignmentForm: UntypedFormGroup = this.formBuilder.group({
     id: this.assignment.id,
     date: [
       { value: this.assignment.date, disabled: true },
@@ -75,7 +75,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private assignmentService: AssignmentService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,

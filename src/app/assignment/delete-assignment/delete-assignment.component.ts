@@ -2,7 +2,7 @@ import { AssignmentInterface } from 'app/assignment/model/assignment.model';
 import { AssignmentService } from 'app/assignment/service/assignment.service';
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -11,12 +11,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ["./delete-assignment.component.css"],
 })
 export class DeleteAssignmentComponent {
-  assignmentForm: FormGroup = this.formBuilder.group({
+  assignmentForm: UntypedFormGroup = this.formBuilder.group({
     id: this.activatedRoute.snapshot.params.id,
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private assignmentService: AssignmentService,
     private router: Router,
     private activatedRoute: ActivatedRoute

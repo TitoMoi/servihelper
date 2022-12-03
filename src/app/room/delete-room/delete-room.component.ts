@@ -4,7 +4,7 @@ import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -21,7 +21,7 @@ export class DeleteRoomComponent {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private roomService: RoomService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,

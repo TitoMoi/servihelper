@@ -12,7 +12,7 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { MatOption } from "@angular/material/core";
 import {
   MatDatepicker,
@@ -63,7 +63,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     ),
   ];
 
-  selectionForm: FormGroup = this.formBuilder.group({
+  selectionForm: UntypedFormGroup = this.formBuilder.group({
     dates: [undefined, Validators.required],
     rooms: [undefined, Validators.required],
     assignTypes: [undefined, Validators.required],
@@ -76,7 +76,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     private roomService: RoomService,
     private translocoService: TranslocoService,
     private sharedService: SharedService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnInit(): void {

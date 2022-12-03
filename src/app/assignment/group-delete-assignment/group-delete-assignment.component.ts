@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Validators } from "ngx-editor";
 import { AssignmentInterface } from "../model/assignment.model";
@@ -23,7 +23,7 @@ export class GroupDeleteAssignmentComponent {
 
   constructor(
     private assignmentService: AssignmentService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}

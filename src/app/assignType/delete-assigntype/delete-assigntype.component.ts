@@ -4,7 +4,7 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -26,7 +26,7 @@ export class DeleteAssignTypeComponent {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,

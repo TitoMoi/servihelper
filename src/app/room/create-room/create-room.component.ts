@@ -2,7 +2,7 @@ import { ParticipantService } from 'app/participant/service/participant.service'
 import { RoomService } from 'app/room/service/room.service';
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -19,7 +19,7 @@ export class CreateRoomComponent {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private roomService: RoomService,
     private participantService: ParticipantService,
     private router: Router,

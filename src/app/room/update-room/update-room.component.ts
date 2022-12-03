@@ -2,7 +2,7 @@ import { RoomInterface } from 'app/room/model/room.model';
 import { RoomService } from 'app/room/service/room.service';
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -12,14 +12,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateRoomComponent implements OnInit {
-  roomForm: FormGroup = this.formBuilder.group({
+  roomForm: UntypedFormGroup = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
     order: [undefined, Validators.required],
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private roomService: RoomService,
     private router: Router,
     private activatedRoute: ActivatedRoute

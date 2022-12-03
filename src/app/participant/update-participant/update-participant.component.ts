@@ -17,7 +17,7 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { FormArray, FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormArray, UntypedFormBuilder, Validators } from "@angular/forms";
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
@@ -62,7 +62,7 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private participantService: ParticipantService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
@@ -72,13 +72,13 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
   ) {}
 
   //Accesor for the template, not working fine on the ts -> use this.participantForm.get
-  get getRoomsForm(): FormArray {
-    return this.participantForm.controls.rooms as FormArray;
+  get getRoomsForm(): UntypedFormArray {
+    return this.participantForm.controls.rooms as UntypedFormArray;
   }
 
   //Accesor for the template, not working fine on the ts -> use this.participantForm.get
-  get getAssignTypesForm(): FormArray {
-    return this.participantForm.controls.assignTypes as FormArray;
+  get getAssignTypesForm(): UntypedFormArray {
+    return this.participantForm.controls.assignTypes as UntypedFormArray;
   }
 
   ngOnInit(): void {
@@ -126,7 +126,7 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
         available: [r.available, Validators.required],
       });
       //Add assignType to the form
-      const fa = this.participantForm.get("rooms") as FormArray;
+      const fa = this.participantForm.get("rooms") as UntypedFormArray;
       fa.push(roomGroup);
     });
     this.hasLoadedRooms = true;
@@ -145,7 +145,7 @@ export class UpdateParticipantComponent implements OnInit, OnDestroy {
           canAssistant: [at.canAssistant],
         });
         //Add assignType to the form
-        const fa = this.participantForm.get("assignTypes") as FormArray;
+        const fa = this.participantForm.get("assignTypes") as UntypedFormArray;
         fa.push(assignType);
       }
     );

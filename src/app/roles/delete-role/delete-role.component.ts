@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ConfigService } from "app/config/service/config.service";
 import { Validators } from "ngx-editor";
@@ -20,7 +20,7 @@ export class DeleteRoleComponent {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private configService: ConfigService,
     private router: Router,
     private activatedRoute: ActivatedRoute

@@ -4,7 +4,7 @@ import { NoteService } from 'app/note/service/note.service';
 import { Editor, toHTML, Toolbar } from 'ngx-editor';
 
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -13,10 +13,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ["./create-note.component.css"],
 })
 export class CreateNoteComponent implements OnDestroy {
-  noteForm: FormGroup = this.formBuilder.group({
+  noteForm: UntypedFormGroup = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
-    editorContent: new FormControl(
+    editorContent: new UntypedFormControl(
       { value: undefined, disabled: false },
       Validators.required
     ),
@@ -26,7 +26,7 @@ export class CreateNoteComponent implements OnDestroy {
   toolbar: Toolbar = [["bold"], ["italic"], ["underline"]];
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private noteService: NoteService,
     private router: Router,
     private activatedRoute: ActivatedRoute

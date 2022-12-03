@@ -4,7 +4,7 @@ import { NoteService } from "app/note/service/note.service";
 import { APP_CONFIG } from "environments/environment";
 import { writeJsonSync } from "fs-extra";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
 
@@ -101,7 +101,7 @@ export class ConfigComponent {
   notes: NoteInterface[] = this.noteService.getNotes();
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private configService: ConfigService,
     private noteService: NoteService,
     private translocoService: TranslocoService,
