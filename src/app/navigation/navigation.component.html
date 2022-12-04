@@ -1,7 +1,5 @@
 <mat-sidenav-container *transloco="let t">
   <mat-sidenav
-    #drawer
-    class="sidenav d-print-none"
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
