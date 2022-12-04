@@ -10,7 +10,6 @@
 <div class="mx-3 my-1">{{ "ROLE_EXPLANATION2" | transloco }}</div>
 <ng-container *ngIf="(roles$ | async).length">
   <table
-    id="tableDiv"
     *ngIf="roles$ | async"
     mat-table
     [dataSource]="roles$ | async"

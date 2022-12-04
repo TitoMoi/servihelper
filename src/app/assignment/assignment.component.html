@@ -48,7 +48,6 @@
     </div>
     <div style="height: 82%; overflow: auto; margin-bottom: 1px solid black">
       <table
-        id="tableDiv"
         class="mt-2 mat-elevation-z8"
         *ngIf="dataSource.length"
         mat-table
@@ -91,7 +90,7 @@
             *matCellDef="let element"
             [ngClass]="{ hasDateSeparator: element.hasDateSeparator }"
           >
-            {{ element.date | translocoDate: { dateStyle: "medium" } }}
+            {{ element.date | translocoDate : { dateStyle: "medium" } }}
           </td>
         </ng-container>
 

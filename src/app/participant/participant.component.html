@@ -32,7 +32,6 @@
     {{ "PARTICIPANT_TOTAL_PARTICIPANTS" | transloco }}: {{ dataSource.length }}
   </div>
   <table
-    id="tableDiv"
     *ngIf="dataSource.length"
     mat-table
     [trackBy]="trackByIdFn"
