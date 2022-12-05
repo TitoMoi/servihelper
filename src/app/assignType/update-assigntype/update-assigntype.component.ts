@@ -2,7 +2,11 @@ import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -13,13 +17,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class UpdateAssignTypeComponent implements OnInit {
   //for the color component that doesnt support reactive forms
-  color;
 
   assignTypeForm: UntypedFormGroup = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
     hasAssistant: [false],
     order: [undefined, Validators.required],
+    color: [undefined],
   });
 
   constructor(
@@ -38,14 +42,13 @@ export class UpdateAssignTypeComponent implements OnInit {
       name: assignType.name,
       hasAssistant: assignType.hasAssistant || false,
       order: assignType.order,
+      color: assignType.color || "#000000",
     });
-    this.color = assignType.color;
   }
 
   onSubmit(): void {
     this.assignTypeService.updateAssignType({
       ...this.assignTypeForm.value,
-      color: this.color,
     });
 
     //navigate to parent

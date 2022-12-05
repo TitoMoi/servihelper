@@ -13,13 +13,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class CreateAssignTypeComponent {
   //for the color component that doesnt support reactive forms
-  color;
 
   assignTypeForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
     hasAssistant: [false],
     order: [undefined, Validators.required],
+    color: ["#000000"],
   });
 
   constructor(
@@ -34,7 +34,6 @@ export class CreateAssignTypeComponent {
     //save the assign type
     const id = this.assignTypeService.createAssignType({
       ...this.assignTypeForm.value,
-      color: this.color,
     });
 
     //Add the assign type reference for all the participants
