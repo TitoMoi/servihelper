@@ -128,7 +128,7 @@
                   [removable]="true"
                   (removed)="remove(date)"
                 >
-                  {{ date | translocoDate: { dateStyle: "short" } }}
+                  {{ date | translocoDate : { dateStyle: "short" } }}
                   <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
                 </mat-chip-row>
                 <mat-label *ngIf="!notAvailableDates.length">{{
@@ -157,7 +157,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button type="button" routerLink="..">
+        <button mat-raised-button type="button" class="me-3" routerLink="..">
           {{ "BUTTON_CANCEL" | transloco }}
         </button>
         <button
