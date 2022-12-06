@@ -16,29 +16,15 @@
     >
     <mat-nav-list class="p-0">
       <!-- p-0 list has padding top and a gap is visible -->
-      <div class="row g-0 justify-content-around align-items-center">
-        <div class="col-12">
-          <a mat-list-item routerLink="/">
-            <span>{{ t("NAV_HOME") }}</span>
-          </a>
+      <mat-list-item routerLink="/">
+        <span>{{ t("NAV_HOME") }}</span>
+      </mat-list-item>
+      <mat-list-item routerLink="assignType">
+        <div class="d-flex justify-content-between">
+          <span class="white-space-pre-wrap">{{ t("NAV_ASSIGN_TYPE") }}</span>
+          <mat-icon svgIcon="abc"></mat-icon>
         </div>
-      </div>
-      <div class="row g-0 justify-content-around align-items-center">
-        <!-- <div class="col-10">
-          <a mat-list-item routerLink="assignType">
-            <span>{{ t("NAV_ASSIGN_TYPE") }}</span>
-          </a>
-        </div>
-        <div class="col-2">
-          <mat-icon svgIcon="abc" aria-label="Side nav toggle icon"></mat-icon>
-        </div> -->
-        <mat-list-item routerLink="assignType">
-          <div class="d-flex justify-content-between">
-            <span class="white-space-pre-wrap">{{ t("NAV_ASSIGN_TYPE") }}</span>
-            <mat-icon svgIcon="abc"></mat-icon>
-          </div>
-        </mat-list-item>
-      </div>
+      </mat-list-item>
       <mat-list-item routerLink="room">
         <div class="d-flex justify-content-between">
           <span>{{ t("NAV_ROOM") }}</span>
