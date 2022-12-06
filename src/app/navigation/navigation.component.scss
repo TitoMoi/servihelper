@@ -4,7 +4,7 @@ mat-nav-list {
 }
 
 //no other solution is provided
-mat-icon {
-  height: 28px;
-  width: 28px;
+mat-list-item > mat-icon {
+  height: 32px;
+  width: 32px;
 }
