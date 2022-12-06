@@ -1,19 +1,20 @@
-<mat-sidenav-container *transloco="let t">
+<mat-sidenav-container *transloco="let t" style="height: auto">
   <mat-sidenav
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar
-      ><a
+    <mat-toolbar>
+      <a
         *ngIf="(queryGitHub$ | async)?.tag_name !== appVersion"
         href="#"
         (click)="openExternalServihelperRepository()"
       >
         {{ t("NEW_VERSION_AVAILABLE") }}
-      </a></mat-toolbar
-    >
+      </a>
+    </mat-toolbar>
+
     <mat-nav-list class="p-0">
       <!-- p-0 list has padding top and a gap is visible -->
       <mat-list-item routerLink="/">
@@ -93,7 +94,7 @@
       <div class="col-9">
         <div class="row justify-content-end align-items-center">
           <div class="col-auto">
-            <mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
               <mat-select
                 [value]="(config$ | async).lang"
                 (selectionChange)="updateLang($event)"
@@ -105,7 +106,7 @@
             </mat-form-field>
           </div>
           <div class="col-auto">
-            <mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
               <mat-select
                 color="primary"
                 [value]="currentRoleId$ | async"
