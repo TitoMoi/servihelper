@@ -1,10 +1,15 @@
 //Recomended from angular material, assignment type doesnt fit by default
 mat-nav-list {
-  width: 250px;
+  width: 230px;
 }
 
 //no other solution is provided
-mat-list-item > mat-icon {
+mat-list-item * > mat-icon {
   height: 32px;
   width: 32px;
+}
+
+//To break words of "types of assignments" and fit
+.white-space-pre-wrap {
+  white-space: pre-wrap;
 }
