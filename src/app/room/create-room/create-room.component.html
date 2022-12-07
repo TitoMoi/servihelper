@@ -1,12 +1,12 @@
 <form [formGroup]="roomForm" novalidate (ngSubmit)="onSubmit()">
-  <mat-card appearance="outlined" class="shipping-card">
+  <mat-card>
     <mat-card-header>
       <mat-card-title>{{ "ROOM_CREATE_TITLE" | transloco }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input
               matInput
@@ -17,7 +17,7 @@
           </mat-form-field>
 
           <div class="col-6">
-            <mat-form-field class="full-width">
+            <mat-form-field>
               <mat-label>{{ "PLACEHOLDER_ORDER" | transloco }}</mat-label>
               <input matInput type="number" formControlName="order" />
             </mat-form-field>

@@ -1,6 +1,6 @@
 <ng-container *transloco="let t">
   <form [formGroup]="form" novalidate (ngSubmit)="submit()">
-    <mat-card appearance="outlined" class="shipping-card">
+    <mat-card>
       <mat-card-header>
         <mat-card-title>{{
           t("ASSIGN_GROUP_ASSIGN_DELETE_TITLE")
@@ -9,7 +9,7 @@
       <mat-card-content>
         <div class="row">
           <div class="col-6">
-            <mat-form-field appearance="fill" class="full-width">
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_GROUP_DELETE_DATE") }}</mat-label>
               <input
                 required

@@ -1,6 +1,6 @@
 <ng-container *ngIf="isRoomsAvailable && isAssignTypesAvailable">
   <form [formGroup]="participantForm" novalidate (ngSubmit)="submitAndCreate()">
-    <mat-card appearance="outlined" class="shipping-card">
+    <mat-card>
       <mat-card-header>
         <mat-card-title>{{
           "PARTICIPANT_CREATE_TITLE" | transloco
@@ -9,7 +9,7 @@
       <mat-card-content>
         <div class="row">
           <div class="col-12">
-            <mat-form-field class="full-width mb-2">
+            <mat-form-field>
               <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
               <input
                 matInput
@@ -19,7 +19,7 @@
               />
             </mat-form-field>
           </div>
-          <div class="col-6 mb-2">
+          <div class="col-6">
             <mat-checkbox
               labelPosition="before"
               color="primary"
@@ -27,7 +27,7 @@
               >{{ "PARTICIPANT_CREATE_ISWOMAN" | transloco }}</mat-checkbox
             >
           </div>
-          <div class="col-6 mb-2">
+          <div class="col-6">
             <mat-checkbox
               labelPosition="before"
               color="primary"
@@ -35,7 +35,7 @@
               >{{ "PARTICIPANT_CREATE_ISEXTERNAL" | transloco }}</mat-checkbox
             >
           </div>
-          <div class="col-12 mb-2 mr-auto">
+          <div class="col-12 mr-auto">
             <h3 *ngIf="rooms.length">
               {{ "PARTICIPANT_CREATE_ROOMS_TITLE" | transloco }}
             </h3>
@@ -44,7 +44,7 @@
                 <ng-container
                   *ngFor="let r of getRoomsForm.controls; let i = index"
                 >
-                  <div class="col-12 col-md-3 mb-2" [formGroupName]="i">
+                  <div class="col-12" [formGroupName]="i">
                     <mat-checkbox color="primary" formControlName="available">{{
                       getRoom(r.value.roomId).name
                     }}</mat-checkbox>
@@ -55,7 +55,7 @@
           </div>
 
           <!-- principal assignTypes -->
-          <div class="col-12 mb-2 mr-auto">
+          <div class="col-12">
             <h3 *ngIf="assignTypes.length">
               {{ "PARTICIPANT_CREATE_ASSIGNTYPE_PRINCIPAL" | transloco }}
             </h3>
@@ -64,7 +64,7 @@
                 <ng-container
                   *ngFor="let at of getAssignTypesForm.controls; let j = index"
                 >
-                  <div class="col-auto mb-2" [formGroupName]="j">
+                  <div class="col-auto" [formGroupName]="j">
                     <mat-checkbox
                       color="primary"
                       formControlName="canPrincipal"
@@ -79,7 +79,7 @@
           </div>
 
           <!-- assistant assignTypes -->
-          <div class="col-12 mb-2 mr-auto">
+          <div class="col-12">
             <h3 *ngIf="assignTypes.length">
               {{ "PARTICIPANT_CREATE_ASSIGNTYPE_ASSISTANT" | transloco }}
             </h3>
@@ -90,7 +90,7 @@
                 >
                   <div
                     *ngIf="getAssignType(at.value.assignTypeId).hasAssistant"
-                    class="col-auto mb-2"
+                    class="col-auto"
                     [formGroupName]="z"
                   >
                     <mat-checkbox
@@ -106,7 +106,7 @@
             </div>
           </div>
 
-          <div class="col-12 mb-2">
+          <div class="col-12">
             <hr />
             <mat-checkbox
               labelPosition="before"
@@ -115,8 +115,8 @@
               >{{ "PARTICIPANT_CREATE_AVAILABLE" | transloco }}</mat-checkbox
             >
           </div>
-          <div class="col-12 mb-2">
-            <mat-form-field class="full-width" appearance="fill">
+          <div class="col-12">
+            <mat-form-field>
               <mat-chip-grid
                 #chipList
                 aria-label="PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE"
@@ -162,6 +162,7 @@
         </button>
         <button
           mat-raised-button
+          class="me-3"
           color="primary"
           type="button"
           (click)="onSubmit()"

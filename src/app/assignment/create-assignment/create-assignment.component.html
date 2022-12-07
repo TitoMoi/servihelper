@@ -4,13 +4,13 @@
     novalidate
     (ngSubmit)="submitAndCreate($event)"
   >
-    <mat-card appearance="outlined" class="shipping-card">
+    <mat-card>
       <mat-card-header>
         <mat-card-title>{{ t("ASSIGN_CREATE_ASSIGN_TITLE") }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="row">
-          <mat-form-field appearance="fill">
+          <mat-form-field>
             <mat-label>{{ t("ASSIGN_CREATE_CHOOSE_DATE") }}</mat-label>
             <input
               required
@@ -32,7 +32,7 @@
             ></mat-datepicker>
           </mat-form-field>
           <div class="col-6 mb-2">
-            <mat-form-field class="full-width">
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_CREATE_ROOM") }}</mat-label>
               <mat-select
                 formControlName="room"
@@ -49,7 +49,7 @@
             </mat-form-field>
           </div>
           <div class="col-6 mb-2">
-            <mat-form-field class="full-width">
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_CREATE_ASSIGNTYPE") }}</mat-label>
               <mat-select
                 formControlName="assignType"
@@ -70,7 +70,7 @@
             </mat-form-field>
           </div>
           <div class="col-12 mb-2">
-            <mat-form-field class="full-width">
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_CREATE_THEME") }}</mat-label>
               <input matInput spellcheck="false" formControlName="theme" />
             </mat-form-field>
@@ -117,7 +117,7 @@
             </div>
           </div>
           <div class="col-12 mb-2">
-            <mat-form-field class="full-width">
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_CREATE_PRINCIPAL") }}</mat-label>
               <mat-select
                 #principalSelect
@@ -140,7 +140,7 @@
             </mat-form-field>
           </div>
           <div class="col-12 mb-2">
-            <mat-form-field class="full-width">
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_CREATE_ASSISTANT") }}</mat-label>
               <mat-select
                 #assistantSelect
@@ -162,7 +162,7 @@
             </mat-form-field>
           </div>
           <div class="col-12 mb-2">
-            <mat-form-field class="full-width">
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_CREATE_FOOTER_NOTE") }}</mat-label>
               <mat-select formControlName="footerNote" [disableRipple]="true">
                 <mat-option [value]="undefined"></mat-option>

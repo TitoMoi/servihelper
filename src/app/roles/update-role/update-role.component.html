@@ -1,12 +1,12 @@
 <form [formGroup]="roleForm" novalidate (ngSubmit)="onSubmit()">
-  <mat-card appearance="outlined" class="shipping-card">
+  <mat-card>
     <mat-card-header>
       <mat-card-title>{{ "ROLE_UPDATE_TITLE" | transloco }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input
               matInput
@@ -25,7 +25,7 @@
           </h3>
           <div class="row mb-2">
             <ng-container *ngFor="let at of assignTypes">
-              <div class="col-auto mb-2">
+              <div class="col-auto">
                 <mat-checkbox
                   color="primary"
                   [checked]="at.id | isRoleCheckedPipe : assignTypesId"

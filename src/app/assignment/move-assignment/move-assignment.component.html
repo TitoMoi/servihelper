@@ -1,13 +1,13 @@
 <ng-container *transloco="let t">
   <form [formGroup]="form" novalidate (ngSubmit)="submit()">
-    <mat-card appearance="outlined" class="shipping-card">
+    <mat-card>
       <mat-card-header>
         <mat-card-title>{{ t("ASSIGN_MOVE_ASSIGN_TITLE") }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="row">
           <div class="col-6">
-            <mat-form-field appearance="fill" class="full-width">
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_MOVE_CHOOSE_DATE_ORIGIN") }}</mat-label>
               <input
                 required
@@ -27,7 +27,7 @@
             </mat-form-field>
           </div>
           <div class="col-6">
-            <mat-form-field appearance="fill" class="full-width">
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_MOVE_CHOOSE_DATE_DESTINY") }}</mat-label>
               <input
                 required

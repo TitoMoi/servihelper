@@ -2,6 +2,10 @@
 @import "sass/bootstrap-grid";
 @import "sass/mat_mixins";
 
+//css guideline:
+//grid margins top and bot are at row level, grid margins left and right are at col level
+//elements can have margins if necessary
+
 html,
 body {
   height: 100%;
@@ -22,15 +26,8 @@ tr {
   }
 }
 
-form {
-  margin: 0.5rem;
-}
-
+//all form fields expand up to col
 mat-form-field {
-  width: 100%;
-}
-
-.full-width {
   width: 100%;
 }
 

@@ -7,7 +7,7 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content class="row">
-        <mat-form-field class="full-width">
+        <mat-form-field>
           <mat-label>{{ "SEARCH_PARTICIPANT" | transloco }}</mat-label>
           <mat-select formControlName="participant" required>
             <mat-option *ngFor="let p of participants" [value]="p">
@@ -35,7 +35,7 @@
             {{ r.isPrincipalResult | transloco }}
           </div>
           <div class="col-3">
-            {{ r.date | translocoDate: { dateStyle: "long" } }}
+            {{ r.date | translocoDate : { dateStyle: "long" } }}
           </div>
           <div class="col-3">
             {{ r.assignTypeName }}

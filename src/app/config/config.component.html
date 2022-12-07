@@ -12,47 +12,47 @@
           </mat-expansion-panel-header>
 
           <h4>{{ "CONFIG_ASSIGNMENT_TITLE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input matInput formControlName="assignmentHeaderTitle" />
           </mat-form-field>
           <h4>{{ "CONFIG_ASSIGNMENT_PRINCIPAL_TITLE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input matInput formControlName="assignmentPrincipalTitle" />
           </mat-form-field>
           <h4>{{ "CONFIG_ASSIGNMENT_ASSISTANT_TITLE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input matInput formControlName="assignmentAssistantTitle" />
           </mat-form-field>
           <h4>{{ "CONFIG_ASSIGNMENT_DATE_TITLE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input matInput formControlName="assignmentDateTitle" />
           </mat-form-field>
           <h4>{{ "CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input matInput formControlName="assignmentAssignTypeTitle" />
           </mat-form-field>
           <h4>{{ "CONFIG_ASSIGNMENT_THEME_TITLE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input matInput formControlName="assignmentThemeTitle" />
           </mat-form-field>
           <h4>{{ "CONFIG_ASSIGNMENT_ROOM_TITLE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input matInput formControlName="assignmentRoomTitle" />
           </mat-form-field>
           <h4>{{ "CONFIG_ASSIGNMENT_NOTE_TITLE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input matInput formControlName="assignmentNoteTitle" />
           </mat-form-field>
           <h4>{{ "CONFIG_DEFAULT_FOOTER_NOTE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-select formControlName="defaultFooterNoteId" required>
               <mat-option [value]="undefined"> </mat-option>
               <mat-option *ngFor="let note of notes" [value]="note.id">
@@ -77,12 +77,12 @@
           </mat-expansion-panel-header>
 
           <h4>{{ "CONFIG_REPORT_TITLE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
             <input matInput formControlName="reportTitle" />
           </mat-form-field>
           <h4>{{ "CONFIG_DEFAULT_WEEKDAY_BEGINS" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-select formControlName="defaultWeekDayBegins" required>
               <mat-option *ngFor="let day of weekDayBegins" [value]="day.value">
                 {{ day.name }}
@@ -91,7 +91,7 @@
           </mat-form-field>
 
           <h4>{{ "CONFIG_DEFAULT_REPORT_DATE_FORMAT" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-select formControlName="defaultReportDateFormat" required>
               <mat-option *ngFor="let df of translocoDateFormats" [value]="df">
                 {{ df }}
@@ -100,7 +100,7 @@
           </mat-form-field>
 
           <h4>{{ "CONFIG_DEFAULT_REPORT_DATE_COLOR" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <mat-label>{{
               "PLACEHOLDER_REPORT_DATE_COLOR" | transloco
             }}</mat-label>
@@ -115,7 +115,7 @@
           </mat-form-field>
 
           <h4>{{ "CONFIG_DEFAULT_FONT_SIZE" | transloco }}</h4>
-          <mat-form-field class="full-width">
+          <mat-form-field>
             <input
               matInput
               type="number"
@@ -168,8 +168,8 @@
       </span>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 mb-2 text-align-end">
+  <div class="row mb-2">
+    <div class="col-12 text-align-end">
       {{ appVersion }}
     </div>
   </div>
