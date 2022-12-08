@@ -3,8 +3,15 @@
 @import "sass/mat_mixins";
 
 //css guideline:
-//grid margins top and bot are at row level, grid margins left and right are at col level
-//elements can have margins if necessary
+//grid margins top and bot are at row level (y), grid margins left and right are at col level (x)
+//elements can have margins if necessary to separate from each other or use grid cols
+
+//all components layout must begin with:
+/* <div class="m-2"> //have general margins left, top, right, bottom
+    <div class="row my-2 g-0"> //separate buttons from form or table
+      <div class="col"> 
+        //content
+*/
 
 html,
 body {

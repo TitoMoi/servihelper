@@ -1,208 +1,211 @@
 <router-outlet></router-outlet>
-<ng-container *transloco="let t">
-  <span [hidden]="activatedRoute.children.length !== 0">
-    <div class="row gx-0 align-items-center">
-      <div class="col">
-        <div class="d-flex app-align-items-center">
-          <a
-            class="m-3"
-            mat-raised-button
-            [disableRipple]="true"
-            color="primary"
-            routerLink="create"
+<div
+  class="m-2"
+  *transloco="let t"
+  [hidden]="activatedRoute.children.length !== 0"
+>
+  <div class="row my-2 g-0">
+    <div class="col-auto">
+      <div class="d-flex align-items-center">
+        <a
+          mat-raised-button
+          [disableRipple]="true"
+          color="primary"
+          routerLink="create"
+          routerLinkActive="active"
+        >
+          {{ t("ASSIGN_CREATE_ASSIGN_BUTTON") }}
+        </a>
+        <ng-container *ngIf="dataSource.length">
+          <mat-icon
+            class="mx-3"
+            svgIcon="csvSvg"
+            (click)="exportCsv()"
+          ></mat-icon>
+          <mat-icon
+            class="mx-3"
+            svgIcon="search"
+            routerLink="../search"
             routerLinkActive="active"
-          >
-            {{ t("ASSIGN_CREATE_ASSIGN_BUTTON") }}
-          </a>
-          <ng-container *ngIf="dataSource.length">
-            <mat-icon
-              class="m-3"
-              svgIcon="csvSvg"
-              aria-label="icon"
-              (click)="exportCsv()"
-            ></mat-icon>
-            <mat-icon
-              class="m-3"
-              svgIcon="search"
-              aria-label="icon"
-              routerLink="../search"
-              routerLinkActive="active"
-            ></mat-icon>
-            <mat-icon
-              class="m-3"
-              svgIcon="switch"
-              aria-label="icon"
-              routerLink="move"
-              routerLinkActive="active"
-            ></mat-icon>
-            <mat-icon
-              class="m-3"
-              svgIcon="calendar-delete"
-              aria-label="icon"
-              routerLink="group-delete"
-              routerLinkActive="active"
-            ></mat-icon>
-          </ng-container>
-        </div>
+          ></mat-icon>
+          <mat-icon
+            class="mx-3"
+            svgIcon="switch"
+            routerLink="move"
+            routerLinkActive="active"
+          ></mat-icon>
+          <mat-icon
+            class="mx-3"
+            svgIcon="calendar-delete"
+            routerLink="group-delete"
+            routerLinkActive="active"
+          ></mat-icon>
+        </ng-container>
       </div>
     </div>
-    <div style="height: 82%; overflow: auto; margin-bottom: 1px solid black">
-      <table
-        class="mt-2 mat-elevation-z8"
-        *ngIf="dataSource.length"
-        mat-table
-        recycleRows
-        multiTemplateDataRows
-        [trackBy]="trackByIdFn"
-        [dataSource]="dataSource"
-      >
-        <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+    <div class="row my-2 g-0">
+      <div class="col">
+        <table
+          class="mat-elevation-z8"
+          *ngIf="dataSource.length"
+          mat-table
+          recycleRows
+          multiTemplateDataRows
+          [trackBy]="trackByIdFn"
+          [dataSource]="dataSource"
+        >
+          <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- assignImage Column -->
-        <ng-container matColumnDef="assignImage">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ t("ASSIGN_TABLE_HEADER_IMAGE") }}
-          </th>
-          <td
-            mat-cell
-            *matCellDef="let element"
-            [ngClass]="{ hasBeenClicked: element.hasBeenClicked }"
-          >
-            <mat-icon
-              class="m-auto"
-              (click)="highlightRow($event, element)"
-              [routerLink]="['image', element.id]"
-              routerLinkActive="active"
-              svgIcon="assignImage"
-              aria-label="Side nav toggle icon"
-            ></mat-icon>
-          </td>
-        </ng-container>
-
-        <!-- date Column -->
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ t("ASSIGN_TABLE_HEADER_DATE") }}
-          </th>
-          <td
-            mat-cell
-            *matCellDef="let element"
-            [ngClass]="{ hasDateSeparator: element.hasDateSeparator }"
-          >
-            {{ element.date | translocoDate : { dateStyle: "medium" } }}
-          </td>
-        </ng-container>
-
-        <!-- principal Column -->
-        <ng-container matColumnDef="principal">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ t("ASSIGN_TABLE_HEADER_PRINCIPAL") }}
-          </th>
-          <td mat-cell *matCellDef="let element">{{ element.principal }}</td>
-        </ng-container>
-
-        <!-- assistant Column -->
-        <ng-container matColumnDef="assistant">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ t("ASSIGN_TABLE_HEADER_ASSISTANT") }}
-          </th>
-          <td mat-cell *matCellDef="let element">{{ element.assistant }}</td>
-        </ng-container>
-
-        <!-- assignType Column -->
-        <ng-container matColumnDef="assignType">
-          <th mat-header-cell *matHeaderCellDef>
-            <span>{{ t("ASSIGN_TABLE_HEADER_ASSIGNTYPE") }}</span>
-          </th>
-          <td
-            mat-cell
-            *matCellDef="let element"
-            [style.backgroundColor]="element.assignTypeColor"
-          >
-            {{ element.assignType }}
-          </td>
-        </ng-container>
-
-        <!-- room Column -->
-        <ng-container matColumnDef="room">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ t("ASSIGN_TABLE_HEADER_ROOM") }}
-          </th>
-          <td mat-cell *matCellDef="let element">{{ element.room }}</td>
-        </ng-container>
-
-        <!-- editIcon Column -->
-        <ng-container matColumnDef="editIcon">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ t("ASSIGN_TABLE_HEADER_EDIT") }}
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon
-              class="m-auto"
-              (click)="preventDefault($event)"
-              [routerLink]="['update', element.id]"
-              routerLinkActive="active"
-              svgIcon="edit"
-              aria-label="Side nav toggle icon"
-            ></mat-icon>
-          </td>
-        </ng-container>
-
-        <!-- deleteIcon Column -->
-        <ng-container matColumnDef="deleteIcon">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ t("ASSIGN_TABLE_HEADER_DELETE") }}
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon
-              class="m-auto"
-              [routerLink]="['delete', element.id]"
-              routerLinkActive="active"
-              svgIcon="garbage"
-              aria-label="Side nav toggle icon"
-            ></mat-icon>
-          </td>
-        </ng-container>
-
-        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-        <ng-container matColumnDef="expandedDetail">
-          <td
-            mat-cell
-            *matCellDef="let element"
-            [attr.colspan]="displayedColumns.length"
-          >
-            <div
-              class="expanded-element-detail"
-              [@detailExpand]="
-                element === expandedElement ? 'expanded' : 'collapsed'
-              "
+          <!-- assignImage Column -->
+          <ng-container matColumnDef="assignImage">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ t("ASSIGN_TABLE_HEADER_IMAGE") }}
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              [ngClass]="{ hasBeenClicked: element.hasBeenClicked }"
             >
-              <div class="expanded-element-theme">
-                <div>
-                  {{ t("ASSIGN_TABLE_EXPANDED_THEME") }}
-                  {{ element.theme }}
+              <mat-icon
+                class="m-auto"
+                (click)="highlightRow($event, element)"
+                [routerLink]="['image', element.id]"
+                routerLinkActive="active"
+                svgIcon="assignImage"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+            </td>
+          </ng-container>
+
+          <!-- date Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ t("ASSIGN_TABLE_HEADER_DATE") }}
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              [ngClass]="{ hasDateSeparator: element.hasDateSeparator }"
+            >
+              {{ element.date | translocoDate : { dateStyle: "medium" } }}
+            </td>
+          </ng-container>
+
+          <!-- principal Column -->
+          <ng-container matColumnDef="principal">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ t("ASSIGN_TABLE_HEADER_PRINCIPAL") }}
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.principal }}
+            </td>
+          </ng-container>
+
+          <!-- assistant Column -->
+          <ng-container matColumnDef="assistant">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ t("ASSIGN_TABLE_HEADER_ASSISTANT") }}
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.assistant }}
+            </td>
+          </ng-container>
+
+          <!-- assignType Column -->
+          <ng-container matColumnDef="assignType">
+            <th mat-header-cell *matHeaderCellDef>
+              <span>{{ t("ASSIGN_TABLE_HEADER_ASSIGNTYPE") }}</span>
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              [style.backgroundColor]="element.assignTypeColor"
+            >
+              {{ element.assignType }}
+            </td>
+          </ng-container>
+
+          <!-- room Column -->
+          <ng-container matColumnDef="room">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ t("ASSIGN_TABLE_HEADER_ROOM") }}
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.room }}</td>
+          </ng-container>
+
+          <!-- editIcon Column -->
+          <ng-container matColumnDef="editIcon">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ t("ASSIGN_TABLE_HEADER_EDIT") }}
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon
+                class="m-auto"
+                (click)="preventDefault($event)"
+                [routerLink]="['update', element.id]"
+                routerLinkActive="active"
+                svgIcon="edit"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+            </td>
+          </ng-container>
+
+          <!-- deleteIcon Column -->
+          <ng-container matColumnDef="deleteIcon">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ t("ASSIGN_TABLE_HEADER_DELETE") }}
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon
+                class="m-auto"
+                [routerLink]="['delete', element.id]"
+                routerLinkActive="active"
+                svgIcon="garbage"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+            </td>
+          </ng-container>
+
+          <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+          <ng-container matColumnDef="expandedDetail">
+            <td
+              mat-cell
+              *matCellDef="let element"
+              [attr.colspan]="displayedColumns.length"
+            >
+              <div
+                class="expanded-element-detail"
+                [@detailExpand]="
+                  element === expandedElement ? 'expanded' : 'collapsed'
+                "
+              >
+                <div class="expanded-element-theme">
+                  <div>
+                    {{ t("ASSIGN_TABLE_EXPANDED_THEME") }}
+                    {{ element.theme }}
+                  </div>
                 </div>
               </div>
-            </div>
-          </td>
-        </ng-container>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr
-          mat-row
-          *matRowDef="let element; let even = even; columns: displayedColumns"
-          (click)="
-            expandedElement = expandedElement === element ? null : element
-          "
-          routerLinkActive="active"
-        ></tr>
-        <tr
-          mat-row
-          *matRowDef="let row; columns: ['expandedDetail']"
-          class="expanded-detail-row"
-        ></tr>
-      </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let element; let even = even; columns: displayedColumns"
+            (click)="
+              expandedElement = expandedElement === element ? null : element
+            "
+            routerLinkActive="active"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['expandedDetail']"
+            class="expanded-detail-row"
+          ></tr>
+        </table>
+      </div>
     </div>
-  </span>
-</ng-container>
+  </div>
+</div>
