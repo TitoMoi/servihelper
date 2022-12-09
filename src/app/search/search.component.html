@@ -1,71 +1,63 @@
-<div class="m-2">
-  <div class="row g-0">
-    <div class="col">
-      <ng-container *ngIf="participants.length">
-        <form [formGroup]="searchForm" novalidate>
-          <mat-card appearance="outlined">
-            <mat-card-header>
-              <mat-card-title>
-                {{ "SEARCH_PARTICIPANT_TITLE" | transloco }}
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div class="row g-0">
-                <div class="col">
-                  <mat-form-field>
-                    <mat-label>{{
-                      "SEARCH_PARTICIPANT" | transloco
-                    }}</mat-label>
-                    <mat-select formControlName="participant" required>
-                      <mat-option *ngFor="let p of participants" [value]="p">
-                        {{ p.name }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
+<div class="row g-0">
+  <div class="col">
+    <ng-container *ngIf="participants.length">
+      <form [formGroup]="searchForm" novalidate>
+        <mat-card appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>
+              {{ "SEARCH_PARTICIPANT_TITLE" | transloco }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row g-0">
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>{{ "SEARCH_PARTICIPANT" | transloco }}</mat-label>
+                  <mat-select formControlName="participant" required>
+                    <mat-option *ngFor="let p of participants" [value]="p">
+                      {{ p.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
-              <div class="row" *ngIf="results.length">
-                <div class="col">
-                  {{ "SEARCH_ISPRINCIPAL" | transloco }}
-                </div>
-                <div class="col">
-                  {{ "SEARCH_DATE" | transloco }}
-                </div>
-                <div class="col">
-                  {{ "SEARCH_ASSIGNTYPE" | transloco }}
-                </div>
-                <div class="col">
-                  {{ "SEARCH_ROOM" | transloco }}
-                </div>
+            </div>
+            <div class="row" *ngIf="results.length">
+              <div class="col">
+                {{ "SEARCH_ISPRINCIPAL" | transloco }}
               </div>
-              <hr />
-              <div class="row my-2 g-0" *ngFor="let r of results">
-                <div class="col">
-                  {{ r.isPrincipalResult | transloco }}
-                </div>
-                <div class="col">
-                  {{ r.date | translocoDate : { dateStyle: "long" } }}
-                </div>
-                <div class="col">
-                  {{ r.assignTypeName }}
-                </div>
-                <div class="col">
-                  {{ r.roomName }}
-                </div>
+              <div class="col">
+                {{ "SEARCH_DATE" | transloco }}
               </div>
-            </mat-card-content>
-            <mat-card-actions>
-              <button
-                mat-raised-button
-                type="button"
-                routerLink="../assignment"
-              >
-                {{ "BUTTON_CANCEL" | transloco }}
-              </button>
-            </mat-card-actions>
-          </mat-card>
-        </form>
-      </ng-container>
-    </div>
+              <div class="col">
+                {{ "SEARCH_ASSIGNTYPE" | transloco }}
+              </div>
+              <div class="col">
+                {{ "SEARCH_ROOM" | transloco }}
+              </div>
+            </div>
+            <hr />
+            <div class="row my-2 g-0" *ngFor="let r of results">
+              <div class="col">
+                {{ r.isPrincipalResult | transloco }}
+              </div>
+              <div class="col">
+                {{ r.date | translocoDate : { dateStyle: "long" } }}
+              </div>
+              <div class="col">
+                {{ r.assignTypeName }}
+              </div>
+              <div class="col">
+                {{ r.roomName }}
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button type="button" routerLink="../assignment">
+              {{ "BUTTON_CANCEL" | transloco }}
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </ng-container>
   </div>
 </div>

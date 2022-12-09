@@ -1,84 +1,80 @@
-<div class="m-2">
-  <div class="row g-0">
-    <div class="col">
-      <ng-container *transloco="let t">
-        <form [formGroup]="form" novalidate (ngSubmit)="submit()">
-          <mat-card>
-            <mat-card-header>
-              <mat-card-title>{{
-                t("ASSIGN_MOVE_ASSIGN_TITLE")
-              }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div class="row">
-                <div class="col-6">
-                  <mat-form-field>
-                    <mat-label>{{
-                      t("ASSIGN_MOVE_CHOOSE_DATE_ORIGIN")
-                    }}</mat-label>
-                    <input
-                      required
-                      matInput
-                      [matDatepicker]="originPicker"
-                      formControlName="originDate"
-                    />
-                    <mat-datepicker-toggle
-                      matPrefix
-                      [for]="originPicker"
-                      class="mr-3"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker
-                      id="datepickerOriginId"
-                      #originPicker
-                    ></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="col-6">
-                  <mat-form-field>
-                    <mat-label>{{
-                      t("ASSIGN_MOVE_CHOOSE_DATE_DESTINY")
-                    }}</mat-label>
-                    <input
-                      required
-                      matInput
-                      [matDatepicker]="destinyDate"
-                      formControlName="destinyDate"
-                    />
-                    <mat-datepicker-toggle
-                      matPrefix
-                      [for]="destinyDate"
-                      class="mr-3"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker
-                      id="datepickerDestinyId"
-                      #destinyDate
-                    ></mat-datepicker>
-                  </mat-form-field>
-                </div>
+<div class="row g-0">
+  <div class="col">
+    <ng-container *transloco="let t">
+      <form [formGroup]="form" novalidate (ngSubmit)="submit()">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ t("ASSIGN_MOVE_ASSIGN_TITLE") }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field>
+                  <mat-label>{{
+                    t("ASSIGN_MOVE_CHOOSE_DATE_ORIGIN")
+                  }}</mat-label>
+                  <input
+                    required
+                    matInput
+                    [matDatepicker]="originPicker"
+                    formControlName="originDate"
+                  />
+                  <mat-datepicker-toggle
+                    matPrefix
+                    [for]="originPicker"
+                    class="mr-3"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker
+                    id="datepickerOriginId"
+                    #originPicker
+                  ></mat-datepicker>
+                </mat-form-field>
               </div>
-            </mat-card-content>
-            <mat-card-actions>
-              <button
-                class="me-3"
-                mat-raised-button
-                [disableRipple]="true"
-                type="button"
-                routerLink=".."
-              >
-                {{ t("BUTTON_CANCEL") }}
-              </button>
-              <button
-                mat-raised-button
-                color="primary"
-                type="submit"
-                [disabled]="form.invalid"
-              >
-                {{ t("BUTTON_SAVE") }}
-              </button>
-            </mat-card-actions>
-          </mat-card>
-        </form>
-      </ng-container>
-    </div>
+              <div class="col-6">
+                <mat-form-field>
+                  <mat-label>{{
+                    t("ASSIGN_MOVE_CHOOSE_DATE_DESTINY")
+                  }}</mat-label>
+                  <input
+                    required
+                    matInput
+                    [matDatepicker]="destinyDate"
+                    formControlName="destinyDate"
+                  />
+                  <mat-datepicker-toggle
+                    matPrefix
+                    [for]="destinyDate"
+                    class="mr-3"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker
+                    id="datepickerDestinyId"
+                    #destinyDate
+                  ></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              class="me-3"
+              mat-raised-button
+              [disableRipple]="true"
+              type="button"
+              routerLink=".."
+            >
+              {{ t("BUTTON_CANCEL") }}
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="form.invalid"
+            >
+              {{ t("BUTTON_SAVE") }}
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </ng-container>
   </div>
 </div>

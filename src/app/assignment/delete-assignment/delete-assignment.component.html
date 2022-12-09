@@ -1,34 +1,32 @@
-<div class="m-2">
-  <div class="row g-0">
-    <div class="col">
-      <form [formGroup]="assignmentForm" novalidate (ngSubmit)="onSubmit()">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>{{
-              "ASSIGN_DELETE_TITLE" | transloco
-            }}</mat-card-title>
-            <mat-card-subtitle>{{
-              "ASSIGN_DELETE_WARNING" | transloco
-            }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="row"></div>
-          </mat-card-content>
-          <mat-card-actions>
-            <button
-              mat-raised-button
-              type="button"
-              class="me-3"
-              routerLink="../.."
-            >
-              {{ "BUTTON_CANCEL" | transloco }}
-            </button>
-            <button mat-raised-button color="warn" type="submit">
-              {{ "BUTTON_DELETE" | transloco }}
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </form>
-    </div>
+<div class="row g-0">
+  <div class="col">
+    <form [formGroup]="assignmentForm" novalidate (ngSubmit)="onSubmit()">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{
+            "ASSIGN_DELETE_TITLE" | transloco
+          }}</mat-card-title>
+          <mat-card-subtitle>{{
+            "ASSIGN_DELETE_WARNING" | transloco
+          }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row"></div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            type="button"
+            class="me-3"
+            routerLink="../.."
+          >
+            {{ "BUTTON_CANCEL" | transloco }}
+          </button>
+          <button mat-raised-button color="warn" type="submit">
+            {{ "BUTTON_DELETE" | transloco }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
   </div>
 </div>
