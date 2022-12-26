@@ -1,4 +1,4 @@
-<div class="row white-base-background m-3">
+<div class="row bg-color-white m-3">
   <div class="col-12 g-0">
     <mat-accordion>
       <mat-expansion-panel>
@@ -29,7 +29,7 @@
             ></mat-icon>
           </div>
         </div>
-        <div id="toPngDivId" class="white-base-background m-3">
+        <div id="toPngDivId" class="bg-color-white m-3">
           <div class="row m-3">
             <div class="col-2">
               <b> {{ "STATISTICS_NAME" | transloco }}</b>
@@ -57,14 +57,14 @@
             <div class="col-2">
               {{
                 participant.penultimateAssignmentDate
-                  | translocoDate: { dateStyle: "medium" }
+                  | translocoDate : { dateStyle: "medium" }
               }}
               - {{ participant.penultimateAssignType }}
             </div>
             <div class="col-2">
               {{
                 participant.lastAssignmentDate
-                  | translocoDate: { dateStyle: "medium" }
+                  | translocoDate : { dateStyle: "medium" }
               }}
               - {{ participant.lastAssignType }}
             </div>

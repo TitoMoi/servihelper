@@ -1,10 +1,11 @@
 @import "sass/fonts";
-@import "sass/bootstrap-grid";
+@import "sass/colors";
 @import "sass/mat_mixins";
 
 //css guideline:
 //grid margins top and bot are at row level (y), grid margins left and right are at col level (x)
 //elements can have margins if necessary to separate from each other or use grid cols
+//use bootstrap utilities and do not create new classes
 
 //all components layout must begin with:
 /* 
@@ -45,34 +46,11 @@ mat-form-field {
 .text-center {
   text-align: center;
 }
-.bg-color-white {
-  background-color: white;
-}
-
-.bg-color-lightgray {
-  background-color: lightgray;
-}
-
-.bg-color-lightskyblue {
-  background-color: lightskyblue;
-}
-
-.bg-color-lightyellow {
-  background-color: lightyellow;
-}
-
-.bg-color-lightcoral {
-  background-color: lightcoral;
-}
 
 .cp-ok-btn {
   background-color: #673ab7; //primary
   color: white;
   padding: 8px;
-}
-
-.white-base-background {
-  background-color: white;
 }
 
 //ToDo: try to remove this override
@@ -96,8 +74,4 @@ mat-form-field {
       background-color: lightyellow;
     }
   }
-}
-
-.bold {
-  font-weight: 600;
 }

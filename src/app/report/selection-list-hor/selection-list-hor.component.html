@@ -45,7 +45,7 @@
 </div>
 
 <div id="toPngDivId" class="bg-color-white">
-  <div class="bold" [style.textAlign]="'center'">{{ reportTitle }}</div>
+  <div class="fw-bold" [style.textAlign]="'center'">{{ reportTitle }}</div>
   <ng-container *ngFor="let ag of assignmentGroups; index as i">
     <table
       [id]="'table' + i"
@@ -54,7 +54,7 @@
     >
       <tr>
         <th
-          class="bold"
+          class="fw-bold"
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
         >
@@ -69,7 +69,7 @@
         <th
           *ngFor="let assignment of ag.assignments"
           [id]="assignment.assignType.id"
-          class="bold"
+          class="fw-bold"
           [style.backgroundColor]="
             assignTypeService.getAssignType(assignment.assignType.id).color
           "

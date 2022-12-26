@@ -1,209 +1,186 @@
-<div class="row g-0">
-  <div class="col">
-    <ng-container *transloco="let t">
-      <form
-        [formGroup]="assignmentForm"
-        novalidate
-        (ngSubmit)="onSubmit($event)"
-      >
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>{{ t("ASSIGN_UPDATE_TITLE") }}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="row">
-              <mat-form-field>
-                <mat-label>{{ t("ASSIGN_UPDATE_DATE") }}</mat-label>
-                <input
-                  required
-                  matInput
-                  [matDatepicker]="picker"
-                  formControlName="date"
-                />
-                <mat-datepicker-toggle
-                  matPrefix
-                  [for]="picker"
-                  class="mr-3"
-                ></mat-datepicker-toggle>
-                <mat-datepicker
-                  #picker
-                  (closed)="highlightIfAlreadyHasWork()"
-                ></mat-datepicker>
-              </mat-form-field>
-              <div class="col-6 mb-2">
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_UPDATE_ROOM") }}</mat-label>
-                  <mat-select
-                    formControlName="room"
-                    required
-                    (closed)="highlightIfAlreadyHasWork()"
-                  >
-                    <mat-option
-                      *ngFor="let room of rooms; trackBy: trackByIdRoomFn"
-                      [value]="room.id"
-                    >
-                      {{ room.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-6 mb-2">
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_UPDATE_ASSIGNTYPE") }}</mat-label>
-                  <mat-select
-                    formControlName="assignType"
-                    required
-                    (closed)="highlightIfAlreadyHasWork()"
-                  >
-                    <mat-option
-                      *ngFor="
-                        let assignType of assignTypes;
-                        trackBy: trackByIdAssignTypeFn
-                      "
-                      [value]="assignType.id"
-                      [style.backgroundColor]="assignType.color"
-                    >
-                      {{ assignType.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-12 mb-2">
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_UPDATE_THEME") }}</mat-label>
-                  <input matInput spellcheck="false" formControlName="theme" />
-                </mat-form-field>
-              </div>
+<ng-container *transloco="let t">
+  <form [formGroup]="assignmentForm" novalidate (ngSubmit)="onSubmit($event)">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ t("ASSIGN_UPDATE_TITLE") }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <mat-form-field>
+            <mat-label>{{ t("ASSIGN_UPDATE_DATE") }}</mat-label>
+            <input
+              required
+              matInput
+              [matDatepicker]="picker"
+              formControlName="date"
+            />
+            <mat-datepicker-toggle
+              matPrefix
+              [for]="picker"
+              class="mr-3"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #picker
+              (closed)="highlightIfAlreadyHasWork()"
+            ></mat-datepicker>
+          </mat-form-field>
+          <div class="col-6 mb-2">
+            <mat-form-field>
+              <mat-label>{{ t("ASSIGN_UPDATE_ROOM") }}</mat-label>
+              <mat-select
+                formControlName="room"
+                required
+                (closed)="highlightIfAlreadyHasWork()"
+              >
+                <mat-option
+                  *ngFor="let room of rooms; trackBy: trackByIdRoomFn"
+                  [value]="room.id"
+                >
+                  {{ room.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mb-2">
+            <mat-form-field>
+              <mat-label>{{ t("ASSIGN_UPDATE_ASSIGNTYPE") }}</mat-label>
+              <mat-select
+                formControlName="assignType"
+                required
+                (closed)="highlightIfAlreadyHasWork()"
+              >
+                <mat-option
+                  *ngFor="
+                    let assignType of assignTypes;
+                    trackBy: trackByIdAssignTypeFn
+                  "
+                  [value]="assignType.id"
+                  [style.backgroundColor]="assignType.color"
+                >
+                  {{ assignType.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 mb-2">
+            <mat-form-field>
+              <mat-label>{{ t("ASSIGN_UPDATE_THEME") }}</mat-label>
+              <input matInput spellcheck="false" formControlName="theme" />
+            </mat-form-field>
+          </div>
 
-              <div class="col-12 mb-2">
-                <div class="d-flex align-items-baseline justify-content-start">
-                  <span class="d-inline-block me-3">
-                    <mat-icon
-                      class="me-2"
-                      svgIcon="woman"
-                      aria-label="icon"
-                    ></mat-icon>
-                    <mat-checkbox
-                      labelPosition="before"
-                      color="primary"
-                      formControlName="onlyWoman"
-                      [disableRipple]="true"
-                      >{{ t("ASSIGN_CREATE_ONLY_WOMEN") }}</mat-checkbox
-                    >
-                  </span>
-                  <span class="d-inline-block me-3">
-                    <mat-icon
-                      class="me-2"
-                      svgIcon="man"
-                      aria-label="icon"
-                    ></mat-icon>
-                    <mat-checkbox
-                      labelPosition="before"
-                      color="primary"
-                      formControlName="onlyMan"
-                      [disableRipple]="true"
-                      >{{ t("ASSIGN_CREATE_ONLY_MEN") }}</mat-checkbox
-                    >
-                  </span>
-                  <span>
-                    <mat-checkbox
-                      labelPosition="before"
-                      color="primary"
-                      formControlName="onlyExternals"
-                      [disableRipple]="true"
-                      >{{ t("ASSIGN_CREATE_ONLY_EXTERNALS") }}</mat-checkbox
-                    >
-                  </span>
-                </div>
-              </div>
-              <div class="col-12 mb-2">
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_UPDATE_PRINCIPAL") }}</mat-label>
-                  <mat-select
-                    formControlName="principal"
-                    required
-                    [disableRipple]="true"
-                  >
-                    <mat-option
-                      *ngFor="
-                        let participant of principals;
-                        trackBy: trackByIdFn
-                      "
-                      [value]="participant.id"
-                      [ngClass]="{
-                        'bg-color-lightyellow': participant.hasWork,
-                        'no-hover': true
-                      }"
-                    >
-                      {{ participant.count }} - {{ participant.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-12 mb-2">
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_UPDATE_ASSISTANT") }}</mat-label>
-                  <mat-select
-                    formControlName="assistant"
-                    [disableRipple]="true"
-                  >
-                    <mat-option [value]="undefined"></mat-option>
-                    <mat-option
-                      *ngFor="
-                        let participant of assistants;
-                        trackBy: trackByIdFn
-                      "
-                      [value]="participant.id"
-                      [ngClass]="{
-                        'bg-color-lightyellow': participant.hasWork,
-                        'no-hover': true
-                      }"
-                    >
-                      {{ participant.count }} - {{ participant.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-12 mb-2">
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_UPDATE_FOOTER_NOTE") }}</mat-label>
-                  <mat-select
-                    formControlName="footerNote"
-                    [disableRipple]="true"
-                  >
-                    <mat-option [value]="undefined"></mat-option>
-                    <mat-option
-                      *ngFor="let note of footerNotes"
-                      [value]="note.id"
-                    >
-                      {{ note.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
+          <div class="col-12 mb-2">
+            <div class="d-flex align-items-baseline justify-content-start">
+              <span class="d-inline-block me-3">
+                <mat-icon
+                  class="me-2"
+                  svgIcon="woman"
+                  aria-label="icon"
+                ></mat-icon>
+                <mat-checkbox
+                  labelPosition="before"
+                  color="primary"
+                  formControlName="onlyWoman"
+                  [disableRipple]="true"
+                  >{{ t("ASSIGN_CREATE_ONLY_WOMEN") }}</mat-checkbox
+                >
+              </span>
+              <span class="d-inline-block me-3">
+                <mat-icon
+                  class="me-2"
+                  svgIcon="man"
+                  aria-label="icon"
+                ></mat-icon>
+                <mat-checkbox
+                  labelPosition="before"
+                  color="primary"
+                  formControlName="onlyMan"
+                  [disableRipple]="true"
+                  >{{ t("ASSIGN_CREATE_ONLY_MEN") }}</mat-checkbox
+                >
+              </span>
+              <span>
+                <mat-checkbox
+                  labelPosition="before"
+                  color="primary"
+                  formControlName="onlyExternals"
+                  [disableRipple]="true"
+                  >{{ t("ASSIGN_CREATE_ONLY_EXTERNALS") }}</mat-checkbox
+                >
+              </span>
             </div>
-          </mat-card-content>
-          <mat-card-actions>
-            <button
-              class="me-3"
-              mat-raised-button
-              type="button"
-              [disableRipple]="true"
-              routerLink="../.."
-            >
-              {{ t("BUTTON_CANCEL") }}
-            </button>
-            <button
-              mat-raised-button
-              color="primary"
-              type="submit"
-              [disabled]="assignmentForm.invalid"
-            >
-              {{ t("BUTTON_UPDATE") }}
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </form>
-    </ng-container>
-  </div>
-</div>
+          </div>
+          <div class="col-12 mb-2">
+            <mat-form-field>
+              <mat-label>{{ t("ASSIGN_UPDATE_PRINCIPAL") }}</mat-label>
+              <mat-select
+                formControlName="principal"
+                required
+                [disableRipple]="true"
+              >
+                <mat-option
+                  *ngFor="let participant of principals; trackBy: trackByIdFn"
+                  [value]="participant.id"
+                  [ngClass]="{
+                    'bg-color-lightyellow': participant.hasWork,
+                    'no-hover': true
+                  }"
+                >
+                  {{ participant.count }} - {{ participant.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 mb-2">
+            <mat-form-field>
+              <mat-label>{{ t("ASSIGN_UPDATE_ASSISTANT") }}</mat-label>
+              <mat-select formControlName="assistant" [disableRipple]="true">
+                <mat-option [value]="undefined"></mat-option>
+                <mat-option
+                  *ngFor="let participant of assistants; trackBy: trackByIdFn"
+                  [value]="participant.id"
+                  [ngClass]="{
+                    'bg-color-lightyellow': participant.hasWork,
+                    'no-hover': true
+                  }"
+                >
+                  {{ participant.count }} - {{ participant.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12 mb-2">
+            <mat-form-field>
+              <mat-label>{{ t("ASSIGN_UPDATE_FOOTER_NOTE") }}</mat-label>
+              <mat-select formControlName="footerNote" [disableRipple]="true">
+                <mat-option [value]="undefined"></mat-option>
+                <mat-option *ngFor="let note of footerNotes" [value]="note.id">
+                  {{ note.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          class="me-3"
+          mat-raised-button
+          type="button"
+          [disableRipple]="true"
+          routerLink="../.."
+        >
+          {{ t("BUTTON_CANCEL") }}
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="assignmentForm.invalid"
+        >
+          {{ t("BUTTON_UPDATE") }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-container>

@@ -12,7 +12,7 @@
         </th>
       </tr>
       <tr>
-        <td class="bold">
+        <td class="fw-bold">
           <span *ngIf="!assignmentPrincipalTitle" class="ms-3 me-3">{{
             "ASSIGN_IMAGE_NAME" | transloco
           }}</span>
@@ -27,7 +27,7 @@
         </td>
       </tr>
       <tr *ngIf="assistantName">
-        <td class="bold">
+        <td class="fw-bold">
           <span *ngIf="!assignmentAssistantTitle" class="ms-3 me-3">{{
             "ASSIGN_IMAGE_ASSISTANT" | transloco
           }}</span>
@@ -42,7 +42,7 @@
         </td>
       </tr>
       <tr>
-        <td class="bold">
+        <td class="fw-bold">
           <span *ngIf="!assignmentDateTitle" class="ms-3 me-3">{{
             "ASSIGN_IMAGE_DATE" | transloco
           }}</span>
@@ -54,12 +54,12 @@
       <tr>
         <td>
           <span class="ms-3 me-3">
-            {{ date | translocoDate: { dateStyle: "full" } }}
+            {{ date | translocoDate : { dateStyle: "full" } }}
           </span>
         </td>
       </tr>
       <tr>
-        <td class="bold">
+        <td class="fw-bold">
           <span *ngIf="!assignmentAssignTypeTitle" class="ms-3 me-3">{{
             "ASSIGN_IMAGE_ASSIGNTYPE" | transloco
           }}</span>
@@ -72,7 +72,7 @@
         <td><span class="ms-3"></span>{{ assignTypeName }}</td>
       </tr>
       <tr *ngIf="theme">
-        <td class="bold">
+        <td class="fw-bold">
           <div *ngIf="!assignmentThemeTitle" class="ms-3 me-3">
             {{ "ASSIGN_IMAGE_NOTE" | transloco }}
           </div>
@@ -87,7 +87,7 @@
         </td>
       </tr>
       <tr>
-        <td class="bold">
+        <td class="fw-bold">
           <span *ngIf="!assignmentRoomTitle" class="ms-3 me-3">{{
             "ASSIGN_IMAGE_ROOM_PRESENTATION" | transloco
           }}</span>
@@ -104,7 +104,7 @@
         </td>
       </tr>
       <tr *ngIf="footerNoteEditorHTML">
-        <td class="bold">
+        <td class="fw-bold">
           <span *ngIf="!assignmentNoteTitle" class="ms-3 me-3">{{
             "ASSIGN_IMAGE_FOOTER_NOTE" | transloco
           }}</span>

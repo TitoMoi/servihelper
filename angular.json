@@ -1,9 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
+    "schematicCollections": ["@angular-eslint/schematics"]
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -27,12 +25,16 @@
             "tsConfig": "src/tsconfig.json",
             "polyfills": "src/polyfills.ts",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "node_modules/bootstrap/scss/bootstrap-grid.scss",
+              "node_modules/bootstrap/scss/bootstrap-utilities.scss",
+              "src/styles.scss"
+            ],
             "scripts": [],
             "customWebpackConfig": {
               "path": "./angular.webpack.js"
             },
-            "allowedCommonJsDependencies": ["adm-zip", "rxjs", "rxjs/operators"]
+            "allowedCommonJsDependencies": ["adm-zip"]
           },
           "configurations": {
             "dev": {
