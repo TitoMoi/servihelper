@@ -169,7 +169,7 @@ export class AssignmentComponent
   }
 
   queryAllMatRows() {
-    this.rows = document.querySelectorAll(".mat-row");
+    this.rows = document.querySelectorAll(".mat-mdc-row");
   }
 
   trackByIdFn(index, assignment: AssignmentTableInterface) {
