@@ -34,14 +34,16 @@ tr {
   }
 }
 
-//all form fields expand up to col
+//all form fields expand up to parent col
 mat-form-field {
   width: 100%;
 }
 
+//Cannot specify height or width here, component level is more specific but cursor is agnostic
 mat-icon {
   cursor: pointer;
 }
+
 .app-align-items-center {
   align-items: center;
 }

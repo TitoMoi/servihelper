@@ -48,9 +48,9 @@ export class SelectionListComponent implements OnChanges {
 
   reportTitle = this.configService.getConfig().reportTitle;
 
-  #assignments: AssignmentInterface[] = [];
-
   assignmentGroups: AssignmentGroupInterface[] = [];
+
+  #assignments: AssignmentInterface[] = [];
 
   constructor(
     public assignTypeService: AssignTypeService,
@@ -76,6 +76,11 @@ export class SelectionListComponent implements OnChanges {
         this.cdr.detectChanges();
       });
     }
+  }
+
+  setColorInputEvent(value: string) {
+    this.colorpicker = value;
+    console.log("seted:", value);
   }
 
   /**

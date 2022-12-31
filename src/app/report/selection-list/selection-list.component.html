@@ -26,22 +26,19 @@
     aria-label="icon"
     (click)="toExcel()"
   ></mat-icon>
-  <mat-icon
+  <input
     class="m-2"
-    svgIcon="colorpicker"
-    cpColorMode="presets"
-    [(colorPicker)]="colorpicker"
-    cpAlphaChannel="disabled"
-    [cpPresetColors]="[
-      '#fff',
-      '#dbf7fa',
-      '#dbfae5',
-      '#fcffe6',
-      '#ffebe6',
-      '#f5e6ff'
-    ]"
-    aria-label="icon"
-  ></mat-icon>
+    type="color"
+    list="presetColors"
+    (input)="setColorInputEvent($event.target.value)"
+  />
+  <datalist id="presetColors">
+    <option>#dbf7fa</option>
+    <option>#dbfae5</option>
+    <option>#fcffe6</option>
+    <option>#ffebe6</option>
+    <option>#f5e6ff</option>
+  </datalist>
 </div>
 
 <div id="toPngDivId" style="width: 40rem" class="bg-color-white">

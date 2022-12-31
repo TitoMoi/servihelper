@@ -1,6 +1,5 @@
 import { HomeComponent } from "app/home/home.component";
 import { NavigationComponent } from "app/navigation/navigation.component";
-import { ColorPickerModule } from "ngx-color-picker";
 import { NgxEditorModule } from "ngx-editor";
 
 import { HttpClientModule } from "@angular/common/http";
@@ -140,7 +139,6 @@ import { IsRoleCheckedPipe } from "./roles/pipe/is-role-checked.pipe";
     MatNativeDateModule,
     MatChipsModule,
     NgxEditorModule,
-    ColorPickerModule,
   ],
   providers: [{ provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent],
