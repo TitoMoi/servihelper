@@ -26,8 +26,8 @@
             "polyfills": "src/polyfills.ts",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap-grid.scss",
-              "node_modules/bootstrap/scss/bootstrap-utilities.scss",
+              "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap-utilities.min.css",
               "src/styles.scss"
             ],
             "scripts": [],

@@ -1,45 +1,43 @@
 <router-outlet></router-outlet>
-<div
-  class="row my-2 g-0"
-  *transloco="let t"
-  [hidden]="activatedRoute.children.length !== 0"
->
-  <div class="col-auto">
-    <div class="d-flex align-items-center">
-      <a
-        mat-raised-button
-        [disableRipple]="true"
-        color="primary"
-        routerLink="create"
-        routerLinkActive="active"
-      >
-        {{ t("ASSIGN_CREATE_ASSIGN_BUTTON") }}
-      </a>
-      <ng-container *ngIf="dataSource.length">
-        <mat-icon
-          class="mx-3"
-          svgIcon="csvSvg"
-          (click)="exportCsv()"
-        ></mat-icon>
-        <mat-icon
-          class="mx-3"
-          svgIcon="search"
-          routerLink="../search"
+<span *transloco="let t">
+  <div class="row my-2 g-0" [hidden]="activatedRoute.children.length !== 0">
+    <div class="col-auto">
+      <div class="d-flex align-items-center">
+        <a
+          mat-raised-button
+          [disableRipple]="true"
+          color="primary"
+          routerLink="create"
           routerLinkActive="active"
-        ></mat-icon>
-        <mat-icon
-          class="mx-3"
-          svgIcon="switch"
-          routerLink="move"
-          routerLinkActive="active"
-        ></mat-icon>
-        <mat-icon
-          class="mx-3"
-          svgIcon="calendar-delete"
-          routerLink="group-delete"
-          routerLinkActive="active"
-        ></mat-icon>
-      </ng-container>
+        >
+          {{ t("ASSIGN_CREATE_ASSIGN_BUTTON") }}
+        </a>
+        <ng-container *ngIf="dataSource.length">
+          <mat-icon
+            class="mx-3"
+            svgIcon="csvSvg"
+            (click)="exportCsv()"
+          ></mat-icon>
+          <mat-icon
+            class="mx-3"
+            svgIcon="search"
+            routerLink="../search"
+            routerLinkActive="active"
+          ></mat-icon>
+          <mat-icon
+            class="mx-3"
+            svgIcon="switch"
+            routerLink="move"
+            routerLinkActive="active"
+          ></mat-icon>
+          <mat-icon
+            class="mx-3"
+            svgIcon="calendar-delete"
+            routerLink="group-delete"
+            routerLinkActive="active"
+          ></mat-icon>
+        </ng-container>
+      </div>
     </div>
   </div>
   <div class="row my-2 g-0">
@@ -206,4 +204,4 @@
       </table>
     </div>
   </div>
-</div>
+</span>
