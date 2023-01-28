@@ -73,8 +73,7 @@ export class AssignmentComponent
   rows: NodeListOf<Element> = undefined;
 
   observer: IntersectionObserver = new IntersectionObserver((entries) => {
-    //Always observe the last row, forEach only has 1 entry
-
+    //observe the last row
     for (const entry of entries) {
       if (entry.isIntersecting) {
         let itemsPerPage = 0;
@@ -158,8 +157,8 @@ export class AssignmentComponent
   ngAfterViewChecked(): void {
     this.queryAllMatRows();
 
-    //Multiply by 2 because each assignment has two rows, the "theme row" is hidden
-    if (this.rows.length !== this.assignments.length * 2)
+    //keep observing until we reach the assignments length
+    if (this.rows.length !== this.assignments.length)
       this.observer.observe(this.rows[this.rows.length - 1]);
   }
 
@@ -169,7 +168,7 @@ export class AssignmentComponent
   }
 
   queryAllMatRows() {
-    this.rows = document.querySelectorAll(".mat-mdc-row");
+    this.rows = document.querySelectorAll("#visibleRow");
   }
 
   trackByIdFn(index, assignment: AssignmentTableInterface) {

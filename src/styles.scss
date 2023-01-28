@@ -53,6 +53,11 @@ mat-icon {
   text-align: center;
 }
 
+.table-overflow {
+  height: 80vh;
+  overflow: auto;
+}
+
 .cp-ok-btn {
   background-color: #673ab7; //primary
   color: white;
