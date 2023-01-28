@@ -47,28 +47,24 @@ export class ConfigComponent {
   ];
 
   //is part of the form
-  defaultReportDateColor: string =
-    this.configService.getConfig().defaultReportDateColor;
+  currentConfig = this.configService.getConfig();
 
   // Config form
   configForm = this.formBuilder.group({
-    defaultFooterNoteId: this.configService.getConfig().defaultFooterNoteId,
-    defaultReportFontSize: this.configService.getConfig().defaultReportFontSize,
-    defaultReportDateFormat:
-      this.configService.getConfig().defaultReportDateFormat,
-    defaultWeekDayBegins: this.configService.getConfig().defaultWeekDayBegins,
-    assignmentHeaderTitle: this.configService.getConfig().assignmentHeaderTitle,
-    assignmentPrincipalTitle:
-      this.configService.getConfig().assignmentPrincipalTitle,
-    assignmentAssistantTitle:
-      this.configService.getConfig().assignmentAssistantTitle,
-    assignmentDateTitle: this.configService.getConfig().assignmentDateTitle,
-    assignmentAssignTypeTitle:
-      this.configService.getConfig().assignmentAssignTypeTitle,
-    assignmentThemeTitle: this.configService.getConfig().assignmentThemeTitle,
-    assignmentRoomTitle: this.configService.getConfig().assignmentRoomTitle,
-    assignmentNoteTitle: this.configService.getConfig().assignmentNoteTitle,
-    reportTitle: this.configService.getConfig().reportTitle,
+    defaultFooterNoteId: this.currentConfig.defaultFooterNoteId,
+    defaultReportFontSize: this.currentConfig.defaultReportFontSize,
+    defaultReportDateFormat: this.currentConfig.defaultReportDateFormat,
+    defaultReportDateColor: this.currentConfig.defaultReportDateColor,
+    defaultWeekDayBegins: this.currentConfig.defaultWeekDayBegins,
+    assignmentHeaderTitle: this.currentConfig.assignmentHeaderTitle,
+    assignmentPrincipalTitle: this.currentConfig.assignmentPrincipalTitle,
+    assignmentAssistantTitle: this.currentConfig.assignmentAssistantTitle,
+    assignmentDateTitle: this.currentConfig.assignmentDateTitle,
+    assignmentAssignTypeTitle: this.currentConfig.assignmentAssignTypeTitle,
+    assignmentThemeTitle: this.currentConfig.assignmentThemeTitle,
+    assignmentRoomTitle: this.currentConfig.assignmentRoomTitle,
+    assignmentNoteTitle: this.currentConfig.assignmentNoteTitle,
+    reportTitle: this.currentConfig.reportTitle,
   });
 
   // If config assignmentHeader key is saved
@@ -78,7 +74,7 @@ export class ConfigComponent {
   confirmDelete = false;
 
   //Restart data
-  config: ConfigInterface = {
+  defaultConfig: ConfigInterface = {
     lang: "en",
     assignmentHeaderTitle: "",
     assignmentPrincipalTitle: "",
@@ -112,7 +108,7 @@ export class ConfigComponent {
    * Resets data to default
    */
   eraseAllData() {
-    writeJsonSync(this.path + "/config.json", this.config);
+    writeJsonSync(this.path + "/config.json", this.defaultConfig);
     writeJsonSync(this.path + "/note.json", []);
     writeJsonSync(this.path + "/assignType.json", []);
     writeJsonSync(this.path + "/room.json", []);
@@ -130,10 +126,9 @@ export class ConfigComponent {
 
   onSubmit(): void {
     this.configService.updateConfig({
-      ...this.config, //Default config
+      ...this.defaultConfig, //Default config
       ...this.configService.getConfig(), //Current config
       ...this.configForm.value, //Incoming config
-      defaultReportDateColor: this.defaultReportDateColor,
     });
 
     this.isFormSaved = true;

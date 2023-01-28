@@ -105,12 +105,9 @@
               "PLACEHOLDER_REPORT_DATE_COLOR" | transloco
             }}</mat-label>
             <input
+              type="color"
               matInput
-              [cpOKButton]="true"
-              [cpOKButtonClass]="'cp-ok-btn'"
-              cpAlphaChannel="disabled"
-              [(colorPicker)]="defaultReportDateColor"
-              [style.background]="defaultReportDateColor"
+              formControlName="defaultReportDateColor"
             />
           </mat-form-field>
 
