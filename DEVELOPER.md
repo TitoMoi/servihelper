@@ -4,9 +4,10 @@ Servihelper aims to:
 
 - Provide an universal app to create and share assignments on Windows, Mac and Linux.
 - Web app is not possible today as it needs access to the filesystem to be free.
-- 1 repository of code for all 3 platforms.
-- Provide free development cost _(no apple id)_ free distribution _(github)_ free use and colaboration mechanism between diferent assignment actors without middleware servers _(import and export)_ this comes at a cost, the user must download new versions instead of auto updating.
-- Be accessible in as many languages as possible.
+- 1 repository of code for all 3 platforms _(windows, apple, linux)_
+- It's provided with free development cost _(no apple id)_ with free distribution _(github)_ free use and free colaboration between diferent administrator actors using the function of import and export
+- The administrator user must download new versions when they are available and work all together with the same version.
+- Be accessible and provided in as many languages as possible.
 
 ## Language
 
@@ -24,33 +25,50 @@ Language files must be sorted when adding keys with the scripts/sort-i18json.js
 
 ## Lazy load
 
-Servihelper doesnt use lazy load as it is a desktop app and network is not an issue.
+Servihelper doesnt use angular lazy load as it is a desktop app and network is not an issue.
+
+## Layout
+
+- All pages are wrapper in a bootstrap margin level 3.
+- All content uses bootstrap margin level 2 for small laptops and margin level 3 for sibling items.
 
 ## Icons
 
-Icons should be added at app.component.ts array of icons without the extension.
+Icons should be added at `app.component.ts` in the array of icons without the extension.
 
 ## Build
 
-Currently using electron-builder for windows and mac apple, the version of the app generated is in the ./app/package.json version field
+Currently using electron-builder for windows and mac apple, the version of the app is automatically generated in the distributable with only updating the two existing package.json:
 
-Before build update both package.json and shared service "version" property as this version latter is matched with latest tag from github.
+- ./package.json
+- ./app/package.json
 
-- For windows use script `prepare:publish:windows`
-- For mac use script `prepare:publish:mac:universal`
+So, before running the build script, update both package.
+Also update in the shared service:
+
+- ./src/app/services/shared.service.ts
+
+the `appVersion` property as this version latter is matched with latest tag from github.
+
+When creating the github tag, it must only contain the same version as it is in the `package.json`, do not add any letter, just numbers.
+
+- For windows use a windows computer and run script `prepare:publish:windows`
+- For mac use a mac computer and run script `prepare:publish:mac:universal`
 
 ## Fonts
 
-The available fonts for pdf are in resources:
+The available fonts for pdf are in ./src/app/resources:
 
 - Meiryo for japanese
 - malgun for korean
 - simsun for simplified chinese
 - notosans for all the others.
   The base64 fonts are in resources/base64fonts and not in assets because is not needed that each user has the base64 fonts.
-  they are already imported as base64 in the pdfService and in main chunk.
+
+  They are already imported as base64 in the pdfService and in main chunk.
+
   The fonts are converted to base64 using the parallax \jsPDF\fontconverter\fontconverter.html
 
-## Reminders
+## Reminders (experimental)
 
-Create a google event: https://support.google.com/calendar/thread/128416249/calendar-url-generator-which-parameters?hl=en
+It is possible to send a reminder with the google event old api _(can be disabled at any moment)_: https://support.google.com/calendar/thread/128416249/calendar-url-generator-which-parameters?hl=en
