@@ -1,6 +1,7 @@
 <router-outlet></router-outlet>
-<span *transloco="let t">
-  <div class="row mb-2 g-0" [hidden]="activatedRoute.children.length !== 0">
+<!-- Hide the table for edit and delete -->
+<span *transloco="let t" [hidden]="activatedRoute.children.length !== 0">
+  <div class="row mb-2 g-0">
     <div class="col-auto">
       <div class="d-flex align-items-center">
         <a

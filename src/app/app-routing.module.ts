@@ -129,6 +129,7 @@ const routes: Routes = [
     ],
   },
   {
+    //create is outside of children because we want to destroy assignments and create again with the new assignments
     path: "assignment/create",
     component: CreateAssignmentComponent,
   },
