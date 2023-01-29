@@ -77,7 +77,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="justify-content-between">
+    <mat-toolbar color="primary" class="justify-content-end">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -87,52 +87,45 @@
       >
         <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
       </button>
-
-      <div class="col-3">
+      <div class="me-auto">
         <span>Servihelper</span>
       </div>
-      <div class="col-lg-9">
-        <div class="row justify-content-end align-items-center">
-          <div class="col-lg-auto">
-            <mat-form-field subscriptSizing="dynamic">
-              <mat-select
-                [value]="(config$ | async).lang"
-                (selectionChange)="updateLang($event)"
-              >
-                <mat-option *ngFor="let lang of availableLangs" [value]="lang">
-                  {{ t(lang) }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-lg-auto">
-            <mat-form-field subscriptSizing="dynamic">
-              <mat-select
-                color="primary"
-                [value]="currentRoleId$ | async"
-                (selectionChange)="updateRole($event)"
-              >
-                <mat-option [value]="administratorKey">{{
-                  t("ROLE_ADMINISTRATOR")
-                }}</mat-option>
-                <mat-option
-                  *ngFor="let role of roles$ | async"
-                  [value]="role.id"
-                >
-                  {{ role.name }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-lg-auto">
-            <mat-icon
-              id="avatarIconId"
-              svgIcon="avatar"
-              aria-label="icon"
-              routerLink="role"
-            ></mat-icon>
-          </div>
-        </div>
+
+      <div class="d-inline-block me-3">
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-select
+            [value]="(config$ | async).lang"
+            (selectionChange)="updateLang($event)"
+          >
+            <mat-option *ngFor="let lang of availableLangs" [value]="lang">
+              {{ t(lang) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="d-inline-block me-3">
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-select
+            color="primary"
+            [value]="currentRoleId$ | async"
+            (selectionChange)="updateRole($event)"
+          >
+            <mat-option [value]="administratorKey">{{
+              t("ROLE_ADMINISTRATOR")
+            }}</mat-option>
+            <mat-option *ngFor="let role of roles$ | async" [value]="role.id">
+              {{ role.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="d-inline-block me-3">
+        <mat-icon
+          id="avatarIconId"
+          svgIcon="avatar"
+          aria-label="icon"
+          routerLink="role"
+        ></mat-icon>
       </div>
     </mat-toolbar>
     <div class="m-3">

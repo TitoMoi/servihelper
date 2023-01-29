@@ -16,8 +16,6 @@ import { ActivatedRoute, Router } from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateAssignTypeComponent implements OnInit {
-  //for the color component that doesnt support reactive forms
-
   assignTypeForm: UntypedFormGroup = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
@@ -42,7 +40,7 @@ export class UpdateAssignTypeComponent implements OnInit {
       name: assignType.name,
       hasAssistant: assignType.hasAssistant || false,
       order: assignType.order,
-      color: assignType.color || "#000000",
+      color: assignType.color,
     });
   }
 

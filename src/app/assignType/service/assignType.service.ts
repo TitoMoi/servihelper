@@ -57,7 +57,7 @@ export class AssignTypeService {
   /**
    *
    * @param assignType the assignType to create
-   * @returns true if assignType is saved false if not
+   * @returns the id of the created assign type
    */
   createAssignType(assignType: AssignTypeInterface): string {
     //Generate id for the assignType

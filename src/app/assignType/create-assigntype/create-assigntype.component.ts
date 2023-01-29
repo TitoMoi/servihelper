@@ -12,8 +12,6 @@ import { ActivatedRoute, Router } from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAssignTypeComponent {
-  //for the color component that doesnt support reactive forms
-
   assignTypeForm = this.formBuilder.group({
     id: undefined,
     name: [undefined, Validators.required],
