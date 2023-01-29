@@ -36,7 +36,7 @@ export class SelectionListComponent implements OnChanges {
   @Input() rooms: string[];
   @Input() order: string;
 
-  colorpicker: string = undefined;
+  colorpicker = undefined;
   tableWithColor = {};
 
   defaultReportFontSize =
@@ -324,7 +324,7 @@ export class SelectionListComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font, fontSize: 16 },
+        styles: { font, fontSize: 14 },
         margin: firstTable ? { top: 30 } : undefined,
         columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {

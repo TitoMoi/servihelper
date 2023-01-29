@@ -19,7 +19,7 @@ export class CreateAssignTypeComponent {
     name: [undefined, Validators.required],
     hasAssistant: [false],
     order: [undefined, Validators.required],
-    color: ["#000000"],
+    color: ["#FFFFFF"],
   });
 
   constructor(

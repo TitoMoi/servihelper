@@ -87,7 +87,7 @@ export class ConfigComponent {
     reportTitle: "",
     defaultFooterNoteId: "",
     defaultReportFontSize: "",
-    defaultReportDateColor: "",
+    defaultReportDateColor: "#FFFFFF",
     defaultWeekDayBegins: 1,
     defaultReportDateFormat: this.translocoDateFormats[3],
     roles: [],
