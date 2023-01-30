@@ -14,14 +14,14 @@ export class AssignTypeService {
     ? //__dirname is where the .js file exists
       __dirname + "/assets/source/assignType.json"
     : "./assets/source/assignType.json";
+  //flag to indicate that assignTypes file has changed
+  hasChanged = true;
   //The array of assignTypes in memory
   #assignTypes: AssignTypeInterface[] = undefined;
   //The map of assignTypes for look up of by id
   #assignTypesMap: Map<string, AssignTypeInterface> = new Map();
   //The map of assignTypes for look up of by name
   #assignTypesMapByName: Map<string, AssignTypeInterface> = new Map();
-  //flag to indicate that assignTypes file has changed
-  hasChanged = true;
 
   constructor() {}
 
@@ -62,6 +62,7 @@ export class AssignTypeService {
   createAssignType(assignType: AssignTypeInterface): string {
     //Generate id for the assignType
     assignType.id = nanoid();
+    assignType.name = assignType.name.trim();
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);
     this.#assignTypesMap.set(assignType.id, assignType);
@@ -96,6 +97,7 @@ export class AssignTypeService {
    * @returns true if assignType is updated and saved false otherwise
    */
   updateAssignType(assignType: AssignTypeInterface): boolean {
+    assignType.name = assignType.name.trim();
     //update assignType
     for (let i = 0; i < this.#assignTypes.length; i++) {
       if (this.#assignTypes[i].id === assignType.id) {

@@ -15,6 +15,8 @@ export class AssignmentService {
     ? //__dirname is where the .js file exists
       __dirname + "/assets/source/assignment.json"
     : "./assets/source/assignment.json";
+  //flag to indicate that assignments file has changed
+  hasChanged = true;
   //The array of assignments in memory
   #assignments: AssignmentInterface[] = undefined;
   //The map of assignments for look up of by id
@@ -23,10 +25,9 @@ export class AssignmentService {
   #assignmentsByDateMap: Map<Date | string, AssignmentInterface[]> = new Map();
   //Observable for the assignment table to track assignments updates
   #changes$ = new Subject<AssignmentInterface>();
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   assignmentHasChanged$: Observable<AssignmentInterface> =
     this.#changes$.asObservable();
-  //flag to indicate that assignments file has changed
-  hasChanged = true;
 
   constructor() {}
 

@@ -1,7 +1,7 @@
-import { AssignTypeInterface } from 'app/assignType/model/assignType.model';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
+import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-assign-type",
@@ -13,10 +13,6 @@ export class AssignTypeComponent implements OnInit {
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
-  //Table
-  displayedColumns: string[] = ["name", "order", "editIcon", "deleteIcon"];
-  //datasource
-  dataSource: AssignTypeInterface[];
 
   constructor(private assignTypeService: AssignTypeService) {}
 
@@ -38,7 +34,5 @@ export class AssignTypeComponent implements OnInit {
         order: assignType.order,
       });
     }
-    //Update the view
-    this.dataSource = dataSourceTemp;
   }
 }

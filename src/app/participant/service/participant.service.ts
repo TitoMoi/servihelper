@@ -18,13 +18,12 @@ export class ParticipantService {
     ? //__dirname is where the .js file exists
       __dirname + "/assets/source/participant.json"
     : "./assets/source/participant.json";
-
+  //flag to indicate that participants file has changed
+  hasChanged = true;
   //The array of participants in memory
   #participants: ParticipantInterface[] = undefined;
   //The map of participants for look up by id
   #participantsMap: Map<string, ParticipantInterface> = new Map();
-  //flag to indicate that participants file has changed
-  hasChanged = true;
 
   constructor() {}
 

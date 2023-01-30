@@ -14,13 +14,12 @@ export class RoomService {
     ? //__dirname is where the .js file exists
       __dirname + "/assets/source/room.json"
     : "./assets/source/room.json";
-
+  //flag to indicate that rooms file has changed
+  hasChanged = true;
   //The array of rooms in memory
   #rooms: RoomInterface[] = undefined;
   //The map of rooms for look up of rooms
   #roomsMap: Map<string, RoomInterface> = new Map();
-  //flag to indicate that rooms file has changed
-  hasChanged = true;
 
   constructor() {}
 

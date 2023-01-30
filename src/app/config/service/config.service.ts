@@ -22,19 +22,18 @@ export class ConfigService {
     ? //__dirname is where the .js file exists
       __dirname + "/assets/source/config.json"
     : "./assets/source/config.json";
-  // The config in memory object
-  #config: ConfigInterface = undefined;
+  // Flag to indicate that config file has changed
+  hasChanged = true;
 
   configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(
-    this.#config
+    undefined
   );
   /**
    * Like the private inner config object but public and observable
    */
   config$: Observable<ConfigInterface> = this.configSubject$.asObservable();
-
-  // Flag to indicate that config file has changed
-  hasChanged = true;
+  // The config in memory object
+  #config: ConfigInterface = undefined;
 
   constructor() {}
 
@@ -100,11 +99,13 @@ export class ConfigService {
 
   addRole(role: RoleInterface) {
     role.id = nanoid();
+    role.name = role.name.trim();
     this.#config.roles.push(role);
     this.saveConfigToFile();
   }
 
   updateRole(role: RoleInterface) {
+    role.name = role.name.trim();
     const index = this.#config.roles.findIndex((r) => r.id === role.id);
     this.#config.roles[index] = role;
     this.saveConfigToFile();
