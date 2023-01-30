@@ -1,4 +1,4 @@
-<ng-container *ngIf="dataSource">
+<span *transloco="let t">
   <div class="d-flex align-items-baseline">
     <button
       mat-raised-button
@@ -7,86 +7,65 @@
       routerLink="create"
       routerLinkActive="active"
     >
-      {{ "PARTICIPANT_BUTTON_TITLE" | transloco }}
+      {{ t("PARTICIPANT_BUTTON_TITLE") }}
     </button>
     <button
-      *ngIf="dataSource.length"
+      *ngIf="participants.length"
       mat-raised-button
       class="mb-2 me-3"
       color="accent"
       routerLink="create-from"
       routerLinkActive="active"
     >
-      {{ "PARTICIPANT_COPY_BUTTON_TITLE" | transloco }}
+      {{ t("PARTICIPANT_COPY_BUTTON_TITLE") }}
     </button>
     <mat-checkbox
-      *ngIf="dataSource.length"
+      *ngIf="participants.length"
       class="mb-2"
       labelPosition="before"
       color="primary"
       (change)="toggleParticipants($event)"
-      >{{ "PARTICIPANT_SHOW_EXTERNAL" | transloco }}</mat-checkbox
+      >{{ t("PARTICIPANT_SHOW_EXTERNAL") }}</mat-checkbox
     >
   </div>
-  <div *ngIf="dataSource.length" class="mb-2">
-    {{ "PARTICIPANT_TOTAL_PARTICIPANTS" | transloco }}: {{ dataSource.length }}
+  <div *ngIf="participants.length" class="mb-2">
+    {{ t("PARTICIPANT_TOTAL_PARTICIPANTS") }}: {{ participants.length }}
   </div>
-  <div class="table-overflow">
-    <table
-      *ngIf="dataSource.length"
-      mat-table
-      [trackBy]="trackByIdFn"
-      [dataSource]="dataSource"
-      class="mat-elevation-z8"
-    >
-      <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
 
-      <!-- principal Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ "PARTICIPANT_TABLE_HEADER_PRINCIPAL" | transloco }}
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  <div *ngIf="participants.length" class="table-overflow">
+    <div class="grid">
+      <div class="grid-header-item fw-bold">
+        {{ t("PARTICIPANT_TABLE_HEADER_PRINCIPAL") }}
+      </div>
+      <div class="grid-header-item fw-bold">
+        {{ t("PARTICIPANT_TABLE_HEADER_EDIT") }}
+      </div>
+      <div class="grid-header-item fw-bold">
+        {{ t("PARTICIPANT_TABLE_HEADER_DELETE") }}
+      </div>
+      <ng-container *ngFor="let p of participants">
+        <div class="grid-row">
+          <div class="grid-item d-flex align-items-center">
+            {{ p.name }}
+          </div>
+          <div class="grid-item d-flex align-items-center">
+            <mat-icon
+              [routerLink]="['update', p.id]"
+              routerLinkActive="active"
+              svgIcon="edit"
+              aria-label="Side nav toggle icon"
+            ></mat-icon>
+          </div>
+          <div class="grid-item d-flex align-items-center">
+            <mat-icon
+              [routerLink]="['delete', p.id]"
+              routerLinkActive="active"
+              svgIcon="garbage"
+              aria-label="Side nav toggle icon"
+            ></mat-icon>
+          </div>
+        </div>
       </ng-container>
-
-      <!-- editIcon Column -->
-      <ng-container matColumnDef="editIcon">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ "PARTICIPANT_TABLE_HEADER_EDIT" | transloco }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <mat-icon
-            class="m-auto"
-            [routerLink]="['update', element.id]"
-            routerLinkActive="active"
-            svgIcon="edit"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
-        </td>
-      </ng-container>
-
-      <!-- deleteIcon Column -->
-      <ng-container matColumnDef="deleteIcon">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ "PARTICIPANT_TABLE_HEADER_DELETE" | transloco }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <mat-icon
-            class="m-auto"
-            [routerLink]="['delete', element.id]"
-            routerLinkActive="active"
-            svgIcon="garbage"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let element; let even = even; columns: displayedColumns"
-      ></tr>
-    </table>
+    </div>
   </div>
-</ng-container>
+</span>

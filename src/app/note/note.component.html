@@ -8,7 +8,7 @@
     >{{ "NOTE_BUTTON_CREATE_TITLE" | transloco }}</a
   >
 
-  <div class="table-overflow">
+  <div *ngIf="notes.length" class="table-overflow">
     <div class="grid">
       <div class="grid-header-item fw-bold">
         {{ t("NOTE_TABLE_HEADER_NAME") }}

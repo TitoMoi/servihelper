@@ -16,50 +16,23 @@ import { MatCheckboxChange } from "@angular/material/checkbox";
 export class ParticipantComponent implements OnInit {
   participants: ParticipantInterface[];
 
-  //Table
-  displayedColumns: string[] = ["name", "editIcon", "deleteIcon"];
-
-  dataSource: ParticipantTableInterface[];
-
   constructor(private participantService: ParticipantService) {}
 
   ngOnInit(): void {
     this.participants = this.participantService
       .getParticipants()
       .filter((participant) => !participant.isExternal);
-    this.fillDataSource(this.participants);
-  }
-
-  trackByIdFn(index, participant: ParticipantTableInterface) {
-    return participant.id;
   }
 
   toggleParticipants(event: MatCheckboxChange) {
     if (event.checked) {
-      this.fillDataSource(
-        this.participantService
-          .getParticipants()
-          .filter((participant) => participant.isExternal)
-      );
+      this.participants = this.participantService
+        .getParticipants()
+        .filter((participant) => participant.isExternal);
     } else {
-      this.fillDataSource(
-        this.participantService
-          .getParticipants()
-          .filter((participant) => !participant.isExternal)
-      );
+      this.participants = this.participantService
+        .getParticipants()
+        .filter((participant) => !participant.isExternal);
     }
-  }
-
-  fillDataSource(participantsPage: ParticipantInterface[]) {
-    const dataSourceTemp: ParticipantTableInterface[] = [];
-    for (const participant of participantsPage) {
-      //Populate datasource, values is in order
-      dataSourceTemp.push({
-        id: participant.id,
-        name: participant.name,
-      });
-    }
-    //Update the view
-    this.dataSource = dataSourceTemp;
   }
 }

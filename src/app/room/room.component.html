@@ -8,7 +8,7 @@
     >{{ t("ROOM_BUTTON_CREATE_TITLE") }}</a
   >
 
-  <div class="table-overflow">
+  <div *ngIf="rooms.length" class="table-overflow">
     <div class="grid">
       <div class="grid-header-item fw-bold">
         {{ t("ROOM_TABLE_HEADER_NAME") }}
