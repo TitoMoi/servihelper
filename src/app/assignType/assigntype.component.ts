@@ -20,10 +20,6 @@ export class AssignTypeComponent implements OnInit {
     this.fillDataSource(this.assignTypes);
   }
 
-  trackByIdFn(index, assignType: AssignTypeInterface) {
-    return assignType.id;
-  }
-
   fillDataSource(assignTypesPage: AssignTypeInterface[]) {
     const dataSourceTemp: AssignTypeInterface[] = [];
     for (const assignType of assignTypesPage) {

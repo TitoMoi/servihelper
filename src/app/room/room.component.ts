@@ -1,4 +1,4 @@
-import { RoomInterface, RoomTableInterface } from "app/room/model/room.model";
+import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 
 import { Component, OnInit } from "@angular/core";
@@ -17,9 +17,5 @@ export class RoomComponent implements OnInit {
     this.rooms = this.roomService
       .getRooms()
       .sort((a, b) => (a.order > b.order ? 1 : -1));
-  }
-
-  trackByIdFn(index, room: RoomInterface) {
-    return room.id;
   }
 }
