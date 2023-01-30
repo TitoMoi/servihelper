@@ -238,5 +238,7 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "ASSIGNTYPE_TABLE_HEADER_COLOR": "Color",
+  "ROOM_TABLE_HEADER_ORDER": "Order"
 }
