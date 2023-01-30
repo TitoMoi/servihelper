@@ -1,4 +1,4 @@
-<ng-container *ngIf="dataSource">
+<span *transloco="let t">
   <a
     mat-raised-button
     color="primary"
@@ -7,61 +7,41 @@
     routerLinkActive="active"
     >{{ "NOTE_BUTTON_CREATE_TITLE" | transloco }}</a
   >
+
   <div class="table-overflow">
-    <table
-      *ngIf="dataSource.length"
-      mat-table
-      [dataSource]="dataSource"
-      class="mat-elevation-z8"
-    >
-      <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- principal Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ "NOTE_TABLE_HEADER_NAME" | transloco }}
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <div class="grid">
+      <div class="grid-header-item fw-bold">
+        {{ t("NOTE_TABLE_HEADER_NAME") }}
+      </div>
+      <div class="grid-header-item fw-bold">
+        {{ t("NOTE_TABLE_HEADER_EDIT") }}
+      </div>
+      <div class="grid-header-item fw-bold">
+        {{ t("NOTE_TABLE_HEADER_DELETE") }}
+      </div>
+      <ng-container *ngFor="let n of notes">
+        <div class="grid-row">
+          <div class="grid-item d-flex align-items-center">
+            {{ n.name }}
+          </div>
+          <div class="grid-item d-flex align-items-center">
+            <mat-icon
+              [routerLink]="['update', n.id]"
+              routerLinkActive="active"
+              svgIcon="edit"
+              aria-label="Side nav toggle icon"
+            ></mat-icon>
+          </div>
+          <div class="grid-item d-flex align-items-center">
+            <mat-icon
+              [routerLink]="['delete', n.id]"
+              routerLinkActive="active"
+              svgIcon="garbage"
+              aria-label="Side nav toggle icon"
+            ></mat-icon>
+          </div>
+        </div>
       </ng-container>
-
-      <!-- editIcon Column -->
-      <ng-container matColumnDef="editIcon">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ "NOTE_TABLE_HEADER_EDIT" | transloco }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <mat-icon
-            class="m-auto"
-            [routerLink]="['update', element.id]"
-            routerLinkActive="active"
-            svgIcon="edit"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
-        </td>
-      </ng-container>
-
-      <!-- deleteIcon Column -->
-      <ng-container matColumnDef="deleteIcon">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ "NOTE_TABLE_HEADER_DELETE" | transloco }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <mat-icon
-            class="m-auto"
-            [routerLink]="['delete', element.id]"
-            routerLinkActive="active"
-            svgIcon="garbage"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let element; let even = even; columns: displayedColumns"
-      ></tr>
-    </table>
+    </div>
   </div>
-</ng-container>
+</span>
