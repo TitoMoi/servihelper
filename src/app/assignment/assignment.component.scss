@@ -3,35 +3,38 @@ mat-icon {
   width: 28px;
 }
 
-table {
-  font-size: 15px !important;
-}
+.grid {
+  display: grid;
+  grid-template-columns: 0.25fr 1fr 1fr 1fr 0.25fr 1fr 1fr 0.5fr 0.5fr;
+  grid-auto-rows: 1fr;
+  align-items: center;
+  align-self: center;
+  box-sizing: border-box;
+  & > div.grid-header-item {
+    padding: 12px 4px;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  & > div.grid-row {
+    display: contents;
 
-tr {
-  cursor: pointer;
-}
-
-tr.expanded-detail-row {
-  height: 0;
+    & > div.grid-item {
+      height: 100%;
+      padding-right: 4px;
+      padding-left: 4px;
+    }
+    &:hover div.grid-item {
+      height: 100%;
+      padding-right: 4px;
+      padding-left: 4px;
+      background-color: white;
+    }
+  }
 }
 
 .hasDateSeparator {
-  border-top: 2px solid black;
+  border-top: 2px dashed black;
 }
 .hasBeenClicked {
   background-color: oldlace;
-}
-
-.expanded-element-row td {
-  border-bottom-width: 0;
-}
-
-.expanded-element-detail {
-  overflow: hidden;
-  display: flex;
-}
-
-.expanded-element-theme {
-  margin-top: 4px;
-  margin-bottom: 4px;
 }

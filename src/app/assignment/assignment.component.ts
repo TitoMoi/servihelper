@@ -30,39 +30,16 @@ import { Subscription } from "rxjs";
   selector: "app-assignment",
   templateUrl: "./assignment.component.html",
   styleUrls: ["./assignment.component.scss"],
-  animations: [
-    trigger("detailExpand", [
-      state("collapsed", style({ height: "0px", minHeight: "0" })),
-      state("expanded", style({ height: "*" })),
-      transition(
-        "expanded <=> collapsed",
-        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
-      ),
-    ]),
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignmentComponent
   implements OnInit, OnDestroy, AfterViewChecked
 {
   //In memory assignments
-  assignments: AssignmentInterface[];
+  assignments: AssignmentInterface[] = [];
 
-  //Table
-  displayedColumns: string[] = [
-    "assignImage",
-    "date",
-    "principal",
-    "assistant",
-    "assignType",
-    "room",
-    "editIcon",
-    "deleteIcon",
-  ];
-  //Datasource
-  dataSource: AssignmentTableInterface[] = [];
-  //Expanded element
-  expandedElement: AssignmentInterface | null;
+  //The assignments with display values
+  displayAssignments;
 
   dayIndex = 0;
   lastItemsPerPageIndex = 0;
@@ -92,9 +69,9 @@ export class AssignmentComponent
         //update last items per page
         this.lastItemsPerPageIndex = this.lastItemsPerPageIndex + itemsPerPage;
 
-        this.dataSource = [
-          ...this.dataSource,
-          ...this.fillDataSource(assignmentsPage),
+        this.displayAssignments = [
+          ...this.displayAssignments,
+          ...this.getDisplayValues(assignmentsPage),
         ];
         this.observer.unobserve(entry.target);
         this.cdr.detectChanges();
@@ -127,7 +104,7 @@ export class AssignmentComponent
       itemsPerPage += this.dateAndAssignmentsLength[i];
     }
     const assignmentsPage = this.assignments.slice(0, itemsPerPage); //+1 for the slice method that doesnt include last
-    this.dataSource = this.fillDataSource(assignmentsPage);
+    this.displayAssignments = this.getDisplayValues(assignmentsPage);
 
     //update index for next week
     this.dayIndex += 7;
@@ -138,17 +115,15 @@ export class AssignmentComponent
     this.subscription.add(
       this.assignmentService.assignmentHasChanged$.subscribe(
         (assignment: AssignmentInterface) => {
-          const index = this.dataSource.findIndex(
+          const index = this.displayAssignments.findIndex(
             (dataElement: AssignmentTableInterface) =>
               dataElement.id === assignment.id
           );
-          //Prepare assignment for the datasource
+          //Prepare assignment display values
           const assignmentTable: AssignmentTableInterface[] =
-            this.fillDataSource([assignment]);
-          //Change it
-          this.dataSource[index] = assignmentTable[0];
-          //Update reference to refresh the view
-          this.dataSource = [...this.dataSource];
+            this.getDisplayValues([assignment]);
+          //swap the assignment
+          this.displayAssignments[index] = assignmentTable[0];
         }
       )
     );
@@ -163,21 +138,21 @@ export class AssignmentComponent
   }
 
   ngOnDestroy(): void {
-    this.observer.disconnect();
+    /*  this.observer.disconnect(); */
     this.subscription.unsubscribe();
   }
 
   /** query is based on id because we cannot rely on css classes as they can change
    */
   queryAllMatRows() {
-    this.rows = document.querySelectorAll("#visibleRow");
+    this.rows = document.querySelectorAll("#imageId");
   }
 
   trackByIdFn(index, assignment: AssignmentTableInterface) {
     return assignment.id;
   }
 
-  fillDataSource(
+  getDisplayValues(
     assignmentsPage: AssignmentInterface[]
   ): AssignmentTableInterface[] {
     const assignmentsTable: AssignmentTableInterface[] = [];
@@ -211,7 +186,7 @@ export class AssignmentComponent
       });
     }
 
-    //Separate dates from one day to another with a black border
+    //Separate dates from one day to another with a black dashed border
     let filteredLastDate: Date = assignmentsTable[0]?.date;
     for (const tableRow of assignmentsTable) {
       if (
@@ -240,14 +215,14 @@ export class AssignmentComponent
     let data = "";
     let headers = "";
     const rows = [];
-    const keys = Object.keys(this.dataSource[0]);
+    const keys = Object.keys(this.displayAssignments[0]);
     for (const key of keys) {
       headers = headers + key + ";";
     }
     headers = headers + "\n";
     rows.push(headers);
 
-    for (const assign of this.dataSource) {
+    for (const assign of this.displayAssignments) {
       data = ""; //reset row
       for (const key of keys) {
         data = data + assign[key] + ";";
