@@ -1,6 +1,22 @@
-<h1 mat-dialog-title>Favorite Animal</h1>
+<h1 mat-dialog-title>Reasoning</h1>
 <div mat-dialog-content>
-  <div *ngFor="let participant of data">
-    <pre>{{ participant | json }}</pre>
+  <div class="grid">
+    <div class="fw-bold">name</div>
+    <div class="fw-bold">count with same room and same assign type</div>
+    <div class="fw-bold">last assignment date</div>
+    <ng-container *ngFor="let participant of data">
+      <div>
+        {{ participant.name }}
+      </div>
+      <div>
+        {{ participant.count }}
+      </div>
+      <div>
+        {{
+          participant.lastAssignmentDate
+            | translocoDate : { dateStyle: "medium" }
+        }}
+      </div>
+    </ng-container>
   </div>
 </div>

@@ -122,7 +122,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  setPrincipalsCount() {
+  setPrincipalsCountAndLastDate() {
     this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
       this.principals,
@@ -132,7 +132,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
-  setAssistantsCount() {
+  setAssistantsCountAndLastDate() {
     //Set count for assistants
     this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
@@ -147,9 +147,9 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   getCountSortAndHighlightProcess() {
     this.getPrincipalAndAssistant();
     //Set count for principals
-    this.setPrincipalsCount();
+    this.setPrincipalsCountAndLastDate();
     //Set count for assistants
-    this.setAssistantsCount();
+    this.setAssistantsCountAndLastDate();
     this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
     this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
     this.warningIfAlreadyHasWork();
@@ -174,10 +174,10 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           this.getPrincipalAndAssistant();
 
           //Set count for principals
-          this.setPrincipalsCount();
+          this.setPrincipalsCountAndLastDate();
 
           //Set count for assistants
-          this.setAssistantsCount();
+          this.setAssistantsCountAndLastDate();
 
           this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
           this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
@@ -199,10 +199,10 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           this.getPrincipalAndAssistant();
 
           //Set count for principals
-          this.setPrincipalsCount();
+          this.setPrincipalsCountAndLastDate();
 
           //Set count for assistants
-          this.setAssistantsCount();
+          this.setAssistantsCountAndLastDate();
 
           this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
           this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
@@ -227,10 +227,10 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
             this.getPrincipalAndAssistant();
 
             //Set count for principals
-            this.setPrincipalsCount();
+            this.setPrincipalsCountAndLastDate();
 
             //Set count for assistants
-            this.setAssistantsCount();
+            this.setAssistantsCountAndLastDate();
 
             this.principals.sort(
               this.sortService.sortParticipantsByCountOrDate

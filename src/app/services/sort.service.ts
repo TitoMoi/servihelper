@@ -96,7 +96,6 @@ export class SortService {
     a: ParticipantDynamicInterface,
     b: ParticipantDynamicInterface
   ): number {
-    console.log("sort participants", a);
     if (a.count < b.count) {
       return -1;
     }

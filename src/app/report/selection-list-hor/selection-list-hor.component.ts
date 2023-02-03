@@ -80,7 +80,6 @@ export class SelectionListHorComponent implements OnChanges {
 
   setColorInputEvent(value: string) {
     this.colorpicker = value;
-    console.log("seted:", value);
   }
 
   /**

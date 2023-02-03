@@ -148,7 +148,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
-  setPrincipalsCount() {
+  setPrincipalsCountAndLastDate() {
     this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
       this.principals,
@@ -156,10 +156,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       this.gfv("assignType"),
       true
     );
-    console.log("after count principals", this.principals);
   }
 
-  setAssistantsCount() {
+  setAssistantsCountAndLastDate() {
     //Set count for assistants
     this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
@@ -174,11 +173,13 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   getCountSortAndHighlightProcess() {
     this.getPrincipalAndAssistant();
     //Set count for principals
-    this.setPrincipalsCount();
+    this.setPrincipalsCountAndLastDate();
     //Set count for assistants
-    this.setAssistantsCount();
-    console.log("before sort", this.principals);
-    this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
+    this.setAssistantsCountAndLastDate();
+
+    this.principals = this.principals.sort(
+      this.sortService.sortParticipantsByCountOrDate
+    );
     this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
     this.warningIfAlreadyHasWork();
   }
@@ -202,11 +203,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.getPrincipalAndAssistant();
 
           //Set count for principals
-          this.setPrincipalsCount();
+          this.setPrincipalsCountAndLastDate();
 
           //Set count for assistants
-          this.setAssistantsCount();
-          console.log("after set principals count", this.principals);
+          this.setAssistantsCountAndLastDate();
 
           this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
           this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
@@ -227,10 +227,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.getPrincipalAndAssistant();
 
           //Set count for principals
-          this.setPrincipalsCount();
+          this.setPrincipalsCountAndLastDate();
 
           //Set count for assistants
-          this.setAssistantsCount();
+          this.setAssistantsCountAndLastDate();
 
           this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
           this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
@@ -251,14 +251,15 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
             this.getPrincipalAndAssistant();
 
             //Set count for principals
-            this.setPrincipalsCount();
+            this.setPrincipalsCountAndLastDate();
 
             //Set count for assistants
-            this.setAssistantsCount();
+            this.setAssistantsCountAndLastDate();
 
             this.principals.sort(
               this.sortService.sortParticipantsByCountOrDate
             );
+
             this.assistants.sort(
               this.sortService.sortParticipantsByCountOrDate
             );
@@ -552,8 +553,6 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     isAssistant: boolean
   ) {
     e.preventDefault();
-
-    console.log(this.principals);
     //Get a list of participants for that date with that count
     const principalsSameCount = this.principals.filter(
       (p) => p.count === participant.count

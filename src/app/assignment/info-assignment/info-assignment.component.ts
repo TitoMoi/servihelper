@@ -10,7 +10,5 @@ import { ParticipantDynamicInterface } from "app/participant/model/participant.m
 export class InfoAssignmentComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ParticipantDynamicInterface[]
-  ) {
-    console.log(data);
-  }
+  ) {}
 }

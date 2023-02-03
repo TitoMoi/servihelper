@@ -1,0 +1,10 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 1fr;
+  box-sizing: border-box;
+  align-items: center;
+  & > div {
+    height: 100%;
+  }
+}

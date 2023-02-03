@@ -130,7 +130,6 @@ export class SharedService {
             //Add the date of the last assignment
             if (!participant.lastAssignmentDate) {
               participant.lastAssignmentDate = assignment.date;
-              console.log("in count", participant.lastAssignmentDate);
             } else if (
               new Date(participant.lastAssignmentDate) <
               new Date(assignment.date)
