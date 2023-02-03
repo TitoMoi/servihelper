@@ -1,11 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder } from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { RoomInterface } from "app/room/model/room.model";
-import { RoomService } from "app/room/service/room.service";
-import { Validators } from "ngx-editor";
 import { ParticipantInterface } from "../model/participant.model";
 import { ParticipantService } from "../service/participant.service";
 
@@ -27,11 +22,8 @@ export class CreateFromParticipantComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private participantService: ParticipantService,
-    private roomService: RoomService,
-    private assignTypeService: AssignTypeService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {}

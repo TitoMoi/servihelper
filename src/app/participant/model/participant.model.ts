@@ -55,8 +55,3 @@ export interface ParticipantAssignTypesInterface {
   canPrincipal: boolean;
   canAssistant: boolean;
 }
-
-export interface ParticipantTableInterface {
-  id: string;
-  name: string;
-}

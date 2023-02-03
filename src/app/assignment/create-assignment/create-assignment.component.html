@@ -28,7 +28,7 @@
               id="assignmentDatepickerId"
               #picker
               [startAt]="this.lastDateService.lastDate$ | async"
-              (closed)="highlightIfAlreadyHasWork()"
+              (closed)="warningIfAlreadyHasWork()"
             ></mat-datepicker>
           </mat-form-field>
           <div class="col-6 mb-2">
@@ -37,7 +37,7 @@
               <mat-select
                 formControlName="room"
                 required
-                (closed)="highlightIfAlreadyHasWork()"
+                (closed)="warningIfAlreadyHasWork()"
               >
                 <mat-option
                   *ngFor="let room of rooms; trackBy: trackByIdRoomFn"
@@ -54,7 +54,7 @@
               <mat-select
                 formControlName="assignType"
                 required
-                (closed)="highlightIfAlreadyHasWork()"
+                (closed)="warningIfAlreadyHasWork()"
               >
                 <mat-option
                   *ngFor="
@@ -129,12 +129,29 @@
                 <mat-option
                   *ngFor="let participant of principals; trackBy: trackByIdFn"
                   [value]="participant.id"
-                  [ngClass]="{
-                    'bg-color-lightyellow': participant.hasWork,
-                    'no-hover': true
-                  }"
                 >
-                  {{ participant.count }} - {{ participant.name }}
+                  <div class="grid">
+                    <div>
+                      <mat-icon
+                        *ngIf="participant.hasWork"
+                        (click)="
+                          onPrincipalIconClick($event, participant, false)
+                        "
+                        svgIcon="warning"
+                        aria-label="icon"
+                      ></mat-icon>
+                      <mat-icon
+                        *ngIf="!participant.hasWork"
+                        (click)="
+                          onPrincipalIconClick($event, participant, false)
+                        "
+                        svgIcon="info-blue"
+                        aria-label="icon"
+                      ></mat-icon>
+                    </div>
+                    <div>{{ participant.count }}</div>
+                    <div>{{ participant.name }}</div>
+                  </div>
                 </mat-option>
               </mat-select>
             </mat-form-field>

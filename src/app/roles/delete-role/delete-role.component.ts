@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder } from "@angular/forms";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ConfigService } from "app/config/service/config.service";
-import { Validators } from "ngx-editor";
+
 import { RoleInterface } from "../model/role.model";
 
 @Component({

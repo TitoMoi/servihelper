@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder } from "@angular/forms";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Validators } from "ngx-editor";
+
 import { AssignmentInterface } from "../model/assignment.model";
 import { AssignmentService } from "../service/assignment.service";
 

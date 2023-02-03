@@ -5,8 +5,6 @@ import { LastDateService } from "app/assignment/service/last-date.service";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ConfigService } from "app/config/service/config.service";
-import { sortParticipantsByCountOrDate } from "app/functions";
-import { setCount } from "app/functions/setCount";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import {
@@ -27,16 +25,23 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 import { MatButton } from "@angular/material/button";
 import { MatSelect } from "@angular/material/select";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RoleInterface } from "app/roles/model/role.model";
+import { MatDialog } from "@angular/material/dialog";
+import { InfoAssignmentComponent } from "../info-assignment/info-assignment.component";
+import { SortService } from "app/services/sort.service";
 
 @Component({
   selector: "app-create-assignment",
   templateUrl: "./create-assignment.component.html",
-  styleUrls: ["./create-assignment.component.css"],
+  styleUrls: ["./create-assignment.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAssignmentComponent implements OnInit, OnDestroy {
@@ -94,8 +99,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     private noteService: NoteService,
     private configService: ConfigService,
     private sharedService: SharedService,
+    private sortService: SortService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private matDialog: MatDialog,
     private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
@@ -142,18 +149,19 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   setPrincipalsCount() {
-    setCount(
+    this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
       this.principals,
       this.gfv("room"),
       this.gfv("assignType"),
       true
     );
+    console.log("after count principals", this.principals);
   }
 
   setAssistantsCount() {
     //Set count for assistants
-    setCount(
+    this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
       this.assistants,
       this.gfv("room"),
@@ -169,9 +177,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.setPrincipalsCount();
     //Set count for assistants
     this.setAssistantsCount();
-    this.principals.sort(sortParticipantsByCountOrDate);
-    this.assistants.sort(sortParticipantsByCountOrDate);
-    this.highlightIfAlreadyHasWork();
+    console.log("before sort", this.principals);
+    this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
+    this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
+    this.warningIfAlreadyHasWork();
   }
 
   prepareDateSub() {
@@ -197,9 +206,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
 
           //Set count for assistants
           this.setAssistantsCount();
+          console.log("after set principals count", this.principals);
 
-          this.principals.sort(sortParticipantsByCountOrDate);
-          this.assistants.sort(sortParticipantsByCountOrDate);
+          this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
+          this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
         }
       });
     this.cdr.detectChanges();
@@ -222,8 +232,8 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           //Set count for assistants
           this.setAssistantsCount();
 
-          this.principals.sort(sortParticipantsByCountOrDate);
-          this.assistants.sort(sortParticipantsByCountOrDate);
+          this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
+          this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
         }
       })
     );
@@ -246,8 +256,12 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
             //Set count for assistants
             this.setAssistantsCount();
 
-            this.principals.sort(sortParticipantsByCountOrDate);
-            this.assistants.sort(sortParticipantsByCountOrDate);
+            this.principals.sort(
+              this.sortService.sortParticipantsByCountOrDate
+            );
+            this.assistants.sort(
+              this.sortService.sortParticipantsByCountOrDate
+            );
           }
         })
     );
@@ -300,10 +314,18 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
       this.assignmentForm
         .get("onlyExternals")
         .valueChanges.subscribe((onlyExternals) => {
+          this.assignmentForm
+            .get("principal")
+            .reset(undefined, { emitEvent: false });
+          this.assignmentForm
+            .get("assistant")
+            .reset(undefined, { emitEvent: false });
+
           if (!onlyExternals) {
             this.getCountSortAndHighlightProcess();
             return;
           }
+
           this.principals = this.principals.filter((p) => p.isExternal);
           this.assistants = this.assistants.filter((p) => p.isExternal);
         })
@@ -371,7 +393,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   /**
    * Highlight the principal or assistant if already has work
    */
-  highlightIfAlreadyHasWork() {
+  warningIfAlreadyHasWork() {
     const dateValue = this.gfv("date");
     const room = this.gfv("room");
     const assignType = this.gfv("assignType");
@@ -518,6 +540,27 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
   onSelectionChangeAssistant() {
     this.assistantSelect.close();
     this.btnSaveCreateAnother.focus();
+  }
+
+  /**
+   * @param e the event, to prevent default
+   * @param id the participant id
+   */
+  onPrincipalIconClick(
+    e: Event,
+    participant: ParticipantDynamicInterface,
+    isAssistant: boolean
+  ) {
+    e.preventDefault();
+
+    console.log(this.principals);
+    //Get a list of participants for that date with that count
+    const principalsSameCount = this.principals.filter(
+      (p) => p.count === participant.count
+    );
+    this.matDialog.open(InfoAssignmentComponent, {
+      data: principalsSameCount,
+    });
   }
 
   /**

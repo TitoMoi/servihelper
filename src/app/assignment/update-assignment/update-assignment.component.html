@@ -21,7 +21,7 @@
             ></mat-datepicker-toggle>
             <mat-datepicker
               #picker
-              (closed)="highlightIfAlreadyHasWork()"
+              (closed)="warningIfAlreadyHasWork()"
             ></mat-datepicker>
           </mat-form-field>
           <div class="col-6 mb-2">
@@ -30,7 +30,7 @@
               <mat-select
                 formControlName="room"
                 required
-                (closed)="highlightIfAlreadyHasWork()"
+                (closed)="warningIfAlreadyHasWork()"
               >
                 <mat-option
                   *ngFor="let room of rooms; trackBy: trackByIdRoomFn"
@@ -47,7 +47,7 @@
               <mat-select
                 formControlName="assignType"
                 required
-                (closed)="highlightIfAlreadyHasWork()"
+                (closed)="warningIfAlreadyHasWork()"
               >
                 <mat-option
                   *ngFor="

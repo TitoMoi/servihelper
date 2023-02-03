@@ -1,7 +1,4 @@
-import {
-  ParticipantInterface,
-  ParticipantTableInterface,
-} from "app/participant/model/participant.model";
+import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";

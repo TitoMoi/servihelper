@@ -1,6 +1,5 @@
 import { HomeComponent } from "app/home/home.component";
 import { NavigationComponent } from "app/navigation/navigation.component";
-import { NgxEditorModule } from "ngx-editor";
 
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
@@ -68,6 +67,9 @@ import { CreateRoleComponent } from "./roles/create-role/create-role.component";
 import { UpdateRoleComponent } from "./roles/update-role/update-role.component";
 import { DeleteRoleComponent } from "./roles/delete-role/delete-role.component";
 import { IsRoleCheckedPipe } from "./roles/pipe/is-role-checked.pipe";
+import { MatDialogModule } from "@angular/material/dialog";
+import { InfoAssignmentComponent } from "./assignment/info-assignment/info-assignment.component";
+import { NgxEditorModule } from "ngx-editor";
 
 @NgModule({
   declarations: [
@@ -114,6 +116,7 @@ import { IsRoleCheckedPipe } from "./roles/pipe/is-role-checked.pipe";
     UpdateRoleComponent,
     DeleteRoleComponent,
     IsRoleCheckedPipe,
+    InfoAssignmentComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -138,7 +141,8 @@ import { IsRoleCheckedPipe } from "./roles/pipe/is-role-checked.pipe";
     MatDatepickerModule,
     MatNativeDateModule,
     MatChipsModule,
-    NgxEditorModule,
+    MatDialogModule,
+    NgxEditorModule, //the editor for the notes
   ],
   providers: [{ provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent],

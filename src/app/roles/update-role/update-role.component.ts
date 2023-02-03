@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder } from "@angular/forms";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ConfigService } from "app/config/service/config.service";
-import { Validators } from "ngx-editor";
 
 @Component({
   selector: "app-update-role",

@@ -46,6 +46,8 @@ export class AppComponent implements OnInit {
     "woman",
     "calendar-delete",
     "folder",
+    "warning",
+    "info-blue",
   ];
 
   constructor(

@@ -3,8 +3,6 @@ import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { sortParticipantsByCountOrDate } from "app/functions";
-import { setCount } from "app/functions/setCount";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import {
@@ -23,13 +21,18 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { SortService } from "app/services/sort.service";
 
 @Component({
   selector: "app-update-assignment",
   templateUrl: "./update-assignment.component.html",
-  styleUrls: ["./update-assignment.component.css"],
+  styleUrls: ["./update-assignment.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateAssignmentComponent implements OnInit, OnDestroy {
@@ -82,6 +85,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     private participantService: ParticipantService,
     private noteService: NoteService,
     private sharedService: SharedService,
+    private sortService: SortService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -111,30 +115,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
 
     this.checkAvailableDates();
 
-    this.getPrincipalAndAssistant();
-
-    //Set count for principals
-    setCount(
-      this.assignments,
-      this.principals,
-      this.gfv("room"),
-      this.gfv("assignType"),
-      true
-    );
-
-    //Set count for assistants
-    setCount(
-      this.assignments,
-      this.assistants,
-      this.gfv("room"),
-      this.gfv("assignType"),
-      false
-    );
-
-    this.principals.sort(sortParticipantsByCountOrDate);
-    this.assistants.sort(sortParticipantsByCountOrDate);
-
-    this.highlightIfAlreadyHasWork();
+    this.getCountSortAndHighlightProcess();
   }
 
   ngOnDestroy(): void {
@@ -142,7 +123,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   setPrincipalsCount() {
-    setCount(
+    this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
       this.principals,
       this.gfv("room"),
@@ -153,7 +134,7 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
 
   setAssistantsCount() {
     //Set count for assistants
-    setCount(
+    this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
       this.assistants,
       this.gfv("room"),
@@ -169,9 +150,9 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
     this.setPrincipalsCount();
     //Set count for assistants
     this.setAssistantsCount();
-    this.principals.sort(sortParticipantsByCountOrDate);
-    this.assistants.sort(sortParticipantsByCountOrDate);
-    this.highlightIfAlreadyHasWork();
+    this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
+    this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
+    this.warningIfAlreadyHasWork();
   }
 
   prepareDateSub() {
@@ -198,8 +179,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           //Set count for assistants
           this.setAssistantsCount();
 
-          this.principals.sort(sortParticipantsByCountOrDate);
-          this.assistants.sort(sortParticipantsByCountOrDate);
+          this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
+          this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
         }
       });
   }
@@ -223,8 +204,8 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
           //Set count for assistants
           this.setAssistantsCount();
 
-          this.principals.sort(sortParticipantsByCountOrDate);
-          this.assistants.sort(sortParticipantsByCountOrDate);
+          this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
+          this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
         }
       })
     );
@@ -251,8 +232,12 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
             //Set count for assistants
             this.setAssistantsCount();
 
-            this.principals.sort(sortParticipantsByCountOrDate);
-            this.assistants.sort(sortParticipantsByCountOrDate);
+            this.principals.sort(
+              this.sortService.sortParticipantsByCountOrDate
+            );
+            this.assistants.sort(
+              this.sortService.sortParticipantsByCountOrDate
+            );
           }
         })
     );
@@ -303,6 +288,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
       this.assignmentForm
         .get("onlyExternals")
         .valueChanges.subscribe((onlyExternals) => {
+          this.assignmentForm
+            .get("principal")
+            .reset(undefined, { emitEvent: false });
+          this.assignmentForm
+            .get("assistant")
+            .reset(undefined, { emitEvent: false });
+
           if (!onlyExternals) {
             this.getCountSortAndHighlightProcess();
             return;
@@ -357,13 +349,13 @@ export class UpdateAssignmentComponent implements OnInit, OnDestroy {
             new Date(this.gfv("date")).getTime() === new Date(date).getTime()
         )
     );
-    this.highlightIfAlreadyHasWork();
+    this.warningIfAlreadyHasWork();
   }
 
   /**
    * Highlight the participant if already has work
    */
-  highlightIfAlreadyHasWork() {
+  warningIfAlreadyHasWork() {
     const dateValue = this.gfv("date");
     const room = this.gfv("room");
     const assignType = this.gfv("assignType");

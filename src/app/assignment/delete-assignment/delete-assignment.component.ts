@@ -1,14 +1,18 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
 
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, FormControl, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import {
+  UntypedFormBuilder,
+  FormControl,
+  UntypedFormGroup,
+} from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-delete-assignment",
   templateUrl: "./delete-assignment.component.html",
-  styleUrls: ["./delete-assignment.component.css"],
+  styleUrls: ["./delete-assignment.component.scss"],
 })
 export class DeleteAssignmentComponent {
   assignmentForm: UntypedFormGroup = this.formBuilder.group({

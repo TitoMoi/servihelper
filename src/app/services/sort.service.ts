@@ -91,4 +91,26 @@ export class SortService {
     }
     return 0;
   }
+
+  sortParticipantsByCountOrDate(
+    a: ParticipantDynamicInterface,
+    b: ParticipantDynamicInterface
+  ): number {
+    console.log("sort participants", a);
+    if (a.count < b.count) {
+      return -1;
+    }
+    if (a.count > b.count) {
+      return 1;
+    }
+
+    if (new Date(a.lastAssignmentDate) < new Date(b.lastAssignmentDate)) {
+      return -1;
+    }
+
+    if (new Date(a.lastAssignmentDate) > new Date(b.lastAssignmentDate)) {
+      return 1;
+    }
+    return 0;
+  }
 }
