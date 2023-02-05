@@ -135,7 +135,11 @@
                       <mat-icon
                         *ngIf="participant.hasWork"
                         (click)="
-                          onPrincipalIconClick($event, participant, false)
+                          onPrincipalIconWarningClick(
+                            $event,
+                            participant,
+                            false
+                          )
                         "
                         svgIcon="warning"
                         aria-label="icon"
@@ -143,7 +147,7 @@
                       <mat-icon
                         *ngIf="!participant.hasWork"
                         (click)="
-                          onPrincipalIconClick($event, participant, false)
+                          onPrincipalIconInfoClick($event, participant, false)
                         "
                         svgIcon="info-blue"
                         aria-label="icon"

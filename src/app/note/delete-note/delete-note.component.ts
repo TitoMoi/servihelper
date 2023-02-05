@@ -1,8 +1,7 @@
 import { AssignmentService } from "app/assignment/service/assignment.service";
-import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 

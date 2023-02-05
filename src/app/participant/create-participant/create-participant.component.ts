@@ -1,6 +1,5 @@
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
-import { ParticipantRoomInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
@@ -13,7 +12,11 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { UntypedFormArray, UntypedFormBuilder, Validators } from "@angular/forms";
+import {
+  UntypedFormArray,
+  UntypedFormBuilder,
+  Validators,
+} from "@angular/forms";
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
@@ -118,11 +121,6 @@ export class CreateParticipantComponent implements OnInit, OnDestroy {
   }
 
   addRoom(r: RoomInterface) {
-    const fakeParticipantRoom: ParticipantRoomInterface = {
-      roomId: "2",
-      available: false,
-    };
-
     const room = this.formBuilder.group({
       //the above fakeParticipantRoom reflects these keys, if interface changes update this
       roomId: [r.id, Validators.required],

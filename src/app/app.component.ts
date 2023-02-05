@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     private assignmentService: AssignmentService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private pdfService: PdfService //Require pdfService here to force the service be provided with main chunk to be initialized
+    private pdfService: PdfService
   ) {
     //Register icons
     for (const iconFileName of this.icons) {
@@ -76,6 +76,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pdfService.registerOnLangChange();
     this.configService.getConfig();
     this.roomService.getRooms();
     this.assignTypeService.getAssignTypes();

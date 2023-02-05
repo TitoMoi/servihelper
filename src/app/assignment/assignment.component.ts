@@ -9,13 +9,6 @@ import { RoomService } from "app/room/service/room.service";
 import { SortService } from "app/services/sort.service";
 
 import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from "@angular/animations";
-import {
   AfterViewChecked,
   ChangeDetectionStrategy,
   ChangeDetectorRef,

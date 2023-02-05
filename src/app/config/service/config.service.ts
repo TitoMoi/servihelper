@@ -70,7 +70,7 @@ export class ConfigService {
     //update config
     this.#config = config;
     //save configs with the updated config
-    const res = this.saveConfigToFile();
+    this.saveConfigToFile();
   }
 
   /**
@@ -82,7 +82,7 @@ export class ConfigService {
   updateConfigByKey(key: ConfigOptionsType, value: any) {
     this.#config[key as string] = value;
     //save configs with the updated config
-    const res = this.saveConfigToFile();
+    this.saveConfigToFile();
   }
 
   getRoles() {

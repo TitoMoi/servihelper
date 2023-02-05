@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { map, Observable } from "rxjs";
-import { RoleInterface, RoleTableInterface } from "./model/role.model";
+import { RoleInterface } from "./model/role.model";
 
 @Component({
   selector: "app-roles",

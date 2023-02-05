@@ -1,9 +1,9 @@
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomService } from 'app/room/service/room.service';
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomService } from "app/room/service/room.service";
 
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-create-room",

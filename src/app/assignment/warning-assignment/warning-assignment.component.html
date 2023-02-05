@@ -1,0 +1,13 @@
+<div mat-dialog-title class="d-flex align-items-center justify-content-evenly">
+  <mat-icon svgIcon="warning" aria-label="icon"></mat-icon>
+  <span>other assignments:</span>
+</div>
+<div mat-dialog-content>
+  <div class="grid">
+    <ng-container *ngFor="let message of data">
+      <div>
+        {{ message }}
+      </div>
+    </ng-container>
+  </div>
+</div>

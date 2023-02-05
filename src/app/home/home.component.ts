@@ -47,7 +47,6 @@ export class HomeComponent {
     zip.addLocalFolder(this.path);
 
     zip.toBuffer((buffer: Buffer) => {
-      const today = new Date(Date.now());
       const blob = new Blob([buffer], { type: "application/octet" });
       const zipLink = document.createElement("a");
       zipLink.href = window.URL.createObjectURL(blob);

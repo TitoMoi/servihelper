@@ -1,4 +1,3 @@
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";

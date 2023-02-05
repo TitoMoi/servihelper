@@ -24,7 +24,9 @@ export class PdfService {
 
   lastFont;
 
-  constructor(private translocoService: TranslocoService) {
+  constructor(private translocoService: TranslocoService) {}
+
+  registerOnLangChange() {
     this.translocoService.langChanges$.subscribe((lang) => {
       this.font = this.langToFont[lang];
       if (!this.font) this.font = "notosans";

@@ -70,6 +70,7 @@ import { IsRoleCheckedPipe } from "./roles/pipe/is-role-checked.pipe";
 import { MatDialogModule } from "@angular/material/dialog";
 import { InfoAssignmentComponent } from "./assignment/info-assignment/info-assignment.component";
 import { NgxEditorModule } from "ngx-editor";
+import { WarningAssignmentComponent } from "./assignment/warning-assignment/warning-assignment.component";
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { NgxEditorModule } from "ngx-editor";
     DeleteRoleComponent,
     IsRoleCheckedPipe,
     InfoAssignmentComponent,
+    WarningAssignmentComponent,
   ],
   imports: [
     BrowserAnimationsModule,

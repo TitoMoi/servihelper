@@ -1,12 +1,7 @@
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
-import { Component, OnInit } from "@angular/core";
-import {
-  UntypedFormBuilder,
-  FormControl,
-  UntypedFormGroup,
-} from "@angular/forms";
+import { Component } from "@angular/core";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({

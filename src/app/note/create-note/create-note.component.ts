@@ -1,7 +1,7 @@
 import { editorJsonToHtml } from "app/functions/editorJsonToHtml";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import { Editor, toHTML, Toolbar } from "ngx-editor";
+import { Editor, Toolbar } from "ngx-editor";
 
 import { Component, OnDestroy } from "@angular/core";
 import {

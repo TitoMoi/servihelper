@@ -70,7 +70,7 @@ export class AssignmentService {
    */
   getDateAndAssignmentsLength(): number[] {
     const dateAndAssignLength = [];
-    for (const [date, assignments] of this.#assignmentsByDateMap) {
+    for (const assignments of this.#assignmentsByDateMap.values()) {
       dateAndAssignLength.push(assignments.length);
     }
     return dateAndAssignLength;
@@ -340,15 +340,25 @@ export class AssignmentService {
   /**
    *
    * @param participantId the participant id to search assignments
+   * @param date optional param if provided will filter only for that date
    * @returns the assignments of the participant
    */
-  findAssignmentsByParticipantId(participantId: string): AssignmentInterface[] {
-    const assignments = this.#assignments.filter(
+  findAssignmentsByParticipantId(
+    participantId: string,
+    date?: Date
+  ): AssignmentInterface[] {
+    //By date
+    if (date) {
+      return this.getAssignmentsByDate(date).filter(
+        (a) => a.principal === participantId || a.assistant === participantId
+      );
+    }
+    //By all assignments
+    return this.#assignments.filter(
       (assignment) =>
         assignment.principal === participantId ||
         assignment.assistant === participantId
     );
-    return assignments;
   }
 
   /**

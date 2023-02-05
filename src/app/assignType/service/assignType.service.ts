@@ -87,6 +87,15 @@ export class AssignTypeService {
    * @param assignTypeName the name of the assignType to look for
    * @returns the assignType
    */
+  getAssignTypeNameById(assignTypeId: string): string {
+    return this.#assignTypesMap.get(assignTypeId).name;
+  }
+
+  /**
+   *
+   * @param assignTypeName the name of the assignType to look for
+   * @returns the assignType
+   */
   getAssignTypeByName(assignTypeName: string): AssignTypeInterface {
     return this.#assignTypesMapByName.get(assignTypeName);
   }

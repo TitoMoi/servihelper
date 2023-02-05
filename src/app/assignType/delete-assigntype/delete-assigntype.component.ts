@@ -1,9 +1,8 @@
 import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 

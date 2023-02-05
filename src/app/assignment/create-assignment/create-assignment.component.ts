@@ -37,6 +37,7 @@ import { RoleInterface } from "app/roles/model/role.model";
 import { MatDialog } from "@angular/material/dialog";
 import { InfoAssignmentComponent } from "../info-assignment/info-assignment.component";
 import { SortService } from "app/services/sort.service";
+import { WarningAssignmentComponent } from "../warning-assignment/warning-assignment.component";
 
 @Component({
   selector: "app-create-assignment",
@@ -547,7 +548,7 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    * @param e the event, to prevent default
    * @param id the participant id
    */
-  onPrincipalIconClick(
+  onPrincipalIconInfoClick(
     e: Event,
     participant: ParticipantDynamicInterface,
     isAssistant: boolean
@@ -559,6 +560,38 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     );
     this.matDialog.open(InfoAssignmentComponent, {
       data: principalsSameCount,
+    });
+  }
+
+  /**
+   * @param e the event, to prevent default
+   * @param id the participant id
+   */
+  onPrincipalIconWarningClick(
+    e: Event,
+    participant: ParticipantDynamicInterface,
+    isAssistant: boolean
+  ) {
+    e.preventDefault();
+
+    const messageList: string[] = [];
+
+    const participantAssignments =
+      this.assignmentService.findAssignmentsByParticipantId(
+        participant.id,
+        this.gfv("date")
+      );
+
+    participantAssignments.forEach((pa) => {
+      messageList.push(
+        this.roomService.getRoomNameById(pa.room) +
+          " " +
+          this.assignTypeService.getAssignTypeNameById(pa.assignType)
+      );
+    });
+
+    this.matDialog.open(WarningAssignmentComponent, {
+      data: messageList,
     });
   }
 
