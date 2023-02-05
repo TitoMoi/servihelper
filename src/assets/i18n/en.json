@@ -16,7 +16,7 @@
   "ASSIGN_CREATE_CHOOSE_DATE": "Choose a date",
   "ASSIGN_CREATE_FOOTER_NOTE": "Footer note",
   "ASSIGN_CREATE_ONLY_EXTERNALS": "Only externals",
-  "ASSIGN_CREATE_ONLY_MEN": "Only men",
+
   "ASSIGN_CREATE_ONLY_WOMEN": "Only women",
   "ASSIGN_CREATE_PRINCIPAL": "Principal",
   "ASSIGN_CREATE_ROOM": "Room",
@@ -241,5 +241,6 @@
   "zhCN": "Chinese",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Color",
   "ROOM_TABLE_HEADER_ORDER": "Order",
-  "ASSIGN_TABLE_HEADER_ASSIGNTYPE_COLOR": "Color"
+  "ASSIGN_TABLE_HEADER_ASSIGNTYPE_COLOR": "Color",
+  "ASSIGN_CREATE_ONLY_MEN": "Only men (without externals)"
 }

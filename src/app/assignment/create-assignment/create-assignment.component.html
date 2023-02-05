@@ -62,7 +62,7 @@
                     trackBy: trackByIdAssignTypeFn
                   "
                   [value]="assignType.id"
-                  [style.backgroundColor]="assignType.color"
+                  [style.borderLeft]="getBorderLeftStyle(assignType.color)"
                 >
                   {{ assignType.name }}
                 </mat-option>

@@ -284,8 +284,12 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
           this.getCountSortAndHighlightProcess();
           return;
         }
-        this.principals = this.principals.filter((p) => p.isWoman === false);
-        this.assistants = this.assistants.filter((a) => a.isWoman === false);
+        this.principals = this.principals.filter(
+          (p) => p.isWoman === false && !p.isExternal
+        );
+        this.assistants = this.assistants.filter(
+          (a) => a.isWoman === false && !a.isExternal
+        );
       })
     );
   }
@@ -548,12 +552,9 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    * @param e the event, to prevent default
    * @param id the participant id
    */
-  onPrincipalIconInfoClick(
-    e: Event,
-    participant: ParticipantDynamicInterface,
-    isAssistant: boolean
-  ) {
+  onPrincipalIconInfoClick(e: Event, participant: ParticipantDynamicInterface) {
     e.preventDefault();
+    e.stopPropagation();
     //Get a list of participants for that date with that count
     const principalsSameCount = this.principals.filter(
       (p) => p.count === participant.count
@@ -569,10 +570,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
    */
   onPrincipalIconWarningClick(
     e: Event,
-    participant: ParticipantDynamicInterface,
-    isAssistant: boolean
+    participant: ParticipantDynamicInterface
   ) {
     e.preventDefault();
+    e.stopPropagation();
 
     const messageList: string[] = [];
 
@@ -593,6 +594,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     this.matDialog.open(WarningAssignmentComponent, {
       data: messageList,
     });
+  }
+
+  getBorderLeftStyle(color) {
+    return `10px solid ${color}`;
   }
 
   /**
