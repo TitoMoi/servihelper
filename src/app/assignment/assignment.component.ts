@@ -135,6 +135,10 @@ export class AssignmentComponent
     this.subscription.unsubscribe();
   }
 
+  getBorderLeftColor(color: string) {
+    return `20px solid ${color ? color : "#FFF"}`;
+  }
+
   /** query is based on id because we cannot rely on css classes as they can change
    */
   queryAllMatRows() {

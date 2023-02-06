@@ -57,9 +57,6 @@
         {{ t("ASSIGN_TABLE_HEADER_ASSISTANT") }}
       </div>
       <div class="grid-header-item fw-bold">
-        {{ t("ASSIGN_TABLE_HEADER_ASSIGNTYPE_COLOR") }}
-      </div>
-      <div class="grid-header-item fw-bold">
         {{ t("ASSIGN_TABLE_HEADER_ASSIGNTYPE") }}
       </div>
       <div class="grid-header-item fw-bold">
@@ -75,7 +72,7 @@
         <div class="grid-row">
           <div
             id="imageId"
-            [ngClass]="{ 'bg-color-lightgreen': a.hasBeenClicked }"
+            [ngClass]="{ borderLeftLightGreen: a.hasBeenClicked }"
             class="grid-item d-flex align-items-center"
           >
             <mat-icon
@@ -100,9 +97,8 @@
           </div>
           <div
             class="grid-item d-flex align-items-center"
-            [style.backgroundColor]="a.assignTypeColor"
-          ></div>
-          <div class="grid-item d-flex align-items-center">
+            [style.borderLeft]="getBorderLeftColor(a.assignTypeColor)"
+          >
             {{ a.assignType }}
           </div>
           <div class="grid-item d-flex align-items-center">
