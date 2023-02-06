@@ -25,7 +25,7 @@ import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { AssignmentComponent } from "./assignment/assignment.component";
-import { CreateAssignmentComponent } from "./assignment/create-assignment/create-assignment.component";
+import { CreateUpdateAssignmentComponent } from "./assignment/create-update-assignment/create-update-assignment.component";
 import { CustomDateAdapter } from "./customDateAdapter";
 import { DeleteAssignmentComponent } from "./assignment/delete-assignment/delete-assignment.component";
 import { ImageAssignmentComponent } from "./assignment/image-assignment/image-assignment.component";
@@ -33,7 +33,6 @@ import { MultipleImageAssignmentComponent } from "./report/multiple-image-assign
 import { ReportSelectorComponent } from "./report/report-selector/report-selector.component";
 import { SelectionListHorComponent } from "./report/selection-list-hor/selection-list-hor.component";
 import { SelectionListComponent } from "./report/selection-list/selection-list.component";
-import { UpdateAssignmentComponent } from "./assignment/update-assignment/update-assignment.component";
 import { AssignTypeComponent } from "./assignType/assignType.component";
 import { CreateAssignTypeComponent } from "./assignType/create-assigntype/create-assigntype.component";
 import { DeleteAssignTypeComponent } from "./assignType/delete-assigntype/delete-assigntype.component";
@@ -89,8 +88,7 @@ import { WarningAssignmentComponent } from "./assignment/warning-assignment/warn
     UpdateParticipantComponent,
     DeleteParticipantComponent,
     AssignmentComponent,
-    CreateAssignmentComponent,
-    UpdateAssignmentComponent,
+    CreateUpdateAssignmentComponent,
     DeleteAssignmentComponent,
     ImageAssignmentComponent,
     RoomComponent,

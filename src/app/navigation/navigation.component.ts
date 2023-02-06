@@ -1,6 +1,6 @@
 import { ConfigService } from "app/config/service/config.service";
 import { Observable } from "rxjs";
-import { map, shareReplay } from "rxjs/operators";
+import { filter, map, shareReplay } from "rxjs/operators";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
@@ -33,19 +33,19 @@ export class NavigationComponent implements OnInit {
 
   lang = this.config.lang;
 
-  currentRoleId = this.config.role;
-
   administratorKey = this.configService.administratorKey;
 
   availableLangs = undefined;
 
-  isNewVersion = false;
-
-  appVersion = this.sharedService.appVersion;
-
-  queryGitHub$ = this.httpClient.get<GitHubDataInterface>(
-    "https://api.github.com/repos/titoMoi/servihelper/releases/latest"
-  );
+  queryGitHub$ = this.httpClient
+    .get<GitHubDataInterface>(
+      "https://api.github.com/repos/titoMoi/servihelper/releases/latest"
+    )
+    .pipe(
+      filter(
+        (githubData) => githubData.tag_name !== this.sharedService.appVersion
+      )
+    );
 
   config$: Observable<ConfigInterface> = this.configService.config$;
 

@@ -213,6 +213,7 @@ export class AssignmentService {
         this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
         //save assignments with the updated assignment
         this.saveAssignmentsToFile();
+        break;
       }
     }
     //For the assignment table

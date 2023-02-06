@@ -7,7 +7,5 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
   styleUrls: ["./warning-assignment.component.scss"],
 })
 export class WarningAssignmentComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: string[]) {
-    console.log(data);
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: string[]) {}
 }

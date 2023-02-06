@@ -10,6 +10,7 @@ export interface AssignmentInterface {
   theme: string;
   onlyWoman: boolean;
   onlyMan: boolean;
+  onlyExternals: boolean;
   principal: string;
   assistant: string;
   footerNote: string;

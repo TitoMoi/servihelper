@@ -1,10 +1,9 @@
 import { AssignmentComponent } from "app/assignment/assignment.component";
-import { CreateAssignmentComponent } from "app/assignment/create-assignment/create-assignment.component";
+import { CreateUpdateAssignmentComponent } from "app/assignment/create-update-assignment/create-update-assignment.component";
 import { DeleteAssignmentComponent } from "app/assignment/delete-assignment/delete-assignment.component";
 import { ImageAssignmentComponent } from "app/assignment/image-assignment/image-assignment.component";
 import { MoveAssignmentComponent } from "app/assignment/move-assignment/move-assignment.component";
 import { ReportSelectorComponent } from "app/report/report-selector/report-selector.component";
-import { UpdateAssignmentComponent } from "app/assignment/update-assignment/update-assignment.component";
 import { AssignTypeComponent } from "app/assignType/assignType.component";
 import { CreateAssignTypeComponent } from "app/assignType/create-assigntype/create-assigntype.component";
 import { DeleteAssignTypeComponent } from "app/assignType/delete-assigntype/delete-assigntype.component";
@@ -123,16 +122,17 @@ const routes: Routes = [
         component: ImageAssignmentComponent,
       },
       {
+        //create is outside of children because we want to destroy assignments and create again with the new assignments
+        path: "create",
+        component: CreateUpdateAssignmentComponent,
+      },
+      {
         path: "update/:id",
-        component: UpdateAssignmentComponent,
+        component: CreateUpdateAssignmentComponent,
       },
     ],
   },
-  {
-    //create is outside of children because we want to destroy assignments and create again with the new assignments
-    path: "assignment/create",
-    component: CreateAssignmentComponent,
-  },
+
   {
     path: "assignment/move",
     component: MoveAssignmentComponent,

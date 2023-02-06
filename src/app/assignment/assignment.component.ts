@@ -18,6 +18,7 @@ import {
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
+import { LastDateService } from "./service/last-date.service";
 
 @Component({
   selector: "app-assignment",
@@ -81,6 +82,7 @@ export class AssignmentComponent
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
     private sortService: SortService,
+    private lastDateService: LastDateService,
     private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
@@ -184,14 +186,14 @@ export class AssignmentComponent
     }
 
     //Separate dates from one day to another with a black dashed border
-    let filteredLastDate: Date = assignmentsTable[0]?.date;
     for (const tableRow of assignmentsTable) {
       if (
         new Date(tableRow.date).getTime() !==
-        new Date(filteredLastDate).getTime()
+        new Date(this.lastDateService.lastDashedDate).getTime()
       ) {
         tableRow.hasDateSeparator = true;
-        filteredLastDate = tableRow.date;
+        //update last dashed date
+        this.lastDateService.lastDashedDate = tableRow.date;
       }
     }
 

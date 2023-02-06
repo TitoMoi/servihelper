@@ -39,8 +39,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   @Input() rooms: string[];
   @Input() order: string;
 
-  #assignments: AssignmentInterface[] = [];
-
   assignmentsWithNames: AssignmentInterface[] = [];
 
   assignmentsInFolderCreated = false;
@@ -60,6 +58,8 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   assignmentThemeTitle = this.configService.getConfig().assignmentThemeTitle;
   assignmentRoomTitle = this.configService.getConfig().assignmentRoomTitle;
   assignmentNoteTitle = this.configService.getConfig().assignmentNoteTitle;
+
+  #assignments: AssignmentInterface[] = [];
 
   constructor(
     public assignTypeService: AssignTypeService,
@@ -115,6 +115,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         theme: a.theme,
         onlyMan: undefined,
         onlyWoman: undefined,
+        onlyExternals: undefined,
       };
       this.assignmentsWithNames.push(assignmentWithData);
     });

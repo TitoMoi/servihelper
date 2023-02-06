@@ -7,7 +7,7 @@
   >
     <mat-toolbar>
       <a
-        *ngIf="(queryGitHub$ | async)?.tag_name !== appVersion"
+        *ngIf="queryGitHub$ | async"
         href="#"
         (click)="openExternalServihelperRepository()"
       >

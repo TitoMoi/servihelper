@@ -37,6 +37,7 @@ function createWindow(): Electron.BrowserWindow {
       electron: require(path.join(__dirname, "/../node_modules/electron")),
     });
     win.loadURL("http://localhost:4200");
+    win.maximize();
   } else {
     // Path when running electron executable
     let pathIndex = "./index.html";
@@ -53,6 +54,7 @@ function createWindow(): Electron.BrowserWindow {
         slashes: true,
       })
     );
+    win.maximize();
   }
 
   // Emitted when the window is closed.
