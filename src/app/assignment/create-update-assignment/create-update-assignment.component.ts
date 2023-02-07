@@ -240,7 +240,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   prepareAssignTypeSub() {
     this.subscription.add(
       this.assignmentForm.get("assignType").valueChanges.subscribe(() => {
-        console.log("hola");
         this.batchCleanPrincipalAssistant();
 
         if (this.gfv("date") && this.gfv("room") && this.gfv("assignType")) {
