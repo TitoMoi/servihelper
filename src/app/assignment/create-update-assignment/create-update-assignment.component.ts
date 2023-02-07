@@ -68,9 +68,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   assignmentsBySelectedDate: AssignmentInterface[] = [];
 
   role$ = this.configService.config$.pipe(
-    map((config) =>
-      this.configService.getRole(this.configService.getCurrentRole())
-    )
+    map(() => this.configService.getRole(this.configService.getCurrentRole()))
   );
 
   role: RoleInterface;
@@ -142,6 +140,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.prepareOnlyWomanSub();
     this.prepareOnlyExternalsSub();
     this.preparePrincipalSub();
+
+    if (this.isUpdate) {
+      this.getParticipantsAvailableOnDate();
+      this.batchGetCountSortWarning();
+    }
   }
 
   ngOnDestroy(): void {
@@ -155,6 +158,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
         //If date and room are selected, when click the assignTypes select is not working, so we need to call it manually
         if (this.gfv("date") && this.gfv("room")) {
+          this.filterAssignmentsByRole();
           this.removeAssignTypesThatAlreadyExistOnDate();
         }
       })
@@ -182,17 +186,13 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
-  //Batch function
-  getCountSortAndHighlightProcess() {
+  /** Batch operation
+   */
+  batchGetCountSortWarning() {
     this.getPrincipalAndAssistant();
-    //Set count for principals
     this.setPrincipalsCountAndLastDate();
-    //Set count for assistants
     this.setAssistantsCountAndLastDate();
-
-    this.principals = this.principals.sort(
-      this.sortService.sortParticipantsByCountOrDate
-    );
+    this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
     this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
     this.warningIfAlreadyHasWork();
   }
@@ -203,26 +203,18 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       .valueChanges.subscribe((date) => {
         this.lastDateService.lastDate = date;
 
-        this.cleanPrincipalAndAssistant();
+        this.batchCleanPrincipalAssistant();
 
         if (this.gfv("date")) {
-          this.checkAvailableDates();
+          this.getParticipantsAvailableOnDate();
         }
 
         if (this.gfv("room")) {
+          this.filterAssignmentsByRole();
           this.removeAssignTypesThatAlreadyExistOnDate();
         }
         if (this.gfv("room") && this.gfv("assignType")) {
-          this.getPrincipalAndAssistant();
-
-          //Set count for principals
-          this.setPrincipalsCountAndLastDate();
-
-          //Set count for assistants
-          this.setAssistantsCountAndLastDate();
-
-          this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
-          this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
+          this.batchGetCountSortWarning();
         }
       });
     this.cdr.detectChanges();
@@ -230,23 +222,15 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   prepareRoomSub() {
     this.subscription.add(
-      this.assignmentForm.get("room").valueChanges.subscribe((room) => {
-        this.cleanPrincipalAndAssistant();
+      this.assignmentForm.get("room").valueChanges.subscribe(() => {
+        this.batchCleanPrincipalAssistant();
 
         if (this.gfv("date")) {
+          this.filterAssignmentsByRole();
           this.removeAssignTypesThatAlreadyExistOnDate();
         }
         if (this.gfv("date") && this.gfv("assignType")) {
-          this.getPrincipalAndAssistant();
-
-          //Set count for principals
-          this.setPrincipalsCountAndLastDate();
-
-          //Set count for assistants
-          this.setAssistantsCountAndLastDate();
-
-          this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
-          this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
+          this.batchGetCountSortWarning();
         }
       })
     );
@@ -255,29 +239,14 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   prepareAssignTypeSub() {
     this.subscription.add(
-      this.assignmentForm
-        .get("assignType")
-        .valueChanges.subscribe((assignType) => {
-          this.cleanPrincipalAndAssistant();
+      this.assignmentForm.get("assignType").valueChanges.subscribe(() => {
+        console.log("hola");
+        this.batchCleanPrincipalAssistant();
 
-          if (this.gfv("date") && this.gfv("room") && this.gfv("assignType")) {
-            this.getPrincipalAndAssistant();
-
-            //Set count for principals
-            this.setPrincipalsCountAndLastDate();
-
-            //Set count for assistants
-            this.setAssistantsCountAndLastDate();
-
-            this.principals.sort(
-              this.sortService.sortParticipantsByCountOrDate
-            );
-
-            this.assistants.sort(
-              this.sortService.sortParticipantsByCountOrDate
-            );
-          }
-        })
+        if (this.gfv("date") && this.gfv("room") && this.gfv("assignType")) {
+          this.batchGetCountSortWarning();
+        }
+      })
     );
     this.cdr.detectChanges();
   }
@@ -285,17 +254,13 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   prepareOnlyManSub() {
     this.subscription.add(
       this.assignmentForm.get("onlyMan").valueChanges.subscribe((onlyMan) => {
-        this.assignmentForm
-          .get("principal")
-          .reset(undefined, { emitEvent: false });
-        this.assignmentForm
-          .get("assistant")
-          .reset(undefined, { emitEvent: false });
+        this.batchCleanPrincipalAssistant();
 
         if (!onlyMan) {
-          this.getCountSortAndHighlightProcess();
+          this.batchGetCountSortWarning();
           return;
         }
+        //Only man
         this.principals = this.principals.filter(
           (p) => p.isWoman === false && !p.isExternal
         );
@@ -305,22 +270,19 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       })
     );
   }
+
   prepareOnlyWomanSub() {
     this.subscription.add(
       this.assignmentForm
         .get("onlyWoman")
         .valueChanges.subscribe((onlyWoman) => {
-          this.assignmentForm
-            .get("principal")
-            .reset(undefined, { emitEvent: false });
-          this.assignmentForm
-            .get("assistant")
-            .reset(undefined, { emitEvent: false });
+          this.batchCleanPrincipalAssistant();
 
           if (!onlyWoman) {
-            this.getCountSortAndHighlightProcess();
+            this.batchGetCountSortWarning();
             return;
           }
+          //Only woman
           this.principals = this.principals.filter((p) => p.isWoman === true);
           this.assistants = this.assistants.filter((a) => a.isWoman === true);
         })
@@ -332,18 +294,13 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       this.assignmentForm
         .get("onlyExternals")
         .valueChanges.subscribe((onlyExternals) => {
-          this.assignmentForm
-            .get("principal")
-            .reset(undefined, { emitEvent: false });
-          this.assignmentForm
-            .get("assistant")
-            .reset(undefined, { emitEvent: false });
+          this.batchCleanPrincipalAssistant();
 
           if (!onlyExternals) {
-            this.getCountSortAndHighlightProcess();
+            this.batchGetCountSortWarning();
             return;
           }
-
+          //Only externals
           this.principals = this.principals.filter((p) => p.isExternal);
           this.assistants = this.assistants.filter((p) => p.isExternal);
         })
@@ -367,7 +324,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
-  cleanPrincipalAndAssistant() {
+  batchCleanPrincipalAssistant() {
     this.assignmentForm.get("principal").reset(undefined, { emitEvent: false });
     this.assignmentForm.get("assistant").reset(undefined, { emitEvent: false });
 
@@ -375,6 +332,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.assistants = [];
   }
 
+  /**
+   * Gets the principal and assistant based on the available participants, room, assignType and only selectors
+   */
   getPrincipalAndAssistant() {
     this.principals = this.sharedService.filterPrincipalsByAvailable(
       structuredClone(this.participants),
@@ -396,7 +356,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   /**
    * Filter available participants by selected date and create a map of assignments by selected date.
    */
-  checkAvailableDates() {
+  getParticipantsAvailableOnDate() {
     this.participants = this.participantService
       .getParticipants(true)
       .filter(
@@ -434,13 +394,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
-   * Remove assignTypes that already exist in the selected date and room.
-   * depends on: assignments, selected room, selected date
-   *
-   * This method doesnt trigger on update assignment because admin user can select any assignment while updating
-   */
-  removeAssignTypesThatAlreadyExistOnDate() {
+  filterAssignmentsByRole() {
     //Filter assignTypes by permissions
     this.assignTypes = this.assignTypeService.getAssignTypes();
 
@@ -454,7 +408,15 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.assignTypes = this.assignTypes.sort((a, b) =>
       a.order > b.order ? 1 : -1
     );
+  }
 
+  /**
+   * Remove assignTypes that already exist in the selected date and room.
+   * depends on: assignments, selected room, selected date
+   *
+   * This method doesnt trigger on update assignment because admin user can select any assignment while updating
+   */
+  removeAssignTypesThatAlreadyExistOnDate() {
     const dateValue = this.gfv("date");
     const roomValue = this.gfv("room");
     const assignTypeValue = this.gfv("assignType");
@@ -549,10 +511,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       .get("onlyExternals")
       .setValue(onlyExternals, { emitEvent: false });
 
-    //
-    this.checkAvailableDates();
+    this.getParticipantsAvailableOnDate();
 
     //Reset assign types select
+    this.filterAssignmentsByRole();
     this.removeAssignTypesThatAlreadyExistOnDate();
   }
 
@@ -567,7 +529,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   /** Focus */
   onSelectionChangeAssistant() {
     this.assistantSelect.close();
-    this.btnSaveCreateAnother.focus();
+    if (this.isUpdate) this.btnSaveCreateAnother.focus();
   }
 
   /**
