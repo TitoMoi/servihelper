@@ -143,6 +143,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       this.getParticipantsAvailableOnDate();
       this.batchGetCountSortWarning();
       this.removePrincipalFromAssistants(this.gfv("principal"));
+      this.enableOrDisableAssistantControl(this.gfv("assignType"));
     }
 
     //Prepare the form changes
@@ -261,14 +262,27 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   prepareAssignTypeSub() {
     this.subscription.add(
-      this.assignmentForm.get("assignType").valueChanges.subscribe(() => {
-        this.batchCleanPrincipalAssistant();
+      this.assignmentForm
+        .get("assignType")
+        .valueChanges.subscribe((assignTypeId: string) => {
+          this.batchCleanPrincipalAssistant();
 
-        if (this.gfv("date") && this.gfv("room") && this.gfv("assignType")) {
-          this.batchGetCountSortWarning();
-        }
-      })
+          if (this.gfv("date") && this.gfv("room") && this.gfv("assignType")) {
+            this.batchGetCountSortWarning();
+          }
+          this.enableOrDisableAssistantControl(assignTypeId);
+        })
     );
+    this.cdr.detectChanges();
+  }
+
+  /** (Form) Enable or disable the assistant control if assign type has assistant help */
+  enableOrDisableAssistantControl(assignTypeId) {
+    if (this.assignTypeService.getAssignType(assignTypeId).hasAssistant) {
+      this.assignmentForm.get("assistant").enable({ emitEvent: false });
+    } else {
+      this.assignmentForm.get("assistant").disable({ emitEvent: false });
+    }
     this.cdr.detectChanges();
   }
 
@@ -349,12 +363,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     }
   }
 
+  /** (Form) clean principalId and assistantId */
   batchCleanPrincipalAssistant() {
     this.assignmentForm.get("principal").reset(undefined, { emitEvent: false });
     this.assignmentForm.get("assistant").reset(undefined, { emitEvent: false });
-
-    this.principals = [];
-    this.assistants = [];
   }
 
   /**
@@ -546,12 +558,12 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.principalSelect.close();
     //Wait until button is enabled to focus it otherwise not works
     this.cdr.detectChanges();
-    if (this.isUpdate) this.btnSaveCreateAnother.focus();
+    if (!this.isUpdate) this.btnSaveCreateAnother.focus();
   }
 
   onSelectionChangeAssistant() {
     this.assistantSelect.close();
-    if (this.isUpdate) this.btnSaveCreateAnother.focus();
+    if (!this.isUpdate) this.btnSaveCreateAnother.focus();
   }
 
   /**

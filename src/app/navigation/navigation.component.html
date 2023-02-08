@@ -11,12 +11,11 @@
         href="#"
         (click)="openExternalServihelperRepository()"
       >
-        {{ t("NEW_VERSION_AVAILABLE") }}
+        <div class="f">{{ t("NEW_VERSION_AVAILABLE") }}</div>
       </a>
     </mat-toolbar>
-
+    <!-- p-0 -> mat-nav-list has padding top and a gap is visible, this padding fix removes it -->
     <mat-nav-list class="p-0">
-      <!-- p-0 list has padding top and a gap is visible -->
       <mat-list-item routerLink="/">
         <span>{{ t("NAV_HOME") }}</span>
       </mat-list-item>

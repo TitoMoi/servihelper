@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
+import { SharedService } from "app/services/shared.service";
 
 @Component({
-  selector: 'app-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+  selector: "app-question",
+  templateUrl: "./question.component.html",
+  styleUrls: ["./question.component.scss"],
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent {
+  appVersion = this.sharedService.appVersion;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor(private sharedService: SharedService) {}
 }

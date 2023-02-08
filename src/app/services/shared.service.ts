@@ -10,7 +10,7 @@ import { AssignmentInterface } from "app/assignment/model/assignment.model";
   providedIn: "root",
 })
 export class SharedService {
-  appVersion = "3.10.1";
+  appVersion = "3.10.0";
 
   constructor() {}
 

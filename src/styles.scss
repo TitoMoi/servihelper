@@ -49,40 +49,7 @@ mat-icon {
   align-items: center;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .table-overflow {
   height: 80vh;
   overflow: auto;
-}
-
-.cp-ok-btn {
-  background-color: #673ab7; //primary
-  color: white;
-  padding: 8px;
-}
-
-//ToDo: try to remove this override
-.mat-mdc-option.no-hover.mat-active {
-  background: inherit;
-  color: inherit;
-
-  &.bg-color-lightyellow {
-    background-color: lightyellow;
-  }
-}
-
-.mat-mdc-option.no-hover {
-  &:hover {
-    border: 1px solid lightgray;
-    background: inherit;
-    color: inherit;
-  }
-  &.bg-color-lightyellow {
-    &:hover {
-      background-color: lightyellow;
-    }
-  }
 }
