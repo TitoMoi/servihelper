@@ -80,8 +80,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   isUpdate = this.a !== undefined;
 
-  //Update or create
-  assignmentForm: UntypedFormGroup = this.formBuilder.group({
+  defaultForm = {
     id: this.a ? this.a.id : undefined,
     date: [
       {
@@ -113,7 +112,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     footerNote: this.a
       ? this.a.footerNote
       : this.configService.getConfig().defaultFooterNoteId, //Note id
-  });
+  };
+  //Update or create
+  assignmentForm: UntypedFormGroup = this.formBuilder.group(this.defaultForm);
 
   //Subscriptions
   subscription: Subscription = new Subscription();
@@ -394,13 +395,14 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
    * Filter available participants by selected date and create a map of assignments by selected date.
    */
   getParticipantsAvailableOnDate() {
+    const dateControlValue = this.gfv("date");
     this.participants = this.participantService
       .getParticipants(true)
       .filter(
         (p) =>
           !p.notAvailableDates.some(
             (date) =>
-              new Date(this.gfv("date")).getTime() === new Date(date).getTime()
+              new Date(dateControlValue).getTime() === new Date(date).getTime()
           )
       );
   }
@@ -442,9 +444,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       );
     }
 
-    this.assignTypes = this.assignTypes.sort((a, b) =>
-      a.order > b.order ? 1 : -1
-    );
+    this.assignTypes.sort((a, b) => (a.order > b.order ? 1 : -1));
   }
 
   /**
@@ -456,17 +456,16 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     const roomValue = this.gfv("room");
     const assignTypeValue = this.gfv("assignType");
 
-    this.assignTypes = this.assignTypes.filter((at) => {
-      let exists = false;
+    console.log(
+      "existing assignments",
+      this.assignmentService.getAssignmentsByDate(dateValue)
+    );
 
-      for (const a of this.assignmentService.getAssignmentsByDate(dateValue)) {
-        if (a.assignType === at.id && a.room === roomValue) {
-          exists = true;
-          break;
-        }
-      }
-      return exists;
-    });
+    this.assignTypes = this.assignTypes.filter((at) =>
+      this.assignmentService
+        .getAssignmentsByDate(dateValue)
+        .some((a) => a.assignType === at.id && a.room === roomValue)
+    );
 
     //Reset if assignType selected not in new assignTypes
     if (!this.assignTypes.some((at) => at.id === assignTypeValue))
@@ -510,6 +509,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.removeGremlings();
     this.assignmentService.createAssignment(this.assignmentForm.value);
 
+    //Save current values
     const date = this.gfv("date");
     const footerNote = this.gfv("footerNote");
     const room = this.gfv("room");
@@ -517,23 +517,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     const onlyWoman = this.gfv("onlyWoman");
     const onlyExternals = this.gfv("onlyExternals");
 
-    this.assignmentForm.reset(
-      {
-        id: undefined,
-        date: [undefined, Validators.required],
-        room: [undefined, Validators.required], //Room id
-        assignType: [undefined, Validators.required], //AssignType id
-        theme: "",
-        onlyWoman: [false],
-        onlyMan: [false],
-        onlyExternals: [false],
-        principal: [undefined, Validators.required], //participant id
-        assistant: [undefined], //participant id
-        footerNote: this.configService.getConfig().defaultFooterNoteId, //Note id
-      },
-      { emitEvent: false }
-    );
+    //Reset form
+    this.assignmentForm.reset(this.defaultForm, { emitEvent: false });
 
+    //Restore values
     this.assignmentForm.get("date").setValue(date, { emitEvent: false });
     this.assignmentForm
       .get("footerNote")
@@ -564,6 +551,16 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   onSelectionChangeAssistant() {
     this.assistantSelect.close();
     if (!this.isUpdate) this.btnSaveCreateAnother.focus();
+  }
+
+  getPrincipalName(principalId) {
+    const principal = this.principals.find((p) => p.id === principalId);
+    return principal?.name;
+  }
+
+  getAssistantName(assistantId) {
+    const assistant = this.assistants.find((a) => a.id === assistantId);
+    return assistant?.name;
   }
 
   /**
