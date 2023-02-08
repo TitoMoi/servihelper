@@ -15,9 +15,9 @@
     "allowJs": true,
     "noImplicitOverride": true,
     "noUnusedLocals": true,
-    "target": "ES2022",
+    "target": "esnext",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["ES2022", "dom"],
+    "lib": ["esnext", "dom"],
     "useDefineForClassFields": false
   },
   "include": ["src/**/*.d.ts"],
