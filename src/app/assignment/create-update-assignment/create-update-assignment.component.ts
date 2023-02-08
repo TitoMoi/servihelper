@@ -83,9 +83,27 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   //Update or create
   assignmentForm: UntypedFormGroup = this.formBuilder.group({
     id: this.a ? this.a.id : undefined,
-    date: [this.a ? this.a.date : undefined, Validators.required],
-    room: [this.a ? this.a.room : undefined, Validators.required], //Room id
-    assignType: [this.a ? this.a.assignType : undefined, Validators.required], //AssignType id
+    date: [
+      {
+        value: this.a ? this.a.date : undefined,
+        disabled: this.a ? true : false,
+      },
+      Validators.required,
+    ],
+    room: [
+      {
+        value: this.a ? this.a.room : undefined,
+        disabled: this.a ? true : false,
+      },
+      Validators.required,
+    ], //Room id
+    assignType: [
+      {
+        value: this.a ? this.a.assignType : undefined,
+        disabled: this.a ? true : false,
+      },
+      Validators.required,
+    ], //AssignType id
     theme: this.a ? this.a.theme : "",
     onlyWoman: [this.a ? this.a.onlyWoman : false],
     onlyMan: [this.a ? this.a.onlyMan : false],
@@ -119,19 +137,15 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.getAssignments();
   }
 
-  async getAssignments() {
-    this.assignments = await this.assignmentService.getAssignments();
-  }
-  /**
-   *
-   * @param formControlName the form control name to get the value
-   * @returns the value for the form control
-   */
-  gfv(formControlName) {
-    return this.assignmentForm.get(formControlName).value;
-  }
-
   ngOnInit() {
+    //Get the view values
+    if (this.isUpdate) {
+      this.getParticipantsAvailableOnDate();
+      this.batchGetCountSortWarning();
+      this.removePrincipalFromAssistants(this.gfv("principal"));
+    }
+
+    //Prepare the form changes
     this.prepareRole();
     this.prepareDateSub();
     this.prepareRoomSub();
@@ -140,15 +154,22 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.prepareOnlyWomanSub();
     this.prepareOnlyExternalsSub();
     this.preparePrincipalSub();
-
-    if (this.isUpdate) {
-      this.getParticipantsAvailableOnDate();
-      this.batchGetCountSortWarning();
-    }
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  async getAssignments() {
+    this.assignments = await this.assignmentService.getAssignments();
+  }
+
+  /**
+   * @param formControlName the form control name to get the value
+   * @returns the value for the form control
+   */
+  gfv(formControlName: string) {
+    return this.assignmentForm.get(formControlName).value;
   }
 
   prepareRole() {
@@ -165,6 +186,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
+  /** (view) Set count and last assignment date for principals */
   setPrincipalsCountAndLastDate() {
     this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
@@ -175,8 +197,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
+  /** (view) Set count and last assignment date for assistants */
   setAssistantsCountAndLastDate() {
-    //Set count for assistants
     this.sharedService.setCountAndLastAssignmentDate(
       this.assignments,
       this.assistants,
@@ -312,15 +334,19 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
         .get("principal")
         .valueChanges.subscribe((principalId) => {
           //remove selected principal from assistants
-          let i = this.assistants.length;
-          while (i--) {
-            if (this.assistants[i].id === principalId) {
-              this.assistants.splice(i, 1);
-              break;
-            }
-          }
+          this.removePrincipalFromAssistants(principalId);
         })
     );
+  }
+
+  removePrincipalFromAssistants(principalId: string) {
+    let i = this.assistants.length;
+    while (i--) {
+      if (this.assistants[i].id === principalId) {
+        this.assistants.splice(i, 1);
+        break;
+      }
+    }
   }
 
   batchCleanPrincipalAssistant() {
@@ -412,8 +438,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   /**
    * Remove assignTypes that already exist in the selected date and room.
    * depends on: assignments, selected room, selected date
-   *
-   * This method doesnt trigger on update assignment because admin user can select any assignment while updating
    */
   removeAssignTypesThatAlreadyExistOnDate() {
     const dateValue = this.gfv("date");
@@ -431,6 +455,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       }
       return exists;
     });
+
     //Reset if assignType selected not in new assignTypes
     if (!this.assignTypes.some((at) => at.id === assignTypeValue))
       this.assignmentForm
@@ -517,15 +542,13 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.removeAssignTypesThatAlreadyExistOnDate();
   }
 
-  /** Focus */
   onSelectionChangePrincipal() {
     this.principalSelect.close();
     //Wait until button is enabled to focus it otherwise not works
     this.cdr.detectChanges();
-    this.btnSaveCreateAnother.focus();
+    if (this.isUpdate) this.btnSaveCreateAnother.focus();
   }
 
-  /** Focus */
   onSelectionChangeAssistant() {
     this.assistantSelect.close();
     if (this.isUpdate) this.btnSaveCreateAnother.focus();
@@ -580,7 +603,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   getBorderLeftStyle(color) {
-    return `10px solid ${color}`;
+    return `10px solid ${color ? color : "#FFF"}`;
   }
 
   /**
