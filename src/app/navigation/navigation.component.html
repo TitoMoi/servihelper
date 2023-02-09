@@ -7,11 +7,16 @@
   >
     <mat-toolbar>
       <a
-        *ngIf="queryGitHub$ | async"
+        *ngIf="queryGitHub$ | async as githubData"
         href="#"
         (click)="openExternalServihelperRepository()"
       >
-        <div class="f">{{ t("NEW_VERSION_AVAILABLE") }}</div>
+        <div class="new-version-font-size">
+          {{ t("NEW_VERSION_AVAILABLE") }}:
+        </div>
+        <div class="new-version-font-size">
+          {{ githubData.tag_name }}
+        </div>
       </a>
     </mat-toolbar>
     <!-- p-0 -> mat-nav-list has padding top and a gap is visible, this padding fix removes it -->
