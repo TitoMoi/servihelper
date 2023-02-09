@@ -456,15 +456,14 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     const roomValue = this.gfv("room");
     const assignTypeValue = this.gfv("assignType");
 
-    console.log(
-      "existing assignments",
-      this.assignmentService.getAssignmentsByDate(dateValue)
-    );
+    const assignmentsByDate =
+      this.assignmentService.getAssignmentsByDate(dateValue);
 
-    this.assignTypes = this.assignTypes.filter((at) =>
-      this.assignmentService
-        .getAssignmentsByDate(dateValue)
-        .some((a) => a.assignType === at.id && a.room === roomValue)
+    this.assignTypes = this.assignTypes.filter(
+      (at) =>
+        !assignmentsByDate.some(
+          (a) => a.assignType === at.id && a.room === roomValue
+        )
     );
 
     //Reset if assignType selected not in new assignTypes
