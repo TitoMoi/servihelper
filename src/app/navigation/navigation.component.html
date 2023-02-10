@@ -1,6 +1,7 @@
 <mat-sidenav-container *transloco="let t">
   <mat-sidenav
     fixedInViewport
+    disableClose="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
@@ -132,7 +133,7 @@
         ></mat-icon>
       </div>
     </mat-toolbar>
-    <div class="m-3">
+    <div class="m-3 height-100-viewport">
       <ng-content></ng-content>
     </div>
   </mat-sidenav-content>
