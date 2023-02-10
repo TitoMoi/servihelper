@@ -2,6 +2,13 @@ import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { RoomInterface } from "app/room/model/room.model";
 
+type AssignmentOperationType = "create" | "update" | "delete"; //get is excluded
+
+export interface AssignmentOperationInterface {
+  assignment: AssignmentInterface;
+  operationType: AssignmentOperationType;
+}
+
 export interface AssignmentInterface {
   id: string;
   date: Date;

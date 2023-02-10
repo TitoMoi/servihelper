@@ -498,7 +498,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     else this.assignmentService.createAssignment(this.assignmentForm.value);
 
     //navigate to parent, one parent for each fragment
-    this.router.navigate([".."], {
+    const parentRoute = this.isUpdate ? "../.." : "..";
+    this.router.navigate([parentRoute], {
       relativeTo: this.activatedRoute,
     });
   }

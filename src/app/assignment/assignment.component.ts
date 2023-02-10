@@ -1,5 +1,6 @@
 import {
   AssignmentInterface,
+  AssignmentOperationInterface,
   AssignmentTableInterface,
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
@@ -33,7 +34,7 @@ export class AssignmentComponent
   assignments: AssignmentInterface[] = [];
 
   //The assignments with display values
-  displayAssignments;
+  displayAssignments: AssignmentTableInterface[];
 
   dayIndex = 0;
   lastItemsPerPageIndex = 0;
@@ -65,7 +66,7 @@ export class AssignmentComponent
 
         this.displayAssignments = [
           ...this.displayAssignments,
-          ...this.getDisplayValues(assignmentsPage),
+          ...this.getDisplayValuesAndSeparator(assignmentsPage),
         ];
         this.observer.unobserve(entry.target);
         this.cdr.detectChanges();
@@ -99,26 +100,30 @@ export class AssignmentComponent
       itemsPerPage += this.dateAndAssignmentsLength[i];
     }
     const assignmentsPage = this.assignments.slice(0, itemsPerPage); //+1 for the slice method that doesnt include last
-    this.displayAssignments = this.getDisplayValues(assignmentsPage);
+    this.displayAssignments =
+      this.getDisplayValuesAndSeparator(assignmentsPage);
 
     //update index for next week
     this.dayIndex += 7;
     //update index of last items per page
     this.lastItemsPerPageIndex = this.lastItemsPerPageIndex + itemsPerPage; //prepare index for next day
 
-    //Listen for assignments updates
+    //Listen for assignments updates (create, update, delete)
     this.subscription.add(
-      this.assignmentService.assignmentHasChanged$.subscribe(
-        (assignment: AssignmentInterface) => {
-          const index = this.displayAssignments.findIndex(
-            (dataElement: AssignmentTableInterface) =>
-              dataElement.id === assignment.id
-          );
-          //Prepare assignment display values
-          const assignmentTable: AssignmentTableInterface[] =
-            this.getDisplayValues([assignment]);
-          //swap the assignment
-          this.displayAssignments[index] = assignmentTable[0];
+      this.assignmentService.assignment$.subscribe(
+        (assignmentOperation: AssignmentOperationInterface) => {
+          const assignment = assignmentOperation.assignment;
+          switch (assignmentOperation.operationType) {
+            case "create":
+              this.addAssignmentToTable(assignment);
+              break;
+            case "update":
+              this.updateAssignmentInTable(assignment);
+              break;
+            case "delete":
+              this.deleteAssignmentInTable(assignment);
+              break;
+          }
         }
       )
     );
@@ -137,6 +142,33 @@ export class AssignmentComponent
     this.subscription.unsubscribe();
   }
 
+  addAssignmentToTable(assignment: AssignmentInterface) {
+    const assignmentTable: AssignmentTableInterface[] =
+      this.getDisplayValuesAndSeparator([assignment]);
+    this.displayAssignments.push(assignmentTable[0]);
+    this.displayAssignments.sort(
+      this.assignmentService.sortAssignmentsByDateDesc
+    );
+  }
+
+  updateAssignmentInTable(assignment: AssignmentInterface) {
+    const index = this.displayAssignments.findIndex(
+      (dataElement: AssignmentTableInterface) =>
+        dataElement.id === assignment.id
+    );
+    //Prepare assignment display values
+    const assignmentTable: AssignmentTableInterface[] =
+      this.getDisplayValuesAndSeparator([assignment]);
+    //swap the assignment
+    this.displayAssignments[index] = assignmentTable[0];
+  }
+
+  deleteAssignmentInTable(assignment) {
+    this.displayAssignments = this.displayAssignments.filter(
+      (da) => da.id === assignment.id
+    );
+  }
+
   getBorderLeftColor(color: string) {
     return `20px solid ${color ? color : "#FFF"}`;
   }
@@ -151,7 +183,7 @@ export class AssignmentComponent
     return assignment.id;
   }
 
-  getDisplayValues(
+  getDisplayValuesAndSeparator(
     assignmentsPage: AssignmentInterface[]
   ): AssignmentTableInterface[] {
     const assignmentsTable: AssignmentTableInterface[] = [];
@@ -169,14 +201,16 @@ export class AssignmentComponent
         assignment.assignType
       );
 
+      const room = this.roomService.getRoom(assignment.room);
+
       //Populate datasource, values are in order
       assignmentsTable.push({
         id: assignment.id,
         date: assignment.date,
         hasDateSeparator: undefined,
         hasBeenClicked: undefined,
-        room: this.roomService.getRoom(assignment.room).name,
-        assignType: assignType.name,
+        room: room?.name,
+        assignType: assignType?.name,
         assignTypeColor: assignType.color,
         theme: assignment.theme,
         principal: this.participantService.getParticipant(assignment.principal)
@@ -186,6 +220,19 @@ export class AssignmentComponent
     }
 
     //Separate dates from one day to another with a black dashed border
+
+    /*  for (const [index, assignment] of assignmentsTable.entries()) {
+      if (
+        new Date(assignment.date).getTime() !==
+        new Date(this.lastDateService.lastDashedDate).getTime()
+      ) {
+        //Dont put a top dash in the first value
+        if (index !== 0) assignment.hasDateSeparator = true;
+        //update last dashed date
+        this.lastDateService.lastDashedDate = assignment.date;
+      }
+    } */
+
     for (const tableRow of assignmentsTable) {
       if (
         new Date(tableRow.date).getTime() !==
