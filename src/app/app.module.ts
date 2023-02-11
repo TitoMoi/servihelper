@@ -70,6 +70,10 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { InfoAssignmentComponent } from "./assignment/info-assignment/info-assignment.component";
 import { NgxEditorModule } from "ngx-editor";
 import { WarningAssignmentComponent } from "./assignment/warning-assignment/warning-assignment.component";
+import { AssignTypePipe } from "./assignType/pipe/assign-type.pipe";
+import { RoomPipe } from "./room/pipe/room.pipe";
+import { NotePipe } from './note/pipe/note.pipe';
+import { ParticipantPipe } from './participant/pipe/participant.pipe';
 
 @NgModule({
   declarations: [
@@ -117,6 +121,10 @@ import { WarningAssignmentComponent } from "./assignment/warning-assignment/warn
     IsRoleCheckedPipe,
     InfoAssignmentComponent,
     WarningAssignmentComponent,
+    AssignTypePipe,
+    RoomPipe,
+    NotePipe,
+    ParticipantPipe,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="assignment">
   <div class="col-12">
     <table id="assignmentTableId" class="bg-color-white" style="width: 23rem">
       <tr>
@@ -23,10 +23,12 @@
       </tr>
       <tr>
         <td>
-          <span class="ms-3 me-3">{{ principalName }} </span>
+          <span class="ms-3 me-3"
+            >{{ assignment.principal | participantPipe }}
+          </span>
         </td>
       </tr>
-      <tr *ngIf="assistantName">
+      <tr *ngIf="assignment.assistant | participantPipe">
         <td class="fw-bold">
           <span *ngIf="!assignmentAssistantTitle" class="ms-3 me-3">{{
             "ASSIGN_IMAGE_ASSISTANT" | transloco
@@ -36,7 +38,7 @@
           }}</span>
         </td>
       </tr>
-      <tr *ngIf="assistantName">
+      <tr *ngIf="assignment.assistant | participantPipe as assistantName">
         <td>
           <span class="ms-3 me-3">{{ assistantName }}</span>
         </td>
@@ -54,7 +56,7 @@
       <tr>
         <td>
           <span class="ms-3 me-3">
-            {{ date | translocoDate : { dateStyle: "full" } }}
+            {{ assignment.date | translocoDate : { dateStyle: "full" } }}
           </span>
         </td>
       </tr>
@@ -69,9 +71,11 @@
         </td>
       </tr>
       <tr>
-        <td><span class="ms-3"></span>{{ assignTypeName }}</td>
+        <td>
+          <span class="ms-3"></span>{{ assignment.assignType | assignTypePipe }}
+        </td>
       </tr>
-      <tr *ngIf="theme">
+      <tr *ngIf="assignment.theme">
         <td class="fw-bold">
           <div *ngIf="!assignmentThemeTitle" class="ms-3 me-3">
             {{ "ASSIGN_IMAGE_NOTE" | transloco }}
@@ -81,9 +85,9 @@
           </div>
         </td>
       </tr>
-      <tr *ngIf="theme">
+      <tr *ngIf="assignment.theme">
         <td>
-          <div class="ms-3 me-3">{{ theme }}</div>
+          <div class="ms-3 me-3">{{ assignment.theme }}</div>
         </td>
       </tr>
       <tr>
@@ -99,7 +103,7 @@
       <tr>
         <td>
           <div [ngClass]="{ 'mb-3': !footerNoteEditorHTML }" class="ms-3 me-3">
-            {{ roomName }}
+            {{ assignment.room | roomPipe }}
           </div>
         </td>
       </tr>
