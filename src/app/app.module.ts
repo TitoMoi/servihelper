@@ -34,9 +34,8 @@ import { ReportSelectorComponent } from "./report/report-selector/report-selecto
 import { SelectionListHorComponent } from "./report/selection-list-hor/selection-list-hor.component";
 import { SelectionListComponent } from "./report/selection-list/selection-list.component";
 import { AssignTypeComponent } from "./assignType/assignType.component";
-import { CreateAssignTypeComponent } from "./assignType/create-assigntype/create-assigntype.component";
+import { CreateUpdateAssignTypeComponent } from "./assignType/create-update-assigntype/create-update-assigntype.component";
 import { DeleteAssignTypeComponent } from "./assignType/delete-assigntype/delete-assigntype.component";
-import { UpdateAssignTypeComponent } from "./assignType/update-assigntype/update-assigntype.component";
 import { AutoFocusModule } from "./autofocus/autofocus.module";
 import { ConfigComponent } from "./config/config.component";
 import { CreateNoteComponent } from "./note/create-note/create-note.component";
@@ -72,8 +71,8 @@ import { NgxEditorModule } from "ngx-editor";
 import { WarningAssignmentComponent } from "./assignment/warning-assignment/warning-assignment.component";
 import { AssignTypePipe } from "./assignType/pipe/assign-type.pipe";
 import { RoomPipe } from "./room/pipe/room.pipe";
-import { NotePipe } from './note/pipe/note.pipe';
-import { ParticipantPipe } from './participant/pipe/participant.pipe';
+import { NotePipe } from "./note/pipe/note.pipe";
+import { ParticipantPipe } from "./participant/pipe/participant.pipe";
 
 @NgModule({
   declarations: [
@@ -100,8 +99,7 @@ import { ParticipantPipe } from './participant/pipe/participant.pipe';
     UpdateRoomComponent,
     DeleteRoomComponent,
     AssignTypeComponent,
-    CreateAssignTypeComponent,
-    UpdateAssignTypeComponent,
+    CreateUpdateAssignTypeComponent,
     DeleteAssignTypeComponent,
     NoteComponent,
     CreateNoteComponent,

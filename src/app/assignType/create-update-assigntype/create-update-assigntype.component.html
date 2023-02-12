@@ -1,8 +1,13 @@
-<form [formGroup]="assignTypeForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-header>
       <mat-card-title
-        >{{ "ASSIGNTYPE_CREATE_TITLE" | transloco }}
+        >{{
+          (this.isUpdate
+            ? "ASSIGNTYPE_UPDATE_TITLE"
+            : "ASSIGNTYPE_CREATE_TITLE"
+          ) | transloco
+        }}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -41,16 +46,21 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button type="button" class="me-3" routerLink="..">
+      <button
+        mat-raised-button
+        type="button"
+        class="me-3"
+        [routerLink]="isUpdate ? '../..' : '..'"
+      >
         {{ "BUTTON_CANCEL" | transloco }}
       </button>
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="assignTypeForm.invalid"
+        [disabled]="form.invalid"
       >
-        {{ "BUTTON_SAVE" | transloco }}
+        {{ (isUpdate ? "BUTTON_UPDATE" : "BUTTON_SAVE") | transloco }}
       </button>
     </mat-card-actions>
   </mat-card>

@@ -5,9 +5,8 @@ import { ImageAssignmentComponent } from "app/assignment/image-assignment/image-
 import { MoveAssignmentComponent } from "app/assignment/move-assignment/move-assignment.component";
 import { ReportSelectorComponent } from "app/report/report-selector/report-selector.component";
 import { AssignTypeComponent } from "app/assignType/assignType.component";
-import { CreateAssignTypeComponent } from "app/assignType/create-assigntype/create-assigntype.component";
+import { CreateUpdateAssignTypeComponent } from "app/assignType/create-update-assigntype/create-update-assigntype.component";
 import { DeleteAssignTypeComponent } from "app/assignType/delete-assigntype/delete-assigntype.component";
-import { UpdateAssignTypeComponent } from "app/assignType/update-assigntype/update-assigntype.component";
 import { ConfigComponent } from "app/config/config.component";
 import { HomeComponent } from "app/home/home.component";
 import { CreateNoteComponent } from "app/note/create-note/create-note.component";
@@ -67,11 +66,11 @@ const routes: Routes = [
   },
   {
     path: "assignType/create",
-    component: CreateAssignTypeComponent,
+    component: CreateUpdateAssignTypeComponent,
   },
   {
     path: "assignType/update/:id",
-    component: UpdateAssignTypeComponent,
+    component: CreateUpdateAssignTypeComponent,
   },
   {
     path: "assignType/delete/:id",
