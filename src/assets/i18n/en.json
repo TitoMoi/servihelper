@@ -156,7 +156,6 @@
   "PARTICIPANT_UPDATE_TITLE": "Update participant",
   "PLACEHOLDER_COLOR": "The color for this assignment type in the lists",
   "PLACEHOLDER_NAME": "Name",
-  "PLACEHOLDER_ORDER": "The order of appearance in the lists, 1 will come out before 2 and so on",
   "PLACEHOLDER_REPORT_DATE_COLOR": "Default background color for the date",
   "PLACEHOLDER_SELECT_COPY_PARTICIPANT": "Select the participant to clone",
   "REPORT_MULTIPLE_IMAGE_OPEN_FOLDER": "Click me to open the assignments folder...",
@@ -232,5 +231,6 @@
   "ASSIGN_PRINCIPAL": "Principal",
   "ASSIGN_ROOM": "Room",
   "ASSIGN_THEME": "Theme",
-  "INFO__MY_VERSION": "My current version:"
+  "INFO__MY_VERSION": "My current version:",
+  "PLACEHOLDER_ORDER": "order of appearance"
 }

@@ -1,10 +1,11 @@
 <mat-sidenav-container *transloco="let t">
   <mat-sidenav
+    #drawer
     fixedInViewport
-    disableClose="true"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
+    [disableClose]="hideSidenav === false"
+    [attr.role]="hideSidenav ? 'dialog' : 'navigation'"
+    [mode]="hideSidenav ? 'over' : 'side'"
+    [opened]="hideSidenav === false"
   >
     <mat-toolbar>
       <a
@@ -22,58 +23,58 @@
     </mat-toolbar>
     <!-- p-0 -> mat-nav-list has padding top and a gap is visible, this padding fix removes it -->
     <mat-nav-list class="p-0">
-      <mat-list-item routerLink="/">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="/">
         <span>{{ t("NAV_HOME") }}</span>
       </mat-list-item>
-      <mat-list-item routerLink="assignType">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="assignType">
         <div class="d-flex justify-content-between align-items-center">
           <span class="white-space-pre-wrap">{{ t("NAV_ASSIGN_TYPE") }}</span>
           <mat-icon svgIcon="abc"></mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="room">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="room">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t("NAV_ROOM") }}</span>
           <mat-icon svgIcon="room"></mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="note">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="note">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t("NAV_NOTE") }}</span>
           <mat-icon svgIcon="notes"></mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="participant">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="participant">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t("NAV_PARTICIPANT") }}</span>
           <mat-icon svgIcon="participants"></mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="assignment">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="assignment">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t("NAV_ASSIGNMENT") }}</span>
           <mat-icon svgIcon="assignment"></mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="selectionSheets">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="selectionSheets">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t("NAV_REPORTS") }}</span>
           <mat-icon svgIcon="lists"></mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="statistics">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="statistics">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t("NAV_STATISTICS") }}</span>
           <mat-icon svgIcon="statistics"></mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="config">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="config">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t("NAV_CONFIG") }}</span>
           <mat-icon svgIcon="config"></mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="info">
+      <mat-list-item (click)="closeDrawer(drawer)" routerLink="info">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t("NAV_INFO") }}</span>
           <mat-icon svgIcon="info" aria-label="Side nav toggle icon"></mat-icon>
@@ -88,7 +89,6 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
       >
         <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
       </button>

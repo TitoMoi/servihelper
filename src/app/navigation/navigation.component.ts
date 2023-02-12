@@ -3,7 +3,12 @@ import { Observable } from "rxjs";
 import { filter, map, shareReplay } from "rxjs/operators";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from "@angular/core";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
 import { MatSelectChange } from "@angular/material/select";
 import { TranslocoService } from "@ngneat/transloco";
@@ -14,6 +19,7 @@ import { GitHubDataInterface } from "./model/navigation.model";
 import { ConfigInterface } from "app/config/model/config.model";
 import { RoleInterface } from "app/roles/model/role.model";
 import { UntypedFormBuilder } from "@angular/forms";
+import { MatSidenav } from "@angular/material/sidenav";
 
 @Component({
   selector: "app-navigation",
@@ -22,12 +28,7 @@ import { UntypedFormBuilder } from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationComponent implements OnInit {
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  hideSidenav;
 
   config = this.configService.getConfig();
 
@@ -61,6 +62,19 @@ export class NavigationComponent implements OnInit {
     roleId: [this.administratorKey],
   });
 
+  #hideSidenav$: Observable<boolean> = this.breakpointObserver
+    .observe([
+      Breakpoints.Large,
+      Breakpoints.Medium,
+      Breakpoints.Small,
+      Breakpoints.Tablet,
+      Breakpoints.Handset,
+    ])
+    .pipe(
+      map((result) => result.matches),
+      shareReplay()
+    );
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private breakpointObserver: BreakpointObserver,
@@ -68,7 +82,8 @@ export class NavigationComponent implements OnInit {
     private dateAdapter: DateAdapter<NativeDateAdapter>,
     public configService: ConfigService,
     private sharedService: SharedService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -76,6 +91,12 @@ export class NavigationComponent implements OnInit {
 
     this.setLang(this.lang);
     this.setLocale(this.lang);
+
+    //Create only 1 subscription on the model, as i need it after to check if drawer can be closed
+    this.#hideSidenav$.subscribe((hideSidenav) => {
+      this.hideSidenav = hideSidenav;
+      this.cdr.detectChanges();
+    });
   }
 
   /**
@@ -118,5 +139,9 @@ export class NavigationComponent implements OnInit {
 
   openExternalServihelperRepository() {
     shell.openExternal("https://github.com/TitoMoi/servihelper/releases");
+  }
+
+  closeDrawer(drawer: MatSidenav) {
+    if (this.hideSidenav) drawer.close();
   }
 }

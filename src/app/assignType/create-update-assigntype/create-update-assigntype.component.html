@@ -23,19 +23,21 @@
             />
           </mat-form-field>
         </div>
-        <div class="col-6">
+        <div class="col-auto">
           <mat-form-field>
             <mat-label>{{ "PLACEHOLDER_ORDER" | transloco }}</mat-label>
             <input matInput type="number" formControlName="order" />
           </mat-form-field>
         </div>
-        <div class="col-6">
+        <div class="col-auto">
           <mat-label class="me-3">{{
             "PLACEHOLDER_COLOR" | transloco
           }}</mat-label>
           <input type="color" formControlName="color" />
         </div>
-        <div class="col-6">
+      </div>
+      <div class="row">
+        <div class="col">
           <mat-checkbox
             labelPosition="before"
             color="primary"

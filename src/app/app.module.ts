@@ -73,6 +73,7 @@ import { AssignTypePipe } from "./assignType/pipe/assign-type.pipe";
 import { RoomPipe } from "./room/pipe/room.pipe";
 import { NotePipe } from "./note/pipe/note.pipe";
 import { ParticipantPipe } from "./participant/pipe/participant.pipe";
+import { LayoutModule } from "@angular/cdk/layout";
 
 @NgModule({
   declarations: [
@@ -149,6 +150,7 @@ import { ParticipantPipe } from "./participant/pipe/participant.pipe";
     MatChipsModule,
     MatDialogModule,
     NgxEditorModule, //the editor for the notes
+    LayoutModule,
   ],
   providers: [{ provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent],
