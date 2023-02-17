@@ -17,10 +17,9 @@ import { DeleteParticipantComponent } from "app/participant/delete-participant/d
 import { ParticipantComponent } from "app/participant/participant.component";
 import { UpdateParticipantComponent } from "app/participant/update-participant/update-participant.component";
 import { QuestionComponent } from "app/question/question.component";
-import { CreateRoomComponent } from "app/room/create-room/create-room.component";
+import { CreateUpdateRoomComponent } from "app/room/create-update-room/create-update-room.component";
 import { DeleteRoomComponent } from "app/room/delete-room/delete-room.component";
 import { RoomComponent } from "app/room/room.component";
-import { UpdateRoomComponent } from "app/room/update-room/update-room.component";
 import { SearchComponent } from "app/search/search.component";
 import { StatisticsComponent } from "app/statistics/statistics.component";
 
@@ -49,11 +48,11 @@ const routes: Routes = [
   },
   {
     path: "room/create",
-    component: CreateRoomComponent,
+    component: CreateUpdateRoomComponent,
   },
   {
     path: "room/update/:id",
-    component: UpdateRoomComponent,
+    component: CreateUpdateRoomComponent,
   },
   {
     path: "room/delete/:id",

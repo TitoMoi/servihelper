@@ -46,10 +46,9 @@ import { DeleteParticipantComponent } from "./participant/delete-participant/del
 import { ParticipantComponent } from "./participant/participant.component";
 import { UpdateParticipantComponent } from "./participant/update-participant/update-participant.component";
 import { QuestionComponent } from "./question/question.component";
-import { CreateRoomComponent } from "./room/create-room/create-room.component";
+import { CreateUpdateRoomComponent } from "./room/create-update-room/create-update-room.component";
 import { DeleteRoomComponent } from "./room/delete-room/delete-room.component";
 import { RoomComponent } from "./room/room.component";
-import { UpdateRoomComponent } from "./room/update-room/update-room.component";
 import { SearchComponent } from "./search/search.component";
 import { AssistantCountComponent } from "./statistics/assistant-count/assistant-count.component";
 import { GlobalCountComponent } from "./statistics/global-count/global-count.component";
@@ -95,8 +94,7 @@ import { LayoutModule } from "@angular/cdk/layout";
     DeleteAssignmentComponent,
     ImageAssignmentComponent,
     RoomComponent,
-    CreateRoomComponent,
-    UpdateRoomComponent,
+    CreateUpdateRoomComponent,
     DeleteRoomComponent,
     AssignTypeComponent,
     CreateUpdateAssignTypeComponent,
