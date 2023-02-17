@@ -9,10 +9,9 @@ import { CreateUpdateAssignTypeComponent } from "app/assignType/create-update-as
 import { DeleteAssignTypeComponent } from "app/assignType/delete-assigntype/delete-assigntype.component";
 import { ConfigComponent } from "app/config/config.component";
 import { HomeComponent } from "app/home/home.component";
-import { CreateNoteComponent } from "app/note/create-note/create-note.component";
+import { CreateUpdateNoteComponent } from "app/note/create-update-note/create-update-note.component";
 import { DeleteNoteComponent } from "app/note/delete-note/delete-note.component";
 import { NoteComponent } from "app/note/note.component";
-import { UpdateNoteComponent } from "app/note/update-note/update-note.component";
 import { CreateParticipantComponent } from "app/participant/create-participant/create-participant.component";
 import { DeleteParticipantComponent } from "app/participant/delete-participant/delete-participant.component";
 import { ParticipantComponent } from "app/participant/participant.component";
@@ -82,11 +81,11 @@ const routes: Routes = [
   },
   {
     path: "note/create",
-    component: CreateNoteComponent,
+    component: CreateUpdateNoteComponent,
   },
   {
     path: "note/update/:id",
-    component: UpdateNoteComponent,
+    component: CreateUpdateNoteComponent,
   },
   {
     path: "note/delete/:id",

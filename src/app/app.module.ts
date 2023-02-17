@@ -38,10 +38,9 @@ import { CreateUpdateAssignTypeComponent } from "./assignType/create-update-assi
 import { DeleteAssignTypeComponent } from "./assignType/delete-assigntype/delete-assigntype.component";
 import { AutoFocusModule } from "./autofocus/autofocus.module";
 import { ConfigComponent } from "./config/config.component";
-import { CreateNoteComponent } from "./note/create-note/create-note.component";
+import { CreateUpdateNoteComponent } from "./note/create-update-note/create-update-note.component";
 import { DeleteNoteComponent } from "./note/delete-note/delete-note.component";
 import { NoteComponent } from "./note/note.component";
-import { UpdateNoteComponent } from "./note/update-note/update-note.component";
 import { CreateParticipantComponent } from "./participant/create-participant/create-participant.component";
 import { DeleteParticipantComponent } from "./participant/delete-participant/delete-participant.component";
 import { ParticipantComponent } from "./participant/participant.component";
@@ -103,8 +102,7 @@ import { LayoutModule } from "@angular/cdk/layout";
     CreateUpdateAssignTypeComponent,
     DeleteAssignTypeComponent,
     NoteComponent,
-    CreateNoteComponent,
-    UpdateNoteComponent,
+    CreateUpdateNoteComponent,
     DeleteNoteComponent,
     ReportSelectorComponent,
     SelectionListComponent,

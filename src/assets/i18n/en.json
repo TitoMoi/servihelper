@@ -85,8 +85,6 @@
   "CONFIG_ZIP_UPLOADED": "Zip uploaded",
   "INFO_HOW_TO_WORK": "¿How can several managers work at the same time?",
   "INFO_HOW_TO_WORK_ANSWER": "The first creates its assignments, exports the data from the home section and leaves it in a site shared by those responsible, the second imports it and creates its assignments, and so on.",
-  "INFO_WHAT_IS_YELLOW_COLOR": "A yellow color appears in some participants, what is it?",
-  "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "Although the participant may be a candidate for the assignment, it means that he or she already has one or more other assignments on that date.",
   "INFO__CONTACT": "¿How do I report a bug or an improvement?",
   "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
   "INFO__DISTRIBUTION": "¿Can I distribute it?",
@@ -232,5 +230,7 @@
   "ASSIGN_ROOM": "Room",
   "ASSIGN_THEME": "Theme",
   "INFO__MY_VERSION": "My current version:",
-  "PLACEHOLDER_ORDER": "order of appearance"
+  "PLACEHOLDER_ORDER": "order of appearance",
+  "INFO_WHAT_IS_YELLOW_COLOR": "remove?",
+  "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "remove¿"
 }
