@@ -21,7 +21,7 @@ export class ParticipantComponent implements OnInit {
       .filter((participant) => !participant.isExternal);
   }
 
-  toggleParticipants(event: MatCheckboxChange) {
+  toggleExternals(event: MatCheckboxChange) {
     if (event.checked) {
       this.participants = this.participantService
         .getParticipants()

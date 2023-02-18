@@ -68,7 +68,7 @@ export class ParticipantService {
     this.#participantsMap.set(participant.id, participant);
 
     //ORDER THE PARTICIPANTS BY A to Z
-    this.#participants = this.#participants.sort(function (a, b) {
+    this.#participants.sort(function (a, b) {
       if (a.name < b.name) {
         return -1;
       }
@@ -107,6 +107,18 @@ export class ParticipantService {
 
         this.#participantsMap.set(participant.id, participant);
         //save participants with the updated participant
+
+        //ORDER THE PARTICIPANTS BY A to Z
+        this.#participants.sort(function (a, b) {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
+
         return this.saveParticipantsToFile();
       }
     }
