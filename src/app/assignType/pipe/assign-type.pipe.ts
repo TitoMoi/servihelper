@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { AssignTypeInterface } from "../model/assignType.model";
 import { AssignTypeService } from "../service/assignType.service";
 
 @Pipe({
@@ -6,8 +7,8 @@ import { AssignTypeService } from "../service/assignType.service";
 })
 export class AssignTypePipe implements PipeTransform {
   constructor(private assignTypeService: AssignTypeService) {}
-  /**Given the id of the assignType return the name */
-  transform(id: string): string {
-    return this.assignTypeService.getAssignType(id)?.name;
+  /**Given the id of the assignType return the assignType */
+  transform(id: string): AssignTypeInterface {
+    return this.assignTypeService.getAssignType(id);
   }
 }

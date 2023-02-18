@@ -1,5 +1,5 @@
 import {
-  ParticipantAssignTypesInterface,
+  ParticipantAssignTypeInterface,
   ParticipantInterface,
   ParticipantModel,
 } from "app/participant/model/participant.model";
@@ -132,7 +132,7 @@ export class ParticipantService {
    * @returns
    */
   addAssignType(id: string, hasAssistant: boolean): boolean {
-    const participantAssignTypesValue: ParticipantAssignTypesInterface = {
+    const participantAssignTypesValue: ParticipantAssignTypeInterface = {
       assignTypeId: id,
       canPrincipal: true,
       canAssistant: hasAssistant,

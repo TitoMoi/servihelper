@@ -41,10 +41,9 @@ import { ConfigComponent } from "./config/config.component";
 import { CreateUpdateNoteComponent } from "./note/create-update-note/create-update-note.component";
 import { DeleteNoteComponent } from "./note/delete-note/delete-note.component";
 import { NoteComponent } from "./note/note.component";
-import { CreateParticipantComponent } from "./participant/create-participant/create-participant.component";
+import { CreateUpdateParticipantComponent } from "./participant/create-update-participant/create-update-participant.component";
 import { DeleteParticipantComponent } from "./participant/delete-participant/delete-participant.component";
 import { ParticipantComponent } from "./participant/participant.component";
-import { UpdateParticipantComponent } from "./participant/update-participant/update-participant.component";
 import { QuestionComponent } from "./question/question.component";
 import { CreateUpdateRoomComponent } from "./room/create-update-room/create-update-room.component";
 import { DeleteRoomComponent } from "./room/delete-room/delete-room.component";
@@ -67,11 +66,12 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { InfoAssignmentComponent } from "./assignment/info-assignment/info-assignment.component";
 import { NgxEditorModule } from "ngx-editor";
 import { WarningAssignmentComponent } from "./assignment/warning-assignment/warning-assignment.component";
-import { AssignTypePipe } from "./assignType/pipe/assign-type.pipe";
+import { AssignTypeNamePipe } from "./assignType/pipe/assignType-name.pipe";
 import { RoomPipe } from "./room/pipe/room.pipe";
 import { NotePipe } from "./note/pipe/note.pipe";
 import { ParticipantPipe } from "./participant/pipe/participant.pipe";
 import { LayoutModule } from "@angular/cdk/layout";
+import { AssignTypePipe } from "./assignType/pipe/assign-type.pipe";
 
 @NgModule({
   declarations: [
@@ -86,8 +86,7 @@ import { LayoutModule } from "@angular/cdk/layout";
     ConfigComponent,
     NavigationComponent,
     ParticipantComponent,
-    CreateParticipantComponent,
-    UpdateParticipantComponent,
+    CreateUpdateParticipantComponent,
     DeleteParticipantComponent,
     AssignmentComponent,
     CreateUpdateAssignmentComponent,
@@ -117,6 +116,7 @@ import { LayoutModule } from "@angular/cdk/layout";
     InfoAssignmentComponent,
     WarningAssignmentComponent,
     AssignTypePipe,
+    AssignTypeNamePipe,
     RoomPipe,
     NotePipe,
     ParticipantPipe,

@@ -1,11 +1,10 @@
 export interface ParticipantInterface {
-  id: string;
+  id?: string; //On update id is not coming from the form
   name: string;
   isWoman: boolean;
   isExternal: boolean;
-  onlyAssistant: boolean;
   rooms: ParticipantRoomInterface[];
-  assignTypes: ParticipantAssignTypesInterface[];
+  assignTypes: ParticipantAssignTypeInterface[];
   available: boolean;
   notAvailableDates?: string[];
 }
@@ -26,9 +25,8 @@ export class ParticipantModel {
   name: string;
   isWoman: boolean;
   isExternal: boolean;
-  onlyAssistant: boolean;
   rooms: ParticipantRoomInterface[];
-  assignTypes: ParticipantAssignTypesInterface[];
+  assignTypes: ParticipantAssignTypeInterface[];
   available: boolean;
   notAvailableDates?: string[];
 
@@ -37,7 +35,6 @@ export class ParticipantModel {
     this.name = participant.name;
     this.isWoman = participant.isWoman;
     this.isExternal = participant.isExternal;
-    this.onlyAssistant = participant.onlyAssistant;
     this.rooms = participant.rooms;
     this.assignTypes = participant.assignTypes;
     this.available = participant.available;
@@ -50,7 +47,7 @@ export interface ParticipantRoomInterface {
   available: boolean;
 }
 
-export interface ParticipantAssignTypesInterface {
+export interface ParticipantAssignTypeInterface {
   assignTypeId: string;
   canPrincipal: boolean;
   canAssistant: boolean;

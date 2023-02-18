@@ -12,10 +12,9 @@ import { HomeComponent } from "app/home/home.component";
 import { CreateUpdateNoteComponent } from "app/note/create-update-note/create-update-note.component";
 import { DeleteNoteComponent } from "app/note/delete-note/delete-note.component";
 import { NoteComponent } from "app/note/note.component";
-import { CreateParticipantComponent } from "app/participant/create-participant/create-participant.component";
+import { CreateUpdateParticipantComponent } from "app/participant/create-update-participant/create-update-participant.component";
 import { DeleteParticipantComponent } from "app/participant/delete-participant/delete-participant.component";
 import { ParticipantComponent } from "app/participant/participant.component";
-import { UpdateParticipantComponent } from "app/participant/update-participant/update-participant.component";
 import { QuestionComponent } from "app/question/question.component";
 import { CreateUpdateRoomComponent } from "app/room/create-update-room/create-update-room.component";
 import { DeleteRoomComponent } from "app/room/delete-room/delete-room.component";
@@ -96,7 +95,7 @@ const routes: Routes = [
   },
   {
     path: "participant/create",
-    component: CreateParticipantComponent,
+    component: CreateUpdateParticipantComponent,
   },
   {
     path: "participant/create-from",
@@ -104,7 +103,7 @@ const routes: Routes = [
   },
   {
     path: "participant/update/:id",
-    component: UpdateParticipantComponent,
+    component: CreateUpdateParticipantComponent,
   },
   {
     path: "participant/delete/:id",
