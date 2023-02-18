@@ -21,7 +21,15 @@
             />
           </mat-form-field>
         </div>
-        <div class="col-6">
+        <div class="col-auto">
+          <mat-checkbox
+            labelPosition="before"
+            color="primary"
+            formControlName="available"
+            >{{ t("PARTICIPANT_CREATE_AVAILABLE") }}</mat-checkbox
+          >
+        </div>
+        <div class="col-auto">
           <mat-checkbox
             labelPosition="before"
             color="primary"
@@ -29,7 +37,7 @@
             >{{ t("PARTICIPANT_CREATE_ISWOMAN") }}</mat-checkbox
           >
         </div>
-        <div class="col-6">
+        <div class="col-auto">
           <mat-checkbox
             labelPosition="before"
             color="primary"
@@ -37,6 +45,7 @@
             >{{ t("PARTICIPANT_CREATE_ISEXTERNAL") }}</mat-checkbox
           >
         </div>
+
         <div class="participant-overflow">
           <div class="col-12 mr-auto">
             <h3 *ngIf="rooms.length">
@@ -120,16 +129,6 @@
             </div>
           </div>
         </div>
-
-        <div class="col-12">
-          <hr />
-          <mat-checkbox
-            labelPosition="before"
-            color="primary"
-            formControlName="available"
-            >{{ t("PARTICIPANT_CREATE_AVAILABLE") }}</mat-checkbox
-          >
-        </div>
         <div class="col-12">
           <mat-form-field>
             <mat-chip-grid
@@ -139,14 +138,14 @@
             >
               <mat-chip-row
                 *ngFor="let date of getNotAvailableDates"
-                [selectable]="false"
-                [removable]="true"
+                selectable="false"
+                removable="true"
                 (removed)="remove(date)"
               >
                 {{ date | translocoDate : { dateStyle: "short" } }}
                 <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
               </mat-chip-row>
-              <mat-label>{{
+              <mat-label *ngIf="!getNotAvailableDates.length">{{
                 t("PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE")
               }}</mat-label>
               <input

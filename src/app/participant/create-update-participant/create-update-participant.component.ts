@@ -49,7 +49,6 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   closeOnSelected = false;
   init = new Date();
   resetModel = new Date(0);
-  notAvailableDates = [];
   timeoutRef;
 
   form = this.formBuilder.group({
@@ -73,20 +72,18 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {}
 
-  /** Returns FormArray */
   get getRoomsArray(): ParticipantRoomInterface[] {
     //rooms is the FormArray, value is the array
     return this.form.controls.rooms.value;
   }
 
-  /** Returns FormArray */
   get getAssignTypesArray(): ParticipantAssignTypeInterface[] {
     //assignTypes is the FormArray, value is the array
     return this.form.controls.assignTypes.value;
   }
 
   /** Returns [] */
-  get getNotAvailableDates(): string[] {
+  get getNotAvailableDates() {
     return this.form.controls.notAvailableDates.value;
   }
 
@@ -194,10 +191,9 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     this.form.get("name").reset(undefined);
     this.form.get("isWoman").reset(false);
     this.form.get("isExternal").reset(false);
+    this.form.get("notAvailableDates").reset();
     this.addAssignTypes();
     this.addRooms();
-
-    this.notAvailableDates = [];
   }
 
   createParticipant() {
@@ -218,9 +214,9 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
       const date = event.value;
       const index = this.findDate(date);
       if (index === -1) {
-        this.notAvailableDates.push(date);
+        this.getNotAvailableDates.push(date);
       } else {
-        this.notAvailableDates.splice(index, 1);
+        this.getNotAvailableDates.splice(index, 1);
       }
       this.resetModel = new Date(0);
       if (!this.closeOnSelected) {
@@ -243,11 +239,20 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   /** code for the datepicker hack*/
   public remove(date: Date): void {
     const index = this.findDate(date);
-    this.notAvailableDates.splice(index, 1);
+    this.getNotAvailableDates.splice(index, 1);
   }
 
   /** code for the datepicker hack*/
   private findDate(date: Date): number {
-    return this.notAvailableDates.map((m) => +m).indexOf(+date);
+    /*  return this.getNotAvailableDates.map((m) => +m).indexOf(+date); */
+    console.log("+date", +date);
+
+    return this.getNotAvailableDates
+      .map((m) => {
+        console.log("m", m);
+        console.log("+m", +m);
+        return +m;
+      })
+      .indexOf(+date);
   }
 }

@@ -6,7 +6,7 @@ export interface ParticipantInterface {
   rooms: ParticipantRoomInterface[];
   assignTypes: ParticipantAssignTypeInterface[];
   available: boolean;
-  notAvailableDates?: string[];
+  notAvailableDates?: Date[];
 }
 
 //These values are calculated under assignments and statistics pages but shouldnt be saved on json file
@@ -28,7 +28,7 @@ export class ParticipantModel {
   rooms: ParticipantRoomInterface[];
   assignTypes: ParticipantAssignTypeInterface[];
   available: boolean;
-  notAvailableDates?: string[];
+  notAvailableDates?: Date[];
 
   constructor(participant: ParticipantInterface) {
     this.id = participant.id;
