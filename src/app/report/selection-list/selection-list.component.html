@@ -73,14 +73,16 @@
         <td
           [id]="assignment.assignType.id"
           class="fw-bold"
-          [style.backgroundColor]="
-            assignTypeService.getAssignType(assignment.assignType.id).color
+          [style.borderLeft]="'10px solid'"
+          [style.borderLeftColor]="
+            (assignment.assignType.id | assignTypePipe).color || 'transparent'
           "
           [style.fontSize]="defaultReportFontSize"
         >
-          <div class="ms-lg-3">{{ assignment.theme }}</div>
-          <div *ngIf="!assignment.theme" class="ms-3">
-            {{ assignment.assignType.name }}
+          <div>
+            {{
+              assignment.theme ? assignment.theme : assignment.assignType.name
+            }}
           </div>
         </td>
         <td [style.fontSize]="defaultReportFontSize">
