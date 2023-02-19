@@ -58,8 +58,7 @@ import { MoveAssignmentComponent } from "./assignment/move-assignment/move-assig
 import { GroupDeleteAssignmentComponent } from "./assignment/group-delete-assignment/group-delete-assignment.component";
 import { CreateFromParticipantComponent } from "./participant/create-from-participant/create-from-participant.component";
 import { RolesComponent } from "./roles/roles.component";
-import { CreateRoleComponent } from "./roles/create-role/create-role.component";
-import { UpdateRoleComponent } from "./roles/update-role/update-role.component";
+import { CreateUpdateRoleComponent } from "./roles/create-update-role/create-update-role.component";
 import { DeleteRoleComponent } from "./roles/delete-role/delete-role.component";
 import { IsRoleCheckedPipe } from "./roles/pipe/is-role-checked.pipe";
 import { MatDialogModule } from "@angular/material/dialog";
@@ -109,8 +108,7 @@ import { AssignTypePipe } from "./assignType/pipe/assign-type.pipe";
     GroupDeleteAssignmentComponent,
     CreateFromParticipantComponent,
     RolesComponent,
-    CreateRoleComponent,
-    UpdateRoleComponent,
+    CreateUpdateRoleComponent,
     DeleteRoleComponent,
     IsRoleCheckedPipe,
     InfoAssignmentComponent,

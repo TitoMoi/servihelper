@@ -6,28 +6,26 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ConfigService } from "app/config/service/config.service";
 
 @Component({
-  selector: "app-update-role",
-  templateUrl: "./update-role.component.html",
-  styleUrls: ["./update-role.component.scss"],
+  selector: "app-create-update-role",
+  templateUrl: "./create-update-role.component.html",
+  styleUrls: ["./create-update-role.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UpdateRoleComponent {
+export class CreateUpdateRoleComponent {
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
-  roles = this.configService.getRoles();
-  role = this.roles.find(
-    (r) => r.id === this.activatedRoute.snapshot.params.id
-  );
+  r = this.configService
+    .getRoles()
+    .find((role) => role.id === this.activatedRoute.snapshot.params.id);
 
-  //for the pipe
-  assignTypesId = this.role.assignTypesId || [];
+  isUpdate = this.r ? true : false;
 
-  roleForm = this.formBuilder.group({
-    id: this.role.id,
-    name: [this.role.name, Validators.required],
-    assignTypesId: [this.role.assignTypesId],
+  form = this.formBuilder.group({
+    id: this.r ? this.r.id : undefined,
+    name: [this.r ? this.r.name : undefined, Validators.required],
+    assignTypesId: [this.r ? this.r.assignTypesId : [], Validators.required],
   });
 
   constructor(
@@ -40,7 +38,7 @@ export class UpdateRoleComponent {
 
   //Add or remove
   changeCheckbox(assignTypeId: string) {
-    const atCtrl = this.roleForm.get("assignTypesId");
+    const atCtrl = this.form.get("assignTypesId");
     let assignTypesId: string[] = atCtrl.value;
     const index = assignTypesId.indexOf(assignTypeId);
     if (index > -1) {
@@ -52,11 +50,17 @@ export class UpdateRoleComponent {
   }
 
   onSubmit() {
-    const value = this.roleForm.value;
-    this.configService.updateRole(value);
+    const value = this.form.value;
 
+    if (this.isUpdate) {
+      this.configService.updateRole(value);
+    } else {
+      this.configService.addRole(value);
+    }
     //navigate to parent
-    this.router.navigate(["../.."], {
+    const route = this.isUpdate ? "../.." : "..";
+
+    this.router.navigate([route], {
       relativeTo: this.activatedRoute,
     });
   }
