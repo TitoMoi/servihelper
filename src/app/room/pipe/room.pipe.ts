@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { RoomInterface } from "../model/room.model";
 import { RoomService } from "../service/room.service";
 
 @Pipe({
@@ -7,7 +8,7 @@ import { RoomService } from "../service/room.service";
 export class RoomPipe implements PipeTransform {
   /**Given the id of the room return the name */
   constructor(private roomService: RoomService) {}
-  transform(id: string): string {
-    return this.roomService.getRoom(id)?.name;
+  transform(id: string): RoomInterface {
+    return this.roomService.getRoom(id);
   }
 }

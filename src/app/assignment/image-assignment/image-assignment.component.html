@@ -1,173 +1,180 @@
-<div class="row" *ngIf="assignment">
-  <div class="col-12">
-    <table id="assignmentTableId" class="bg-color-white" style="width: 23rem">
-      <tr>
-        <th class="d-block ms-3 me-3 border-bottom">
-          <div *ngIf="!assignmentHeaderTitle" class="mt-1 mb-1">
-            {{ "ASSIGN_IMAGE_TITLE" | transloco }}
-          </div>
-          <div *ngIf="assignmentHeaderTitle" class="mt-1 mb-1">
-            {{ assignmentHeaderTitle }}
-          </div>
-        </th>
-      </tr>
-      <tr>
-        <td class="fw-bold">
-          <span *ngIf="!assignmentPrincipalTitle" class="ms-3 me-3">{{
-            "ASSIGN_IMAGE_NAME" | transloco
-          }}</span>
-          <span *ngIf="assignmentPrincipalTitle" class="ms-3 me-3">{{
-            assignmentPrincipalTitle
-          }}</span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span class="ms-3 me-3"
-            >{{ assignment.principal | participantPipe }}
-          </span>
-        </td>
-      </tr>
-      <tr *ngIf="assignment.assistant | participantPipe">
-        <td class="fw-bold">
-          <span *ngIf="!assignmentAssistantTitle" class="ms-3 me-3">{{
-            "ASSIGN_IMAGE_ASSISTANT" | transloco
-          }}</span>
-          <span *ngIf="assignmentAssistantTitle" class="ms-3 me-3">{{
-            assignmentAssistantTitle
-          }}</span>
-        </td>
-      </tr>
-      <tr *ngIf="assignment.assistant | participantPipe as assistantName">
-        <td>
-          <span class="ms-3 me-3">{{ assistantName }}</span>
-        </td>
-      </tr>
-      <tr>
-        <td class="fw-bold">
-          <span *ngIf="!assignmentDateTitle" class="ms-3 me-3">{{
-            "ASSIGN_IMAGE_DATE" | transloco
-          }}</span>
-          <span *ngIf="assignmentDateTitle" class="ms-3 me-3">{{
-            assignmentDateTitle
-          }}</span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span class="ms-3 me-3">
-            {{ assignment.date | translocoDate : { dateStyle: "full" } }}
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td class="fw-bold">
-          <span *ngIf="!assignmentAssignTypeTitle" class="ms-3 me-3">{{
-            "ASSIGN_IMAGE_ASSIGNTYPE" | transloco
-          }}</span>
-          <span *ngIf="assignmentAssignTypeTitle" class="ms-3 me-3">{{
-            assignmentAssignTypeTitle
-          }}</span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span class="ms-3"></span
-          >{{ assignment.assignType | assignTypeNamePipe }}
-        </td>
-      </tr>
-      <tr *ngIf="assignment.theme">
-        <td class="fw-bold">
-          <div *ngIf="!assignmentThemeTitle" class="ms-3 me-3">
-            {{ "ASSIGN_IMAGE_NOTE" | transloco }}
-          </div>
-          <div *ngIf="assignmentThemeTitle" class="ms-3 me-3">
-            {{ assignmentThemeTitle }}
-          </div>
-        </td>
-      </tr>
-      <tr *ngIf="assignment.theme">
-        <td>
-          <div class="ms-3 me-3">{{ assignment.theme }}</div>
-        </td>
-      </tr>
-      <tr>
-        <td class="fw-bold">
-          <span *ngIf="!assignmentRoomTitle" class="ms-3 me-3">{{
-            "ASSIGN_IMAGE_ROOM_PRESENTATION" | transloco
-          }}</span>
-          <span *ngIf="assignmentRoomTitle" class="ms-3 me-3">{{
-            assignmentRoomTitle
-          }}</span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div [ngClass]="{ 'mb-3': !footerNoteEditorHTML }" class="ms-3 me-3">
-            {{ assignment.room | roomPipe }}
-          </div>
-        </td>
-      </tr>
-      <tr *ngIf="footerNoteEditorHTML">
-        <td class="fw-bold">
-          <span *ngIf="!assignmentNoteTitle" class="ms-3 me-3">{{
-            "ASSIGN_IMAGE_FOOTER_NOTE" | transloco
-          }}</span>
-          <span *ngIf="assignmentNoteTitle" class="ms-3 me-3">{{
-            assignmentNoteTitle
-          }}</span>
-        </td>
-      </tr>
-      <tr *ngIf="footerNoteEditorHTML">
-        <td>
-          <div
-            class="ms-3 me-3 mb-3 text-justify font-15"
-            [innerHTML]="footerNoteEditorHTML"
-          ></div>
-        </td>
-      </tr>
-    </table>
-  </div>
-  <div class="col-12 d-print-none">
-    <div class="d-flex app-align-items-center">
-      <button class="m-2" mat-raised-button type="button" routerLink="../..">
-        {{ "BUTTON_CANCEL" | transloco }}
-      </button>
-      <button
-        class="m-2"
-        mat-raised-button
-        type="button"
-        color="primary"
-        (click)="copyImageToClipboard()"
-      >
-        {{ "BUTTON_COPY" | transloco }}
-      </button>
-      <mat-icon
-        class="m-2"
-        svgIcon="googlecalendar"
-        aria-label="icon"
-        (click)="toGoogleCalendarUrl()"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="pdf"
-        aria-label="icon"
-        (click)="toPdf()"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="png"
-        aria-label="icon"
-        (click)="toPng()"
-      ></mat-icon>
+<ng-container *transloco="let t">
+  <div class="row" *ngIf="assignment">
+    <div class="col-12">
+      <table id="assignmentTableId" class="bg-color-white" style="width: 23rem">
+        <tr>
+          <th class="d-block ms-3 me-3 border-bottom">
+            <div *ngIf="!assignmentHeaderTitle" class="mt-1 mb-1">
+              {{ t("ASSIGN_IMAGE_TITLE") }}
+            </div>
+            <div *ngIf="assignmentHeaderTitle" class="mt-1 mb-1">
+              {{ assignmentHeaderTitle }}
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <td class="fw-bold">
+            <span *ngIf="!assignmentPrincipalTitle" class="ms-3 me-3">{{
+              t("ASSIGN_IMAGE_NAME")
+            }}</span>
+            <span *ngIf="assignmentPrincipalTitle" class="ms-3 me-3">{{
+              assignmentPrincipalTitle
+            }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="ms-3 me-3"
+              >{{ (assignment.principal | participantPipe).name }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="assignment.assistant">
+          <td class="fw-bold">
+            <span *ngIf="!assignmentAssistantTitle" class="ms-3 me-3">{{
+              t("ASSIGN_IMAGE_ASSISTANT")
+            }}</span>
+            <span *ngIf="assignmentAssistantTitle" class="ms-3 me-3">{{
+              assignmentAssistantTitle
+            }}</span>
+          </td>
+        </tr>
+        <tr *ngIf="assignment.assistant">
+          <td>
+            <span class="ms-3 me-3">{{
+              (assignment.assistant | participantPipe).name
+            }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="fw-bold">
+            <span *ngIf="!assignmentDateTitle" class="ms-3 me-3">{{
+              t("ASSIGN_IMAGE_DATE")
+            }}</span>
+            <span *ngIf="assignmentDateTitle" class="ms-3 me-3">{{
+              assignmentDateTitle
+            }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="ms-3 me-3">
+              {{ assignment.date | translocoDate : { dateStyle: "full" } }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="fw-bold">
+            <span *ngIf="!assignmentAssignTypeTitle" class="ms-3 me-3">{{
+              t("ASSIGN_IMAGE_ASSIGNTYPE")
+            }}</span>
+            <span *ngIf="assignmentAssignTypeTitle" class="ms-3 me-3">{{
+              assignmentAssignTypeTitle
+            }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="ms-3"></span
+            >{{ (assignment.assignType | assignTypePipe).name }}
+          </td>
+        </tr>
+        <tr *ngIf="assignment.theme">
+          <td class="fw-bold">
+            <div *ngIf="!assignmentThemeTitle" class="ms-3 me-3">
+              {{ t("ASSIGN_IMAGE_NOTE") }}
+            </div>
+            <div *ngIf="assignmentThemeTitle" class="ms-3 me-3">
+              {{ assignmentThemeTitle }}
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="assignment.theme">
+          <td>
+            <div class="ms-3 me-3">{{ assignment.theme }}</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="fw-bold">
+            <span *ngIf="!assignmentRoomTitle" class="ms-3 me-3">{{
+              t("ASSIGN_IMAGE_ROOM_PRESENTATION")
+            }}</span>
+            <span *ngIf="assignmentRoomTitle" class="ms-3 me-3">{{
+              assignmentRoomTitle
+            }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div
+              [ngClass]="{ 'mb-3': !footerNoteEditorHTML }"
+              class="ms-3 me-3"
+            >
+              {{ (assignment.room | roomPipe).name }}
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="footerNoteEditorHTML">
+          <td class="fw-bold">
+            <span *ngIf="!assignmentNoteTitle" class="ms-3 me-3">{{
+              t("ASSIGN_IMAGE_FOOTER_NOTE")
+            }}</span>
+            <span *ngIf="assignmentNoteTitle" class="ms-3 me-3">{{
+              assignmentNoteTitle
+            }}</span>
+          </td>
+        </tr>
+        <tr *ngIf="footerNoteEditorHTML">
+          <td>
+            <div
+              class="ms-3 me-3 mb-3 text-justify font-15"
+              [innerHTML]="footerNoteEditorHTML"
+            ></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-12 d-print-none">
+      <div class="d-flex app-align-items-center">
+        <button class="m-2" mat-raised-button type="button" routerLink="../..">
+          {{ t("BUTTON_CANCEL") }}
+        </button>
+        <button
+          class="m-2"
+          mat-raised-button
+          type="button"
+          color="primary"
+          (click)="copyImageToClipboard()"
+        >
+          {{ t("BUTTON_COPY") }}
+        </button>
+        <mat-icon
+          class="m-2"
+          svgIcon="googlecalendar"
+          aria-label="icon"
+          (click)="toGoogleCalendarUrl()"
+        ></mat-icon>
+        <mat-icon
+          class="m-2"
+          svgIcon="pdf"
+          aria-label="icon"
+          (click)="toPdf()"
+        ></mat-icon>
+        <mat-icon
+          class="m-2"
+          svgIcon="png"
+          aria-label="icon"
+          (click)="toPng()"
+        ></mat-icon>
+      </div>
+    </div>
+    <div class="col-12 col-md-5 col-xl-12">
+      <p class="m-2 d-inline-block copied" *ngIf="copied">
+        {{ t("ASSIGN_IMAGE_COPIED") }}
+      </p>
+      <p class="m-2 d-inline-block copied" *ngIf="copiedCalendarReminder">
+        {{ t("ASSIGN_REMINDER_COPIED") }}
+      </p>
     </div>
   </div>
-  <div class="col-12 col-md-5 col-xl-12">
-    <p class="m-2 d-inline-block copied" *ngIf="copied">
-      {{ "ASSIGN_IMAGE_COPIED" | transloco }}
-    </p>
-    <p class="m-2 d-inline-block copied" *ngIf="copiedCalendarReminder">
-      {{ "ASSIGN_REMINDER_COPIED" | transloco }}
-    </p>
-  </div>
-</div>
+</ng-container>

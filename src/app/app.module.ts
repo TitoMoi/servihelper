@@ -65,7 +65,6 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { InfoAssignmentComponent } from "./assignment/info-assignment/info-assignment.component";
 import { NgxEditorModule } from "ngx-editor";
 import { WarningAssignmentComponent } from "./assignment/warning-assignment/warning-assignment.component";
-import { AssignTypeNamePipe } from "./assignType/pipe/assignType-name.pipe";
 import { RoomPipe } from "./room/pipe/room.pipe";
 import { NotePipe } from "./note/pipe/note.pipe";
 import { ParticipantPipe } from "./participant/pipe/participant.pipe";
@@ -114,7 +113,6 @@ import { AssignTypePipe } from "./assignType/pipe/assign-type.pipe";
     InfoAssignmentComponent,
     WarningAssignmentComponent,
     AssignTypePipe,
-    AssignTypeNamePipe,
     RoomPipe,
     NotePipe,
     ParticipantPipe,

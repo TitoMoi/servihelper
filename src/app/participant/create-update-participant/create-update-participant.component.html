@@ -59,7 +59,9 @@
                       <mat-checkbox
                         color="primary"
                         formControlName="available"
-                        >{{ participantRoom.roomId | roomPipe }}</mat-checkbox
+                        >{{
+                          (participantRoom.roomId | roomPipe).name
+                        }}</mat-checkbox
                       >
                     </div>
                   </ng-container>
@@ -84,8 +86,8 @@
                         color="primary"
                         formControlName="canPrincipal"
                         >{{
-                          participantAssignType.assignTypeId
-                            | assignTypeNamePipe
+                          (participantAssignType.assignTypeId | assignTypePipe)
+                            .name
                         }}</mat-checkbox
                       >
                     </div>
@@ -118,8 +120,8 @@
                         color="primary"
                         formControlName="canAssistant"
                         >{{
-                          participantAssignType.assignTypeId
-                            | assignTypeNamePipe
+                          (participantAssignType.assignTypeId | assignTypePipe)
+                            .name
                         }}</mat-checkbox
                       >
                     </div>
