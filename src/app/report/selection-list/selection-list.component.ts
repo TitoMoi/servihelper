@@ -36,9 +36,6 @@ export class SelectionListComponent implements OnChanges {
   @Input() rooms: string[];
   @Input() order: string;
 
-  colorpicker = undefined;
-  tableWithColor = {};
-
   defaultReportFontSize =
     this.configService.getConfig().defaultReportFontSize + "px";
   defaultReportDateFormat =
@@ -78,10 +75,6 @@ export class SelectionListComponent implements OnChanges {
     }
   }
 
-  setColorInputEvent(value: string) {
-    this.colorpicker = value;
-  }
-
   /**
    * Filters the assignments based on the range date and assign types and rooms
    */
@@ -111,6 +104,9 @@ export class SelectionListComponent implements OnChanges {
     );
   }
 
+  getBorderRight(color): string {
+    return `border-right: 6px solid ${color};`;
+  }
   /**
    * Convert the id's to names
    */
@@ -196,7 +192,8 @@ export class SelectionListComponent implements OnChanges {
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       autoTable(doc, {
         html: `#table${i}`,
-        styles: { font, fontSize: 16 },
+        styles: { font, fontSize: 14 },
+        theme: "plain",
         margin: firstTable ? { top: 30 } : undefined,
         columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
@@ -208,27 +205,20 @@ export class SelectionListComponent implements OnChanges {
           const classList: DOMTokenList = data.cell.raw["classList"];
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
-            data.cell.styles.fillColor = assignType.color;
             data.cell.styles.fontStyle = "bold";
             return;
           }
           //date
           if (localName === "th") {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
-            data.cell.styles.fillColor =
-              this.configService.getConfig().defaultReportDateColor ||
-              "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
             return;
           }
           //theme
           if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fillColor = "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
             return;
           }
-          if (!assignType && !classList.contains("bold"))
-            data.cell.styles.fillColor = "#FFFFFF";
         },
         didDrawPage: (data) => {
           totalHeight = data.cursor.y;
@@ -239,76 +229,17 @@ export class SelectionListComponent implements OnChanges {
     return totalHeight;
   }
 
-  toPdfForPrint() {
-    const doc = this.pdfService.getJsPdf({
-      orientation: "portrait",
-    });
-
-    const font = this.pdfService.getFontForLang();
-
-    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 20, {
-      align: "center",
-    });
-
-    let firstTable = true;
-
-    for (let i = 0; i < this.assignmentGroups.length; i++) {
-      const tableId = `table${i}`;
-      autoTable(doc, {
-        html: "#" + tableId,
-        styles: { font, fontSize: 14 },
-        margin: firstTable ? { top: 30 } : undefined,
-        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
-        didParseCell: (data) => {
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const id = data.cell.raw["id"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const localName = data.cell.raw["localName"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const classList: DOMTokenList = data.cell.raw["classList"];
-          const assignType = this.assignTypeService.getAssignType(id);
-          if (assignType) {
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || assignType.color;
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          //date
-          if (localName === "th") {
-            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] ||
-              this.configService.getConfig().defaultReportDateColor ||
-              "#FFFFFF";
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          //theme
-          if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || "#FFFFFF";
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-          if (!assignType && !classList.contains("bold"))
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || "#FFFFFF";
-        },
-      });
-      firstTable = false;
-    }
-    doc.save("assignmentsPrint");
-  }
-
   /**
-   * To digital pdf, give 50 extra space at the end
+   *
+   * @param isForPrint if true, adds breakpoints in the pages, false generates an infinite list
+   *
    */
-  toPdf() {
+  toPdf(isForPrint: boolean) {
     const height = this.getPdfHeight();
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
       compress: true,
-      format: [210, height + 50],
+      format: isForPrint ? undefined : [210, height + 50],
     });
 
     const font = this.pdfService.getFontForLang();
@@ -324,6 +255,7 @@ export class SelectionListComponent implements OnChanges {
       autoTable(doc, {
         html: "#" + tableId,
         styles: { font, fontSize: 14 },
+        theme: "plain",
         margin: firstTable ? { top: 30 } : undefined,
         columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
@@ -335,37 +267,26 @@ export class SelectionListComponent implements OnChanges {
           const classList: DOMTokenList = data.cell.raw["classList"];
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || assignType.color;
             data.cell.styles.fontStyle = "bold";
             return;
           }
           //date
           if (localName === "th") {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] ||
-              this.configService.getConfig().defaultReportDateColor ||
-              "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
             return;
           }
           //theme
           if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || "#FFFFFF";
             data.cell.styles.fontStyle = "bold";
             return;
           }
-          if (!assignType && !classList.contains("bold"))
-            data.cell.styles.fillColor =
-              this.tableWithColor[tableId] || "#FFFFFF";
         },
       });
       firstTable = false;
     }
 
-    doc.save("assignments");
+    doc.save(isForPrint ? "assignmentsPrint" : "assignments");
   }
 
   async toPng() {
@@ -383,40 +304,6 @@ export class SelectionListComponent implements OnChanges {
   }
 
   toExcel() {
-    this.excelService.addAsignmentsVertical(
-      this.assignmentGroups,
-      this.tableWithColor
-    );
-  }
-
-  /**
-   *
-   * @param event the pointerEvent
-   * Override assignment styles and date styles and apply same background for all the day
-   */
-  changeBackgroundColor(event) {
-    const targetId = event.currentTarget.id;
-    const tableElem: HTMLTableElement = document.getElementById(
-      targetId
-    ) as HTMLTableElement;
-
-    const selectedColor = this.colorpicker;
-
-    //Override assignment and date colors and reset
-    const trList: HTMLCollection = tableElem.children; //tr
-    const length = trList.length;
-    for (let i = 0; i < length; i++) {
-      const childNodes: NodeList = trList[i].childNodes; //th, td
-      childNodes.forEach((child: HTMLTableElement) => {
-        if (child.style) {
-          child.style.backgroundColor = ""; //must be empty string
-        }
-      });
-    }
-    //Apply background for all the table
-    tableElem.style.backgroundColor = selectedColor;
-
-    //Save color for the selected table
-    this.tableWithColor[targetId] = selectedColor;
+    this.excelService.addAsignmentsVertical(this.assignmentGroups);
   }
 }

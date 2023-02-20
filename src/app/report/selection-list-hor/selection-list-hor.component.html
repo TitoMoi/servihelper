@@ -1,36 +1,25 @@
-<div class="d-flex align-items-center">
+<div *transloco="let t" class="d-flex align-items-center">
   <mat-icon
     class="m-2"
     svgIcon="pdfblue"
     aria-label="icon"
+    [matTooltip]="t('REPORT_ICON_PDF_PAGE')"
     (click)="toPdfForPrint()"
   ></mat-icon>
   <mat-icon
     class="m-2"
     svgIcon="png"
     aria-label="icon"
+    [matTooltip]="t('REPORT_ICON_PNG')"
     (click)="toPng()"
   ></mat-icon>
   <mat-icon
     class="m-2"
     svgIcon="excel"
     aria-label="icon"
+    [matTooltip]="t('REPORT_ICON_EXCEL')"
     (click)="toExcel()"
   ></mat-icon>
-  <input
-    class="m-2"
-    type="color"
-    value="#FFFFFF"
-    list="presetColors"
-    (input)="setColorInputEvent($event.target.value)"
-  />
-  <datalist id="presetColors">
-    <option>#dbf7fa</option>
-    <option>#dbfae5</option>
-    <option>#fcffe6</option>
-    <option>#ffebe6</option>
-    <option>#f5e6ff</option>
-  </datalist>
 </div>
 
 <div id="toPngDivId" class="bg-color-white">
@@ -59,8 +48,9 @@
           *ngFor="let assignment of ag.assignments"
           [id]="assignment.assignType.id"
           class="fw-bold"
-          [style.backgroundColor]="
-            assignTypeService.getAssignType(assignment.assignType.id).color
+          [style.borderBottom]="'6px solid'"
+          [style.borderBottomColor]="
+            (assignment.assignType.id | assignTypePipe).color || 'transparent'
           "
           [style.fontSize]="defaultReportFontSize"
         >

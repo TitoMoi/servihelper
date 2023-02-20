@@ -50,10 +50,7 @@ export class ExcelService {
    *
    * @param bicos the array of bicos to add in the vertical template
    */
-  addAsignmentsVertical(
-    assignmentGroups: AssignmentGroupInterface[],
-    tableWithColor: Record<string, string>
-  ) {
+  addAsignmentsVertical(assignmentGroups: AssignmentGroupInterface[]) {
     let workbook = this.createWorkbook();
 
     workbook = this.setInitialProperties(workbook);
@@ -62,7 +59,7 @@ export class ExcelService {
 
     this.sheet = this.addSheetA4AndPortrait(workbook);
 
-    this.addAssignmentsToSheetVertical(assignmentGroups, tableWithColor);
+    this.addAssignmentsToSheetVertical(assignmentGroups);
 
     this.autoSizeColumnWidth();
 
@@ -79,10 +76,7 @@ export class ExcelService {
    *
    * @param bicos the array of bicos to add in the horizontal template
    */
-  addAsignmentsHorizontal(
-    assignmentGroups: AssignmentGroupInterface[],
-    tableWithColor: Record<string, string>
-  ) {
+  addAsignmentsHorizontal(assignmentGroups: AssignmentGroupInterface[]) {
     let workbook = this.createWorkbook();
 
     workbook = this.setInitialProperties(workbook);
@@ -91,7 +85,7 @@ export class ExcelService {
 
     this.sheet = this.addSheetA4AndLandscape(workbook);
 
-    this.addAssignmentsToSheetHorizontal(assignmentGroups, tableWithColor);
+    this.addAssignmentsToSheetHorizontal(assignmentGroups);
 
     this.autoSizeColumnWidth();
 
@@ -150,13 +144,8 @@ export class ExcelService {
     return worksheet;
   }
 
-  private addAssignmentsToSheetVertical(
-    ags: AssignmentGroupInterface[],
-    tableWithColor: Record<string, string>
-  ) {
-    let count = 0;
+  private addAssignmentsToSheetVertical(ags: AssignmentGroupInterface[]) {
     ags.forEach((ag) => {
-      const tableId = `table${count}`;
       //date
       const row = this.sheet.addRow({});
       const cell = row.getCell(1);
@@ -164,9 +153,9 @@ export class ExcelService {
         type: "pattern",
         pattern: "solid",
         fgColor: {
-          argb:
-            tableWithColor[tableId]?.substring(1) || //? -> maybe there is no custom color
-            this.configService.getConfig().defaultReportDateColor.substring(1),
+          argb: this.configService
+            .getConfig()
+            .defaultReportDateColor.substring(1),
         }, //substring to remove #
       };
 
@@ -189,14 +178,6 @@ export class ExcelService {
           Number(this.configService.getConfig().defaultReportFontSize) || 16,
       };
 
-      cellRoom.fill = {
-        type: "pattern",
-        pattern: "solid",
-        fgColor: {
-          argb: tableWithColor[tableId]?.substring(1),
-        },
-      };
-
       cellRoom.value = ag.roomName;
 
       //assign type titles
@@ -212,17 +193,16 @@ export class ExcelService {
             Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
-        const color =
-          tableWithColor[tableId]?.substring(1) ||
-          this.assignTypeService
-            .getAssignType(a.assignType.id)
-            .color?.substring(1);
+        const borderColor = this.assignTypeService
+          .getAssignType(a.assignType.id)
+          .color?.substring(1);
 
-        cell.fill = {
-          type: "pattern",
-          pattern: "solid",
-          fgColor: {
-            argb: tableWithColor[tableId]?.substring(1) || color,
+        cell.border = {
+          right: {
+            style: "thick",
+            color: {
+              argb: borderColor,
+            },
           },
         };
 
@@ -236,28 +216,14 @@ export class ExcelService {
             Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
-        cell2.fill = {
-          type: "pattern",
-          pattern: "solid",
-          fgColor: {
-            argb: tableWithColor[tableId]?.substring(1),
-          },
-        };
-
         cell2.value = a.principal.name;
         if (a.assistant) cell2.value += " / " + "\n" + a.assistant.name;
       });
-      count++;
     });
   }
 
-  private addAssignmentsToSheetHorizontal(
-    ags: AssignmentGroupInterface[],
-    tableWithColor: Record<string, string>
-  ) {
-    let count = 0;
+  private addAssignmentsToSheetHorizontal(ags: AssignmentGroupInterface[]) {
     ags.forEach((ag) => {
-      const tableId = `table${count}`;
       //date
       const row = this.sheet.addRow({});
       const cell = row.getCell(1);
@@ -266,9 +232,9 @@ export class ExcelService {
         type: "pattern",
         pattern: "solid",
         fgColor: {
-          argb:
-            tableWithColor[tableId]?.substring(1) || //? -> maybe there is no custom color
-            this.configService.getConfig().defaultReportDateColor.substring(1), //remove #
+          argb: this.configService
+            .getConfig()
+            .defaultReportDateColor.substring(1), //remove #
         },
       };
 
@@ -291,11 +257,9 @@ export class ExcelService {
         const cell = row.getCell(i);
         cell.value = a.assignType.name;
 
-        const color =
-          tableWithColor[tableId]?.substring(1) ||
-          this.assignTypeService
-            .getAssignType(a.assignType.id)
-            .color?.substring(1);
+        const borderColor = this.assignTypeService
+          .getAssignType(a.assignType.id)
+          .color?.substring(1);
 
         cell.font = {
           bold: true,
@@ -303,11 +267,12 @@ export class ExcelService {
             Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
-        cell.fill = {
-          type: "pattern",
-          pattern: "solid",
-          fgColor: {
-            argb: tableWithColor[tableId]?.substring(1) || color,
+        cell.border = {
+          bottom: {
+            style: "thick",
+            color: {
+              argb: borderColor,
+            },
           },
         };
 
@@ -347,7 +312,6 @@ export class ExcelService {
 
         i++;
       });
-      count++;
     });
   }
 }

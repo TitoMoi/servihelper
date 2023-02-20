@@ -1,42 +1,32 @@
-<div class="d-flex align-items-center">
+<div *transloco="let t" class="d-flex align-items-center">
   <mat-icon
     class="m-2"
     svgIcon="pdf"
     aria-label="icon"
-    (click)="toPdf()"
+    [matTooltip]="t('REPORT_ICON_PDF_INFINITE')"
+    (click)="toPdf(false)"
   ></mat-icon>
   <mat-icon
     class="m-2"
     svgIcon="pdfblue"
     aria-label="icon"
-    (click)="toPdfForPrint()"
+    [matTooltip]="t('REPORT_ICON_PDF_PAGE')"
+    (click)="toPdf(true)"
   ></mat-icon>
   <mat-icon
     class="m-2"
     svgIcon="png"
     aria-label="icon"
+    [matTooltip]="t('REPORT_ICON_PNG')"
     (click)="toPng()"
   ></mat-icon>
   <mat-icon
     class="m-2"
     svgIcon="excel"
     aria-label="icon"
+    [matTooltip]="t('REPORT_ICON_EXCEL')"
     (click)="toExcel()"
   ></mat-icon>
-  <input
-    class="m-2"
-    type="color"
-    value="#FFFFFF"
-    list="presetColors"
-    (input)="setColorInputEvent($event.target.value)"
-  />
-  <datalist id="presetColors">
-    <option>#dbf7fa</option>
-    <option>#dbfae5</option>
-    <option>#fcffe6</option>
-    <option>#ffebe6</option>
-    <option>#f5e6ff</option>
-  </datalist>
 </div>
 
 <div id="toPngDivId" style="width: 40rem" class="bg-color-white">
@@ -73,9 +63,10 @@
         <td
           [id]="assignment.assignType.id"
           class="fw-bold"
-          [style.borderLeft]="'10px solid'"
-          [style.borderLeftColor]="
-            (assignment.assignType.id | assignTypePipe).color || 'transparent'
+          [style]="
+            getBorderRight(
+              (assignment.assignType.id | assignTypePipe).color || 'transparent'
+            )
           "
           [style.fontSize]="defaultReportFontSize"
         >
@@ -85,7 +76,7 @@
             }}
           </div>
         </td>
-        <td [style.fontSize]="defaultReportFontSize">
+        <td class="ps-1" [style.fontSize]="defaultReportFontSize">
           {{ assignment.principal.name
           }}<span *ngIf="assignment.assistant">
             / <br />

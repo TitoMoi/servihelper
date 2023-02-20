@@ -232,5 +232,11 @@
   "INFO__MY_VERSION": "My current version:",
   "PLACEHOLDER_ORDER": "order of appearance",
   "INFO_WHAT_IS_YELLOW_COLOR": "remove?",
-  "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "remove¿"
+  "INFO_WHAT_IS_YELLOW_COLOR_ANSWER": "remove¿",
+  "REPORT_ICON_PDF_INFINITE": "Pdf black/white with infinite list",
+  "REPORT_ICON_PDF_PAGE": "Pdf black/white with page breaks",
+  "REPORT_ICON_EXCEL": "Colorful Excel sheet",
+  "REPORT_ICON_PNG": "Colorful png image",
+  "REPORT_ICON_PRINT": "Print sheets to distribute",
+  "REPORT_ICON_FOLDER": "Generate png files (takes a while)"
 }

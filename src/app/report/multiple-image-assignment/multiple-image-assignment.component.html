@@ -1,25 +1,25 @@
-<div class="row gx-0 align-items-center">
+<div *transloco="let t" class="row gx-0 align-items-center">
   <div class="col-12">
     <div class="d-flex align-items-center">
-      <button class="m-2" mat-raised-button type="button" routerLink="..">
-        {{ "BUTTON_CANCEL" | transloco }}
-      </button>
       <mat-icon
         class="m-2"
         svgIcon="png"
         aria-label="icon"
+        [matTooltip]="t('REPORT_ICON_PNG')"
         (click)="toPng()"
       ></mat-icon>
       <mat-icon
         class="m-2"
         svgIcon="printer"
         aria-label="icon"
+        [matTooltip]="t('REPORT_ICON_PRINT')"
         (click)="createHiddenWindowForPrint()"
       ></mat-icon>
       <mat-icon
         class="m-2"
         svgIcon="folder"
         aria-label="icon"
+        [matTooltip]="t('REPORT_ICON_FOLDER')"
         (click)="createAssignmentsInFolder()"
       ></mat-icon>
       <button
@@ -30,12 +30,12 @@
         type="button"
         (click)="openAssignmentsFolder()"
       >
-        {{ "OPEN_ASSIGNMENTS_SHEET_FOLDER" | transloco }}
+        {{ t("OPEN_ASSIGNMENTS_SHEET_FOLDER") }}
       </button>
     </div>
   </div>
   <div class="m-2">
-    {{ ("NUMBER_OF_ASSIGNMENTS" | transloco) + assignmentsWithNames.length }}
+    {{ t("NUMBER_OF_ASSIGNMENTS") + assignmentsWithNames.length }}
   </div>
   <div id="assignmentDiv" class="col col-xl-6 bg-color-white">
     <div class="d-flex flex-wrap align-items-start">
@@ -53,22 +53,20 @@
       >
         <h4 class="m-1">
           <span *ngIf="!assignmentHeaderTitle">{{
-            "ASSIGN_IMAGE_TITLE" | transloco
+            t("ASSIGN_IMAGE_TITLE")
           }}</span>
           <span *ngIf="assignmentHeaderTitle">{{ assignmentHeaderTitle }}</span>
         </h4>
         <hr class="m-1" />
         <div class="m-1">
-          <b *ngIf="!assignmentPrincipalTitle">{{
-            "ASSIGN_IMAGE_NAME" | transloco
-          }}</b>
+          <b *ngIf="!assignmentPrincipalTitle">{{ t("ASSIGN_IMAGE_NAME") }}</b>
           <b *ngIf="assignmentPrincipalTitle">{{ assignmentPrincipalTitle }}</b>
         </div>
         <div class="m-1">{{ a.principal }}</div>
         <ng-container *ngIf="a.assistant">
           <div class="m-1">
             <b *ngIf="!assignmentAssistantTitle">{{
-              "ASSIGN_IMAGE_ASSISTANT" | transloco
+              t("ASSIGN_IMAGE_ASSISTANT")
             }}</b>
             <b *ngIf="assignmentAssistantTitle">{{
               assignmentAssistantTitle
@@ -77,17 +75,15 @@
           <div class="m-1">{{ a.assistant }}</div>
         </ng-container>
         <div class="m-1">
-          <b *ngIf="!assignmentDateTitle">{{
-            "ASSIGN_IMAGE_DATE" | transloco
-          }}</b>
+          <b *ngIf="!assignmentDateTitle">{{ t("ASSIGN_IMAGE_DATE") }}</b>
           <b *ngIf="assignmentDateTitle">{{ assignmentDateTitle }}</b>
         </div>
         <div class="m-1">
-          {{ a.date | translocoDate: { dateStyle: "full" } }}
+          {{ a.date | translocoDate : { dateStyle: "full" } }}
         </div>
         <div class="m-1">
           <b *ngIf="!assignmentAssignTypeTitle">{{
-            "ASSIGN_IMAGE_ASSIGNTYPE" | transloco
+            t("ASSIGN_IMAGE_ASSIGNTYPE")
           }}</b>
           <b *ngIf="assignmentAssignTypeTitle">{{
             assignmentAssignTypeTitle
@@ -96,9 +92,7 @@
         <div class="m-1">{{ a.assignType }}</div>
         <ng-container *ngIf="a.theme"
           ><div class="m-1">
-            <b *ngIf="!assignmentThemeTitle">{{
-              "ASSIGN_IMAGE_NOTE" | transloco
-            }}</b>
+            <b *ngIf="!assignmentThemeTitle">{{ t("ASSIGN_IMAGE_NOTE") }}</b>
             <b *ngIf="assignmentThemeTitle">{{ assignmentThemeTitle }}</b>
           </div>
           <div class="m-1">{{ a.theme }}</div></ng-container
@@ -106,7 +100,7 @@
 
         <div class="m-1">
           <b *ngIf="!assignmentRoomTitle">{{
-            "ASSIGN_IMAGE_ROOM_PRESENTATION" | transloco
+            t("ASSIGN_IMAGE_ROOM_PRESENTATION")
           }}</b>
           <b *ngIf="assignmentRoomTitle">{{ assignmentRoomTitle }}</b>
         </div>
@@ -114,7 +108,7 @@
         <ng-container *ngIf="a.footerNote"
           ><div class="m-1">
             <b *ngIf="!assignmentNoteTitle">{{
-              "ASSIGN_IMAGE_FOOTER_NOTE" | transloco
+              t("ASSIGN_IMAGE_FOOTER_NOTE")
             }}</b>
             <b *ngIf="assignmentNoteTitle">{{ assignmentNoteTitle }}</b>
           </div>

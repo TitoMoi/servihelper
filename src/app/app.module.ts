@@ -70,7 +70,7 @@ import { NotePipe } from "./note/pipe/note.pipe";
 import { ParticipantPipe } from "./participant/pipe/participant.pipe";
 import { LayoutModule } from "@angular/cdk/layout";
 import { AssignTypePipe } from "./assignType/pipe/assign-type.pipe";
-
+import { MatTooltipModule } from "@angular/material/tooltip";
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,6 +136,7 @@ import { AssignTypePipe } from "./assignType/pipe/assign-type.pipe";
     MatInputModule,
     MatTableModule,
     MatCheckboxModule,
+    MatTooltipModule,
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
