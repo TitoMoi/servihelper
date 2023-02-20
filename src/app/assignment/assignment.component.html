@@ -17,24 +17,28 @@
           <mat-icon
             class="mx-3"
             svgIcon="csvSvg"
+            [matTooltip]="t('ASSIGN_ICON_EXPORT_CSV')"
             (click)="exportCsv()"
           ></mat-icon>
           <mat-icon
             class="mx-3"
             svgIcon="search"
             routerLink="../search"
+            [matTooltip]="t('ASSIGN_ICON_SEARCH')"
             routerLinkActive="active"
           ></mat-icon>
           <mat-icon
             class="mx-3"
             svgIcon="switch"
             routerLink="move"
+            [matTooltip]="t('ASSIGN_ICON_GROUP_MOVE')"
             routerLinkActive="active"
           ></mat-icon>
           <mat-icon
             class="mx-3"
             svgIcon="calendar-delete"
             routerLink="group-delete"
+            [matTooltip]="t('ASSIGN_ICON_GROUP_DELETE')"
             routerLinkActive="active"
           ></mat-icon>
         </ng-container>

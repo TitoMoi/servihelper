@@ -238,5 +238,9 @@
   "REPORT_ICON_EXCEL": "Colorful Excel sheet",
   "REPORT_ICON_PNG": "Colorful png image",
   "REPORT_ICON_PRINT": "Print sheets to distribute",
-  "REPORT_ICON_FOLDER": "Generate png files (takes a while)"
+  "REPORT_ICON_FOLDER": "Generate png files (takes a while)",
+  "ASSIGN_ICON_GROUP_DELETE": "Delete all assignments of certain day",
+  "ASSIGN_ICON_GROUP_MOVE": "Move all assignments from one day to another",
+  "ASSIGN_ICON_SEARCH": "Search all the assignments of a participant",
+  "ASSIGN_ICON_EXPORT_CSV": "Export all assignments into a csv file"
 }
