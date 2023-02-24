@@ -13,7 +13,7 @@
         >
           {{ t("ASSIGN_CREATE_TITLE") }}
         </a>
-        <ng-container *ngIf="displayAssignments.length">
+        <ng-container *ngIf="assignmentsTable.length">
           <mat-icon
             class="mx-3"
             svgIcon="csvSvg"
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <div *ngIf="displayAssignments.length" class="table-overflow">
+  <div *ngIf="assignmentsTable.length" class="table-overflow">
     <div class="grid">
       <div class="grid-header-item fw-bold">
         {{ t("ASSIGN_TABLE_HEADER_IMAGE") }}
@@ -72,7 +72,7 @@
       <div class="grid-header-item fw-bold">
         {{ t("ASSIGN_TABLE_HEADER_DELETE") }}
       </div>
-      <ng-container *ngFor="let a of displayAssignments; trackBy: trackByIdFn">
+      <ng-container *ngFor="let a of assignmentsTable; trackBy: trackByIdFn">
         <div class="grid-row">
           <div
             id="imageId"
@@ -94,19 +94,23 @@
             {{ a.date | translocoDate : { dateStyle: "medium" } }}
           </div>
           <div class="grid-item d-flex align-items-center">
-            {{ a.principal }}
+            {{ (a.principal | participantPipe).name }}
           </div>
           <div class="grid-item d-flex align-items-center">
-            {{ a.assistant }}
+            <ng-container *ngIf="a.assistant">
+              {{ (a.assistant | participantPipe).name }}
+            </ng-container>
           </div>
+
           <div
+            *ngIf="a.assignType | assignTypePipe as assignType"
             class="grid-item d-flex align-items-center"
-            [style.borderLeft]="getBorderLeftColor(a.assignTypeColor)"
+            [style.borderLeft]="getBorderLeftColor(assignType.color)"
           >
-            {{ a.assignType }}
+            {{ assignType.name }}
           </div>
           <div class="grid-item d-flex align-items-center">
-            {{ a.room }}
+            {{ (a.room | roomPipe).name }}
           </div>
 
           <div class="grid-item d-flex align-items-center">

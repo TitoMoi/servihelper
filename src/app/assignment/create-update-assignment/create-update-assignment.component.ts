@@ -18,6 +18,7 @@ import { SharedService } from "app/services/shared.service";
 import { Subscription, map } from "rxjs";
 
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -45,7 +46,9 @@ import { WarningAssignmentComponent } from "../warning-assignment/warning-assign
   styleUrls: ["./create-update-assignment.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
+export class CreateUpdateAssignmentComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   @ViewChild("principalSelect") principalSelect: MatSelect;
   @ViewChild("assistantSelect") assistantSelect: MatSelect;
   @ViewChild("btnSaveCreateAnother") btnSaveCreateAnother: MatButton;
@@ -79,8 +82,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   );
 
   isUpdate = this.a !== undefined;
-
-  defaultForm = {
+  //FORM Update or create
+  form: UntypedFormGroup = this.formBuilder.group({
     id: this.a ? this.a.id : undefined,
     date: [
       {
@@ -90,19 +93,21 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       Validators.required,
     ],
     room: [
+      //Room id
       {
         value: this.a ? this.a.room : undefined,
         disabled: this.a ? true : false,
       },
       Validators.required,
-    ], //Room id
+    ],
     assignType: [
+      //AssignType id
       {
         value: this.a ? this.a.assignType : undefined,
         disabled: this.a ? true : false,
       },
       Validators.required,
-    ], //AssignType id
+    ],
     theme: this.a ? this.a.theme : "",
     onlyWoman: [this.a ? this.a.onlyWoman : false],
     onlyMan: [this.a ? this.a.onlyMan : false],
@@ -112,9 +117,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     footerNote: this.a
       ? this.a.footerNote
       : this.configService.getConfig().defaultFooterNoteId, //Note id
-  };
-  //Update or create
-  assignmentForm: UntypedFormGroup = this.formBuilder.group(this.defaultForm);
+  });
 
   //Subscriptions
   subscription: Subscription = new Subscription();
@@ -137,6 +140,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   ) {
     this.getAssignments();
   }
+  ngAfterViewInit(): void {
+    console.log(this.form.getRawValue());
+    this.cdr.detectChanges();
+  }
 
   ngOnInit() {
     //Get the view values
@@ -145,6 +152,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       this.batchGetCountSortWarning();
       this.removePrincipalFromAssistants(this.gfv("principal"));
       this.enableOrDisableAssistantControl(this.gfv("assignType"));
+      console.log(this.form.getRawValue());
     }
 
     //Prepare the form changes
@@ -171,7 +179,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
    * @returns the value for the form control
    */
   gfv(formControlName: string) {
-    return this.assignmentForm.get(formControlName).value;
+    return this.form.get(formControlName).value;
   }
 
   prepareRole() {
@@ -222,31 +230,29 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   prepareDateSub() {
-    this.subscription = this.assignmentForm
-      .get("date")
-      .valueChanges.subscribe((date) => {
-        this.lastDateService.lastDate = date;
+    this.subscription = this.form.get("date").valueChanges.subscribe((date) => {
+      this.lastDateService.lastDate = date;
 
-        this.batchCleanPrincipalAssistant();
+      this.batchCleanPrincipalAssistant();
 
-        if (this.gfv("date")) {
-          this.getParticipantsAvailableOnDate();
-        }
+      if (this.gfv("date")) {
+        this.getParticipantsAvailableOnDate();
+      }
 
-        if (this.gfv("room")) {
-          this.filterAssignmentsByRole();
-          this.removeAssignTypesThatAlreadyExistOnDate();
-        }
-        if (this.gfv("room") && this.gfv("assignType")) {
-          this.batchGetCountSortWarning();
-        }
-      });
+      if (this.gfv("room")) {
+        this.filterAssignmentsByRole();
+        this.removeAssignTypesThatAlreadyExistOnDate();
+      }
+      if (this.gfv("room") && this.gfv("assignType")) {
+        this.batchGetCountSortWarning();
+      }
+    });
     this.cdr.detectChanges();
   }
 
   prepareRoomSub() {
     this.subscription.add(
-      this.assignmentForm.get("room").valueChanges.subscribe(() => {
+      this.form.get("room").valueChanges.subscribe(() => {
         this.batchCleanPrincipalAssistant();
 
         if (this.gfv("date")) {
@@ -263,7 +269,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   prepareAssignTypeSub() {
     this.subscription.add(
-      this.assignmentForm
+      this.form
         .get("assignType")
         .valueChanges.subscribe((assignTypeId: string) => {
           this.batchCleanPrincipalAssistant();
@@ -280,16 +286,16 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   /** (Form) Enable or disable the assistant control if assign type has assistant help */
   enableOrDisableAssistantControl(assignTypeId) {
     if (this.assignTypeService.getAssignType(assignTypeId).hasAssistant) {
-      this.assignmentForm.get("assistant").enable({ emitEvent: false });
+      this.form.get("assistant").enable({ emitEvent: false });
     } else {
-      this.assignmentForm.get("assistant").disable({ emitEvent: false });
+      this.form.get("assistant").disable({ emitEvent: false });
     }
     this.cdr.detectChanges();
   }
 
   prepareOnlyManSub() {
     this.subscription.add(
-      this.assignmentForm.get("onlyMan").valueChanges.subscribe((onlyMan) => {
+      this.form.get("onlyMan").valueChanges.subscribe((onlyMan) => {
         this.batchCleanPrincipalAssistant();
 
         if (!onlyMan) {
@@ -309,48 +315,42 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   prepareOnlyWomanSub() {
     this.subscription.add(
-      this.assignmentForm
-        .get("onlyWoman")
-        .valueChanges.subscribe((onlyWoman) => {
-          this.batchCleanPrincipalAssistant();
+      this.form.get("onlyWoman").valueChanges.subscribe((onlyWoman) => {
+        this.batchCleanPrincipalAssistant();
 
-          if (!onlyWoman) {
-            this.batchGetCountSortWarning();
-            return;
-          }
-          //Only woman
-          this.principals = this.principals.filter((p) => p.isWoman === true);
-          this.assistants = this.assistants.filter((a) => a.isWoman === true);
-        })
+        if (!onlyWoman) {
+          this.batchGetCountSortWarning();
+          return;
+        }
+        //Only woman
+        this.principals = this.principals.filter((p) => p.isWoman === true);
+        this.assistants = this.assistants.filter((a) => a.isWoman === true);
+      })
     );
   }
 
   prepareOnlyExternalsSub() {
     this.subscription.add(
-      this.assignmentForm
-        .get("onlyExternals")
-        .valueChanges.subscribe((onlyExternals) => {
-          this.batchCleanPrincipalAssistant();
+      this.form.get("onlyExternals").valueChanges.subscribe((onlyExternals) => {
+        this.batchCleanPrincipalAssistant();
 
-          if (!onlyExternals) {
-            this.batchGetCountSortWarning();
-            return;
-          }
-          //Only externals
-          this.principals = this.principals.filter((p) => p.isExternal);
-          this.assistants = this.assistants.filter((p) => p.isExternal);
-        })
+        if (!onlyExternals) {
+          this.batchGetCountSortWarning();
+          return;
+        }
+        //Only externals
+        this.principals = this.principals.filter((p) => p.isExternal);
+        this.assistants = this.assistants.filter((p) => p.isExternal);
+      })
     );
   }
 
   preparePrincipalSub() {
     this.subscription.add(
-      this.assignmentForm
-        .get("principal")
-        .valueChanges.subscribe((principalId) => {
-          //remove selected principal from assistants
-          this.removePrincipalFromAssistants(principalId);
-        })
+      this.form.get("principal").valueChanges.subscribe((principalId) => {
+        //remove selected principal from assistants
+        this.removePrincipalFromAssistants(principalId);
+      })
     );
   }
 
@@ -366,8 +366,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   /** (Form) clean principalId and assistantId */
   batchCleanPrincipalAssistant() {
-    this.assignmentForm.get("principal").reset(undefined, { emitEvent: false });
-    this.assignmentForm.get("assistant").reset(undefined, { emitEvent: false });
+    this.form.get("principal").reset(undefined, { emitEvent: false });
+    this.form.get("assistant").reset(undefined, { emitEvent: false });
   }
 
   /**
@@ -452,32 +452,32 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
    * depends on: assignments, selected room, selected date
    */
   removeAssignTypesThatAlreadyExistOnDate() {
-    const dateValue = this.gfv("date");
-    const roomValue = this.gfv("room");
-    const assignTypeValue = this.gfv("assignType");
+    if (!this.isUpdate) {
+      const dateValue = this.gfv("date");
+      const roomValue = this.gfv("room");
+      const assignTypeValue = this.gfv("assignType");
 
-    const assignmentsByDate =
-      this.assignmentService.getAssignmentsByDate(dateValue);
+      const assignmentsByDate =
+        this.assignmentService.getAssignmentsByDate(dateValue);
 
-    this.assignTypes = this.assignTypes.filter(
-      (at) =>
-        !assignmentsByDate.some(
-          (a) => a.assignType === at.id && a.room === roomValue
-        )
-    );
+      this.assignTypes = this.assignTypes.filter(
+        (at) =>
+          !assignmentsByDate.some(
+            (a) => a.assignType === at.id && a.room === roomValue
+          )
+      );
 
-    //Reset if assignType selected not in new assignTypes
-    if (!this.assignTypes.some((at) => at.id === assignTypeValue))
-      this.assignmentForm
-        .get("assignType")
-        .reset(undefined, { emitEvent: false });
+      //Reset if assignType selected not in new assignTypes
+      if (!this.assignTypes.some((at) => at.id === assignTypeValue))
+        this.form.get("assignType").reset(undefined, { emitEvent: false });
+    }
   }
 
   /**
    * Special characters that are not visual and are hidden, even for code editors.
    */
   removeGremlings() {
-    const themeControl = this.assignmentForm.get("theme");
+    const themeControl = this.form.get("theme");
     const value = themeControl.value;
     if (value)
       themeControl.patchValue(value.replace(/\u200B/g, ""), {
@@ -491,11 +491,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
     //update
     if (this.isUpdate)
-      this.assignmentService.updateAssignment(
-        this.assignmentForm.getRawValue()
-      );
+      this.assignmentService.updateAssignment(this.form.getRawValue());
     //create
-    else this.assignmentService.createAssignment(this.assignmentForm.value);
+    else this.assignmentService.createAssignment(this.form.value);
 
     //navigate to parent, one parent for each fragment
     const parentRoute = this.isUpdate ? "../.." : "..";
@@ -507,7 +505,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   submitAndCreate(event: Event): void {
     event.stopPropagation();
     this.removeGremlings();
-    this.assignmentService.createAssignment(this.assignmentForm.value);
+    this.assignmentService.createAssignment(this.form.value);
 
     //Save current values
     const date = this.gfv("date");
@@ -518,19 +516,15 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     const onlyExternals = this.gfv("onlyExternals");
 
     //Reset form
-    this.assignmentForm.reset(this.defaultForm, { emitEvent: false });
+    this.form.reset({ emitEvent: false });
 
     //Restore values
-    this.assignmentForm.get("date").setValue(date, { emitEvent: false });
-    this.assignmentForm
-      .get("footerNote")
-      .setValue(footerNote, { emitEvent: false });
-    this.assignmentForm.get("room").setValue(room, { emitEvent: false });
-    this.assignmentForm.get("onlyMan").setValue(onlyMan, { emitEvent: false });
-    this.assignmentForm
-      .get("onlyWoman")
-      .setValue(onlyWoman, { emitEvent: false });
-    this.assignmentForm
+    this.form.get("date").setValue(date, { emitEvent: false });
+    this.form.get("footerNote").setValue(footerNote, { emitEvent: false });
+    this.form.get("room").setValue(room, { emitEvent: false });
+    this.form.get("onlyMan").setValue(onlyMan, { emitEvent: false });
+    this.form.get("onlyWoman").setValue(onlyWoman, { emitEvent: false });
+    this.form
       .get("onlyExternals")
       .setValue(onlyExternals, { emitEvent: false });
 

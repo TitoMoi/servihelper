@@ -42,15 +42,7 @@ export interface AssignmentGroupInterface {
   assignments: AssignmentReportInterface[];
 }
 
-export interface AssignmentTableInterface {
-  id: string;
-  date: Date;
+export interface AssignmentTableInterface extends AssignmentInterface {
   hasDateSeparator: boolean; //To separate dates from one day to another
   hasBeenClicked: boolean; //To highlight last row when clicked the sheet
-  room: string;
-  assignType: string;
-  assignTypeColor: string;
-  theme: string;
-  principal: string;
-  assistant: string;
 }

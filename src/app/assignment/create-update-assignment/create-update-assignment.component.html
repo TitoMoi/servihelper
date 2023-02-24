@@ -1,9 +1,5 @@
 <ng-container *transloco="let t">
-  <form
-    [formGroup]="assignmentForm"
-    novalidate
-    (ngSubmit)="submitAndCreate($event)"
-  >
+  <form [formGroup]="form" novalidate (ngSubmit)="submitAndCreate($event)">
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{
@@ -128,8 +124,8 @@
                 (selectionChange)="onSelectionChangePrincipal()"
                 [disableRipple]="true"
               >
-                <mat-select-trigger>
-                  {{ getPrincipalName(principalSelect.value) }}
+                <mat-select-trigger *ngIf="principalSelect.value">
+                  {{ (principalSelect.value | participantPipe).name }}
                 </mat-select-trigger>
                 <mat-option
                   *ngFor="let participant of principals; trackBy: trackByIdFn"
@@ -174,8 +170,8 @@
                 (selectionChange)="onSelectionChangeAssistant()"
                 [disableRipple]="true"
               >
-                <mat-select-trigger>
-                  {{ getAssistantName(assistantSelect.value) }}
+                <mat-select-trigger *ngIf="assistantSelect.value">
+                  {{ (assistantSelect.value | participantPipe).name }}
                 </mat-select-trigger>
                 <mat-option
                   *ngFor="let participant of assistants; trackBy: trackByIdFn"
@@ -219,7 +215,7 @@
           color="primary"
           type="button"
           (click)="onSubmit($event)"
-          [disabled]="assignmentForm.invalid"
+          [disabled]="form.invalid"
         >
           {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         </button>
@@ -230,7 +226,7 @@
           color="accent"
           type="submit"
           [disableRipple]="true"
-          [disabled]="assignmentForm.invalid"
+          [disabled]="form.invalid"
         >
           {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
         </button>
