@@ -1,12 +1,11 @@
-<form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+<form *transloco="let t" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-header>
       <mat-card-title
         >{{
-          (this.isUpdate
-            ? "ASSIGNTYPE_UPDATE_TITLE"
-            : "ASSIGNTYPE_CREATE_TITLE"
-          ) | transloco
+          this.isUpdate
+            ? t("ASSIGNTYPE_UPDATE_TITLE")
+            : t("ASSIGNTYPE_CREATE_TITLE")
         }}
       </mat-card-title>
     </mat-card-header>
@@ -14,7 +13,7 @@
       <div class="row">
         <div class="col-12">
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input
               matInput
               appautofocus
@@ -25,14 +24,12 @@
         </div>
         <div class="col-auto">
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_ORDER" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
             <input matInput type="number" formControlName="order" />
           </mat-form-field>
         </div>
         <div class="col-auto">
-          <mat-label class="me-3">{{
-            "PLACEHOLDER_COLOR" | transloco
-          }}</mat-label>
+          <mat-label class="me-3">{{ t("PLACEHOLDER_COLOR") }}</mat-label>
           <input type="color" formControlName="color" />
         </div>
       </div>
@@ -42,7 +39,7 @@
             labelPosition="before"
             color="primary"
             formControlName="hasAssistant"
-            >{{ "ASSIGNTYPE_HAS_ASSISTANT" | transloco }}</mat-checkbox
+            >{{ t("ASSIGNTYPE_HAS_ASSISTANT") }}</mat-checkbox
           >
         </div>
       </div>
@@ -54,7 +51,7 @@
         class="me-3"
         [routerLink]="isUpdate ? '../..' : '..'"
       >
-        {{ "BUTTON_CANCEL" | transloco }}
+        {{ t("BUTTON_CANCEL") }}
       </button>
       <button
         mat-raised-button
@@ -62,7 +59,7 @@
         type="submit"
         [disabled]="form.invalid"
       >
-        {{ (isUpdate ? "BUTTON_UPDATE" : "BUTTON_SAVE") | transloco }}
+        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
       </button>
     </mat-card-actions>
   </mat-card>

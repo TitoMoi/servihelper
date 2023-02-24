@@ -1,10 +1,10 @@
-<form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+<form *transloco="let t" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
   <h3>
-    {{ (isUpdate ? "NOTE_UPDATE_TITLE" : "NOTE_CREATE_TITLE") | transloco }}
+    {{ isUpdate ? t("NOTE_UPDATE_TITLE") : t("NOTE_CREATE_TITLE") }}
   </h3>
 
   <mat-form-field>
-    <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+    <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
     <input matInput appautofocus spellcheck="false" formControlName="name" />
   </mat-form-field>
   <div class="col-12">
@@ -23,7 +23,7 @@
       type="button"
       [routerLink]="isUpdate ? '../..' : '..'"
     >
-      {{ "BUTTON_CANCEL" | transloco }}
+      {{ t("BUTTON_CANCEL") }}
     </button>
     <button
       mat-raised-button
@@ -31,7 +31,7 @@
       type="submit"
       [disabled]="form.invalid"
     >
-      {{ (isUpdate ? "BUTTON_UPDATE" : "BUTTON_SAVE") | transloco }}
+      {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
     </button>
   </div>
 </form>

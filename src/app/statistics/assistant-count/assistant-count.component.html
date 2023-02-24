@@ -1,21 +1,21 @@
-<mat-accordion bg-color-white>
+<mat-accordion *transloco="let t">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h3 class="m-3">
-          {{ "STATISTICS_COUNT_ASSISTANT_TITLE" | transloco }}
+          {{ t("STATISTICS_COUNT_ASSISTANT_TITLE") }}
         </h3>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="row m-3 align-items-center">
       <div class="col-3">
         <mat-checkbox color="primary" (change)="changeWoman($event)">{{
-          "STATISTICS_ONLY_WOMAN" | transloco
+          t("STATISTICS_ONLY_WOMAN")
         }}</mat-checkbox>
       </div>
       <div class="col-3">
         <mat-checkbox color="primary" (change)="changeMan($event)">{{
-          "STATISTICS_ONLY_MAN" | transloco
+          t("STATISTICS_ONLY_MAN")
         }}</mat-checkbox>
       </div>
       <div class="col-2">
@@ -25,19 +25,19 @@
     <div id="toPngDivId" class="bg-color-white m-3">
       <div class="row m-3">
         <div class="col-2">
-          <b>{{ "STATISTICS_NAME" | transloco }}</b>
+          <b>{{ t("STATISTICS_NAME") }}</b>
         </div>
         <div class="col-2">
-          <b>{{ "STATISTICS_COUNT" | transloco }}</b>
+          <b>{{ t("STATISTICS_COUNT") }}</b>
         </div>
         <div class="col-2">
-          <b>{{ "STATISTICS_PENULTIMA" | transloco }}</b>
+          <b>{{ t("STATISTICS_PENULTIMA") }}</b>
         </div>
         <div class="col-2">
-          <b>{{ "STATISTICS_LAST" | transloco }}</b>
+          <b>{{ t("STATISTICS_LAST") }}</b>
         </div>
         <div class="col-4">
-          <b>{{ "STATISTICS_DISTANCE" | transloco }}</b>
+          <b>{{ t("STATISTICS_DISTANCE") }}</b>
         </div>
       </div>
       <div class="row m-3" *ngFor="let participant of assistantList">

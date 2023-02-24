@@ -1,4 +1,9 @@
-<form [formGroup]="configForm" novalidate (ngSubmit)="onSubmit()">
+<form
+  *transloco="let t"
+  [formGroup]="configForm"
+  novalidate
+  (ngSubmit)="onSubmit()"
+>
   <div class="row mb-2">
     <div class="col-12">
       <mat-accordion>
@@ -6,52 +11,52 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               <h3 class="m-3">
-                {{ "CONFIG_ACCORDION_SHEET_TITLE" | transloco }}
+                {{ t("CONFIG_ACCORDION_SHEET_TITLE") }}
               </h3>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <h4>{{ "CONFIG_ASSIGNMENT_TITLE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="assignmentHeaderTitle" />
           </mat-form-field>
-          <h4>{{ "CONFIG_ASSIGNMENT_PRINCIPAL_TITLE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_ASSIGNMENT_PRINCIPAL_TITLE") }}</h4>
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="assignmentPrincipalTitle" />
           </mat-form-field>
-          <h4>{{ "CONFIG_ASSIGNMENT_ASSISTANT_TITLE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_ASSIGNMENT_ASSISTANT_TITLE") }}</h4>
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="assignmentAssistantTitle" />
           </mat-form-field>
-          <h4>{{ "CONFIG_ASSIGNMENT_DATE_TITLE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_ASSIGNMENT_DATE_TITLE") }}</h4>
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="assignmentDateTitle" />
           </mat-form-field>
-          <h4>{{ "CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE") }}</h4>
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="assignmentAssignTypeTitle" />
           </mat-form-field>
-          <h4>{{ "CONFIG_ASSIGNMENT_THEME_TITLE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_ASSIGNMENT_THEME_TITLE") }}</h4>
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="assignmentThemeTitle" />
           </mat-form-field>
-          <h4>{{ "CONFIG_ASSIGNMENT_ROOM_TITLE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_ASSIGNMENT_ROOM_TITLE") }}</h4>
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="assignmentRoomTitle" />
           </mat-form-field>
-          <h4>{{ "CONFIG_ASSIGNMENT_NOTE_TITLE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_ASSIGNMENT_NOTE_TITLE") }}</h4>
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="assignmentNoteTitle" />
           </mat-form-field>
-          <h4>{{ "CONFIG_DEFAULT_FOOTER_NOTE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_DEFAULT_FOOTER_NOTE") }}</h4>
           <mat-form-field>
             <mat-select formControlName="defaultFooterNoteId" required>
               <mat-option [value]="undefined"> </mat-option>
@@ -71,17 +76,17 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               <h3 class="m-3">
-                {{ "CONFIG_ACCORDION_REPORT_TITLE" | transloco }}
+                {{ t("CONFIG_ACCORDION_REPORT_TITLE") }}
               </h3>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <h4>{{ "CONFIG_REPORT_TITLE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_REPORT_TITLE") }}</h4>
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="reportTitle" />
           </mat-form-field>
-          <h4>{{ "CONFIG_DEFAULT_WEEKDAY_BEGINS" | transloco }}</h4>
+          <h4>{{ t("CONFIG_DEFAULT_WEEKDAY_BEGINS") }}</h4>
           <mat-form-field>
             <mat-select formControlName="defaultWeekDayBegins" required>
               <mat-option *ngFor="let day of weekDayBegins" [value]="day.value">
@@ -90,7 +95,7 @@
             </mat-select>
           </mat-form-field>
 
-          <h4>{{ "CONFIG_DEFAULT_REPORT_DATE_FORMAT" | transloco }}</h4>
+          <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_FORMAT") }}</h4>
           <mat-form-field>
             <mat-select formControlName="defaultReportDateFormat" required>
               <mat-option *ngFor="let df of translocoDateFormats" [value]="df">
@@ -99,11 +104,9 @@
             </mat-select>
           </mat-form-field>
 
-          <h4>{{ "CONFIG_DEFAULT_REPORT_DATE_COLOR" | transloco }}</h4>
+          <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_COLOR") }}</h4>
           <mat-form-field>
-            <mat-label>{{
-              "PLACEHOLDER_REPORT_DATE_COLOR" | transloco
-            }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_REPORT_DATE_COLOR") }}</mat-label>
             <input
               type="color"
               matInput
@@ -111,7 +114,7 @@
             />
           </mat-form-field>
 
-          <h4>{{ "CONFIG_DEFAULT_FONT_SIZE" | transloco }}</h4>
+          <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE") }}</h4>
           <mat-form-field>
             <input
               matInput
@@ -130,7 +133,7 @@
         <mat-expansion-panel-header tabIndex="3" class="bg-color-lightcoral">
           <mat-panel-title>
             <h3 class="m-3">
-              {{ "CONFIG_RESTART_LABEL" | transloco }}
+              {{ t("CONFIG_RESTART_LABEL") }}
             </h3>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -140,7 +143,7 @@
           color="warn"
           (click)="confirmDelete = !confirmDelete"
         >
-          {{ "CONFIG_RESET_ALL" | transloco }}
+          {{ t("CONFIG_RESET_ALL") }}
         </button>
         <button
           *ngIf="confirmDelete"
@@ -150,7 +153,7 @@
           color="warn"
           (click)="eraseAllData()"
         >
-          {{ "CONFIG_RESET_ALL_CONFIRM" | transloco }}
+          {{ t("CONFIG_RESET_ALL_CONFIRM") }}
         </button>
       </mat-expansion-panel>
     </mat-accordion>
@@ -158,10 +161,10 @@
   <div class="row mb-2">
     <div class="col-12">
       <button mat-raised-button type="submit" color="primary">
-        {{ "BUTTON_SAVE" | transloco }}
+        {{ t("BUTTON_SAVE") }}
       </button>
       <span class="ms-2 green-msg" *ngIf="isFormSaved">
-        {{ "CONFIG_FORM_SAVED" | transloco }}
+        {{ t("CONFIG_FORM_SAVED") }}
       </span>
     </div>
   </div>

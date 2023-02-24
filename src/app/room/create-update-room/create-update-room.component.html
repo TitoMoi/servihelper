@@ -1,15 +1,15 @@
-<form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+<form *transloco="let t" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{
-        (isUpdate ? "ROOM_UPDATE_TITLE" : "ROOM_CREATE_TITLE") | transloco
+        isUpdate ? t("ROOM_UPDATE_TITLE") : t("ROOM_CREATE_TITLE")
       }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input
               matInput
               appautofocus
@@ -20,7 +20,7 @@
 
           <div class="col-6">
             <mat-form-field>
-              <mat-label>{{ "PLACEHOLDER_ORDER" | transloco }}</mat-label>
+              <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
               <input matInput type="number" formControlName="order" />
             </mat-form-field>
           </div>
@@ -34,7 +34,7 @@
         class="me-3"
         [routerLink]="isUpdate ? '../..' : '..'"
       >
-        {{ "BUTTON_CANCEL" | transloco }}
+        {{ t("BUTTON_CANCEL") }}
       </button>
       <button
         mat-raised-button
@@ -42,7 +42,7 @@
         type="submit"
         [disabled]="form.invalid"
       >
-        {{ (isUpdate ? "BUTTON_UPDATE" : "BUTTON_SAVE") | transloco }}
+        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
       </button>
     </mat-card-actions>
   </mat-card>

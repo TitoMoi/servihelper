@@ -1,16 +1,19 @@
-<form [formGroup]="roomForm" novalidate (ngSubmit)="onSubmit(roomForm.value)">
+<form
+  *transloco="let t"
+  [formGroup]="roomForm"
+  novalidate
+  (ngSubmit)="onSubmit(roomForm.value)"
+>
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{ "ROOM_DELETE_TITLE" | transloco }}</mat-card-title>
-      <mat-card-subtitle>{{
-        "ROOM_DELETE_WARNING" | transloco
-      }}</mat-card-subtitle>
+      <mat-card-title>{{ t("ROOM_DELETE_TITLE") }}</mat-card-title>
+      <mat-card-subtitle>{{ t("ROOM_DELETE_WARNING") }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <mat-label>{{ "PLACEHOLDER_NAME" | transloco }}</mat-label>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input matInput formControlName="name" />
           </mat-form-field>
         </div>
@@ -18,10 +21,10 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button type="button" class="me-3" routerLink="../..">
-        {{ "BUTTON_CANCEL" | transloco }}
+        {{ t("BUTTON_CANCEL") }}
       </button>
       <button mat-raised-button color="warn" type="submit">
-        {{ "BUTTON_DELETE" | transloco }}
+        {{ t("BUTTON_DELETE") }}
       </button>
     </mat-card-actions>
   </mat-card>
