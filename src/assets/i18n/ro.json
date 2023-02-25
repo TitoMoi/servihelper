@@ -261,5 +261,6 @@
   "ro": "Română",
   "ru": "Rusă",
   "tr": "Turc",
-  "zhCN": "Chinez"
+  "zhCN": "Chinez",
+  "ASSIGN_CHECK_IS_MULTIPLE": "This is a repeated assignment on diferent days"
 }

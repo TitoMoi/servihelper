@@ -127,12 +127,12 @@ export class AssignmentComponent
     this.queryAllMatRows();
 
     //keep observing until we reach the assignments length
-    if (this.rows.length !== this.assignments.length)
+    if (this.assignments.length && this.rows.length !== this.assignments.length)
       this.observer.observe(this.rows[this.rows.length - 1]);
   }
 
   ngOnDestroy(): void {
-    /*  this.observer.disconnect(); */
+    this.observer.disconnect();
     this.subscription.unsubscribe();
   }
 

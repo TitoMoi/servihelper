@@ -80,7 +80,7 @@ export class SharedService {
     });
   }
 
-  sortDates(a: string, b: string): number {
+  sortDates(a: Date, b: Date): number {
     const dateA = new Date(a);
     const dateB = new Date(b);
     if (dateA > dateB) {

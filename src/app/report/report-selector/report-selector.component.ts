@@ -12,7 +12,11 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 import { MatOption } from "@angular/material/core";
 import {
   MatDatepicker,
@@ -30,9 +34,18 @@ import { TranslocoService } from "@ngneat/transloco";
 export class ReportSelectorComponent implements OnInit, AfterViewInit {
   //Angular material datepicker hacked
   @ViewChild(MatDatepicker) datePickerRef: MatDatepicker<Date>;
+
   @ViewChild("assignTypesSelect") assignTypesSelectRef: MatSelect;
   @ViewChild("roomsSelect") roomsSelectRef: MatSelect;
   @ViewChild("orderSelect") order: MatSelect;
+
+  //props for datepicker hack
+  closeOnSelected = false;
+  init = new Date();
+  selectedDates = [];
+  timeoutRef;
+  resetModel = undefined;
+  //end of props for datepicker hack
 
   rooms: RoomInterface[] = this.roomService
     .getRooms()
@@ -42,12 +55,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
-  //props for datepicker hack
-  closeOnSelected = false;
-  init = new Date();
-  selectedDates = [];
-  timeoutRef;
-  resetModel = undefined;
+  isMultipleDates = false;
 
   orderOptions: string[] = ["Asc", "Desc"];
 
@@ -93,13 +101,15 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
   }
 
+  //********* DATEPICKER HACK *************
+
   //for Datepicker hack
-  public dateClass = (date: Date) => {
+  public dateClass(date: Date) {
     if (this.findDate(date) !== -1) {
       return ["selected"];
     }
     return [];
-  };
+  }
 
   //for Datepicker hack
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {

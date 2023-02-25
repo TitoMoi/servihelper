@@ -39,6 +39,10 @@ import { MatDialog } from "@angular/material/dialog";
 import { InfoAssignmentComponent } from "../info-assignment/info-assignment.component";
 import { SortService } from "app/services/sort.service";
 import { WarningAssignmentComponent } from "../warning-assignment/warning-assignment.component";
+import {
+  MatDatepicker,
+  MatDatepickerInputEvent,
+} from "@angular/material/datepicker";
 
 @Component({
   selector: "app-create-update-assignment",
@@ -52,6 +56,18 @@ export class CreateUpdateAssignmentComponent
   @ViewChild("principalSelect") principalSelect: MatSelect;
   @ViewChild("assistantSelect") assistantSelect: MatSelect;
   @ViewChild("btnSaveCreateAnother") btnSaveCreateAnother: MatButton;
+
+  //Angular material datepicker hacked
+  @ViewChild("multipleDatePicker") datePickerRef: MatDatepicker<Date>;
+
+  //Props for the datepicker multiple dates hack
+  isMultipleDates = false;
+  closeOnSelected = false;
+  init = new Date();
+  selectedDates: Date[] = [];
+  timeoutRef;
+  resetModel = undefined;
+  //end of props for datepicker hack
 
   rooms: RoomInterface[] = this.roomService
     .getRooms()
@@ -168,6 +184,15 @@ export class CreateUpdateAssignmentComponent
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  toggleIsMultipleDates() {
+    //Reset first
+    this.form.get("date").reset();
+    /* this.selectedDates = []; */
+
+    this.isMultipleDates = !this.isMultipleDates;
+    this.cdr.detectChanges();
   }
 
   async getAssignments() {
@@ -452,24 +477,26 @@ export class CreateUpdateAssignmentComponent
    * depends on: assignments, selected room, selected date
    */
   removeAssignTypesThatAlreadyExistOnDate() {
-    if (!this.isUpdate) {
+    if (!this.isUpdate && !this.isMultipleDates) {
       const dateValue = this.gfv("date");
       const roomValue = this.gfv("room");
       const assignTypeValue = this.gfv("assignType");
 
-      const assignmentsByDate =
-        this.assignmentService.getAssignmentsByDate(dateValue);
+      if (dateValue && roomValue) {
+        const assignmentsByDate =
+          this.assignmentService.getAssignmentsByDate(dateValue);
 
-      this.assignTypes = this.assignTypes.filter(
-        (at) =>
-          !assignmentsByDate.some(
-            (a) => a.assignType === at.id && a.room === roomValue
-          )
-      );
+        this.assignTypes = this.assignTypes.filter(
+          (at) =>
+            !assignmentsByDate.some(
+              (a) => a.assignType === at.id && a.room === roomValue
+            )
+        );
 
-      //Reset if assignType selected not in new assignTypes
-      if (!this.assignTypes.some((at) => at.id === assignTypeValue))
-        this.form.get("assignType").reset(undefined, { emitEvent: false });
+        //Reset if assignType selected not in new assignTypes
+        if (!this.assignTypes.some((at) => at.id === assignTypeValue))
+          this.form.get("assignType").reset(undefined, { emitEvent: false });
+      }
     }
   }
 
@@ -516,7 +543,7 @@ export class CreateUpdateAssignmentComponent
     const onlyExternals = this.gfv("onlyExternals");
 
     //Reset form
-    this.form.reset({ emitEvent: false });
+    this.form.reset();
 
     //Restore values
     this.form.get("date").setValue(date, { emitEvent: false });
@@ -624,5 +651,59 @@ export class CreateUpdateAssignmentComponent
 
   trackByIdAssignTypeFn(index, assignType: AssignTypeInterface) {
     return assignType.id;
+  }
+
+  //********* DATEPICKER HACK *************
+
+  //for Datepicker hack
+  public dateClass = (date: Date) => {
+    if (this.findDate(date) !== -1) {
+      return ["selected"];
+    }
+    return [];
+  };
+
+  //for Datepicker hack
+  public dateChanged(event: MatDatepickerInputEvent<Date>): void {
+    if (event.value) {
+      const date = event.value;
+      const index = this.findDate(date);
+      if (index === -1) {
+        this.selectedDates.push(date);
+      } else {
+        this.selectedDates.splice(index, 1);
+      }
+      this.resetModel = new Date(0);
+      //prepare sorted dates for the reports and new reference for the input components
+      this.selectedDates = [
+        ...this.selectedDates.sort(this.sharedService.sortDates),
+      ];
+
+      if (!this.closeOnSelected) {
+        const closeFn = this.datePickerRef.close;
+        this.datePickerRef.close = () => {};
+        // eslint-disable-next-line no-underscore-dangle
+        this.datePickerRef[
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          "_componentRef"
+        ].instance._calendar.monthView._createWeekCells();
+
+        this.timeoutRef = setTimeout(() => {
+          this.datePickerRef.close = closeFn;
+        });
+      }
+    }
+    this.cdr.detectChanges();
+  }
+
+  //for Datepicker hack
+  public remove(date: Date): void {
+    const index = this.findDate(date);
+    this.selectedDates.splice(index, 1);
+  }
+
+  //for Datepicker hack
+  private findDate(date: Date): number {
+    return this.selectedDates.map((m) => +m).indexOf(+date);
   }
 }

@@ -261,5 +261,6 @@
   "ro": "罗马尼亚人",
   "ru": "俄语",
   "tr": "土耳其",
-  "zhCN": "中国人"
+  "zhCN": "中国人",
+  "ASSIGN_CHECK_IS_MULTIPLE": "This is a repeated assignment on diferent days"
 }

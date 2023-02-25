@@ -8,7 +8,39 @@
       </mat-card-header>
       <mat-card-content>
         <div class="row">
-          <mat-form-field>
+          <div class="col">
+            <mat-checkbox
+              labelPosition="before"
+              color="primary"
+              (change)="toggleIsMultipleDates()"
+              [disableRipple]="true"
+              >{{ t("ASSIGN_CHECK_IS_MULTIPLE") }}</mat-checkbox
+            >
+          </div>
+        </div>
+        <div class="row">
+          <mat-form-field *ngIf="isMultipleDates">
+            <mat-label>{{
+              t("ASSIGN_SELECTION_DATES_SELECT_TITLE")
+            }}</mat-label>
+            <input
+              matInput
+              [value]="resetModel"
+              [matDatepicker]="multipleDatePicker"
+              (dateChange)="dateChanged($event)"
+            />
+            <mat-datepicker-toggle
+              matPrefix
+              [for]="multipleDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #multipleDatePicker
+              [startAt]="init"
+              [dateClass]="dateClass"
+            ></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="!isMultipleDates">
             <mat-label>{{ t("ASSIGN_CHOOSE_DATE") }}</mat-label>
             <input
               required
