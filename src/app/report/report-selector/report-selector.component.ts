@@ -104,12 +104,12 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
   //********* DATEPICKER HACK *************
 
   //for Datepicker hack
-  public dateClass(date: Date) {
+  public dateClass = (date: Date) => {
     if (this.findDate(date) !== -1) {
       return ["selected"];
     }
     return [];
-  }
+  };
 
   //for Datepicker hack
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
