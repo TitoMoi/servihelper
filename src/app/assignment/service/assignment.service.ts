@@ -121,9 +121,33 @@ export class AssignmentService {
    * @returns save in memory assignments to file, true if assignments are saved to disk or false if some error happens.
    * performance: dont mark flag hasChanged to true because this.assignments in memory is already updated
    */
-  saveAssignmentsToFile() {
+  async saveAssignmentsToFile() {
     //Write assignments back to file
-    writeJson(this.path, this.#assignments);
+    await writeJson(this.path, this.#assignments);
+  }
+
+  createMultipleAssignments(assignments: AssignmentInterface[]) {
+    for (const assignment of assignments) {
+      //Generate id for the assignment
+      assignment.id = nanoid();
+      //add assignment to assignments
+      this.#assignments.push(assignment);
+      this.#assignmentsMap.set(assignment.id, assignment);
+      this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
+    }
+    //ORDER THE ASSIGNMENTS BY MOST RECENT DATE
+    this.#assignments.sort(this.sortAssignmentsByDateDesc);
+    //save assignments with the new assignment
+    this.saveAssignmentsToFile();
+
+    for (const assignment of assignments) {
+      //Notify
+      const assignmentOperation: AssignmentOperationInterface = {
+        assignment,
+        operationType: "create",
+      };
+      this.assignment$.next(assignmentOperation);
+    }
   }
 
   /**

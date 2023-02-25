@@ -521,12 +521,14 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
     //Multiple create
     if (this.isMultipleDates) {
+      const assignmentsToSave = [];
       this.selectedDates.forEach((d) => {
-        this.assignmentService.createAssignment({
+        assignmentsToSave.push({
           ...this.form.value,
           date: d,
         });
       });
+      this.assignmentService.createMultipleAssignments(assignmentsToSave);
     }
     //create
     if (!this.isUpdate && !this.isMultipleDates) {
