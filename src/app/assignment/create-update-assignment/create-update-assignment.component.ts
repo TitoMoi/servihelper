@@ -18,7 +18,6 @@ import { SharedService } from "app/services/shared.service";
 import { Subscription, map } from "rxjs";
 
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -43,6 +42,7 @@ import {
   MatDatepicker,
   MatDatepickerInputEvent,
 } from "@angular/material/datepicker";
+import { MatCheckboxChange } from "@angular/material/checkbox";
 
 @Component({
   selector: "app-create-update-assignment",
@@ -50,9 +50,7 @@ import {
   styleUrls: ["./create-update-assignment.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateUpdateAssignmentComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   @ViewChild("principalSelect") principalSelect: MatSelect;
   @ViewChild("assistantSelect") assistantSelect: MatSelect;
   @ViewChild("btnSaveCreateAnother") btnSaveCreateAnother: MatButton;
@@ -156,10 +154,6 @@ export class CreateUpdateAssignmentComponent
   ) {
     this.getAssignments();
   }
-  ngAfterViewInit(): void {
-    console.log(this.form.getRawValue());
-    this.cdr.detectChanges();
-  }
 
   ngOnInit() {
     //Get the view values
@@ -168,7 +162,6 @@ export class CreateUpdateAssignmentComponent
       this.batchGetCountSortWarning();
       this.removePrincipalFromAssistants(this.gfv("principal"));
       this.enableOrDisableAssistantControl(this.gfv("assignType"));
-      console.log(this.form.getRawValue());
     }
 
     //Prepare the form changes
@@ -186,11 +179,18 @@ export class CreateUpdateAssignmentComponent
     this.subscription.unsubscribe();
   }
 
-  toggleIsMultipleDates() {
+  toggleIsMultipleDates(e: MatCheckboxChange) {
+    const dateCtrl = this.form.get("date");
     //Reset first
     this.form.get("date").reset();
-    /* this.selectedDates = []; */
+    this.selectedDates = [];
 
+    if (e.checked) {
+      dateCtrl.clearValidators();
+    } else {
+      dateCtrl.addValidators(Validators.required);
+    }
+    dateCtrl.updateValueAndValidity();
     this.isMultipleDates = !this.isMultipleDates;
     this.cdr.detectChanges();
   }
@@ -223,24 +223,28 @@ export class CreateUpdateAssignmentComponent
 
   /** (view) Set count and last assignment date for principals */
   setPrincipalsCountAndLastDate() {
-    this.sharedService.setCountAndLastAssignmentDate(
-      this.assignments,
-      this.principals,
-      this.gfv("room"),
-      this.gfv("assignType"),
-      true
-    );
+    if (!this.isMultipleDates) {
+      this.sharedService.setCountAndLastAssignmentDate(
+        this.assignments,
+        this.principals,
+        this.gfv("room"),
+        this.gfv("assignType"),
+        true
+      );
+    }
   }
 
   /** (view) Set count and last assignment date for assistants */
   setAssistantsCountAndLastDate() {
-    this.sharedService.setCountAndLastAssignmentDate(
-      this.assignments,
-      this.assistants,
-      this.gfv("room"),
-      this.gfv("assignType"),
-      false
-    );
+    if (!this.isMultipleDates) {
+      this.sharedService.setCountAndLastAssignmentDate(
+        this.assignments,
+        this.assistants,
+        this.gfv("room"),
+        this.gfv("assignType"),
+        false
+      );
+    }
   }
 
   /** Batch operation
@@ -259,18 +263,10 @@ export class CreateUpdateAssignmentComponent
       this.lastDateService.lastDate = date;
 
       this.batchCleanPrincipalAssistant();
-
-      if (this.gfv("date")) {
-        this.getParticipantsAvailableOnDate();
-      }
-
-      if (this.gfv("room")) {
-        this.filterAssignmentsByRole();
-        this.removeAssignTypesThatAlreadyExistOnDate();
-      }
-      if (this.gfv("room") && this.gfv("assignType")) {
-        this.batchGetCountSortWarning();
-      }
+      this.filterAssignmentsByRole();
+      this.getParticipantsAvailableOnDate();
+      this.removeAssignTypesThatAlreadyExistOnDate();
+      this.batchGetCountSortWarning();
     });
     this.cdr.detectChanges();
   }
@@ -279,14 +275,9 @@ export class CreateUpdateAssignmentComponent
     this.subscription.add(
       this.form.get("room").valueChanges.subscribe(() => {
         this.batchCleanPrincipalAssistant();
-
-        if (this.gfv("date")) {
-          this.filterAssignmentsByRole();
-          this.removeAssignTypesThatAlreadyExistOnDate();
-        }
-        if (this.gfv("date") && this.gfv("assignType")) {
-          this.batchGetCountSortWarning();
-        }
+        this.filterAssignmentsByRole();
+        this.removeAssignTypesThatAlreadyExistOnDate();
+        this.batchGetCountSortWarning();
       })
     );
     this.cdr.detectChanges();
@@ -298,10 +289,7 @@ export class CreateUpdateAssignmentComponent
         .get("assignType")
         .valueChanges.subscribe((assignTypeId: string) => {
           this.batchCleanPrincipalAssistant();
-
-          if (this.gfv("date") && this.gfv("room") && this.gfv("assignType")) {
-            this.batchGetCountSortWarning();
-          }
+          this.batchGetCountSortWarning();
           this.enableOrDisableAssistantControl(assignTypeId);
         })
     );
@@ -380,11 +368,13 @@ export class CreateUpdateAssignmentComponent
   }
 
   removePrincipalFromAssistants(principalId: string) {
-    let i = this.assistants.length;
-    while (i--) {
-      if (this.assistants[i].id === principalId) {
-        this.assistants.splice(i, 1);
-        break;
+    if (principalId) {
+      let i = this.assistants.length;
+      while (i--) {
+        if (this.assistants[i].id === principalId) {
+          this.assistants.splice(i, 1);
+          break;
+        }
       }
     }
   }
@@ -399,61 +389,74 @@ export class CreateUpdateAssignmentComponent
    * Gets the principal and assistant based on the available participants, room, assignType and only selectors
    */
   getPrincipalAndAssistant() {
-    this.principals = this.sharedService.filterPrincipalsByAvailable(
-      structuredClone(this.participants),
-      this.gfv("assignType"),
-      this.gfv("room"),
-      this.gfv("onlyMan"),
-      this.gfv("onlyWoman")
-    );
+    if (this.isMultipleDates) {
+      this.principals = structuredClone(this.participants);
+      this.assistants = structuredClone(this.participants);
+      return;
+    }
 
-    this.assistants = this.sharedService.filterAssistantsByAvailable(
-      structuredClone(this.participants),
-      this.gfv("assignType"),
-      this.gfv("room"),
-      this.gfv("onlyMan"),
-      this.gfv("onlyWoman")
-    );
+    if (this.gfv("room") && this.gfv("date") && this.gfv("assignType")) {
+      this.principals = this.sharedService.filterPrincipalsByAvailable(
+        structuredClone(this.participants),
+        this.gfv("assignType"),
+        this.gfv("room"),
+        this.gfv("onlyMan"),
+        this.gfv("onlyWoman")
+      );
+
+      this.assistants = this.sharedService.filterAssistantsByAvailable(
+        structuredClone(this.participants),
+        this.gfv("assignType"),
+        this.gfv("room"),
+        this.gfv("onlyMan"),
+        this.gfv("onlyWoman")
+      );
+    }
   }
 
   /**
    * Filter available participants by selected date and create a map of assignments by selected date.
    */
   getParticipantsAvailableOnDate() {
+    this.participants = this.participantService.getParticipants(true);
+
+    if (this.isMultipleDates) {
+      return;
+    }
     const dateControlValue = this.gfv("date");
-    this.participants = this.participantService
-      .getParticipants(true)
-      .filter(
-        (p) =>
-          !p.notAvailableDates.some(
-            (date) =>
-              new Date(dateControlValue).getTime() === new Date(date).getTime()
-          )
-      );
+    this.participants = this.participants.filter(
+      (p) =>
+        !p.notAvailableDates.some(
+          (date) =>
+            new Date(dateControlValue).getTime() === new Date(date).getTime()
+        )
+    );
   }
 
   /**
    * Highlight the principal or assistant if already has work
    */
   warningIfAlreadyHasWork() {
-    const dateValue = this.gfv("date");
-    const room = this.gfv("room");
-    const assignType = this.gfv("assignType");
+    if (!this.isMultipleDates) {
+      const dateValue = this.gfv("date");
+      const room = this.gfv("room");
+      const assignType = this.gfv("assignType");
 
-    if (dateValue && room && assignType) {
-      for (const p of this.principals) {
-        const hasWork = this.assignmentService
-          .getAssignmentsByDate(dateValue)
-          .some((a) => a.principal === p.id || a.assistant === p.id);
-        p.hasWork = hasWork;
-      }
+      if (dateValue && room && assignType) {
+        for (const p of this.principals) {
+          const hasWork = this.assignmentService
+            .getAssignmentsByDate(dateValue)
+            .some((a) => a.principal === p.id || a.assistant === p.id);
+          p.hasWork = hasWork;
+        }
 
-      for (const as of this.assistants) {
-        const hasWork = this.assignmentService
-          .getAssignmentsByDate(dateValue)
-          .some((a) => a.principal === as.id || a.assistant === as.id);
+        for (const as of this.assistants) {
+          const hasWork = this.assignmentService
+            .getAssignmentsByDate(dateValue)
+            .some((a) => a.principal === as.id || a.assistant === as.id);
 
-        as.hasWork = hasWork;
+          as.hasWork = hasWork;
+        }
       }
     }
   }
@@ -566,12 +569,14 @@ export class CreateUpdateAssignmentComponent
     this.principalSelect.close();
     //Wait until button is enabled to focus it otherwise not works
     this.cdr.detectChanges();
-    if (!this.isUpdate) this.btnSaveCreateAnother.focus();
+    if (!this.isUpdate && !this.isMultipleDates)
+      this.btnSaveCreateAnother.focus();
   }
 
   onSelectionChangeAssistant() {
     this.assistantSelect.close();
-    if (!this.isUpdate) this.btnSaveCreateAnother.focus();
+    if (!this.isUpdate && !this.isMultipleDates)
+      this.btnSaveCreateAnother.focus();
   }
 
   getPrincipalName(principalId) {

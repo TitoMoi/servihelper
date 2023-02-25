@@ -12,7 +12,7 @@
             <mat-checkbox
               labelPosition="before"
               color="primary"
-              (change)="toggleIsMultipleDates()"
+              (change)="toggleIsMultipleDates($event)"
               [disableRipple]="true"
               >{{ t("ASSIGN_CHECK_IS_MULTIPLE") }}</mat-checkbox
             >
@@ -178,7 +178,10 @@
                         aria-label="icon"
                       ></mat-icon>
                       <mat-icon
-                        *ngIf="!participant.hasWork"
+                        *ngIf="
+                          !participant.hasWork && !isMultipleDates;
+                          else noIcon
+                        "
                         (click)="
                           onPrincipalIconInfoClick($event, participant, false)
                         "
@@ -186,8 +189,12 @@
                         aria-label="icon"
                       ></mat-icon>
                     </div>
-                    <div>{{ participant.count }}</div>
+                    <div *ngIf="!isMultipleDates; else noCount">
+                      {{ participant.count }}
+                    </div>
                     <div>{{ participant.name }}</div>
+                    <ng-template #noIcon><div></div></ng-template>
+                    <ng-template #noCount><div></div></ng-template>
                   </div>
                 </mat-option>
               </mat-select>
@@ -213,7 +220,10 @@
                     'no-hover': true
                   }"
                 >
-                  {{ participant.count }} - {{ participant.name }}
+                  <span *ngIf="!this.isMultipleDates"
+                    >{{ participant.count }} -</span
+                  >
+                  {{ participant.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -247,12 +257,14 @@
           color="primary"
           type="button"
           (click)="onSubmit($event)"
-          [disabled]="form.invalid"
+          [disabled]="
+            form.invalid || (isMultipleDates && !selectedDates.length)
+          "
         >
           {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         </button>
         <button
-          *ngIf="!isUpdate"
+          *ngIf="!isUpdate && !isMultipleDates"
           #btnSaveCreateAnother
           mat-raised-button
           color="accent"
