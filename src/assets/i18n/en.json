@@ -241,5 +241,6 @@
   "ru": "Russian",
   "tr": "Turkish",
   "zhCN": "Chinese",
-  "ASSIGN_CHECK_IS_MULTIPLE": "This is a repeated assignment on diferent days"
+  "ASSIGN_CHECK_IS_MULTIPLE": "This is a repeated assignment on diferent days",
+  "ASSIGN_MULTIPLE_CREATE_TITLE": "Create multiple assignments"
 }

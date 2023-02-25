@@ -3,11 +3,15 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{
-          isUpdate ? t("ASSIGN_UPDATE_TITLE") : t("ASSIGN_CREATE_TITLE")
+          isUpdate
+            ? t("ASSIGN_UPDATE_TITLE")
+            : isMultipleDates
+            ? t("ASSIGN_MULTIPLE_CREATE_TITLE")
+            : t("ASSIGN_CREATE_TITLE")
         }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div class="row">
+        <div *ngIf="!isUpdate" class="row">
           <div class="col">
             <mat-checkbox
               labelPosition="before"
@@ -166,7 +170,10 @@
                   <div class="grid">
                     <div>
                       <mat-icon
-                        *ngIf="participant.hasWork"
+                        *ngIf="
+                          participant.hasWork && !isMultipleDates;
+                          else noIcon
+                        "
                         (click)="
                           onPrincipalIconWarningClick(
                             $event,

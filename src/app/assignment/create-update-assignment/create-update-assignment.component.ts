@@ -211,12 +211,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.role$.subscribe((r) => {
         this.role = r;
-
-        //If date and room are selected, when click the assignTypes select is not working, so we need to call it manually
-        if (this.gfv("date") && this.gfv("room")) {
-          this.filterAssignmentsByRole();
-          this.removeAssignTypesThatAlreadyExistOnDate();
-        }
+        this.filterAssignmentsByRole();
+        this.removeAssignTypesThatAlreadyExistOnDate();
       })
     );
   }
@@ -465,7 +461,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     //Filter assignTypes by permissions
     this.assignTypes = this.assignTypeService.getAssignTypes();
 
-    //administrator is undefined
+    //administrator is undefined value
     if (this.role) {
       this.assignTypes = this.assignTypes.filter((at) =>
         this.role.assignTypesId.includes(at.id)
@@ -522,8 +518,20 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     //update
     if (this.isUpdate)
       this.assignmentService.updateAssignment(this.form.getRawValue());
+
+    //Multiple create
+    if (this.isMultipleDates) {
+      this.selectedDates.forEach((d) => {
+        this.assignmentService.createAssignment({
+          ...this.form.value,
+          date: d,
+        });
+      });
+    }
     //create
-    else this.assignmentService.createAssignment(this.form.value);
+    if (!this.isUpdate && !this.isMultipleDates) {
+      this.assignmentService.createAssignment(this.form.value);
+    }
 
     //navigate to parent, one parent for each fragment
     const parentRoute = this.isUpdate ? "../.." : "..";
