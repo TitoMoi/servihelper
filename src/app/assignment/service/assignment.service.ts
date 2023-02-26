@@ -127,9 +127,14 @@ export class AssignmentService {
   }
 
   createMultipleAssignments(assignments: AssignmentInterface[]) {
-    for (const assignment of assignments) {
+    for (let assignment of assignments) {
       //Generate id for the assignment
       assignment.id = nanoid();
+
+      //Simulate we have saved and retrieved assignment, this is only for serialize Date and get an ISO string
+      //This only happens on create, update respects the date and also delete.
+      //We do this because we dont get again the assignments from file, they are in memory
+      assignment = assignment = JSON.parse(JSON.stringify(assignment));
       //add assignment to assignments
       this.#assignments.push(assignment);
       this.#assignmentsMap.set(assignment.id, assignment);
@@ -144,6 +149,7 @@ export class AssignmentService {
       //Simulate we have saved and retrieved assignment, this is only for serialize Date and get an ISO string
       //This only happens on create, update respects the date and also delete
       assignment = JSON.parse(JSON.stringify(assignment));
+
       //Notify
       const assignmentOperation: AssignmentOperationInterface = {
         assignment,
@@ -161,6 +167,10 @@ export class AssignmentService {
   createAssignment(assignment: AssignmentInterface) {
     //Generate id for the assignment
     assignment.id = nanoid();
+    //Simulate we have saved and retrieved assignment, this is only for serialize Date and get an ISO string
+    //This only happens on create, update respects the date and also delete.
+    //We do this because we dont get again the assignments from file, they are in memory
+    assignment = assignment = JSON.parse(JSON.stringify(assignment));
     //add assignment to assignments
     this.#assignments.push(assignment);
     this.#assignmentsMap.set(assignment.id, assignment);

@@ -173,7 +173,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.isUpdate) {
-      /*  this.participantService.updateParticipant(this.form.getRawValue()); */
+      this.participantService.updateParticipant(this.form.getRawValue());
     } else {
       this.createParticipant();
     }
@@ -244,15 +244,6 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
 
   /** code for the datepicker hack*/
   private findDate(date: Date): number {
-    /*  return this.getNotAvailableDates.map((m) => +m).indexOf(+date); */
-    console.log("+date", +date);
-
-    return this.getNotAvailableDates
-      .map((m) => {
-        console.log("m", m);
-        console.log("+m", +m);
-        return +m;
-      })
-      .indexOf(+date);
+    return this.getNotAvailableDates.map((m) => +m).indexOf(+date);
   }
 }

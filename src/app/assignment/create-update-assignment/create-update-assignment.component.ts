@@ -294,12 +294,14 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   /** (Form) Enable or disable the assistant control if assign type has assistant help */
   enableOrDisableAssistantControl(assignTypeId) {
-    if (this.assignTypeService.getAssignType(assignTypeId).hasAssistant) {
-      this.form.get("assistant").enable({ emitEvent: false });
-    } else {
-      this.form.get("assistant").disable({ emitEvent: false });
+    if (assignTypeId) {
+      if (this.assignTypeService.getAssignType(assignTypeId).hasAssistant) {
+        this.form.get("assistant").enable({ emitEvent: false });
+      } else {
+        this.form.get("assistant").disable({ emitEvent: false });
+      }
+      this.cdr.detectChanges();
     }
-    this.cdr.detectChanges();
   }
 
   prepareOnlyManSub() {
@@ -385,13 +387,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
    * Gets the principal and assistant based on the available participants, room, assignType and only selectors
    */
   getPrincipalAndAssistant() {
-    if (this.isMultipleDates) {
-      this.principals = structuredClone(this.participants);
-      this.assistants = structuredClone(this.participants);
-      return;
-    }
-
-    if (this.gfv("room") && this.gfv("date") && this.gfv("assignType")) {
+    if (this.gfv("room") && this.gfv("assignType")) {
       this.principals = this.sharedService.filterPrincipalsByAvailable(
         structuredClone(this.participants),
         this.gfv("assignType"),
