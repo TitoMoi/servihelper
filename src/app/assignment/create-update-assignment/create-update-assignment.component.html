@@ -39,7 +39,7 @@
             ></mat-datepicker-toggle>
             <mat-datepicker
               #multipleDatePicker
-              [startAt]="init"
+              [startAt]="this.lastDateService.lastDate$ | async"
               [dateClass]="dateClass"
             ></mat-datepicker>
           </mat-form-field>

@@ -678,6 +678,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
     if (event.value) {
       const date = event.value;
+      //update last clicked date
+      this.lastDateService.lastDate = date;
       const index = this.findDate(date);
       if (index === -1) {
         this.selectedDates.push(date);
