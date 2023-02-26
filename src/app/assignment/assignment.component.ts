@@ -4,7 +4,6 @@ import {
   AssignmentTableInterface,
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
-import { SortService } from "app/services/sort.service";
 
 import {
   AfterViewChecked,
@@ -17,6 +16,7 @@ import {
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
+import { SortService } from "app/services/sort.service";
 
 @Component({
   selector: "app-assignment",
@@ -63,8 +63,11 @@ export class AssignmentComponent
 
         this.assignmentsTable = [
           ...this.assignmentsTable,
-          ...this.prepareExtendedValuesAndSeparator(assignmentsPage),
+          ...this.prepareRowExtendedValues(assignmentsPage),
         ];
+
+        this.sortAndUpdateSeparator();
+
         this.observer.unobserve(entry.target);
         this.cdr.detectChanges();
       }
@@ -76,8 +79,8 @@ export class AssignmentComponent
   constructor(
     public activatedRoute: ActivatedRoute,
     private assignmentService: AssignmentService,
-    private sortService: SortService,
     private lastDateService: LastDateService,
+    private sortService: SortService,
     private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
@@ -94,8 +97,9 @@ export class AssignmentComponent
       itemsPerPage += this.dateAndAssignmentsLength[i];
     }
     const assignmentsPage = this.assignments.slice(0, itemsPerPage); //+1 for the slice method that doesnt include last
-    this.assignmentsTable =
-      this.prepareExtendedValuesAndSeparator(assignmentsPage);
+    this.assignmentsTable = this.prepareRowExtendedValues(assignmentsPage);
+
+    this.sortAndUpdateSeparator();
 
     //update index for next week
     this.dayIndex += 7;
@@ -127,7 +131,11 @@ export class AssignmentComponent
     this.queryAllMatRows();
 
     //keep observing until we reach the assignments length
-    if (this.assignments.length && this.rows.length !== this.assignments.length)
+    if (
+      this.assignments &&
+      this.assignments.length &&
+      this.rows.length !== this.assignments.length
+    )
       this.observer.observe(this.rows[this.rows.length - 1]);
   }
 
@@ -136,13 +144,34 @@ export class AssignmentComponent
     this.subscription.unsubscribe();
   }
 
+  sortAndUpdateSeparator() {
+    //sort
+    this.assignmentsTable = this.sortService.sortAssignmentsByRoomAndAssignType(
+      this.assignmentsTable
+    );
+
+    //Add separator
+    for (const tableRow of this.assignmentsTable) {
+      //reset
+      tableRow.hasDateSeparator = false;
+      if (
+        new Date(tableRow.date).getTime() !==
+        new Date(this.lastDateService.lastDashedDate).getTime()
+      ) {
+        tableRow.hasDateSeparator = true;
+        //update last dashed date
+        this.lastDateService.lastDashedDate = tableRow.date;
+      }
+    }
+    this.assignmentsTable = [...this.assignmentsTable];
+    this.cdr.detectChanges();
+  }
+
   addAssignmentToTable(assignment: AssignmentInterface) {
     const assignmentTable: AssignmentTableInterface[] =
-      this.prepareExtendedValuesAndSeparator([assignment]);
+      this.prepareRowExtendedValues([assignment]);
     this.assignmentsTable.push(assignmentTable[0]);
-    this.assignmentsTable.sort(
-      this.assignmentService.sortAssignmentsByDateDesc
-    );
+    this.sortAndUpdateSeparator();
   }
 
   updateAssignmentInTable(assignment: AssignmentInterface) {
@@ -152,15 +181,17 @@ export class AssignmentComponent
     );
     //Prepare assignment display values
     const assignmentTable: AssignmentTableInterface[] =
-      this.prepareExtendedValuesAndSeparator([assignment]);
+      this.prepareRowExtendedValues([assignment]);
     //swap the assignment
     this.assignmentsTable[index] = assignmentTable[0];
+    this.sortAndUpdateSeparator();
   }
 
   deleteAssignmentInTable(assignment) {
     this.assignmentsTable = this.assignmentsTable.filter(
       (da) => da.id === assignment.id
     );
+    this.sortAndUpdateSeparator();
   }
 
   getBorderLeftColor(color: string) {
@@ -177,16 +208,12 @@ export class AssignmentComponent
     return assignment.id;
   }
 
-  prepareExtendedValuesAndSeparator(
+  prepareRowExtendedValues(
     assignmentsPage: AssignmentInterface[]
   ): AssignmentTableInterface[] {
     const assignmentsTable: AssignmentTableInterface[] = [];
 
-    //sort
-    const assignmentsSorted =
-      this.sortService.sortAssignmentsByRoomAndAssignType(assignmentsPage);
-
-    for (const assignment of assignmentsSorted) {
+    for (const assignment of assignmentsPage) {
       const assignmentsTableInterface: AssignmentTableInterface = {
         id: assignment.id,
         date: assignment.date,
@@ -204,17 +231,6 @@ export class AssignmentComponent
       };
       //Populate datasource, values are in order
       assignmentsTable.push(assignmentsTableInterface);
-    }
-
-    for (const tableRow of assignmentsTable) {
-      if (
-        new Date(tableRow.date).getTime() !==
-        new Date(this.lastDateService.lastDashedDate).getTime()
-      ) {
-        tableRow.hasDateSeparator = true;
-        //update last dashed date
-        this.lastDateService.lastDashedDate = tableRow.date;
-      }
     }
 
     //Update the view

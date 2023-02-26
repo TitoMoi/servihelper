@@ -1,4 +1,7 @@
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import {
+  AssignmentInterface,
+  AssignmentTableInterface,
+} from "app/assignment/model/assignment.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { RoomService } from "app/room/service/room.service";
 
@@ -19,9 +22,11 @@ export class SortService {
    * @param assignments a paginated assignments result, not all the assignments
    * @returns
    */
-  sortAssignmentsByRoomAndAssignType(assignments: AssignmentInterface[]) {
+  sortAssignmentsByRoomAndAssignType(
+    assignments: AssignmentTableInterface[] | AssignmentInterface[]
+  ) {
     //Diferent sort, first separate date into arrays, then double sort, first room and then assign type
-    const assignmentsByDate: [AssignmentInterface[]] = [[]];
+    const assignmentsByDate = [[]];
     let index = 0;
     let lastDate = assignments[0]?.date;
 
@@ -40,7 +45,7 @@ export class SortService {
 
     for (let assignGroupByDate of assignmentsByDate) {
       assignGroupByDate = assignGroupByDate.sort(
-        (a: AssignmentInterface, b: AssignmentInterface) => {
+        (a: AssignmentTableInterface, b: AssignmentTableInterface) => {
           const assignTypeAOrder = this.assignTypeService.getAssignType(
             a.assignType
           ).order;
