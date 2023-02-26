@@ -1,25 +1,36 @@
-<div mat-dialog-title class="d-flex align-items-center justify-content-evenly">
-  <mat-icon svgIcon="info-blue" aria-label="icon"></mat-icon>
-  <span>Having same room and same assign type then:</span>
-</div>
-<div mat-dialog-content>
-  <div class="grid">
-    <div class="fw-bold d-flex align-items-center">name</div>
-    <div class="fw-bold d-flex align-items-center">count</div>
-    <div class="fw-bold d-flex align-items-center">last assignment date</div>
-    <ng-container *ngFor="let participant of data">
-      <div class="d-flex align-items-center">
-        {{ participant.name }}
-      </div>
-      <div class="d-flex align-items-center">
-        {{ participant.count }}
-      </div>
-      <div class="d-flex align-items-center">
-        {{
-          participant.lastAssignmentDate
-            | translocoDate : { dateStyle: "medium" }
-        }}
-      </div>
-    </ng-container>
+<ng-container *transloco="let t">
+  <div
+    mat-dialog-title
+    class="d-flex align-items-center justify-content-evenly"
+  >
+    <mat-icon svgIcon="info-blue" aria-label="icon"></mat-icon>
+    <span>{{ t("INFO_ASSIGNMENT_TITLE") }} </span>
   </div>
-</div>
+  <div mat-dialog-content>
+    <div class="grid">
+      <div class="fw-bold d-flex align-items-center">
+        {{ t("INFO_ASSIGNMENT_NAME") }}
+      </div>
+      <div class="fw-bold d-flex align-items-center">
+        {{ t("INFO_ASSIGNMENT_COUNT") }}
+      </div>
+      <div class="fw-bold d-flex align-items-center">
+        {{ t("INFO_ASSIGNMENT_LAST_ASSIGN_DATE") }}
+      </div>
+      <ng-container *ngFor="let participant of data">
+        <div class="d-flex align-items-center">
+          {{ participant.name }}
+        </div>
+        <div class="d-flex align-items-center">
+          {{ participant.count }}
+        </div>
+        <div class="d-flex align-items-center">
+          {{
+            participant.lastAssignmentDate
+              | translocoDate : { dateStyle: "medium" }
+          }}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
