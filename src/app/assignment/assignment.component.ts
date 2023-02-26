@@ -144,29 +144,6 @@ export class AssignmentComponent
     this.subscription.unsubscribe();
   }
 
-  sortAndUpdateSeparator() {
-    //sort
-    this.assignmentsTable = this.sortService.sortAssignmentsByRoomAndAssignType(
-      this.assignmentsTable
-    );
-
-    //Add separator
-    for (const tableRow of this.assignmentsTable) {
-      //reset
-      tableRow.hasDateSeparator = false;
-      if (
-        new Date(tableRow.date).getTime() !==
-        new Date(this.lastDateService.lastDashedDate).getTime()
-      ) {
-        tableRow.hasDateSeparator = true;
-        //update last dashed date
-        this.lastDateService.lastDashedDate = tableRow.date;
-      }
-    }
-    this.assignmentsTable = [...this.assignmentsTable];
-    this.cdr.detectChanges();
-  }
-
   addAssignmentToTable(assignment: AssignmentInterface) {
     const assignmentTable: AssignmentTableInterface[] =
       this.prepareRowExtendedValues([assignment]);
@@ -192,6 +169,28 @@ export class AssignmentComponent
       (da) => da.id === assignment.id
     );
     this.sortAndUpdateSeparator();
+  }
+
+  sortAndUpdateSeparator() {
+    //sort
+    this.assignmentsTable =
+      this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
+        this.assignmentsTable
+      );
+
+    //Add separator
+    for (const tableRow of this.assignmentsTable) {
+      //reset
+      tableRow.hasDateSeparator = false;
+      if (
+        new Date(tableRow.date).getTime() !==
+        new Date(this.lastDateService.lastDashedDate).getTime()
+      ) {
+        tableRow.hasDateSeparator = true;
+        //update last dashed date
+        this.lastDateService.lastDashedDate = tableRow.date;
+      }
+    }
   }
 
   getBorderLeftColor(color: string) {

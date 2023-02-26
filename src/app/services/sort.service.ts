@@ -7,6 +7,7 @@ import { RoomService } from "app/room/service/room.service";
 
 import { Injectable } from "@angular/core";
 import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
 
 @Injectable({
   providedIn: "root",
@@ -14,6 +15,7 @@ import { ParticipantDynamicInterface } from "app/participant/model/participant.m
 export class SortService {
   constructor(
     private assignTypeService: AssignTypeService,
+    private assignmentService: AssignmentService,
     private roomService: RoomService
   ) {}
 
@@ -22,9 +24,12 @@ export class SortService {
    * @param assignments a paginated assignments result, not all the assignments
    * @returns
    */
-  sortAssignmentsByRoomAndAssignType(
+  sortAssignmentsByDateThenRoomAndAssignType(
     assignments: AssignmentTableInterface[] | AssignmentInterface[]
   ) {
+    //Sort by date first
+    assignments.sort(this.assignmentService.sortAssignmentsByDateDesc);
+
     //Diferent sort, first separate date into arrays, then double sort, first room and then assign type
     const assignmentsByDate = [[]];
     let index = 0;

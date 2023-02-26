@@ -140,7 +140,10 @@ export class AssignmentService {
     //save assignments with the new assignment
     this.saveAssignmentsToFile();
 
-    for (const assignment of assignments) {
+    for (let assignment of assignments) {
+      //Simulate we have saved and retrieved assignment, this is only for serialize Date and get an ISO string
+      //This only happens on create, update respects the date and also delete
+      assignment = JSON.parse(JSON.stringify(assignment));
       //Notify
       const assignmentOperation: AssignmentOperationInterface = {
         assignment,
@@ -167,6 +170,11 @@ export class AssignmentService {
 
     //save assignments with the new assignment
     this.saveAssignmentsToFile();
+
+    //Simulate we have saved and retrieved assignment, this is only for serialize Date and get an ISO string
+    //This only happens on create, update respects the date and also delete
+    assignment = JSON.parse(JSON.stringify(assignment));
+
     //Notify
     const assignmentOperation: AssignmentOperationInterface = {
       assignment,

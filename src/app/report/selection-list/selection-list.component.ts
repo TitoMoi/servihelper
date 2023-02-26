@@ -66,9 +66,10 @@ export class SelectionListComponent implements OnChanges {
       this.assignmentGroups = [];
       this.filterAssignments().then(() => {
         this.sortAssignmentByDate(this.order);
-        this.#assignments = this.sortService.sortAssignmentsByRoomAndAssignType(
-          this.#assignments
-        );
+        this.#assignments =
+          this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
+            this.#assignments
+          );
         this.getRelatedData();
         this.cdr.detectChanges();
       });
