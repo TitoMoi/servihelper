@@ -142,12 +142,13 @@ export class ImageAssignmentComponent {
 
     autoTable(doc, {
       html: `#assignmentTableId`,
-      styles: { font },
-      columnStyles: { 0: { cellWidth: 65 } },
+      styles: { font, fontSize: 15 },
+      columnStyles: { 0: { cellWidth: 110 } },
       didParseCell: (data) => {
+        data.cell.text = [data.cell.text.toString().trim()];
         // eslint-disable-next-line @typescript-eslint/dot-notation
         const classList: DOMTokenList = data.cell.raw["classList"];
-        if (classList.contains("bold")) {
+        if (classList.contains("fw-bold")) {
           data.cell.styles.fontStyle = "bold";
         }
         data.cell.styles.fillColor = "#FFFFFF";

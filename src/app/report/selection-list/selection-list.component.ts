@@ -260,27 +260,14 @@ export class SelectionListComponent implements OnChanges {
         margin: firstTable ? { top: 30 } : undefined,
         columnStyles: { 0: { cellWidth: 110 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const id = data.cell.raw["id"];
+          data.cell.text = [data.cell.text.toString().trim()];
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const localName = data.cell.raw["localName"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const classList: DOMTokenList = data.cell.raw["classList"];
-          const assignType = this.assignTypeService.getAssignType(id);
-          if (assignType) {
-            data.cell.text = [data.cell.text.toString().trim()];
-            return;
-          }
           //date
           if (localName === "th") {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fontStyle = "bold";
             data.cell.styles.fontSize = 14;
-            return;
-          }
-          //theme
-          if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fontStyle = "bold";
             return;
           }
         },
