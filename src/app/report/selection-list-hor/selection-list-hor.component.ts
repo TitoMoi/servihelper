@@ -207,7 +207,7 @@ export class SelectionListHorComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font, fontSize: 14 },
+        styles: { font, fontSize: 13 },
         theme: "plain",
         margin: firstTable ? { top: 30 } : undefined,
         didParseCell: (data) => {

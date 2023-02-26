@@ -25,11 +25,7 @@
 <div id="toPngDivId" class="bg-color-white">
   <div class="fw-bold" [style.textAlign]="'center'">{{ reportTitle }}</div>
   <ng-container *ngFor="let ag of assignmentGroups; index as i">
-    <table
-      [id]="'table' + i"
-      [style.cursor]="colorpicker ? 'cell' : 'default'"
-      (click)="changeBackgroundColor($event)"
-    >
+    <table [id]="'table' + i">
       <tr>
         <th
           class="fw-bold"

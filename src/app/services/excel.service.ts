@@ -193,9 +193,10 @@ export class ExcelService {
             Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
-        const borderColor = this.assignTypeService
-          .getAssignType(a.assignType.id)
-          .color?.substring(1);
+        const borderColor =
+          this.assignTypeService
+            .getAssignType(a.assignType.id)
+            .color?.substring(1) || "FFFFFF";
 
         cell.border = {
           right: {
@@ -257,9 +258,10 @@ export class ExcelService {
         const cell = row.getCell(i);
         cell.value = a.assignType.name;
 
-        const borderColor = this.assignTypeService
-          .getAssignType(a.assignType.id)
-          .color?.substring(1);
+        const borderColor =
+          this.assignTypeService
+            .getAssignType(a.assignType.id)
+            .color?.substring(1) || "FFFFFF";
 
         cell.font = {
           bold: true,

@@ -193,10 +193,10 @@ export class SelectionListComponent implements OnChanges {
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       autoTable(doc, {
         html: `#table${i}`,
-        styles: { font, fontSize: 14 },
+        styles: { font, fontSize: 13, halign: "left" },
         theme: "plain",
         margin: firstTable ? { top: 30 } : undefined,
-        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
+        columnStyles: { 0: { cellWidth: 110 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
@@ -211,8 +211,8 @@ export class SelectionListComponent implements OnChanges {
           }
           //date
           if (localName === "th") {
-            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fontStyle = "bold";
+            data.cell.styles.fontSize = 14;
             return;
           }
           //theme
@@ -255,10 +255,10 @@ export class SelectionListComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font, fontSize: 14 },
+        styles: { font, fontSize: 13 },
         theme: "plain",
         margin: firstTable ? { top: 30 } : undefined,
-        columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 80 } },
+        columnStyles: { 0: { cellWidth: 110 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
@@ -268,13 +268,14 @@ export class SelectionListComponent implements OnChanges {
           const classList: DOMTokenList = data.cell.raw["classList"];
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
-            data.cell.styles.fontStyle = "bold";
+            data.cell.text = [data.cell.text.toString().trim()];
             return;
           }
           //date
           if (localName === "th") {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fontStyle = "bold";
+            data.cell.styles.fontSize = 14;
             return;
           }
           //theme
