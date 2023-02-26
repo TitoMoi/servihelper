@@ -204,7 +204,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   }
 
   createParticipant() {
-    /*  this.participantService.createParticipant(this.form.getRawValue()); */
+    this.participantService.createParticipant(this.form.getRawValue());
   }
 
   /** code for the datepicker hack*/
