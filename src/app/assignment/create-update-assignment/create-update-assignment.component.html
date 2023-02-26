@@ -175,11 +175,7 @@
                           else noIcon
                         "
                         (click)="
-                          onPrincipalIconWarningClick(
-                            $event,
-                            participant,
-                            false
-                          )
+                          onPrincipalIconWarningClick($event, participant)
                         "
                         svgIcon="warning"
                         aria-label="icon"
@@ -189,9 +185,7 @@
                           !participant.hasWork && !isMultipleDates;
                           else noIcon
                         "
-                        (click)="
-                          onPrincipalIconInfoClick($event, participant, false)
-                        "
+                        (click)="onPrincipalIconInfoClick($event, participant)"
                         svgIcon="info-blue"
                         aria-label="icon"
                       ></mat-icon>

@@ -132,6 +132,9 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   }
 
   addAssignTypes() {
+    //reset
+    this.form.controls.assignTypes =
+      this.formBuilder.array<ParticipantAssignTypeInterface>([]);
     //Populate control with assignTypes
     for (const at of this.assignTypes) {
       this.addAssignType(at);
@@ -154,6 +157,10 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   }
 
   addRooms() {
+    //reset
+    this.form.controls.rooms = this.formBuilder.array<ParticipantRoomInterface>(
+      []
+    );
     //Populate control with rooms
     this.rooms.forEach((r) => this.addRoom(r));
   }
@@ -188,10 +195,10 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   submitAndCreate(): void {
     this.createParticipant();
 
-    this.form.get("name").reset(undefined);
-    this.form.get("isWoman").reset(false);
-    this.form.get("isExternal").reset(false);
-    this.form.get("notAvailableDates").reset();
+    this.form.get("name").reset(undefined, { emitEvent: false });
+    this.form.get("isWoman").reset(false, { emitEvent: false });
+    this.form.get("isExternal").reset(false, { emitEvent: false });
+    this.form.get("notAvailableDates").reset([], { emitEvent: false });
     this.addAssignTypes();
     this.addRooms();
   }
