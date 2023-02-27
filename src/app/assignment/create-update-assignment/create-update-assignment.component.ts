@@ -65,6 +65,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   selectedDates: Date[] = [];
   timeoutRef;
   resetModel = undefined;
+  timeoutExecuted = true; //first time
   //end of props for datepicker hack
 
   rooms: RoomInterface[] = this.roomService
@@ -676,7 +677,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   //for Datepicker hack
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
-    if (event.value) {
+    if (event.value && this.timeoutExecuted) {
+      this.timeoutExecuted = false;
       const date = event.value;
       //update last clicked date
       this.lastDateService.lastDate = date;
@@ -703,6 +705,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
         this.timeoutRef = setTimeout(() => {
           this.datePickerRef.close = closeFn;
+          this.timeoutExecuted = true;
         });
       }
     }

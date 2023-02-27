@@ -50,6 +50,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   init = new Date();
   resetModel = new Date(0);
   timeoutRef;
+  timeoutExecuted = true; //first time
 
   form = this.formBuilder.group({
     id: this.p ? this.p.id : undefined,
@@ -217,7 +218,8 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
 
   /** code for the datepicker hack*/
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
-    if (event.value) {
+    if (event.value && this.timeoutExecuted) {
+      this.timeoutExecuted = false;
       const date = event.value;
       const index = this.findDate(date);
       if (index === -1) {
@@ -237,6 +239,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
 
         this.timeoutRef = setTimeout(() => {
           this.datePickerRef.close = closeFn;
+          this.timeoutExecuted = true;
         });
         this.cdr.detectChanges();
       }

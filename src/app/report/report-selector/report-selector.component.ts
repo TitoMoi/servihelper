@@ -45,6 +45,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
   selectedDates = [];
   timeoutRef;
   resetModel = undefined;
+  timeoutExecuted = true; //first time
   //end of props for datepicker hack
 
   rooms: RoomInterface[] = this.roomService
@@ -113,7 +114,8 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
 
   //for Datepicker hack
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
-    if (event.value) {
+    if (event.value && this.timeoutExecuted) {
+      this.timeoutExecuted = false;
       const date = event.value;
       const index = this.findDate(date);
       if (index === -1) {
@@ -138,6 +140,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
 
         this.timeoutRef = setTimeout(() => {
           this.datePickerRef.close = closeFn;
+          this.timeoutExecuted = true;
         });
       }
     }
