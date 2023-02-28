@@ -111,9 +111,10 @@ export class AssignmentComponent
       this.assignmentService.assignment$.subscribe(
         (assignmentOperation: AssignmentOperationInterface) => {
           const assignment = assignmentOperation.assignment;
+          const insertedIndex = assignmentOperation.insertedIndex;
           switch (assignmentOperation.operationType) {
             case "create":
-              this.addAssignmentToTable(assignment);
+              this.addAssignmentToTable(assignment, insertedIndex);
               break;
             case "update":
               this.updateAssignmentInTable(assignment);
@@ -144,11 +145,15 @@ export class AssignmentComponent
     this.subscription.unsubscribe();
   }
 
-  addAssignmentToTable(assignment: AssignmentInterface) {
-    const assignmentTable: AssignmentTableInterface[] =
-      this.prepareRowExtendedValues([assignment]);
-    this.assignmentsTable.push(assignmentTable[0]);
-    this.sortAndUpdateSeparator();
+  addAssignmentToTable(assignment: AssignmentInterface, insertedIndex: number) {
+    //Check first if should be added, because maybe the slice of the pagination will add it in a future
+    if (this.assignmentsTable.length - 1 > insertedIndex) {
+      const assignmentTable: AssignmentTableInterface[] =
+        this.prepareRowExtendedValues([assignment]);
+      this.assignmentsTable.push(assignmentTable[0]);
+
+      this.sortAndUpdateSeparator();
+    }
   }
 
   updateAssignmentInTable(assignment: AssignmentInterface) {

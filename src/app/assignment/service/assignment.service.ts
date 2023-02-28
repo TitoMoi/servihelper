@@ -149,10 +149,13 @@ export class AssignmentService {
       //Simulate we have saved and retrieved assignment, this is only for serialize Date and get an ISO string
       //This only happens on create, update respects the date and also delete
       assignment = JSON.parse(JSON.stringify(assignment));
-
+      const insertedIndex = this.#assignments.findIndex(
+        (a) => a.id === assignment.id
+      );
       //Notify
       const assignmentOperation: AssignmentOperationInterface = {
         assignment,
+        insertedIndex,
         operationType: "create",
       };
       this.assignment$.next(assignmentOperation);
@@ -185,9 +188,14 @@ export class AssignmentService {
     //This only happens on create, update respects the date and also delete
     assignment = JSON.parse(JSON.stringify(assignment));
 
+    const insertedIndex = this.#assignments.findIndex(
+      (a) => a.id === assignment.id
+    );
+
     //Notify
     const assignmentOperation: AssignmentOperationInterface = {
       assignment,
+      insertedIndex,
       operationType: "create",
     };
     this.assignment$.next(assignmentOperation);

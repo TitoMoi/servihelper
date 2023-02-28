@@ -6,6 +6,7 @@ type AssignmentOperationType = "create" | "update" | "delete"; //get is excluded
 
 export interface AssignmentOperationInterface {
   assignment: AssignmentInterface;
+  insertedIndex?: number; //This is the position of the assignment in the array after sorted
   operationType: AssignmentOperationType;
 }
 
