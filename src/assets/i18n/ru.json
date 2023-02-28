@@ -262,11 +262,11 @@
   "ru": "Русский",
   "tr": "турецкий",
   "zhCN": "китайский язык",
-  "ASSIGN_CHECK_IS_MULTIPLE": "This is a repeated assignment on diferent days",
-  "ASSIGN_MULTIPLE_CREATE_TITLE": "Create multiple assignments",
-  "INFO_ASSIGNMENT_TITLE": "Having same room and same assign type then:",
-  "INFO_ASSIGNMENT_NAME": "Name",
-  "INFO_ASSIGNMENT_COUNT": "Count",
-  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Last assignment date",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Other assignments on same day:"
+  "ASSIGN_CHECK_IS_MULTIPLE": "Это повторное задание в разные дни",
+  "ASSIGN_MULTIPLE_CREATE_TITLE": "Создайте несколько заданий",
+  "INFO_ASSIGNMENT_TITLE": "Иметь ту же комнату и тот же тип назначения, тогда:",
+  "INFO_ASSIGNMENT_NAME": "Имя",
+  "INFO_ASSIGNMENT_COUNT": "Считать",
+  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Последняя дата назначения",
+  "WARNING_ASSIGNMENT_SAME_DAY": "Другие задания в тот же день:"
 }

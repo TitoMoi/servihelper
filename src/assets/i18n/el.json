@@ -262,11 +262,11 @@
   "ru": "Ρωσική",
   "tr": "τούρκικος",
   "zhCN": "κινέζικα",
-  "ASSIGN_CHECK_IS_MULTIPLE": "This is a repeated assignment on diferent days",
-  "ASSIGN_MULTIPLE_CREATE_TITLE": "Create multiple assignments",
-  "INFO_ASSIGNMENT_TITLE": "Having same room and same assign type then:",
-  "INFO_ASSIGNMENT_NAME": "Name",
-  "INFO_ASSIGNMENT_COUNT": "Count",
-  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Last assignment date",
+  "ASSIGN_CHECK_IS_MULTIPLE": "Αυτή είναι μια επαναλαμβανόμενη ανάθεση σε διαφορετικές ημέρες",
+  "ASSIGN_MULTIPLE_CREATE_TITLE": "Δημιουργία πολλαπλών αναθέσεων",
+  "INFO_ASSIGNMENT_TITLE": "Έχοντας το ίδιο δωμάτιο και τον ίδιο τύπο εκχώρησης τότε:",
+  "INFO_ASSIGNMENT_NAME": "Ονομα",
+  "INFO_ASSIGNMENT_COUNT": "μετρώ",
+  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Ημερομηνία τελευταίας ανάθεσης",
   "WARNING_ASSIGNMENT_SAME_DAY": "Other assignments on same day:"
 }

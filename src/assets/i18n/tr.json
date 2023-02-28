@@ -262,11 +262,11 @@
   "ru": "Rusça",
   "tr": "Türk",
   "zhCN": "Çince",
-  "ASSIGN_CHECK_IS_MULTIPLE": "This is a repeated assignment on diferent days",
-  "ASSIGN_MULTIPLE_CREATE_TITLE": "Create multiple assignments",
-  "INFO_ASSIGNMENT_TITLE": "Having same room and same assign type then:",
-  "INFO_ASSIGNMENT_NAME": "Name",
-  "INFO_ASSIGNMENT_COUNT": "Count",
-  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Last assignment date",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Other assignments on same day:"
+  "ASSIGN_CHECK_IS_MULTIPLE": "Bu farklı günlerde tekrarlanan bir ödev",
+  "ASSIGN_MULTIPLE_CREATE_TITLE": "Birden fazla ödev oluşturun",
+  "INFO_ASSIGNMENT_TITLE": "Aynı odaya ve aynı atama tipine sahip olmak:",
+  "INFO_ASSIGNMENT_NAME": "İsim",
+  "INFO_ASSIGNMENT_COUNT": "Saymak",
+  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Son Ödev Tarihi",
+  "WARNING_ASSIGNMENT_SAME_DAY": "Aynı günde diğer ödevler:"
 }

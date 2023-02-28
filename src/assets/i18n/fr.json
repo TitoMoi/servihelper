@@ -262,11 +262,11 @@
   "ru": "Russe",
   "tr": "Turque",
   "zhCN": "Chinois",
-  "ASSIGN_CHECK_IS_MULTIPLE": "This is a repeated assignment on diferent days",
-  "ASSIGN_MULTIPLE_CREATE_TITLE": "Create multiple assignments",
-  "INFO_ASSIGNMENT_TITLE": "Having same room and same assign type then:",
-  "INFO_ASSIGNMENT_NAME": "Name",
-  "INFO_ASSIGNMENT_COUNT": "Count",
-  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Last assignment date",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Other assignments on same day:"
+  "ASSIGN_CHECK_IS_MULTIPLE": "Ceci est une affectation répétée à différents jours",
+  "ASSIGN_MULTIPLE_CREATE_TITLE": "Créer plusieurs affectations",
+  "INFO_ASSIGNMENT_TITLE": "Avoir la même chambre et le même type d'attribution alors:",
+  "INFO_ASSIGNMENT_NAME": "Nom",
+  "INFO_ASSIGNMENT_COUNT": "Compter",
+  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Dernière date d'affectation",
+  "WARNING_ASSIGNMENT_SAME_DAY": "Autres affectations le même jour:"
 }

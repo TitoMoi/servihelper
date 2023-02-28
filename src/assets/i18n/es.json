@@ -264,11 +264,11 @@
   "ru": "Ruso",
   "tr": "Turco",
   "zhCN": "Chino",
-  "ASSIGN_CHECK_IS_MULTIPLE": "This is a repeated assignment on diferent days",
-  "ASSIGN_MULTIPLE_CREATE_TITLE": "Create multiple assignments",
-  "INFO_ASSIGNMENT_TITLE": "Having same room and same assign type then:",
-  "INFO_ASSIGNMENT_NAME": "Name",
-  "INFO_ASSIGNMENT_COUNT": "Count",
-  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Last assignment date",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Other assignments on same day:"
+  "ASSIGN_CHECK_IS_MULTIPLE": "Esta es una tarea repetida en diferentes días",
+  "ASSIGN_MULTIPLE_CREATE_TITLE": "Crear múltiples tareas",
+  "INFO_ASSIGNMENT_TITLE": "Teniendo la misma sala y el mismo tipo de asignación entonces:",
+  "INFO_ASSIGNMENT_NAME": "Nombre",
+  "INFO_ASSIGNMENT_COUNT": "Conteo",
+  "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Última fecha de asignación",
+  "WARNING_ASSIGNMENT_SAME_DAY": "Otras tareas el mismo día:"
 }
