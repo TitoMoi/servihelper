@@ -125,6 +125,10 @@ const routes: Routes = [
         path: "update/:id",
         component: CreateUpdateAssignmentComponent,
       },
+      {
+        path: "delete/:id",
+        component: DeleteAssignmentComponent,
+      },
     ],
   },
 
@@ -135,10 +139,6 @@ const routes: Routes = [
   {
     path: "assignment/group-delete",
     component: GroupDeleteAssignmentComponent,
-  },
-  {
-    path: "assignment/delete/:id",
-    component: DeleteAssignmentComponent,
   },
   {
     path: "selectionSheets",

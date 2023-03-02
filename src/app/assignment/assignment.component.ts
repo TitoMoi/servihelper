@@ -51,9 +51,14 @@ export class AssignmentComponent
           itemsPerPage += this.dateAndAssignmentsLength[i];
         }
 
-        const assignmentsPage = this.assignments.slice(
+        let assignmentsPage = this.assignments.slice(
           this.lastItemsPerPageIndex,
           this.lastItemsPerPageIndex + itemsPerPage
+        );
+
+        //Remove duplicates, this is because we can add an assignment and move the pagination pointer
+        assignmentsPage = assignmentsPage.filter(
+          (a) => !this.assignmentsTable.some((at) => at.id === a.id)
         );
 
         //update index for next week
@@ -111,10 +116,9 @@ export class AssignmentComponent
       this.assignmentService.assignment$.subscribe(
         (assignmentOperation: AssignmentOperationInterface) => {
           const assignment = assignmentOperation.assignment;
-          const insertedIndex = assignmentOperation.insertedIndex;
           switch (assignmentOperation.operationType) {
             case "create":
-              this.addAssignmentToTable(assignment, insertedIndex);
+              this.addAssignmentToTable(assignment);
               break;
             case "update":
               this.updateAssignmentInTable(assignment);
@@ -132,11 +136,7 @@ export class AssignmentComponent
     this.queryAllMatRows();
 
     //keep observing until we reach the assignments length
-    if (
-      this.assignments &&
-      this.assignments.length &&
-      this.rows.length !== this.assignments.length
-    )
+    if (this.assignments.length && this.rows.length !== this.assignments.length)
       this.observer.observe(this.rows[this.rows.length - 1]);
   }
 
@@ -145,15 +145,12 @@ export class AssignmentComponent
     this.subscription.unsubscribe();
   }
 
-  addAssignmentToTable(assignment: AssignmentInterface, insertedIndex: number) {
-    //Check first if should be added, because maybe the slice of the pagination will add it in a future
-    if (this.assignmentsTable.length - 1 > insertedIndex) {
-      const assignmentTable: AssignmentTableInterface[] =
-        this.prepareRowExtendedValues([assignment]);
-      this.assignmentsTable.push(assignmentTable[0]);
+  addAssignmentToTable(assignment: AssignmentInterface) {
+    const assignmentTable: AssignmentTableInterface[] =
+      this.prepareRowExtendedValues([assignment]);
+    this.assignmentsTable.push(assignmentTable[0]);
 
-      this.sortAndUpdateSeparator();
-    }
+    this.sortAndUpdateSeparator();
   }
 
   updateAssignmentInTable(assignment: AssignmentInterface) {
@@ -171,7 +168,7 @@ export class AssignmentComponent
 
   deleteAssignmentInTable(assignment) {
     this.assignmentsTable = this.assignmentsTable.filter(
-      (da) => da.id === assignment.id
+      (da) => da.id !== assignment.id
     );
     this.sortAndUpdateSeparator();
   }
