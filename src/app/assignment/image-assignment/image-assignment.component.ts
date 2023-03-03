@@ -145,7 +145,7 @@ export class ImageAssignmentComponent {
       styles: { font, fontSize: 15 },
       columnStyles: { 0: { cellWidth: 110 } },
       didParseCell: (data) => {
-        data.cell.text = [data.cell.text.toString().trim()];
+        data.cell.text = data.cell.text.map((char) => char.trim());
         // eslint-disable-next-line @typescript-eslint/dot-notation
         const classList: DOMTokenList = data.cell.raw["classList"];
         if (classList.contains("fw-bold")) {
