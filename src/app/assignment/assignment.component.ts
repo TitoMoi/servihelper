@@ -33,45 +33,32 @@ export class AssignmentComponent
   //The assignments with display values
   assignmentsTable: AssignmentTableInterface[] = [];
 
-  dayIndex = 0;
-  lastItemsPerPageIndex = 0;
-  //For each day has the length of assignments
-  dateAndAssignmentsLength =
-    this.assignmentService.getDateAndAssignmentsLength();
-
   rows: NodeListOf<Element> = undefined;
+
+  paginationEndIndex = 25;
 
   observer: IntersectionObserver = new IntersectionObserver((entries) => {
     //observe the last row
     for (const entry of entries) {
       if (entry.isIntersecting) {
-        let itemsPerPage = 0;
-        //Get a 7 days assignments, days can jump as could not be assignments between
-        for (let i = this.dayIndex; i < this.dayIndex + 7; i++) {
-          itemsPerPage += this.dateAndAssignmentsLength[i];
+        let assignmentsPage = this.getAssignmentsSlice(
+          this.paginationEndIndex,
+          this.paginationEndIndex + 25
+        );
+
+        if (assignmentsPage?.length) {
+          //Remove duplicates, this is because we can add an assignment and move the pagination pointer
+          assignmentsPage = assignmentsPage.filter(
+            (a) => !this.assignmentsTable.some((at) => at.id === a.id)
+          );
+
+          this.assignmentsTable = [
+            ...this.assignmentsTable,
+            ...this.prepareRowExtendedValues(assignmentsPage),
+          ];
+
+          this.sortAndUpdateSeparator();
         }
-
-        let assignmentsPage = this.assignments.slice(
-          this.lastItemsPerPageIndex,
-          this.lastItemsPerPageIndex + itemsPerPage
-        );
-
-        //Remove duplicates, this is because we can add an assignment and move the pagination pointer
-        assignmentsPage = assignmentsPage.filter(
-          (a) => !this.assignmentsTable.some((at) => at.id === a.id)
-        );
-
-        //update index for next week
-        this.dayIndex += 7;
-        //update last items per page
-        this.lastItemsPerPageIndex = this.lastItemsPerPageIndex + itemsPerPage;
-
-        this.assignmentsTable = [
-          ...this.assignmentsTable,
-          ...this.prepareRowExtendedValues(assignmentsPage),
-        ];
-
-        this.sortAndUpdateSeparator();
 
         this.observer.unobserve(entry.target);
         this.cdr.detectChanges();
@@ -96,20 +83,13 @@ export class AssignmentComponent
   }
 
   ngOnInit() {
-    //Initial pagination, get a week of assignments
-    let itemsPerPage = 0;
-    for (let i = this.dayIndex; i < this.dayIndex + 7; i++) {
-      itemsPerPage += this.dateAndAssignmentsLength[i];
-    }
-    const assignmentsPage = this.assignments.slice(0, itemsPerPage); //+1 for the slice method that doesnt include last
+    const assignmentsPage = this.getAssignmentsSlice(
+      0,
+      this.paginationEndIndex
+    );
     this.assignmentsTable = this.prepareRowExtendedValues(assignmentsPage);
 
     this.sortAndUpdateSeparator();
-
-    //update index for next week
-    this.dayIndex += 7;
-    //update index of last items per page
-    this.lastItemsPerPageIndex = this.lastItemsPerPageIndex + itemsPerPage; //prepare index for next day
 
     //Listen for assignments updates (create, update, delete)
     this.subscription.add(
@@ -143,6 +123,13 @@ export class AssignmentComponent
   ngOnDestroy(): void {
     this.observer.disconnect();
     this.subscription.unsubscribe();
+  }
+
+  getAssignmentsSlice(start, end): AssignmentInterface[] {
+    const assignmentsSlice = this.assignments.slice(start, end);
+    //update pointer for next pagination iteration
+    this.paginationEndIndex = end;
+    return assignmentsSlice;
   }
 
   addAssignmentToTable(assignment: AssignmentInterface) {
