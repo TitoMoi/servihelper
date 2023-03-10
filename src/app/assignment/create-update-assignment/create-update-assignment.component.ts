@@ -603,7 +603,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   onPrincipalIconInfoClick(e: Event, participant: ParticipantDynamicInterface) {
     e.preventDefault();
     e.stopPropagation();
-    //Get a list of participants for that date with that count
+    //Get a list of participants for that date with that count with that role
     const principalsSameCount = this.principals.filter(
       (p) => p.count === participant.count
     );
@@ -612,14 +612,23 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     });
   }
 
+  onAssistantIconInfoClick(e: Event, participant: ParticipantDynamicInterface) {
+    e.preventDefault();
+    e.stopPropagation();
+    //Get a list of participants for that date with that count with that role
+    const assistantsSameCount = this.assistants.filter(
+      (p) => p.count === participant.count
+    );
+    this.matDialog.open(InfoAssignmentComponent, {
+      data: assistantsSameCount,
+    });
+  }
+
   /**
    * @param e the event, to prevent default
    * @param id the participant id
    */
-  onPrincipalIconWarningClick(
-    e: Event,
-    participant: ParticipantDynamicInterface
-  ) {
+  onIconWarningClick(e: Event, participant: ParticipantDynamicInterface) {
     e.preventDefault();
     e.stopPropagation();
 

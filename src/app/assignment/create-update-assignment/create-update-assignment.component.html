@@ -174,9 +174,7 @@
                           participant.hasWork && !isMultipleDates;
                           else noIcon
                         "
-                        (click)="
-                          onPrincipalIconWarningClick($event, participant)
-                        "
+                        (click)="onIconWarningClick($event, participant)"
                         svgIcon="warning"
                         aria-label="icon"
                       ></mat-icon>
@@ -216,15 +214,35 @@
                 <mat-option
                   *ngFor="let participant of assistants; trackBy: trackByIdFn"
                   [value]="participant.id"
-                  [ngClass]="{
-                    'bg-color-lightyellow': participant.hasWork,
-                    'no-hover': true
-                  }"
                 >
-                  <span *ngIf="!this.isMultipleDates"
-                    >{{ participant.count }} -</span
-                  >
-                  {{ participant.name }}
+                  <div class="grid">
+                    <div>
+                      <mat-icon
+                        *ngIf="
+                          participant.hasWork && !isMultipleDates;
+                          else noIcon
+                        "
+                        (click)="onIconWarningClick($event, participant)"
+                        svgIcon="warning"
+                        aria-label="icon"
+                      ></mat-icon>
+                      <mat-icon
+                        *ngIf="
+                          !participant.hasWork && !isMultipleDates;
+                          else noIcon
+                        "
+                        (click)="onAssistantIconInfoClick($event, participant)"
+                        svgIcon="info-blue"
+                        aria-label="icon"
+                      ></mat-icon>
+                    </div>
+                    <div *ngIf="!isMultipleDates; else noCount">
+                      {{ participant.count }}
+                    </div>
+                    <div>{{ participant.name }}</div>
+                    <ng-template #noIcon><div></div></ng-template>
+                    <ng-template #noCount><div></div></ng-template>
+                  </div>
                 </mat-option>
               </mat-select>
             </mat-form-field>
