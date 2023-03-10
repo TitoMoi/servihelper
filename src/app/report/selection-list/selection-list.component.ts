@@ -3,7 +3,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
 import { ExcelService } from "app/services/excel.service";
-import { SortService } from "app/services/sort.service";
+import { SortOrderType, SortService } from "app/services/sort.service";
 import { PdfService } from "app/services/pdf.service";
 import { toPng } from "html-to-image";
 import autoTable from "jspdf-autotable";
@@ -34,7 +34,7 @@ export class SelectionListComponent implements OnChanges {
   @Input() selectedDates: Date[];
   @Input() assignTypes: string[];
   @Input() rooms: string[];
-  @Input() order: string;
+  @Input() order: SortOrderType;
 
   defaultReportFontSize =
     this.configService.getConfig().defaultReportFontSize + "px";
@@ -65,10 +65,10 @@ export class SelectionListComponent implements OnChanges {
       this.#assignments = [];
       this.assignmentGroups = [];
       this.filterAssignments().then(() => {
-        this.sortAssignmentByDate(this.order);
         this.#assignments =
           this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
-            this.#assignments
+            this.#assignments,
+            this.order
           );
         this.getRelatedData();
         this.cdr.detectChanges();
@@ -90,18 +90,6 @@ export class SelectionListComponent implements OnChanges {
           (date) =>
             new Date(date).getTime() === new Date(assignment.date).getTime()
         )
-    );
-  }
-
-  sortAssignmentByDate(order: string) {
-    if (order === "Desc") {
-      this.#assignments = this.#assignments.sort(
-        this.assignmentService.sortAssignmentsByDateDesc
-      );
-      return;
-    }
-    this.#assignments = this.#assignments.sort(
-      this.assignmentService.sortAssignmentsByDateAsc
     );
   }
 

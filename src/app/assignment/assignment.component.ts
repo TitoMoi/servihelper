@@ -164,7 +164,8 @@ export class AssignmentComponent
     //sort
     this.assignmentsTable =
       this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
-        this.assignmentsTable
+        this.assignmentsTable,
+        "Desc"
       );
 
     //Add separator

@@ -9,6 +9,7 @@ import { Injectable } from "@angular/core";
 import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
+export type SortOrderType = "Asc" | "Desc";
 @Injectable({
   providedIn: "root",
 })
@@ -25,10 +26,15 @@ export class SortService {
    * @returns
    */
   sortAssignmentsByDateThenRoomAndAssignType(
-    assignments: AssignmentTableInterface[] | AssignmentInterface[]
+    assignments: AssignmentTableInterface[] | AssignmentInterface[],
+    order: SortOrderType
   ) {
     //Sort by date first
-    assignments.sort(this.assignmentService.sortAssignmentsByDateDesc);
+    assignments.sort(
+      order === "Desc"
+        ? this.assignmentService.sortAssignmentsByDateDesc
+        : this.assignmentService.sortAssignmentsByDateAsc
+    );
 
     //Diferent sort, first separate date into arrays, then double sort, first room and then assign type
     const assignmentsByDate = [[]];
