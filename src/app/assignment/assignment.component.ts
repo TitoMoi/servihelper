@@ -17,6 +17,10 @@ import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
 import { SortService } from "app/services/sort.service";
+import { RoomService } from "app/room/service/room.service";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { NoteService } from "app/note/service/note.service";
 
 @Component({
   selector: "app-assignment",
@@ -30,7 +34,7 @@ export class AssignmentComponent
   //In memory assignments
   assignments: AssignmentInterface[] = [];
 
-  //The assignments with display values
+  //The assignments
   assignmentsTable: AssignmentTableInterface[] = [];
 
   rows: NodeListOf<Element> = undefined;
@@ -71,6 +75,10 @@ export class AssignmentComponent
   constructor(
     public activatedRoute: ActivatedRoute,
     private assignmentService: AssignmentService,
+    private roomService: RoomService,
+    private assignTypeService: AssignTypeService,
+    private participantService: ParticipantService,
+    private noteService: NoteService,
     private lastDateService: LastDateService,
     private sortService: SortService,
     private cdr: ChangeDetectorRef
@@ -145,7 +153,7 @@ export class AssignmentComponent
       (dataElement: AssignmentTableInterface) =>
         dataElement.id === assignment.id
     );
-    //Prepare assignment display values
+    //Prepare assignment
     const assignmentTable: AssignmentTableInterface[] =
       this.prepareRowExtendedValues([assignment]);
     //swap the assignment
@@ -249,7 +257,38 @@ export class AssignmentComponent
     for (const assign of this.assignmentsTable) {
       data = ""; //reset row
       for (const key of keys) {
-        data = data + assign[key] + ";";
+        switch (key) {
+          case "room":
+            data = data + this.roomService.getRoomNameById(assign[key]) + ";";
+            break;
+          case "assignType":
+            data =
+              data +
+              this.assignTypeService.getAssignTypeNameById(assign[key]) +
+              ";";
+            break;
+          case "principal":
+            data =
+              data +
+              this.participantService.getParticipant(assign[key]).name +
+              ";";
+            break;
+          case "assistant":
+            this.participantService.getParticipant(assign[key]);
+            data =
+              data +
+              this.participantService.getParticipant(assign[key])?.name +
+              ";";
+            break;
+          case "footerNote":
+            data =
+              data + this.noteService.getNote(assign[key]).editorHTML + ";";
+            break;
+
+          default:
+            data = data + assign[key] + ";";
+            break;
+        }
       }
       data = data + "\n";
       rows.push(data);
