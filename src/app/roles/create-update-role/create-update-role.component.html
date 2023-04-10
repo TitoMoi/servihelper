@@ -13,7 +13,7 @@
             <input
               matInput
               required
-              appautofocus
+              [appautofocus]="isUpdate ? false : true"
               spellcheck="false"
               formControlName="name"
             />

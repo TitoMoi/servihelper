@@ -16,7 +16,7 @@
             <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
             <input
               matInput
-              appautofocus
+              [appautofocus]="isUpdate ? false : true"
               spellcheck="false"
               formControlName="name"
             />

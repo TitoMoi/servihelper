@@ -48,7 +48,7 @@
             <mat-label>{{ t("ASSIGN_CHOOSE_DATE") }}</mat-label>
             <input
               required
-              appautofocus
+              [appautofocus]="isUpdate ? false : true"
               matInput
               [matDatepicker]="picker"
               formControlName="date"
