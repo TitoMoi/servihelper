@@ -6,7 +6,7 @@ Servihelper is a free executable app that runs on the machine _(Windows or Mac)_
 
 Your data is managed internally on the local device, so it never goes to the internet.
 
-Its purpose is for help the Jehovah's witnesses to create and manage assignments for the meetings.
+Its purpose is for help the Jehovah's witnesses to create and manage all kind of assignments.
 
 [Examples](https://drive.google.com/drive/folders/1h3LLPwzKukYT3AXiMMLlcggHyi4ZafNH?usp=sharing)
 
@@ -30,9 +30,9 @@ All kinds of assignments can be created. You need to create the assignment types
 
 ## What cannot be done or implemented?
 
-Diferent actors working at the same time is not possible, as sensitive data cannot be uploaded to cloud environments and keep being free.
+Diferent persons working at the same time is not possible.
 
-But, they can work exporting the app data from actor one and importing in the app of the actor two.
+But, they can work exporting the app data from person one and importing in the app of the person two.
 
 ## ¿Can I distribute it?
 
@@ -40,17 +40,13 @@ Yes, although it is recommended that you distribute the download link, as a new 
 
 ## ¿How do I distribute the assignments?
 
-When generating an assignment in the -Assignments- section, an assignment sheet appears in the -Image- column.
+- Digital distribution - In the assignments section, an icon sheet appears in the -Image- column. Click, watch the preview and copy to clipboard. Then paste on whatsapp.
 
-We click on it and we can preview the assignment.
+- Print - On the reports section there is a print button.
 
-Then below, we can copy it to the clipboard to later paste it in whatsapp web, generate a .png image or generate a pdf.
+## When selecting the participant for the assignment, a number is displayed next to it, what is it?
 
-Massive printing of assignments is supported too.
-
-## When I create an assignment, when selecting the participant, a number is displayed next to it, what is it?
-
-It is the number of times the participant has participated in that room with that type of assignment with that role.
+It is the number of times the participant has participated in that room with that type of assignment with that role _(principal or assistant)_
 
 ## ¿How do I report a bug or ask for a feature?
 
