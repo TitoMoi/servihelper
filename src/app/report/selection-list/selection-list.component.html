@@ -30,12 +30,14 @@
 </div>
 
 <div id="toPngDivId" style="width: 40rem" class="bg-color-white">
-  <div class="fw-bold" [style.textAlign]="'center'">{{ reportTitle }}</div>
+  <div *ngIf="reportTitle" class="fw-bold p-2" [style.textAlign]="'center'">
+    {{ reportTitle }}
+  </div>
   <ng-container *ngFor="let ag of assignmentGroups; index as i">
     <table [id]="'table' + i">
       <tr>
         <th
-          class="fw-bold"
+          class="fw-bold pt-2 pb-2"
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
         >
@@ -58,7 +60,7 @@
         <!-- td id is to find assignType later, not always has name, sometimes has theme -->
         <td
           [id]="assignment.assignType.id"
-          class="fw-bold"
+          class="ps-1 pt-2"
           [style]="
             getBorderRight(
               (assignment.assignType.id | assignTypePipe).color || 'transparent'
