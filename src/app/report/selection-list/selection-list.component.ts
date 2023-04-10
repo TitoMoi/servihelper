@@ -245,7 +245,11 @@ export class SelectionListComponent implements OnChanges {
         html: "#" + tableId,
         styles: { font, fontSize: 13 },
         theme: "plain",
-        margin: firstTable ? { top: 30 } : undefined,
+        margin: this.reportTitle
+          ? { top: 30 }
+          : firstTable
+          ? { top: 10 }
+          : undefined,
         columnStyles: { 0: { cellWidth: 110 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           data.cell.text = data.cell.text.map((char) => char.trim());
