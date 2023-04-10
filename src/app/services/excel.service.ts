@@ -162,6 +162,7 @@ export class ExcelService {
       cell.font = {
         size:
           Number(this.configService.getConfig().defaultReportFontSize) || 16,
+        bold: true,
       };
 
       cell.value = this.translocoLocaleService.localizeDate(
@@ -188,7 +189,6 @@ export class ExcelService {
         const cell = row.getCell(1);
 
         cell.font = {
-          bold: true,
           size:
             Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
