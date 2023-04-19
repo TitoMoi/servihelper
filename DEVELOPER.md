@@ -9,6 +9,11 @@ Servihelper aims to:
 - The administrator user must download new versions when they are available and work all together with the same version.
 - Be accessible and provided in as many languages as possible.
 
+## Development Setup
+
+- After cloning the repository, create a folder "assets" in root.
+- Copy only src/assets/source into the new created "assets" folder.
+
 ## Language
 
 Servihelper uses transloco and transloco locale for dates. And date-fns for statistics locales.
