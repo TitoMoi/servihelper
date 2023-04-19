@@ -5,12 +5,14 @@ import {
 
 import { Injectable } from "@angular/core";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
+/* import { version } from '../../../package.json'; */
+const { version } = require('../../../package.json');
 
 @Injectable({
   providedIn: "root",
 })
 export class SharedService {
-  appVersion = "4.1.2";
+  appVersion = version;
 
   constructor() {}
 

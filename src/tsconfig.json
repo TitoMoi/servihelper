@@ -4,7 +4,8 @@
     "outDir": "../out-tsc/app",
     "module": "ES2020",
     "types": [],
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "resolveJsonModule": true
   },
   "files": ["main.ts", "polyfills.ts"],
   "include": ["**/*.d.ts"],
