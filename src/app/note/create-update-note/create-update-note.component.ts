@@ -1,7 +1,7 @@
 import { editorJsonToHtml } from "app/functions/editorJsonToHtml";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import { Editor, Toolbar } from "ngx-editor";
+import { Editor, Toolbar, NgxEditorModule } from "ngx-editor";
 
 import { Component, OnDestroy } from "@angular/core";
 import {
@@ -9,13 +9,30 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
+  ReactiveFormsModule,
 } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { AutoFocusDirective } from "../../autofocus/autofocus.directive";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-create-update-note",
   templateUrl: "./create-update-note.component.html",
   styleUrls: ["./create-update-note.component.css"],
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AutoFocusDirective,
+    NgxEditorModule,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class CreateUpdateNoteComponent implements OnDestroy {
   n = this.noteService.getNote(this.activatedRoute.snapshot.params.id);
@@ -30,10 +47,7 @@ export class CreateUpdateNoteComponent implements OnDestroy {
     name: [this.n ? this.n.name : undefined, Validators.required],
     editorContent: this.n
       ? this.n.editorContent
-      : new UntypedFormControl(
-          { value: undefined, disabled: false },
-          Validators.required
-        ),
+      : new UntypedFormControl({ value: undefined, disabled: false }, Validators.required),
   });
 
   constructor(

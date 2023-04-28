@@ -23,18 +23,14 @@
       <div class="row">
         <div class="col">
           <h4 *ngIf="assignTypes.length">
-            {{
-              isUpdate ? t("ROLE_UPDATE_SUBTITLE") : t("ROLE_CREATE_SUBTITLE")
-            }}
+            {{ isUpdate ? t("ROLE_UPDATE_SUBTITLE") : t("ROLE_CREATE_SUBTITLE") }}
           </h4>
           <div class="row mb-2">
             <ng-container *ngFor="let at of assignTypes">
               <div class="col-auto">
-                <mat-checkbox
-                  color="primary"
-                  (change)="changeCheckbox(at.id)"
-                  >{{ at.name }}</mat-checkbox
-                >
+                <mat-checkbox color="primary" (change)="changeCheckbox(at.id)">{{
+                  at.name
+                }}</mat-checkbox>
               </div>
             </ng-container>
           </div>
@@ -50,12 +46,7 @@
       >
         {{ t("BUTTON_CANCEL") }}
       </button>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="form.invalid"
-      >
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
         {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
       </button>
     </mat-card-actions>

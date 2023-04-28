@@ -29,10 +29,11 @@ import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
+  ReactiveFormsModule,
 } from "@angular/forms";
-import { MatButton } from "@angular/material/button";
-import { MatSelect } from "@angular/material/select";
-import { ActivatedRoute, Router } from "@angular/router";
+import { MatButton, MatButtonModule } from "@angular/material/button";
+import { MatSelect, MatSelectModule } from "@angular/material/select";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { RoleInterface } from "app/roles/model/role.model";
 import { MatDialog } from "@angular/material/dialog";
 import { InfoAssignmentComponent } from "../info-assignment/info-assignment.component";
@@ -41,14 +42,44 @@ import { WarningAssignmentComponent } from "../warning-assignment/warning-assign
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
+  MatDatepickerModule,
 } from "@angular/material/datepicker";
-import { MatCheckboxChange } from "@angular/material/checkbox";
+import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
+import { ParticipantPipe } from "../../participant/pipe/participant.pipe";
+import { MatIconModule } from "@angular/material/icon";
+import { MatOptionModule } from "@angular/material/core";
+import { AutoFocusDirective } from "../../autofocus/autofocus.directive";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-create-update-assignment",
   templateUrl: "./create-update-assignment.component.html",
   styleUrls: ["./create-update-assignment.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    NgIf,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    AutoFocusDirective,
+    MatSelectModule,
+    NgFor,
+    MatOptionModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterLink,
+    AsyncPipe,
+    ParticipantPipe,
+  ],
 })
 export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   @ViewChild("principalSelect") principalSelect: MatSelect;
@@ -282,13 +313,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   prepareAssignTypeSub() {
     this.subscription.add(
-      this.form
-        .get("assignType")
-        .valueChanges.subscribe((assignTypeId: string) => {
-          this.batchCleanPrincipalAssistant();
-          this.batchGetCountSortWarning();
-          this.enableOrDisableAssistantControl(assignTypeId);
-        })
+      this.form.get("assignType").valueChanges.subscribe((assignTypeId: string) => {
+        this.batchCleanPrincipalAssistant();
+        this.batchGetCountSortWarning();
+        this.enableOrDisableAssistantControl(assignTypeId);
+      })
     );
     this.cdr.detectChanges();
   }
@@ -315,12 +344,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
           return;
         }
         //Only man
-        this.principals = this.principals.filter(
-          (p) => p.isWoman === false && !p.isExternal
-        );
-        this.assistants = this.assistants.filter(
-          (a) => a.isWoman === false && !a.isExternal
-        );
+        this.principals = this.principals.filter((p) => p.isWoman === false && !p.isExternal);
+        this.assistants = this.assistants.filter((a) => a.isWoman === false && !a.isExternal);
       })
     );
   }
@@ -420,8 +445,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.participants = this.participants.filter(
       (p) =>
         !p.notAvailableDates.some(
-          (date) =>
-            new Date(dateControlValue).getTime() === new Date(date).getTime()
+          (date) => new Date(dateControlValue).getTime() === new Date(date).getTime()
         )
     );
   }
@@ -479,14 +503,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       const assignTypeValue = this.gfv("assignType");
 
       if (dateValue && roomValue) {
-        const assignmentsByDate =
-          this.assignmentService.getAssignmentsByDate(dateValue);
+        const assignmentsByDate = this.assignmentService.getAssignmentsByDate(dateValue);
 
         this.assignTypes = this.assignTypes.filter(
           (at) =>
-            !assignmentsByDate.some(
-              (a) => a.assignType === at.id && a.room === roomValue
-            )
+            !assignmentsByDate.some((a) => a.assignType === at.id && a.room === roomValue)
         );
 
         //Reset if assignType selected not in new assignTypes
@@ -513,8 +534,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.removeGremlings();
 
     //update
-    if (this.isUpdate)
-      this.assignmentService.updateAssignment(this.form.getRawValue());
+    if (this.isUpdate) this.assignmentService.updateAssignment(this.form.getRawValue());
 
     //Multiple create
     if (this.isMultipleDates) {
@@ -561,9 +581,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.form.get("room").setValue(room, { emitEvent: false });
     this.form.get("onlyMan").setValue(onlyMan, { emitEvent: false });
     this.form.get("onlyWoman").setValue(onlyWoman, { emitEvent: false });
-    this.form
-      .get("onlyExternals")
-      .setValue(onlyExternals, { emitEvent: false });
+    this.form.get("onlyExternals").setValue(onlyExternals, { emitEvent: false });
 
     this.getParticipantsAvailableOnDate();
 
@@ -576,14 +594,12 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.principalSelect.close();
     //Wait until button is enabled to focus it otherwise not works
     this.cdr.detectChanges();
-    if (!this.isUpdate && !this.isMultipleDates)
-      this.btnSaveCreateAnother.focus();
+    if (!this.isUpdate && !this.isMultipleDates) this.btnSaveCreateAnother.focus();
   }
 
   onSelectionChangeAssistant() {
     this.assistantSelect.close();
-    if (!this.isUpdate && !this.isMultipleDates)
-      this.btnSaveCreateAnother.focus();
+    if (!this.isUpdate && !this.isMultipleDates) this.btnSaveCreateAnother.focus();
   }
 
   getPrincipalName(principalId) {
@@ -604,9 +620,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     e.preventDefault();
     e.stopPropagation();
     //Get a list of participants for that date with that count with that role
-    const principalsSameCount = this.principals.filter(
-      (p) => p.count === participant.count
-    );
+    const principalsSameCount = this.principals.filter((p) => p.count === participant.count);
     this.matDialog.open(InfoAssignmentComponent, {
       data: principalsSameCount,
     });
@@ -616,9 +630,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     e.preventDefault();
     e.stopPropagation();
     //Get a list of participants for that date with that count with that role
-    const assistantsSameCount = this.assistants.filter(
-      (p) => p.count === participant.count
-    );
+    const assistantsSameCount = this.assistants.filter((p) => p.count === participant.count);
     this.matDialog.open(InfoAssignmentComponent, {
       data: assistantsSameCount,
     });
@@ -634,11 +646,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
     const messageList: string[] = [];
 
-    const participantAssignments =
-      this.assignmentService.findAssignmentsByParticipantId(
-        participant.id,
-        this.gfv("date")
-      );
+    const participantAssignments = this.assignmentService.findAssignmentsByParticipantId(
+      participant.id,
+      this.gfv("date")
+    );
 
     participantAssignments.forEach((pa) => {
       messageList.push(
@@ -699,9 +710,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       }
       this.resetModel = new Date(0);
       //prepare sorted dates for the reports and new reference for the input components
-      this.selectedDates = [
-        ...this.selectedDates.sort(this.sharedService.sortDates),
-      ];
+      this.selectedDates = [...this.selectedDates.sort(this.sharedService.sortDates)];
 
       if (!this.closeOnSelected) {
         const closeFn = this.datePickerRef.close;

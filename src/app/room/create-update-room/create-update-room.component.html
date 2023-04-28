@@ -36,12 +36,7 @@
       >
         {{ t("BUTTON_CANCEL") }}
       </button>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="form.invalid"
-      >
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
         {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
       </button>
     </mat-card-actions>

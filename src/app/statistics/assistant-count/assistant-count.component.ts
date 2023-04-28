@@ -34,22 +34,30 @@ import {
 } from "date-fns/locale";
 import { Subscription } from "rxjs";
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from "@angular/core";
-import { MatCheckboxChange } from "@angular/material/checkbox";
-import { TranslocoService } from "@ngneat/transloco";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
+import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
+import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { SortService } from "app/services/sort.service";
 import { toPng } from "html-to-image";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { NgFor } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
+import { MatExpansionModule } from "@angular/material/expansion";
 
 @Component({
   selector: "app-assistant-count",
   templateUrl: "./assistant-count.component.html",
   styleUrls: ["./assistant-count.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatIconModule,
+    NgFor,
+    TranslocoLocaleModule,
+  ],
 })
 export class AssistantCountComponent implements OnInit, OnDestroy {
   assistantList: ParticipantInterface[] & ParticipantDynamicInterface[];
@@ -113,9 +121,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = this.assignTypeService.getAssignType(
-          assignment.assignType
-        );
+        const assignType = this.assignTypeService.getAssignType(assignment.assignType);
         participant.lastAssignType = assignType.name;
       }
     }
@@ -130,9 +136,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = this.assignTypeService.getAssignType(
-          assignment.assignType
-        );
+        const assignType = this.assignTypeService.getAssignType(assignment.assignType);
         participant.penultimateAssignType = assignType.name;
       }
     }
@@ -144,9 +148,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     );
 
     //Order by count and distance
-    this.assistantList = participants.sort(
-      this.sortService.sortByCountAndByDistance
-    );
+    this.assistantList = participants.sort(this.sortService.sortByCountAndByDistance);
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
     this.subscription = this.translocoService.langChanges$.subscribe((lang) => {
@@ -167,9 +169,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     if (!event.checked) {
       return;
     }
-    this.assistantList = this.assistantList.filter(
-      (participant) => participant.isWoman
-    );
+    this.assistantList = this.assistantList.filter((participant) => participant.isWoman);
   }
 
   /**
@@ -181,9 +181,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     if (!event.checked) {
       return;
     }
-    this.assistantList = this.assistantList.filter(
-      (participant) => !participant.isWoman
-    );
+    this.assistantList = this.assistantList.filter((participant) => !participant.isWoman);
   }
 
   async toPng() {

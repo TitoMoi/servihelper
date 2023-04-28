@@ -24,9 +24,7 @@
         </div>
         <div class="row">
           <mat-form-field *ngIf="isMultipleDates">
-            <mat-label>{{
-              t("ASSIGN_SELECTION_DATES_SELECT_TITLE")
-            }}</mat-label>
+            <mat-label>{{ t("ASSIGN_SELECTION_DATES_SELECT_TITLE") }}</mat-label>
             <input
               matInput
               [value]="resetModel"
@@ -68,11 +66,7 @@
           <div class="col-6 mb-2">
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_ROOM") }}</mat-label>
-              <mat-select
-                formControlName="room"
-                required
-                (closed)="warningIfAlreadyHasWork()"
-              >
+              <mat-select formControlName="room" required (closed)="warningIfAlreadyHasWork()">
                 <mat-option
                   *ngFor="let room of rooms; trackBy: trackByIdRoomFn"
                   [value]="room.id"
@@ -91,10 +85,7 @@
                 (closed)="warningIfAlreadyHasWork()"
               >
                 <mat-option
-                  *ngFor="
-                    let assignType of assignTypes;
-                    trackBy: trackByIdAssignTypeFn
-                  "
+                  *ngFor="let assignType of assignTypes; trackBy: trackByIdAssignTypeFn"
                   [value]="assignType.id"
                   [style.borderLeft]="getBorderLeftStyle(assignType.color)"
                 >
@@ -112,11 +103,7 @@
           <div class="col-12 mb-2">
             <div class="d-flex align-items-baseline justify-content-start">
               <span class="d-inline-block me-3">
-                <mat-icon
-                  class="me-2"
-                  svgIcon="woman"
-                  aria-label="icon"
-                ></mat-icon>
+                <mat-icon class="me-2" svgIcon="woman" aria-label="icon"></mat-icon>
                 <mat-checkbox
                   labelPosition="before"
                   color="primary"
@@ -126,11 +113,7 @@
                 >
               </span>
               <span class="d-inline-block me-3">
-                <mat-icon
-                  class="me-2"
-                  svgIcon="man"
-                  aria-label="icon"
-                ></mat-icon>
+                <mat-icon class="me-2" svgIcon="man" aria-label="icon"></mat-icon>
                 <mat-checkbox
                   labelPosition="before"
                   color="primary"
@@ -170,19 +153,13 @@
                   <div class="grid">
                     <div>
                       <mat-icon
-                        *ngIf="
-                          participant.hasWork && !isMultipleDates;
-                          else noIcon
-                        "
+                        *ngIf="participant.hasWork && !isMultipleDates; else noIcon"
                         (click)="onIconWarningClick($event, participant)"
                         svgIcon="warning"
                         aria-label="icon"
                       ></mat-icon>
                       <mat-icon
-                        *ngIf="
-                          !participant.hasWork && !isMultipleDates;
-                          else noIcon
-                        "
+                        *ngIf="!participant.hasWork && !isMultipleDates; else noIcon"
                         (click)="onPrincipalIconInfoClick($event, participant)"
                         svgIcon="info-blue"
                         aria-label="icon"
@@ -218,19 +195,13 @@
                   <div class="grid">
                     <div>
                       <mat-icon
-                        *ngIf="
-                          participant.hasWork && !isMultipleDates;
-                          else noIcon
-                        "
+                        *ngIf="participant.hasWork && !isMultipleDates; else noIcon"
                         (click)="onIconWarningClick($event, participant)"
                         svgIcon="warning"
                         aria-label="icon"
                       ></mat-icon>
                       <mat-icon
-                        *ngIf="
-                          !participant.hasWork && !isMultipleDates;
-                          else noIcon
-                        "
+                        *ngIf="!participant.hasWork && !isMultipleDates; else noIcon"
                         (click)="onAssistantIconInfoClick($event, participant)"
                         svgIcon="info-blue"
                         aria-label="icon"
@@ -276,9 +247,7 @@
           color="primary"
           type="button"
           (click)="onSubmit($event)"
-          [disabled]="
-            form.invalid || (isMultipleDates && !selectedDates.length)
-          "
+          [disabled]="form.invalid || (isMultipleDates && !selectedDates.length)"
         >
           {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         </button>

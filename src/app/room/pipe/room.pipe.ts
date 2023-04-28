@@ -4,6 +4,7 @@ import { RoomService } from "../service/room.service";
 
 @Pipe({
   name: "roomPipe",
+  standalone: true,
 })
 export class RoomPipe implements PipeTransform {
   /**Given the id of the room return the name */

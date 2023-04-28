@@ -1,6 +1,6 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef } from "@angular/core";
 
-import { AutoFocusDirective } from './autofocus.directive';
+import { AutoFocusDirective } from "./autofocus.directive";
 
 describe("AutofocusDirective", () => {
   it("should create an instance", () => {

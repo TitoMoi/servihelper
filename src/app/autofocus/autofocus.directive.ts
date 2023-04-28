@@ -2,6 +2,7 @@ import { Directive, ElementRef, Input, OnInit } from "@angular/core";
 
 @Directive({
   selector: "[appautofocus]",
+  standalone: true,
 })
 export class AutoFocusDirective implements OnInit {
   @Input() appautofocus = true;

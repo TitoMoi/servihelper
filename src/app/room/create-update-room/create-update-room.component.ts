@@ -2,14 +2,31 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomService } from "app/room/service/room.service";
 
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { UntypedFormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { AutoFocusDirective } from "../../autofocus/autofocus.directive";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-create-update-room",
   templateUrl: "./create-update-room.component.html",
   styleUrls: ["./create-update-room.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AutoFocusDirective,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class CreateUpdateRoomComponent {
   r = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);

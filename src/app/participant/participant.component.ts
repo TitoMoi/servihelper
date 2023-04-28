@@ -2,13 +2,29 @@ import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { MatCheckboxChange } from "@angular/material/checkbox";
+import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
+import { MatIconModule } from "@angular/material/icon";
+import { NgIf, NgFor } from "@angular/common";
+import { RouterLink, RouterLinkActive } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-participant",
   templateUrl: "./participant.component.html",
   styleUrls: ["./participant.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    NgIf,
+    MatCheckboxModule,
+    NgFor,
+    MatIconModule,
+  ],
 })
 export class ParticipantComponent implements OnInit {
   participants: ParticipantInterface[];

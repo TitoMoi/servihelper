@@ -4,6 +4,7 @@ import { ParticipantService } from "../service/participant.service";
 
 @Pipe({
   name: "participantPipe",
+  standalone: true,
 })
 export class ParticipantPipe implements PipeTransform {
   constructor(private participantService: ParticipantService) {}

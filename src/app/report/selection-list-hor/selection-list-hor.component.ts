@@ -24,12 +24,28 @@ import {
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { PdfService } from "app/services/pdf.service";
+import { AssignTypePipe } from "../../assignType/pipe/assign-type.pipe";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { NgFor, NgIf } from "@angular/common";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatIconModule } from "@angular/material/icon";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-selection-list-hor",
   templateUrl: "./selection-list-hor.component.html",
   styleUrls: ["./selection-list-hor.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    MatIconModule,
+    MatTooltipModule,
+    NgFor,
+    NgIf,
+    TranslocoLocaleModule,
+    AssignTypePipe,
+  ],
 })
 export class SelectionListHorComponent implements OnChanges {
   @Input() selectedDates: Date[];
@@ -37,12 +53,9 @@ export class SelectionListHorComponent implements OnChanges {
   @Input() rooms: string[];
   @Input() order: SortOrderType;
 
-  defaultReportFontSize =
-    this.configService.getConfig().defaultReportFontSize + "px";
-  defaultReportDateFormat =
-    this.configService.getConfig().defaultReportDateFormat;
-  defaultReportDateColor =
-    this.configService.getConfig().defaultReportDateColor;
+  defaultReportFontSize = this.configService.getConfig().defaultReportFontSize + "px";
+  defaultReportDateFormat = this.configService.getConfig().defaultReportDateFormat;
+  defaultReportDateColor = this.configService.getConfig().defaultReportDateColor;
   reportTitle = this.configService.getConfig().reportTitle;
 
   assignmentGroups: AssignmentGroupInterface[] = [];
@@ -65,11 +78,10 @@ export class SelectionListHorComponent implements OnChanges {
       this.#assignments = [];
       this.assignmentGroups = [];
       this.filterAssignments().then(() => {
-        this.#assignments =
-          this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
-            this.#assignments,
-            this.order
-          );
+        this.#assignments = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
+          this.#assignments,
+          this.order
+        );
         this.getRelatedData();
         this.cdr.detectChanges();
       });
@@ -86,8 +98,7 @@ export class SelectionListHorComponent implements OnChanges {
         this.assignTypes.includes(assignment.assignType) &&
         this.rooms.includes(assignment.room) &&
         this.selectedDates.some(
-          (date) =>
-            new Date(date).getTime() === new Date(assignment.date).getTime()
+          (date) => new Date(date).getTime() === new Date(assignment.date).getTime()
         )
     );
   }
@@ -95,16 +106,9 @@ export class SelectionListHorComponent implements OnChanges {
   sortAssignmentByAssignTypeOrder() {
     for (const ag of this.assignmentGroups) {
       ag.assignments.sort(
-        (
-          a: AssignmentReportInterface,
-          b: AssignmentReportInterface
-        ): number => {
-          const orderA = this.assignTypeService.getAssignType(
-            a.assignType.id
-          ).order;
-          const orderB = this.assignTypeService.getAssignType(
-            b.assignType.id
-          ).order;
+        (a: AssignmentReportInterface, b: AssignmentReportInterface): number => {
+          const orderA = this.assignTypeService.getAssignType(a.assignType.id).order;
+          const orderB = this.assignTypeService.getAssignType(b.assignType.id).order;
 
           if (orderA > orderB) {
             return 1;
@@ -136,8 +140,7 @@ export class SelectionListHorComponent implements OnChanges {
       if (!assignGroup.date) assignGroup.date = assignment.date;
 
       if (
-        new Date(assignGroup.date).toISOString() !==
-        new Date(assignment.date).toISOString()
+        new Date(assignGroup.date).toISOString() !== new Date(assignment.date).toISOString()
       ) {
         //save and reset
         this.assignmentGroups.push(assignGroup);
@@ -151,9 +154,7 @@ export class SelectionListHorComponent implements OnChanges {
       if (!assignGroup.roomName)
         assignGroup.roomName = this.roomService.getRoom(assignment.room).name;
 
-      if (
-        assignGroup.roomName !== this.roomService.getRoom(assignment.room).name
-      ) {
+      if (assignGroup.roomName !== this.roomService.getRoom(assignment.room).name) {
         //save and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
         assignGroup = {

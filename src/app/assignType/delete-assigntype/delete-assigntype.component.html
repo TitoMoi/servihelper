@@ -1,15 +1,8 @@
-<form
-  *transloco="let t"
-  [formGroup]="assignTypeForm"
-  novalidate
-  (ngSubmit)="onSubmit()"
->
+<form *transloco="let t" [formGroup]="assignTypeForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ t("ASSIGNTYPE_DELETE_TITLE") }}</mat-card-title>
-      <mat-card-subtitle>{{
-        t("ASSIGNTYPE_DELETE_WARNING")
-      }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ t("ASSIGNTYPE_DELETE_WARNING") }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <div class="row">

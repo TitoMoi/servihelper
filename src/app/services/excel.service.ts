@@ -26,9 +26,7 @@ export class ExcelService {
     this.sheet.columns.forEach((column) => {
       const lengths = column.values.map((v) => v.toString().length);
 
-      const maxLength = Math.max(
-        ...lengths.filter((v) => typeof v === "number")
-      );
+      const maxLength = Math.max(...lengths.filter((v) => typeof v === "number"));
       column.width = maxLength;
     });
   }
@@ -134,9 +132,7 @@ export class ExcelService {
     return worksheet;
   }
 
-  private addSheetA4AndLandscape(
-    workbook: ExcelJS.Workbook
-  ): ExcelJS.Worksheet {
+  private addSheetA4AndLandscape(workbook: ExcelJS.Workbook): ExcelJS.Worksheet {
     // create new sheet with pageSetup settings for A4 - landscape
     const worksheet = workbook.addWorksheet("Hoja1", {
       pageSetup: { paperSize: 9, orientation: "landscape" },
@@ -153,30 +149,24 @@ export class ExcelService {
         type: "pattern",
         pattern: "solid",
         fgColor: {
-          argb: this.configService
-            .getConfig()
-            .defaultReportDateColor.substring(1),
+          argb: this.configService.getConfig().defaultReportDateColor.substring(1),
         }, //substring to remove #
       };
 
       cell.font = {
-        size:
-          Number(this.configService.getConfig().defaultReportFontSize) || 16,
+        size: Number(this.configService.getConfig().defaultReportFontSize) || 16,
         bold: true,
       };
 
-      cell.value = this.translocoLocaleService.localizeDate(
-        ag.date,
-        undefined,
-        { dateStyle: this.configService.getConfig().defaultReportDateFormat }
-      );
+      cell.value = this.translocoLocaleService.localizeDate(ag.date, undefined, {
+        dateStyle: this.configService.getConfig().defaultReportDateFormat,
+      });
 
       //room
       const cellRoom = row.getCell(2);
       cellRoom.font = {
         bold: true,
-        size:
-          Number(this.configService.getConfig().defaultReportFontSize) || 16,
+        size: Number(this.configService.getConfig().defaultReportFontSize) || 16,
       };
 
       cellRoom.value = ag.roomName;
@@ -189,14 +179,12 @@ export class ExcelService {
         const cell = row.getCell(1);
 
         cell.font = {
-          size:
-            Number(this.configService.getConfig().defaultReportFontSize) || 16,
+          size: Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
         const borderColor =
-          this.assignTypeService
-            .getAssignType(a.assignType.id)
-            .color?.substring(1) || "FFFFFF";
+          this.assignTypeService.getAssignType(a.assignType.id).color?.substring(1) ||
+          "FFFFFF";
 
         cell.border = {
           right: {
@@ -213,8 +201,7 @@ export class ExcelService {
         const cell2 = row.getCell(2);
 
         cell2.font = {
-          size:
-            Number(this.configService.getConfig().defaultReportFontSize) || 16,
+          size: Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
         cell2.value = a.principal.name;
@@ -233,23 +220,18 @@ export class ExcelService {
         type: "pattern",
         pattern: "solid",
         fgColor: {
-          argb: this.configService
-            .getConfig()
-            .defaultReportDateColor.substring(1), //remove #
+          argb: this.configService.getConfig().defaultReportDateColor.substring(1), //remove #
         },
       };
 
       cell.font = {
         bold: true,
-        size:
-          Number(this.configService.getConfig().defaultReportFontSize) || 16,
+        size: Number(this.configService.getConfig().defaultReportFontSize) || 16,
       };
 
-      cell.value = this.translocoLocaleService.localizeDate(
-        ag.date,
-        undefined,
-        { dateStyle: this.configService.getConfig().defaultReportDateFormat }
-      );
+      cell.value = this.translocoLocaleService.localizeDate(ag.date, undefined, {
+        dateStyle: this.configService.getConfig().defaultReportDateFormat,
+      });
 
       //assign type titles
       let i = 2;
@@ -259,14 +241,12 @@ export class ExcelService {
         cell.value = a.assignType.name;
 
         const borderColor =
-          this.assignTypeService
-            .getAssignType(a.assignType.id)
-            .color?.substring(1) || "FFFFFF";
+          this.assignTypeService.getAssignType(a.assignType.id).color?.substring(1) ||
+          "FFFFFF";
 
         cell.font = {
           bold: true,
-          size:
-            Number(this.configService.getConfig().defaultReportFontSize) || 16,
+          size: Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
         cell.border = {
@@ -289,8 +269,7 @@ export class ExcelService {
       const cellRoom = row2.getCell(1);
       cellRoom.font = {
         bold: true,
-        size:
-          Number(this.configService.getConfig().defaultReportFontSize) || 16,
+        size: Number(this.configService.getConfig().defaultReportFontSize) || 16,
       };
       cellRoom.value = ag.roomName;
 
@@ -299,8 +278,7 @@ export class ExcelService {
         const cell = row2.getCell(i);
 
         cell.font = {
-          size:
-            Number(this.configService.getConfig().defaultReportFontSize) || 16,
+          size: Number(this.configService.getConfig().defaultReportFontSize) || 16,
         };
 
         cell.alignment = {

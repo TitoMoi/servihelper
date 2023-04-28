@@ -55,10 +55,7 @@
       </tr>
       <tr>
         <td [style.fontSize]="defaultReportFontSize">{{ ag.roomName }}</td>
-        <td
-          *ngFor="let assignment of ag.assignments"
-          [style.fontSize]="defaultReportFontSize"
-        >
+        <td *ngFor="let assignment of ag.assignments" [style.fontSize]="defaultReportFontSize">
           {{ assignment.principal.name }}
           <ng-container *ngIf="assignment.assistant"
             >/ <br />

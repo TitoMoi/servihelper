@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { LastDateService } from './last-date.service';
+import { LastDateService } from "./last-date.service";
 
-describe('LastDateService', () => {
+describe("LastDateService", () => {
   let service: LastDateService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('LastDateService', () => {
     service = TestBed.inject(LastDateService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

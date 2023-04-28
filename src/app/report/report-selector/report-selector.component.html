@@ -11,15 +11,8 @@
             [matDatepicker]="picker"
             (dateChange)="dateChanged($event)"
           />
-          <mat-datepicker-toggle
-            matPrefix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker
-            #picker
-            [startAt]="init"
-            [dateClass]="dateClass"
-          ></mat-datepicker>
+          <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker [startAt]="init" [dateClass]="dateClass"></mat-datepicker>
         </mat-form-field>
       </div>
       <div class="col">
@@ -34,23 +27,17 @@
       </div>
       <div class="col">
         <mat-form-field>
-          <mat-label>{{
-            t("ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE")
-          }}</mat-label>
+          <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE") }}</mat-label>
           <mat-select #assignTypesSelect formControlName="assignTypes" multiple>
-            <mat-option
-              *ngFor="let assignType of assignTypes"
-              [value]="assignType.id"
-              >{{ assignType.name }}</mat-option
-            >
+            <mat-option *ngFor="let assignType of assignTypes" [value]="assignType.id">{{
+              assignType.name
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="col">
         <mat-form-field>
-          <mat-label>{{
-            t("ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE")
-          }}</mat-label>
+          <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE") }}</mat-label>
           <mat-select #orderSelect formControlName="order">
             <mat-option *ngFor="let order of orderOptions" [value]="order">{{
               order
@@ -60,15 +47,11 @@
       </div>
       <div class="col">
         <mat-form-field>
-          <mat-label>{{
-            t("ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_TITLE")
-          }}</mat-label>
+          <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_TITLE") }}</mat-label>
           <mat-select #templateSelect formControlName="template">
-            <mat-option
-              *ngFor="let template of templateOptions"
-              [value]="template"
-              >{{ template }}</mat-option
-            >
+            <mat-option *ngFor="let template of templateOptions" [value]="template">{{
+              template
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

@@ -14,11 +14,7 @@
   </mat-form-field>
   <div class="col-12">
     <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-    <ngx-editor
-      spellcheck="false"
-      [editor]="editor"
-      formControlName="editorContent"
-    >
+    <ngx-editor spellcheck="false" [editor]="editor" formControlName="editorContent">
     </ngx-editor>
   </div>
   <div class="mt-3">
@@ -30,12 +26,7 @@
     >
       {{ t("BUTTON_CANCEL") }}
     </button>
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="form.invalid"
-    >
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
       {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
     </button>
   </div>

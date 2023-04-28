@@ -331,9 +331,7 @@ export class AssignmentService {
     this.#assignmentsByDateMap = new Map();
 
     //delete assignments of the participant being the principal
-    this.#assignments = this.#assignments.filter(
-      (a) => a.principal !== participantId
-    );
+    this.#assignments = this.#assignments.filter((a) => a.principal !== participantId);
 
     //Reset to undefined in assistant
     for (const assignment of this.#assignments) {
@@ -394,10 +392,7 @@ export class AssignmentService {
    * @param date optional param if provided will filter only for that date
    * @returns the assignments of the participant
    */
-  findAssignmentsByParticipantId(
-    participantId: string,
-    date?: Date
-  ): AssignmentInterface[] {
+  findAssignmentsByParticipantId(participantId: string, date?: Date): AssignmentInterface[] {
     //By date
     if (date) {
       return this.getAssignmentsByDate(date).filter(
@@ -407,8 +402,7 @@ export class AssignmentService {
     //By all assignments
     return this.#assignments.filter(
       (assignment) =>
-        assignment.principal === participantId ||
-        assignment.assistant === participantId
+        assignment.principal === participantId || assignment.assistant === participantId
     );
   }
 

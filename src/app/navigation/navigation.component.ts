@@ -3,15 +3,10 @@ import { Observable } from "rxjs";
 import { filter, map, shareReplay } from "rxjs/operators";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from "@angular/core";
-import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
-import { MatSelectChange } from "@angular/material/select";
-import { TranslocoService } from "@ngneat/transloco";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { DateAdapter, NativeDateAdapter, MatOptionModule } from "@angular/material/core";
+import { MatSelectChange, MatSelectModule } from "@angular/material/select";
+import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { shell } from "electron";
 import { SharedService } from "app/services/shared.service";
 import { HttpClient } from "@angular/common/http";
@@ -19,13 +14,36 @@ import { GitHubDataInterface } from "./model/navigation.model";
 import { ConfigInterface } from "app/config/model/config.model";
 import { RoleInterface } from "app/roles/model/role.model";
 import { UntypedFormBuilder } from "@angular/forms";
-import { MatSidenav } from "@angular/material/sidenav";
+import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { RouterLink } from "@angular/router";
+import { MatListModule } from "@angular/material/list";
+import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @Component({
   selector: "app-navigation",
   templateUrl: "./navigation.component.html",
   styleUrls: ["./navigation.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    NgIf,
+    MatListModule,
+    RouterLink,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgFor,
+    MatOptionModule,
+    AsyncPipe,
+  ],
 })
 export class NavigationComponent implements OnInit {
   hideSidenav;
@@ -42,21 +60,13 @@ export class NavigationComponent implements OnInit {
     .get<GitHubDataInterface>(
       "https://api.github.com/repos/titoMoi/servihelper/releases/latest"
     )
-    .pipe(
-      filter(
-        (githubData) => githubData.tag_name !== this.sharedService.appVersion
-      )
-    );
+    .pipe(filter((githubData) => githubData.tag_name !== this.sharedService.appVersion));
 
   config$: Observable<ConfigInterface> = this.configService.config$;
 
-  roles$: Observable<RoleInterface[]> = this.config$.pipe(
-    map((config) => config.roles)
-  );
+  roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
 
-  currentRoleId$: Observable<string> = this.config$.pipe(
-    map((config) => config.role)
-  );
+  currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
 
   roleForm = this.formBuilder.group({
     roleId: [this.administratorKey],

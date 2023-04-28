@@ -3,25 +3,35 @@ import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 
 import { Component } from "@angular/core";
-import { UntypedFormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-delete-assign-type",
   templateUrl: "./delete-assigntype.component.html",
   styleUrls: ["./delete-assigntype.component.css"],
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class DeleteAssignTypeComponent {
-  assignType = this.assignTypeService.getAssignType(
-    this.activatedRoute.snapshot.params.id
-  );
+  assignType = this.assignTypeService.getAssignType(this.activatedRoute.snapshot.params.id);
 
   assignTypeForm = this.formBuilder.group({
     id: this.assignType.id,
-    name: [
-      { value: this.assignType.name, disabled: true },
-      Validators.required,
-    ],
+    name: [{ value: this.assignType.name, disabled: true }, Validators.required],
   });
 
   constructor(

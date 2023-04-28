@@ -4,19 +4,39 @@ import { NoteService } from "app/note/service/note.service";
 import { APP_CONFIG } from "environments/environment";
 import { writeJsonSync } from "fs-extra";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { UntypedFormBuilder } from "@angular/forms";
-import { TranslocoService } from "@ngneat/transloco";
+import { UntypedFormBuilder, ReactiveFormsModule } from "@angular/forms";
+import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 import { ipcRenderer } from "electron";
 import { SharedService } from "app/services/shared.service";
+import { MatButtonModule } from "@angular/material/button";
+import { NgFor, NgIf } from "@angular/common";
+import { MatOptionModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatExpansionModule } from "@angular/material/expansion";
 
 @Component({
   selector: "app-config",
   templateUrl: "./config.component.html",
   styleUrls: ["./config.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    NgFor,
+    MatButtonModule,
+    NgIf,
+  ],
 })
 export class ConfigComponent {
   // The path of the app
@@ -27,12 +47,7 @@ export class ConfigComponent {
 
   appVersion = this.sharedService.appVersion;
 
-  translocoDateFormats: DateFormatStyles[] = [
-    "short",
-    "medium",
-    "long",
-    "full",
-  ];
+  translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
 
   weekDayBegins: WeekDaysBegin[] = [
     {

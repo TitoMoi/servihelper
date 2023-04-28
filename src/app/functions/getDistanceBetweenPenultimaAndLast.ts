@@ -14,10 +14,7 @@ export function getDistanceBetweenPenultimaAndLast(
 ): void {
   //Get the distance, i18n sensitive
   for (const participant of participantList) {
-    if (
-      participant.penultimateAssignmentDate &&
-      participant.lastAssignmentDate
-    ) {
+    if (participant.penultimateAssignmentDate && participant.lastAssignmentDate) {
       participant.distanceBetweenPenultimaAndLast = formatDistanceStrict(
         new Date(participant.penultimateAssignmentDate),
         new Date(participant.lastAssignmentDate),

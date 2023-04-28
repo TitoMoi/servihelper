@@ -2,11 +2,7 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title
-        >{{
-          this.isUpdate
-            ? t("ASSIGNTYPE_UPDATE_TITLE")
-            : t("ASSIGNTYPE_CREATE_TITLE")
-        }}
+        >{{ this.isUpdate ? t("ASSIGNTYPE_UPDATE_TITLE") : t("ASSIGNTYPE_CREATE_TITLE") }}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -53,12 +49,7 @@
       >
         {{ t("BUTTON_CANCEL") }}
       </button>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="form.invalid"
-      >
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
         {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
       </button>
     </mat-card-actions>

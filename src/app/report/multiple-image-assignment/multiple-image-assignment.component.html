@@ -46,15 +46,12 @@
           display: inline-block;
           vertical-align: top;
           margin-right: 4px;
-          font-family: 'Noto Sans', 'Noto Sans JP', 'Noto Sans KR',
-            'Noto Sans SC', sans-serif;
+          font-family: 'Noto Sans', 'Noto Sans JP', 'Noto Sans KR', 'Noto Sans SC', sans-serif;
         "
         *ngFor="let a of assignmentsWithNames"
       >
         <h4 class="m-1">
-          <span *ngIf="!assignmentHeaderTitle">{{
-            t("ASSIGN_IMAGE_TITLE")
-          }}</span>
+          <span *ngIf="!assignmentHeaderTitle">{{ t("ASSIGN_IMAGE_TITLE") }}</span>
           <span *ngIf="assignmentHeaderTitle">{{ assignmentHeaderTitle }}</span>
         </h4>
         <hr class="m-1" />
@@ -65,12 +62,8 @@
         <div class="m-1">{{ a.principal }}</div>
         <ng-container *ngIf="a.assistant">
           <div class="m-1">
-            <b *ngIf="!assignmentAssistantTitle">{{
-              t("ASSIGN_IMAGE_ASSISTANT")
-            }}</b>
-            <b *ngIf="assignmentAssistantTitle">{{
-              assignmentAssistantTitle
-            }}</b>
+            <b *ngIf="!assignmentAssistantTitle">{{ t("ASSIGN_IMAGE_ASSISTANT") }}</b>
+            <b *ngIf="assignmentAssistantTitle">{{ assignmentAssistantTitle }}</b>
           </div>
           <div class="m-1">{{ a.assistant }}</div>
         </ng-container>
@@ -82,12 +75,8 @@
           {{ a.date | translocoDate : { dateStyle: "full" } }}
         </div>
         <div class="m-1">
-          <b *ngIf="!assignmentAssignTypeTitle">{{
-            t("ASSIGN_IMAGE_ASSIGNTYPE")
-          }}</b>
-          <b *ngIf="assignmentAssignTypeTitle">{{
-            assignmentAssignTypeTitle
-          }}</b>
+          <b *ngIf="!assignmentAssignTypeTitle">{{ t("ASSIGN_IMAGE_ASSIGNTYPE") }}</b>
+          <b *ngIf="assignmentAssignTypeTitle">{{ assignmentAssignTypeTitle }}</b>
         </div>
         <div class="m-1">{{ a.assignType }}</div>
         <ng-container *ngIf="a.theme"
@@ -99,17 +88,13 @@
         >
 
         <div class="m-1">
-          <b *ngIf="!assignmentRoomTitle">{{
-            t("ASSIGN_IMAGE_ROOM_PRESENTATION")
-          }}</b>
+          <b *ngIf="!assignmentRoomTitle">{{ t("ASSIGN_IMAGE_ROOM_PRESENTATION") }}</b>
           <b *ngIf="assignmentRoomTitle">{{ assignmentRoomTitle }}</b>
         </div>
         <div class="m-1">{{ a.room }}</div>
         <ng-container *ngIf="a.footerNote"
           ><div class="m-1">
-            <b *ngIf="!assignmentNoteTitle">{{
-              t("ASSIGN_IMAGE_FOOTER_NOTE")
-            }}</b>
+            <b *ngIf="!assignmentNoteTitle">{{ t("ASSIGN_IMAGE_FOOTER_NOTE") }}</b>
             <b *ngIf="assignmentNoteTitle">{{ assignmentNoteTitle }}</b>
           </div>
           <div class="text-justify m-1 font-15" [innerHTML]="a.footerNote"></div

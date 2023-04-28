@@ -24,9 +24,7 @@
         </tr>
         <tr>
           <td>
-            <span class="ms-3 me-3"
-              >{{ (assignment.principal | participantPipe).name }}
-            </span>
+            <span class="ms-3 me-3">{{ (assignment.principal | participantPipe).name }} </span>
           </td>
         </tr>
         <tr *ngIf="assignment.assistant">
@@ -41,9 +39,7 @@
         </tr>
         <tr *ngIf="assignment.assistant">
           <td>
-            <span class="ms-3 me-3">{{
-              (assignment.assistant | participantPipe).name
-            }}</span>
+            <span class="ms-3 me-3">{{ (assignment.assistant | participantPipe).name }}</span>
           </td>
         </tr>
         <tr>
@@ -75,8 +71,7 @@
         </tr>
         <tr>
           <td>
-            <span class="ms-3"></span
-            >{{ (assignment.assignType | assignTypePipe).name }}
+            <span class="ms-3"></span>{{ (assignment.assignType | assignTypePipe).name }}
           </td>
         </tr>
         <tr *ngIf="assignment.theme">
@@ -106,10 +101,7 @@
         </tr>
         <tr>
           <td>
-            <div
-              [ngClass]="{ 'mb-3': !footerNoteEditorHTML }"
-              class="ms-3 me-3"
-            >
+            <div [ngClass]="{ 'mb-3': !footerNoteEditorHTML }" class="ms-3 me-3">
               {{ (assignment.room | roomPipe).name }}
             </div>
           </td>
@@ -154,18 +146,8 @@
           aria-label="icon"
           (click)="toGoogleCalendarUrl()"
         ></mat-icon>
-        <mat-icon
-          class="m-2"
-          svgIcon="pdf"
-          aria-label="icon"
-          (click)="toPdf()"
-        ></mat-icon>
-        <mat-icon
-          class="m-2"
-          svgIcon="png"
-          aria-label="icon"
-          (click)="toPng()"
-        ></mat-icon>
+        <mat-icon class="m-2" svgIcon="pdf" aria-label="icon" (click)="toPdf()"></mat-icon>
+        <mat-icon class="m-2" svgIcon="png" aria-label="icon" (click)="toPng()"></mat-icon>
       </div>
     </div>
     <div class="col-12 col-md-5 col-xl-12">

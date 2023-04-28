@@ -1,7 +1,4 @@
-import {
-  ConfigInterface,
-  ConfigOptionsType,
-} from "app/config/model/config.model";
+import { ConfigInterface, ConfigOptionsType } from "app/config/model/config.model";
 import { APP_CONFIG } from "environments/environment";
 import { readJSONSync, writeJSONSync } from "fs-extra";
 
@@ -25,9 +22,7 @@ export class ConfigService {
   // Flag to indicate that config file has changed
   hasChanged = true;
 
-  configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(
-    undefined
-  );
+  configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
   /**
    * Like the private inner config object but public and observable
    */

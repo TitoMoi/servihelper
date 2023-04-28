@@ -1,9 +1,4 @@
-<form
-  *transloco="let t"
-  [formGroup]="roleForm"
-  novalidate
-  (ngSubmit)="onSubmit()"
->
+<form *transloco="let t" [formGroup]="roleForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ t("ROLE_DELETE_TITLE") }}</mat-card-title>

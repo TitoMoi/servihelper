@@ -12,22 +12,56 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { FormArray, FormBuilder, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
+  MatDatepickerModule,
 } from "@angular/material/datepicker";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import {
   ParticipantRoomInterface,
   ParticipantAssignTypeInterface,
 } from "../model/participant.model";
+import { RoomPipe } from "../../room/pipe/room.pipe";
+import { AssignTypePipe } from "../../assignType/pipe/assign-type.pipe";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatChipsModule } from "@angular/material/chips";
+import { NgIf, NgFor } from "@angular/common";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { AutoFocusDirective } from "../../autofocus/autofocus.directive";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-create-update-participant",
   templateUrl: "./create-update-participant.component.html",
   styleUrls: ["./create-update-participant.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AutoFocusDirective,
+    MatCheckboxModule,
+    NgIf,
+    NgFor,
+    MatChipsModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    RouterLink,
+    TranslocoLocaleModule,
+    AssignTypePipe,
+    RoomPipe,
+  ],
 })
 export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   //Angular material datepicker hacked
@@ -40,9 +74,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
-  p = this.participantService.getParticipant(
-    this.activatedRoute.snapshot.params.id
-  );
+  p = this.participantService.getParticipant(this.activatedRoute.snapshot.params.id);
 
   isUpdate = this.p ? true : false;
 
@@ -134,8 +166,9 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
 
   addAssignTypes() {
     //reset
-    this.form.controls.assignTypes =
-      this.formBuilder.array<ParticipantAssignTypeInterface>([]);
+    this.form.controls.assignTypes = this.formBuilder.array<ParticipantAssignTypeInterface>(
+      []
+    );
     //Populate control with assignTypes
     for (const at of this.assignTypes) {
       this.addAssignType(at);
@@ -149,8 +182,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
       canAssistant: a.hasAssistant,
     };
 
-    const assignTypeFormGroup =
-      this.formBuilder.group<ParticipantAssignTypeInterface>(at);
+    const assignTypeFormGroup = this.formBuilder.group<ParticipantAssignTypeInterface>(at);
 
     const fa = this.form.controls.assignTypes as FormArray;
 
@@ -159,9 +191,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
 
   addRooms() {
     //reset
-    this.form.controls.rooms = this.formBuilder.array<ParticipantRoomInterface>(
-      []
-    );
+    this.form.controls.rooms = this.formBuilder.array<ParticipantRoomInterface>([]);
     //Populate control with rooms
     this.rooms.forEach((r) => this.addRoom(r));
   }

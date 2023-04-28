@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SelectionListHorComponent } from './selection-list-hor.component';
+import { SelectionListHorComponent } from "./selection-list-hor.component";
 
-describe('SelectionListHorComponent', () => {
+describe("SelectionListHorComponent", () => {
   let component: SelectionListHorComponent;
   let fixture: ComponentFixture<SelectionListHorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectionListHorComponent ]
-    })
-    .compileComponents();
+      imports: [SelectionListHorComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('SelectionListHorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

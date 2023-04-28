@@ -12,9 +12,7 @@ export class LastDateService {
   #lastDate: Date = new Date();
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  lastDateSub$: BehaviorSubject<Date> = new BehaviorSubject(
-    new Date(this.#lastDate)
-  );
+  lastDateSub$: BehaviorSubject<Date> = new BehaviorSubject(new Date(this.#lastDate));
   // eslint-disable-next-line @typescript-eslint/member-ordering
   lastDate$: Observable<Date> = this.lastDateSub$.asObservable();
 

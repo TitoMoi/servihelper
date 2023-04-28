@@ -31,22 +31,30 @@ import {
 } from "date-fns/locale";
 import { Subscription } from "rxjs";
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from "@angular/core";
-import { MatCheckboxChange } from "@angular/material/checkbox";
-import { TranslocoService } from "@ngneat/transloco";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
+import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
+import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { toPng } from "html-to-image";
 import { SortService } from "app/services/sort.service";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { NgFor } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
+import { MatExpansionModule } from "@angular/material/expansion";
 
 @Component({
   selector: "app-global-count",
   templateUrl: "./global-count.component.html",
   styleUrls: ["./global-count.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatIconModule,
+    NgFor,
+    TranslocoLocaleModule,
+  ],
 })
 export class GlobalCountComponent implements OnInit, OnDestroy {
   globalList: ParticipantDynamicInterface[] & ParticipantDynamicInterface[];
@@ -101,18 +109,13 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     setCountById(assignments, participants);
 
     for (const participant of participants) {
-      const assignment: AssignmentInterface = getLastAssignment(
-        assignments,
-        participant
-      );
+      const assignment: AssignmentInterface = getLastAssignment(assignments, participant);
       //Get the lastAssignmentDate
       participant.lastAssignmentDate = assignment?.date;
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = this.assignTypeService.getAssignType(
-          assignment.assignType
-        );
+        const assignType = this.assignTypeService.getAssignType(assignment.assignType);
         participant.lastAssignType = assignType.name;
       }
     }
@@ -127,9 +130,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
-        const assignType = this.assignTypeService.getAssignType(
-          assignment.assignType
-        );
+        const assignType = this.assignTypeService.getAssignType(assignment.assignType);
         participant.penultimateAssignType = assignType.name;
       }
     }
@@ -141,9 +142,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     );
 
     //Order by count and distance
-    this.globalList = participants.sort(
-      this.sortService.sortByCountAndByDistance
-    );
+    this.globalList = participants.sort(this.sortService.sortByCountAndByDistance);
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
     this.subscription.add(
@@ -166,9 +165,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     if (!event.checked) {
       return;
     }
-    this.globalList = this.globalList.filter(
-      (participant) => participant.isWoman
-    );
+    this.globalList = this.globalList.filter((participant) => participant.isWoman);
   }
 
   /**
@@ -180,9 +177,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     if (!event.checked) {
       return;
     }
-    this.globalList = this.globalList.filter(
-      (participant) => !participant.isWoman
-    );
+    this.globalList = this.globalList.filter((participant) => !participant.isWoman);
   }
 
   async toPng() {

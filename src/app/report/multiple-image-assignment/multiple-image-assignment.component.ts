@@ -20,18 +20,29 @@ import {
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { ipcRenderer } from "electron";
-import {
-  ensureDirSync,
-  ensureFileSync,
-  removeSync,
-  writeFileSync,
-} from "fs-extra";
+import { ensureDirSync, ensureFileSync, removeSync, writeFileSync } from "fs-extra";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { MatButtonModule } from "@angular/material/button";
+import { NgIf, NgFor } from "@angular/common";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatIconModule } from "@angular/material/icon";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-multiple-image-assignment",
   templateUrl: "./multiple-image-assignment.component.html",
   styleUrls: ["./multiple-image-assignment.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    MatIconModule,
+    MatTooltipModule,
+    NgIf,
+    MatButtonModule,
+    NgFor,
+    TranslocoLocaleModule,
+  ],
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
   @Input() selectedDates: Date[];
@@ -48,13 +59,10 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
-  assignmentPrincipalTitle =
-    this.configService.getConfig().assignmentPrincipalTitle;
-  assignmentAssistantTitle =
-    this.configService.getConfig().assignmentAssistantTitle;
+  assignmentPrincipalTitle = this.configService.getConfig().assignmentPrincipalTitle;
+  assignmentAssistantTitle = this.configService.getConfig().assignmentAssistantTitle;
   assignmentDateTitle = this.configService.getConfig().assignmentDateTitle;
-  assignmentAssignTypeTitle =
-    this.configService.getConfig().assignmentAssignTypeTitle;
+  assignmentAssignTypeTitle = this.configService.getConfig().assignmentAssignTypeTitle;
   assignmentThemeTitle = this.configService.getConfig().assignmentThemeTitle;
   assignmentRoomTitle = this.configService.getConfig().assignmentRoomTitle;
   assignmentNoteTitle = this.configService.getConfig().assignmentNoteTitle;
@@ -93,8 +101,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         this.assignTypes.includes(assignment.assignType) &&
         this.rooms.includes(assignment.room) &&
         this.selectedDates.some(
-          (date) =>
-            new Date(date).getTime() === new Date(assignment.date).getTime()
+          (date) => new Date(date).getTime() === new Date(assignment.date).getTime()
         )
     );
   }
@@ -152,9 +159,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
    */
   async createHiddenWindowForPrint() {
     //the div
-    const div: HTMLDivElement = document.getElementById(
-      "assignmentDiv"
-    ) as HTMLDivElement;
+    const div: HTMLDivElement = document.getElementById("assignmentDiv") as HTMLDivElement;
     //create window
     await ipcRenderer.send("createHiddenWindowForPrint", {
       innerHTML: div.innerHTML,
@@ -173,9 +178,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   async createAssignmentsInFolder() {
     this.assignmentsInFolderCreated = false;
     const assignmentsWithNamesBK = structuredClone(this.assignmentsWithNames);
-    const div: HTMLDivElement = document.getElementById(
-      "assignmentDiv"
-    ) as HTMLDivElement;
+    const div: HTMLDivElement = document.getElementById("assignmentDiv") as HTMLDivElement;
     div.classList.remove("col-xl-6");
     div.classList.add("col-xl-3");
     div.classList.remove("col");
@@ -197,9 +200,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
     for (const [key, assignments] of assignByNameMap.entries()) {
       //Ensure participant folder name
-      const pathName = filenamifyPath(
-        path.join(this.homeDir, "assignments", key)
-      );
+      const pathName = filenamifyPath(path.join(this.homeDir, "assignments", key));
       //Create again
       ensureDirSync(pathName);
       for (const a of assignments) {

@@ -16,20 +16,43 @@ import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
+  ReactiveFormsModule,
 } from "@angular/forms";
-import { MatOption } from "@angular/material/core";
+import { MatOption, MatOptionModule } from "@angular/material/core";
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
+  MatDatepickerModule,
 } from "@angular/material/datepicker";
-import { MatSelect } from "@angular/material/select";
-import { TranslocoService } from "@ngneat/transloco";
+import { MatSelect, MatSelectModule } from "@angular/material/select";
+import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
+import { MultipleImageAssignmentComponent } from "../multiple-image-assignment/multiple-image-assignment.component";
+import { SelectionListHorComponent } from "../selection-list-hor/selection-list-hor.component";
+import { SelectionListComponent } from "../selection-list/selection-list.component";
+import { NgFor, NgIf } from "@angular/common";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @Component({
   selector: "app-report-selector",
   templateUrl: "./report-selector.component.html",
   styleUrls: ["./report-selector.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    NgFor,
+    MatOptionModule,
+    NgIf,
+    SelectionListComponent,
+    SelectionListHorComponent,
+    MultipleImageAssignmentComponent,
+  ],
 })
 export class ReportSelectorComponent implements OnInit, AfterViewInit {
   //Angular material datepicker hacked
@@ -61,15 +84,9 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
   orderOptions: string[] = ["Asc", "Desc"];
 
   templateOptions: string[] = [
-    this.translocoService.translate(
-      "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL"
-    ),
-    this.translocoService.translate(
-      "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL"
-    ),
-    this.translocoService.translate(
-      "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET"
-    ),
+    this.translocoService.translate("ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL"),
+    this.translocoService.translate("ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL"),
+    this.translocoService.translate("ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET"),
   ];
 
   selectionForm: UntypedFormGroup = this.formBuilder.group({
@@ -93,9 +110,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.assignTypesSelectRef.options.forEach((item: MatOption) =>
-      item.select()
-    );
+    this.assignTypesSelectRef.options.forEach((item: MatOption) => item.select());
 
     this.roomsSelectRef.options.forEach((item: MatOption) => item.select());
     this.order.options.first.select();
@@ -125,9 +140,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
       }
       this.resetModel = new Date(0);
       //prepare sorted dates for the reports and new reference for the input components
-      this.selectedDates = [
-        ...this.selectedDates.sort(this.sharedService.sortDates),
-      ];
+      this.selectedDates = [...this.selectedDates.sort(this.sharedService.sortDates)];
 
       if (!this.closeOnSelected) {
         const closeFn = this.datePickerRef.close;

@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PrincipalCountComponent } from './principal-count.component';
+import { PrincipalCountComponent } from "./principal-count.component";
 
-describe('PrincipalCountComponent', () => {
+describe("PrincipalCountComponent", () => {
   let component: PrincipalCountComponent;
   let fixture: ComponentFixture<PrincipalCountComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PrincipalCountComponent ]
-    })
-    .compileComponents();
+      imports: [PrincipalCountComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PrincipalCountComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

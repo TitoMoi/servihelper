@@ -1,20 +1,43 @@
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { AssignmentService } from 'app/assignment/service/assignment.service';
-import { AssignTypeService } from 'app/assignType/service/assignType.service';
-import { ParticipantInterface } from 'app/participant/model/participant.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { RoomService } from 'app/room/service/room.service';
-import { Subscription } from 'rxjs';
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { RoomService } from "app/room/service/room.service";
+import { Subscription } from "rxjs";
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule } from "@angular/forms";
 
-import { SearchResultInterface } from './model/search.model';
+import { SearchResultInterface } from "./model/search.model";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { RouterLink } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { MatOptionModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
+import { NgIf, NgFor } from "@angular/common";
 
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.scss"],
+  standalone: true,
+  imports: [
+    NgIf,
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgFor,
+    MatOptionModule,
+    MatButtonModule,
+    RouterLink,
+    TranslocoLocaleModule,
+  ],
 })
 export class SearchComponent implements OnInit, OnDestroy {
   searchForm: UntypedFormGroup;
@@ -48,9 +71,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.participantSub$ = this.searchForm.valueChanges.subscribe((values) => {
       const participant = values.participant;
 
-      this.assignments = this.assignmentService.findAssignmentsByParticipantId(
-        participant.id
-      );
+      this.assignments = this.assignmentService.findAssignmentsByParticipantId(participant.id);
 
       this.calculateSearchResult(participant.id);
     });
@@ -64,9 +85,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.results = [];
 
     for (const assignment of this.assignments) {
-      const assignType = this.assignTypeService.getAssignType(
-        assignment.assignType
-      );
+      const assignType = this.assignTypeService.getAssignType(assignment.assignType);
       const room = this.roomService.getRoom(assignment.room);
       const isPrincipalLiteral =
         assignment.principal === participantId ? "SEARCH_YES" : "SEARCH_NO";

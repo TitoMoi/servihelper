@@ -4,6 +4,7 @@ import { NoteService } from "../service/note.service";
 
 @Pipe({
   name: "notePipe",
+  standalone: true,
 })
 export class NotePipe implements PipeTransform {
   constructor(private noteService: NoteService) {}

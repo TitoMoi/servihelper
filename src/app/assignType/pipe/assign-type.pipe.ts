@@ -4,6 +4,7 @@ import { AssignTypeService } from "../service/assignType.service";
 
 @Pipe({
   name: "assignTypePipe",
+  standalone: true,
 })
 export class AssignTypePipe implements PipeTransform {
   constructor(private assignTypeService: AssignTypeService) {}

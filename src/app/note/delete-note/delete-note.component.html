@@ -1,9 +1,4 @@
-<form
-  *transloco="let t"
-  [formGroup]="noteForm"
-  novalidate
-  (ngSubmit)="onSubmit()"
->
+<form *transloco="let t" [formGroup]="noteForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ t("NOTE_DELETE_TITLE") }}</mat-card-title>

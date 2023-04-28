@@ -42,9 +42,7 @@ export class SortService {
     let lastDate = assignments[0]?.date;
 
     for (const assignment of assignments) {
-      if (
-        new Date(assignment.date).getTime() === new Date(lastDate).getTime()
-      ) {
+      if (new Date(assignment.date).getTime() === new Date(lastDate).getTime()) {
         assignmentsByDate[index].push(assignment);
       } else {
         lastDate = assignment.date;
@@ -57,12 +55,8 @@ export class SortService {
     for (let assignGroupByDate of assignmentsByDate) {
       assignGroupByDate = assignGroupByDate.sort(
         (a: AssignmentTableInterface, b: AssignmentTableInterface) => {
-          const assignTypeAOrder = this.assignTypeService.getAssignType(
-            a.assignType
-          ).order;
-          const assignTypeBOrder = this.assignTypeService.getAssignType(
-            b.assignType
-          ).order;
+          const assignTypeAOrder = this.assignTypeService.getAssignType(a.assignType).order;
+          const assignTypeBOrder = this.assignTypeService.getAssignType(b.assignType).order;
           const roomAOrder = this.roomService.getRoom(a.room).order;
           const roomBOrder = this.roomService.getRoom(b.room).order;
 

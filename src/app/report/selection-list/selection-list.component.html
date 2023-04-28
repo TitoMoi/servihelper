@@ -62,16 +62,12 @@
           [id]="assignment.assignType.id"
           class="ps-1 pt-2"
           [style]="
-            getBorderRight(
-              (assignment.assignType.id | assignTypePipe).color || 'transparent'
-            )
+            getBorderRight((assignment.assignType.id | assignTypePipe).color || 'transparent')
           "
           [style.fontSize]="defaultReportFontSize"
         >
           <div>
-            {{
-              assignment.theme ? assignment.theme : assignment.assignType.name
-            }}
+            {{ assignment.theme ? assignment.theme : assignment.assignType.name }}
           </div>
         </td>
         <td class="ps-1" [style.fontSize]="defaultReportFontSize">

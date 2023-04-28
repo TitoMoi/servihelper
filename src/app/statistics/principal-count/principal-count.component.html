@@ -49,17 +49,11 @@
           {{ participant.count }}
         </div>
         <div class="col-2">
-          {{
-            participant.penultimateAssignmentDate
-              | translocoDate : { dateStyle: "medium" }
-          }}
+          {{ participant.penultimateAssignmentDate | translocoDate : { dateStyle: "medium" } }}
           - {{ participant.penultimateAssignType }}
         </div>
         <div class="col-2">
-          {{
-            participant.lastAssignmentDate
-              | translocoDate : { dateStyle: "medium" }
-          }}
+          {{ participant.lastAssignmentDate | translocoDate : { dateStyle: "medium" } }}
           - {{ participant.lastAssignType }}
         </div>
         <div class="col-4">

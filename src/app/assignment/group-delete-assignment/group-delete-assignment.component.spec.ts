@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { GroupDeleteAssignmentComponent } from './group-delete-assignment.component';
+import { GroupDeleteAssignmentComponent } from "./group-delete-assignment.component";
 
-describe('GroupDeleteAssignmentComponent', () => {
+describe("GroupDeleteAssignmentComponent", () => {
   let component: GroupDeleteAssignmentComponent;
   let fixture: ComponentFixture<GroupDeleteAssignmentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupDeleteAssignmentComponent ]
-    })
-    .compileComponents();
+      imports: [GroupDeleteAssignmentComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('GroupDeleteAssignmentComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

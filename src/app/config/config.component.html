@@ -1,9 +1,4 @@
-<form
-  *transloco="let t"
-  [formGroup]="configForm"
-  novalidate
-  (ngSubmit)="onSubmit()"
->
+<form *transloco="let t" [formGroup]="configForm" novalidate (ngSubmit)="onSubmit()">
   <div class="row mb-2">
     <div class="col-12">
       <mat-accordion>
@@ -107,11 +102,7 @@
           <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_COLOR") }}</h4>
           <mat-form-field>
             <mat-label>{{ t("PLACEHOLDER_REPORT_DATE_COLOR") }}</mat-label>
-            <input
-              type="color"
-              matInput
-              formControlName="defaultReportDateColor"
-            />
+            <input type="color" matInput formControlName="defaultReportDateColor" />
           </mat-form-field>
 
           <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE") }}</h4>

@@ -3,25 +3,35 @@ import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 
 import { Component } from "@angular/core";
-import { UntypedFormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-delete-participant",
   templateUrl: "./delete-participant.component.html",
   styleUrls: ["./delete-participant.component.css"],
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class DeleteParticipantComponent {
-  participant = this.participantService.getParticipant(
-    this.activatedRoute.snapshot.params.id
-  );
+  participant = this.participantService.getParticipant(this.activatedRoute.snapshot.params.id);
 
   participantForm = this.formBuilder.group({
     id: this.participant.id,
-    name: [
-      { value: this.participant.name, disabled: true },
-      Validators.required,
-    ],
+    name: [{ value: this.participant.name, disabled: true }, Validators.required],
   });
 
   constructor(

@@ -1,13 +1,30 @@
 import { Component } from "@angular/core";
-import { UntypedFormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { AssignmentInterface } from "../model/assignment.model";
 import { AssignmentService } from "../service/assignment.service";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-move-assignment",
   templateUrl: "./move-assignment.component.html",
   styleUrls: ["./move-assignment.component.scss"],
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class MoveAssignmentComponent {
   assignments: AssignmentInterface[];

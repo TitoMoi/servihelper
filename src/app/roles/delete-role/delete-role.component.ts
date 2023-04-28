@@ -1,15 +1,30 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { UntypedFormBuilder, Validators } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 import { ConfigService } from "app/config/service/config.service";
 
 import { RoleInterface } from "../model/role.model";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-delete-role",
   templateUrl: "./delete-role.component.html",
   styleUrls: ["./delete-role.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class DeleteRoleComponent {
   role = this.configService.getRole(this.activatedRoute.snapshot.params.id);

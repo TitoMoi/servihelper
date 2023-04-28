@@ -1,13 +1,9 @@
 <span *transloco="let t">
   <div class="row mb-2 g-0">
     <div class="col">
-      <a
-        mat-raised-button
-        color="primary"
-        routerLink="create"
-        routerLinkActive="active"
-        >{{ t("ASSIGNTYPE_CREATE_BUTTON") }}</a
-      >
+      <a mat-raised-button color="primary" routerLink="create" routerLinkActive="active">{{
+        t("ASSIGNTYPE_CREATE_BUTTON")
+      }}</a>
     </div>
   </div>
   <div *ngIf="assignTypes.length" class="table-overflow">

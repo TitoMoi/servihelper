@@ -17,10 +17,7 @@ export function setCountById(
   for (const assignment of assignmentList) {
     //not expensive, not many participants, maybe 200 in a kingdom hall?
     for (const participant of participantList) {
-      if (
-        participant.id === assignment.principal ||
-        participant.id === assignment.assistant
-      ) {
+      if (participant.id === assignment.principal || participant.id === assignment.assistant) {
         //Add +1 for every matching id to the participants count
         participant.count += 1;
       }

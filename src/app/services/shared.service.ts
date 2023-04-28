@@ -6,7 +6,7 @@ import {
 import { Injectable } from "@angular/core";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 /* import { version } from '../../../package.json'; */
-const { version } = require('../../../package.json');
+const { version } = require("../../../package.json");
 
 @Injectable({
   providedIn: "root",
@@ -43,9 +43,7 @@ export class SharedService {
       const canOnlyMan = onlyMan ? p.isWoman === false : true;
       const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
 
-      return (
-        isAvailable && canAssignType && canRoom && canOnlyMan && canOnlyWoman
-      );
+      return isAvailable && canAssignType && canRoom && canOnlyMan && canOnlyWoman;
     });
   }
 
@@ -76,9 +74,7 @@ export class SharedService {
       const canOnlyMan = onlyMan ? p.isWoman === false : true;
       const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
 
-      return (
-        isAvailable && canAssignType && canRoom && canOnlyMan && canOnlyWoman
-      );
+      return isAvailable && canAssignType && canRoom && canOnlyMan && canOnlyWoman;
     });
   }
 
@@ -117,25 +113,16 @@ export class SharedService {
     //Apply count
     for (const assignment of assignmentList) {
       //match the room and the assignType
-      if (
-        assignment.assignType === assignTypeId &&
-        assignment.room === roomId
-      ) {
+      if (assignment.assignType === assignTypeId && assignment.room === roomId) {
         //not expensive, not many participants, maybe 200 in a kingdom hall?
         for (const participant of participantList) {
-          if (
-            participant.id ===
-            (isPrincipal ? assignment.principal : assignment.assistant)
-          ) {
+          if (participant.id === (isPrincipal ? assignment.principal : assignment.assistant)) {
             //Add +1 for every matching room and assignType to the participants count
             participant.count += 1;
             //Add the date of the last assignment
             if (!participant.lastAssignmentDate) {
               participant.lastAssignmentDate = assignment.date;
-            } else if (
-              new Date(participant.lastAssignmentDate) <
-              new Date(assignment.date)
-            ) {
+            } else if (new Date(participant.lastAssignmentDate) < new Date(assignment.date)) {
               participant.lastAssignmentDate = assignment.date;
             }
             break;

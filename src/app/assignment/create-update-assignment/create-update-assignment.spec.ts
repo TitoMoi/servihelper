@@ -8,7 +8,7 @@ describe("CreateAssignmentComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CreateUpdateAssignmentComponent],
+      imports: [CreateUpdateAssignmentComponent],
     }).compileComponents();
   });
 

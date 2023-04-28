@@ -23,12 +23,28 @@ import {
   AssignmentInterface,
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
+import { AssignTypePipe } from "../../assignType/pipe/assign-type.pipe";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { NgIf, NgFor } from "@angular/common";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatIconModule } from "@angular/material/icon";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-selection-list",
   templateUrl: "./selection-list.component.html",
   styleUrls: ["./selection-list.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    MatIconModule,
+    MatTooltipModule,
+    NgIf,
+    NgFor,
+    TranslocoLocaleModule,
+    AssignTypePipe,
+  ],
 })
 export class SelectionListComponent implements OnChanges {
   @Input() selectedDates: Date[];
@@ -36,12 +52,9 @@ export class SelectionListComponent implements OnChanges {
   @Input() rooms: string[];
   @Input() order: SortOrderType;
 
-  defaultReportFontSize =
-    this.configService.getConfig().defaultReportFontSize + "px";
-  defaultReportDateFormat =
-    this.configService.getConfig().defaultReportDateFormat;
-  defaultReportDateColor =
-    this.configService.getConfig().defaultReportDateColor;
+  defaultReportFontSize = this.configService.getConfig().defaultReportFontSize + "px";
+  defaultReportDateFormat = this.configService.getConfig().defaultReportDateFormat;
+  defaultReportDateColor = this.configService.getConfig().defaultReportDateColor;
 
   reportTitle = this.configService.getConfig().reportTitle;
 
@@ -65,11 +78,10 @@ export class SelectionListComponent implements OnChanges {
       this.#assignments = [];
       this.assignmentGroups = [];
       this.filterAssignments().then(() => {
-        this.#assignments =
-          this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
-            this.#assignments,
-            this.order
-          );
+        this.#assignments = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
+          this.#assignments,
+          this.order
+        );
         this.getRelatedData();
         this.cdr.detectChanges();
       });
@@ -87,8 +99,7 @@ export class SelectionListComponent implements OnChanges {
         this.assignTypes.includes(assignment.assignType) &&
         this.rooms.includes(assignment.room) &&
         this.selectedDates.some(
-          (date) =>
-            new Date(date).getTime() === new Date(assignment.date).getTime()
+          (date) => new Date(date).getTime() === new Date(assignment.date).getTime()
         )
     );
   }
@@ -114,8 +125,7 @@ export class SelectionListComponent implements OnChanges {
       if (!assignGroup.date) assignGroup.date = assignment.date;
 
       if (
-        new Date(assignGroup.date).toISOString() !==
-        new Date(assignment.date).toISOString()
+        new Date(assignGroup.date).toISOString() !== new Date(assignment.date).toISOString()
       ) {
         //save and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
@@ -129,9 +139,7 @@ export class SelectionListComponent implements OnChanges {
       if (!assignGroup.roomName)
         assignGroup.roomName = this.roomService.getRoom(assignment.room).name;
 
-      if (
-        assignGroup.roomName !== this.roomService.getRoom(assignment.room).name
-      ) {
+      if (assignGroup.roomName !== this.roomService.getRoom(assignment.room).name) {
         //save and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
         assignGroup = {
@@ -245,11 +253,7 @@ export class SelectionListComponent implements OnChanges {
         html: "#" + tableId,
         styles: { font, fontSize: 13 },
         theme: "plain",
-        margin: this.reportTitle
-          ? { top: 30 }
-          : firstTable
-          ? { top: 10 }
-          : undefined,
+        margin: this.reportTitle ? { top: 30 } : firstTable ? { top: 10 } : undefined,
         columnStyles: { 0: { cellWidth: 110 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
           data.cell.text = data.cell.text.map((char) => char.trim());

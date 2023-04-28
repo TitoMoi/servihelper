@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ReportSelectorComponent } from './report-selector.component';
+import { ReportSelectorComponent } from "./report-selector.component";
 
 describe("SelectionSheetsAssignmentComponent", () => {
   let component: ReportSelectorComponent;
@@ -8,7 +8,7 @@ describe("SelectionSheetsAssignmentComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ReportSelectorComponent],
+      imports: [ReportSelectorComponent],
     }).compileComponents();
   });
 

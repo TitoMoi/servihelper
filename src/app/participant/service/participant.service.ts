@@ -33,9 +33,7 @@ export class ParticipantService {
    */
   getParticipants(deepClone = false): ParticipantInterface[] {
     if (!this.hasChanged) {
-      return deepClone
-        ? structuredClone(this.#participants)
-        : this.#participants;
+      return deepClone ? structuredClone(this.#participants) : this.#participants;
     }
     this.hasChanged = false;
     this.#participants = readJSONSync(this.path);
@@ -151,10 +149,7 @@ export class ParticipantService {
     };
 
     for (const participant of this.#participants) {
-      participant.assignTypes = [
-        ...participant.assignTypes,
-        participantAssignTypesValue,
-      ];
+      participant.assignTypes = [...participant.assignTypes, participantAssignTypesValue];
       this.#participantsMap.set(participant.id, participant);
     }
 
@@ -169,14 +164,11 @@ export class ParticipantService {
   deleteAssignType(id: string): boolean {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
-      this.#participants[i].assignTypes = this.#participants[
-        i
-      ].assignTypes.filter((at) => at.assignTypeId !== id);
-
-      this.#participantsMap.set(
-        this.#participants[i].id,
-        this.#participants[i]
+      this.#participants[i].assignTypes = this.#participants[i].assignTypes.filter(
+        (at) => at.assignTypeId !== id
       );
+
+      this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);
     }
     return this.saveParticipantsToFile();
   }
@@ -212,10 +204,7 @@ export class ParticipantService {
         (at) => at.roomId !== id
       );
 
-      this.#participantsMap.set(
-        this.#participants[i].id,
-        this.#participants[i]
-      );
+      this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);
     }
     return this.saveParticipantsToFile();
   }

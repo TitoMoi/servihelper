@@ -9,13 +9,17 @@ import { APP_CONFIG } from "environments/environment";
 import { writeFileSync } from "fs-extra";
 
 import { Component } from "@angular/core";
-import { TranslocoService } from "@ngneat/transloco";
+import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
+import { NgIf, NgClass } from "@angular/common";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
+  standalone: true,
+  imports: [TranslocoModule, MatButtonModule, NgIf, NgClass],
 })
 export class HomeComponent {
   // If zip is loaded and saved
@@ -68,45 +72,25 @@ export class HomeComponent {
     zip.getEntries().forEach((zipEntry) => {
       switch (zipEntry.entryName) {
         case "assignment.json":
-          writeFileSync(
-            this.path + "/assignment.json",
-            zipEntry.getData().toString("utf8")
-          );
+          writeFileSync(this.path + "/assignment.json", zipEntry.getData().toString("utf8"));
           break;
         case "participant.json":
-          writeFileSync(
-            this.path + "/participant.json",
-            zipEntry.getData().toString("utf8")
-          );
+          writeFileSync(this.path + "/participant.json", zipEntry.getData().toString("utf8"));
           break;
         case "room.json":
-          writeFileSync(
-            this.path + "/room.json",
-            zipEntry.getData().toString("utf8")
-          );
+          writeFileSync(this.path + "/room.json", zipEntry.getData().toString("utf8"));
           break;
         case "assignType.json":
-          writeFileSync(
-            this.path + "/assignType.json",
-            zipEntry.getData().toString("utf8")
-          );
+          writeFileSync(this.path + "/assignType.json", zipEntry.getData().toString("utf8"));
           break;
         case "note.json":
-          writeFileSync(
-            this.path + "/note.json",
-            zipEntry.getData().toString("utf8")
-          );
+          writeFileSync(this.path + "/note.json", zipEntry.getData().toString("utf8"));
           break;
         case "config.json":
           const currentConfig = this.configService.getConfig(); //Default config
-          const incomingConfig = JSON.parse(
-            zipEntry.getData().toString("utf8")
-          );
+          const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
           const finalConfig = { ...currentConfig, ...incomingConfig };
-          writeFileSync(
-            this.path + "/config.json",
-            JSON.stringify(finalConfig)
-          );
+          writeFileSync(this.path + "/config.json", JSON.stringify(finalConfig));
           break;
       }
     });

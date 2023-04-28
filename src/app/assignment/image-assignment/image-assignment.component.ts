@@ -11,15 +11,36 @@ import { toPng } from "html-to-image";
 import autoTable from "jspdf-autotable";
 
 import { ChangeDetectorRef, Component } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { PdfService } from "app/services/pdf.service";
 import { clipboard, nativeImage, NativeImage } from "electron";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { ParticipantPipe } from "../../participant/pipe/participant.pipe";
+import { RoomPipe } from "../../room/pipe/room.pipe";
+import { AssignTypePipe } from "../../assignType/pipe/assign-type.pipe";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { NgIf, NgClass } from "@angular/common";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-image-assignment",
   templateUrl: "./image-assignment.component.html",
   styleUrls: ["./image-assignment.component.css"],
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    NgIf,
+    NgClass,
+    MatButtonModule,
+    RouterLink,
+    MatIconModule,
+    TranslocoLocaleModule,
+    AssignTypePipe,
+    RoomPipe,
+    ParticipantPipe,
+  ],
 })
 export class ImageAssignmentComponent {
   rooms: RoomInterface[];
@@ -34,13 +55,10 @@ export class ImageAssignmentComponent {
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
-  assignmentPrincipalTitle =
-    this.configService.getConfig().assignmentPrincipalTitle;
-  assignmentAssistantTitle =
-    this.configService.getConfig().assignmentAssistantTitle;
+  assignmentPrincipalTitle = this.configService.getConfig().assignmentPrincipalTitle;
+  assignmentAssistantTitle = this.configService.getConfig().assignmentAssistantTitle;
   assignmentDateTitle = this.configService.getConfig().assignmentDateTitle;
-  assignmentAssignTypeTitle =
-    this.configService.getConfig().assignmentAssignTypeTitle;
+  assignmentAssignTypeTitle = this.configService.getConfig().assignmentAssignTypeTitle;
   assignmentThemeTitle = this.configService.getConfig().assignmentThemeTitle;
   assignmentRoomTitle = this.configService.getConfig().assignmentRoomTitle;
   assignmentNoteTitle = this.configService.getConfig().assignmentNoteTitle;
@@ -49,9 +67,8 @@ export class ImageAssignmentComponent {
     this.activatedRoute.snapshot.params.id
   );
 
-  footerNoteEditorHTML: string = this.noteService.getNote(
-    this.assignment.footerNote
-  )?.editorHTML;
+  footerNoteEditorHTML: string = this.noteService.getNote(this.assignment.footerNote)
+    ?.editorHTML;
 
   constructor(
     private assignmentService: AssignmentService,
@@ -89,9 +106,7 @@ export class ImageAssignmentComponent {
    * The reminder appears the night before the assignment
    */
   toGoogleCalendarUrl() {
-    const assignType = this.assignTypeService.getAssignType(
-      this.assignment.assignType
-    );
+    const assignType = this.assignTypeService.getAssignType(this.assignment.assignType);
     const date = new Date(this.assignment.date);
     const dateNextDay = new Date(this.assignment.date);
     dateNextDay.setDate(dateNextDay.getDate() + 1); //Add +1 to be full day event
@@ -99,17 +114,9 @@ export class ImageAssignmentComponent {
     &text=${encodeURI(assignType.name)}
     &details=${encodeURI(this.assignment.theme)}
     &dates=${encodeURI(
-      date
-        .toISOString()
-        .replace(/-/g, "")
-        .replace(/:/g, "")
-        .replace(/\./g, "") +
+      date.toISOString().replace(/-/g, "").replace(/:/g, "").replace(/\./g, "") +
         "/" +
-        dateNextDay
-          .toISOString()
-          .replace(/-/g, "")
-          .replace(/:/g, "")
-          .replace(/\./g, "")
+        dateNextDay.toISOString().replace(/-/g, "").replace(/:/g, "").replace(/\./g, "")
     )}`;
     url = url.replace(/\s/g, "");
     clipboard.write(

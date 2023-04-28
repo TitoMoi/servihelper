@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MoveAssignmentComponent } from './move-assignment.component';
+import { MoveAssignmentComponent } from "./move-assignment.component";
 
-describe('MoveAssignmentComponent', () => {
+describe("MoveAssignmentComponent", () => {
   let component: MoveAssignmentComponent;
   let fixture: ComponentFixture<MoveAssignmentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MoveAssignmentComponent ]
-    })
-    .compileComponents();
+      imports: [MoveAssignmentComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('MoveAssignmentComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

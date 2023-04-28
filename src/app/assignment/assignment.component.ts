@@ -13,7 +13,7 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterOutlet, RouterLink, RouterLinkActive } from "@angular/router";
 import { Subscription } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
 import { SortService } from "app/services/sort.service";
@@ -21,16 +21,40 @@ import { RoomService } from "app/room/service/room.service";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { NoteService } from "app/note/service/note.service";
+import { ParticipantPipe } from "../participant/pipe/participant.pipe";
+import { RoomPipe } from "../room/pipe/room.pipe";
+import { AssignTypePipe } from "../assignType/pipe/assign-type.pipe";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatIconModule } from "@angular/material/icon";
+import { NgIf, NgFor, NgClass } from "@angular/common";
+import { MatButtonModule } from "@angular/material/button";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-assignment",
   templateUrl: "./assignment.component.html",
   styleUrls: ["./assignment.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    TranslocoModule,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    NgIf,
+    MatIconModule,
+    MatTooltipModule,
+    NgFor,
+    NgClass,
+    TranslocoLocaleModule,
+    AssignTypePipe,
+    RoomPipe,
+    ParticipantPipe,
+  ],
 })
-export class AssignmentComponent
-  implements OnInit, OnDestroy, AfterViewChecked
-{
+export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked {
   //In memory assignments
   assignments: AssignmentInterface[] = [];
 
@@ -91,10 +115,7 @@ export class AssignmentComponent
   }
 
   ngOnInit() {
-    const assignmentsPage = this.getAssignmentsSlice(
-      0,
-      this.paginationEndIndex
-    );
+    const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);
     this.assignmentsTable = this.prepareRowExtendedValues(assignmentsPage);
 
     this.sortAndUpdateSeparator();
@@ -141,8 +162,9 @@ export class AssignmentComponent
   }
 
   addAssignmentToTable(assignment: AssignmentInterface) {
-    const assignmentTable: AssignmentTableInterface[] =
-      this.prepareRowExtendedValues([assignment]);
+    const assignmentTable: AssignmentTableInterface[] = this.prepareRowExtendedValues([
+      assignment,
+    ]);
     this.assignmentsTable.push(assignmentTable[0]);
 
     this.sortAndUpdateSeparator();
@@ -150,31 +172,28 @@ export class AssignmentComponent
 
   updateAssignmentInTable(assignment: AssignmentInterface) {
     const index = this.assignmentsTable.findIndex(
-      (dataElement: AssignmentTableInterface) =>
-        dataElement.id === assignment.id
+      (dataElement: AssignmentTableInterface) => dataElement.id === assignment.id
     );
     //Prepare assignment
-    const assignmentTable: AssignmentTableInterface[] =
-      this.prepareRowExtendedValues([assignment]);
+    const assignmentTable: AssignmentTableInterface[] = this.prepareRowExtendedValues([
+      assignment,
+    ]);
     //swap the assignment
     this.assignmentsTable[index] = assignmentTable[0];
     this.sortAndUpdateSeparator();
   }
 
   deleteAssignmentInTable(assignment) {
-    this.assignmentsTable = this.assignmentsTable.filter(
-      (da) => da.id !== assignment.id
-    );
+    this.assignmentsTable = this.assignmentsTable.filter((da) => da.id !== assignment.id);
     this.sortAndUpdateSeparator();
   }
 
   sortAndUpdateSeparator() {
     //sort
-    this.assignmentsTable =
-      this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
-        this.assignmentsTable,
-        "Desc"
-      );
+    this.assignmentsTable = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
+      this.assignmentsTable,
+      "Desc"
+    );
 
     //Add separator
     for (const tableRow of this.assignmentsTable) {
@@ -262,27 +281,17 @@ export class AssignmentComponent
             data = data + this.roomService.getRoomNameById(assign[key]) + ";";
             break;
           case "assignType":
-            data =
-              data +
-              this.assignTypeService.getAssignTypeNameById(assign[key]) +
-              ";";
+            data = data + this.assignTypeService.getAssignTypeNameById(assign[key]) + ";";
             break;
           case "principal":
-            data =
-              data +
-              this.participantService.getParticipant(assign[key]).name +
-              ";";
+            data = data + this.participantService.getParticipant(assign[key]).name + ";";
             break;
           case "assistant":
             this.participantService.getParticipant(assign[key]);
-            data =
-              data +
-              this.participantService.getParticipant(assign[key])?.name +
-              ";";
+            data = data + this.participantService.getParticipant(assign[key])?.name + ";";
             break;
           case "footerNote":
-            data =
-              data + this.noteService.getNote(assign[key]).editorHTML + ";";
+            data = data + this.noteService.getNote(assign[key]).editorHTML + ";";
             break;
 
           default:

@@ -2,13 +2,28 @@ import { AssignmentService } from "app/assignment/service/assignment.service";
 import { NoteService } from "app/note/service/note.service";
 
 import { Component } from "@angular/core";
-import { UntypedFormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-delete-note",
   templateUrl: "./delete-note.component.html",
   styleUrls: ["./delete-note.component.css"],
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class DeleteNoteComponent {
   note = this.noteService.getNote(this.activatedRoute.snapshot.params.id);

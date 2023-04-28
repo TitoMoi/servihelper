@@ -1,15 +1,37 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { UntypedFormBuilder, Validators } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 import { AssignTypeInterface } from "app/assignType/model/assignType.model";
 import { AssignTypeService } from "app/assignType/service/assignType.service";
 import { ConfigService } from "app/config/service/config.service";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { NgIf, NgFor } from "@angular/common";
+import { AutoFocusDirective } from "../../autofocus/autofocus.directive";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCardModule } from "@angular/material/card";
+import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-create-update-role",
   templateUrl: "./create-update-role.component.html",
   styleUrls: ["./create-update-role.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AutoFocusDirective,
+    NgIf,
+    NgFor,
+    MatCheckboxModule,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class CreateUpdateRoleComponent {
   assignTypes: AssignTypeInterface[] = this.assignTypeService

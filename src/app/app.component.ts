@@ -9,11 +9,15 @@ import { Component, OnInit } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { PdfService } from "./services/pdf.service";
+import { RouterOutlet } from "@angular/router";
+import { NavigationComponent } from "./navigation/navigation.component";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
+  standalone: true,
+  imports: [NavigationComponent, RouterOutlet],
 })
 export class AppComponent implements OnInit {
   //Icons
