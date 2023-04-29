@@ -151,7 +151,7 @@
                   [value]="participant.id"
                 >
                   <div class="grid">
-                    <div>
+                    <div class="d-flex align-items-center py-1">
                       <mat-icon
                         *ngIf="participant.hasWork && !isMultipleDates; else noIcon"
                         (click)="onIconWarningClick($event, participant)"

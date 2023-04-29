@@ -245,7 +245,6 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
         hasDateSeparator: undefined,
         hasBeenClicked: undefined,
       };
-      //Populate datasource, values are in order
       assignmentsTable.push(assignmentsTableInterface);
     }
 
