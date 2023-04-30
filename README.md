@@ -1,24 +1,30 @@
-![1](./pictures/servihelper-logo.png)
+![logo](./pictures/servihelper-logo.png)
 
 # Introduction
 
-Servihelper is a free executable app that runs on the machine _(Windows or Mac)_
+Servihelper is an executable app that runs on the machine _(Windows or Mac)_
+
+The program is free.
 
 Your data is managed internally on the local device, so it never goes to the internet.
 
 Its purpose is for help the Jehovah's witnesses to create and manage all kind of assignments.
 
-[Examples](https://drive.google.com/drive/folders/1h3LLPwzKukYT3AXiMMLlcggHyi4ZafNH?usp=sharing)
-
 ## Download links
 
-Download app section [Download for Windows or Mac](https://github.com/TitoMoi/servihelper/releases).
+Download app section: [Download for Windows or Mac](https://github.com/TitoMoi/servihelper/releases).
+
+[Import File Example](https://drive.google.com/drive/folders/1h3LLPwzKukYT3AXiMMLlcggHyi4ZafNH?usp=sharing)
+
+## Example images
+
+<img src="./pictures/assignment-example.png" alt= "example" width="300" height="320">
 
 ## Languages
 
 Available interface languages are at the end of the page.
 
-The sheet (assignment) to distribute can be customized, so you can add your language when distributing.
+The sheet _(assignment)_ to distribute can be customized, so you can add your language when distributing.
 
 ## The executable is not recognized on Mac
 
