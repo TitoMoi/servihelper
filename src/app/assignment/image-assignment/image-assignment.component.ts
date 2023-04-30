@@ -149,7 +149,7 @@ export class ImageAssignmentComponent {
 
     autoTable(doc, {
       html: `#assignmentTableId`,
-      styles: { font, fontSize: 15 },
+      styles: { font, fontSize: 14 },
       columnStyles: { 0: { cellWidth: 110 } },
       didParseCell: (data) => {
         data.cell.text = data.cell.text.map((char) => char.trim());
