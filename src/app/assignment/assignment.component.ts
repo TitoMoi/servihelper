@@ -290,7 +290,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
             data = data + this.participantService.getParticipant(assign[key])?.name + ";";
             break;
           case "footerNote":
-            data = data + this.noteService.getNote(assign[key]).editorHTML + ";";
+            data = data + this.noteService.getNote(assign[key])?.editorHTML + ";";
             break;
 
           default:
