@@ -10,7 +10,6 @@ import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 import { ipcRenderer } from "electron";
-import { SharedService } from "app/services/shared.service";
 import { MatButtonModule } from "@angular/material/button";
 import { NgFor, NgIf } from "@angular/common";
 import { MatOptionModule } from "@angular/material/core";
@@ -44,8 +43,6 @@ export class ConfigComponent {
     ? //__dirname is where the .json files exists
       __dirname + "/assets/source"
     : "./assets/source";
-
-  appVersion = this.sharedService.appVersion;
 
   translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
 
@@ -114,8 +111,7 @@ export class ConfigComponent {
     private formBuilder: UntypedFormBuilder,
     private configService: ConfigService,
     private noteService: NoteService,
-    private translocoService: TranslocoService,
-    private sharedService: SharedService
+    private translocoService: TranslocoService
   ) {}
 
   /**
