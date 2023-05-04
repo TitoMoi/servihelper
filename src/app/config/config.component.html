@@ -1,154 +1,141 @@
 <form *transloco="let t" [formGroup]="configForm" novalidate (ngSubmit)="onSubmit()">
-  <div class="row mb-2">
-    <div class="col-12">
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <h3 class="m-3">
-                {{ t("CONFIG_ACCORDION_SHEET_TITLE") }}
-              </h3>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
+  <mat-accordion [multi]="false">
+    <mat-expansion-panel class="mb-2">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3 class="m-3">
+            {{ t("CONFIG_ACCORDION_SHEET_TITLE") }}
+          </h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-          <h4>{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-            <input matInput formControlName="assignmentHeaderTitle" />
-          </mat-form-field>
-          <h4>{{ t("CONFIG_ASSIGNMENT_PRINCIPAL_TITLE") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-            <input matInput formControlName="assignmentPrincipalTitle" />
-          </mat-form-field>
-          <h4>{{ t("CONFIG_ASSIGNMENT_ASSISTANT_TITLE") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-            <input matInput formControlName="assignmentAssistantTitle" />
-          </mat-form-field>
-          <h4>{{ t("CONFIG_ASSIGNMENT_DATE_TITLE") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-            <input matInput formControlName="assignmentDateTitle" />
-          </mat-form-field>
-          <h4>{{ t("CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-            <input matInput formControlName="assignmentAssignTypeTitle" />
-          </mat-form-field>
-          <h4>{{ t("CONFIG_ASSIGNMENT_THEME_TITLE") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-            <input matInput formControlName="assignmentThemeTitle" />
-          </mat-form-field>
-          <h4>{{ t("CONFIG_ASSIGNMENT_ROOM_TITLE") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-            <input matInput formControlName="assignmentRoomTitle" />
-          </mat-form-field>
-          <h4>{{ t("CONFIG_ASSIGNMENT_NOTE_TITLE") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-            <input matInput formControlName="assignmentNoteTitle" />
-          </mat-form-field>
-          <h4>{{ t("CONFIG_DEFAULT_FOOTER_NOTE") }}</h4>
-          <mat-form-field>
-            <mat-select formControlName="defaultFooterNoteId" required>
-              <mat-option [value]="undefined"> </mat-option>
-              <mat-option *ngFor="let note of notes" [value]="note.id">
-                {{ note.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-12">
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <h3 class="m-3">
-                {{ t("CONFIG_ACCORDION_REPORT_TITLE") }}
-              </h3>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
+      <h4>{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <input matInput formControlName="assignmentHeaderTitle" />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_ASSIGNMENT_PRINCIPAL_TITLE") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <input matInput formControlName="assignmentPrincipalTitle" />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_ASSIGNMENT_ASSISTANT_TITLE") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <input matInput formControlName="assignmentAssistantTitle" />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_ASSIGNMENT_DATE_TITLE") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <input matInput formControlName="assignmentDateTitle" />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <input matInput formControlName="assignmentAssignTypeTitle" />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_ASSIGNMENT_THEME_TITLE") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <input matInput formControlName="assignmentThemeTitle" />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_ASSIGNMENT_ROOM_TITLE") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <input matInput formControlName="assignmentRoomTitle" />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_ASSIGNMENT_NOTE_TITLE") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <input matInput formControlName="assignmentNoteTitle" />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_DEFAULT_FOOTER_NOTE") }}</h4>
+      <mat-form-field>
+        <mat-select formControlName="defaultFooterNoteId" required>
+          <mat-option [value]="undefined"> </mat-option>
+          <mat-option *ngFor="let note of notes" [value]="note.id">
+            {{ note.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel class="mb-2">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3 class="m-3">
+            {{ t("CONFIG_ACCORDION_REPORT_TITLE") }}
+          </h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-          <h4>{{ t("CONFIG_REPORT_TITLE") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-            <input matInput formControlName="reportTitle" />
-          </mat-form-field>
-          <h4>{{ t("CONFIG_DEFAULT_WEEKDAY_BEGINS") }}</h4>
-          <mat-form-field>
-            <mat-select formControlName="defaultWeekDayBegins" required>
-              <mat-option *ngFor="let day of weekDayBegins" [value]="day.value">
-                {{ day.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+      <h4>{{ t("CONFIG_REPORT_TITLE") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <input matInput formControlName="reportTitle" />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_DEFAULT_WEEKDAY_BEGINS") }}</h4>
+      <mat-form-field>
+        <mat-select formControlName="defaultWeekDayBegins" required>
+          <mat-option *ngFor="let day of weekDayBegins" [value]="day.value">
+            {{ day.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-          <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_FORMAT") }}</h4>
-          <mat-form-field>
-            <mat-select formControlName="defaultReportDateFormat" required>
-              <mat-option *ngFor="let df of translocoDateFormats" [value]="df">
-                {{ df }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+      <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_FORMAT") }}</h4>
+      <mat-form-field>
+        <mat-select formControlName="defaultReportDateFormat" required>
+          <mat-option *ngFor="let df of translocoDateFormats" [value]="df">
+            {{ df }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-          <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_COLOR") }}</h4>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_REPORT_DATE_COLOR") }}</mat-label>
-            <input type="color" matInput formControlName="defaultReportDateColor" />
-          </mat-form-field>
+      <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_COLOR") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_REPORT_DATE_COLOR") }}</mat-label>
+        <input type="color" matInput formControlName="defaultReportDateColor" />
+      </mat-form-field>
 
-          <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE") }}</h4>
-          <mat-form-field>
-            <input
-              matInput
-              type="number"
-              formControlName="defaultReportFontSize"
-              placeholder="16"
-            />
-          </mat-form-field>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-  </div>
-  <div class="row mb-2">
-    <mat-accordion>
-      <mat-expansion-panel class="hover-lightcoral">
-        <mat-expansion-panel-header tabIndex="3" class="bg-color-lightcoral">
-          <mat-panel-title>
-            <h3 class="m-3">
-              {{ t("CONFIG_RESTART_LABEL") }}
-            </h3>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <button
-          mat-raised-button
-          type="button"
-          color="warn"
-          (click)="confirmDelete = !confirmDelete"
-        >
-          {{ t("CONFIG_RESET_ALL") }}
-        </button>
-        <button
-          *ngIf="confirmDelete"
-          class="ms-2"
-          mat-raised-button
-          type="button"
-          color="warn"
-          (click)="eraseAllData()"
-        >
-          {{ t("CONFIG_RESET_ALL_CONFIRM") }}
-        </button>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
+      <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE") }}</h4>
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          formControlName="defaultReportFontSize"
+          placeholder="16"
+        />
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel class="mb-2 hover-lightcoral">
+      <mat-expansion-panel-header tabIndex="3" class="bg-color-lightcoral">
+        <mat-panel-title>
+          <h3 class="m-3">
+            {{ t("CONFIG_RESTART_LABEL") }}
+          </h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <button
+        mat-raised-button
+        type="button"
+        color="warn"
+        (click)="confirmDelete = !confirmDelete"
+      >
+        {{ t("CONFIG_RESET_ALL") }}
+      </button>
+      <button
+        *ngIf="confirmDelete"
+        class="ms-2"
+        mat-raised-button
+        type="button"
+        color="warn"
+        (click)="eraseAllData()"
+      >
+        {{ t("CONFIG_RESET_ALL_CONFIRM") }}
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+
   <div class="row mb-2">
     <div class="col-12">
       <button mat-raised-button type="submit" color="primary">
