@@ -12,8 +12,8 @@ export class AssignTypeService {
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
-      __dirname + "/assets/source/assigntype.json"
-    : "./assets/source/assigntype.json";
+      __dirname + "/assets/source/assignType.json"
+    : "./assets/source/assignType.json";
   //flag to indicate that assignTypes file has changed
   hasChanged = true;
   //The array of assignTypes in memory
