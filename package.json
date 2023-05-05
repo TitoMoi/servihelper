@@ -1,6 +1,6 @@
 {
   "name": "servihelper",
-  "version": "4.1.3",
+  "version": "4.2.0",
   "description": "Servihelper",
   "author": {
     "name": "Moisés Medina Vicente",
@@ -27,6 +27,7 @@
     "electron:build": "electron-builder build --publish=never",
     "prepare:publish:windows": "npm run build:prod && node scripts/clean-release.js && npm run electron:build && node scripts/zip-release-windows.js",
     "prepare:publish:mac:universal": "npm run build:prod && node scripts/clean-release.js && npm run electron:build -- --universal",
+    "prepare:publish:linux": "npm run build:prod && node scripts/clean-release.js && npm run electron:build",
     "test": "ng test --watch=false",
     "test:watch": "ng test",
     "lint": "ng lint",
