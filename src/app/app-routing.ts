@@ -4,9 +4,9 @@ import { DeleteAssignmentComponent } from "app/assignment/delete-assignment/dele
 import { ImageAssignmentComponent } from "app/assignment/image-assignment/image-assignment.component";
 import { MoveAssignmentComponent } from "app/assignment/move-assignment/move-assignment.component";
 import { ReportSelectorComponent } from "app/report/report-selector/report-selector.component";
-import { AssignTypeComponent } from "app/assignType/assignType.component";
-import { CreateUpdateAssignTypeComponent } from "app/assignType/create-update-assigntype/create-update-assigntype.component";
-import { DeleteAssignTypeComponent } from "app/assignType/delete-assigntype/delete-assigntype.component";
+import { AssignTypeComponent } from "app/assigntype/assigntype.component";
+import { CreateUpdateAssignTypeComponent } from "app/assigntype/create-update-assigntype/create-update-assigntype.component";
+import { DeleteAssignTypeComponent } from "app/assigntype/delete-assigntype/delete-assigntype.component";
 import { ConfigComponent } from "app/config/config.component";
 import { HomeComponent } from "app/home/home.component";
 import { CreateUpdateNoteComponent } from "app/note/create-update-note/create-update-note.component";

@@ -1,5 +1,5 @@
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
@@ -24,7 +24,7 @@ import {
   ParticipantAssignTypeInterface,
 } from "../model/participant.model";
 import { RoomPipe } from "../../room/pipe/room.pipe";
-import { AssignTypePipe } from "../../assignType/pipe/assign-type.pipe";
+import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";

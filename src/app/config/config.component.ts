@@ -120,7 +120,7 @@ export class ConfigComponent {
   eraseAllData() {
     writeJsonSync(this.path + "/config.json", this.defaultConfig);
     writeJsonSync(this.path + "/note.json", []);
-    writeJsonSync(this.path + "/assignType.json", []);
+    writeJsonSync(this.path + "/assigntype.json", []);
     writeJsonSync(this.path + "/room.json", []);
     writeJsonSync(this.path + "/participant.json", []);
     writeJsonSync(this.path + "/assignment.json", []);

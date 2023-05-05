@@ -1,4 +1,4 @@
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { RoomInterface } from "app/room/model/room.model";
 

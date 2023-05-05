@@ -1,5 +1,5 @@
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 
 import { Component } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
@@ -10,8 +10,8 @@ import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
   selector: "app-assign-type",
-  templateUrl: "./assignType.component.html",
-  styleUrls: ["./assignType.component.scss"],
+  templateUrl: "./assigntype.component.html",
+  styleUrls: ["./assigntype.component.scss"],
   standalone: true,
   imports: [
     TranslocoModule,

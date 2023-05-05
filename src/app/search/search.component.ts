@@ -1,6 +1,6 @@
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";

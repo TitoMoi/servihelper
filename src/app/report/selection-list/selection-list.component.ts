@@ -1,4 +1,4 @@
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ConfigService } from "app/config/service/config.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
@@ -23,7 +23,7 @@ import {
   AssignmentInterface,
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypePipe } from "../../assignType/pipe/assign-type.pipe";
+import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { NgIf, NgFor } from "@angular/common";
 import { MatTooltipModule } from "@angular/material/tooltip";

@@ -1,4 +1,4 @@
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
@@ -14,10 +14,10 @@ import { ChangeDetectorRef, Component } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { PdfService } from "app/services/pdf.service";
 import { clipboard, nativeImage, NativeImage } from "electron";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ParticipantPipe } from "../../participant/pipe/participant.pipe";
 import { RoomPipe } from "../../room/pipe/room.pipe";
-import { AssignTypePipe } from "../../assignType/pipe/assign-type.pipe";
+import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";

@@ -1,6 +1,6 @@
 import AdmZip from "adm-zip";
 import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
@@ -81,7 +81,7 @@ export class HomeComponent {
           writeFileSync(this.path + "/room.json", zipEntry.getData().toString("utf8"));
           break;
         case "assignType.json":
-          writeFileSync(this.path + "/assignType.json", zipEntry.getData().toString("utf8"));
+          writeFileSync(this.path + "/assigntype.json", zipEntry.getData().toString("utf8"));
           break;
         case "note.json":
           writeFileSync(this.path + "/note.json", zipEntry.getData().toString("utf8"));

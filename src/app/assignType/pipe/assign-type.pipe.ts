@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { AssignTypeInterface } from "../model/assignType.model";
-import { AssignTypeService } from "../service/assignType.service";
+import { AssignTypeInterface } from "../model/assigntype.model";
+import { AssignTypeService } from "../service/assigntype.service";
 
 @Pipe({
   name: "assignTypePipe",

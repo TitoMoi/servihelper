@@ -1,4 +1,4 @@
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 
 import { ChangeDetectionStrategy, Component } from "@angular/core";

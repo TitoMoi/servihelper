@@ -2,7 +2,7 @@ import {
   AssignmentInterface,
   AssignmentTableInterface,
 } from "app/assignment/model/assignment.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { RoomService } from "app/room/service/room.service";
 
 import { Injectable } from "@angular/core";

@@ -1,5 +1,5 @@
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
-import { AssignTypeService } from "app/assignType/service/assignType.service";
+import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 import { SharedService } from "app/services/shared.service";

@@ -1,4 +1,4 @@
-import { AssignTypeInterface } from "app/assignType/model/assignType.model";
+import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { APP_CONFIG } from "environments/environment";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -12,8 +12,8 @@ export class AssignTypeService {
   //where the file is depending on the context
   path: string = APP_CONFIG.production
     ? //__dirname is where the .js file exists
-      __dirname + "/assets/source/assignType.json"
-    : "./assets/source/assignType.json";
+      __dirname + "/assets/source/assigntype.json"
+    : "./assets/source/assigntype.json";
   //flag to indicate that assignTypes file has changed
   hasChanged = true;
   //The array of assignTypes in memory
