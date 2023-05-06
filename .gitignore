@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+#local developtment assets
+/.assets
+
 # compiled output
 /dist
 /dist.
