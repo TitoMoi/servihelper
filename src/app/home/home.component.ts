@@ -81,7 +81,7 @@ export class HomeComponent {
           writeFileSync(this.path + "/room.json", zipEntry.getData().toString("utf8"));
           break;
         case "assignType.json":
-          writeFileSync(this.path + "/assigntype.json", zipEntry.getData().toString("utf8"));
+          writeFileSync(this.path + "/assignType.json", zipEntry.getData().toString("utf8"));
           break;
         case "note.json":
           writeFileSync(this.path + "/note.json", zipEntry.getData().toString("utf8"));
