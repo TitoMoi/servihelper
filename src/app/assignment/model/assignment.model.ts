@@ -19,6 +19,7 @@ export interface AssignmentInterface {
   onlyMan: boolean;
   onlyExternals: boolean;
   principal: string;
+  group?: number;
   assistant: string;
   footerNote: string;
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-for-of */
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { LastDateService } from "app/assignment/service/last-date.service";
@@ -99,6 +98,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   timeoutExecuted = true; //first time
   //end of props for datepicker hack
 
+  availableGroups: number[] = [];
+
   rooms: RoomInterface[] = this.roomService
     .getRooms()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
@@ -159,6 +160,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     onlyMan: [this.a ? this.a.onlyMan : false],
     onlyExternals: [this.a ? this.a.onlyExternals : false],
     principal: [this.a ? this.a.principal : undefined, Validators.required], //participant id
+    group: [this.a ? this.a.group : undefined],
     assistant: [this.a ? this.a.assistant : undefined], //participant id
     footerNote: this.a
       ? this.a.footerNote
@@ -205,6 +207,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.prepareOnlyWomanSub();
     this.prepareOnlyExternalsSub();
     this.preparePrincipalSub();
+    this.prepareGroupSub();
   }
 
   ngOnDestroy(): void {
@@ -279,6 +282,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
    */
   batchGetCountSortWarning() {
     this.getPrincipalAndAssistant();
+    this.setOnlyExternals();
+    this.getAvailableGroups();
     this.setPrincipalsCountAndLastDate();
     this.setAssistantsCountAndLastDate();
     this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
@@ -291,6 +296,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       this.lastDateService.lastDate = date;
 
       this.batchCleanPrincipalAssistant();
+      this.batchCleanGroup();
       this.filterAssignmentsByRole();
       this.getParticipantsAvailableOnDate();
       this.removeAssignTypesThatAlreadyExistOnDate();
@@ -303,6 +309,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.form.get("room").valueChanges.subscribe(() => {
         this.batchCleanPrincipalAssistant();
+        this.batchCleanGroup();
         this.filterAssignmentsByRole();
         this.removeAssignTypesThatAlreadyExistOnDate();
         this.batchGetCountSortWarning();
@@ -315,6 +322,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.form.get("assignType").valueChanges.subscribe((assignTypeId: string) => {
         this.batchCleanPrincipalAssistant();
+        this.batchCleanGroup();
         this.batchGetCountSortWarning();
         this.enableOrDisableAssistantControl(assignTypeId);
       })
@@ -338,6 +346,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.form.get("onlyMan").valueChanges.subscribe((onlyMan) => {
         this.batchCleanPrincipalAssistant();
+        this.batchCleanGroup();
 
         if (!onlyMan) {
           this.batchGetCountSortWarning();
@@ -354,7 +363,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.form.get("onlyWoman").valueChanges.subscribe((onlyWoman) => {
         this.batchCleanPrincipalAssistant();
-
+        this.batchCleanGroup();
         if (!onlyWoman) {
           this.batchGetCountSortWarning();
           return;
@@ -368,16 +377,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   prepareOnlyExternalsSub() {
     this.subscription.add(
-      this.form.get("onlyExternals").valueChanges.subscribe((onlyExternals) => {
+      this.form.get("onlyExternals").valueChanges.subscribe(() => {
         this.batchCleanPrincipalAssistant();
-
-        if (!onlyExternals) {
-          this.batchGetCountSortWarning();
-          return;
-        }
-        //Only externals
-        this.principals = this.principals.filter((p) => p.isExternal);
-        this.assistants = this.assistants.filter((p) => p.isExternal);
+        this.batchCleanGroup();
+        this.batchGetCountSortWarning();
       })
     );
   }
@@ -389,6 +392,26 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
         this.removePrincipalFromAssistants(principalId);
       })
     );
+  }
+
+  prepareGroupSub() {
+    this.subscription.add(
+      this.form.get("group").valueChanges.subscribe((group) => {
+        this.batchCleanPrincipalAssistant();
+        this.batchGetCountSortWarning();
+        if (group) {
+          //undefined is all groups
+          this.principals = this.principals.filter((p) => p.group === group);
+        }
+      })
+    );
+  }
+
+  setOnlyExternals() {
+    //Only externals
+    const onlyExternals = this.gfv("onlyExternals");
+    this.principals = this.principals.filter((p) => Boolean(p.isExternal) === onlyExternals); //Compatibility, isExternal can be undefined
+    this.assistants = this.assistants.filter((p) => Boolean(p.isExternal) === onlyExternals);
   }
 
   removePrincipalFromAssistants(principalId: string) {
@@ -407,6 +430,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   batchCleanPrincipalAssistant() {
     this.form.get("principal").reset(undefined, { emitEvent: false });
     this.form.get("assistant").reset(undefined, { emitEvent: false });
+  }
+
+  /** (Form) clean group */
+  batchCleanGroup() {
+    this.form.get("group").reset(undefined, { emitEvent: false });
   }
 
   /**
@@ -448,6 +476,12 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
           (date) => new Date(dateControlValue).getTime() === new Date(date).getTime()
         )
     );
+  }
+
+  getAvailableGroups() {
+    this.availableGroups = [
+      ...new Set(this.principals.filter((p) => p.group).map((p) => p.group)),
+    ].sort((n1, n2) => (n1 > n2 ? 1 : 0));
   }
 
   /**

@@ -1,6 +1,7 @@
 export interface ParticipantInterface {
   id?: string; //On update id is not coming from the form
   name: string;
+  group?: number;
   isWoman: boolean;
   isExternal: boolean;
   rooms: ParticipantRoomInterface[];
@@ -23,6 +24,7 @@ export interface ParticipantDynamicInterface extends ParticipantInterface {
 export class ParticipantModel {
   id: string;
   name: string;
+  group?: number;
   isWoman: boolean;
   isExternal: boolean;
   rooms: ParticipantRoomInterface[];
@@ -33,6 +35,7 @@ export class ParticipantModel {
   constructor(participant: ParticipantInterface) {
     this.id = participant.id;
     this.name = participant.name;
+    this.group = participant.group;
     this.isWoman = participant.isWoman;
     this.isExternal = participant.isExternal;
     this.rooms = participant.rooms;

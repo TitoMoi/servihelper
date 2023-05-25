@@ -50,11 +50,12 @@ mat-icon {
 }
 
 .table-overflow {
-  height: 80vh;
+  height: 80dvh;
   overflow: auto;
 }
 
 .participant-overflow {
-  height: 55vh;
-  overflow: auto;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }

@@ -36,6 +36,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { MatSelectModule } from "@angular/material/select";
+import { MatOptionModule } from "@angular/material/core";
 
 @Component({
   selector: "app-create-update-participant",
@@ -57,6 +59,8 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatIconModule,
     MatDatepickerModule,
     MatButtonModule,
+    MatSelectModule,
+    MatOptionModule,
     RouterLink,
     TranslocoLocaleModule,
     AssignTypePipe,
@@ -87,8 +91,9 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   form = this.formBuilder.group({
     id: this.p ? this.p.id : undefined,
     name: [this.p ? this.p.name : undefined, Validators.required],
+    group: [this.p ? this.p.group : undefined],
     isWoman: this.p ? this.p.isWoman : false,
-    isExternal: this.p ? this.p.isExternal : undefined,
+    isExternal: this.p ? this.p.isExternal : false,
     assignTypes: this.formBuilder.array<ParticipantAssignTypeInterface>([]), //do not wrap this into an [], because [...] creates a formControl wrapper
     rooms: this.formBuilder.array<ParticipantRoomInterface>([]),
     available: [this.p ? this.p.available : true],

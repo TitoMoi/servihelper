@@ -123,6 +123,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         onlyMan: undefined,
         onlyWoman: undefined,
         onlyExternals: undefined,
+        group: undefined,
       };
       this.assignmentsWithNames.push(assignmentWithData);
     });

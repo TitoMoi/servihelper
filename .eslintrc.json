@@ -21,6 +21,7 @@
       ],
       "rules": {
         "prefer-arrow/prefer-arrow-functions": 0,
+        "jsdoc/newline-after-description": "off",
         "@angular-eslint/directive-selector": 0,
         "@angular-eslint/component-selector": [
           "error",

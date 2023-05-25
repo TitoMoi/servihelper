@@ -37,6 +37,9 @@
         {{ t("PARTICIPANT_TABLE_HEADER_PRINCIPAL") }}
       </div>
       <div class="grid-header-item fw-bold">
+        {{ t("PARTICIPANT_TABLE_HEADER_GROUP") }}
+      </div>
+      <div class="grid-header-item fw-bold">
         {{ t("PARTICIPANT_TABLE_HEADER_EDIT") }}
       </div>
       <div class="grid-header-item fw-bold">
@@ -46,6 +49,9 @@
         <div class="grid-row">
           <div class="grid-item d-flex align-items-center">
             {{ p.name }}
+          </div>
+          <div class="grid-item d-flex align-items-center">
+            {{ p.group }}
           </div>
           <div class="grid-item d-flex align-items-center">
             <mat-icon

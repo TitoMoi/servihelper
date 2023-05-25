@@ -133,7 +133,18 @@
               </span>
             </div>
           </div>
-          <div class="col-12 mb-2">
+          <div class="col-2 mb-2">
+            <mat-form-field>
+              <mat-label>{{ t("ASSIGN_GROUP") }}</mat-label>
+              <mat-select formControlName="group">
+                <mat-option [value]="undefined"></mat-option>
+                <mat-option *ngFor="let number of availableGroups" [value]="number">{{
+                  number
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-10 mb-2">
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_PRINCIPAL") }}</mat-label>
               <mat-select

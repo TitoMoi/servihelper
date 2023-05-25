@@ -18,22 +18,38 @@
             />
           </mat-form-field>
         </div>
-        <div class="col-auto">
-          <mat-checkbox labelPosition="before" color="primary" formControlName="available">{{
-            t("PARTICIPANT_CREATE_AVAILABLE")
-          }}</mat-checkbox>
+        <div class="col-lg-4 col-6">
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_GROUP") }}</mat-label>
+            <mat-select formControlName="group">
+              <mat-option
+                *ngFor="let number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+                [value]="number"
+                >{{ number }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
         </div>
-        <div class="col-auto">
-          <mat-checkbox labelPosition="before" color="primary" formControlName="isWoman">{{
-            t("PARTICIPANT_CREATE_ISWOMAN")
-          }}</mat-checkbox>
+        <div class="row">
+          <div class="col-auto">
+            <mat-checkbox labelPosition="before" color="primary" formControlName="available">{{
+              t("PARTICIPANT_CREATE_AVAILABLE")
+            }}</mat-checkbox>
+          </div>
+          <div class="col-auto">
+            <mat-checkbox labelPosition="before" color="primary" formControlName="isWoman">{{
+              t("PARTICIPANT_CREATE_ISWOMAN")
+            }}</mat-checkbox>
+          </div>
+          <div class="col-auto">
+            <mat-checkbox
+              labelPosition="before"
+              color="primary"
+              formControlName="isExternal"
+              >{{ t("PARTICIPANT_CREATE_ISEXTERNAL") }}</mat-checkbox
+            >
+          </div>
         </div>
-        <div class="col-auto">
-          <mat-checkbox labelPosition="before" color="primary" formControlName="isExternal">{{
-            t("PARTICIPANT_CREATE_ISEXTERNAL")
-          }}</mat-checkbox>
-        </div>
-
         <div class="participant-overflow">
           <div class="col-12 mr-auto">
             <h3 *ngIf="rooms.length">

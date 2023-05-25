@@ -1,7 +1,7 @@
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
 import { MatIconModule } from "@angular/material/icon";
 import { NgIf, NgFor } from "@angular/common";
@@ -26,16 +26,12 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatIconModule,
   ],
 })
-export class ParticipantComponent implements OnInit {
-  participants: ParticipantInterface[];
+export class ParticipantComponent {
+  participants: ParticipantInterface[] = this.participantService
+    .getParticipants()
+    .filter((participant) => !participant.isExternal);
 
   constructor(private participantService: ParticipantService) {}
-
-  ngOnInit(): void {
-    this.participants = this.participantService
-      .getParticipants()
-      .filter((participant) => !participant.isExternal);
-  }
 
   toggleExternals(event: MatCheckboxChange) {
     if (event.checked) {

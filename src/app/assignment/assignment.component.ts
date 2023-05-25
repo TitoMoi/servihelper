@@ -236,6 +236,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
         room: assignment.room,
         assignType: assignment.assignType,
         principal: assignment.principal,
+        group: assignment.group,
         assistant: assignment.assistant,
         theme: assignment.theme,
         onlyWoman: assignment.onlyWoman,
