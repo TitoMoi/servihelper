@@ -478,15 +478,14 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     );
   }
 
+  /** Get available non undefined groups, group them and sort in ascendant order */
   getAvailableGroups() {
     this.availableGroups = [
       ...new Set(this.principals.filter((p) => p.group).map((p) => p.group)),
     ].sort((n1, n2) => (n1 > n2 ? 1 : 0));
   }
 
-  /**
-   * Highlight the principal or assistant if already has work
-   */
+  /** Highlight the principal or assistant if already has work */
   warningIfAlreadyHasWork() {
     if (!this.isMultipleDates) {
       const dateValue = this.gfv("date");
