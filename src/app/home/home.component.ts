@@ -5,7 +5,6 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
-import { APP_CONFIG } from "environments/environment";
 import { writeFileSync } from "fs-extra";
 
 import { Component } from "@angular/core";
@@ -28,12 +27,6 @@ export class HomeComponent {
   // If upload button is clicked
   upload = false;
 
-  // The path of the app
-  path: string = APP_CONFIG.production
-    ? //__dirname is where the .json files exists
-      __dirname + "/assets/source"
-    : "./assets/source";
-
   constructor(
     private configService: ConfigService,
     private roomService: RoomService,
@@ -48,7 +41,7 @@ export class HomeComponent {
   downloadFiles() {
     const zip = new AdmZip();
 
-    zip.addLocalFolder(this.path);
+    zip.addLocalFolder(this.configService.sourceFilesPath);
 
     zip.toBuffer((buffer: Buffer) => {
       const blob = new Blob([buffer], { type: "application/octet" });
@@ -71,26 +64,35 @@ export class HomeComponent {
     // reading archives
     zip.getEntries().forEach((zipEntry) => {
       switch (zipEntry.entryName) {
-        case "assignment.json":
-          writeFileSync(this.path + "/assignment.json", zipEntry.getData().toString("utf8"));
+        case this.configService.assignmentsFilename:
+          writeFileSync(
+            this.configService.assignmentsPath,
+            zipEntry.getData().toString("utf8")
+          );
           break;
-        case "participant.json":
-          writeFileSync(this.path + "/participant.json", zipEntry.getData().toString("utf8"));
+        case this.configService.participantsFilename:
+          writeFileSync(
+            this.configService.participantsPath,
+            zipEntry.getData().toString("utf8")
+          );
           break;
-        case "room.json":
-          writeFileSync(this.path + "/room.json", zipEntry.getData().toString("utf8"));
+        case this.configService.roomsFilename:
+          writeFileSync(this.configService.roomsPath, zipEntry.getData().toString("utf8"));
           break;
-        case "assignType.json":
-          writeFileSync(this.path + "/assignType.json", zipEntry.getData().toString("utf8"));
+        case this.configService.assignTypesFilename:
+          writeFileSync(
+            this.configService.assignTypesPath,
+            zipEntry.getData().toString("utf8")
+          );
           break;
-        case "note.json":
-          writeFileSync(this.path + "/note.json", zipEntry.getData().toString("utf8"));
+        case this.configService.notesFilename:
+          writeFileSync(this.configService.notesPath, zipEntry.getData().toString("utf8"));
           break;
-        case "config.json":
+        case this.configService.configFilename:
           const currentConfig = this.configService.getConfig(); //Default config
           const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
           const finalConfig = { ...currentConfig, ...incomingConfig };
-          writeFileSync(this.path + "/config.json", JSON.stringify(finalConfig));
+          writeFileSync(this.configService.configPath, JSON.stringify(finalConfig));
           break;
       }
     });

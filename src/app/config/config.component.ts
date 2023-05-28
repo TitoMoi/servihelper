@@ -1,7 +1,6 @@
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import { APP_CONFIG } from "environments/environment";
 import { writeJsonSync } from "fs-extra";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { UntypedFormBuilder, ReactiveFormsModule } from "@angular/forms";
@@ -38,12 +37,6 @@ import { MatExpansionModule } from "@angular/material/expansion";
   ],
 })
 export class ConfigComponent {
-  // The path of the app
-  path: string = APP_CONFIG.production
-    ? //__dirname is where the .json files exists
-      __dirname + "/assets/source"
-    : "./assets/source";
-
   translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
 
   weekDayBegins: WeekDaysBegin[] = [
@@ -118,12 +111,12 @@ export class ConfigComponent {
    * Resets data to default
    */
   eraseAllData() {
-    writeJsonSync(this.path + "/config.json", this.defaultConfig);
-    writeJsonSync(this.path + "/note.json", []);
-    writeJsonSync(this.path + "/assignType.json", []);
-    writeJsonSync(this.path + "/room.json", []);
-    writeJsonSync(this.path + "/participant.json", []);
-    writeJsonSync(this.path + "/assignment.json", []);
+    writeJsonSync(this.configService.configPath, this.defaultConfig);
+    writeJsonSync(this.configService.notesPath, []);
+    writeJsonSync(this.configService.assignmentsPath, []);
+    writeJsonSync(this.configService.roomsPath, []);
+    writeJsonSync(this.configService.participantsPath, []);
+    writeJsonSync(this.configService.assignTypesPath, []);
 
     //Close the program
     ipcRenderer.send("closeApp");

@@ -1,19 +1,14 @@
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
-import { APP_CONFIG } from "environments/environment";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
+import { ConfigService } from "app/config/service/config.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class AssignTypeService {
-  //where the file is depending on the context
-  path: string = APP_CONFIG.production
-    ? //__dirname is where the .js file exists
-      __dirname + "/assets/source/assignType.json"
-    : "./assets/source/assignType.json";
   //flag to indicate that assignTypes file has changed
   hasChanged = true;
   //The array of assignTypes in memory
@@ -23,7 +18,7 @@ export class AssignTypeService {
   //The map of assignTypes for look up of by name
   #assignTypesMapByName: Map<string, AssignTypeInterface> = new Map();
 
-  constructor() {}
+  constructor(private configService: ConfigService) {}
 
   /**
    *
@@ -34,7 +29,7 @@ export class AssignTypeService {
       return deepClone ? structuredClone(this.#assignTypes) : this.#assignTypes;
     }
     this.hasChanged = false;
-    this.#assignTypes = readJSONSync(this.path);
+    this.#assignTypes = readJSONSync(this.configService.assignTypesPath);
     for (const assignType of this.#assignTypes) {
       this.#assignTypesMap.set(assignType.id, assignType);
     }
@@ -50,7 +45,7 @@ export class AssignTypeService {
    */
   saveAssignTypesToFile(): boolean {
     //Write assignTypes back to file
-    writeJson(this.path, this.#assignTypes);
+    writeJson(this.configService.assignTypesPath, this.#assignTypes);
     return true;
   }
 

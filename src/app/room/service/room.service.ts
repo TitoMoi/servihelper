@@ -1,19 +1,14 @@
 import { RoomInterface } from "app/room/model/room.model";
-import { APP_CONFIG } from "environments/environment";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
+import { ConfigService } from "app/config/service/config.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class RoomService {
-  //where the file is depending on the context
-  path: string = APP_CONFIG.production
-    ? //__dirname is where the .js file exists
-      __dirname + "/assets/source/room.json"
-    : "./assets/source/room.json";
   //flag to indicate that rooms file has changed
   hasChanged = true;
   //The array of rooms in memory
@@ -21,7 +16,7 @@ export class RoomService {
   //The map of rooms for look up of rooms
   #roomsMap: Map<string, RoomInterface> = new Map();
 
-  constructor() {}
+  constructor(private configService: ConfigService) {}
 
   /**
    *
@@ -32,7 +27,7 @@ export class RoomService {
       return deepClone ? structuredClone(this.#rooms) : this.#rooms;
     }
     this.hasChanged = false;
-    this.#rooms = readJSONSync(this.path);
+    this.#rooms = readJSONSync(this.configService.roomsPath);
     for (const room of this.#rooms) {
       this.#roomsMap.set(room.id, room);
     }
@@ -54,7 +49,7 @@ export class RoomService {
    */
   saveRoomsToFile(): boolean {
     //Write rooms back to file
-    writeJson(this.path, this.#rooms);
+    writeJson(this.configService.roomsPath, this.#rooms);
     return true;
   }
 

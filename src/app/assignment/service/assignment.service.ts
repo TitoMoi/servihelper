@@ -3,22 +3,17 @@ import {
   AssignmentOperationInterface,
   AssignmentTableInterface,
 } from "app/assignment/model/assignment.model";
-import { APP_CONFIG } from "environments/environment";
 import { readJSON, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
+import { ConfigService } from "app/config/service/config.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class AssignmentService {
-  //where the file is depending on the context
-  path: string = APP_CONFIG.production
-    ? //__dirname is where the .js file exists
-      __dirname + "/assets/source/assignment.json"
-    : "./assets/source/assignment.json";
   //flag to indicate that assignments file has changed
   hasChanged = true;
   //To track assignment create, update or delete
@@ -31,7 +26,7 @@ export class AssignmentService {
   //The map of assignments for look up of by date
   #assignmentsByDateMap: Map<Date | string, AssignmentInterface[]> = new Map();
 
-  constructor() {}
+  constructor(private configService: ConfigService) {}
 
   /**
    * @param deepClone if should be cloned or only return reference
@@ -43,7 +38,7 @@ export class AssignmentService {
     }
     this.hasChanged = false;
     //populate maps for first run
-    this.#assignments = await readJSON(this.path);
+    this.#assignments = await readJSON(this.configService.assignmentsPath);
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
 
@@ -123,7 +118,7 @@ export class AssignmentService {
    */
   saveAssignmentsToFile() {
     //Write assignments back to file
-    writeJson(this.path, this.#assignments);
+    writeJson(this.configService.assignmentsPath, this.#assignments);
   }
 
   createMultipleAssignments(assignments: AssignmentInterface[]) {

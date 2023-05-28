@@ -6,6 +6,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { RoleInterface } from "app/roles/model/role.model";
 import { nanoid } from "nanoid";
+import path from "path";
 
 @Injectable({
   providedIn: "root",
@@ -14,13 +15,41 @@ export class ConfigService {
   //Administrator key
   administratorKey = "administrator";
 
-  // Where the file is depending on the context
-  path: string = APP_CONFIG.production
-    ? //__dirname is where the .js file exists
-      __dirname + "/assets/source/config.json"
-    : "./assets/source/config.json";
+  sourceFilesPath = "assets/source";
+
+  assignmentsFilename = "assignment.json";
+  notesFilename = "note.json";
+  participantsFilename = "participant.json";
+  assignTypesFilename = "assignType.json";
+  roomsFilename = "room.json";
+  configFilename = "config.json";
+
+  /** Where the file is depending on the context__dirname is where the .js file exists */
+  configPath: string = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.configFilename)
+    : path.join("./", this.sourceFilesPath, this.configFilename);
   // Flag to indicate that config file has changed
   hasChanged = true;
+
+  assignmentsPath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.assignmentsFilename)
+    : path.join("./", this.sourceFilesPath, this.assignmentsFilename);
+
+  notesPath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.notesFilename)
+    : path.join("./", this.sourceFilesPath, this.notesFilename);
+
+  participantsPath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.participantsFilename)
+    : path.join("./", this.sourceFilesPath, this.participantsFilename);
+
+  assignTypesPath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.assignTypesFilename)
+    : path.join("./", this.sourceFilesPath, this.assignTypesFilename);
+
+  roomsPath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.roomsFilename)
+    : path.join("./", this.sourceFilesPath, this.roomsFilename);
 
   configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
   /**
@@ -41,7 +70,7 @@ export class ConfigService {
       return this.#config;
     }
     this.hasChanged = false;
-    this.#config = readJSONSync(this.path);
+    this.#config = readJSONSync(this.configPath);
     this.configSubject$.next(this.#config);
     return this.#config;
   }
@@ -50,7 +79,7 @@ export class ConfigService {
    * @returns true if configs are saved to disk or false
    */
   saveConfigToFile() {
-    writeJSONSync(this.path, this.#config);
+    writeJSONSync(this.configPath, this.#config);
     this.hasChanged = true;
     //Notify public listeners
     this.configSubject$.next(this.#config);

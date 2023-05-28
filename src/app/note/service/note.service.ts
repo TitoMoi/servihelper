@@ -1,28 +1,22 @@
 import { NoteInterface } from "app/note/model/note.model";
-import { APP_CONFIG } from "environments/environment";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
+import { ConfigService } from "app/config/service/config.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class NoteService {
-  //where the file is depending on the context
-  path: string = APP_CONFIG.production
-    ? //__dirname is where the .js file exists
-      __dirname + "/assets/source/note.json"
-    : "./assets/source/note.json";
-
+  //flag to indicate that notes file has changed
+  hasChanged = true;
   //The array of notes in memory
   #notes: NoteInterface[] = undefined;
   //The map of notes for look up of by id
   #notesMap: Map<string, NoteInterface> = new Map();
-  //flag to indicate that notes file has changed
-  hasChanged = true;
 
-  constructor() {}
+  constructor(private configService: ConfigService) {}
 
   /**
    *
@@ -33,7 +27,7 @@ export class NoteService {
       return deepClone ? structuredClone(this.#notes) : this.#notes;
     }
     this.hasChanged = false;
-    this.#notes = readJSONSync(this.path);
+    this.#notes = readJSONSync(this.configService.notesPath);
     for (const note of this.#notes) {
       this.#notesMap.set(note.id, note);
     }
@@ -46,7 +40,7 @@ export class NoteService {
    */
   saveNotesToFile(): boolean {
     //Write notes back to file
-    writeJson(this.path, this.#notes);
+    writeJson(this.configService.notesPath, this.#notes);
     return true;
   }
 
