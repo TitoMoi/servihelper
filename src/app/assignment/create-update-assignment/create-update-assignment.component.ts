@@ -278,7 +278,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     }
   }
 
-  /** Batch operation
+  /** Batch operation, should not call other batch operations inside
    */
   batchGetCountSortWarning() {
     this.getPrincipalAndAssistant();
@@ -289,6 +289,16 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
     this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
     this.warningIfAlreadyHasWork();
+  }
+  /** (Form) batch clean principalId and assistantId, should not call other batch operations inside */
+  batchCleanPrincipalAssistant() {
+    this.form.get("principal").reset(undefined, { emitEvent: false });
+    this.form.get("assistant").reset(undefined, { emitEvent: false });
+  }
+
+  /** (Form) batch clean group, should not call other batch operations inside */
+  batchCleanGroup() {
+    this.form.get("group").reset(undefined, { emitEvent: false });
   }
 
   prepareDateSub() {
@@ -426,17 +436,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     }
   }
 
-  /** (Form) clean principalId and assistantId */
-  batchCleanPrincipalAssistant() {
-    this.form.get("principal").reset(undefined, { emitEvent: false });
-    this.form.get("assistant").reset(undefined, { emitEvent: false });
-  }
-
-  /** (Form) clean group */
-  batchCleanGroup() {
-    this.form.get("group").reset(undefined, { emitEvent: false });
-  }
-
   /**
    * Gets the principal and assistant based on the available participants, room, assignType and only selectors
    */
@@ -515,7 +514,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     //Filter assignTypes by permissions
     this.assignTypes = this.assignTypeService.getAssignTypes();
 
-    //administrator is undefined value
+    //administrator is undefined value so this if doesnt apply and can view everything
     if (this.role) {
       this.assignTypes = this.assignTypes.filter((at) =>
         this.role.assignTypesId.includes(at.id)
