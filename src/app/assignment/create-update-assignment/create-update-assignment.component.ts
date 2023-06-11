@@ -160,7 +160,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     onlyMan: [this.a ? this.a.onlyMan : false],
     onlyExternals: [this.a ? this.a.onlyExternals : false],
     principal: [this.a ? this.a.principal : undefined, Validators.required], //participant id
-    group: [this.a ? this.a.group : undefined],
+    group: [this.a ? this.a.group : 0], //undefined is not working
     assistant: [this.a ? this.a.assistant : undefined], //participant id
     footerNote: this.a
       ? this.a.footerNote
@@ -298,7 +298,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   /** (Form) batch clean group, should not call other batch operations inside */
   batchCleanGroup() {
-    this.form.get("group").reset(undefined, { emitEvent: false });
+    this.form.get("group").reset(0, { emitEvent: false });
   }
 
   prepareDateSub() {
@@ -409,8 +409,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       this.form.get("group").valueChanges.subscribe((group) => {
         this.batchCleanPrincipalAssistant();
         this.batchGetCountSortWarning();
+        //0 is all groups so we skip the if
         if (group) {
-          //undefined is all groups
           this.principals = this.principals.filter((p) => p.group === group);
         }
       })

@@ -137,7 +137,7 @@
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_GROUP") }}</mat-label>
               <mat-select formControlName="group">
-                <mat-option [value]="undefined">{{ t("ASSIGN_ALL_GROUPS") }}</mat-option>
+                <mat-option [value]="0">{{ t("ASSIGN_ALL_GROUPS") }}</mat-option>
                 <mat-option *ngFor="let number of availableGroups" [value]="number">{{
                   number
                 }}</mat-option>
