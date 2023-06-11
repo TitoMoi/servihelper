@@ -22,21 +22,19 @@
       </div>
       <ng-container *ngFor="let r of roles">
         <div class="grid-row">
-          <div class="grid-item">
+          <div class="d-flex align-items-center justify-content-start">
             {{ r.name }}
           </div>
-          <div class="grid-item">
+          <div class="d-flex align-items-center justify-content-start">
             <mat-icon
-              class="m-auto"
               [routerLink]="['update', r.id]"
               routerLinkActive="active"
               svgIcon="edit"
               aria-label="Side nav toggle icon"
             ></mat-icon>
           </div>
-          <div class="grid-item">
+          <div class="d-flex align-items-center justify-content-start">
             <mat-icon
-              class="m-auto"
               [routerLink]="['delete', r.id]"
               routerLinkActive="active"
               svgIcon="garbage"
