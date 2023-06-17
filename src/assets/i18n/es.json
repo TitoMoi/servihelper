@@ -274,5 +274,6 @@
   "PLACEHOLDER_GROUP": "Grupo",
   "PARTICIPANT_TABLE_HEADER_GROUP": "Grupo",
   "ASSIGN_GROUP": "Grupo",
-  "ASSIGN_ALL_GROUPS": "Todos"
+  "ASSIGN_ALL_GROUPS": "Todos",
+  "ASSIGN_ERROR_PRINCIPAL": "Una fecha, sala y tipo de assignación son requeridos"
 }

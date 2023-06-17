@@ -251,5 +251,6 @@
   "PLACEHOLDER_GROUP": "Group",
   "PARTICIPANT_TABLE_HEADER_GROUP": "Group",
   "ASSIGN_GROUP": "Group",
-  "ASSIGN_ALL_GROUPS": "All"
+  "ASSIGN_ALL_GROUPS": "All",
+  "ASSIGN_ERROR_PRINCIPAL": "A date, room and assign type are required"
 }

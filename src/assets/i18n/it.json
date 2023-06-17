@@ -272,5 +272,6 @@
   "PLACEHOLDER_GROUP": "Gruppo",
   "PARTICIPANT_TABLE_HEADER_GROUP": "Gruppo",
   "ASSIGN_GROUP": "Gruppo",
-  "ASSIGN_ALL_GROUPS": "Tutto"
+  "ASSIGN_ALL_GROUPS": "Tutto",
+  "ASSIGN_ERROR_PRINCIPAL": "Sono richiesti una data, una stanza e un tipo di assegnazione"
 }

@@ -185,6 +185,9 @@
                   </div>
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="form.controls.principal.invalid">{{
+                t("ASSIGN_ERROR_PRINCIPAL")
+              }}</mat-error>
             </mat-form-field>
           </div>
           <div class="col-12 mb-2">

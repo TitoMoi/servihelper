@@ -272,5 +272,6 @@
   "PLACEHOLDER_GROUP": "グループ",
   "PARTICIPANT_TABLE_HEADER_GROUP": "グループ",
   "ASSIGN_GROUP": "グループ",
-  "ASSIGN_ALL_GROUPS": "全て"
+  "ASSIGN_ALL_GROUPS": "全て",
+  "ASSIGN_ERROR_PRINCIPAL": "日付、部屋、割り当ての種類が必要です"
 }

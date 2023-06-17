@@ -272,5 +272,6 @@
   "PLACEHOLDER_GROUP": "Groep",
   "PARTICIPANT_TABLE_HEADER_GROUP": "Groep",
   "ASSIGN_GROUP": "Groep",
-  "ASSIGN_ALL_GROUPS": "Alle"
+  "ASSIGN_ALL_GROUPS": "Alle",
+  "ASSIGN_ERROR_PRINCIPAL": "Een datum, de kamer en het toewijsttype zijn vereist"
 }

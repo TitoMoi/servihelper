@@ -272,5 +272,6 @@
   "PLACEHOLDER_GROUP": "समूह",
   "PARTICIPANT_TABLE_HEADER_GROUP": "समूह",
   "ASSIGN_GROUP": "समूह",
-  "ASSIGN_ALL_GROUPS": "सभी"
+  "ASSIGN_ALL_GROUPS": "सभी",
+  "ASSIGN_ERROR_PRINCIPAL": "एक तिथि, कमरा और असाइन करने के प्रकार की आवश्यकता है"
 }

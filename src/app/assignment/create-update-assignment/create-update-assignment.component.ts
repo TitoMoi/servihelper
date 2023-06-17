@@ -614,6 +614,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.form.get("onlyMan").setValue(onlyMan, { emitEvent: false });
     this.form.get("onlyWoman").setValue(onlyWoman, { emitEvent: false });
     this.form.get("onlyExternals").setValue(onlyExternals, { emitEvent: false });
+    this.form.get("group").setValue(0, { emitEvent: false });
 
     this.getParticipantsAvailableOnDate();
 

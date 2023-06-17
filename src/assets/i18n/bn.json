@@ -272,5 +272,6 @@
   "PLACEHOLDER_GROUP": "গ্রুপ",
   "PARTICIPANT_TABLE_HEADER_GROUP": "গ্রুপ",
   "ASSIGN_GROUP": "গ্রুপ",
-  "ASSIGN_ALL_GROUPS": "সব"
+  "ASSIGN_ALL_GROUPS": "সব",
+  "ASSIGN_ERROR_PRINCIPAL": "একটি তারিখ, ঘর এবং অ্যাসাইন টাইপ প্রয়োজন"
 }

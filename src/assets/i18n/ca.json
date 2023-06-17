@@ -273,5 +273,6 @@
   "PLACEHOLDER_GROUP": "Grup",
   "PARTICIPANT_TABLE_HEADER_GROUP": "Grup",
   "ASSIGN_GROUP": "Grup",
-  "ASSIGN_ALL_GROUPS": "Tots"
+  "ASSIGN_ALL_GROUPS": "Tots",
+  "ASSIGN_ERROR_PRINCIPAL": "Cal una data, una sala i un tipus d'assignació"
 }

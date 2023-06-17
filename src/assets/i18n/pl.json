@@ -272,5 +272,6 @@
   "PLACEHOLDER_GROUP": "Grupa",
   "PARTICIPANT_TABLE_HEADER_GROUP": "Grupa",
   "ASSIGN_GROUP": "Grupa",
-  "ASSIGN_ALL_GROUPS": "Wszystko"
+  "ASSIGN_ALL_GROUPS": "Wszystko",
+  "ASSIGN_ERROR_PRINCIPAL": "Wymagane są datę, pokój i przypisanie"
 }

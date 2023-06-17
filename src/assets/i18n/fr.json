@@ -272,5 +272,6 @@
   "PLACEHOLDER_GROUP": "Groupe",
   "PARTICIPANT_TABLE_HEADER_GROUP": "Groupe",
   "ASSIGN_GROUP": "Groupe",
-  "ASSIGN_ALL_GROUPS": "Toute"
+  "ASSIGN_ALL_GROUPS": "Toute",
+  "ASSIGN_ERROR_PRINCIPAL": "Une date, une pièce et un type d'attribution sont requis"
 }

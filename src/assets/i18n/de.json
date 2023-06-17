@@ -272,5 +272,6 @@
   "PLACEHOLDER_GROUP": "Gruppe",
   "PARTICIPANT_TABLE_HEADER_GROUP": "Gruppe",
   "ASSIGN_GROUP": "Gruppe",
-  "ASSIGN_ALL_GROUPS": "Alle"
+  "ASSIGN_ALL_GROUPS": "Alle",
+  "ASSIGN_ERROR_PRINCIPAL": "Ein Datum, ein Raum und ein Zuweisungsart sind erforderlich"
 }

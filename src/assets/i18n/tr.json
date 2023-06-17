@@ -272,5 +272,6 @@
   "PLACEHOLDER_GROUP": "Grup",
   "PARTICIPANT_TABLE_HEADER_GROUP": "Grup",
   "ASSIGN_GROUP": "Grup",
-  "ASSIGN_ALL_GROUPS": "Tüm"
+  "ASSIGN_ALL_GROUPS": "Tüm",
+  "ASSIGN_ERROR_PRINCIPAL": "Bir tarih, oda ve atama türü gereklidir"
 }
