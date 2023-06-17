@@ -61,7 +61,7 @@ export class ParticipantService {
    */
   createParticipant(participant: ParticipantInterface): boolean {
     //Generate id for the participant
-    participant.id = nanoid();
+    participant.id = nanoid(this.configService.nanoMaxCharId);
     //add participant to participants
     this.#participants.push(participant);
     this.#participantsMap.set(participant.id, participant);

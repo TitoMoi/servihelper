@@ -12,6 +12,9 @@ import path from "path";
   providedIn: "root",
 })
 export class ConfigService {
+  //nanoId max id characters https://zelark.github.io/nano-id-cc/
+  nanoMaxCharId = 10;
+
   //Administrator key
   administratorKey = "administrator";
 
@@ -122,7 +125,7 @@ export class ConfigService {
   }
 
   addRole(role: RoleInterface) {
-    role.id = nanoid();
+    role.id = nanoid(this.nanoMaxCharId);
     role.name = role.name.trim();
     this.#config.roles.push(role);
     this.saveConfigToFile();

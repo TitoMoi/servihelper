@@ -51,7 +51,7 @@ export class NoteService {
    */
   createNote(note: NoteInterface): boolean {
     //Generate id for the note
-    note.id = nanoid();
+    note.id = nanoid(this.configService.nanoMaxCharId);
     //add note to notes
     this.#notes.push(note);
     this.#notesMap.set(note.id, note);

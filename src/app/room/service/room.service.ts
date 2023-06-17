@@ -60,7 +60,7 @@ export class RoomService {
    */
   createRoom(room: RoomInterface): string {
     //Generate id for the room
-    room.id = nanoid();
+    room.id = nanoid(this.configService.nanoMaxCharId);
     //add room to rooms
     this.#rooms.push(room);
     this.#roomsMap.set(room.id, room);

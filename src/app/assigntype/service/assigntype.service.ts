@@ -56,7 +56,7 @@ export class AssignTypeService {
    */
   createAssignType(assignType: AssignTypeInterface): string {
     //Generate id for the assignType
-    assignType.id = nanoid();
+    assignType.id = nanoid(this.configService.nanoMaxCharId);
     assignType.name = assignType.name.trim();
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);

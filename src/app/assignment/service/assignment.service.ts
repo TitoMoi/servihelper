@@ -124,7 +124,7 @@ export class AssignmentService {
   createMultipleAssignments(assignments: AssignmentInterface[]) {
     for (let assignment of assignments) {
       //Generate id for the assignment
-      assignment.id = nanoid();
+      assignment.id = nanoid(this.configService.nanoMaxCharId);
 
       //Simulate we have saved and retrieved assignment, this is only for serialize Date and get an ISO string
       //This only happens on create, update respects the date and also delete.
@@ -158,7 +158,7 @@ export class AssignmentService {
    */
   createAssignment(assignment: AssignmentInterface) {
     //Generate id for the assignment
-    assignment.id = nanoid();
+    assignment.id = nanoid(this.configService.nanoMaxCharId);
     //Simulate we have saved and retrieved assignment, this is only for serialize Date and get an ISO string
     //This only happens on create, update respects the date and also delete.
     //We do this because we dont get again the assignments from file, they are in memory
