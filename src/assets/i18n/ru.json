@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "Имя",
   "INFO_ASSIGNMENT_COUNT": "Считать",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Последняя дата назначения",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Другие задания в тот же день:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Другие задания в тот же день:",
+  "PLACEHOLDER_GROUP": "Группа",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Группа",
+  "ASSIGN_GROUP": "Группа",
+  "ASSIGN_ALL_GROUPS": "Все"
 }

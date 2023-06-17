@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "name",
   "INFO_ASSIGNMENT_COUNT": "Zählen",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Letzter Zuweisungsdatum",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Andere Aufgaben am selben Tag:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Andere Aufgaben am selben Tag:",
+  "PLACEHOLDER_GROUP": "Gruppe",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Gruppe",
+  "ASSIGN_GROUP": "Gruppe",
+  "ASSIGN_ALL_GROUPS": "Alle"
 }

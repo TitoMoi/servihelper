@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "Nom",
   "INFO_ASSIGNMENT_COUNT": "Compter",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Dernière date d'affectation",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Autres affectations le même jour:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Autres affectations le même jour:",
+  "PLACEHOLDER_GROUP": "Groupe",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Groupe",
+  "ASSIGN_GROUP": "Groupe",
+  "ASSIGN_ALL_GROUPS": "Toute"
 }

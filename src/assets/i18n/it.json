@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "Nome",
   "INFO_ASSIGNMENT_COUNT": "Contare",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Ultima data di assegnazione",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Altri incarichi lo stesso giorno:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Altri incarichi lo stesso giorno:",
+  "PLACEHOLDER_GROUP": "Gruppo",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Gruppo",
+  "ASSIGN_GROUP": "Gruppo",
+  "ASSIGN_ALL_GROUPS": "Tutto"
 }

@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "Naam",
   "INFO_ASSIGNMENT_COUNT": "Graaf",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Laatste opdrachtdatum",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Andere opdrachten op dezelfde dag:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Andere opdrachten op dezelfde dag:",
+  "PLACEHOLDER_GROUP": "Groep",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Groep",
+  "ASSIGN_GROUP": "Groep",
+  "ASSIGN_ALL_GROUPS": "Alle"
 }

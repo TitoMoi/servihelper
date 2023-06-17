@@ -269,5 +269,9 @@
   "INFO_ASSIGNMENT_NAME": "Nom",
   "INFO_ASSIGNMENT_COUNT": "Recompte",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Data de l'assignació",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Altres tasques el mateix dia:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Altres tasques el mateix dia:",
+  "PLACEHOLDER_GROUP": "Grup",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Grup",
+  "ASSIGN_GROUP": "Grup",
+  "ASSIGN_ALL_GROUPS": "Tots"
 }

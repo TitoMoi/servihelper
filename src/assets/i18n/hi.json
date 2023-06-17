@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "नाम",
   "INFO_ASSIGNMENT_COUNT": "Count",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "अंतिम असाइनमेंट तिथि",
-  "WARNING_ASSIGNMENT_SAME_DAY": "उसी दिन अन्य असाइनमेंट:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "उसी दिन अन्य असाइनमेंट:",
+  "PLACEHOLDER_GROUP": "समूह",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "समूह",
+  "ASSIGN_GROUP": "समूह",
+  "ASSIGN_ALL_GROUPS": "सभी"
 }

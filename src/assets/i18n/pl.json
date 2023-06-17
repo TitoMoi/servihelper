@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "Nazwa",
   "INFO_ASSIGNMENT_COUNT": "Liczyć",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Ostatnia data zadania",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Inne zadania tego tego samego dnia:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Inne zadania tego tego samego dnia:",
+  "PLACEHOLDER_GROUP": "Grupa",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Grupa",
+  "ASSIGN_GROUP": "Grupa",
+  "ASSIGN_ALL_GROUPS": "Wszystko"
 }

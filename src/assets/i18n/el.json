@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "Ονομα",
   "INFO_ASSIGNMENT_COUNT": "μετρώ",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Ημερομηνία τελευταίας ανάθεσης",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Other assignments on same day:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Other assignments on same day:",
+  "PLACEHOLDER_GROUP": "Ομάδα",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Ομάδα",
+  "ASSIGN_GROUP": "Ομάδα",
+  "ASSIGN_ALL_GROUPS": "Ολα"
 }

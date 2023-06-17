@@ -247,5 +247,9 @@
   "INFO_ASSIGNMENT_NAME": "Name",
   "INFO_ASSIGNMENT_COUNT": "Count",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Last assignment date",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Other assignments on same day:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Other assignments on same day:",
+  "PLACEHOLDER_GROUP": "Group",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Group",
+  "ASSIGN_GROUP": "Group",
+  "ASSIGN_ALL_GROUPS": "All"
 }

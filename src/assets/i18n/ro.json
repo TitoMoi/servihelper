@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "Nume",
   "INFO_ASSIGNMENT_COUNT": "Numara",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Ultima dată de atribuire",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Alte misiuni în aceeași zi:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Alte misiuni în aceeași zi:",
+  "PLACEHOLDER_GROUP": "Grup",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Grup",
+  "ASSIGN_GROUP": "Grup",
+  "ASSIGN_ALL_GROUPS": "Toate"
 }

@@ -268,5 +268,9 @@
   "INFO_ASSIGNMENT_NAME": "নাম",
   "INFO_ASSIGNMENT_COUNT": "Count",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "শেষ অ্যাসাইনমেন্টের তারিখ",
-  "WARNING_ASSIGNMENT_SAME_DAY": "একই দিনে অন্যান্য অ্যাসাইনমেন্ট:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "একই দিনে অন্যান্য অ্যাসাইনমেন্ট:",
+  "PLACEHOLDER_GROUP": "গ্রুপ",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "গ্রুপ",
+  "ASSIGN_GROUP": "গ্রুপ",
+  "ASSIGN_ALL_GROUPS": "সব"
 }

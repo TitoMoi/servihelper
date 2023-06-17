@@ -270,5 +270,9 @@
   "INFO_ASSIGNMENT_NAME": "Nombre",
   "INFO_ASSIGNMENT_COUNT": "Conteo",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Última fecha de asignación",
-  "WARNING_ASSIGNMENT_SAME_DAY": "Otras tareas el mismo día:"
+  "WARNING_ASSIGNMENT_SAME_DAY": "Otras tareas el mismo día:",
+  "PLACEHOLDER_GROUP": "Grupo",
+  "PARTICIPANT_TABLE_HEADER_GROUP": "Grupo",
+  "ASSIGN_GROUP": "Grupo",
+  "ASSIGN_ALL_GROUPS": "Todos"
 }
