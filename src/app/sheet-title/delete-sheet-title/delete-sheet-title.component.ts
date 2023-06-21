@@ -8,6 +8,7 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitleService } from "../service/sheet-title.service";
 import { SheetTitleInterface } from "../model/sheet-title.model";
+import { ConfigService } from "app/config/service/config.service";
 
 @Component({
   selector: "app-delete-sheet-title",
@@ -35,13 +36,23 @@ export class DeleteSheetTitleComponent {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private sheetTitleService: SheetTitleService,
+    private configService: ConfigService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
 
   onSubmit(title: SheetTitleInterface): void {
     //delete room
-    this.sheetTitleService.deleteSheetTitle(title.id);
+    const isDeleted = this.sheetTitleService.deleteSheetTitle(title.id);
+
+    //if the sheet title was the default on the config file "assignmentHeaderTitle" then delete it too
+    if (isDeleted) {
+      const config = this.configService.getConfig();
+
+      if (config.assignmentHeaderTitle === title.id) {
+        this.configService.updateConfigByKey("assignmentHeaderTitle", undefined);
+      }
+    }
 
     //navigate to parent
     this.router.navigate(["../.."], {
