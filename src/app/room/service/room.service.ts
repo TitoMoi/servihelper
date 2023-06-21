@@ -56,7 +56,7 @@ export class RoomService {
   /**
    *
    * @param room the room to create
-   * @returns true if room is saved false if not
+   * @returns the id of the new room
    */
   createRoom(room: RoomInterface): string {
     //Generate id for the room

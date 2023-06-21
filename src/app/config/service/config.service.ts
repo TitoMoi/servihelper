@@ -26,6 +26,7 @@ export class ConfigService {
   assignTypesFilename = "assignType.json";
   roomsFilename = "room.json";
   configFilename = "config.json";
+  sheetTitleFilename = "sheetTitle.json";
 
   /** Where the file is depending on the context__dirname is where the .js file exists */
   configPath: string = APP_CONFIG.production
@@ -53,6 +54,10 @@ export class ConfigService {
   roomsPath = APP_CONFIG.production
     ? path.join(__dirname, this.sourceFilesPath, this.roomsFilename)
     : path.join("./", this.sourceFilesPath, this.roomsFilename);
+
+  sheetTitlePath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.sheetTitleFilename)
+    : path.join("./", this.sourceFilesPath, this.sheetTitleFilename);
 
   configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
   /**
