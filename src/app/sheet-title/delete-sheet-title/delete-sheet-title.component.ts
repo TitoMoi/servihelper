@@ -50,7 +50,7 @@ export class DeleteSheetTitleComponent {
       const config = this.configService.getConfig();
 
       if (config.assignmentHeaderTitle === title.id) {
-        this.configService.updateConfigByKey("assignmentHeaderTitle", undefined);
+        this.configService.updateConfigByKey("assignmentHeaderTitle", "");
       }
     }
 
