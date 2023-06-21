@@ -15,7 +15,7 @@
           mat-raised-button
           [disableRipple]="true"
           color="primary"
-          routerLink="title/create"
+          routerLink="createTitle"
           routerLinkActive="active"
         >
           {{ t("CONFIG_CREATE_TITLE") }}
@@ -24,7 +24,37 @@
 
       <mat-form-field>
         <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <input matInput formControlName="assignmentHeaderTitle" />
+        <mat-select
+          #titleSelect
+          formControlName="assignmentHeaderTitle"
+          required
+          [disableRipple]="true"
+        >
+          <mat-select-trigger *ngIf="titleSelect.value">
+            {{ (titleSelect.value | sheetTitlePipe)?.name }}
+          </mat-select-trigger>
+          <mat-option *ngFor="let t of titles" [value]="t.id">
+            <div class="d-flex align-items-center justify-content-evenly">
+              <mat-icon
+                class="me-4"
+                (click)="preventDefault($event)"
+                [routerLink]="['updateTitle', t.id]"
+                routerLinkActive="active"
+                svgIcon="edit"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+              <mat-icon
+                class="me-4"
+                (click)="preventDefault($event)"
+                [routerLink]="['deleteTitle', t.id]"
+                routerLinkActive="active"
+                svgIcon="garbage"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+              <div>{{ t.name }}</div>
+            </div>
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <h4>{{ t("CONFIG_ASSIGNMENT_PRINCIPAL_TITLE") }}</h4>
       <mat-form-field>

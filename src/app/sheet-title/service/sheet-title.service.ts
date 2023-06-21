@@ -3,10 +3,12 @@ import { SheetTitleInterface } from "../model/sheet-title.model";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
+import { ConfigService } from "app/config/service/config.service";
+
 @Injectable({
   providedIn: "root",
 })
-export class TitleServiceService {
+export class SheetTitleService {
   //flag to indicate that sheet title file has changed
   hasChanged = true;
   //The array of sheet titles in memory
@@ -17,12 +19,10 @@ export class TitleServiceService {
   /**
    *
    * @param id the id of the sheet title to search for
-   * @returns the sheet title that is ALWAYS found
+   * @returns the sheet title or undefined
    */
-  getTitle(id: string): SheetTitleInterface {
-    const title = this.#titles.find((t) => t.id === id);
-    if (title === undefined) throw new Error("title undefined");
-    return title;
+  getTitle(id: string): SheetTitleInterface | undefined {
+    return this.#titles.find((t) => t.id === id);
   }
 
   /**
@@ -59,18 +59,28 @@ export class TitleServiceService {
   /**
    *
    * @param title the sheet title to update
-   * @returns true if sheet itles is updated and saved false otherwise
+   * @returns true if sheet title is updated and saved false otherwise
    */
-  updateRoom(title: SheetTitleInterface): boolean {
-    //update room
+  updateTitle(title: SheetTitleInterface): boolean {
+    //update sheet title
     for (let i = 0; i < this.#titles.length; i++) {
       if (this.#titles[i].id === title.id) {
         this.#titles[i] = title;
-        //save sheet titles with the updated room
+        //save sheet titles with the updated sheet title
         return this.saveSheetTitlesToFile();
       }
     }
     return false;
+  }
+  /**
+   *
+   * @param room the sheet title id to delete
+   * @returns true if sheet title is deleted and saved false otherwise
+   */
+  deleteSheetTitle(id: string): boolean {
+    this.#titles = this.#titles.filter((t) => t.id !== id);
+    //save titles
+    return this.saveSheetTitlesToFile();
   }
   /**
    *

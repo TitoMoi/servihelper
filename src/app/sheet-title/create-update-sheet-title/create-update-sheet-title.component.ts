@@ -1,5 +1,4 @@
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomService } from "app/room/service/room.service";
+import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
@@ -27,9 +26,10 @@ import { TranslocoModule } from "@ngneat/transloco";
   ],
   templateUrl: "./create-update-sheet-title.component.html",
   styleUrls: ["./create-update-sheet-title.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUpdateSheetTitleComponent {
-  t = this.titleService.getTitle(this.activatedRoute.snapshot.params.id);
+  t = this.sheetTitleService.getTitle(this.activatedRoute.snapshot.params.id);
 
   isUpdate = this.t ? true : false;
 
@@ -41,7 +41,7 @@ export class CreateUpdateSheetTitleComponent {
 
   constructor(
     private formBuilder: UntypedFormBuilder,
-    private titleService: TitleService,
+    private sheetTitleService: SheetTitleService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -49,9 +49,9 @@ export class CreateUpdateSheetTitleComponent {
   onSubmit(): void {
     const title = this.form.value;
     if (this.isUpdate) {
-      this.titleService.updateTitle(title);
+      this.sheetTitleService.updateTitle(title);
     } else {
-      this.titleService.createTitle(title);
+      this.sheetTitleService.createTitle(title);
     }
 
     //navigate to parent

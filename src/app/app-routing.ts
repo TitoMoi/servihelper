@@ -29,6 +29,7 @@ import { RolesComponent } from "./roles/roles.component";
 import { CreateUpdateRoleComponent } from "./roles/create-update-role/create-update-role.component";
 import { DeleteRoleComponent } from "./roles/delete-role/delete-role.component";
 import { CreateUpdateSheetTitleComponent } from "app/sheet-title/create-update-sheet-title/create-update-sheet-title.component";
+import { DeleteSheetTitleComponent } from "app/sheet-title/delete-sheet-title/delete-sheet-title.component";
 
 export const routes: Routes = [
   {
@@ -156,8 +157,16 @@ export const routes: Routes = [
     component: ConfigComponent,
   },
   {
-    path: "config/title/create",
+    path: "config/createTitle",
     component: CreateUpdateSheetTitleComponent,
+  },
+  {
+    path: "config/updateTitle/:id",
+    component: CreateUpdateSheetTitleComponent,
+  },
+  {
+    path: "config/deleteTitle/:id",
+    component: DeleteSheetTitleComponent,
   },
   {
     path: "role",

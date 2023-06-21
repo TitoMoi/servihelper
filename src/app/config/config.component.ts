@@ -2,7 +2,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { writeJsonSync } from "fs-extra";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ViewChild } from "@angular/core";
 import { UntypedFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
@@ -12,12 +12,14 @@ import { ipcRenderer } from "electron";
 import { MatButtonModule } from "@angular/material/button";
 import { NgFor, NgIf } from "@angular/common";
 import { MatOptionModule } from "@angular/material/core";
-import { MatSelectModule } from "@angular/material/select";
+import { MatSelect, MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
+import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
+import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 
 @Component({
   selector: "app-config",
@@ -39,10 +41,14 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
     MatButtonModule,
     NgIf,
     MatIconModule,
+    SheetTitlePipe,
   ],
 })
 export class ConfigComponent {
+  @ViewChild("titleSelect") titleSelect: MatSelect;
   translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
+
+  titles = this.sheetTitleService.getTitles().sort((a, b) => (a.order > b.order ? 1 : -1));
 
   weekDayBegins: WeekDaysBegin[] = [
     {
@@ -109,6 +115,7 @@ export class ConfigComponent {
     private formBuilder: UntypedFormBuilder,
     private configService: ConfigService,
     private noteService: NoteService,
+    private sheetTitleService: SheetTitleService,
     private translocoService: TranslocoService
   ) {}
 
@@ -140,5 +147,8 @@ export class ConfigComponent {
     });
 
     this.isFormSaved = true;
+  }
+  preventDefault(event) {
+    event.stopPropagation();
   }
 }

@@ -253,5 +253,9 @@
   "ru": "Russian",
   "tr": "Turkish",
   "zhCN": "Chinese",
-  "CONFIG_CREATE_TITLE": "Create title"
+  "CONFIG_CREATE_TITLE": "Create title",
+  "TITLE_UPDATE_TITLE": "Update title",
+  "TITLE_CREATE_TITLE": "Create title",
+  "TITLE_DELETE_TITLE": "Delete Title",
+  "TITLE_DELETE_WARNING": "This action is irreversible"
 }

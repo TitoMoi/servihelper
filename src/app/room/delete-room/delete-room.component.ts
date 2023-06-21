@@ -30,7 +30,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 export class DeleteRoomComponent {
   room = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);
 
-  roomForm = this.formBuilder.group({
+  form = this.formBuilder.group({
     id: this.room.id,
     name: [{ value: this.room.name, disabled: true }, Validators.required],
   });
