@@ -28,6 +28,7 @@ import { CreateFromParticipantComponent } from "./participant/create-from-partic
 import { RolesComponent } from "./roles/roles.component";
 import { CreateUpdateRoleComponent } from "./roles/create-update-role/create-update-role.component";
 import { DeleteRoleComponent } from "./roles/delete-role/delete-role.component";
+import { CreateUpdateSheetTitleComponent } from "app/sheet-title/create-update-sheet-title/create-update-sheet-title.component";
 
 export const routes: Routes = [
   {
@@ -153,6 +154,10 @@ export const routes: Routes = [
   {
     path: "config",
     component: ConfigComponent,
+  },
+  {
+    path: "config/title/create",
+    component: CreateUpdateSheetTitleComponent,
   },
   {
     path: "role",

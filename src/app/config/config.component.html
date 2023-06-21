@@ -8,8 +8,20 @@
           </h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
+      <div class="d-flex align-items-center">
+        <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
+        <h4 class="me-2">{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
+        <a
+          mat-raised-button
+          [disableRipple]="true"
+          color="primary"
+          routerLink="title/create"
+          routerLinkActive="active"
+        >
+          {{ t("CONFIG_CREATE_TITLE") }}
+        </a>
+      </div>
 
-      <h4>{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
       <mat-form-field>
         <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
         <input matInput formControlName="assignmentHeaderTitle" />

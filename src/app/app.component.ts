@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
     "folder",
     "warning",
     "info-blue",
+    "sheet-title",
   ];
 
   constructor(
@@ -80,12 +81,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.assignmentService.getAssignments();
     this.pdfService.registerOnLangChange();
     this.configService.getConfig();
     this.roomService.getRooms();
     this.assignTypeService.getAssignTypes();
     this.noteService.getNotes();
     this.participantService.getParticipants();
-    this.assignmentService.getAssignments();
   }
 }

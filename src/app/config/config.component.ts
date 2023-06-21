@@ -16,6 +16,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { MatIconModule } from "@angular/material/icon";
+import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
   selector: "app-config",
@@ -31,9 +33,12 @@ import { MatExpansionModule } from "@angular/material/expansion";
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
+    RouterLink,
+    RouterLinkActive,
     NgFor,
     MatButtonModule,
     NgIf,
+    MatIconModule,
   ],
 })
 export class ConfigComponent {

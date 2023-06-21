@@ -252,5 +252,6 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "CONFIG_CREATE_TITLE": "Create title"
 }
