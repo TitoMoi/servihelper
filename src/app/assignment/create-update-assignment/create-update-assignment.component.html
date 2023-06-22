@@ -23,46 +23,59 @@
           </div>
         </div>
         <div class="row">
-          <mat-form-field *ngIf="isMultipleDates">
-            <mat-label>{{ t("ASSIGN_SELECTION_DATES_SELECT_TITLE") }}</mat-label>
-            <input
-              matInput
-              [value]="resetModel"
-              [matDatepicker]="multipleDatePicker"
-              (dateChange)="dateChanged($event)"
-            />
-            <mat-datepicker-toggle
-              matPrefix
-              [for]="multipleDatePicker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker
-              #multipleDatePicker
-              [startAt]="this.lastDateService.lastDate$ | async"
-              [dateClass]="dateClass"
-            ></mat-datepicker>
-          </mat-form-field>
+          <div class="col-6">
+            <mat-form-field *ngIf="isMultipleDates">
+              <mat-label>{{ t("ASSIGN_SELECTION_DATES_SELECT_TITLE") }}</mat-label>
+              <input
+                matInput
+                [value]="resetModel"
+                [matDatepicker]="multipleDatePicker"
+                (dateChange)="dateChanged($event)"
+              />
+              <mat-datepicker-toggle
+                matPrefix
+                [for]="multipleDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #multipleDatePicker
+                [startAt]="this.lastDateService.lastDate$ | async"
+                [dateClass]="dateClass"
+              ></mat-datepicker>
+            </mat-form-field>
 
-          <mat-form-field *ngIf="!isMultipleDates">
-            <mat-label>{{ t("ASSIGN_CHOOSE_DATE") }}</mat-label>
-            <input
-              required
-              [appautofocus]="isUpdate ? false : true"
-              matInput
-              [matDatepicker]="picker"
-              formControlName="date"
-            />
-            <mat-datepicker-toggle
-              matPrefix
-              [for]="picker"
-              class="mr-3"
-            ></mat-datepicker-toggle>
-            <mat-datepicker
-              id="assignmentDatepickerId"
-              #picker
-              [startAt]="this.lastDateService.lastDate$ | async"
-              (closed)="warningIfAlreadyHasWork()"
-            ></mat-datepicker>
-          </mat-form-field>
+            <mat-form-field *ngIf="!isMultipleDates">
+              <mat-label>{{ t("ASSIGN_CHOOSE_DATE") }}</mat-label>
+              <input
+                required
+                [appautofocus]="isUpdate ? false : true"
+                matInput
+                [matDatepicker]="picker"
+                formControlName="date"
+              />
+              <mat-datepicker-toggle
+                matPrefix
+                [for]="picker"
+                class="mr-3"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                id="assignmentDatepickerId"
+                #picker
+                [startAt]="this.lastDateService.lastDate$ | async"
+                (closed)="warningIfAlreadyHasWork()"
+              ></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>{{ t("ASSIGN_CHOOSE_SHEET_TITLE") }}</mat-label>
+              <mat-select formControlName="sheetTitle">
+                <mat-option *ngFor="let title of sheetTitles" [value]="title.id">
+                  {{ title.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
           <div class="col-6 mb-2">
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_ROOM") }}</mat-label>

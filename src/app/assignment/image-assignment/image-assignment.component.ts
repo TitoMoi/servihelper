@@ -23,6 +23,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { NgIf, NgClass } from "@angular/common";
 import { TranslocoModule } from "@ngneat/transloco";
+import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 
 @Component({
   selector: "app-image-assignment",
@@ -40,6 +41,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     AssignTypePipe,
     RoomPipe,
     ParticipantPipe,
+    SheetTitlePipe,
   ],
 })
 export class ImageAssignmentComponent {
@@ -54,7 +56,7 @@ export class ImageAssignmentComponent {
   copiedCalendarReminder = false;
 
   //Title bindings
-  assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
+  assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle; //default config sheet title
   assignmentPrincipalTitle = this.configService.getConfig().assignmentPrincipalTitle;
   assignmentAssistantTitle = this.configService.getConfig().assignmentAssistantTitle;
   assignmentDateTitle = this.configService.getConfig().assignmentDateTitle;

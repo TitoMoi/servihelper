@@ -11,6 +11,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { PdfService } from "./services/pdf.service";
 import { RouterOutlet } from "@angular/router";
 import { NavigationComponent } from "./navigation/navigation.component";
+import { SheetTitleService } from "./sheet-title/service/sheet-title.service";
 
 @Component({
   selector: "app-root",
@@ -62,6 +63,7 @@ export class AppComponent implements OnInit {
     private noteService: NoteService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
+    private sheetTitleService: SheetTitleService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private pdfService: PdfService
@@ -88,5 +90,6 @@ export class AppComponent implements OnInit {
     this.assignTypeService.getAssignTypes();
     this.noteService.getNotes();
     this.participantService.getParticipants();
+    this.sheetTitleService.getTitles();
   }
 }

@@ -4,12 +4,17 @@
       <table id="assignmentTableId" class="bg-color-white" style="width: 23rem">
         <tr>
           <th class="d-block ms-3 me-3 border-bottom">
-            <div *ngIf="!assignmentHeaderTitle" class="mt-1 mb-1">
-              {{ t("ASSIGN_IMAGE_TITLE") }}
+            <div *ngIf="assignment.sheetTitle; else noTitle">
+              {{ (assignment.sheetTitle | sheetTitlePipe)?.name }}
             </div>
-            <div *ngIf="assignmentHeaderTitle" class="mt-1 mb-1">
-              {{ assignmentHeaderTitle }}
-            </div>
+            <ng-template #noTitle>
+              <div *ngIf="!assignmentHeaderTitle" class="mt-1 mb-1">
+                {{ t("ASSIGN_IMAGE_TITLE") }}
+              </div>
+              <div *ngIf="assignmentHeaderTitle" class="mt-1 mb-1">
+                {{ (assignmentHeaderTitle | sheetTitlePipe).name }}
+              </div>
+            </ng-template>
           </th>
         </tr>
         <tr>

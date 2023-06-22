@@ -12,6 +12,7 @@ export interface AssignmentOperationInterface {
 export interface AssignmentInterface {
   id: string;
   date: Date;
+  sheetTitle?: string;
   room: string;
   assignType: string;
   theme: string;
@@ -27,6 +28,7 @@ export interface AssignmentInterface {
 export interface AssignmentReportInterface {
   id: string;
   date: Date;
+  sheetTitle?: string;
   room: RoomInterface;
   assignType: AssignTypeInterface;
   theme: string;

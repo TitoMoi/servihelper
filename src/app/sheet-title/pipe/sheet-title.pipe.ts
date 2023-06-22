@@ -8,7 +8,7 @@ import { SheetTitleInterface } from "../model/sheet-title.model";
 })
 export class SheetTitlePipe implements PipeTransform {
   constructor(private sheetTitleService: SheetTitleService) {}
-  /**Given the id of the assignType return the assignType */
+  /**Given the id of the sheet title return the sheet title */
   transform(id: string): SheetTitleInterface | undefined {
     return this.sheetTitleService.getTitle(id);
   }

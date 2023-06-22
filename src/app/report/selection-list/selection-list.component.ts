@@ -152,6 +152,7 @@ export class SelectionListComponent implements OnChanges {
       assignGroup.assignments.push({
         id: assignment.id,
         date: assignment.date,
+        sheetTitle: assignment.sheetTitle,
         room: this.roomService.getRoom(assignment.room),
         assignType: this.assignTypeService.getAssignType(assignment.assignType),
         theme: assignment.theme,

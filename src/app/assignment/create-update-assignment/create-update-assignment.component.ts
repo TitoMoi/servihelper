@@ -53,6 +53,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { NgIf, NgFor, AsyncPipe } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { SheetTitleInterface } from "app/sheet-title/model/sheet-title.model";
+import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 
 @Component({
   selector: "app-create-update-assignment",
@@ -107,6 +109,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
+  sheetTitles: SheetTitleInterface[] = this.sheetTitleService
+    .getTitles()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
+
   //A flag to indicate that all assign types for the current role have been scheduled
   noAvailableAssignTypesByRole = false;
   //to filter available dates
@@ -131,9 +137,12 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   );
 
   isUpdate = this.a !== undefined;
+
+  config = this.configService.getConfig();
   //FORM Update or create
   form: UntypedFormGroup = this.formBuilder.group({
     id: this.a ? this.a.id : undefined,
+    sheetTitle: this.a ? this.a.sheetTitle : this.config.assignmentHeaderTitle, //not undefined
     date: [
       {
         value: this.a ? this.a.date : undefined,
@@ -164,9 +173,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     principal: [this.a ? this.a.principal : undefined, Validators.required], //participant id
     group: [this.a ? this.a.group : 0], //undefined is not working
     assistant: [this.a ? this.a.assistant : undefined], //participant id
-    footerNote: this.a
-      ? this.a.footerNote
-      : this.configService.getConfig().defaultFooterNoteId, //Note id
+    footerNote: this.a ? this.a.footerNote : this.config.defaultFooterNoteId, //Note id
   });
 
   //Subscriptions
@@ -181,6 +188,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     private participantService: ParticipantService,
     private noteService: NoteService,
     private configService: ConfigService,
+    private sheetTitleService: SheetTitleService,
     private sharedService: SharedService,
     private sortService: SortService,
     private router: Router,
@@ -605,6 +613,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
     //Save current values
     const date = this.gfv("date");
+    const sheetTitle = this.gfv("sheetTitle");
     const footerNote = this.gfv("footerNote");
     const room = this.gfv("room");
     const onlyMan = this.gfv("onlyMan");
@@ -616,6 +625,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
     //Restore values
     this.form.get("date").setValue(date, { emitEvent: false });
+    this.form.get("sheetTitle").setValue(sheetTitle, { emitEvent: false });
     this.form.get("footerNote").setValue(footerNote, { emitEvent: false });
     this.form.get("room").setValue(room, { emitEvent: false });
     this.form.get("onlyMan").setValue(onlyMan, { emitEvent: false });
