@@ -107,6 +107,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
+  //A flag to indicate that all assign types for the current role have been scheduled
+  noAvailableAssignTypesByRole = false;
   //to filter available dates
   participants: ParticipantInterface[] = [];
 
@@ -533,6 +535,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       const dateValue = this.gfv("date");
       const roomValue = this.gfv("room");
       const assignTypeValue = this.gfv("assignType");
+      this.noAvailableAssignTypesByRole = false;
 
       if (dateValue && roomValue) {
         const assignmentsByDate = this.assignmentService.getAssignmentsByDate(dateValue);
@@ -545,6 +548,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
         //Reset if assignType selected not in new assignTypes
         if (!this.assignTypes.some((at) => at.id === assignTypeValue))
           this.form.get("assignType").reset(undefined, { emitEvent: false });
+
+        if (!this.assignTypes.length) {
+          this.noAvailableAssignTypesByRole = true;
+        }
       }
     }
   }

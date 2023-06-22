@@ -257,5 +257,7 @@
   "TITLE_UPDATE_TITLE": "Update title",
   "TITLE_CREATE_TITLE": "Create title",
   "TITLE_DELETE_TITLE": "Delete Title",
-  "TITLE_DELETE_WARNING": "This action is irreversible"
+  "TITLE_DELETE_WARNING": "This action is irreversible",
+  "CONFIG_ERROR_NO_AVAILABLE_TITLES": "No available titles, please create one",
+  "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "All assignments have been scheduled according to the date, room and role selected"
 }

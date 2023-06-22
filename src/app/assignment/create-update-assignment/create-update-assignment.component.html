@@ -92,6 +92,9 @@
                   {{ assignType.name }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="noAvailableAssignTypesByRole">{{
+                t("ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES")
+              }}</mat-error>
             </mat-form-field>
           </div>
           <div class="col-12 mb-2">

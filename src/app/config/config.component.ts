@@ -2,7 +2,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { writeJsonSync } from "fs-extra";
-import { ChangeDetectionStrategy, Component, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from "@angular/core";
 import { UntypedFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
@@ -44,7 +44,7 @@ import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
     SheetTitlePipe,
   ],
 })
-export class ConfigComponent {
+export class ConfigComponent implements OnDestroy {
   @ViewChild("titleSelect") titleSelect: MatSelect;
   translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
 
@@ -65,7 +65,7 @@ export class ConfigComponent {
   currentConfig = this.configService.getConfig();
 
   // Config form
-  configForm = this.formBuilder.group({
+  form = this.formBuilder.group({
     defaultFooterNoteId: this.currentConfig.defaultFooterNoteId,
     defaultReportFontSize: this.currentConfig.defaultReportFontSize,
     defaultReportDateFormat: this.currentConfig.defaultReportDateFormat,
@@ -81,9 +81,6 @@ export class ConfigComponent {
     assignmentNoteTitle: this.currentConfig.assignmentNoteTitle,
     reportTitle: this.currentConfig.reportTitle,
   });
-
-  // If config assignmentHeader key is saved
-  isFormSaved = false;
 
   // Confirm the delete operation
   confirmDelete = false;
@@ -119,6 +116,14 @@ export class ConfigComponent {
     private translocoService: TranslocoService
   ) {}
 
+  ngOnDestroy(): void {
+    this.configService.updateConfig({
+      ...this.defaultConfig, //Default config
+      ...this.configService.getConfig(), //Current config
+      ...this.form.value, //Incoming config
+    });
+  }
+
   /**
    * Resets data to default
    */
@@ -139,15 +144,6 @@ export class ConfigComponent {
     this.configService.updateConfigByKey("assignmentHeaderTitle", elem.value);
   }
 
-  onSubmit(): void {
-    this.configService.updateConfig({
-      ...this.defaultConfig, //Default config
-      ...this.configService.getConfig(), //Current config
-      ...this.configForm.value, //Incoming config
-    });
-
-    this.isFormSaved = true;
-  }
   preventDefault(event) {
     event.stopPropagation();
   }

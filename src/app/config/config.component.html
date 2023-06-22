@@ -1,4 +1,4 @@
-<form *transloco="let t" [formGroup]="configForm" novalidate (ngSubmit)="onSubmit()">
+<form *transloco="let t" [formGroup]="form" novalidate>
   <mat-accordion [multi]="false">
     <mat-expansion-panel class="mb-2">
       <mat-expansion-panel-header>
@@ -55,6 +55,9 @@
             </div>
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="!titles.length">{{
+          t("CONFIG_ERROR_NO_AVAILABLE_TITLES")
+        }}</mat-error>
       </mat-form-field>
       <h4>{{ t("CONFIG_ASSIGNMENT_PRINCIPAL_TITLE") }}</h4>
       <mat-form-field>
@@ -177,15 +180,4 @@
       </button>
     </mat-expansion-panel>
   </mat-accordion>
-
-  <div class="row mb-2">
-    <div class="col-12">
-      <button mat-raised-button type="submit" color="primary">
-        {{ t("BUTTON_SAVE") }}
-      </button>
-      <span class="ms-2 green-msg" *ngIf="isFormSaved">
-        {{ t("CONFIG_FORM_SAVED") }}
-      </span>
-    </div>
-  </div>
 </form>
