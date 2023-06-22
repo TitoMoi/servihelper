@@ -5,7 +5,7 @@
         <tr>
           <th class="d-block ms-3 me-3 border-bottom">
             <div *ngIf="assignment.sheetTitle; else noTitle">
-              {{ (assignment.sheetTitle | sheetTitlePipe)?.name }}
+              {{ (assignment.sheetTitle | sheetTitlePipe).name }}
             </div>
             <ng-template #noTitle>
               <div *ngIf="!assignmentHeaderTitle" class="mt-1 mb-1">

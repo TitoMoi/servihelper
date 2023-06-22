@@ -9,6 +9,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitleService } from "../service/sheet-title.service";
 import { SheetTitleInterface } from "../model/sheet-title.model";
 import { ConfigService } from "app/config/service/config.service";
+import { AssignmentService } from "app/assignment/service/assignment.service";
 
 @Component({
   selector: "app-delete-sheet-title",
@@ -36,6 +37,7 @@ export class DeleteSheetTitleComponent {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private sheetTitleService: SheetTitleService,
+    private assignmentService: AssignmentService,
     private configService: ConfigService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -45,8 +47,11 @@ export class DeleteSheetTitleComponent {
     //delete room
     const isDeleted = this.sheetTitleService.deleteSheetTitle(title.id);
 
-    //if the sheet title was the default on the config file "assignmentHeaderTitle" then delete it too
     if (isDeleted) {
+      //Remove the title in the existing assignments
+      this.assignmentService.removeAssignmentsSheetTitleProperty(title.id);
+
+      //if the sheet title was the default on the config file "assignmentHeaderTitle" then delete it too
       const config = this.configService.getConfig();
 
       if (config.assignmentHeaderTitle === title.id) {

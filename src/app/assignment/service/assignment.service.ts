@@ -342,9 +342,7 @@ export class AssignmentService {
   }
 
   /**
-   *
-   * @param id the id of the room to delete assignments by.
-   * @returns true if assignment is deleted and saved false otherwise
+   * @param id the id of the room to delete assignments by
    */
   deleteAssignmentsByRoom(id: string) {
     this.#assignmentsMap = new Map();
@@ -362,9 +360,27 @@ export class AssignmentService {
   }
 
   /**
-   *
-   * @param id the id of the assignType to delete assignments by.
-   * @returns true if assignment is deleted and saved false otherwise
+   * @param id the id of the sheet title to delete assignments by
+   */
+  removeAssignmentsSheetTitleProperty(id: string) {
+    this.#assignmentsMap = new Map();
+    this.#assignmentsByDateMap = new Map();
+    //delete sheet title property
+    this.#assignments.forEach((a) => {
+      if (a.sheetTitle === id) a.sheetTitle = "";
+    });
+
+    for (const assignment of this.#assignments) {
+      this.#assignmentsMap.set(assignment.id, assignment);
+      this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
+    }
+
+    //save assignments
+    this.saveAssignmentsToFile();
+  }
+
+  /**
+   * @param id the id of the assignType to delete assignments by
    */
   deleteAssignmentsByAssignType(id: string) {
     this.#assignmentsMap = new Map();

@@ -69,6 +69,7 @@
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_CHOOSE_SHEET_TITLE") }}</mat-label>
               <mat-select formControlName="sheetTitle">
+                <mat-option value=""></mat-option>
                 <mat-option *ngFor="let title of sheetTitles" [value]="title.id">
                   {{ title.name }}
                 </mat-option>

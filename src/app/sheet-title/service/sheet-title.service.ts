@@ -79,6 +79,7 @@ export class SheetTitleService {
    */
   deleteSheetTitle(id: string): boolean {
     this.#titles = this.#titles.filter((t) => t.id !== id);
+
     //save titles
     return this.saveSheetTitlesToFile();
   }
