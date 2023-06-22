@@ -4,7 +4,7 @@
       <table id="assignmentTableId" class="bg-color-white" style="width: 23rem">
         <tr>
           <th class="d-block ms-3 me-3 border-bottom">
-            <div *ngIf="assignment.sheetTitle; else noTitle">
+            <div *ngIf="assignment.sheetTitle; else noTitle" class="mt-1 mb-1">
               {{ (assignment.sheetTitle | sheetTitlePipe).name }}
             </div>
             <ng-template #noTitle>

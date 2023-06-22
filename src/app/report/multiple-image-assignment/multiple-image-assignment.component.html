@@ -50,10 +50,17 @@
         "
         *ngFor="let a of assignmentsWithNames"
       >
-        <h4 class="m-1">
-          <span *ngIf="!assignmentHeaderTitle">{{ t("ASSIGN_IMAGE_TITLE") }}</span>
-          <span *ngIf="assignmentHeaderTitle">{{ assignmentHeaderTitle }}</span>
-        </h4>
+        <ng-container *ngIf="a.sheetTitle; else noTitle">
+          <h4 class="m-1">{{ (a.sheetTitle | sheetTitlePipe).name }}</h4>
+        </ng-container>
+        <ng-template #noTitle>
+          <h4 class="m-1">
+            <span *ngIf="!assignmentHeaderTitle">{{ t("ASSIGN_IMAGE_TITLE") }}</span>
+            <span *ngIf="assignmentHeaderTitle">{{
+              (assignmentHeaderTitle | sheetTitlePipe).name
+            }}</span>
+          </h4>
+        </ng-template>
         <hr class="m-1" />
         <div class="m-1">
           <b *ngIf="!assignmentPrincipalTitle">{{ t("ASSIGN_IMAGE_NAME") }}</b>

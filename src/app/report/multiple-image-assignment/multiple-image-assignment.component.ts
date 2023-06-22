@@ -27,6 +27,7 @@ import { NgIf, NgFor } from "@angular/common";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
+import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 
 @Component({
   selector: "app-multiple-image-assignment",
@@ -42,6 +43,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatButtonModule,
     NgFor,
     TranslocoLocaleModule,
+    SheetTitlePipe,
   ],
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
@@ -114,6 +116,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       const assignmentWithData: AssignmentInterface = {
         id: a.id,
         date: a.date,
+        sheetTitle: a.sheetTitle,
         principal: this.participantService.getParticipant(a.principal).name,
         assistant: this.participantService.getParticipant(a.assistant)?.name,
         room: this.roomService.getRoom(a.room).name,
