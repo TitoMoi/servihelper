@@ -17,7 +17,7 @@
     "tsc": "tsc",
     "tsc:main": "tsc ./app/main.ts",
     "start": "npm-run-all -p electron:serve ng:serve",
-    "build": "npm run build -- -c production",
+    "build": "ng build -c production",
     "build:dev": "npm run build -- -c dev",
     "ng:serve": "ng serve -c dev",
     "electron:serve-tsc": "tsc -p tsconfig.json",
