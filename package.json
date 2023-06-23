@@ -49,7 +49,7 @@
     "@ngneat/transloco": "4.2.6",
     "@ngneat/transloco-locale": "4.0.1",
     "date-fns": "2.30.0",
-    "electron-builder": "23.6.0",
+    "electron-builder": "24.4.0",
     "exceljs": "4.3.0",
     "filenamify": "6.0.0",
     "html-to-image": "1.11.11",
