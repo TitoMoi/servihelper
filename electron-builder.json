@@ -3,13 +3,7 @@
   "directories": {
     "output": "release/"
   },
-  "files": [
-    "**/*",
-    "!**/*.ts",
-    "!*.map",
-    "!package.json",
-    "!package-lock.json"
-  ],
+  "files": ["**/*", "!**/*.ts", "!*.map", "!package.json", "!package-lock.json"],
   "extraResources": [
     {
       "from": "dist",
@@ -21,9 +15,7 @@
     "icon": "dist/assets/icons",
     "target": ["portable"]
   },
-  "portable": {
-    "splashImage": "dist/assets/icons/electron.bmp"
-  },
+  "portable": {},
   "mac": {
     "icon": "dist/assets/icons",
     "target": ["dmg"]
