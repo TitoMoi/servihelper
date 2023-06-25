@@ -1,35 +1,46 @@
-name: Build/release
+name: Build
 
-on: push
-
-permissions: write-all
+on: [push]
 
 jobs:
-  release:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-
+  build_on_linux:
+    runs-on: ubuntu-latest
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
-
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@master
         with:
           node-version: 18
+      - name: install dependencies
+        run: npm install
+      - name: build
+        run: npm run build
+      - name: package
+        run: npm run  prepare:publish:linux
 
-      - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
+  build_on_mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@master
         with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.github_token }}
+          node-version: 18
+      - name: install dependencies
+        run: npm install
+      - name: build
+        run: npm run build
+      - name: package
+        run: npm run prepare:publish:mac:universal
 
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
-        env:
-          NODE_OPTIONS: "--max_old_space_size=4096"
+  build_on_win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@master
+        with:
+          node-version: 18
+      - name: install dependencies
+        run: npm install
+      - name: build
+        run: npm run build
+      - name: package
+        run: npm run prepare:publish:windows
