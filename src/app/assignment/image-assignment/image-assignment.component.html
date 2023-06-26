@@ -12,7 +12,8 @@
                 {{ t("ASSIGN_IMAGE_TITLE") }}
               </div>
               <div *ngIf="assignmentHeaderTitle" class="mt-1 mb-1">
-                {{ (assignmentHeaderTitle | sheetTitlePipe).name }}
+                <!-- This is a workaround, old files have a literal string and its not a key -->
+                {{ (assignmentHeaderTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE") }}
               </div>
             </ng-template>
           </th>

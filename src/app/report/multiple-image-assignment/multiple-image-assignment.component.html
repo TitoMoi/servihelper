@@ -56,8 +56,9 @@
         <ng-template #noTitle>
           <h4 class="m-1">
             <span *ngIf="!assignmentHeaderTitle">{{ t("ASSIGN_IMAGE_TITLE") }}</span>
+            <!-- This OR condition is a workaround, old files have a literal string and its not a key -->
             <span *ngIf="assignmentHeaderTitle">{{
-              (assignmentHeaderTitle | sheetTitlePipe).name
+              (assignmentHeaderTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE")
             }}</span>
           </h4>
         </ng-template>
