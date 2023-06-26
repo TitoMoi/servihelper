@@ -15,7 +15,12 @@ jobs:
       - name: build
         run: npm run build
       - name: package
-        run: npm run  prepare:publish:linux
+        run: npm run release:linux
+      - name: Step 4 - Use the Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with:
+          name: servihelper-linux
+          path: release
 
   build_on_mac:
     runs-on: macos-latest
@@ -29,7 +34,12 @@ jobs:
       - name: build
         run: npm run build
       - name: package
-        run: npm run prepare:publish:mac:universal
+        run: npm run release:mac:universal
+      - name: Step 4 - Use the Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with:
+          name: servihelper-mac
+          path: release
 
   build_on_win:
     runs-on: windows-latest
@@ -38,32 +48,14 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 18
-      - name: install dependencies
+      - name: Step 1 - install dependencies
         run: npm install
-      - name: build
+      - name: Step 2 - build the frontend
         run: npm run build
-      - name: package
-        run: npm run prepare:publish:windows
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
+      - name: Step 3 - package with Electron builder
+        run: npm run release:windows
+      - name: Step 4 - Use the Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: true
-          prerelease: false
-      - name: Upload release asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release
-          asset_name: servihelper-windows.zip
-          asset_content_type: application/zip
+          name: servihelper-windows
+          path: release
