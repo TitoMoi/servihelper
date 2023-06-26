@@ -12,11 +12,16 @@ fs.readdir(releaseDir, (err, files) => {
   files.forEach((file) => {
     const fileDir = path.join(releaseDir, file);
 
-    //Generated files of Windows, Mac and Linux that we want to keep
-    if (file === "win-unpacked" || file.match(/.*\.(dmg|AppImage)$/)?.length > 0) {
+    //The folder of Windows and Linux, and the file (binary) of Mac
+    if (
+      file === "win-unpacked" ||
+      file === `linux-unpacked` ||
+      file === `servihelper-${package.version}-universal.dmg`
+    ) {
       console.log("found " + fileDir);
 
-      if (file === "win-unpacked") {
+      //Elegant name
+      if (file === "win-unpacked" || file === "linux-unpacked") {
         fs.renameSync(fileDir, path.join(releaseDir + `/servihelper-${package.version}`));
       }
     } else {
