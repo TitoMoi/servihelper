@@ -10,11 +10,11 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 18
-      - name: install dependencies
+      - name: Step 1 - install dependencies
         run: npm install
-      - name: build
+      - name: Step 2 - build the frontend
         run: npm run build
-      - name: package
+      - name: Step 3 - package with Electron builder and clean release folder
         run: npm run release:linux
       - name: Step 4 - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
@@ -29,11 +29,11 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 18
-      - name: install dependencies
+      - name: Step 1 - install dependencies
         run: npm install
-      - name: build
+      - name: Step 2 - build the frontend
         run: npm run build
-      - name: package
+      - name: Step 3 - package with Electron builder and clean release folder
         run: npm run release:mac:universal
       - name: Step 4 - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
@@ -52,7 +52,7 @@ jobs:
         run: npm install
       - name: Step 2 - build the frontend
         run: npm run build
-      - name: Step 3 - package with Electron builder
+      - name: Step 3 - package with Electron builder and clean release folder
         run: npm run release:windows
       - name: Step 4 - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
