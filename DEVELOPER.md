@@ -41,24 +41,28 @@ Servihelper doesnt use angular lazy load as it is a desktop app and network is n
 
 Icons should be added at `app.component.ts` in the array of icons without the extension.
 
-## Build
+## Local Build
 
-Currently using electron-builder for windows and mac apple, the version of the app is automatically generated in the distributable with only updating the two existing package.json:
+The version of the app is automatically generated in the distributable with only updating the two existing package.json:
 
 - ./package.json
 - ./app/package.json
 
 So, before running the build script, update both package.
-Also update in the shared service:
-
-- ./src/app/services/shared.service.ts
 
 the `appVersion` property as this version latter is matched with latest tag from github.
 
 When creating the github tag, it must only contain the same version as it is in the `package.json`, do not add any letter, just numbers.
 
-- For windows use a windows computer and run script `prepare:publish:windows`
-- For mac use a mac computer and run script `prepare:publish:mac:universal`
+- Before the release, run the script `node scripts/remove-release-folder.js` to clean the folder
+- For windows use a windows computer and run script `release:windows`
+- For mac use a mac computer and run script `release:mac:universal`
+
+## Github Build
+
+- Just push a tag with the same version as in the package.json and a github action will run to create the binaries.
+- Download the binaries and create a draft release, upload the binaries.
+- The draft release title MUST be the version of the package without any letter, just numbers.
 
 ## Fonts
 
