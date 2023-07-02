@@ -1,16 +1,21 @@
 {
   "root": true,
   "ignorePatterns": [
-    "app/**/*", // ignore nodeJs files
+    "app/**/*",
     "dist/**/*",
     "release/**/*",
     "*.js"
   ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["./tsconfig.json", "./src/tsconfig.json"],
+        "project": [
+          "./tsconfig.json",
+          "./src/tsconfig.json"
+        ],
         "createDefaultProgram": true
       },
       "extends": [
@@ -34,8 +39,12 @@
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
     }
   ]
