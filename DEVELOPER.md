@@ -11,8 +11,8 @@ Servihelper aims to:
 
 ## Development Setup
 
-- After cloning the repository, create a folder "assets" in root.
-- Copy only src/assets/source into the new created "assets" folder.
+- After cloning the repository, create two folders "assets/source" in root.
+- Copy only src/assets/source into the new created "assets/source" folder.
 
 ## Language
 
