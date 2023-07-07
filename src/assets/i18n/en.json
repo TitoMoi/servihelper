@@ -262,5 +262,9 @@
   "tr": "Turkish",
   "zhCN": "Chinese",
   "NAV_MAPS": "Maps",
-  "MAP_BUTTON_CREATE_TITLE": "Create map"
+  "MAP_BUTTON_CREATE_TITLE": "Create map",
+  "MAP_CREATE_CREATE_POLYGON": "Create polygon",
+  "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "At least two markers are required",
+  "MAP_CREATE_REMOVE_POLYGON": "Remove polygon",
+  "MAP_CREATE_REMOVE_MARKERS": "Remove markers"
 }

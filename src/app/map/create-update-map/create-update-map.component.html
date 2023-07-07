@@ -1,3 +1,28 @@
-<p>create-update-map works!</p>
-
+<span *transloco="let t">
+    <a
+    mat-raised-button
+    color="primary"
+    class="mb-2"
+    [disabled]="!markerRef.length"
+  (click)="removeMarkers()"
+    >{{ t("MAP_CREATE_REMOVE_MARKERS") }}</a
+  >
+<a
+    mat-raised-button
+    color="primary"
+    class="mb-2"
+    [disabled]="polygon.length < 2 || !!polygonRef === true"
+  [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')"
+  (click)="createPolygon()"
+    >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
+  >
+  <a
+    mat-raised-button
+    class="mb-2"
+    [disabled]="!!polygonRef === false"
+  (click)="removePolygon()"
+    >{{ t("MAP_CREATE_REMOVE_POLYGON") }}</a
+  >
+  
 <div id="map"></div>
+</span>
