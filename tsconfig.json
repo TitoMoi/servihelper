@@ -16,7 +16,6 @@
     "noImplicitOverride": true,
     "noUnusedLocals": true,
     "target": "esnext",
-    "typeRoots": ["node_modules/@types"],
     "lib": ["esnext", "dom"],
     "useDefineForClassFields": false
   },
