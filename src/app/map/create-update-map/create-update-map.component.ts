@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from "@angular/core";
 import { CommonModule, NgFor, NgIf } from "@angular/common";
-import {Map, TileLayer, Polygon, Marker} from "leaflet";
+import {icon, Map, TileLayer, Polygon, Marker} from "leaflet";
 import { Subscription, fromEvent } from "rxjs";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -31,6 +31,20 @@ export class CreateUpdateMapComponent implements AfterViewInit {
   polygonRef:Polygon;
 
   ngAfterViewInit(): void {
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
+const iconDefault = icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+Marker.prototype.options.icon = iconDefault;
     this.map = new Map("map").setView([51.505, -0.09], 13);
 
     new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -50,6 +64,10 @@ export class CreateUpdateMapComponent implements AfterViewInit {
       this.markerRef.push(new Marker(clickEvent.latlng).addTo(this.map));
     }
   }));
+  }
+
+  isCreatePolygonBtnDisabled() {
+    return this.polygon.length < 2 || !!(this.polygonRef) === true
   }
 
   createPolygon() {

@@ -25,7 +25,11 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.json",
             "polyfills": "src/polyfills.ts",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": ["src/favicon.ico", "src/assets", {
+              "glob": "**/*",
+              "input": "node_modules/leaflet/dist/images/",
+              "output": "assets/"
+           }],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
               "node_modules/bootstrap/dist/css/bootstrap-utilities.min.css",
