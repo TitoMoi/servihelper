@@ -30,6 +30,8 @@ import { CreateUpdateRoleComponent } from "./roles/create-update-role/create-upd
 import { DeleteRoleComponent } from "./roles/delete-role/delete-role.component";
 import { CreateUpdateSheetTitleComponent } from "app/sheet-title/create-update-sheet-title/create-update-sheet-title.component";
 import { DeleteSheetTitleComponent } from "app/sheet-title/delete-sheet-title/delete-sheet-title.component";
+import { MapComponent } from "app/map/map.component";
+import { CreateUpdateMapComponent } from "app/map/create-update-map/create-update-map.component";
 
 export const routes: Routes = [
   {
@@ -187,5 +189,13 @@ export const routes: Routes = [
   {
     path: "info",
     component: QuestionComponent,
+  },
+  {
+    path: "map",
+    component: MapComponent,
+  },
+  {
+    path: "map/create",
+    component: CreateUpdateMapComponent,
   },
 ];
