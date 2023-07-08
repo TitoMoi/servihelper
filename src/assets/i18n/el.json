@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Δωμάτιο",
   "ASSIGN_CREATE_THEME": "Θέμα",
   "ASSIGN_CREATE_TITLE": "Δημιουργία ανάθεσης",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "First you need to create assignment types, rooms and participants",
   "ASSIGN_DELETE_TITLE": "Κατάργηση της ανάθεσης",
   "ASSIGN_DELETE_WARNING": "Αυτή η ενέργεια είναι μη αναστρέψιμη",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Όλες οι εργασίες έχουν προγραμματιστεί σύμφωνα με την ημερομηνία, το δωμάτιο και τον ρόλο που επιλέχθηκαν",

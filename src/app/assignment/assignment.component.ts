@@ -154,6 +154,14 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     this.subscription.unsubscribe();
   }
 
+  isCreateAssignmentDisabled() {
+    return !(
+      this.roomService.getRoomsLength() &&
+      this.assignTypeService.getAssignTypesLength() &&
+      this.participantService.getParticipantsLength()
+    );
+  }
+
   getAssignmentsSlice(start, end): AssignmentInterface[] {
     const assignmentsSlice = this.assignments.slice(start, end);
     //update pointer for next pagination iteration

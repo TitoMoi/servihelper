@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Kamer",
   "ASSIGN_CREATE_THEME": "Thema",
   "ASSIGN_CREATE_TITLE": "Creëer opdracht",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Eerst moet u opdrachttypen, kamers en deelnemers maken",
   "ASSIGN_DELETE_TITLE": "Verwijder de opdracht",
   "ASSIGN_DELETE_WARNING": "Deze actie is onomkeerbaar",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Alle opdrachten zijn gepland volgens de geselecteerde datum, kamer en rol",

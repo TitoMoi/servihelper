@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "部屋",
   "ASSIGN_CREATE_THEME": "テーマ",
   "ASSIGN_CREATE_TITLE": "割り当てを作成します",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "まず、割り当てタイプ、部屋、参加者を作成する必要があります",
   "ASSIGN_DELETE_TITLE": "割り当てを削除します",
   "ASSIGN_DELETE_WARNING": "このアクションは不可逆的です",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "すべての課題は、選択された日付、部屋、役割に従ってスケジュールされています",

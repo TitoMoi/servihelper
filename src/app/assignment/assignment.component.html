@@ -4,15 +4,22 @@
   <div class="row mb-2 g-0">
     <div class="col-auto">
       <div class="d-flex align-items-center">
-        <a
-          mat-raised-button
-          [disableRipple]="true"
-          color="primary"
-          routerLink="create"
-          routerLinkActive="active"
+        <div
+          [matTooltip]="t('ASSIGN_CREATE_TITLE_TOOLTIP')"
+          [matTooltipDisabled]="!isCreateAssignmentDisabled()"
         >
-          {{ t("ASSIGN_CREATE_TITLE") }}
-        </a>
+          <a
+            mat-raised-button
+            [disableRipple]="true"
+            [disabled]="isCreateAssignmentDisabled()"
+            color="primary"
+            routerLink="create"
+            routerLinkActive="active"
+          >
+            {{ t("ASSIGN_CREATE_TITLE") }}
+          </a>
+        </div>
+
         <ng-container *ngIf="assignmentsTable.length">
           <mat-icon
             class="mx-3"

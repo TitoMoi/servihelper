@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "ঘর",
   "ASSIGN_CREATE_THEME": "থিম",
   "ASSIGN_CREATE_TITLE": "অ্যাসাইনমেন্ট তৈরি করুন",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "প্রথমে আপনাকে অ্যাসাইনমেন্টের ধরণ, কক্ষ এবং অংশগ্রহণকারীদের তৈরি করতে হবে",
   "ASSIGN_DELETE_TITLE": "অ্যাসাইনমেন্ট সরান",
   "ASSIGN_DELETE_WARNING": "এই ক্রিয়াটি অপরিবর্তনীয়",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "সমস্ত অ্যাসাইনমেন্ট নির্বাচিত তারিখ, ঘর এবং ভূমিকা অনুযায়ী নির্ধারিত হয়েছে",

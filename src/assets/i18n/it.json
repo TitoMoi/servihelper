@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Camera",
   "ASSIGN_CREATE_THEME": "Tema",
   "ASSIGN_CREATE_TITLE": "Crea un incarico",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Per prima cosa devi creare tipi di assegnazione, stanze e partecipanti",
   "ASSIGN_DELETE_TITLE": "Rimuovi l'assegnazione",
   "ASSIGN_DELETE_WARNING": "Questa azione è irreversibile",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Tutti i compiti sono stati programmati in base alla data, alla stanza e al ruolo selezionato",

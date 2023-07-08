@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Cameră",
   "ASSIGN_CREATE_THEME": "Temă",
   "ASSIGN_CREATE_TITLE": "Creați atribuire",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Mai întâi trebuie să creați tipuri de atribuire, camere și participanți",
   "ASSIGN_DELETE_TITLE": "Eliminați atribuirea",
   "ASSIGN_DELETE_WARNING": "Această acțiune este ireversibilă",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Toate misiunile au fost programate în funcție de data, camera și rolul selectat",

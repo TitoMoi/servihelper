@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Chambre",
   "ASSIGN_CREATE_THEME": "Thème",
   "ASSIGN_CREATE_TITLE": "Créer une affectation",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Vous devez d'abord créer des types d'affectations, des chambres et des participants",
   "ASSIGN_DELETE_TITLE": "Supprimer l'attribution",
   "ASSIGN_DELETE_WARNING": "Cette action est irréversible",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Toutes les affectations ont été programmées en fonction de la date, de la salle et du rôle sélectionnés",

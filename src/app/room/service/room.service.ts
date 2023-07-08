@@ -34,6 +34,10 @@ export class RoomService {
     return deepClone ? structuredClone(this.#rooms) : this.#rooms;
   }
 
+  getRoomsLength() {
+    return this.#rooms?.length;
+  }
+
   /**
    *
    * @param roomId the id of the room to search for the name

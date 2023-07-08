@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Номер",
   "ASSIGN_CREATE_THEME": "Тема",
   "ASSIGN_CREATE_TITLE": "Создать задание",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Сначала вам нужно создать типы заданий, комнаты и участники",
   "ASSIGN_DELETE_TITLE": "Удалить задание",
   "ASSIGN_DELETE_WARNING": "Это действие необратимо",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Все задания были запланированы в соответствии с датой, выбранной комнатой и роли",

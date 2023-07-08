@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Oda",
   "ASSIGN_CREATE_THEME": "Tema",
   "ASSIGN_CREATE_TITLE": "Ödev Oluşturun",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "First you need to create assignment types, rooms and participants",
   "ASSIGN_DELETE_TITLE": "Ödevi Kaldır",
   "ASSIGN_DELETE_WARNING": "Bu eylem geri döndürülemez",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Tüm ödevler seçilen tarihe, odaya ve rolüne göre planlanmıştır",

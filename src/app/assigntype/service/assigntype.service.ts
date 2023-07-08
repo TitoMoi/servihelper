@@ -39,6 +39,10 @@ export class AssignTypeService {
     return deepClone ? structuredClone(this.#assignTypes) : this.#assignTypes;
   }
 
+  getAssignTypesLength() {
+    return this.#assignTypes?.length;
+  }
+
   /**
    *
    * @returns true if assignTypes are saved to disk or false

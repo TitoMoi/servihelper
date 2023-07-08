@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Sala",
   "ASSIGN_CREATE_THEME": "Tema",
   "ASSIGN_CREATE_TITLE": "Criar atribuição",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Primeiro você precisa criar tipos de atribuição, salas e participantes",
   "ASSIGN_DELETE_TITLE": "Eliminar designação",
   "ASSIGN_DELETE_WARNING": "Esta ação é irreversível",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Todas as tarefas foram agendadas de acordo com a data, sala e função selecionadas",

@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Pomieszczenie",
   "ASSIGN_CREATE_THEME": "Motyw",
   "ASSIGN_CREATE_TITLE": "Utwórz zadanie",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Najpierw musisz utworzyć rodzaje zadań, pokoje i uczestników",
   "ASSIGN_DELETE_TITLE": "Usuń przypisanie",
   "ASSIGN_DELETE_WARNING": "Ta akcja jest nieodwracalna",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Wszystkie zadania zostały zaplanowane zgodnie z wybraną datą, pokojem i roli",

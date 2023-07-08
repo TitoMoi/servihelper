@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "कमरा",
   "ASSIGN_CREATE_THEME": "थीम",
   "ASSIGN_CREATE_TITLE": "असाइनमेंट बनाएं",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "सबसे पहले आपको असाइनमेंट प्रकार, कमरे और प्रतिभागी बनाने की आवश्यकता है",
   "ASSIGN_DELETE_TITLE": "असाइनमेंट निकालें",
   "ASSIGN_DELETE_WARNING": "यह कार्रवाई अपरिवर्तनीय है",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "सभी असाइनमेंट को तिथि, कमरे और भूमिका के अनुसार निर्धारित किया गया है",

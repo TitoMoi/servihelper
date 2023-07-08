@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "房间",
   "ASSIGN_CREATE_THEME": "主题",
   "ASSIGN_CREATE_TITLE": "创建分配",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "首先，您需要创建作业类型，房间和参与者",
   "ASSIGN_DELETE_TITLE": "删除作业",
   "ASSIGN_DELETE_WARNING": "这个动作是不可逆转的",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "所有作业均根据选定的日期，房间和角色安排",

@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "Zimmer",
   "ASSIGN_CREATE_THEME": "Thema",
   "ASSIGN_CREATE_TITLE": "Zuordnung erstellen",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Zuerst müssen Sie Zuweisungstypen, Räume und Teilnehmer erstellen",
   "ASSIGN_DELETE_TITLE": "Zuordnung entfernen",
   "ASSIGN_DELETE_WARNING": "Diese Aktion ist irreversibel",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Alle Aufgaben wurden nach Datum, Raum und Rolle ausgewählt",

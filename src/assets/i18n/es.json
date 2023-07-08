@@ -31,6 +31,7 @@
   "ASSIGN_CREATE_ROOM": "Sala",
   "ASSIGN_CREATE_THEME": "Tema",
   "ASSIGN_CREATE_TITLE": "Crear assignación",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Primero debe crear tipos de tareas, salas y participantes",
   "ASSIGN_DELETE_TITLE": "Eliminar asignación",
   "ASSIGN_DELETE_WARNING": "Esta accion es irreversible",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Todas las tareas se han programado de acuerdo con la fecha, la sala y el rol seleccionados",

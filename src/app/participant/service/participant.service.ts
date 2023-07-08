@@ -44,6 +44,10 @@ export class ParticipantService {
     return deepClone ? structuredClone(this.#participants) : this.#participants;
   }
 
+  getParticipantsLength() {
+    return this.#participants?.length;
+  }
+
   /**
    *
    * @returns true if participants are saved to disk or false

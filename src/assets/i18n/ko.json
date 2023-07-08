@@ -30,6 +30,7 @@
   "ASSIGN_CREATE_ROOM": "방",
   "ASSIGN_CREATE_THEME": "주제",
   "ASSIGN_CREATE_TITLE": "과제를 만듭니다",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "먼저 과제 유형, 객실 및 참가자를 만들어야합니다.",
   "ASSIGN_DELETE_TITLE": "과제를 제거하십시오",
   "ASSIGN_DELETE_WARNING": "이 조치는 돌이킬 수 없습니다",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "모든 과제는 선택된 날짜, 객실 및 역할에 따라 예정되었습니다.",
