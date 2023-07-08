@@ -1,34 +1,67 @@
 <span *transloco="let t">
-    <div class="d-flex">
-
-        <a
-        mat-raised-button
-        color="primary"
-        class="mb-2 me-2"
-        [disabled]="!markerRef.length"
+  <div class="d-flex">
+    <a
+      mat-raised-button
+      color="primary"
+      class="mb-2 me-2"
+      [disabled]="!markerRef.length"
       (click)="removeMarkers()"
-        >{{ t("MAP_CREATE_REMOVE_MARKERS") }}</a
-      >
-      <div [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')" [matTooltipDisabled]="!isCreatePolygonBtnDisabled()">
-        <a
+      >{{ t("MAP_CREATE_REMOVE_MARKERS") }}</a
+    >
+    <div
+      [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')"
+      [matTooltipDisabled]="!isCreatePolygonBtnDisabled()"
+    >
+      <a
         mat-raised-button
         color="primary"
         class="mb-2 me-2"
         [disabled]="isCreatePolygonBtnDisabled()"
-      
-      (click)="createPolygon()"
+        (click)="createPolygon()"
         >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
       >
     </div>
-    
-      <a
-        mat-raised-button
-        class="mb-2"
-        [disabled]="!!polygonRef === false"
+
+    <a
+      mat-raised-button
+      class="mb-2"
+      [disabled]="!!polygonRef === false"
       (click)="removePolygon()"
-        >{{ t("MAP_CREATE_REMOVE_POLYGON") }}</a
-      >
+      >{{ t("MAP_CREATE_REMOVE_POLYGON") }}</a
+    >
+  </div>
+  <form [formGroup]="mapForm" novalidate>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <input
+            matInput
+            [appautofocus]="isUpdate ? false : true"
+            spellcheck="false"
+            formControlName="name"
+          />
+        </mat-form-field>
+      </div>
     </div>
-  
-<div id="map"></div>
+  </form>
+  <!-- The reference for leaflet to load the map -->
+  <div id="map" class="mb-2"></div>
+  <button
+    mat-raised-button
+    type="button"
+    class="me-3"
+    [routerLink]="isUpdate ? '../..' : '..'"
+  >
+    {{ t("BUTTON_CANCEL") }}
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="save()"
+    [disabled]="mapForm.invalid"
+  >
+    {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+  </button>
 </span>

@@ -12,6 +12,8 @@ import { PdfService } from "./services/pdf.service";
 import { RouterOutlet } from "@angular/router";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { SheetTitleService } from "./sheet-title/service/sheet-title.service";
+import { MapService } from "./map/services/map.service";
+import { PolygonService } from "./map/services/polygon.service";
 
 @Component({
   selector: "app-root",
@@ -67,7 +69,9 @@ export class AppComponent implements OnInit {
     private sheetTitleService: SheetTitleService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private pdfService: PdfService
+    private pdfService: PdfService,
+    private mapService: MapService,
+    private polygonService: PolygonService
   ) {
     //Register icons
     for (const iconFileName of this.icons) {
@@ -92,5 +96,9 @@ export class AppComponent implements OnInit {
     this.noteService.getNotes();
     this.participantService.getParticipants();
     this.sheetTitleService.getTitles();
+    this.participantService.getParticipants();
+    this.sheetTitleService.getTitles();
+    this.mapService.getMaps();
+    this.polygonService.getPolygons();
   }
 }

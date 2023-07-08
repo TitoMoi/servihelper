@@ -27,6 +27,8 @@ export class ConfigService {
   roomsFilename = "room.json";
   configFilename = "config.json";
   sheetTitleFilename = "sheetTitle.json";
+  mapsFilename = "maps.json";
+  polygonsFilename = "polygons.json";
 
   /** Where the file is depending on the context__dirname is where the .js file exists */
   configPath: string = APP_CONFIG.production
@@ -58,6 +60,14 @@ export class ConfigService {
   sheetTitlePath = APP_CONFIG.production
     ? path.join(__dirname, this.sourceFilesPath, this.sheetTitleFilename)
     : path.join("./", this.sourceFilesPath, this.sheetTitleFilename);
+
+  mapsPath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.mapsFilename)
+    : path.join("./", this.sourceFilesPath, this.mapsFilename);
+
+  polygonsPath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.polygonsFilename)
+    : path.join("./", this.sourceFilesPath, this.polygonsFilename);
 
   configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
   /**
