@@ -1,6 +1,7 @@
-import { LatLngTuple } from "leaflet";
+import { LatLng } from "leaflet";
 
-export interface MapInterface {
+//The data that we want to associate with a map, this is not the leaflet map
+export interface MapContextInterface {
   id: string;
   name: string;
   poligonId: string;
@@ -12,6 +13,6 @@ export interface MapInterface {
 
 export interface PolygonInterface {
   id: string;
-  latLngTupleList: LatLngTuple[]; //We save the polygon points, then we create in runtime the polygon from leaflet
+  latLngList: LatLng[]; //We save the polygon points, then we create in runtime the polygon from leaflet
   m: Date; //last modified date
 }

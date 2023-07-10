@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { MapInterface } from "../model/map.model";
+import { MapContextInterface } from "../model/map.model";
 import { ConfigService } from "app/config/service/config.service";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -13,15 +13,15 @@ export class MapService {
   //flag to indicate that maps file has changed
   hasChanged = true;
   //The array of maps in memory
-  #maps: MapInterface[];
+  #maps: MapContextInterface[];
   //The map of maps for look up of maps
-  #mapsMap: Map<string, MapInterface> = new Map();
+  #mapsMap: Map<string, MapContextInterface> = new Map();
 
   /**
    *
    * @returns MapInterface[] the array of maps
    */
-  getMaps(deepClone = false): MapInterface[] {
+  getMaps(deepClone = false): MapContextInterface[] {
     if (!this.hasChanged) {
       return deepClone ? structuredClone(this.#maps) : this.#maps;
     }
@@ -57,7 +57,7 @@ export class MapService {
    * @param map the map to create
    * @returns the id of the new map
    */
-  createMap(map: MapInterface): string {
+  createMap(map: MapContextInterface): string {
     //Generate id for the map
     map.id = nanoid(this.configService.nanoMaxCharId);
     map.m = new Date();
@@ -75,9 +75,9 @@ export class MapService {
    * @param id the id of the map to search for
    * @returns the map that is ALWAYS found
    */
-  getMap(id: string): MapInterface {
+  getMap(id: string): MapContextInterface | undefined {
     //search map
-    return this.#mapsMap.get(id)!;
+    return this.#mapsMap.get(id);
   }
 
   /**
@@ -85,7 +85,7 @@ export class MapService {
    * @param map the map to update
    * @returns true if map is updated and saved false otherwise
    */
-  updateMap(map: MapInterface): boolean {
+  updateMap(map: MapContextInterface): boolean {
     //update map
     for (let i = 0; i < this.#maps.length; i++) {
       if (this.#maps[i].id === map.id) {

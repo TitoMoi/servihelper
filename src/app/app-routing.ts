@@ -198,4 +198,8 @@ export const routes: Routes = [
     path: "map/create",
     component: CreateUpdateMapComponent,
   },
+  {
+    path: "map/update/:id",
+    component: CreateUpdateMapComponent,
+  },
 ];

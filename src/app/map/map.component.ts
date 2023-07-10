@@ -4,6 +4,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
+import { MapService } from "./services/map.service";
+import { MapContextInterface } from "./model/map.model";
 
 @Component({
   selector: "app-map",
@@ -21,4 +23,9 @@ import { TranslocoModule } from "@ngneat/transloco";
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"],
 })
-export class MapComponent {}
+export class MapComponent {
+  //In memory maps
+  maps: MapContextInterface[] = this.mapService.getMaps();
+
+  constructor(private mapService: MapService) {}
+}

@@ -1,6 +1,13 @@
-import { AfterViewInit, Component, OnInit, inject } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  inject,
+} from "@angular/core";
 import { CommonModule, NgFor, NgIf } from "@angular/common";
-import { icon, Map, TileLayer, Polygon, Marker, LatLngTuple } from "leaflet";
+import { icon, Map, TileLayer, Polygon, Marker, LatLng } from "leaflet";
 import { Subscription, fromEvent } from "rxjs";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -8,7 +15,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, Validators, UntypedFormBuilder } from "@angular/forms";
-import { MapInterface, PolygonInterface } from "../model/map.model";
+import { MapContextInterface, PolygonInterface } from "../model/map.model";
 import { MapService } from "../services/map.service";
 import { PolygonService } from "../services/polygon.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -34,42 +41,47 @@ import { AutoFocusDirective } from "app/autofocus/autofocus.directive";
   ],
   templateUrl: "./create-update-map.component.html",
   styleUrls: ["./create-update-map.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUpdateMapComponent implements OnInit, AfterViewInit {
-  private untypedFormBuilder = inject(UntypedFormBuilder);
+  private formBuilder = inject(UntypedFormBuilder);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private mapService = inject(MapService);
   private polygonService = inject(PolygonService);
+  private cdr = inject(ChangeDetectorRef);
 
-  loadedMap = this.mapService.getMap(this.activatedRoute.snapshot.params.id);
+  loadedMap: MapContextInterface = this.mapService.getMap(
+    this.activatedRoute.snapshot.params.id
+  );
   loadedPolygon = this.polygonService.getPolygon(this.loadedMap?.poligonId);
 
   isUpdate = this.loadedMap ? true : false;
 
-  mapForm = this.untypedFormBuilder.group({
-    id: this.loadedMap ? this.loadedMap.id : undefined,
-    name: [this.loadedMap ? this.loadedMap.name : undefined, Validators.required],
-    poligonId: [this.loadedMap ? this.loadedMap.poligonId : undefined, Validators.required],
-    initDateList: [this.loadedMap ? this.loadedMap.initDateList : undefined],
-    endDateList: [this.loadedMap ? this.loadedMap.endDateList : undefined],
-    m: [this.loadedMap ? this.loadedMap.m : undefined],
+  //MapContextInterface
+  mapForm = this.formBuilder.group({
+    id: this.loadedMap?.id,
+    name: [this.loadedMap?.name, Validators.required],
+    poligonId: [this.loadedMap?.poligonId, Validators.required],
+    initDateList: [this.loadedMap?.initDateList],
+    endDateList: [this.loadedMap?.endDateList],
+    assignedToList: [this.loadedMap?.assignedToList],
+    m: [this.loadedMap?.m],
   });
 
-  polygonForm = this.untypedFormBuilder.group({
-    id: this.loadedMap ? this.loadedMap.id : undefined,
-    latLngTupleList: this.loadedPolygon ? this.loadedPolygon.latLngTupleList : undefined,
+  //PolygonInterface
+  polygonForm = this.formBuilder.group({
+    id: this.loadedMap?.id,
+    latLngList: this.loadedPolygon?.latLngList, //User do clicks on map
+    m: this.loadedPolygon?.m,
   });
 
   subscription: Subscription = new Subscription();
+
+  //The leaflet map
   map: Map;
-
+  //Array of marker references
   markerRef: Marker[] = [];
-
-  //User do clicks on map
-  latLngTupleList: LatLngTuple[] = [];
-  polygonRef: PolygonInterface;
-
   //Leaflet polygon
   leafletPolygon: Polygon;
 
@@ -103,46 +115,62 @@ export class CreateUpdateMapComponent implements OnInit, AfterViewInit {
     //https://leafletjs.com/reference.html#map-click
     this.subscription.add(
       fromEvent(this.map, "click").subscribe((clickEvent: any) => {
-        if (!this.polygonRef) {
-          this.latLngTupleList.push(clickEvent.latlng);
-          this.markerRef.push(new Marker(clickEvent.latlng).addTo(this.map));
+        const polygonId = this.polygonForm.get("id")?.value;
+        if (!polygonId) {
+          const latLngListControl = this.polygonForm.get("latLngList");
+          const latLngList = (latLngListControl.value as LatLng[]) || ([] as LatLng[]);
+          latLngList.push(clickEvent.latlng);
+          latLngListControl.patchValue(latLngList);
+          this.createMarker(clickEvent.latlng);
+          this.cdr.detectChanges();
         }
       })
     );
   }
 
+  /**
+   *
+   * @returns Check if is possible to create the polygon
+   */
   isCreatePolygonBtnDisabled() {
-    return this.latLngTupleList.length < 2 || !!this.polygonRef === true;
+    const latLngList = this.polygonForm.get("latLngList").value as LatLng[];
+    if (latLngList) {
+      return latLngList.length < 2 || this.polygonExists();
+    }
+    return true;
+  }
+
+  /**
+   * @param latLng the tuple object to add to the map
+   * Store the reference in an array of refs.
+   */
+  createMarker(latLng: LatLng) {
+    this.markerRef.push(new Marker(latLng).addTo(this.map));
+  }
+
+  polygonExists() {
+    return Boolean(this.polygonForm.get("id").value);
   }
 
   createPolygon() {
-    this.polygonRef = {
-      id: "1", //just to allow the save button
-      latLngTupleList: this.latLngTupleList,
-      m: null,
-    };
-    this.leafletPolygon = new Polygon(this.polygonRef.latLngTupleList).addTo(this.map);
-    this.mapForm.get("poligonId").setValue(this.polygonRef.id);
-    this.polygonForm.get("latLngTupleList").setValue(this.polygonRef.latLngTupleList);
+    this.polygonForm.get("id").setValue("1");
+    this.leafletPolygon = new Polygon(this.polygonForm.get("latLngList").value).addTo(
+      this.map
+    );
   }
 
   removePolygon() {
-    this.latLngTupleList = [];
-    this.polygonRef = undefined;
+    this.polygonForm.get("id").reset();
+    this.polygonForm.get("latLngList").reset();
     this.leafletPolygon.remove();
     this.removeMarkers();
-    this.mapForm.get("poligonId").reset();
-    this.polygonForm.get("latLngTupleList").reset();
   }
 
   removeMarkers() {
     this.markerRef.forEach((m) => m.remove());
     this.markerRef = [];
-
-    //Prevent create a polygon when no markers are visible
-    if (!this.polygonRef) {
-      this.latLngTupleList = [];
-    }
+    //Remove the points in the polygon
+    this.polygonForm.get("latLngList").reset();
   }
 
   //We need to save the polygon and the map
@@ -151,7 +179,7 @@ export class CreateUpdateMapComponent implements OnInit, AfterViewInit {
     const polygon: PolygonInterface = this.polygonForm.value;
     const polygonId = this.polygonService.createPolygon(polygon);
     //Save the map
-    const map: MapInterface = this.mapForm.value;
+    const map: MapContextInterface = this.mapForm.value;
     map.poligonId = polygonId;
     this.mapService.createMap(map);
 
