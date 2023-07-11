@@ -559,6 +559,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
         if (!this.assignTypes.length) {
           this.noAvailableAssignTypesByRole = true;
+          //Do not let the user click as there are no assign types
+          this.form.get("assignType").markAsTouched();
         }
       }
     }
