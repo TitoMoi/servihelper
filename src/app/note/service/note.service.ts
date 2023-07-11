@@ -38,7 +38,7 @@ export class NoteService {
    *
    * @returns true if notes are saved to disk or false
    */
-  saveNotesToFile(): boolean {
+  #saveNotesToFile(): boolean {
     //Write notes back to file
     writeJson(this.configService.notesPath, this.#notes);
     return true;
@@ -52,11 +52,13 @@ export class NoteService {
   createNote(note: NoteInterface): boolean {
     //Generate id for the note
     note.id = nanoid(this.configService.nanoMaxCharId);
+    //trim the name
+    note.name = note.name.trim();
     //add note to notes
     this.#notes.push(note);
     this.#notesMap.set(note.id, note);
     //save notes with the new note
-    return this.saveNotesToFile();
+    return this.#saveNotesToFile();
   }
 
   /**
@@ -77,10 +79,12 @@ export class NoteService {
     //update note
     for (let i = 0; i < this.#notes.length; i++) {
       if (this.#notes[i].id === note.id) {
+        //trim the name
+        note.name = note.name.trim();
         this.#notes[i] = note;
         this.#notesMap.set(note.id, note);
         //save notes with the updated note
-        return this.saveNotesToFile();
+        return this.#saveNotesToFile();
       }
     }
     return false;
@@ -96,6 +100,6 @@ export class NoteService {
     this.#notes = this.#notes.filter((b) => b.id !== id);
     this.#notesMap.delete(id);
     //save notes
-    return this.saveNotesToFile();
+    return this.#saveNotesToFile();
   }
 }

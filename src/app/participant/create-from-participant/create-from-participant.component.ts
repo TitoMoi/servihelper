@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 import { ParticipantInterface } from "../model/participant.model";
@@ -33,7 +33,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     RouterLink,
   ],
 })
-export class CreateFromParticipantComponent implements OnInit {
+export class CreateFromParticipantComponent {
   participants: ParticipantInterface[] = this.participantService.getParticipants(true);
 
   participantForm = this.formBuilder.group({
@@ -49,9 +49,6 @@ export class CreateFromParticipantComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
-
-  createParticipant() {}
   onSubmit(): void {
     const participantId = this.participantForm.get("principal").value;
 

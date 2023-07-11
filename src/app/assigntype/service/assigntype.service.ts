@@ -61,6 +61,7 @@ export class AssignTypeService {
   createAssignType(assignType: AssignTypeInterface): string {
     //Generate id for the assignType
     assignType.id = nanoid(this.configService.nanoMaxCharId);
+    //trim the name
     assignType.name = assignType.name.trim();
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);
@@ -105,10 +106,11 @@ export class AssignTypeService {
    * @returns true if assignType is updated and saved false otherwise
    */
   updateAssignType(assignType: AssignTypeInterface): boolean {
-    assignType.name = assignType.name.trim();
     //update assignType
     for (let i = 0; i < this.#assignTypes.length; i++) {
       if (this.#assignTypes[i].id === assignType.id) {
+        //trim name
+        assignType.name = assignType.name.trim();
         this.#assignTypes[i] = assignType;
         this.#assignTypesMap.set(assignType.id, assignType);
         this.#assignTypesMapByName.set(assignType.name, assignType);

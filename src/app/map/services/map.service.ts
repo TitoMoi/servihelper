@@ -60,6 +60,8 @@ export class MapService {
   createMap(map: MapContextInterface): string {
     //Generate id for the map
     map.id = nanoid(this.configService.nanoMaxCharId);
+    //trim name
+    map.name = map.name.trim();
     map.m = new Date();
     //add map to maps
     this.#maps.push(map);
@@ -89,6 +91,8 @@ export class MapService {
     //update map
     for (let i = 0; i < this.#maps.length; i++) {
       if (this.#maps[i].id === map.id) {
+        //trim name
+        map.name = map.name.trim();
         map.m = new Date();
         this.#maps[i] = map;
         this.#mapsMap.set(map.id, map);

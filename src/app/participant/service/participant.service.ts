@@ -66,6 +66,8 @@ export class ParticipantService {
   createParticipant(participant: ParticipantInterface): boolean {
     //Generate id for the participant
     participant.id = nanoid(this.configService.nanoMaxCharId);
+    //Trim the name
+    participant.name = participant.name.trim();
     //add participant to participants
     this.#participants.push(participant);
     this.#participantsMap.set(participant.id, participant);
@@ -105,6 +107,8 @@ export class ParticipantService {
       if (this.#participants[i].id === participant.id) {
         //Clean incoming participant first, maybe has dynamic data from assignments section
         const pModel = new ParticipantModel(participant);
+        //Trim the name
+        pModel.name = pModel.name.trim();
         //Convert class to obj
         this.#participants[i] = { ...pModel };
 
