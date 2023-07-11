@@ -57,6 +57,7 @@ When creating the github tag, it must only contain the same version as it is in 
 - Before the release, run the script `node scripts/remove-release-folder.js` to clean the folder
 - For windows use a windows computer and run script `release:windows`
 - For mac use a mac computer and run script `release:mac:universal`
+- For linux distributions use a linux computer and run script `release:linux`
 
 ## Github Build
 
