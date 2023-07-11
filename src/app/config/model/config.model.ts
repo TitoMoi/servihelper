@@ -1,5 +1,6 @@
 import { DateFormatStyles } from "@ngneat/transloco-locale";
 import { RoleInterface } from "app/roles/model/role.model";
+import { LatLngLiteral } from "leaflet";
 
 export type ConfigOptionsType =
   | "lang"
@@ -17,6 +18,7 @@ export type ConfigOptionsType =
   | "defaultWeekDayBegins"
   | "defaultReportDateFormat"
   | "reportTitle"
+  | "lastMapClick"
   | "roles"
   | "role";
 
@@ -41,6 +43,7 @@ export interface ConfigInterface {
   assignmentRoomTitle?: string;
   assignmentNoteTitle?: string;
   reportTitle?: string;
+  lastMapClick: LatLngLiteral;
   roles?: RoleInterface[];
   role?: string;
 }

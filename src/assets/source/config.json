@@ -14,6 +14,7 @@
   "defaultReportFontSize": "",
   "defaultReportDateColor": "",
   "defaultReportDateFormat": "full",
+  "lastMapClick": { "lat": 41.254340619843205, "lng": -74.35855865478517 },
   "roles": [],
   "role": "administrator"
 }

@@ -60,7 +60,7 @@
     color="primary"
     type="button"
     (click)="save()"
-    [disabled]="mapForm.invalid"
+    [disabled]="mapForm.invalid || !polygonExists()"
   >
     {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
   </button>

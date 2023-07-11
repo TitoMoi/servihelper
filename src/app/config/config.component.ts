@@ -102,6 +102,7 @@ export class ConfigComponent implements OnDestroy {
     defaultReportDateColor: "#FFFFFF",
     defaultWeekDayBegins: 1,
     defaultReportDateFormat: this.translocoDateFormats[3],
+    lastMapClick: { lat: 41.254340619843205, lng: -74.35855865478517 }, //warwick
     roles: [],
     role: this.configService.administratorKey,
   };
