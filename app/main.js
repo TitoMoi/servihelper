@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var path = require("path");
 var fs_1 = require("fs");
@@ -59,16 +59,17 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true,
             allowRunningInsecureContent: serve ? true : false,
-            contextIsolation: false
-        }
+            contextIsolation: false,
+        },
     });
     /* require("@electron/remote/main").enable(win.webContents); */
     if (serve) {
         win.webContents.openDevTools();
         require("electron-reload")(__dirname, {
-            electron: require(path.join(__dirname, "/../node_modules/electron"))
+            electron: require(path.join(__dirname, "/../node_modules/electron")),
         });
         win.loadURL("http://localhost:4200");
+        win.maximize();
     }
     else {
         // Path when running electron executable
@@ -80,8 +81,9 @@ function createWindow() {
         win.loadURL(url.format({
             pathname: path.join(__dirname, pathIndex),
             protocol: "file:",
-            slashes: true
+            slashes: true,
         }));
+        win.maximize();
     }
     // Emitted when the window is closed.
     win.on("closed", function () {
@@ -101,8 +103,8 @@ function createWindow() {
                     winPrint = new electron_1.BrowserWindow({
                         show: false,
                         webPreferences: {
-                            javascript: true
-                        }
+                            javascript: true,
+                        },
                     });
                     return [4 /*yield*/, winPrint.loadFile("assets/web/blank.html")];
                 case 1:
