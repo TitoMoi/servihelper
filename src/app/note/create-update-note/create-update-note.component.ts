@@ -43,8 +43,8 @@ export class CreateUpdateNoteComponent implements OnDestroy {
   toolbar: Toolbar = [["bold"], ["italic"], ["underline"]];
 
   form: UntypedFormGroup = this.formBuilder.group({
-    id: this.n ? this.n.id : undefined,
-    name: [this.n ? this.n.name : undefined, Validators.required],
+    id: this.n?.id,
+    name: [this.n?.name, Validators.required],
     editorContent: this.n
       ? this.n.editorContent
       : new UntypedFormControl({ value: undefined, disabled: false }, Validators.required),

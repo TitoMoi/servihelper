@@ -36,10 +36,10 @@ export class CreateUpdateAssignTypeComponent {
   isUpdate = this.at ? true : false;
 
   form = this.formBuilder.group({
-    id: this.at ? this.at.id : undefined,
-    name: [this.at ? this.at.name : undefined, Validators.required],
+    id: this.at?.id,
+    name: [this.at?.name, Validators.required],
     hasAssistant: [this.at ? this.at.hasAssistant : false],
-    order: [this.at ? this.at.order : undefined, Validators.required],
+    order: [this.at?.order, Validators.required],
     color: [this.at ? this.at.color : "#FFFFFF"],
   });
 

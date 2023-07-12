@@ -34,9 +34,9 @@ export class CreateUpdateSheetTitleComponent {
   isUpdate = this.t ? true : false;
 
   form = this.formBuilder.group({
-    id: this.t ? this.t.id : undefined,
-    name: [this.t ? this.t.name : undefined, Validators.required],
-    order: [this.t ? this.t.order : undefined, Validators.required],
+    id: this.t?.id,
+    name: [this.t?.name, Validators.required],
+    order: [this.t?.order, Validators.required],
   });
 
   constructor(

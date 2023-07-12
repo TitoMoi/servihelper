@@ -34,9 +34,9 @@ export class CreateUpdateRoomComponent {
   isUpdate = this.r ? true : false;
 
   form = this.formBuilder.group({
-    id: this.r ? this.r.id : undefined,
-    name: [this.r ? this.r.name : undefined, Validators.required],
-    order: [this.r ? this.r.order : undefined, Validators.required],
+    id: this.r?.id,
+    name: [this.r?.name, Validators.required],
+    order: [this.r?.order, Validators.required],
   });
 
   constructor(

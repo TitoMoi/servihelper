@@ -89,9 +89,9 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   timeoutExecuted = true; //first time
 
   form = this.formBuilder.group({
-    id: this.p ? this.p.id : undefined,
-    name: [this.p ? this.p.name : undefined, Validators.required],
-    group: [this.p ? this.p.group : undefined],
+    id: this.p?.id,
+    name: [this.p?.name, Validators.required],
+    group: [this.p?.group],
     isWoman: this.p ? this.p.isWoman : false,
     isExternal: this.p ? this.p.isExternal : false,
     assignTypes: this.formBuilder.array<ParticipantAssignTypeInterface>([]), //do not wrap this into an [], because [...] creates a formControl wrapper

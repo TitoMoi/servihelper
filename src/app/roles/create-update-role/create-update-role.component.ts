@@ -45,8 +45,8 @@ export class CreateUpdateRoleComponent {
   isUpdate = this.r ? true : false;
 
   form = this.formBuilder.group({
-    id: this.r ? this.r.id : undefined,
-    name: [this.r ? this.r.name : undefined, Validators.required],
+    id: this.r?.id,
+    name: [this.r?.name, Validators.required],
     assignTypesId: [this.r ? this.r.assignTypesId : [], Validators.required],
   });
 

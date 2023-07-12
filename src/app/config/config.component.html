@@ -36,7 +36,7 @@
             <div class="d-flex align-items-center justify-content-evenly">
               <mat-icon
                 class="me-4"
-                (click)="preventDefault($event)"
+                (click)="stopPropagation($event)"
                 [routerLink]="['updateTitle', t.id]"
                 routerLinkActive="active"
                 svgIcon="edit"
@@ -44,7 +44,7 @@
               ></mat-icon>
               <mat-icon
                 class="me-4"
-                (click)="preventDefault($event)"
+                (click)="stopPropagation($event)"
                 [routerLink]="['deleteTitle', t.id]"
                 routerLinkActive="active"
                 svgIcon="garbage"

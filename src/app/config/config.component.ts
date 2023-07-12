@@ -145,7 +145,7 @@ export class ConfigComponent implements OnDestroy {
     this.configService.updateConfigByKey("assignmentHeaderTitle", elem.value);
   }
 
-  preventDefault(event) {
+  stopPropagation(event) {
     event.stopPropagation();
   }
 }
