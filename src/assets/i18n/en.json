@@ -192,7 +192,6 @@
   "PARTICIPANT_UPDATE_ONLYASSISTANT": "Only assistant",
   "PARTICIPANT_UPDATE_ROOMS_TITLE": "Rooms where participates",
   "PARTICIPANT_UPDATE_TITLE": "Update participant",
-  "PLACEHOLDER_COLOR": "The color for this assignment type in the lists",
   "PLACEHOLDER_GROUP": "Group",
   "PLACEHOLDER_NAME": "Name",
   "PLACEHOLDER_ORDER": "order of appearance",
@@ -270,6 +269,10 @@
   "zhCN": "Chinese",
   "MAP_SLIDE_MAPS": "Show territories",
   "MAP_SLIDE_GROUPS": "Show territory groups",
-  "GROUPMAP_UPDATE_TITLE": "Update group map",
-  "GROUPMAP_CREATE_TITLE": "Create group map"
+  "TERRITORY_BUTTON_CREATE_TITLE": "Create territory",
+  "TERRITORYGROUP_BUTTON_CREATE_TITLE": "Create territory group",
+  "TERRITORYGROUP_CREATE_TITLE": "Create territory group",
+  "TERRITORYGROUP_UPDATE_TITLE": "Update territory group",
+  "ASSIGNTYPE_COLOR": "The color for this assignment type",
+  "TERRITORYGROUP_COLOR": "The color for this territory group"
 }

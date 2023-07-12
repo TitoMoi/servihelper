@@ -2,7 +2,9 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title
-        >{{ this.isUpdate ? t("GROUPMAP_UPDATE_TITLE") : t("GROUPMAP_CREATE_TITLE") }}
+        >{{
+          this.isUpdate ? t("TERRITORYGROUP_UPDATE_TITLE") : t("TERRITORYGROUP_CREATE_TITLE")
+        }}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -25,7 +27,7 @@
           </mat-form-field>
         </div>
         <div class="col-auto">
-          <mat-label class="me-3">{{ t("PLACEHOLDER_COLOR") }}</mat-label>
+          <mat-label class="me-3">{{ t("TERRITORYGROUP_COLOR") }}</mat-label>
           <input type="color" formControlName="color" />
         </div>
       </div>

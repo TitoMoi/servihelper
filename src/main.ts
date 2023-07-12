@@ -37,7 +37,7 @@ if (APP_CONFIG.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes), //withDebugTracing()
     importProvidersFrom(
       TranslocoRootModule,
       TranslocoLocaleModule,
