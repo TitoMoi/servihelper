@@ -1,11 +1,9 @@
-import { Component } from "@angular/core";
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { CommonModule, NgFor, NgIf } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
-import { MapService } from "./services/map.service";
-import { MapContextInterface } from "./model/map.model";
+import { MatRadioButton, MatRadioModule } from "@angular/material/radio";
 
 @Component({
   selector: "app-map",
@@ -18,14 +16,16 @@ import { MapContextInterface } from "./model/map.model";
     RouterLinkActive,
     NgIf,
     NgFor,
-    MatIconModule,
+    MatRadioModule,
+    RouterOutlet,
   ],
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"],
 })
-export class MapComponent {
-  //In memory maps
-  maps: MapContextInterface[] = this.mapService.getMaps();
+export class MapComponent implements AfterViewInit {
+  @ViewChild("matRadioMap") matRadioMap: MatRadioButton;
 
-  constructor(private mapService: MapService) {}
+  ngAfterViewInit(): void {
+    this.matRadioMap.value = "1";
+  }
 }

@@ -12,7 +12,9 @@ import { PdfService } from "./services/pdf.service";
 import { RouterOutlet } from "@angular/router";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { SheetTitleService } from "./sheet-title/service/sheet-title.service";
-import { MapService } from "./map/services/map.service";
+import { TerritoryService } from "./map/services/territory.service";
+import { TerritoryGroupService } from "./map/services/territory-group.service";
+
 import { PolygonService } from "./map/services/polygon.service";
 
 @Component({
@@ -70,7 +72,8 @@ export class AppComponent implements OnInit {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private pdfService: PdfService,
-    private mapService: MapService,
+    private territoryService: TerritoryService,
+    private territoryGroupService: TerritoryGroupService,
     private polygonService: PolygonService
   ) {
     //Register icons
@@ -98,7 +101,8 @@ export class AppComponent implements OnInit {
     this.sheetTitleService.getTitles();
     this.participantService.getParticipants();
     this.sheetTitleService.getTitles();
-    this.mapService.getMaps();
+    this.territoryService.getTerritories();
+    this.territoryGroupService.getTerritoryGroups();
     this.polygonService.getPolygons();
   }
 }

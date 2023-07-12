@@ -31,7 +31,10 @@ import { DeleteRoleComponent } from "./roles/delete-role/delete-role.component";
 import { CreateUpdateSheetTitleComponent } from "app/sheet-title/create-update-sheet-title/create-update-sheet-title.component";
 import { DeleteSheetTitleComponent } from "app/sheet-title/delete-sheet-title/delete-sheet-title.component";
 import { MapComponent } from "app/map/map.component";
-import { CreateUpdateMapComponent } from "app/map/create-update-map/create-update-map.component";
+import { CreateUpdateTerritoryComponent } from "app/map/territory/create-update-territory/create-update-territory.component";
+import { CreateUpdateTerritoryGroupComponent } from "app/map/territory-group/create-update-territory-group/create-update-territory-group.component";
+import { TerritoryComponent } from "app/map/territory/territory.component";
+import { TerritoryGroupComponent } from "app/map/territory-group/territory-group.component";
 
 export const routes: Routes = [
   {
@@ -193,13 +196,31 @@ export const routes: Routes = [
   {
     path: "map",
     component: MapComponent,
-  },
-  {
-    path: "map/create",
-    component: CreateUpdateMapComponent,
-  },
-  {
-    path: "map/update/:id",
-    component: CreateUpdateMapComponent,
+    children: [
+      {
+        path: "territory",
+        component: TerritoryComponent,
+      },
+      {
+        path: "territory/create",
+        component: CreateUpdateTerritoryComponent,
+      },
+      {
+        path: "territory/update/:id",
+        component: CreateUpdateTerritoryComponent,
+      },
+      {
+        path: "territoryGroup",
+        component: TerritoryGroupComponent,
+      },
+      {
+        path: "territoryGroup/create",
+        component: CreateUpdateTerritoryGroupComponent,
+      },
+      {
+        path: "territoryGroup/update",
+        component: CreateUpdateTerritoryGroupComponent,
+      },
+    ],
   },
 ];

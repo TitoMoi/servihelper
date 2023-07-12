@@ -23,16 +23,16 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, Validators, FormBuilder } from "@angular/forms";
-import { MapContextInterface, PolygonInterface } from "../model/map.model";
-import { MapService } from "../services/map.service";
-import { PolygonService } from "../services/polygon.service";
+import { PolygonInterface, TerritoryContextInterface } from "../../model/map.model";
+import { TerritoryService } from "../../services/territory.service";
+import { PolygonService } from "../../services/polygon.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { AutoFocusDirective } from "app/autofocus/autofocus.directive";
 import { ConfigService } from "app/config/service/config.service";
 
 @Component({
-  selector: "app-create-update-map",
+  selector: "app-create-update-territory",
   standalone: true,
   imports: [
     CommonModule,
@@ -48,41 +48,39 @@ import { ConfigService } from "app/config/service/config.service";
     AutoFocusDirective,
     ReactiveFormsModule,
   ],
-  templateUrl: "./create-update-map.component.html",
-  styleUrls: ["./create-update-map.component.scss"],
+  templateUrl: "./create-update-territory.component.html",
+  styleUrls: ["./create-update-territory.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateUpdateMapComponent implements OnInit, AfterViewInit {
+export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   private formBuilder = inject(FormBuilder);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
-  private mapService = inject(MapService);
+  private territoryService = inject(TerritoryService);
   private polygonService = inject(PolygonService);
   private configService = inject(ConfigService);
   private cdr = inject(ChangeDetectorRef);
 
-  loadedMap: MapContextInterface = this.mapService.getMap(
-    this.activatedRoute.snapshot.params.id
-  );
-  loadedPolygon = this.polygonService.getPolygon(this.loadedMap?.poligonId);
+  loadedTerritory = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
+  loadedPolygon = this.polygonService.getPolygon(this.loadedTerritory?.poligonId);
 
-  isUpdate = this.loadedMap ? true : false;
+  isUpdate = this.loadedTerritory ? true : false;
 
   //MapContextInterface
   mapForm = this.formBuilder.group({
-    id: [this.loadedMap?.id],
-    name: [this.loadedMap?.name, Validators.required],
-    poligonId: [this.loadedMap?.poligonId],
-    initDateList: [this.loadedMap?.initDateList],
-    endDateList: [this.loadedMap?.endDateList],
-    assignedToList: [this.loadedMap?.assignedToList],
-    m: [this.loadedMap?.m],
+    id: [this.loadedTerritory?.id],
+    name: [this.loadedTerritory?.name, Validators.required],
+    poligonId: [this.loadedTerritory?.poligonId],
+    initDateList: [this.loadedTerritory?.initDateList],
+    endDateList: [this.loadedTerritory?.endDateList],
+    assignedToList: [this.loadedTerritory?.assignedToList],
+    m: [this.loadedTerritory?.m],
   });
 
   //PolygonInterface
   polygonForm = this.formBuilder.group({
     id: [this.loadedPolygon?.id],
-    latLngList: [this.loadedPolygon?.latLngList], //User do clicks on map
+    latLngList: [this.loadedPolygon?.latLngList || []], //User do clicks on map
     m: [this.loadedPolygon?.m],
   });
 
@@ -115,7 +113,7 @@ export class CreateUpdateMapComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     const viewPosition = this.isUpdate
-      ? this.polygonForm.controls.latLngList.value[0]
+      ? this.polygonForm.controls.latLngList.value![0]
       : this.configService.getConfig().lastMapClick;
     const zoom = this.isUpdate ? 18 : 14;
     this.map = new Map("map").setView(viewPosition, zoom);
@@ -138,11 +136,10 @@ export class CreateUpdateMapComponent implements OnInit, AfterViewInit {
     //https://leafletjs.com/reference.html#map-click
     this.subscription.add(
       fromEvent(this.map, "click").subscribe((clickEvent: LeafletMouseEvent) => {
-        const polygonId = this.polygonForm.controls.id.value;
-        if (!polygonId) {
+        if (!this.polygonExists()) {
           const latLngListControl = this.polygonForm.controls.latLngList;
-          const latLngList = latLngListControl.value || ([] as LatLngLiteral[]);
-          latLngList.push(clickEvent.latlng);
+          const latLngList = latLngListControl.value;
+          latLngList!.push(clickEvent.latlng);
           latLngListControl.patchValue(latLngList);
           this.createMarker(clickEvent.latlng);
           this.cdr.detectChanges();
@@ -208,14 +205,14 @@ export class CreateUpdateMapComponent implements OnInit, AfterViewInit {
   save() {
     //Save polygon
     const polygon: PolygonInterface = this.polygonForm.value;
-    const map: MapContextInterface = this.mapForm.value;
+    const territory: TerritoryContextInterface = this.mapForm.value;
     if (this.isUpdate) {
       this.polygonService.updatePolygon(polygon);
-      this.mapService.updateMap(map);
+      this.territoryService.updateTerritory(territory);
     } else {
       const polygonId = this.polygonService.createPolygon(polygon);
-      map.poligonId = polygonId;
-      this.mapService.createMap(map);
+      territory.poligonId = polygonId;
+      this.territoryService.createTerritory(territory);
     }
     this.configService.updateConfigByKey("lastMapClick", polygon.latLngList[0]);
     //navigate to parent

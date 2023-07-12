@@ -1,0 +1,19 @@
+<span *transloco="let t">
+  <a
+    mat-raised-button
+    color="primary"
+    class="mb-2"
+    routerLink="create"
+    routerLinkActive="active"
+    >{{ t("MAP_BUTTON_CREATE_MAP_TITLE") }}</a
+  >
+</span>
+<div *ngFor="let map of maps" class="d-flex align-items-center">
+  <!-- Here comes accordion first -->
+  <mat-icon
+    [routerLink]="['update', map.id]"
+    routerLinkActive="active"
+    svgIcon="edit"
+    aria-label="Side nav toggle icon"
+  ></mat-icon>
+</div>

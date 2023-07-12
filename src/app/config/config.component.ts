@@ -135,6 +135,9 @@ export class ConfigComponent implements OnDestroy {
     writeJsonSync(this.configService.roomsPath, []);
     writeJsonSync(this.configService.participantsPath, []);
     writeJsonSync(this.configService.assignTypesPath, []);
+    writeJsonSync(this.configService.territoriesPath, []);
+    writeJsonSync(this.configService.territoryGroupsPath, []);
+    writeJsonSync(this.configService.polygonsPath, []);
 
     //Close the program
     ipcRenderer.send("closeApp");

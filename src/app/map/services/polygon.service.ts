@@ -64,7 +64,7 @@ export class PolygonService {
    * @param id the id of the polygon to search for
    * @returns the polygon that is ALWAYS found
    */
-  getPolygon(id: string): PolygonInterface {
+  getPolygon(id: string | undefined): PolygonInterface {
     //search polygon
     return this.#polygonsMap.get(id)!;
   }

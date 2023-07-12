@@ -27,7 +27,8 @@ export class ConfigService {
   roomsFilename = "room.json";
   configFilename = "config.json";
   sheetTitleFilename = "sheetTitle.json";
-  mapsFilename = "maps.json";
+  territoriesFilename = "territory.json";
+  territoryGroupsFilename = "territoryGroup.json";
   polygonsFilename = "polygons.json";
 
   /** Where the file is depending on the context__dirname is where the .js file exists */
@@ -61,9 +62,13 @@ export class ConfigService {
     ? path.join(__dirname, this.sourceFilesPath, this.sheetTitleFilename)
     : path.join("./", this.sourceFilesPath, this.sheetTitleFilename);
 
-  mapsPath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.mapsFilename)
-    : path.join("./", this.sourceFilesPath, this.mapsFilename);
+  territoriesPath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.territoriesFilename)
+    : path.join("./", this.sourceFilesPath, this.territoriesFilename);
+
+  territoryGroupsPath = APP_CONFIG.production
+    ? path.join(__dirname, this.sourceFilesPath, this.territoryGroupsFilename)
+    : path.join("./", this.sourceFilesPath, this.territoryGroupsFilename);
 
   polygonsPath = APP_CONFIG.production
     ? path.join(__dirname, this.sourceFilesPath, this.polygonsFilename)
