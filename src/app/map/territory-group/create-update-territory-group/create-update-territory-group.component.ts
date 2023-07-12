@@ -48,8 +48,9 @@ export class CreateUpdateTerritoryGroupComponent {
 
   onSubmit(): void {
     if (this.isUpdate) {
+      this.territoryGroupService.updateTerritoryGroup(this.form.value);
     } else {
-      //save the territoryGroup
+      this.territoryGroupService.createTerritoryGroup(this.form.value);
     }
     const route = this.isUpdate ? "../.." : "..";
 

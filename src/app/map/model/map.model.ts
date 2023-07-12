@@ -21,5 +21,5 @@ export interface TerritoryGroupInterface {
   id?: string;
   name?: string;
   color?: string;
-  order: number;
+  order?: number;
 }

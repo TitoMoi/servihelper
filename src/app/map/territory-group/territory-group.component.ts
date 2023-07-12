@@ -4,6 +4,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
+import { TerritoryGroupInterface } from "../model/map.model";
+import { TerritoryGroupService } from "../services/territory-group.service";
 
 @Component({
   selector: "app-territory-group",
@@ -21,4 +23,8 @@ import { TranslocoModule } from "@ngneat/transloco";
   templateUrl: "./territory-group.component.html",
   styleUrls: ["./territory-group.component.scss"],
 })
-export class TerritoryGroupComponent {}
+export class TerritoryGroupComponent {
+  territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService.getTerritoryGroups();
+
+  constructor(private territoryGroupService: TerritoryGroupService) {}
+}
