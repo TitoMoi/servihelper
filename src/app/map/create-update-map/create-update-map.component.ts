@@ -117,7 +117,8 @@ export class CreateUpdateMapComponent implements OnInit, AfterViewInit {
     const viewPosition = this.isUpdate
       ? this.polygonForm.controls.latLngList.value[0]
       : this.configService.getConfig().lastMapClick;
-    this.map = new Map("map").setView(viewPosition, 13);
+    const zoom = this.isUpdate ? 18 : 14;
+    this.map = new Map("map").setView(viewPosition, zoom);
 
     new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
