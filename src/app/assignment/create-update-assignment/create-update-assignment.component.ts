@@ -141,11 +141,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   config = this.configService.getConfig();
   //FORM Update or create
   form: UntypedFormGroup = this.formBuilder.group({
-    id: this.a ? this.a.id : undefined,
+    id: this.a?.id,
     sheetTitle: this.a ? this.a.sheetTitle : this.config.assignmentHeaderTitle, //not undefined
     date: [
       {
-        value: this.a ? this.a.date : undefined,
+        value: this.a?.date,
         disabled: this.a ? true : false,
       },
       Validators.required,
@@ -153,7 +153,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     room: [
       //Room id
       {
-        value: this.a ? this.a.room : undefined,
+        value: this.a?.room,
         disabled: this.a ? true : false,
       },
       Validators.required,
@@ -161,7 +161,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     assignType: [
       //AssignType id
       {
-        value: this.a ? this.a.assignType : undefined,
+        value: this.a?.assignType,
         disabled: this.a ? true : false,
       },
       Validators.required,
@@ -170,9 +170,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     onlyWoman: [this.a ? this.a.onlyWoman : false],
     onlyMan: [this.a ? this.a.onlyMan : false],
     onlyExternals: [this.a ? this.a.onlyExternals : false],
-    principal: [this.a ? this.a.principal : undefined, Validators.required], //participant id
-    group: [this.a ? this.a.group : 0], //undefined is not working
-    assistant: [this.a ? this.a.assistant : undefined], //participant id
+    principal: [this.a?.principal, Validators.required], //participant id
+    group: [this.a ? this.a.group : 0], //null is not working
+    assistant: [this.a?.assistant], //participant id
     footerNote: this.a ? this.a.footerNote : this.config.defaultFooterNoteId, //Note id
   });
 
