@@ -32,7 +32,9 @@ import { TerritoryGroupService } from "../territory-group/service/territory-grou
 })
 export class TerritoryComponent {
   maps: TerritoryContextInterface[] = this.territoryService.getTerritories();
-  territoryGroups = this.territoryGroupService.getTerritoryGroups();
+  territoryGroups = this.territoryGroupService
+    .getTerritoryGroups()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
 
   constructor(
     private territoryService: TerritoryService,

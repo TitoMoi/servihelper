@@ -278,5 +278,8 @@
   "TERRITORYGROUP_DELETE_TITLE": "Delete territory group",
   "TERRITORYGROUP_DELETE_WARNING": "This action is irreversible",
   "TERRITORY_DELETE_TITLE": "Delete territory",
-  "TERRITORY_DELETE_WARNING": "This action is irreversible"
+  "TERRITORY_DELETE_WARNING": "This action is irreversible",
+  "TERRITORY_TABLE_HEADER_NAME": "Name",
+  "TERRITORY_TABLE_HEADER_EDIT": "Edit",
+  "TERRITORY_TABLE_HEADER_DELETE": "Delete"
 }

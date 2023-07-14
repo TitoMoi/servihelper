@@ -24,7 +24,9 @@ import { TerritoryGroupService } from "./service/territory-group.service";
   styleUrls: ["./territory-group.component.scss"],
 })
 export class TerritoryGroupComponent {
-  territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService.getTerritoryGroups();
+  territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService
+    .getTerritoryGroups()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
 
   constructor(private territoryGroupService: TerritoryGroupService) {}
 }
