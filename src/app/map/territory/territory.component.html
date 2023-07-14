@@ -34,25 +34,27 @@
             {{ t("TERRITORY_TABLE_HEADER_DELETE") }}
           </div>
           <ng-container *ngFor="let m of maps">
-            <div class="grid-row">
-              <div class="grid-item d-flex align-items-center">{{ m.name }}</div>
-              <div class="grid-item d-flex align-items-center">
-                <mat-icon
-                  [routerLink]="['update', m.id]"
-                  routerLinkActive="active"
-                  svgIcon="edit"
-                  aria-label="Side nav toggle icon"
-                ></mat-icon>
+            <ng-container *ngIf="m.groups.includes(tg.id)">
+              <div class="grid-row">
+                <div class="grid-item d-flex align-items-center">{{ m.name }}</div>
+                <div class="grid-item d-flex align-items-center">
+                  <mat-icon
+                    [routerLink]="['update', m.id]"
+                    routerLinkActive="active"
+                    svgIcon="edit"
+                    aria-label="Side nav toggle icon"
+                  ></mat-icon>
+                </div>
+                <div class="grid-item d-flex align-items-center">
+                  <mat-icon
+                    [routerLink]="['delete', m.id]"
+                    routerLinkActive="active"
+                    svgIcon="garbage"
+                    aria-label="Side nav toggle icon"
+                  ></mat-icon>
+                </div>
               </div>
-              <div class="grid-item d-flex align-items-center">
-                <mat-icon
-                  [routerLink]="['delete', m.id]"
-                  routerLinkActive="active"
-                  svgIcon="garbage"
-                  aria-label="Side nav toggle icon"
-                ></mat-icon>
-              </div>
-            </div>
+            </ng-container>
           </ng-container>
         </div>
       </mat-expansion-panel>
