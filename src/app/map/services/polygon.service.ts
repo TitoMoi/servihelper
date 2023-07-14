@@ -20,7 +20,7 @@ export class PolygonService {
    *
    * @returns PolygonInterface[] the array of polygons
    */
-  getPolygons(deepClone = false): PolygonInterface[] {
+  getPolygons(deepClone = false) {
     if (!this.hasChanged) {
       return deepClone ? structuredClone(this.#polygons) : this.#polygons;
     }
@@ -64,7 +64,7 @@ export class PolygonService {
    * @param id the id of the polygon to search for
    * @returns the polygon that is ALWAYS found
    */
-  getPolygon(id: string | undefined): PolygonInterface {
+  getPolygon(id: string | undefined) {
     //search polygon
     return this.#polygonsMap.get(id)!;
   }

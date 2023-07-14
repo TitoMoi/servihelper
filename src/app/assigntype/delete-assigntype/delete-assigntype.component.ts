@@ -46,7 +46,7 @@ export class DeleteAssignTypeComponent {
   onSubmit(): void {
     //get id
     const id = this.assignTypeForm.get("id").value;
-    //save the assignType
+    //delete the assignType
     this.assignTypeService.deleteAssignType(id);
     //delete from participants assignType
     this.participantService.deleteAssignType(id);

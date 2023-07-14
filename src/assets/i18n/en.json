@@ -274,5 +274,7 @@
   "TERRITORYGROUP_CREATE_TITLE": "Create territory group",
   "TERRITORYGROUP_UPDATE_TITLE": "Update territory group",
   "ASSIGNTYPE_COLOR": "The color for this assignment type",
-  "TERRITORYGROUP_COLOR": "The color for this territory group"
+  "TERRITORYGROUP_COLOR": "The color for this territory group",
+  "TERRITORYGROUP_DELETE_TITLE": "Delete territory group",
+  "TERRITORYGROUP_DELETE_WARNING": "This action is irreversible"
 }

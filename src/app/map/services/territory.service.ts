@@ -36,9 +36,9 @@ export class TerritoryService {
   /**
    *
    * @param id the id of the territory to search for
-   * @returns the territory that is ALWAYS found
+   * @returns the territory that can be found
    */
-  getTerritory(id: string | undefined): TerritoryContextInterface | undefined {
+  getTerritory(id: string | undefined) {
     //search territory
     return this.#territoriesMap.get(id);
   }
@@ -113,6 +113,19 @@ export class TerritoryService {
     this.#territoriesMap.delete(id);
     this.#territories = this.#territories.filter((b) => b.id !== id);
     //save territories
+    return this.#saveTerritoriesToFile();
+  }
+
+  /**
+   * @param id the id of the territory group we want to delete
+   */
+  deleteTerritoryGroupById(id: string): boolean {
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
+    for (let i = 0; i < this.#territories.length; i++) {
+      this.#territories[i].groups = this.#territories[i].groups.filter((gId) => gId !== id);
+
+      this.#territoriesMap.set(this.#territories[i].id, this.#territories[i]);
+    }
     return this.#saveTerritoriesToFile();
   }
 }

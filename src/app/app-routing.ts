@@ -35,6 +35,7 @@ import { CreateUpdateTerritoryComponent } from "app/map/territory/create-update-
 import { CreateUpdateTerritoryGroupComponent } from "app/map/territory-group/create-update-territory-group/create-update-territory-group.component";
 import { TerritoryComponent } from "app/map/territory/territory.component";
 import { TerritoryGroupComponent } from "app/map/territory-group/territory-group.component";
+import { DeleteTerritoryGroupComponent } from "app/map/territory-group/delete-territory-group/delete-territory-group.component";
 
 export const routes: Routes = [
   {
@@ -218,8 +219,12 @@ export const routes: Routes = [
         component: CreateUpdateTerritoryGroupComponent,
       },
       {
-        path: "territoryGroup/update",
+        path: "territoryGroup/update/:id",
         component: CreateUpdateTerritoryGroupComponent,
+      },
+      {
+        path: "assignType/delete/:id",
+        component: DeleteTerritoryGroupComponent,
       },
     ],
   },

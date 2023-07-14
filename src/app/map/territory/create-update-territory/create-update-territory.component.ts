@@ -22,14 +22,14 @@ import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { ReactiveFormsModule, Validators, FormBuilder } from "@angular/forms";
-import { PolygonInterface, TerritoryContextInterface } from "../../model/map.model";
+import { ReactiveFormsModule, Validators, NonNullableFormBuilder } from "@angular/forms";
 import { TerritoryService } from "../../services/territory.service";
 import { PolygonService } from "../../services/polygon.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { AutoFocusDirective } from "app/autofocus/autofocus.directive";
 import { ConfigService } from "app/config/service/config.service";
+import { PolygonInterface, TerritoryContextInterface } from "app/map/model/map.model";
 
 @Component({
   selector: "app-create-update-territory",
@@ -53,7 +53,7 @@ import { ConfigService } from "app/config/service/config.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
-  private formBuilder = inject(FormBuilder);
+  private formBuilder = inject(NonNullableFormBuilder);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private territoryService = inject(TerritoryService);
@@ -71,17 +71,18 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     id: [this.loadedTerritory?.id],
     name: [this.loadedTerritory?.name, Validators.required],
     poligonId: [this.loadedTerritory?.poligonId],
-    initDateList: [this.loadedTerritory?.initDateList],
-    endDateList: [this.loadedTerritory?.endDateList],
-    assignedToList: [this.loadedTerritory?.assignedToList],
-    m: [this.loadedTerritory?.m],
+    initDateList: [this.loadedTerritory?.assignedDates || []],
+    endDateList: [this.loadedTerritory?.returnedDates || []],
+    assignedToList: [this.loadedTerritory?.participants || []],
+    groups: [this.loadedTerritory?.groups || []],
+    m: [this.loadedTerritory?.m], //modified is set again on create or update
   });
 
   //PolygonInterface
   polygonForm = this.formBuilder.group({
     id: [this.loadedPolygon?.id],
     latLngList: [this.loadedPolygon?.latLngList || []], //User do clicks on map
-    m: [this.loadedPolygon?.m],
+    m: [this.loadedPolygon?.m], //modified is set again on create or update
   });
 
   subscription: Subscription = new Subscription();
@@ -115,7 +116,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     const viewPosition = this.isUpdate
       ? this.polygonForm.controls.latLngList.value![0]
       : this.configService.getConfig().lastMapClick;
-    const zoom = this.isUpdate ? 18 : 14;
+    const zoom = this.isUpdate ? 16 : 13;
     this.map = new Map("map").setView(viewPosition, zoom);
 
     new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -204,8 +205,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   //We need to save or update the polygon and the map, also update the last click point
   save() {
     //Save polygon
-    const polygon: PolygonInterface = this.polygonForm.value;
-    const territory: TerritoryContextInterface = this.mapForm.value;
+    const polygon = this.polygonForm.value as PolygonInterface;
+    const territory = this.mapForm.value as TerritoryContextInterface;
     if (this.isUpdate) {
       this.polygonService.updatePolygon(polygon);
       this.territoryService.updateTerritory(territory);
