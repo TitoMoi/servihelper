@@ -2,13 +2,14 @@ import { Component, inject } from "@angular/core";
 import { CommonModule, NgFor, NgIf } from "@angular/common";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { TerritoryGroupService } from "../service/territory-group.service";
-import { ReactiveFormsModule, Validators, FormBuilder } from "@angular/forms";
+import { ReactiveFormsModule, Validators, NonNullableFormBuilder } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
 import { AutoFocusDirective } from "app/autofocus/autofocus.directive";
 import { MatCardModule } from "@angular/material/card";
+import { TerritoryGroupInterface } from "app/map/model/map.model";
 
 @Component({
   selector: "app-create-update-territory-group",
@@ -31,7 +32,7 @@ import { MatCardModule } from "@angular/material/card";
 })
 export class CreateUpdateTerritoryGroupComponent {
   territoryGroupService = inject(TerritoryGroupService);
-  private formBuilder = inject(FormBuilder);
+  private formBuilder = inject(NonNullableFormBuilder);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
 
@@ -47,10 +48,11 @@ export class CreateUpdateTerritoryGroupComponent {
   });
 
   onSubmit(): void {
+    const tg = this.form.value as TerritoryGroupInterface;
     if (this.isUpdate) {
-      this.territoryGroupService.updateTerritoryGroup(this.form.value);
+      this.territoryGroupService.updateTerritoryGroup(tg);
     } else {
-      this.territoryGroupService.createTerritoryGroup(this.form.value);
+      this.territoryGroupService.createTerritoryGroup(tg);
     }
     const route = this.isUpdate ? "../.." : "..";
 

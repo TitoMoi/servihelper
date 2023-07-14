@@ -2,18 +2,45 @@
   <a
     mat-raised-button
     color="primary"
-    class="mb-2"
+    class="mb-3"
     routerLink="create"
     routerLinkActive="active"
     >{{ t("TERRITORY_BUTTON_CREATE_TITLE") }}</a
   >
 </span>
-<div *ngFor="let map of maps" class="d-flex align-items-center">
-  <!-- Here comes accordion first -->
-  <mat-icon
-    [routerLink]="['update', map.id]"
-    routerLinkActive="active"
-    svgIcon="edit"
-    aria-label="Side nav toggle icon"
-  ></mat-icon>
-</div>
+<ng-container *ngFor="let tg of territoryGroups">
+  <div class="mb-2">
+    <mat-accordion *transloco="let t">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3 class="d-flex">
+              <div
+                class="me-3"
+                [ngStyle]="{ width: '25px', height: '25px', 'background-color': tg.color }"
+              ></div>
+              <span>{{ tg.name }}</span>
+            </h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col">
+            <div class="d-flex">
+              <span>name</span>
+              <span>edit</span>
+              <span>delete</span>
+            </div>
+          </div>
+        </div>
+        <ng-container *ngFor="let m of maps">
+          <mat-icon
+            [routerLink]="['update', m.id]"
+            routerLinkActive="active"
+            svgIcon="edit"
+            aria-label="Side nav toggle icon"
+          ></mat-icon>
+        </ng-container>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</ng-container>
