@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
-import { PolygonInterface } from "../model/map.model";
+import { PolygonInterface } from "../../model/map.model";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 

@@ -6,8 +6,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { RouterLink, Router, ActivatedRoute } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
-import { TerritoryGroupService } from "app/map/services/territory-group.service";
-import { TerritoryService } from "app/map/services/territory.service";
+import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
+import { TerritoryService } from "app/map/territory/service/territory.service";
 import { Validators } from "ngx-editor";
 
 @Component({

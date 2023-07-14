@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { TerritoryContextInterface } from "../model/map.model";
+import { TerritoryContextInterface } from "../../model/map.model";
 import { ConfigService } from "app/config/service/config.service";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";

@@ -5,7 +5,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
 import { TerritoryGroupInterface } from "../model/map.model";
-import { TerritoryGroupService } from "../services/territory-group.service";
+import { TerritoryGroupService } from "./service/territory-group.service";
 
 @Component({
   selector: "app-territory-group",

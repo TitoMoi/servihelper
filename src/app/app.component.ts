@@ -12,10 +12,10 @@ import { PdfService } from "./services/pdf.service";
 import { RouterOutlet } from "@angular/router";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { SheetTitleService } from "./sheet-title/service/sheet-title.service";
-import { TerritoryService } from "./map/services/territory.service";
-import { TerritoryGroupService } from "./map/services/territory-group.service";
+import { TerritoryService } from "./map/territory/service/territory.service";
+import { TerritoryGroupService } from "./map/territory-group/service/territory-group.service";
 
-import { PolygonService } from "./map/services/polygon.service";
+import { PolygonService } from "./map/territory/service/polygon.service";
 
 @Component({
   selector: "app-root",

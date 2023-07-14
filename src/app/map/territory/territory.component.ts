@@ -5,7 +5,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
 import { TerritoryContextInterface } from "../model/map.model";
-import { TerritoryService } from "../services/territory.service";
+import { TerritoryService } from "./service/territory.service";
 
 @Component({
   selector: "app-territory",
