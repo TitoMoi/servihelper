@@ -44,6 +44,32 @@
         </mat-form-field>
       </div>
     </div>
+    <div class="row">
+      <div class="col-6 mb-2">
+        <mat-form-field>
+          <mat-label>{{ t("TERRITORY_PARTICIPANT_LABEL") }}</mat-label>
+          <mat-select (selectionChange)="handleParticipant($event)" [disableRipple]="true">
+            <mat-option *ngFor="let p of participants" [value]="p.id">
+              {{ p.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-6 mb-2">
+        <mat-form-field>
+          <mat-label>{{ t("TERRITORY_GROUP_LABEL") }}</mat-label>
+          <mat-select
+            multiple
+            (selectionChange)="handleTerritoryGroups($event)"
+            [disableRipple]="true"
+          >
+            <mat-option *ngFor="let tg of territoryGroups" [value]="tg.id">
+              {{ tg.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
   </form>
   <!-- The reference for leaflet to load the map -->
   <div id="map" class="mb-2"></div>

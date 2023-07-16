@@ -36,7 +36,9 @@
           <ng-container *ngFor="let m of maps">
             <ng-container *ngIf="m.groups.includes(tg.id)">
               <div class="grid-row">
-                <div class="grid-item d-flex align-items-center">{{ m.name }}</div>
+                <div class="grid-item d-flex align-items-center">
+                  {{ m.name }} {{ (m.participants?.at(-1) | participantPipe)?.name }}
+                </div>
                 <div class="grid-item d-flex align-items-center">
                   <mat-icon
                     [routerLink]="['update', m.id]"

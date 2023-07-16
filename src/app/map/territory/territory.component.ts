@@ -10,6 +10,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { TerritoryGroupService } from "../territory-group/service/territory-group.service";
+import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
 
 @Component({
   selector: "app-territory",
@@ -26,6 +27,7 @@ import { TerritoryGroupService } from "../territory-group/service/territory-grou
     MatExpansionModule,
     MatCheckboxModule,
     TranslocoLocaleModule,
+    ParticipantPipe,
   ],
   templateUrl: "./territory.component.html",
   styleUrls: ["./territory.component.scss"],

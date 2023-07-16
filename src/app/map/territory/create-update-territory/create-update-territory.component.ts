@@ -29,7 +29,16 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { AutoFocusDirective } from "app/autofocus/autofocus.directive";
 import { ConfigService } from "app/config/service/config.service";
-import { PolygonInterface, TerritoryContextInterface } from "app/map/model/map.model";
+import {
+  PolygonInterface,
+  TerritoryContextInterface,
+  TerritoryGroupInterface,
+} from "app/map/model/map.model";
+import { ParticipantInterface } from "app/participant/model/participant.model";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { MatSelectChange, MatSelectModule } from "@angular/material/select";
+import { MatOptionModule } from "@angular/material/core";
+import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
 
 @Component({
   selector: "app-create-update-territory",
@@ -47,6 +56,8 @@ import { PolygonInterface, TerritoryContextInterface } from "app/map/model/map.m
     MatInputModule,
     AutoFocusDirective,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatOptionModule,
   ],
   templateUrl: "./create-update-territory.component.html",
   styleUrls: ["./create-update-territory.component.scss"],
@@ -57,23 +68,25 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private territoryService = inject(TerritoryService);
+  private territoryGroupService = inject(TerritoryGroupService);
   private polygonService = inject(PolygonService);
   private configService = inject(ConfigService);
   private cdr = inject(ChangeDetectorRef);
+  private participantService = inject(ParticipantService);
 
   loadedTerritory = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
   loadedPolygon = this.polygonService.getPolygon(this.loadedTerritory?.poligonId);
 
   isUpdate = this.loadedTerritory ? true : false;
 
-  //MapContextInterface
+  //TerritoryContextInterface
   mapForm = this.formBuilder.group({
     id: [this.loadedTerritory?.id],
     name: [this.loadedTerritory?.name, Validators.required],
     poligonId: [this.loadedTerritory?.poligonId],
-    initDateList: [this.loadedTerritory?.assignedDates || []],
-    endDateList: [this.loadedTerritory?.returnedDates || []],
-    assignedToList: [this.loadedTerritory?.participants || []],
+    assignedDates: [this.loadedTerritory?.assignedDates || []],
+    returnedDates: [this.loadedTerritory?.returnedDates || []],
+    participants: [this.loadedTerritory?.participants || []],
     groups: [this.loadedTerritory?.groups || []],
     m: [this.loadedTerritory?.m], //modified is set again on create or update
   });
@@ -93,6 +106,10 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   markerRef: Marker[] = [];
   //Leaflet polygon
   leafletPolygon: Polygon;
+
+  //OTHER DATA NOT RELATED TO THE MAP STRUCTURE
+  participants: ParticipantInterface[] = this.participantService.getParticipants();
+  territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService.getTerritoryGroups();
 
   ngOnInit(): void {
     //Bug of leaflet fix
@@ -221,5 +238,20 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     this.router.navigate([route], {
       relativeTo: this.activatedRoute,
     });
+  }
+
+  //OTHER METHODS NOT RELATED WITH MAPS
+  handleParticipant(e: MatSelectChange) {
+    if (!this.isUpdate) {
+      this.mapForm.controls.participants.value.push(e.value);
+    }
+    //update
+  }
+
+  handleTerritoryGroups(e: MatSelectChange) {
+    const values: string[] = e.value;
+    if (!this.isUpdate) {
+      this.mapForm.controls.groups.setValue(values);
+    }
   }
 }

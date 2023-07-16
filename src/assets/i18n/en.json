@@ -281,5 +281,7 @@
   "TERRITORY_DELETE_WARNING": "This action is irreversible",
   "TERRITORY_TABLE_HEADER_NAME": "Name",
   "TERRITORY_TABLE_HEADER_EDIT": "Edit",
-  "TERRITORY_TABLE_HEADER_DELETE": "Delete"
+  "TERRITORY_TABLE_HEADER_DELETE": "Delete",
+  "TERRITORY_PARTICIPANT_LABEL": "Select Participant",
+  "TERRITORY_GROUP_LABEL": "Select one or more groups"
 }
