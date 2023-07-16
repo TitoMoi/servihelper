@@ -59,6 +59,7 @@
         <mat-form-field>
           <mat-label>{{ t("TERRITORY_GROUP_LABEL") }}</mat-label>
           <mat-select
+            required
             multiple
             (selectionChange)="handleTerritoryGroups($event)"
             [disableRipple]="true"

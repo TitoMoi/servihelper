@@ -87,7 +87,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     assignedDates: [this.loadedTerritory?.assignedDates || []],
     returnedDates: [this.loadedTerritory?.returnedDates || []],
     participants: [this.loadedTerritory?.participants || []],
-    groups: [this.loadedTerritory?.groups || []],
+    groups: [this.loadedTerritory?.groups || [], Validators.required],
     m: [this.loadedTerritory?.m], //modified is set again on create or update
   });
 

@@ -13,7 +13,7 @@ export interface TerritoryContextInterface {
   assignedDates?: Date[]; //When its assigned
   returnedDates?: Date[]; //When its returned
   participants?: string[]; //Participants assigned
-  groups?: string[]; //The id of the groups where this territory belongs to
+  groups: string[]; //The id of the groups where this territory belongs to
   m: Date; //last created or modified date
 }
 
