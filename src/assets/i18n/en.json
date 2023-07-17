@@ -283,5 +283,6 @@
   "TERRITORY_TABLE_HEADER_EDIT": "Edit",
   "TERRITORY_TABLE_HEADER_DELETE": "Delete",
   "TERRITORY_PARTICIPANT_LABEL": "Select Participant",
-  "TERRITORY_GROUP_LABEL": "Select one or more groups"
+  "TERRITORY_GROUP_LABEL": "Select one or more groups",
+  "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Please create a territory and assign it to this group"
 }

@@ -23,7 +23,10 @@
             </h3>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="grid">
+        <ng-template #noCreatedTerritoryTpl>
+          <div>{{ t("TERRITORY_NO_TERRITORY_PLACEHOLDER") }}</div>
+        </ng-template>
+        <div *ngIf="maps.length; else noCreatedTerritoryTpl" class="grid">
           <div class="grid-header-item fw-bold">
             {{ t("TERRITORY_TABLE_HEADER_NAME") }}
           </div>

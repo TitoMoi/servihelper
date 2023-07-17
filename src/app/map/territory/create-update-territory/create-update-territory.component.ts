@@ -111,6 +111,10 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   participants: ParticipantInterface[] = this.participantService.getParticipants();
   territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService.getTerritoryGroups();
 
+  get selectedParticipant() {
+    return this.mapForm.controls.participants.value.at(-1);
+  }
+
   ngOnInit(): void {
     //Bug of leaflet fix
     const iconRetinaUrl = "assets/marker-icon-2x.png";
@@ -206,7 +210,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
 
   removePolygon() {
     this.polygonForm.controls.id.patchValue(null);
-    this.polygonForm.controls.latLngList.patchValue(null);
+    this.polygonForm.controls.latLngList.patchValue([]);
     this.leafletPolygon.remove();
     this.removeMarkers();
     this.cdr.detectChanges();
@@ -216,7 +220,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     this.markerRef.forEach((m) => m.remove());
     this.markerRef = [];
     //Remove the points in the polygon
-    this.polygonForm.controls.latLngList.patchValue(null);
+    this.polygonForm.controls.latLngList.patchValue([]);
   }
 
   //We need to save or update the polygon and the map, also update the last click point
