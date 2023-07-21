@@ -1,2 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 -1.5 2253 2253" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;"><rect id="Heatmap" x="1.997" y="0" width="2250" height="2250" style="fill:none;"/><rect x="135.331" y="133.333" width="495.833" height="495.833" style="fill:#1c4e80;stroke:#202020;stroke-width:66.67px;"/><rect x="631.164" y="133.333" width="495.833" height="495.833" style="fill:#1c4e80;stroke:#202020;stroke-width:66.67px;"/><rect x="1127" y="133.333" width="495.833" height="495.833" style="fill:#eee;stroke:#202020;stroke-width:66.67px;"/><rect x="1622.83" y="133.333" width="495.833" height="495.833" style="fill:#ea6a47;stroke:#202020;stroke-width:66.67px;"/><rect x="135.331" y="629.167" width="495.833" height="495.833" style="fill:#1c4e80;stroke:#202020;stroke-width:66.67px;"/><rect x="135.331" y="1125" width="495.833" height="495.833" style="fill:#eee;stroke:#202020;stroke-width:66.67px;"/><rect x="135.331" y="1620.83" width="495.833" height="495.833" style="fill:#eee;stroke:#202020;stroke-width:66.67px;"/><rect x="631.164" y="629.167" width="495.833" height="495.833" style="fill:#eee;stroke:#202020;stroke-width:66.67px;"/><rect x="631.164" y="1125" width="495.833" height="495.833" style="fill:#eee;stroke:#202020;stroke-width:66.67px;"/><rect x="631.164" y="1620.83" width="495.833" height="495.833" style="fill:#eee;stroke:#202020;stroke-width:66.67px;"/><rect x="1127" y="629.167" width="495.833" height="495.833" style="fill:#eee;stroke:#202020;stroke-width:66.67px;"/><rect x="1127" y="1125" width="495.833" height="495.833" style="fill:#eee;stroke:#202020;stroke-width:66.67px;"/><rect x="1127" y="1620.83" width="495.833" height="495.833" style="fill:#ea6a47;stroke:#202020;stroke-width:66.67px;"/><rect x="1622.83" y="629.167" width="495.833" height="495.833" style="fill:#ea6a47;stroke:#202020;stroke-width:66.67px;"/><rect x="1622.83" y="1125" width="495.833" height="495.833" style="fill:#ea6a47;stroke:#202020;stroke-width:66.67px;"/><rect x="1622.83" y="1620.83" width="495.833" height="495.833" style="fill:#ea6a47;stroke:#202020;stroke-width:66.67px;"/></svg>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 498.57 498.57" xml:space="preserve">
+<g transform="translate(1 2)">
+	<polyline style="fill:#FFE100;" points="487.498,8.072 487.498,232.177 235.695,232.177 235.695,45.843 	"/>
+	<polygon style="fill:#00DA6C;" points="34.252,78.577 202.121,50.039 202.121,234.695 34.252,234.695 	"/>
+	<polyline style="fill:#FFFFFF;" points="9.072,78.577 9.072,234.695 34.252,234.695 34.252,78.577 	"/>
+	<polygon style="fill:#3DB9F9;" points="235.695,448.728 487.498,486.498 487.498,268.269 235.695,268.269 	"/>
+	<polygon style="fill:#63D3FD;" points="235.695,448.728 462.318,486.498 462.318,268.269 235.695,268.269 	"/>
+	<polygon style="fill:#FFFFFF;" points="9.072,415.993 202.121,444.531 202.121,268.269 9.072,268.269 	"/>
+	<polygon style="fill:#FFE100;" points="34.252,415.993 202.121,444.531 202.121,268.269 34.252,268.269 	"/>
+	<polyline style="fill:#DD3859;" points="235.695,45.843 235.695,232.177 487.498,232.177 487.498,8.072 	"/>
+	<polyline style="fill:#E4667F;" points="235.695,45.843 235.695,232.177 462.318,232.177 462.318,8.072 	"/>
+	<path d="M495.892,240.57h-268.59V38.289l74.702-10.911c4.197-0.839,9.233,2.518,9.233,6.715c0.839,4.197-2.518,9.233-6.715,9.233
+		l-60.433,9.233v171.226h235.016V18.144L354.043,36.61c-4.197,0.839-9.233-2.518-9.233-6.715c-0.839-4.197,2.518-9.233,6.715-9.233
+		L495.892-2V240.57z"/>
+	<path d="M210.515,243.089H0.679V71.023l209.836-31.056V243.089z M17.466,226.302h176.262V59.272L17.466,85.292V226.302z"/>
+	<path d="M495.892,496.57l-268.59-40.289V259.875h268.59V496.57z M244.089,442.013l235.016,35.252V276.662H244.089V442.013z"/>
+	<path d="M210.515,454.603L0.679,423.548V259.875h209.836V454.603z M17.466,409.279l176.262,26.02V276.662H17.466V409.279z"/>
+	<path d="M336.416,33.252c0-5.036-3.357-8.393-8.393-8.393c-5.036,0-8.393,3.357-8.393,8.393s3.357,8.393,8.393,8.393
+		C333.059,41.646,336.416,38.289,336.416,33.252"/>
+</g>
+</svg>
