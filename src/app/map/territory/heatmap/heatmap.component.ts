@@ -83,9 +83,11 @@ export class HeatmapComponent implements AfterViewInit {
 
   createPolygons() {
     for (let i = 0; i < this.loadedTerritories.length; i++) {
-      const polygon = this.polygonService.getPolygon(this.loadedTerritories[i].poligonId);
-      const leafletPolygon = new Polygon(polygon.latLngList);
-      const color = this.getColorBasedOnTimeDistance(this.loadedTerritories[i]);
+      const terr = this.loadedTerritories[i];
+      const polygon = this.polygonService.getPolygon(terr.poligonId);
+      const leafletPolygon = new Polygon(polygon.latLngList, {});
+      leafletPolygon.bindTooltip(terr.name);
+      const color = this.getColorBasedOnTimeDistance(terr);
       leafletPolygon.setStyle({ fillColor: color, color: color });
       leafletPolygon.addTo(this.map);
     }
