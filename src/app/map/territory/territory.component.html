@@ -43,7 +43,7 @@
             <ng-container *ngIf="m.groups.includes(tg.id)">
               <div class="grid-row">
                 <div class="grid-item d-flex align-items-center">
-                  {{ m.name }}
+                  {{ m.name }} -
                   {{
                     m.returnedDates.length !== m.participants.length
                       ? (m.participants?.at(-1) | participantPipe)?.name
