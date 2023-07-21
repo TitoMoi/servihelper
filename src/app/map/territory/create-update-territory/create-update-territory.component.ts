@@ -122,17 +122,6 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     }
   }
 
-  /**
-   * if participants length is greater than returnedDates it means the territory is active
-   * else its not assigned or its returned
-   */
-  isTerritoryActive() {
-    return (
-      this.mapForm.controls.participants.value.length >
-      this.mapForm.controls.returnedDates.value.length
-    );
-  }
-
   ngOnInit(): void {
     //Bug of leaflet fix
     const iconRetinaUrl = "assets/marker-icon-2x.png";
@@ -266,6 +255,17 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   }
 
   //OTHER METHODS NOT RELATED WITH MAPS
+
+  /**
+   * if participants length is greater than returnedDates it means the territory is active
+   * else its not assigned or its returned
+   */
+  isTerritoryActive() {
+    return (
+      this.mapForm.controls.participants.value.length >
+      this.mapForm.controls.returnedDates.value.length
+    );
+  }
 
   clearHistory() {
     this.mapForm.controls.participants.setValue([]);

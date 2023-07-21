@@ -2,11 +2,18 @@
   <a
     mat-raised-button
     color="primary"
-    class="mb-3"
+    class="mb-3 me-2"
     routerLink="create"
     routerLinkActive="active"
     >{{ t("TERRITORY_BUTTON_CREATE_TITLE") }}</a
   >
+  <mat-icon
+    *ngIf="maps.length"
+    [routerLink]="['heatmap']"
+    routerLinkActive="active"
+    svgIcon="heatmap"
+    aria-label="Side nav toggle icon"
+  ></mat-icon>
 </span>
 <ng-container *ngFor="let tg of territoryGroups">
   <div class="mb-2">

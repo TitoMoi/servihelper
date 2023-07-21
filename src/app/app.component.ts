@@ -60,6 +60,7 @@ export class AppComponent implements OnInit {
     "sheet-title",
     "map",
     "return",
+    "heatmap",
   ];
 
   constructor(
