@@ -251,11 +251,4 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     }
     //update
   }
-
-  handleTerritoryGroups(e: MatSelectChange) {
-    const values: string[] = e.value;
-    if (!this.isUpdate) {
-      this.mapForm.controls.groups.setValue(values);
-    }
-  }
 }
