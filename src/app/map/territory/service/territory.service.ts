@@ -117,6 +117,19 @@ export class TerritoryService {
   }
 
   /**
+   *
+   * @param territory the territory to return
+   */
+  returnTerritory(id: string) {
+    //find territory
+    const t = this.#territories.find((terr) => terr.id === id);
+    //Mark it as returned
+    t.returnedDates.push(new Date());
+    //Update territory
+    this.updateTerritory(t);
+  }
+
+  /**
    * @param id the id of the territory group we want to delete
    */
   deleteTerritoryGroupById(id: string): boolean {

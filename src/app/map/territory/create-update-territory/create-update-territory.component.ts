@@ -108,11 +108,26 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   leafletPolygon: Polygon;
 
   //OTHER DATA NOT RELATED TO THE MAP STRUCTURE
-  participants: ParticipantInterface[] = this.participantService.getParticipants();
+  participants: ParticipantInterface[] = this.participantService
+    .getParticipants()
+    .filter((p) => p.isExternal === false);
   territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService.getTerritoryGroups();
 
   get selectedParticipant() {
-    return this.mapForm.controls.participants.value.at(-1);
+    if (this.isTerritoryActive()) {
+      return this.mapForm.controls.participants.value.at(-1);
+    }
+  }
+
+  /**
+   * if participants length is greater than returnedDates it means the territory is active
+   * else its not assigned or its inactive
+   */
+  isTerritoryActive() {
+    return (
+      this.mapForm.controls.participants.value.length >
+      this.mapForm.controls.returnedDates.value.length
+    );
   }
 
   ngOnInit(): void {
@@ -248,7 +263,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   handleParticipant(e: MatSelectChange) {
     if (!this.isUpdate) {
       this.mapForm.controls.participants.value.push(e.value);
+      this.mapForm.controls.assignedDates.value.push(new Date());
     }
-    //update
+    //update, we can already have a participant that has returned the territory
+    //he can be assigned again and it counts as a new assignment
   }
 }

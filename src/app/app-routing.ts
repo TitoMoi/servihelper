@@ -37,6 +37,7 @@ import { TerritoryComponent } from "app/map/territory/territory.component";
 import { TerritoryGroupComponent } from "app/map/territory-group/territory-group.component";
 import { DeleteTerritoryGroupComponent } from "app/map/territory-group/delete-territory-group/delete-territory-group.component";
 import { DeleteTerritoryComponent } from "app/map/territory/delete-territory/delete-territory.component";
+import { ReturnTerritoryComponent } from "app/map/territory/return-territory/return-territory.component";
 
 export const routes: Routes = [
   {
@@ -214,6 +215,10 @@ export const routes: Routes = [
       {
         path: "territory/delete/:id",
         component: DeleteTerritoryComponent,
+      },
+      {
+        path: "territory/return/:id",
+        component: ReturnTerritoryComponent,
       },
       {
         path: "territoryGroup",

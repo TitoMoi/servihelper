@@ -31,7 +31,10 @@
             {{ t("TERRITORY_TABLE_HEADER_NAME") }}
           </div>
           <div class="grid-header-item fw-bold">
-            {{ t("TERRITORY_TABLE_HEADER_EDIT") }}
+            {{ t("TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT") }}
+          </div>
+          <div class="grid-header-item fw-bold">
+            {{ t("TERRITORY_TABLE_HEADER_RETURN") }}
           </div>
           <div class="grid-header-item fw-bold">
             {{ t("TERRITORY_TABLE_HEADER_DELETE") }}
@@ -40,7 +43,12 @@
             <ng-container *ngIf="m.groups.includes(tg.id)">
               <div class="grid-row">
                 <div class="grid-item d-flex align-items-center">
-                  {{ m.name }} {{ (m.participants?.at(-1) | participantPipe)?.name }}
+                  {{ m.name }}
+                  {{
+                    m.returnedDates.length !== m.participants.length
+                      ? (m.participants?.at(-1) | participantPipe)?.name
+                      : ""
+                  }}
                 </div>
                 <div class="grid-item d-flex align-items-center">
                   <mat-icon
@@ -49,6 +57,16 @@
                     svgIcon="edit"
                     aria-label="Side nav toggle icon"
                   ></mat-icon>
+                </div>
+                <div class="grid-item d-flex align-items-center">
+                  <mat-icon
+                    *ngIf="m.participants.length > m.returnedDates.length; else returnedTpl"
+                    [routerLink]="['return', m.id]"
+                    routerLinkActive="active"
+                    svgIcon="return"
+                    aria-label="Side nav toggle icon"
+                  ></mat-icon>
+                  <ng-template #returnedTpl> Returned </ng-template>
                 </div>
                 <div class="grid-item d-flex align-items-center">
                   <mat-icon

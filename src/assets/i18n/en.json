@@ -280,9 +280,12 @@
   "TERRITORY_DELETE_TITLE": "Delete territory",
   "TERRITORY_DELETE_WARNING": "This action is irreversible",
   "TERRITORY_TABLE_HEADER_NAME": "Name",
-  "TERRITORY_TABLE_HEADER_EDIT": "Edit",
+  "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Assign participant or edit territory",
   "TERRITORY_TABLE_HEADER_DELETE": "Delete",
   "TERRITORY_PARTICIPANT_LABEL": "Select Participant",
   "TERRITORY_GROUP_LABEL": "Select one or more groups",
-  "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Please create a territory and assign it to this group"
+  "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Please create a territory and assign it to this group",
+  "TERRITORY_TABLE_HEADER_RETURN": "Return territory",
+  "TERRITORY_RETURN_TITLE": "Return the territory",
+  "TERRITORY_RETURN_WARNING": "You can reassign the territory to another participant"
 }

@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
     "info-blue",
     "sheet-title",
     "map",
+    "return",
   ];
 
   constructor(

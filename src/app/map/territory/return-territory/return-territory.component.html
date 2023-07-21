@@ -1,0 +1,26 @@
+<form *transloco="let t" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ t("TERRITORY_RETURN_TITLE") }}</mat-card-title>
+      <mat-card-subtitle>{{ t("TERRITORY_RETURN_WARNING") }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="button" class="me-3" routerLink="../..">
+        {{ t("BUTTON_CANCEL") }}
+      </button>
+      <button mat-raised-button color="primary" type="submit">
+        {{ t("BUTTON_CONFIRM") }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
