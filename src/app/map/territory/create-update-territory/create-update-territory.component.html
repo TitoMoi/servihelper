@@ -49,8 +49,8 @@
         <mat-form-field>
           <mat-label>{{ t("TERRITORY_PARTICIPANT_LABEL") }}</mat-label>
           <mat-select
-            (selectionChange)="handleParticipant($event)"
-            [value]="selectedParticipant"
+            (selectionChange)="onParticipantSelect($event)"
+            [value]="temporalParticipant || selectedParticipant"
             [disableRipple]="true"
           >
             <mat-option *ngFor="let p of participants" [value]="p.id">

@@ -113,6 +113,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     .filter((p) => p.isExternal === false);
   territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService.getTerritoryGroups();
 
+  //Simulate a form control
+  temporalParticipant;
+
   get selectedParticipant() {
     if (this.isTerritoryActive()) {
       return this.mapForm.controls.participants.value.at(-1);
@@ -121,7 +124,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
 
   /**
    * if participants length is greater than returnedDates it means the territory is active
-   * else its not assigned or its inactive
+   * else its not assigned or its returned
    */
   isTerritoryActive() {
     return (
@@ -242,6 +245,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   save() {
     //Save polygon
     const polygon = this.polygonForm.value as PolygonInterface;
+    //handle participant and save territory
+    this.handleParticipant(this.temporalParticipant);
     const territory = this.mapForm.value as TerritoryContextInterface;
     if (this.isUpdate) {
       this.polygonService.updatePolygon(polygon);
@@ -259,13 +264,29 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     });
   }
 
+  onParticipantSelect(e: MatSelectChange) {
+    this.temporalParticipant = e.value;
+    this.cdr.detectChanges();
+  }
+
   //OTHER METHODS NOT RELATED WITH MAPS
-  handleParticipant(e: MatSelectChange) {
-    if (!this.isUpdate) {
-      this.mapForm.controls.participants.value.push(e.value);
-      this.mapForm.controls.assignedDates.value.push(new Date());
+  handleParticipant(participantId) {
+    if (participantId) {
+      if (!this.isUpdate) {
+        this.mapForm.controls.participants.value.push(participantId);
+        this.mapForm.controls.assignedDates.value.push(new Date());
+      } else {
+        /* update, we can already have a participant that has returned the territory
+      he can be assigned again and it counts as a new assignment */
+        //case territory is active but we need to change the participant
+        if (this.isTerritoryActive()) {
+          this.mapForm.controls.participants.value.push(participantId);
+        } else {
+          //Territory is returned and its not the first time as this case is !this.isUpdate
+          this.mapForm.controls.participants.value.push(participantId);
+          this.mapForm.controls.assignedDates.value.push(new Date());
+        }
+      }
     }
-    //update, we can already have a participant that has returned the territory
-    //he can be assigned again and it counts as a new assignment
   }
 }
