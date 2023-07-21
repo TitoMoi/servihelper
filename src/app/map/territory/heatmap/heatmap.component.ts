@@ -19,6 +19,9 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { AutoFocusDirective } from "app/autofocus/autofocus.directive";
 import { PolygonService } from "../service/polygon.service";
 import { Map, Polygon, TileLayer } from "leaflet";
+import { TerritoryService } from "../service/territory.service";
+import { TerritoryContextInterface } from "app/map/model/map.model";
+import { formatDistance } from "date-fns";
 
 @Component({
   selector: "app-heatmap",
@@ -46,11 +49,19 @@ import { Map, Polygon, TileLayer } from "leaflet";
 export class HeatmapComponent implements AfterViewInit {
   polygonService = inject(PolygonService);
   private cdr = inject(ChangeDetectorRef);
+  private territoryService = inject(TerritoryService);
 
+  loadedTerritories = this.territoryService.getTerritories();
   loadedPolygons = this.polygonService.getPolygons();
 
   //The leaflet map
   map: Map;
+
+  //colors
+  redColor = "#fc6868";
+  yellowColor = "#fafaa0";
+  blueColor = "#92d4fc";
+  greenColor = "#8afa84";
 
   ngAfterViewInit(): void {
     /* this.map = new Map("map").setView(this.loadedPolygons[0].latLngList[0], 16); */
@@ -71,9 +82,27 @@ export class HeatmapComponent implements AfterViewInit {
   }
 
   createPolygons() {
-    for (let i = 0; i < this.loadedPolygons.length; i++) {
-      new Polygon(this.loadedPolygons[i].latLngList).addTo(this.map);
+    for (let i = 0; i < this.loadedTerritories.length; i++) {
+      const polygon = this.polygonService.getPolygon(this.loadedTerritories[i].poligonId);
+      const leafletPolygon = new Polygon(polygon.latLngList);
+      const color = this.getColorBasedOnTimeDistance(this.loadedTerritories[i]);
+      leafletPolygon.setStyle({ fillColor: color, color: color });
+      leafletPolygon.addTo(this.map);
     }
     this.cdr.detectChanges();
+  }
+
+  getColorBasedOnTimeDistance(territory: TerritoryContextInterface): string {
+    if (territory.assignedDates.length) {
+      const territoryLastAssignedDate = new Date(territory.assignedDates.at(-1));
+      if (territoryLastAssignedDate) {
+        const distance = formatDistance(territoryLastAssignedDate, new Date());
+        /* how to reason the includes? https://date-fns.org/v2.30.0/docs/formatDistance#description */
+        if (distance.includes("year")) return this.redColor;
+        if (distance.includes("months")) return this.yellowColor;
+      }
+      return this.blueColor;
+    }
+    return this.greenColor;
   }
 }

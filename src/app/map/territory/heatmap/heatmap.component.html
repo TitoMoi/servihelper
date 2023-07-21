@@ -2,6 +2,28 @@
   <button mat-raised-button type="button" class="mb-3" [routerLink]="'..'">
     {{ t("BUTTON_CANCEL") }}
   </button>
+  <div class="d-flex mb-2">
+    <div
+      class="me-2"
+      [ngStyle]="{ width: '25px', height: '25px', 'background-color': greenColor }"
+    ></div>
+    <span class="me-2">{{ t("COLOR_GREEN_EXPLANATION") }}</span>
+    <div
+      class="me-2"
+      [ngStyle]="{ width: '25px', height: '25px', 'background-color': blueColor }"
+    ></div>
+    <span class="me-2">{{ t("COLOR_BLUE_EXPLANATION") }}</span>
+    <div
+      class="me-2"
+      [ngStyle]="{ width: '25px', height: '25px', 'background-color': yellowColor }"
+    ></div>
+    <span class="me-2">{{ t("COLOR_YELLOW_EXPLANATION") }}</span>
+    <div
+      class="me-2"
+      [ngStyle]="{ width: '25px', height: '25px', 'background-color': redColor }"
+    ></div>
+    <span class="me-2">{{ t("COLOR_RED_EXPLANATION") }}</span>
+  </div>
   <div class="row">
     <div class="col">
       <!-- The reference for leaflet to load the map -->

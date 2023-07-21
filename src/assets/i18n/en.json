@@ -291,5 +291,9 @@
   "MAP_CREATE_CLEAR_HISTORY": "Clear history",
   "MAP_CLEAR_HISTORY": "Clear all participants, created and returned dates but keep the territory",
   "TERRITORY_TABLE_RETURNED": "Returned",
-  "TERRITORY_TABLE_NEVER_ASSIGNED": "Never assigned"
+  "TERRITORY_TABLE_NEVER_ASSIGNED": "Never assigned",
+  "COLOR_GREEN_EXPLANATION": "Never assigned",
+  "COLOR_BLUE_EXPLANATION": "Less than 2 months old",
+  "COLOR_YELLOW_EXPLANATION": "More than two months old",
+  "COLOR_RED_EXPLANATION": "1 year old or more"
 }
