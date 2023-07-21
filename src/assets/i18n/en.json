@@ -287,5 +287,9 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Please create a territory and assign it to this group",
   "TERRITORY_TABLE_HEADER_RETURN": "Return territory",
   "TERRITORY_RETURN_TITLE": "Return the territory",
-  "TERRITORY_RETURN_WARNING": "You can reassign the territory to another participant"
+  "TERRITORY_RETURN_WARNING": "You can reassign the territory to another participant",
+  "MAP_CREATE_CLEAR_HISTORY": "Clear history",
+  "MAP_CLEAR_HISTORY": "Clear all participants, created and returned dates but keep the territory",
+  "TERRITORY_TABLE_RETURNED": "Returned",
+  "TERRITORY_TABLE_NEVER_ASSIGNED": "Never assigned"
 }

@@ -1,33 +1,43 @@
 <span *transloco="let t">
-  <div class="d-flex">
-    <a
-      mat-raised-button
-      color="primary"
-      class="mb-2 me-2"
-      [disabled]="!markerRef.length"
-      (click)="removeMarkers()"
-      >{{ t("MAP_CREATE_REMOVE_MARKERS") }}</a
-    >
-    <div
-      [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')"
-      [matTooltipDisabled]="!isCreatePolygonBtnDisabled()"
-    >
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
       <a
         mat-raised-button
         color="primary"
         class="mb-2 me-2"
-        [disabled]="isCreatePolygonBtnDisabled()"
-        (click)="createPolygon()"
-        >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
+        [disabled]="!markerRef.length"
+        (click)="removeMarkers()"
+        >{{ t("MAP_CREATE_REMOVE_MARKERS") }}</a
+      >
+      <div
+        [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')"
+        [matTooltipDisabled]="!isCreatePolygonBtnDisabled()"
+      >
+        <a
+          mat-raised-button
+          color="primary"
+          class="mb-2 me-2"
+          [disabled]="isCreatePolygonBtnDisabled()"
+          (click)="createPolygon()"
+          >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
+        >
+      </div>
+      <a
+        mat-raised-button
+        class="mb-2"
+        [disabled]="!polygonExists()"
+        (click)="removePolygon()"
+        >{{ t("MAP_CREATE_REMOVE_POLYGON") }}</a
       >
     </div>
-
     <a
       mat-raised-button
       class="mb-2"
-      [disabled]="!polygonExists()"
-      (click)="removePolygon()"
-      >{{ t("MAP_CREATE_REMOVE_POLYGON") }}</a
+      color="warn"
+      [disabled]="!mapForm.controls.participants.value.length"
+      [matTooltip]="t('MAP_CLEAR_HISTORY')"
+      (click)="clearHistory()"
+      >{{ t("MAP_CREATE_CLEAR_HISTORY") }}</a
     >
   </div>
   <form [formGroup]="mapForm" novalidate>

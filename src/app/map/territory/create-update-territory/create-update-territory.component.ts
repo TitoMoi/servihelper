@@ -110,7 +110,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   //OTHER DATA NOT RELATED TO THE MAP STRUCTURE
   participants: ParticipantInterface[] = this.participantService
     .getParticipants()
-    .filter((p) => p.isExternal === false);
+    .filter((p) => Boolean(p.isExternal) === false);
   territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService.getTerritoryGroups();
 
   //Simulate a form control
@@ -186,6 +186,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
         }
       })
     );
+    this.cdr.detectChanges();
   }
 
   /**
@@ -264,12 +265,20 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
     });
   }
 
+  //OTHER METHODS NOT RELATED WITH MAPS
+
+  clearHistory() {
+    this.mapForm.controls.participants.setValue([]);
+    this.mapForm.controls.assignedDates.setValue([]);
+    this.mapForm.controls.returnedDates.setValue([]);
+    this.save();
+  }
+
   onParticipantSelect(e: MatSelectChange) {
     this.temporalParticipant = e.value;
     this.cdr.detectChanges();
   }
 
-  //OTHER METHODS NOT RELATED WITH MAPS
   handleParticipant(participantId) {
     if (participantId) {
       if (!this.isUpdate) {
@@ -280,6 +289,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
       he can be assigned again and it counts as a new assignment */
         //case territory is active but we need to change the participant
         if (this.isTerritoryActive()) {
+          this.mapForm.controls.participants.value.pop();
           this.mapForm.controls.participants.value.push(participantId);
         } else {
           //Territory is returned and its not the first time as this case is !this.isUpdate
