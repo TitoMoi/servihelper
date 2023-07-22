@@ -297,5 +297,6 @@
   "ICON_PDF_PAGE": "Pdf black/white with page breaks",
   "ICON_PNG": "Colorful png image",
   "ICON_PRINT": "Print sheets to distribute",
-  "ICON_GOOGLECALENDAR": "Create a link for google calendar reminder"
+  "ICON_GOOGLECALENDAR": "Create a link for google calendar reminder",
+  "ICON_HEATMAP": "Show a heat map with meaningful colors"
 }
