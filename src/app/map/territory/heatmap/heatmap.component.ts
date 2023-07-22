@@ -22,6 +22,8 @@ import { Map, Polygon, TileLayer } from "leaflet";
 import { TerritoryService } from "../service/territory.service";
 import { TerritoryContextInterface } from "app/map/model/map.model";
 import { formatDistance } from "date-fns";
+import { NativeImage, nativeImage, clipboard } from "electron";
+import { toPng } from "html-to-image";
 
 @Component({
   selector: "app-heatmap",
@@ -102,5 +104,37 @@ export class HeatmapComponent implements AfterViewInit {
       return this.blueColor;
     }
     return this.greenColor;
+  }
+
+  /**
+   * Copy image to the clipboard
+   */
+  async copyImageToClipboard() {
+    document.body.style.cursor = "wait";
+    const node = document.getElementById("map");
+    const dataUrl = await toPng(node);
+    const natImage: NativeImage = nativeImage.createFromDataURL(dataUrl);
+    clipboard.write(
+      {
+        image: natImage,
+      },
+      "selection"
+    );
+    document.body.style.cursor = "default";
+    this.cdr.detectChanges();
+  }
+
+  async toPng(mapName: string = "heatmap") {
+    //the div
+    document.body.style.cursor = "wait";
+    const div = document.getElementById("map");
+    const dataUrl = await toPng(div);
+
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.setAttribute("download", `${mapName}.png`);
+    link.click();
+
+    document.body.style.cursor = "default";
   }
 }
