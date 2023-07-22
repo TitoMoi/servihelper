@@ -65,6 +65,10 @@ When creating the github tag, it must only contain the same version as it is in 
 - Download the binaries and create a draft release, upload the binaries.
 - The draft release title MUST be the version of the package without any letter, just numbers.
 
+## Static map
+
+- The static map is under folder ./static
+
 ## Fonts
 
 The available fonts for pdf are in ./src/app/resources:
