@@ -24,6 +24,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { NgIf, NgClass } from "@angular/common";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
   selector: "app-image-assignment",
@@ -42,6 +43,7 @@ import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
     RoomPipe,
     ParticipantPipe,
     SheetTitlePipe,
+    MatTooltipModule,
   ],
 })
 export class ImageAssignmentComponent {

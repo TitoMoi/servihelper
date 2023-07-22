@@ -197,12 +197,6 @@
   "PLACEHOLDER_ORDER": "order of appearance",
   "PLACEHOLDER_REPORT_DATE_COLOR": "Default background color for the date",
   "PLACEHOLDER_SELECT_COPY_PARTICIPANT": "Select the participant to clone",
-  "REPORT_ICON_EXCEL": "Colorful Excel sheet",
-  "REPORT_ICON_FOLDER": "Generate png files (takes a while)",
-  "REPORT_ICON_PDF_INFINITE": "Pdf black/white with infinite list",
-  "REPORT_ICON_PDF_PAGE": "Pdf black/white with page breaks",
-  "REPORT_ICON_PNG": "Colorful png image",
-  "REPORT_ICON_PRINT": "Print sheets to distribute",
   "REPORT_MULTIPLE_IMAGE_OPEN_FOLDER": "Click me to open the assignments folder...",
   "ROLE_ADMINISTRATOR": "Administrator",
   "ROLE_BUTTON_CREATE": "Create role",
@@ -295,5 +289,13 @@
   "COLOR_GREEN_EXPLANATION": "Never assigned",
   "COLOR_BLUE_EXPLANATION": "Less than 2 months old",
   "COLOR_YELLOW_EXPLANATION": "More than two months old",
-  "COLOR_RED_EXPLANATION": "1 year old or more"
+  "COLOR_RED_EXPLANATION": "1 year old or more",
+  "ICON_CLIPBOARD": "Copy to the clipboard",
+  "ICON_EXCEL": "Colorful Excel sheet",
+  "ICON_FOLDER": "Generate png files (takes a while)",
+  "ICON_PDF_INFINITE": "Pdf black/white with infinite list",
+  "ICON_PDF_PAGE": "Pdf black/white with page breaks",
+  "ICON_PNG": "Colorful png image",
+  "ICON_PRINT": "Print sheets to distribute",
+  "ICON_GOOGLECALENDAR": "Create a link for google calendar reminder"
 }

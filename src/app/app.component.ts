@@ -61,6 +61,7 @@ export class AppComponent implements OnInit {
     "map",
     "return",
     "heatmap",
+    "clipboard",
   ];
 
   constructor(

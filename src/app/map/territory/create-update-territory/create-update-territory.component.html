@@ -1,10 +1,10 @@
 <span *transloco="let t">
-  <div class="d-flex justify-content-between">
-    <div class="d-flex">
+  <div class="d-flex justify-content-between mb-2">
+    <div class="d-flex align-items-center">
       <a
         mat-raised-button
         color="primary"
-        class="mb-2 me-2"
+        class="me-2"
         [disabled]="!markerRef.length"
         (click)="removeMarkers()"
         >{{ t("MAP_CREATE_REMOVE_MARKERS") }}</a
@@ -16,29 +16,27 @@
         <a
           mat-raised-button
           color="primary"
-          class="mb-2 me-2"
+          class="me-2"
           [disabled]="isCreatePolygonBtnDisabled()"
           (click)="createPolygon()"
           >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
         >
       </div>
+      <a mat-raised-button [disabled]="!polygonExists()" (click)="removePolygon()">{{
+        t("MAP_CREATE_REMOVE_POLYGON")
+      }}</a>
+    </div>
+    <div class="d-flex align-items-center">
       <a
         mat-raised-button
-        class="mb-2"
-        [disabled]="!polygonExists()"
-        (click)="removePolygon()"
-        >{{ t("MAP_CREATE_REMOVE_POLYGON") }}</a
+        class="me-2"
+        color="warn"
+        [disabled]="!mapForm.controls.participants.value.length"
+        [matTooltip]="t('MAP_CLEAR_HISTORY')"
+        (click)="clearHistory()"
+        >{{ t("MAP_CREATE_CLEAR_HISTORY") }}</a
       >
     </div>
-    <a
-      mat-raised-button
-      class="mb-2"
-      color="warn"
-      [disabled]="!mapForm.controls.participants.value.length"
-      [matTooltip]="t('MAP_CLEAR_HISTORY')"
-      (click)="clearHistory()"
-      >{{ t("MAP_CREATE_CLEAR_HISTORY") }}</a
-    >
   </div>
   <form [formGroup]="mapForm" novalidate>
     <div class="row">
@@ -86,6 +84,22 @@
       </div>
     </div>
   </form>
+  <div *ngIf="polygonExists()" class="d-flex">
+    <mat-icon
+      class="m-2"
+      svgIcon="clipboard"
+      aria-label="icon"
+      [matTooltip]="t('ICON_CLIPBOARD')"
+      (click)="copyImageToClipboard()"
+    ></mat-icon>
+    <mat-icon
+      class="m-2"
+      svgIcon="png"
+      aria-label="icon"
+      [matTooltip]="t('ICON_PNG')"
+      (click)="toPng(mapForm.controls.name.value)"
+    ></mat-icon>
+  </div>
   <!-- The reference for leaflet to load the map -->
   <div id="map" class="mb-2"></div>
   <button

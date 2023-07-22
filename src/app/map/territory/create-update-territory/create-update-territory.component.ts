@@ -15,6 +15,7 @@ import {
   Marker,
   LeafletMouseEvent,
   LatLngLiteral,
+  LatLng,
 } from "leaflet";
 import { Subscription, fromEvent } from "rxjs";
 import { MatButtonModule } from "@angular/material/button";
@@ -39,6 +40,8 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { MatSelectChange, MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
+import { NativeImage, nativeImage, clipboard } from "electron";
+import { toPng } from "html-to-image";
 
 @Component({
   selector: "app-create-update-territory",
@@ -141,11 +144,19 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    //Get center and destroy polygon
+    let center: LatLng;
+    if (this.polygonExists()) {
+      const tempPolygon = new Polygon(this.polygonForm.controls.latLngList.value);
+      center = tempPolygon.getBounds().getCenter();
+      tempPolygon.remove();
+    }
+
     const viewPosition = this.isUpdate
       ? this.polygonForm.controls.latLngList.value![0]
       : this.configService.getConfig().lastMapClick;
-    const zoom = this.isUpdate ? 16 : 13;
-    this.map = new Map("map").setView(viewPosition, zoom);
+    const zoom = this.isUpdate ? 17 : 13;
+    this.map = new Map("map", { center }).setView(viewPosition, zoom);
 
     new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
@@ -298,5 +309,36 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
         }
       }
     }
+  }
+  /**
+   * Copy image to the clipboard
+   */
+  async copyImageToClipboard() {
+    document.body.style.cursor = "wait";
+    const node = document.getElementById("map");
+    const dataUrl = await toPng(node);
+    const natImage: NativeImage = nativeImage.createFromDataURL(dataUrl);
+    clipboard.write(
+      {
+        image: natImage,
+      },
+      "selection"
+    );
+    document.body.style.cursor = "default";
+    this.cdr.detectChanges();
+  }
+
+  async toPng(mapName: string) {
+    //the div
+    document.body.style.cursor = "wait";
+    const div = document.getElementById("map");
+    const dataUrl = await toPng(div);
+
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.setAttribute("download", `${mapName}.png`);
+    link.click();
+
+    document.body.style.cursor = "default";
   }
 }
