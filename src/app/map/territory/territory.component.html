@@ -8,7 +8,7 @@
     >{{ t("TERRITORY_BUTTON_CREATE_TITLE") }}</a
   >
   <mat-icon
-    *ngIf="maps.length"
+    *ngIf="territories.length"
     [routerLink]="['heatmap']"
     routerLinkActive="active"
     svgIcon="heatmap"
@@ -34,7 +34,10 @@
         <ng-template #noCreatedTerritoryTpl>
           <div>{{ t("TERRITORY_NO_TERRITORY_PLACEHOLDER") }}</div>
         </ng-template>
-        <div *ngIf="maps.length; else noCreatedTerritoryTpl" class="grid">
+        <div *ngIf="territories.length; else noCreatedTerritoryTpl" class="grid">
+          <div class="grid-header-item fw-bold">
+            {{ t("TERRITORY_TABLE_HEADER_MAPLINK") }}
+          </div>
           <div class="grid-header-item fw-bold">
             {{ t("TERRITORY_TABLE_HEADER_NAME") }}
           </div>
@@ -47,20 +50,28 @@
           <div class="grid-header-item fw-bold">
             {{ t("TERRITORY_TABLE_HEADER_DELETE") }}
           </div>
-          <ng-container *ngFor="let m of maps">
-            <ng-container *ngIf="m.groups.includes(tg.id)">
+          <ng-container *ngFor="let terr of territories">
+            <ng-container *ngIf="terr.groups.includes(tg.id)">
               <div class="grid-row">
                 <div class="grid-item d-flex align-items-center">
-                  {{ m.name }} -
+                  <mat-icon
+                    routerLinkActive="active"
+                    svgIcon="maplink"
+                    (click)="generateMapLink(terr)"
+                    aria-label="Side nav toggle icon"
+                  ></mat-icon>
+                </div>
+                <div class="grid-item d-flex align-items-center">
+                  {{ terr.name }} -
                   {{
-                    m.returnedDates.length !== m.participants.length
-                      ? (m.participants?.at(-1) | participantPipe)?.name
+                    terr.returnedDates.length !== terr.participants.length
+                      ? (terr.participants?.at(-1) | participantPipe)?.name
                       : ""
                   }}
                 </div>
                 <div class="grid-item d-flex align-items-center">
                   <mat-icon
-                    [routerLink]="['update', m.id]"
+                    [routerLink]="['update', terr.id]"
                     routerLinkActive="active"
                     svgIcon="edit"
                     aria-label="Side nav toggle icon"
@@ -68,21 +79,24 @@
                 </div>
                 <div class="grid-item d-flex align-items-center">
                   <mat-icon
-                    *ngIf="m.participants.length > m.returnedDates.length; else returnedTpl"
-                    [routerLink]="['return', m.id]"
+                    *ngIf="
+                      terr.participants.length > terr.returnedDates.length;
+                      else returnedTpl
+                    "
+                    [routerLink]="['return', terr.id]"
                     routerLinkActive="active"
                     svgIcon="return"
                     aria-label="Side nav toggle icon"
                   ></mat-icon>
                   <ng-template #returnedTpl>{{
-                    m.participants.length === 0 && m.returnedDates.length === 0
+                    terr.participants.length === 0 && terr.returnedDates.length === 0
                       ? t("TERRITORY_TABLE_NEVER_ASSIGNED")
                       : t("TERRITORY_TABLE_RETURNED")
                   }}</ng-template>
                 </div>
                 <div class="grid-item d-flex align-items-center">
                   <mat-icon
-                    [routerLink]="['delete', m.id]"
+                    [routerLink]="['delete', terr.id]"
                     routerLinkActive="active"
                     svgIcon="garbage"
                     aria-label="Side nav toggle icon"

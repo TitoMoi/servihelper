@@ -12,6 +12,8 @@ import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { TerritoryGroupService } from "../territory-group/service/territory-group.service";
 import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { PolygonService } from "./service/polygon.service";
+import { clipboard } from "electron";
 
 @Component({
   selector: "app-territory",
@@ -35,13 +37,31 @@ import { MatTooltipModule } from "@angular/material/tooltip";
   styleUrls: ["./territory.component.scss"],
 })
 export class TerritoryComponent {
-  maps: TerritoryContextInterface[] = this.territoryService.getTerritories();
+  territories: TerritoryContextInterface[] = this.territoryService.getTerritories();
   territoryGroups = this.territoryGroupService
     .getTerritoryGroups()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
   constructor(
     private territoryService: TerritoryService,
-    private territoryGroupService: TerritoryGroupService
+    private territoryGroupService: TerritoryGroupService,
+    private polygonService: PolygonService
   ) {}
+
+  generateMapLink(t: TerritoryContextInterface) {
+    document.body.style.cursor = "wait";
+    let servihelperMapUrl = new URL("https://titomoi.github.io/servihelper");
+    servihelperMapUrl.searchParams.append(
+      "polygon",
+      JSON.stringify(this.polygonService.getPolygon(t.poligonId).latLngList)
+    );
+    console.log(servihelperMapUrl.toString());
+    clipboard.write(
+      {
+        text: servihelperMapUrl.toString(),
+      },
+      "selection"
+    );
+    document.body.style.cursor = "default";
+  }
 }

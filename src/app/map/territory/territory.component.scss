@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  grid-template-columns: 1fr 0.25fr 0.25fr 0.25fr;
+  grid-template-columns: 0.25fr 1fr 0.25fr 0.25fr 0.25fr;
   grid-auto-rows: 1fr;
   align-items: center;
   align-self: center;
@@ -25,4 +25,8 @@
       background-color: white;
     }
   }
+}
+mat-icon {
+  height: 28px;
+  width: 28px;
 }
