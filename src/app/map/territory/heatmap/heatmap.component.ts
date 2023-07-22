@@ -64,11 +64,7 @@ export class HeatmapComponent implements AfterViewInit {
   greenColor = "#8afa84";
 
   ngAfterViewInit(): void {
-    /* this.map = new Map("map").setView(this.loadedPolygons[0].latLngList[0], 16); */
-    this.map = new Map("map").setView(
-      { lat: 39.508560885931615, lng: -0.6224441528320312 },
-      13
-    );
+    this.map = new Map("map").setView(this.loadedPolygons[0].latLngList[0], 13);
 
     new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
