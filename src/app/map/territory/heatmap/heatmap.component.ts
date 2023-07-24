@@ -62,6 +62,8 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   map: Map;
   //Tile
   tile: TileLayer;
+  //PolygonRef list
+  polygonRefList: Polygon[] = [];
 
   //colors
   redColor = "#fc6868";
@@ -84,6 +86,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.polygonRefList.forEach((ref) => ref.remove());
     this.tile.remove();
     this.map.remove();
   }
@@ -92,16 +95,17 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
     for (let i = 0; i < this.loadedTerritories.length; i++) {
       const terr = this.loadedTerritories[i];
       const polygon = this.polygonService.getPolygon(terr.poligonId);
-      const leafletPolygon = new Polygon(polygon.latLngList, {});
+      const leafletPolygonRef = new Polygon(polygon.latLngList);
+      this.polygonRefList.push(leafletPolygonRef);
       //bind the name and a callback method to open edit mode
-      leafletPolygon.bindTooltip(terr.name);
-      leafletPolygon.on("click", () => {
+      leafletPolygonRef.bindTooltip(terr.name);
+      leafletPolygonRef.on("click", () => {
         const terr = this.territoryService.getTerritoryByPolygonId(polygon.id);
         this.router.navigate([`map/territory/update/${terr.id}`]);
       });
       const color = this.getColorBasedOnTimeDistance(terr);
-      leafletPolygon.setStyle({ fillColor: color, color: color });
-      leafletPolygon.addTo(this.map);
+      leafletPolygonRef.setStyle({ fillColor: color, color: color });
+      leafletPolygonRef.addTo(this.map);
     }
     this.cdr.detectChanges();
   }

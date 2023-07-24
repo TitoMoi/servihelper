@@ -103,12 +103,7 @@
   <!-- The reference for leaflet to load the map -->
   <!-- its map2 because on router navigation from heatmap its not displayed as it should be -->
   <div id="map2" class="mb-2"></div>
-  <button
-    mat-raised-button
-    type="button"
-    class="me-3"
-    [routerLink]="isUpdate ? '../..' : '..'"
-  >
+  <button mat-raised-button type="button" class="me-3" (click)="goBack()">
     {{ t("BUTTON_CANCEL") }}
   </button>
   <button

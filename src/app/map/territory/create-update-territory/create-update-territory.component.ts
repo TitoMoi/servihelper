@@ -7,7 +7,7 @@ import {
   OnInit,
   inject,
 } from "@angular/core";
-import { CommonModule, NgFor, NgIf } from "@angular/common";
+import { CommonModule, Location, NgFor, NgIf } from "@angular/common";
 import {
   icon,
   Map,
@@ -77,6 +77,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   private configService = inject(ConfigService);
   private cdr = inject(ChangeDetectorRef);
   private participantService = inject(ParticipantService);
+  private location = inject(Location);
 
   loadedTerritory = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
   loadedPolygon = this.polygonService.getPolygon(this.loadedTerritory?.poligonId);
@@ -198,6 +199,10 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.tile.remove();
     this.map.remove();
     this.subscription.unsubscribe();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   /**
