@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
   inject,
 } from "@angular/core";
@@ -66,7 +67,7 @@ import { toPng } from "html-to-image";
   styleUrls: ["./create-update-territory.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
+export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, OnDestroy {
   private formBuilder = inject(NonNullableFormBuilder);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
@@ -187,6 +188,10 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit {
       })
     );
     this.cdr.detectChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.map.remove();
   }
 
   /**

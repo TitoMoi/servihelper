@@ -45,6 +45,16 @@ export class TerritoryService {
 
   /**
    *
+   * @param id the id of the polygon to search for
+   * @returns the territory that owns that polygon
+   */
+  getTerritoryByPolygonId(polId: string | undefined) {
+    //search territory
+    return this.#territories.find((t) => t.poligonId === polId);
+  }
+
+  /**
+   *
    * @param territoryId the id of the territory to search for the name
    * @returns the name of the territory
    */

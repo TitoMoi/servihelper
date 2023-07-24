@@ -37,7 +37,9 @@ import { clipboard } from "electron";
   styleUrls: ["./territory.component.scss"],
 })
 export class TerritoryComponent {
-  territories: TerritoryContextInterface[] = this.territoryService.getTerritories();
+  territories: TerritoryContextInterface[] = this.territoryService
+    .getTerritories()
+    .sort((a, b) => (a.name > b.name ? 1 : -1));
   territoryGroups = this.territoryGroupService
     .getTerritoryGroups()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
