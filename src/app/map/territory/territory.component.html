@@ -55,9 +55,10 @@
               <div class="grid-row">
                 <div class="grid-item d-flex align-items-center">
                   <mat-icon
+                    #iconMapLink
                     routerLinkActive="active"
                     svgIcon="maplink"
-                    (click)="generateMapLink(terr)"
+                    (click)="generateMapLink(terr, iconMapLink)"
                     aria-label="Side nav toggle icon"
                   ></mat-icon>
                 </div>

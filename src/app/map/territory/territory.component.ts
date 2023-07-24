@@ -1,7 +1,7 @@
-import { Component } from "@angular/core";
+import { ChangeDetectorRef, Component } from "@angular/core";
 import { CommonModule, NgFor, NgIf } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
+import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
 import { TerritoryContextInterface } from "../model/map.model";
@@ -47,17 +47,19 @@ export class TerritoryComponent {
   constructor(
     private territoryService: TerritoryService,
     private territoryGroupService: TerritoryGroupService,
-    private polygonService: PolygonService
+    private polygonService: PolygonService,
+    private cdr: ChangeDetectorRef
   ) {}
 
-  generateMapLink(t: TerritoryContextInterface) {
+  generateMapLink(t: TerritoryContextInterface, matIcon: MatIcon) {
+    matIcon.svgIcon = "clipboard";
+    this.cdr.detectChanges();
     document.body.style.cursor = "wait";
     let servihelperMapUrl = new URL("https://titomoi.github.io/servihelper");
     servihelperMapUrl.searchParams.append(
       "polygon",
       JSON.stringify(this.polygonService.getPolygon(t.poligonId).latLngList)
     );
-    console.log(servihelperMapUrl.toString());
     clipboard.write(
       {
         text: servihelperMapUrl.toString(),
@@ -65,5 +67,9 @@ export class TerritoryComponent {
       "selection"
     );
     document.body.style.cursor = "default";
+    setTimeout(() => {
+      matIcon.svgIcon = "maplink";
+      this.cdr.detectChanges();
+    }, 500);
   }
 }
