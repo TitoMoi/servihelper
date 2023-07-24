@@ -193,14 +193,16 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     );
 
     //zoom the map to the polygon
-    this.map.fitBounds(this.leafletPolygon.getBounds());
+    if (this.polygonExists()) {
+      this.map.fitBounds(this.leafletPolygon.getBounds());
+    }
 
     this.cdr.detectChanges();
   }
 
   ngOnDestroy(): void {
     this.markerRef.forEach((m) => m.remove());
-    this.leafletPolygon.remove();
+    this.leafletPolygon?.remove();
     this.tile.remove();
     this.map.remove();
     this.subscription.unsubscribe();

@@ -10,6 +10,8 @@ Your data is managed internally on the local device with .json files, so it neve
 
 Its purpose is for help the Jehovah's witnesses to create and manage all kind of assignments.
 
+Also supports territory creation and distribution.
+
 ## Download links
 
 Download app section: [Download for Windows or Mac](https://github.com/TitoMoi/servihelper/releases).
@@ -19,6 +21,17 @@ Download app section: [Download for Windows or Mac](https://github.com/TitoMoi/s
 ## Example images
 
 <img src="./pictures/assignment-example.png" alt= "example" width="300" height="320">
+
+## Example images Territory
+
+Overview:
+<img src="./pictures/map.png" alt= "map-overview">
+
+Edition:
+<img src="./pictures/map-update.png" alt= "map-update">
+
+Heatmap:
+<img src="./pictures/map-heatmap.png" alt= "map-heatmap">
 
 ## Languages
 
