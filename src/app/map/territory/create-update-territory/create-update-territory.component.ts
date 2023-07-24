@@ -199,6 +199,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   ngOnDestroy(): void {
+    this.markerRef.forEach((m) => m.remove());
     this.leafletPolygon.remove();
     this.tile.remove();
     this.map.remove();
