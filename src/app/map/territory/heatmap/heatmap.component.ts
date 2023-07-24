@@ -60,6 +60,8 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
 
   //The leaflet map
   map: Map;
+  //Tile
+  tile: TileLayer;
 
   //colors
   redColor = "#fc6868";
@@ -70,7 +72,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.map = new Map("map").setView(this.loadedPolygons[0].latLngList[0], 13);
 
-    new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    this.tile = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       minZoom: 3,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -82,6 +84,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.tile.remove();
     this.map.remove();
   }
 

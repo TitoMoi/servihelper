@@ -106,6 +106,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   //The leaflet map
   map: Map;
+  //Tile
+  tile: TileLayer;
   //Array of marker references
   markerRef: Marker[] = [];
   //Leaflet polygon
@@ -157,9 +159,10 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       ? this.polygonForm.controls.latLngList.value![0]
       : this.configService.getConfig().lastMapClick;
     const zoom = this.isUpdate ? 17 : 13;
-    this.map = new Map("map", { center }).setView(viewPosition, zoom);
 
-    new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    this.map = new Map("map2", { center }).setView(viewPosition, zoom);
+
+    this.tile = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       minZoom: 3,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -187,10 +190,12 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
         }
       })
     );
+
     this.cdr.detectChanges();
   }
 
   ngOnDestroy(): void {
+    this.tile.remove();
     this.map.remove();
     this.subscription.unsubscribe();
   }
