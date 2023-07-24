@@ -192,6 +192,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   ngOnDestroy(): void {
     this.map.remove();
+    this.subscription.unsubscribe();
   }
 
   /**
