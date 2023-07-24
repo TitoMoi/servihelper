@@ -40,20 +40,21 @@
       }
     }
     function createPolygon(polygon) {
-      return L.polygon(polygon).addTo(map);
+      this.leafletPolygon = L.polygon(polygon).addTo(map);
+      return this.leafletPolygon;
     }
 
     const polygonArray = getUrlPolygonParams();
     if (polygonArray) {
-      const map = L.map("map").setView(polygonArray[0], 17);
+      var map = L.map("map").setView(polygonArray[0], 17);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
       L.control.locate().addTo(map);
-      const polygon = createPolygon(polygonArray);
-      map.fitBounds(polygon.getBounds());
+      const pol = createPolygon(polygonArray);
+      map.fitBounds(pol.getBounds());
     }
   </script>
 </html>
