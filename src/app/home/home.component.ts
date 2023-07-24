@@ -12,6 +12,7 @@ import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
 import { NgIf, NgClass } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
+import path from "path";
 
 @Component({
   selector: "app-home",
@@ -40,8 +41,7 @@ export class HomeComponent {
 
   downloadFiles() {
     const zip = new AdmZip();
-
-    zip.addLocalFolder(this.configService.sourceFilesPath);
+    zip.addLocalFolder(path.join(this.configService.sourceFilesPath));
 
     zip.toBuffer((buffer: Buffer) => {
       const blob = new Blob([buffer], { type: "application/octet" });
