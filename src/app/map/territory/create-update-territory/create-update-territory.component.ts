@@ -192,6 +192,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       })
     );
 
+    //zoom the map to the polygon
+    this.map.fitBounds(this.leafletPolygon.getBounds());
+
     this.cdr.detectChanges();
   }
 
