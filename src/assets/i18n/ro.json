@@ -326,5 +326,6 @@
   "ro": "Română",
   "ru": "Rusă",
   "tr": "Turc",
-  "zhCN": "Chinez"
+  "zhCN": "Chinez",
+  "ASSIGNTYPE_REPEAT": "Această misiune poate fi repetată în aceeași zi"
 }

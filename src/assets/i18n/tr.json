@@ -326,5 +326,6 @@
   "ro": "Romanya",
   "ru": "Rusça",
   "tr": "Türk",
-  "zhCN": "Çince"
+  "zhCN": "Çince",
+  "ASSIGNTYPE_REPEAT": "Bu ödev aynı gün tekrarlanabilir"
 }

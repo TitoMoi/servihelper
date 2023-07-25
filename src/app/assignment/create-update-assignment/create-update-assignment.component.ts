@@ -550,7 +550,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
         this.assignTypes = this.assignTypes.filter(
           (at) =>
-            !assignmentsByDate.some((a) => a.assignType === at.id && a.room === roomValue)
+            !assignmentsByDate.some((a) => a.assignType === at.id && a.room === roomValue) ||
+            Boolean(at.repeat)
         );
 
         //Reset if assignType selected not in new assignTypes

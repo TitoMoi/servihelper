@@ -5,6 +5,7 @@ export interface AssignTypeInterface {
   id: string;
   name: string;
   hasAssistant?: boolean;
+  repeat: boolean;
   order: number;
   color?: string;
 }

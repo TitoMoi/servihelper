@@ -88,6 +88,27 @@ export class HomeComponent {
         case this.configService.notesFilename:
           writeFileSync(this.configService.notesPath, zipEntry.getData().toString("utf8"));
           break;
+        case this.configService.sheetTitleFilename:
+          writeFileSync(
+            this.configService.sheetTitlePath,
+            zipEntry.getData().toString("utf8")
+          );
+          break;
+        case this.configService.territoriesFilename:
+          writeFileSync(
+            this.configService.territoriesPath,
+            zipEntry.getData().toString("utf8")
+          );
+          break;
+        case this.configService.polygonsFilename:
+          writeFileSync(this.configService.polygonsPath, zipEntry.getData().toString("utf8"));
+          break;
+        case this.configService.territoryGroupsFilename:
+          writeFileSync(
+            this.configService.territoryGroupsPath,
+            zipEntry.getData().toString("utf8")
+          );
+          break;
         case this.configService.configFilename:
           const currentConfig = this.configService.getConfig(); //Default config
           const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));

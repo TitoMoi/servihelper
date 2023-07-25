@@ -299,5 +299,6 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "ASSIGNTYPE_REPEAT": "This assignment type can be repeated the same day"
 }

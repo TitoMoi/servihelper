@@ -326,5 +326,6 @@
   "ro": "Rumena",
   "ru": "Russo",
   "tr": "Turca",
-  "zhCN": "Cinese"
+  "zhCN": "Cinese",
+  "ASSIGNTYPE_REPEAT": "Questo incarico può essere ripetuto lo stesso giorno"
 }

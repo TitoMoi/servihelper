@@ -326,5 +326,6 @@
   "ro": "Rumuński",
   "ru": "Rosyjski",
   "tr": "Turecki",
-  "zhCN": "Chiński"
+  "zhCN": "Chiński",
+  "ASSIGNTYPE_REPEAT": "To zadanie można powtórzyć tego samego dnia"
 }

@@ -29,14 +29,19 @@
           <input type="color" formControlName="color" />
         </div>
       </div>
-      <div class="row">
-        <div class="col">
+      <div class="row justify-content-start">
+        <div class="col-auto">
           <mat-checkbox
             labelPosition="before"
             color="primary"
             formControlName="hasAssistant"
             >{{ t("ASSIGNTYPE_HAS_ASSISTANT") }}</mat-checkbox
           >
+        </div>
+        <div class="col-auto">
+          <mat-checkbox labelPosition="before" color="primary" formControlName="repeat">{{
+            t("ASSIGNTYPE_REPEAT")
+          }}</mat-checkbox>
         </div>
       </div>
     </mat-card-content>

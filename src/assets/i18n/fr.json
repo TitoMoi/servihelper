@@ -326,5 +326,6 @@
   "ro": "Roumaine",
   "ru": "Russe",
   "tr": "Turque",
-  "zhCN": "Chinois"
+  "zhCN": "Chinois",
+  "ASSIGNTYPE_REPEAT": "Ce type d'affectation peut être répété le même jour"
 }

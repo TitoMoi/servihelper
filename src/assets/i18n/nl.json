@@ -326,5 +326,6 @@
   "ro": "Roemeense",
   "ru": "Russisch",
   "tr": "Turks",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "ASSIGNTYPE_REPEAT": "Deze opdracht kan dezelfde dag worden herhaald"
 }

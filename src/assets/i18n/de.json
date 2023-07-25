@@ -326,5 +326,6 @@
   "ro": "Rumänisch",
   "ru": "Russisch",
   "tr": "Türkisch",
-  "zhCN": "Chinesisch"
+  "zhCN": "Chinesisch",
+  "ASSIGNTYPE_REPEAT": "Dieser Zuordnungstyp kann am selben Tag wiederholt werden"
 }

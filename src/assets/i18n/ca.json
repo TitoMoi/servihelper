@@ -327,5 +327,6 @@
   "ro": "Romanès",
   "ru": "Rus",
   "tr": "Turc",
-  "zhCN": "Xinès"
+  "zhCN": "Xinès",
+  "ASSIGNTYPE_REPEAT": "Aquest tipus d'assignació es pot repetir el mateix dia"
 }

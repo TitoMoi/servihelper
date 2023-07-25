@@ -328,5 +328,6 @@
   "ro": "Rumano",
   "ru": "Ruso",
   "tr": "Turco",
-  "zhCN": "Chino"
+  "zhCN": "Chino",
+  "ASSIGNTYPE_REPEAT": "Este tipo de asignación puede repetirse el mismo dia"
 }

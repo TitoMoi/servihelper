@@ -328,5 +328,6 @@
   "ro": "Romena",
   "ru": "Russo",
   "tr": "Turca",
-  "zhCN": "Chinês"
+  "zhCN": "Chinês",
+  "ASSIGNTYPE_REPEAT": "Esta tarefa pode ser repetida no mesmo dia"
 }

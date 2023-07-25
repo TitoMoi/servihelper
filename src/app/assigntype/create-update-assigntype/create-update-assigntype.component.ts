@@ -39,6 +39,7 @@ export class CreateUpdateAssignTypeComponent {
     id: this.at?.id,
     name: [this.at?.name, Validators.required],
     hasAssistant: [this.at ? this.at.hasAssistant : false],
+    repeat: [this.at ? this.at.repeat : false],
     order: [this.at?.order, Validators.required],
     color: [this.at ? this.at.color : "#FFFFFF"],
   });
