@@ -5,7 +5,7 @@
   "ASSIGNTYPE_DELETE_TITLE": "Eliminar tipo de asignación",
   "ASSIGNTYPE_DELETE_WARNING": "Esta accion es irreversible",
   "ASSIGNTYPE_HAS_ASSISTANT": "Este tipo de asignación tiene ayudante",
-  "ASSIGNTYPE_TABLE_HEADER_COLOR": "color",
+  "ASSIGNTYPE_TABLE_HEADER_COLOR": "Color",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Eliminar",
   "ASSIGNTYPE_TABLE_HEADER_EDIT": "Editar",
   "ASSIGNTYPE_TABLE_HEADER_NAME": "Nombre",
