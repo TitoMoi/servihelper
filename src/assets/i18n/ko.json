@@ -327,5 +327,8 @@
   "ru": "러시아인",
   "tr": "터키",
   "zhCN": "중국인",
-  "ASSIGNTYPE_REPEAT": "이 과제는 같은 날 반복 될 수 있습니다"
+  "ASSIGNTYPE_REPEAT": "이 과제는 같은 날 반복 될 수 있습니다",
+  "BUTTON_SHOW_AVAILABLE_COLORS": "Show used colors",
+  "BUTTON_HIDE_AVAILABLE_COLORS": "Hide used colors",
+  "BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP": "When you open the colorpicker selector there is a color grab icon of the left side, using the color grab allows you to not enter manually an existing color"
 }

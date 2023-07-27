@@ -327,5 +327,8 @@
   "ru": "Russisch",
   "tr": "Turks",
   "zhCN": "Chinese",
-  "ASSIGNTYPE_REPEAT": "Deze opdracht kan dezelfde dag worden herhaald"
+  "ASSIGNTYPE_REPEAT": "Deze opdracht kan dezelfde dag worden herhaald",
+  "BUTTON_SHOW_AVAILABLE_COLORS": "Show used colors",
+  "BUTTON_HIDE_AVAILABLE_COLORS": "Hide used colors",
+  "BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP": "When you open the colorpicker selector there is a color grab icon of the left side, using the color grab allows you to not enter manually an existing color"
 }

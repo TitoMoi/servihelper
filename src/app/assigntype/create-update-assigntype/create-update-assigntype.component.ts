@@ -11,6 +11,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-create-update-assign-type",
@@ -19,6 +21,7 @@ import { TranslocoModule } from "@ngneat/transloco";
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    CommonModule,
     TranslocoModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -27,6 +30,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     AutoFocusDirective,
     MatCheckboxModule,
     MatButtonModule,
+    MatTooltipModule,
     RouterLink,
   ],
 })
@@ -44,6 +48,17 @@ export class CreateUpdateAssignTypeComponent {
     color: [this.at ? this.at.color : "#FFFFFF"],
   });
 
+  //Get an array of non repeated colors and remove falsy values
+  colors = [
+    ...new Set(
+      this.assignTypeService
+        .getAssignTypes()
+        .map((at) => at.color)
+        .filter((c) => !!c)
+    ),
+  ];
+  showColors = false;
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private assignTypeService: AssignTypeService,
@@ -51,6 +66,10 @@ export class CreateUpdateAssignTypeComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
+
+  getBgColor(c: string) {
+    return `background-color: ${c}`;
+  }
 
   onSubmit(): void {
     if (this.isUpdate) {
