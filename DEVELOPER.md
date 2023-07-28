@@ -67,7 +67,7 @@ When creating the github tag, it must only contain the same version as it is in 
 
 ## Static map
 
-- The static map is under folder ./static
+- The static map is under folder ./docs. Github pages publishes it with CI/CD when the branch map has changes on folder docs
 
 ## Fonts
 
