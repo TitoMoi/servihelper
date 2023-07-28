@@ -329,14 +329,14 @@
   "tr": "Turc",
   "zhCN": "Xinès",
   "ASSIGNTYPE_REPEAT": "Aquest tipus d'assignació es pot repetir el mateix dia",
-  "BUTTON_SHOW_AVAILABLE_COLORS": "Show used colors",
-  "BUTTON_HIDE_AVAILABLE_COLORS": "Hide used colors",
-  "BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP": "When you open the colorpicker selector there is a color grab icon of the left side, using the color grab allows you to not enter manually an existing color",
-  "STATISTICS_EXCLUDE_EXTERNALS": "Hide externals",
-  "TERRITORY_NO_TGROUPS_CREATED": "Create a territory group first",
-  "WARNING_TERRITORY_WITHOUT_TGROUP": "If the territories belonging to this group don't belong to any other group, then the territory will also be removed, if you don't want to lose the territories, make sure they belong at least to another group.",
-  "TERRITORY_NOT_ASSIGNED": "Not assigned",
-  "STATISTICS_ROLE_TIP": "If you change the role, then the statistics will only display the role assignment types.",
+  "BUTTON_SHOW_AVAILABLE_COLORS": "Mostra colors usats",
+  "BUTTON_HIDE_AVAILABLE_COLORS": "Amaga els colors usats",
+  "BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP": "Quan obriu el selector de color, hi ha una icona de agafar una mostra de color al costat esquerre, amb la presa de colors us permet no introduir manualment un color existent",
+  "STATISTICS_EXCLUDE_EXTERNALS": "Amaga els externs",
+  "TERRITORY_NO_TGROUPS_CREATED": "Creeu primer un grup de territori",
+  "WARNING_TERRITORY_WITHOUT_TGROUP": "Si els territoris que pertanyen a aquest grup no pertanyen a cap altre grup, també s’eliminarà el territori, si no voleu perdre els territoris, assegureu-vos que pertanyen almenys a un altre grup.",
+  "TERRITORY_NOT_ASSIGNED": "No assignat",
+  "STATISTICS_ROLE_TIP": "Si canvieu el paper, les estadístiques només mostraran els tipus d'assignació de rol.",
   "STATISTICS_1": "Principal",
-  "STATISTICS_2": "Assistant"
+  "STATISTICS_2": "Ajudant"
 }

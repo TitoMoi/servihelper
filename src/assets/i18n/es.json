@@ -330,14 +330,14 @@
   "tr": "Turco",
   "zhCN": "Chino",
   "ASSIGNTYPE_REPEAT": "Este tipo de asignación puede repetirse el mismo dia",
-  "BUTTON_SHOW_AVAILABLE_COLORS": "Show used colors",
-  "BUTTON_HIDE_AVAILABLE_COLORS": "Hide used colors",
-  "BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP": "When you open the colorpicker selector there is a color grab icon of the left side, using the color grab allows you to not enter manually an existing color",
-  "STATISTICS_EXCLUDE_EXTERNALS": "Hide externals",
-  "TERRITORY_NO_TGROUPS_CREATED": "Create a territory group first",
-  "WARNING_TERRITORY_WITHOUT_TGROUP": "If the territories belonging to this group don't belong to any other group, then the territory will also be removed, if you don't want to lose the territories, make sure they belong at least to another group.",
-  "TERRITORY_NOT_ASSIGNED": "Not assigned",
-  "STATISTICS_ROLE_TIP": "If you change the role, then the statistics will only display the role assignment types.",
+  "BUTTON_SHOW_AVAILABLE_COLORS": "Mostrar colores usados",
+  "BUTTON_HIDE_AVAILABLE_COLORS": "Esconder colores usados",
+  "BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP": "Cuando abres el selector de color, hay un icono de seleccion de color en el lado izquierdo, usar el selector de color le permite no ingresar manualmente un color existente",
+  "STATISTICS_EXCLUDE_EXTERNALS": "Esconder los externos",
+  "TERRITORY_NO_TGROUPS_CREATED": "Crear primero un grupo de territorio",
+  "WARNING_TERRITORY_WITHOUT_TGROUP": "Si los territorios pertenecientes a este grupo no pertenecen a ningún otro grupo, entonces el territorio también será eliminado, si no desea perder los territorios, asegúrese de que pertenezcan al menos a otro grupo.",
+  "TERRITORY_NOT_ASSIGNED": "No asignado",
+  "STATISTICS_ROLE_TIP": "Si cambia el rol, las estadísticas solo mostrarán los tipos de asignación para dicho rol.",
   "STATISTICS_1": "Principal",
-  "STATISTICS_2": "Assistant"
+  "STATISTICS_2": "Asistente"
 }
