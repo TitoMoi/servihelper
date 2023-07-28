@@ -68,7 +68,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 export class PrincipalCountComponent implements OnInit, OnDestroy {
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
   @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
-  @ViewChild("onlyExternalsBox") onlyExternalsBox: MatCheckbox;
+  @ViewChild("hideExternalsBox") hideExternalsBox: MatCheckbox;
 
   principalList: ParticipantInterface[] & ParticipantDynamicInterface[];
 
@@ -161,7 +161,8 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
     this.principalList = participants.sort(this.sortService.sortByCountAndByDistance);
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
-    this.subscription = this.translocoService.langChanges$.subscribe((lang) => {
+    this.subscription.unsubscribe();
+    this.subscription = this.translocoService.langChanges$.subscribe(() => {
       //Get the distance, i18n sensitive
       getDistanceBetweenPenultimaAndLast(
         participants,
@@ -178,11 +179,11 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
     await this.initStatistics();
     if (!event.checked) {
       this.onlyMenBox.disabled = false;
-      this.onlyExternalsBox.disabled = false;
+      this.hideExternalsBox.disabled = false;
       return;
     }
     this.onlyMenBox.disabled = true;
-    this.onlyExternalsBox.disabled = true;
+    this.hideExternalsBox.disabled = true;
     this.principalList = this.filterOnlyWomen();
   }
 
@@ -194,6 +195,7 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
     await this.initStatistics();
     if (!event.checked) {
       this.onlyWomenBox.disabled = false;
+      this.hideExternalsBox.checked = false;
       return;
     }
     this.onlyWomenBox.disabled = true;

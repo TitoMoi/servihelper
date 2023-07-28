@@ -65,7 +65,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 export class GlobalCountComponent implements OnInit, OnDestroy {
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
   @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
-  @ViewChild("onlyExternalsBox") onlyExternalsBox: MatCheckbox;
+  @ViewChild("hideExternalsBox") hideExternalsBox: MatCheckbox;
 
   globalList: ParticipantDynamicInterface[] & ParticipantDynamicInterface[];
 
@@ -155,8 +155,9 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     this.globalList = participants.sort(this.sortService.sortByCountAndByDistance);
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
+    this.subscription.unsubscribe();
     this.subscription.add(
-      this.translocoService.langChanges$.subscribe((lang) => {
+      this.translocoService.langChanges$.subscribe(() => {
         //Assistant
         getDistanceBetweenPenultimaAndLast(
           participants,
@@ -174,11 +175,11 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     await this.initStatistics();
     if (!event.checked) {
       this.onlyMenBox.disabled = false;
-      this.onlyExternalsBox.disabled = false;
+      this.hideExternalsBox.disabled = false;
       return;
     }
     this.onlyMenBox.disabled = true;
-    this.onlyExternalsBox.disabled = true;
+    this.hideExternalsBox.disabled = true;
     this.globalList = this.filterOnlyWomen();
   }
 
@@ -190,6 +191,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     await this.initStatistics();
     if (!event.checked) {
       this.onlyWomenBox.disabled = false;
+      this.hideExternalsBox.checked = false;
       return;
     }
     this.onlyWomenBox.disabled = true;
