@@ -31,8 +31,14 @@ import {
 } from "date-fns/locale";
 import { Subscription } from "rxjs";
 
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
-import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { toPng } from "html-to-image";
 import { SortService } from "app/services/sort.service";
@@ -57,6 +63,10 @@ import { MatExpansionModule } from "@angular/material/expansion";
   ],
 })
 export class GlobalCountComponent implements OnInit, OnDestroy {
+  @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
+  @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
+  @ViewChild("onlyExternalsBox") onlyExternalsBox: MatCheckbox;
+
   globalList: ParticipantDynamicInterface[] & ParticipantDynamicInterface[];
 
   locales;
@@ -163,9 +173,13 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
   async changeWoman(event: MatCheckboxChange): Promise<void> {
     await this.initStatistics();
     if (!event.checked) {
+      this.onlyMenBox.disabled = false;
+      this.onlyExternalsBox.disabled = false;
       return;
     }
-    this.globalList = this.globalList.filter((participant) => participant.isWoman);
+    this.onlyMenBox.disabled = true;
+    this.onlyExternalsBox.disabled = true;
+    this.globalList = this.filterOnlyWomen();
   }
 
   /**
@@ -175,9 +189,32 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
   async changeMan(event: MatCheckboxChange): Promise<void> {
     await this.initStatistics();
     if (!event.checked) {
+      this.onlyWomenBox.disabled = false;
       return;
     }
-    this.globalList = this.globalList.filter((participant) => !participant.isWoman);
+    this.onlyWomenBox.disabled = true;
+    this.globalList = this.filterOnlyMen();
+  }
+
+  /** Must respect women or men check */
+  async changeExternals(event: MatCheckboxChange): Promise<void> {
+    await this.initStatistics();
+
+    if (this.onlyWomenBox.checked) this.globalList = this.filterOnlyWomen();
+    if (this.onlyMenBox.checked) this.globalList = this.filterOnlyMen();
+
+    if (!event.checked) {
+      return;
+    }
+    this.globalList = this.globalList.filter((participant) => !participant.isExternal);
+  }
+
+  filterOnlyMen() {
+    return this.globalList.filter((participant) => !participant.isWoman);
+  }
+
+  filterOnlyWomen() {
+    return this.globalList.filter((participant) => participant.isWoman);
   }
 
   async toPng() {

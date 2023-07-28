@@ -7,19 +7,23 @@
         </h3>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="row m-3 align-items-center">
-      <div class="col-3">
-        <mat-checkbox color="primary" (change)="changeWoman($event)">{{
+    <div class="row m-3 align-items-center justify-content-start">
+      <div class="col-auto">
+        <mat-checkbox #onlyWomenBox color="primary" (change)="changeWoman($event)">{{
           t("STATISTICS_ONLY_WOMAN")
         }}</mat-checkbox>
       </div>
-      <div class="col-3">
-        <mat-checkbox color="primary" (change)="changeMan($event)">{{
+      <div class="col-auto">
+        <mat-checkbox #onlyMenBox color="primary" (change)="changeMan($event)">{{
           t("STATISTICS_ONLY_MAN")
         }}</mat-checkbox>
       </div>
-
-      <div class="col-2">
+      <div class="col-auto">
+        <mat-checkbox #onlyExternalsBox color="primary" (change)="changeExternals($event)">{{
+          t("STATISTICS_EXCLUDE_EXTERNALS")
+        }}</mat-checkbox>
+      </div>
+      <div class="col-auto">
         <mat-icon svgIcon="png" aria-label="icon" (click)="toPng()"></mat-icon>
       </div>
     </div>
