@@ -35,7 +35,7 @@ export class ConfigService {
 
   /** Where the file is depending on the context__dirname is where the .js file exists */
   configPath: string = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.configFilename)
+    ? path.join(this.sourceFilesPath, this.configFilename)
     : path.join("./", this.sourceFilesPath, this.configFilename);
   // Flag to indicate that config file has changed
   hasChanged = true;
