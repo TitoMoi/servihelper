@@ -27,7 +27,7 @@
                 class="me-3"
                 [ngStyle]="{ width: '25px', height: '25px', 'background-color': tg.color }"
               ></div>
-              <span>{{ tg.name }}</span>
+              <span>{{ tg.name }} - {{ getLengthForGroup(tg.id) }}</span>
             </h3>
           </mat-panel-title>
         </mat-expansion-panel-header>

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
 import { CommonModule, NgFor, NgIf } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon, MatIconModule } from "@angular/material/icon";
@@ -35,6 +35,7 @@ import { clipboard } from "electron";
   ],
   templateUrl: "./territory.component.html",
   styleUrls: ["./territory.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TerritoryComponent {
   territories: TerritoryContextInterface[] = this.territoryService
@@ -50,6 +51,14 @@ export class TerritoryComponent {
     private polygonService: PolygonService,
     private cdr: ChangeDetectorRef
   ) {}
+
+  getLengthForGroup(tgId: string) {
+    let count = 0;
+    for (let i = 0; i < this.territories.length; i++) {
+      if (this.territories[i].groups.includes(tgId)) count++;
+    }
+    return count;
+  }
 
   generateMapLink(t: TerritoryContextInterface, matIcon: MatIcon) {
     matIcon.svgIcon = "clipboard";
