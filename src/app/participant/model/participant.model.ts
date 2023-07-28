@@ -10,7 +10,7 @@ export interface ParticipantInterface {
   notAvailableDates?: Date[];
 }
 
-//These values are calculated under assignments and statistics pages but shouldnt be saved on json file
+//These values may exist and are calculated under assignments and statistics pages but shouldnt be saved on json file
 export interface ParticipantDynamicInterface extends ParticipantInterface {
   count?: number; //Dynamic value, undefined by default
   hasWork?: boolean; //Dynamic, if has current assignments for the date
@@ -19,6 +19,8 @@ export interface ParticipantDynamicInterface extends ParticipantInterface {
   distanceBetweenPenultimaAndLast?: string; //Dynamic value, undefined by default, string in distance
   lastAssignType?: string; //Dynamic value, undefined by default, the name of the assignType
   penultimateAssignType?: string; //Dynamic value, undefined by default, the name of the assignType
+  isPrincipalLastAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment or not (assistant)
+  isPrincipalPenultimateAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment or not (assistant)
 }
 
 export class ParticipantModel {

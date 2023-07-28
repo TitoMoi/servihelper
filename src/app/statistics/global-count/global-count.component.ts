@@ -7,7 +7,10 @@ import {
   getPenultimateAssignment,
   setCountById,
 } from "app/functions";
-import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
+import {
+  ParticipantDynamicInterface,
+  ParticipantInterface,
+} from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import {
   bn,
@@ -43,7 +46,7 @@ import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { toPng } from "html-to-image";
 import { SortService } from "app/services/sort.service";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
-import { NgFor } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 
@@ -54,11 +57,11 @@ import { MatExpansionModule } from "@angular/material/expansion";
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    CommonModule,
     TranslocoModule,
     MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
-    NgFor,
     TranslocoLocaleModule,
   ],
 })
@@ -67,7 +70,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
   @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
   @ViewChild("hideExternalsBox") hideExternalsBox: MatCheckbox;
 
-  globalList: ParticipantDynamicInterface[] & ParticipantDynamicInterface[];
+  globalList: ParticipantInterface[] & ParticipantDynamicInterface[];
 
   locales;
 
@@ -112,18 +115,21 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
 
   async initStatistics() {
     const assignments = await this.assignmentService.getAssignments(true);
-    const participants: ParticipantDynamicInterface[] =
-      this.participantService.getParticipants(true);
+    const participants = this.participantService.getParticipants(
+      true
+    ) as ParticipantDynamicInterface[];
 
     //Global
     setCountById(assignments, participants);
 
     for (const participant of participants) {
       const assignment: AssignmentInterface = getLastAssignment(assignments, participant);
-      //Get the lastAssignmentDate
-      participant.lastAssignmentDate = assignment?.date;
 
       if (assignment) {
+        //Get the lastAssignmentDate
+        participant.lastAssignmentDate = assignment.date;
+        participant.isPrincipalLastAssignment =
+          assignment.principal === participant.id ? true : false;
         //Search the assignmentType and inject
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
         participant.lastAssignType = assignType.name;
@@ -140,6 +146,8 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
 
       if (assignment) {
         //Search the assignmentType and inject
+        participant.isPrincipalPenultimateAssignment =
+          assignment.principal === participant.id ? true : false;
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
         participant.penultimateAssignType = assignType.name;
       }

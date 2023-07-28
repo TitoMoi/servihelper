@@ -115,8 +115,9 @@ export class PrincipalCountComponent implements OnInit, OnDestroy {
 
   async initStatistics() {
     const assignments = await this.assignmentService.getAssignments(true);
-    const participants: ParticipantDynamicInterface[] =
-      this.participantService.getParticipants(true);
+    const participants = this.participantService.getParticipants(
+      true
+    ) as ParticipantDynamicInterface[];
 
     //Principal
     setPrincipalCountById(assignments, participants);
