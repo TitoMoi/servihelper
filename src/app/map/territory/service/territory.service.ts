@@ -141,6 +141,7 @@ export class TerritoryService {
 
   /**
    * @param id the id of the territory group we want to delete
+   * if the territory groups remains empty at the end then the territory is also removed
    */
   deleteTerritoryGroupById(id: string): boolean {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
@@ -149,6 +150,9 @@ export class TerritoryService {
 
       this.#territoriesMap.set(this.#territories[i].id, this.#territories[i]);
     }
+    //Remove the empty groups territories
+    this.#territories = this.#territories.filter((t) => t.groups.length);
+
     return this.#saveTerritoriesToFile();
   }
 }
