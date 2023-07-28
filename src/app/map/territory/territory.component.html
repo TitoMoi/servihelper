@@ -1,20 +1,30 @@
 <span *transloco="let t">
-  <a
-    mat-raised-button
-    color="primary"
-    class="mb-3 me-2"
-    routerLink="create"
-    routerLinkActive="active"
-    >{{ t("TERRITORY_BUTTON_CREATE_TITLE") }}</a
-  >
-  <mat-icon
-    *ngIf="territories.length"
-    [routerLink]="['heatmap']"
-    routerLinkActive="active"
-    svgIcon="heatmap"
-    [matTooltip]="t('ICON_HEATMAP')"
-    aria-label="Side nav toggle icon"
-  ></mat-icon>
+  <div class="d-flex align-items-center justify-content-start mb-2">
+    <div
+      class="col-auto me-3"
+      [matTooltip]="t('TERRITORY_NO_TGROUPS_CREATED')"
+      [matTooltipDisabled]="!!territoryGroups.length"
+    >
+      <a
+        mat-raised-button
+        color="primary"
+        routerLink="create"
+        routerLinkActive="active"
+        [disabled]="!territoryGroups.length"
+        >{{ t("TERRITORY_BUTTON_CREATE_TITLE") }}</a
+      >
+    </div>
+    <div class="col-auto">
+      <mat-icon
+        *ngIf="territories.length"
+        [routerLink]="['heatmap']"
+        routerLinkActive="active"
+        svgIcon="heatmap"
+        [matTooltip]="t('ICON_HEATMAP')"
+        aria-label="Side nav toggle icon"
+      ></mat-icon>
+    </div>
+  </div>
 </span>
 <ng-container *ngFor="let tg of territoryGroups">
   <div class="mb-2">
