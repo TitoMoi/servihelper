@@ -177,7 +177,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   });
 
   //Subscriptions
-  subscription: Subscription = new Subscription();
+  subscription = new Subscription();
 
   constructor(
     public lastDateService: LastDateService,

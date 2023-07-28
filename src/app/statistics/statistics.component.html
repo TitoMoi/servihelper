@@ -1,3 +1,19 @@
-<div class="mb-2"><app-global-count></app-global-count></div>
-<div class="mb-2"><app-principal-count></app-principal-count></div>
-<div class="mb-2"><app-assistant-count></app-assistant-count></div>
+<span *transloco="let t">
+  <div class="row mb-3">
+    <div class="col">
+      <div class="d-flex">
+        <mat-icon class="me-2" svgIcon="info-blue" aria-label="icon"></mat-icon>
+        <div>{{ t("STATISTICS_ROLE_TIP") }}</div>
+      </div>
+    </div>
+  </div>
+</span>
+<div class="mb-2">
+  <app-global-count [allowedAssignTypesIds]="allowedAssignTypesIds"></app-global-count>
+</div>
+<div class="mb-2">
+  <app-principal-count [allowedAssignTypesIds]="allowedAssignTypesIds"></app-principal-count>
+</div>
+<div class="mb-2">
+  <app-assistant-count [allowedAssignTypesIds]="allowedAssignTypesIds"></app-assistant-count>
+</div>

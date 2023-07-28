@@ -1,13 +1,60 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AssistantCountComponent } from "./assistant-count/assistant-count.component";
 import { PrincipalCountComponent } from "./principal-count/principal-count.component";
 import { GlobalCountComponent } from "./global-count/global-count.component";
+import { TranslocoModule } from "@ngneat/transloco";
+import { Observable, Subscription, combineLatest, map } from "rxjs";
+import { ConfigService } from "app/config/service/config.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
+import { ConfigInterface } from "app/config/model/config.model";
+import { RoleInterface } from "app/roles/model/role.model";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-statistics",
   templateUrl: "./statistics.component.html",
   styleUrls: ["./statistics.component.scss"],
   standalone: true,
-  imports: [GlobalCountComponent, PrincipalCountComponent, AssistantCountComponent],
+  imports: [
+    GlobalCountComponent,
+    PrincipalCountComponent,
+    AssistantCountComponent,
+    TranslocoModule,
+    MatIconModule,
+  ],
 })
-export class StatisticsComponent {}
+export class StatisticsComponent implements OnInit, OnDestroy {
+  allowedAssignTypesIds = [];
+
+  subscription = new Subscription();
+
+  config$: Observable<ConfigInterface> = this.configService.config$;
+  roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
+  currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
+
+  constructor(
+    private configService: ConfigService,
+    private assignTypeService: AssignTypeService
+  ) {}
+
+  ngOnInit(): void {
+    //prepare emissions, emits also the first time
+    this.subscription.add(
+      combineLatest([this.currentRoleId$, this.roles$]).subscribe(([currentRole, roles]) => {
+        this.allowedAssignTypesIds =
+          currentRole === "administrator"
+            ? this.getAllAssignTypesIds()
+            : roles.find((r) => r.id === currentRole).assignTypesId;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  //first load or Admin
+  getAllAssignTypesIds() {
+    return this.assignTypeService.getAssignTypes()?.map((at) => at.id);
+  }
+}

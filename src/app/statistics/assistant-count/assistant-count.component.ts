@@ -37,9 +37,11 @@ import { Subscription } from "rxjs";
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnDestroy,
-  OnInit,
+  OnChanges,
   ViewChild,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
@@ -65,10 +67,13 @@ import { MatExpansionModule } from "@angular/material/expansion";
     TranslocoLocaleModule,
   ],
 })
-export class AssistantCountComponent implements OnInit, OnDestroy {
+export class AssistantCountComponent implements OnChanges, OnDestroy {
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
   @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
   @ViewChild("hideExternalsBox") hideExternalsBox: MatCheckbox;
+
+  @Input() allowedAssignTypesIds;
+
   assistantList: ParticipantInterface[] & ParticipantDynamicInterface[];
 
   locales;
@@ -80,7 +85,8 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
     private translocoService: TranslocoService,
-    private sortService: SortService
+    private sortService: SortService,
+    private cdr: ChangeDetectorRef
   ) {
     this.locales = {
       es, //Spanish
@@ -104,7 +110,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.initStatistics();
   }
 
@@ -113,10 +119,20 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
   }
 
   async initStatistics() {
-    const assignments = await this.assignmentService.getAssignments(true);
-    const participants = this.participantService.getParticipants(
-      true
-    ) as ParticipantDynamicInterface[];
+    const assignments = (await this.assignmentService.getAssignments(true)).filter((a) =>
+      this.allowedAssignTypesIds.includes(a.assignType)
+    );
+    /* available participants that can do this kind of type assignments
+    Filter from the participant the assignTypes that are allowed
+    and watch if he can participate as assistant of this assign types */
+    const participants = this.participantService
+      .getParticipants(true)
+      .filter((p) =>
+        p.assignTypes
+          .filter((at) => this.allowedAssignTypesIds.includes(at.assignTypeId))
+          .some((at) => !!at.canAssistant)
+      )
+      .filter((p) => p.available) as ParticipantDynamicInterface[];
 
     //Assistant
     setAssistantCountById(assignments, participants);
@@ -169,6 +185,7 @@ export class AssistantCountComponent implements OnInit, OnDestroy {
         this.locales[this.translocoService.getActiveLang()]
       );
     });
+    this.cdr.detectChanges();
   }
 
   /**

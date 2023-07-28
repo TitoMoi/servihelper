@@ -334,5 +334,8 @@
   "STATISTICS_EXCLUDE_EXTERNALS": "Hide externals",
   "TERRITORY_NO_TGROUPS_CREATED": "Create a territory group first",
   "WARNING_TERRITORY_WITHOUT_TGROUP": "If the territories belonging to this group don't belong to any other group, then the territory will also be removed, if you don't want to lose the territories, make sure they belong at least to another group.",
-  "TERRITORY_NOT_ASSIGNED": "Not assigned"
+  "TERRITORY_NOT_ASSIGNED": "Not assigned",
+  "STATISTICS_ROLE_TIP": "If you change the role, then the statistics will only display the role assignment types.",
+  "STATISTICS_1": "Principal",
+  "STATISTICS_2": "Assistant"
 }

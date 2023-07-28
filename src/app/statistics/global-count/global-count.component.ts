@@ -36,9 +36,11 @@ import { Subscription } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  Input,
+  OnChanges,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from "@angular/core";
 import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
@@ -65,10 +67,12 @@ import { MatExpansionModule } from "@angular/material/expansion";
     TranslocoLocaleModule,
   ],
 })
-export class GlobalCountComponent implements OnInit, OnDestroy {
+export class GlobalCountComponent implements OnChanges, OnDestroy {
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
   @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
   @ViewChild("hideExternalsBox") hideExternalsBox: MatCheckbox;
+
+  @Input() allowedAssignTypesIds: string[];
 
   globalList: ParticipantInterface[] & ParticipantDynamicInterface[];
 
@@ -81,7 +85,8 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
     private translocoService: TranslocoService,
-    private sortService: SortService
+    private sortService: SortService,
+    private cdr: ChangeDetectorRef
   ) {
     this.locales = {
       es,
@@ -105,7 +110,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnInit(): void {
+  ngOnChanges() {
     this.initStatistics();
   }
 
@@ -114,10 +119,20 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
   }
 
   async initStatistics() {
-    const assignments = await this.assignmentService.getAssignments(true);
-    const participants = this.participantService.getParticipants(
-      true
-    ) as ParticipantDynamicInterface[];
+    const assignments = (await this.assignmentService.getAssignments(true)).filter((a) =>
+      this.allowedAssignTypesIds.includes(a.assignType)
+    );
+    /* available participants that can do this kind of type assignments
+    Filter from the participant the assignTypes that are allowed
+    and watch if he can participate in some of this assign types */
+    const participants = this.participantService
+      .getParticipants(true)
+      .filter((p) =>
+        p.assignTypes
+          .filter((at) => this.allowedAssignTypesIds.includes(at.assignTypeId))
+          .some((at) => !!at.canPrincipal || !!at.canAssistant)
+      )
+      .filter((p) => p.available) as ParticipantDynamicInterface[];
 
     //Global
     setCountById(assignments, participants);
@@ -173,6 +188,7 @@ export class GlobalCountComponent implements OnInit, OnDestroy {
         );
       })
     );
+    this.cdr.detectChanges();
   }
 
   /**
