@@ -18,7 +18,9 @@ export class ConfigService {
   //Administrator key
   administratorKey = "administrator";
 
-  sourceFilesPath = "assets/source";
+  sourceFilesPath = APP_CONFIG.production
+    ? path.join(__dirname, "assets/source")
+    : "assets/source";
 
   assignmentsFilename = "assignment.json";
   notesFilename = "note.json";
