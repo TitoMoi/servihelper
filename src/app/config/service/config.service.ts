@@ -41,39 +41,39 @@ export class ConfigService {
   hasChanged = true;
 
   assignmentsPath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.assignmentsFilename)
+    ? path.join(this.sourceFilesPath, this.assignmentsFilename)
     : path.join("./", this.sourceFilesPath, this.assignmentsFilename);
 
   notesPath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.notesFilename)
+    ? path.join(this.sourceFilesPath, this.notesFilename)
     : path.join("./", this.sourceFilesPath, this.notesFilename);
 
   participantsPath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.participantsFilename)
+    ? path.join(this.sourceFilesPath, this.participantsFilename)
     : path.join("./", this.sourceFilesPath, this.participantsFilename);
 
   assignTypesPath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.assignTypesFilename)
+    ? path.join(this.sourceFilesPath, this.assignTypesFilename)
     : path.join("./", this.sourceFilesPath, this.assignTypesFilename);
 
   roomsPath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.roomsFilename)
+    ? path.join(this.sourceFilesPath, this.roomsFilename)
     : path.join("./", this.sourceFilesPath, this.roomsFilename);
 
   sheetTitlePath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.sheetTitleFilename)
+    ? path.join(this.sourceFilesPath, this.sheetTitleFilename)
     : path.join("./", this.sourceFilesPath, this.sheetTitleFilename);
 
   territoriesPath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.territoriesFilename)
+    ? path.join(this.sourceFilesPath, this.territoriesFilename)
     : path.join("./", this.sourceFilesPath, this.territoriesFilename);
 
   territoryGroupsPath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.territoryGroupsFilename)
+    ? path.join(this.sourceFilesPath, this.territoryGroupsFilename)
     : path.join("./", this.sourceFilesPath, this.territoryGroupsFilename);
 
   polygonsPath = APP_CONFIG.production
-    ? path.join(__dirname, this.sourceFilesPath, this.polygonsFilename)
+    ? path.join(this.sourceFilesPath, this.polygonsFilename)
     : path.join("./", this.sourceFilesPath, this.polygonsFilename);
 
   configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
