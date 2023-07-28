@@ -306,5 +306,6 @@
   "BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP": "When you open the colorpicker selector there is a color grab icon of the left side, using the color grab allows you to not enter manually an existing color",
   "STATISTICS_EXCLUDE_EXTERNALS": "Hide externals",
   "TERRITORY_NO_TGROUPS_CREATED": "Create a territory group first",
-  "WARNING_TERRITORY_WITHOUT_TGROUP": "If the territories belonging to this group don't belong to any other group, then the territory will also be removed, if you don't want to lose the territories, make sure they belong at least to another group."
+  "WARNING_TERRITORY_WITHOUT_TGROUP": "If the territories belonging to this group don't belong to any other group, then the territory will also be removed, if you don't want to lose the territories, make sure they belong at least to another group.",
+  "TERRITORY_NOT_ASSIGNED": "Not assigned"
 }
