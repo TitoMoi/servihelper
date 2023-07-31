@@ -86,3 +86,9 @@ The available fonts for pdf are in ./src/app/resources:
 ## Reminders (experimental)
 
 It is possible to send a reminder with the google event old api _(can be disabled at any moment)_: https://support.google.com/calendar/thread/128416249/calendar-url-generator-which-parameters?hl=en
+
+## To keep in mind
+
+On `image-assignment.component.ts` we use the class `fw-bold` from bootstrap. Do not remove it as it is used to show the image name in bold when the image is selected.
+
+On `assignment.component.ts` we do a fake pagination.
