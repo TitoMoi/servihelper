@@ -1,41 +1,27 @@
 <ng-container *transloco="let t">
   <h3 class="mb-2">{{ t("CONFIG_BACKUP_LABEL_IMPORT") }}</h3>
-  <button
-    class="mb-2"
-    mat-raised-button
-    type="button"
-    color="primary"
-    (click)="upload = !upload"
-  >
-    {{ t("CONFIG_BACKUP_IMPORT") }}
-  </button>
-
-  <div *ngIf="upload" class="mb-2">
-    <div class="m-3">
-      <label
-        for="zip-upload"
-        [ngClass]="{
-          'custom-file-upload-success': isZipLoaded,
-          'custom-file-upload': !isZipLoaded
-        }"
-      >
-        <span *ngIf="!isZipLoaded">{{ t("CONFIG_ZIP_UPLOAD") }} ...</span>
-        <span *ngIf="isZipLoaded" class="ml-3 d-inline-block">{{
-          t("CONFIG_ZIP_UPLOADED")
-        }}</span>
-      </label>
-      <input id="zip-upload" type="file" (change)="uploadZipFiles($event)" />
-    </div>
-    <div *ngIf="isZipLoaded" class="pb-3">
-      <p class="d-inline-block m-3 green-msg">
-        {{ t("CONFIG_BACKUP_SUCCESS_ALL_FILES") }}
-      </p>
-    </div>
+  <div class="mb-3">
+    <label
+      for="zip-upload"
+      [ngClass]="{
+        'custom-file-upload-success': isZipLoaded,
+        'custom-file-upload': !isZipLoaded
+      }"
+    >
+      <span *ngIf="!isZipLoaded">{{ t("CONFIG_ZIP_UPLOAD") }} ...</span>
+      <span *ngIf="isZipLoaded" class="ml-3 d-inline-block">{{
+        t("CONFIG_ZIP_UPLOADED")
+      }}</span>
+    </label>
+    <input id="zip-upload" type="file" (change)="uploadZipFiles($event)" />
   </div>
   <h3 class="mb-2">{{ t("CONFIG_BACKUP_LABEL_EXPORT") }}</h3>
-  <p>
-    <button mat-raised-button type="button" color="accent" (click)="downloadFiles()">
-      {{ t("BUTTON_DOWNLOAD") }}
-    </button>
-  </p>
+  <button mat-raised-button type="button" color="accent" (click)="downloadFiles()">
+    {{ t("BUTTON_DOWNLOAD") }}
+  </button>
+  <div *ngIf="isZipLoaded" class="pb-3">
+    <p class="d-inline-block mt-3 green-msg">
+      {{ t("CONFIG_BACKUP_SUCCESS_ALL_FILES") }}
+    </p>
+  </div>
 </ng-container>
