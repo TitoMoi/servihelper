@@ -22,7 +22,10 @@
     <!-- p-0 -> mat-nav-list has padding top and a gap is visible, this padding fix removes it -->
     <mat-nav-list class="p-0">
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="/">
-        <span>{{ t("NAV_HOME") }}</span>
+        <div class="d-flex justify-content-between align-items-center">
+          <span>{{ t("NAV_HOME") }}</span>
+          <mat-icon svgIcon="swap"></mat-icon>
+        </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="assignType">
         <div class="d-flex justify-content-between align-items-center">
