@@ -7,13 +7,12 @@ import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { RoomInterface } from "app/room/model/room.model";
-import { toPng } from "html-to-image";
 import autoTable from "jspdf-autotable";
 
 import { ChangeDetectorRef, Component } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { PdfService } from "app/services/pdf.service";
-import { clipboard, nativeImage, NativeImage } from "electron";
+import { clipboard } from "electron";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ParticipantPipe } from "../../participant/pipe/participant.pipe";
 import { RoomPipe } from "../../room/pipe/room.pipe";
@@ -91,18 +90,8 @@ export class ImageAssignmentComponent {
   /**
    * Copy image to the clipboard
    */
-  async copyImageToClipboard() {
-    document.body.style.cursor = "wait";
-    const node = document.getElementById("assignmentTableId");
-    const dataUrl = await toPng(node);
-    const natImage: NativeImage = nativeImage.createFromDataURL(dataUrl);
-    clipboard.write(
-      {
-        image: natImage,
-      },
-      "selection"
-    );
-    document.body.style.cursor = "default";
+  async toClipboard() {
+    this.exportService.toClipboard("assignmentTableId");
     this.copied = true;
     this.cdr.detectChanges();
   }

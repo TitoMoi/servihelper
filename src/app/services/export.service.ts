@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { clipboard, nativeImage } from "electron";
 import { toPng } from "html-to-image";
 
 @Injectable({
@@ -12,7 +13,7 @@ export class ExportService {
    * @param elemId the id of the div to export
    * @param filename the name of the file to save
    */
-  async toPng(elemId, filename: string = "image") {
+  async toPng(elemId: string, filename: string = "image") {
     //the div
     document.body.style.cursor = "wait";
     const div = document.getElementById(elemId);
@@ -24,6 +25,24 @@ export class ExportService {
       link.setAttribute("download", `${filename}.png`);
       link.click();
     }
+    document.body.style.cursor = "default";
+  }
+
+  /**
+   *
+   * @param elemId the id of the div to export
+   */
+  async toClipboard(elemId: string) {
+    document.body.style.cursor = "wait";
+    const node = document.getElementById(elemId);
+    const dataUrl = await toPng(node);
+    const natImage = nativeImage.createFromDataURL(dataUrl);
+    clipboard.write(
+      {
+        image: natImage,
+      },
+      "selection"
+    );
     document.body.style.cursor = "default";
   }
 }

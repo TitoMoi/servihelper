@@ -24,8 +24,6 @@ import { Map, Polygon, TileLayer } from "leaflet";
 import { TerritoryService } from "../service/territory.service";
 import { TerritoryContextInterface } from "app/map/model/map.model";
 import { formatDistance } from "date-fns";
-import { NativeImage, nativeImage, clipboard } from "electron";
-import { toPng } from "html-to-image";
 
 @Component({
   selector: "app-heatmap",
@@ -129,18 +127,8 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   /**
    * Copy image to the clipboard
    */
-  async copyImageToClipboard() {
-    document.body.style.cursor = "wait";
-    const node = document.getElementById("map");
-    const dataUrl = await toPng(node);
-    const natImage: NativeImage = nativeImage.createFromDataURL(dataUrl);
-    clipboard.write(
-      {
-        image: natImage,
-      },
-      "selection"
-    );
-    document.body.style.cursor = "default";
+  async toClipboard() {
+    this.exportService.toClipboard("map");
     this.cdr.detectChanges();
   }
 

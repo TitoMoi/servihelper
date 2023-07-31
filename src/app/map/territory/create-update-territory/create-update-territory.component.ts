@@ -41,8 +41,6 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { MatSelectChange, MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
-import { NativeImage, nativeImage, clipboard } from "electron";
-import { toPng } from "html-to-image";
 import { ExportService } from "app/services/export.service";
 
 @Component({
@@ -335,21 +333,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       }
     }
   }
-  /**
-   * Copy image to the clipboard
-   */
-  async copyImageToClipboard() {
-    document.body.style.cursor = "wait";
-    const node = document.getElementById("map");
-    const dataUrl = await toPng(node);
-    const natImage: NativeImage = nativeImage.createFromDataURL(dataUrl);
-    clipboard.write(
-      {
-        image: natImage,
-      },
-      "selection"
-    );
-    document.body.style.cursor = "default";
+
+  async toClipboard() {
+    this.exportService.toClipboard("map");
     this.cdr.detectChanges();
   }
 
