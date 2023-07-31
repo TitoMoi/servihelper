@@ -29,7 +29,7 @@ import { TerritoryService } from "../service/territory.service";
 import { PolygonService } from "../service/polygon.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { AutoFocusDirective } from "app/autofocus/autofocus.directive";
+import { AutoFocusDirective } from "app/directives/autofocus/autofocus.directive";
 import { ConfigService } from "app/config/service/config.service";
 import {
   PolygonInterface,

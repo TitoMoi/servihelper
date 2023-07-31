@@ -31,7 +31,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
 import { NgIf, NgFor } from "@angular/common";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { AutoFocusDirective } from "../../autofocus/autofocus.directive";
+import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";

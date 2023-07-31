@@ -47,7 +47,7 @@ import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox
 import { ParticipantPipe } from "../../participant/pipe/participant.pipe";
 import { MatIconModule } from "@angular/material/icon";
 import { MatOptionModule } from "@angular/material/core";
-import { AutoFocusDirective } from "../../autofocus/autofocus.directive";
+import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { NgIf, NgFor, AsyncPipe } from "@angular/common";

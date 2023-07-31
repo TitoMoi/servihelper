@@ -17,7 +17,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router, RouterLink } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
-import { AutoFocusDirective } from "app/autofocus/autofocus.directive";
+import { AutoFocusDirective } from "app/directives/autofocus/autofocus.directive";
 import { PolygonService } from "../service/polygon.service";
 import { Map, Polygon, TileLayer } from "leaflet";
 import { TerritoryService } from "../service/territory.service";

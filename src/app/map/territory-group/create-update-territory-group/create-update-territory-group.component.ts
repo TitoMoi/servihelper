@@ -7,7 +7,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
-import { AutoFocusDirective } from "app/autofocus/autofocus.directive";
+import { AutoFocusDirective } from "app/directives/autofocus/autofocus.directive";
 import { MatCardModule } from "@angular/material/card";
 import { TerritoryGroupInterface } from "app/map/model/map.model";
 
