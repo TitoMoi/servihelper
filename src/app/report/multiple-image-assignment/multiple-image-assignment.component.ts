@@ -3,7 +3,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
-import { toPng, toBlob } from "html-to-image";
+import { toBlob } from "html-to-image";
 import { filenamifyPath } from "filenamify";
 const os = require("os");
 const path = require("path");
@@ -28,6 +28,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
+import { ExportService } from "app/services/export.service";
 
 @Component({
   selector: "app-multiple-image-assignment",
@@ -78,6 +79,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private assignmentService: AssignmentService,
     private noteService: NoteService,
     private configService: ConfigService,
+    private exportService: ExportService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -145,17 +147,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   }
 
   async toPng() {
-    //the div
-    document.body.style.cursor = "wait";
-    const div = document.getElementById("assignmentDiv");
-    const dataUrl = await toPng(div);
-
-    const link = document.createElement("a");
-    link.href = dataUrl;
-    link.setAttribute("download", "assignments.png");
-    link.click();
-
-    document.body.style.cursor = "default";
+    this.exportService.toPng("assignmentDiv", "assignments");
   }
 
   /**

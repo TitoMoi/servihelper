@@ -5,7 +5,6 @@ import { RoomService } from "app/room/service/room.service";
 import { ExcelService } from "app/services/excel.service";
 import { SortOrderType, SortService } from "app/services/sort.service";
 import { PdfService } from "app/services/pdf.service";
-import { toPng } from "html-to-image";
 import autoTable from "jspdf-autotable";
 
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -29,6 +28,7 @@ import { NgIf, NgFor } from "@angular/common";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
+import { ExportService } from "app/services/export.service";
 
 @Component({
   selector: "app-selection-list",
@@ -71,6 +71,7 @@ export class SelectionListComponent implements OnChanges {
     private sortService: SortService,
     private excelService: ExcelService,
     private pdfService: PdfService,
+    private exportService: ExportService,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnChanges(changes: SimpleChanges) {
@@ -276,17 +277,7 @@ export class SelectionListComponent implements OnChanges {
   }
 
   async toPng() {
-    //the div
-    document.body.style.cursor = "wait";
-    const div = document.getElementById("toPngDivId");
-    const dataUrl = await toPng(div);
-
-    const link = document.createElement("a");
-    link.href = dataUrl;
-    link.setAttribute("download", "assignments.png");
-    link.click();
-
-    document.body.style.cursor = "default";
+    this.exportService.toPng("toPngDivId", "assignments");
   }
 
   toExcel() {

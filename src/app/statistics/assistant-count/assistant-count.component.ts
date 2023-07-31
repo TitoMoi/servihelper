@@ -46,11 +46,11 @@ import {
 import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { SortService } from "app/services/sort.service";
-import { toPng } from "html-to-image";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { NgFor } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { ExportService } from "app/services/export.service";
 
 @Component({
   selector: "app-assistant-count",
@@ -86,6 +86,7 @@ export class AssistantCountComponent implements OnChanges, OnDestroy {
     private participantService: ParticipantService,
     private translocoService: TranslocoService,
     private sortService: SortService,
+    private exportService: ExportService,
     private cdr: ChangeDetectorRef
   ) {
     this.locales = {
@@ -240,16 +241,6 @@ export class AssistantCountComponent implements OnChanges, OnDestroy {
   }
 
   async toPng() {
-    //the div
-    document.body.style.cursor = "wait";
-    const div = document.getElementById("toPngDivId");
-    const dataUrl = await toPng(div);
-
-    const link = document.createElement("a");
-    link.href = dataUrl;
-    link.setAttribute("download", "statistics-assistant");
-    link.click();
-
-    document.body.style.cursor = "default";
+    this.exportService.toPng("toPngDivId", "statistics-assistant");
   }
 }

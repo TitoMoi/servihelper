@@ -43,6 +43,7 @@ import { MatOptionModule } from "@angular/material/core";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
 import { NativeImage, nativeImage, clipboard } from "electron";
 import { toPng } from "html-to-image";
+import { ExportService } from "app/services/export.service";
 
 @Component({
   selector: "app-create-update-territory",
@@ -77,6 +78,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   private configService = inject(ConfigService);
   private cdr = inject(ChangeDetectorRef);
   private participantService = inject(ParticipantService);
+  private exportService = inject(ExportService);
   private location = inject(Location);
 
   loadedTerritory = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
@@ -352,16 +354,6 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   async toPng(mapName: string) {
-    //the div
-    document.body.style.cursor = "wait";
-    const div = document.getElementById("map");
-    const dataUrl = await toPng(div);
-
-    const link = document.createElement("a");
-    link.href = dataUrl;
-    link.setAttribute("download", `${mapName}.png`);
-    link.click();
-
-    document.body.style.cursor = "default";
+    this.exportService.toPng("map", mapName);
   }
 }

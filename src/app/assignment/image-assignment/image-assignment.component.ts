@@ -25,6 +25,8 @@ import { NgIf, NgClass } from "@angular/common";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { ExportService } from "app/services/export.service";
+import { ParticipantService } from "app/participant/service/participant.service";
 
 @Component({
   selector: "app-image-assignment",
@@ -81,6 +83,8 @@ export class ImageAssignmentComponent {
     private activatedRoute: ActivatedRoute,
     private configService: ConfigService,
     private pdfService: PdfService,
+    private exportService: ExportService,
+    private participantService: ParticipantService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -133,17 +137,10 @@ export class ImageAssignmentComponent {
   }
 
   async toPng() {
-    //the div
-    document.body.style.cursor = "wait";
-    const div = document.getElementById("assignmentTableId");
-    const dataUrl = await toPng(div);
-
-    const link = document.createElement("a");
-    link.href = dataUrl;
-    link.setAttribute("download", "assignment.png");
-    link.click();
-
-    document.body.style.cursor = "default";
+    const filename =
+      this.participantService.getParticipant(this.assignment.principal).name +
+      this.assignTypeService.getAssignType(this.assignment.assignType).name;
+    this.exportService.toPng("assignmentTableId", filename);
   }
 
   toPdf() {

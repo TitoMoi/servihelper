@@ -18,6 +18,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { Router, RouterLink } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
 import { AutoFocusDirective } from "app/directives/autofocus/autofocus.directive";
+import { ExportService } from "app/services/export.service";
 import { PolygonService } from "../service/polygon.service";
 import { Map, Polygon, TileLayer } from "leaflet";
 import { TerritoryService } from "../service/territory.service";
@@ -53,6 +54,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   polygonService = inject(PolygonService);
   private cdr = inject(ChangeDetectorRef);
   private territoryService = inject(TerritoryService);
+  private exportService = inject(ExportService);
   private router = inject(Router);
 
   loadedTerritories = this.territoryService.getTerritories();
@@ -142,17 +144,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  async toPng(mapName: string = "heatmap") {
-    //the div
-    document.body.style.cursor = "wait";
-    const div = document.getElementById("map");
-    const dataUrl = await toPng(div);
-
-    const link = document.createElement("a");
-    link.href = dataUrl;
-    link.setAttribute("download", `${mapName}.png`);
-    link.click();
-
-    document.body.style.cursor = "default";
+  async toPng() {
+    this.exportService.toPng("map", "heatmap");
   }
 }
