@@ -2,7 +2,6 @@ import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
-import { SharedService } from "app/services/shared.service";
 
 import {
   AfterViewInit,
@@ -32,6 +31,7 @@ import { SelectionListComponent } from "../selection-list/selection-list.compone
 import { NgFor, NgIf } from "@angular/common";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { SortService } from "app/services/sort.service";
 
 @Component({
   selector: "app-report-selector",
@@ -101,7 +101,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     private assignTypeService: AssignTypeService,
     private roomService: RoomService,
     private translocoService: TranslocoService,
-    private sharedService: SharedService,
+    private sortService: SortService,
     private formBuilder: UntypedFormBuilder,
     private cdr: ChangeDetectorRef
   ) {}
@@ -140,7 +140,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
       }
       this.resetModel = new Date(0);
       //prepare sorted dates for the reports and new reference for the input components
-      this.selectedDates = [...this.selectedDates.sort(this.sharedService.sortDates)];
+      this.selectedDates = [...this.selectedDates.sort(this.sortService.sortDates)];
 
       if (!this.closeOnSelected) {
         const closeFn = this.datePickerRef.close;

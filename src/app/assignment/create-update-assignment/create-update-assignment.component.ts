@@ -763,7 +763,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       }
       this.resetModel = new Date(0);
       //prepare sorted dates for the reports and new reference for the input components
-      this.selectedDates = [...this.selectedDates.sort(this.sharedService.sortDates)];
+      this.selectedDates = [...this.selectedDates.sort(this.sortService.sortDates)];
 
       if (!this.closeOnSelected) {
         const closeFn = this.datePickerRef.close;
