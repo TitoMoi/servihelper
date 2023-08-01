@@ -114,6 +114,16 @@ export class SortService {
     return 0;
   }
 
+  sortParticipantsByCount(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
+    if (a.count < b.count) {
+      return -1;
+    }
+    if (a.count > b.count) {
+      return 1;
+    }
+    return 0;
+  }
+
   sortParticipantsByCountOrDate(
     a: ParticipantDynamicInterface,
     b: ParticipantDynamicInterface

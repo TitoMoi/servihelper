@@ -1,0 +1,27 @@
+<mat-accordion *transloco="let t">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3 class="m-3">
+          {{ t("STATISTICS_COUNT_TERRITORY_TITLE") }}
+        </h3>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngFor="let p of participants">
+      <div class="row m-2">
+        <div class="col-12 fw-bold mb-1">
+          <span class="border padding">{{ p.count }}</span> - {{ p.name }}
+        </div>
+        <div class="col">
+          <div class="d-flex justify-content-start">
+            <ng-container *ngFor="let t of territories">
+              <span *ngIf="t.participants.includes(p.id)" class="me-3">
+                {{ t.name }}
+              </span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </mat-expansion-panel>
+</mat-accordion>

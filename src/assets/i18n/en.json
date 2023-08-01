@@ -310,5 +310,6 @@
   "TERRITORY_NOT_ASSIGNED": "Not assigned",
   "STATISTICS_ROLE_TIP": "If you change the role, then the statistics will only display the role assignment types.",
   "STATISTICS_1": "Principal",
-  "STATISTICS_2": "Assistant"
+  "STATISTICS_2": "Assistant",
+  "STATISTICS_COUNT_TERRITORY_TITLE": "Territory assignments"
 }
