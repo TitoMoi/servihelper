@@ -125,22 +125,31 @@ export class ImageAssignmentComponent {
     this.copiedCalendarReminder = true;
   }
 
-  async toPng() {
+  getFilename() {
     const filename =
       this.participantService.getParticipant(this.assignment.principal).name +
       this.assignTypeService.getAssignType(this.assignment.assignType).name;
+    return filename;
+  }
+
+  async toPng() {
+    const filename = this.getFilename();
     this.exportService.toPng("assignmentTableId", filename);
   }
 
   toPdf() {
-    const doc = this.pdfService.getJsPdf({ orientation: "portrait" });
+    const doc = this.pdfService.getJsPdf({
+      orientation: "portrait",
+      format: "a6",
+      compress: true,
+    });
 
     const font = this.pdfService.getFontForLang();
 
     autoTable(doc, {
       html: `#assignmentTableId`,
-      styles: { font, fontSize: 14 },
-      columnStyles: { 0: { cellWidth: 110 } },
+      styles: { font, fontSize: 12 },
+      margin: { vertical: 4, horizontal: 4 },
       didParseCell: (data) => {
         data.cell.text = data.cell.text.map((char) => char.trim());
         // eslint-disable-next-line @typescript-eslint/dot-notation
@@ -151,7 +160,7 @@ export class ImageAssignmentComponent {
         data.cell.styles.fillColor = "#FFFFFF";
       },
     });
-
-    doc.save("assignment");
+    const filename = this.getFilename();
+    doc.save(filename);
   }
 }
