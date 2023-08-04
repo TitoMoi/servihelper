@@ -13,6 +13,9 @@ import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
 import { NgIf, NgClass } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import path from "path";
+import { PolygonService } from "app/map/territory/service/polygon.service";
+import { TerritoryService } from "app/map/territory/service/territory.service";
+import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
 
 @Component({
   selector: "app-home",
@@ -36,6 +39,9 @@ export class HomeComponent {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private translocoService: TranslocoService,
+    private polygonService: PolygonService,
+    private territoryService: TerritoryService,
+    private territoryGroupService: TerritoryGroupService,
     private dateAdapter: DateAdapter<NativeDateAdapter>
   ) {}
 
@@ -124,12 +130,18 @@ export class HomeComponent {
     this.assignmentService.hasChanged = true;
     this.participantService.hasChanged = true;
     this.noteService.hasChanged = true;
+    this.polygonService.hasChanged = true;
+    this.territoryService.hasChanged = true;
+    this.territoryGroupService.hasChanged = true;
     this.configService.getConfig();
     this.roomService.getRooms();
     this.assignTypeService.getAssignTypes();
     this.noteService.getNotes();
     this.participantService.getParticipants();
     this.assignmentService.getAssignments();
+    this.polygonService.getPolygons();
+    this.territoryService.getTerritories();
+    this.territoryGroupService.getTerritoryGroups();
 
     let lang = this.configService.getConfig().lang;
     this.translocoService = this.translocoService.setActiveLang(lang);
