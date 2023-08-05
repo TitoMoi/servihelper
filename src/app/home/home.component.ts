@@ -10,19 +10,20 @@ import { writeFileSync } from "fs-extra";
 import { Component } from "@angular/core";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
-import { NgIf, NgClass } from "@angular/common";
+import { NgIf, NgClass, AsyncPipe } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import path from "path";
 import { PolygonService } from "app/map/territory/service/polygon.service";
 import { TerritoryService } from "app/map/territory/service/territory.service";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
+import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
   standalone: true,
-  imports: [TranslocoModule, MatButtonModule, NgIf, NgClass],
+  imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgIf, NgClass, AsyncPipe],
 })
 export class HomeComponent {
   // If zip is loaded and saved
@@ -30,6 +31,8 @@ export class HomeComponent {
 
   // If upload button is clicked
   upload = false;
+
+  config$ = this.configService.config$;
 
   constructor(
     private configService: ConfigService,
@@ -123,6 +126,10 @@ export class HomeComponent {
           break;
       }
     });
+
+    //Update last imported date and filename
+    this.configService.updateConfigByKey("lastImportedDate", new Date());
+    this.configService.updateConfigByKey("lastImportedFilename", zipFile.name);
 
     this.configService.hasChanged = true;
     this.roomService.hasChanged = true;

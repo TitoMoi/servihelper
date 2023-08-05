@@ -20,7 +20,9 @@ export type ConfigOptionsType =
   | "reportTitle"
   | "lastMapClick"
   | "roles"
-  | "role";
+  | "role"
+  | "lastImportedDate"
+  | "lastImportedFilename";
 
 export interface WeekDaysBegin {
   name: string;
@@ -46,4 +48,6 @@ export interface ConfigInterface {
   lastMapClick: LatLngLiteral;
   roles?: RoleInterface[];
   role?: string;
+  lastImportedDate: Date;
+  lastImportedFilename: string;
 }

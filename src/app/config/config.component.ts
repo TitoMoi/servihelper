@@ -105,6 +105,8 @@ export class ConfigComponent implements OnDestroy {
     lastMapClick: { lat: 41.254340619843205, lng: -74.35855865478517 }, //warwick
     roles: [],
     role: this.configService.administratorKey,
+    lastImportedDate: undefined,
+    lastImportedFilename: "",
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();

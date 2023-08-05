@@ -15,13 +15,20 @@
     </label>
     <input id="zip-upload" type="file" (change)="uploadZipFiles($event)" />
   </div>
-  <h3 class="mb-2">{{ t("CONFIG_BACKUP_LABEL_EXPORT") }}</h3>
-  <button mat-raised-button type="button" color="accent" (click)="downloadFiles()">
-    {{ t("BUTTON_DOWNLOAD") }}
-  </button>
+  <ng-container *ngIf="config$ | async as config">
+    <div *ngIf="config.lastImportedDate" class="my-3">
+      <span>{{ t("CONFIG_LAST_IMPORTED_DATE") }}: </span>
+      {{ config.lastImportedDate | translocoDate : { dateStyle: "full" } }} -
+      {{ config.lastImportedFilename }}
+    </div>
+  </ng-container>
   <div *ngIf="isZipLoaded" class="pb-3">
     <p class="d-inline-block mt-3 green-msg">
       {{ t("CONFIG_BACKUP_SUCCESS_ALL_FILES") }}
     </p>
   </div>
+  <h3>{{ t("CONFIG_BACKUP_LABEL_EXPORT") }}</h3>
+  <button mat-raised-button type="button" color="accent" (click)="downloadFiles()">
+    {{ t("BUTTON_DOWNLOAD") }}
+  </button>
 </ng-container>

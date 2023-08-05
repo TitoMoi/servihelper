@@ -76,7 +76,7 @@ export class ConfigService {
     ? path.join(this.sourceFilesPath, this.polygonsFilename)
     : path.join("./", this.sourceFilesPath, this.polygonsFilename);
 
-  configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
+  private configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
   /**
    * Like the private inner config object but public and observable
    */
