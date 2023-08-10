@@ -312,5 +312,8 @@
   "STATISTICS_1": "Principal",
   "STATISTICS_2": "Assistant",
   "STATISTICS_COUNT_TERRITORY_TITLE": "Territory assignments",
-  "CONFIG_LAST_IMPORTED_DATE": "Last imported date"
+  "CONFIG_LAST_IMPORTED_DATE": "Last imported date",
+  "STATISTICS_COUNT_TERRITORY_NAME": "Territory name",
+  "STATISTICS_COUNT_TERRITORY_ASSIGNED": "Assigned",
+  "STATISTICS_COUNT_TERRITORY_RETURNED": "Returned"
 }
