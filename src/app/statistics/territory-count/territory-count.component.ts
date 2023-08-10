@@ -45,7 +45,7 @@ export class TerritoryCountComponent implements OnInit {
     for (let i = 0; i < this.participants.length; i++) {
       this.getTerritoryCount(this.participants[i]);
     }
-    this.participants.sort(this.sortService.sortParticipantsByCount);
+    this.participants.sort(this.sortService.sortParticipantsByCount).reverse();
   }
 
   getTerritoryCount(p: ParticipantDynamicInterface): void {
