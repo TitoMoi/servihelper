@@ -13,11 +13,25 @@
           <span class="border padding">{{ p.count }}</span> - {{ p.name }}
         </div>
         <div class="col">
-          <div class="d-flex justify-content-start">
-            <ng-container *ngFor="let t of territories">
-              <span *ngIf="t.participants.includes(p.id)" class="me-3">
-                {{ t.name }}
-              </span>
+          <div class="row">
+            <ng-container *ngFor="let t of territories; let i = index">
+              <ng-container *ngIf="t.participants.includes(p.id)" class="me-3">
+                <div class="col-auto">
+                  <div>{{ t.name }}</div>
+                  <div>
+                    {{
+                      t.assignedDates[t.participants.indexOf(p.id)]
+                        | translocoDate : { dateStyle: "short" }
+                    }}
+                  </div>
+                  <div>
+                    {{
+                      t.returnedDates[t.participants.indexOf(p.id)]
+                        | translocoDate : { dateStyle: "short" }
+                    }}
+                  </div>
+                </div>
+              </ng-container>
             </ng-container>
           </div>
         </div>
