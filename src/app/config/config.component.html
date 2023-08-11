@@ -3,23 +3,24 @@
     <mat-expansion-panel class="mb-2">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <h3 class="m-3">
-            {{ t("CONFIG_ACCORDION_PUBLIC_SPEECH") }}
-          </h3>
+          <div class="d-flex align-items-center">
+            <mat-icon class="me-2 pe-none" svgIcon="speech"></mat-icon>
+            <h3 class="m-3">
+              {{ t("CONFIG_ACCORDION_PUBLIC_SPEECH") }}
+            </h3>
+          </div>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="d-flex align-items-center">
-        <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
-        <a
-          mat-raised-button
-          [disableRipple]="true"
-          color="primary"
-          routerLink="createPublicTheme"
-          routerLinkActive="active"
-        >
-          {{ t("CONFIG_CREATE_PUBLIC_THEME") }}
-        </a>
-      </div>
+      <a
+        mat-raised-button
+        [disableRipple]="true"
+        class="mt-2"
+        color="primary"
+        routerLink="createPublicTheme"
+        routerLinkActive="active"
+      >
+        {{ t("CONFIG_CREATE_PUBLIC_THEME") }}
+      </a>
       <h4 class="me-2">{{ t("CONFIG_AVAILABLE_THEMES") }}</h4>
       <mat-form-field>
         <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
@@ -50,7 +51,7 @@
                 svgIcon="garbage"
                 aria-label="Side nav toggle icon"
               ></mat-icon>
-              <div>{{ t.name }}</div>
+              <div>{{ theme.name }}</div>
             </div>
           </mat-option>
         </mat-select>
@@ -62,23 +63,23 @@
     <mat-expansion-panel class="mb-2">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <h3 class="m-3">
-            {{ t("CONFIG_ACCORDION_SHEET_TITLE") }}
-          </h3>
+          <div class="d-flex align-items-center">
+            <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
+            <h3 class="m-3">
+              {{ t("CONFIG_ACCORDION_SHEET_TITLE") }}
+            </h3>
+          </div>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="d-flex align-items-center">
-        <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
-        <a
-          mat-raised-button
-          [disableRipple]="true"
-          color="primary"
-          routerLink="createTitle"
-          routerLinkActive="active"
-        >
-          {{ t("CONFIG_CREATE_TITLE") }}
-        </a>
-      </div>
+      <a
+        mat-raised-button
+        [disableRipple]="true"
+        color="primary"
+        routerLink="createTitle"
+        routerLinkActive="active"
+      >
+        {{ t("CONFIG_CREATE_TITLE") }}
+      </a>
       <h4 class="me-2">{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
       <mat-form-field>
         <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>

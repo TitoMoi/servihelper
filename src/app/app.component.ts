@@ -64,6 +64,7 @@ export class AppComponent implements OnInit {
     "clipboard",
     "maplink",
     "swap",
+    "speech",
   ];
 
   constructor(
