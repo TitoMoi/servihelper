@@ -6,6 +6,7 @@ export interface AssignTypeInterface {
   name: string;
   hasAssistant?: boolean;
   repeat: boolean;
+  publicSpeech: boolean;
   order: number;
   color?: string;
 }

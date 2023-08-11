@@ -322,5 +322,6 @@
   "PUBLICTHEME_UPDATE_TITLE": "Update public theme",
   "PUBLICTHEME_CREATE_TITLE": "Create public theme",
   "PUBLICTHEME_DELETE_TITLE": "Delete public theme",
-  "PUBLICTHEME_DELETE_WARNING": "This action is irreversible"
+  "PUBLICTHEME_DELETE_WARNING": "This action is irreversible",
+  "ASSIGNTYPE_PUBLICSPEECH": "This assignment is the public speech"
 }
