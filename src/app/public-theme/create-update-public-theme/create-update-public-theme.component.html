@@ -1,0 +1,44 @@
+<form *transloco="let t" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{
+        isUpdate ? t("PUBLICTHEME_UPDATE_TITLE") : t("PUBLICTHEME_CREATE_TITLE")
+      }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input
+              matInput
+              [appautofocus]="isUpdate ? false : true"
+              spellcheck="false"
+              formControlName="name"
+            />
+          </mat-form-field>
+
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
+              <input matInput type="number" formControlName="order" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        type="button"
+        class="me-3"
+        [routerLink]="isUpdate ? '../..' : '..'"
+      >
+        {{ t("BUTTON_CANCEL") }}
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

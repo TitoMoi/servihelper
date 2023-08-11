@@ -16,6 +16,7 @@ export interface AssignmentInterface {
   room: string;
   assignType: string;
   theme: string;
+  publicTheme: string;
   onlyWoman: boolean;
   onlyMan: boolean;
   onlyExternals: boolean;
@@ -32,6 +33,7 @@ export interface AssignmentReportInterface {
   room: RoomInterface;
   assignType: AssignTypeInterface;
   theme: string;
+  publicTheme: string;
   onlyWoman: boolean;
   onlyMan: boolean;
   principal: ParticipantInterface;

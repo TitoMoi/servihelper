@@ -370,6 +370,24 @@ export class AssignmentService {
       if (a.sheetTitle === id) a.sheetTitle = "";
     });
 
+    this.updateAssignmentMaps();
+  }
+
+  /**
+   * @param id the id of the public theme to delete assignments by
+   */
+  removeAssignmentsPublicThemeProperty(id: string) {
+    this.#assignmentsMap = new Map();
+    this.#assignmentsByDateMap = new Map();
+    //delete sheet title property
+    this.#assignments.forEach((a) => {
+      if (a.publicTheme === id) a.publicTheme = "";
+    });
+
+    this.updateAssignmentMaps();
+  }
+
+  private updateAssignmentMaps() {
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
       this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);

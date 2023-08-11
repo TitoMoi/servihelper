@@ -3,6 +3,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
+import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { toBlob } from "html-to-image";
 import { filenamifyPath } from "filenamify";
 const os = require("os");
@@ -80,6 +81,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private noteService: NoteService,
     private configService: ConfigService,
     private exportService: ExportService,
+    private publicThemeService: PublicThemeService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -125,6 +127,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         assignType: this.assignTypeService.getAssignType(a.assignType).name,
         footerNote: this.noteService.getNote(a.footerNote)?.editorHTML,
         theme: a.theme,
+        publicTheme: this.publicThemeService.getPublicTheme(a.publicTheme)?.name,
         onlyMan: undefined,
         onlyWoman: undefined,
         onlyExternals: undefined,

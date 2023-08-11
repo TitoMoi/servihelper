@@ -171,6 +171,7 @@ export class SelectionListHorComponent implements OnChanges {
         room: this.roomService.getRoom(assignment.room),
         assignType: this.assignTypeService.getAssignType(assignment.assignType),
         theme: assignment.theme,
+        publicTheme: assignment.publicTheme,
         onlyWoman: false,
         onlyMan: false,
         principal: this.participantService.getParticipant(assignment.principal),

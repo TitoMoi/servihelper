@@ -29,6 +29,7 @@ export class ConfigService {
   roomsFilename = "room.json";
   configFilename = "config.json";
   sheetTitleFilename = "sheetTitle.json";
+  publicThemeFilename = "publicTheme.json";
   territoriesFilename = "territory.json";
   territoryGroupsFilename = "territoryGroup.json";
   polygonsFilename = "polygons.json";
@@ -63,6 +64,10 @@ export class ConfigService {
   sheetTitlePath = APP_CONFIG.production
     ? path.join(this.sourceFilesPath, this.sheetTitleFilename)
     : path.join("./", this.sourceFilesPath, this.sheetTitleFilename);
+
+  publicThemePath = APP_CONFIG.production
+    ? path.join(this.sourceFilesPath, this.publicThemeFilename)
+    : path.join("./", this.sourceFilesPath, this.publicThemeFilename);
 
   territoriesPath = APP_CONFIG.production
     ? path.join(this.sourceFilesPath, this.territoriesFilename)

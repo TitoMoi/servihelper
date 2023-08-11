@@ -20,6 +20,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
+import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
+import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 
 @Component({
   selector: "app-config",
@@ -42,6 +44,7 @@ import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
     NgIf,
     MatIconModule,
     SheetTitlePipe,
+    PublicThemePipe,
   ],
 })
 export class ConfigComponent implements OnDestroy {
@@ -49,6 +52,9 @@ export class ConfigComponent implements OnDestroy {
   translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
 
   titles = this.sheetTitleService.getTitles().sort((a, b) => (a.order > b.order ? 1 : -1));
+  publicThemes = this.publicThemeService
+    .getPublicThemes()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
 
   weekDayBegins: WeekDaysBegin[] = [
     {
@@ -116,6 +122,7 @@ export class ConfigComponent implements OnDestroy {
     private configService: ConfigService,
     private noteService: NoteService,
     private sheetTitleService: SheetTitleService,
+    private publicThemeService: PublicThemeService,
     private translocoService: TranslocoService
   ) {}
 

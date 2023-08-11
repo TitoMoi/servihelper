@@ -4,6 +4,65 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <h3 class="m-3">
+            {{ t("CONFIG_ACCORDION_PUBLIC_SPEECH") }}
+          </h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="d-flex align-items-center">
+        <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
+        <a
+          mat-raised-button
+          [disableRipple]="true"
+          color="primary"
+          routerLink="createPublicTheme"
+          routerLinkActive="active"
+        >
+          {{ t("CONFIG_CREATE_PUBLIC_THEME") }}
+        </a>
+      </div>
+      <h4 class="me-2">{{ t("CONFIG_AVAILABLE_THEMES") }}</h4>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+        <mat-select
+          #publicThemeSelect
+          formControlName="assignmentHeaderTitle"
+          required
+          [disableRipple]="true"
+        >
+          <mat-select-trigger *ngIf="publicThemeSelect.value">
+            {{ (publicThemeSelect.value | publicThemePipe)?.name }}
+          </mat-select-trigger>
+          <mat-option *ngFor="let theme of publicThemes" [value]="theme.id">
+            <div class="d-flex align-items-center justify-content-evenly">
+              <mat-icon
+                class="me-4"
+                (click)="stopPropagation($event)"
+                [routerLink]="['updatePublicTheme', theme.id]"
+                routerLinkActive="active"
+                svgIcon="edit"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+              <mat-icon
+                class="me-4"
+                (click)="stopPropagation($event)"
+                [routerLink]="['deletePublicTheme', theme.id]"
+                routerLinkActive="active"
+                svgIcon="garbage"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+              <div>{{ t.name }}</div>
+            </div>
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!publicThemes.length">{{
+          t("CONFIG_ERROR_NO_AVAILABLE_TITLES")
+        }}</mat-error>
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel class="mb-2">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3 class="m-3">
             {{ t("CONFIG_ACCORDION_SHEET_TITLE") }}
           </h3>
         </mat-panel-title>

@@ -39,6 +39,8 @@ import { DeleteTerritoryGroupComponent } from "app/map/territory-group/delete-te
 import { DeleteTerritoryComponent } from "app/map/territory/delete-territory/delete-territory.component";
 import { ReturnTerritoryComponent } from "app/map/territory/return-territory/return-territory.component";
 import { HeatmapComponent } from "app/map/territory/heatmap/heatmap.component";
+import { DeletePublicThemeComponent } from "app/public-theme/delete-public-theme/delete-public-theme.component";
+import { CreateUpdatePublicThemeComponent } from "app/public-theme/create-update-public-theme/create-update-public-theme.component";
 
 export const routes: Routes = [
   {
@@ -176,6 +178,18 @@ export const routes: Routes = [
   {
     path: "config/deleteTitle/:id",
     component: DeleteSheetTitleComponent,
+  },
+  {
+    path: "config/createPublicTheme",
+    component: CreateUpdatePublicThemeComponent,
+  },
+  {
+    path: "config/updatePublicTheme/:id",
+    component: CreateUpdatePublicThemeComponent,
+  },
+  {
+    path: "config/deletePublicTheme/:id",
+    component: DeletePublicThemeComponent,
   },
   {
     path: "role",
