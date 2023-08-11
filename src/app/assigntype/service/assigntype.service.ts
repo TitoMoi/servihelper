@@ -68,13 +68,13 @@ export class AssignTypeService {
     assignType.name = assignType.name.trim();
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);
-    if (!assignType.publicSpeech) {
+    if (assignType.publicSpeech) {
+      //Update all
+      this.updateAssigTypesMaps();
+    } else {
       //update only one
       this.#assignTypesMap.set(assignType.id, assignType);
       this.#assignTypesMapByName.set(assignType.name, assignType);
-    } else {
-      //Update all
-      this.updateAssigTypesMaps();
     }
     //save assignTypes with the new assignType
     this.saveAssignTypesToFile();
@@ -125,19 +125,18 @@ export class AssignTypeService {
         assignType.name = assignType.name.trim();
         this.#assignTypes[i] = assignType;
 
-        if (!assignType.publicSpeech) {
+        if (assignType.publicSpeech) {
+          //Update all
+          this.updateAssigTypesMaps();
+        } else {
           //Update only one
           this.#assignTypesMap.set(assignType.id, assignType);
           this.#assignTypesMapByName.set(assignType.name, assignType);
-        } else {
-          //Update all
-          this.updateAssigTypesMaps();
         }
-        //save assignTypes with the updated assignType
-        return this.saveAssignTypesToFile();
       }
     }
-    return false;
+    //save assignTypes with the updated assignType
+    return this.saveAssignTypesToFile();
   }
 
   /**
