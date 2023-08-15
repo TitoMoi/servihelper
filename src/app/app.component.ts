@@ -16,6 +16,7 @@ import { TerritoryService } from "./map/territory/service/territory.service";
 import { TerritoryGroupService } from "./map/territory-group/service/territory-group.service";
 
 import { PolygonService } from "./map/territory/service/polygon.service";
+import { PublicThemeService } from "./public-theme/service/public-theme.service";
 
 @Component({
   selector: "app-root",
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private sheetTitleService: SheetTitleService,
+    private publicThemeService: PublicThemeService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private pdfService: PdfService,
@@ -107,6 +109,7 @@ export class AppComponent implements OnInit {
     this.sheetTitleService.getTitles();
     this.participantService.getParticipants();
     this.sheetTitleService.getTitles();
+    this.publicThemeService.getPublicThemes();
     this.territoryService.getTerritories();
     this.territoryGroupService.getTerritoryGroups();
     this.polygonService.getPolygons();

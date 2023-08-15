@@ -29,6 +29,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
 import { ExportService } from "app/services/export.service";
+import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 
 @Component({
   selector: "app-selection-list",
@@ -68,6 +69,7 @@ export class SelectionListComponent implements OnChanges {
     private roomService: RoomService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
+    private publicThemeService: PublicThemeService,
     private sortService: SortService,
     private excelService: ExcelService,
     private pdfService: PdfService,
@@ -156,8 +158,10 @@ export class SelectionListComponent implements OnChanges {
         sheetTitle: assignment.sheetTitle,
         room: this.roomService.getRoom(assignment.room),
         assignType: this.assignTypeService.getAssignType(assignment.assignType),
-        theme: assignment.theme,
-        publicTheme: assignment.publicTheme,
+        theme: assignment.isPTheme
+          ? this.publicThemeService.getPublicTheme(assignment.theme)?.name
+          : assignment.theme,
+        isPTheme: assignment.isPTheme,
         onlyWoman: false,
         onlyMan: false,
         principal: this.participantService.getParticipant(assignment.principal),

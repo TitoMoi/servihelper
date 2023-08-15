@@ -6,7 +6,7 @@ export interface AssignTypeInterface {
   name: string;
   hasAssistant?: boolean;
   repeat: boolean;
-  publicSpeech: boolean;
+  isPublicSpeech: boolean; //Marks this and only this assign type as the public speech
   order: number;
   color?: string;
 }

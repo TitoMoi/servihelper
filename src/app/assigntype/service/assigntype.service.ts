@@ -59,8 +59,8 @@ export class AssignTypeService {
    * @returns the id of the created assign type
    */
   createAssignType(assignType: AssignTypeInterface): string {
-    if (assignType.publicSpeech) {
-      this.#assignTypes.forEach((at) => (at.publicSpeech = false));
+    if (assignType.isPublicSpeech) {
+      this.#assignTypes.forEach((at) => (at.isPublicSpeech = false));
     }
     //Generate id for the assignType
     assignType.id = nanoid(this.configService.nanoMaxCharId);
@@ -68,7 +68,7 @@ export class AssignTypeService {
     assignType.name = assignType.name.trim();
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);
-    if (assignType.publicSpeech) {
+    if (assignType.isPublicSpeech) {
       //Update all
       this.updateAssigTypesMaps();
     } else {
@@ -117,15 +117,15 @@ export class AssignTypeService {
   updateAssignType(assignType: AssignTypeInterface): boolean {
     //update assignType
     for (let i = 0; i < this.#assignTypes.length; i++) {
-      if (assignType.publicSpeech) {
-        this.#assignTypes[i].publicSpeech = false;
+      if (assignType.isPublicSpeech) {
+        this.#assignTypes[i].isPublicSpeech = false;
       }
       if (this.#assignTypes[i].id === assignType.id) {
         //trim name
         assignType.name = assignType.name.trim();
         this.#assignTypes[i] = assignType;
 
-        if (assignType.publicSpeech) {
+        if (assignType.isPublicSpeech) {
           //Update all
           this.updateAssigTypesMaps();
         } else {

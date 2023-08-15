@@ -26,6 +26,7 @@ import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ExportService } from "app/services/export.service";
 import { ParticipantService } from "app/participant/service/participant.service";
+import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 
 @Component({
   selector: "app-image-assignment",
@@ -45,6 +46,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
     ParticipantPipe,
     SheetTitlePipe,
     MatTooltipModule,
+    PublicThemePipe,
   ],
 })
 export class ImageAssignmentComponent {

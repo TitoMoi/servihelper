@@ -55,6 +55,9 @@ import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitleInterface } from "app/sheet-title/model/sheet-title.model";
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
+import { PublicThemeInterface } from "app/public-theme/model/public-theme.model";
+import { PublicThemeService } from "app/public-theme/service/public-theme.service";
+import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 
 @Component({
   selector: "app-create-update-assignment",
@@ -80,6 +83,7 @@ import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
     RouterLink,
     AsyncPipe,
     ParticipantPipe,
+    PublicThemePipe,
   ],
 })
 export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
@@ -113,6 +117,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     .getTitles()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
+  publicThemes: PublicThemeInterface[] = this.publicThemeService
+    .getPublicThemes()
+    .sort((a, b) => (a.order > b.order ? 1 : -1));
+
   //A flag to indicate that all assign types for the current role have been scheduled
   noAvailableAssignTypesByRole = false;
   //to filter available dates
@@ -130,6 +138,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   );
 
   role: RoleInterface;
+
+  //To modify the template
+  isPTheme = false;
 
   //Fill the form with the assignment passed by the router
   a: AssignmentInterface = this.assignmentService.getAssignment(
@@ -167,6 +178,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       Validators.required,
     ],
     theme: this.a ? this.a.theme : "",
+    isPTheme: this.a ? this.a.isPTheme : false,
     onlyWoman: [this.a ? this.a.onlyWoman : false],
     onlyMan: [this.a ? this.a.onlyMan : false],
     onlyExternals: [this.a ? this.a.onlyExternals : false],
@@ -189,6 +201,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     private noteService: NoteService,
     private configService: ConfigService,
     private sheetTitleService: SheetTitleService,
+    private publicThemeService: PublicThemeService,
     private sharedService: SharedService,
     private sortService: SortService,
     private router: Router,
@@ -212,6 +225,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.prepareRole();
     this.prepareDateSub();
     this.prepareRoomSub();
+    this.prepareIsPublicSpeechAssignTypeSub();
     this.prepareAssignTypeSub();
     this.prepareOnlyManSub();
     this.prepareOnlyWomanSub();
@@ -341,6 +355,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   prepareAssignTypeSub() {
     this.subscription.add(
       this.form.get("assignType").valueChanges.subscribe((assignTypeId: string) => {
+        //is public speech
+        const isPSpeech = this.assignTypeService.getAssignType(assignTypeId).isPublicSpeech;
+        if (isPSpeech) this.form.get("isPTheme").setValue(true);
+        //Other assign types
         this.batchCleanPrincipalAssistant();
         this.batchCleanGroup();
         this.batchGetCountSortWarning();
@@ -348,6 +366,19 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       })
     );
     this.cdr.detectChanges();
+  }
+
+  prepareIsPublicSpeechAssignTypeSub() {
+    this.subscription.add(
+      this.form.get("isPTheme").valueChanges.subscribe((isPtheme: boolean) => {
+        //To modify the template
+        this.isPTheme = isPtheme;
+        const onlyWomanCtrl = this.form.get("onlyWoman");
+        this.isPTheme
+          ? onlyWomanCtrl.disable({ emitEvent: false })
+          : onlyWomanCtrl.enable({ emitEvent: false });
+      })
+    );
   }
 
   /** (Form) Enable or disable the assistant control if assign type has assistant help */

@@ -47,7 +47,7 @@
   "ASSIGN_IMAGE_DATE": "date:",
   "ASSIGN_IMAGE_FOOTER_NOTE": "Note aux participants:",
   "ASSIGN_IMAGE_NAME": "Nom:",
-  "ASSIGN_IMAGE_NOTE": "Thème:",
+  "ASSIGN_IMAGE_THEME": "Thème:",
   "ASSIGN_IMAGE_ROOM_PRESENTATION": "Présenté dans:",
   "ASSIGN_IMAGE_TITLE": "Vous pouvez modifier ce titre dans la section config",
   "ASSIGN_MOVE_ASSIGN_TITLE": "Changement de date massif pour les affectations",

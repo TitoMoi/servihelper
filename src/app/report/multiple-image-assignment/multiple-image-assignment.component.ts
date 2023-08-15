@@ -30,6 +30,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 import { ExportService } from "app/services/export.service";
+import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 
 @Component({
   selector: "app-multiple-image-assignment",
@@ -46,6 +47,7 @@ import { ExportService } from "app/services/export.service";
     NgFor,
     TranslocoLocaleModule,
     SheetTitlePipe,
+    PublicThemePipe,
   ],
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
@@ -126,8 +128,8 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         room: this.roomService.getRoom(a.room).name,
         assignType: this.assignTypeService.getAssignType(a.assignType).name,
         footerNote: this.noteService.getNote(a.footerNote)?.editorHTML,
-        theme: a.theme,
-        publicTheme: this.publicThemeService.getPublicTheme(a.publicTheme)?.name,
+        theme: a.isPTheme ? this.publicThemeService.getPublicTheme(a.theme)?.name : a.theme,
+        isPTheme: a.isPTheme,
         onlyMan: undefined,
         onlyWoman: undefined,
         onlyExternals: undefined,

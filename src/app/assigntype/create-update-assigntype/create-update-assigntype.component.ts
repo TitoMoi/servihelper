@@ -44,7 +44,7 @@ export class CreateUpdateAssignTypeComponent {
     name: [this.at?.name, Validators.required],
     hasAssistant: [this.at ? this.at.hasAssistant : false],
     repeat: [this.at ? this.at.repeat : false],
-    publicSpeech: [this.at ? this.at.publicSpeech : false],
+    isPublicSpeech: [this.at ? this.at.isPublicSpeech : false],
     order: [this.at?.order, Validators.required],
     color: [this.at ? this.at.color : "#FFFFFF"],
   });

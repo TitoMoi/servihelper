@@ -381,7 +381,7 @@ export class AssignmentService {
     this.#assignmentsByDateMap = new Map();
     //delete sheet title property
     this.#assignments.forEach((a) => {
-      if (a.publicTheme === id) a.publicTheme = "";
+      if (a.isPTheme && a.theme === id) a.theme = "";
     });
 
     this.updateAssignmentMaps();

@@ -16,7 +16,7 @@ export interface AssignmentInterface {
   room: string;
   assignType: string;
   theme: string;
-  publicTheme: string;
+  isPTheme: boolean; //isPublicTheme means the theme is an string id and not a string literal
   onlyWoman: boolean;
   onlyMan: boolean;
   onlyExternals: boolean;
@@ -33,7 +33,7 @@ export interface AssignmentReportInterface {
   room: RoomInterface;
   assignType: AssignTypeInterface;
   theme: string;
-  publicTheme: string;
+  isPTheme: boolean; //isPublicTheme means the theme is an string id and not a string literal
   onlyWoman: boolean;
   onlyMan: boolean;
   principal: ParticipantInterface;

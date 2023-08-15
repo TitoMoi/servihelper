@@ -111,7 +111,25 @@
               }}</mat-error>
             </mat-form-field>
           </div>
-          <div class="col-12 mb-2">
+          <div *ngIf="isPTheme" class="col-12 mb-2">
+            <mat-form-field>
+              <mat-label>{{ t("ASSIGN_THEME") }}</mat-label>
+              <mat-select
+                #publicThemeSelect
+                formControlName="theme"
+                required
+                [disableRipple]="true"
+              >
+                <!-- <mat-select-trigger *ngIf="publicThemeSelect.value">
+                  {{ (publicThemeSelect.value | publicThemePipe).name }}
+                </mat-select-trigger> -->
+                <mat-option *ngFor="let pTheme of publicThemes" [value]="pTheme.id">
+                  <div>{{ pTheme.name }}</div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="!isPTheme" class="col-12 mb-2">
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_THEME") }}</mat-label>
               <input matInput spellcheck="false" formControlName="theme" />

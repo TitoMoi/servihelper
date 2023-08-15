@@ -51,7 +51,7 @@
         *ngFor="let a of assignmentsWithNames"
       >
         <ng-container *ngIf="a.sheetTitle; else noTitle">
-          <h4 class="m-1">{{ (a.sheetTitle | sheetTitlePipe).name }}</h4>
+          <h4 class="m-1">{{ (a.sheetTitle | sheetTitlePipe)?.name }}</h4>
         </ng-container>
         <ng-template #noTitle>
           <h4 class="m-1">
@@ -89,12 +89,13 @@
         <div class="m-1">{{ a.assignType }}</div>
         <ng-container *ngIf="a.theme"
           ><div class="m-1">
-            <b *ngIf="!assignmentThemeTitle">{{ t("ASSIGN_IMAGE_NOTE") }}</b>
+            <b *ngIf="!assignmentThemeTitle">{{ t("ASSIGN_IMAGE_THEME") }}</b>
             <b *ngIf="assignmentThemeTitle">{{ assignmentThemeTitle }}</b>
           </div>
-          <div class="m-1">{{ a.theme }}</div></ng-container
+          <div class="m-1">
+            {{ a.theme }}
+          </div></ng-container
         >
-
         <div class="m-1">
           <b *ngIf="!assignmentRoomTitle">{{ t("ASSIGN_IMAGE_ROOM_PRESENTATION") }}</b>
           <b *ngIf="assignmentRoomTitle">{{ assignmentRoomTitle }}</b>

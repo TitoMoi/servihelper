@@ -83,7 +83,7 @@
         <tr *ngIf="assignment.theme">
           <td class="fw-bold">
             <div *ngIf="!assignmentThemeTitle" class="ms-3 me-3">
-              {{ t("ASSIGN_IMAGE_NOTE") }}
+              {{ t("ASSIGN_IMAGE_THEME") }}
             </div>
             <div *ngIf="assignmentThemeTitle" class="ms-3 me-3">
               {{ assignmentThemeTitle }}
@@ -92,7 +92,13 @@
         </tr>
         <tr *ngIf="assignment.theme">
           <td>
-            <div class="ms-3 me-3">{{ assignment.theme }}</div>
+            <div class="ms-3 me-3">
+              {{
+                assignment.isPTheme
+                  ? (assignment.theme | publicThemePipe)?.name
+                  : assignment.theme
+              }}
+            </div>
           </td>
         </tr>
         <tr>
