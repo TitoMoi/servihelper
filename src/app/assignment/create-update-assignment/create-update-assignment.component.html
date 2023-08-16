@@ -120,11 +120,11 @@
                 required
                 [disableRipple]="true"
               >
-                <!-- <mat-select-trigger *ngIf="publicThemeSelect.value">
+                <mat-select-trigger *ngIf="publicThemeSelect.value">
                   {{ (publicThemeSelect.value | publicThemePipe).name }}
-                </mat-select-trigger> -->
+                </mat-select-trigger>
                 <mat-option *ngFor="let pTheme of publicThemes" [value]="pTheme.id">
-                  <div>{{ pTheme.name }}</div>
+                  <div>{{ getPThemeCount(pTheme.id) }} - {{ pTheme.name }}</div>
                 </mat-option>
               </mat-select>
             </mat-form-field>
