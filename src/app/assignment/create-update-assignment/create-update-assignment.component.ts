@@ -259,6 +259,16 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.assignments = await this.assignmentService.getAssignments();
   }
 
+  getPThemeCount(pThemeId: string) {
+    let count = 0;
+    for (let i = 0; i < this.assignments.length; i++) {
+      if (this.assignments[i].isPTheme && this.assignments[i].theme === pThemeId) {
+        count++;
+      }
+    }
+    return count;
+  }
+
   /**
    * @param formControlName the form control name to get the value
    * @returns the value for the form control
