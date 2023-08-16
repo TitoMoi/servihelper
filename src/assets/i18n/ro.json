@@ -342,5 +342,13 @@
   "ro": "Română",
   "ru": "Rusă",
   "tr": "Turc",
-  "zhCN": "Chinez"
+  "zhCN": "Chinez",
+  "CONFIG_ACCORDION_PUBLIC_SPEECH": "Themes for Public Talks",
+  "CONFIG_CREATE_PUBLIC_THEME": "Create theme",
+  "CONFIG_AVAILABLE_THEMES": "List of available themes for public talks",
+  "PUBLICTHEME_UPDATE_TITLE": "Update public theme",
+  "PUBLICTHEME_CREATE_TITLE": "Create public theme",
+  "PUBLICTHEME_DELETE_TITLE": "Delete public theme",
+  "PUBLICTHEME_DELETE_WARNING": "This action is irreversible",
+  "ASSIGNTYPE_PUBLICSPEECH": "This assignment is the public speech"
 }
