@@ -14,9 +14,7 @@ Also supports territory creation and distribution.
 
 ## Download links
 
-Download app section: [Download for Windows or Mac](https://github.com/TitoMoi/servihelper/releases).
-
-[Import File Example](https://drive.google.com/drive/folders/1h3LLPwzKukYT3AXiMMLlcggHyi4ZafNH?usp=sharing)
+Download app section: [Download for Windows, Mac or Linux](https://github.com/TitoMoi/servihelper/releases).
 
 ## Example images
 
@@ -61,9 +59,16 @@ Yes, although it is recommended that you distribute the download link, as a new 
 
 ## ¿How do I distribute the assignments?
 
-- Digital distribution - In the assignments section, an icon sheet appears in the -Image- column. Click, watch the preview and copy to clipboard. Then paste on whatsapp.
+- Digital distribution
 
-- Print - On the reports section there is a print button.
+  - In the assignments section, an icon sheet appears in the -Image- column. Click, watch the preview and copy to clipboard. Then paste on whatsapp.
+  - On report section select "multiple sheets" and click "generate png files" button, it will create a folder for each participant with his assignments in .png format.
+
+- Print - On the reports section select "multiple sheets" there is a print button.
+
+## ¿How do I distribute the territories?
+
+- There is a link that you can distribute for each territory. If you want to short the link before send it you can use some online tool like shortUrl.
 
 ## When selecting the participant for the assignment, a number is displayed next to it, what is it?
 
