@@ -139,15 +139,16 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   role: RoleInterface;
 
-  //To modify the template
-  isPTheme = false;
-
   //Fill the form with the assignment passed by the router
   a: AssignmentInterface = this.assignmentService.getAssignment(
     this.activatedRoute.snapshot.params.id
   );
 
   isUpdate = this.a !== undefined;
+
+  //To modify the template
+  //ToDo: Change to typed forms and remove this (use the form isPTheme)
+  isPTheme = this.a?.isPTheme;
 
   config = this.configService.getConfig();
   //FORM Update or create
@@ -179,7 +180,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     ],
     theme: this.a ? this.a.theme : "",
     isPTheme: this.a ? this.a.isPTheme : false,
-    onlyWoman: [this.a ? this.a.onlyWoman : false],
+    onlyWoman: [{ value: this.a ? this.a.onlyWoman : false, disabled: this.a?.isPTheme }],
     onlyMan: [this.a ? this.a.onlyMan : false],
     onlyExternals: [this.a ? this.a.onlyExternals : false],
     principal: [this.a?.principal, Validators.required], //participant id

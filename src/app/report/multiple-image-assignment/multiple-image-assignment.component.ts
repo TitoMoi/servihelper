@@ -21,7 +21,7 @@ import {
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { ipcRenderer } from "electron";
-import { ensureDirSync, ensureFileSync, removeSync, writeFileSync } from "fs-extra";
+import { ensureFileSync, removeSync, writeFileSync } from "fs-extra";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatButtonModule } from "@angular/material/button";
 import { NgIf, NgFor } from "@angular/common";
@@ -200,10 +200,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
     for (const [key, assignments] of assignByNameMap.entries()) {
-      //Ensure participant folder name
-      const pathName = filenamifyPath(path.join(this.homeDir, "assignments", key));
-      //Create again
-      ensureDirSync(pathName);
       for (const a of assignments) {
         //update the UI with only 1 assignment each time
         this.assignmentsWithNames = [a];

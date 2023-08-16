@@ -37,11 +37,11 @@
       <div class="col-auto">
         <div class="d-flex justify-content-start">
           <span class="me-3"
-            ><span class="border padding bg-color-lightskyblue">1</span> -
+            ><span class="border padding bg-color-lightskyblue2">1</span> -
             {{ t("STATISTICS_1") }}</span
           >
           <span
-            ><span class="border padding bg-color-lightcoral">2</span> -
+            ><span class="border padding bg-color-lightcoral2">2</span> -
             {{ t("STATISTICS_2") }}</span
           >
         </div>
@@ -75,12 +75,12 @@
         <div class="col-2">
           <span
             *ngIf="participant.isPrincipalPenultimateAssignment === true"
-            class="border padding bg-color-lightskyblue"
+            class="border padding bg-color-lightskyblue2"
             >1</span
           >
           <span
             *ngIf="participant.isPrincipalPenultimateAssignment === false"
-            class="border padding bg-color-lightcoral"
+            class="border padding bg-color-lightcoral2"
             >2</span
           >
           {{ participant.penultimateAssignmentDate | translocoDate : { dateStyle: "medium" } }}
@@ -89,12 +89,12 @@
         <div class="col-2">
           <span
             *ngIf="participant.isPrincipalLastAssignment === true"
-            class="border padding bg-color-lightskyblue"
+            class="border padding bg-color-lightskyblue2"
             >1</span
           >
           <span
             *ngIf="participant.isPrincipalLastAssignment === false"
-            class="border padding bg-color-lightcoral"
+            class="border padding bg-color-lightcoral2"
             >2</span
           >
           {{ participant.lastAssignmentDate | translocoDate : { dateStyle: "medium" } }}
