@@ -17,6 +17,8 @@ import { PolygonService } from "app/map/territory/service/polygon.service";
 import { TerritoryService } from "app/map/territory/service/territory.service";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { PublicThemeService } from "app/public-theme/service/public-theme.service";
+import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 
 @Component({
   selector: "app-home",
@@ -41,6 +43,8 @@ export class HomeComponent {
     private noteService: NoteService,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
+    private publicThemeService: PublicThemeService,
+    private sheetTitleService: SheetTitleService,
     private translocoService: TranslocoService,
     private polygonService: PolygonService,
     private territoryService: TerritoryService,
@@ -72,58 +76,20 @@ export class HomeComponent {
     const zip = new AdmZip(zipFile.path);
     // reading archives
     zip.getEntries().forEach((zipEntry) => {
-      switch (zipEntry.entryName) {
-        case this.configService.assignmentsFilename:
-          writeFileSync(
-            this.configService.assignmentsPath,
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case this.configService.participantsFilename:
-          writeFileSync(
-            this.configService.participantsPath,
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case this.configService.roomsFilename:
-          writeFileSync(this.configService.roomsPath, zipEntry.getData().toString("utf8"));
-          break;
-        case this.configService.assignTypesFilename:
-          writeFileSync(
-            this.configService.assignTypesPath,
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case this.configService.notesFilename:
-          writeFileSync(this.configService.notesPath, zipEntry.getData().toString("utf8"));
-          break;
-        case this.configService.sheetTitleFilename:
-          writeFileSync(
-            this.configService.sheetTitlePath,
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case this.configService.territoriesFilename:
-          writeFileSync(
-            this.configService.territoriesPath,
-            zipEntry.getData().toString("utf8")
-          );
-          break;
-        case this.configService.polygonsFilename:
-          writeFileSync(this.configService.polygonsPath, zipEntry.getData().toString("utf8"));
-          break;
-        case this.configService.territoryGroupsFilename:
-          writeFileSync(
-            this.configService.territoryGroupsPath,
-            zipEntry.getData().toString("utf8")
-          );
-          break;
+      switch (
+        zipEntry.entryName //entryName = participant.json...etc
+      ) {
         case this.configService.configFilename:
           const currentConfig = this.configService.getConfig(); //Default config
           const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
           const finalConfig = { ...currentConfig, ...incomingConfig };
           writeFileSync(this.configService.configPath, JSON.stringify(finalConfig));
           break;
+        default:
+          writeFileSync(
+            path.join(this.configService.sourceFilesPath, zipEntry.entryName),
+            zipEntry.getData().toString("utf8")
+          );
       }
     });
 
@@ -136,6 +102,8 @@ export class HomeComponent {
     this.assignTypeService.hasChanged = true;
     this.assignmentService.hasChanged = true;
     this.participantService.hasChanged = true;
+    this.sheetTitleService.hasChanged = true;
+    this.publicThemeService.hasChanged = true;
     this.noteService.hasChanged = true;
     this.polygonService.hasChanged = true;
     this.territoryService.hasChanged = true;
@@ -144,6 +112,8 @@ export class HomeComponent {
     this.roomService.getRooms();
     this.assignTypeService.getAssignTypes();
     this.noteService.getNotes();
+    this.sheetTitleService.getTitles();
+    this.publicThemeService.getPublicThemes();
     this.participantService.getParticipants();
     this.assignmentService.getAssignments();
     this.polygonService.getPolygons();

@@ -1,14 +1,13 @@
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import { writeJsonSync } from "fs-extra";
+import { readdirSync, writeJsonSync } from "fs-extra";
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from "@angular/core";
 import { UntypedFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
-import { ipcRenderer } from "electron";
 import { MatButtonModule } from "@angular/material/button";
 import { NgFor, NgIf } from "@angular/common";
 import { MatOptionModule } from "@angular/material/core";
@@ -22,6 +21,8 @@ import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
+import path from "path";
+import { ipcRenderer } from "electron";
 
 @Component({
   selector: "app-config",
@@ -138,15 +139,11 @@ export class ConfigComponent implements OnDestroy {
    * Resets data to default
    */
   eraseAllData() {
+    for (let file of readdirSync(this.configService.sourceFilesPath)) {
+      writeJsonSync(path.join(this.configService.sourceFilesPath, file), []);
+    }
+    //Override with default config
     writeJsonSync(this.configService.configPath, this.defaultConfig);
-    writeJsonSync(this.configService.notesPath, []);
-    writeJsonSync(this.configService.assignmentsPath, []);
-    writeJsonSync(this.configService.roomsPath, []);
-    writeJsonSync(this.configService.participantsPath, []);
-    writeJsonSync(this.configService.assignTypesPath, []);
-    writeJsonSync(this.configService.territoriesPath, []);
-    writeJsonSync(this.configService.territoryGroupsPath, []);
-    writeJsonSync(this.configService.polygonsPath, []);
 
     //Close the program
     ipcRenderer.send("closeApp");
