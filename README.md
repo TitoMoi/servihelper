@@ -12,6 +12,8 @@ Its purpose is for help the Jehovah's witnesses to create and manage all kind of
 
 Also supports territory creation and distribution.
 
+Also supports public speech assignments.
+
 ## Download links
 
 Download app section: [Download for Windows, Mac or Linux](https://github.com/TitoMoi/servihelper/releases).
