@@ -263,6 +263,7 @@ export class SelectionListComponent implements OnChanges {
         margin: this.reportTitle ? { top: 30 } : firstTable ? { top: 10 } : undefined,
         columnStyles: { 0: { cellWidth: 110 }, 1: { cellWidth: 80 } },
         didParseCell: (data) => {
+          //bug fix
           data.cell.text = data.cell.text.map((char) => char.trim());
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const localName = data.cell.raw["localName"];

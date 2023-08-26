@@ -18,6 +18,21 @@ Also supports public speech assignments.
 
 Download app section: [Download for Windows, Mac or Linux](https://github.com/TitoMoi/servihelper/releases).
 
+## The executable is not recognized on Mac
+
+Thats because i dont have an Apple developer Id _(i have to pay for it)_, you need to trust the binary manually, go to:
+
+mac -> security tab -> general tab and below the section are the instructions to allow it.
+
+<img src="./pictures/allow-mac.png" alt= "allow-mac">
+
+More help: [Open a Mac app from an unidentified developer](https://support.apple.com/en-gb/guide/mac-help/mh40616/mac)
+
+## ¿What can be done?
+
+- All kinds of assignments can be created and distributed physically _(print)_ or digitally.
+- Create territories and distribute them.
+
 ## Example images
 
 <img src="./pictures/assignment-example.png" alt= "example" width="300" height="320">
@@ -38,14 +53,6 @@ Heatmap:
 Available interface languages are at the end of the page.
 
 The sheet _(assignment)_ to distribute can be customized, so you can add your language when distributing.
-
-## The executable is not recognized on Mac
-
-Thats because i dont have an Apple developer Id, you must need to trust the binary in mac -> security tab -> general tab and below the section are the instructions to allow it.
-
-## ¿What can be done?
-
-All kinds of assignments can be created. You need to create the assignment types, rooms, and participants in advance.
 
 ## What cannot be done or implemented?
 
