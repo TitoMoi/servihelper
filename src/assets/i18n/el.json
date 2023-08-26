@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "Αυτή η ενέργεια είναι μη αναστρέψιμη",
   "ASSIGNTYPE_HAS_ASSISTANT": "Αυτός ο τύπος εκχώρησης έχει βοηθό",
   "ASSIGNTYPE_PUBLICSPEECH": "Αυτή η ανάθεση είναι η δημόσια ομιλία",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Μπορείτε να δημιουργήσετε τα δημόσια θέματα στην ενότητα Ρυθμίσεις",
   "ASSIGNTYPE_REPEAT": "Αυτή η ανάθεση μπορεί να επαναληφθεί την ίδια μέρα",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Χρώμα",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Διαγράφω",

@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "Deze actie is onomkeerbaar",
   "ASSIGNTYPE_HAS_ASSISTANT": "Dit opdrachttype heeft assistent",
   "ASSIGNTYPE_PUBLICSPEECH": "Deze opdracht is de openbare toespraak",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "U kunt de openbare thema's maken in het gedeelte Instellingen",
   "ASSIGNTYPE_REPEAT": "Deze opdracht kan dezelfde dag worden herhaald",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Kleur",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Verwijderen",

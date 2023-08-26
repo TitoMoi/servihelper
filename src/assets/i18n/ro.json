@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "Această acțiune este ireversibilă",
   "ASSIGNTYPE_HAS_ASSISTANT": "Acest tip de atribuire are asistent",
   "ASSIGNTYPE_PUBLICSPEECH": "This assignment is the public speech",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Puteți crea teme publice în secțiunea Setări",
   "ASSIGNTYPE_REPEAT": "Această misiune poate fi repetată în aceeași zi",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Culoare",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Șterge",

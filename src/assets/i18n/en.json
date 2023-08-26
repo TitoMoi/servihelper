@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "This action is irreversible",
   "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant",
   "ASSIGNTYPE_PUBLICSPEECH": "This assignment is the public speech",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "You can create the public themes in the Settings section",
   "ASSIGNTYPE_REPEAT": "This assignment type can be repeated the same day",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Color",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Delete",

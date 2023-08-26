@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "Aquesta acció és irreversible",
   "ASSIGNTYPE_HAS_ASSISTANT": "Aquest tipus d'assignació té ajudant",
   "ASSIGNTYPE_PUBLICSPEECH": "Aquesta tasca és el discurs públic",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Podeu crear els temes públics a la secció Configuració",
   "ASSIGNTYPE_REPEAT": "Aquest tipus d'assignació es pot repetir el mateix dia",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Color",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Eliminar",

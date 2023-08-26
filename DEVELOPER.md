@@ -2,17 +2,17 @@
 
 Servihelper aims to:
 
-- Provide an universal app to create and share assignments on Windows, Mac and Linux.
+- Provide an universal app to create and share assignments or territories on Windows, Mac and Linux.
 - Web app is not possible today as it needs access to the filesystem to be free.
 - 1 repository of code for all 3 platforms _(windows, apple, linux)_
-- It's provided with free development cost _(no apple id)_ with free distribution _(github)_ free use and free colaboration between diferent administrator actors using the function of import and export
+- It's provided with free development cost _(no apple id)_ with free distribution _(github)_ free use and free colaboration between diferent administrator actors using the function of import and export.
 - The administrator user must download new versions when they are available and work all together with the same version.
 - Be accessible and provided in as many languages as possible.
 
 ## Development Setup
 
-- After cloning the repository, create two folders "assets/source" in root.
-- Copy only src/assets/source into the new created "assets/source" folder.
+- After cloning the repository, create a folder "assets" in root _(This is for development and do not modify the originals)_
+- Copy all src/assets content into the new created "assets" folder.
 
 ## Language
 
@@ -31,11 +31,6 @@ Language files must be sorted when adding keys with the scripts/sort-i18json.js
 ## Lazy load
 
 Servihelper doesnt use angular lazy load as it is a desktop app and network is not an issue.
-
-## Layout
-
-- All pages are wrapper in a bootstrap margin level 3.
-- All content uses bootstrap margin level 2 for small laptops and margin level 3 for sibling items.
 
 ## Icons
 

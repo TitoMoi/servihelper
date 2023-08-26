@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "यह कार्रवाई अपरिवर्तनीय है",
   "ASSIGNTYPE_HAS_ASSISTANT": "इस असाइनमेंट प्रकार में सहायक है",
   "ASSIGNTYPE_PUBLICSPEECH": "यह असाइनमेंट सार्वजनिक भाषण है",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "आप सेटिंग अनुभाग में सार्वजनिक थीम बना सकते हैं",
   "ASSIGNTYPE_REPEAT": "इस असाइनमेंट को उसी दिन दोहराया जा सकता है",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "रंग",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "मिटाना",

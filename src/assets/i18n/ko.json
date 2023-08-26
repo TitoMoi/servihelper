@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "이 조치는 돌이킬 수 없습니다",
   "ASSIGNTYPE_HAS_ASSISTANT": "이 과제 유형에는 조수가 있습니다",
   "ASSIGNTYPE_PUBLICSPEECH": "이 과제는 대중 연설입니다",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "설정 섹션에서 공개 테마를 생성할 수 있습니다.",
   "ASSIGNTYPE_REPEAT": "이 과제는 같은 날 반복 될 수 있습니다",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "색상",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "삭제",

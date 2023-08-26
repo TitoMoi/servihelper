@@ -17,6 +17,8 @@ import { TerritoryGroupService } from "./map/territory-group/service/territory-g
 
 import { PolygonService } from "./map/territory/service/polygon.service";
 import { PublicThemeService } from "./public-theme/service/public-theme.service";
+import { readdirSync } from "fs-extra";
+import path from "path";
 
 @Component({
   selector: "app-root",
@@ -26,48 +28,6 @@ import { PublicThemeService } from "./public-theme/service/public-theme.service"
   imports: [NavigationComponent, RouterOutlet],
 })
 export class AppComponent implements OnInit {
-  //Icons
-  icons: string[] = [
-    "avatar",
-    "menu",
-    "room",
-    "abc",
-    "notes",
-    "participants",
-    "assignment",
-    "statistics",
-    "config",
-    "info",
-    "garbage",
-    "edit",
-    "assignImage",
-    "lists",
-    "csvSvg",
-    "search",
-    "pdf",
-    "pdfblue",
-    "png",
-    "printer",
-    "excel",
-    "googlecalendar",
-    "colorpicker",
-    "switch",
-    "man",
-    "woman",
-    "calendar-delete",
-    "folder",
-    "warning",
-    "info-blue",
-    "sheet-title",
-    "map",
-    "return",
-    "heatmap",
-    "clipboard",
-    "maplink",
-    "download",
-    "speech",
-  ];
-
   constructor(
     private configService: ConfigService,
     private roomService: RoomService,
@@ -84,17 +44,21 @@ export class AppComponent implements OnInit {
     private territoryGroupService: TerritoryGroupService,
     private polygonService: PolygonService
   ) {
-    //Register icons
-    for (const iconFileName of this.icons) {
+    //Get only svg files and then get only the name part (without extension)
+    const files = readdirSync(this.configService.iconsFilesPath)
+      .filter((file) => path.extname(file).toLowerCase() === ".svg")
+      .map((file) => path.parse(file).name);
+    //Register all svg icons
+    for (let file of files) {
       this.matIconRegistry.addSvgIcon(
-        iconFileName,
+        file,
         this.domSanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/" + iconFileName + ".svg"
+          path.join(this.configService.iconsFilesPath, file + ".svg")
         )
       );
     }
-    for (const iconFileName of this.icons) {
-      this.matIconRegistry.getNamedSvgIcon(iconFileName).subscribe();
+    for (const file of files) {
+      this.matIconRegistry.getNamedSvgIcon(file).subscribe();
     }
   }
 

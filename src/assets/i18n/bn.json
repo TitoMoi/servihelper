@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "এই ক্রিয়াটি অপরিবর্তনীয়",
   "ASSIGNTYPE_HAS_ASSISTANT": "এই অ্যাসাইনমেন্ট টাইপ সহকারী রয়েছে",
   "ASSIGNTYPE_PUBLICSPEECH": "এই অ্যাসাইনমেন্টটি জনসাধারণের বক্তৃতা",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "আপনি সেটিংস বিভাগে সর্বজনীন থিম তৈরি করতে পারেন",
   "ASSIGNTYPE_REPEAT": "এই অ্যাসাইনমেন্ট একই দিন পুনরাবৃত্তি করা যেতে পারে",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "রঙ",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "মুছে ফেলা",

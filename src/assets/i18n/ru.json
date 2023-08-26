@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "Это действие необратимо",
   "ASSIGNTYPE_HAS_ASSISTANT": "Этот тип назначения имеет помощника",
   "ASSIGNTYPE_PUBLICSPEECH": "Это задание - публичная речь",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Вы можете создать общедоступные темы в разделе «Настройки».",
   "ASSIGNTYPE_REPEAT": "Это задание можно повторить в тот же день",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Цвет",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Удалить",

@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "Esta ação é irreversível",
   "ASSIGNTYPE_HAS_ASSISTANT": "Este tipo de atribuição tem assistente",
   "ASSIGNTYPE_PUBLICSPEECH": "Esta tarefa é o discurso público",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Você pode criar os temas públicos na seção Configurações",
   "ASSIGNTYPE_REPEAT": "Esta tarefa pode ser repetida no mesmo dia",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Cor",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Eliminar",

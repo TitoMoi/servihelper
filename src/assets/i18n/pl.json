@@ -6,6 +6,7 @@
   "ASSIGNTYPE_DELETE_WARNING": "Ta akcja jest nieodwracalna",
   "ASSIGNTYPE_HAS_ASSISTANT": "Ten typ zadania ma asystenta",
   "ASSIGNTYPE_PUBLICSPEECH": "To zadanie jest przemówieniem publicznym",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Motywy publiczne możesz tworzyć w sekcji Ustawienia",
   "ASSIGNTYPE_REPEAT": "To zadanie można powtórzyć tego samego dnia",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Kolor",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Usuwać",
