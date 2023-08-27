@@ -62,7 +62,8 @@ When creating the github tag, it must only contain the same version as it is in 
 
 ## Static map
 
-- The static map is under folder ./docs. Github pages publishes it with CI/CD when the branch map has changes on folder docs
+- The static map is under folder ./docs. Github pages publishes it with CI/CD when the branch `map` has changes on folder docs.
+- Do not create commits on branch map, develop only in `main` branch and merge it to `map` branch.
 
 ## Fonts
 
@@ -72,6 +73,7 @@ The available fonts for pdf are in ./src/app/resources:
 - malgun for korean
 - simsun for simplified chinese
 - notosans for all the others.
+
   The base64 fonts are in resources/base64fonts and not in assets because is not needed that each user has the base64 fonts.
 
   They are already imported as base64 in the pdfService and in main chunk.
