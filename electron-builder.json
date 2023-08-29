@@ -23,6 +23,7 @@
   "linux": {
     "icon": "dist/assets/icons/favicon.512x512.png",
     "category": "Utility",
-    "target": ["AppImage", "deb"]
+    "target": ["AppImage"],
+    "executableArgs": ["--no-sandbox"]
   }
 }
