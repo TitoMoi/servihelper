@@ -368,7 +368,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       this.form.get("assignType").valueChanges.subscribe((assignTypeId: string) => {
         //is public speech
         const isPSpeech = this.assignTypeService.getAssignType(assignTypeId).isPublicSpeech;
-        if (isPSpeech) this.form.get("isPTheme").setValue(true);
+        isPSpeech
+          ? this.form.get("isPTheme").setValue(true)
+          : this.form.get("isPTheme").setValue(false);
         //Other assign types
         this.batchCleanPrincipalAssistant();
         this.batchCleanGroup();
@@ -384,6 +386,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       this.form.get("isPTheme").valueChanges.subscribe((isPtheme: boolean) => {
         //To modify the template
         this.isPTheme = isPtheme;
+        //Clear value of theme
+        this.form.get("theme").reset();
         const onlyWomanCtrl = this.form.get("onlyWoman");
         this.isPTheme
           ? onlyWomanCtrl.disable({ emitEvent: false })
