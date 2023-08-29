@@ -25,8 +25,12 @@ fs.readdir(releaseDir, (err, files) => {
         fs.renameSync(fileDir, path.join(releaseDir + `/servihelper-${package.version}`));
       }
     } else {
-      fs.removeSync(fileDir);
-      console.log("removed " + fileDir);
+      if (file.endsWith("deb")) {
+        console.log("found " + file);
+      } else {
+        fs.removeSync(fileDir);
+        console.log("removed " + fileDir);
+      }
     }
   });
 });
