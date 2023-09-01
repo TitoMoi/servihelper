@@ -13,8 +13,7 @@
   ],
   "win": {
     "icon": "dist/assets/icons",
-    "target": ["portable"],
-    "executableName": "Moi"
+    "target": ["portable"]
   },
   "portable": {},
   "mac": {
@@ -24,7 +23,6 @@
   "linux": {
     "icon": "dist/assets/icons",
     "category": "Utility",
-    "target": ["AppImage"],
-    "artifactName": "${name}.${ext}"
+    "target": ["AppImage"]
   }
 }

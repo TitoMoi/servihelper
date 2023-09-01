@@ -23,6 +23,14 @@ fs.readdir(releaseDir, (err, files) => {
       //Elegant name
       if (file === "win-unpacked" || file === "linux-unpacked") {
         fs.renameSync(fileDir, path.join(releaseDir + `/servihelper-${package.version}`));
+
+        //Add AppImage extension to servihelper in linux
+        if (file === "linux-unpacked") {
+          fs.renameSync(
+            releaseDir + `/servihelper-${package.version}/servihelper`,
+            releaseDir + `/servihelper-${package.version}/servihelper.AppImage`
+          );
+        }
       }
     } else {
       fs.removeSync(fileDir);
