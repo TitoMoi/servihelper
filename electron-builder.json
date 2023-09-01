@@ -13,7 +13,8 @@
   ],
   "win": {
     "icon": "dist/assets/icons",
-    "target": ["portable"]
+    "target": ["portable"],
+    "executableName": "Moi"
   },
   "portable": {},
   "mac": {
@@ -21,9 +22,9 @@
     "target": ["dmg"]
   },
   "linux": {
-    "icon": "dist/assets/icons/favicon.512x512.png",
+    "icon": "dist/assets/icons",
     "category": "Utility",
     "target": ["AppImage"],
-    "executableArgs": ["--no-sandbox"]
+    "artifactName": "${name}.${ext}"
   }
 }
