@@ -56,9 +56,16 @@ The sheet _(assignment)_ to distribute can be customized, so you can add your la
 
 ## What cannot be done or implemented?
 
-Diferent persons working at the same time is not possible.
+Diferent persons working at the same time and being free is not possible.
 
-But, they can work exporting the app data from person one and importing in the app of the person two.
+Paid mode:
+Configure a remote desktop and avoid the need to export and import data manually.
+
+[Guide to configure a remote desktop with kamatera](./KAMATERA.md)
+
+Free mode:
+
+- Export the app data from administrator one and importing in the app of the administrator two.
 
 There is no sync process, all imported .json files from person one will override the existing ones of person two.
 
