@@ -32,106 +32,106 @@ Its no longer necessary to export and import files, all administrators can work 
 
 Go to kamatera webpage: https://www.kamatera.com/ and click on Get Started
 
-![logo](./pictures/kamatera/1.png)
+![logo](./pictures/kamatera/1.PNG)
 
 Click on Create free account:
 
-![logo](./pictures/kamatera/2.png)
+![logo](./pictures/kamatera/2.PNG)
 
 Click again on create an account:
 
-![logo](./pictures/kamatera/3.png)
+![logo](./pictures/kamatera/3.PNG)
 
 After setting up the billing process, go to "My Cloud" section and "Create new Desktop" select your region and your closest country.
 
 Select on "Choose Desktop OS" -> UBUNTU
 
-![logo](./pictures/kamatera/4.png)
+![logo](./pictures/kamatera/4.PNG)
 
 Select the last version:
 
-![logo](./pictures/kamatera/5.png)
+![logo](./pictures/kamatera/5.PNG)
 
 Select the minimum avaiability, CPU, RAM and storage like in the image, we need at least 20 GB os storage as the system updates itself the first run we dont run out of space:
 
-![logo](./pictures/kamatera/6.png)
+![logo](./pictures/kamatera/6.PNG)
 
 Set a easy password and a name for the desktop.
 
 Choose the billing strategy, i would recommend go for a fixed tax.
 
-![logo](./pictures/kamatera/7.png)
+![logo](./pictures/kamatera/7.PNG)
 
 The Task is being done, go for a coffee ☕ _(it takes about 15min)_
 
-![logo](./pictures/kamatera/8.png)
+![logo](./pictures/kamatera/8.PNG)
 
 After the task is completed, now on Servers section we see our desktop created, click on "Open":
 
 _(If not, refresh the page)_
 
-![logo](./pictures/kamatera/9.png)
+![logo](./pictures/kamatera/9.PNG)
 
 A new Section appears, we only need the remote connexion details, go to "Info" section:
 
-![logo](./pictures/kamatera/10.png)
+![logo](./pictures/kamatera/10.PNG)
 
 We have here the remote connection ID, the user and the password:
 
-![logo](./pictures/kamatera/11.png)
+![logo](./pictures/kamatera/11.PNG)
 
 On Windows, open the application Remote desktop connection:
 
 _(On Mac 🖥️ you can download the app from the app store)_
 
-![logo](./pictures/kamatera/12.png)
+![logo](./pictures/kamatera/12.PNG)
 
 Put the id, with the dots between the numbers and connect:
 
-![logo](./pictures/kamatera/13.png)
+![logo](./pictures/kamatera/13.PNG)
 
 This warning is because is a new connection, we need to trust it, click on "do not ask again" and click on "connect":
 
-![logo](./pictures/kamatera/14.png)
+![logo](./pictures/kamatera/14.PNG)
 
 The same, click on do not ask again and "Yes":
 
-![logo](./pictures/kamatera/15.png)
+![logo](./pictures/kamatera/15.PNG)
 
 Now we are on the kamatera servers, put the username root and the password we got before:
 
-![logo](./pictures/kamatera/16.png)
+![logo](./pictures/kamatera/16.PNG)
 
 We are in our remote desktop! Before everything we need to create a new user, thats because servihelper doesnt run with the root _(administrator)_ user.
 
 Open the terminal that its on the bottom bar:
-![logo](./pictures/kamatera/17.png)
+![logo](./pictures/kamatera/17.PNG)
 
 When the terminal is open, we are going to create the new user, write the next lines:
 
 `sudo useradd -m servihelper`
 
-![logo](./pictures/kamatera/18.png)
+![logo](./pictures/kamatera/18.PNG)
 
 Next we need to add a password, close the console and open it again and write the next lines:
 
 `sudo passwd servihelper`
 
-![logo](./pictures/kamatera/19.png)
+![logo](./pictures/kamatera/19.PNG)
 
 It will require a password, dont worry if you dont see anything while typing the password, its a security measure:
 
 _(Dont go hard this password will be shared later with other administrators)_
 
-![logo](./pictures/kamatera/20.png)
+![logo](./pictures/kamatera/20.PNG)
 
 The successful message when the password is set:
 
-![logo](./pictures/kamatera/21.png)
+![logo](./pictures/kamatera/21.PNG)
 
 Now close the remote connection window, on top right just close the connection, and open again the remote desktop application, now we are going to put the new created user with his password:
 
-![logo](./pictures/kamatera/22.png)
+![logo](./pictures/kamatera/22.PNG)
 
 Once inside we see some warnings, just skip them all:
 
@@ -141,37 +141,37 @@ Now open the browser, its in the bottom bar right to the terminal we opened befo
 
 Click on Releases:
 
-![logo](./pictures/kamatera/24.png)
+![logo](./pictures/kamatera/24.PNG)
 
 Download the latest release, the linux version:
 
-![logo](./pictures/kamatera/25.png)
+![logo](./pictures/kamatera/25.PNG)
 
 Once downloaded open the folder, right click and "Show in folder" _(its in the download folder)_
 
-![logo](./pictures/kamatera/26.png)
+![logo](./pictures/kamatera/26.PNG)
 
 Now right click on the downloaded file and click on "Extract Here" it will generate a new folder:
 
-![logo](./pictures/kamatera/27.png)
+![logo](./pictures/kamatera/27.PNG)
 
 Drag the new created folder to the desktop:
 
-![logo](./pictures/kamatera/28.png)
+![logo](./pictures/kamatera/28.PNG)
 
 Then open the folder and scroll down until we find the "servihelper.AppImage" _(in the image is just servihelper)_
 
-![logo](./pictures/kamatera/29.png)
+![logo](./pictures/kamatera/29.PNG)
 
 Right click and click on "Properties"
 
-![logo](./pictures/kamatera/30.png)
+![logo](./pictures/kamatera/30.PNG)
 
 Go to permission tab and click the bottom check "Allow this file to run as a program"
 
 _(On linux all files are just simple files)_
 
-![logo](./pictures/kamatera/31.png)
+![logo](./pictures/kamatera/31.PNG)
 
 Close the menu and double click Servihelper.AppImage, it will open servihelper and you are ready to go! 🎉
 
