@@ -5,7 +5,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
-import { writeFileSync } from "fs-extra";
+import { writeFileSync, writeJsonSync } from "fs-extra";
 
 import { Component } from "@angular/core";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
@@ -82,8 +82,8 @@ export class HomeComponent {
         case this.configService.configFilename:
           const currentConfig = this.configService.getConfig(); //Default config
           const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
-          const finalConfig = { ...currentConfig, ...incomingConfig };
-          writeFileSync(this.configService.configPath, JSON.stringify(finalConfig));
+          let finalConfig = { ...currentConfig, ...incomingConfig };
+          writeJsonSync(this.configService.configPath, finalConfig);
           break;
         default:
           writeFileSync(
@@ -93,11 +93,13 @@ export class HomeComponent {
       }
     });
 
-    //Update last imported date and filename
-    this.configService.updateConfigByKey("lastImportedDate", new Date());
-    this.configService.updateConfigByKey("lastImportedFilename", zipFile.name);
-
     this.configService.hasChanged = true;
+    const config = this.configService.getConfig();
+    //Update last imported date and filename
+    config.lastImportedDate = new Date();
+    config.lastImportedFilename = zipFile.name;
+    this.configService.updateConfig(config);
+
     this.roomService.hasChanged = true;
     this.assignTypeService.hasChanged = true;
     this.assignmentService.hasChanged = true;
@@ -108,7 +110,6 @@ export class HomeComponent {
     this.polygonService.hasChanged = true;
     this.territoryService.hasChanged = true;
     this.territoryGroupService.hasChanged = true;
-    this.configService.getConfig();
     this.roomService.getRooms();
     this.assignTypeService.getAssignTypes();
     this.noteService.getNotes();
