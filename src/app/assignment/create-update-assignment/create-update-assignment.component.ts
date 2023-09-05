@@ -14,7 +14,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 import { SharedService } from "app/services/shared.service";
-import { Subscription, map } from "rxjs";
+import { Subscription, filter, map } from "rxjs";
 
 import {
   ChangeDetectionStrategy,
@@ -365,18 +365,21 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   prepareAssignTypeSub() {
     this.subscription.add(
-      this.form.get("assignType").valueChanges.subscribe((assignTypeId: string) => {
-        //is public speech
-        const isPSpeech = this.assignTypeService.getAssignType(assignTypeId).isPublicSpeech;
-        isPSpeech
-          ? this.form.get("isPTheme").setValue(true)
-          : this.form.get("isPTheme").setValue(false);
-        //Other assign types
-        this.batchCleanPrincipalAssistant();
-        this.batchCleanGroup();
-        this.batchGetCountSortWarning();
-        this.enableOrDisableAssistantControl(assignTypeId);
-      })
+      this.form
+        .get("assignType")
+        .valueChanges.pipe(filter((at) => at))
+        .subscribe((assignTypeId: string) => {
+          //is public speech
+          const isPSpeech = this.assignTypeService.getAssignType(assignTypeId).isPublicSpeech;
+          isPSpeech
+            ? this.form.get("isPTheme").setValue(true)
+            : this.form.get("isPTheme").setValue(false);
+          //Other assign types
+          this.batchCleanPrincipalAssistant();
+          this.batchCleanGroup();
+          this.batchGetCountSortWarning();
+          this.enableOrDisableAssistantControl(assignTypeId);
+        })
     );
     this.cdr.detectChanges();
   }
@@ -670,7 +673,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     const onlyExternals = this.gfv("onlyExternals");
 
     //Reset form
-    this.form.reset();
+    this.form.reset({ emitEvent: false });
 
     //Restore values
     this.form.get("date").setValue(date, { emitEvent: false });
