@@ -58,6 +58,12 @@ export class CreateUpdateRoleComponent {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  //includes
+  isChecked(id: string): boolean {
+    const assignTypesIdList = this.form.get("assignTypesId").value as string[];
+    return assignTypesIdList.includes(id);
+  }
+
   //Add or remove
   changeCheckbox(assignTypeId: string) {
     const atCtrl = this.form.get("assignTypesId");

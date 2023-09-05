@@ -28,9 +28,12 @@
           <div class="row mb-2">
             <ng-container *ngFor="let at of assignTypes">
               <div class="col-auto">
-                <mat-checkbox color="primary" (change)="changeCheckbox(at.id)">{{
-                  at.name
-                }}</mat-checkbox>
+                <mat-checkbox
+                  color="primary"
+                  (change)="changeCheckbox(at.id)"
+                  [checked]="isChecked(at.id)"
+                  >{{ at.name }}</mat-checkbox
+                >
               </div>
             </ng-container>
           </div>
