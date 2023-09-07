@@ -241,6 +241,6 @@ export class AssistantCountComponent implements OnChanges, OnDestroy {
   }
 
   async toPng() {
-    this.exportService.toPng("toPngDivId", "statistics-assistant");
+    await this.exportService.toPng("toPngDivIdAssistant", "statistics-assistant");
   }
 }

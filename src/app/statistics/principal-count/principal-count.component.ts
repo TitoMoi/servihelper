@@ -240,6 +240,6 @@ export class PrincipalCountComponent implements OnChanges, OnDestroy {
   }
 
   async toPng() {
-    this.exportService.toPng("toPngDivId", "statistics-principal");
+    await this.exportService.toPng("toPngDivIdPrincipal", "statistics-principal");
   }
 }
