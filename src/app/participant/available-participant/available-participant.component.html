@@ -6,7 +6,7 @@
   <div id="toPngDivId">
     <table>
       <thead>
-        <th *transloco="let t">
+        <th *transloco="let t" class="bg-color-white">
           <div>{{ t("PARTICIPANT_AVAILABLE_PRINCIPAL") }}</div>
           <mat-icon
             class="m-2 no-print"
@@ -16,14 +16,14 @@
             (click)="toPng('toPngDivId')"
           ></mat-icon>
         </th>
-        <th *ngFor="let at of assignTypes">
+        <th *ngFor="let at of assignTypes" class="bg-color-white">
           <div>{{ at.name }}</div>
         </th>
       </thead>
       <tbody>
         <tr *ngFor="let p of participants">
-          <td>{{ p.name }}</td>
-          <td *ngFor="let at of assignTypes" class="text-center">
+          <td class="fw-bold bg-color-white">{{ p.name }}</td>
+          <td *ngFor="let at of assignTypes" class="bg-color-lightgray text-center">
             {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔️" : "❌" }}
           </td>
         </tr>
@@ -32,7 +32,7 @@
   </div>
   <table id="toPngDivId2">
     <thead>
-      <th *transloco="let t">
+      <th *transloco="let t" class="bg-color-white">
         <div>{{ t("PARTICIPANT_AVAILABLE_ASSISTANT") }}</div>
         <mat-icon
           class="m-2"
@@ -42,12 +42,12 @@
           (click)="toPng('toPngDivId2')"
         ></mat-icon>
       </th>
-      <th *ngFor="let at of assignTypesAssistant">{{ at.name }}</th>
+      <th *ngFor="let at of assignTypesAssistant" class="bg-color-white">{{ at.name }}</th>
     </thead>
     <tbody>
       <tr *ngFor="let p of participants">
-        <td>{{ p.name }}</td>
-        <td *ngFor="let at of assignTypesAssistant" class="text-center">
+        <td class="fw-bold bg-color-white">{{ p.name }}</td>
+        <td *ngFor="let at of assignTypesAssistant" class="text-center bg-color-lightgray">
           {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔️" : "❌" }}
         </td>
       </tr>
