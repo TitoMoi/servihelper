@@ -1,5 +1,5 @@
 <span *transloco="let t">
-  <div class="d-flex align-items-baseline">
+  <div class="d-flex align-items-center">
     <button
       mat-raised-button
       class="mb-2 me-3"
@@ -20,12 +20,19 @@
       {{ t("PARTICIPANT_COPY_BUTTON_TITLE") }}
     </button>
     <mat-checkbox
-      class="mb-2"
+      class="mb-2 me-3"
       labelPosition="before"
       color="primary"
       (change)="toggleExternals($event)"
       >{{ t("PARTICIPANT_SHOW_EXTERNAL") }}</mat-checkbox
     >
+    <mat-icon
+      class="mb-2"
+      svgIcon="assigntypeavailable"
+      routerLink="assigntypeavailable"
+      [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
+      routerLinkActive="active"
+    ></mat-icon>
   </div>
   <div *ngIf="participants.length" class="mb-2">
     {{ t("PARTICIPANT_TOTAL_PARTICIPANTS") }}: {{ participants.length }}

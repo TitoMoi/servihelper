@@ -351,5 +351,8 @@
   "ro": "রোমানিয়ান",
   "ru": "রাশিয়ান",
   "tr": "তুর্কি",
-  "zhCN": "চাইনিজ"
+  "zhCN": "চাইনিজ",
+  "PARTICIPANT_AVAILABLE_LIST": "Show a table of participants with available assignment types",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Can Principal",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Can Assistant"
 }

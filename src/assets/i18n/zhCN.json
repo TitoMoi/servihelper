@@ -351,5 +351,8 @@
   "ro": "罗马尼亚人",
   "ru": "俄语",
   "tr": "土耳其",
-  "zhCN": "中国人"
+  "zhCN": "中国人",
+  "PARTICIPANT_AVAILABLE_LIST": "显示具有可用作业类型的参与者表",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "可以校长",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "可以助理"
 }

@@ -351,5 +351,8 @@
   "ro": "Rumänisch",
   "ru": "Russisch",
   "tr": "Türkisch",
-  "zhCN": "Chinesisch"
+  "zhCN": "Chinesisch",
+  "PARTICIPANT_AVAILABLE_LIST": "Zeigen Sie eine Tabelle der Teilnehmer mit verfügbaren Zuordnungstypen an",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Kann Principal",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Kann Assistent"
 }

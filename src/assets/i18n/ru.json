@@ -351,5 +351,8 @@
   "ro": "румынский",
   "ru": "Русский",
   "tr": "турецкий",
-  "zhCN": "китайский язык"
+  "zhCN": "китайский язык",
+  "PARTICIPANT_AVAILABLE_LIST": "Показать таблицу участников с доступными типами назначения",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Может принципал",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Может помощник"
 }

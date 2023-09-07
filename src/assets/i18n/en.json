@@ -324,5 +324,8 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "PARTICIPANT_AVAILABLE_LIST": "Show a table of participants with available assignment types",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Can Principal",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Can Assistant"
 }

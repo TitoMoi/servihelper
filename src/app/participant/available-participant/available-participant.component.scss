@@ -1,0 +1,19 @@
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+td {
+  width: auto;
+  background-color: lightgrey;
+}
+
+th {
+  background-color: ghostwhite;
+}
+
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}

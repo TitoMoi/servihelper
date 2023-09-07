@@ -51,7 +51,9 @@
         *ngFor="let a of assignmentsWithNames"
       >
         <ng-container *ngIf="a.sheetTitle; else noTitle">
-          <h4 class="m-1">{{ (a.sheetTitle | sheetTitlePipe)?.name }}</h4>
+          <h4 class="m-1">
+            {{ (a.sheetTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE") }}
+          </h4>
         </ng-container>
         <ng-template #noTitle>
           <h4 class="m-1">

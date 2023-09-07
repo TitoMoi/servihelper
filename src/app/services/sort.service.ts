@@ -114,6 +114,11 @@ export class SortService {
     return 0;
   }
 
+  sortParticipantsByGender(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
+    // false values first
+    return a.isWoman === b.isWoman ? 0 : a.isWoman ? 1 : -1;
+  }
+
   sortParticipantsByCount(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
     if (a.count < b.count) {
       return -1;

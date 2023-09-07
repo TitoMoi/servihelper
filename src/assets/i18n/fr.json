@@ -351,5 +351,8 @@
   "ro": "Roumaine",
   "ru": "Russe",
   "tr": "Turque",
-  "zhCN": "Chinois"
+  "zhCN": "Chinois",
+  "PARTICIPANT_AVAILABLE_LIST": "Afficher un tableau des participants avec les types de tâches disponibles",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Peut-il être directeur",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Peut assistant"
 }

@@ -305,7 +305,7 @@
   "STATISTICS_ONLY_MAN": "Només homes",
   "STATISTICS_ONLY_WOMAN": "Només dones",
   "STATISTICS_PENULTIMA": "Data penúltima",
-  "STATISTICS_ROLE_TIP": "Si canvieu el paper, les estadístiques només mostraran els tipus d'assignació de rol.",
+  "STATISTICS_ROLE_TIP": "Les estadístiques mostren els tipus d'assignació segons el rol seleccionat",
   "TERRITORYGROUP_BUTTON_CREATE_TITLE": "Crea un grup de territori",
   "TERRITORYGROUP_COLOR": "El color d’aquest grup de territori",
   "TERRITORYGROUP_CREATE_TITLE": "Crea un grup de territori",
@@ -352,5 +352,8 @@
   "ro": "Romanès",
   "ru": "Rus",
   "tr": "Turc",
-  "zhCN": "Xinès"
+  "zhCN": "Xinès",
+  "PARTICIPANT_AVAILABLE_LIST": "Mostra una taula de participants amb els tipus d'assignació disponibles",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Pot principal",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Pot ajudant"
 }

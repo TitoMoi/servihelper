@@ -351,5 +351,8 @@
   "ro": "Română",
   "ru": "Rusă",
   "tr": "Turc",
-  "zhCN": "Chinez"
+  "zhCN": "Chinez",
+  "PARTICIPANT_AVAILABLE_LIST": "Afișați un tabel de participanți cu tipuri de atribuire disponibile",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Poate director",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Poate asistent"
 }

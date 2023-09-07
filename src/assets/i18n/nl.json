@@ -351,5 +351,8 @@
   "ro": "Roemeense",
   "ru": "Russisch",
   "tr": "Turks",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "PARTICIPANT_AVAILABLE_LIST": "Toon een tabel met deelnemers met beschikbare opdrachttypen",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Kan directeur",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Kan assistent"
 }

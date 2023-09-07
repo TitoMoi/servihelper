@@ -351,5 +351,8 @@
   "ro": "Romanya",
   "ru": "Rusça",
   "tr": "Türk",
-  "zhCN": "Çince"
+  "zhCN": "Çince",
+  "PARTICIPANT_AVAILABLE_LIST": "Mevcut atama türlerine sahip katılımcıların bir tablosunu gösterin",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Müdür olabilir",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Can asistan"
 }

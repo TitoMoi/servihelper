@@ -351,5 +351,8 @@
   "ro": "루마니아 사람",
   "ru": "러시아인",
   "tr": "터키",
-  "zhCN": "중국인"
+  "zhCN": "중국인",
+  "PARTICIPANT_AVAILABLE_LIST": "사용 가능한 할당 유형이있는 참가자 테이블을 보여줍니다",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "교장",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "조수가 될 수 있습니다"
 }

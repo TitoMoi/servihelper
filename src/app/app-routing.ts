@@ -41,7 +41,7 @@ import { ReturnTerritoryComponent } from "app/map/territory/return-territory/ret
 import { HeatmapComponent } from "app/map/territory/heatmap/heatmap.component";
 import { DeletePublicThemeComponent } from "app/public-theme/delete-public-theme/delete-public-theme.component";
 import { CreateUpdatePublicThemeComponent } from "app/public-theme/create-update-public-theme/create-update-public-theme.component";
-
+import { AvailableParticipantComponent } from "app/participant/available-participant/available-participant.component";
 export const routes: Routes = [
   {
     path: "",
@@ -103,6 +103,10 @@ export const routes: Routes = [
   {
     path: "participant",
     component: ParticipantComponent,
+  },
+  {
+    path: "participant/assigntypeavailable",
+    component: AvailableParticipantComponent,
   },
   {
     path: "participant/create",

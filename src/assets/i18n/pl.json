@@ -351,5 +351,8 @@
   "ro": "Rumuński",
   "ru": "Rosyjski",
   "tr": "Turecki",
-  "zhCN": "Chiński"
+  "zhCN": "Chiński",
+  "PARTICIPANT_AVAILABLE_LIST": "Pokaż tabelę uczestników z dostępnymi typami zadań",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Może główny",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Może asystent"
 }

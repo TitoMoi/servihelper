@@ -353,5 +353,8 @@
   "ro": "Rumano",
   "ru": "Ruso",
   "tr": "Turco",
-  "zhCN": "Chino"
+  "zhCN": "Chino",
+  "PARTICIPANT_AVAILABLE_LIST": "Muestra una tabla de participantes con sus respectivos tipos de asignaciones",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Puede principal",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Puede asistente"
 }

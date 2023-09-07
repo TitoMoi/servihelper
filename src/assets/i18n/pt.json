@@ -353,5 +353,8 @@
   "ro": "Romena",
   "ru": "Russo",
   "tr": "Turca",
-  "zhCN": "Chinês"
+  "zhCN": "Chinês",
+  "PARTICIPANT_AVAILABLE_LIST": "Mostre uma tabela de participantes com tipos de atribuição disponíveis",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Pode principal",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Pode assistente"
 }

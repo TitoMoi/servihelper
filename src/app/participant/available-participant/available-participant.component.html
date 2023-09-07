@@ -1,0 +1,56 @@
+<div *transloco="let t" class="d-flex">
+  <mat-icon class="me-2" svgIcon="info-blue" aria-label="icon"></mat-icon>
+  <div>{{ t("STATISTICS_ROLE_TIP") }}</div>
+</div>
+<div class="table-overflow">
+  <div id="toPngDivId">
+    <table>
+      <thead>
+        <th *transloco="let t">
+          <div>{{ t("PARTICIPANT_AVAILABLE_PRINCIPAL") }}</div>
+          <mat-icon
+            class="m-2 no-print"
+            svgIcon="png"
+            aria-label="icon"
+            [matTooltip]="t('ICON_PNG')"
+            (click)="toPng('toPngDivId')"
+          ></mat-icon>
+        </th>
+        <th *ngFor="let at of assignTypes">
+          <div>{{ at.name }}</div>
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of participants">
+          <td>{{ p.name }}</td>
+          <td *ngFor="let at of assignTypes" class="text-center">
+            {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔️" : "❌" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <table id="toPngDivId2">
+    <thead>
+      <th *transloco="let t">
+        <div>{{ t("PARTICIPANT_AVAILABLE_ASSISTANT") }}</div>
+        <mat-icon
+          class="m-2"
+          svgIcon="png"
+          aria-label="icon"
+          [matTooltip]="t('ICON_PNG')"
+          (click)="toPng('toPngDivId2')"
+        ></mat-icon>
+      </th>
+      <th *ngFor="let at of assignTypesAssistant">{{ at.name }}</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of participants">
+        <td>{{ p.name }}</td>
+        <td *ngFor="let at of assignTypesAssistant" class="text-center">
+          {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔️" : "❌" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

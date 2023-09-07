@@ -351,5 +351,8 @@
   "ro": "रोमानियाई",
   "ru": "रूसी",
   "tr": "तुर्की",
-  "zhCN": "चीनी"
+  "zhCN": "चीनी",
+  "PARTICIPANT_AVAILABLE_LIST": "उपलब्ध असाइनमेंट प्रकारों के साथ प्रतिभागियों की एक तालिका दिखाएं",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "प्रिंसिपल कर सकते हैं",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "सहायक कर सकते हैं"
 }

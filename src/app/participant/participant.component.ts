@@ -8,6 +8,7 @@ import { NgIf, NgFor } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
   selector: "app-participant",
@@ -24,6 +25,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatCheckboxModule,
     NgFor,
     MatIconModule,
+    MatTooltipModule,
   ],
 })
 export class ParticipantComponent {

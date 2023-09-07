@@ -351,5 +351,8 @@
   "ro": "ρουμανικός",
   "ru": "Ρωσική",
   "tr": "τούρκικος",
-  "zhCN": "κινέζικα"
+  "zhCN": "κινέζικα",
+  "PARTICIPANT_AVAILABLE_LIST": "Εμφάνιση ενός πίνακα συμμετεχόντων με διαθέσιμους τύπους αποστολής",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Κύριος",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Μπορεί βοηθός"
 }
