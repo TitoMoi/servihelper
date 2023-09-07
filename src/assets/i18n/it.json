@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "Contare",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Ultima data di assegnazione",
   "INFO_ASSIGNMENT_NAME": "Nome",
-  "INFO_ASSIGNMENT_TITLE": "Avere la stessa stanza e lo stesso tipo di assegnazione quindi:",
   "INFO_HOW_TO_WORK": "¿Come possono lavorare diversi manager contemporaneamente?",
   "INFO__CONTACT": "¿Come faccio a segnalare un bug o un miglioramento?",
   "INFO__CONTACT_ANSWER": "servihelper@gmail.com",
@@ -354,5 +353,7 @@
   "zhCN": "Cinese",
   "PARTICIPANT_AVAILABLE_LIST": "Mostra una tabella dei partecipanti con tipi di assegnazione disponibili",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Può preside",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Può assistente"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Può assistente",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Ultima stanza",
+  "INFO_ASSIGNMENT_TITLE": "Avere lo stesso tipo di assegnazione quindi:"
 }

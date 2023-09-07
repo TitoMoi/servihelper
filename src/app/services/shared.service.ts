@@ -86,7 +86,7 @@ export class SharedService {
    * @param assignTypeId string the id of the selected assignType
    * @param isPrincipal boolean if is principal or assistant
    */
-  setCountAndLastAssignmentDate(
+  setCountAndLastAssignmentDateAndRoom(
     assignmentList: AssignmentInterface[],
     participantList: ParticipantDynamicInterface[],
     roomId: string,
@@ -100,8 +100,8 @@ export class SharedService {
 
     //Apply count
     for (const assignment of assignmentList) {
-      //match the room and the assignType
-      if (assignment.assignType === assignTypeId && assignment.room === roomId) {
+      //match the assignType
+      if (assignment.assignType === assignTypeId) {
         //not expensive, not many participants, maybe 200 in a kingdom hall?
         for (const participant of participantList) {
           if (participant.id === (isPrincipal ? assignment.principal : assignment.assistant)) {
@@ -110,8 +110,10 @@ export class SharedService {
             //Add the date of the last assignment
             if (!participant.lastAssignmentDate) {
               participant.lastAssignmentDate = assignment.date;
+              participant.lastAssignmentRoom = assignment.room;
             } else if (new Date(participant.lastAssignmentDate) < new Date(assignment.date)) {
               participant.lastAssignmentDate = assignment.date;
+              participant.lastAssignmentRoom = assignment.room;
             }
             break;
           }

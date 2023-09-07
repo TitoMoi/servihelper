@@ -18,6 +18,7 @@ export interface ParticipantDynamicInterface extends ParticipantInterface {
   penultimateAssignmentDate?: Date; //Dynamic value, undefined by default, date of penultimate assignment
   distanceBetweenPenultimaAndLast?: string; //Dynamic value, undefined by default, string in distance
   lastAssignType?: string; //Dynamic value, undefined by default, the name of the assignType
+  lastAssignmentRoom?: string; //Dynamic value, undefined by default, the id of the room
   penultimateAssignType?: string; //Dynamic value, undefined by default, the name of the assignType
   isPrincipalLastAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment or not (assistant)
   isPrincipalPenultimateAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment or not (assistant)

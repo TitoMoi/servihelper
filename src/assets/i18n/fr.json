@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "Compter",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Dernière date d'affectation",
   "INFO_ASSIGNMENT_NAME": "Nom",
-  "INFO_ASSIGNMENT_TITLE": "Avoir la même chambre et le même type d'attribution alors:",
   "INFO_HOW_TO_WORK": "¿Comment plusieurs gestionnaires peuvent-ils travailler en même temps?",
   "INFO_HOW_TO_WORK_ANSWER": "Le premier crée ses affectations, exporte les données de la section «Accueil» et la laisse dans un site partagé par les responsables, le second l'indique et crée ses affectations, etc.",
   "INFO__CONTACT": "¿Comment signaler un bug ou une amélioration?",
@@ -354,5 +353,7 @@
   "zhCN": "Chinois",
   "PARTICIPANT_AVAILABLE_LIST": "Afficher un tableau des participants avec les types de tâches disponibles",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Peut-il être directeur",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Peut assistant"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Peut assistant",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Dernière pièce",
+  "INFO_ASSIGNMENT_TITLE": "Avoir le même type d'attribution alors:"
 }

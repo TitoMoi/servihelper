@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "Count",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "अंतिम असाइनमेंट तिथि",
   "INFO_ASSIGNMENT_NAME": "नाम",
-  "INFO_ASSIGNMENT_TITLE": "एक ही कमरा और एक ही असाइन टाइप टाइप करना:",
   "INFO_HOW_TO_WORK": "And कई प्रबंधक एक ही समय में कैसे काम कर सकते हैं?",
   "INFO_HOW_TO_WORK_ANSWER": "पहला अपने असाइनमेंट बनाता है, होम सेक्शन से डेटा को निर्यात करता है और इसे जिम्मेदार लोगों द्वारा साझा किए गए साइट में छोड़ देता है, दूसरा इसे आयात करता है और इसके असाइनमेंट बनाता है, और इसी तरह।",
   "INFO__CONTACT": "‘मैं बग या सुधार की रिपोर्ट कैसे करूं?",
@@ -354,5 +353,7 @@
   "zhCN": "चीनी",
   "PARTICIPANT_AVAILABLE_LIST": "उपलब्ध असाइनमेंट प्रकारों के साथ प्रतिभागियों की एक तालिका दिखाएं",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "प्रिंसिपल कर सकते हैं",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "सहायक कर सकते हैं"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "सहायक कर सकते हैं",
+  "INFO_ASSIGNMENT_LAST_ROOM": "अंतिम कमरा",
+  "INFO_ASSIGNMENT_TITLE": "तब एक ही असाइन करने का प्रकार:"
 }

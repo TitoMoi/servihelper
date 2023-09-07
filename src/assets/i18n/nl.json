@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "Graaf",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Laatste opdrachtdatum",
   "INFO_ASSIGNMENT_NAME": "Naam",
-  "INFO_ASSIGNMENT_TITLE": "Met dezelfde kamer en hetzelfde toewijzingstype dan:",
   "INFO_HOW_TO_WORK": "¿Hoe kunnen verschillende managers tegelijkertijd werken?",
   "INFO_HOW_TO_WORK_ANSWER": "De eerste maakt zijn opdrachten, exporteert de gegevens uit de thuissectie en laat deze op een site die wordt gedeeld door de verantwoordelijke, de tweede importeert het en maakt zijn opdrachten, enzovoort.",
   "INFO__CONTACT": "¿Hoe meld ik een bug of een verbetering?",
@@ -354,5 +353,7 @@
   "zhCN": "Chinese",
   "PARTICIPANT_AVAILABLE_LIST": "Toon een tabel met deelnemers met beschikbare opdrachttypen",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Kan directeur",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Kan assistent"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Kan assistent",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Laatste kamer",
+  "INFO_ASSIGNMENT_TITLE": "Met hetzelfde toewijzingstype dan:"
 }

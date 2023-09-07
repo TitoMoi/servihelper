@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "Count",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "শেষ অ্যাসাইনমেন্টের তারিখ",
   "INFO_ASSIGNMENT_NAME": "নাম",
-  "INFO_ASSIGNMENT_TITLE": "একই ঘর এবং একই বরাদ্দ টাইপ আছে:",
   "INFO_HOW_TO_WORK": "Manage বেশ কয়েকটি পরিচালক একই সাথে কীভাবে কাজ করতে পারেন?",
   "INFO_HOW_TO_WORK_ANSWER": "প্রথমটি তার অ্যাসাইনমেন্টগুলি তৈরি করে, হোম বিভাগ থেকে ডেটা রফতানি করে এবং এটি দায়বদ্ধ ব্যক্তিদের দ্বারা ভাগ করা একটি সাইটে রেখে দেয়, দ্বিতীয়টি এটি আমদানি করে এবং এর কার্যভারগুলি তৈরি করে এবং আরও অনেক কিছু।",
   "INFO__CONTACT": "আমি কীভাবে কোনও বাগ বা উন্নতির প্রতিবেদন করব?",
@@ -352,7 +351,9 @@
   "ru": "রাশিয়ান",
   "tr": "তুর্কি",
   "zhCN": "চাইনিজ",
-  "PARTICIPANT_AVAILABLE_LIST": "Show a table of participants with available assignment types",
-  "PARTICIPANT_AVAILABLE_PRINCIPAL": "Can Principal",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Can Assistant"
+  "PARTICIPANT_AVAILABLE_LIST": "উপলভ্য অ্যাসাইনমেন্ট প্রকার সহ অংশগ্রহণকারীদের একটি সারণী দেখান",
+  "PARTICIPANT_AVAILABLE_PRINCIPAL": "অধ্যক্ষ করতে পারেন",
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "সহকারী করতে পারেন",
+  "INFO_ASSIGNMENT_LAST_ROOM": "শেষ ঘর",
+  "INFO_ASSIGNMENT_TITLE": "একই বরাদ্দ প্রকার আছে:"
 }

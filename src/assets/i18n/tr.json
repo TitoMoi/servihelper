@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "Saymak",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Son Ödev Tarihi",
   "INFO_ASSIGNMENT_NAME": "İsim",
-  "INFO_ASSIGNMENT_TITLE": "Aynı odaya ve aynı atama tipine sahip olmak:",
   "INFO_HOW_TO_WORK": "¿Birkaç yönetici aynı anda nasıl çalışabilir?",
   "INFO_HOW_TO_WORK_ANSWER": "Birincisi ödevlerini oluşturur, verileri ana bölümden dışa aktarır ve sorumlu olanlar tarafından paylaşılan bir sitede bırakır, ikincisi onu içe aktarır ve ödevlerini oluşturur.",
   "INFO__CONTACT": "¿Bir hata veya iyileştirme nasıl bildiririm?",
@@ -354,5 +353,7 @@
   "zhCN": "Çince",
   "PARTICIPANT_AVAILABLE_LIST": "Mevcut atama türlerine sahip katılımcıların bir tablosunu gösterin",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Müdür olabilir",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Can asistan"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Can asistan",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Son oda",
+  "INFO_ASSIGNMENT_TITLE": "Aynı atama türüne sahip olmak:"
 }

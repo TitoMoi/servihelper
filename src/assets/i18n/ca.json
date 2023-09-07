@@ -160,7 +160,6 @@
   "INFO_ASSIGNMENT_COUNT": "Recompte",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Data de l'assignació",
   "INFO_ASSIGNMENT_NAME": "Nom",
-  "INFO_ASSIGNMENT_TITLE": "Tenint la mateixa sala i el mateix tipus d'assignació llavors:",
   "INFO_HOW_TO_WORK": "¿Com poden treballar diversos gestors alhora?",
   "INFO_HOW_TO_WORK_ANSWER": "El primer crea les seves assignacions, exporta les dades de la secció 'Home' i les deixa en un lloc compartit pels responsables, el segon les importa i crea les seves assignacions, etc.",
   "INFO__CONTACT": "¿Com reporte un error o una millora?",
@@ -355,5 +354,7 @@
   "zhCN": "Xinès",
   "PARTICIPANT_AVAILABLE_LIST": "Mostra una taula de participants amb els tipus d'assignació disponibles",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Pot principal",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Pot ajudant"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Pot ajudant",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Última sala",
+  "INFO_ASSIGNMENT_TITLE": "Tenint el mateix tipus d'assignació llavors:"
 }

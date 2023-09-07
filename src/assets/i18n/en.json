@@ -138,7 +138,6 @@
   "INFO_ASSIGNMENT_COUNT": "Count",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Last assignment date",
   "INFO_ASSIGNMENT_NAME": "Name",
-  "INFO_ASSIGNMENT_TITLE": "Having same room and same assign type then:",
   "INFO_HOW_TO_WORK": "¿How can several managers work at the same time?",
   "INFO_HOW_TO_WORK_ANSWER": "The first creates its assignments, exports the data from the home section and leaves it in a site shared by those responsible, the second imports it and creates its assignments, and so on.",
   "INFO__CONTACT": "¿How do I report a bug or an improvement?",
@@ -327,5 +326,7 @@
   "zhCN": "Chinese",
   "PARTICIPANT_AVAILABLE_LIST": "Show a table of participants with available assignment types",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Can Principal",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Can Assistant"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Can Assistant",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Last room",
+  "INFO_ASSIGNMENT_TITLE": "Having same assign type then:"
 }

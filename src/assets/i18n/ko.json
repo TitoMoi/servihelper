@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "세다",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "마지막 과제 날짜",
   "INFO_ASSIGNMENT_NAME": "이름",
-  "INFO_ASSIGNMENT_TITLE": "그런 다음 동일한 방과 같은 할당 유형이 있습니다:",
   "INFO_HOW_TO_WORK": "¿ 몇몇 관리자는 어떻게 동시에 일할 수 있습니까?",
   "INFO_HOW_TO_WORK_ANSWER": "첫 번째는 과제를 생성하고, 홈 섹션에서 데이터를 내보내고, 책임있는 사람들이 공유하는 사이트에 맡기고, 두 번째는 그것을 가져오고 할당을 생성합니다.",
   "INFO__CONTACT": "¿ 버그 나 개선을 어떻게보고합니까?",
@@ -354,5 +353,7 @@
   "zhCN": "중국인",
   "PARTICIPANT_AVAILABLE_LIST": "사용 가능한 할당 유형이있는 참가자 테이블을 보여줍니다",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "교장",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "조수가 될 수 있습니다"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "조수가 될 수 있습니다",
+  "INFO_ASSIGNMENT_LAST_ROOM": "마지막 방",
+  "INFO_ASSIGNMENT_TITLE": "그런 다음 동일한 할당 유형이 있습니다."
 }

@@ -161,7 +161,6 @@
   "INFO_ASSIGNMENT_COUNT": "Contar",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Última data de atribuição",
   "INFO_ASSIGNMENT_NAME": "Nome",
-  "INFO_ASSIGNMENT_TITLE": "Ter o mesmo quarto e o mesmo tipo de atribuição então:",
   "INFO_HOW_TO_WORK": "¿Como vários gerentes podem trabalhar ao mesmo tempo?",
   "INFO_HOW_TO_WORK_ANSWER": "O primeiro cria suas atribuições, exporta os dados da seção 'home' e os deixa em um site compartilhado pelos responsáveis, o segundo importa e cria suas atribuições, e assim por diante.",
   "INFO__CONTACT": "¿Como faço para relatar um bug ou uma melhoria?",
@@ -356,5 +355,7 @@
   "zhCN": "Chinês",
   "PARTICIPANT_AVAILABLE_LIST": "Mostre uma tabela de participantes com tipos de atribuição disponíveis",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Pode principal",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Pode assistente"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Pode assistente",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Último quarto",
+  "INFO_ASSIGNMENT_TITLE": "Tendo o mesmo tipo de atribuição então:"
 }

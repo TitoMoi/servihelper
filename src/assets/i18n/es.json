@@ -161,7 +161,6 @@
   "INFO_ASSIGNMENT_COUNT": "Conteo",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Última fecha de asignación",
   "INFO_ASSIGNMENT_NAME": "Nombre",
-  "INFO_ASSIGNMENT_TITLE": "Teniendo la misma sala y el mismo tipo de asignación entonces:",
   "INFO_HOW_TO_WORK": "¿Cómo pueden trabajar varios responsables a la vez?",
   "INFO_HOW_TO_WORK_ANSWER": "El primero crea sus asignaciones, exporta los datos desde la sección 'home' y los deja en un sitio que compartan los responsables, el segundo lo importa y crea sus asignaciones, y asi sucesivamente.",
   "INFO__CONTACT": "¿Cómo notifico un error o una mejora?",
@@ -356,5 +355,7 @@
   "zhCN": "Chino",
   "PARTICIPANT_AVAILABLE_LIST": "Muestra una tabla de participantes con sus respectivos tipos de asignaciones",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Puede principal",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Puede asistente"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Puede asistente",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Última sala",
+  "INFO_ASSIGNMENT_TITLE": "Teniendo el mismo tipo de asignación, entonces:"
 }

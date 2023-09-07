@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "Считать",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Последняя дата назначения",
   "INFO_ASSIGNMENT_NAME": "Имя",
-  "INFO_ASSIGNMENT_TITLE": "Иметь ту же комнату и тот же тип назначения, тогда:",
   "INFO_HOW_TO_WORK": "¿Как несколько менеджеров могут работать одновременно?",
   "INFO_HOW_TO_WORK_ANSWER": "Первый создает свои задания, экспортирует данные из домашнего раздела и оставляет их на сайте, поделившись ответственными, вторым импортирует их и создает свои задания и так далее.",
   "INFO__CONTACT": "¿Как мне сообщить об ошибке или улучшении?",
@@ -354,5 +353,7 @@
   "zhCN": "китайский язык",
   "PARTICIPANT_AVAILABLE_LIST": "Показать таблицу участников с доступными типами назначения",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Может принципал",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Может помощник"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Может помощник",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Последняя комната",
+  "INFO_ASSIGNMENT_TITLE": "Тогда с тем же назначением типа:"
 }

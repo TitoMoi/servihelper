@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "カウント",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "最後の割り当て日",
   "INFO_ASSIGNMENT_NAME": "名前",
-  "INFO_ASSIGNMENT_TITLE": "同じ部屋と同じ割り当てタイプを持っています:",
   "INFO_HOW_TO_WORK": "¿何人かのマネージャーが同時に作業するにはどうすればよいですか？",
   "INFO_HOW_TO_WORK_ANSWER": "1つ目は、割り当てを作成し、ホームセクションからデータをエクスポートし、責任者が共有するサイトに残し、2番目の輸入を輸入して割り当てを作成します。",
   "INFO__CONTACT": "¿バグや改善を報告するにはどうすればよいですか？",
@@ -354,5 +353,7 @@
   "zhCN": "中国語",
   "PARTICIPANT_AVAILABLE_LIST": "利用可能な割り当てタイプを持つ参加者のテーブルを表示します",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "プリンシパルができます",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "アシスタントができます"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "アシスタントができます",
+  "INFO_ASSIGNMENT_LAST_ROOM": "最後の部屋",
+  "INFO_ASSIGNMENT_TITLE": "同じ割り当てタイプを持っていると："
 }

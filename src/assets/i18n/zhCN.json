@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "数数",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "最后一个分配日期",
   "INFO_ASSIGNMENT_NAME": "姓名",
-  "INFO_ASSIGNMENT_TITLE": "拥有相同的房间和相同的分配类型:",
   "INFO_HOW_TO_WORK": "�几位经理如何同时工作？",
   "INFO_HOW_TO_WORK_ANSWER": "第一个创建其作业，从家庭部分中导出数据，并将其放在负责人共享的站点中，第二个将其导入并创建其作业等等。",
   "INFO__CONTACT": "�如何报告错误或改进？",
@@ -354,5 +353,7 @@
   "zhCN": "中国人",
   "PARTICIPANT_AVAILABLE_LIST": "显示具有可用作业类型的参与者表",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "可以校长",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "可以助理"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "可以助理",
+  "INFO_ASSIGNMENT_LAST_ROOM": "最后一个房间",
+  "INFO_ASSIGNMENT_TITLE": "然后具有相同的分配类型："
 }

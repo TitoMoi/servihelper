@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "μετρώ",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Ημερομηνία τελευταίας ανάθεσης",
   "INFO_ASSIGNMENT_NAME": "Ονομα",
-  "INFO_ASSIGNMENT_TITLE": "Έχοντας το ίδιο δωμάτιο και τον ίδιο τύπο εκχώρησης τότε:",
   "INFO_HOW_TO_WORK": "¿Πώς μπορούν πολλοί διαχειριστές να λειτουργούν ταυτόχρονα;",
   "INFO_HOW_TO_WORK_ANSWER": "Το πρώτο δημιουργεί τις αποστολές του, εξάγει τα δεδομένα από το τμήμα στο σπίτι και το αφήνει σε έναν ιστότοπο που μοιράζονται οι υπεύθυνοι, ο δεύτερος εισάγει και δημιουργεί τις αποστολές του κ.ο.κ.",
   "INFO__CONTACT": "¿Πώς μπορώ να αναφέρω ένα σφάλμα ή μια βελτίωση;",
@@ -354,5 +353,7 @@
   "zhCN": "κινέζικα",
   "PARTICIPANT_AVAILABLE_LIST": "Εμφάνιση ενός πίνακα συμμετεχόντων με διαθέσιμους τύπους αποστολής",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Κύριος",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Μπορεί βοηθός"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Μπορεί βοηθός",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Τελευταίο δωμάτιο",
+  "INFO_ASSIGNMENT_TITLE": "Έχοντας τον ίδιο τύπο εκχώρησης τότε:"
 }

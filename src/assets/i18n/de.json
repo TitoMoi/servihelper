@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "Zählen",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Letzter Zuweisungsdatum",
   "INFO_ASSIGNMENT_NAME": "name",
-  "INFO_ASSIGNMENT_TITLE": "Mit demselben Raum und demselben Zuweisungsart dann haben:",
   "INFO_HOW_TO_WORK": "Wie können mehrere Manager gleichzeitig arbeiten?",
   "INFO_HOW_TO_WORK_ANSWER": "Der erste erstellt seine Zuordnungen, exportiert die Daten aus dem Zuhause und lässt sie in einer von den Verantwortlichen geteilten Site, die zweite importiert und erstellt seine Aufgaben usw.",
   "INFO__CONTACT": "Wie melde ich einen Fehler oder eine Verbesserung?",
@@ -354,5 +353,7 @@
   "zhCN": "Chinesisch",
   "PARTICIPANT_AVAILABLE_LIST": "Zeigen Sie eine Tabelle der Teilnehmer mit verfügbaren Zuordnungstypen an",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Kann Principal",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Kann Assistent"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Kann Assistent",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Letzter Zimmer",
+  "INFO_ASSIGNMENT_TITLE": "Mit dem gleichen Zuweisungsart dann:"
 }

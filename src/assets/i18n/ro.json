@@ -159,7 +159,6 @@
   "INFO_ASSIGNMENT_COUNT": "Numara",
   "INFO_ASSIGNMENT_LAST_ASSIGN_DATE": "Ultima dată de atribuire",
   "INFO_ASSIGNMENT_NAME": "Nume",
-  "INFO_ASSIGNMENT_TITLE": "Având aceeași cameră și același tip de atribuire atunci:",
   "INFO_HOW_TO_WORK": "Cum pot funcționa mai mulți manageri în același timp?",
   "INFO_HOW_TO_WORK_ANSWER": "Primul își creează misiunile, exportă datele din secțiunea de origine și le lasă într -un site împărtășit de cei responsabili, al doilea îi importă și creează misiunile sale, etc.",
   "INFO__CONTACT": "Cum raportez o eroare sau o îmbunătățire?",
@@ -354,5 +353,7 @@
   "zhCN": "Chinez",
   "PARTICIPANT_AVAILABLE_LIST": "Afișați un tabel de participanți cu tipuri de atribuire disponibile",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Poate director",
-  "PARTICIPANT_AVAILABLE_ASSISTANT": "Poate asistent"
+  "PARTICIPANT_AVAILABLE_ASSISTANT": "Poate asistent",
+  "INFO_ASSIGNMENT_LAST_ROOM": "Ultima cameră",
+  "INFO_ASSIGNMENT_TITLE": "Având același tip de atribuire: atunci:"
 }

@@ -290,7 +290,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   /** (view) Set count and last assignment date for principals */
   setPrincipalsCountAndLastDate() {
     if (!this.isMultipleDates) {
-      this.sharedService.setCountAndLastAssignmentDate(
+      this.sharedService.setCountAndLastAssignmentDateAndRoom(
         this.assignments,
         this.principals,
         this.gfv("room"),
@@ -303,7 +303,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   /** (view) Set count and last assignment date for assistants */
   setAssistantsCountAndLastDate() {
     if (!this.isMultipleDates) {
-      this.sharedService.setCountAndLastAssignmentDate(
+      this.sharedService.setCountAndLastAssignmentDateAndRoom(
         this.assignments,
         this.assistants,
         this.gfv("room"),
