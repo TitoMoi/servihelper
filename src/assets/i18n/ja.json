@@ -175,8 +175,6 @@
   "INFO__MY_VERSION": "私の現在のバージョン:",
   "INFO__WHAT_CAN_BE_DONE": "¿何ができるの？",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "あらゆる種類の割り当てを作成できます。事前に割り当ての種類、部屋、参加者を作成する必要があります。",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "割り当てを作成すると、参加者を選択すると、その隣に番号が表示されますが、それは何ですか？",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "それはあなたがその部屋に参加した回数です。",
   "INFO__WHAT_IS_SERVIHELPER": "¿servihelperとは何ですか？",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "マシンで実行されるプログラムです。データは内部で管理されているため、インターネットに行くことはありません。",
   "MAP_BUTTON_CREATE_MAP_TITLE": "マップを作成します",

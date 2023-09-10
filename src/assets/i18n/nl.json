@@ -175,8 +175,6 @@
   "INFO__MY_VERSION": "Mijn huidige versie:",
   "INFO__WHAT_CAN_BE_DONE": "Wat gedaan kan worden?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Alle soorten opdrachten kunnen worden gemaakt.U moet vooraf de opdrachttypen, kamers en deelnemers maken.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Wanneer ik een opdracht maak, wordt bij het selecteren van de deelnemer een nummer ernaast weergegeven, wat is het dan?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "Het is het aantal keren dat u met dat soort opdracht aan die rol hebt deelgenomen aan die rol.",
   "INFO__WHAT_IS_SERVIHELPER": "¿Wat is servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Het is een programma dat op de machine draait.Uw gegevens worden intern beheerd, dus het gaat nooit naar internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Maak kaart",

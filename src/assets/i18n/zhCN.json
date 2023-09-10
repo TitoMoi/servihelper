@@ -175,8 +175,6 @@
   "INFO__MY_VERSION": "我当前的版本:",
   "INFO__WHAT_CAN_BE_DONE": "�可以做什么？",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "可以创建各种作业。您需要提前创建作业类型，房间和参与者。",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "当我创建一个作业时，选择参与者时，旁边显示一个数字，这是什么？",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "这是您带有该角色的分配类型的房间的次数。",
   "INFO__WHAT_IS_SERVIHELPER": "什么是Servihelper？",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "这是一个在计算机上运行的程序。您的数据在内部进行管理，因此它永远不会访问Internet。",
   "MAP_BUTTON_CREATE_MAP_TITLE": "创建地图",

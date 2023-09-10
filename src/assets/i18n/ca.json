@@ -176,8 +176,6 @@
   "INFO__MY_VERSION": "La meva versió actual:",
   "INFO__WHAT_CAN_BE_DONE": "¿Què es pot fer?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Es poden crear tot tipus d'assignacions. És necessari crear els tipus d'assignacions, les sales i els participants prèviament.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Quan cree una assignació, en seleccionar el participant ix un número al seu costat, què és?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "És les vegades que ha participat en aqueixa sala amb aqueixa mena d'assignació amb aqueix rol.",
   "INFO__WHAT_IS_SERVIHELPER": "Què és servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "És un programa que s'executa en la màquina. Les seues dades es gestionen de manera interna, per la qual cosa mai ixen a internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Crea mapa",

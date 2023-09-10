@@ -174,8 +174,6 @@
   "INFO__MY_VERSION": "La mia versione attuale:",
   "INFO__WHAT_CAN_BE_DONE": "Cosa si può fare?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "È possibile creare tutti i tipi di incarichi. È necessario creare in anticipo i tipi di assegnazione, le stanze e i partecipanti.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Quando creo un incarico, quando seleziono il partecipante, un numero viene visualizzato accanto ad esso, che cos'è?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "È il numero di volte in cui hai partecipato in quella stanza con quel tipo di incarico con quel ruolo.",
   "INFO__WHAT_IS_SERVIHELPER": "¿Che cos'è SERVIELPER?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "È un programma che funziona sulla macchina. I tuoi dati sono gestiti internamente, quindi non vanno mai su Internet.",
   "Info_how_to_work_answer": "Il primo crea i suoi compiti, esporta i dati dalla sezione domestica e li lascia in un sito condiviso da quelli responsabili, il secondo lo importa e crea i suoi compiti, e così via.",

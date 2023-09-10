@@ -175,8 +175,6 @@
   "INFO__MY_VERSION": "Meine aktuelle Version:",
   "INFO__WHAT_CAN_BE_DONE": "Was kann getan werden?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Es können alle Arten von Aufträgen erstellt werden. Sie müssen die Zuordnertypen, Räume und Teilnehmer im Voraus erstellen.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Wenn ich eine Zuordnung erstelle, bei der Auswahl des Teilnehmers wird eine Nummer daneben angezeigt, was ist das?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "Es ist die Häufigkeit, mit der Sie mit dieser Art von Zuordnung mit dieser Rolle an diesem Raum teilgenommen haben.",
   "INFO__WHAT_IS_SERVIHELPER": "Was ist Servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Es ist ein Programm, das auf dem Computer ausgeführt wird. Ihre Daten werden intern verwaltet, sodass es nie ins Internet geht.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Karte erstellen",

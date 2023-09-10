@@ -175,8 +175,6 @@
   "INFO__MY_VERSION": "Ma version actuelle:",
   "INFO__WHAT_CAN_BE_DONE": "Ce qui peut être fait?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Toutes sortes de missions peuvent être créées.Vous devez créer à l'avance les types d'affectation, les chambres et les participants.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Lorsque je crée une affectation, lors de la sélection du participant, un numéro s'affiche à côté, qu'est-ce que c'est?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "C'est le nombre de fois où vous avez participé à cette pièce avec ce type d'affectation avec ce rôle.",
   "INFO__WHAT_IS_SERVIHELPER": "¿Qu'est-ce que le servin?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Il s'agit d'un programme qui s'exécute sur la machine.Vos données sont gérées en interne, donc elle ne va jamais sur Internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Créer une carte",

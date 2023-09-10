@@ -177,8 +177,6 @@
   "INFO__MY_VERSION": "Minha versão atual:",
   "INFO__WHAT_CAN_BE_DONE": "¿O que se pode fazer?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Todos os tipos de atribuições podem ser criados. Você precisa criar os tipos de tarefas, salas e participantes com antecedência.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Quando eu crio uma tarefa, ao selecionar o participante, um número é exibido ao lado dela, o que é?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "É o número de vezes que você participou daquela sala com aquele tipo de atribuição com aquela função.",
   "INFO__WHAT_IS_SERVIHELPER": "¿O que é servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "É um programa executado na máquina. Seus dados são gerenciados internamente, portanto, nunca vão para a internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Criar mapa",

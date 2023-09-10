@@ -154,8 +154,6 @@
   "INFO__MY_VERSION": "My current version:",
   "INFO__WHAT_CAN_BE_DONE": "¿What can be done?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "All kinds of assignments can be created. You need to create the assignment types, rooms, and participants in advance.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "When I create an assignment, when selecting the participant, a number is displayed next to it, what is it?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "It is the number of times you have participated in that room with that type of assignment with that role.",
   "INFO__WHAT_IS_SERVIHELPER": "¿What is servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "It is a program that runs on the machine. Your data is managed internally, so it never goes to the internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Create map",

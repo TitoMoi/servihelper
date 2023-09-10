@@ -175,8 +175,6 @@
   "INFO__MY_VERSION": "Mevcut sürümüm:",
   "INFO__WHAT_CAN_BE_DONE": "Ne yapılabilir?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Her türlü ödev oluşturulabilir.Ödev türlerini, odaları ve katılımcıları önceden oluşturmanız gerekir.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Bir ödev oluşturduğumda, katılımcıyı seçerken yanında bir sayı görüntülenir, nedir?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "Bu odaya bu rolle bu tür atama ile katıldığınız sayıdır.",
   "INFO__WHAT_IS_SERVIHELPER": "¿ServiHelper nedir?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Makinede çalışan bir programdır.Verileriniz dahili olarak yönetilir, bu nedenle asla internete gitmez.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Harita Oluştur",

@@ -175,8 +175,6 @@
   "INFO__MY_VERSION": "Moja obecna wersja:",
   "INFO__WHAT_CAN_BE_DONE": "Co można zrobić?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Można utworzyć wszelkiego rodzaju zadania.Musisz z wyprzedzeniem utworzyć rodzaje zadań, pokoje i uczestników.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Kiedy tworzę zadanie, wybierając uczestnika, obok niego wyświetlany jest liczba, co to jest?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "Jest to liczba razy uczestniczyć w tym pokoju z tego rodzaju zadaniem z tą rolą.",
   "INFO__WHAT_IS_SERVIHELPER": "¿Co to jest Servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Jest to program działający na maszynie.Twoje dane są zarządzane wewnętrznie, więc nigdy nie trafia do Internetu.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Utwórz mapę",

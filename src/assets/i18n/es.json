@@ -177,8 +177,6 @@
   "INFO__MY_VERSION": "Mi versión actual:",
   "INFO__WHAT_CAN_BE_DONE": "¿Qué se puede hacer?",
   "INFO__WHAT_CAN_BE_DONE_ANSWER": "Se pueden crear todo tipo de asignaciones. Es necesario crear los tipos de asignaciones, las salas y los participantes previamente.",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT": "Cuando creo una asignación, al seleccionar el participante sale un número a su lado, qué es?",
-  "INFO__WHAT_IS_NUMBER_WITH_PARTICIPANT_ANSWER": "Es las veces que ha participado en esa sala con ese tipo de asignación con ese rol.",
   "INFO__WHAT_IS_SERVIHELPER": "¿Qué es servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Es un programa que se ejecuta en la máquina. Sus datos se gestionan de manera interna, por lo que nunca salen a internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Crear mapa",
