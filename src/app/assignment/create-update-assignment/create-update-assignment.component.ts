@@ -58,7 +58,7 @@ import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 import { PublicThemeInterface } from "app/public-theme/model/public-theme.model";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
-import { addDays, subDays } from "date-fns";
+import { addDays, parseISO, subDays } from "date-fns";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
@@ -578,8 +578,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     const at = this.assignTypeService.getAssignType(this.gfv("assignType"));
     const days = at?.days;
     if (days) {
+      let currentDate: Date = this.gfv("date");
+      //If we edit an assignment, we get the string iso instead of a real date
+      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
       for (let p of this.principals) {
-        const currentDate: Date = this.gfv("date");
         //Get all the days before and after, its 1 based index
         let allDays: AssignmentInterface[] = [];
         for (var i = 1; i <= days; i++) {
