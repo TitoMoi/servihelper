@@ -58,6 +58,8 @@ import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 import { PublicThemeInterface } from "app/public-theme/model/public-theme.model";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
+import { addDays, subDays } from "date-fns";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
   selector: "app-create-update-assignment",
@@ -76,6 +78,7 @@ import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
     MatDatepickerModule,
     AutoFocusDirective,
     MatSelectModule,
+    MatTooltipModule,
     NgFor,
     MatOptionModule,
     MatIconModule,
@@ -324,6 +327,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
     this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
     this.warningIfAlreadyHasWork();
+    this.checkIfCollision();
   }
   /** (Form) batch clean principalId and assistantId, should not call other batch operations inside */
   batchCleanPrincipalAssistant() {
@@ -564,6 +568,30 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
             .some((a) => a.principal === as.id || a.assistant === as.id);
 
           as.hasWork = hasWork;
+        }
+      }
+    }
+  }
+
+  checkIfCollision() {
+    /* get the threshold of the assign type */
+    const at = this.assignTypeService.getAssignType(this.gfv("assignType"));
+    const days = at?.days;
+    if (days) {
+      for (let p of this.principals) {
+        const currentDate: Date = this.gfv("date");
+        //Get all the days before and after, its 1 based index
+        let allDays: AssignmentInterface[] = [];
+        for (var i = 1; i <= days; i++) {
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+          );
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+          );
+        }
+        if (allDays.some((a) => a.assignType === at.id && a.principal === p.id)) {
+          p.collision = true;
         }
       }
     }

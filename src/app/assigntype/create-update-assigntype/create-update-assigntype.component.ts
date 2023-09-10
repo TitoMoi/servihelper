@@ -47,6 +47,7 @@ export class CreateUpdateAssignTypeComponent {
     isPublicSpeech: [this.at ? this.at.isPublicSpeech : false],
     order: [this.at?.order, Validators.required],
     color: [this.at ? this.at.color : "#FFFFFF"],
+    days: [this.at?.days],
   });
 
   //Get an array of non repeated colors and remove falsy values

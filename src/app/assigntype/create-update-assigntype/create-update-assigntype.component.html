@@ -18,41 +18,59 @@
             />
           </mat-form-field>
         </div>
-        <div class="row justify-content-start align-items-center">
-          <div class="col-auto">
-            <mat-form-field>
-              <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
-              <input matInput type="number" formControlName="order" />
-            </mat-form-field>
-          </div>
-          <div class="col-auto">
-            <mat-label class="me-3">{{ t("ASSIGNTYPE_COLOR") }}</mat-label>
-            <input type="color" formControlName="color" />
-          </div>
-          <div class="col-auto">
-            <button
-              mat-raised-button
-              *ngIf="colors.length"
-              color="primary"
-              type="button"
-              [matTooltip]="t('BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP')"
-              (click)="showColors = !showColors"
-            >
-              {{
-                showColors
-                  ? t("BUTTON_HIDE_AVAILABLE_COLORS")
-                  : t("BUTTON_SHOW_AVAILABLE_COLORS")
-              }}
-            </button>
-          </div>
+      </div>
+      <div class="row justify-content-start align-items-center">
+        <div class="col-12 mb-2">
+          {{ t("ASSIGNTYPE_ORDER_LABEL") }}
         </div>
-        <div class="row">
-          <div class="col">
-            <div class="d-flex" *ngIf="showColors">
-              <ng-container *ngFor="let c of colors">
-                <span class="square me-1" [style]="getBgColor(c)"></span>
-              </ng-container>
-            </div>
+        <div class="col-auto">
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
+            <input matInput type="number" formControlName="order" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row justify-content-start align-items-center">
+        <div class="col-12 mb-2">
+          {{ t("ASSIGNTYPE_DAYS_LABEL") }}
+        </div>
+        <div class="col-auto">
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_TIME") }}</mat-label>
+            <input matInput type="number" formControlName="days" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row justify-content-start align-items-center mb-2">
+        <div class="col-auto">
+          <mat-label class="me-3">{{ t("ASSIGNTYPE_COLOR") }}</mat-label>
+          <input type="color" formControlName="color" />
+        </div>
+      </div>
+      <div class="row justify-content-start align-items-center mb-2">
+        <div class="col-auto">
+          <button
+            mat-raised-button
+            *ngIf="colors.length"
+            color="primary"
+            type="button"
+            [matTooltip]="t('BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP')"
+            (click)="showColors = !showColors"
+          >
+            {{
+              showColors
+                ? t("BUTTON_HIDE_AVAILABLE_COLORS")
+                : t("BUTTON_SHOW_AVAILABLE_COLORS")
+            }}
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="d-flex" *ngIf="showColors">
+            <ng-container *ngFor="let c of colors">
+              <span class="square me-1" [style]="getBgColor(c)"></span>
+            </ng-container>
           </div>
         </div>
       </div>

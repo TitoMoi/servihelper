@@ -9,4 +9,5 @@ export interface AssignTypeInterface {
   isPublicSpeech: boolean; //Marks this and only this assign type as the public speech
   order: number;
   color?: string;
+  days?: number; //the number of days that must pass before the participant can repeat this assign type
 }
