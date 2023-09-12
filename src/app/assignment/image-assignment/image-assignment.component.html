@@ -3,7 +3,8 @@
     <div class="col-12">
       <table id="assignmentTableId" class="bg-color-white" style="width: 23rem">
         <tr>
-          <th class="d-block ms-3 me-3 border-bottom">
+          <!-- Do not remove sheetTitle css class its for the pdf alignment -->
+          <th class="d-block ms-3 me-3 border-bottom fw-bold sheetTitle">
             <div *ngIf="assignment.sheetTitle; else noTitle" class="mt-1 mb-1">
               {{ (assignment.sheetTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE") }}
             </div>
@@ -91,7 +92,8 @@
           </td>
         </tr>
         <tr *ngIf="assignment.theme">
-          <td>
+          <!-- Do not remove theme css class its for the pdf alignment -->
+          <td class="theme">
             <div class="ms-3 me-3">
               {{
                 assignment.isPTheme
@@ -129,7 +131,8 @@
           </td>
         </tr>
         <tr *ngIf="footerNoteEditorHTML">
-          <td>
+          <!-- Do not remove footerNote css class its for the pdf alignment -->
+          <td class="footerNote">
             <div
               class="ms-3 me-3 mb-3 text-justify font-15"
               [innerHTML]="footerNoteEditorHTML"

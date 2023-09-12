@@ -158,6 +158,14 @@ export class ImageAssignmentComponent {
         const classList: DOMTokenList = data.cell.raw["classList"];
         if (classList.contains("fw-bold")) {
           data.cell.styles.fontStyle = "bold";
+
+          if (classList.contains("sheetTitle")) {
+            data.cell.styles.halign = "center";
+          }
+        }
+        //This is the theme body
+        if (classList.contains("theme") || classList.contains("footerNote")) {
+          data.cell.styles.fontSize = 10;
         }
         data.cell.styles.fillColor = "#FFFFFF";
       },
