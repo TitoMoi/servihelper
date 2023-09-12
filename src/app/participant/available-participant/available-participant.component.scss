@@ -3,7 +3,11 @@ table {
   width: 100%;
 }
 td {
+  font-size: 14px;
   width: auto;
+}
+th {
+  font-size: 14px;
 }
 
 @media print {

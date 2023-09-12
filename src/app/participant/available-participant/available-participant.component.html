@@ -23,8 +23,8 @@
       <tbody>
         <tr *ngFor="let p of participants">
           <td class="fw-bold bg-color-white">{{ p.name }}</td>
-          <td *ngFor="let at of assignTypes" class="bg-color-lightgray text-center">
-            {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔️" : "❌" }}
+          <td *ngFor="let at of assignTypes" class="bg-color-white text-center">
+            {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔" : "" }}
           </td>
         </tr>
       </tbody>
@@ -47,8 +47,8 @@
     <tbody>
       <tr *ngFor="let p of participants">
         <td class="fw-bold bg-color-white">{{ p.name }}</td>
-        <td *ngFor="let at of assignTypesAssistant" class="text-center bg-color-lightgray">
-          {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔️" : "❌" }}
+        <td *ngFor="let at of assignTypesAssistant" class="bg-color-white text-center">
+          {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔" : "" }}
         </td>
       </tr>
     </tbody>
