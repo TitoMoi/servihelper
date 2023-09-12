@@ -14,6 +14,9 @@ Also supports territory creation and distribution.
 
 Also supports public speech assignments.
 
+The purpose of servihelper is not to be the best app out there, but to provide a free cost for the user and free cost for the
+developer _(Servihelper has no mantainance fee)_ and also provide a very friendly user interface.
+
 ## Download links
 
 Download app section: [Download for Windows, Mac or Linux](https://github.com/TitoMoi/servihelper/releases).
