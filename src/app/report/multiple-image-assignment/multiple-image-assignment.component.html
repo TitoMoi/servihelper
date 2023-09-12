@@ -37,7 +37,7 @@
   <div class="m-2">
     {{ t("NUMBER_OF_ASSIGNMENTS") + assignmentsWithNames.length }}
   </div>
-  <div id="assignmentDiv" class="col col-xl-6 bg-color-white">
+  <div id="assignmentDiv" class="col-auto bg-color-white">
     <div class="d-flex flex-wrap align-items-start">
       <!-- this style is for the print option that doesnt support class-->
       <div
@@ -45,6 +45,7 @@
           width: 20rem;
           display: inline-block;
           vertical-align: top;
+          margin-left: 4px;
           margin-right: 4px;
           font-family: 'Noto Sans', 'Noto Sans JP', 'Noto Sans KR', 'Noto Sans SC', sans-serif;
         "
@@ -108,7 +109,7 @@
             <b *ngIf="!assignmentNoteTitle">{{ t("ASSIGN_IMAGE_FOOTER_NOTE") }}</b>
             <b *ngIf="assignmentNoteTitle">{{ assignmentNoteTitle }}</b>
           </div>
-          <div class="text-justify m-1 font-15" [innerHTML]="a.footerNote"></div
+          <div class="text-justify footerNote" [innerHTML]="a.footerNote"></div
         ></ng-container>
       </div>
     </div>

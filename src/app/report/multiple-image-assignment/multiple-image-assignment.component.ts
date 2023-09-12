@@ -21,7 +21,7 @@ import {
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { ipcRenderer } from "electron";
-import { ensureFileSync, removeSync, writeFileSync } from "fs-extra";
+import { ensureFileSync, removeSync, writeFile } from "fs-extra";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatButtonModule } from "@angular/material/button";
 import { NgIf, NgFor } from "@angular/common";
@@ -179,11 +179,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   async createAssignmentsInFolder() {
     this.assignmentsInFolderCreated = false;
     const assignmentsWithNamesBK = structuredClone(this.assignmentsWithNames);
-    const div: HTMLDivElement = document.getElementById("assignmentDiv") as HTMLDivElement;
-    div.classList.remove("col-xl-6");
-    div.classList.add("col-xl-3");
-    div.classList.remove("col");
-    div.classList.add("col-6");
     //Create a map for every name and their assignments
     const assignByNameMap = new Map<string, AssignmentInterface[]>();
     for (const a of this.assignmentsWithNames) {
@@ -213,14 +208,9 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         const blob = await this.imageToBlob();
         const ab = await blob.arrayBuffer();
         const view = new Uint8Array(ab);
-        writeFileSync(fileName, view);
+        writeFile(fileName, view);
       }
     }
-    //restore width
-    div.classList.remove("col-xl-3");
-    div.classList.add("col-xl-6");
-    div.classList.remove("col-6");
-    div.classList.add("col");
 
     //Restore assignments view
     this.assignmentsWithNames = assignmentsWithNamesBK;
