@@ -1,7 +1,7 @@
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { LastDateService } from "app/assignment/service/last-date.service";
-import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
+import { AssignTypeInterface, AssignTypes } from "app/assigntype/model/assigntype.model";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
@@ -577,6 +577,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   checkIfCollision() {
+    /* get the distance in time between some assignment types */
+    const closeOthersDays = this.configService.getConfig().closeToOthersDays;
+
     /* get the threshold of the assign type */
     const at = this.assignTypeService.getAssignType(this.gfv("assignType"));
     const days = at?.days;
@@ -596,10 +599,43 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
           );
         }
         if (allDays.some((a) => a.assignType === at.id && a.principal === p.id)) {
-          p.collision = true;
+          p.hasCollision = true;
         }
       }
     }
+    if (closeOthersDays) {
+      let currentDate: Date = this.gfv("date");
+      //If we edit an assignment, we get the string iso instead of a real date
+      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+      for (let p of this.principals) {
+        //Get all the days before and after, its 1 based index
+        let allDays: AssignmentInterface[] = [];
+        for (var i = 1; i <= closeOthersDays; i++) {
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+          );
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+          );
+        }
+        if (
+          allDays.some(
+            (a) =>
+              this.isOfTypeAssignTypes(
+                this.assignTypeService.getAssignType(this.gfv("assignType")).type
+              ) &&
+              (a.principal === p.id || a.assistant === p.id)
+          )
+        ) {
+          p.isCloseToOthers = true;
+        }
+      }
+    }
+  }
+
+  /** Check if the type is inside a group of types */
+  isOfTypeAssignTypes(type: string): type is AssignTypes {
+    return ["bibleReading", "initialCall", "returnVisit", "talk", "bibleStudy"].includes(type);
   }
 
   filterAssignmentsByRole() {
@@ -800,7 +836,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   getBorderLeftStyle(color) {
-    return `10px solid ${color ? color : "#FFF"}`;
+    return `12px solid ${color ? color : "#FFF"}`;
   }
 
   /**

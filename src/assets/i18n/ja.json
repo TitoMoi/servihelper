@@ -8,8 +8,6 @@
   "ASSIGNTYPE_DELETE_WARNING": "このアクションは不可逆的です",
   "ASSIGNTYPE_HAS_ASSISTANT": "この割り当てタイプにはアシスタントがあります",
   "ASSIGNTYPE_ORDER_LABEL": "L'ordine di aspetto di questo incarico in diverse sezioni:",
-  "ASSIGNTYPE_PUBLICSPEECH": "この課題は公開スピーチです",
-  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "「設定」セクションで公開テーマを作成できます。",
   "ASSIGNTYPE_REPEAT": "この割り当ては同じ日に繰り返すことができます",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "色",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "消去",

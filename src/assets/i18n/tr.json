@@ -8,8 +8,6 @@
   "ASSIGNTYPE_DELETE_WARNING": "Bu eylem geri döndürülemez",
   "ASSIGNTYPE_HAS_ASSISTANT": "Bu ödev türünün asistanı var",
   "ASSIGNTYPE_ORDER_LABEL": "Bu ödevin farklı bölümlerde görünüm sırası:",
-  "ASSIGNTYPE_PUBLICSPEECH": "Bu ödev halka açık konuşmadır",
-  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Herkese açık temaları Ayarlar bölümünde oluşturabilirsiniz",
   "ASSIGNTYPE_REPEAT": "Bu ödev aynı gün tekrarlanabilir",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Color",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Silmek",

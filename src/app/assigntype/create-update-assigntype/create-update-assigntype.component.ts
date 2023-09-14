@@ -13,6 +13,7 @@ import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { CommonModule } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-create-update-assign-type",
@@ -32,6 +33,7 @@ import { CommonModule } from "@angular/common";
     MatButtonModule,
     MatTooltipModule,
     RouterLink,
+    MatIconModule,
   ],
 })
 export class CreateUpdateAssignTypeComponent {

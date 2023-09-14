@@ -8,8 +8,6 @@
   "ASSIGNTYPE_DELETE_WARNING": "Esta accion es irreversible",
   "ASSIGNTYPE_HAS_ASSISTANT": "Este tipo de asignación tiene ayudante",
   "ASSIGNTYPE_ORDER_LABEL": "El orden de posición de esta tarea en diferentes secciones:",
-  "ASSIGNTYPE_PUBLICSPEECH": "Esta tarea es el discurso público",
-  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Puedes crear los temas públicos en la sección Configuración.",
   "ASSIGNTYPE_REPEAT": "Este tipo de asignación puede repetirse el mismo dia",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Color",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Eliminar",

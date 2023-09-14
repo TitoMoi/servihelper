@@ -22,7 +22,8 @@ export type ConfigOptionsType =
   | "roles"
   | "role"
   | "lastImportedDate"
-  | "lastImportedFilename";
+  | "lastImportedFilename"
+  | "closeToOthersDays";
 
 export interface WeekDaysBegin {
   name: string;
@@ -50,4 +51,5 @@ export interface ConfigInterface {
   role?: string;
   lastImportedDate: Date;
   lastImportedFilename: string;
+  closeToOthersDays: number;
 }

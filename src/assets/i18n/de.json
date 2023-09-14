@@ -8,8 +8,6 @@
   "ASSIGNTYPE_DELETE_WARNING": "Diese Aktion ist irreversibel",
   "ASSIGNTYPE_HAS_ASSISTANT": "Dieser Zuweisungstyp hat Assistent",
   "ASSIGNTYPE_ORDER_LABEL": "Die Erscheinungsreihenfolge dieser Aufgabe in verschiedenen Abschnitten:",
-  "ASSIGNTYPE_PUBLICSPEECH": "Diese Aufgabe ist die öffentliche Rede",
-  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Sie können die öffentlichen Themen im Abschnitt Einstellungen erstellen",
   "ASSIGNTYPE_REPEAT": "Dieser Zuordnungstyp kann am selben Tag wiederholt werden",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Farbe",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Löschen",

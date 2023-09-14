@@ -8,8 +8,6 @@
   "ASSIGNTYPE_DELETE_WARNING": "Cette action est irréversible",
   "ASSIGNTYPE_HAS_ASSISTANT": "Ce type d'affectation a un assistant",
   "ASSIGNTYPE_ORDER_LABEL": "L'ordre d'apparence de cette affectation sur différentes sections:",
-  "ASSIGNTYPE_PUBLICSPEECH": "Cette affectation est le discours public",
-  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "Vous pouvez créer les thèmes publics dans la section Paramètres",
   "ASSIGNTYPE_REPEAT": "Ce type d'affectation peut être répété le même jour",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Couleur",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Effacer",

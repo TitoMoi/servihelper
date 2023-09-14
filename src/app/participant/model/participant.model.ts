@@ -22,7 +22,8 @@ export interface ParticipantDynamicInterface extends ParticipantInterface {
   penultimateAssignType?: string; //Dynamic value, undefined by default, the name of the assignType
   isPrincipalLastAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment or not (assistant)
   isPrincipalPenultimateAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment or not (assistant)
-  collision?: boolean; //Dynamic value, if the participant has the same assignment before or after the required no participation time of the assignment
+  hasCollision?: boolean; //Dynamic value, if the participant has the same assignment before or after the required no participation time of the assignment
+  isCloseToOthers?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments
 }
 
 export class ParticipantModel {

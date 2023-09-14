@@ -23,6 +23,7 @@ import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import path from "path";
 import { ipcRenderer } from "electron";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
   selector: "app-config",
@@ -46,6 +47,7 @@ import { ipcRenderer } from "electron";
     MatIconModule,
     SheetTitlePipe,
     PublicThemePipe,
+    MatTooltipModule,
   ],
 })
 export class ConfigComponent implements OnDestroy {
@@ -73,6 +75,7 @@ export class ConfigComponent implements OnDestroy {
 
   // Config form
   form = this.formBuilder.group({
+    closeToOthersDays: this.currentConfig.closeToOthersDays,
     defaultFooterNoteId: this.currentConfig.defaultFooterNoteId,
     defaultReportFontSize: this.currentConfig.defaultReportFontSize,
     defaultReportDateFormat: this.currentConfig.defaultReportDateFormat,
@@ -114,6 +117,7 @@ export class ConfigComponent implements OnDestroy {
     role: this.configService.administratorKey,
     lastImportedDate: undefined,
     lastImportedFilename: "",
+    closeToOthersDays: 30,
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();

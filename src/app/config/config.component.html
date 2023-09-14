@@ -211,8 +211,27 @@
         />
       </mat-form-field>
     </mat-expansion-panel>
+    <mat-expansion-panel class="mb-2">
+      <mat-expansion-panel-header tabIndex="3">
+        <mat-panel-title>
+          <h3 class="m-3">
+            {{ t("CONFIG_ISCLOSEOTHERS_TITLE") }}
+          </h3>
+          <mat-icon svgIcon="warningtime"></mat-icon>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <h4>{{ t("CONFIG_ISCLOSEOTHERS_LABEL") }}</h4>
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          formControlName="closeToOthersDays"
+          [matTooltip]="t('CONFIG_ISCLOSEOTHERS_TOOLTIP')"
+        />
+      </mat-form-field>
+    </mat-expansion-panel>
     <mat-expansion-panel class="mb-2 hover-lightcoral">
-      <mat-expansion-panel-header tabIndex="3" class="bg-color-lightcoral">
+      <mat-expansion-panel-header tabIndex="4" class="bg-color-lightcoral">
         <mat-panel-title>
           <h3 class="m-3">
             {{ t("CONFIG_RESTART_LABEL") }}
