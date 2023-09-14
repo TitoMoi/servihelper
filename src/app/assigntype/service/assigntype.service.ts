@@ -59,23 +59,15 @@ export class AssignTypeService {
    * @returns the id of the created assign type
    */
   createAssignType(assignType: AssignTypeInterface): string {
-    if (assignType.isPublicSpeech) {
-      this.#assignTypes.forEach((at) => (at.isPublicSpeech = false));
-    }
     //Generate id for the assignType
     assignType.id = nanoid(this.configService.nanoMaxCharId);
     //trim the name
     assignType.name = assignType.name.trim();
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);
-    if (assignType.isPublicSpeech) {
-      //Update all
-      this.updateAssigTypesMaps();
-    } else {
-      //update only one
-      this.#assignTypesMap.set(assignType.id, assignType);
-      this.#assignTypesMapByName.set(assignType.name, assignType);
-    }
+    this.#assignTypesMap.set(assignType.id, assignType);
+    this.#assignTypesMapByName.set(assignType.name, assignType);
+
     //save assignTypes with the new assignType
     this.saveAssignTypesToFile();
 
@@ -117,22 +109,13 @@ export class AssignTypeService {
   updateAssignType(assignType: AssignTypeInterface): boolean {
     //update assignType
     for (let i = 0; i < this.#assignTypes.length; i++) {
-      if (assignType.isPublicSpeech) {
-        this.#assignTypes[i].isPublicSpeech = false;
-      }
       if (this.#assignTypes[i].id === assignType.id) {
         //trim name
         assignType.name = assignType.name.trim();
         this.#assignTypes[i] = assignType;
 
-        if (assignType.isPublicSpeech) {
-          //Update all
-          this.updateAssigTypesMaps();
-        } else {
-          //Update only one
-          this.#assignTypesMap.set(assignType.id, assignType);
-          this.#assignTypesMapByName.set(assignType.name, assignType);
-        }
+        this.#assignTypesMap.set(assignType.id, assignType);
+        this.#assignTypesMapByName.set(assignType.name, assignType);
       }
     }
     //save assignTypes with the updated assignType
@@ -152,12 +135,5 @@ export class AssignTypeService {
     this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
     //save assignTypes
     return this.saveAssignTypesToFile();
-  }
-
-  private updateAssigTypesMaps() {
-    for (const at of this.#assignTypes) {
-      this.#assignTypesMap.set(at.id, at);
-      this.#assignTypesMapByName.set(at.name, at);
-    }
   }
 }

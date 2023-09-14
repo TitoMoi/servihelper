@@ -7,6 +7,7 @@ import { NgIf, NgFor } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
+import { AssignTypeNamePipe } from "./pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-assign-type",
@@ -21,6 +22,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     NgIf,
     NgFor,
     MatIconModule,
+    AssignTypeNamePipe,
   ],
 })
 export class AssignTypeComponent {

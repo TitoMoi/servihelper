@@ -10,7 +10,7 @@ import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directi
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { CommonModule } from "@angular/common";
 
@@ -39,12 +39,18 @@ export class CreateUpdateAssignTypeComponent {
 
   isUpdate = this.at ? true : false;
 
+  name = this.isUpdate
+    ? this.at.name
+      ? this.at.name
+      : this.translocoService.translate(this.at.tKey)
+    : null;
+
   form = this.formBuilder.group({
     id: this.at?.id,
-    name: [this.at?.name, Validators.required],
+    name: [this.name, Validators.required],
     hasAssistant: [this.at ? this.at.hasAssistant : false],
     repeat: [this.at ? this.at.repeat : false],
-    isPublicSpeech: [this.at ? this.at.isPublicSpeech : false],
+    type: [this.at ? this.at.type : "other"],
     order: [this.at?.order, Validators.required],
     color: [this.at ? this.at.color : "#FFFFFF"],
     days: [this.at?.days],
@@ -66,6 +72,7 @@ export class CreateUpdateAssignTypeComponent {
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
     private router: Router,
+    private translocoService: TranslocoService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -74,19 +81,22 @@ export class CreateUpdateAssignTypeComponent {
   }
 
   onSubmit(): void {
-    if (this.isUpdate) {
-      this.assignTypeService.updateAssignType({
-        ...this.form.value,
-      });
-    } else {
-      //save the assign type
-      const id = this.assignTypeService.createAssignType({
-        ...this.form.value,
-      });
+    if (this.form.dirty) {
+      if (this.isUpdate) {
+        this.assignTypeService.updateAssignType({
+          ...this.form.value,
+        });
+      } else {
+        //save the assign type
+        const id = this.assignTypeService.createAssignType({
+          ...this.form.value,
+        });
 
-      //Add the assign type reference for all the participants
-      this.participantService.addAssignType(id, this.form.get("hasAssistant").value);
+        //Add the assign type reference for all the participants
+        this.participantService.addAssignType(id, this.form.get("hasAssistant").value);
+      }
     }
+
     const route = this.isUpdate ? "../.." : "..";
 
     //navigate to parent

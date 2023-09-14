@@ -30,7 +30,7 @@
             [style.backgroundColor]="at.color"
           ></div>
           <div class="grid-item d-flex align-items-center">
-            {{ at.name }}
+            {{ at | assignTypeNamePipe }}
           </div>
           <div class="grid-item d-flex align-items-center">
             {{ at.order }}
@@ -45,6 +45,7 @@
           </div>
           <div class="grid-item d-flex align-items-center">
             <mat-icon
+              *ngIf="at.type === 'other'"
               [routerLink]="['delete', at.id]"
               routerLinkActive="active"
               svgIcon="garbage"

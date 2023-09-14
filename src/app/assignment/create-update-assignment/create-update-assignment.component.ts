@@ -374,7 +374,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
         .valueChanges.pipe(filter((at) => at))
         .subscribe((assignTypeId: string) => {
           //is public speech
-          const isPSpeech = this.assignTypeService.getAssignType(assignTypeId).isPublicSpeech;
+          const isPSpeech =
+            this.assignTypeService.getAssignType(assignTypeId).type === "publicSpeech";
           isPSpeech
             ? this.form.get("isPTheme").setValue(true)
             : this.form.get("isPTheme").setValue(false);

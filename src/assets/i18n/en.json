@@ -8,8 +8,6 @@
   "ASSIGNTYPE_DELETE_WARNING": "This action is irreversible",
   "ASSIGNTYPE_HAS_ASSISTANT": "This assignment type has assistant",
   "ASSIGNTYPE_ORDER_LABEL": "The appearance order of this assignment on diferent sections:",
-  "ASSIGNTYPE_PUBLICSPEECH": "This assignment is the public speech",
-  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "You can create the public themes in the Settings section",
   "ASSIGNTYPE_REPEAT": "This assignment type can be repeated the same day",
   "ASSIGNTYPE_TABLE_HEADER_COLOR": "Color",
   "ASSIGNTYPE_TABLE_HEADER_DELETE": "Delete",
@@ -330,5 +328,18 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "ASSIGNTYPES_PUBLICSPEECH": "Public Speech",
+  "ASSIGNTYPES_TREASURES": "Treasures",
+  "ASSIGNTYPES_SPIRITUALGEMS": "Spiritual Gems",
+  "ASSIGNTYPES_BIBLEREADING": "Bible Reading",
+  "ASSIGNTYPES_INITIALCALL": "Initial Call",
+  "ASSIGNTYPES_TALK": "Talk",
+  "ASSIGNTYPES_RETURNVISIT": "Return Visit",
+  "ASSIGNTYPES_BIBLESTUDY": "Bible Study",
+  "ASSIGNTYPES_LIVINGASCHRISTIANS": "Living as Christians",
+  "ASSIGNTYPES_CONGREGATIONBIBLESTUDY": "Congregation Bible Study",
+
+  "ASSIGNTYPE_PUBLICSPEECH": "DELETE X",
+  "ASSIGNTYPE_PUBLICSPEECH_TOOLTIP": "DELETE X"
 }
