@@ -1,6 +1,6 @@
 {
   "ASSIGNMENT_COLLISION_TOOLTIP": "Not recommended because the participant has the same assignment type before or after the current date and within the threshold for this assignment type",
-  "ASSIGNTYPE_COLOR": "The color for this assignment type",
+  "ASSIGNTYPE_COLOR": "The color for this assignment type:",
   "ASSIGNTYPE_CREATE_BUTTON": "Create assignment type",
   "ASSIGNTYPE_CREATE_TITLE": "Create assignment type",
   "ASSIGNTYPE_DAYS_LABEL": "The number of days that must pass before the same participant can do again this assignment type (only as principal):",
@@ -342,5 +342,6 @@
   "ASSIGNMENT_ISCLOSEOTHERS_TOOLTIP": "Not recommended because the participant has another assignment of type bible reading or from apply yourself to the field ministry section close to this date, you can configure this threshold in the config section",
   "CONFIG_ISCLOSEOTHERS_TITLE": "Distance in time between some kind of assignments",
   "CONFIG_ISCLOSEOTHERS_LABEL": "Distance in days",
-  "CONFIG_ISCLOSEOTHERS_TOOLTIP": "Give the time of proximity in days between assignments from bible reading or apply yourself to the field ministry section"
+  "CONFIG_ISCLOSEOTHERS_TOOLTIP": "Give the time of proximity in days between assignments from bible reading or apply yourself to the field ministry section",
+  "ASSIGNTYPE_TIME_ICON": "This icon will appear when the distance in time is not satisfied for this assignment type"
 }

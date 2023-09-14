@@ -35,11 +35,17 @@
           {{ t("ASSIGNTYPE_DAYS_LABEL") }}
         </div>
         <div class="col-auto">
-          <mat-icon svgIcon="time"></mat-icon>
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_TIME") }}</mat-label>
-            <input matInput type="number" formControlName="days" />
-          </mat-form-field>
+          <div class="d-flex align-items-center">
+            <mat-icon
+              svgIcon="time"
+              class="me-2"
+              [matTooltip]="t('ASSIGNTYPE_TIME_ICON')"
+            ></mat-icon>
+            <mat-form-field>
+              <mat-label>{{ t("PLACEHOLDER_TIME") }}</mat-label>
+              <input matInput type="number" formControlName="days" />
+            </mat-form-field>
+          </div>
         </div>
       </div>
       <div class="row justify-content-start align-items-center mb-2">
