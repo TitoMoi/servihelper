@@ -30,6 +30,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { NgIf, NgFor, NgClass } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-assignment",
@@ -50,6 +51,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     NgClass,
     TranslocoLocaleModule,
     AssignTypePipe,
+    AssignTypeNamePipe,
     RoomPipe,
     ParticipantPipe,
   ],

@@ -114,7 +114,7 @@
             class="grid-item d-flex align-items-center ps-2"
             [style.borderLeft]="getBorderLeftColor(assignType.color)"
           >
-            {{ assignType.name }}
+            {{ assignType | assignTypeNamePipe }}
           </div>
           <div class="grid-item d-flex align-items-center">
             {{ (a.room | roomPipe).name }}

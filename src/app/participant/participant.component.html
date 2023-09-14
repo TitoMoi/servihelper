@@ -27,6 +27,7 @@
       >{{ t("PARTICIPANT_SHOW_EXTERNAL") }}</mat-checkbox
     >
     <mat-icon
+      *ngIf="participants.length"
       class="mb-2"
       svgIcon="assigntypeavailable"
       routerLink="assigntypeavailable"

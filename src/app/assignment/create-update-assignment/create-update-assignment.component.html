@@ -103,7 +103,7 @@
                   [value]="assignType.id"
                   [style.borderLeft]="getBorderLeftStyle(assignType.color)"
                 >
-                  {{ assignType.name }}
+                  {{ assignType | assignTypeNamePipe }}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="noAvailableAssignTypesByRole">{{

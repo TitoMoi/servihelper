@@ -38,6 +38,7 @@ import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-create-update-participant",
@@ -64,6 +65,7 @@ import { MatOptionModule } from "@angular/material/core";
     RouterLink,
     TranslocoLocaleModule,
     AssignTypePipe,
+    AssignTypeNamePipe,
     RoomPipe,
   ],
 })
