@@ -88,6 +88,7 @@ export class ImageAssignmentComponent {
     private pdfService: PdfService,
     private exportService: ExportService,
     private participantService: ParticipantService,
+    private assignTypeNamePipe: AssignTypeNamePipe,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -112,7 +113,7 @@ export class ImageAssignmentComponent {
     const dateNextDay = new Date(this.assignment.date);
     dateNextDay.setDate(dateNextDay.getDate() + 1); //Add +1 to be full day event
     let url = `https://www.google.com/calendar/render?action=TEMPLATE
-    &text=${encodeURI(assignType.name)}
+    &text=${encodeURI(this.assignTypeNamePipe.transform(assignType))}
     &details=${encodeURI(this.assignment.theme)}
     &dates=${encodeURI(
       date.toISOString().replace(/-/g, "").replace(/:/g, "").replace(/\./g, "") +

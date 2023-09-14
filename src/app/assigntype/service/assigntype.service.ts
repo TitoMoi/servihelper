@@ -15,8 +15,6 @@ export class AssignTypeService {
   #assignTypes: AssignTypeInterface[] = undefined;
   //The map of assignTypes for look up of by id
   #assignTypesMap: Map<string, AssignTypeInterface> = new Map();
-  //The map of assignTypes for look up of by name
-  #assignTypesMapByName: Map<string, AssignTypeInterface> = new Map();
 
   constructor(private configService: ConfigService) {}
 
@@ -32,9 +30,6 @@ export class AssignTypeService {
     this.#assignTypes = readJSONSync(this.configService.assignTypesPath);
     for (const assignType of this.#assignTypes) {
       this.#assignTypesMap.set(assignType.id, assignType);
-    }
-    for (const assignType of this.#assignTypes) {
-      this.#assignTypesMapByName.set(assignType.name, assignType);
     }
     return deepClone ? structuredClone(this.#assignTypes) : this.#assignTypes;
   }
@@ -66,7 +61,6 @@ export class AssignTypeService {
     //add assignType to assignTypes
     this.#assignTypes.push(assignType);
     this.#assignTypesMap.set(assignType.id, assignType);
-    this.#assignTypesMapByName.set(assignType.name, assignType);
 
     //save assignTypes with the new assignType
     this.saveAssignTypesToFile();
@@ -94,15 +88,6 @@ export class AssignTypeService {
 
   /**
    *
-   * @param assignTypeName the name of the assignType to look for
-   * @returns the assignType
-   */
-  getAssignTypeByName(assignTypeName: string): AssignTypeInterface {
-    return this.#assignTypesMapByName.get(assignTypeName);
-  }
-
-  /**
-   *
    * @param assignType the assignType to update
    * @returns true if assignType is updated and saved false otherwise
    */
@@ -115,7 +100,6 @@ export class AssignTypeService {
         this.#assignTypes[i] = assignType;
 
         this.#assignTypesMap.set(assignType.id, assignType);
-        this.#assignTypesMapByName.set(assignType.name, assignType);
       }
     }
     //save assignTypes with the updated assignType
@@ -129,9 +113,7 @@ export class AssignTypeService {
    */
   deleteAssignType(id: string): boolean {
     //delete assignType
-    const assignType = this.getAssignType(id);
     this.#assignTypesMap.delete(id);
-    this.#assignTypesMapByName.delete(assignType.name);
     this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
     //save assignTypes
     return this.saveAssignTypesToFile();

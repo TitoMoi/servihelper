@@ -6,6 +6,7 @@ import { Injectable } from "@angular/core";
 import { TranslocoLocaleService } from "@ngneat/transloco-locale";
 
 import { AssignmentGroupInterface } from "../assignment/model/assignment.model";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Injectable({
   providedIn: "root",
@@ -15,7 +16,8 @@ export class ExcelService {
   constructor(
     private configService: ConfigService,
     private translocoLocaleService: TranslocoLocaleService,
-    private assignTypeService: AssignTypeService
+    private assignTypeService: AssignTypeService,
+    private assignTypeNamePipe: AssignTypeNamePipe
   ) {}
 
   mergeCells(from: string, to: string) {
@@ -195,7 +197,7 @@ export class ExcelService {
           },
         };
 
-        cell.value = a.theme ? a.theme : a.assignType.name;
+        cell.value = a.theme ? a.theme : this.assignTypeNamePipe.transform(a.assignType);
 
         //participants
         const cell2 = row.getCell(2);
@@ -238,7 +240,7 @@ export class ExcelService {
       ag.assignments.forEach((a) => {
         // eslint-disable-next-line @typescript-eslint/no-shadow
         const cell = row.getCell(i);
-        cell.value = a.assignType.name;
+        cell.value = this.assignTypeNamePipe.transform(a.assignType);
 
         const borderColor =
           this.assignTypeService.getAssignType(a.assignType.id).color?.substring(1) ||

@@ -1,10 +1,14 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Injectable, Pipe, PipeTransform } from "@angular/core";
 import { AssignTypeInterface } from "../model/assigntype.model";
 import { TranslocoService } from "@ngneat/transloco";
 
+//We need the pipe becomes injectable for excel.service.ts
 @Pipe({
   name: "assignTypeNamePipe",
   standalone: true,
+})
+@Injectable({
+  providedIn: "root",
 })
 export class AssignTypeNamePipe implements PipeTransform {
   constructor(private translocoService: TranslocoService) {}

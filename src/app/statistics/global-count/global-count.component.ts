@@ -51,6 +51,7 @@ import { CommonModule } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { ExportService } from "app/services/export.service";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-global-count",
@@ -87,6 +88,7 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
     private translocoService: TranslocoService,
     private sortService: SortService,
     private exportService: ExportService,
+    private assignTypeNamePipe: AssignTypeNamePipe,
     private cdr: ChangeDetectorRef
   ) {
     this.locales = {
@@ -148,7 +150,7 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
           assignment.principal === participant.id ? true : false;
         //Search the assignmentType and inject
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
-        participant.lastAssignType = assignType.name;
+        participant.lastAssignType = this.assignTypeNamePipe.transform(assignType);
       }
     }
 
@@ -165,7 +167,7 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
         participant.isPrincipalPenultimateAssignment =
           assignment.principal === participant.id ? true : false;
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
-        participant.penultimateAssignType = assignType.name;
+        participant.penultimateAssignType = this.assignTypeNamePipe.transform(assignType);
       }
     }
 

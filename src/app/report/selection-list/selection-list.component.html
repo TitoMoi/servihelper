@@ -67,7 +67,11 @@
           [style.fontSize]="defaultReportFontSize"
         >
           <div>
-            {{ assignment.theme ? assignment.theme : assignment.assignType.name }}
+            {{
+              assignment.theme
+                ? assignment.theme
+                : (assignment.assignType | assignTypeNamePipe)
+            }}
           </div>
         </td>
         <td class="ps-1" [style.fontSize]="defaultReportFontSize">

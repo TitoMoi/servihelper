@@ -30,7 +30,7 @@
           <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE") }}</mat-label>
           <mat-select #assignTypesSelect formControlName="assignTypes" multiple>
             <mat-option *ngFor="let assignType of assignTypes" [value]="assignType.id">{{
-              assignType.name
+              assignType | assignTypeNamePipe
             }}</mat-option>
           </mat-select>
         </mat-form-field>

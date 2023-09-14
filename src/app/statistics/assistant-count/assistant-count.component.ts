@@ -51,6 +51,7 @@ import { NgFor } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { ExportService } from "app/services/export.service";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-assistant-count",
@@ -87,7 +88,8 @@ export class AssistantCountComponent implements OnChanges, OnDestroy {
     private translocoService: TranslocoService,
     private sortService: SortService,
     private exportService: ExportService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private assignTypeNamePipe: AssignTypeNamePipe
   ) {
     this.locales = {
       es, //Spanish
@@ -149,7 +151,7 @@ export class AssistantCountComponent implements OnChanges, OnDestroy {
       if (assignment) {
         //Search the assignmentType and inject
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
-        participant.lastAssignType = assignType.name;
+        participant.lastAssignType = this.assignTypeNamePipe.transform(assignType);
       }
     }
 
@@ -164,7 +166,7 @@ export class AssistantCountComponent implements OnChanges, OnDestroy {
       if (assignment) {
         //Search the assignmentType and inject
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
-        participant.penultimateAssignType = assignType.name;
+        participant.penultimateAssignType = this.assignTypeNamePipe.transform(assignType);
       }
     }
 

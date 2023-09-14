@@ -30,6 +30,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
 import { ExportService } from "app/services/export.service";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-selection-list",
@@ -45,6 +46,7 @@ import { PublicThemeService } from "app/public-theme/service/public-theme.servic
     NgFor,
     TranslocoLocaleModule,
     AssignTypePipe,
+    AssignTypeNamePipe,
   ],
 })
 export class SelectionListComponent implements OnChanges {

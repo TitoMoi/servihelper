@@ -32,6 +32,7 @@ import { NgFor, NgIf } from "@angular/common";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { SortService } from "app/services/sort.service";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-report-selector",
@@ -52,6 +53,7 @@ import { SortService } from "app/services/sort.service";
     SelectionListComponent,
     SelectionListHorComponent,
     MultipleImageAssignmentComponent,
+    AssignTypeNamePipe,
   ],
 })
 export class ReportSelectorComponent implements OnInit, AfterViewInit {
