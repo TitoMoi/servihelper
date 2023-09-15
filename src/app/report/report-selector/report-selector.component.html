@@ -20,7 +20,7 @@
           <mat-label>{{ t("ASSIGN_SELECTION_ROOMS_SELECT_TITLE") }}</mat-label>
           <mat-select #roomsSelect formControlName="rooms" multiple>
             <mat-option *ngFor="let room of rooms" [value]="room.id">{{
-              room.name
+              room | roomNamePipe
             }}</mat-option>
           </mat-select>
         </mat-form-field>

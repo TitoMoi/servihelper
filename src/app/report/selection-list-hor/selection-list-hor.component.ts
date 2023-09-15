@@ -32,6 +32,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { ExportService } from "app/services/export.service";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
   selector: "app-selection-list-hor",
@@ -76,6 +77,7 @@ export class SelectionListHorComponent implements OnChanges {
     private publicThemeService: PublicThemeService,
     private pdfService: PdfService,
     private exportService: ExportService,
+    private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
@@ -157,14 +159,19 @@ export class SelectionListHorComponent implements OnChanges {
       }
 
       if (!assignGroup.roomName)
-        assignGroup.roomName = this.roomService.getRoom(assignment.room).name;
+        assignGroup.roomName = this.roomNamePipe.transform(
+          this.roomService.getRoom(assignment.room)
+        );
 
-      if (assignGroup.roomName !== this.roomService.getRoom(assignment.room).name) {
+      if (
+        assignGroup.roomName !==
+        this.roomNamePipe.transform(this.roomService.getRoom(assignment.room))
+      ) {
         //save and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
         assignGroup = {
           date: assignment.date,
-          roomName: this.roomService.getRoom(assignment.room).name,
+          roomName: this.roomNamePipe.transform(this.roomService.getRoom(assignment.room)),
           assignments: [],
         };
       }

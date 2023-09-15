@@ -34,6 +34,7 @@ import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { MatChipsModule } from "@angular/material/chips";
 import { PdfService } from "app/services/pdf.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
   selector: "app-multiple-image-assignment",
@@ -90,6 +91,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private publicThemeService: PublicThemeService,
     private pdfService: PdfService,
     private assignTypeNamePipe: AssignTypeNamePipe,
+    private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -131,7 +133,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         sheetTitle: a.sheetTitle,
         principal: this.participantService.getParticipant(a.principal).name,
         assistant: this.participantService.getParticipant(a.assistant)?.name,
-        room: this.roomService.getRoom(a.room).name,
+        room: this.roomNamePipe.transform(this.roomService.getRoom(a.room)),
         assignType: this.assignTypeNamePipe.transform(
           this.assignTypeService.getAssignType(a.assignType)
         ),

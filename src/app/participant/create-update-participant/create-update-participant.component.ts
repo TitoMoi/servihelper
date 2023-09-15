@@ -39,6 +39,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
   selector: "app-create-update-participant",
@@ -67,6 +68,7 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
     AssignTypePipe,
     AssignTypeNamePipe,
     RoomPipe,
+    RoomNamePipe,
   ],
 })
 export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {

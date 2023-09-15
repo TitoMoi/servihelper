@@ -61,6 +61,7 @@ import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { addDays, parseISO, subDays } from "date-fns";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
   selector: "app-create-update-assignment",
@@ -89,6 +90,7 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
     ParticipantPipe,
     PublicThemePipe,
     AssignTypeNamePipe,
+    RoomNamePipe,
   ],
 })
 export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {

@@ -15,6 +15,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { TranslocoLocaleService } from "@ngneat/transloco-locale";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { RoomService } from "app/room/service/room.service";
 
 export type pdfFileNames = "S89S";
 @Injectable({
@@ -41,7 +42,8 @@ export class PdfService {
     private translocoService: TranslocoService,
     private translocoLocaleService: TranslocoLocaleService,
     private participantService: ParticipantService,
-    private assignTypeService: AssignTypeService
+    private assignTypeService: AssignTypeService,
+    private roomService: RoomService
   ) {}
 
   registerOnLangChange() {
@@ -151,6 +153,10 @@ export class PdfService {
       const checkOtherField = form.getCheckBox("checkOther");
       const checkOtherTextField = form.getTextField("checkOtherText");
 
+      const checkMainHall = form.getCheckBox("checkMainHall");
+      const checkAuxiliaryHall1 = form.getCheckBox("checkAuxiliaryHall1");
+      const checkAuxiliaryHall2 = form.getCheckBox("checkAuxiliaryHall2");
+
       //Assign fields
       nameField.setText(this.participantService.getParticipant(assignment.principal).name);
       if (assignment.assistant) {
@@ -186,6 +192,18 @@ export class PdfService {
       if (type === "other") {
         checkOtherField.check();
         checkOtherTextField.setText(assignment.theme);
+      }
+
+      const roomType = this.roomService.getRoom(assignment.room).type;
+
+      if (roomType === "mainHall") {
+        checkMainHall.check();
+      }
+      if (roomType === "auxiliaryRoom1") {
+        checkAuxiliaryHall1.check();
+      }
+      if (roomType === "auxiliaryRoom2") {
+        checkAuxiliaryHall2.check();
       }
 
       return await pdfDoc.save();

@@ -117,7 +117,7 @@
             {{ assignType | assignTypeNamePipe }}
           </div>
           <div class="grid-item d-flex align-items-center">
-            {{ (a.room | roomPipe).name }}
+            {{ a.room | roomPipe | roomNamePipe }}
           </div>
 
           <div class="grid-item d-flex align-items-center">

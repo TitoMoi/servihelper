@@ -7,6 +7,7 @@ import { NgIf, NgFor } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
+import { RoomNamePipe } from "./pipe/room-name.pipe";
 
 @Component({
   selector: "app-room",
@@ -21,6 +22,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     NgIf,
     NgFor,
     MatIconModule,
+    RoomNamePipe,
   ],
 })
 export class RoomComponent implements OnInit {

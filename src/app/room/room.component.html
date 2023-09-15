@@ -25,7 +25,7 @@
       <ng-container *ngFor="let r of rooms">
         <div class="grid-row">
           <div class="grid-item d-flex align-items-center">
-            {{ r.name }}
+            {{ r | roomNamePipe }}
           </div>
           <div class="grid-item d-flex align-items-center">
             {{ r.order }}
@@ -40,6 +40,7 @@
           </div>
           <div class="grid-item d-flex align-items-center">
             <mat-icon
+              *ngIf="r.type === 'other'"
               [routerLink]="['delete', r.id]"
               routerLinkActive="active"
               svgIcon="garbage"

@@ -9,7 +9,7 @@ import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directi
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 
 @Component({
   selector: "app-create-update-room",
@@ -33,9 +33,15 @@ export class CreateUpdateRoomComponent {
 
   isUpdate = this.r ? true : false;
 
+  name = this.isUpdate
+    ? this.r.name
+      ? this.r.name
+      : this.translocoService.translate(this.r.tKey)
+    : null;
+
   form = this.formBuilder.group({
     id: this.r?.id,
-    name: [this.r?.name, Validators.required],
+    name: [this.name, Validators.required],
     order: [this.r?.order, Validators.required],
   });
 
@@ -44,6 +50,7 @@ export class CreateUpdateRoomComponent {
     private roomService: RoomService,
     private participantService: ParticipantService,
     private router: Router,
+    private translocoService: TranslocoService,
     private activatedRoute: ActivatedRoute
   ) {}
 

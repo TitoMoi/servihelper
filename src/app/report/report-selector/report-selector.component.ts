@@ -33,6 +33,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { SortService } from "app/services/sort.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
   selector: "app-report-selector",
@@ -54,6 +55,7 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
     SelectionListHorComponent,
     MultipleImageAssignmentComponent,
     AssignTypeNamePipe,
+    RoomNamePipe,
   ],
 })
 export class ReportSelectorComponent implements OnInit, AfterViewInit {

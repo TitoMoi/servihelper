@@ -85,7 +85,7 @@
                   *ngFor="let room of rooms; trackBy: trackByIdRoomFn"
                   [value]="room.id"
                 >
-                  {{ room.name }}
+                  {{ room | roomNamePipe }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

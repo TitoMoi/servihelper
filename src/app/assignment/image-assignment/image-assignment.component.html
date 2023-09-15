@@ -117,7 +117,7 @@
         <tr>
           <td>
             <div [ngClass]="{ 'mb-3': !footerNoteEditorHTML }" class="ms-3 me-3">
-              {{ (assignment.room | roomPipe).name }}
+              {{ assignment.room | roomPipe | roomNamePipe }}
             </div>
           </td>
         </tr>

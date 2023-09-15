@@ -29,6 +29,7 @@ import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { MatChipsModule } from "@angular/material/chips";
 import { SharedService } from "app/services/shared.service";
+import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
   selector: "app-image-assignment",
@@ -51,6 +52,7 @@ import { SharedService } from "app/services/shared.service";
     MatTooltipModule,
     PublicThemePipe,
     MatChipsModule,
+    RoomNamePipe,
   ],
 })
 export class ImageAssignmentComponent {

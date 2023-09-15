@@ -350,5 +350,9 @@
   "CONFIG_ISCLOSEOTHERS_PRAYER_LABEL": "Distance in days between {{ASSIGNTYPES_INITIALPRAYER}}, {{ASSIGNTYPES_ENDINGPRAYER}}",
   "CONFIG_ISCLOSEOTHERS_PRAYER_TOOLTIP": "Give the time of proximity in days between {{ASSIGNTYPES_INITIALPRAYER}}, {{ASSIGNTYPES_ENDINGPRAYER}}",
 
-  "ASSIGNTYPE_TIME_ICON": "This icon will appear when the distance in time for the participant is not satisfied for this assignment type"
+  "ASSIGNTYPE_TIME_ICON": "This icon will appear when the distance in time for the participant is not satisfied for this assignment type",
+
+  "ROOMTYPES_MAINHALL": "Main hall",
+  "ROOMTYPES_AUXILIARYROOM1": "Auxiliary room 1",
+  "ROOMTYPES_AUXILIARYROOM2": "Auxiliary room 2"
 }

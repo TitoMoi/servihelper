@@ -1,6 +1,8 @@
 export interface RoomInterface {
   id: string;
   name: string;
+  tKey: string;
+  type: RoomTypes;
   order: number;
 }
 export interface RoomAvailableInterface {
@@ -13,3 +15,5 @@ export interface RoomTableInterface {
   name: string;
   order: number;
 }
+
+export type RoomTypes = "mainHall" | "auxiliaryRoom1" | "auxiliaryRoom2" | "other";

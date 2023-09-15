@@ -379,5 +379,8 @@
   "CONFIG_ISCLOSEOTHERS_PRAYER_LABEL": "Distancia en días entre {{ASSIGNTYPES_INITIALPRAYER}}, {{ASSIGNTYPES_ENDINGPRAYER}}",
   "CONFIG_ISCLOSEOTHERS_PRAYER_TOOLTIP": "Introduce el tiempo en días que debe pasar entre {{ASSIGNTYPES_INITIALPRAYER}}, {{ASSIGNTYPES_ENDINGPRAYER}}",
 
-  "ASSIGNTYPE_TIME_ICON": "Este icono aparece cuando la distancia en tiempo para esta misma asignación no se cumple para el mismo participante"
+  "ASSIGNTYPE_TIME_ICON": "Este icono aparece cuando la distancia en tiempo para esta misma asignación no se cumple para el mismo participante",
+  "ROOMTYPES_MAINHALL": "Sala principal",
+  "ROOMTYPES_AUXILIARYROOM1": "Sala auxiliar núm. 1",
+  "ROOMTYPES_AUXILIARYROOM2": "Sala auxiliar núm. 2"
 }

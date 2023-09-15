@@ -61,7 +61,7 @@
                   <ng-container *ngIf="r as participantRoom">
                     <div class="col-auto" [formGroupName]="i">
                       <mat-checkbox color="primary" formControlName="available">{{
-                        (participantRoom.roomId | roomPipe).name
+                        participantRoom.roomId | roomPipe | roomNamePipe
                       }}</mat-checkbox>
                     </div>
                   </ng-container>
