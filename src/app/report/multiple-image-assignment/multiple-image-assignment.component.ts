@@ -33,7 +33,6 @@ import { ExportService } from "app/services/export.service";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { MatChipsModule } from "@angular/material/chips";
 import { PdfService } from "app/services/pdf.service";
-import { SharedService } from "app/services/shared.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
@@ -89,7 +88,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private configService: ConfigService,
     private exportService: ExportService,
     private publicThemeService: PublicThemeService,
-    private sharedService: SharedService,
     private pdfService: PdfService,
     private assignTypeNamePipe: AssignTypeNamePipe,
     private cdr: ChangeDetectorRef
@@ -232,10 +230,28 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     //Clean directory "assignments" first
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
-    for (const a of this.#assignments) {
-      const pdfBytes = await this.pdfService.toPdfS89S(a);
-      this.sharedService.saveUInt8ArrayAsPdfFile(pdfBytes, this.sharedService.getFilename(a));
+    for (const [index, a] of this.#assignments.entries()) {
+      if (this.pdfService.isAllowedTypeForS89S(a)) {
+        const pdfBytes = await this.pdfService.toPdfS89S(a);
+        const participantName = this.participantService.getParticipant(a.principal).name;
+        const assignTypeName = this.assignTypeNamePipe.transform(
+          this.assignTypeService.getAssignType(a.assignType)
+        );
+        //Ensure the filename is valid for the system
+        const fileNamePath = filenamifyPath(
+          path.join(
+            this.homeDir,
+            "assignments",
+            participantName,
+            index + "-" + assignTypeName + ".pdf"
+          )
+        );
+        ensureFileSync(fileNamePath);
+        writeFile(fileNamePath, pdfBytes);
+      }
     }
+    this.assignmentsInFolderCreated = true;
+    this.cdr.detectChanges();
   }
 
   openAssignmentsFolder() {
