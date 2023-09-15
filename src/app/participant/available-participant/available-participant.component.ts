@@ -54,9 +54,7 @@ export class AvailableParticipantComponent {
     private configService: ConfigService,
     private cdr: ChangeDetectorRef,
     private exportService: ExportService
-  ) {
-    this.participants.forEach((p) => p.assignTypes);
-  }
+  ) {}
 
   checkIncludesAssignTypeAsPrincipal(
     assignTypes: ParticipantAssignTypeInterface[],

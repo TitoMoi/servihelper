@@ -145,7 +145,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
 
   setFormRooms() {
     //Populate control with rooms
-    this.p.rooms.forEach((r: ParticipantRoomInterface) => {
+    for (const r of this.p.rooms) {
       const roomGroup = this.formBuilder.group({
         //ParticipantRoomInterface
         roomId: [r.roomId, Validators.required],
@@ -155,12 +155,12 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
       const fa = this.form.get("rooms") as FormArray;
 
       fa.push(roomGroup);
-    });
+    }
   }
 
   setFormAssignTypes() {
-    //Populate control with rooms
-    this.p.assignTypes.forEach((at: ParticipantAssignTypeInterface) => {
+    //Populate control with assign types
+    for (const at of this.p.assignTypes) {
       const assignType = this.formBuilder.group({
         //ParticipantAssignTypesInterface
         assignTypeId: [at.assignTypeId, Validators.required],
@@ -170,7 +170,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
       //Add assignType to the form
       const fa = this.form.get("assignTypes") as FormArray;
       fa.push(assignType);
-    });
+    }
   }
 
   addAssignTypes() {
@@ -202,7 +202,9 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     //reset
     this.form.controls.rooms = this.formBuilder.array<ParticipantRoomInterface>([]);
     //Populate control with rooms
-    this.rooms.forEach((r) => this.addRoom(r));
+    for (const r of this.rooms) {
+      this.addRoom(r);
+    }
   }
 
   addRoom(r: RoomInterface) {

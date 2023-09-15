@@ -11,7 +11,9 @@ export function setCountById(
   participantList: ParticipantDynamicInterface[]
 ): void {
   //reset "count" to 0
-  participantList.forEach((participant) => (participant.count = 0));
+  for (const p of participantList) {
+    p.count = 0;
+  }
 
   //Apply count
   for (const assignment of assignmentList) {
