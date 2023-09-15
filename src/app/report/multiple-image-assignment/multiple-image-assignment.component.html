@@ -22,6 +22,10 @@
         [matTooltip]="t('ICON_FOLDER')"
         (click)="createAssignmentsInFolder()"
       ></mat-icon>
+      <mat-chip (click)="toPdfS89S()">
+        <mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
+        S89S
+      </mat-chip>
       <button
         *ngIf="assignmentsInFolderCreated"
         mat-raised-button

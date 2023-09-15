@@ -357,5 +357,27 @@
   "ro": "Rumano",
   "ru": "Ruso",
   "tr": "Turco",
-  "zhCN": "Chino"
+  "zhCN": "Chino",
+  "ASSIGNTYPES_PUBLICSPEECH": "Discurso público",
+  "ASSIGNTYPES_INITIALPRAYER": "Oración inicial",
+  "ASSIGNTYPES_ENDINGPRAYER": "Oración final",
+  "ASSIGNTYPES_TREASURES": "Tesoros",
+  "ASSIGNTYPES_SPIRITUALGEMS": "Perlas escondidas",
+  "ASSIGNTYPES_BIBLEREADING": "Lectura de la Biblia",
+  "ASSIGNTYPES_INITIALCALL": "Primera conversación",
+  "ASSIGNTYPES_TALK": "Discurso",
+  "ASSIGNTYPES_RETURNVISIT": "Revisita",
+  "ASSIGNTYPES_BIBLESTUDY": "Curso bíblico",
+  "ASSIGNTYPES_LIVINGASCHRISTIANS": "Nuestra vida cristiana",
+  "ASSIGNTYPES_CONGREGATIONBIBLESTUDY": "Estudio bíblico de la congregación",
+  "ASSIGNMENT_ISCLOSEOTHERS_TOOLTIP": "No recomendado porque el participante tiene otra assignación de tipo {{ASSIGNTYPES_BIBLEREADING}} o {{ASSIGNTYPES_INITIALCALL}} o {{ASSIGNTYPES_RETURNVISIT}} o {{ASSIGNTYPES_BIBLESTUDY}} o {{ASSIGNTYPES_TALK}} en una fecha cercana",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distancia en tiempo entre algunos tipos de asignaciones",
+  "CONFIG_ISCLOSEOTHERS_LABEL": "Distancia en días entre {{ASSIGNTYPES_BIBLEREADING}}, {{ASSIGNTYPES_INITIALCALL}}, {{ASSIGNTYPES_RETURNVISIT}}, {{ASSIGNTYPES_BIBLESTUDY}}, {{ASSIGNTYPES_TALK}}",
+  "CONFIG_ISCLOSEOTHERS_TOOLTIP": "Introduce el tiempo en días que debe pasar entre {{ASSIGNTYPES_BIBLEREADING}}, {{ASSIGNTYPES_INITIALCALL}}, {{ASSIGNTYPES_RETURNVISIT}}, {{ASSIGNTYPES_BIBLESTUDY}}, {{ASSIGNTYPES_TALK}}",
+
+  "ASSIGNMENT_ISCLOSEOTHERS_PRAYER_TOOLTIP": "No recomendado porque el participante tiene otra assignación de tipo {{ASSIGNTYPES_INITIALPRAYER}} or {{ASSIGNTYPES_ENDINGPRAYER}} en una fecha cercana",
+  "CONFIG_ISCLOSEOTHERS_PRAYER_LABEL": "Distancia en días entre {{ASSIGNTYPES_INITIALPRAYER}}, {{ASSIGNTYPES_ENDINGPRAYER}}",
+  "CONFIG_ISCLOSEOTHERS_PRAYER_TOOLTIP": "Introduce el tiempo en días que debe pasar entre {{ASSIGNTYPES_INITIALPRAYER}}, {{ASSIGNTYPES_ENDINGPRAYER}}",
+
+  "ASSIGNTYPE_TIME_ICON": "Este icono aparece cuando la distancia en tiempo para esta misma asignación no se cumple para el mismo participante"
 }

@@ -169,13 +169,7 @@
           (click)="toPdf()"
         ></mat-icon>
         <mat-chip *ngIf="isAllowedTypeForS89S()" (click)="toPdfS89S()">
-          <mat-icon
-            matChipAvatar
-            class="m-2"
-            svgIcon="pdf"
-            [matTooltip]="t('ICON_PDF_PAGE')"
-            aria-label="icon"
-          ></mat-icon>
+          <mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
           S89S
         </mat-chip>
 

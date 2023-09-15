@@ -133,14 +133,7 @@ export class ImageAssignmentComponent {
   }
 
   isAllowedTypeForS89S() {
-    const type = this.assignTypeService.getAssignType(this.assignment.assignType).type;
-    return (
-      type === "bibleReading" ||
-      type === "initialCall" ||
-      type === "returnVisit" ||
-      type === "bibleStudy" ||
-      type === "talk"
-    );
+    return this.pdfService.isAllowedTypeForS89S(this.assignment);
   }
 
   async toPng() {

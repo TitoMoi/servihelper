@@ -31,6 +31,10 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 import { ExportService } from "app/services/export.service";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
+import { MatChipsModule } from "@angular/material/chips";
+import { PdfService } from "app/services/pdf.service";
+import { SharedService } from "app/services/shared.service";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-multiple-image-assignment",
@@ -48,6 +52,7 @@ import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
     TranslocoLocaleModule,
     SheetTitlePipe,
     PublicThemePipe,
+    MatChipsModule,
   ],
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
@@ -84,6 +89,9 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private configService: ConfigService,
     private exportService: ExportService,
     private publicThemeService: PublicThemeService,
+    private sharedService: SharedService,
+    private pdfService: PdfService,
+    private assignTypeNamePipe: AssignTypeNamePipe,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -118,7 +126,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
    * Change assignments Ids to names and data
    */
   prepareAssignmentsData() {
-    this.#assignments.forEach((a) => {
+    for (const a of this.#assignments) {
       const assignmentWithData: AssignmentInterface = {
         id: a.id,
         date: a.date,
@@ -126,7 +134,9 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         principal: this.participantService.getParticipant(a.principal).name,
         assistant: this.participantService.getParticipant(a.assistant)?.name,
         room: this.roomService.getRoom(a.room).name,
-        assignType: this.assignTypeService.getAssignType(a.assignType).name,
+        assignType: this.assignTypeNamePipe.transform(
+          this.assignTypeService.getAssignType(a.assignType)
+        ),
         footerNote: this.noteService.getNote(a.footerNote)?.editorHTML,
         theme: a.isPTheme ? this.publicThemeService.getPublicTheme(a.theme)?.name : a.theme,
         isPTheme: a.isPTheme,
@@ -136,7 +146,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         group: undefined,
       };
       this.assignmentsWithNames.push(assignmentWithData);
-    });
+    }
 
     //Sort
     if (this.order === "Desc") {
@@ -195,13 +205,13 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
     for (const [key, assignments] of assignByNameMap.entries()) {
-      for (const a of assignments) {
+      for (const [index, a] of assignments.entries()) {
         //update the UI with only 1 assignment each time
         this.assignmentsWithNames = [a];
         this.cdr.detectChanges();
         //Ensure the filename is valid for the system
         const fileName = filenamifyPath(
-          path.join(this.homeDir, "assignments", key, a.assignType + ".png")
+          path.join(this.homeDir, "assignments", key, index + "-" + a.assignType + ".png")
         );
         ensureFileSync(fileName);
         //Create the blob and save it to the fs
@@ -216,6 +226,16 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     this.assignmentsWithNames = assignmentsWithNamesBK;
     this.assignmentsInFolderCreated = true;
     this.cdr.detectChanges();
+  }
+
+  async toPdfS89S() {
+    //Clean directory "assignments" first
+    removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
+
+    for (const a of this.#assignments) {
+      const pdfBytes = await this.pdfService.toPdfS89S(a);
+      this.sharedService.saveUInt8ArrayAsPdfFile(pdfBytes, this.sharedService.getFilename(a));
+    }
   }
 
   openAssignmentsFolder() {

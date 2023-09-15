@@ -121,61 +121,74 @@ export class PdfService {
     return await PDFDocument.load(pdfFile);
   }
 
-  async toPdfS89S(assignment: AssignmentInterface): Promise<Uint8Array> {
-    const pdfDoc = await this.getPdfTemplateFile(this.S89S);
-
-    const form = pdfDoc.getForm();
-
-    //Get fields
-    const nameField = form.getTextField("name");
-    nameField.setFontSize(10);
-    const surnameField = form.getTextField("surname");
-    surnameField.setFontSize(10);
-    const dateField = form.getTextField("date");
-    dateField.setFontSize(10);
-    const checkBibleReadingField = form.getCheckBox("checkBibleReading");
-    const checkInitialCallField = form.getCheckBox("checkInitialCall");
-    const checkReturnVisitField = form.getCheckBox("checkReturnVisit");
-    const checkBibleStudyField = form.getCheckBox("checkBibleStudy");
-    const checkTalkField = form.getCheckBox("checkTalk");
-    const checkOtherField = form.getCheckBox("checkOther");
-    const checkOtherTextField = form.getTextField("checkOtherText");
-
-    //Assign fields
-    nameField.setText(this.participantService.getParticipant(assignment.principal).name);
-    if (assignment.assistant) {
-      surnameField.setText(this.participantService.getParticipant(assignment.assistant).name);
-    }
-    dateField.setText(
-      this.translocoLocaleService.localizeDate(
-        assignment.date,
-        this.translocoLocaleService.getLocale(),
-        { dateStyle: "full" }
-      )
-    );
-
+  isAllowedTypeForS89S(assignment: AssignmentInterface): boolean {
     const type = this.assignTypeService.getAssignType(assignment.assignType).type;
+    return (
+      type === "bibleReading" ||
+      type === "initialCall" ||
+      type === "returnVisit" ||
+      type === "bibleStudy" ||
+      type === "talk"
+    );
+  }
 
-    if (type === "bibleReading") {
-      checkBibleReadingField.check();
-    }
-    if (type === "initialCall") {
-      checkInitialCallField.check();
-    }
-    if (type === "returnVisit") {
-      checkReturnVisitField.check();
-    }
-    if (type === "bibleStudy") {
-      checkBibleStudyField.check();
-    }
-    if (type === "talk") {
-      checkTalkField.check();
-    }
-    if (type === "other") {
-      checkOtherField.check();
-      checkOtherTextField.setText(assignment.theme);
-    }
+  async toPdfS89S(assignment: AssignmentInterface): Promise<Uint8Array> {
+    if (this.isAllowedTypeForS89S(assignment)) {
+      const pdfDoc = await this.getPdfTemplateFile(this.S89S);
+      const form = pdfDoc.getForm();
+      //Get fields
+      const nameField = form.getTextField("name");
+      nameField.setFontSize(10);
+      const surnameField = form.getTextField("surname");
+      surnameField.setFontSize(10);
+      const dateField = form.getTextField("date");
+      dateField.setFontSize(10);
+      const checkBibleReadingField = form.getCheckBox("checkBibleReading");
+      const checkInitialCallField = form.getCheckBox("checkInitialCall");
+      const checkReturnVisitField = form.getCheckBox("checkReturnVisit");
+      const checkBibleStudyField = form.getCheckBox("checkBibleStudy");
+      const checkTalkField = form.getCheckBox("checkTalk");
+      const checkOtherField = form.getCheckBox("checkOther");
+      const checkOtherTextField = form.getTextField("checkOtherText");
 
-    return await pdfDoc.save();
+      //Assign fields
+      nameField.setText(this.participantService.getParticipant(assignment.principal).name);
+      if (assignment.assistant) {
+        surnameField.setText(
+          this.participantService.getParticipant(assignment.assistant).name
+        );
+      }
+      dateField.setText(
+        this.translocoLocaleService.localizeDate(
+          assignment.date,
+          this.translocoLocaleService.getLocale(),
+          { dateStyle: "full" }
+        )
+      );
+
+      const type = this.assignTypeService.getAssignType(assignment.assignType).type;
+
+      if (type === "bibleReading") {
+        checkBibleReadingField.check();
+      }
+      if (type === "initialCall") {
+        checkInitialCallField.check();
+      }
+      if (type === "returnVisit") {
+        checkReturnVisitField.check();
+      }
+      if (type === "bibleStudy") {
+        checkBibleStudyField.check();
+      }
+      if (type === "talk") {
+        checkTalkField.check();
+      }
+      if (type === "other") {
+        checkOtherField.check();
+        checkOtherTextField.setText(assignment.theme);
+      }
+
+      return await pdfDoc.save();
+    }
   }
 }
