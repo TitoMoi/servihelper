@@ -128,8 +128,11 @@ export class PdfService {
 
     //Get fields
     const nameField = form.getTextField("name");
+    nameField.setFontSize(10);
     const surnameField = form.getTextField("surname");
+    surnameField.setFontSize(10);
     const dateField = form.getTextField("date");
+    dateField.setFontSize(10);
     const checkBibleReadingField = form.getCheckBox("checkBibleReading");
     const checkInitialCallField = form.getCheckBox("checkInitialCall");
     const checkReturnVisitField = form.getCheckBox("checkReturnVisit");
