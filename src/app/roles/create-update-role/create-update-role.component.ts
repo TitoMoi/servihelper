@@ -12,6 +12,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-create-update-role",
@@ -31,6 +32,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatCheckboxModule,
     MatButtonModule,
     RouterLink,
+    AssignTypeNamePipe,
   ],
 })
 export class CreateUpdateRoleComponent {

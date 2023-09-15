@@ -13,11 +13,19 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ExportService } from "app/services/export.service";
 import { MatIconModule } from "@angular/material/icon";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-available-participant",
   standalone: true,
-  imports: [CommonModule, AssignTypePipe, TranslocoModule, MatTooltipModule, MatIconModule],
+  imports: [
+    CommonModule,
+    AssignTypePipe,
+    AssignTypeNamePipe,
+    TranslocoModule,
+    MatTooltipModule,
+    MatIconModule,
+  ],
   templateUrl: "./available-participant.component.html",
   styleUrls: ["./available-participant.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

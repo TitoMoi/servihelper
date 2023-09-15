@@ -17,7 +17,7 @@
           ></mat-icon>
         </th>
         <th *ngFor="let at of assignTypes" class="bg-color-white">
-          <div>{{ at.name }}</div>
+          <div>{{ at | assignTypeNamePipe }}</div>
         </th>
       </thead>
       <tbody>
@@ -42,7 +42,9 @@
           (click)="toPng('toPngDivId2')"
         ></mat-icon>
       </th>
-      <th *ngFor="let at of assignTypesAssistant" class="bg-color-white">{{ at.name }}</th>
+      <th *ngFor="let at of assignTypesAssistant" class="bg-color-white">
+        {{ at | assignTypeNamePipe }}
+      </th>
     </thead>
     <tbody>
       <tr *ngFor="let p of participants">

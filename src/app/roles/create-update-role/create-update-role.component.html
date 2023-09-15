@@ -32,7 +32,7 @@
                   color="primary"
                   (change)="changeCheckbox(at.id)"
                   [checked]="isChecked(at.id)"
-                  >{{ at.name }}</mat-checkbox
+                  >{{ at | assignTypeNamePipe }}</mat-checkbox
                 >
               </div>
             </ng-container>
