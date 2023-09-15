@@ -283,7 +283,15 @@
                     <div *ngIf="!isMultipleDates; else noCount">
                       {{ participant.count }}
                     </div>
-                    <div>{{ participant.name }}</div>
+                    <div class="d-flex align-items-center">
+                      <span class="me-2">{{ participant.name }}</span>
+                      <mat-icon
+                        *ngIf="participant.isCloseToOthers && !isMultipleDates"
+                        svgIcon="warningtime"
+                        aria-label="icon"
+                        [matTooltip]="t('ASSIGNMENT_ISCLOSEOTHERS_TOOLTIP')"
+                      ></mat-icon>
+                    </div>
                     <ng-template #noIcon><div></div></ng-template>
                     <ng-template #noCount><div></div></ng-template>
                   </div>

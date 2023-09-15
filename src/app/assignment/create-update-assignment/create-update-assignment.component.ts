@@ -592,17 +592,18 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       if (days) {
         //If we edit an assignment, we get the string iso instead of a real date
         if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+        //Get all the days before and after, its 1 based index
+        let allDays: AssignmentInterface[] = [];
+        for (var i = 1; i <= days; i++) {
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+          );
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+          );
+        }
         for (let p of this.principals) {
-          //Get all the days before and after, its 1 based index
-          let allDays: AssignmentInterface[] = [];
-          for (var i = 1; i <= days; i++) {
-            allDays = allDays.concat(
-              this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
-            );
-            allDays = allDays.concat(
-              this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
-            );
-          }
           if (allDays.some((a) => a.assignType === at.id && a.principal === p.id)) {
             p.hasCollision = true;
           }
@@ -611,17 +612,19 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       if (closeOthersDays) {
         //If we edit an assignment, we get the string iso instead of a real date
         if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+        //Get all the days before and after, its 1 based index
+        let allDays: AssignmentInterface[] = [];
+        for (var i = 1; i <= closeOthersDays; i++) {
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+          );
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+          );
+        }
+
         for (let p of this.principals) {
-          //Get all the days before and after, its 1 based index
-          let allDays: AssignmentInterface[] = [];
-          for (var i = 1; i <= closeOthersDays; i++) {
-            allDays = allDays.concat(
-              this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
-            );
-            allDays = allDays.concat(
-              this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
-            );
-          }
           if (
             allDays.some(
               (a) =>
@@ -634,25 +637,40 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
             p.isCloseToOthers = true;
           }
         }
+
+        for (let assist of this.assistants) {
+          if (
+            allDays.some(
+              (a) =>
+                this.isOfTypeAssignTypes(
+                  this.assignTypeService.getAssignType(this.gfv("assignType")).type
+                ) &&
+                (a.principal === assist.id || a.assistant === assist.id)
+            )
+          ) {
+            assist.isCloseToOthers = true;
+          }
+        }
       }
       if (closeOthersPrayerDays) {
         //If we edit an assignment, we get the string iso instead of a real date
         if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+        //Get all the days before and after, its 1 based index
+        let allDays: AssignmentInterface[] = [];
+        for (var i = 1; i <= closeOthersPrayerDays; i++) {
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+          );
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+          );
+        }
         for (let p of this.principals) {
-          //Get all the days before and after, its 1 based index
-          let allDays: AssignmentInterface[] = [];
-          for (var i = 1; i <= closeOthersPrayerDays; i++) {
-            allDays = allDays.concat(
-              this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
-            );
-            allDays = allDays.concat(
-              this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
-            );
-          }
           if (
             allDays.some(
               (a) =>
-                this.isOfTypeAssignTypesPrayer(
+                this.isOfTypePrayer(
                   this.assignTypeService.getAssignType(this.gfv("assignType")).type
                 ) && a.principal === p.id
             )
@@ -669,7 +687,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     return ["bibleReading", "initialCall", "returnVisit", "talk", "bibleStudy"].includes(type);
   }
   /** Check if the type is inside a group of types */
-  isOfTypeAssignTypesPrayer(type: string): type is AssignTypes {
+  isOfTypePrayer(type: string): type is AssignTypes {
     return ["initialPrayer", "endingPrayer"].includes(type);
   }
 
