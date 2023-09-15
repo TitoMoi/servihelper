@@ -25,9 +25,10 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ExportService } from "app/services/export.service";
-import { ParticipantService } from "app/participant/service/participant.service";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { MatChipsModule } from "@angular/material/chips";
+import { SharedService } from "app/services/shared.service";
 
 @Component({
   selector: "app-image-assignment",
@@ -49,6 +50,7 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
     SheetTitlePipe,
     MatTooltipModule,
     PublicThemePipe,
+    MatChipsModule,
   ],
 })
 export class ImageAssignmentComponent {
@@ -87,8 +89,8 @@ export class ImageAssignmentComponent {
     private configService: ConfigService,
     private pdfService: PdfService,
     private exportService: ExportService,
-    private participantService: ParticipantService,
     private assignTypeNamePipe: AssignTypeNamePipe,
+    private sharedService: SharedService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -130,15 +132,19 @@ export class ImageAssignmentComponent {
     this.copiedCalendarReminder = true;
   }
 
-  getFilename() {
-    const filename =
-      this.participantService.getParticipant(this.assignment.principal).name +
-      this.assignTypeService.getAssignType(this.assignment.assignType).name;
-    return filename;
+  isAllowedTypeForS89S() {
+    const type = this.assignTypeService.getAssignType(this.assignment.assignType).type;
+    return (
+      type === "bibleReading" ||
+      type === "initialCall" ||
+      type === "returnVisit" ||
+      type === "bibleStudy" ||
+      type === "talk"
+    );
   }
 
   async toPng() {
-    const filename = this.getFilename();
+    const filename = this.sharedService.getFilename(this.assignment);
     this.exportService.toPng("assignmentTableId", filename);
   }
 
@@ -173,7 +179,15 @@ export class ImageAssignmentComponent {
         data.cell.styles.fillColor = "#FFFFFF";
       },
     });
-    const filename = this.getFilename();
+    const filename = this.sharedService.getFilename(this.assignment);
     doc.save(filename);
+  }
+
+  async toPdfS89S() {
+    const pdfBytes = await this.pdfService.toPdfS89S(this.assignment);
+    this.sharedService.saveUInt8ArrayAsPdfFile(
+      pdfBytes,
+      this.sharedService.getFilename(this.assignment)
+    );
   }
 }

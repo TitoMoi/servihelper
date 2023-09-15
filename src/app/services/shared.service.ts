@@ -5,6 +5,9 @@ import {
 
 import { Injectable } from "@angular/core";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 /* import { version } from '../../../package.json'; */
 const { version } = require("../../../package.json");
 
@@ -14,7 +17,11 @@ const { version } = require("../../../package.json");
 export class SharedService {
   appVersion = version;
 
-  constructor() {}
+  constructor(
+    private participantService: ParticipantService,
+    private assignTypeService: AssignTypeService,
+    private assignTypeNamePipe: AssignTypeNamePipe
+  ) {}
 
   /**
    *
@@ -120,5 +127,25 @@ export class SharedService {
         }
       }
     }
+  }
+
+  /** Needs user interaction because the name can be already taken */
+  getFilename(assignment: AssignmentInterface): string {
+    const filename =
+      this.participantService.getParticipant(assignment.principal).name +
+      "-" +
+      this.assignTypeNamePipe.transform(
+        this.assignTypeService.getAssignType(assignment.assignType)
+      );
+    return filename;
+  }
+
+  saveUInt8ArrayAsPdfFile(uint8Array: Uint8Array, filename: string) {
+    const blob = new Blob([uint8Array], { type: "application/pdf" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    link.remove();
   }
 }

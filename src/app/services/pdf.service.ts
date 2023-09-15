@@ -7,7 +7,16 @@ import malgun from "../../resources/base64fonts/malgun";
 import simsun from "../../resources/base64fonts/simsun";
 import notosans from "../../resources/base64fonts/notosans";
 import notosansbold from "../../resources/base64fonts/notosansbold";
+import { PDFDocument } from "pdf-lib";
+import path from "path";
+import { ConfigService } from "app/config/service/config.service";
+import { readFileSync } from "fs";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { TranslocoLocaleService } from "@ngneat/transloco-locale";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
 
+export type pdfFileNames = "S89S";
 @Injectable({
   providedIn: "root",
 })
@@ -24,7 +33,16 @@ export class PdfService {
 
   lastFont;
 
-  constructor(private translocoService: TranslocoService) {}
+  //Pdf file names
+  S89S = "S89S.pdf";
+
+  constructor(
+    private configService: ConfigService,
+    private translocoService: TranslocoService,
+    private translocoLocaleService: TranslocoLocaleService,
+    private participantService: ParticipantService,
+    private assignTypeService: AssignTypeService
+  ) {}
 
   registerOnLangChange() {
     this.translocoService.langChanges$.subscribe((lang) => {
@@ -89,5 +107,72 @@ export class PdfService {
    */
   getFontForLang() {
     return this.font;
+  }
+
+  async getPdfTemplateFile(name: string) {
+    const pdfFile = readFileSync(
+      path.join(
+        this.configService.templatesFilesPath,
+        this.configService.getConfig().lang,
+        "pdf",
+        name
+      )
+    );
+    return await PDFDocument.load(pdfFile);
+  }
+
+  async toPdfS89S(assignment: AssignmentInterface): Promise<Uint8Array> {
+    const pdfDoc = await this.getPdfTemplateFile(this.S89S);
+
+    const form = pdfDoc.getForm();
+
+    //Get fields
+    const nameField = form.getTextField("name");
+    const surnameField = form.getTextField("surname");
+    const dateField = form.getTextField("date");
+    const checkBibleReadingField = form.getCheckBox("checkBibleReading");
+    const checkInitialCallField = form.getCheckBox("checkInitialCall");
+    const checkReturnVisitField = form.getCheckBox("checkReturnVisit");
+    const checkBibleStudyField = form.getCheckBox("checkBibleStudy");
+    const checkTalkField = form.getCheckBox("checkTalk");
+    const checkOtherField = form.getCheckBox("checkOther");
+    const checkOtherTextField = form.getTextField("checkOtherText");
+
+    //Assign fields
+    nameField.setText(this.participantService.getParticipant(assignment.principal).name);
+    if (assignment.assistant) {
+      surnameField.setText(this.participantService.getParticipant(assignment.assistant).name);
+    }
+    dateField.setText(
+      this.translocoLocaleService.localizeDate(
+        assignment.date,
+        this.translocoLocaleService.getLocale(),
+        { dateStyle: "full" }
+      )
+    );
+
+    const type = this.assignTypeService.getAssignType(assignment.assignType).type;
+
+    if (type === "bibleReading") {
+      checkBibleReadingField.check();
+    }
+    if (type === "initialCall") {
+      checkInitialCallField.check();
+    }
+    if (type === "returnVisit") {
+      checkReturnVisitField.check();
+    }
+    if (type === "bibleStudy") {
+      checkBibleStudyField.check();
+    }
+    if (type === "talk") {
+      checkTalkField.check();
+    }
+    if (type === "other") {
+      checkOtherField.check();
+      checkOtherTextField.setText(assignment.theme);
+    }
+
+    return await pdfDoc.save();
   }
 }

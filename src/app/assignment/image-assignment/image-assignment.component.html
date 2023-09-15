@@ -168,6 +168,18 @@
           aria-label="icon"
           (click)="toPdf()"
         ></mat-icon>
+        <mat-chip (click)="toPdfS89S()">
+          <mat-icon
+            matChipAvatar
+            *ngIf="isAllowedTypeForS89S()"
+            class="m-2"
+            svgIcon="pdf"
+            [matTooltip]="t('ICON_PDF_PAGE')"
+            aria-label="icon"
+          ></mat-icon>
+          S89S
+        </mat-chip>
+
         <mat-icon
           class="m-2"
           svgIcon="png"

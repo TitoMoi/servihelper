@@ -24,6 +24,8 @@ export class ConfigService {
 
   sourceFilesPath = path.join(this.assetsFilesPath, "source");
 
+  templatesFilesPath = path.join(this.assetsFilesPath, "templates");
+
   assignmentsFilename = "assignment.json";
   notesFilename = "note.json";
   participantsFilename = "participant.json";
