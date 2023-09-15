@@ -52,4 +52,5 @@ export interface ConfigInterface {
   lastImportedDate: Date;
   lastImportedFilename: string;
   closeToOthersDays: number;
+  closeToOthersPrayerDays: number;
 }

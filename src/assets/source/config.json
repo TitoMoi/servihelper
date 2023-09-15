@@ -19,5 +19,6 @@
   "role": "administrator",
   "lastImportedDate": "",
   "lastImportedFilename": "",
-  "closeToOthersDays": 30
+  "closeToOthersDays": 30,
+  "closeToOthersPrayerDays": 30
 }

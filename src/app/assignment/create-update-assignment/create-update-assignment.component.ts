@@ -577,8 +577,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   checkIfCollision() {
-    /* get the distance in time between some assignment types */
     const closeOthersDays = this.configService.getConfig().closeToOthersDays;
+    const closeOthersPrayerDays = this.configService.getConfig().closeToOthersPrayerDays;
 
     /* get the threshold of the assign type */
     const at = this.assignTypeService.getAssignType(this.gfv("assignType"));
@@ -631,11 +631,42 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
         }
       }
     }
+    if (closeOthersPrayerDays) {
+      let currentDate: Date = this.gfv("date");
+      //If we edit an assignment, we get the string iso instead of a real date
+      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+      for (let p of this.principals) {
+        //Get all the days before and after, its 1 based index
+        let allDays: AssignmentInterface[] = [];
+        for (var i = 1; i <= closeOthersPrayerDays; i++) {
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+          );
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+          );
+        }
+        if (
+          allDays.some(
+            (a) =>
+              this.isOfTypeAssignTypesPrayer(
+                this.assignTypeService.getAssignType(this.gfv("assignType")).type
+              ) && a.principal === p.id
+          )
+        ) {
+          p.isCloseToOthersPrayer = true;
+        }
+      }
+    }
   }
 
   /** Check if the type is inside a group of types */
   isOfTypeAssignTypes(type: string): type is AssignTypes {
     return ["bibleReading", "initialCall", "returnVisit", "talk", "bibleStudy"].includes(type);
+  }
+  /** Check if the type is inside a group of types */
+  isOfTypeAssignTypesPrayer(type: string): type is AssignTypes {
+    return ["initialPrayer", "endingPrayer"].includes(type);
   }
 
   filterAssignmentsByRole() {

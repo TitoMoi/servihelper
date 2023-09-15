@@ -36,14 +36,15 @@
         </div>
         <div class="col-auto">
           <div class="d-flex align-items-center">
-            <mat-icon
-              svgIcon="time"
-              class="me-2"
-              [matTooltip]="t('ASSIGNTYPE_TIME_ICON')"
-            ></mat-icon>
             <mat-form-field>
               <mat-label>{{ t("PLACEHOLDER_TIME") }}</mat-label>
               <input matInput type="number" formControlName="days" />
+              <mat-icon
+                matSuffix
+                svgIcon="time"
+                class="me-2"
+                [matTooltip]="t('ASSIGNTYPE_TIME_ICON')"
+              ></mat-icon>
             </mat-form-field>
           </div>
         </div>

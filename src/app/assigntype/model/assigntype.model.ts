@@ -15,6 +15,8 @@ export interface AssignTypeInterface {
 
 export type AssignTypes =
   | "publicSpeech"
+  | "initialPrayer"
+  | "endingPrayer"
   | "treasures"
   | "spiritualGems"
   | "bibleReading"

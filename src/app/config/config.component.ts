@@ -76,6 +76,7 @@ export class ConfigComponent implements OnDestroy {
   // Config form
   form = this.formBuilder.group({
     closeToOthersDays: this.currentConfig.closeToOthersDays,
+    closeToOthersPrayerDays: this.currentConfig.closeToOthersPrayerDays,
     defaultFooterNoteId: this.currentConfig.defaultFooterNoteId,
     defaultReportFontSize: this.currentConfig.defaultReportFontSize,
     defaultReportDateFormat: this.currentConfig.defaultReportDateFormat,
@@ -118,6 +119,7 @@ export class ConfigComponent implements OnDestroy {
     lastImportedDate: undefined,
     lastImportedFilename: "",
     closeToOthersDays: 30,
+    closeToOthersPrayerDays: 30,
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();
@@ -151,11 +153,6 @@ export class ConfigComponent implements OnDestroy {
 
     //Close the program
     ipcRenderer.send("closeApp");
-  }
-
-  handleImageHeaderInput(e: Event) {
-    const elem: HTMLInputElement = e.target as HTMLInputElement;
-    this.configService.updateConfigByKey("assignmentHeaderTitle", elem.value);
   }
 
   stopPropagation(event) {

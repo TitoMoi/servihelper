@@ -215,9 +215,8 @@
       <mat-expansion-panel-header tabIndex="3">
         <mat-panel-title>
           <h3 class="m-3">
-            {{ t("CONFIG_ISCLOSEOTHERS_TITLE") }}
+            {{ t("CONFIG_TIME_DISTANCE_TITLE") }}
           </h3>
-          <mat-icon svgIcon="warningtime"></mat-icon>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <h4>{{ t("CONFIG_ISCLOSEOTHERS_LABEL") }}</h4>
@@ -228,6 +227,17 @@
           formControlName="closeToOthersDays"
           [matTooltip]="t('CONFIG_ISCLOSEOTHERS_TOOLTIP')"
         />
+        <mat-icon matSuffix svgIcon="warningtime"></mat-icon>
+      </mat-form-field>
+      <h4>{{ t("CONFIG_ISCLOSEOTHERS_PRAYER_LABEL") }}</h4>
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          formControlName="closeToOthersPrayerDays"
+          [matTooltip]="t('CONFIG_ISCLOSEOTHERS_PRAYER_TOOLTIP')"
+        />
+        <mat-icon matSuffix svgIcon="warningtime"></mat-icon>
       </mat-form-field>
     </mat-expansion-panel>
     <mat-expansion-panel class="mb-2 hover-lightcoral">
