@@ -6,6 +6,7 @@ import { NgFor } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
 import { RoomPipe } from "app/room/pipe/room.pipe";
+import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
   selector: "app-info-assignment",
@@ -19,6 +20,7 @@ import { RoomPipe } from "app/room/pipe/room.pipe";
     NgFor,
     TranslocoLocaleModule,
     RoomPipe,
+    RoomNamePipe,
   ],
 })
 export class InfoAssignmentComponent {

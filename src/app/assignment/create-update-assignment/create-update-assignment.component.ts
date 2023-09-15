@@ -215,6 +215,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog,
+    private assignTypeNamePipe: AssignTypeNamePipe,
+    private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
@@ -857,9 +859,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
     participantAssignments.forEach((pa) => {
       messageList.push(
-        this.roomService.getRoomNameById(pa.room) +
+        this.roomNamePipe.transform(this.roomService.getRoom(pa.room)) +
           " - " +
-          this.assignTypeService.getAssignTypeNameById(pa.assignType)
+          this.assignTypeNamePipe.transform(
+            this.assignTypeService.getAssignType(pa.assignType)
+          )
       );
     });
 

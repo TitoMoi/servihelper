@@ -109,6 +109,8 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     private noteService: NoteService,
     private lastDateService: LastDateService,
     private sortService: SortService,
+    private assignTypeNamePipe: AssignTypeNamePipe,
+    private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
@@ -291,10 +293,16 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
       for (const key of keys) {
         switch (key) {
           case "room":
-            data = data + this.roomService.getRoomNameById(assign[key]) + ";";
+            data =
+              data + this.roomNamePipe.transform(this.roomService.getRoom(assign[key])) + ";";
             break;
           case "assignType":
-            data = data + this.assignTypeService.getAssignTypeNameById(assign[key]) + ";";
+            data =
+              data +
+              this.assignTypeNamePipe.transform(
+                this.assignTypeService.getAssignType(assign[key])
+              ) +
+              ";";
             break;
           case "principal":
             data = data + this.participantService.getParticipant(assign[key]).name + ";";

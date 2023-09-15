@@ -79,15 +79,6 @@ export class AssignTypeService {
 
   /**
    *
-   * @param assignTypeName the name of the assignType to look for
-   * @returns the assignType
-   */
-  getAssignTypeNameById(assignTypeId: string): string {
-    return this.#assignTypesMap.get(assignTypeId).name;
-  }
-
-  /**
-   *
    * @param assignType the assignType to update
    * @returns true if assignType is updated and saved false otherwise
    */

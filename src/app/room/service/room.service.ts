@@ -40,15 +40,6 @@ export class RoomService {
 
   /**
    *
-   * @param roomId the id of the room to search for the name
-   * @returns the name of the room
-   */
-  getRoomNameById(roomId: string): string {
-    return this.#roomsMap.get(roomId).name;
-  }
-
-  /**
-   *
    * @returns true if rooms are saved to disk or false
    */
   #saveRoomsToFile(): boolean {

@@ -29,7 +29,7 @@
           {{ participant.count }}
         </div>
         <div class="d-flex align-items-center me-1">
-          {{ (participant.lastAssignmentRoom | roomPipe)?.name }}
+          {{ participant.lastAssignmentRoom | roomPipe | roomNamePipe }}
         </div>
         <div class="d-flex align-items-center me-1">
           {{ participant.lastAssignmentDate | translocoDate : { dateStyle: "medium" } }}
