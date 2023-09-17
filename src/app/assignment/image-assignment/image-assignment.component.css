@@ -2,6 +2,10 @@
   background-color: inherit;
 }
 
+#pdfAcronim {
+  cursor: pointer;
+}
+
 .border-bottom {
   border-bottom: 2px solid gray;
 }

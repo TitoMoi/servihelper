@@ -168,10 +168,13 @@
           aria-label="icon"
           (click)="toPdf()"
         ></mat-icon>
-        <mat-chip *ngIf="isAllowedTypeForS89S()" (click)="toPdfS89S()">
-          <mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
-          S89S
-        </mat-chip>
+
+        <mat-chip-listbox aria-label="Fish selection">
+          <mat-chip-option *ngIf="isAllowedTypeForS89S()" (click)="toPdfS89S()"
+            ><mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
+            <span id="pdfAcronim">S89S</span></mat-chip-option
+          >
+        </mat-chip-listbox>
 
         <mat-icon
           class="m-2"
