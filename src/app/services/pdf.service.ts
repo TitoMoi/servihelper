@@ -139,32 +139,30 @@ export class PdfService {
       const pdfDoc = await this.getPdfTemplateFile(this.S89S);
       const form = pdfDoc.getForm();
       //Get fields
-      const nameField = form.getTextField("name");
-      nameField.setFontSize(10);
-      const surnameField = form.getTextField("surname");
-      surnameField.setFontSize(10);
-      const dateField = form.getTextField("date");
-      dateField.setFontSize(10);
-      const checkBibleReadingField = form.getCheckBox("checkBibleReading");
-      const checkInitialCallField = form.getCheckBox("checkInitialCall");
-      const checkReturnVisitField = form.getCheckBox("checkReturnVisit");
-      const checkBibleStudyField = form.getCheckBox("checkBibleStudy");
-      const checkTalkField = form.getCheckBox("checkTalk");
-      const checkOtherField = form.getCheckBox("checkOther");
-      const checkOtherTextField = form.getTextField("checkOtherText");
+      const principal = form.getTextField("principal");
+      principal.setFontSize(10);
+      const assistant = form.getTextField("assistant");
+      assistant.setFontSize(10);
+      const date = form.getTextField("date");
+      date.setFontSize(10);
+      const bibleReadingCheck = form.getCheckBox("bibleReadingCheck");
+      const initialCallCheck = form.getCheckBox("initialCallCheck");
+      const returnVisitCheck = form.getCheckBox("returnVisitCheck");
+      const bibleStudyCheck = form.getCheckBox("bibleStudyCheck");
+      const talkCheck = form.getCheckBox("talkCheck");
+      const otherCheck = form.getCheckBox("otherCheck");
+      const otherText = form.getTextField("otherText");
 
-      const checkMainHall = form.getCheckBox("checkMainHall");
-      const checkAuxiliaryHall1 = form.getCheckBox("checkAuxiliaryHall1");
-      const checkAuxiliaryHall2 = form.getCheckBox("checkAuxiliaryHall2");
+      const mainHallCheck = form.getCheckBox("mainHallCheck");
+      const auxiliaryHallCheck = form.getCheckBox("auxiliaryHallCheck");
+      const auxiliaryHall2Check = form.getCheckBox("auxiliaryHall2Check");
 
       //Assign fields
-      nameField.setText(this.participantService.getParticipant(assignment.principal).name);
+      principal.setText(this.participantService.getParticipant(assignment.principal).name);
       if (assignment.assistant) {
-        surnameField.setText(
-          this.participantService.getParticipant(assignment.assistant).name
-        );
+        assistant.setText(this.participantService.getParticipant(assignment.assistant).name);
       }
-      dateField.setText(
+      date.setText(
         this.translocoLocaleService.localizeDate(
           assignment.date,
           this.translocoLocaleService.getLocale(),
@@ -175,35 +173,35 @@ export class PdfService {
       const type = this.assignTypeService.getAssignType(assignment.assignType).type;
 
       if (type === "bibleReading") {
-        checkBibleReadingField.check();
+        bibleReadingCheck.check();
       }
       if (type === "initialCall") {
-        checkInitialCallField.check();
+        initialCallCheck.check();
       }
       if (type === "returnVisit") {
-        checkReturnVisitField.check();
+        returnVisitCheck.check();
       }
       if (type === "bibleStudy") {
-        checkBibleStudyField.check();
+        bibleStudyCheck.check();
       }
       if (type === "talk") {
-        checkTalkField.check();
+        talkCheck.check();
       }
       if (type === "other") {
-        checkOtherField.check();
-        checkOtherTextField.setText(assignment.theme);
+        otherCheck.check();
+        otherText.setText(assignment.theme);
       }
 
       const roomType = this.roomService.getRoom(assignment.room).type;
 
       if (roomType === "mainHall") {
-        checkMainHall.check();
+        mainHallCheck.check();
       }
       if (roomType === "auxiliaryRoom1") {
-        checkAuxiliaryHall1.check();
+        auxiliaryHallCheck.check();
       }
       if (roomType === "auxiliaryRoom2") {
-        checkAuxiliaryHall2.check();
+        auxiliaryHall2Check.check();
       }
 
       form.flatten();

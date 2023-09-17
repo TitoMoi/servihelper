@@ -80,6 +80,11 @@ The available fonts for pdf are in ./src/app/resources:
 
   The fonts are converted to base64 using the parallax \jsPDF\fontconverter\fontconverter.html
 
+## Pdf forms
+
+Pdf forms have the same field names for all language pdf forms. The type of the field (text, check) is always at the end of the name of the field.
+On Every template folder are images to show the template fields names.
+
 ## Reminders (experimental)
 
 It is possible to send a reminder with the google event old api _(can be disabled at any moment)_: https://support.google.com/calendar/thread/128416249/calendar-url-generator-which-parameters?hl=en
