@@ -17,9 +17,11 @@ jobs:
         run: npm install
       - name: Step 2 - build the frontend
         run: npm run build
-      - name: Step 3 - package with Electron builder and clean release folder
+      - name: Step 3 - run transloco optimize
+        run: npm run transloco:optimize
+      - name: Step 4 - package with Electron builder and clean release folder
         run: npm run release:linux
-      - name: Step 4 - Use the Upload Artifact GitHub Action
+      - name: Step 5 - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v3
         with:
           name: servihelper-linux
@@ -36,9 +38,11 @@ jobs:
         run: npm install
       - name: Step 2 - build the frontend
         run: npm run build
-      - name: Step 3 - package with Electron builder and clean release folder
+      - name: Step 3 - run transloco optimize
+        run: npm run transloco:optimize
+      - name: Step 4 - package with Electron builder and clean release folder
         run: npm run release:mac:universal
-      - name: Step 4 - Use the Upload Artifact GitHub Action
+      - name: Step 5 - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v3
         with:
           name: servihelper-mac
@@ -55,9 +59,11 @@ jobs:
         run: npm install
       - name: Step 2 - build the frontend
         run: npm run build
-      - name: Step 3 - package with Electron builder and clean release folder
+      - name: Step 3 - run transloco optimize
+        run: npm run transloco:optimize
+      - name: Step 4 - package with Electron builder and clean release folder
         run: npm run release:windows
-      - name: Step 4 - Use the Upload Artifact GitHub Action
+      - name: Step 5 - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v3
         with:
           name: servihelper-windows

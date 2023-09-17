@@ -79,6 +79,9 @@ export class TranslocoHttpLoader implements TranslocoLoader {
         defaultLang: "en",
         reRenderOnLangChange: true,
         prodMode: APP_CONFIG.production,
+        flatten: {
+          aot: APP_CONFIG.production,
+        },
       }),
     },
     { provide: TRANSLOCO_LOADER, useClass: TranslocoHttpLoader },
