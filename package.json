@@ -55,12 +55,12 @@
     "jspdf": "2.5.1",
     "jspdf-autotable": "3.5.28",
     "leaflet": "^1.9.4",
-    "nanoid": "4.0.2",
+    "nanoid": "5.0.1",
     "ngx-editor": "15.3.0",
     "pdf-lib": "^1.17.1",
     "rxjs": "7.8.1",
     "tslib": "2.6.0",
-    "zone.js": "0.13.1"
+    "zone.js": "0.13.3"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^16.0.0",
