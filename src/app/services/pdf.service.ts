@@ -206,6 +206,7 @@ export class PdfService {
         checkAuxiliaryHall2.check();
       }
 
+      form.flatten();
       return await pdfDoc.save();
     }
   }
