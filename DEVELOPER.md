@@ -82,12 +82,28 @@ The available fonts for pdf are in ./src/app/resources:
 
 ### Templates
 
-DIFERENCES PDF VS WORD
+The templates are word and pdf.
+
+The key diference is the mantainance.
+
+| Word vs Pdf              | Pdf | Word |     |     |
+| ------------------------ | --- | ---- | --- | --- |
+| number of templates      | N   | 1    |     |     |
+| Immediate change         | No  | Yes  |     |     |
+| Translation effort       | No  | Yes  |     |     |
+| Template check if exists | Yes | No   |     |     |
+
+Clearly, the Word version is more mantainable but the pdf provides the original file.
 
 ## Pdf forms
 
-Pdf forms have the same field names for all language pdf forms. The type of the field (text, check) is always at the end of the name of the field.
-On Every template folder are images to show the template fields names.
+Located under src/assets/templates/{lang}/pdf
+
+Pdf forms have the same field names for all language pdf forms.
+
+The type of the field (text, check) is always at the end of the name of the field.
+
+On every template folder are images to show the template fields names.
 
 ## Reminders (experimental)
 
