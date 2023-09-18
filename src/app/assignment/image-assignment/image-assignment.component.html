@@ -93,8 +93,7 @@
           </td>
         </tr>
         <tr *ngIf="assignment.theme">
-          <!-- Do not remove theme css class its for the pdf alignment -->
-          <td class="theme">
+          <td>
             <div class="ms-3 me-3">
               {{
                 assignment.isPTheme
@@ -132,8 +131,7 @@
           </td>
         </tr>
         <tr *ngIf="footerNoteEditorHTML">
-          <!-- Do not remove footerNote css class its for the pdf alignment -->
-          <td class="footerNote">
+          <td>
             <div
               class="ms-3 me-3 mb-3 text-justify font-15"
               [innerHTML]="footerNoteEditorHTML"

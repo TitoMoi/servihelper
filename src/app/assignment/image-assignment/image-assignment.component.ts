@@ -154,8 +154,8 @@ export class ImageAssignmentComponent {
 
     autoTable(doc, {
       html: `#assignmentTableId`,
-      styles: { font, fontSize: 12 },
-      margin: { vertical: 4, horizontal: 4 },
+      styles: { font, fontSize: 10 },
+      margin: { vertical: 2, horizontal: 2 },
       didParseCell: (data) => {
         data.cell.text = data.cell.text.map((char) => char.trim());
         // eslint-disable-next-line @typescript-eslint/dot-notation
@@ -166,10 +166,6 @@ export class ImageAssignmentComponent {
           if (classList.contains("sheetTitle")) {
             data.cell.styles.halign = "center";
           }
-        }
-        //This is the theme body
-        if (classList.contains("theme") || classList.contains("footerNote")) {
-          data.cell.styles.fontSize = 10;
         }
         data.cell.styles.fillColor = "#FFFFFF";
       },
