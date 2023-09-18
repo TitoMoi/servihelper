@@ -80,6 +80,10 @@ The available fonts for pdf are in ./src/app/resources:
 
   The fonts are converted to base64 using the parallax \jsPDF\fontconverter\fontconverter.html
 
+### Templates
+
+DIFERENCES PDF VS WORD
+
 ## Pdf forms
 
 Pdf forms have the same field names for all language pdf forms. The type of the field (text, check) is always at the end of the name of the field.

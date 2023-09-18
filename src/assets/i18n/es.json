@@ -385,5 +385,6 @@
   "ROOMTYPES_AUXILIARYROOM2": "Sala auxiliar núm. 2",
 
   "S89S_TOOLTIP": "Generar el pdf s89s",
-  "S89SM_TOOLTIP": "Generar el pdf 4-s89s que contiene todas las asignaciones"
+  "S89SM_TOOLTIP": "Generar el pdf 4-s89s que contiene todas las asignaciones",
+  "TEMPLATE_NOT_AVAILABLE": "Pdf no disponible para este idioma, por favor envia una copia a {{INFO__CONTACT_ANSWER}} para que pueda estar disponible en la próxima versión"
 }

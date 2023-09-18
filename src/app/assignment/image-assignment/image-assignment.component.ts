@@ -66,6 +66,8 @@ export class ImageAssignmentComponent {
   copied = false;
   copiedCalendarReminder = false;
 
+  templateS89SExists = !this.pdfService.checkTemplateExists(this.pdfService.S89S);
+
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle; //default config sheet title
   assignmentPrincipalTitle = this.configService.getConfig().assignmentPrincipalTitle;

@@ -357,5 +357,6 @@
   "ROOMTYPES_AUXILIARYROOM2": "Auxiliary room 2",
 
   "S89S_TOOLTIP": "Generate individual s89s pdf",
-  "S89SM_TOOLTIP": "Generate the 4-s89s pdf containing all the assignments"
+  "S89SM_TOOLTIP": "Generate the 4-s89s pdf containing all the assignments",
+  "TEMPLATE_NOT_AVAILABLE": "Pdf not available for this lang, please send it to {{INFO__CONTACT_ANSWER}} so it can be available in the next version"
 }

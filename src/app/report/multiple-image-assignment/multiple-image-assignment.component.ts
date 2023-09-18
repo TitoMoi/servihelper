@@ -23,7 +23,7 @@ import { ipcRenderer } from "electron";
 import { ensureFileSync, removeSync, writeFile } from "fs-extra";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatButtonModule } from "@angular/material/button";
-import { NgIf, NgFor } from "@angular/common";
+import { NgIf, NgFor, AsyncPipe } from "@angular/common";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -52,6 +52,7 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     SheetTitlePipe,
     PublicThemePipe,
     MatChipsModule,
+    AsyncPipe,
   ],
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
@@ -65,6 +66,9 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   assignmentsInFolderCreated = false;
 
   homeDir = this.configService.homeDir;
+
+  templateS89SExists = !this.pdfService.checkTemplateExists(this.pdfService.S89S);
+  templateS89SMExists = !this.pdfService.checkTemplateExists(this.pdfService.S89SM);
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
