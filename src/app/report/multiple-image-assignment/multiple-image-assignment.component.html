@@ -23,10 +23,14 @@
         (click)="createAssignmentsInFolder()"
       ></mat-icon>
       <mat-chip-listbox aria-label="Fish selection">
-        <mat-chip-option (click)="toPdfS89S()"
+        <mat-chip-option (click)="toPdfS89S()" [matTooltip]="t('S89S_TOOLTIP')"
           ><mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
           <span id="pdfAcronim">S89S</span></mat-chip-option
         >
+        <mat-chip-option (click)="toPdfS89SM()" [matTooltip]="t('S89SM_TOOLTIP')">
+          <mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
+          <span id="pdfAcronim">4-S89S</span>
+        </mat-chip-option>
       </mat-chip-listbox>
       <button
         *ngIf="assignmentsInFolderCreated"

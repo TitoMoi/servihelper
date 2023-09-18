@@ -6,7 +6,6 @@ import { RoomService } from "app/room/service/room.service";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { toBlob } from "html-to-image";
 import { filenamifyPath } from "filenamify";
-const os = require("os");
 const path = require("path");
 import { shell } from "electron";
 
@@ -65,8 +64,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
   assignmentsInFolderCreated = false;
 
-  //The user home
-  homeDir = os.homedir();
+  homeDir = this.configService.homeDir;
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
@@ -224,6 +222,24 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
     //Restore assignments view
     this.assignmentsWithNames = assignmentsWithNamesBK;
+    this.assignmentsInFolderCreated = true;
+    this.cdr.detectChanges();
+  }
+
+  async toPdfS89SM() {
+    //Clean directory "assignments" first
+    removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
+
+    //the s89sm will all the assignments
+    const pdfBytes = await this.pdfService.toPdfS89SM(this.#assignments);
+
+    //Ensure the filename is valid for the system
+    const fileNamePath = filenamifyPath(
+      path.join(this.homeDir, "assignments", this.pdfService.S89SM)
+    );
+    ensureFileSync(fileNamePath);
+    writeFile(fileNamePath, pdfBytes);
+
     this.assignmentsInFolderCreated = true;
     this.cdr.detectChanges();
   }

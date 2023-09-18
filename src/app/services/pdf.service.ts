@@ -16,8 +16,10 @@ import { TranslocoLocaleService } from "@ngneat/transloco-locale";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
+import { filenamifyPath } from "filenamify";
+import { ensureFileSync, writeFile } from "fs-extra";
 
-export type pdfFileNames = "S89S";
+export type pdfFileNames = "S89S" | "S89SM";
 @Injectable({
   providedIn: "root",
 })
@@ -34,8 +36,11 @@ export class PdfService {
 
   lastFont;
 
+  homeDir = this.configService.homeDir;
+
   //Pdf file names
   S89S = "S89S.pdf";
+  S89SM = "S89SM.pdf";
 
   constructor(
     private configService: ConfigService,
@@ -111,14 +116,22 @@ export class PdfService {
     return this.font;
   }
 
-  async getPdfTemplateFile(name: string) {
+  /**
+   *
+   * @param name the name of the pdf template
+   * @param optionalPath if provided it will look up for the filename in this path
+   * @returns
+   */
+  async getPdfTemplateFile(name: string, optionalPath?: string) {
     const pdfFile = readFileSync(
-      path.join(
-        this.configService.templatesFilesPath,
-        this.configService.getConfig().lang,
-        "pdf",
-        name
-      )
+      optionalPath
+        ? optionalPath
+        : path.join(
+            this.configService.templatesFilesPath,
+            this.configService.getConfig().lang,
+            "pdf",
+            name
+          )
     );
     return await PDFDocument.load(pdfFile);
   }
@@ -133,11 +146,19 @@ export class PdfService {
       type === "talk"
     );
   }
-
+  /**
+   *
+   * @param assignment the assignment to S89S
+   * @returns the pdf array
+   */
   async toPdfS89S(assignment: AssignmentInterface): Promise<Uint8Array> {
     if (this.isAllowedTypeForS89S(assignment)) {
       const pdfDoc = await this.getPdfTemplateFile(this.S89S);
       const form = pdfDoc.getForm();
+
+      const copiedPage = await pdfDoc.copyPages(pdfDoc, [0]);
+
+      copiedPage[0].doc.getForm();
       //Get fields
       const principal = form.getTextField("principal");
       principal.setFontSize(10);
@@ -207,5 +228,115 @@ export class PdfService {
       form.flatten();
       return await pdfDoc.save();
     }
+  }
+
+  async toPdfS89SM(assignmentList: AssignmentInterface[]): Promise<Uint8Array> {
+    //Filter only the assignments that can be S89S
+    assignmentList = assignmentList.filter((a) => this.isAllowedTypeForS89S(a));
+
+    //Get all the iterations by 4, check if there is a decimal part, if there is, truncate and add +1
+    // 12,5 => 12 + 1 (the last page will have some sheets empty)
+    let iterations = assignmentList.length / 4;
+    if (iterations % 1 != 0) iterations = Math.trunc(iterations) + 1;
+
+    for (let iteration = 0; iteration < iterations; iteration++) {
+      //Get the template and the form inside
+      const s89smTemplate = await this.getPdfTemplateFile(this.S89SM);
+      const form = s89smTemplate.getForm();
+
+      //For every iteration get a slice of 4 assignments
+      const end = 4 * (iteration + 1); //We need to add +1 or in the first iteration end is 0.
+      const init = end - 4;
+
+      for (let [i, a] of assignmentList.slice(init, end).entries()) {
+        //Get fields, i (index is zero based, we need to add +1)
+        const index = i + 1;
+        const principal = form.getTextField("principal" + index);
+        principal.setFontSize(10);
+        const assistant = form.getTextField("assistant" + index);
+        assistant.setFontSize(10);
+        const date = form.getTextField("date" + index);
+        date.setFontSize(10);
+        const bibleReadingCheck = form.getCheckBox("bibleReadingCheck" + index);
+        const initialCallCheck = form.getCheckBox("initialCallCheck" + index);
+        const returnVisitCheck = form.getCheckBox("returnVisitCheck" + index);
+        const bibleStudyCheck = form.getCheckBox("bibleStudyCheck" + index);
+        const talkCheck = form.getCheckBox("talkCheck" + index);
+        const otherCheck = form.getCheckBox("otherCheck" + index);
+        const otherText = form.getTextField("otherText" + index);
+
+        const mainHallCheck = form.getCheckBox("mainHallCheck" + index);
+        const auxiliaryHallCheck = form.getCheckBox("auxiliaryHallCheck" + index);
+        const auxiliaryHall2Check = form.getCheckBox("auxiliaryHall2Check" + index);
+
+        //Assign fields
+        principal.setText(this.participantService.getParticipant(a.principal).name);
+        if (a.assistant) {
+          assistant.setText(this.participantService.getParticipant(a.assistant).name);
+        }
+        date.setText(
+          this.translocoLocaleService.localizeDate(
+            a.date,
+            this.translocoLocaleService.getLocale(),
+            { dateStyle: "full" }
+          )
+        );
+
+        const type = this.assignTypeService.getAssignType(a.assignType).type;
+
+        if (type === "bibleReading") {
+          bibleReadingCheck.check();
+        }
+        if (type === "initialCall") {
+          initialCallCheck.check();
+        }
+        if (type === "returnVisit") {
+          returnVisitCheck.check();
+        }
+        if (type === "bibleStudy") {
+          bibleStudyCheck.check();
+        }
+        if (type === "talk") {
+          talkCheck.check();
+        }
+        if (type === "other") {
+          otherCheck.check();
+          otherText.setText(a.theme);
+        }
+
+        const roomType = this.roomService.getRoom(a.room).type;
+
+        if (roomType === "mainHall") {
+          mainHallCheck.check();
+        }
+        if (roomType === "auxiliaryRoom1") {
+          auxiliaryHallCheck.check();
+        }
+        if (roomType === "auxiliaryRoom2") {
+          auxiliaryHall2Check.check();
+        }
+      }
+      form.flatten();
+      const pdfBytes = await s89smTemplate.save();
+
+      //Ensure the filename is valid for the system
+      const fileNamePath = filenamifyPath(
+        path.join(this.homeDir, "assignments", iteration + "-" + this.S89SM)
+      );
+      ensureFileSync(fileNamePath);
+      writeFile(fileNamePath, pdfBytes);
+    }
+    //Now we have N iteration files, lets merge them
+    const pdf = await PDFDocument.create();
+    for (let i = 0; i < iterations; i++) {
+      const filename = i + "-" + this.S89SM;
+      const p = path.join(this.homeDir, "assignments", i + "-" + this.S89SM);
+      const iterationPdf = await this.getPdfTemplateFile(filename, p);
+      //The description of copyPages doesnt add a page to the new pdf, it just returns the copied pages
+      const [page] = await pdf.copyPages(iterationPdf, [0]);
+      //Thats why we need to add the page here
+      pdf.addPage(page);
+    }
+    return pdf.save();
   }
 }

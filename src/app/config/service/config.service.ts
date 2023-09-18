@@ -8,12 +8,17 @@ import { RoleInterface } from "app/roles/model/role.model";
 import { nanoid } from "nanoid";
 import path from "path";
 
+const os = require("os");
+
 @Injectable({
   providedIn: "root",
 })
 export class ConfigService {
   //nanoId max id characters https://zelark.github.io/nano-id-cc/
   nanoMaxCharId = 10;
+
+  //The user home
+  homeDir = os.homedir();
 
   //Administrator key
   administratorKey = "administrator";

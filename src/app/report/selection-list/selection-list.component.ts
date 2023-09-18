@@ -112,7 +112,7 @@ export class SelectionListComponent implements OnChanges {
   }
 
   getBorderRight(color): string {
-    return `border-right: 8px solid ${color};`;
+    return `border-right: 12px solid ${color};`;
   }
   /**
    * Convert the id's to names

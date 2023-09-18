@@ -382,5 +382,8 @@
   "ASSIGNTYPE_TIME_ICON": "Este icono aparece cuando la distancia en tiempo para esta misma asignación no se cumple para el mismo participante",
   "ROOMTYPES_MAINHALL": "Sala principal",
   "ROOMTYPES_AUXILIARYROOM1": "Sala auxiliar núm. 1",
-  "ROOMTYPES_AUXILIARYROOM2": "Sala auxiliar núm. 2"
+  "ROOMTYPES_AUXILIARYROOM2": "Sala auxiliar núm. 2",
+
+  "S89S_TOOLTIP": "Generar el pdf s89s",
+  "S89SM_TOOLTIP": "Generar el pdf 4-s89s que contiene todas las asignaciones"
 }

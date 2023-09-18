@@ -354,5 +354,8 @@
 
   "ROOMTYPES_MAINHALL": "Main hall",
   "ROOMTYPES_AUXILIARYROOM1": "Auxiliary room 1",
-  "ROOMTYPES_AUXILIARYROOM2": "Auxiliary room 2"
+  "ROOMTYPES_AUXILIARYROOM2": "Auxiliary room 2",
+
+  "S89S_TOOLTIP": "Generate individual s89s pdf",
+  "S89SM_TOOLTIP": "Generate the 4-s89s pdf containing all the assignments"
 }
