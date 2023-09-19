@@ -201,11 +201,11 @@ export class SelectionListHorComponent implements OnChanges {
 
     const font = this.pdfService.getFontForLang();
 
-    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 20, {
+    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 8, {
       align: "center",
     });
 
-    let firstTable = true;
+    /* let firstTable = true; */
 
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       const tableId = `table${i}`;
@@ -213,7 +213,7 @@ export class SelectionListHorComponent implements OnChanges {
         html: "#" + tableId,
         styles: { font, fontSize: 10 },
         theme: "plain",
-        margin: firstTable ? { top: 30 } : undefined,
+        margin: { vertical: 10, horizontal: 4 },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
@@ -231,7 +231,7 @@ export class SelectionListHorComponent implements OnChanges {
           }
         },
       });
-      firstTable = false;
+      /* firstTable = false; */
     }
     doc.save("assignmentsPrint");
   }

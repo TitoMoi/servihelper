@@ -257,11 +257,9 @@ export class SelectionListComponent implements OnChanges {
 
     const font = this.pdfService.getFontForLang();
 
-    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 20, {
+    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 8, {
       align: "center",
     });
-
-    let firstTable = true;
 
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       const tableId = `table${i}`;
@@ -269,8 +267,8 @@ export class SelectionListComponent implements OnChanges {
         html: "#" + tableId,
         styles: { font, fontSize: isForPrint ? 10 : 13 },
         theme: "plain",
-        margin: this.reportTitle ? { top: 30 } : firstTable ? { top: 10 } : undefined,
-        columnStyles: { 0: { cellWidth: 110 }, 1: { cellWidth: 80 } },
+        margin: { vertical: 10, horizontal: 4 },
+        columnStyles: { 0: { cellWidth: 140 }, 1: { cellWidth: 50 } },
         didParseCell: (data) => {
           //bug fix
           data.cell.text = data.cell.text.map((char) => char.trim());
@@ -285,7 +283,6 @@ export class SelectionListComponent implements OnChanges {
           }
         },
       });
-      firstTable = false;
     }
 
     doc.save(isForPrint ? "assignmentsPrint" : "assignments");
