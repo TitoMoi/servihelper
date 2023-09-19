@@ -29,7 +29,7 @@
   ></mat-icon>
 </div>
 
-<div id="toPngDivId" style="width: 40rem" class="bg-color-white">
+<div id="toPngDivId" style="width: 791px; height: auto" class="bg-color-white">
   <div *ngIf="reportTitle" class="fw-bold p-2" [style.textAlign]="'center'">
     {{ reportTitle }}
   </div>
@@ -40,6 +40,7 @@
           class="fw-bold pt-2 pb-2"
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
+          [style.width]="'65%'"
         >
           {{
             ag.date
@@ -65,6 +66,7 @@
             getBorderRight((assignment.assignType.id | assignTypePipe).color || 'transparent')
           "
           [style.fontSize]="defaultReportFontSize"
+          [style.width]="'65%'"
         >
           <div class="me-3">
             {{
