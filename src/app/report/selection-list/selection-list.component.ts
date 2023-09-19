@@ -267,7 +267,7 @@ export class SelectionListComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font, fontSize: 13 },
+        styles: { font, fontSize: isForPrint ? 10 : 13 },
         theme: "plain",
         margin: this.reportTitle ? { top: 30 } : firstTable ? { top: 10 } : undefined,
         columnStyles: { 0: { cellWidth: 110 }, 1: { cellWidth: 80 } },
@@ -280,7 +280,7 @@ export class SelectionListComponent implements OnChanges {
           if (localName === "th") {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fontStyle = "bold";
-            data.cell.styles.fontSize = 14;
+            data.cell.styles.fontSize = 12;
             return;
           }
         },
