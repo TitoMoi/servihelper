@@ -18,3 +18,9 @@ mat-icon {
   height: 28px;
   width: 28px;
 }
+
+/* Rounded border */
+hr.rounded {
+  border-top: 12px solid #bbb;
+  border-radius: 7px;
+}

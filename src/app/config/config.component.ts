@@ -109,7 +109,7 @@ export class ConfigComponent implements OnDestroy {
     assignmentNoteTitle: "",
     reportTitle: "",
     defaultFooterNoteId: "",
-    defaultReportFontSize: "12",
+    defaultReportFontSize: "13",
     defaultReportDateColor: "#FFFFFF",
     defaultWeekDayBegins: 1,
     defaultReportDateFormat: this.translocoDateFormats[3],
