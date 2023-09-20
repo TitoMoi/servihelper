@@ -9,7 +9,7 @@ import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 import { MatButtonModule } from "@angular/material/button";
-import { NgFor, NgIf } from "@angular/common";
+import { AsyncPipe, NgClass, NgFor, NgIf } from "@angular/common";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelect, MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
@@ -24,6 +24,7 @@ import { PublicThemeService } from "app/public-theme/service/public-theme.servic
 import path from "path";
 import { ipcRenderer } from "electron";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 @Component({
   selector: "app-config",
@@ -44,10 +45,13 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     NgFor,
     MatButtonModule,
     NgIf,
+    AsyncPipe,
+    NgClass,
     MatIconModule,
     SheetTitlePipe,
     PublicThemePipe,
     MatTooltipModule,
+    MatSlideToggleModule,
   ],
 })
 export class ConfigComponent implements OnDestroy {
@@ -55,6 +59,7 @@ export class ConfigComponent implements OnDestroy {
   translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
 
   titles = this.sheetTitleService.getTitles().sort((a, b) => (a.order > b.order ? 1 : -1));
+
   publicThemes = this.publicThemeService
     .getPublicThemes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
@@ -72,6 +77,8 @@ export class ConfigComponent implements OnDestroy {
 
   //is part of the form
   currentConfig = this.configService.getConfig();
+
+  isSharedFolderSelected = false;
 
   // Config form
   form = this.formBuilder.group({
@@ -153,6 +160,72 @@ export class ConfigComponent implements OnDestroy {
 
     //Close the program
     ipcRenderer.send("closeApp");
+  }
+
+  async sharedFolderSelected(event: Event) {
+    const target = event.target as HTMLInputElement;
+    console.log(target.files[0].webkitRelativePath);
+    /*  const dialogPath = await dialog.showOpenDialog({ properties: ["openDirectory"] });
+    console.log(dialogPath); */
+
+    /* const zipFile = this.getZipContentFromFileEvent(event);
+    const zip = new AdmZip(zipFile.path);
+    // reading archives
+    zip.getEntries().forEach((zipEntry) => {
+      switch (
+        zipEntry.entryName //entryName = participant.json...etc
+      ) {
+        case this.configService.configFilename:
+          const currentConfig = this.configService.getConfig(); //Default config
+          const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
+          let finalConfig = { ...currentConfig, ...incomingConfig };
+          writeJsonSync(this.configService.configPath, finalConfig);
+          break;
+        default:
+          writeFileSync(
+            path.join(this.configService.sourceFilesPath, zipEntry.entryName),
+            zipEntry.getData().toString("utf8")
+          );
+      }
+    });
+
+    //After data has been owerwritten, we need to check if we need to migrate and make changes
+    this.migrationService.migrateData();
+
+    this.configService.hasChanged = true;
+    const config = this.configService.getConfig();
+    //Update last imported date and filename
+    config.lastImportedDate = new Date();
+    config.lastImportedFilename = zipFile.name;
+    this.configService.updateConfig(config);
+
+    this.roomService.hasChanged = true;
+    this.assignTypeService.hasChanged = true;
+    this.assignmentService.hasChanged = true;
+    this.participantService.hasChanged = true;
+    this.sheetTitleService.hasChanged = true;
+    this.publicThemeService.hasChanged = true;
+    this.noteService.hasChanged = true;
+    this.polygonService.hasChanged = true;
+    this.territoryService.hasChanged = true;
+    this.territoryGroupService.hasChanged = true;
+    this.roomService.getRooms();
+    this.assignTypeService.getAssignTypes();
+    this.noteService.getNotes();
+    this.sheetTitleService.getTitles();
+    this.publicThemeService.getPublicThemes();
+    this.participantService.getParticipants();
+    this.assignmentService.getAssignments();
+    this.polygonService.getPolygons();
+    this.territoryService.getTerritories();
+    this.territoryGroupService.getTerritoryGroups();
+
+    let lang = this.configService.getConfig().lang;
+    this.translocoService = this.translocoService.setActiveLang(lang);
+    if (lang === "zhCN") lang = "zh";
+    this.dateAdapter.setLocale(lang);
+
+    this.isZipLoaded = true; */
   }
 
   stopPropagation(event) {

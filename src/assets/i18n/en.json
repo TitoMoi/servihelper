@@ -354,5 +354,9 @@
   "ASSIGNTYPE_TIME_ICON": "This icon will appear when the distance in time for the participant is not satisfied for this assignment type",
   "S89S_TOOLTIP": "Generate individual s89s pdf",
   "S89SM_TOOLTIP": "Generate the 4-s89s pdf containing all the assignments",
-  "TEMPLATE_NOT_AVAILABLE": "Pdf not available for this lang, please send it to {{INFO__CONTACT_ANSWER}} so it can be available in the next version"
+  "TEMPLATE_NOT_AVAILABLE": "Pdf not available for this lang, please send it to {{INFO__CONTACT_ANSWER}} so it can be available in the next version",
+  "CONFIG_GO_ONLINE": "Go online",
+  "CONFIG_GO_ONLINE_LABEL": "Go online",
+  "CONFIG_ONLINE_FOLDER_SELECT": "Select the shared folder",
+  "CONFIG_ONLINE_FOLDER_SELECTED": "Shared folder selected"
 }

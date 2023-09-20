@@ -4,6 +4,106 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <div class="d-flex align-items-center">
+            <mat-icon svgIcon="online"></mat-icon>
+            <h3 class="m-3">
+              {{ t("CONFIG_GO_ONLINE") }}
+            </h3>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="explanation">
+        <div>
+          Servihelper works offline by default, all the data is stored inside the servihelper
+          folder.
+        </div>
+        <div>
+          To work online with more administrators we need to specify another folder where the
+          data will be.
+        </div>
+        <div>
+          It cannot be whatever folder, it must be a folder where data files can be updated by
+          more administrators.
+        </div>
+        <div>So, a shared folder is required. Some common shared folders are:</div>
+        <div class="d-flex mt-2 mb-2">
+          <span class="me-3">Google Drive</span
+          ><mat-icon class="me-3" svgIcon="googledrive"></mat-icon>
+          <span class="me-3">Dropbox</span
+          ><mat-icon class="me-3" svgIcon="onedrive"></mat-icon>
+          <span class="me-3">OneDrive</span><mat-icon svgIcon="dropbox"></mat-icon>
+        </div>
+        <div>
+          It's necessary to install the desktop app for one of the aboves providers. You will
+          find the app on their respective markets.
+        </div>
+        <div>You also can look up for the desktop app from google search.</div>
+        <div>
+          When you have installed the app, check that its up, you're logged and its running.
+        </div>
+        <div>
+          Create the shared folder and prepare the shared link for the other administrators.
+          <span class="fst-italic"
+            >(When the other admins install the same app, they need to use you link and the
+            folder will appear on their system)</span
+          >
+        </div>
+        <div>
+          Then click on the next slider button and a prompt to select the shared folder will
+          appear.
+        </div>
+        <div>All the data will be copied to that shared folder.</div>
+        <div>
+          Share the link with the other administrators, they have to repeat the same steps.
+        </div>
+        <div>Servihelper implements a lock system to avoid collisions.</div>
+        <div>
+          BUT, you need to check every time that the desktop app from one of the above is up,
+          you are logged and its running, otherwise servihelper lock mechanism wont work.
+        </div>
+        <h4>{{ t("CONFIG_GO_ONLINE_LABEL") }}</h4>
+        <div class="d-flex align-items-baseline">
+          <mat-slide-toggle #onlineToggle color="primary" class="mb-3 me-3">
+            {{ t("CONFIG_GO_ONLINE") }}
+          </mat-slide-toggle>
+          <div *ngIf="(onlineToggle.change | async)?.checked">
+            <label
+              for="folder-upload"
+              [ngClass]="{
+                'custom-file-upload-success': isSharedFolderSelected,
+                'custom-file-upload': !isSharedFolderSelected
+              }"
+            >
+              <span *ngIf="!isSharedFolderSelected"
+                >{{ t("CONFIG_ONLINE_FOLDER_SELECT") }} ...</span
+              >
+              <span *ngIf="isSharedFolderSelected" class="ml-3 d-inline-block">{{
+                t("CONFIG_ONLINE_FOLDER_SELECTED")
+              }}</span>
+            </label>
+            <input
+              id="folder-upload"
+              type="file"
+              webkitdirectory
+              (change)="sharedFolderSelected($event)"
+            />
+          </div>
+        </div>
+
+        <div>The lock works with these premises:</div>
+        <ul>
+          <li>Check that you have internet access.</li>
+          <li class="fw-bold color-lightcoral">
+            Check that the desktop app is up, you're logged and its running
+            <span class="fst-italic">(You need to check this manually)</span>
+          </li>
+          <li>Internal checks to guarantee the lock and also prevent away mode.</li>
+        </ul>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel class="mb-2">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="d-flex align-items-center">
             <mat-icon class="me-2 pe-none" svgIcon="speech"></mat-icon>
             <h3 class="m-3">
               {{ t("CONFIG_ACCORDION_PUBLIC_SPEECH") }}
@@ -213,7 +313,7 @@
       </mat-form-field>
     </mat-expansion-panel>
     <mat-expansion-panel class="mb-2">
-      <mat-expansion-panel-header tabIndex="3">
+      <mat-expansion-panel-header>
         <mat-panel-title>
           <h3 class="m-3">
             {{ t("CONFIG_TIME_DISTANCE_TITLE") }}
@@ -242,7 +342,7 @@
       </mat-form-field>
     </mat-expansion-panel>
     <mat-expansion-panel class="mb-2 hover-lightcoral">
-      <mat-expansion-panel-header tabIndex="4" class="bg-color-lightcoral">
+      <mat-expansion-panel-header class="bg-color-lightcoral">
         <mat-panel-title>
           <h3 class="m-3">
             {{ t("CONFIG_RESTART_LABEL") }}

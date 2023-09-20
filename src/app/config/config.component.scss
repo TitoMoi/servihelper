@@ -1,3 +1,7 @@
+.explanation {
+  font-size: 14px;
+}
+
 .green-msg {
   background-color: white;
   border: 2px solid lightgreen;
@@ -23,4 +27,23 @@ mat-icon {
 hr.rounded {
   border-top: 12px solid #bbb;
   border-radius: 7px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.custom-file-upload-success {
+  border: 1px solid #ccc;
+  background-color: lightgreen;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }

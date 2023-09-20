@@ -69,7 +69,7 @@ export class HomeComponent {
   }
 
   getZipContentFromFileEvent(event: Event) {
-    const target: HTMLInputElement = event.target as HTMLInputElement;
+    const target = event.target as HTMLInputElement;
     return target.files[0];
   }
 
