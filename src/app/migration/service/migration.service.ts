@@ -24,10 +24,17 @@ export class MigrationService {
     //First migration
     if (!migration) {
       this.toV5();
+      this.saveData();
       return;
     }
   }
 
+  saveData() {
+    this.assignTypeService.saveAssignTypesToFile();
+    this.roomService.saveRoomsToFile();
+  }
+
+  /*Based on git changes to the models **/
   toV5() {
     //:::assignTypes:::
     for (const at of this.assignTypeService.getAssignTypes()) {

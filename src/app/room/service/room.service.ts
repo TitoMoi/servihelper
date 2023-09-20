@@ -42,7 +42,7 @@ export class RoomService {
    *
    * @returns true if rooms are saved to disk or false
    */
-  #saveRoomsToFile(): boolean {
+  saveRoomsToFile(): boolean {
     //Write rooms back to file
     writeJson(this.configService.roomsPath, this.#rooms);
     return true;
@@ -62,7 +62,7 @@ export class RoomService {
     this.#rooms.push(room);
     this.#roomsMap.set(room.id, room);
     //save rooms with the new room
-    this.#saveRoomsToFile();
+    this.saveRoomsToFile();
 
     return room.id;
   }
@@ -91,7 +91,7 @@ export class RoomService {
         this.#rooms[i] = room;
         this.#roomsMap.set(room.id, room);
         //save rooms with the updated room
-        return this.#saveRoomsToFile();
+        return this.saveRoomsToFile();
       }
     }
     return false;
@@ -107,6 +107,6 @@ export class RoomService {
     this.#roomsMap.delete(id);
     this.#rooms = this.#rooms.filter((b) => b.id !== id);
     //save rooms
-    return this.#saveRoomsToFile();
+    return this.saveRoomsToFile();
   }
 }
