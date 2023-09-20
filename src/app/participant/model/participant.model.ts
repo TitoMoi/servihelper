@@ -27,6 +27,7 @@ export interface ParticipantDynamicInterface extends ParticipantInterface {
   isCloseToOthersPrayer?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments
 }
 
+//We need a model to save because on save there are some unwanted properties from the dynamic model
 export class ParticipantModel {
   id: string;
   name: string;

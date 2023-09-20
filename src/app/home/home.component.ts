@@ -19,6 +19,7 @@ import { TerritoryGroupService } from "app/map/territory-group/service/territory
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
+import { MigrationService } from "app/migration/service/migration.service";
 
 @Component({
   selector: "app-home",
@@ -38,6 +39,7 @@ export class HomeComponent {
 
   constructor(
     private configService: ConfigService,
+    private migrationService: MigrationService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
     private noteService: NoteService,
@@ -92,6 +94,9 @@ export class HomeComponent {
           );
       }
     });
+
+    //After data has been owerwritten, we need to check if we need to migrate and make changes
+    this.migrationService.migrateData();
 
     this.configService.hasChanged = true;
     const config = this.configService.getConfig();

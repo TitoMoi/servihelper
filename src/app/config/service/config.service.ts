@@ -26,9 +26,7 @@ export class ConfigService {
   assetsFilesPath = APP_CONFIG.production ? path.join(__dirname, "assets") : "assets";
 
   iconsFilesPath = path.join(this.assetsFilesPath, "icons");
-
   sourceFilesPath = path.join(this.assetsFilesPath, "source");
-
   templatesFilesPath = path.join(this.assetsFilesPath, "templates");
 
   assignmentsFilename = "assignment.json";
@@ -37,6 +35,7 @@ export class ConfigService {
   assignTypesFilename = "assignType.json";
   roomsFilename = "room.json";
   configFilename = "config.json";
+  migrationFilename = "migration.json";
   sheetTitleFilename = "sheetTitle.json";
   publicThemeFilename = "publicTheme.json";
   territoriesFilename = "territory.json";
@@ -50,23 +49,15 @@ export class ConfigService {
   hasChanged = true;
 
   assignmentsPath = path.join(this.sourceFilesPath, this.assignmentsFilename);
-
   notesPath = path.join(this.sourceFilesPath, this.notesFilename);
-
   participantsPath = path.join(this.sourceFilesPath, this.participantsFilename);
-
+  migrationPath = path.join(this.sourceFilesPath, this.migrationFilename);
   assignTypesPath = path.join(this.sourceFilesPath, this.assignTypesFilename);
-
   roomsPath = path.join(this.sourceFilesPath, this.roomsFilename);
-
   sheetTitlePath = path.join(this.sourceFilesPath, this.sheetTitleFilename);
-
   publicThemePath = path.join(this.sourceFilesPath, this.publicThemeFilename);
-
   territoriesPath = path.join(this.sourceFilesPath, this.territoriesFilename);
-
   territoryGroupsPath = path.join(this.sourceFilesPath, this.territoryGroupsFilename);
-
   polygonsPath = path.join(this.sourceFilesPath, this.polygonsFilename);
 
   private configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
