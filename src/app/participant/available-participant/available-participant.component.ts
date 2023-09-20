@@ -3,7 +3,10 @@ import { CommonModule } from "@angular/common";
 import { ParticipantService } from "../service/participant.service";
 import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { ParticipantAssignTypeInterface } from "../model/participant.model";
+import {
+  ParticipantAssignTypeInterface,
+  ParticipantInterface,
+} from "../model/participant.model";
 import { SortService } from "app/services/sort.service";
 import { ConfigService } from "app/config/service/config.service";
 import { Observable, Subscription, combineLatest, map } from "rxjs";
@@ -14,6 +17,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { ExportService } from "app/services/export.service";
 import { MatIconModule } from "@angular/material/icon";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 
 @Component({
   selector: "app-available-participant",
@@ -56,20 +60,6 @@ export class AvailableParticipantComponent {
     private exportService: ExportService
   ) {}
 
-  checkIncludesAssignTypeAsPrincipal(
-    assignTypes: ParticipantAssignTypeInterface[],
-    assignTypeId: string
-  ) {
-    return assignTypes.some((at) => at.assignTypeId === assignTypeId && at.canPrincipal);
-  }
-
-  checkIncludesAssignTypeAsAssistant(
-    assignTypes: ParticipantAssignTypeInterface[],
-    assignTypeId: string
-  ) {
-    return assignTypes.some((at) => at.assignTypeId === assignTypeId && at.canAssistant);
-  }
-
   ngOnInit(): void {
     //prepare emissions, emits also the first time
     this.subscription.add(
@@ -94,11 +84,39 @@ export class AvailableParticipantComponent {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.participantService.saveParticipantsToFile();
+  }
+
+  checkIncludesAssignTypeAsPrincipal(
+    assignTypes: ParticipantAssignTypeInterface[],
+    assignTypeId: string
+  ) {
+    return assignTypes.some((at) => at.assignTypeId === assignTypeId && at.canPrincipal);
+  }
+
+  checkIncludesAssignTypeAsAssistant(
+    assignTypes: ParticipantAssignTypeInterface[],
+    assignTypeId: string
+  ) {
+    return assignTypes.some((at) => at.assignTypeId === assignTypeId && at.canAssistant);
   }
 
   //first load or Admin
   getAllAssignTypesIds() {
     return this.assignTypeService.getAssignTypes()?.map((at) => at.id);
+  }
+
+  changeAvailability(
+    participant: ParticipantInterface,
+    assignType: AssignTypeInterface,
+    isPrincipal: boolean
+  ) {
+    const participantAt = participant.assignTypes.find(
+      (at) => at.assignTypeId === assignType.id
+    );
+    isPrincipal
+      ? (participantAt.canPrincipal = !participantAt.canPrincipal)
+      : (participantAt.canAssistant = !participantAt.canAssistant);
   }
 
   async toPng(id) {

@@ -4,7 +4,7 @@
 </div>
 <div class="table-overflow">
   <div id="toPngDivId">
-    <table>
+    <table class="mb-3">
       <thead>
         <th *transloco="let t" class="bg-color-white">
           <div>{{ t("PARTICIPANT_AVAILABLE_PRINCIPAL") }}</div>
@@ -23,7 +23,11 @@
       <tbody>
         <tr *ngFor="let p of participants">
           <td class="fw-bold bg-color-white">{{ p.name }}</td>
-          <td *ngFor="let at of assignTypes" class="bg-color-white text-center">
+          <td
+            *ngFor="let at of assignTypes"
+            class="bg-color-white text-center"
+            (click)="changeAvailability(p, at, true)"
+          >
             {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔" : "" }}
           </td>
         </tr>
@@ -49,7 +53,11 @@
     <tbody>
       <tr *ngFor="let p of participants">
         <td class="fw-bold bg-color-white">{{ p.name }}</td>
-        <td *ngFor="let at of assignTypesAssistant" class="bg-color-white text-center">
+        <td
+          *ngFor="let at of assignTypesAssistant"
+          class="bg-color-white text-center"
+          (click)="changeAvailability(p, at, false)"
+        >
           {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔" : "" }}
         </td>
       </tr>
