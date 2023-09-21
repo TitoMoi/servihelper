@@ -14,22 +14,27 @@ import { NavigationComponent } from "./navigation/navigation.component";
 import { SheetTitleService } from "./sheet-title/service/sheet-title.service";
 import { TerritoryService } from "./map/territory/service/territory.service";
 import { TerritoryGroupService } from "./map/territory-group/service/territory-group.service";
-
+import { OnlineService } from "app/online/service/online.service";
 import { PolygonService } from "./map/territory/service/polygon.service";
 import { PublicThemeService } from "./public-theme/service/public-theme.service";
 import { readdirSync } from "fs-extra";
 import path from "path";
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
   standalone: true,
-  imports: [NavigationComponent, RouterOutlet],
+  imports: [NavigationComponent, RouterOutlet, NgIf],
 })
 export class AppComponent implements OnInit {
+  //Flag to render the app when the paths are resolved (online or offline)
+  pathsResolved = false;
+
   constructor(
     private configService: ConfigService,
+    private onlineService: OnlineService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
     private noteService: NoteService,
@@ -63,9 +68,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.assignmentService.getAssignments();
     this.pdfService.registerOnLangChange();
-    this.configService.getConfig();
+    const online = this.onlineService.getOnline();
+    this.pathsResolved = this.configService.prepareFilePaths(online); //1
+    this.assignmentService.getAssignments();
+    this.configService.getConfig(); //2
     this.roomService.getRooms();
     this.assignTypeService.getAssignTypes();
     this.noteService.getNotes();

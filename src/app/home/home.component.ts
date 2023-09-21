@@ -20,6 +20,7 @@ import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 import { MigrationService } from "app/migration/service/migration.service";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-home",
@@ -37,8 +38,11 @@ export class HomeComponent {
 
   config$ = this.configService.config$;
 
+  isOnline = this.onlineService.getOnline().isOnline;
+
   constructor(
     private configService: ConfigService,
+    private onlineService: OnlineService,
     private migrationService: MigrationService,
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
@@ -73,6 +77,7 @@ export class HomeComponent {
     return target.files[0];
   }
 
+  /** Uploads servihelper files, only for offline */
   uploadZipFiles(event: Event) {
     const zipFile = this.getZipContentFromFileEvent(event);
     const zip = new AdmZip(zipFile.path);
@@ -82,6 +87,8 @@ export class HomeComponent {
         zipEntry.entryName //entryName = participant.json...etc
       ) {
         case this.configService.configFilename:
+          const online = this.onlineService.getOnline();
+          this.configService.prepareFilePaths(online);
           const currentConfig = this.configService.getConfig(); //Default config
           const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
           let finalConfig = { ...currentConfig, ...incomingConfig };

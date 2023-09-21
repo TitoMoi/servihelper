@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { RoleInterface } from "app/roles/model/role.model";
 import { nanoid } from "nanoid";
 import path from "path";
+import { OnlineInterface } from "app/online/model/online.model";
 
 const os = require("os");
 
@@ -23,18 +24,15 @@ export class ConfigService {
   //Administrator key
   administratorKey = "administrator";
 
-  assetsFilesPath = APP_CONFIG.production ? path.join(__dirname, "assets") : "assets";
-
-  iconsFilesPath = path.join(this.assetsFilesPath, "icons");
-  sourceFilesPath = path.join(this.assetsFilesPath, "source");
-  templatesFilesPath = path.join(this.assetsFilesPath, "templates");
-
+  //Json Filenames
   assignmentsFilename = "assignment.json";
   notesFilename = "note.json";
   participantsFilename = "participant.json";
   assignTypesFilename = "assignType.json";
   roomsFilename = "room.json";
   configFilename = "config.json";
+  onlineFilename = "online.json";
+  lockFilename = "lock.json";
   migrationFilename = "migration.json";
   sheetTitleFilename = "sheetTitle.json";
   publicThemeFilename = "publicTheme.json";
@@ -42,23 +40,32 @@ export class ConfigService {
   territoryGroupsFilename = "territoryGroup.json";
   polygonsFilename = "polygons.json";
 
+  //These file paths are not affected by the online
   /** Where the file is depending on the context__dirname is where the .js file exists */
-  configPath = path.join(this.sourceFilesPath, this.configFilename);
+  assetsFilesPath = APP_CONFIG.production ? path.join(__dirname, "assets") : "assets";
+  iconsFilesPath = path.join(this.assetsFilesPath, "icons");
+  templatesFilesPath = path.join(this.assetsFilesPath, "templates");
+  //This source is always offline
+  onlinePath = path.join(this.assetsFilesPath, "source", this.onlineFilename);
+  /**Also, these other path location below are prepared when the config file is loaded */
+  sourceFilesPath;
+  //The inner files of source folder
+  configPath;
+  lockPath;
+  assignmentsPath;
+  notesPath;
+  participantsPath;
+  migrationPath;
+  assignTypesPath;
+  roomsPath;
+  sheetTitlePath;
+  publicThemePath;
+  territoriesPath;
+  territoryGroupsPath;
+  polygonsPath;
 
   // Flag to indicate that config file has changed
   hasChanged = true;
-
-  assignmentsPath = path.join(this.sourceFilesPath, this.assignmentsFilename);
-  notesPath = path.join(this.sourceFilesPath, this.notesFilename);
-  participantsPath = path.join(this.sourceFilesPath, this.participantsFilename);
-  migrationPath = path.join(this.sourceFilesPath, this.migrationFilename);
-  assignTypesPath = path.join(this.sourceFilesPath, this.assignTypesFilename);
-  roomsPath = path.join(this.sourceFilesPath, this.roomsFilename);
-  sheetTitlePath = path.join(this.sourceFilesPath, this.sheetTitleFilename);
-  publicThemePath = path.join(this.sourceFilesPath, this.publicThemeFilename);
-  territoriesPath = path.join(this.sourceFilesPath, this.territoriesFilename);
-  territoryGroupsPath = path.join(this.sourceFilesPath, this.territoryGroupsFilename);
-  polygonsPath = path.join(this.sourceFilesPath, this.polygonsFilename);
 
   private configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
   /**
@@ -82,6 +89,30 @@ export class ConfigService {
     this.#config = readJSONSync(this.configPath);
     this.configSubject$.next(this.#config);
     return this.#config;
+  }
+
+  prepareFilePaths(onlineConfig: OnlineInterface): boolean {
+    if (onlineConfig.isOnline && onlineConfig.path) {
+      this.sourceFilesPath = onlineConfig.path;
+    } else {
+      this.sourceFilesPath = path.join(this.assetsFilesPath, "source");
+    }
+
+    //PREPARE ALL THE REMAINING PATHS
+    this.configPath = path.join(this.sourceFilesPath, this.configFilename);
+    this.lockPath = path.join(this.sourceFilesPath, this.configFilename);
+    this.assignmentsPath = path.join(this.sourceFilesPath, this.assignmentsFilename);
+    this.notesPath = path.join(this.sourceFilesPath, this.notesFilename);
+    this.participantsPath = path.join(this.sourceFilesPath, this.participantsFilename);
+    this.migrationPath = path.join(this.sourceFilesPath, this.migrationFilename);
+    this.assignTypesPath = path.join(this.sourceFilesPath, this.assignTypesFilename);
+    this.roomsPath = path.join(this.sourceFilesPath, this.roomsFilename);
+    this.sheetTitlePath = path.join(this.sourceFilesPath, this.sheetTitleFilename);
+    this.publicThemePath = path.join(this.sourceFilesPath, this.publicThemeFilename);
+    this.territoriesPath = path.join(this.sourceFilesPath, this.territoriesFilename);
+    this.territoryGroupsPath = path.join(this.sourceFilesPath, this.territoryGroupsFilename);
+    this.polygonsPath = path.join(this.sourceFilesPath, this.polygonsFilename);
+    return true;
   }
   /**
    *

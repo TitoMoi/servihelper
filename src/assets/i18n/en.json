@@ -358,5 +358,19 @@
   "CONFIG_GO_ONLINE": "Go online",
   "CONFIG_GO_ONLINE_LABEL": "Go online",
   "CONFIG_ONLINE_FOLDER_SELECT": "Select the shared folder",
-  "CONFIG_ONLINE_FOLDER_SELECTED": "Shared folder selected"
+  "CONFIG_ONLINE_FOLDER_SELECTED": "Shared folder selected",
+  "HOME_IS_ONLINE_ACTIVATED": "Online mode is activated",
+  "BUTTON_CHECK_ONLINE": "Check online folder",
+  "CONFIG_ONLINE_FOLDER_ERROR": "The provided system url is not valid",
+  "PLACEHOLDER_SHARED_FOLDER_LABEL": "Enter the system shared folder path",
+  "CONFIG_IS_VALID_PATH": "It's a valid path!",
+  "CONFIG_NO_FILES_SHARED_FOLDER": "No servihelper files found under",
+  "CONFIG_ASK_MOVE_FILES": "Do you want to move the current offline files to the shared folder?",
+  "BUTTON_YES": "Yes",
+  "BUTTON_NO": "No",
+  "CONFIG_YES_WARNING": "Be careful! Click {{BUTTON_YES}} only if you are the first one to synchronize the files.",
+  "CONFIG_SERVIHELPER_FILES_FOUND": "Servihelper files found! Now you are working online!",
+  "CONFIG_CANNOT_COPY": "Cannot copy servihelper files to shared folder, some file already exists",
+  "CONFIG_SAVE_SHARED_COMPLETED": "All servihelper files are now under the shared folder. You are online now.",
+  "ONLINE": "Online"
 }

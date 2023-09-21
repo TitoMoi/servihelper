@@ -1,8 +1,15 @@
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import { readdirSync, writeJsonSync } from "fs-extra";
-import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from "@angular/core";
+import { copySync, existsSync, readdir, readdirSync, writeJsonSync } from "fs-extra";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { UntypedFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
@@ -25,6 +32,8 @@ import path from "path";
 import { ipcRenderer } from "electron";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { OnlineService } from "app/online/service/online.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-config",
@@ -54,7 +63,7 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     MatSlideToggleModule,
   ],
 })
-export class ConfigComponent implements OnDestroy {
+export class ConfigComponent implements OnInit, OnDestroy {
   @ViewChild("titleSelect") titleSelect: MatSelect;
   translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
 
@@ -78,6 +87,8 @@ export class ConfigComponent implements OnDestroy {
   //is part of the form
   currentConfig = this.configService.getConfig();
 
+  onlineConfig = this.onlineService.getOnline();
+
   isSharedFolderSelected = false;
 
   // Config form
@@ -98,6 +109,18 @@ export class ConfigComponent implements OnDestroy {
     assignmentRoomTitle: this.currentConfig.assignmentRoomTitle,
     assignmentNoteTitle: this.currentConfig.assignmentNoteTitle,
     reportTitle: this.currentConfig.reportTitle,
+  });
+
+  //ONLINE SECTION
+  servihelperFilesExist = false;
+  isPathError = false;
+  isValidPath = false;
+  copyFilesError = false;
+  saveCompleted = false;
+  //onlineForm
+  onlineForm = this.formBuilder.group({
+    isOnline: this.onlineConfig.isOnline,
+    path: this.onlineConfig.path,
   });
 
   // Confirm the delete operation
@@ -131,14 +154,29 @@ export class ConfigComponent implements OnDestroy {
 
   notes: NoteInterface[] = this.noteService.getNotes();
 
+  subscription = new Subscription();
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private configService: ConfigService,
+    private onlineService: OnlineService,
     private noteService: NoteService,
     private sheetTitleService: SheetTitleService,
     private publicThemeService: PublicThemeService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
+    private cdr: ChangeDetectorRef
   ) {}
+  ngOnInit(): void {
+    this.subscription.add(
+      this.onlineForm.get("isOnline").valueChanges.subscribe((isOnline) => {
+        if (!isOnline) {
+          console.log("no is online");
+          this.moveOnlineFilesBack();
+          this.saveOnline();
+        }
+      })
+    );
+  }
 
   ngOnDestroy(): void {
     this.configService.updateConfig({
@@ -146,6 +184,7 @@ export class ConfigComponent implements OnDestroy {
       ...this.configService.getConfig(), //Current config
       ...this.form.value, //Incoming config
     });
+    this.subscription.unsubscribe();
   }
 
   /**
@@ -162,70 +201,58 @@ export class ConfigComponent implements OnDestroy {
     ipcRenderer.send("closeApp");
   }
 
-  async sharedFolderSelected(event: Event) {
-    const target = event.target as HTMLInputElement;
-    console.log(target.files[0].webkitRelativePath);
-    /*  const dialogPath = await dialog.showOpenDialog({ properties: ["openDirectory"] });
-    console.log(dialogPath); */
+  async checkAndSaveOnlineMode() {
+    this.isPathError = false;
+    this.isValidPath = false;
+    const path = this.onlineForm.get("path").value;
+    this.isPathError = !existsSync(path);
 
-    /* const zipFile = this.getZipContentFromFileEvent(event);
-    const zip = new AdmZip(zipFile.path);
-    // reading archives
-    zip.getEntries().forEach((zipEntry) => {
-      switch (
-        zipEntry.entryName //entryName = participant.json...etc
-      ) {
-        case this.configService.configFilename:
-          const currentConfig = this.configService.getConfig(); //Default config
-          const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
-          let finalConfig = { ...currentConfig, ...incomingConfig };
-          writeJsonSync(this.configService.configPath, finalConfig);
-          break;
-        default:
-          writeFileSync(
-            path.join(this.configService.sourceFilesPath, zipEntry.entryName),
-            zipEntry.getData().toString("utf8")
-          );
-      }
+    if (this.isPathError) {
+      this.onlineForm.controls.path.setErrors({
+        required: true,
+      });
+      this.cdr.detectChanges();
+      return;
+    }
+    this.isValidPath = true;
+
+    const dirArray = await readdir(path);
+
+    this.servihelperFilesExist = dirArray.some((item) =>
+      item.includes(this.configService.onlineFilename)
+    );
+    this.cdr.detectChanges();
+
+    if (this.servihelperFilesExist) {
+      this.saveOnline();
+    }
+  }
+
+  moveOnlineFilesBack() {
+    copySync(this.onlineConfig.path, path.join(this.configService.assetsFilesPath, "source"), {
+      overwrite: true,
     });
+  }
 
-    //After data has been owerwritten, we need to check if we need to migrate and make changes
-    this.migrationService.migrateData();
+  moveOfflineFilesToSharedFolder() {
+    try {
+      this.copyFilesError = false;
+      this.saveCompleted = false;
+      copySync(this.configService.sourceFilesPath, this.onlineForm.get("path").value, {
+        errorOnExist: true,
+        overwrite: false,
+      });
+      this.saveCompleted = true;
+      this.saveOnline();
+    } catch (err) {
+      this.copyFilesError = true;
+    }
+  }
 
-    this.configService.hasChanged = true;
-    const config = this.configService.getConfig();
-    //Update last imported date and filename
-    config.lastImportedDate = new Date();
-    config.lastImportedFilename = zipFile.name;
-    this.configService.updateConfig(config);
-
-    this.roomService.hasChanged = true;
-    this.assignTypeService.hasChanged = true;
-    this.assignmentService.hasChanged = true;
-    this.participantService.hasChanged = true;
-    this.sheetTitleService.hasChanged = true;
-    this.publicThemeService.hasChanged = true;
-    this.noteService.hasChanged = true;
-    this.polygonService.hasChanged = true;
-    this.territoryService.hasChanged = true;
-    this.territoryGroupService.hasChanged = true;
-    this.roomService.getRooms();
-    this.assignTypeService.getAssignTypes();
-    this.noteService.getNotes();
-    this.sheetTitleService.getTitles();
-    this.publicThemeService.getPublicThemes();
-    this.participantService.getParticipants();
-    this.assignmentService.getAssignments();
-    this.polygonService.getPolygons();
-    this.territoryService.getTerritories();
-    this.territoryGroupService.getTerritoryGroups();
-
-    let lang = this.configService.getConfig().lang;
-    this.translocoService = this.translocoService.setActiveLang(lang);
-    if (lang === "zhCN") lang = "zh";
-    this.dateAdapter.setLocale(lang);
-
-    this.isZipLoaded = true; */
+  saveOnline() {
+    const onlineConfig = this.onlineForm.value;
+    console.log(onlineConfig);
+    this.onlineService.updateOnline(onlineConfig);
   }
 
   stopPropagation(event) {

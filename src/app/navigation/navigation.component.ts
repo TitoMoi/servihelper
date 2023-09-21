@@ -22,6 +22,7 @@ import { RouterLink } from "@angular/router";
 import { MatListModule } from "@angular/material/list";
 import { NgIf, NgFor, AsyncPipe } from "@angular/common";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-navigation",
@@ -49,6 +50,8 @@ export class NavigationComponent implements OnInit {
   hideSidenav;
 
   config = this.configService.getConfig();
+
+  online$ = this.onlineService.online$;
 
   lang = this.config.lang;
 
@@ -91,6 +94,7 @@ export class NavigationComponent implements OnInit {
     public translocoService: TranslocoService,
     private dateAdapter: DateAdapter<NativeDateAdapter>,
     public configService: ConfigService,
+    private onlineService: OnlineService,
     private sharedService: SharedService,
     private httpClient: HttpClient,
     private cdr: ChangeDetectorRef
