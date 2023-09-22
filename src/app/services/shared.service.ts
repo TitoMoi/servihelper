@@ -165,7 +165,8 @@ export class SharedService {
     link.remove();
   }
 
-  reloadAllData() {
+  /**Gets a fresh all data */
+  getAllData(): boolean {
     this.roomService.hasChanged = true;
     this.assignTypeService.hasChanged = true;
     this.assignmentService.hasChanged = true;
@@ -186,5 +187,6 @@ export class SharedService {
     this.polygonService.getPolygons();
     this.territoryService.getTerritories();
     this.territoryGroupService.getTerritoryGroups();
+    return true;
   }
 }

@@ -9,17 +9,16 @@ import { BehaviorSubject, Observable } from "rxjs";
 })
 export class OnlineService {
   private onlineSubject$: BehaviorSubject<OnlineInterface> = new BehaviorSubject(undefined);
-  /**
-   * Like the private inner config object but public and observable
-   */
+  /**Like the private online object but public and observable */
   online$: Observable<OnlineInterface> = this.onlineSubject$.asObservable();
 
   #online: OnlineInterface;
+
   constructor(private configService: ConfigService) {}
 
   /**
    *
-   * @returns RoomInterface[] the array of rooms
+   * @returns OnlineInterface
    */
   getOnline(): OnlineInterface {
     this.#online = readJSONSync(this.configService.onlinePath);
@@ -28,24 +27,17 @@ export class OnlineService {
   }
 
   /**
-   *
    * @param online the object to replace
-   * @returns true if online is updated and saved false otherwise
    */
-  updateOnline(online: OnlineInterface): boolean {
-    //update room
+  updateOnline(online: OnlineInterface) {
+    //update online
     this.#online = online;
     this.onlineSubject$.next(online);
-    return this.saveOnlineToFile();
+    this.saveOnlineToFile();
   }
 
-  /**
-   *
-   * @returns true if rooms are saved to disk or false
-   */
-  saveOnlineToFile(): boolean {
+  saveOnlineToFile() {
     //Write rooms back to file
     writeJson(this.configService.onlinePath, this.#online);
-    return true;
   }
 }

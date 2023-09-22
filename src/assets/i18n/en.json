@@ -374,5 +374,7 @@
   "CONFIG_SAVE_SHARED_COMPLETED": "All servihelper files are now under the shared folder. You are online now.",
   "ONLINE": "Online",
   "CONFIG_SAVED": "Config saved",
-  "CLOSE": "Close"
+  "CLOSE": "Close",
+  "APP_LOCKED": "Servihelper is locked by another administrator.",
+  "CHECK_LATER": "Please try again later."
 }

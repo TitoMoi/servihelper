@@ -100,7 +100,7 @@ export class ConfigService {
 
     //PREPARE ALL THE REMAINING PATHS
     this.configPath = path.join(this.sourceFilesPath, this.configFilename);
-    this.lockPath = path.join(this.sourceFilesPath, this.configFilename);
+    this.lockPath = path.join(this.sourceFilesPath, this.lockFilename);
     this.assignmentsPath = path.join(this.sourceFilesPath, this.assignmentsFilename);
     this.notesPath = path.join(this.sourceFilesPath, this.notesFilename);
     this.participantsPath = path.join(this.sourceFilesPath, this.participantsFilename);

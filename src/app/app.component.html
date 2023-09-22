@@ -1,3 +1,9 @@
-<app-navigation *ngIf="pathsResolved">
+<app-navigation *ngIf="dataLoaded">
   <router-outlet></router-outlet>
 </app-navigation>
+<div *ngIf="showLockMsg" class="row align-items-center justify-content-center">
+  <div class="col lockMsg" *transloco="let t">
+    <div class="fw-bold mb-3">{{ t("APP_LOCKED") }} 🔒</div>
+    <div class="bold">{{ t("CHECK_LATER") }} 👨‍💻</div>
+  </div>
+</div>
