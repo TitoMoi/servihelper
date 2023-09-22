@@ -92,6 +92,7 @@ The key diference is the mantainance.
 | Immediate change         | No  | Yes  |     |     |
 | Translation effort       | No  | Yes  |     |     |
 | Template check if exists | Yes | No   |     |     |
+| Emulated                 | No  | Yes  |     |     |
 
 Clearly, the Word version is more mantainable but the pdf provides the original file.
 
@@ -103,7 +104,9 @@ Pdf forms have the same field names for all language pdf forms.
 
 The type of the field (text, check) is always at the end of the name of the field.
 
-On every template folder are images to show the template fields names.
+On every template folder there are images to show the template fields names.
+
+!Every new pdf must be normalized with the expected names, use the scripts/templates to normalize them.
 
 ## Reminders (experimental)
 
