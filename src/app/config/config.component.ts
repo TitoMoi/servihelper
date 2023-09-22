@@ -195,16 +195,18 @@ export class ConfigComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.configService.updateConfig({
-      ...this.defaultConfig, //Default config
-      ...this.configService.getConfig(), //Current config
-      ...this.form.value, //Incoming config
-    });
-    this.matSnackBar.open(
-      this.translocoService.translate("CONFIG_SAVED") + " 🔧 ",
-      this.translocoService.translate("CLOSE"),
-      { duration: 3500 }
-    );
+    if (this.form.dirty) {
+      this.configService.updateConfig({
+        ...this.defaultConfig, //Default config
+        ...this.configService.getConfig(), //Current config
+        ...this.form.value, //Incoming config
+      });
+      this.matSnackBar.open(
+        this.translocoService.translate("CONFIG_SAVED") + " 🔧 ",
+        this.translocoService.translate("CLOSE"),
+        { duration: 3500 }
+      );
+    }
     this.subscription.unsubscribe();
   }
 
