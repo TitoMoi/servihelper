@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   //Register when we quit the app, works with the cross X
   @HostListener("window:unload", ["$event"])
   unloadHandler() {
-    this.lockService.releaseLock();
+    this.lockService.releaseLock(true);
   }
 
   constructor(

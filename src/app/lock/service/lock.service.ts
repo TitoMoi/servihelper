@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { LockInterface } from "app/lock/model/lock.model";
 import { ConfigService } from "app/config/service/config.service";
-import { readJSONSync, writeJson } from "fs-extra";
+import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { intervalToDuration } from "date-fns";
 import { OnlineService } from "app/online/service/online.service";
 
@@ -30,9 +30,9 @@ export class LockService {
   }
 
   /** Set lock to false */
-  releaseLock() {
+  releaseLock(exit: boolean = false) {
     this.#lock.lock = false;
-    this.saveLockToFile();
+    this.saveLockToFile(exit);
   }
 
   updateTimestamp() {
@@ -63,7 +63,13 @@ export class LockService {
   } */
 
   /** Save the lock only if we are online */
-  saveLockToFile() {
-    if (this.isOnline) writeJson(this.configService.lockPath, this.#lock);
+  saveLockToFile(exit: boolean = false) {
+    if (this.isOnline) {
+      if (exit) {
+        //Make sure the file is saved
+        writeJsonSync(this.configService.lockPath, this.#lock);
+      }
+      writeJson(this.configService.lockPath, this.#lock);
+    }
   }
 }
