@@ -8,6 +8,14 @@ import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
+import { AssignmentService } from "app/assignment/service/assignment.service";
+import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
+import { PolygonService } from "app/map/territory/service/polygon.service";
+import { TerritoryService } from "app/map/territory/service/territory.service";
+import { NoteService } from "app/note/service/note.service";
+import { PublicThemeService } from "app/public-theme/service/public-theme.service";
+import { RoomService } from "app/room/service/room.service";
+import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 /* import { version } from '../../../package.json'; */
 const { version } = require("../../../package.json");
 
@@ -18,9 +26,17 @@ export class SharedService {
   appVersion = version;
 
   constructor(
-    private participantService: ParticipantService,
+    private assignTypeNamePipe: AssignTypeNamePipe,
+    private sheetTitleService: SheetTitleService,
+    private roomService: RoomService,
+    private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
-    private assignTypeNamePipe: AssignTypeNamePipe
+    private participantService: ParticipantService,
+    private publicThemeService: PublicThemeService,
+    private territoryService: TerritoryService,
+    private territoryGroupService: TerritoryGroupService,
+    private polygonService: PolygonService,
+    private noteService: NoteService
   ) {}
 
   /**
@@ -147,5 +163,28 @@ export class SharedService {
     link.download = filename;
     link.click();
     link.remove();
+  }
+
+  reloadAllData() {
+    this.roomService.hasChanged = true;
+    this.assignTypeService.hasChanged = true;
+    this.assignmentService.hasChanged = true;
+    this.participantService.hasChanged = true;
+    this.sheetTitleService.hasChanged = true;
+    this.publicThemeService.hasChanged = true;
+    this.noteService.hasChanged = true;
+    this.polygonService.hasChanged = true;
+    this.territoryService.hasChanged = true;
+    this.territoryGroupService.hasChanged = true;
+    this.roomService.getRooms();
+    this.assignTypeService.getAssignTypes();
+    this.noteService.getNotes();
+    this.sheetTitleService.getTitles();
+    this.publicThemeService.getPublicThemes();
+    this.participantService.getParticipants();
+    this.assignmentService.getAssignments();
+    this.polygonService.getPolygons();
+    this.territoryService.getTerritories();
+    this.territoryGroupService.getTerritoryGroups();
   }
 }

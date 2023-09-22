@@ -1,7 +1,14 @@
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import { copySync, existsSync, readdir, readdirSync, writeJsonSync } from "fs-extra";
+import {
+  copySync,
+  existsSync,
+  readdir,
+  readdirSync,
+  removeSync,
+  writeJsonSync,
+} from "fs-extra";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -34,6 +41,9 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { OnlineService } from "app/online/service/online.service";
 import { Subscription } from "rxjs";
+import { OnlineInterface } from "app/online/model/online.model";
+import { SharedService } from "app/services/shared.service";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-config",
@@ -61,6 +71,7 @@ import { Subscription } from "rxjs";
     PublicThemePipe,
     MatTooltipModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
   ],
 })
 export class ConfigComponent implements OnInit, OnDestroy {
@@ -164,14 +175,19 @@ export class ConfigComponent implements OnInit, OnDestroy {
     private sheetTitleService: SheetTitleService,
     private publicThemeService: PublicThemeService,
     private translocoService: TranslocoService,
+    private sharedService: SharedService,
+    private matSnackBar: MatSnackBar,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
     this.subscription.add(
       this.onlineForm.get("isOnline").valueChanges.subscribe((isOnline) => {
         if (!isOnline) {
-          console.log("no is online");
           this.moveOnlineFilesBack();
+
+          //Remove the remote path
+          this.onlineForm.get("path").setValue("");
+          this.resetOnlineFlags();
           this.saveOnline();
         }
       })
@@ -184,6 +200,11 @@ export class ConfigComponent implements OnInit, OnDestroy {
       ...this.configService.getConfig(), //Current config
       ...this.form.value, //Incoming config
     });
+    this.matSnackBar.open(
+      this.translocoService.translate("CONFIG_SAVED") + " 🔧 ",
+      this.translocoService.translate("CLOSE"),
+      { duration: 3500 }
+    );
     this.subscription.unsubscribe();
   }
 
@@ -219,7 +240,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     const dirArray = await readdir(path);
 
     this.servihelperFilesExist = dirArray.some((item) =>
-      item.includes(this.configService.onlineFilename)
+      item.includes(this.configService.configFilename)
     );
     this.cdr.detectChanges();
 
@@ -238,10 +259,14 @@ export class ConfigComponent implements OnInit, OnDestroy {
     try {
       this.copyFilesError = false;
       this.saveCompleted = false;
-      copySync(this.configService.sourceFilesPath, this.onlineForm.get("path").value, {
+      const remotePath = this.onlineForm.get("path").value;
+      copySync(this.configService.sourceFilesPath, remotePath, {
         errorOnExist: true,
         overwrite: false,
       });
+      //Delete online.json from remote, only available on local
+      console.log(path.join(remotePath, this.configService.onlineFilename));
+      removeSync(path.join(remotePath, this.configService.onlineFilename));
       this.saveCompleted = true;
       this.saveOnline();
     } catch (err) {
@@ -250,9 +275,21 @@ export class ConfigComponent implements OnInit, OnDestroy {
   }
 
   saveOnline() {
-    const onlineConfig = this.onlineForm.value;
-    console.log(onlineConfig);
+    const onlineConfig: OnlineInterface = {
+      isOnline: this.onlineForm.get("isOnline").value,
+      path: this.onlineForm.get("path").value,
+    };
     this.onlineService.updateOnline(onlineConfig);
+    this.configService.prepareFilePaths(onlineConfig);
+    this.sharedService.reloadAllData();
+  }
+
+  resetOnlineFlags() {
+    this.servihelperFilesExist = false;
+    this.isPathError = false;
+    this.isValidPath = false;
+    this.copyFilesError = false;
+    this.saveCompleted = false;
   }
 
   stopPropagation(event) {

@@ -372,5 +372,7 @@
   "CONFIG_SERVIHELPER_FILES_FOUND": "Servihelper files found! Now you are working online!",
   "CONFIG_CANNOT_COPY": "Cannot copy servihelper files to shared folder, some file already exists",
   "CONFIG_SAVE_SHARED_COMPLETED": "All servihelper files are now under the shared folder. You are online now.",
-  "ONLINE": "Online"
+  "ONLINE": "Online",
+  "CONFIG_SAVED": "Config saved",
+  "CLOSE": "Close"
 }
