@@ -19,8 +19,20 @@ export class LockService {
    * @returns LockInterface
    */
   getLock(): LockInterface {
-    this.#lock = readJSONSync(this.configService.lockPath);
-    return this.#lock;
+    if (this.isOnline) {
+      try {
+        this.#lock = readJSONSync(this.configService.lockPath);
+        return this.#lock;
+      } catch (e) {
+        //This should never happen, prevent a death file
+        this.#lock = {
+          lock: false,
+          timestamp: new Date(),
+        };
+        this.saveLockToFile(true);
+        return this.#lock;
+      }
+    }
   }
 
   /** Set lock to true */
