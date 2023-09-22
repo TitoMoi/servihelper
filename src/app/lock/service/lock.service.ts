@@ -58,7 +58,6 @@ export class LockService {
    * So, if we encounter a lock true and a timestamp above 20 min we must take the app.
    */
   checkDeathEnd() {
-    console.log(this.#lock.lock);
     if (
       this.#lock.lock &&
       intervalToDuration({

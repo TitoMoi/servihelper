@@ -28,7 +28,9 @@ export class AppComponent implements OnInit {
   //Register when we quit the app, works with the cross X
   @HostListener("window:unload", ["$event"])
   unloadHandler() {
-    this.lockService.releaseLock(true);
+    if (!this.showLockMsg) {
+      this.lockService.releaseLock(true);
+    }
   }
 
   constructor(
@@ -65,9 +67,9 @@ export class AppComponent implements OnInit {
 
     //LOCK?
     if (online.isOnline) {
-      const lockObj = this.lockService.getLock();
+      this.lockService.getLock();
       this.lockService.checkDeathEnd();
-
+      const lockObj = this.lockService.getLock();
       if (lockObj.lock) {
         this.showLockMsg = true;
       } else {
