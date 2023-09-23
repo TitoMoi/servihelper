@@ -3,12 +3,14 @@ import { TerritoryContextInterface } from "../../model/map.model";
 import { ConfigService } from "app/config/service/config.service";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
+import { LockService } from "app/lock/service/lock.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class TerritoryService {
   private configService = inject(ConfigService);
+  private lockService = inject(LockService);
 
   //flag to indicate that territories file has changed
   hasChanged = true;
@@ -69,6 +71,7 @@ export class TerritoryService {
   #saveTerritoriesToFile(): boolean {
     //Write territories back to file
     writeJson(this.configService.territoriesPath, this.#territories);
+    this.lockService.updateTimestamp();
     return true;
   }
 
