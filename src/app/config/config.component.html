@@ -42,16 +42,22 @@
           When you have installed the app, check that the app its running and you're logged.
         </div>
         <div class="mb-1">
-          Now, inside the app folder, create a new shared folder, call it "servihelper" for
-          example. Prepare the link to this new folder.
-          <span class="fst-italic"
-            >(When the other admins install the same app, they need to use you link and the
-            folder will appear on their system)</span
-          >
+          A new virtual drive will appear on your filesystem
+          <span class="fst-italic">(D: E: F: whatever)</span>
         </div>
         <div class="mb-1">
-          Then click on the next slider button and an input field to paste the system shared
-          folder path will appear.
+          Now, inside the virtual drive, create a new folder, call it "servihelper" for
+          example. If you are the first one to sync the files then prepare the link to share
+          this new folder.
+          <span class="fst-italic"
+            >(When the other admins install the same app, they need to use you link and the
+            folder will appear on their filesystem with all the data)</span
+          >
+        </div>
+        <div class="mb-1">Then, lets notify servihelper about this shared folder.</div>
+        <div class="mb-1">
+          Click on the next slider button and an input field to paste the system shared folder
+          path will appear.
         </div>
         <h4>{{ t("CONFIG_GO_ONLINE_LABEL") }}</h4>
         <form [formGroup]="onlineForm" novalidate>
