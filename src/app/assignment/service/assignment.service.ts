@@ -9,6 +9,7 @@ import { nanoid } from "nanoid/non-secure";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { ConfigService } from "app/config/service/config.service";
+import { LockService } from "app/lock/service/lock.service";
 
 @Injectable({
   providedIn: "root",
@@ -26,7 +27,7 @@ export class AssignmentService {
   //The map of assignments for look up of by date
   #assignmentsByDateMap: Map<Date | string, AssignmentInterface[]> = new Map();
 
-  constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService, private lockService: LockService) {}
 
   /**
    * @param deepClone if should be cloned or only return reference
@@ -119,6 +120,8 @@ export class AssignmentService {
   saveAssignmentsToFile() {
     //Write assignments back to file
     writeJson(this.configService.assignmentsPath, this.#assignments);
+    //Notify the lock we are working
+    this.lockService.updateTimestamp();
   }
 
   createMultipleAssignments(assignments: AssignmentInterface[]) {

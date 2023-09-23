@@ -8,6 +8,7 @@ import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
+import { LockService } from "app/lock/service/lock.service";
 
 @Injectable({
   providedIn: "root",
@@ -22,11 +23,7 @@ export class ParticipantService {
   //The map of participants for look up by id
   #participantsMap: Map<string, ParticipantInterface> = new Map();
 
-  constructor(private configService: ConfigService) {}
-
-  getFileName() {
-    return "participant.json";
-  }
+  constructor(private configService: ConfigService, private lockService: LockService) {}
 
   /**
    * @param deepClone if should return the cloned array or the reference
@@ -52,10 +49,11 @@ export class ParticipantService {
    *
    * @returns true if participants are saved to disk or false
    */
-  saveParticipantsToFile(): boolean {
+  saveParticipantsToFile() {
     //Write participants back to file
     writeJson(this.configService.participantsPath, this.#participants);
-    return true;
+    //Notify the lock we are working
+    this.lockService.updateTimestamp();
   }
 
   /**
@@ -63,7 +61,7 @@ export class ParticipantService {
    * @param participant the participant to create
    * @returns true if participant is saved false if not
    */
-  createParticipant(participant: ParticipantInterface): boolean {
+  createParticipant(participant: ParticipantInterface) {
     //Generate id for the participant
     participant.id = nanoid(this.configService.nanoMaxCharId);
     //Trim the name
@@ -84,7 +82,7 @@ export class ParticipantService {
     });
 
     //save participants with the new participant
-    return this.saveParticipantsToFile();
+    this.saveParticipantsToFile();
   }
 
   /**
@@ -101,7 +99,7 @@ export class ParticipantService {
    * @param participant the participant to update
    * @returns true if participant is updated and saved false otherwise
    */
-  updateParticipant(participant: ParticipantInterface): boolean {
+  updateParticipant(participant: ParticipantInterface) {
     //update participant
     for (let i = 0; i < this.#participants.length; i++) {
       if (this.#participants[i].id === participant.id) {
@@ -126,7 +124,7 @@ export class ParticipantService {
           return 0;
         });
 
-        return this.saveParticipantsToFile();
+        this.saveParticipantsToFile();
       }
     }
     return false;
@@ -137,12 +135,12 @@ export class ParticipantService {
    * @param participant the participant to delete
    * @returns true if participant is deleted and saved false otherwise
    */
-  deleteParticipant(id: string): boolean {
+  deleteParticipant(id: string) {
     //delete participant
     this.#participants = this.#participants.filter((b) => b.id !== id);
     this.#participantsMap.delete(id);
     //save participants
-    return this.saveParticipantsToFile();
+    this.saveParticipantsToFile();
   }
 
   /**
@@ -150,7 +148,7 @@ export class ParticipantService {
    * @param id the id of the new assignType to add
    * @returns
    */
-  addAssignType(id: string, hasAssistant: boolean): boolean {
+  addAssignType(id: string, hasAssistant: boolean) {
     const participantAssignTypesValue: ParticipantAssignTypeInterface = {
       assignTypeId: id,
       canPrincipal: true,
@@ -162,7 +160,7 @@ export class ParticipantService {
       this.#participantsMap.set(participant.id, participant);
     }
 
-    return this.saveParticipantsToFile();
+    this.saveParticipantsToFile();
   }
 
   /**
@@ -170,7 +168,7 @@ export class ParticipantService {
    * @param id the assignType id to delete for all the participants
    * @returns true if all participants are updated and saved false otherwise
    */
-  deleteAssignType(id: string): boolean {
+  deleteAssignType(id: string) {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].assignTypes = this.#participants[i].assignTypes.filter(
@@ -179,7 +177,7 @@ export class ParticipantService {
 
       this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);
     }
-    return this.saveParticipantsToFile();
+    this.saveParticipantsToFile();
   }
 
   /**
@@ -187,7 +185,7 @@ export class ParticipantService {
    * @param id the id of the new room to add
    * @returns
    */
-  addRoom(roomId: string): boolean {
+  addRoom(roomId: string) {
     const value = {
       roomId,
       available: true,
@@ -198,7 +196,7 @@ export class ParticipantService {
       this.#participantsMap.set(participant.id, participant);
     }
 
-    return this.saveParticipantsToFile();
+    this.saveParticipantsToFile();
   }
 
   /**
@@ -206,7 +204,7 @@ export class ParticipantService {
    * @param id the room id to delete for all the participants
    * @returns true if all participants are updated and saved false otherwise
    */
-  deleteRoom(id: string): boolean {
+  deleteRoom(id: string) {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].rooms = this.#participants[i].rooms.filter(
@@ -215,6 +213,6 @@ export class ParticipantService {
 
       this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);
     }
-    return this.saveParticipantsToFile();
+    this.saveParticipantsToFile();
   }
 }

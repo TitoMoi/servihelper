@@ -18,6 +18,7 @@ import { ExportService } from "app/services/export.service";
 import { MatIconModule } from "@angular/material/icon";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
+import { LockService } from "app/lock/service/lock.service";
 
 @Component({
   selector: "app-available-participant",
@@ -40,8 +41,8 @@ export class AvailableParticipantComponent {
     .filter((p) => !p.isExternal && p.available)
     .sort(this.sortService.sortParticipantsByGender);
 
-  assignTypes = []; /* this.assignTypeService.getAssignTypes(); */
-  assignTypesAssistant = []; /* this.assignTypeService.getAssignTypes(); */
+  assignTypes = [];
+  assignTypesAssistant = [];
 
   allowedAssignTypesIds = [];
 
@@ -56,8 +57,9 @@ export class AvailableParticipantComponent {
     private assignTypeService: AssignTypeService,
     private sortService: SortService,
     private configService: ConfigService,
-    private cdr: ChangeDetectorRef,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private lockService: LockService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +87,7 @@ export class AvailableParticipantComponent {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.participantService.saveParticipantsToFile();
+    this.lockService.updateTimestamp();
   }
 
   checkIncludesAssignTypeAsPrincipal(
