@@ -67,14 +67,17 @@ export class AppComponent implements OnInit {
 
     //LOCK?
     if (online.isOnline) {
-      this.lockService.getLock();
-      this.lockService.checkDeathEnd();
       const lockObj = this.lockService.getLock();
-      if (lockObj.lock) {
-        this.showLockMsg = true;
-      } else {
-        this.lockService.takeLock();
+      const isDeathEnd = this.lockService.checkDeathEnd();
+      if (isDeathEnd) {
+        this.lockService.updateTimestamp();
         this.loadData();
+      } else {
+        if (lockObj.lock) {
+          this.showLockMsg = true;
+        } else {
+          this.loadData();
+        }
       }
     } else {
       this.loadData();

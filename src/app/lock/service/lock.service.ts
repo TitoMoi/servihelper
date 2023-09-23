@@ -57,7 +57,7 @@ export class LockService {
    * If the user is away 10 minuts the lock is released and the app is closed.
    * So, if we encounter a lock true and a timestamp above 20 min we must take the app.
    */
-  checkDeathEnd() {
+  checkDeathEnd(): boolean {
     if (
       this.#lock.lock &&
       intervalToDuration({
@@ -65,8 +65,9 @@ export class LockService {
         end: new Date(),
       }).minutes > 20
     ) {
-      this.releaseLock();
+      return true;
     }
+    return false;
   }
 
   /* checkTimer(){
