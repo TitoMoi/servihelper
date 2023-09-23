@@ -283,6 +283,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     };
     this.onlineService.updateOnline(onlineConfig);
     this.configService.prepareFilePaths(onlineConfig);
+    this.configService.getConfig();
     this.sharedService.getAllData();
   }
 
