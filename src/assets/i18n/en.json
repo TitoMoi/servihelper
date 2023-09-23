@@ -375,6 +375,6 @@
   "ONLINE": "Online",
   "CONFIG_SAVED": "Config saved",
   "CLOSE": "Close",
-  "APP_LOCKED": "Servihelper is locked 🔒 by another administrator 👨‍💻",
+  "APP_LOCKED": "Servihelper is being used by another administrator 👨‍💻",
   "CHECK_LATER": "Please try again later."
 }

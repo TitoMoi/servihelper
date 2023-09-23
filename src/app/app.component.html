@@ -2,12 +2,13 @@
   <router-outlet></router-outlet>
 </app-navigation>
 
-<div *ngIf="showLockMsg" style="display: flex; height: 100%">
-  <div
-    *transloco="let t"
-    class="d-flex lockMsg align-items-center justify-content-center flex-grow-1 flex-column"
-  >
+<div
+  *ngIf="showLockMsg"
+  class="lockMsgFont"
+  style="height: 100%; display: grid; place-items: center"
+>
+  <div *transloco="let t">
     <div class="fw-bold mb-3">{{ t("APP_LOCKED") }}</div>
-    <div>{{ t("CHECK_LATER") }}</div>
+    <div class="text-center">{{ t("CHECK_LATER") }}</div>
   </div>
 </div>
