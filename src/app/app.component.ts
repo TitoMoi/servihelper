@@ -76,6 +76,7 @@ export class AppComponent implements OnInit {
         if (lockObj.lock) {
           this.showLockMsg = true;
         } else {
+          this.lockService.takeLockAndTimestamp();
           this.loadData();
         }
       }

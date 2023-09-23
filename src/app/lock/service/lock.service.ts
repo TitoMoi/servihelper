@@ -52,6 +52,12 @@ export class LockService {
     this.saveLockToFile();
   }
 
+  takeLockAndTimestamp() {
+    this.#lock.lock = true;
+    this.#lock.timestamp = new Date();
+    this.saveLockToFile();
+  }
+
   /**
    * When the lock remains true, after 20 minuts without timestamp allow the app to take it.
    * If the user is away 10 minuts the lock is released and the app is closed.
