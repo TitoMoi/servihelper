@@ -11,9 +11,7 @@
           <a
             mat-raised-button
             [disableRipple]="true"
-            [disabled]="
-              isCreateAssignmentDisabled() || (inOnline && (hasInternet$ | async) === false)
-            "
+            [disabled]="isCreateAssignmentDisabled() || (netStatusOffline$ | async)"
             color="primary"
             routerLink="create"
             routerLinkActive="active"

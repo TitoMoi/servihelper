@@ -103,7 +103,7 @@
         <span>Servihelper</span>
       </div>
       <ng-container *ngIf="(online$ | async).isOnline as isOnlineAlias">
-        <div class="me-3" *ngIf="isOnlineAlias && (hasInternet$ | async) === false">
+        <div class="me-3" *ngIf="isOnlineAlias && (netStatusOffline$ | async)">
           <mat-icon id="noWifiIcon" svgIcon="nowifi" color="warning"></mat-icon>
         </div>
         <div class="me-3" *ngIf="isOnlineAlias">{{ t("ONLINE") }}</div>

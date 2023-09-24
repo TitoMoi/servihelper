@@ -53,7 +53,7 @@ export class NavigationComponent implements OnInit {
 
   online$ = this.onlineService.online$;
 
-  hasInternet$ = this.onlineService.netStatus$;
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   lang = this.config.lang;
 

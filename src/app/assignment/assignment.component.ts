@@ -71,7 +71,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   paginationEndIndex = 25;
 
-  hasInternet$ = this.onlineService.netStatus$;
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   inOnline = this.onlineService.getOnline().isOnline;
 
