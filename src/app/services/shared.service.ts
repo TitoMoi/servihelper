@@ -16,6 +16,7 @@ import { NoteService } from "app/note/service/note.service";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { RoomService } from "app/room/service/room.service";
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
+import { ipcRenderer } from "electron";
 /* import { version } from '../../../package.json'; */
 const { version } = require("../../../package.json");
 
@@ -188,5 +189,9 @@ export class SharedService {
     this.territoryService.getTerritories();
     this.territoryGroupService.getTerritoryGroups();
     return true;
+  }
+
+  closeApp() {
+    ipcRenderer.send("closeApp");
   }
 }

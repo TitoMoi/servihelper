@@ -4,6 +4,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { intervalToDuration } from "date-fns";
 import { OnlineService } from "app/online/service/online.service";
+import { SharedService } from "app/services/shared.service";
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +14,11 @@ export class LockService {
 
   isOnline = this.onlineService.getOnline().isOnline;
 
-  constructor(private configService: ConfigService, private onlineService: OnlineService) {}
+  constructor(
+    private configService: ConfigService,
+    private onlineService: OnlineService,
+    private sharedService: SharedService
+  ) {}
 
   /**
    * @returns LockInterface
@@ -63,17 +68,27 @@ export class LockService {
    * If the user is away 10 minuts the lock is released and the app is closed.
    * So, if we encounter a lock true and a timestamp above 20 min we must take the app.
    */
-  checkDeathEnd(): boolean {
+  checkDeathEnd(mins: number): boolean {
     if (
       this.#lock.lock &&
       intervalToDuration({
         start: new Date(this.#lock.timestamp),
         end: new Date(),
-      }).minutes > 20
+      }).minutes > mins
     ) {
       return true;
     }
     return false;
+  }
+
+  intervalNoActivity() {
+    //900000 millisecons is 15 min
+    setInterval(() => {
+      const isDeathEnd = this.checkDeathEnd(15);
+      if (isDeathEnd) {
+        this.sharedService.closeApp();
+      }
+    }, 900000);
   }
 
   /* checkTimer(){

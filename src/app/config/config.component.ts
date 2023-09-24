@@ -36,7 +36,6 @@ import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import path from "path";
-import { ipcRenderer } from "electron";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { OnlineService } from "app/online/service/online.service";
@@ -46,6 +45,7 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule, MatDialog } from "@angular/material/dialog";
 import { OnlineTemplateComponent } from "app/config/online-template/online-template.component";
 import { LockService } from "app/lock/service/lock.service";
+import { SharedService } from "app/services/shared.service";
 
 @Component({
   selector: "app-config",
@@ -181,6 +181,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     private matSnackBar: MatSnackBar,
     private matDialog: MatDialog,
     private lockService: LockService,
+    private sharedService: SharedService,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
@@ -333,7 +334,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
   }
 
   closeApp() {
-    ipcRenderer.send("closeApp");
+    this.sharedService.closeApp();
   }
 
   stopPropagation(event) {

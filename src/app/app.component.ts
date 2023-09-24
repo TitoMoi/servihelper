@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     //LOCK?
     if (online.isOnline) {
       const lockObj = this.lockService.getLock();
-      const isDeathEnd = this.lockService.checkDeathEnd();
+      const isDeathEnd = this.lockService.checkDeathEnd(20);
       if (isDeathEnd) {
         this.lockService.updateTimestamp();
         this.loadData();
@@ -78,6 +78,7 @@ export class AppComponent implements OnInit {
         } else {
           this.lockService.takeLockAndTimestamp();
           this.loadData();
+          this.lockService.intervalNoActivity();
         }
       }
     } else {
