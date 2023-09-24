@@ -379,5 +379,6 @@
   "CHECK_LATER": "Please try again later.",
   "CLOSE_APP": "Close servihelper",
   "RESTART_APP": "The new configuration requires Servihelper to be closed and opened again.",
-  "APP_OFFLINE": "Servihelper is working offline. All shared data files have been copied under the servihelper folder."
+  "APP_OFFLINE": "Servihelper is working offline. All shared data files have been copied under the servihelper folder.",
+  "APP_ONLINE_TIMEOUT_REMINDER": "When working online the app will close after 15 minuts 🕒 if there is no activity."
 }

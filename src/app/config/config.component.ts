@@ -197,7 +197,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
 
           //Open dialog to inform about offline mode
           const dialogRef = this.matDialog.open(OnlineTemplateComponent, {
-            data: { msgKey: "APP_OFFLINE" },
+            data: { msgKey: "APP_OFFLINE", isOnline: false },
           });
 
           //Close servihelper
@@ -267,7 +267,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
 
       //Open dialog to inform about online mode
       const dialogRef = this.matDialog.open(OnlineTemplateComponent, {
-        data: { msgKey: "CONFIG_SERVIHELPER_FILES_FOUND" },
+        data: { msgKey: "CONFIG_SERVIHELPER_FILES_FOUND", isOnline: true },
       });
 
       //Close servihelper
@@ -302,7 +302,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
 
       //Open dialog to inform about online mode
       const dialogRef = this.matDialog.open(OnlineTemplateComponent, {
-        data: { msgKey: "CONFIG_SAVE_SHARED_COMPLETED" },
+        data: { msgKey: "CONFIG_SAVE_SHARED_COMPLETED", isOnline: true },
       });
 
       //Close servihelper

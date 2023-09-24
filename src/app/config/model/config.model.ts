@@ -57,4 +57,5 @@ export interface ConfigInterface {
 
 export interface OnlineTemplateDataInterface {
   msgKey: string; //key for the i18n
+  isOnline: boolean;
 }
