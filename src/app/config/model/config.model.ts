@@ -54,3 +54,7 @@ export interface ConfigInterface {
   closeToOthersDays: number;
   closeToOthersPrayerDays: number;
 }
+
+export interface OnlineTemplateDataInterface {
+  msgKey: string; //key for the i18n
+}

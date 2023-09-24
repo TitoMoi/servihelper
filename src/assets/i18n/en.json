@@ -376,5 +376,8 @@
   "CONFIG_SAVED": "Config saved",
   "CLOSE": "Close",
   "APP_LOCKED": "Servihelper is being used by another administrator 👨‍💻",
-  "CHECK_LATER": "Please try again later."
+  "CHECK_LATER": "Please try again later.",
+  "CLOSE_APP": "Close servihelper",
+  "RESTART_APP": "The new configuration requires Servihelper to be closed and opened again.",
+  "APP_OFFLINE": "Servihelper is working offline. All shared data files have been copied under the servihelper folder."
 }

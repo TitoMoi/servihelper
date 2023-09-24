@@ -40,10 +40,12 @@ import { ipcRenderer } from "electron";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { OnlineService } from "app/online/service/online.service";
-import { Subscription } from "rxjs";
+import { Subscription, take } from "rxjs";
 import { OnlineInterface } from "app/online/model/online.model";
-import { SharedService } from "app/services/shared.service";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatDialogModule, MatDialog } from "@angular/material/dialog";
+import { OnlineTemplateComponent } from "app/config/online-template/online-template.component";
+import { LockService } from "app/lock/service/lock.service";
 
 @Component({
   selector: "app-config",
@@ -72,6 +74,7 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     MatTooltipModule,
     MatSlideToggleModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
 })
 export class ConfigComponent implements OnInit, OnDestroy {
@@ -175,20 +178,33 @@ export class ConfigComponent implements OnInit, OnDestroy {
     private sheetTitleService: SheetTitleService,
     private publicThemeService: PublicThemeService,
     private translocoService: TranslocoService,
-    private sharedService: SharedService,
     private matSnackBar: MatSnackBar,
+    private matDialog: MatDialog,
+    private lockService: LockService,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
     this.subscription.add(
       this.onlineForm.get("isOnline").valueChanges.subscribe((isOnline) => {
         if (!isOnline) {
+          this.lockService.releaseLock();
           this.moveOnlineFilesBack();
 
           //Remove the remote path
           this.onlineForm.get("path").setValue("");
           this.resetOnlineFlags();
           this.saveOnline();
+
+          //Open dialog to inform about offline mode
+          const dialogRef = this.matDialog.open(OnlineTemplateComponent, {
+            data: { msgKey: "APP_OFFLINE" },
+          });
+
+          //Close servihelper
+          dialogRef
+            .afterClosed()
+            .pipe(take(1))
+            .subscribe(() => this.closeApp());
         }
       })
     );
@@ -221,7 +237,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     writeJsonSync(this.configService.configPath, this.defaultConfig);
 
     //Close the program
-    ipcRenderer.send("closeApp");
+    this.closeApp();
   }
 
   async checkAndSaveOnlineMode() {
@@ -248,6 +264,17 @@ export class ConfigComponent implements OnInit, OnDestroy {
 
     if (this.servihelperFilesExist) {
       this.saveOnline();
+
+      //Open dialog to inform about online mode
+      const dialogRef = this.matDialog.open(OnlineTemplateComponent, {
+        data: { msgKey: "CONFIG_SERVIHELPER_FILES_FOUND" },
+      });
+
+      //Close servihelper
+      dialogRef
+        .afterClosed()
+        .pipe(take(1))
+        .subscribe(() => this.closeApp());
     }
   }
 
@@ -266,13 +293,26 @@ export class ConfigComponent implements OnInit, OnDestroy {
         errorOnExist: true,
         overwrite: false,
       });
-      //Delete online.json from remote, only available on local
-      console.log(path.join(remotePath, this.configService.onlineFilename));
+      //online.json is only available in local
       removeSync(path.join(remotePath, this.configService.onlineFilename));
       this.saveCompleted = true;
+      this.cdr.detectChanges();
+
       this.saveOnline();
+
+      //Open dialog to inform about online mode
+      const dialogRef = this.matDialog.open(OnlineTemplateComponent, {
+        data: { msgKey: "CONFIG_SAVE_SHARED_COMPLETED" },
+      });
+
+      //Close servihelper
+      dialogRef
+        .afterClosed()
+        .pipe(take(1))
+        .subscribe(() => this.closeApp());
     } catch (err) {
       this.copyFilesError = true;
+      this.cdr.detectChanges();
     }
   }
 
@@ -282,9 +322,6 @@ export class ConfigComponent implements OnInit, OnDestroy {
       path: this.onlineForm.get("path").value,
     };
     this.onlineService.updateOnline(onlineConfig);
-    this.configService.prepareFilePaths(onlineConfig);
-    this.configService.getConfig();
-    this.sharedService.getAllData();
   }
 
   resetOnlineFlags() {
@@ -293,6 +330,10 @@ export class ConfigComponent implements OnInit, OnDestroy {
     this.isValidPath = false;
     this.copyFilesError = false;
     this.saveCompleted = false;
+  }
+
+  closeApp() {
+    ipcRenderer.send("closeApp");
   }
 
   stopPropagation(event) {

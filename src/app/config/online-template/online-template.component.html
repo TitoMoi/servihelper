@@ -1,0 +1,16 @@
+<span *transloco="let t">
+  <h1 mat-dialog-title><mat-icon svgIcon="wifi"></mat-icon></h1>
+  <div mat-dialog-content>
+    <div>
+      {{ t(data.msgKey) }}
+    </div>
+    <div>
+      {{ t("RESTART_APP") }}
+    </div>
+  </div>
+  <div mat-dialog-actions class="d-flex justify-content-center">
+    <button mat-raised-button class="m-2" color="primary" (click)="closeDialog()">
+      {{ t("BUTTON_CONFIRM") }}
+    </button>
+  </div>
+</span>

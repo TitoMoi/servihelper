@@ -120,10 +120,6 @@
               {{ t("BUTTON_YES") }}
             </button>
             <div *ngIf="copyFilesError">{{ t("CONFIG_CANNOT_COPY") }}.</div>
-            <div *ngIf="saveCompleted">{{ t("CONFIG_SAVE_SHARED_COMPLETED") }}</div>
-          </div>
-          <div *ngIf="servihelperFilesExist && isValidPath" class="mb-2 me-2">
-            {{ t("CONFIG_SERVIHELPER_FILES_FOUND") }}
           </div>
         </form>
       </div>
