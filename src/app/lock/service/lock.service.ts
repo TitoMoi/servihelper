@@ -4,7 +4,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { intervalToDuration } from "date-fns";
 import { OnlineService } from "app/online/service/online.service";
-import { SharedService } from "app/services/shared.service";
+import { ipcRenderer } from "electron";
 
 @Injectable({
   providedIn: "root",
@@ -14,11 +14,7 @@ export class LockService {
 
   isOnline = this.onlineService.getOnline().isOnline;
 
-  constructor(
-    private configService: ConfigService,
-    private onlineService: OnlineService,
-    private sharedService: SharedService
-  ) {}
+  constructor(private configService: ConfigService, private onlineService: OnlineService) {}
 
   /**
    * @returns LockInterface
@@ -86,7 +82,8 @@ export class LockService {
     setInterval(() => {
       const isDeathEnd = this.checkDeathEnd(15);
       if (isDeathEnd) {
-        this.sharedService.closeApp();
+        //shared function but we get a circular di injection
+        ipcRenderer.send("closeApp");
       }
     }, 900000);
   }
