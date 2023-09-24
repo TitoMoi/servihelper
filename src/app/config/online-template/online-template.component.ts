@@ -27,7 +27,9 @@ export class OnlineTemplateComponent {
   constructor(
     public dialogRef: MatDialogRef<OnlineTemplateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: OnlineTemplateDataInterface
-  ) {}
+  ) {
+    dialogRef.disableClose = true; //Ask for explicit read
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
