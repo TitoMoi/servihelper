@@ -53,6 +53,8 @@ export class NavigationComponent implements OnInit {
 
   online$ = this.onlineService.online$;
 
+  hasInternet$ = this.onlineService.netStatus$;
+
   lang = this.config.lang;
 
   administratorKey = this.configService.administratorKey;

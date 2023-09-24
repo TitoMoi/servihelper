@@ -27,11 +27,12 @@ import { AssignTypePipe } from "../assigntype/pipe/assign-type.pipe";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
-import { NgIf, NgFor, NgClass } from "@angular/common";
+import { NgIf, NgFor, NgClass, AsyncPipe } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-assignment",
@@ -50,6 +51,7 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     MatTooltipModule,
     NgFor,
     NgClass,
+    AsyncPipe,
     TranslocoLocaleModule,
     AssignTypePipe,
     AssignTypeNamePipe,
@@ -68,6 +70,10 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   rows: NodeListOf<Element> = undefined;
 
   paginationEndIndex = 25;
+
+  hasInternet$ = this.onlineService.netStatus$;
+
+  inOnline = this.onlineService.getOnline().isOnline;
 
   observer: IntersectionObserver = new IntersectionObserver((entries) => {
     //observe the last row
@@ -110,6 +116,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     private lastDateService: LastDateService,
     private sortService: SortService,
     private assignTypeNamePipe: AssignTypeNamePipe,
+    private onlineService: OnlineService,
     private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef
   ) {

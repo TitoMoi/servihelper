@@ -102,7 +102,12 @@
       <div class="me-auto">
         <span>Servihelper</span>
       </div>
-      <div class="me-3" *ngIf="(online$ | async).isOnline">{{ t("ONLINE") }}</div>
+      <ng-container *ngIf="(online$ | async).isOnline as isOnlineAlias">
+        <div class="me-3" *ngIf="isOnlineAlias && (hasInternet$ | async) === false">
+          <mat-icon id="noWifiIcon" svgIcon="nowifi" color="warning"></mat-icon>
+        </div>
+        <div class="me-3" *ngIf="isOnlineAlias">{{ t("ONLINE") }}</div>
+      </ng-container>
       <div class="d-inline-block me-3">
         <mat-form-field subscriptSizing="dynamic">
           <mat-select [value]="(config$ | async).lang" (selectionChange)="updateLang($event)">

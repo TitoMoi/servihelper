@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { OnlineInterface } from "app/online/model/online.model";
 import { ConfigService } from "app/config/service/config.service";
 import { readJSONSync, writeJson } from "fs-extra";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, fromEvent, map, merge, of } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -11,10 +11,21 @@ export class OnlineService {
   private onlineSubject$: BehaviorSubject<OnlineInterface> = new BehaviorSubject(undefined);
   /**Like the private online object but public and observable */
   online$: Observable<OnlineInterface> = this.onlineSubject$.asObservable();
-
   #online: OnlineInterface;
 
+  //Check if has access to internet
+  #networkStatus$ = new BehaviorSubject(false);
+  netStatus$ = this.#networkStatus$.asObservable();
+
   constructor(private configService: ConfigService) {}
+
+  prepareHasInternetAccess() {
+    if (this.#online.isOnline) {
+      merge(of(null), fromEvent(window, "online"), fromEvent(window, "offline"))
+        .pipe(map(() => navigator.onLine))
+        .subscribe((status) => this.#networkStatus$.next(status));
+    }
+  }
 
   /**
    *

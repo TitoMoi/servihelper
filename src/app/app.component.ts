@@ -63,6 +63,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.pdfService.registerOnLangChange();
     const online = this.onlineService.getOnline();
+    this.onlineService.prepareHasInternetAccess();
     this.configService.prepareFilePaths(online); //1
 
     //LOCK?
