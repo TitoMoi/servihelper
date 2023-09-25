@@ -86,6 +86,7 @@ export class MigrationService {
     }
 
     //:::assignTypes:::
+    this.assignTypeService.hasChanged = true;
     for (const at of this.assignTypeService.getAssignTypes()) {
       //add properties days, tKey, type
       if (at.days == null) {
@@ -107,6 +108,7 @@ export class MigrationService {
 
     //:::rooms:::
     //add property tKey, type
+    this.roomService.hasChanged = true;
     for (const room of this.roomService.getRooms()) {
       if (room.tKey == null) {
         room.tKey = "";

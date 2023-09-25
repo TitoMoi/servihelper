@@ -95,9 +95,6 @@ export class HomeComponent {
           let finalConfig = { ...currentConfig, ...incomingConfig };
           writeJsonSync(this.configService.configPath, finalConfig);
           break;
-        case this.configService.assignmentsFilename: //.gz
-          writeFileSync(this.configService.assignmentsPath, zipEntry.getData());
-          break;
         default:
           writeFileSync(
             path.join(this.configService.sourceFilesPath, zipEntry.entryName),
