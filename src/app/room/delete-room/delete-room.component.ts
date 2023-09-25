@@ -11,6 +11,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-delete-room",
@@ -25,10 +28,15 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatInputModule,
     MatButtonModule,
     RouterLink,
+    NgIf,
+    AsyncPipe,
+    MatIconModule,
   ],
 })
 export class DeleteRoomComponent {
   room = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   form = this.formBuilder.group({
     id: this.room.id,
@@ -41,7 +49,8 @@ export class DeleteRoomComponent {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private onlineService: OnlineService
   ) {}
 
   onSubmit(room: RoomInterface): void {

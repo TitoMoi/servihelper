@@ -10,6 +10,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
+import { MatIconModule } from "@angular/material/icon";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-create-update-room",
@@ -26,10 +29,15 @@ import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
     AutoFocusDirective,
     MatButtonModule,
     RouterLink,
+    MatIconModule,
+    NgIf,
+    AsyncPipe,
   ],
 })
 export class CreateUpdateRoomComponent {
   r = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   isUpdate = this.r ? true : false;
 
@@ -42,6 +50,7 @@ export class CreateUpdateRoomComponent {
   form = this.formBuilder.group({
     id: this.r?.id,
     name: [this.name, Validators.required],
+    type: [this.r ? this.r.type : "other"],
     order: [this.r?.order, Validators.required],
   });
 
@@ -51,7 +60,8 @@ export class CreateUpdateRoomComponent {
     private participantService: ParticipantService,
     private router: Router,
     private translocoService: TranslocoService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private onlineService: OnlineService
   ) {}
 
   onSubmit(): void {
