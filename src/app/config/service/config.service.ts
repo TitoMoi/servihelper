@@ -36,9 +36,9 @@ export class ConfigService {
   migrationFilename = "migration.json";
   sheetTitleFilename = "sheetTitle.json";
   publicThemeFilename = "publicTheme.json";
-  territoriesFilename = "territory.json";
-  territoryGroupsFilename = "territoryGroup.json";
-  polygonsFilename = "polygons.json";
+  territoriesFilename = "territory.gz";
+  territoryGroupsFilename = "territoryGroup.gz";
+  polygonsFilename = "polygons.gz";
 
   //These file paths are not affected by the online
   /** Where the file is depending on the context__dirname is where the .js file exists */

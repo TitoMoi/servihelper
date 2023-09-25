@@ -1,9 +1,9 @@
 import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { PolygonInterface } from "../../model/map.model";
-import { readJSONSync, writeJson } from "fs-extra";
+import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
-
+import { gzip, ungzip } from "pako";
 @Injectable({
   providedIn: "root",
 })
@@ -25,9 +25,15 @@ export class PolygonService {
       return deepClone ? structuredClone(this.#polygons) : this.#polygons;
     }
     this.hasChanged = false;
-    this.#polygons = readJSONSync(this.configService.polygonsPath);
-    for (const polygon of this.#polygons) {
-      this.#polygonsMap.set(polygon.id, polygon);
+
+    const polygonsContent = readFileSync(this.configService.polygonsPath);
+
+    if (polygonsContent) {
+      this.#polygons = JSON.parse(ungzip(polygonsContent, { to: "string" }));
+
+      for (const polygon of this.#polygons) {
+        this.#polygonsMap.set(polygon.id, polygon);
+      }
     }
     return deepClone ? structuredClone(this.#polygons) : this.#polygons;
   }
@@ -36,8 +42,9 @@ export class PolygonService {
    * @returns true if polygons are saved to disk or false
    */
   #savePolygonsToFile(): boolean {
-    //Write polygons back to file
-    writeJson(this.configService.polygonsPath, this.#polygons);
+    //Write territories back to file
+    const gziped = gzip(JSON.stringify(this.#polygons), { to: "string" });
+    writeFile(this.configService.polygonsPath, gziped);
     return true;
   }
 

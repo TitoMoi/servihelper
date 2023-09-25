@@ -1,10 +1,10 @@
 import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { TerritoryGroupInterface } from "../../model/map.model";
-import { readJSONSync, writeJson } from "fs-extra";
+import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { LockService } from "app/lock/service/lock.service";
-
+import { gzip, ungzip } from "pako";
 @Injectable({
   providedIn: "root",
 })
@@ -27,9 +27,15 @@ export class TerritoryGroupService {
       return deepClone ? structuredClone(this.#territoryGroups) : this.#territoryGroups;
     }
     this.hasChanged = false;
-    this.#territoryGroups = readJSONSync(this.configService.territoryGroupsPath);
-    for (const gm of this.#territoryGroups) {
-      this.#territoryGroupsMap.set(gm.id!, gm);
+
+    const territoryGroupContent = readFileSync(this.configService.territoryGroupsPath);
+
+    if (territoryGroupContent) {
+      this.#territoryGroups = JSON.parse(ungzip(territoryGroupContent, { to: "string" }));
+
+      for (const gm of this.#territoryGroups) {
+        this.#territoryGroupsMap.set(gm.id!, gm);
+      }
     }
     return deepClone ? structuredClone(this.#territoryGroups) : this.#territoryGroups;
   }
@@ -38,8 +44,10 @@ export class TerritoryGroupService {
    * @returns true if territoryGroups are saved to disk
    */
   #saveTerritoryGroupsToFile(): boolean {
-    //Write territoryGroups back to file
-    writeJson(this.configService.territoryGroupsPath, this.#territoryGroups);
+    //Write territories group back to file
+    const gziped = gzip(JSON.stringify(this.#territoryGroups), { to: "string" });
+    writeFile(this.configService.territoryGroupsPath, gziped);
+
     this.lockService.updateTimestamp();
     return true;
   }

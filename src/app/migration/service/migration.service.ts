@@ -40,13 +40,50 @@ export class MigrationService {
       this.configService.sourceFilesPath,
       "assignment.json"
     );
-    const assignments: AssignmentInterface[] = readJsonSync(assignmentJsonPath);
+    const assignments = readJsonSync(assignmentJsonPath);
     if (assignments) {
       const gziped = gzip(JSON.stringify(assignments), { to: "string" });
       writeFileSync(this.configService.assignmentsPath, gziped);
 
       //After migrated, remove old assignments.json
       removeSync(assignmentJsonPath);
+    }
+
+    //:::Polygons, territories and territory groups are now gzip
+
+    const territoryJsonPath = path.join(this.configService.sourceFilesPath, "territory.json");
+    const territories = readJsonSync(territoryJsonPath);
+    if (territories) {
+      const gziped = gzip(JSON.stringify(territories), { to: "string" });
+      writeFileSync(this.configService.territoriesPath, gziped);
+
+      //After migrated, remove old territory.json
+      removeSync(territoryJsonPath);
+    }
+
+    //TERRITORY GROUPS
+    const territoryGroupJsonPath = path.join(
+      this.configService.sourceFilesPath,
+      "territoryGroup.json"
+    );
+    const territoryGroups = readJsonSync(territoryGroupJsonPath);
+    if (territoryGroups) {
+      const gziped = gzip(JSON.stringify(territoryGroups), { to: "string" });
+      writeFileSync(this.configService.territoryGroupsPath, gziped);
+
+      //After migrated, remove old territoryGroup.json
+      removeSync(territoryGroupJsonPath);
+    }
+
+    //POLYGONS
+    const polygonsJsonPath = path.join(this.configService.sourceFilesPath, "polygons.json");
+    const polygons = readJsonSync(polygonsJsonPath);
+    if (polygons) {
+      const gziped = gzip(JSON.stringify(polygons), { to: "string" });
+      writeFileSync(this.configService.polygonsPath, gziped);
+
+      //After migrated, remove old polygons.json
+      removeSync(polygonsJsonPath);
     }
 
     //:::assignTypes:::

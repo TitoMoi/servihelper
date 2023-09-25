@@ -1,10 +1,10 @@
 import { Injectable, inject } from "@angular/core";
 import { TerritoryContextInterface } from "../../model/map.model";
 import { ConfigService } from "app/config/service/config.service";
-import { readJSONSync, writeJson } from "fs-extra";
+import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { LockService } from "app/lock/service/lock.service";
-
+import { gzip, ungzip } from "pako";
 @Injectable({
   providedIn: "root",
 })
@@ -28,10 +28,17 @@ export class TerritoryService {
       return deepClone ? structuredClone(this.#territories) : this.#territories;
     }
     this.hasChanged = false;
-    this.#territories = readJSONSync(this.configService.territoriesPath);
-    for (const territory of this.#territories) {
-      this.#territoriesMap.set(territory.id, territory);
+
+    const territoryContent = readFileSync(this.configService.territoriesPath);
+
+    if (territoryContent) {
+      this.#territories = JSON.parse(ungzip(territoryContent, { to: "string" }));
+
+      for (const territory of this.#territories) {
+        this.#territoriesMap.set(territory.id, territory);
+      }
     }
+
     return deepClone ? structuredClone(this.#territories) : this.#territories;
   }
 
@@ -70,7 +77,9 @@ export class TerritoryService {
    */
   #saveTerritoriesToFile(): boolean {
     //Write territories back to file
-    writeJson(this.configService.territoriesPath, this.#territories);
+    const gziped = gzip(JSON.stringify(this.#territories), { to: "string" });
+    writeFile(this.configService.territoriesPath, gziped);
+
     this.lockService.updateTimestamp();
     return true;
   }
