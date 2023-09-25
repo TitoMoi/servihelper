@@ -5,8 +5,10 @@
     class="mb-3"
     routerLink="create"
     routerLinkActive="active"
-    >{{ t("TERRITORYGROUP_BUTTON_CREATE_TITLE") }}</a
-  >
+    [disabled]="netStatusOffline$ | async"
+    >{{ t("TERRITORYGROUP_BUTTON_CREATE_TITLE") }}
+    <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon
+  ></a>
   <div *ngIf="territoryGroups?.length" class="table-overflow">
     <div class="grid">
       <div class="grid-header-item fw-bold">
