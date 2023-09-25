@@ -7,7 +7,7 @@ import {
   OnInit,
   inject,
 } from "@angular/core";
-import { CommonModule, Location, NgFor, NgIf } from "@angular/common";
+import { CommonModule, Location } from "@angular/common";
 import {
   icon,
   Map,
@@ -42,6 +42,7 @@ import { MatSelectChange, MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
 import { ExportService } from "app/services/export.service";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-create-update-territory",
@@ -51,8 +52,6 @@ import { ExportService } from "app/services/export.service";
     TranslocoModule,
     MatButtonModule,
     RouterLink,
-    NgIf,
-    NgFor,
     MatIconModule,
     MatTooltipModule,
     MatFormFieldModule,
@@ -78,9 +77,12 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   private participantService = inject(ParticipantService);
   private exportService = inject(ExportService);
   private location = inject(Location);
+  private onlineService = inject(OnlineService);
 
   loadedTerritory = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
   loadedPolygon = this.polygonService.getPolygon(this.loadedTerritory?.poligonId);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   isUpdate = this.loadedTerritory ? true : false;
 

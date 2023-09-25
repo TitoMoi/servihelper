@@ -18,8 +18,14 @@
       <button mat-raised-button type="button" class="me-3" routerLink="../..">
         {{ t("BUTTON_CANCEL") }}
       </button>
-      <button mat-raised-button color="primary" type="submit">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="netStatusOffline$ | async"
+      >
         {{ t("BUTTON_CONFIRM") }}
+        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>

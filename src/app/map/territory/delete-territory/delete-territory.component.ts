@@ -8,6 +8,9 @@ import { RouterLink, Router, ActivatedRoute } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
 import { Validators } from "ngx-editor";
 import { TerritoryService } from "../service/territory.service";
+import { OnlineService } from "app/online/service/online.service";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-delete-territory",
@@ -20,12 +23,17 @@ import { TerritoryService } from "../service/territory.service";
     MatInputModule,
     MatButtonModule,
     RouterLink,
+    AsyncPipe,
+    NgIf,
+    MatIconModule,
   ],
   templateUrl: "./delete-territory.component.html",
   styleUrls: ["./delete-territory.component.scss"],
 })
 export class DeleteTerritoryComponent {
   t = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   form = this.formBuilder.group({
     id: this.t.id,
@@ -36,6 +44,7 @@ export class DeleteTerritoryComponent {
     private formBuilder: UntypedFormBuilder,
     private territoryService: TerritoryService,
     private router: Router,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
   onSubmit(): void {

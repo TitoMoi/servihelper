@@ -14,6 +14,7 @@ import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { PolygonService } from "./service/polygon.service";
 import { clipboard } from "electron";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-territory",
@@ -45,10 +46,13 @@ export class TerritoryComponent {
     .getTerritoryGroups()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
+
   constructor(
     private territoryService: TerritoryService,
     private territoryGroupService: TerritoryGroupService,
     private polygonService: PolygonService,
+    private onlineService: OnlineService,
     private cdr: ChangeDetectorRef
   ) {}
 

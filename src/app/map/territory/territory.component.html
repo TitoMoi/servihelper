@@ -10,9 +10,10 @@
         color="primary"
         routerLink="create"
         routerLinkActive="active"
-        [disabled]="!territoryGroups.length"
-        >{{ t("TERRITORY_BUTTON_CREATE_TITLE") }}</a
-      >
+        [disabled]="!territoryGroups.length || (netStatusOffline$ | async)"
+        >{{ t("TERRITORY_BUTTON_CREATE_TITLE") }}
+        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon
+      ></a>
     </div>
     <div class="col-auto">
       <mat-icon
