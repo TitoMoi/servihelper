@@ -9,6 +9,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { OnlineService } from "app/online/service/online.service";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-move-assignment",
@@ -24,6 +27,9 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatDatepickerModule,
     MatButtonModule,
     RouterLink,
+    AsyncPipe,
+    MatIconModule,
+    NgIf,
   ],
 })
 export class MoveAssignmentComponent {
@@ -32,6 +38,8 @@ export class MoveAssignmentComponent {
   assignmentsPromise = this.assignmentService
     .getAssignments()
     .then((assignments) => (this.assignments = assignments));
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   form = this.formBuilder.group({
     originDate: [undefined, Validators.required],
@@ -42,6 +50,7 @@ export class MoveAssignmentComponent {
     private assignmentService: AssignmentService,
     private formBuilder: UntypedFormBuilder,
     private router: Router,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
 

@@ -54,7 +54,6 @@
   "ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE": "Ascending or descending order",
   "ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE": "Select the assignment types",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL": "Horizontal",
-  "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET": "Multiple sheets",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_TITLE": "Template to view",
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL": "Vertical",
   "ASSIGN_SELECTION_DATES_SELECT_TITLE": "Select multiple dates",
@@ -359,7 +358,6 @@
   "CONFIG_GO_ONLINE_LABEL": "Go online",
   "CONFIG_ONLINE_FOLDER_SELECT": "Select the shared folder",
   "CONFIG_ONLINE_FOLDER_SELECTED": "Shared folder selected",
-  "HOME_IS_ONLINE_ACTIVATED": "Online mode is activated",
   "BUTTON_CHECK_ONLINE": "Check online folder",
   "CONFIG_ONLINE_FOLDER_ERROR": "The provided system url is not valid",
   "PLACEHOLDER_SHARED_FOLDER_LABEL": "Enter the system shared folder path",
@@ -380,5 +378,8 @@
   "CLOSE_APP": "Close servihelper",
   "RESTART_APP": "The new configuration requires Servihelper to be closed and opened again.",
   "APP_OFFLINE": "Servihelper is working offline. All shared data files have been copied under the servihelper folder.",
-  "APP_ONLINE_TIMEOUT_REMINDER": "When working online the app will close after 15 minuts 🕒 if there is no activity."
+  "APP_ONLINE_TIMEOUT_REMINDER": "When working online the app will close after 15 minuts 🕒 if there is no activity.",
+
+  "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET": "Native slips and s89 📝",
+  "HOME_IS_ONLINE_ACTIVATED": "⚠️ Online mode is activated. Please make sure you have the latest files from the shared folder. If not, close servihelper and get them first."
 }

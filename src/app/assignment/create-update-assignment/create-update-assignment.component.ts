@@ -62,6 +62,7 @@ import { addDays, parseISO, subDays } from "date-fns";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-create-update-assignment",
@@ -146,6 +147,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   role: RoleInterface;
 
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
+
   //Fill the form with the assignment passed by the router
   a: AssignmentInterface = this.assignmentService.getAssignment(
     this.activatedRoute.snapshot.params.id
@@ -215,6 +218,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog,
+    private onlineService: OnlineService,
     private assignTypeNamePipe: AssignTypeNamePipe,
     private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef

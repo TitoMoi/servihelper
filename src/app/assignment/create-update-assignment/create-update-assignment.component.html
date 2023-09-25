@@ -328,8 +328,13 @@
           color="primary"
           type="button"
           (click)="onSubmit($event)"
-          [disabled]="form.invalid || (isMultipleDates && !selectedDates.length)"
+          [disabled]="
+            form.invalid ||
+            (isMultipleDates && !selectedDates.length) ||
+            (netStatusOffline$ | async)
+          "
         >
+          <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
           {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         </button>
         <button
@@ -339,8 +344,9 @@
           color="accent"
           type="submit"
           [disableRipple]="true"
-          [disabled]="form.invalid"
+          [disabled]="form.invalid || (netStatusOffline$ | async)"
         >
+          <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
           {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
         </button>
       </mat-card-actions>

@@ -10,6 +10,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { OnlineService } from "app/online/service/online.service";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-group-delete-assignment",
@@ -24,7 +27,10 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatInputModule,
     MatDatepickerModule,
     MatButtonModule,
+    AsyncPipe,
     RouterLink,
+    MatIconModule,
+    NgIf,
   ],
 })
 export class GroupDeleteAssignmentComponent {
@@ -34,6 +40,8 @@ export class GroupDeleteAssignmentComponent {
     .getAssignments()
     .then((assignments) => (this.assignments = assignments));
 
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
+
   form = this.formBuilder.group({
     date: [undefined, Validators.required],
   });
@@ -42,6 +50,7 @@ export class GroupDeleteAssignmentComponent {
     private assignmentService: AssignmentService,
     private formBuilder: UntypedFormBuilder,
     private router: Router,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
 

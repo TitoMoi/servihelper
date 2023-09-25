@@ -17,6 +17,7 @@
             routerLinkActive="active"
           >
             {{ t("ASSIGN_CREATE_TITLE") }}
+            <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
           </a>
         </div>
 

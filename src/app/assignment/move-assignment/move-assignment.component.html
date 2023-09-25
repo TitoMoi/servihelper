@@ -54,7 +54,13 @@
             >
               {{ t("BUTTON_CANCEL") }}
             </button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="form.invalid || (netStatusOffline$ | async)"
+            >
+              <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
               {{ t("BUTTON_SAVE") }}
             </button>
           </mat-card-actions>
