@@ -12,7 +12,7 @@ export class NoteService {
   //flag to indicate that notes file has changed
   hasChanged = true;
   //The array of notes in memory
-  #notes: NoteInterface[] = undefined;
+  #notes: NoteInterface[] = [];
   //The map of notes for look up of by id
   #notesMap: Map<string, NoteInterface> = new Map();
 

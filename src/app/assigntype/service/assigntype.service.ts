@@ -1,5 +1,5 @@
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
-import { readJSONSync, writeJson } from "fs-extra";
+import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
@@ -12,7 +12,7 @@ export class AssignTypeService {
   //flag to indicate that assignTypes file has changed
   hasChanged = true;
   //The array of assignTypes in memory
-  #assignTypes: AssignTypeInterface[] = undefined;
+  #assignTypes: AssignTypeInterface[] = [];
   //The map of assignTypes for look up of by id
   #assignTypesMap: Map<string, AssignTypeInterface> = new Map();
 
@@ -42,9 +42,11 @@ export class AssignTypeService {
    *
    * @returns true if assignTypes are saved to disk or false
    */
-  saveAssignTypesToFile(): boolean {
+  saveAssignTypesToFile(sync = false): boolean {
     //Write assignTypes back to file
-    writeJson(this.configService.assignTypesPath, this.#assignTypes);
+    sync
+      ? writeJsonSync(this.configService.assignTypesPath, this.#assignTypes)
+      : writeJson(this.configService.assignTypesPath, this.#assignTypes);
     return true;
   }
 

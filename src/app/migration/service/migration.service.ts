@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
-import { readJsonSync, writeFileSync, writeJsonSync } from "fs-extra";
+import { readJsonSync, removeSync, writeFileSync, writeJsonSync } from "fs-extra";
 import { MigrationInterface } from "app/migration/model/migration.model";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { RoomService } from "app/room/service/room.service";
@@ -27,20 +27,26 @@ export class MigrationService {
   }
 
   saveData() {
-    this.assignTypeService.saveAssignTypesToFile();
-    this.roomService.saveRoomsToFile();
+    //save them sync or the migration process breaks
+    this.assignTypeService.saveAssignTypesToFile(true);
+    this.roomService.saveRoomsToFile(true);
   }
 
   /*Based on git changes to the models **/
   toV5() {
     //:::assignments:::
     //Now assignments are gziped, so we need to convert from json to gzip
-    const assignments: AssignmentInterface[] = readJsonSync(
-      path.join(this.configService.sourceFilesPath, "assignment.json")
+    const assignmentJsonPath = path.join(
+      this.configService.sourceFilesPath,
+      "assignment.json"
     );
+    const assignments: AssignmentInterface[] = readJsonSync(assignmentJsonPath);
     if (assignments) {
       const gziped = gzip(JSON.stringify(assignments), { to: "string" });
       writeFileSync(this.configService.assignmentsPath, gziped);
+
+      //After migrated, remove old assignments.json
+      removeSync(assignmentJsonPath);
     }
 
     //:::assignTypes:::

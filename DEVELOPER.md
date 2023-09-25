@@ -65,6 +65,11 @@ When creating the github tag, it must only contain the same version as it is in 
 - The static map is under folder ./docs. Github pages publishes it with CI/CD when the branch `map` has changes on folder docs.
 - Do not create commits on branch map, develop only in `main` branch and merge it to `map` branch.
 
+## Migrate process
+
+- migration.json only exists when the program imports in offline mode.
+- Do not create migration.json on src/assets and do not add it to src/assets/backup/source
+
 ## Fonts
 
 The available fonts for pdf are in ./src/app/resources:

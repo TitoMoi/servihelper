@@ -1,5 +1,5 @@
 import { RoomInterface } from "app/room/model/room.model";
-import { readJSONSync, writeJson } from "fs-extra";
+import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
@@ -12,7 +12,7 @@ export class RoomService {
   //flag to indicate that rooms file has changed
   hasChanged = true;
   //The array of rooms in memory
-  #rooms: RoomInterface[] = undefined;
+  #rooms: RoomInterface[] = [];
   //The map of rooms for look up of rooms
   #roomsMap: Map<string, RoomInterface> = new Map();
 
@@ -42,9 +42,11 @@ export class RoomService {
    *
    * @returns true if rooms are saved to disk or false
    */
-  saveRoomsToFile(): boolean {
+  saveRoomsToFile(sync = false): boolean {
     //Write rooms back to file
-    writeJson(this.configService.roomsPath, this.#rooms);
+    sync
+      ? writeJsonSync(this.configService.roomsPath, this.#rooms)
+      : writeJson(this.configService.roomsPath, this.#rooms);
     return true;
   }
 

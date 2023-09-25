@@ -15,7 +15,7 @@ export class TerritoryGroupService {
   //flag to indicate that territoryGroups file has changed
   hasChanged = true;
   //The array of territoryGroups in memory
-  #territoryGroups: TerritoryGroupInterface[];
+  #territoryGroups: TerritoryGroupInterface[] = [];
   //The map of territoryGroups to look up for group maps
   #territoryGroupsMap: Map<string, TerritoryGroupInterface> = new Map();
   /**

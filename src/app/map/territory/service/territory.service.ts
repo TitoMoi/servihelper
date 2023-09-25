@@ -15,7 +15,7 @@ export class TerritoryService {
   //flag to indicate that territories file has changed
   hasChanged = true;
   //The array of territories in memory
-  #territories: TerritoryContextInterface[];
+  #territories: TerritoryContextInterface[] = [];
   //The territory of territories for look up of territories
   #territoriesMap: Map<string, TerritoryContextInterface> = new Map();
 
