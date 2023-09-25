@@ -9,6 +9,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { OnlineService } from "app/online/service/online.service";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-delete-note",
@@ -23,10 +26,15 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatInputModule,
     MatButtonModule,
     RouterLink,
+    AsyncPipe,
+    NgIf,
+    MatIconModule,
   ],
 })
 export class DeleteNoteComponent {
   note = this.noteService.getNote(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   noteForm = this.formBuilder.group({
     id: this.note.id,
@@ -38,6 +46,7 @@ export class DeleteNoteComponent {
     private noteService: NoteService,
     private assignmentService: AssignmentService,
     private router: Router,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
 

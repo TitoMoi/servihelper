@@ -3,10 +3,11 @@ import { NoteService } from "app/note/service/note.service";
 
 import { Component, OnInit } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
-import { NgIf, NgFor } from "@angular/common";
+import { NgIf, NgFor, AsyncPipe } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-note",
@@ -21,12 +22,15 @@ import { TranslocoModule } from "@ngneat/transloco";
     NgIf,
     NgFor,
     MatIconModule,
+    AsyncPipe,
   ],
 })
 export class NoteComponent implements OnInit {
   notes: NoteInterface[];
 
-  constructor(private noteService: NoteService) {}
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
+
+  constructor(private noteService: NoteService, private onlineService: OnlineService) {}
 
   ngOnInit(): void {
     this.notes = this.noteService.getNotes();

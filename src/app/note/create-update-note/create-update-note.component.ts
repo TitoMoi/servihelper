@@ -17,6 +17,9 @@ import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directi
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { TranslocoModule } from "@ngneat/transloco";
+import { OnlineService } from "app/online/service/online.service";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-create-update-note",
@@ -32,10 +35,15 @@ import { TranslocoModule } from "@ngneat/transloco";
     NgxEditorModule,
     MatButtonModule,
     RouterLink,
+    AsyncPipe,
+    NgIf,
+    MatIconModule,
   ],
 })
 export class CreateUpdateNoteComponent implements OnDestroy {
   n = this.noteService.getNote(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   isUpdate = this.n ? true : false;
 
@@ -54,6 +62,7 @@ export class CreateUpdateNoteComponent implements OnDestroy {
     private formBuilder: UntypedFormBuilder,
     private noteService: NoteService,
     private router: Router,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
 

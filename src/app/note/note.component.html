@@ -5,8 +5,10 @@
     class="mb-2"
     routerLink="create"
     routerLinkActive="active"
-    >{{ t("NOTE_BUTTON_CREATE_TITLE") }}</a
-  >
+    [disabled]="netStatusOffline$ | async"
+    >{{ t("NOTE_BUTTON_CREATE_TITLE") }}
+    <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon
+  ></a>
 
   <div *ngIf="notes.length" class="table-overflow">
     <div class="grid">
