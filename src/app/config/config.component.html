@@ -142,8 +142,10 @@
         color="primary"
         routerLink="createPublicTheme"
         routerLinkActive="active"
+        [disabled]="netStatusOffline$ | async"
       >
         {{ t("CONFIG_CREATE_PUBLIC_THEME") }}
+        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
       </a>
       <h4 class="me-2">{{ t("CONFIG_AVAILABLE_THEMES") }}</h4>
       <mat-form-field>
@@ -201,8 +203,10 @@
         color="primary"
         routerLink="createTitle"
         routerLinkActive="active"
+        [disabled]="netStatusOffline$ | async"
       >
         {{ t("CONFIG_CREATE_TITLE") }}
+        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
       </a>
       <h4 class="me-2">{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
       <mat-form-field>

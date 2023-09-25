@@ -98,6 +98,8 @@ export class ConfigComponent implements OnInit, OnDestroy {
     },
   ];
 
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
+
   //is part of the form
   currentConfig = this.configService.getConfig();
 
@@ -207,6 +209,15 @@ export class ConfigComponent implements OnInit, OnDestroy {
             .pipe(take(1))
             .subscribe(() => this.closeApp());
         }
+      })
+    );
+
+    this.subscription.add(
+      this.netStatusOffline$.subscribe((statusOffline) => {
+        Object.keys(this.form.controls).forEach((key) => {
+          statusOffline ? this.form.controls[key].disable() : this.form.controls[key].enable();
+        });
+        this.cdr.detectChanges();
       })
     );
   }
