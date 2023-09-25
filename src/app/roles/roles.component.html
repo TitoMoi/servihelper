@@ -5,8 +5,10 @@
     class="mb-2"
     routerLink="create"
     routerLinkActive="active"
-    >{{ t("ROLE_BUTTON_CREATE") }}</a
-  >
+    [disabled]="netStatusOffline$ | async"
+    >{{ t("ROLE_BUTTON_CREATE") }}
+    <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon
+  ></a>
   <div class="mb-2">{{ t("ROLE_EXPLANATION") }}</div>
   <div class="mb-2">{{ t("ROLE_EXPLANATION2") }}</div>
   <ng-container *ngIf="roles$ | async as roles">

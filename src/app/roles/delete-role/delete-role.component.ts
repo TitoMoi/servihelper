@@ -9,6 +9,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { MatIconModule } from "@angular/material/icon";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-delete-role",
@@ -24,6 +27,9 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatInputModule,
     MatButtonModule,
     RouterLink,
+    MatIconModule,
+    NgIf,
+    AsyncPipe,
   ],
 })
 export class DeleteRoleComponent {
@@ -34,11 +40,14 @@ export class DeleteRoleComponent {
     name: [{ value: this.role.name, disabled: true }, Validators.required],
   });
 
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private configService: ConfigService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private onlineService: OnlineService
   ) {}
 
   onSubmit() {

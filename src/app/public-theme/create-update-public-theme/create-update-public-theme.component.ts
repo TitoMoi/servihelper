@@ -8,6 +8,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { PublicThemeService } from "../service/public-theme.service";
+import { MatIconModule } from "@angular/material/icon";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-create-update-public-theme",
@@ -22,6 +25,9 @@ import { PublicThemeService } from "../service/public-theme.service";
     AutoFocusDirective,
     MatButtonModule,
     RouterLink,
+    MatIconModule,
+    NgIf,
+    AsyncPipe,
   ],
   templateUrl: "./create-update-public-theme.component.html",
   styleUrls: ["./create-update-public-theme.component.scss"],
@@ -29,6 +35,8 @@ import { PublicThemeService } from "../service/public-theme.service";
 })
 export class CreateUpdatePublicThemeComponent {
   theme = this.publicThemeService.getPublicTheme(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   isUpdate = this.theme ? true : false;
 
@@ -42,7 +50,8 @@ export class CreateUpdatePublicThemeComponent {
     private formBuilder: UntypedFormBuilder,
     private publicThemeService: PublicThemeService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private onlineService: OnlineService
   ) {}
 
   onSubmit(): void {

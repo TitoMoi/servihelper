@@ -7,6 +7,7 @@ import { NgIf, NgFor, AsyncPipe } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-roles",
@@ -33,7 +34,9 @@ export class RolesComponent implements OnInit {
   //Table
   displayedColumns: string[] = ["name", "editIcon", "deleteIcon"];
 
-  constructor(private configService: ConfigService) {}
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
+
+  constructor(private configService: ConfigService, private onlineService: OnlineService) {}
 
   ngOnInit(): void {}
 

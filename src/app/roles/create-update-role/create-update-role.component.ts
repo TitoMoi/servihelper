@@ -6,13 +6,15 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ConfigService } from "app/config/service/config.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { NgIf, NgFor } from "@angular/common";
+import { NgIf, NgFor, AsyncPipe } from "@angular/common";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { MatIconModule } from "@angular/material/icon";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-create-update-role",
@@ -33,6 +35,8 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
     MatButtonModule,
     RouterLink,
     AssignTypeNamePipe,
+    MatIconModule,
+    AsyncPipe,
   ],
 })
 export class CreateUpdateRoleComponent {
@@ -43,6 +47,8 @@ export class CreateUpdateRoleComponent {
   r = this.configService
     .getRoles()
     .find((role) => role.id === this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   isUpdate = this.r ? true : false;
 
@@ -57,7 +63,8 @@ export class CreateUpdateRoleComponent {
     private configService: ConfigService,
     private assignTypeService: AssignTypeService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private onlineService: OnlineService
   ) {}
 
   //includes

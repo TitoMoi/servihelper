@@ -9,6 +9,9 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { PublicThemeService } from "../service/public-theme.service";
 import { PublicThemeInterface } from "../model/public-theme.model";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-delete-public-theme",
@@ -21,12 +24,17 @@ import { PublicThemeInterface } from "../model/public-theme.model";
     MatInputModule,
     MatButtonModule,
     RouterLink,
+    NgIf,
+    AsyncPipe,
+    MatIconModule,
   ],
   templateUrl: "./delete-public-theme.component.html",
   styleUrls: ["./delete-public-theme.component.scss"],
 })
 export class DeletePublicThemeComponent {
   publicTheme = this.publicThemeService.getPublicTheme(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   form = this.formBuilder.group({
     id: this.publicTheme.id,
@@ -38,6 +46,7 @@ export class DeletePublicThemeComponent {
     private publicThemeService: PublicThemeService,
     private assignmentService: AssignmentService,
     private router: Router,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
 
