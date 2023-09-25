@@ -6,7 +6,6 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { RoomService } from "app/room/service/room.service";
 import path from "path";
 import { gzip } from "pako";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
 
 @Injectable({
   providedIn: "root",
