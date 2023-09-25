@@ -23,12 +23,14 @@
       <tbody>
         <tr *ngFor="let p of participants">
           <td class="fw-bold bg-color-white">{{ p.name }}</td>
-          <td
-            *ngFor="let at of assignTypes"
-            class="bg-color-white text-center"
-            (click)="changeAvailability(p, at, true)"
-          >
-            {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔" : "" }}
+          <td *ngFor="let at of assignTypes" class="bg-color-white text-center">
+            <button
+              mat-button
+              [disabled]="isNetStatusOffline"
+              (click)="changeAvailability(p, at, true)"
+            >
+              {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔" : "" }}
+            </button>
           </td>
         </tr>
       </tbody>

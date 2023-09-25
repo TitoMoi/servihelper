@@ -5,13 +5,15 @@ import { ParticipantInterface } from "../model/participant.model";
 import { ParticipantService } from "../service/participant.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatOptionModule } from "@angular/material/core";
-import { NgFor, NgClass } from "@angular/common";
+import { NgFor, NgClass, AsyncPipe } from "@angular/common";
 import { MatSelectModule } from "@angular/material/select";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { OnlineService } from "app/online/service/online.service";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-create-from-participant",
@@ -31,10 +33,14 @@ import { TranslocoModule } from "@ngneat/transloco";
     NgClass,
     MatButtonModule,
     RouterLink,
+    AsyncPipe,
+    MatIconModule,
   ],
 })
 export class CreateFromParticipantComponent {
   participants: ParticipantInterface[] = this.participantService.getParticipants(true);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   participantForm = this.formBuilder.group({
     id: undefined,
@@ -46,6 +52,7 @@ export class CreateFromParticipantComponent {
     private formBuilder: UntypedFormBuilder,
     private participantService: ParticipantService,
     private router: Router,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
 

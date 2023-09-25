@@ -10,6 +10,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { OnlineService } from "app/online/service/online.service";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-delete-participant",
@@ -24,10 +27,15 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatInputModule,
     MatButtonModule,
     RouterLink,
+    NgIf,
+    AsyncPipe,
+    MatIconModule,
   ],
 })
 export class DeleteParticipantComponent {
   participant = this.participantService.getParticipant(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   participantForm = this.formBuilder.group({
     id: this.participant.id,
@@ -39,6 +47,7 @@ export class DeleteParticipantComponent {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private router: Router,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
 

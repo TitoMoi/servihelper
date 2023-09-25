@@ -29,7 +29,7 @@ import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
-import { NgIf, NgFor } from "@angular/common";
+import { NgIf, NgFor, AsyncPipe } from "@angular/common";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
@@ -40,6 +40,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-create-update-participant",
@@ -69,6 +70,7 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     AssignTypeNamePipe,
     RoomPipe,
     RoomNamePipe,
+    AsyncPipe,
   ],
 })
 export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
@@ -81,6 +83,8 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   p = this.participantService.getParticipant(this.activatedRoute.snapshot.params.id);
 
@@ -111,6 +115,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     private assignTypeService: AssignTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private onlineService: OnlineService,
     private cdr: ChangeDetectorRef
   ) {}
 

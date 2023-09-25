@@ -6,8 +6,10 @@
       color="primary"
       routerLink="create"
       routerLinkActive="active"
+      [disabled]="netStatusOffline$ | async"
     >
       {{ t("PARTICIPANT_BUTTON_TITLE") }}
+      <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
     </button>
     <button
       *ngIf="participants.length"
@@ -16,8 +18,10 @@
       color="accent"
       routerLink="create-from"
       routerLinkActive="active"
+      [disabled]="netStatusOffline$ | async"
     >
       {{ t("PARTICIPANT_COPY_BUTTON_TITLE") }}
+      <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
     </button>
     <mat-checkbox
       class="mb-2 me-3"

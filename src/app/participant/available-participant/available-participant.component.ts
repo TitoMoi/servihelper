@@ -19,6 +19,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { LockService } from "app/lock/service/lock.service";
+import { OnlineService } from "app/online/service/online.service";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: "app-available-participant",
@@ -30,6 +32,7 @@ import { LockService } from "app/lock/service/lock.service";
     TranslocoModule,
     MatTooltipModule,
     MatIconModule,
+    MatButtonModule,
   ],
   templateUrl: "./available-participant.component.html",
   styleUrls: ["./available-participant.component.scss"],
@@ -48,6 +51,11 @@ export class AvailableParticipantComponent {
 
   subscription = new Subscription();
 
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
+
+  //To not create too many subscriptions on the template
+  isNetStatusOffline = false;
+
   config$: Observable<ConfigInterface> = this.configService.config$;
   roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
   currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
@@ -59,6 +67,7 @@ export class AvailableParticipantComponent {
     private configService: ConfigService,
     private exportService: ExportService,
     private lockService: LockService,
+    private onlineService: OnlineService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -79,6 +88,13 @@ export class AvailableParticipantComponent {
           .getAssignTypes()
           .filter((at) => this.allowedAssignTypesIds.includes(at.id) && at.hasAssistant);
 
+        this.cdr.detectChanges();
+      })
+    );
+
+    this.subscription.add(
+      this.netStatusOffline$.subscribe((isOffline) => {
+        this.isNetStatusOffline = isOffline;
         this.cdr.detectChanges();
       })
     );

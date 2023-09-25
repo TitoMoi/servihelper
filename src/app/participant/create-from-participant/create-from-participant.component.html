@@ -52,6 +52,7 @@
         [disabled]="participantForm.invalid"
       >
         {{ t("BUTTON_SAVE") }}
+        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>

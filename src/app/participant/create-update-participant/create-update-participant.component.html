@@ -172,6 +172,7 @@
         [disabled]="form.invalid"
       >
         {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
       </button>
       <button
         *ngIf="!isUpdate"
@@ -181,6 +182,7 @@
         [disabled]="form.invalid"
       >
         {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
+        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>
