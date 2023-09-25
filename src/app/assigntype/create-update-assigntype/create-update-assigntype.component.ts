@@ -12,8 +12,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { CommonModule } from "@angular/common";
+import { AsyncPipe, CommonModule, NgIf } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-create-update-assign-type",
@@ -34,10 +35,14 @@ import { MatIconModule } from "@angular/material/icon";
     MatTooltipModule,
     RouterLink,
     MatIconModule,
+    AsyncPipe,
+    NgIf,
   ],
 })
 export class CreateUpdateAssignTypeComponent {
   at = this.assignTypeService.getAssignType(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   isUpdate = this.at ? true : false;
 
@@ -75,6 +80,7 @@ export class CreateUpdateAssignTypeComponent {
     private participantService: ParticipantService,
     private router: Router,
     private translocoService: TranslocoService,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
 

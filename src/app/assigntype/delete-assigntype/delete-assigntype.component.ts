@@ -10,6 +10,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
+import { OnlineService } from "app/online/service/online.service";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-delete-assign-type",
@@ -24,10 +27,15 @@ import { TranslocoModule } from "@ngneat/transloco";
     MatInputModule,
     MatButtonModule,
     RouterLink,
+    AsyncPipe,
+    NgIf,
+    MatIconModule,
   ],
 })
 export class DeleteAssignTypeComponent {
   assignType = this.assignTypeService.getAssignType(this.activatedRoute.snapshot.params.id);
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   assignTypeForm = this.formBuilder.group({
     id: this.assignType.id,
@@ -40,6 +48,7 @@ export class DeleteAssignTypeComponent {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private router: Router,
+    private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
   ) {}
 

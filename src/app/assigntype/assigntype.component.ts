@@ -3,11 +3,12 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 
 import { Component } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
-import { NgIf, NgFor } from "@angular/common";
+import { NgIf, NgFor, AsyncPipe } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
 import { AssignTypeNamePipe } from "./pipe/assign-type-name.pipe";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-assign-type",
@@ -23,6 +24,7 @@ import { AssignTypeNamePipe } from "./pipe/assign-type-name.pipe";
     NgFor,
     MatIconModule,
     AssignTypeNamePipe,
+    AsyncPipe,
   ],
 })
 export class AssignTypeComponent {
@@ -31,5 +33,10 @@ export class AssignTypeComponent {
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
-  constructor(private assignTypeService: AssignTypeService) {}
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
+
+  constructor(
+    private assignTypeService: AssignTypeService,
+    private onlineService: OnlineService
+  ) {}
 }
