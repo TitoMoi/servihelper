@@ -1,6 +1,12 @@
 import { Injectable } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
-import { readJsonSync, removeSync, writeFileSync, writeJsonSync } from "fs-extra";
+import {
+  readJsonSync,
+  removeSync,
+  writeFileSync,
+  writeJSONSync,
+  writeJsonSync,
+} from "fs-extra";
 import { MigrationInterface } from "app/migration/model/migration.model";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { RoomService } from "app/room/service/room.service";
@@ -86,46 +92,46 @@ export class MigrationService {
     }
 
     //:::assignTypes:::
-    this.assignTypeService.hasChanged = true;
-    for (const at of this.assignTypeService.getAssignTypes()) {
-      //add properties days, tKey, type
-      if (at.days == null) {
-        at.days = 0;
+    const assignTypes = readJsonSync(this.configService.assignTypesPath);
+    if (assignTypes) {
+      for (const at of assignTypes) {
+        //add properties days, tKey, type
+        if (at.days == null) {
+          at.days = 0;
+        }
+        if (at.tKey == null) {
+          at.tKey = "";
+        }
+        if (at.type == null) {
+          at.type = "other";
+        }
+        //find isPublicSpeech property, put it in type
+        if (at["isPublicSpeech"] != null) {
+          at.type = "publicSpeech";
+        }
+        //delete all isPublicSpeech properties
+        delete at["isPublicSpeech"];
       }
-      if (at.tKey == null) {
-        at.tKey = "";
+      writeJSONSync(this.configService.assignTypesPath, assignTypes);
+
+      //:::rooms:::
+      //add property tKey, type
+      const rooms = readJsonSync(this.configService.roomsPath);
+      for (const room of rooms) {
+        if (room.tKey == null) {
+          room.tKey = "";
+        }
+        if (room.type == null) {
+          room.type = "other";
+        }
       }
-      if (at.type == null) {
-        at.type = "other";
-      }
-      //find isPublicSpeech property, put it in type
-      if (at["isPublicSpeech"] != null) {
-        at.type = "publicSpeech";
-      }
-      //delete all isPublicSpeech properties
-      delete at["isPublicSpeech"];
+      writeJSONSync(this.configService.roomsPath, rooms);
+
+      //create file migration.json
+      const migration: MigrationInterface = {
+        version: 5,
+      };
+      writeJsonSync(this.configService.migrationPath, migration);
     }
-
-    //:::rooms:::
-    //add property tKey, type
-    this.roomService.hasChanged = true;
-    for (const room of this.roomService.getRooms()) {
-      if (room.tKey == null) {
-        room.tKey = "";
-      }
-      if (room.type == null) {
-        room.type = "other";
-      }
-    }
-
-    //create file migration.json
-    const migration: MigrationInterface = {
-      version: 5,
-    };
-    this.saveMigration(migration);
-  }
-
-  saveMigration(migration: MigrationInterface) {
-    writeJsonSync(this.configService.migrationPath, migration);
   }
 }
