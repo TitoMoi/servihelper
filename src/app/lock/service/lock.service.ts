@@ -38,19 +38,25 @@ export class LockService {
 
   /** Set lock to true */
   takeLock() {
-    this.#lock.lock = true;
-    this.saveLockToFile();
+    if (this.#lock) {
+      this.#lock.lock = true;
+      this.saveLockToFile();
+    }
   }
 
   /** Set lock to false */
   releaseLock(exit: boolean = false) {
-    this.#lock.lock = false;
-    this.saveLockToFile(exit);
+    if (this.#lock) {
+      this.#lock.lock = false;
+      this.saveLockToFile(exit);
+    }
   }
 
   updateTimestamp() {
-    this.#lock.timestamp = new Date();
-    this.saveLockToFile();
+    if (this.#lock) {
+      this.#lock.timestamp = new Date();
+      this.saveLockToFile();
+    }
   }
 
   takeLockAndTimestamp() {
@@ -77,6 +83,10 @@ export class LockService {
     return false;
   }
 
+  /**
+   * If there is no activity or the network status is offline, the user wont we able to update the timestamp.
+   * Then the user will be logged out.
+   */
   intervalNoActivity() {
     //900000 millisecons is 15 min
     setInterval(() => {

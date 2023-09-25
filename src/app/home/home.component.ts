@@ -77,22 +77,26 @@ export class HomeComponent {
     return target.files[0];
   }
 
-  /** Uploads servihelper files, only for offline */
+  /** Uploads servihelper files, only for OFFLINE */
   uploadZipFiles(event: Event) {
     const zipFile = this.getZipContentFromFileEvent(event);
     const zip = new AdmZip(zipFile.path);
+
+    //First of all prepare the paths, online file is already available
+    this.configService.prepareFilePaths({ isOnline: false, path: "" });
     // reading archives
     zip.getEntries().forEach((zipEntry) => {
       switch (
-        zipEntry.entryName //entryName = participant.json...etc
+        zipEntry.entryName //entryName = participant.json, assignment.gz, ...
       ) {
         case this.configService.configFilename:
-          const online = this.onlineService.getOnline();
-          this.configService.prepareFilePaths(online);
           const currentConfig = this.configService.getConfig(); //Default config
           const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
           let finalConfig = { ...currentConfig, ...incomingConfig };
           writeJsonSync(this.configService.configPath, finalConfig);
+          break;
+        case this.configService.assignmentsFilename: //.gz
+          writeFileSync(this.configService.assignmentsPath, zipEntry.getData());
           break;
         default:
           writeFileSync(

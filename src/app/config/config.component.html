@@ -369,7 +369,7 @@
         <mat-icon matSuffix svgIcon="warningtime"></mat-icon>
       </mat-form-field>
     </mat-expansion-panel>
-    <mat-expansion-panel class="mb-2 hover-lightcoral">
+    <mat-expansion-panel *ngIf="!onlineConfig.isOnline" class="mb-2 hover-lightcoral">
       <mat-expansion-panel-header class="bg-color-lightcoral">
         <mat-panel-title>
           <h3 class="m-3">
@@ -391,7 +391,7 @@
         mat-raised-button
         type="button"
         color="warn"
-        (click)="eraseAllData()"
+        (click)="restoreAllData()"
       >
         {{ t("CONFIG_RESET_ALL_CONFIRM") }}
       </button>

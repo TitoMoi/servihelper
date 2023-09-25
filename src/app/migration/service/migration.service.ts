@@ -1,9 +1,12 @@
 import { Injectable } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
-import { readJSONSync, writeJsonSync } from "fs-extra";
+import { readJsonSync, writeFileSync, writeJsonSync } from "fs-extra";
 import { MigrationInterface } from "app/migration/model/migration.model";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { RoomService } from "app/room/service/room.service";
+import path from "path";
+import { gzip } from "pako";
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
 
 @Injectable({
   providedIn: "root",
@@ -17,16 +20,10 @@ export class MigrationService {
   ) {}
 
   migrateData() {
-    const migration: MigrationInterface = readJSONSync(this.configService.migrationPath, {
-      throws: false,
-    });
-
     //First migration
-    if (!migration) {
-      this.toV5();
-      this.saveData();
-      return;
-    }
+    this.toV5();
+    this.saveData();
+    return;
   }
 
   saveData() {
@@ -36,6 +33,16 @@ export class MigrationService {
 
   /*Based on git changes to the models **/
   toV5() {
+    //:::assignments:::
+    //Now assignments are gziped, so we need to convert from json to gzip
+    const assignments: AssignmentInterface[] = readJsonSync(
+      path.join(this.configService.sourceFilesPath, "assignment.json")
+    );
+    if (assignments) {
+      const gziped = gzip(JSON.stringify(assignments), { to: "string" });
+      writeFileSync(this.configService.assignmentsPath, gziped);
+    }
+
     //:::assignTypes:::
     for (const at of this.assignTypeService.getAssignTypes()) {
       //add properties days, tKey, type

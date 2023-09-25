@@ -306,7 +306,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       this.sharedService.setCountAndLastAssignmentDateAndRoom(
         this.assignments,
         this.principals,
-        this.gfv("room"),
         this.gfv("assignType"),
         true
       );
@@ -319,7 +318,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
       this.sharedService.setCountAndLastAssignmentDateAndRoom(
         this.assignments,
         this.assistants,
-        this.gfv("room"),
         this.gfv("assignType"),
         false
       );

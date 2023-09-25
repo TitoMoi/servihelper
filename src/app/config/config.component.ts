@@ -1,14 +1,7 @@
 import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
-import {
-  copySync,
-  existsSync,
-  readdir,
-  readdirSync,
-  removeSync,
-  writeJsonSync,
-} from "fs-extra";
+import { copySync, existsSync, readdir, removeSync } from "fs-extra";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -241,12 +234,14 @@ export class ConfigComponent implements OnInit, OnDestroy {
   /**
    * Resets data to default
    */
-  eraseAllData() {
-    for (let file of readdirSync(this.configService.sourceFilesPath)) {
-      writeJsonSync(path.join(this.configService.sourceFilesPath, file), []);
-    }
-    //Override with default config
-    writeJsonSync(this.configService.configPath, this.defaultConfig);
+  restoreAllData() {
+    copySync(
+      this.configService.backupPath,
+      path.join(this.configService.assetsFilesPath, "source"),
+      {
+        overwrite: true,
+      }
+    );
 
     //Close the program
     this.closeApp();

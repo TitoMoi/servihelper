@@ -1,0 +1,134 @@
+[
+  {
+    "id": "1",
+    "name": "",
+    "tKey": "ASSIGNTYPES_PUBLICSPEECH",
+    "hasAssistant": false,
+    "repeat": false,
+    "type": "publicSpeech",
+    "order": 1,
+    "color": "#4B6DA6",
+    "days": null
+  },
+  {
+    "id": "2",
+    "name": "",
+    "tKey": "ASSIGNTYPES_INITIALPRAYER",
+    "hasAssistant": false,
+    "repeat": false,
+    "type": "initialPrayer",
+    "order": 2,
+    "color": "#ffffff",
+    "days": null
+  },
+  {
+    "id": "3",
+    "name": "",
+    "tKey": "ASSIGNTYPES_TREASURES",
+    "hasAssistant": false,
+    "repeat": false,
+    "type": "treasures",
+    "order": 3,
+    "color": "#616261",
+    "days": null
+  },
+  {
+    "id": "4",
+    "name": "",
+    "tKey": "ASSIGNTYPES_SPIRITUALGEMS",
+    "hasAssistant": false,
+    "repeat": false,
+    "type": "spiritualGems",
+    "order": 4,
+    "color": "#616261",
+    "days": null
+  },
+  {
+    "id": "5",
+    "name": "",
+    "tKey": "ASSIGNTYPES_BIBLEREADING",
+    "hasAssistant": false,
+    "repeat": false,
+    "type": "bibleReading",
+    "order": 5,
+    "color": "#616261",
+    "days": null
+  },
+  {
+    "id": "6",
+    "name": "",
+    "tKey": "ASSIGNTYPES_INITIALCALL",
+    "hasAssistant": true,
+    "repeat": true,
+    "type": "initialCall",
+    "order": 6,
+    "color": "#C48430",
+    "days": null
+  },
+  {
+    "id": "7",
+    "name": "",
+    "tKey": "ASSIGNTYPES_TALK",
+    "hasAssistant": false,
+    "repeat": false,
+    "type": "talk",
+    "order": 7,
+    "color": "#C48430",
+    "days": null
+  },
+  {
+    "id": "8",
+    "name": "",
+    "tKey": "ASSIGNTYPES_RETURNVISIT",
+    "hasAssistant": true,
+    "repeat": true,
+    "type": "returnVisit",
+    "order": 8,
+    "color": "#C48430",
+    "days": null
+  },
+  {
+    "id": "9",
+    "name": "",
+    "tKey": "ASSIGNTYPES_BIBLESTUDY",
+    "hasAssistant": true,
+    "repeat": false,
+    "type": "bibleStudy",
+    "order": 9,
+    "color": "#C48430",
+    "days": null
+  },
+  {
+    "id": "10",
+    "name": "",
+    "tKey": "ASSIGNTYPES_LIVINGASCHRISTIANS",
+    "hasAssistant": false,
+    "repeat": true,
+    "type": "livingAsChristians",
+    "order": 10,
+    "color": "#942827",
+    "days": null
+  },
+  {
+    "id": "11",
+    "name": "",
+    "tKey": "ASSIGNTYPES_CONGREGATIONBIBLESTUDY",
+    "hasAssistant": true,
+    "repeat": false,
+    "type": "congregationBibleStudy",
+    "order": 11,
+    "color": "#942827",
+    "days": null
+  },
+  {
+    "id": "12",
+    "name": "",
+    "tKey": "ASSIGNTYPES_ENDINGPRAYER",
+    "hasAssistant": false,
+    "repeat": false,
+    "type": "endingPrayer",
+    "order": 12,
+    "color": "#ffffff",
+    "days": null
+  }
+]

@@ -25,7 +25,7 @@ export class ConfigService {
   administratorKey = "administrator";
 
   //Json Filenames
-  assignmentsFilename = "assignment.json";
+  assignmentsFilename = "assignment.gz";
   notesFilename = "note.json";
   participantsFilename = "participant.json";
   assignTypesFilename = "assignType.json";
@@ -45,6 +45,7 @@ export class ConfigService {
   assetsFilesPath = APP_CONFIG.production ? path.join(__dirname, "assets") : "assets";
   iconsFilesPath = path.join(this.assetsFilesPath, "icons");
   templatesFilesPath = path.join(this.assetsFilesPath, "templates");
+  backupPath = path.join(this.assetsFilesPath, "backup", "source");
   //This source is always offline
   onlinePath = path.join(this.assetsFilesPath, "source", this.onlineFilename);
   /**Also, these other path location below are prepared when the config file is loaded */

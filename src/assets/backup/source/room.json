@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "",
+    "tKey": "ROOMTYPES_MAINHALL",
+    "type": "mainHall",
+    "order": 1
+  },
+  {
+    "id": "2",
+    "name": "",
+    "tKey": "ROOMTYPES_AUXILIARYROOM1",
+    "type": "auxiliaryRoom1",
+    "order": 2
+  },
+  {
+    "id": "3",
+    "name": "",
+    "tKey": "ROOMTYPES_AUXILIARYROOM2",
+    "type": "auxiliaryRoom2",
+    "order": 3
+  }
+]

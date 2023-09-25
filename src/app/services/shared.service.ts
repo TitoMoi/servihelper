@@ -17,7 +17,6 @@ import { PublicThemeService } from "app/public-theme/service/public-theme.servic
 import { RoomService } from "app/room/service/room.service";
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 import { ipcRenderer } from "electron";
-/* import { version } from '../../../package.json'; */
 const { version } = require("../../../package.json");
 
 @Injectable({
@@ -113,7 +112,6 @@ export class SharedService {
   setCountAndLastAssignmentDateAndRoom(
     assignmentList: AssignmentInterface[],
     participantList: ParticipantDynamicInterface[],
-    roomId: string,
     assignTypeId: string,
     isPrincipal: boolean
   ): void {
@@ -166,7 +164,7 @@ export class SharedService {
     link.remove();
   }
 
-  /**Gets a fresh all data */
+  /**Gets a fresh all data except the config, online and the lock */
   getAllData(): boolean {
     this.roomService.hasChanged = true;
     this.assignTypeService.hasChanged = true;

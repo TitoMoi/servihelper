@@ -3,13 +3,14 @@ import {
   AssignmentOperationInterface,
   AssignmentTableInterface,
 } from "app/assignment/model/assignment.model";
-import { readJSON, writeJson } from "fs-extra";
+import { readFile, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { ConfigService } from "app/config/service/config.service";
 import { LockService } from "app/lock/service/lock.service";
+import { gzip, ungzip } from "pako";
 
 @Injectable({
   providedIn: "root",
@@ -21,7 +22,7 @@ export class AssignmentService {
   assignment$: Subject<AssignmentOperationInterface> =
     new Subject<AssignmentOperationInterface>();
   //The array of assignments in memory
-  #assignments: AssignmentInterface[] = undefined;
+  #assignments: AssignmentInterface[] = [];
   //The map of assignments for look up of by id
   #assignmentsMap: Map<string, AssignmentInterface> = new Map();
   //The map of assignments for look up of by date
@@ -38,12 +39,18 @@ export class AssignmentService {
       return deepClone ? structuredClone(this.#assignments) : this.#assignments;
     }
     this.hasChanged = false;
-    //populate maps for first run
-    this.#assignments = await readJSON(this.configService.assignmentsPath);
-    for (const assignment of this.#assignments) {
-      this.#assignmentsMap.set(assignment.id, assignment);
 
-      this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
+    const assignContent = await readFile(this.configService.assignmentsPath);
+
+    if (assignContent) {
+      this.#assignments = JSON.parse(ungzip(assignContent, { to: "string" }));
+
+      //populate maps for first run
+      for (const assignment of this.#assignments) {
+        this.#assignmentsMap.set(assignment.id, assignment);
+
+        this.addOrUpdateAssignmentToAssignmentByDateMap(assignment);
+      }
     }
 
     return deepClone ? structuredClone(this.#assignments) : this.#assignments;
@@ -119,7 +126,8 @@ export class AssignmentService {
    */
   saveAssignmentsToFile() {
     //Write assignments back to file
-    writeJson(this.configService.assignmentsPath, this.#assignments);
+    const gziped = gzip(JSON.stringify(this.#assignments), { to: "string" });
+    writeFile(this.configService.assignmentsPath, gziped);
     //Notify the lock we are working
     this.lockService.updateTimestamp();
   }
