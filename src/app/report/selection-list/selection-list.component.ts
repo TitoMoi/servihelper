@@ -190,7 +190,7 @@ export class SelectionListComponent implements OnChanges {
    *
    * @returns the total height
    */
-  getPdfHeight(isForPrint: boolean): number {
+  getPdfHeight(): number {
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
       format: [210, 90000],
@@ -203,7 +203,7 @@ export class SelectionListComponent implements OnChanges {
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       autoTable(doc, {
         html: `#table${i}`,
-        styles: { font, fontSize: isForPrint ? 11 : 12 },
+        styles: { font, fontSize: 11 },
         theme: "plain",
         margin: { vertical: 10, horizontal: 4 },
         columnStyles: { 0: { cellWidth: 140 }, 1: { cellWidth: 50 } },
@@ -237,11 +237,11 @@ export class SelectionListComponent implements OnChanges {
    *
    */
   toPdf(isForPrint: boolean) {
-    const height = this.getPdfHeight(isForPrint);
+    const height = this.getPdfHeight();
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
       compress: true,
-      format: isForPrint ? "a4" : [210, height + 50],
+      format: isForPrint ? "a4" : [210, height + 50], //infinite list
     });
 
     const font = this.pdfService.getFontForLang();
@@ -254,10 +254,10 @@ export class SelectionListComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font, fontSize: isForPrint ? 11 : 12 },
+        styles: { font, fontSize: 11 },
         theme: "plain",
-        margin: { vertical: 10, horizontal: 4 },
-        columnStyles: { 0: { cellWidth: 160 }, 1: { cellWidth: 50 } },
+        margin: { vertical: 10, horizontal: 8 },
+        columnStyles: { 0: { cellWidth: 152 }, 1: { cellWidth: 42 } },
         didParseCell: (data) => {
           //bug fix
           data.cell.text = data.cell.text.map((char) => char.trim());
@@ -277,6 +277,72 @@ export class SelectionListComponent implements OnChanges {
 
   async toPng() {
     this.exportService.toPng("toPngDivId", "assignments");
+  }
+
+  toPdfOpinionated(isForPrint = true) {
+    const doc = this.pdfService.getJsPdf({
+      orientation: "portrait",
+      format: "a4",
+    });
+
+    const fontSize = 11;
+    doc.setFontSize(fontSize);
+    /* const dpi = 300; */
+    let x = 10;
+    let y = 10;
+
+    let treasuresFromWordBand = false;
+    let improvePreachingBand = false;
+    let livingAsChristiansBand = false;
+    //margins are 10, so... w = 210 - 10 - 10  = 190, h = 270 - 10 - 10 = 250
+    //titles are 10, so we have 3 titles * 2 weeks = 250 - (30 * 2) = 190
+    //week is 190, we have two weeks so... 190 / 2 = 95 for assignments for each week
+
+    const pageWidth = 190;
+    const maxLineWidth = pageWidth - 40;
+    /* const lineHeight = (fontSize * 1.15) / dpi; */
+    for (const ag of this.assignmentGroups) {
+      const numberAssignments = ag.assignments.length;
+      const height = 95 / numberAssignments;
+      for (const a of ag.assignments) {
+        //Bands
+        if (
+          this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
+          !treasuresFromWordBand
+        ) {
+          doc.setFillColor(a.assignType.color);
+          doc.rect(10, y, 190, 5, "F");
+          treasuresFromWordBand = true;
+          y = y + 5;
+        }
+        if (
+          this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
+          !improvePreachingBand
+        ) {
+          doc.setFillColor(a.assignType.color);
+          doc.rect(10, y, 190, 5, "F");
+          improvePreachingBand = true;
+          y = y + 5;
+        }
+        if (
+          this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
+          !livingAsChristiansBand
+        ) {
+          doc.setFillColor(a.assignType.color);
+          doc.rect(10, y, 190, 5, "F");
+          livingAsChristiansBand = true;
+          y = y + 5; //The band has taken 5
+        }
+        y = y + height;
+        const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
+        const textLines = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
+        console.log(textLines);
+        doc.text(textLines, x, y);
+        doc.text(a.principal.name, x + 160, y);
+        y = y + textLines.length * 1.15 + 2;
+      }
+    }
+    doc.save();
   }
 
   toExcel() {

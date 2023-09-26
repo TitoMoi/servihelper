@@ -1,4 +1,4 @@
-import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
+import { AssignTypeInterface, AssignTypes } from "app/assigntype/model/assigntype.model";
 import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
@@ -15,6 +15,18 @@ export class AssignTypeService {
   #assignTypes: AssignTypeInterface[] = [];
   //The map of assignTypes for look up of by id
   #assignTypesMap: Map<string, AssignTypeInterface> = new Map();
+
+  treasuresAssignmentTypes: AssignTypes[] = ["spiritualGems", "treasures", "bibleReading"];
+  improvePreachingAssignmentTypes: AssignTypes[] = [
+    "initialCall",
+    "returnVisit",
+    "bibleStudy",
+    "talk",
+  ];
+  liveAsChristiansAssignmentTypes: AssignTypes[] = [
+    "livingAsChristians",
+    "congregationBibleStudy",
+  ];
 
   constructor(private configService: ConfigService) {}
 

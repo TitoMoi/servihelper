@@ -1,0 +1,5 @@
+<svg height="512" viewBox="0 0 512 512" width="512">
+  <rect width="400" height="70" style="fill:#616261;stroke-width:3;stroke:rgb(0,0,0)" />
+  <rect y= "80" width="400" height="70" style="fill:#C48430;stroke-width:3;stroke:rgb(0,0,0)" />
+  <rect y= "160" width="400" height="70" style="fill:#942827;stroke-width:3;stroke:rgb(0,0,0)" />
+</svg>
