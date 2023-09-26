@@ -337,11 +337,11 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   async toClipboard() {
-    this.exportService.toClipboard("map");
+    this.exportService.toClipboard("map2");
     this.cdr.detectChanges();
   }
 
   async toPng(mapName: string) {
-    this.exportService.toPng("map", mapName);
+    this.exportService.toPng("map2", mapName);
   }
 }
