@@ -190,7 +190,7 @@ export class SelectionListComponent implements OnChanges {
    *
    * @returns the total height
    */
-  getPdfHeight(): number {
+  getPdfHeight(isForPrint: boolean): number {
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
       format: [210, 90000],
@@ -200,22 +200,18 @@ export class SelectionListComponent implements OnChanges {
 
     let totalHeight = 0;
 
-    let firstTable = true;
-
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       autoTable(doc, {
         html: `#table${i}`,
-        styles: { font, fontSize: 13, halign: "left" },
+        styles: { font, fontSize: isForPrint ? 11 : 12 },
         theme: "plain",
-        margin: firstTable ? { top: 30 } : undefined,
-        columnStyles: { 0: { cellWidth: 110 }, 1: { cellWidth: 80 } },
+        margin: { vertical: 10, horizontal: 4 },
+        columnStyles: { 0: { cellWidth: 140 }, 1: { cellWidth: 50 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const localName = data.cell.raw["localName"];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const classList: DOMTokenList = data.cell.raw["classList"];
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
             data.cell.styles.fontStyle = "bold";
@@ -224,12 +220,6 @@ export class SelectionListComponent implements OnChanges {
           //date
           if (localName === "th") {
             data.cell.styles.fontStyle = "bold";
-            data.cell.styles.fontSize = 14;
-            return;
-          }
-          //theme
-          if (!assignType && localName === "td" && classList.contains("bold")) {
-            data.cell.styles.fontStyle = "bold";
             return;
           }
         },
@@ -237,7 +227,6 @@ export class SelectionListComponent implements OnChanges {
           totalHeight = data.cursor.y;
         },
       });
-      firstTable = false;
     }
     return totalHeight;
   }
@@ -248,11 +237,11 @@ export class SelectionListComponent implements OnChanges {
    *
    */
   toPdf(isForPrint: boolean) {
-    const height = this.getPdfHeight();
+    const height = this.getPdfHeight(isForPrint);
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
       compress: true,
-      format: isForPrint ? undefined : [210, height + 50],
+      format: isForPrint ? "a4" : [210, height + 50],
     });
 
     const font = this.pdfService.getFontForLang();
@@ -265,10 +254,10 @@ export class SelectionListComponent implements OnChanges {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font, fontSize: isForPrint ? 10 : 13 },
+        styles: { font, fontSize: isForPrint ? 11 : 12 },
         theme: "plain",
         margin: { vertical: 10, horizontal: 4 },
-        columnStyles: { 0: { cellWidth: 140 }, 1: { cellWidth: 50 } },
+        columnStyles: { 0: { cellWidth: 160 }, 1: { cellWidth: 50 } },
         didParseCell: (data) => {
           //bug fix
           data.cell.text = data.cell.text.map((char) => char.trim());
@@ -276,9 +265,7 @@ export class SelectionListComponent implements OnChanges {
           const localName = data.cell.raw["localName"];
           //date
           if (localName === "th") {
-            //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
             data.cell.styles.fontStyle = "bold";
-            data.cell.styles.fontSize = 12;
             return;
           }
         },
