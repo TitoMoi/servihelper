@@ -84,21 +84,23 @@
       </div>
     </div>
   </form>
-  <div *ngIf="polygonExists()" class="d-flex">
-    <mat-icon
-      class="m-2"
-      svgIcon="clipboard"
-      aria-label="icon"
-      [matTooltip]="t('ICON_CLIPBOARD')"
-      (click)="toClipboard()"
-    ></mat-icon>
-    <mat-icon
-      class="m-2"
-      svgIcon="png"
-      aria-label="icon"
-      [matTooltip]="t('ICON_PNG')"
-      (click)="toPng(mapForm.controls.name.value)"
-    ></mat-icon>
+  <div class="d-flex">
+    <button mat-icon-button [disabled]="!polygonExists()">
+      <mat-icon
+        svgIcon="clipboard"
+        aria-label="icon"
+        [matTooltip]="t('ICON_CLIPBOARD')"
+        (click)="toClipboard()"
+      ></mat-icon>
+    </button>
+    <button mat-icon-button [disabled]="!polygonExists()">
+      <mat-icon
+        svgIcon="png"
+        aria-label="icon"
+        [matTooltip]="t('ICON_PNG')"
+        (click)="toPng(mapForm.controls.name.value)"
+      ></mat-icon>
+    </button>
   </div>
   <!-- The reference for leaflet to load the map -->
   <!-- its map2 because on router navigation from heatmap its not displayed as it should be -->
