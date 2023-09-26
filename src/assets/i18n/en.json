@@ -107,7 +107,6 @@
   "CONFIG_CREATE_TITLE": "Create title",
   "CONFIG_DATE_MONDAY": "Monday",
   "CONFIG_DATE_SUNDAY": "Sunday",
-  "CONFIG_DEFAULT_FONT_SIZE": "Default font size for image and excel report (except pdf)",
   "CONFIG_DEFAULT_FOOTER_NOTE": "Select default footnote when creating assignments",
   "CONFIG_DEFAULT_REPORT_DATE_COLOR": "Choose default color for date",
   "CONFIG_DEFAULT_REPORT_DATE_FORMAT": "Choose default format for date",
@@ -381,5 +380,9 @@
   "APP_ONLINE_TIMEOUT_REMINDER": "When working online the app will close after 15 minuts 🕒 if there is no activity.",
 
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET": "Native slips and s89 📝",
-  "HOME_IS_ONLINE_ACTIVATED": "⚠️ Online mode is activated. Please make sure you have the latest files from the shared folder. If not, close servihelper and get them first."
+  "HOME_IS_ONLINE_ACTIVATED": "⚠️ Online mode is activated. Please make sure you have the latest files from the shared folder. If not, close servihelper and get them first.",
+  "CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL": "Horizontal reports default font size in pixels for png image and excel (except pdf)",
+  "CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL_TIP": "Font size must be smaller to fit all the a4 page",
+  "CONFIG_DEFAULT_FONT_SIZE_VERTICAL": "Vertical reports default font size in pixels for png image and excel report (except pdf)",
+  "CONFIG_DEFAULT_FONT_SIZE": "XXXREMOVE THISXXXX"
 }

@@ -57,7 +57,8 @@ export class SelectionListHorComponent implements OnChanges {
   @Input() rooms: string[];
   @Input() order: SortOrderType;
 
-  defaultReportFontSize = this.configService.getConfig().defaultReportFontSize + "px";
+  defaultReportFontSizeHorizontal =
+    this.configService.getConfig().defaultReportFontSizeHorizontal + "px";
   defaultReportDateFormat = this.configService.getConfig().defaultReportDateFormat;
   defaultReportDateColor = this.configService.getConfig().defaultReportDateColor;
   reportTitle = this.configService.getConfig().reportTitle;

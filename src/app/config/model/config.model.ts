@@ -33,7 +33,8 @@ export interface WeekDaysBegin {
 export interface ConfigInterface {
   lang?: string;
   defaultFooterNoteId?: string;
-  defaultReportFontSize?: string;
+  defaultReportFontSize: number;
+  defaultReportFontSizeHorizontal: number;
   defaultReportDateColor?: string;
   defaultWeekDayBegins: number;
   defaultReportDateFormat?: DateFormatStyles;

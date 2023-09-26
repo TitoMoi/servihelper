@@ -30,7 +30,7 @@
         <th
           class="fw-bold"
           [style.backgroundColor]="defaultReportDateColor"
-          [style.fontSize]="defaultReportFontSize"
+          [style.fontSize]="defaultReportFontSizeHorizontal"
         >
           {{
             ag.date
@@ -48,14 +48,17 @@
           [style.borderBottomColor]="
             (assignment.assignType.id | assignTypePipe).color || 'transparent'
           "
-          [style.fontSize]="defaultReportFontSize"
+          [style.fontSize]="defaultReportFontSizeHorizontal"
         >
           {{ assignment.assignType | assignTypeNamePipe }}
         </th>
       </tr>
       <tr>
-        <td [style.fontSize]="defaultReportFontSize">{{ ag.roomName }}</td>
-        <td *ngFor="let assignment of ag.assignments" [style.fontSize]="defaultReportFontSize">
+        <td [style.fontSize]="defaultReportFontSizeHorizontal">{{ ag.roomName }}</td>
+        <td
+          *ngFor="let assignment of ag.assignments"
+          [style.fontSize]="defaultReportFontSizeHorizontal"
+        >
           {{ assignment.principal.name }}
           <ng-container *ngIf="assignment.assistant"
             >/ <br />

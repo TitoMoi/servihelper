@@ -330,13 +330,23 @@
         <input type="color" matInput formControlName="defaultReportDateColor" />
       </mat-form-field>
 
-      <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE") }}</h4>
+      <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE_VERTICAL") }}</h4>
       <mat-form-field>
         <input
           matInput
           type="number"
           formControlName="defaultReportFontSize"
-          placeholder="16"
+          [placeholder]="form.controls.defaultReportFontSize.value"
+        />
+      </mat-form-field>
+      <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL") }}</h4>
+      <div class="fst-italic">{{ t("CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL_TIP") }}</div>
+      <mat-form-field>
+        <input
+          matInput
+          type="number"
+          formControlName="defaultReportFontSizeHorizontal"
+          [placeholder]="form.controls.defaultReportFontSizeHorizontal.value"
         />
       </mat-form-field>
     </mat-expansion-panel>
