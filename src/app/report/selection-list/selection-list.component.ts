@@ -32,6 +32,8 @@ import { ExportService } from "app/services/export.service";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
+import { readFileSync } from "fs-extra";
+import path from "path";
 
 @Component({
   selector: "app-selection-list",
@@ -338,7 +340,7 @@ export class SelectionListComponent implements OnChanges {
       );
       //date
       doc.setFont(this.pdfService.font, "bold");
-      doc.setFontSize(12);
+      doc.setFontSize(13);
       //room
       doc.text(dateText, x, y, {});
       doc.text(ag.roomName, x + 145, y);
@@ -368,38 +370,52 @@ export class SelectionListComponent implements OnChanges {
           this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
           !treasuresFromWordBand
         ) {
-          y = y - 3; //the band paints from baseline to bottom, text is from baseline to above
+          y = y - 3;
+          const image = path.join(this.configService.iconsFilesPath, "diamond.jpg");
+          const uint8array = new Uint8Array(readFileSync(image));
+          doc.addImage(uint8array, "JPEG", x, y, 5, 5);
+          //the band paints from baseline to bottom, text is from baseline to above
           doc.setFillColor(a.assignType.color);
-          doc.rect(10, y, 190, 4, "F");
+          doc.rect(20, y, 180, 5, "F");
           treasuresFromWordBand = true;
-          y = y + 9; //The band has taken 6 (2 + 4) plus 2 to ending space
+          y = y + 10; //The band has taken 6 (2 + 4) plus 2 to ending space
         }
         if (
           this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
           !improvePreachingBand
         ) {
           y = y - 3;
+
+          const image = path.join(this.configService.iconsFilesPath, "wheat.jpg");
+          const uint8array = new Uint8Array(readFileSync(image));
+          doc.addImage(uint8array, "JPEG", x, y, 5, 5);
+
           doc.setFillColor(a.assignType.color);
-          doc.rect(10, y, 190, 4, "F");
+          doc.rect(20, y, 180, 5, "F");
           improvePreachingBand = true;
-          y = y + 9;
+          y = y + 10;
         }
         if (
           this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
           !livingAsChristiansBand
         ) {
           y = y - 3;
+
+          const image = path.join(this.configService.iconsFilesPath, "sheep.jpg");
+          const uint8array = new Uint8Array(readFileSync(image));
+          doc.addImage(uint8array, "JPEG", x, y, 5, 5);
+
           doc.setFillColor(a.assignType.color);
-          doc.rect(10, y, 190, 4, "F");
+          doc.rect(20, y, 180, 5, "F");
           livingAsChristiansBand = true;
-          y = y + 9;
+          y = y + 10;
         }
         doc.text(textLinesTheme, x, y);
         doc.text(textLinesParticipants, x + 145, y);
         y = y + height;
       }
       //Separator betweek week 1 and 2
-      y = y + 10;
+      y = y + 8;
       weekCounter--;
     }
     doc.save();
