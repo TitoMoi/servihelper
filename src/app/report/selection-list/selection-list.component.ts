@@ -418,7 +418,7 @@ export class SelectionListComponent implements OnChanges {
       y = y + 8;
       weekCounter--;
     }
-    doc.save();
+    doc.save("assignmentsBands");
   }
 
   toExcel() {
