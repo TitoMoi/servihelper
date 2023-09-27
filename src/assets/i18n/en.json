@@ -384,5 +384,6 @@
   "CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL": "Horizontal reports default font size in pixels for png image and excel (except pdf)",
   "CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL_TIP": "Font size must be smaller to fit all the a4 page",
   "CONFIG_DEFAULT_FONT_SIZE_VERTICAL": "Vertical reports default font size in pixels for png image and excel report (except pdf)",
-  "CONFIG_DEFAULT_FONT_SIZE": "XXXREMOVE THISXXXX"
+  "CONFIG_DEFAULT_FONT_SIZE": "XXXREMOVE THISXXXX",
+  "ICON_PDF_BAND": "Generate a colorful pdf with bands and up to two weeks per page"
 }
