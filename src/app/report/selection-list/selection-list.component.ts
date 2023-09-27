@@ -23,7 +23,7 @@ import {
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
-import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { TranslocoLocaleModule, TranslocoLocaleService } from "@ngneat/transloco-locale";
 import { NgIf, NgFor } from "@angular/common";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
@@ -78,6 +78,7 @@ export class SelectionListComponent implements OnChanges {
     private pdfService: PdfService,
     private exportService: ExportService,
     private roomNamePipe: RoomNamePipe,
+    private translocoLocaleService: TranslocoLocaleService,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnChanges(changes: SimpleChanges) {
@@ -286,6 +287,7 @@ export class SelectionListComponent implements OnChanges {
     });
 
     const fontSize = 11;
+    doc.setFont(this.pdfService.font);
     doc.setFontSize(fontSize);
     /* const dpi = 300; */
     let x = 10;
@@ -297,49 +299,87 @@ export class SelectionListComponent implements OnChanges {
     //margins are 10, so... w = 210 - 10 - 10  = 190, h = 270 - 10 - 10 = 250
     //titles are 10, so we have 3 titles * 2 weeks = 250 - (30 * 2) = 190
     //week is 190, we have two weeks so... 190 / 2 = 95 for assignments for each week
+    //In the header for each week goes the date so... 95 - 5 = 90
+    const totalHeight = 90;
 
     const pageWidth = 190;
-    const maxLineWidth = pageWidth - 40;
+    const maxLineWidth = pageWidth - 50;
+    const maxLineWidthParticipants = pageWidth - 160;
+
     /* const lineHeight = (fontSize * 1.15) / dpi; */
     for (const ag of this.assignmentGroups) {
-      const numberAssignments = ag.assignments.length;
-      const height = 95 / numberAssignments;
+      //Get the height for the assignments
+      let totalTextLines = 0;
+      //Reset the bands
+      treasuresFromWordBand = false;
+      improvePreachingBand = false;
+      livingAsChristiansBand = false;
       for (const a of ag.assignments) {
+        const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
+        const textLinesTheme = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
+
+        totalTextLines = totalTextLines + textLinesTheme.length;
+      }
+      const dateText = this.translocoLocaleService.localizeDate(
+        ag.date,
+        this.translocoLocaleService.getLocale(),
+        { dateStyle: this.defaultReportDateFormat }
+      );
+      doc.setFont(this.pdfService.font, "bold");
+      doc.text(dateText, x, y, {});
+      y = y + 5;
+      doc.setFont(this.pdfService.font, "normal");
+
+      for (const a of ag.assignments) {
+        const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
+        const textLinesTheme = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
+
+        const participantsNames =
+          a.principal.name + (a.assistant ? " / " + a.assistant.name : "");
+        const textLinesParticipants = doc.splitTextToSize(
+          participantsNames,
+          maxLineWidthParticipants
+        );
+
+        const heightTheme = (totalHeight / totalTextLines) * textLinesTheme.length;
+        const heightParticipantNames =
+          (totalHeight / totalTextLines) * textLinesParticipants.length;
+        const height =
+          heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
         //Bands
         if (
           this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
           !treasuresFromWordBand
         ) {
+          y = y - 3; //the band paints from baseline to bottom, text is from baseline to above
           doc.setFillColor(a.assignType.color);
           doc.rect(10, y, 190, 5, "F");
           treasuresFromWordBand = true;
-          y = y + 5;
+          y = y + 11; //The band has taken 10 plus a space
         }
         if (
           this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
           !improvePreachingBand
         ) {
+          y = y - 3;
           doc.setFillColor(a.assignType.color);
           doc.rect(10, y, 190, 5, "F");
           improvePreachingBand = true;
-          y = y + 5;
+          y = y + 11;
         }
         if (
           this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
           !livingAsChristiansBand
         ) {
+          y = y - 3;
           doc.setFillColor(a.assignType.color);
           doc.rect(10, y, 190, 5, "F");
           livingAsChristiansBand = true;
-          y = y + 5; //The band has taken 5
+          y = y + 11;
         }
-        y = y + height;
-        const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
-        const textLines = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
-        console.log(textLines);
-        doc.text(textLines, x, y);
-        doc.text(a.principal.name, x + 160, y);
-        y = y + textLines.length * 1.15 + 2;
+        doc.text(textLinesTheme, x, y);
+        doc.text(textLinesParticipants, x + 150, y);
+        y = y + height + 1;
       }
     }
     doc.save();
