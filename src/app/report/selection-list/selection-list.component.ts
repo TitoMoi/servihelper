@@ -280,7 +280,7 @@ export class SelectionListComponent implements OnChanges {
     this.exportService.toPng("toPngDivId", "assignments");
   }
 
-  toPdfOpinionated(isForPrint = true) {
+  toPdfOpinionated() {
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
       format: "a4",
@@ -336,10 +336,15 @@ export class SelectionListComponent implements OnChanges {
         this.translocoLocaleService.getLocale(),
         { dateStyle: this.defaultReportDateFormat }
       );
+      //date
       doc.setFont(this.pdfService.font, "bold");
+      doc.setFontSize(12);
+      //room
       doc.text(dateText, x, y, {});
+      doc.text(ag.roomName, x + 145, y);
       y = y + 7;
       doc.setFont(this.pdfService.font, "normal");
+      doc.setFontSize(11);
 
       for (const a of ag.assignments) {
         const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
