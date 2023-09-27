@@ -8,8 +8,6 @@ import {
   writeJsonSync,
 } from "fs-extra";
 import { MigrationInterface } from "app/migration/model/migration.model";
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { RoomService } from "app/room/service/room.service";
 import path from "path";
 import { gzip } from "pako";
 
@@ -18,23 +16,11 @@ import { gzip } from "pako";
 })
 export class MigrationService {
   //Migrate data based on the model
-  constructor(
-    private configService: ConfigService,
-    private assignTypeService: AssignTypeService,
-    private roomService: RoomService
-  ) {}
+  constructor(private configService: ConfigService) {}
 
   migrateData() {
     //First migration
     this.toV5();
-    this.saveData();
-    return;
-  }
-
-  saveData() {
-    //save them sync or the migration process breaks
-    this.assignTypeService.saveAssignTypesToFile(true);
-    this.roomService.saveRoomsToFile(true);
   }
 
   /*Based on git changes to the models **/
@@ -45,7 +31,7 @@ export class MigrationService {
       this.configService.sourceFilesPath,
       "assignment.json"
     );
-    const assignments = readJsonSync(assignmentJsonPath);
+    const assignments = readJsonSync(assignmentJsonPath, { throws: false });
     if (assignments) {
       const gziped = gzip(JSON.stringify(assignments), { to: "string" });
       writeFileSync(this.configService.assignmentsPath, gziped);
@@ -56,8 +42,9 @@ export class MigrationService {
 
     //:::Polygons, territories and territory groups are now gzip
 
+    //TERRITORIES
     const territoryJsonPath = path.join(this.configService.sourceFilesPath, "territory.json");
-    const territories = readJsonSync(territoryJsonPath);
+    const territories = readJsonSync(territoryJsonPath, { throws: false });
     if (territories) {
       const gziped = gzip(JSON.stringify(territories), { to: "string" });
       writeFileSync(this.configService.territoriesPath, gziped);
@@ -71,7 +58,7 @@ export class MigrationService {
       this.configService.sourceFilesPath,
       "territoryGroup.json"
     );
-    const territoryGroups = readJsonSync(territoryGroupJsonPath);
+    const territoryGroups = readJsonSync(territoryGroupJsonPath, { throws: false });
     if (territoryGroups) {
       const gziped = gzip(JSON.stringify(territoryGroups), { to: "string" });
       writeFileSync(this.configService.territoryGroupsPath, gziped);
@@ -82,7 +69,7 @@ export class MigrationService {
 
     //POLYGONS
     const polygonsJsonPath = path.join(this.configService.sourceFilesPath, "polygons.json");
-    const polygons = readJsonSync(polygonsJsonPath);
+    const polygons = readJsonSync(polygonsJsonPath, { throws: false });
     if (polygons) {
       const gziped = gzip(JSON.stringify(polygons), { to: "string" });
       writeFileSync(this.configService.polygonsPath, gziped);
