@@ -300,14 +300,25 @@ export class SelectionListComponent implements OnChanges {
     //titles are 10, so we have 3 titles * 2 weeks = 250 - (30 * 2) = 190
     //week is 190, we have two weeks so... 190 / 2 = 95 for assignments for each week
     //In the header for each week goes the date so... 95 - 5 = 90
-    const totalHeight = 90;
+    //And a separator between week 1 and 2 of 10 so... 90 - 5 = 85
+
+    /* const totalHeightPerWeek = 85; */
+    /* const totalHeightForAssignments = totalHeightPerWeek - 8 * 3; */
 
     const pageWidth = 190;
     const maxLineWidth = pageWidth - 50;
     const maxLineWidthParticipants = pageWidth - 160;
 
     /* const lineHeight = (fontSize * 1.15) / dpi; */
+
+    //Every two weeks add a page
+    let weekCounter = 2;
+
     for (const ag of this.assignmentGroups) {
+      if (!weekCounter) {
+        doc.addPage("a4", "p");
+        y = 10;
+      }
       //Get the height for the assignments
       let totalTextLines = 0;
       //Reset the bands
@@ -327,7 +338,7 @@ export class SelectionListComponent implements OnChanges {
       );
       doc.setFont(this.pdfService.font, "bold");
       doc.text(dateText, x, y, {});
-      y = y + 5;
+      y = y + 7;
       doc.setFont(this.pdfService.font, "normal");
 
       for (const a of ag.assignments) {
@@ -341,9 +352,10 @@ export class SelectionListComponent implements OnChanges {
           maxLineWidthParticipants
         );
 
-        const heightTheme = (totalHeight / totalTextLines) * textLinesTheme.length;
-        const heightParticipantNames =
-          (totalHeight / totalTextLines) * textLinesParticipants.length;
+        const heightTheme = 3.5 * (textLinesTheme.length + 1);
+        /* (totalHeightForAssignments / totalTextLines) * (textLinesTheme.length + 1); */
+        const heightParticipantNames = 3 * (textLinesParticipants.length + 1);
+        /* (totalHeightForAssignments / totalTextLines) * (textLinesParticipants.length + 1); */
         const height =
           heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
         //Bands
@@ -353,9 +365,9 @@ export class SelectionListComponent implements OnChanges {
         ) {
           y = y - 3; //the band paints from baseline to bottom, text is from baseline to above
           doc.setFillColor(a.assignType.color);
-          doc.rect(10, y, 190, 5, "F");
+          doc.rect(10, y, 190, 4, "F");
           treasuresFromWordBand = true;
-          y = y + 11; //The band has taken 10 plus a space
+          y = y + 9; //The band has taken 6 (2 + 4) plus 2 to ending space
         }
         if (
           this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
@@ -363,9 +375,9 @@ export class SelectionListComponent implements OnChanges {
         ) {
           y = y - 3;
           doc.setFillColor(a.assignType.color);
-          doc.rect(10, y, 190, 5, "F");
+          doc.rect(10, y, 190, 4, "F");
           improvePreachingBand = true;
-          y = y + 11;
+          y = y + 9;
         }
         if (
           this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
@@ -373,14 +385,17 @@ export class SelectionListComponent implements OnChanges {
         ) {
           y = y - 3;
           doc.setFillColor(a.assignType.color);
-          doc.rect(10, y, 190, 5, "F");
+          doc.rect(10, y, 190, 4, "F");
           livingAsChristiansBand = true;
-          y = y + 11;
+          y = y + 9;
         }
         doc.text(textLinesTheme, x, y);
-        doc.text(textLinesParticipants, x + 150, y);
-        y = y + height + 1;
+        doc.text(textLinesParticipants, x + 145, y);
+        y = y + height;
       }
+      //Separator betweek week 1 and 2
+      y = y + 10;
+      weekCounter--;
     }
     doc.save();
   }
