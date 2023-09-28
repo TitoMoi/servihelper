@@ -60,13 +60,13 @@ export class HomeComponent {
 
   downloadFiles() {
     const zip = new AdmZip();
-    zip.addLocalFolder(path.join(this.configService.sourceFilesPath));
+    zip.addLocalFolder(this.configService.sourceFilesPath);
 
     zip.toBuffer((buffer: Buffer) => {
       const blob = new Blob([buffer], { type: "application/octet" });
       const zipLink = document.createElement("a");
       zipLink.href = window.URL.createObjectURL(blob);
-      //With .rar extension to prevent mac to auto unzip folder
+      //No extension to prevent mac to auto unzip folder
       zipLink.setAttribute("download", "servihelper-files");
       zipLink.click();
     });
@@ -80,7 +80,9 @@ export class HomeComponent {
   /** Uploads servihelper files, only for OFFLINE */
   uploadZipFiles(event: Event) {
     const zipFile = this.getZipContentFromFileEvent(event);
-    const zip = new AdmZip(zipFile.path);
+    let zip = new AdmZip();
+    zip = zip.readFile(zipFile.path);
+    /* const zip = new AdmZip(zipFile.path); */
 
     //First of all prepare the paths, online file is already available
     this.configService.prepareFilePaths({ isOnline: false, path: "" });
