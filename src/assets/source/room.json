@@ -4,20 +4,20 @@
     "name": "",
     "tKey": "ROOMTYPES_MAINHALL",
     "type": "mainHall",
-    "order": 1
+    "order": 10
   },
   {
     "id": "2",
     "name": "",
     "tKey": "ROOMTYPES_AUXILIARYROOM1",
     "type": "auxiliaryRoom1",
-    "order": 2
+    "order": 20
   },
   {
     "id": "3",
     "name": "",
     "tKey": "ROOMTYPES_AUXILIARYROOM2",
     "type": "auxiliaryRoom2",
-    "order": 3
+    "order": 30
   }
 ]

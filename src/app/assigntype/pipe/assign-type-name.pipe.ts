@@ -14,7 +14,6 @@ export class AssignTypeNamePipe implements PipeTransform {
   constructor(private translocoService: TranslocoService) {}
 
   transform(at: AssignTypeInterface): string {
-    if (!at) return this.translocoService.translate("ASSIGNTYPE_UNKNOWN");
     return at.name ? at.name : this.translocoService.translate(at.tKey);
   }
 }

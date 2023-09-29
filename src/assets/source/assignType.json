@@ -6,7 +6,7 @@
     "hasAssistant": false,
     "repeat": false,
     "type": "publicSpeech",
-    "order": 1,
+    "order": 10,
     "color": "#4B6DA6",
     "days": null
   },
@@ -17,7 +17,7 @@
     "hasAssistant": false,
     "repeat": false,
     "type": "initialPrayer",
-    "order": 2,
+    "order": 20,
     "color": "#ffffff",
     "days": null
   },
@@ -28,7 +28,7 @@
     "hasAssistant": false,
     "repeat": false,
     "type": "treasures",
-    "order": 3,
+    "order": 30,
     "color": "#616261",
     "days": null
   },
@@ -39,7 +39,7 @@
     "hasAssistant": false,
     "repeat": false,
     "type": "spiritualGems",
-    "order": 4,
+    "order": 40,
     "color": "#616261",
     "days": null
   },
@@ -50,7 +50,7 @@
     "hasAssistant": false,
     "repeat": false,
     "type": "bibleReading",
-    "order": 5,
+    "order": 50,
     "color": "#616261",
     "days": null
   },
@@ -61,7 +61,7 @@
     "hasAssistant": true,
     "repeat": true,
     "type": "initialCall",
-    "order": 6,
+    "order": 60,
     "color": "#C48430",
     "days": null
   },
@@ -72,7 +72,7 @@
     "hasAssistant": false,
     "repeat": false,
     "type": "talk",
-    "order": 7,
+    "order": 70,
     "color": "#C48430",
     "days": null
   },
@@ -83,7 +83,7 @@
     "hasAssistant": true,
     "repeat": true,
     "type": "returnVisit",
-    "order": 8,
+    "order": 80,
     "color": "#C48430",
     "days": null
   },
@@ -94,7 +94,7 @@
     "hasAssistant": true,
     "repeat": false,
     "type": "bibleStudy",
-    "order": 9,
+    "order": 90,
     "color": "#C48430",
     "days": null
   },
@@ -105,7 +105,7 @@
     "hasAssistant": false,
     "repeat": true,
     "type": "livingAsChristians",
-    "order": 10,
+    "order": 100,
     "color": "#942827",
     "days": null
   },
@@ -116,7 +116,7 @@
     "hasAssistant": true,
     "repeat": false,
     "type": "congregationBibleStudy",
-    "order": 11,
+    "order": 110,
     "color": "#942827",
     "days": null
   },
@@ -127,7 +127,7 @@
     "hasAssistant": false,
     "repeat": false,
     "type": "endingPrayer",
-    "order": 12,
+    "order": 120,
     "color": "#ffffff",
     "days": null
   }

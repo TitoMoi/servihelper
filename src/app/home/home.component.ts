@@ -80,9 +80,9 @@ export class HomeComponent {
   /** Uploads servihelper files, only for OFFLINE */
   uploadZipFiles(event: Event) {
     const zipFile = this.getZipContentFromFileEvent(event);
-    let zip = new AdmZip();
-    zip = zip.readFile(zipFile.path);
-    /* const zip = new AdmZip(zipFile.path); */
+    /* let zip = new AdmZip();
+    zip = zip.readFile(zipFile.path); */
+    const zip = new AdmZip(zipFile.path);
 
     //First of all prepare the paths, online file is already available
     this.configService.prepareFilePaths({ isOnline: false, path: "" });
@@ -98,10 +98,14 @@ export class HomeComponent {
           writeJsonSync(this.configService.configPath, finalConfig);
           break;
         default:
-          writeFileSync(
-            path.join(this.configService.sourceFilesPath, zipEntry.entryName),
-            zipEntry.getData().toString("utf8")
+          const resolvedPath = path.join(
+            this.configService.sourceFilesPath,
+            zipEntry.entryName
           );
+          const data = (zipEntry.entryName as string).endsWith(".gz")
+            ? zipEntry.getData()
+            : zipEntry.getData().toString("utf8");
+          writeFileSync(resolvedPath, data);
       }
     });
 
