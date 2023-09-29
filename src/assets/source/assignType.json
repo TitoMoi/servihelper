@@ -1,13 +1,13 @@
 [
   {
-    "id": "1",
+    "id": "13",
     "name": "",
-    "tKey": "ASSIGNTYPES_PUBLICSPEECH",
+    "tKey": "ASSIGNTYPES_CHAIRMAN",
     "hasAssistant": false,
     "repeat": false,
-    "type": "publicSpeech",
-    "order": 10,
-    "color": "#4B6DA6",
+    "type": "chairman",
+    "order": 1,
+    "color": "##4F6DA1",
     "days": null
   },
   {
@@ -17,8 +17,19 @@
     "hasAssistant": false,
     "repeat": false,
     "type": "initialPrayer",
-    "order": 20,
+    "order": 10,
     "color": "#ffffff",
+    "days": null
+  },
+  {
+    "id": "1",
+    "name": "",
+    "tKey": "ASSIGNTYPES_PUBLICSPEECH",
+    "hasAssistant": false,
+    "repeat": false,
+    "type": "publicSpeech",
+    "order": 20,
+    "color": "#4F6DA1",
     "days": null
   },
   {

@@ -14,6 +14,7 @@ export interface AssignTypeInterface {
 }
 
 export type AssignTypes =
+  | "chairman"
   | "publicSpeech"
   | "initialPrayer"
   | "endingPrayer"

@@ -282,7 +282,111 @@ export class SelectionListComponent implements OnChanges {
     this.exportService.toPng("toPngDivId", "assignments");
   }
 
-  toPdfOpinionatedWeekend() {}
+  toPdfOpinionatedWeekend() {
+    const doc = this.pdfService.getJsPdf({
+      orientation: "portrait",
+      format: "a4",
+    });
+
+    const fontSize = 11;
+    doc.setFont(this.pdfService.font);
+    doc.setFontSize(fontSize);
+
+    let x = 10;
+    let y = 10;
+
+    let chairmanBand = false;
+    //margins are 10, so... w = 210 - 10 - 10  = 190, h = 270 - 10 - 10 = 250
+    //titles are 10, so we have 3 titles * 2 weeks = 250 - (30 * 2) = 190
+    //week is 190, we have two weeks so... 190 / 2 = 95 for assignments for each week
+    //In the header for each week goes the date so... 95 - 5 = 90
+    //And a separator between week 1 and 2 of 10 so... 90 - 5 = 85
+
+    /* const totalHeightPerWeek = 85; */
+    /* const totalHeightForAssignments = totalHeightPerWeek - 8 * 3; */
+
+    const pageWidth = 190;
+    const maxLineWidth = pageWidth - 65;
+    const maxLineWidthParticipants = pageWidth - 130;
+
+    /* const lineHeight = (fontSize * 1.15) / dpi; */
+
+    //Every two weeks add a page
+    let weekCounter = 5;
+
+    for (const ag of this.assignmentGroups) {
+      if (!weekCounter) {
+        weekCounter = 4;
+        doc.addPage("a4", "p");
+        y = 10;
+      }
+      //Get the height for the assignments
+      let totalTextLines = 0;
+      //Reset the bands
+      chairmanBand = false;
+      for (const a of ag.assignments) {
+        //Get the theme or the assign type and get the lines
+        const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
+        const textLinesTheme = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
+
+        totalTextLines = totalTextLines + textLinesTheme.length;
+      }
+      const dateText = this.translocoLocaleService.localizeDate(
+        ag.date,
+        this.translocoLocaleService.getLocale(),
+        { dateStyle: this.defaultReportDateFormat }
+      );
+      //date
+      doc.setFont(this.pdfService.font, "bold");
+      doc.setFontSize(14);
+      doc.text(dateText, x, y, {});
+      //room
+
+      doc.setFontSize(11);
+      doc.text(ag.roomName, x + 130, y);
+      doc.setFont(this.pdfService.font, "normal");
+      //move the pointer
+      y = y + 7;
+
+      for (const a of ag.assignments) {
+        const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
+        const textLinesTheme = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
+
+        const participantsNames =
+          a.principal.name + (a.assistant ? " / " + a.assistant.name : "");
+        const textLinesParticipants = doc.splitTextToSize(
+          participantsNames,
+          maxLineWidthParticipants
+        );
+
+        const heightTheme = 3.5 * (textLinesTheme.length + 1);
+        /* (totalHeightForAssignments / totalTextLines) * (textLinesTheme.length + 1); */
+        const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
+        /* (totalHeightForAssignments / totalTextLines) * (textLinesParticipants.length + 1); */
+        const height =
+          heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
+        //Bands
+        if (a.assignType.type === "chairman" && !chairmanBand) {
+          y = y - 4;
+          const image = path.join(this.configService.iconsFilesPath, "publicspeech.jpg");
+          const uint8array = new Uint8Array(readFileSync(image));
+          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
+          //the band paints from baseline to bottom, text is from baseline to above
+          doc.setFillColor(a.assignType.color);
+          doc.rect(14, y, 180, 4, "F");
+          chairmanBand = true;
+          y = y + 9; //The band has taken 6 (2 + 4) plus 2 to ending space
+        }
+        doc.text(textLinesTheme, x, y);
+        doc.text(textLinesParticipants, x + 130, y);
+        y = y + height;
+      }
+      //Separator betweek week 1 and 2
+      y = y + 5;
+      weekCounter--;
+    }
+    doc.save("assignmentsWeekend");
+  }
 
   toPdfOpinionated() {
     const doc = this.pdfService.getJsPdf({
@@ -293,7 +397,7 @@ export class SelectionListComponent implements OnChanges {
     const fontSize = 11;
     doc.setFont(this.pdfService.font);
     doc.setFontSize(fontSize);
-    /* const dpi = 300; */
+
     let x = 10;
     let y = 10;
 
@@ -424,7 +528,7 @@ export class SelectionListComponent implements OnChanges {
       y = y + 5;
       weekCounter--;
     }
-    doc.save("assignmentsBands");
+    doc.save("assignmentsMidweek");
   }
 
   toExcel() {
