@@ -282,6 +282,8 @@ export class SelectionListComponent implements OnChanges {
     this.exportService.toPng("toPngDivId", "assignments");
   }
 
+  toPdfOpinionatedWeekend() {}
+
   toPdfOpinionated() {
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",

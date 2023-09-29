@@ -2,38 +2,39 @@
   <mat-icon
     class="m-2"
     svgIcon="pdf"
-    aria-label="icon"
     [matTooltip]="t('ICON_PDF_INFINITE')"
     (click)="toPdf(false)"
   ></mat-icon>
   <mat-icon
     class="m-2"
     svgIcon="pdfblue"
-    aria-label="icon"
     [matTooltip]="t('ICON_PDF_PAGE')"
     (click)="toPdf(true)"
   ></mat-icon>
   <mat-icon
     class="m-2"
     svgIcon="png"
-    aria-label="icon"
     [matTooltip]="t('ICON_PNG')"
     (click)="toPng()"
   ></mat-icon>
   <mat-icon
-    class="m-2"
+    class="m-2 me-5"
     svgIcon="excel"
-    aria-label="icon"
     [matTooltip]="t('ICON_EXCEL')"
     (click)="toExcel()"
   ></mat-icon>
 
   <mat-icon
-    class="m-2"
+    class="m-2 me-3"
     svgIcon="midweeklist"
-    aria-label="icon"
     [matTooltip]="t('ICON_PDF_BAND')"
     (click)="toPdfOpinionated()"
+  ></mat-icon>
+  <mat-icon
+    class="m-2"
+    svgIcon="weekendlist"
+    [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
+    (click)="toPdfOpinionatedWeekend()"
   ></mat-icon>
 </div>
 

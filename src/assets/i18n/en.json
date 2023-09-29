@@ -386,6 +386,5 @@
   "CONFIG_DEFAULT_FONT_SIZE_VERTICAL": "Vertical reports default font size in pixels for png image and excel report (except pdf)",
   "CONFIG_DEFAULT_FONT_SIZE": "XXXREMOVE THISXXXX",
   "ICON_PDF_BAND": "Generate a colorful pdf specially for the midweek with bands and up to two weeks per page",
-  "ROOM_UNKNOWN": "Room unknown",
-  "ASSIGNTYPE_UNKNOWN": "Assign type unknown"
+  "ICON_PDF_BAND_WEEKEND": "Generate a colorful pdf specially for the weekend with bands and up to four weeks per page"
 }
