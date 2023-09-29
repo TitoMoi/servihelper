@@ -18,7 +18,7 @@ export class ExportService {
     document.body.style.cursor = "wait";
     const div = document.getElementById(elemId);
     if (div) {
-      const dataUrl = await toPng(div, { pixelRatio: 3 });
+      const dataUrl = await toPng(div, { pixelRatio: 2 });
 
       const link = document.createElement("a");
       link.href = dataUrl;
