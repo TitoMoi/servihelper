@@ -1,13 +1,6 @@
 <div *transloco="let t" class="d-flex align-items-center">
   <mat-icon
     class="m-2"
-    svgIcon="bands"
-    aria-label="icon"
-    [matTooltip]="t('ICON_PDF_BAND')"
-    (click)="toPdfOpinionated()"
-  ></mat-icon>
-  <mat-icon
-    class="m-2"
     svgIcon="pdf"
     aria-label="icon"
     [matTooltip]="t('ICON_PDF_INFINITE')"
@@ -33,6 +26,14 @@
     aria-label="icon"
     [matTooltip]="t('ICON_EXCEL')"
     (click)="toExcel()"
+  ></mat-icon>
+
+  <mat-icon
+    class="m-2"
+    svgIcon="midweeklist"
+    aria-label="icon"
+    [matTooltip]="t('ICON_PDF_BAND')"
+    (click)="toPdfOpinionated()"
   ></mat-icon>
 </div>
 
