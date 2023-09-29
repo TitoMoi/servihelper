@@ -310,8 +310,8 @@ export class SelectionListComponent implements OnChanges {
     /* const totalHeightForAssignments = totalHeightPerWeek - 8 * 3; */
 
     const pageWidth = 190;
-    const maxLineWidth = pageWidth - 50;
-    const maxLineWidthParticipants = pageWidth - 160;
+    const maxLineWidth = pageWidth - 65;
+    const maxLineWidthParticipants = pageWidth - 130;
 
     /* const lineHeight = (fontSize * 1.15) / dpi; */
 
@@ -320,6 +320,7 @@ export class SelectionListComponent implements OnChanges {
 
     for (const ag of this.assignmentGroups) {
       if (!weekCounter) {
+        weekCounter = 2;
         doc.addPage("a4", "p");
         y = 10;
       }
@@ -330,6 +331,7 @@ export class SelectionListComponent implements OnChanges {
       improvePreachingBand = false;
       livingAsChristiansBand = false;
       for (const a of ag.assignments) {
+        //Get the theme or the assign type and get the lines
         const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
         const textLinesTheme = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
 
@@ -342,13 +344,15 @@ export class SelectionListComponent implements OnChanges {
       );
       //date
       doc.setFont(this.pdfService.font, "bold");
-      doc.setFontSize(13);
-      //room
+      doc.setFontSize(14);
       doc.text(dateText, x, y, {});
-      doc.text(ag.roomName, x + 145, y);
-      y = y + 7;
-      doc.setFont(this.pdfService.font, "normal");
+      //room
+
       doc.setFontSize(11);
+      doc.text(ag.roomName, x + 130, y);
+      doc.setFont(this.pdfService.font, "normal");
+      //move the pointer
+      y = y + 7;
 
       for (const a of ag.assignments) {
         const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
@@ -363,7 +367,7 @@ export class SelectionListComponent implements OnChanges {
 
         const heightTheme = 3.5 * (textLinesTheme.length + 1);
         /* (totalHeightForAssignments / totalTextLines) * (textLinesTheme.length + 1); */
-        const heightParticipantNames = 3 * (textLinesParticipants.length + 1);
+        const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
         /* (totalHeightForAssignments / totalTextLines) * (textLinesParticipants.length + 1); */
         const height =
           heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
@@ -372,52 +376,52 @@ export class SelectionListComponent implements OnChanges {
           this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
           !treasuresFromWordBand
         ) {
-          y = y - 3;
+          y = y - 4;
           const image = path.join(this.configService.iconsFilesPath, "diamond.jpg");
           const uint8array = new Uint8Array(readFileSync(image));
-          doc.addImage(uint8array, "JPEG", x, y, 5, 5);
+          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
           //the band paints from baseline to bottom, text is from baseline to above
           doc.setFillColor(a.assignType.color);
-          doc.rect(20, y, 180, 5, "F");
+          doc.rect(14, y, 180, 4, "F");
           treasuresFromWordBand = true;
-          y = y + 10; //The band has taken 6 (2 + 4) plus 2 to ending space
+          y = y + 9; //The band has taken 6 (2 + 4) plus 2 to ending space
         }
         if (
           this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
           !improvePreachingBand
         ) {
-          y = y - 3;
+          y = y - 4;
 
           const image = path.join(this.configService.iconsFilesPath, "wheat.jpg");
           const uint8array = new Uint8Array(readFileSync(image));
-          doc.addImage(uint8array, "JPEG", x, y, 5, 5);
+          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
 
           doc.setFillColor(a.assignType.color);
-          doc.rect(20, y, 180, 5, "F");
+          doc.rect(14, y, 180, 4, "F");
           improvePreachingBand = true;
-          y = y + 10;
+          y = y + 9;
         }
         if (
           this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
           !livingAsChristiansBand
         ) {
-          y = y - 3;
+          y = y - 4;
 
           const image = path.join(this.configService.iconsFilesPath, "sheep.jpg");
           const uint8array = new Uint8Array(readFileSync(image));
-          doc.addImage(uint8array, "JPEG", x, y, 5, 5);
+          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
 
           doc.setFillColor(a.assignType.color);
-          doc.rect(20, y, 180, 5, "F");
+          doc.rect(14, y, 180, 4, "F");
           livingAsChristiansBand = true;
-          y = y + 10;
+          y = y + 9;
         }
         doc.text(textLinesTheme, x, y);
-        doc.text(textLinesParticipants, x + 145, y);
+        doc.text(textLinesParticipants, x + 130, y);
         y = y + height;
       }
       //Separator betweek week 1 and 2
-      y = y + 8;
+      y = y + 5;
       weekCounter--;
     }
     doc.save("assignmentsBands");
