@@ -469,9 +469,13 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   preparePrincipalSub() {
     this.subscription.add(
-      this.form.get("principal").valueChanges.subscribe((principalId) => {
-        //remove selected principal from assistants
-        this.removePrincipalFromAssistants(principalId);
+      this.form.get("principal").valueChanges.subscribe((newPrincId) => {
+        //Check if older principal should be included in assistants
+        if (this.isUpdate) {
+          this.batchGetCountSortWarning();
+        }
+        //remove current selected principal from assistants
+        this.removePrincipalFromAssistants(newPrincId);
       })
     );
   }
@@ -498,9 +502,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   removePrincipalFromAssistants(principalId: string) {
     if (principalId) {
-      let i = this.assistants.length;
-      while (i--) {
-        if (this.assistants[i].id === principalId) {
+      for (let [i, a] of this.assistants.entries()) {
+        if (a.id === principalId) {
           this.assistants.splice(i, 1);
           break;
         }
