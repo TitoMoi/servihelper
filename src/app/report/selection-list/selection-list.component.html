@@ -32,6 +32,12 @@
   ></mat-icon>
   <mat-icon
     class="m-2"
+    svgIcon="midweeklist"
+    [matTooltip]="t('ICON_PDF_BAND')"
+    (click)="toPdfOpinionatedTwoRooms()"
+  ></mat-icon>
+  <mat-icon
+    class="m-2"
     svgIcon="weekendlist"
     [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
     (click)="toPdfOpinionatedWeekend()"
