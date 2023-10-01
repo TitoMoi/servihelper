@@ -117,10 +117,14 @@ export class SelectionListComponent implements OnChanges {
   getBorderRight(color): string {
     return `border-right: 12px solid ${color};`;
   }
+
   /**
-   * Convert the id's to names
+   *
+   * @param shouldFusionRooms if true, dont create another ag, instead add that assignment to the same ag
    */
-  getRelatedData() {
+  getRelatedData(shouldFusionRooms = false) {
+    this.assignmentGroups = [];
+
     let assignGroup: AssignmentGroupInterface = {
       date: undefined,
       roomName: undefined,
@@ -137,7 +141,7 @@ export class SelectionListComponent implements OnChanges {
       if (
         new Date(assignGroup.date).toISOString() !== new Date(assignment.date).toISOString()
       ) {
-        //save and prepare another assignGroup
+        //save the ag and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
         assignGroup = {
           date: assignment.date,
@@ -153,9 +157,10 @@ export class SelectionListComponent implements OnChanges {
 
       if (
         assignGroup.roomName !==
-        this.roomNamePipe.transform(this.roomService.getRoom(assignment.room))
+          this.roomNamePipe.transform(this.roomService.getRoom(assignment.room)) &&
+        !shouldFusionRooms
       ) {
-        //save and prepare another assignGroup
+        //save the af and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
         assignGroup = {
           date: assignment.date,
@@ -282,7 +287,7 @@ export class SelectionListComponent implements OnChanges {
     this.exportService.toPng("toPngDivId", "assignments");
   }
 
-  toPdfOpinionatedWeekend() {
+  toPdfWeekend() {
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
       format: "a4",
@@ -378,39 +383,28 @@ export class SelectionListComponent implements OnChanges {
     doc.save("assignmentsWeekend");
   }
 
-  toPdfOpinionated() {
+  toPdfMidweek() {
+    this.getRelatedData(true);
+
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
       format: "a4",
     });
 
     const fontSize = 11;
+    let x = 10;
+    let y = 10;
+    const pageWidth = 190;
+    const maxLineWidth = pageWidth - 125;
+    const maxLineWidthParticipants = pageWidth - 130;
+
     doc.setFont(this.pdfService.font);
     doc.setFontSize(fontSize);
 
-    let x = 10;
-    let y = 10;
-
-    let treasuresFromWordBand = false;
-    let improvePreachingBand = false;
-    let livingAsChristiansBand = false;
-    //margins are 10, so... w = 210 - 10 - 10  = 190, h = 270 - 10 - 10 = 250
-    //titles are 10, so we have 3 titles * 2 weeks = 250 - (30 * 2) = 190
-    //week is 190, we have two weeks so... 190 / 2 = 95 for assignments for each week
-    //In the header for each week goes the date so... 95 - 5 = 90
-    //And a separator between week 1 and 2 of 10 so... 90 - 5 = 85
-
-    /* const totalHeightPerWeek = 85; */
-    /* const totalHeightForAssignments = totalHeightPerWeek - 8 * 3; */
-
-    const pageWidth = 190;
-    const maxLineWidth = pageWidth - 65;
-    const maxLineWidthParticipants = pageWidth - 130;
-
-    /* const lineHeight = (fontSize * 1.15) / dpi; */
-
     //Every two weeks add a page
     let weekCounter = 2;
+
+    console.log(this.assignmentGroups);
 
     for (const ag of this.assignmentGroups) {
       if (!weekCounter) {
@@ -418,164 +412,46 @@ export class SelectionListComponent implements OnChanges {
         doc.addPage("a4", "p");
         y = 10;
       }
-      //Reset the bands
-      treasuresFromWordBand = false;
-      improvePreachingBand = false;
-      livingAsChristiansBand = false;
 
+      //Initialize the bands
+      let treasuresFromWordBand = false;
+      let improvePreachingBand = false;
+      let livingAsChristiansBand = false;
+
+      //date
       const dateText = this.translocoLocaleService.localizeDate(
-        ag.date,
+        ag.assignments[0].date,
         this.translocoLocaleService.getLocale(),
         { dateStyle: this.defaultReportDateFormat }
       );
-      //date
+
       doc.setFont(this.pdfService.font, "bold");
       doc.setFontSize(14);
       doc.text(dateText, x, y, {});
-      //room
+
+      //room or rooms
+      const rooms = ag.assignments.map((a) => a.room);
+      const roomsSet = new Set(rooms);
 
       doc.setFontSize(11);
-      doc.text(ag.roomName, x + 130, y);
+      const [room1, room2] = [...roomsSet];
+      doc.text(this.roomNamePipe.transform(room1), x + 70, y);
+      if (room2) doc.text(this.roomNamePipe.transform(room2), x + 130, y);
       doc.setFont(this.pdfService.font, "normal");
       //move the pointer
-      y = y + 7;
+      y = y + 5;
 
       for (const a of ag.assignments) {
-        const themeOrAssignType = a.theme ? a.theme : a.assignType.name;
-        const textLinesTheme = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
+        let height = 0;
 
-        const participantsNames =
-          a.principal.name + (a.assistant ? " / " + a.assistant.name : "");
-        const textLinesParticipants = doc.splitTextToSize(
+        let participantsNames =
+          a.principal.name + (a.assistant ? "/ " + a.assistant.name : "");
+        let textLinesParticipants = doc.splitTextToSize(
           participantsNames,
           maxLineWidthParticipants
         );
-
-        const heightTheme = 3.5 * (textLinesTheme.length + 1);
-        /* (totalHeightForAssignments / totalTextLines) * (textLinesTheme.length + 1); */
         const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
-        /* (totalHeightForAssignments / totalTextLines) * (textLinesParticipants.length + 1); */
-        const height =
-          heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
-        //Bands
-        if (
-          this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
-          !treasuresFromWordBand
-        ) {
-          y = y - 4;
-          const image = path.join(this.configService.iconsFilesPath, "diamond.jpg");
-          const uint8array = new Uint8Array(readFileSync(image));
-          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
-          //the band paints from baseline to bottom, text is from baseline to above
-          doc.setFillColor(a.assignType.color);
-          doc.rect(14, y, 180, 4, "F");
-          treasuresFromWordBand = true;
-          y = y + 9; //The band has taken 6 (2 + 4) plus 2 to ending space
-        }
-        if (
-          this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
-          !improvePreachingBand
-        ) {
-          y = y - 4;
 
-          const image = path.join(this.configService.iconsFilesPath, "wheat.jpg");
-          const uint8array = new Uint8Array(readFileSync(image));
-          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
-
-          doc.setFillColor(a.assignType.color);
-          doc.rect(14, y, 180, 4, "F");
-          improvePreachingBand = true;
-          y = y + 9;
-        }
-        if (
-          this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
-          !livingAsChristiansBand
-        ) {
-          y = y - 4;
-
-          const image = path.join(this.configService.iconsFilesPath, "sheep.jpg");
-          const uint8array = new Uint8Array(readFileSync(image));
-          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
-
-          doc.setFillColor(a.assignType.color);
-          doc.rect(14, y, 180, 4, "F");
-          livingAsChristiansBand = true;
-          y = y + 9;
-        }
-        doc.text(textLinesTheme, x, y);
-        doc.text(textLinesParticipants, x + 130, y);
-        y = y + height;
-      }
-      //Separator betweek week 1 and 2
-      y = y + 5;
-      weekCounter--;
-    }
-    doc.save("assignmentsMidweek");
-  }
-
-  toPdfOpinionatedTwoRooms() {
-    const doc = this.pdfService.getJsPdf({
-      orientation: "portrait",
-      format: "a4",
-    });
-
-    const fontSize = 11;
-    doc.setFont(this.pdfService.font);
-    doc.setFontSize(fontSize);
-
-    let x = 10;
-    let y = 10;
-
-    let treasuresFromWordBand = false;
-    let improvePreachingBand = false;
-    let livingAsChristiansBand = false;
-    //margins are 10, so... w = 210 - 10 - 10  = 190, h = 270 - 10 - 10 = 250
-    //titles are 10, so we have 3 titles * 2 weeks = 250 - (30 * 2) = 190
-    //week is 190, we have two weeks so... 190 / 2 = 95 for assignments for each week
-    //In the header for each week goes the date so... 95 - 5 = 90
-    //And a separator between week 1 and 2 of 10 so... 90 - 5 = 85
-
-    /* const totalHeightPerWeek = 85; */
-    /* const totalHeightForAssignments = totalHeightPerWeek - 8 * 3; */
-
-    const pageWidth = 190;
-    const maxLineWidth = pageWidth - 120;
-    const maxLineWidthParticipant = pageWidth - 130;
-
-    /* const lineHeight = (fontSize * 1.15) / dpi; */
-
-    //Every two weeks add a page
-    let weekCounter = 2;
-
-    for (const ag of this.assignmentGroups) {
-      if (!weekCounter) {
-        weekCounter = 2;
-        doc.addPage("a4", "p");
-        y = 10;
-      }
-      //Reset the bands
-      treasuresFromWordBand = false;
-      improvePreachingBand = false;
-      livingAsChristiansBand = false;
-
-      const dateText = this.translocoLocaleService.localizeDate(
-        ag.date,
-        this.translocoLocaleService.getLocale(),
-        { dateStyle: this.defaultReportDateFormat }
-      );
-      //date
-      doc.setFont(this.pdfService.font, "bold");
-      doc.setFontSize(14);
-      doc.text(dateText, x, y, {});
-      //room
-
-      doc.setFontSize(11);
-      doc.text(ag.roomName, x + 130, y);
-      doc.setFont(this.pdfService.font, "normal");
-      //move the pointer
-      y = y + 7;
-
-      for (const a of ag.assignments) {
         let themeOrAssignType = a.theme ? a.theme : a.assignType.name;
 
         //Before create text lines check the length
@@ -596,19 +472,9 @@ export class SelectionListComponent implements OnChanges {
 
         const textLinesTheme = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
 
-        const participantsNames =
-          a.principal.name + (a.assistant ? " / " + a.assistant.name : "");
-        const textLinesParticipants = doc.splitTextToSize(
-          participantsNames,
-          maxLineWidthParticipant
-        );
-
         const heightTheme = 3.5 * (textLinesTheme.length + 1);
-        /* (totalHeightForAssignments / totalTextLines) * (textLinesTheme.length + 1); */
-        const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
-        /* (totalHeightForAssignments / totalTextLines) * (textLinesParticipants.length + 1); */
-        const height =
-          heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
+
+        height = heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
         //Bands
         if (
           this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
@@ -656,6 +522,25 @@ export class SelectionListComponent implements OnChanges {
         }
         doc.text(textLinesTheme, x, y);
         doc.text(textLinesParticipants, x + 70, y);
+
+        //Find the equivalent on room2 paint participants and remove it
+        // the room2 assignments are at the end of the ag and are sorted
+        const assign = ag.assignments.find(
+          (assign) =>
+            assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
+        );
+        const index = ag.assignments.findIndex((assign) => assign.room.id !== a.room.id);
+        if (assign) {
+          participantsNames =
+            assign.principal.name + (assign.assistant ? "/ " + assign.assistant.name : "");
+          textLinesParticipants = doc.splitTextToSize(
+            participantsNames,
+            maxLineWidthParticipants
+          );
+          doc.text(textLinesParticipants, x + 130, y);
+          ag.assignments.splice(index, 1);
+        }
+
         y = y + height;
       }
       //Separator betweek week 1 and 2
