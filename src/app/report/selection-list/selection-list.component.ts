@@ -547,6 +547,10 @@ export class SelectionListComponent implements OnChanges {
       y = y + 5;
       weekCounter--;
     }
+
+    //Restore related data so the html wont jump
+    this.getRelatedData(false);
+
     doc.save("assignmentsMidweek");
   }
 
