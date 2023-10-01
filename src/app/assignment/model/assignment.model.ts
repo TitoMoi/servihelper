@@ -42,8 +42,6 @@ export interface AssignmentReportInterface {
 }
 
 export interface AssignmentGroupInterface {
-  date: Date;
-  roomName: string;
   assignments: AssignmentReportInterface[];
 }
 

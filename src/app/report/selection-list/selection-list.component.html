@@ -18,23 +18,16 @@
     (click)="toPng()"
   ></mat-icon>
   <mat-icon
-    class="m-2 me-5"
-    svgIcon="excel"
-    [matTooltip]="t('ICON_EXCEL')"
-    (click)="toExcel()"
-  ></mat-icon>
-
-  <mat-icon
     class="m-2 me-3"
     svgIcon="midweeklist"
     [matTooltip]="t('ICON_PDF_BAND')"
-    (click)="toPdfMidweek()"
+    (click)="toPdfBoard(false)"
   ></mat-icon>
   <mat-icon
     class="m-2"
     svgIcon="weekendlist"
     [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
-    (click)="toPdfWeekend()"
+    (click)="toPdfBoard(true)"
   ></mat-icon>
 </div>
 
@@ -52,7 +45,7 @@
           [style.width]="'65%'"
         >
           {{
-            ag.date
+            ag.assignments[0].date
               | translocoDate
                 : {
                     dateStyle: defaultReportDateFormat
@@ -63,7 +56,7 @@
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
         >
-          {{ ag.roomName }}
+          {{ ag.assignments[0].room | roomNamePipe }}
         </th>
       </tr>
       <tr *ngFor="let assignment of ag.assignments">

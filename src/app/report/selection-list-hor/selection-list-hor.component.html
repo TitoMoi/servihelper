@@ -13,13 +13,6 @@
     [matTooltip]="t('ICON_PNG')"
     (click)="toPng()"
   ></mat-icon>
-  <mat-icon
-    class="m-2"
-    svgIcon="excel"
-    aria-label="icon"
-    [matTooltip]="t('ICON_EXCEL')"
-    (click)="toExcel()"
-  ></mat-icon>
 </div>
 
 <div id="toPngDivId" class="bg-color-white" style="width: 1020px">
@@ -32,8 +25,9 @@
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSizeHorizontal"
         >
+          {{ ag.assignments[0] }}
           {{
-            ag.date
+            ag.assignments[0].date
               | translocoDate
                 : {
                     dateStyle: defaultReportDateFormat
@@ -54,7 +48,9 @@
         </th>
       </tr>
       <tr>
-        <td [style.fontSize]="defaultReportFontSizeHorizontal">{{ ag.roomName }}</td>
+        <td [style.fontSize]="defaultReportFontSizeHorizontal">
+          {{ ag.assignments[0].room | roomNamePipe }}
+        </td>
         <td
           *ngFor="let assignment of ag.assignments"
           [style.fontSize]="defaultReportFontSizeHorizontal"

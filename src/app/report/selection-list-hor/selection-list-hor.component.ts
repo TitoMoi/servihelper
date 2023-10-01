@@ -2,7 +2,6 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ConfigService } from "app/config/service/config.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
-import { ExcelService } from "app/services/excel.service";
 import { SortOrderType, SortService } from "app/services/sort.service";
 import autoTable from "jspdf-autotable";
 
@@ -49,6 +48,7 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     TranslocoLocaleModule,
     AssignTypePipe,
     AssignTypeNamePipe,
+    RoomNamePipe,
   ],
 })
 export class SelectionListHorComponent implements OnChanges {
@@ -74,11 +74,9 @@ export class SelectionListHorComponent implements OnChanges {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private sortService: SortService,
-    private excelService: ExcelService,
     private publicThemeService: PublicThemeService,
     private pdfService: PdfService,
     private exportService: ExportService,
-    private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
@@ -134,45 +132,36 @@ export class SelectionListHorComponent implements OnChanges {
    * Convert the id's to names
    */
   getRelatedData() {
+    this.assignmentGroups = [];
+
     let assignGroup: AssignmentGroupInterface = {
-      date: undefined,
-      roomName: undefined,
       assignments: [],
     };
 
     let length = this.#assignments.length;
 
+    let currentDate;
+    let firstRoomId;
     for (const assignment of this.#assignments) {
       --length;
 
-      if (!assignGroup.date) assignGroup.date = assignment.date;
+      if (!currentDate) currentDate = assignment.date;
+      if (!firstRoomId) firstRoomId = assignment.room;
 
-      if (
-        new Date(assignGroup.date).toISOString() !== new Date(assignment.date).toISOString()
-      ) {
+      if (new Date(currentDate).toISOString() !== new Date(assignment.date).toISOString()) {
         //save and reset
         this.assignmentGroups.push(assignGroup);
+        currentDate = assignment.date;
         assignGroup = {
-          date: assignment.date,
-          roomName: undefined,
           assignments: [],
         };
       }
 
-      if (!assignGroup.roomName)
-        assignGroup.roomName = this.roomNamePipe.transform(
-          this.roomService.getRoom(assignment.room)
-        );
-
-      if (
-        assignGroup.roomName !==
-        this.roomNamePipe.transform(this.roomService.getRoom(assignment.room))
-      ) {
+      if (firstRoomId !== assignment.room) {
         //save and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
+        firstRoomId = assignment.room;
         assignGroup = {
-          date: assignment.date,
-          roomName: this.roomNamePipe.transform(this.roomService.getRoom(assignment.room)),
           assignments: [],
         };
       }
@@ -239,9 +228,5 @@ export class SelectionListHorComponent implements OnChanges {
 
   async toPng() {
     this.exportService.toPng("toPngDivId", "assignments");
-  }
-
-  toExcel() {
-    this.excelService.addAsignmentsHorizontal(this.assignmentGroups);
   }
 }
