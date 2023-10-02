@@ -5,6 +5,7 @@ import { RoomService } from "app/room/service/room.service";
 import { SortOrderType, SortService } from "app/services/sort.service";
 import { PdfService } from "app/services/pdf.service";
 import autoTable from "jspdf-autotable";
+import { BandNamesWithExtType } from "app/report/model/report.model";
 
 /* eslint-disable @typescript-eslint/naming-convention */
 import {
@@ -19,6 +20,7 @@ import {
 import {
   AssignmentGroupInterface,
   AssignmentInterface,
+  AssignmentReportInterface,
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
@@ -33,6 +35,7 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { readFileSync } from "fs-extra";
 import path from "path";
+import jsPDF from "jspdf";
 
 @Component({
   selector: "app-selection-list",
@@ -274,34 +277,121 @@ export class SelectionListComponent implements OnChanges {
     this.exportService.toPng("toPngDivId", "assignments");
   }
 
-  toPdfBoard(isWeekend = false) {
-    this.getRelatedData(true);
-
-    const doc = this.pdfService.getJsPdf({
+  getPdfSheet() {
+    return this.pdfService.getJsPdf({
       orientation: "portrait",
       format: "a4",
     });
+  }
 
-    const fontSize = 11;
-    let x = 10;
-    let y = 10;
-    const pageWidth = 190;
-    const maxLineWidth = pageWidth - 125;
-    const maxLineWidthParticipants = pageWidth - 130;
+  getWeekCounter(isWeekend: boolean) {
+    return isWeekend ? 5 : 2;
+  }
+
+  getInitialHeight() {
+    return 20;
+  }
+
+  getInitialWidth() {
+    return 15;
+  }
+
+  getEndingWidth() {
+    return 15;
+  }
+
+  getPageWidth() {
+    return 210;
+  }
+
+  getFormatedDate(date: Date) {
+    return this.translocoLocaleService.localizeDate(
+      date,
+      this.translocoLocaleService.getLocale(),
+      { dateStyle: this.defaultReportDateFormat }
+    );
+  }
+
+  getDateFontSize() {
+    return 14;
+  }
+
+  getTextFontSize() {
+    return 11;
+  }
+
+  getTextMaxWidth(hasMultipleRooms: boolean, participantsText: boolean) {
+    if (!participantsText) {
+      return (
+        this.getPageWidth() -
+        this.getInitialWidth() -
+        this.getEndingWidth() -
+        (hasMultipleRooms ? 120 : 60)
+      );
+    }
+    return this.getPageWidth() - this.getInitialWidth() - this.getEndingWidth() - 120;
+  }
+
+  hasMultipleRooms(ag: AssignmentGroupInterface): boolean {
+    const rooms = ag.assignments.map((a) => a.room);
+    const roomsSet = new Set(rooms);
+    return roomsSet.size > 1;
+  }
+
+  getRooms(ag: AssignmentGroupInterface) {
+    const rooms = ag.assignments.map((a) => a.room);
+    const roomsSet = new Set(rooms);
+    return [...roomsSet];
+  }
+
+  getParticipantsNames(a: AssignmentReportInterface) {
+    return a.principal.name + (a.assistant ? "/ " + a.assistant.name : "");
+  }
+
+  /**
+   *
+   * @param doc the jsPdf instance
+   * @param y the y pointer
+   * @param x the x pointer
+   * @param imageName the image name with extension
+   * @param a the assignment
+   */
+  addBand(
+    doc: jsPDF,
+    x: number,
+    y: number,
+    imageName: BandNamesWithExtType,
+    a: AssignmentReportInterface
+  ): number {
+    y = y - 4; //Rectangles draw to bottom so we need to move the pointer up
+    const image = path.join(this.configService.iconsFilesPath, imageName);
+    const uint8array = new Uint8Array(readFileSync(image));
+    doc.addImage(uint8array, "JPEG", x, y, 4, 4);
+    doc.setFillColor(a.assignType.color);
+    doc.rect(x + 4, y, 176, 4, "F");
+    y = y + 9;
+    return y;
+  }
+
+  toPdfBoard(isWeekend = false) {
+    const assignmentGroupsBackup = [...this.assignmentGroups];
+
+    this.getRelatedData(true);
+
+    const doc = this.getPdfSheet();
+
+    let x = this.getInitialWidth();
+    let y = this.getInitialHeight();
 
     doc.setFont(this.pdfService.font);
-    doc.setFontSize(fontSize);
 
-    //Every two weeks add a page
-    let weekCounter = 2;
-
-    console.log(this.assignmentGroups);
+    let weekCounter = this.getWeekCounter(isWeekend);
 
     for (const ag of this.assignmentGroups) {
       if (!weekCounter) {
-        weekCounter = 2;
+        weekCounter = this.getWeekCounter(isWeekend);
         doc.addPage("a4", "p");
-        y = 10;
+        y = this.getInitialHeight();
       }
 
       //Initialize the bands
@@ -310,50 +400,70 @@ export class SelectionListComponent implements OnChanges {
       let livingAsChristiansBand = false;
 
       //date
-      const dateText = this.translocoLocaleService.localizeDate(
-        ag.assignments[0].date,
-        this.translocoLocaleService.getLocale(),
-        { dateStyle: this.defaultReportDateFormat }
-      );
+      const dateLocaleFormat = this.getFormatedDate(ag.assignments[0].date);
 
       doc.setFont(this.pdfService.font, "bold");
-      doc.setFontSize(14);
-      doc.text(dateText, x, y, {});
+      doc.setFontSize(this.getDateFontSize());
+      doc.text(dateLocaleFormat, x, y, {});
 
-      //room or rooms
-      const rooms = ag.assignments.map((a) => a.room);
-      const roomsSet = new Set(rooms);
+      //rooms title
+      doc.setFontSize(this.getTextFontSize());
 
-      doc.setFontSize(11);
-      const [room1, room2] = [...roomsSet];
-      doc.text(this.roomNamePipe.transform(room1), x + 70, y);
-      if (room2) doc.text(this.roomNamePipe.transform(room2), x + 130, y);
+      const hasMultipleRooms = this.hasMultipleRooms(ag);
+
+      const maxLineWidth = this.getTextMaxWidth(hasMultipleRooms, false);
+      const maxLineWidthParticipants = this.getTextMaxWidth(hasMultipleRooms, true);
+
+      if (hasMultipleRooms) {
+        const [room1, room2] = this.getRooms(ag);
+        doc.text(
+          this.roomNamePipe.transform(room1),
+          x + this.getTextMaxWidth(hasMultipleRooms, false),
+          y
+        );
+        doc.text(
+          this.roomNamePipe.transform(room2),
+          x +
+            this.getTextMaxWidth(hasMultipleRooms, false) +
+            this.getTextMaxWidth(hasMultipleRooms, true),
+          y
+        );
+      } else {
+        const [room1] = this.getRooms(ag);
+        doc.text(
+          this.roomNamePipe.transform(room1),
+          x + this.getTextMaxWidth(hasMultipleRooms, false),
+          y
+        );
+      }
+
       doc.setFont(this.pdfService.font, "normal");
-      //move the pointer
-      y = y + 5;
+      //move the pointer to the assignments section
+      y = y + 10;
 
       for (const a of ag.assignments) {
         let height = 0;
 
-        let participantsNames =
-          a.principal.name + (a.assistant ? "/ " + a.assistant.name : "");
+        let participantsNames = this.getParticipantsNames(a);
+
         let textLinesParticipants = doc.splitTextToSize(
           participantsNames,
           maxLineWidthParticipants
         );
+
         const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
 
         let themeOrAssignType = a.theme ? a.theme : a.assignType.name;
 
+        let wordLength = hasMultipleRooms ? 60 : 90;
         //Before create text lines check the length
-        if (themeOrAssignType.length > 60) {
+        if (themeOrAssignType.length > wordLength) {
           const shortedTheme = [];
           let words = themeOrAssignType.split(" ");
-          let wordCount = 50;
-          for (let word of words) {
-            if (wordCount - word.length > 0) {
-              shortedTheme.push(word);
-              wordCount -= word.length;
+          for (let w of words) {
+            if (wordLength - w.length > 0) {
+              shortedTheme.push(w);
+              wordLength -= w.length;
             } else {
               break;
             }
@@ -371,76 +481,65 @@ export class SelectionListComponent implements OnChanges {
           this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
           !treasuresFromWordBand
         ) {
-          y = y - 4;
-          const image = path.join(this.configService.iconsFilesPath, "diamond.jpg");
-          const uint8array = new Uint8Array(readFileSync(image));
-          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
-          //the band paints from baseline to bottom, text is from baseline to above
-          doc.setFillColor(a.assignType.color);
-          doc.rect(14, y, 180, 4, "F");
+          y = this.addBand(doc, x, y, "diamond.jpg", a);
           treasuresFromWordBand = true;
-          y = y + 9; //The band has taken 6 (2 + 4) plus 2 to ending space
         }
         if (
           this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
           !improvePreachingBand
         ) {
-          y = y - 4;
-
-          const image = path.join(this.configService.iconsFilesPath, "wheat.jpg");
-          const uint8array = new Uint8Array(readFileSync(image));
-          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
-
-          doc.setFillColor(a.assignType.color);
-          doc.rect(14, y, 180, 4, "F");
+          y = this.addBand(doc, x, y, "wheat.jpg", a);
           improvePreachingBand = true;
-          y = y + 9;
         }
         if (
           this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
           !livingAsChristiansBand
         ) {
-          y = y - 4;
-
-          const image = path.join(this.configService.iconsFilesPath, "sheep.jpg");
-          const uint8array = new Uint8Array(readFileSync(image));
-          doc.addImage(uint8array, "JPEG", x, y, 4, 4);
-
-          doc.setFillColor(a.assignType.color);
-          doc.rect(14, y, 180, 4, "F");
+          y = this.addBand(doc, x, y, "sheep.jpg", a);
           livingAsChristiansBand = true;
-          y = y + 9;
         }
         doc.text(textLinesTheme, x, y);
-        doc.text(textLinesParticipants, x + 70, y);
+        //We need to move the pointer adding the width of the text plus a margin
+        doc.text(textLinesParticipants, x + this.getTextMaxWidth(hasMultipleRooms, false), y);
 
-        //Find the equivalent on room2 paint participants and remove it
-        // the room2 assignments are at the end of the ag and are sorted
-        const assign = ag.assignments.find(
-          (assign) =>
-            assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
-        );
-        const index = ag.assignments.findIndex((assign) => assign.room.id !== a.room.id);
-        if (assign) {
-          participantsNames =
-            assign.principal.name + (assign.assistant ? "/ " + assign.assistant.name : "");
-          textLinesParticipants = doc.splitTextToSize(
-            participantsNames,
-            maxLineWidthParticipants
+        if (hasMultipleRooms) {
+          //Find the equivalent on room2, paint participants and remove the assignment
+          // the room2 assignments are at the end of the ag because are sorted
+          const assign = ag.assignments.find(
+            (assign) =>
+              assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
           );
-          doc.text(textLinesParticipants, x + 130, y);
-          ag.assignments.splice(index, 1);
+          const index = ag.assignments.findIndex((assign) => assign.room.id !== a.room.id);
+          if (assign) {
+            participantsNames =
+              assign.principal.name + (assign.assistant ? "/ " + assign.assistant.name : "");
+            textLinesParticipants = doc.splitTextToSize(
+              participantsNames,
+              maxLineWidthParticipants
+            );
+            //We need to move the pointer adding the width of the text
+            //plus the width of the participant text plus a margin
+            doc.text(
+              textLinesParticipants,
+              x +
+                +this.getTextMaxWidth(hasMultipleRooms, false) +
+                this.getTextMaxWidth(hasMultipleRooms, true),
+              y
+            );
+            ag.assignments.splice(index, 1);
+          }
         }
 
+        //Prepare the pointer for the next assignment
         y = y + height;
       }
-      //Separator betweek week 1 and 2
+      //Separator betweek weeks
       y = y + 5;
       weekCounter--;
     }
 
     //Restore related data so the html wont jump
-    this.getRelatedData(false);
+    this.assignmentGroups = assignmentGroupsBackup;
 
     doc.save("assignmentsMidweek");
   }
