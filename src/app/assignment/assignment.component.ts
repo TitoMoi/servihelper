@@ -20,7 +20,6 @@ import { SortService } from "app/services/sort.service";
 import { RoomService } from "app/room/service/room.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ParticipantService } from "app/participant/service/participant.service";
-import { NoteService } from "app/note/service/note.service";
 import { ParticipantPipe } from "../participant/pipe/participant.pipe";
 import { RoomPipe } from "../room/pipe/room.pipe";
 import { AssignTypePipe } from "../assigntype/pipe/assign-type.pipe";
@@ -112,12 +111,9 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     private roomService: RoomService,
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
-    private noteService: NoteService,
     private lastDateService: LastDateService,
     private sortService: SortService,
-    private assignTypeNamePipe: AssignTypeNamePipe,
     private onlineService: OnlineService,
-    private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
@@ -282,58 +278,5 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   preventDefault(event) {
     event.stopPropagation();
-  }
-
-  exportCsv() {
-    let data = "";
-    let headers = "";
-    const rows = [];
-    const keys = Object.keys(this.assignmentsTable[0]);
-    for (const key of keys) {
-      headers = headers + key + ";";
-    }
-    headers = headers + "\n";
-    rows.push(headers);
-
-    for (const assign of this.assignmentsTable) {
-      data = ""; //reset row
-      for (const key of keys) {
-        switch (key) {
-          case "room":
-            data =
-              data + this.roomNamePipe.transform(this.roomService.getRoom(assign[key])) + ";";
-            break;
-          case "assignType":
-            data =
-              data +
-              this.assignTypeNamePipe.transform(
-                this.assignTypeService.getAssignType(assign[key])
-              ) +
-              ";";
-            break;
-          case "principal":
-            data = data + this.participantService.getParticipant(assign[key]).name + ";";
-            break;
-          case "assistant":
-            this.participantService.getParticipant(assign[key]);
-            data = data + this.participantService.getParticipant(assign[key])?.name + ";";
-            break;
-          case "footerNote":
-            data = data + this.noteService.getNote(assign[key])?.editorHTML + ";";
-            break;
-
-          default:
-            data = data + assign[key] + ";";
-            break;
-        }
-      }
-      data = data + "\n";
-      rows.push(data);
-    }
-    const a: any = document.createElement("a");
-    const file = new Blob(rows, { type: "text/csv" });
-    a.href = URL.createObjectURL(file);
-    a.download = "assignments.csv";
-    a.click();
   }
 }

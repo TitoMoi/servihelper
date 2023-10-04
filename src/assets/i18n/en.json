@@ -122,8 +122,6 @@
   "CONFIG_ZIP_UPLOAD": "Upload Zip file",
   "CONFIG_ZIP_UPLOADED": "Zip uploaded",
   "ICON_CLIPBOARD": "Copy to the clipboard",
-  "ICON_EXCEL": "Colorful Excel sheet",
-  "ICON_EXPORT_CSV": "Export all assignments into a csv file",
   "ICON_FOLDER": "Generate png files (takes a while)",
   "ICON_GOOGLECALENDAR": "Create a link for google calendar reminder",
   "ICON_GROUP_DELETE": "Delete all assignments of certain day",
@@ -387,5 +385,7 @@
   "CONFIG_DEFAULT_FONT_SIZE": "XXXREMOVE THISXXXX",
   "ICON_PDF_BAND": "Generate a colorful pdf specially for the midweek with bands and up to two weeks per page",
   "ICON_PDF_BAND_WEEKEND": "Generate a colorful pdf specially for the weekend with bands and up to five weeks per page",
-  "ASSIGNTYPES_CHAIRMAN": "Chairman"
+  "ASSIGNTYPES_CHAIRMAN": "Chairman",
+  "ICON_EXCEL": "XXXREMOVE THISXXX",
+  "ICON_EXPORT_CSV": "XXXREMOVE THISXXX"
 }

@@ -24,12 +24,6 @@
         <ng-container *ngIf="assignmentsTable.length">
           <mat-icon
             class="mx-3"
-            svgIcon="csvSvg"
-            [matTooltip]="t('ICON_EXPORT_CSV')"
-            (click)="exportCsv()"
-          ></mat-icon>
-          <mat-icon
-            class="mx-3"
             svgIcon="search"
             routerLink="../search"
             [matTooltip]="t('ICON_SEARCH')"
