@@ -131,29 +131,22 @@ export class SelectionListComponent implements OnChanges {
       assignments: [],
     };
 
-    let length = this.#assignments.length;
-
     let currentDate;
     let firstRoomId;
-    for (const assignment of this.#assignments) {
-      --length;
 
+    for (const assignment of this.#assignments) {
       if (!currentDate) currentDate = assignment.date;
       if (!firstRoomId) firstRoomId = assignment.room;
 
-      if (new Date(currentDate).toISOString() !== new Date(assignment.date).toISOString()) {
+      if (
+        new Date(currentDate).toISOString() !== new Date(assignment.date).toISOString() ||
+        (firstRoomId !== assignment.room && !shouldFusionRooms)
+      ) {
         //save the ag and prepare another assignGroup
         this.assignmentGroups.push(assignGroup);
+        //reset defaults
         currentDate = assignment.date;
-        assignGroup = {
-          assignments: [],
-        };
-      }
-
-      if (firstRoomId !== assignment.room && !shouldFusionRooms) {
-        //save the ag and prepare another assignGroup
         firstRoomId = assignment.room;
-        this.assignmentGroups.push(assignGroup);
         assignGroup = {
           assignments: [],
         };
@@ -175,9 +168,9 @@ export class SelectionListComponent implements OnChanges {
         assistant: this.participantService.getParticipant(assignment.assistant),
         footerNote: "",
       });
-
-      if (!length) this.assignmentGroups.push(assignGroup);
     }
+    //last assign group who is out of the loop
+    if (assignGroup.assignments.length) this.assignmentGroups.push(assignGroup);
   }
 
   /**
@@ -325,12 +318,17 @@ export class SelectionListComponent implements OnChanges {
       this.getPageWidth() -
       this.getInitialWidth() -
       this.getEndingWidth() -
-      (hasMultipleRooms ? 120 : 60)
+      (hasMultipleRooms ? 80 : 60)
     );
   }
 
-  getMaxWidthNames() {
-    return this.getPageWidth() - this.getInitialWidth() - this.getEndingWidth() - 120;
+  getMaxWidthNames(hasMultipleRooms: boolean) {
+    return (
+      this.getPageWidth() -
+      this.getInitialWidth() -
+      this.getEndingWidth() -
+      (hasMultipleRooms ? 140 : 120)
+    );
   }
 
   hasMultipleRooms(ag: AssignmentGroupInterface): boolean {
@@ -345,8 +343,11 @@ export class SelectionListComponent implements OnChanges {
     return [...roomsSet];
   }
 
-  getParticipantsNames(a: AssignmentReportInterface) {
-    return a.principal.name + (a.assistant ? "/ " + a.assistant.name : "");
+  getParticipantsNames(a: AssignmentReportInterface, hasMultipleRooms: boolean) {
+    if (!hasMultipleRooms) {
+      return a.principal.name + (a.assistant ? "/ " + a.assistant.name : "");
+    }
+    return a.principal.name + (a.assistant ? "/\n" + a.assistant.name : "");
   }
 
   /**
@@ -413,7 +414,7 @@ export class SelectionListComponent implements OnChanges {
       const hasMultipleRooms = this.hasMultipleRooms(ag);
 
       const maxLineWidth = this.getMaxWidth(hasMultipleRooms);
-      const maxLineWidthParticipants = this.getMaxWidthNames();
+      const maxLineWidthParticipants = this.getMaxWidthNames(hasMultipleRooms);
 
       if (hasMultipleRooms) {
         const [room1, room2] = this.getRooms(ag);
@@ -424,7 +425,7 @@ export class SelectionListComponent implements OnChanges {
         );
         doc.text(
           this.roomNamePipe.transform(room2),
-          x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(),
+          x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(hasMultipleRooms),
           y
         );
       } else {
@@ -443,7 +444,7 @@ export class SelectionListComponent implements OnChanges {
       for (const a of ag.assignments) {
         let height = 0;
 
-        let participantsNames = this.getParticipantsNames(a);
+        let participantsNames = this.getParticipantsNames(a, hasMultipleRooms);
 
         let textLinesParticipants = doc.splitTextToSize(
           participantsNames,
@@ -510,8 +511,7 @@ export class SelectionListComponent implements OnChanges {
           );
           const index = ag.assignments.findIndex((assign) => assign.room.id !== a.room.id);
           if (assign) {
-            participantsNames =
-              assign.principal.name + (assign.assistant ? "/ " + assign.assistant.name : "");
+            participantsNames = this.getParticipantsNames(a, hasMultipleRooms);
             textLinesParticipants = doc.splitTextToSize(
               participantsNames,
               maxLineWidthParticipants
@@ -520,7 +520,7 @@ export class SelectionListComponent implements OnChanges {
             //plus the width of the participant text plus a margin
             doc.text(
               textLinesParticipants,
-              x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(),
+              x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(hasMultipleRooms),
               y
             );
             ag.assignments.splice(index, 1);
