@@ -62,6 +62,12 @@ export class HomeComponent {
     const zip = new AdmZip();
     zip.addLocalFolder(this.configService.sourceFilesPath);
 
+    const config = this.configService.getConfig();
+
+    config.lastExportedDate = new Date();
+
+    this.configService.updateConfig(config);
+
     zip.toBuffer((buffer: Buffer) => {
       const blob = new Blob([buffer], { type: "application/octet" });
       const zipLink = document.createElement("a");

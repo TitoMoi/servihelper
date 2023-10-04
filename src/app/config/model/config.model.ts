@@ -2,28 +2,7 @@ import { DateFormatStyles } from "@ngneat/transloco-locale";
 import { RoleInterface } from "app/roles/model/role.model";
 import { LatLngLiteral } from "leaflet";
 
-export type ConfigOptionsType =
-  | "lang"
-  | "assignmentHeaderTitle"
-  | "assignmentPrincipalTitle"
-  | "assignmentAssistantTitle"
-  | "assignmentDateTitle"
-  | "assignmentAssignTypeTitle"
-  | "assignmentThemeTitle"
-  | "assignmentRoomTitle"
-  | "assignmentNoteTitle"
-  | "defaultFooterNoteId"
-  | "defaultReportFontSize"
-  | "defaultReportDateColor"
-  | "defaultWeekDayBegins"
-  | "defaultReportDateFormat"
-  | "reportTitle"
-  | "lastMapClick"
-  | "roles"
-  | "role"
-  | "lastImportedDate"
-  | "lastImportedFilename"
-  | "closeToOthersDays";
+export type ConfigOptionsType = keyof ConfigInterface;
 
 export interface WeekDaysBegin {
   name: string;
@@ -52,6 +31,7 @@ export interface ConfigInterface {
   role?: string;
   lastImportedDate: Date;
   lastImportedFilename: string;
+  lastExportedDate: Date;
   closeToOthersDays: number;
   closeToOthersPrayerDays: number;
 }

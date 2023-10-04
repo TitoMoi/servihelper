@@ -159,6 +159,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     role: this.configService.administratorKey,
     lastImportedDate: undefined,
     lastImportedFilename: "",
+    lastExportedDate: undefined,
     closeToOthersDays: 30,
     closeToOthersPrayerDays: 30,
   };

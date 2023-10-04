@@ -387,5 +387,6 @@
   "ICON_PDF_BAND_WEEKEND": "Generate a colorful pdf specially for the weekend with bands and up to five weeks per page",
   "ASSIGNTYPES_CHAIRMAN": "Chairman",
   "ICON_EXCEL": "XXXREMOVE THISXXX",
-  "ICON_EXPORT_CSV": "XXXREMOVE THISXXX"
+  "ICON_EXPORT_CSV": "XXXREMOVE THISXXX",
+  "CONFIG_LAST_EXPORTED_DATE": "Last exported date"
 }
