@@ -25,6 +25,7 @@ export interface ParticipantDynamicInterface extends ParticipantInterface {
   hasCollision?: boolean; //Dynamic value, if the participant has the same assignment before or after the required no participation time of the assignment
   isCloseToOthers?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments,
   isCloseToOthersPrayer?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments
+  isCloseToOthersTreasuresEtc?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments
 }
 
 //We need a model to save because on save there are some unwanted properties from the dynamic model

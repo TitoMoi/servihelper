@@ -587,12 +587,18 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
 
   checkIfCollision() {
     let currentDate: Date = this.gfv("date");
-    if (currentDate) {
+    const room = this.gfv("room");
+    const at = this.gfv("assignType");
+
+    if (currentDate && room && at) {
       const closeOthersDays = this.configService.getConfig().closeToOthersDays;
       const closeOthersPrayerDays = this.configService.getConfig().closeToOthersPrayerDays;
+      const closeOthersTreasuresEtcDays =
+        this.configService.getConfig().closeToOthersTreasuresEtcDays;
 
       /* get the threshold of the assign type */
       const at = this.assignTypeService.getAssignType(this.gfv("assignType"));
+      const atType = at.type;
       const days = at?.days;
       if (days) {
         //If we edit an assignment, we get the string iso instead of a real date
@@ -614,7 +620,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
           }
         }
       }
-      if (closeOthersDays) {
+      if (closeOthersDays && this.isOfTypeAssignTypes(atType)) {
         //If we edit an assignment, we get the string iso instead of a real date
         if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
@@ -633,9 +639,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
           if (
             allDays.some(
               (a) =>
-                this.isOfTypeAssignTypes(
-                  this.assignTypeService.getAssignType(this.gfv("assignType")).type
-                ) &&
+                this.isOfTypeAssignTypes(atType) &&
                 (a.principal === p.id || a.assistant === p.id)
             )
           ) {
@@ -648,7 +652,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
             allDays.some(
               (a) =>
                 this.isOfTypeAssignTypes(
-                  this.assignTypeService.getAssignType(this.gfv("assignType")).type
+                  this.assignTypeService.getAssignType(a.assignType).type
                 ) &&
                 (a.principal === assist.id || a.assistant === assist.id)
             )
@@ -657,7 +661,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
           }
         }
       }
-      if (closeOthersPrayerDays) {
+      if (closeOthersPrayerDays && this.isOfTypePrayer(atType)) {
         //If we edit an assignment, we get the string iso instead of a real date
         if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
@@ -675,12 +679,38 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
           if (
             allDays.some(
               (a) =>
-                this.isOfTypePrayer(
-                  this.assignTypeService.getAssignType(this.gfv("assignType")).type
-                ) && a.principal === p.id
+                this.isOfTypePrayer(this.assignTypeService.getAssignType(a.assignType).type) &&
+                a.principal === p.id
             )
           ) {
             p.isCloseToOthersPrayer = true;
+          }
+        }
+      }
+      if (closeOthersTreasuresEtcDays && this.isOfTypeTreasuresAndOthers(atType)) {
+        //If we edit an assignment, we get the string iso instead of a real date
+        if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+        //Get all the days before and after, its 1 based index
+        let allDays: AssignmentInterface[] = [];
+        for (var i = 1; i <= closeOthersTreasuresEtcDays; i++) {
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+          );
+          allDays = allDays.concat(
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+          );
+        }
+        for (let p of this.principals) {
+          if (
+            allDays.some(
+              (a) =>
+                this.isOfTypeTreasuresAndOthers(
+                  this.assignTypeService.getAssignType(a.assignType).type
+                ) && a.principal === p.id
+            )
+          ) {
+            p.isCloseToOthersTreasuresEtc = true;
           }
         }
       }
@@ -688,12 +718,22 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   /** Check if the type is inside a group of types */
-  isOfTypeAssignTypes(type: string): type is AssignTypes {
+  isOfTypeAssignTypes(type: AssignTypes) {
     return ["bibleReading", "initialCall", "returnVisit", "talk", "bibleStudy"].includes(type);
   }
-  /** Check if the type is inside a group of types */
-  isOfTypePrayer(type: string): type is AssignTypes {
+
+  isOfTypePrayer(type: AssignTypes) {
     return ["initialPrayer", "endingPrayer"].includes(type);
+  }
+
+  isOfTypeTreasuresAndOthers(type: AssignTypes) {
+    console.log(type);
+    return [
+      "treasures",
+      "spiritualGems",
+      "livingAsChristians",
+      "congregationBibleStudy",
+    ].includes(type);
   }
 
   filterAssignmentsByRole() {

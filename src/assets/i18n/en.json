@@ -347,6 +347,8 @@
   "ASSIGNMENT_ISCLOSEOTHERS_PRAYER_TOOLTIP": "Not recommended because the participant has another assignment of type {{ASSIGNTYPES_INITIALPRAYER}} or {{ASSIGNTYPES_ENDINGPRAYER}} very close",
   "CONFIG_ISCLOSEOTHERS_PRAYER_LABEL": "Distance in days between {{ASSIGNTYPES_INITIALPRAYER}}, {{ASSIGNTYPES_ENDINGPRAYER}}",
   "CONFIG_ISCLOSEOTHERS_PRAYER_TOOLTIP": "Give the time of proximity in days between {{ASSIGNTYPES_INITIALPRAYER}}, {{ASSIGNTYPES_ENDINGPRAYER}}",
+  "CONFIG_ISCLOSEOTHERS_TREASURESETC_LABEL": "Distance in days between {{ASSIGNTYPES_TREASURES}}, {{ASSIGNTYPES_SPIRITUALGEMS}}, {{ASSIGNTYPES_LIVINGASCHRISTIANS}}, {{ASSIGNTYPES_CONGREGATIONBIBLESTUDY}}",
+  "CONFIG_ISCLOSEOTHERS_TREASURESETC_TOOLTIP": "Give the time of proximity in days between {{ASSIGNTYPES_TREASURES}}, {{ASSIGNTYPES_SPIRITUALGEMS}}, {{ASSIGNTYPES_LIVINGASCHRISTIANS}}, {{ASSIGNTYPES_CONGREGATIONBIBLESTUDY}}",
   "ASSIGNTYPE_TIME_ICON": "This icon will appear when the distance in time for the participant is not satisfied for this assignment type",
   "S89S_TOOLTIP": "Generate individual s89s pdf",
   "S89SM_TOOLTIP": "Generate the 4-s89s pdf containing all the assignments",

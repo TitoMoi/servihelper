@@ -104,6 +104,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
   form = this.formBuilder.group({
     closeToOthersDays: this.currentConfig.closeToOthersDays,
     closeToOthersPrayerDays: this.currentConfig.closeToOthersPrayerDays,
+    closeToOthersTreasuresEtcDays: this.currentConfig.closeToOthersTreasuresEtcDays,
     defaultFooterNoteId: this.currentConfig.defaultFooterNoteId,
     defaultReportFontSize: this.currentConfig.defaultReportFontSize,
     defaultReportFontSizeHorizontal: this.currentConfig.defaultReportFontSizeHorizontal,
@@ -162,6 +163,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     lastExportedDate: undefined,
     closeToOthersDays: 30,
     closeToOthersPrayerDays: 30,
+    closeToOthersTreasuresEtcDays: 0,
   };
 
   notes: NoteInterface[] = this.noteService.getNotes();

@@ -34,6 +34,7 @@ export interface ConfigInterface {
   lastExportedDate: Date;
   closeToOthersDays: number;
   closeToOthersPrayerDays: number;
+  closeToOthersTreasuresEtcDays: number;
 }
 
 export interface OnlineTemplateDataInterface {
