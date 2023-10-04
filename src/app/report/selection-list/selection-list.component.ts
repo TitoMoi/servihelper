@@ -320,15 +320,16 @@ export class SelectionListComponent implements OnChanges {
     return 11;
   }
 
-  getTextMaxWidth(hasMultipleRooms: boolean, participantsText: boolean) {
-    if (!participantsText) {
-      return (
-        this.getPageWidth() -
-        this.getInitialWidth() -
-        this.getEndingWidth() -
-        (hasMultipleRooms ? 120 : 60)
-      );
-    }
+  getMaxWidth(hasMultipleRooms: boolean) {
+    return (
+      this.getPageWidth() -
+      this.getInitialWidth() -
+      this.getEndingWidth() -
+      (hasMultipleRooms ? 120 : 60)
+    );
+  }
+
+  getMaxWidthNames() {
     return this.getPageWidth() - this.getInitialWidth() - this.getEndingWidth() - 120;
   }
 
@@ -411,28 +412,26 @@ export class SelectionListComponent implements OnChanges {
 
       const hasMultipleRooms = this.hasMultipleRooms(ag);
 
-      const maxLineWidth = this.getTextMaxWidth(hasMultipleRooms, false);
-      const maxLineWidthParticipants = this.getTextMaxWidth(hasMultipleRooms, true);
+      const maxLineWidth = this.getMaxWidth(hasMultipleRooms);
+      const maxLineWidthParticipants = this.getMaxWidthNames();
 
       if (hasMultipleRooms) {
         const [room1, room2] = this.getRooms(ag);
         doc.text(
           this.roomNamePipe.transform(room1),
-          x + this.getTextMaxWidth(hasMultipleRooms, false),
+          x + this.getMaxWidth(hasMultipleRooms),
           y
         );
         doc.text(
           this.roomNamePipe.transform(room2),
-          x +
-            this.getTextMaxWidth(hasMultipleRooms, false) +
-            this.getTextMaxWidth(hasMultipleRooms, true),
+          x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(),
           y
         );
       } else {
         const [room1] = this.getRooms(ag);
         doc.text(
           this.roomNamePipe.transform(room1),
-          x + this.getTextMaxWidth(hasMultipleRooms, false),
+          x + this.getMaxWidth(hasMultipleRooms),
           y
         );
       }
@@ -500,7 +499,7 @@ export class SelectionListComponent implements OnChanges {
         }
         doc.text(textLinesTheme, x, y);
         //We need to move the pointer adding the width of the text plus a margin
-        doc.text(textLinesParticipants, x + this.getTextMaxWidth(hasMultipleRooms, false), y);
+        doc.text(textLinesParticipants, x + this.getMaxWidth(hasMultipleRooms), y);
 
         if (hasMultipleRooms) {
           //Find the equivalent on room2, paint participants and remove the assignment
@@ -521,9 +520,7 @@ export class SelectionListComponent implements OnChanges {
             //plus the width of the participant text plus a margin
             doc.text(
               textLinesParticipants,
-              x +
-                +this.getTextMaxWidth(hasMultipleRooms, false) +
-                this.getTextMaxWidth(hasMultipleRooms, true),
+              x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(),
               y
             );
             ag.assignments.splice(index, 1);
