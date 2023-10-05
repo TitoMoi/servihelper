@@ -53,7 +53,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { ExportService } from "app/services/export.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatDatepicker, MatDatepickerModule } from "@angular/material/datepicker";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { isSameMonth } from "date-fns";
@@ -135,7 +135,7 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
   async getStatistics() {
     const assignments = (await this.assignmentService.getAssignments(true)).filter((a) =>
       this.allowedAssignTypesIds.includes(a.assignType) && this.date.value
-        ? isSameMonth(a.date, this.date.value)
+        ? isSameMonth(new Date(a.date), new Date(this.date.value))
         : true
     );
     /* available participants that can do this kind of type assignments
@@ -261,5 +261,11 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
 
   async toPng() {
     this.exportService.toPng("toPngDivId", "statistics-global");
+  }
+
+  setMonthAndYear(d: Date, dp: MatDatepicker<Date>) {
+    this.date.setValue(new Date(d));
+    dp.close();
+    this.getStatistics();
   }
 }

@@ -36,7 +36,11 @@
             <mat-label>{{ t("STATISTICS_YEAR_AND_MONTH") }}</mat-label>
             <input matInput [matDatepicker]="dp" [formControl]="date" />
             <mat-datepicker-toggle matIconPrefix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker #dp startView="multi-year" (monthSelected)="dp.close()">
+            <mat-datepicker
+              #dp
+              startView="multi-year"
+              (monthSelected)="setMonthAndYear($event, dp)"
+            >
             </mat-datepicker>
           </mat-form-field>
         </div>
