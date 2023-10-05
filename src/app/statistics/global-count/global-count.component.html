@@ -7,9 +7,14 @@
         </h3>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="row m-3 justify-content-between">
+    <div class="row m-3 justify-content-between align-items-center">
       <div class="col-auto">
-        <div class="d-flex align-items-baseline justify-content-start">
+        <div class="d-flex">
+          <mat-icon svgIcon="png" class="me-3" (click)="toPng()"></mat-icon>
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="d-flex align-items-center">
           <mat-checkbox
             #onlyWomenBox
             color="primary"
@@ -31,7 +36,6 @@
             (change)="changeExternals($event)"
             >{{ t("STATISTICS_EXCLUDE_EXTERNALS") }}</mat-checkbox
           >
-          <mat-icon svgIcon="png" class="me-3" aria-label="icon" (click)="toPng()"></mat-icon>
           <mat-form-field>
             <mat-label>{{ t("STATISTICS_YEAR_AND_MONTH") }}</mat-label>
             <input matInput [matDatepicker]="dp" [formControl]="date" />
@@ -66,13 +70,13 @@
         <div class="col-2">
           <b>{{ t("STATISTICS_COUNT") }}</b>
         </div>
-        <div class="col-2">
+        <div class="col-3">
           <b>{{ t("STATISTICS_PENULTIMA") }}</b>
         </div>
-        <div class="col-2">
+        <div class="col-3">
           <b>{{ t("STATISTICS_LAST") }}</b>
         </div>
-        <div class="col-4">
+        <div class="col-2">
           <b>{{ t("STATISTICS_DISTANCE") }}</b>
         </div>
       </div>
@@ -83,7 +87,7 @@
         <div class="col-2">
           {{ participant.count }}
         </div>
-        <div class="col-2">
+        <div class="col-3">
           <span
             *ngIf="participant.isPrincipalPenultimateAssignment === true"
             class="border padding bg-color-lightskyblue2"
@@ -97,7 +101,7 @@
           {{ participant.penultimateAssignmentDate | translocoDate : { dateStyle: "medium" } }}
           - {{ participant.penultimateAssignType }}
         </div>
-        <div class="col-2">
+        <div class="col-3">
           <span
             *ngIf="participant.isPrincipalLastAssignment === true"
             class="border padding bg-color-lightskyblue2"
@@ -111,7 +115,7 @@
           {{ participant.lastAssignmentDate | translocoDate : { dateStyle: "medium" } }}
           - {{ participant.lastAssignType }}
         </div>
-        <div class="col-4">
+        <div class="col-2">
           {{ participant.distanceBetweenPenultimaAndLast }}
         </div>
       </div>
