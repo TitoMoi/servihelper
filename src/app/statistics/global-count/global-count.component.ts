@@ -52,6 +52,11 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { ExportService } from "app/services/export.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
+import { MatInputModule } from "@angular/material/input";
+import { isSameMonth } from "date-fns";
 
 @Component({
   selector: "app-global-count",
@@ -66,6 +71,10 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
     MatCheckboxModule,
     MatIconModule,
     TranslocoLocaleModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatInputModule,
   ],
 })
 export class GlobalCountComponent implements OnChanges, OnDestroy {
@@ -78,6 +87,8 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
   globalList: ParticipantInterface[] & ParticipantDynamicInterface[];
 
   locales;
+
+  date = new FormControl();
 
   subscription: Subscription = new Subscription();
 
@@ -114,16 +125,18 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    this.initStatistics();
+    this.getStatistics();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  async initStatistics() {
+  async getStatistics() {
     const assignments = (await this.assignmentService.getAssignments(true)).filter((a) =>
-      this.allowedAssignTypesIds.includes(a.assignType)
+      this.allowedAssignTypesIds.includes(a.assignType) && this.date.value
+        ? isSameMonth(a.date, this.date.value)
+        : true
     );
     /* available participants that can do this kind of type assignments
     Filter from the participant the assignTypes that are allowed
@@ -199,7 +212,7 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
    * @param event the checkbox change event
    */
   async changeWoman(event: MatCheckboxChange): Promise<void> {
-    await this.initStatistics();
+    await this.getStatistics();
     if (!event.checked) {
       this.onlyMenBox.disabled = false;
       this.hideExternalsBox.disabled = false;
@@ -215,7 +228,7 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
    * @param event the checkbox change event
    */
   async changeMan(event: MatCheckboxChange): Promise<void> {
-    await this.initStatistics();
+    await this.getStatistics();
     if (!event.checked) {
       this.onlyWomenBox.disabled = false;
       this.hideExternalsBox.checked = false;
@@ -227,7 +240,7 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
 
   /** Must respect women or men check */
   async changeExternals(event: MatCheckboxChange): Promise<void> {
-    await this.initStatistics();
+    await this.getStatistics();
 
     if (this.onlyWomenBox.checked) this.globalList = this.filterOnlyWomen();
     if (this.onlyMenBox.checked) this.globalList = this.filterOnlyMen();

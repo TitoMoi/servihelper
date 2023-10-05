@@ -114,14 +114,14 @@ export class PrincipalCountComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
-    this.initStatistics();
+    this.getStatistics();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  async initStatistics() {
+  async getStatistics() {
     const assignments = (await this.assignmentService.getAssignments(true)).filter((a) =>
       this.allowedAssignTypesIds.includes(a.assignType)
     );
@@ -194,7 +194,7 @@ export class PrincipalCountComponent implements OnChanges, OnDestroy {
    * @param event the checkbox change event
    */
   async changeWoman(event: MatCheckboxChange): Promise<void> {
-    await this.initStatistics();
+    await this.getStatistics();
     if (!event.checked) {
       this.onlyMenBox.disabled = false;
       this.hideExternalsBox.disabled = false;
@@ -210,7 +210,7 @@ export class PrincipalCountComponent implements OnChanges, OnDestroy {
    * @param event the checkbox change event
    */
   async changeMan(event: MatCheckboxChange): Promise<void> {
-    await this.initStatistics();
+    await this.getStatistics();
     if (!event.checked) {
       this.onlyWomenBox.disabled = false;
       this.hideExternalsBox.checked = false;
@@ -222,7 +222,7 @@ export class PrincipalCountComponent implements OnChanges, OnDestroy {
 
   /** Must respect women or men check */
   async changeExternals(event: MatCheckboxChange): Promise<void> {
-    await this.initStatistics();
+    await this.getStatistics();
 
     if (this.onlyWomenBox.checked) this.principalList = this.filterOnlyWomen();
     if (this.onlyMenBox.checked) this.principalList = this.filterOnlyMen();

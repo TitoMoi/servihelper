@@ -9,7 +9,7 @@
     </mat-expansion-panel-header>
     <div class="row m-3 justify-content-between">
       <div class="col-auto">
-        <div class="d-flex align-items-center justify-content-start">
+        <div class="d-flex align-items-baseline justify-content-start">
           <mat-checkbox
             #onlyWomenBox
             color="primary"
@@ -31,7 +31,14 @@
             (change)="changeExternals($event)"
             >{{ t("STATISTICS_EXCLUDE_EXTERNALS") }}</mat-checkbox
           >
-          <mat-icon svgIcon="png" aria-label="icon" (click)="toPng()"></mat-icon>
+          <mat-icon svgIcon="png" class="me-3" aria-label="icon" (click)="toPng()"></mat-icon>
+          <mat-form-field>
+            <mat-label>{{ t("STATISTICS_YEAR_AND_MONTH") }}</mat-label>
+            <input matInput [matDatepicker]="dp" [formControl]="date" />
+            <mat-datepicker-toggle matIconPrefix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="multi-year" (monthSelected)="dp.close()">
+            </mat-datepicker>
+          </mat-form-field>
         </div>
       </div>
       <div class="col-auto">
