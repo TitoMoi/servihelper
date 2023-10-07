@@ -727,7 +727,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
   }
 
   isOfTypeTreasuresAndOthers(type: AssignTypes) {
-    console.log(type);
     return [
       "treasures",
       "spiritualGems",

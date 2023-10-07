@@ -278,7 +278,6 @@ export class PdfService {
     if (this.isAllowedTypeForS89S(assignment)) {
       const pdfDoc = await this.getPdfTemplateFile(this.S89S);
       let form = pdfDoc.getForm();
-      form.getFields().forEach((f) => console.log(f.getName()));
 
       //Get fields
       const principal = form.getTextField(this.defaultPdfFields1.principal);
