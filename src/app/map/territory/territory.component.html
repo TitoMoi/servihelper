@@ -1,7 +1,7 @@
 <span *transloco="let t">
   <div class="d-flex align-items-center justify-content-start mb-2">
     <div
-      class="col-auto me-3 mb-3"
+      class="col-auto me-3"
       [matTooltip]="t('TERRITORY_NO_TGROUPS_CREATED')"
       [matTooltipDisabled]="!!territoryGroups.length"
     >
@@ -28,7 +28,7 @@
   </div>
 </span>
 <ng-container *ngFor="let tg of territoryGroups">
-  <div class="mb-2">
+  <div class="mt-3 mb-2">
     <mat-accordion *transloco="let t">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
