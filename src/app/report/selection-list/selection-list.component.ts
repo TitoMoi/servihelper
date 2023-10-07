@@ -509,9 +509,12 @@ export class SelectionListComponent implements OnChanges {
             (assign) =>
               assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
           );
-          const index = ag.assignments.findIndex((assign) => assign.room.id !== a.room.id);
+          const index = ag.assignments.findIndex(
+            (assign) =>
+              assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
+          );
           if (assign) {
-            participantsNames = this.getParticipantsNames(a, hasMultipleRooms);
+            participantsNames = this.getParticipantsNames(assign, hasMultipleRooms);
             textLinesParticipants = doc.splitTextToSize(
               participantsNames,
               maxLineWidthParticipants
