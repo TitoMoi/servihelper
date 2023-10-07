@@ -293,7 +293,6 @@ export class PdfService {
       const talkCheck = form.getCheckBox(this.defaultPdfFields1.talkCheck);
       const otherCheck = form.getCheckBox(this.defaultPdfFields1.otherCheck);
       const otherText = form.getTextField(this.defaultPdfFields1.otherText);
-
       const mainHallCheck = form.getCheckBox(this.defaultPdfFields1.mainHallCheck);
       const auxiliaryHallCheck = form.getCheckBox(this.defaultPdfFields1.auxiliaryHallCheck);
       const auxiliaryHall2Check = form.getCheckBox(this.defaultPdfFields1.auxiliaryHall2Check);
