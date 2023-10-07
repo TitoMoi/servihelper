@@ -4,7 +4,11 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import {
   getDistanceBetweenPenultimaAndLast,
   getLastAssignment,
+  getLastAssistantAssignment,
+  getLastPrincipalAssignment,
   getPenultimateAssignment,
+  getPenultimateAssistantAssignment,
+  getPenultimatePrincipalAssignment,
   setAssistantCountById,
   setCountById,
   setPrincipalCountById,
@@ -181,6 +185,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     /* available participants that can do this kind of type assignments
     Filter from the participant the assignTypes that are allowed
     and watch if he can participate in some of this assign types */
+    this.participants = [];
     this.participants = this.participantService.getParticipants(true).filter(
       (p) =>
         p.available &&
@@ -209,13 +214,29 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     for (const participant of this.participants) {
-      const assignment: AssignmentInterface = getLastAssignment(assignments, participant);
+      let assignment: AssignmentInterface;
+      //Get the lastAssignmentDate
+      //Global
+      if (!this.onlyPrincipalsBox.checked && !this.onlyAssistantsBox.checked) {
+        assignment = getLastAssignment(assignments, participant);
+        if (assignment) {
+          participant.isPrincipalLastAssignment = assignment.principal === participant.id;
+          participant.isAssistantLastAssignment = assignment.assistant === participant.id;
+        }
+      }
+      //principals
+      if (this.onlyPrincipalsBox.checked) {
+        assignment = getLastPrincipalAssignment(assignments, participant);
+        if (assignment) participant.isPrincipalLastAssignment = true;
+      }
+      //assistants
+      if (this.onlyAssistantsBox.checked) {
+        assignment = getLastAssistantAssignment(assignments, participant);
+        if (assignment) participant.isAssistantLastAssignment = true;
+      }
 
       if (assignment) {
-        //Get the lastAssignmentDate
         participant.lastAssignmentDate = assignment.date;
-        participant.isPrincipalLastAssignment =
-          assignment.principal === participant.id ? true : false;
         //Search the assignmentType and inject
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
         participant.lastAssignType = this.assignTypeNamePipe.transform(assignType);
@@ -224,16 +245,31 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
 
     //Get the penultimateAssignment
     for (const participant of this.participants) {
-      const assignment: AssignmentInterface = getPenultimateAssignment(
-        assignments,
-        participant
-      );
-      participant.penultimateAssignmentDate = assignment?.date;
+      let assignment: AssignmentInterface;
+      //Global
+      if (!this.onlyPrincipalsBox.checked && !this.onlyAssistantsBox.checked) {
+        assignment = getPenultimateAssignment(assignments, participant);
+        if (assignment) {
+          participant.isPrincipalPenultimateAssignment =
+            assignment.principal === participant.id;
+          participant.isAssistantPenultimateAssignment =
+            assignment.assistant === participant.id;
+        }
+      }
+      //principals
+      if (this.onlyPrincipalsBox.checked) {
+        assignment = getPenultimatePrincipalAssignment(assignments, participant);
+        if (assignment) participant.isPrincipalPenultimateAssignment = true;
+      }
+      //assistants
+      if (this.onlyAssistantsBox.checked) {
+        assignment = getPenultimateAssistantAssignment(assignments, participant);
+        if (assignment) participant.isAssistantPenultimateAssignment = true;
+      }
 
       if (assignment) {
+        participant.penultimateAssignmentDate = assignment?.date;
         //Search the assignmentType and inject
-        participant.isPrincipalPenultimateAssignment =
-          assignment.principal === participant.id ? true : false;
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
         participant.penultimateAssignType = this.assignTypeNamePipe.transform(assignType);
       }

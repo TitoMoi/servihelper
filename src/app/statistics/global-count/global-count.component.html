@@ -104,12 +104,12 @@
         </div>
         <div class="col-3">
           <span
-            *ngIf="participant.isPrincipalPenultimateAssignment === true"
+            *ngIf="participant.isPrincipalPenultimateAssignment"
             class="border padding bg-color-lightskyblue2"
             >1</span
           >
           <span
-            *ngIf="participant.isPrincipalPenultimateAssignment === false"
+            *ngIf="participant.isAssistantPenultimateAssignment"
             class="border padding bg-color-lightcoral2"
             >2</span
           >
@@ -123,7 +123,7 @@
             >1</span
           >
           <span
-            *ngIf="participant.isPrincipalLastAssignment === false"
+            *ngIf="participant.isAssistantLastAssignment === true"
             class="border padding bg-color-lightcoral2"
             >2</span
           >

@@ -20,8 +20,10 @@ export interface ParticipantDynamicInterface extends ParticipantInterface {
   lastAssignType?: string; //Dynamic value, undefined by default, the name of the assignType
   lastAssignmentRoom?: string; //Dynamic value, undefined by default, the id of the room
   penultimateAssignType?: string; //Dynamic value, undefined by default, the name of the assignType
-  isPrincipalLastAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment or not (assistant)
-  isPrincipalPenultimateAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment or not (assistant)
+  isPrincipalLastAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment
+  isPrincipalPenultimateAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment
+  isAssistantLastAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment
+  isAssistantPenultimateAssignment?: boolean; //Dynamic value, if this participant is principal for the assignment
   hasCollision?: boolean; //Dynamic value, if the participant has the same assignment before or after the required no participation time of the assignment
   isCloseToOthers?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments,
   isCloseToOthersPrayer?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments

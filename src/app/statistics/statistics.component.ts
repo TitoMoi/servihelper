@@ -1,6 +1,4 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { AssistantCountComponent } from "./assistant-count/assistant-count.component";
-import { PrincipalCountComponent } from "./principal-count/principal-count.component";
 import { TerritoryCountComponent } from "./territory-count/territory-count.component";
 import { GlobalCountComponent } from "./global-count/global-count.component";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -16,14 +14,7 @@ import { MatIconModule } from "@angular/material/icon";
   templateUrl: "./statistics.component.html",
   styleUrls: ["./statistics.component.scss"],
   standalone: true,
-  imports: [
-    GlobalCountComponent,
-    PrincipalCountComponent,
-    AssistantCountComponent,
-    TerritoryCountComponent,
-    TranslocoModule,
-    MatIconModule,
-  ],
+  imports: [GlobalCountComponent, TerritoryCountComponent, TranslocoModule, MatIconModule],
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
   allowedAssignTypesIds = [];
