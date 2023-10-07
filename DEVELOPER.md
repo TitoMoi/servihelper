@@ -109,9 +109,9 @@ Pdf forms have the same field names for all language pdf forms.
 
 The type of the field (text, check) is always at the end of the name of the field.
 
-On every template folder there are images to show the template fields names.
+Form fields have generic names, dont modify them or the pdf icons change and appear as broken.
 
-!Every new pdf must be normalized with the expected names, use the scripts/templates to normalize them.
+Instead, a translation map has been created in pdfService to access them.
 
 ## Reminders (experimental)
 

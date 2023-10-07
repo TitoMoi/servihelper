@@ -42,6 +42,82 @@ export class PdfService {
   S89S = "S89S.pdf";
   S89SM = "S89SM.pdf";
 
+  //The default values that are in the pdf form
+  defaultPdfFields1 = {
+    principal: "900_1_Text",
+    assistant: "900_2_Text",
+    date: "900_3_Text",
+    bibleReadingCheck: "900_4_CheckBox",
+    initialCallCheck: "900_5_CheckBox",
+    initialCallText: "900_6_Text",
+    returnVisitCheck: "900_7_CheckBox",
+    returnVisitText: "900_8_Text",
+    bibleStudyCheck: "900_9_CheckBox",
+    talkCheck: "900_10_CheckBox",
+    otherCheck: "900_11_CheckBox",
+    otherText: "900_12_Text",
+    mainHallCheck: "900_13_CheckBox",
+    auxiliaryHallCheck: "900_14_CheckBox",
+    auxiliaryHall2Check: "900_15_CheckBox",
+  };
+
+  //The default values that are in the pdf form
+  defaultPdfFields2 = {
+    principal: "900_16_Text",
+    assistant: "900_17_Text",
+    date: "900_18_Text",
+    bibleReadingCheck: "900_19_CheckBox",
+    initialCallCheck: "900_20_CheckBox",
+    initialCallText: "900_21_Text",
+    returnVisitCheck: "900_22_CheckBox",
+    returnVisitText: "900_23_Text",
+    bibleStudyCheck: "900_24_CheckBox",
+    talkCheck: "900_25_CheckBox",
+    otherCheck: "900_26_CheckBox",
+    otherText: "900_27_Text",
+    mainHallCheck: "900_28_CheckBox",
+    auxiliaryHallCheck: "900_29_CheckBox",
+    auxiliaryHall2Check: "900_30_CheckBox",
+  };
+
+  //The default values that are in the pdf form
+  defaultPdfFields3 = {
+    principal: "900_31_Text",
+    assistant: "900_32_Text",
+    date: "900_33_Text",
+    bibleReadingCheck: "900_34_CheckBox",
+    initialCallCheck: "900_35_CheckBox",
+    initialCallText: "900_36_Text",
+    returnVisitCheck: "900_37_CheckBox",
+    returnVisitText: "900_38_Text",
+    bibleStudyCheck: "900_39_CheckBox",
+    talkCheck: "900_40_CheckBox",
+    otherCheck: "900_41_CheckBox",
+    otherText: "900_42_Text",
+    mainHallCheck: "900_43_CheckBox",
+    auxiliaryHallCheck: "900_44_CheckBox",
+    auxiliaryHall2Check: "900_45_CheckBox",
+  };
+
+  //The default values that are in the pdf form
+  defaultPdfFields4 = {
+    principal: "900_46_Text",
+    assistant: "900_47_Text",
+    date: "900_48_Text",
+    bibleReadingCheck: "900_49_CheckBox",
+    initialCallCheck: "900_50_CheckBox",
+    initialCallText: "900_51_Text",
+    returnVisitCheck: "900_52_CheckBox",
+    returnVisitText: "900_53_Text",
+    bibleStudyCheck: "900_54_CheckBox",
+    talkCheck: "900_55_CheckBox",
+    otherCheck: "900_56_CheckBox",
+    otherText: "900_57_Text",
+    mainHallCheck: "900_58_CheckBox",
+    auxiliaryHallCheck: "900_59_CheckBox",
+    auxiliaryHall2Check: "900_60_CheckBox",
+  };
+
   constructor(
     private configService: ConfigService,
     private translocoService: TranslocoService,
@@ -201,29 +277,27 @@ export class PdfService {
   async toPdfS89S(assignment: AssignmentInterface): Promise<Uint8Array> {
     if (this.isAllowedTypeForS89S(assignment)) {
       const pdfDoc = await this.getPdfTemplateFile(this.S89S);
-      const form = pdfDoc.getForm();
+      let form = pdfDoc.getForm();
+      form.getFields().forEach((f) => console.log(f.getName()));
 
-      const copiedPage = await pdfDoc.copyPages(pdfDoc, [0]);
-
-      copiedPage[0].doc.getForm();
       //Get fields
-      const principal = form.getTextField("principal");
+      const principal = form.getTextField(this.defaultPdfFields1.principal);
       principal.setFontSize(10);
-      const assistant = form.getTextField("assistant");
+      const assistant = form.getTextField(this.defaultPdfFields1.assistant);
       assistant.setFontSize(10);
-      const date = form.getTextField("date");
+      const date = form.getTextField(this.defaultPdfFields1.date);
       date.setFontSize(10);
-      const bibleReadingCheck = form.getCheckBox("bibleReadingCheck");
-      const initialCallCheck = form.getCheckBox("initialCallCheck");
-      const returnVisitCheck = form.getCheckBox("returnVisitCheck");
-      const bibleStudyCheck = form.getCheckBox("bibleStudyCheck");
-      const talkCheck = form.getCheckBox("talkCheck");
-      const otherCheck = form.getCheckBox("otherCheck");
-      const otherText = form.getTextField("otherText");
+      const bibleReadingCheck = form.getCheckBox(this.defaultPdfFields1.bibleReadingCheck);
+      const initialCallCheck = form.getCheckBox(this.defaultPdfFields1.initialCallCheck);
+      const returnVisitCheck = form.getCheckBox(this.defaultPdfFields1.returnVisitCheck);
+      const bibleStudyCheck = form.getCheckBox(this.defaultPdfFields1.bibleStudyCheck);
+      const talkCheck = form.getCheckBox(this.defaultPdfFields1.talkCheck);
+      const otherCheck = form.getCheckBox(this.defaultPdfFields1.otherCheck);
+      const otherText = form.getTextField(this.defaultPdfFields1.otherText);
 
-      const mainHallCheck = form.getCheckBox("mainHallCheck");
-      const auxiliaryHallCheck = form.getCheckBox("auxiliaryHallCheck");
-      const auxiliaryHall2Check = form.getCheckBox("auxiliaryHall2Check");
+      const mainHallCheck = form.getCheckBox(this.defaultPdfFields1.mainHallCheck);
+      const auxiliaryHallCheck = form.getCheckBox(this.defaultPdfFields1.auxiliaryHallCheck);
+      const auxiliaryHall2Check = form.getCheckBox(this.defaultPdfFields1.auxiliaryHall2Check);
 
       //Assign fields
       principal.setText(this.participantService.getParticipant(assignment.principal).name);
@@ -298,23 +372,38 @@ export class PdfService {
       for (let [i, a] of assignmentList.slice(init, end).entries()) {
         //Get fields, i (index is zero based, we need to add +1)
         const index = i + 1;
-        const principal = form.getTextField("principal" + index);
-        principal.setFontSize(10);
-        const assistant = form.getTextField("assistant" + index);
-        assistant.setFontSize(10);
-        const date = form.getTextField("date" + index);
-        date.setFontSize(10);
-        const bibleReadingCheck = form.getCheckBox("bibleReadingCheck" + index);
-        const initialCallCheck = form.getCheckBox("initialCallCheck" + index);
-        const returnVisitCheck = form.getCheckBox("returnVisitCheck" + index);
-        const bibleStudyCheck = form.getCheckBox("bibleStudyCheck" + index);
-        const talkCheck = form.getCheckBox("talkCheck" + index);
-        const otherCheck = form.getCheckBox("otherCheck" + index);
-        const otherText = form.getTextField("otherText" + index);
+        //Assign the default1 so typescript infers the keys
+        let defaultPdfFields = this.defaultPdfFields1;
+        if (index === 1) {
+          defaultPdfFields = this.defaultPdfFields1;
+        }
+        if (index === 2) {
+          defaultPdfFields = this.defaultPdfFields2;
+        }
+        if (index === 3) {
+          defaultPdfFields = this.defaultPdfFields3;
+        }
+        if (index === 4) {
+          defaultPdfFields = this.defaultPdfFields4;
+        }
 
-        const mainHallCheck = form.getCheckBox("mainHallCheck" + index);
-        const auxiliaryHallCheck = form.getCheckBox("auxiliaryHallCheck" + index);
-        const auxiliaryHall2Check = form.getCheckBox("auxiliaryHall2Check" + index);
+        const principal = form.getTextField(defaultPdfFields.principal);
+        principal.setFontSize(10);
+        const assistant = form.getTextField(defaultPdfFields.assistant);
+        assistant.setFontSize(10);
+        const date = form.getTextField(defaultPdfFields.date);
+        date.setFontSize(10);
+        const bibleReadingCheck = form.getCheckBox(defaultPdfFields.bibleReadingCheck);
+        const initialCallCheck = form.getCheckBox(defaultPdfFields.initialCallCheck);
+        const returnVisitCheck = form.getCheckBox(defaultPdfFields.returnVisitCheck);
+        const bibleStudyCheck = form.getCheckBox(defaultPdfFields.bibleStudyCheck);
+        const talkCheck = form.getCheckBox(defaultPdfFields.talkCheck);
+        const otherCheck = form.getCheckBox(defaultPdfFields.otherCheck);
+        const otherText = form.getTextField(defaultPdfFields.otherText);
+
+        const mainHallCheck = form.getCheckBox(defaultPdfFields.mainHallCheck);
+        const auxiliaryHallCheck = form.getCheckBox(defaultPdfFields.auxiliaryHallCheck);
+        const auxiliaryHall2Check = form.getCheckBox(defaultPdfFields.auxiliaryHall2Check);
 
         //Assign fields
         principal.setText(this.participantService.getParticipant(a.principal).name);
