@@ -53,18 +53,6 @@
         </div>
       </div>
       <div class="col-auto">
-        <mat-form-field>
-          <mat-label>{{ t("STATISTICS_MONTH_RANGE_PICKER") }}</mat-label>
-
-          <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
-            <input matStartDate formControlName="dateStart" placeholder="Start date" />
-            <input matEndDate formControlName="dateEnd" placeholder="End date" />
-          </mat-date-range-input>
-          <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-        </mat-form-field>
-      </div>
-      <div class="col-auto">
         <div class="d-flex justify-content-start">
           <span class="me-3"
             ><span class="border padding bg-color-lightskyblue2">1</span> -
@@ -75,6 +63,20 @@
             {{ t("STATISTICS_2") }}</span
           >
         </div>
+      </div>
+    </div>
+    <div class="row m-3 justify-content-center">
+      <div class="col-auto">
+        <mat-form-field>
+          <mat-label>{{ t("STATISTICS_MONTH_RANGE_PICKER") }}</mat-label>
+
+          <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+            <input matStartDate formControlName="dateStart" placeholder="Start date" />
+            <input matEndDate formControlName="dateEnd" placeholder="End date" />
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
       </div>
     </div>
     <div id="toPngDivId" class="bg-color-white">
