@@ -253,11 +253,15 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   async changeOnlyPrincipals() {
     this.onlyAssistantsBox.disabled = !this.onlyAssistantsBox.disabled;
     await this.getStatistics();
+    if (this.onlyMenBox.checked) this.globalList = this.filterOnlyMen();
+    if (this.onlyWomenBox.checked) this.globalList = this.filterOnlyWomen();
   }
 
   async changeOnlyAssistants() {
     this.onlyPrincipalsBox.disabled = !this.onlyPrincipalsBox.disabled;
     await this.getStatistics();
+    if (this.onlyMenBox.checked) this.globalList = this.filterOnlyMen();
+    if (this.onlyWomenBox.checked) this.globalList = this.filterOnlyWomen();
   }
 
   /**
