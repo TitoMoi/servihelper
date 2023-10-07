@@ -66,10 +66,17 @@
               <div class="grid-row">
                 <div class="grid-item d-flex align-items-center">
                   <mat-icon
+                    class="me-3"
                     #iconMapLink
                     routerLinkActive="active"
                     svgIcon="maplink"
                     (click)="generateMapLink(terr, iconMapLink)"
+                    aria-label="Side nav toggle icon"
+                  ></mat-icon>
+                  <mat-icon
+                    routerLinkActive="active"
+                    svgIcon="pdf"
+                    (click)="toPdf(terr)"
                     aria-label="Side nav toggle icon"
                   ></mat-icon>
                 </div>

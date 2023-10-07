@@ -277,26 +277,6 @@ export class SelectionListComponent implements OnChanges {
     });
   }
 
-  getWeekCounter(isWeekend: boolean) {
-    return isWeekend ? 5 : 2;
-  }
-
-  getInitialHeight() {
-    return 20;
-  }
-
-  getInitialWidth() {
-    return 15;
-  }
-
-  getEndingWidth() {
-    return 15;
-  }
-
-  getPageWidth() {
-    return 210;
-  }
-
   getFormatedDate(date: Date) {
     return this.translocoLocaleService.localizeDate(
       date,
@@ -305,28 +285,20 @@ export class SelectionListComponent implements OnChanges {
     );
   }
 
-  getDateFontSize() {
-    return 14;
-  }
-
-  getTextFontSize() {
-    return 11;
-  }
-
   getMaxWidth(hasMultipleRooms: boolean) {
     return (
-      this.getPageWidth() -
-      this.getInitialWidth() -
-      this.getEndingWidth() -
+      this.pdfService.getPageWidth() -
+      this.pdfService.getInitialWidth() -
+      this.pdfService.getEndingWidth() -
       (hasMultipleRooms ? 80 : 60)
     );
   }
 
   getMaxWidthNames(hasMultipleRooms: boolean) {
     return (
-      this.getPageWidth() -
-      this.getInitialWidth() -
-      this.getEndingWidth() -
+      this.pdfService.getPageWidth() -
+      this.pdfService.getInitialWidth() -
+      this.pdfService.getEndingWidth() -
       (hasMultipleRooms ? 140 : 120)
     );
   }
@@ -382,18 +354,18 @@ export class SelectionListComponent implements OnChanges {
 
     const doc = this.getPdfSheet();
 
-    let x = this.getInitialWidth();
-    let y = this.getInitialHeight();
+    let x = this.pdfService.getInitialWidth();
+    let y = this.pdfService.getInitialHeight();
 
     doc.setFont(this.pdfService.font);
 
-    let weekCounter = this.getWeekCounter(isWeekend);
+    let weekCounter = this.pdfService.getWeekCounter(isWeekend);
 
     for (const ag of this.assignmentGroups) {
       if (!weekCounter) {
-        weekCounter = this.getWeekCounter(isWeekend);
+        weekCounter = this.pdfService.getWeekCounter(isWeekend);
         doc.addPage("a4", "p");
-        y = this.getInitialHeight();
+        y = this.pdfService.getInitialHeight();
       }
 
       //Initialize the bands
@@ -405,11 +377,11 @@ export class SelectionListComponent implements OnChanges {
       const dateLocaleFormat = this.getFormatedDate(ag.assignments[0].date);
 
       doc.setFont(this.pdfService.font, "bold");
-      doc.setFontSize(this.getDateFontSize());
+      doc.setFontSize(this.pdfService.getDateFontSize());
       doc.text(dateLocaleFormat, x, y, {});
 
       //rooms title
-      doc.setFontSize(this.getTextFontSize());
+      doc.setFontSize(this.pdfService.getTextFontSize());
 
       const hasMultipleRooms = this.hasMultipleRooms(ag);
 

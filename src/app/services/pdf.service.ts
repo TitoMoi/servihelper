@@ -155,6 +155,34 @@ export class PdfService {
     return await PDFDocument.load(pdfFile);
   }
 
+  getWeekCounter(isWeekend: boolean) {
+    return isWeekend ? 5 : 2;
+  }
+
+  getInitialHeight() {
+    return 20;
+  }
+
+  getInitialWidth() {
+    return 15;
+  }
+
+  getEndingWidth() {
+    return 15;
+  }
+
+  getPageWidth() {
+    return 210;
+  }
+
+  getDateFontSize() {
+    return 14;
+  }
+
+  getTextFontSize() {
+    return 11;
+  }
+
   isAllowedTypeForS89S(assignment: AssignmentInterface): boolean {
     const type = this.assignTypeService.getAssignType(assignment.assignType).type;
     return (
@@ -248,7 +276,7 @@ export class PdfService {
       return await pdfDoc.save();
     }
   }
-
+  //M=Multiple
   async toPdfS89SM(assignmentList: AssignmentInterface[]): Promise<Uint8Array> {
     //Filter only the assignments that can be S89S
     assignmentList = assignmentList.filter((a) => this.isAllowedTypeForS89S(a));

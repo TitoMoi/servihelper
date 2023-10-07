@@ -3,7 +3,7 @@ import { CommonModule, NgFor, NgIf } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { TerritoryContextInterface } from "../model/map.model";
 import { TerritoryService } from "./service/territory.service";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -15,6 +15,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { PolygonService } from "./service/polygon.service";
 import { clipboard } from "electron";
 import { OnlineService } from "app/online/service/online.service";
+import { PdfService } from "app/services/pdf.service";
 
 @Component({
   selector: "app-territory",
@@ -53,6 +54,8 @@ export class TerritoryComponent {
     private territoryGroupService: TerritoryGroupService,
     private polygonService: PolygonService,
     private onlineService: OnlineService,
+    private pdfService: PdfService,
+    private translocoService: TranslocoService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -64,18 +67,23 @@ export class TerritoryComponent {
     return count;
   }
 
-  generateMapLink(t: TerritoryContextInterface, matIcon: MatIcon) {
-    matIcon.svgIcon = "clipboard";
-    this.cdr.detectChanges();
-    document.body.style.cursor = "wait";
-    let servihelperMapUrl = new URL("https://titomoi.github.io/servihelper");
+  getUrlWithPolygonParams(t: TerritoryContextInterface) {
+    const servihelperMapUrl = new URL("https://titomoi.github.io/servihelper");
     servihelperMapUrl.searchParams.append(
       "polygon",
       JSON.stringify(this.polygonService.getPolygon(t.poligonId).latLngList)
     );
+    return servihelperMapUrl;
+  }
+
+  generateMapLink(t: TerritoryContextInterface, matIcon: MatIcon) {
+    matIcon.svgIcon = "clipboard";
+    this.cdr.detectChanges();
+    document.body.style.cursor = "wait";
+    const url = this.getUrlWithPolygonParams(t);
     clipboard.write(
       {
-        text: servihelperMapUrl.toString(),
+        text: url.toString(),
       },
       "selection"
     );
@@ -84,5 +92,34 @@ export class TerritoryComponent {
       matIcon.svgIcon = "maplink";
       this.cdr.detectChanges();
     }, 500);
+  }
+
+  getPdfSheet() {
+    return this.pdfService.getJsPdf({
+      orientation: "portrait",
+      format: "a4",
+    });
+  }
+
+  toPdf(t: TerritoryContextInterface) {
+    const doc = this.getPdfSheet();
+    doc.setFont(this.pdfService.font, "bold");
+
+    let x = this.pdfService.getInitialWidth();
+    let y = this.pdfService.getInitialHeight();
+
+    doc.setFontSize(14);
+    doc.text(t.name, x, y, {});
+
+    doc.setFontSize(this.pdfService.getTextFontSize());
+    doc.setFont(this.pdfService.font, "normal");
+
+    const mapLinkText =
+      this.translocoService.translate("TERRITORY_TABLE_HEADER_MAPLINK") + ":";
+    doc.text(mapLinkText, x, y + 20, {});
+    doc.setTextColor("blue");
+    doc.textWithLink(t.name, x, y + 30, { url: this.getUrlWithPolygonParams(t).toString() });
+
+    doc.save(t.name);
   }
 }
