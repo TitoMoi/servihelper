@@ -41,6 +41,7 @@ import {
   Input,
   OnChanges,
   OnDestroy,
+  OnInit,
   ViewChild,
 } from "@angular/core";
 import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
@@ -53,10 +54,10 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { ExportService } from "app/services/export.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatDatepicker, MatDatepickerModule } from "@angular/material/datepicker";
-import { FormControl, ReactiveFormsModule } from "@angular/forms";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
-import { isSameMonth } from "date-fns";
+import { isWithinInterval } from "date-fns";
 
 @Component({
   selector: "app-global-count",
@@ -77,7 +78,7 @@ import { isSameMonth } from "date-fns";
     MatInputModule,
   ],
 })
-export class GlobalCountComponent implements OnChanges, OnDestroy {
+export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
   @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
   @ViewChild("hideExternalsBox") hideExternalsBox: MatCheckbox;
@@ -88,7 +89,10 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
 
   locales;
 
-  date = new FormControl();
+  form = this.formBuilder.group<Record<string, Date>>({
+    dateStart: null,
+    dateEnd: null,
+  });
 
   subscription: Subscription = new Subscription();
 
@@ -100,6 +104,7 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
     private sortService: SortService,
     private exportService: ExportService,
     private assignTypeNamePipe: AssignTypeNamePipe,
+    private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef
   ) {
     this.locales = {
@@ -123,9 +128,16 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
       pl,
     };
   }
-
   ngOnChanges() {
     this.getStatistics();
+  }
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((v) => {
+      if (v.dateStart && v.dateEnd) {
+        this.getStatistics();
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -133,11 +145,18 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
   }
 
   async getStatistics() {
-    const assignments = (await this.assignmentService.getAssignments(true)).filter((a) =>
-      this.allowedAssignTypesIds.includes(a.assignType) && this.date.value
-        ? isSameMonth(new Date(a.date), new Date(this.date.value))
-        : true
+    const assignments = (await this.assignmentService.getAssignments(true)).filter(
+      (a) =>
+        this.allowedAssignTypesIds.includes(a.assignType) &&
+        (this.form.value.dateStart && this.form.value.dateEnd
+          ? // For the date within the interval
+            isWithinInterval(new Date(a.date), {
+              start: new Date(this.form.value.dateStart),
+              end: new Date(this.form.value.dateEnd),
+            })
+          : true) //true means get all assignments
     );
+
     /* available participants that can do this kind of type assignments
     Filter from the participant the assignTypes that are allowed
     and watch if he can participate in some of this assign types */
@@ -261,11 +280,5 @@ export class GlobalCountComponent implements OnChanges, OnDestroy {
 
   async toPng() {
     this.exportService.toPng("toPngDivId", "statistics-global");
-  }
-
-  setMonthAndYear(d: Date, dp: MatDatepicker<Date>) {
-    this.date.setValue(new Date(d));
-    dp.close();
-    this.getStatistics();
   }
 }

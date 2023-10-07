@@ -37,15 +37,14 @@
             >{{ t("STATISTICS_EXCLUDE_EXTERNALS") }}</mat-checkbox
           >
           <mat-form-field>
-            <mat-label>{{ t("STATISTICS_YEAR_AND_MONTH") }}</mat-label>
-            <input matInput [matDatepicker]="dp" [formControl]="date" />
-            <mat-datepicker-toggle matIconPrefix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker
-              #dp
-              startView="multi-year"
-              (monthSelected)="setMonthAndYear($event, dp)"
-            >
-            </mat-datepicker>
+            <mat-label>{{ t("STATISTICS_MONTH_RANGE_PICKER") }}</mat-label>
+
+            <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+              <input matStartDate formControlName="dateStart" placeholder="Start date" />
+              <input matEndDate formControlName="dateEnd" placeholder="End date" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
           </mat-form-field>
         </div>
       </div>
