@@ -3,7 +3,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { PolygonInterface } from "../../model/map.model";
 import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
-import { gzip, ungzip } from "pako";
+import { inflate, deflate } from "pako";
 @Injectable({
   providedIn: "root",
 })
@@ -29,7 +29,7 @@ export class PolygonService {
     const polygonsContent = readFileSync(this.configService.polygonsPath);
 
     if (polygonsContent) {
-      this.#polygons = JSON.parse(ungzip(polygonsContent, { to: "string" }));
+      this.#polygons = JSON.parse(inflate(polygonsContent, { to: "string" }));
 
       for (const polygon of this.#polygons) {
         this.#polygonsMap.set(polygon.id, polygon);
@@ -43,7 +43,7 @@ export class PolygonService {
    */
   #savePolygonsToFile(): boolean {
     //Write territories back to file
-    const gziped = gzip(JSON.stringify(this.#polygons), { to: "string" });
+    const gziped = deflate(JSON.stringify(this.#polygons), { to: "string" });
     writeFile(this.configService.polygonsPath, gziped);
     return true;
   }

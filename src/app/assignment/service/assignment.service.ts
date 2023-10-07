@@ -10,7 +10,7 @@ import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { ConfigService } from "app/config/service/config.service";
 import { LockService } from "app/lock/service/lock.service";
-import { gzip, ungzip } from "pako";
+import { inflate, deflate } from "pako";
 
 @Injectable({
   providedIn: "root",
@@ -43,7 +43,7 @@ export class AssignmentService {
     const assignContent = await readFile(this.configService.assignmentsPath);
 
     if (assignContent) {
-      this.#assignments = JSON.parse(ungzip(assignContent, { to: "string" }));
+      this.#assignments = JSON.parse(inflate(assignContent, { to: "string" }));
 
       //populate maps for first run
       for (const assignment of this.#assignments) {
@@ -126,7 +126,7 @@ export class AssignmentService {
    */
   saveAssignmentsToFile() {
     //Write assignments back to file
-    const gziped = gzip(JSON.stringify(this.#assignments), { to: "string" });
+    const gziped = deflate(JSON.stringify(this.#assignments), { to: "string" });
     writeFile(this.configService.assignmentsPath, gziped);
     //Notify the lock we are working
     this.lockService.updateTimestamp();

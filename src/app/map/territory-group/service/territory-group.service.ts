@@ -4,7 +4,7 @@ import { TerritoryGroupInterface } from "../../model/map.model";
 import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { LockService } from "app/lock/service/lock.service";
-import { gzip, ungzip } from "pako";
+import { inflate, deflate } from "pako";
 @Injectable({
   providedIn: "root",
 })
@@ -31,7 +31,7 @@ export class TerritoryGroupService {
     const territoryGroupContent = readFileSync(this.configService.territoryGroupsPath);
 
     if (territoryGroupContent) {
-      this.#territoryGroups = JSON.parse(ungzip(territoryGroupContent, { to: "string" }));
+      this.#territoryGroups = JSON.parse(inflate(territoryGroupContent, { to: "string" }));
 
       for (const gm of this.#territoryGroups) {
         this.#territoryGroupsMap.set(gm.id!, gm);
@@ -45,7 +45,7 @@ export class TerritoryGroupService {
    */
   #saveTerritoryGroupsToFile(): boolean {
     //Write territories group back to file
-    const gziped = gzip(JSON.stringify(this.#territoryGroups), { to: "string" });
+    const gziped = deflate(JSON.stringify(this.#territoryGroups), { to: "string" });
     writeFile(this.configService.territoryGroupsPath, gziped);
 
     this.lockService.updateTimestamp();

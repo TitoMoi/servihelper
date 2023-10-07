@@ -4,7 +4,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { LockService } from "app/lock/service/lock.service";
-import { gzip, ungzip } from "pako";
+import { inflate, deflate } from "pako";
 @Injectable({
   providedIn: "root",
 })
@@ -32,7 +32,7 @@ export class TerritoryService {
     const territoryContent = readFileSync(this.configService.territoriesPath);
 
     if (territoryContent) {
-      this.#territories = JSON.parse(ungzip(territoryContent, { to: "string" }));
+      this.#territories = JSON.parse(inflate(territoryContent, { to: "string" }));
 
       for (const territory of this.#territories) {
         this.#territoriesMap.set(territory.id, territory);
@@ -77,7 +77,7 @@ export class TerritoryService {
    */
   #saveTerritoriesToFile(): boolean {
     //Write territories back to file
-    const gziped = gzip(JSON.stringify(this.#territories), { to: "string" });
+    const gziped = deflate(JSON.stringify(this.#territories), { to: "string" });
     writeFile(this.configService.territoriesPath, gziped);
 
     this.lockService.updateTimestamp();
