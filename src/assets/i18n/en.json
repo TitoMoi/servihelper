@@ -82,10 +82,9 @@
   "BUTTON_SHOW_AVAILABLE_COLORS": "Show used colors",
   "BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP": "When you open the colorpicker selector there is a color grab icon of the left side, using the color grab allows you to not enter manually an existing color",
   "BUTTON_UPDATE": "Update",
-  "COLOR_BLUE_EXPLANATION": "Less than 2 months old",
   "COLOR_GREEN_EXPLANATION": "Never assigned",
   "COLOR_RED_EXPLANATION": "1 year old or more",
-  "COLOR_YELLOW_EXPLANATION": "More than two months old",
+
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Themes for Public Talks",
   "CONFIG_ACCORDION_REPORT_TITLE": "Config reports title, day of the week, date format, colors and fonts",
   "CONFIG_ACCORDION_SHEET_TITLE": "Config the sheet",
@@ -394,5 +393,7 @@
   "CONFIG_LAST_EXPORTED_DATE": "Last exported date",
   "STATISTICS_MONTH_RANGE_PICKER": "Select a range of days",
   "STATISTICS_ONLY_PRINCIPALS": "Only principals",
-  "STATISTICS_ONLY_ASSISTANTS": "Only assistants"
+  "STATISTICS_ONLY_ASSISTANTS": "Only assistants",
+  "COLOR_YELLOW_EXPLANATION": "More than 4 months old",
+  "COLOR_BLUE_EXPLANATION": "Less than 4 months old"
 }

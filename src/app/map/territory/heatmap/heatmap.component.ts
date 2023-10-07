@@ -23,7 +23,7 @@ import { PolygonService } from "../service/polygon.service";
 import { Map, Polygon, TileLayer } from "leaflet";
 import { TerritoryService } from "../service/territory.service";
 import { TerritoryContextInterface } from "app/map/model/map.model";
-import { formatDistance } from "date-fns";
+import { differenceInMonths } from "date-fns";
 
 @Component({
   selector: "app-heatmap",
@@ -114,10 +114,10 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
     if (territory.assignedDates.length) {
       const territoryLastAssignedDate = new Date(territory.assignedDates.at(-1));
       if (territoryLastAssignedDate) {
-        const distance = formatDistance(territoryLastAssignedDate, new Date());
+        const distanceInMonths = differenceInMonths(territoryLastAssignedDate, new Date());
         /* how to reason the includes? https://date-fns.org/v2.30.0/docs/formatDistance#description */
-        if (distance.includes("year")) return this.redColor;
-        if (distance.includes("months")) return this.yellowColor;
+        if (distanceInMonths >= 12) return this.redColor;
+        if (distanceInMonths >= 4) return this.yellowColor;
       }
       return this.blueColor;
     }
