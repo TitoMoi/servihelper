@@ -36,17 +36,33 @@
             (change)="changeExternals($event)"
             >{{ t("STATISTICS_EXCLUDE_EXTERNALS") }}</mat-checkbox
           >
-          <mat-form-field>
-            <mat-label>{{ t("STATISTICS_MONTH_RANGE_PICKER") }}</mat-label>
-
-            <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
-              <input matStartDate formControlName="dateStart" placeholder="Start date" />
-              <input matEndDate formControlName="dateEnd" placeholder="End date" />
-            </mat-date-range-input>
-            <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-          </mat-form-field>
+          <mat-checkbox
+            #onlyPrincipalsBox
+            color="primary"
+            class="me-3"
+            (change)="changeOnlyPrincipals()"
+            >{{ t("STATISTICS_ONLY_PRINCIPALS") }}</mat-checkbox
+          >
+          <mat-checkbox
+            #onlyAssistantsBox
+            color="primary"
+            class="me-3"
+            (change)="changeOnlyAssistants()"
+            >{{ t("STATISTICS_ONLY_ASSISTANTS") }}</mat-checkbox
+          >
         </div>
+      </div>
+      <div class="col-auto">
+        <mat-form-field>
+          <mat-label>{{ t("STATISTICS_MONTH_RANGE_PICKER") }}</mat-label>
+
+          <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+            <input matStartDate formControlName="dateStart" placeholder="Start date" />
+            <input matEndDate formControlName="dateEnd" placeholder="End date" />
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
       </div>
       <div class="col-auto">
         <div class="d-flex justify-content-start">

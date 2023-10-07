@@ -5,7 +5,9 @@ import {
   getDistanceBetweenPenultimaAndLast,
   getLastAssignment,
   getPenultimateAssignment,
+  setAssistantCountById,
   setCountById,
+  setPrincipalCountById,
 } from "app/functions";
 import {
   ParticipantDynamicInterface,
@@ -82,12 +84,16 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
   @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
   @ViewChild("hideExternalsBox") hideExternalsBox: MatCheckbox;
+  @ViewChild("onlyPrincipalsBox") onlyPrincipalsBox: MatCheckbox;
+  @ViewChild("onlyAssistantsBox") onlyAssistantsBox: MatCheckbox;
 
   @Input() allowedAssignTypesIds: string[];
 
   globalList: ParticipantInterface[] & ParticipantDynamicInterface[];
 
   locales;
+
+  participants = [];
 
   form = this.formBuilder.group<Record<string, Date>>({
     dateStart: null,
@@ -133,11 +139,26 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((v) => {
-      if (v.dateStart && v.dateEnd) {
-        this.getStatistics();
-      }
-    });
+    this.subscription.add(
+      this.form.valueChanges.subscribe(async (v) => {
+        if (v.dateStart && v.dateEnd) {
+          await this.getStatistics();
+        }
+      })
+    );
+
+    //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
+    this.subscription.add(
+      this.translocoService.langChanges$.subscribe(() => {
+        //Assistant
+        if (this.participants.length) {
+          getDistanceBetweenPenultimaAndLast(
+            this.participants,
+            this.locales[this.translocoService.getActiveLang()]
+          );
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -160,19 +181,34 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     /* available participants that can do this kind of type assignments
     Filter from the participant the assignTypes that are allowed
     and watch if he can participate in some of this assign types */
-    const participants = this.participantService
-      .getParticipants(true)
-      .filter((p) =>
+    this.participants = this.participantService.getParticipants(true).filter(
+      (p) =>
+        p.available &&
         p.assignTypes
           .filter((at) => this.allowedAssignTypesIds.includes(at.assignTypeId))
-          .some((at) => !!at.canPrincipal || !!at.canAssistant)
-      )
-      .filter((p) => p.available) as ParticipantDynamicInterface[];
+          .some((at) => {
+            return (
+              (this.onlyPrincipalsBox.checked ? !!at.canPrincipal : false) ||
+              (this.onlyAssistantsBox.checked ? !!at.canAssistant : false) ||
+              (!this.onlyPrincipalsBox.checked && !this.onlyAssistantsBox.checked)
+            );
+          })
+    ) as ParticipantDynamicInterface[];
 
     //Global
-    setCountById(assignments, participants);
+    if (!this.onlyPrincipalsBox.checked && !this.onlyAssistantsBox.checked) {
+      setCountById(assignments, this.participants);
+    }
+    //principals
+    if (this.onlyPrincipalsBox.checked) {
+      setPrincipalCountById(assignments, this.participants);
+    }
+    //assistants
+    if (this.onlyAssistantsBox.checked) {
+      setAssistantCountById(assignments, this.participants);
+    }
 
-    for (const participant of participants) {
+    for (const participant of this.participants) {
       const assignment: AssignmentInterface = getLastAssignment(assignments, participant);
 
       if (assignment) {
@@ -187,7 +223,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     //Get the penultimateAssignment
-    for (const participant of participants) {
+    for (const participant of this.participants) {
       const assignment: AssignmentInterface = getPenultimateAssignment(
         assignments,
         participant
@@ -205,25 +241,23 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
 
     //Get the distance, i18n sensitive
     getDistanceBetweenPenultimaAndLast(
-      participants,
+      this.participants,
       this.locales[this.translocoService.getActiveLang()]
     );
 
     //Order by count and distance
-    this.globalList = participants.sort(this.sortService.sortByCountAndByDistance);
-
-    //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
-    this.subscription.unsubscribe();
-    this.subscription.add(
-      this.translocoService.langChanges$.subscribe(() => {
-        //Assistant
-        getDistanceBetweenPenultimaAndLast(
-          participants,
-          this.locales[this.translocoService.getActiveLang()]
-        );
-      })
-    );
+    this.globalList = this.participants.sort(this.sortService.sortByCountAndByDistance);
     this.cdr.detectChanges();
+  }
+
+  async changeOnlyPrincipals() {
+    this.onlyAssistantsBox.disabled = !this.onlyAssistantsBox.disabled;
+    await this.getStatistics();
+  }
+
+  async changeOnlyAssistants() {
+    this.onlyPrincipalsBox.disabled = !this.onlyPrincipalsBox.disabled;
+    await this.getStatistics();
   }
 
   /**

@@ -392,5 +392,7 @@
   "ICON_EXCEL": "XXXREMOVE THISXXX",
   "ICON_EXPORT_CSV": "XXXREMOVE THISXXX",
   "CONFIG_LAST_EXPORTED_DATE": "Last exported date",
-  "STATISTICS_MONTH_RANGE_PICKER": "Select a range of days"
+  "STATISTICS_MONTH_RANGE_PICKER": "Select a range of days",
+  "STATISTICS_ONLY_PRINCIPALS": "Only principals",
+  "STATISTICS_ONLY_ASSISTANTS": "Only assistants"
 }
