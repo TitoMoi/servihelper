@@ -39,8 +39,8 @@ export class PdfService {
   homeDir = this.configService.homeDir;
 
   //Pdf file names
-  S89S = "S89S.pdf";
-  S89SM = "S89SM.pdf";
+  S89 = "S89.pdf";
+  S89M = "S89M.pdf";
 
   //The default values that are in the pdf form
   defaultPdfFields1 = {
@@ -276,7 +276,7 @@ export class PdfService {
    */
   async toPdfS89S(assignment: AssignmentInterface): Promise<Uint8Array> {
     if (this.isAllowedTypeForS89S(assignment)) {
-      const pdfDoc = await this.getPdfTemplateFile(this.S89S);
+      const pdfDoc = await this.getPdfTemplateFile(this.S89);
       let form = pdfDoc.getForm();
 
       //Get fields
@@ -360,7 +360,7 @@ export class PdfService {
 
     for (let iteration = 0; iteration < iterations; iteration++) {
       //Get the template and the form inside
-      const s89smTemplate = await this.getPdfTemplateFile(this.S89SM);
+      const s89smTemplate = await this.getPdfTemplateFile(this.S89M);
       const form = s89smTemplate.getForm();
 
       //For every iteration get a slice of 4 assignments
@@ -455,7 +455,7 @@ export class PdfService {
 
       //Ensure the filename is valid for the system
       const fileNamePath = filenamifyPath(
-        path.join(this.homeDir, "assignments", iteration + "-" + this.S89SM)
+        path.join(this.homeDir, "assignments", iteration + "-" + this.S89M)
       );
       ensureFileSync(fileNamePath);
       writeFile(fileNamePath, pdfBytes);
@@ -463,8 +463,8 @@ export class PdfService {
     //Now we have N iteration files, lets merge them
     const pdf = await PDFDocument.create();
     for (let i = 0; i < iterations; i++) {
-      const filename = i + "-" + this.S89SM;
-      const p = path.join(this.homeDir, "assignments", i + "-" + this.S89SM);
+      const filename = i + "-" + this.S89M;
+      const p = path.join(this.homeDir, "assignments", i + "-" + this.S89M);
       const iterationPdf = await this.getPdfTemplateFile(filename, p);
       //The description of copyPages doesnt add a page to the new pdf, it just returns the copied pages
       const [page] = await pdf.copyPages(iterationPdf, [0]);
