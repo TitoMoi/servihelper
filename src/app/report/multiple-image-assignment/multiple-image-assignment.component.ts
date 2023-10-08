@@ -230,12 +230,12 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     this.cdr.detectChanges();
   }
 
-  async toPdfS89SM() {
+  async toPdfS89M() {
     //Clean directory "assignments" first
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
     //the s89sm will all the assignments
-    const pdfBytes = await this.pdfService.toPdfS89SM(this.#assignments);
+    const pdfBytes = await this.pdfService.toPdfS89M(this.#assignments);
 
     //Ensure the filename is valid for the system
     const fileNamePath = filenamifyPath(
@@ -248,13 +248,13 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     this.cdr.detectChanges();
   }
 
-  async toPdfS89S() {
+  async toPdfS89() {
     //Clean directory "assignments" first
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
     for (const [index, a] of this.#assignments.entries()) {
-      if (this.pdfService.isAllowedTypeForS89S(a)) {
-        const pdfBytes = await this.pdfService.toPdfS89S(a);
+      if (this.pdfService.isAllowedTypeForS89(a)) {
+        const pdfBytes = await this.pdfService.toPdfS89(a);
         const participantName = this.participantService.getParticipant(a.principal).name;
         const assignTypeName = this.assignTypeNamePipe.transform(
           this.assignTypeService.getAssignType(a.assignType)

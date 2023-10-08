@@ -137,7 +137,7 @@ export class ImageAssignmentComponent {
   }
 
   isAllowedTypeForS89S() {
-    return this.pdfService.isAllowedTypeForS89S(this.assignment);
+    return this.pdfService.isAllowedTypeForS89(this.assignment);
   }
 
   async toPng() {
@@ -177,7 +177,7 @@ export class ImageAssignmentComponent {
   }
 
   async toPdfS89S() {
-    const pdfBytes = await this.pdfService.toPdfS89S(this.assignment);
+    const pdfBytes = await this.pdfService.toPdfS89(this.assignment);
     this.sharedService.saveUInt8ArrayAsPdfFile(
       pdfBytes,
       this.sharedService.getFilename(this.assignment)

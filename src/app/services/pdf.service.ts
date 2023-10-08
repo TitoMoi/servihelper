@@ -259,7 +259,7 @@ export class PdfService {
     return 11;
   }
 
-  isAllowedTypeForS89S(assignment: AssignmentInterface): boolean {
+  isAllowedTypeForS89(assignment: AssignmentInterface): boolean {
     const type = this.assignTypeService.getAssignType(assignment.assignType).type;
     return (
       type === "bibleReading" ||
@@ -274,8 +274,8 @@ export class PdfService {
    * @param assignment the assignment to S89S
    * @returns the pdf array
    */
-  async toPdfS89S(assignment: AssignmentInterface): Promise<Uint8Array> {
-    if (this.isAllowedTypeForS89S(assignment)) {
+  async toPdfS89(assignment: AssignmentInterface): Promise<Uint8Array> {
+    if (this.isAllowedTypeForS89(assignment)) {
       const pdfDoc = await this.getPdfTemplateFile(this.S89);
       let form = pdfDoc.getForm();
 
@@ -349,9 +349,9 @@ export class PdfService {
     }
   }
   //M=Multiple
-  async toPdfS89SM(assignmentList: AssignmentInterface[]): Promise<Uint8Array> {
+  async toPdfS89M(assignmentList: AssignmentInterface[]): Promise<Uint8Array> {
     //Filter only the assignments that can be S89S
-    assignmentList = assignmentList.filter((a) => this.isAllowedTypeForS89S(a));
+    assignmentList = assignmentList.filter((a) => this.isAllowedTypeForS89(a));
 
     //Get all the iterations by 4, check if there is a decimal part, if there is, truncate and add +1
     // 12,5 => 12 + 1 (the last page will have some sheets empty)
@@ -360,8 +360,8 @@ export class PdfService {
 
     for (let iteration = 0; iteration < iterations; iteration++) {
       //Get the template and the form inside
-      const s89smTemplate = await this.getPdfTemplateFile(this.S89M);
-      const form = s89smTemplate.getForm();
+      const s89mTemplate = await this.getPdfTemplateFile(this.S89M);
+      const form = s89mTemplate.getForm();
 
       //For every iteration get a slice of 4 assignments
       const end = 4 * (iteration + 1); //We need to add +1 or in the first iteration end is 0.
@@ -451,7 +451,7 @@ export class PdfService {
         }
       }
       form.flatten();
-      const pdfBytes = await s89smTemplate.save();
+      const pdfBytes = await s89mTemplate.save();
 
       //Ensure the filename is valid for the system
       const fileNamePath = filenamifyPath(
