@@ -302,6 +302,7 @@ export class PdfService {
       let doc = this.getJsPdf({
         orientation: "portrait",
         format: [113.03, 85.09],
+        compress: true,
       });
 
       let x = 9;
