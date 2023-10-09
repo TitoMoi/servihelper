@@ -350,7 +350,7 @@
   "CONFIG_ISCLOSEOTHERS_TREASURESETC_LABEL": "Distance in days between {{ASSIGNTYPES_TREASURES}}, {{ASSIGNTYPES_SPIRITUALGEMS}}, {{ASSIGNTYPES_LIVINGASCHRISTIANS}}, {{ASSIGNTYPES_CONGREGATIONBIBLESTUDY}}",
   "CONFIG_ISCLOSEOTHERS_TREASURESETC_TOOLTIP": "Give the time of proximity in days between {{ASSIGNTYPES_TREASURES}}, {{ASSIGNTYPES_SPIRITUALGEMS}}, {{ASSIGNTYPES_LIVINGASCHRISTIANS}}, {{ASSIGNTYPES_CONGREGATIONBIBLESTUDY}}",
   "ASSIGNTYPE_TIME_ICON": "This icon will appear when the distance in time for the participant is not satisfied for this assignment type",
-  "TEMPLATE_NOT_AVAILABLE": "Pdf not available for this lang, please send it to {{INFO__CONTACT_ANSWER}} so it can be available in the next version",
+  "TEMPLATE_NOT_AVAILABLE": "This pdf will be available on a next version",
   "CONFIG_GO_ONLINE": "Go online",
   "CONFIG_GO_ONLINE_LABEL": "Go online",
   "CONFIG_ONLINE_FOLDER_SELECT": "Select the shared folder",

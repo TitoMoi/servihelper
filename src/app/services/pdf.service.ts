@@ -17,7 +17,7 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
 import { filenamifyPath } from "filenamify";
-import { ensureFileSync, pathExistsSync, writeFile } from "fs-extra";
+import { ensureFileSync, writeFile } from "fs-extra";
 
 export type pdfFileNames = "S89" | "S89M";
 @Injectable({
@@ -198,17 +198,12 @@ export class PdfService {
    * @param optionalPath if provided it will look up for the filename in this path
    * @returns
    */
-  checkTemplateExists(name: string, optionalPath?: string) {
-    const filePath = optionalPath
-      ? optionalPath
-      : path.join(
-          this.configService.templatesFilesPath,
-          this.configService.getConfig().lang,
-          "pdf",
-          name
-        );
-    const exists = pathExistsSync(filePath);
-    return exists;
+  checkTemplateExists(name: string) {
+    if (this.S89 === name) {
+      const availableTemplates = ["es", "en"];
+      return availableTemplates.includes(this.configService.getConfig().lang);
+    }
+    return false;
   }
 
   /**
