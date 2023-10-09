@@ -67,8 +67,8 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
   homeDir = this.configService.homeDir;
 
-  templateS89SExists = !this.pdfService.checkTemplateExists(this.pdfService.S89);
-  templateS89SMExists = !this.pdfService.checkTemplateExists(this.pdfService.S89M);
+  templateS89Exists = !this.pdfService.checkTemplateExists(this.pdfService.S89);
+  templateS89MExists = !this.pdfService.checkTemplateExists(this.pdfService.S89M);
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
@@ -234,7 +234,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     //Clean directory "assignments" first
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
-    //the s89sm will all the assignments
+    //the s89m will all the assignments
     const pdfBytes = await this.pdfService.toPdfS89M(this.#assignments);
 
     //Ensure the filename is valid for the system

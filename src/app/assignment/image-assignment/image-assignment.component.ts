@@ -66,7 +66,7 @@ export class ImageAssignmentComponent {
   copied = false;
   copiedCalendarReminder = false;
 
-  templateS89SExists = !this.pdfService.checkTemplateExists(this.pdfService.S89);
+  templateS89Exists = !this.pdfService.checkTemplateExists(this.pdfService.S89);
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle; //default config sheet title
@@ -136,7 +136,7 @@ export class ImageAssignmentComponent {
     this.copiedCalendarReminder = true;
   }
 
-  isAllowedTypeForS89S() {
+  isAllowedTypeForS89() {
     return this.pdfService.isAllowedTypeForS89(this.assignment);
   }
 
@@ -176,8 +176,8 @@ export class ImageAssignmentComponent {
     doc.save(filename);
   }
 
-  async toPdfS89S() {
-    const pdfBytes = await this.pdfService.toPdfS89(this.assignment);
+  async toPdfS89() {
+    const pdfBytes = await this.pdfService.toPdfS89Crafted(this.assignment);
     this.sharedService.saveUInt8ArrayAsPdfFile(
       pdfBytes,
       this.sharedService.getFilename(this.assignment)

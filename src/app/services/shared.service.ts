@@ -164,6 +164,14 @@ export class SharedService {
     link.remove();
   }
 
+  saveBlobAsPdfFile(blob: Blob, filename: string) {
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    link.remove();
+  }
+
   /**Gets a fresh all data except the config, online and the lock */
   getAllData(): boolean {
     this.roomService.hasChanged = true;

@@ -349,8 +349,6 @@
   "CONFIG_ISCLOSEOTHERS_TREASURESETC_LABEL": "Distance in days between {{ASSIGNTYPES_TREASURES}}, {{ASSIGNTYPES_SPIRITUALGEMS}}, {{ASSIGNTYPES_LIVINGASCHRISTIANS}}, {{ASSIGNTYPES_CONGREGATIONBIBLESTUDY}}",
   "CONFIG_ISCLOSEOTHERS_TREASURESETC_TOOLTIP": "Give the time of proximity in days between {{ASSIGNTYPES_TREASURES}}, {{ASSIGNTYPES_SPIRITUALGEMS}}, {{ASSIGNTYPES_LIVINGASCHRISTIANS}}, {{ASSIGNTYPES_CONGREGATIONBIBLESTUDY}}",
   "ASSIGNTYPE_TIME_ICON": "This icon will appear when the distance in time for the participant is not satisfied for this assignment type",
-  "S89S_TOOLTIP": "Generate individual s89s pdf",
-  "S89SM_TOOLTIP": "Generate the 4-s89s pdf containing all the assignments",
   "TEMPLATE_NOT_AVAILABLE": "Pdf not available for this lang, please send it to {{INFO__CONTACT_ANSWER}} so it can be available in the next version",
   "CONFIG_GO_ONLINE": "Go online",
   "CONFIG_GO_ONLINE_LABEL": "Go online",
@@ -395,5 +393,7 @@
   "STATISTICS_ONLY_PRINCIPALS": "Only principals",
   "STATISTICS_ONLY_ASSISTANTS": "Only assistants",
   "COLOR_YELLOW_EXPLANATION": "More than 4 months old",
-  "COLOR_BLUE_EXPLANATION": "Less than 4 months old"
+  "COLOR_BLUE_EXPLANATION": "Less than 4 months old",
+  "S89_TOOLTIP": "Generate individual s89 pdf",
+  "S89M_TOOLTIP": "Generate the 4-s89 pdf containing all the assignments"
 }

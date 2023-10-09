@@ -170,15 +170,15 @@
         <mat-chip-listbox>
           <div
             [matTooltip]="t('TEMPLATE_NOT_AVAILABLE')"
-            [matTooltipDisabled]="!templateS89SExists"
+            [matTooltipDisabled]="!templateS89Exists"
           >
             <mat-chip-option
-              *ngIf="isAllowedTypeForS89S()"
-              [disabled]="templateS89SExists"
-              (click)="toPdfS89S()"
-              [matTooltip]="t('S89S_TOOLTIP')"
+              *ngIf="isAllowedTypeForS89()"
+              [disabled]="templateS89Exists"
+              (click)="toPdfS89()"
+              [matTooltip]="t('S89_TOOLTIP')"
               ><mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
-              <span id="pdfAcronim">S89S</span></mat-chip-option
+              <span id="pdfAcronim">S89</span></mat-chip-option
             >
           </div>
         </mat-chip-listbox>

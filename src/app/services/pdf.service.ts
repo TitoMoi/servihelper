@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { TranslocoService } from "@ngneat/transloco";
-import jsPDF, { jsPDFOptions } from "jspdf";
+import jsPDF, { AcroFormCheckBox, jsPDFOptions } from "jspdf";
 
 import meiryo from "../../resources/base64fonts/meiryo";
 import malgun from "../../resources/base64fonts/malgun";
@@ -18,8 +18,10 @@ import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
 import { filenamifyPath } from "filenamify";
 import { ensureFileSync, pathExistsSync, writeFile } from "fs-extra";
+import { AssignTypes } from "app/assigntype/model/assigntype.model";
+import { RoomTypes } from "app/room/model/room.model";
 
-export type pdfFileNames = "S89S" | "S89SM";
+export type pdfFileNames = "S89" | "S89M";
 @Injectable({
   providedIn: "root",
 })
@@ -269,9 +271,186 @@ export class PdfService {
       type === "talk"
     );
   }
+
+  getAcroFormCheckbox(
+    x: number,
+    y: number,
+    height: number,
+    width: number,
+    name: AssignTypes | RoomTypes
+  ): AcroFormCheckBox {
+    var checkBox = new AcroFormCheckBox();
+    checkBox.maxFontSize = 8.76;
+    checkBox.x = x;
+    checkBox.y = y;
+    checkBox.height = height;
+    checkBox.width = width;
+    checkBox.fieldName = name;
+    checkBox.appearanceState = "Off";
+    checkBox.readOnly = true;
+    return checkBox;
+  }
+
+  async toPdfS89Crafted(assignment: AssignmentInterface) {
+    if (this.isAllowedTypeForS89(assignment)) {
+      let doc = this.getJsPdf({
+        orientation: "portrait",
+        format: [113.03, 85.09],
+      });
+
+      let x = 10;
+      let y = 7;
+      doc.setFont(this.font, "bold");
+      doc.setFontSize(11.95);
+      const text = doc.splitTextToSize(
+        "ASIGNACIÓN PARA LA REUNIÓN VIDA Y MINISTERIO CRISTIANOS",
+        75
+      );
+      doc.text(text, x, y);
+
+      x -= 5;
+      y += 12;
+
+      doc.setFont(this.font, "bold");
+      doc.setFontSize(11.95);
+      doc.text("Nombre:", x, y);
+      doc.setFont(this.font, "normal");
+      doc.setFontSize(8.76);
+      doc.text(this.participantService.getParticipant(assignment.principal).name, x + 25, y);
+
+      y += 7;
+
+      doc.setFont(this.font, "bold");
+      doc.setFontSize(11.95);
+      doc.text("Ayudante:", x, y);
+      doc.setFont(this.font, "normal");
+      doc.setFontSize(8.76);
+      doc.text(this.participantService.getParticipant(assignment.assistant)?.name, x + 25, y);
+
+      y += 7;
+
+      doc.setFont(this.font, "bold");
+      doc.setFontSize(11.95);
+      doc.text("Fecha:", x, y);
+      doc.setFont(this.font, "normal");
+      doc.setFontSize(8.76);
+      doc.text(
+        this.translocoLocaleService.localizeDate(
+          assignment.date,
+          this.translocoLocaleService.getLocale(),
+          { dateStyle: "full" }
+        ),
+        x + 25,
+        y
+      );
+
+      y += 8;
+
+      doc.setFont(this.font, "bold");
+      doc.setFontSize(8.76);
+      doc.text("Tipo de intervención:", x, y);
+
+      doc.setFont(this.font, "normal");
+
+      x += 5;
+      y += 5;
+
+      const type = this.assignTypeService.getAssignType(assignment.assignType).type;
+
+      const bibleReadingCheck = this.getAcroFormCheckbox(x, y - 3, 4, 4, "bibleReading");
+      bibleReadingCheck.appearanceState = type === "bibleReading" ? "On" : "Off";
+      doc = doc.addField(bibleReadingCheck);
+      doc.setFontSize(8.76);
+      doc.text("Lectura de la Biblia", x + 5, y);
+      const bibleStudyCheck = this.getAcroFormCheckbox(x + 45, y - 3, 4, 4, "bibleStudy");
+      bibleStudyCheck.appearanceState = type === "bibleStudy" ? "On" : "Off";
+      doc = doc.addField(bibleStudyCheck);
+      doc.text("Curso Bíblico", x + 50, y);
+
+      y += 5;
+
+      const initialCallCheck = this.getAcroFormCheckbox(x, y - 3, 4, 4, "initialCall");
+      initialCallCheck.appearanceState = type === "initialCall" ? "On" : "Off";
+      doc = doc.addField(initialCallCheck);
+      doc.text("Primera conversación", x + 5, y);
+      const talkCheck = this.getAcroFormCheckbox(x + 45, y - 3, 4, 4, "talk");
+      talkCheck.appearanceState = type === "talk" ? "On" : "Off";
+      doc = doc.addField(talkCheck);
+      doc.text("Discurso", x + 50, y);
+
+      y += 5;
+
+      const otherCheck = this.getAcroFormCheckbox(x + 45, y - 3, 4, 4, "other");
+      otherCheck.appearanceState = type === "other" ? "On" : "Off";
+      doc = doc.addField(otherCheck);
+      doc.text("Other", x + 50, y);
+
+      y += 5;
+
+      const returnVisitCheck = this.getAcroFormCheckbox(x, y - 3, 4, 4, "returnVisit");
+      returnVisitCheck.appearanceState = type === "returnVisit" ? "On" : "Off";
+      doc = doc.addField(returnVisitCheck);
+      doc.text("Revisita", x + 5, y);
+
+      y += 10;
+      x -= 5;
+
+      doc.setFont(this.font, "bold");
+
+      doc.text("Se presentará en:", x, y);
+
+      doc.setFont(this.font, "normal");
+
+      x += 5;
+      y += 5;
+
+      const roomType = this.roomService.getRoom(assignment.room).type;
+
+      const mainHallCheck = this.getAcroFormCheckbox(x, y - 3, 4, 4, "mainHall");
+      mainHallCheck.appearanceState = roomType === "mainHall" ? "On" : "Off";
+      doc = doc.addField(mainHallCheck);
+      doc.text("Sala principal", x + 5, y);
+
+      y += 5;
+
+      const auxiliaryRoom1Check = this.getAcroFormCheckbox(x, y - 3, 4, 4, "auxiliaryRoom1");
+      auxiliaryRoom1Check.appearanceState = roomType === "auxiliaryRoom1" ? "On" : "Off";
+      doc = doc.addField(auxiliaryRoom1Check);
+      doc.text("Sala auxiliar núm. 1", x + 5, y);
+
+      y += 5;
+
+      const auxiliaryRoom2Check = this.getAcroFormCheckbox(x, y - 3, 4, 4, "auxiliaryRoom2");
+      auxiliaryRoom2Check.appearanceState = roomType === "auxiliaryRoom2" ? "On" : "Off";
+      doc = doc.addField(auxiliaryRoom2Check);
+      doc.text("Sala auxiliar núm. 2", x + 5, y);
+
+      y += 7;
+      x -= 5;
+
+      doc.setFontSize(7.07);
+      const footerText = doc.splitTextToSize(
+        "Nota al estudiante: En la Guía de actividades encontrará la información que necesita para su intervención, así como el aspecto de la oratoria que debe preparar con la ayuda del folleto Maestros.",
+        77,
+        { align: "justify" }
+      );
+      doc.text(footerText, x, y);
+
+      y += 15;
+
+      doc.text("S-89-S", x, y);
+      doc.text("11/20", x + 15, y);
+
+      const arraybuffer = doc.output("arraybuffer");
+      const pdf = await PDFDocument.load(arraybuffer);
+      const form = pdf.getForm();
+      form.flatten();
+      return await pdf.save();
+    }
+  }
   /**
    *
-   * @param assignment the assignment to S89S
+   * @param assignment the assignment to S89
    * @returns the pdf array
    */
   async toPdfS89(assignment: AssignmentInterface): Promise<Uint8Array> {
@@ -350,7 +529,7 @@ export class PdfService {
   }
   //M=Multiple
   async toPdfS89M(assignmentList: AssignmentInterface[]): Promise<Uint8Array> {
-    //Filter only the assignments that can be S89S
+    //Filter only the assignments that can be S89
     assignmentList = assignmentList.filter((a) => this.isAllowedTypeForS89(a));
 
     //Get all the iterations by 4, check if there is a decimal part, if there is, truncate and add +1
