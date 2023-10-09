@@ -291,6 +291,12 @@ export class PdfService {
     return checkBox;
   }
 
+  addHeavyCheckImg(doc: jsPDF, x, y) {
+    const image = path.join(this.configService.iconsFilesPath, "heavycheck.png");
+    const uint8array = new Uint8Array(readFileSync(image));
+    doc.addImage(uint8array, "PNG", x, y, 3, 3);
+  }
+
   async toPdfS89Crafted(assignment: AssignmentInterface) {
     if (this.isAllowedTypeForS89(assignment)) {
       let doc = this.getJsPdf({
@@ -357,39 +363,34 @@ export class PdfService {
 
       const type = this.assignTypeService.getAssignType(assignment.assignType).type;
 
-      const bibleReadingCheck = this.getAcroFormCheckbox(x, y - 2.5, 3, 3, "bibleReading");
-      bibleReadingCheck.appearanceState = type === "bibleReading" ? "On" : "Off";
-      doc = doc.addField(bibleReadingCheck);
-      doc.setFontSize(8.76);
+      doc.rect(x, y - 2.5, 3, 3);
+      if (type === "bibleReading") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text("Lectura de la Biblia", x + 5, y);
-      const bibleStudyCheck = this.getAcroFormCheckbox(x + 45, y - 2.5, 3, 3, "bibleStudy");
-      bibleStudyCheck.appearanceState = type === "bibleStudy" ? "On" : "Off";
-      doc = doc.addField(bibleStudyCheck);
+
+      doc.rect(x + 45, y - 2.5, 3, 3);
+      if (type === "bibleStudy") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text("Curso Bíblico", x + 50, y);
 
       y += 5;
 
-      const initialCallCheck = this.getAcroFormCheckbox(x, y - 2.5, 3, 3, "initialCall");
-      initialCallCheck.appearanceState = type === "initialCall" ? "On" : "Off";
-      doc = doc.addField(initialCallCheck);
+      doc.rect(x, y - 2.5, 3, 3);
+      if (type === "initialCall") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text("Primera conversación", x + 5, y);
-      const talkCheck = this.getAcroFormCheckbox(x + 45, y - 2.5, 3, 3, "talk");
-      talkCheck.appearanceState = type === "talk" ? "On" : "Off";
-      doc = doc.addField(talkCheck);
+
+      doc.rect(x + 45, y - 2.5, 3, 3);
+      if (type === "talk") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text("Discurso", x + 50, y);
 
       y += 5;
 
-      const otherCheck = this.getAcroFormCheckbox(x + 45, y - 2.5, 3, 3, "other");
-      otherCheck.appearanceState = type === "other" ? "On" : "Off";
-      doc = doc.addField(otherCheck);
+      doc.rect(x + 45, y - 2.5, 3, 3);
+      if (type === "other") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text("Other", x + 50, y);
 
       y += 5;
 
-      const returnVisitCheck = this.getAcroFormCheckbox(x, y - 2.5, 3, 3, "returnVisit");
-      returnVisitCheck.appearanceState = type === "returnVisit" ? "On" : "Off";
-      doc = doc.addField(returnVisitCheck);
+      doc.rect(x, y - 2.5, 3, 3);
+      if (type === "returnVisit") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text("Revisita", x + 5, y);
 
       y += 10;
@@ -406,23 +407,20 @@ export class PdfService {
 
       const roomType = this.roomService.getRoom(assignment.room).type;
 
-      const mainHallCheck = this.getAcroFormCheckbox(x, y - 2.5, 3, 3, "mainHall");
-      mainHallCheck.appearanceState = roomType === "mainHall" ? "On" : "Off";
-      doc = doc.addField(mainHallCheck);
+      doc.rect(x, y - 2.5, 3, 3);
+      if (roomType === "mainHall") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text("Sala principal", x + 5, y);
 
       y += 5;
 
-      const auxiliaryRoom1Check = this.getAcroFormCheckbox(x, y - 2.5, 3, 3, "auxiliaryRoom1");
-      auxiliaryRoom1Check.appearanceState = roomType === "auxiliaryRoom1" ? "On" : "Off";
-      doc = doc.addField(auxiliaryRoom1Check);
+      doc.rect(x, y - 2.5, 3, 3);
+      if (roomType === "auxiliaryRoom1") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text("Sala auxiliar núm. 1", x + 5, y);
 
       y += 5;
 
-      const auxiliaryRoom2Check = this.getAcroFormCheckbox(x, y - 2.5, 3, 3, "auxiliaryRoom2");
-      auxiliaryRoom2Check.appearanceState = roomType === "auxiliaryRoom2" ? "On" : "Off";
-      doc = doc.addField(auxiliaryRoom2Check);
+      doc.rect(x, y - 2.5, 3, 3);
+      if (roomType === "auxiliaryRoom2") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text("Sala auxiliar núm. 2", x + 5, y);
 
       y += 7;
@@ -431,8 +429,7 @@ export class PdfService {
       doc.setFontSize(7.07);
       const footerText = doc.splitTextToSize(
         "Nota al estudiante: En la Guía de actividades encontrará la información que necesita para su intervención, así como el aspecto de la oratoria que debe preparar con la ayuda del folleto Maestros.",
-        77,
-        { align: "justify" }
+        77
       );
       doc.text(footerText, x, y);
 
@@ -441,21 +438,7 @@ export class PdfService {
       doc.text("S-89-S", x, y);
       doc.text("11/20", x + 15, y);
 
-      const arraybuffer = doc.output("arraybuffer");
-      const pdf = await PDFDocument.load(arraybuffer);
-      const form = pdf.getForm();
-
-      form.getFields().forEach((f) => {
-        const checkboxName = f.acroField.getPartialName();
-        const checkbox = form.getCheckBox(checkboxName);
-        if (type.includes(checkboxName) || roomType.includes(checkboxName)) {
-          checkbox.check();
-        } else {
-          checkbox.uncheck();
-        }
-      });
-      form.flatten();
-      return await pdf.save();
+      return doc.output("blob");
     }
   }
   /**

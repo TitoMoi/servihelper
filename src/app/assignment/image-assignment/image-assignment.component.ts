@@ -178,7 +178,7 @@ export class ImageAssignmentComponent {
 
   async toPdfS89() {
     const pdfBytes = await this.pdfService.toPdfS89Crafted(this.assignment);
-    this.sharedService.saveUInt8ArrayAsPdfFile(
+    this.sharedService.saveBlobAsPdfFile(
       pdfBytes,
       this.sharedService.getFilename(this.assignment)
     );
