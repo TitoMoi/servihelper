@@ -9,7 +9,7 @@
   >
     <mat-toolbar>
       <a
-        *ngIf="queryGitHub$ | async as githubData"
+        *ngIf="queryGithubInterval$ | async as githubData"
         href="#"
         (click)="openExternalServihelperRepository()"
       >

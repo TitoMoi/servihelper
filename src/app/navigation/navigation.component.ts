@@ -1,6 +1,6 @@
 import { ConfigService } from "app/config/service/config.service";
-import { Observable } from "rxjs";
-import { filter, map, shareReplay } from "rxjs/operators";
+import { Observable, of } from "rxjs";
+import { filter, map, shareReplay, switchMap } from "rxjs/operators";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
@@ -61,6 +61,10 @@ export class NavigationComponent implements OnInit {
 
   availableLangs = undefined;
 
+  queryGithubInterval$ = of(Math.random() > 0.55).pipe(
+    filter((doQuery) => doQuery),
+    switchMap(() => this.queryGitHub$)
+  );
   queryGitHub$ = this.httpClient
     .get<GitHubDataInterface>(
       "https://api.github.com/repos/titoMoi/servihelper/releases/latest"
