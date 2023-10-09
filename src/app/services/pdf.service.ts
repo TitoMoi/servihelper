@@ -361,15 +361,15 @@ export class PdfService {
 
       y += 5;
 
+      doc.rect(x, y - 2.5, 3, 3);
+      if (type === "returnVisit") this.addHeavyCheckImg(doc, x, y - 2.5);
+      doc.text(this.translocoService.translate("S89_RETURNVISIT"), x + 5, y);
+
       doc.rect(x + 45, y - 2.5, 3, 3);
       if (type === "other") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text(this.translocoService.translate("S89_OTHER"), x + 50, y);
 
       y += 5;
-
-      doc.rect(x, y - 2.5, 3, 3);
-      if (type === "returnVisit") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.translocoService.translate("S89_RETURNVISIT"), x + 5, y);
 
       y += 10;
       x -= 5;
