@@ -91,27 +91,17 @@ The templates are word and pdf.
 
 The key diference is the mantainance.
 
-| Word vs Pdf              | Pdf | Word |     |     |
-| ------------------------ | --- | ---- | --- | --- |
-| number of templates      | N   | 1    |     |     |
-| Immediate change         | No  | Yes  |     |     |
-| Translation effort       | No  | Yes  |     |     |
-| Template check if exists | Yes | No   |     |     |
-| Emulated                 | No  | Yes  |     |     |
+| original pdf vs emulated pdf | original | emulated    |     |     |
+| ---------------------------- | -------- | ----------- | --- | --- |
+| number of templates          | N        | 0 - is code |     |     |
+| Immediate change             | No       | Yes         |     |     |
+| Translation effort           | No       | Yes         |     |     |
+| Template check if exists     | Yes      | No          |     |     |
 
-Clearly, the Word version is more mantainable but the pdf provides the original file.
+Clearly, the emulated version is more mantainable as we do not depend on third persons or new pdf version
+that cannot be manipulated.
 
 ## Pdf forms
-
-Located under src/assets/templates/{lang}/pdf
-
-Pdf forms have the same field names for all language pdf forms.
-
-The type of the field (text, check) is always at the end of the name of the field.
-
-Form fields have generic names, dont modify them or the pdf icons change and appear as broken.
-
-Instead, a translation map has been created in pdfService to access them.
 
 ## Reminders (experimental)
 
