@@ -288,10 +288,7 @@ export class PdfService {
       let y = 7;
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
-      const text = doc.splitTextToSize(
-        "ASIGNACIÓN PARA LA REUNIÓN VIDA Y MINISTERIO CRISTIANOS",
-        75
-      );
+      const text = doc.splitTextToSize(this.translocoService.translate("S89_TITLE"), 75);
       doc.text(text, x, y);
 
       x -= 5;
@@ -299,7 +296,7 @@ export class PdfService {
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
-      doc.text("Nombre:", x, y);
+      doc.text(this.translocoService.translate("S89_NAME"), x, y);
       doc.setFont(this.font, "normal");
       doc.setFontSize(8.76);
       doc.text(this.participantService.getParticipant(assignment.principal).name, x + 24, y);
@@ -308,7 +305,7 @@ export class PdfService {
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
-      doc.text("Ayudante:", x, y);
+      doc.text(this.translocoService.translate("S89_ASSISTANT"), x, y);
       doc.setFont(this.font, "normal");
       doc.setFontSize(8.76);
       if (assignment.assistant)
@@ -318,7 +315,7 @@ export class PdfService {
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
-      doc.text("Fecha:", x, y);
+      doc.text(this.translocoService.translate("S89_DATE"), x, y);
       doc.setFont(this.font, "normal");
       doc.setFontSize(8.76);
       doc.text(
@@ -335,7 +332,7 @@ export class PdfService {
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(8.76);
-      doc.text("Tipo de intervención:", x, y);
+      doc.text(this.translocoService.translate("S89_ASSIGNMENT_TITLE"), x, y);
 
       doc.setFont(this.font, "normal");
 
@@ -346,40 +343,40 @@ export class PdfService {
 
       doc.rect(x, y - 2.5, 3, 3);
       if (type === "bibleReading") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text("Lectura de la Biblia", x + 5, y);
+      doc.text(this.translocoService.translate("S89_BIBLEREADING"), x + 5, y);
 
       doc.rect(x + 45, y - 2.5, 3, 3);
       if (type === "bibleStudy") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text("Curso Bíblico", x + 50, y);
+      doc.text(this.translocoService.translate("S89_BIBLESTUDY"), x + 50, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
       if (type === "initialCall") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text("Primera conversación", x + 5, y);
+      doc.text(this.translocoService.translate("S89_INITIALCALL"), x + 5, y);
 
       doc.rect(x + 45, y - 2.5, 3, 3);
       if (type === "talk") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text("Discurso", x + 50, y);
+      doc.text(this.translocoService.translate("S89_TALK"), x + 50, y);
 
       y += 5;
 
       doc.rect(x + 45, y - 2.5, 3, 3);
       if (type === "other") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text("Other", x + 50, y);
+      doc.text(this.translocoService.translate("S89_OTHER"), x + 50, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
       if (type === "returnVisit") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text("Revisita", x + 5, y);
+      doc.text(this.translocoService.translate("S89_RETURNVISIT"), x + 5, y);
 
       y += 10;
       x -= 5;
 
       doc.setFont(this.font, "bold");
 
-      doc.text("Se presentará en:", x, y);
+      doc.text(this.translocoService.translate("S89_ROOMS_TITLE"), x, y);
 
       doc.setFont(this.font, "normal");
 
@@ -390,34 +387,34 @@ export class PdfService {
 
       doc.rect(x, y - 2.5, 3, 3);
       if (roomType === "mainHall") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text("Sala principal", x + 5, y);
+      doc.text(this.translocoService.translate("S89_MAINHALL"), x + 5, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
       if (roomType === "auxiliaryRoom1") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text("Sala auxiliar núm. 1", x + 5, y);
+      doc.text(this.translocoService.translate("S89_AUXILIARYROOM1"), x + 5, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
       if (roomType === "auxiliaryRoom2") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text("Sala auxiliar núm. 2", x + 5, y);
+      doc.text(this.translocoService.translate("S89_AUXILIARYROOM2"), x + 5, y);
 
       y += 7;
       x -= 5;
 
       doc.setFontSize(7.07);
       const footerText = doc.splitTextToSize(
-        "Nota al estudiante: En la Guía de actividades encontrará la información que necesita para su intervención, así como el aspecto de la oratoria que debe preparar con la ayuda del folleto Maestros.",
+        this.translocoService.translate("S89_FOOTERNOTE"),
         77
       );
       doc.text(footerText, x, y);
 
       y += 15;
 
-      doc.text("S-89-S", x, y);
-      doc.text("11/20", x + 15, y);
+      doc.text(this.translocoService.translate("S89_VERSION"), x, y);
+      doc.text(this.translocoService.translate("S89_DATE_VERSION"), x + 15, y);
 
       return doc.output("blob");
     }

@@ -383,8 +383,26 @@
   "ROOMTYPES_MAINHALL": "Sala principal",
   "ROOMTYPES_AUXILIARYROOM1": "Sala auxiliar núm. 1",
   "ROOMTYPES_AUXILIARYROOM2": "Sala auxiliar núm. 2",
-
+  "ASSIGNTYPES_OTHER": "Otro",
   "S89S_TOOLTIP": "Generar el pdf s89s",
   "S89SM_TOOLTIP": "Generar el pdf 4-s89s que contiene todas las asignaciones",
-  "TEMPLATE_NOT_AVAILABLE": "Pdf no disponible para este idioma, por favor envia una copia a {{INFO__CONTACT_ANSWER}} para que pueda estar disponible en la próxima versión"
+  "TEMPLATE_NOT_AVAILABLE": "Pdf no disponible para este idioma, por favor envia una copia a {{INFO__CONTACT_ANSWER}} para que pueda estar disponible en la próxima versión",
+  "S89_TITLE": "ASIGNACIÓN PARA LA REUNIÓN VIDA Y MINISTERIO CRISTIANOS",
+  "S89_NAME": "Nombre:",
+  "S89_ASSISTANT": "Ayudante:",
+  "S89_DATE": "Fecha:",
+  "S89_ASSIGNMENT_TITLE": "Tipo de intervención:",
+  "S89_BIBLEREADING": "{{ASSIGNTYPES_BIBLEREADING}}",
+  "S89_BIBLESTUDY": "{{ASSIGNTYPES_BIBLESTUDY}}",
+  "S89_INITIALCALL": "{{ASSIGNTYPES_INITIALCALL}}",
+  "S89_TALK": "{{ASSIGNTYPES_TALK}}",
+  "S89_OTHER": "{{ASSIGNTYPES_OTHER}}",
+  "S89_RETURNVISIT": "{{ASSIGNTYPES_RETURNVISIT}}",
+  "S89_ROOMS_TITLE": "Se presentará en:",
+  "S89_MAINHALL": "{{ROOMTYPES_MAINHALL}}",
+  "S89_AUXILIARYROOM1": "{{ROOMTYPES_AUXILIARYROOM1}}",
+  "S89_AUXILIARYROOM2": "{{ROOMTYPES_AUXILIARYROOM2}}",
+  "S89_FOOTERNOTE": "Nota al estudiante: En la Guía de actividades encontrará la información que necesita para su intervención, así como el aspecto de la oratoria que debe preparar con la ayuda del folleto Maestros.",
+  "S89_VERSION": "S-89-S",
+  "S89_DATE_VERSION": "11/20"
 }
