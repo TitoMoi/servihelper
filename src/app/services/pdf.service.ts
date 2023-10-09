@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { TranslocoService } from "@ngneat/transloco";
-import jsPDF, { AcroFormCheckBox, jsPDFOptions } from "jspdf";
+import { jsPDF, jsPDFOptions } from "jspdf";
 
 import meiryo from "../../resources/base64fonts/meiryo";
 import malgun from "../../resources/base64fonts/malgun";
@@ -18,8 +18,6 @@ import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
 import { filenamifyPath } from "filenamify";
 import { ensureFileSync, pathExistsSync, writeFile } from "fs-extra";
-import { AssignTypes } from "app/assigntype/model/assigntype.model";
-import { RoomTypes } from "app/room/model/room.model";
 
 export type pdfFileNames = "S89" | "S89M";
 @Injectable({
@@ -272,25 +270,6 @@ export class PdfService {
     );
   }
 
-  getAcroFormCheckbox(
-    x: number,
-    y: number,
-    height: number,
-    width: number,
-    name: AssignTypes | RoomTypes
-  ): AcroFormCheckBox {
-    var checkBox = new AcroFormCheckBox();
-    checkBox.maxFontSize = 8.76;
-    checkBox.x = x;
-    checkBox.y = y;
-    checkBox.height = height;
-    checkBox.width = width;
-    checkBox.fieldName = name;
-    checkBox.appearanceState = "Off";
-    checkBox.readOnly = true;
-    return checkBox;
-  }
-
   addHeavyCheckImg(doc: jsPDF, x, y) {
     const image = path.join(this.configService.iconsFilesPath, "heavycheck.png");
     const uint8array = new Uint8Array(readFileSync(image));
@@ -332,7 +311,8 @@ export class PdfService {
       doc.text("Ayudante:", x, y);
       doc.setFont(this.font, "normal");
       doc.setFontSize(8.76);
-      doc.text(this.participantService.getParticipant(assignment.assistant)?.name, x + 24, y);
+      if (assignment.assistant)
+        doc.text(this.participantService.getParticipant(assignment.assistant).name, x + 24, y);
 
       y += 7;
 
