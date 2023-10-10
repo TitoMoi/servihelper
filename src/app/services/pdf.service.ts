@@ -291,26 +291,40 @@ export class PdfService {
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
-      doc.text(this.translocoService.translate("S89_NAME"), x, y);
+      const s89Name = this.translocoService.translate("S89_NAME");
+      let xPosForText = x + doc.getTextWidth(s89Name) + 2;
+      doc.text(s89Name, x, y);
       doc.setFont(this.font, "normal");
       doc.setFontSize(8.76);
-      doc.text(this.participantService.getParticipant(assignment.principal).name, x + 24, y);
+      doc.text(
+        this.participantService.getParticipant(assignment.principal).name,
+        xPosForText,
+        y
+      );
 
       y += 7;
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
-      doc.text(this.translocoService.translate("S89_ASSISTANT"), x, y);
+      const s89Assistant = this.translocoService.translate("S89_ASSISTANT");
+      xPosForText = x + doc.getTextWidth(s89Assistant) + 2;
+      doc.text(s89Assistant, x, y);
       doc.setFont(this.font, "normal");
       doc.setFontSize(8.76);
       if (assignment.assistant)
-        doc.text(this.participantService.getParticipant(assignment.assistant).name, x + 24, y);
+        doc.text(
+          this.participantService.getParticipant(assignment.assistant).name,
+          xPosForText,
+          y
+        );
 
       y += 7;
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
-      doc.text(this.translocoService.translate("S89_DATE"), x, y);
+      const s89Date = this.translocoService.translate("S89_DATE");
+      xPosForText = x + doc.getTextWidth(s89Date) + 2;
+      doc.text(s89Date, x, y);
       doc.setFont(this.font, "normal");
       doc.setFontSize(8.76);
       doc.text(
@@ -319,7 +333,7 @@ export class PdfService {
           this.translocoLocaleService.getLocale(),
           { dateStyle: "full" }
         ),
-        x + 24,
+        xPosForText,
         y
       );
 
@@ -400,7 +414,7 @@ export class PdfService {
       x -= 5;
 
       doc.setFontSize(7.07);
-      const footerText = doc.splitTextToSize(
+      const footerText: string[] = doc.splitTextToSize(
         this.translocoService.translate("S89_FOOTERNOTE"),
         77
       );
