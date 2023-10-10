@@ -337,9 +337,12 @@
   "ASSIGNTYPES_LIVINGASCHRISTIANS": "Living as christians",
   "ASSIGNTYPES_CONGREGATIONBIBLESTUDY": "Congregation bible study",
   "ASSIGNTYPES_OTHER": "Other",
+  "ASSIGNTYPES_CHAIRMAN": "Chairman",
+
   "ROOMTYPES_MAINHALL": "Main hall",
   "ROOMTYPES_AUXILIARYROOM1": "Auxiliary room 1",
   "ROOMTYPES_AUXILIARYROOM2": "Auxiliary room 2",
+
   "ASSIGNMENT_ISCLOSEOTHERS_TOOLTIP": "Not recommended because the participant has another assignment of type {{ASSIGNTYPES_BIBLEREADING}} or {{ASSIGNTYPES_INITIALCALL}} or {{ASSIGNTYPES_RETURNVISIT}} or {{ASSIGNTYPES_BIBLESTUDY}} or {{ASSIGNTYPES_TALK}} very close",
   "CONFIG_TIME_DISTANCE_TITLE": "Distance in time between some kind of assignments",
   "CONFIG_ISCLOSEOTHERS_LABEL": "Distance in days between {{ASSIGNTYPES_BIBLEREADING}}, {{ASSIGNTYPES_INITIALCALL}}, {{ASSIGNTYPES_RETURNVISIT}}, {{ASSIGNTYPES_BIBLESTUDY}}, {{ASSIGNTYPES_TALK}}",
@@ -386,7 +389,6 @@
   "CONFIG_DEFAULT_FONT_SIZE": "XXXREMOVE THISXXXX",
   "ICON_PDF_BAND": "Generate a colorful pdf specially for the midweek with bands and up to two weeks per page",
   "ICON_PDF_BAND_WEEKEND": "Generate a colorful pdf specially for the weekend with bands and up to five weeks per page",
-  "ASSIGNTYPES_CHAIRMAN": "Chairman",
   "ICON_EXCEL": "XXXREMOVE THISXXX",
   "ICON_EXPORT_CSV": "XXXREMOVE THISXXX",
   "CONFIG_LAST_EXPORTED_DATE": "Last exported date",
