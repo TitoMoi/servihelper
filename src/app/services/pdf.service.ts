@@ -380,7 +380,7 @@ export class PdfService {
 
       y += 5;
 
-      y += 10;
+      y += 7;
       x -= 5;
 
       doc.setFont(this.font, "bold");
@@ -418,9 +418,29 @@ export class PdfService {
         this.translocoService.translate("S89_FOOTERNOTE"),
         77
       );
-      doc.text(footerText, x, y);
 
-      y += 15;
+      const startXCached = x;
+      footerText.map((text, i) => {
+        if (text) {
+          const arrayOfNormalAndBoldText = text.split("*");
+          arrayOfNormalAndBoldText.map((textItems, j) => {
+            if (textItems.includes("[b]")) {
+              textItems = textItems.replace("[b]", "");
+              doc.setFont(this.font, "bold");
+            } else {
+              doc.setFont(this.font, "normal");
+            }
+
+            doc.text(textItems, x, y);
+            x = x + doc.getTextWidth(textItems) + 1;
+          });
+
+          x = startXCached;
+          y += 3.5;
+        }
+      });
+
+      y += 5;
 
       doc.text(this.translocoService.translate("S89_VERSION"), x, y);
       doc.text(this.translocoService.translate("S89_DATE_VERSION"), x + 15, y);

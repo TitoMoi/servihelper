@@ -414,7 +414,7 @@
   "S89_MAINHALL": "{{ROOMTYPES_MAINHALL}}",
   "S89_AUXILIARYROOM1": "{{ROOMTYPES_AUXILIARYROOM1}}",
   "S89_AUXILIARYROOM2": "{{ROOMTYPES_AUXILIARYROOM2}}",
-  "S89_FOOTERNOTE": "Note to student: The source material and study point for your assignment can be found in the Life and Ministry Meeting Workbook.Please work on the listed study point, which is discussed in the Teaching brochure.",
+  "S89_FOOTERNOTE": "[b]Note to student:*The source material and study point for your assignment can be found in the Life and Ministry Meeting Workbook. Please work on the listed study point, which is discussed in the Teaching brochure.",
   "S89_VERSION": "S-89-E",
   "S89_DATE_VERSION": "11/20"
 }
