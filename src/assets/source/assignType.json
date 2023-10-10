@@ -7,7 +7,7 @@
     "repeat": false,
     "type": "chairman",
     "order": 1,
-    "color": "##4F6DA1",
+    "color": "#4F6DA1",
     "days": null
   },
   {
@@ -29,7 +29,7 @@
     "repeat": false,
     "type": "publicSpeech",
     "order": 20,
-    "color": "#4F6DA1",
+    "color": "#ffffff",
     "days": null
   },
   {
