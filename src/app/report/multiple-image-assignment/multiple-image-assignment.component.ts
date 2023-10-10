@@ -107,6 +107,10 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     }
   }
 
+  hasAssignments() {
+    return this.#assignments.length;
+  }
+
   /**
    * Filters the assignments based on the range date and assign types
    */

@@ -1,18 +1,23 @@
 <div *transloco="let t" class="d-flex align-items-center">
-  <mat-icon
-    class="m-2"
-    svgIcon="pdfblue"
-    aria-label="icon"
-    [matTooltip]="t('ICON_PDF_PAGE')"
-    (click)="toPdfForPrint()"
-  ></mat-icon>
-  <mat-icon
-    class="m-2"
-    svgIcon="png"
-    aria-label="icon"
-    [matTooltip]="t('ICON_PNG')"
-    (click)="toPng()"
-  ></mat-icon>
+  <ng-container *ngIf="hasAssignments(); else noAssignmentsTpl">
+    <mat-icon
+      class="m-2"
+      svgIcon="pdfblue"
+      aria-label="icon"
+      [matTooltip]="t('ICON_PDF_PAGE')"
+      (click)="toPdfForPrint()"
+    ></mat-icon>
+    <mat-icon
+      class="m-2"
+      svgIcon="png"
+      aria-label="icon"
+      [matTooltip]="t('ICON_PNG')"
+      (click)="toPng()"
+    ></mat-icon>
+  </ng-container>
+  <ng-template #noAssignmentsTpl>
+    {{ t("REPORT_NO_ASSIGNMENTS") }}
+  </ng-template>
 </div>
 
 <div id="toPngDivId" class="bg-color-white" style="width: 1020px">

@@ -1,34 +1,39 @@
 <div *transloco="let t" class="d-flex align-items-center">
-  <mat-icon
-    class="m-2"
-    svgIcon="pdf"
-    [matTooltip]="t('ICON_PDF_INFINITE')"
-    (click)="toPdf(false)"
-  ></mat-icon>
-  <mat-icon
-    class="m-2"
-    svgIcon="pdfblue"
-    [matTooltip]="t('ICON_PDF_PAGE')"
-    (click)="toPdf(true)"
-  ></mat-icon>
-  <mat-icon
-    class="m-2"
-    svgIcon="png"
-    [matTooltip]="t('ICON_PNG')"
-    (click)="toPng()"
-  ></mat-icon>
-  <mat-icon
-    class="m-2 ms-5 me-2"
-    svgIcon="midweeklist"
-    [matTooltip]="t('ICON_PDF_BAND')"
-    (click)="toPdfBoard(false)"
-  ></mat-icon>
-  <mat-icon
-    class="m-2"
-    svgIcon="weekendlist"
-    [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
-    (click)="toPdfBoard(true)"
-  ></mat-icon>
+  <ng-container *ngIf="hasAssignments(); else noAssignmentsTpl">
+    <mat-icon
+      class="m-2"
+      svgIcon="pdf"
+      [matTooltip]="t('ICON_PDF_INFINITE')"
+      (click)="toPdf(false)"
+    ></mat-icon>
+    <mat-icon
+      class="m-2"
+      svgIcon="pdfblue"
+      [matTooltip]="t('ICON_PDF_PAGE')"
+      (click)="toPdf(true)"
+    ></mat-icon>
+    <mat-icon
+      class="m-2"
+      svgIcon="png"
+      [matTooltip]="t('ICON_PNG')"
+      (click)="toPng()"
+    ></mat-icon>
+    <mat-icon
+      class="m-2 ms-5 me-2"
+      svgIcon="midweeklist"
+      [matTooltip]="t('ICON_PDF_BAND')"
+      (click)="toPdfBoard(false)"
+    ></mat-icon>
+    <mat-icon
+      class="m-2"
+      svgIcon="weekendlist"
+      [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
+      (click)="toPdfBoard(true)"
+    ></mat-icon>
+  </ng-container>
+  <ng-template #noAssignmentsTpl>
+    {{ t("REPORT_NO_ASSIGNMENTS") }}
+  </ng-template>
 </div>
 
 <div id="toPngDivId" style="width: 791px; height: auto" class="bg-color-white">

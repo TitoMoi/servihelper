@@ -1,6 +1,6 @@
 <div *transloco="let t" class="row gx-0 align-items-center">
   <div class="col-12">
-    <div class="d-flex align-items-center">
+    <div *ngIf="hasAssignments(); else noAssignmentsTpl" class="d-flex align-items-center">
       <mat-icon
         class="m-2"
         svgIcon="png"
@@ -60,6 +60,9 @@
         {{ t("OPEN_ASSIGNMENTS_SHEET_FOLDER") }}
       </button>
     </div>
+    <ng-template #noAssignmentsTpl>
+      {{ t("REPORT_NO_ASSIGNMENTS") }}
+    </ng-template>
   </div>
   <div class="m-2">
     {{ t("NUMBER_OF_ASSIGNMENTS") + assignmentsWithNames.length }}
