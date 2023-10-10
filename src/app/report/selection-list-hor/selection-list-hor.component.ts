@@ -138,28 +138,20 @@ export class SelectionListHorComponent implements OnChanges {
       assignments: [],
     };
 
-    let length = this.#assignments.length;
-
     let currentDate;
     let firstRoomId;
     for (const assignment of this.#assignments) {
-      --length;
-
       if (!currentDate) currentDate = assignment.date;
       if (!firstRoomId) firstRoomId = assignment.room;
 
-      if (new Date(currentDate).toISOString() !== new Date(assignment.date).toISOString()) {
-        //save and reset
+      if (
+        new Date(currentDate).toISOString() !== new Date(assignment.date).toISOString() ||
+        firstRoomId !== assignment.room
+      ) {
+        //save the ag and prepare another ag
         this.assignmentGroups.push(assignGroup);
+        //reset defaults
         currentDate = assignment.date;
-        assignGroup = {
-          assignments: [],
-        };
-      }
-
-      if (firstRoomId !== assignment.room) {
-        //save and prepare another assignGroup
-        this.assignmentGroups.push(assignGroup);
         firstRoomId = assignment.room;
         assignGroup = {
           assignments: [],
@@ -181,9 +173,9 @@ export class SelectionListHorComponent implements OnChanges {
         assistant: this.participantService.getParticipant(assignment.assistant),
         footerNote: "",
       });
-
-      if (!length) this.assignmentGroups.push(assignGroup);
     }
+    //last assign group who is out of the loop
+    if (assignGroup.assignments.length) this.assignmentGroups.push(assignGroup);
   }
 
   toPdfForPrint() {
