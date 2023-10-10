@@ -1,5 +1,5 @@
 export type BandNamesWithExtType =
-  | "diamond.jpg"
-  | "wheat.jpg"
-  | "sheep.jpg"
-  | "publicspeech.jpg";
+  | "treasures.png"
+  | "wheat.png"
+  | "sheep.png"
+  | "publicspeech.png";

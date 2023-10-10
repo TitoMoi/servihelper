@@ -338,11 +338,11 @@ export class SelectionListComponent implements OnChanges {
     a: AssignmentReportInterface
   ): number {
     y = y - 4; //Rectangles draw to bottom so we need to move the pointer up
+    doc.setFillColor(a.assignType.color);
+    doc.rect(x, y, 180, 4, "F");
     const image = path.join(this.configService.iconsFilesPath, imageName);
     const uint8array = new Uint8Array(readFileSync(image));
-    doc.addImage(uint8array, "JPEG", x, y, 4, 4);
-    doc.setFillColor(a.assignType.color);
-    doc.rect(x + 4, y, 176, 4, "F");
+    doc.addImage(uint8array, "png", x, y, 4, 4);
     y = y + 9;
     return y;
   }
@@ -449,25 +449,28 @@ export class SelectionListComponent implements OnChanges {
 
         height = heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
         //Bands
+        if (a.assignType.type === "chairman" && isWeekend) {
+          y = this.addBand(doc, x, y, "publicspeech.png", a);
+        }
         if (
           this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
           !treasuresFromWordBand
         ) {
-          y = this.addBand(doc, x, y, "diamond.jpg", a);
+          y = this.addBand(doc, x, y, "treasures.png", a);
           treasuresFromWordBand = true;
         }
         if (
           this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
           !improvePreachingBand
         ) {
-          y = this.addBand(doc, x, y, "wheat.jpg", a);
+          y = this.addBand(doc, x, y, "wheat.png", a);
           improvePreachingBand = true;
         }
         if (
           this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
           !livingAsChristiansBand
         ) {
-          y = this.addBand(doc, x, y, "sheep.jpg", a);
+          y = this.addBand(doc, x, y, "sheep.png", a);
           livingAsChristiansBand = true;
         }
         doc.text(textLinesTheme, x, y);
@@ -513,6 +516,6 @@ export class SelectionListComponent implements OnChanges {
     //Restore related data so the html wont jump
     this.assignmentGroups = assignmentGroupsBackup;
 
-    doc.save("assignmentsMidweek");
+    doc.save(isWeekend ? "assignmentsWeekend" : "assignmentsMidweek");
   }
 }
