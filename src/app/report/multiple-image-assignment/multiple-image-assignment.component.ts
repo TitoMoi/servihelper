@@ -68,7 +68,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   homeDir = this.configService.homeDir;
 
   templateS89Exists = !this.pdfService.checkTemplateExists(this.pdfService.S89);
-  templateS89MExists = !this.pdfService.checkTemplateExists(this.pdfService.S89M);
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;

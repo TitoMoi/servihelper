@@ -39,82 +39,6 @@ export class PdfService {
   S89 = "S89.pdf";
   S89M = "S89M.pdf";
 
-  //The default values that are in the pdf form
-  defaultPdfFields1 = {
-    principal: "900_1_Text",
-    assistant: "900_2_Text",
-    date: "900_3_Text",
-    bibleReadingCheck: "900_4_CheckBox",
-    initialCallCheck: "900_5_CheckBox",
-    initialCallText: "900_6_Text",
-    returnVisitCheck: "900_7_CheckBox",
-    returnVisitText: "900_8_Text",
-    bibleStudyCheck: "900_9_CheckBox",
-    talkCheck: "900_10_CheckBox",
-    otherCheck: "900_11_CheckBox",
-    otherText: "900_12_Text",
-    mainHallCheck: "900_13_CheckBox",
-    auxiliaryHallCheck: "900_14_CheckBox",
-    auxiliaryHall2Check: "900_15_CheckBox",
-  };
-
-  //The default values that are in the pdf form
-  defaultPdfFields2 = {
-    principal: "900_16_Text",
-    assistant: "900_17_Text",
-    date: "900_18_Text",
-    bibleReadingCheck: "900_19_CheckBox",
-    initialCallCheck: "900_20_CheckBox",
-    initialCallText: "900_21_Text",
-    returnVisitCheck: "900_22_CheckBox",
-    returnVisitText: "900_23_Text",
-    bibleStudyCheck: "900_24_CheckBox",
-    talkCheck: "900_25_CheckBox",
-    otherCheck: "900_26_CheckBox",
-    otherText: "900_27_Text",
-    mainHallCheck: "900_28_CheckBox",
-    auxiliaryHallCheck: "900_29_CheckBox",
-    auxiliaryHall2Check: "900_30_CheckBox",
-  };
-
-  //The default values that are in the pdf form
-  defaultPdfFields3 = {
-    principal: "900_31_Text",
-    assistant: "900_32_Text",
-    date: "900_33_Text",
-    bibleReadingCheck: "900_34_CheckBox",
-    initialCallCheck: "900_35_CheckBox",
-    initialCallText: "900_36_Text",
-    returnVisitCheck: "900_37_CheckBox",
-    returnVisitText: "900_38_Text",
-    bibleStudyCheck: "900_39_CheckBox",
-    talkCheck: "900_40_CheckBox",
-    otherCheck: "900_41_CheckBox",
-    otherText: "900_42_Text",
-    mainHallCheck: "900_43_CheckBox",
-    auxiliaryHallCheck: "900_44_CheckBox",
-    auxiliaryHall2Check: "900_45_CheckBox",
-  };
-
-  //The default values that are in the pdf form
-  defaultPdfFields4 = {
-    principal: "900_46_Text",
-    assistant: "900_47_Text",
-    date: "900_48_Text",
-    bibleReadingCheck: "900_49_CheckBox",
-    initialCallCheck: "900_50_CheckBox",
-    initialCallText: "900_51_Text",
-    returnVisitCheck: "900_52_CheckBox",
-    returnVisitText: "900_53_Text",
-    bibleStudyCheck: "900_54_CheckBox",
-    talkCheck: "900_55_CheckBox",
-    otherCheck: "900_56_CheckBox",
-    otherText: "900_57_Text",
-    mainHallCheck: "900_58_CheckBox",
-    auxiliaryHallCheck: "900_59_CheckBox",
-    auxiliaryHall2Check: "900_60_CheckBox",
-  };
-
   constructor(
     private configService: ConfigService,
     private translocoService: TranslocoService,
@@ -260,25 +184,28 @@ export class PdfService {
     let counter = 4;
 
     assignments.forEach((assignment, i) => {
+      i = i + 1; //1 index based to count slips
       if (counter === 0) {
         doc = doc.addPage("a4", "p");
         counter = 4;
       }
-      //Default values is first slip
+      //Default value for coord is first slip
       let x = 9;
       let y = 7;
-      //Position in the sheet
-      if (i % 1 === 0) {
+      if (counter === 4) {
         x = 9;
         y = 7;
-      } else if (i % 2 === 0) {
-        x = 105;
+      }
+
+      //Position in the sheet
+      if (counter === 3) {
+        x = 115;
         y = 7;
-      } else if (i % 3 === 0) {
+      } else if (counter === 2) {
         x = 9;
         y = 148.5;
-      } else if (i % 4 === 0) {
-        x = 105;
+      } else if (counter === 1) {
+        x = 115;
         y = 148.5;
       }
 
