@@ -14,7 +14,7 @@ import {
   OnInit,
 } from "@angular/core";
 import { ActivatedRoute, RouterOutlet, RouterLink, RouterLinkActive } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Observable, Subscription, combineLatest, map } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
 import { SortService } from "app/services/sort.service";
 import { RoomService } from "app/room/service/room.service";
@@ -32,6 +32,9 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
+import { ConfigInterface } from "app/config/model/config.model";
+import { RoleInterface } from "app/roles/model/role.model";
+import { ConfigService } from "app/config/service/config.service";
 
 @Component({
   selector: "app-assignment",
@@ -74,6 +77,11 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   inOnline = this.onlineService.getOnline().isOnline;
 
+  allowedAssignTypesIds = [];
+  config$: Observable<ConfigInterface> = this.configService.config$;
+  roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
+  currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
+
   observer: IntersectionObserver = new IntersectionObserver((entries) => {
     //observe the last row
     for (const entry of entries) {
@@ -114,6 +122,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     private lastDateService: LastDateService,
     private sortService: SortService,
     private onlineService: OnlineService,
+    private configService: ConfigService,
     private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
@@ -123,7 +132,26 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     this.assignments = await this.assignmentService.getAssignments();
   }
 
+  //first load or Admin
+  getAllAssignTypesIds() {
+    return this.assignTypeService.getAssignTypes()?.map((at) => at.id);
+  }
+
   ngOnInit() {
+    //prepare emissions, emits also the first time
+    this.subscription.add(
+      combineLatest([this.currentRoleId$, this.roles$]).subscribe(([currentRole, roles]) => {
+        this.allowedAssignTypesIds =
+          currentRole === "administrator"
+            ? this.getAllAssignTypesIds()
+            : roles.find((r) => r.id === currentRole).assignTypesId;
+
+        this.assignments = this.assignments.filter((a) =>
+          this.allowedAssignTypesIds.includes(a.assignType)
+        );
+      })
+    );
+
     const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);
     this.assignmentsTable = this.prepareRowExtendedValues(assignmentsPage);
 
