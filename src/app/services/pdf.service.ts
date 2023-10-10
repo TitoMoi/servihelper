@@ -7,7 +7,6 @@ import malgun from "../../resources/base64fonts/malgun";
 import simsun from "../../resources/base64fonts/simsun";
 import notosans from "../../resources/base64fonts/notosans";
 import notosansbold from "../../resources/base64fonts/notosansbold";
-import { PDFDocument } from "pdf-lib";
 import path from "path";
 import { ConfigService } from "app/config/service/config.service";
 import { readFileSync } from "fs";
@@ -16,8 +15,6 @@ import { TranslocoLocaleService } from "@ngneat/transloco-locale";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
-import { filenamifyPath } from "filenamify";
-import { ensureFileSync, writeFile } from "fs-extra";
 
 export type pdfFileNames = "S89" | "S89M";
 @Injectable({
@@ -206,26 +203,6 @@ export class PdfService {
     return false;
   }
 
-  /**
-   *
-   * @param name the name of the pdf template
-   * @param optionalPath if provided it will look up for the filename in this path
-   * @returns
-   */
-  async getPdfTemplateFile(name: string, optionalPath?: string) {
-    const pdfFile = readFileSync(
-      optionalPath
-        ? optionalPath
-        : path.join(
-            this.configService.templatesFilesPath,
-            this.configService.getConfig().lang,
-            "pdf",
-            name
-          )
-    );
-    return await PDFDocument.load(pdfFile);
-  }
-
   getWeekCounter(isWeekend: boolean) {
     return isWeekend ? 5 : 2;
   }
@@ -271,16 +248,40 @@ export class PdfService {
     doc.addImage(uint8array, "PNG", x, y, 3, 3);
   }
 
-  async toPdfS89Crafted(assignment: AssignmentInterface) {
-    if (this.isAllowedTypeForS89(assignment)) {
-      let doc = this.getJsPdf({
-        orientation: "portrait",
-        format: [113.03, 85.09],
-        compress: true,
-      });
+  async toPdfS89(assignments: AssignmentInterface[], is4slips: boolean) {
+    assignments = assignments.filter((a) => this.isAllowedTypeForS89(a));
 
+    let doc = this.getJsPdf({
+      orientation: "portrait",
+      format: is4slips ? "a4" : [113.03, 85.09],
+      compress: true,
+    });
+
+    let counter = 4;
+
+    assignments.forEach((assignment, i) => {
+      if (counter === 0) {
+        doc = doc.addPage("a4", "p");
+        counter = 4;
+      }
+      //Default values is first slip
       let x = 9;
       let y = 7;
+      //Position in the sheet
+      if (i % 1 === 0) {
+        x = 9;
+        y = 7;
+      } else if (i % 2 === 0) {
+        x = 105;
+        y = 7;
+      } else if (i % 3 === 0) {
+        x = 9;
+        y = 148.5;
+      } else if (i % 4 === 0) {
+        x = 105;
+        y = 148.5;
+      }
+
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
       const text = doc.splitTextToSize(this.translocoService.translate("S89_TITLE"), 75);
@@ -445,7 +446,8 @@ export class PdfService {
       doc.text(this.translocoService.translate("S89_VERSION"), x, y);
       doc.text(this.translocoService.translate("S89_DATE_VERSION"), x + 15, y);
 
-      return doc.output("blob");
-    }
+      counter -= 1;
+    });
+    return doc.output("blob");
   }
 }
