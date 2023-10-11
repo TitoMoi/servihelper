@@ -429,5 +429,5 @@
   "CONFIG_GO_ONLINE_9": "(When the other admins install the same app, they need to use you link and the folder will appear on their filesystem with all the data)",
   "CONFIG_GO_ONLINE_10": "Then, lets notify servihelper about this shared folder.",
   "CONFIG_GO_ONLINE_11": "Click on the next slider button and an input field to paste the system shared folder path will appear.",
-  "CONFIG_GO_ONLINE_12": "The route to the shared folder should be something like: G:\\My Space\\servihelper (letter can change)"
+  "CONFIG_GO_ONLINE_12": "The route to the shared folder changes from Windows, Mac or Linux. In Windows should be something like: G:\\My Space\\servihelper (letter can change)"
 }

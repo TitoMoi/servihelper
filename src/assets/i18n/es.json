@@ -445,5 +445,17 @@
   "S89_FOOTERNOTE": "[b]Nota al estudiante:*En la Guía de actividades encontrará la información que necesita para su intervención, así como el aspecto de la oratoria que debe preparar con la ayuda del folleto Maestros.",
   "S89_VERSION": "S-89-S",
   "S89_DATE_VERSION": "11/20",
-  "REPORT_NO_ASSIGNMENTS": "No hay asignaciones disponibles."
+  "REPORT_NO_ASSIGNMENTS": "No hay asignaciones disponibles.",
+  "CONFIG_GO_ONLINE_1": "Servihelper trabaja en modo offline por defecto, todos los ficheros se guardan en una carpeta local.",
+  "CONFIG_GO_ONLINE_2": "Por favor crea una copia de seguridad antes de activar el modo online",
+  "CONFIG_GO_ONLINE_3": "Para trabajar en modo online con más administradores se necesita una carpeta compartida. Esta carpeta ha de poder sincronizarse por todos los administradores. Algunas carpetas compartidas comunes son:",
+  "CONFIG_GO_ONLINE_4": "Primero es necesario instalar la aplicación de alguno de los proveedores arriba mencionados.",
+  "CONFIG_GO_ONLINE_5": "Puedes buscar la aplicación desde google.",
+  "CONFIG_GO_ONLINE_6": "Al instalar la app hay que comprobar que esta funcionando y estamos logeados.",
+  "CONFIG_GO_ONLINE_7": "Un nuevo disco virtual aparecerá en el sistema de ficheros (D: E: F: lo que sea)",
+  "CONFIG_GO_ONLINE_8": "Dentro de este disco virtual, si eres el primero que va a sincronizar los ficheros crea una nueva carpeta de nombre 'servihelper' (por ejemplo). Si no lo eres, el administrador principal te compartirá un enlace.",
+  "CONFIG_GO_ONLINE_9": "(Cuando los otros admins instalan la app deben usar el link del admin principal para que sincronice la carpeta compartida y aparezca en el nuevo disco virtual)",
+  "CONFIG_GO_ONLINE_10": "Cuando veamos la carpeta compartida con sus ficheros dentro, es momento de activar el modo online",
+  "CONFIG_GO_ONLINE_11": "Haz click en el siguiente boton y especifica la ruta de la carpeta compartida.",
+  "CONFIG_GO_ONLINE_12": "La ruta a la carpeta compartida es diferente en Windows, Mac o Linux. En Windows es de esta manera: G:\\My Space\\servihelper (letra puede variar)"
 }

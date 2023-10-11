@@ -446,5 +446,17 @@
   "S89_FOOTERNOTE": "[b]Nota al estudiante:*En la Guía de actividades encontrará la información que necesita para su intervención, así como el aspecto de la oratoria que debe preparar con la ayuda del folleto Maestros.",
   "S89_VERSION": "S-89-S",
   "S89_DATE_VERSION": "11/20",
-  "REPORT_NO_ASSIGNMENTS": "No hi ha asignacions disponibles."
+  "REPORT_NO_ASSIGNMENTS": "No hi ha asignacions disponibles.",
+  "CONFIG_GO_ONLINE_1": "Servihelper treballa de manera offline per defecte, tots els fitxers es desen en una carpeta local.",
+  "CONFIG_GO_ONLINE_2": "Si us plau crea una còpia de seguretat abans d'activar la manera en línia.",
+  "CONFIG_GO_ONLINE_3": "Per a treballar en manera en línia amb més administradors es necessita una carpeta compartida. Aquesta carpeta ha de poder sincronitzar-se per tots els administradors. Algunes carpetes compartides comunes són:",
+  "CONFIG_GO_ONLINE_4": "Primer és necessari instal·lar l'aplicació d'algun dels proveïdors a dalt esmentats.",
+  "CONFIG_GO_ONLINE_5": "Pots buscar l'aplicació des de google.",
+  "CONFIG_GO_ONLINE_6": "En instal·lar l'app cal comprovar que aquesta esta funcionant i estem logejats.",
+  "CONFIG_GO_ONLINE_7": "Un nou disc virtual apareixerà en el sistema de fitxers (D: E: F: el que sigui)",
+  "CONFIG_GO_ONLINE_8": "Dins d'aquest disc virtual, si ets el primer que sincronitzarà els fitxers crea una nova carpeta de nom 'servihelper' (per exemple). Si no ho ets, l'administrador principal et compartirà un enllaç.",
+  "CONFIG_GO_ONLINE_9": "(Quan els altres admins instal·len l'app han d'usar el link del admin principal perquè sincronitzi la carpeta compartida i aparegui en el nou disc virtual)",
+  "CONFIG_GO_ONLINE_10": "Quan vegem la carpeta compartida amb els seus fitxers dins, és moment d'activar la manera en línia.",
+  "CONFIG_GO_ONLINE_11": "Fes clic en el següent botó i especifica la ruta de la carpeta compartida.",
+  "CONFIG_GO_ONLINE_12": "La ruta a la carpeta compartida és diferent en Windows, Mac o Linux. En Windows és d'aquesta manera: G:\\My Space\\servihelper (lletra pot variar)"
 }
