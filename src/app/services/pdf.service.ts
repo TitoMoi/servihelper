@@ -15,6 +15,8 @@ import { TranslocoLocaleService } from "@ngneat/transloco-locale";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
+import { AssignTypes } from "app/assigntype/model/assigntype.model";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 export type pdfFileNames = "S89" | "S89M";
 @Injectable({
@@ -45,6 +47,7 @@ export class PdfService {
     private translocoLocaleService: TranslocoLocaleService,
     private participantService: ParticipantService,
     private assignTypeService: AssignTypeService,
+    private assignTypeNamePipe: AssignTypeNamePipe,
     private roomService: RoomService
   ) {}
 
@@ -172,6 +175,28 @@ export class PdfService {
     doc.addImage(uint8array, "PNG", x, y, 3, 3);
   }
 
+  shortAssignTypeTheme(doc: jsPDF, a: AssignmentInterface): string {
+    const at = this.assignTypeService.getAssignType(a.assignType);
+    let themeOrAssignType = a.theme ? a.theme : this.assignTypeNamePipe.transform(at);
+
+    let wordLength = 110;
+    //Before create text lines check the length
+    if (themeOrAssignType.length > wordLength) {
+      const shortedTheme = [];
+      let words = themeOrAssignType.split(" ");
+      for (let w of words) {
+        if (wordLength - w.length > 0) {
+          shortedTheme.push(w);
+          wordLength -= w.length;
+        } else {
+          break;
+        }
+      }
+      themeOrAssignType = shortedTheme.join(" ") + " (...)";
+    }
+    return doc.splitTextToSize(themeOrAssignType, 75);
+  }
+
   async toPdfS89(assignments: AssignmentInterface[], is4slips: boolean) {
     assignments = assignments.filter((a) => this.isAllowedTypeForS89(a));
 
@@ -192,21 +217,24 @@ export class PdfService {
       //Default value for coord is first slip
       let x = 9;
       let y = 7;
-      if (counter === 4) {
-        x = 9;
-        y = 7;
-      }
-
-      //Position in the sheet
-      if (counter === 3) {
-        x = 115;
-        y = 7;
-      } else if (counter === 2) {
-        x = 9;
-        y = 148.5;
-      } else if (counter === 1) {
-        x = 115;
-        y = 148.5;
+      //Position in the sheet from left to right to bottom left and then right
+      switch (counter) {
+        case 4:
+          x = 9;
+          y = 7;
+          break;
+        case 3:
+          x = 115;
+          y = 7;
+          break;
+        case 2:
+          x = 9;
+          y = 148.5;
+          break;
+        case 1:
+          x = 115;
+          y = 148.5;
+          break;
       }
 
       doc.setFont(this.font, "bold");
@@ -308,10 +336,22 @@ export class PdfService {
 
       y += 5;
 
-      y += 7;
       x -= 5;
 
+      const canBeRepeated: AssignTypes[] = ["initialCall", "returnVisit"];
+      if (canBeRepeated.includes(type) && assignment.theme) {
+        y += 1;
+        doc.setFontSize(7);
+        const themeText = this.shortAssignTypeTheme(doc, assignment);
+        doc.text(themeText, x, y);
+        y += 8;
+      } else {
+        //closer gap
+        y += 7;
+      }
+
       doc.setFont(this.font, "bold");
+      doc.setFontSize(8.76);
 
       doc.text(this.translocoService.translate("S89_ROOMS_TITLE"), x, y);
 
@@ -368,7 +408,7 @@ export class PdfService {
         }
       });
 
-      y += 5;
+      y += 4;
 
       doc.text(this.translocoService.translate("S89_VERSION"), x, y);
       doc.text(this.translocoService.translate("S89_DATE_VERSION"), x + 15, y);
