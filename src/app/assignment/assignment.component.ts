@@ -13,8 +13,14 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { ActivatedRoute, RouterOutlet, RouterLink, RouterLinkActive } from "@angular/router";
-import { Observable, Subscription, combineLatest, map } from "rxjs";
+import {
+  ActivatedRoute,
+  RouterOutlet,
+  RouterLink,
+  RouterLinkActive,
+  Router,
+} from "@angular/router";
+import { Observable, Subscription, combineLatest, map, skip } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
 import { SortService } from "app/services/sort.service";
 import { RoomService } from "app/room/service/room.service";
@@ -123,6 +129,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     private sortService: SortService,
     private onlineService: OnlineService,
     private configService: ConfigService,
+    private router: Router,
     private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
@@ -138,6 +145,14 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   ngOnInit() {
+    this.subscription.add(
+      this.currentRoleId$.pipe(skip(1)).subscribe(() => {
+        this.router
+          .navigateByUrl("home")
+          .then(() => this.router.navigate(["assignment"], { skipLocationChange: true }));
+      })
+    );
+
     //prepare emissions, emits also the first time
     this.subscription.add(
       combineLatest([this.currentRoleId$, this.roles$]).subscribe(([currentRole, roles]) => {
