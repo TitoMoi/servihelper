@@ -417,5 +417,17 @@
   "S89_FOOTERNOTE": "[b]Note to student:*The source material and study point for your assignment can be found in the Life and Ministry Meeting Workbook. Please work on the listed study point, which is discussed in the Teaching brochure.",
   "S89_VERSION": "S-89-E",
   "S89_DATE_VERSION": "11/20",
-  "REPORT_NO_ASSIGNMENTS": "No assignments available."
+  "REPORT_NO_ASSIGNMENTS": "No assignments available.",
+  "CONFIG_GO_ONLINE_1": "Servihelper works offline by default, all the data is stored inside the servihelper folder.",
+  "CONFIG_GO_ONLINE_2": "Please create a security backup before going online.",
+  "CONFIG_GO_ONLINE_3": "To work online with more administrators we need to specify another folder where the data will be. It cannot be whatever folder, it must be a folder where data files can be updated by more administrators. Then, a shared folder is required. Some common shared folders are:",
+  "CONFIG_GO_ONLINE_4": "It's necessary to install the desktop app for one of the aboves providers. You will find the app on their respective markets.",
+  "CONFIG_GO_ONLINE_5": "You also can look up for the desktop app from google search.",
+  "CONFIG_GO_ONLINE_6": "When you have installed the app, check that the app its running and you're logged.",
+  "CONFIG_GO_ONLINE_7": "A new virtual drive will appear on your filesystem (D: E: F: whatever)",
+  "CONFIG_GO_ONLINE_8": "Now, inside the virtual drive, create a new folder, call it 'servihelper' for example. If you are the first one to sync the files then prepare the link to share this new folder.",
+  "CONFIG_GO_ONLINE_9": "(When the other admins install the same app, they need to use you link and the folder will appear on their filesystem with all the data)",
+  "CONFIG_GO_ONLINE_10": "Then, lets notify servihelper about this shared folder.",
+  "CONFIG_GO_ONLINE_11": "Click on the next slider button and an input field to paste the system shared folder path will appear.",
+  "CONFIG_GO_ONLINE_12": "The route to the shared folder should be something like: G:\\My Space\\servihelper (letter can change)"
 }
