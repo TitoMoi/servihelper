@@ -398,7 +398,7 @@
   "COLOR_YELLOW_EXPLANATION": "More than 4 months old",
   "COLOR_BLUE_EXPLANATION": "Less than 4 months old",
   "S89_TOOLTIP": "Generate individual s89 pdf",
-  "S89M_TOOLTIP": "Generate the 4-s89 pdf containing all the assignments",
+  "S89M_TOOLTIP": "Generate the 4-s89",
   "S89_TITLE": "OUR CHRISTIAN LIFE AND MINISTRY MEETING ASSIGNMENT",
   "S89_NAME": "Name:",
   "S89_ASSISTANT": "Assistant:",

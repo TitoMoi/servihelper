@@ -124,7 +124,7 @@ export class PdfService {
    */
   checkTemplateExists(name: string) {
     if (this.S89 === name) {
-      const availableTemplates = ["es", "en"];
+      const availableTemplates = ["en", "ca", "es"];
       return availableTemplates.includes(this.configService.getConfig().lang);
     }
     return false;
@@ -207,6 +207,12 @@ export class PdfService {
     });
 
     let counter = 4;
+
+    //The S89 in not available in catalan.
+    let backupLang = "ca";
+    if (this.translocoService.getActiveLang() === "ca") {
+      this.translocoService.setActiveLang("es");
+    }
 
     assignments.forEach((assignment, i) => {
       i = i + 1; //1 index based to count slips
@@ -415,6 +421,7 @@ export class PdfService {
 
       counter -= 1;
     });
+    this.translocoService.setActiveLang(backupLang);
     return doc.output("blob");
   }
 }

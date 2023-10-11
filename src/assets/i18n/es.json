@@ -424,8 +424,8 @@
   "STATISTICS_ONLY_PRINCIPALS": "Solo principales",
   "STATISTICS_ONLY_ASSISTANTS": "Solo asistentes",
 
-  "S89_TOOLTIP": "Generar el pdf s89",
-  "S89M_TOOLTIP": "Generar el pdf 4-s89 que contiene todas las asignaciones",
+  "S89_TOOLTIP": "Genera el pdf s89",
+  "S89M_TOOLTIP": "Genera el pdf 4-s89",
   "TEMPLATE_NOT_AVAILABLE": "Pdf no disponible para este idioma, estará disponible en la próxima versión",
   "S89_TITLE": "ASIGNACIÓN PARA LA REUNIÓN VIDA Y MINISTERIO CRISTIANOS",
   "S89_NAME": "Nombre:",
