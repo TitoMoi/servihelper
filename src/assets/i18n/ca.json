@@ -35,7 +35,7 @@
   "ASSIGN_CREATE_ROOM": "Sala",
   "ASSIGN_CREATE_THEME": "Tema",
   "ASSIGN_CREATE_TITLE": "Creeu l'assignació",
-  "ASSIGN_CREATE_TITLE_TOOLTIP": "First you need to create assignment types, rooms and participants",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Abans de crear assignacions és necessari crear els participants",
   "ASSIGN_DELETE_TITLE": "Eliminar assignació",
   "ASSIGN_DELETE_WARNING": "Aquesta acció és irreversible",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "Totes les tasques s’han programat segons la data, la sala i el rol seleccionats",

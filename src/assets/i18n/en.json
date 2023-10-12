@@ -23,7 +23,7 @@
   "ASSIGN_CHOOSE_DATE": "Choose a date",
   "ASSIGN_CHOOSE_SHEET_TITLE": "Sheet title",
   "ASSIGN_CREATE_TITLE": "Create assignment",
-  "ASSIGN_CREATE_TITLE_TOOLTIP": "First you need to create assignment types, rooms and participants",
+  "ASSIGN_CREATE_TITLE_TOOLTIP": "Before creating assignments it's necessary to create participants",
   "ASSIGN_DELETE_TITLE": "Remove assignment",
   "ASSIGN_DELETE_WARNING": "This action is irreversible",
   "ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES": "All assignments have been scheduled according to the date, room and role selected",
