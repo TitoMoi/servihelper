@@ -83,7 +83,7 @@
     "hasAssistant": false,
     "repeat": false,
     "type": "talk",
-    "order": 70,
+    "order": 80,
     "color": "#C48430",
     "days": null
   },
@@ -94,7 +94,7 @@
     "hasAssistant": true,
     "repeat": true,
     "type": "returnVisit",
-    "order": 80,
+    "order": 70,
     "color": "#C48430",
     "days": null
   },
