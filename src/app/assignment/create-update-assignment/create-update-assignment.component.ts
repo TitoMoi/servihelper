@@ -17,9 +17,11 @@ import { SharedService } from "app/services/shared.service";
 import { Subscription, filter, map } from "rxjs";
 
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -32,7 +34,7 @@ import {
 } from "@angular/forms";
 import { MatButton, MatButtonModule } from "@angular/material/button";
 import { MatSelect, MatSelectModule } from "@angular/material/select";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink, RouterModule } from "@angular/router";
 import { RoleInterface } from "app/roles/model/role.model";
 import { MatDialog } from "@angular/material/dialog";
 import { InfoAssignmentComponent } from "../info-assignment/info-assignment.component";
@@ -74,6 +76,7 @@ import { OnlineService } from "app/online/service/online.service";
     TranslocoModule,
     ReactiveFormsModule,
     MatCardModule,
+    RouterModule,
     NgIf,
     MatCheckboxModule,
     MatFormFieldModule,
@@ -94,7 +97,8 @@ import { OnlineService } from "app/online/service/online.service";
     RoomNamePipe,
   ],
 })
-export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
+export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild("cancelBtn", { read: ElementRef }) cancelBtn: ElementRef;
   @ViewChild("principalSelect") principalSelect: MatSelect;
   @ViewChild("assistantSelect") assistantSelect: MatSelect;
   @ViewChild("btnSaveCreateAnother") btnSaveCreateAnother: MatButton;
@@ -224,6 +228,17 @@ export class CreateUpdateAssignmentComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {
     this.getAssignments();
+  }
+
+  ngAfterViewInit(): void {
+    //We need to navigate here from assignments if the role changes
+    //For some reason navigating again to assignments doesnt work
+    //also navigating to another principal route doesnt work
+    //we need to navigate to a children
+    //Then, we simulate a click on the cancel
+    if (this.activatedRoute.snapshot.queryParams.prev === "home") {
+      this.cancelBtn.nativeElement.click();
+    }
   }
 
   ngOnInit() {

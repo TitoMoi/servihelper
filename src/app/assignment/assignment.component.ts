@@ -149,7 +149,12 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
       this.currentRoleId$.pipe(skip(1)).subscribe(() => {
         this.router
           .navigateByUrl("home")
-          .then(() => this.router.navigate(["assignment"], { skipLocationChange: true }));
+          .then(() =>
+            this.router.navigate(["assignment/create"], {
+              skipLocationChange: true,
+              queryParams: { prev: "home" },
+            })
+          );
       })
     );
 
