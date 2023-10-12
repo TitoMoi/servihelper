@@ -211,7 +211,7 @@ export class PdfService {
     //The S89 in not available in catalan.
     let backupLang = "ca";
     if (this.translocoService.getActiveLang() === "ca") {
-      this.translocoService.setActiveLang("es");
+      this.translocoService = this.translocoService.setActiveLang("es");
     }
 
     assignments.forEach((assignment, i) => {

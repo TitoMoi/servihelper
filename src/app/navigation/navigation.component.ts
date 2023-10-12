@@ -97,9 +97,9 @@ export class NavigationComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private breakpointObserver: BreakpointObserver,
-    public translocoService: TranslocoService,
+    private translocoService: TranslocoService,
     private dateAdapter: DateAdapter<NativeDateAdapter>,
-    public configService: ConfigService,
+    private configService: ConfigService,
     private onlineService: OnlineService,
     private sharedService: SharedService,
     private httpClient: HttpClient,
@@ -108,6 +108,11 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     this.availableLangs = this.translocoService.getAvailableLangs();
+
+    //Special condition for the ca because doesnt have the s89 in ca
+    if (this.lang === "ca") {
+      this.translocoService.load("es").subscribe();
+    }
 
     this.setLang(this.lang);
     this.setLocale(this.lang);
@@ -124,6 +129,11 @@ export class NavigationComponent implements OnInit {
    * @param languageChange event of select change
    */
   updateLang(matSelectChange: MatSelectChange) {
+    //Special condition for the ca because doesnt have the s89 in ca
+    if (matSelectChange.value === "ca") {
+      this.translocoService.getTranslation("es");
+    }
+
     this.setLang(matSelectChange.value);
 
     //Save the lang to the config
