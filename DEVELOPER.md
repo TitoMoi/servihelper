@@ -112,3 +112,6 @@ It is possible to send a reminder with the google event old api _(can be disable
 On `image-assignment.component.ts` we use the class `fw-bold` from bootstrap. Do not remove it as it is used to show the image name in bold when the image is selected.
 
 On `assignment.component.ts` we do a fake pagination.
+
+To reload `assignment.component.ts` we do a navigation to home and then we navigate back to assignment but to his child create: `assignment/create` this is because navigating only to assignment the routes become inestable, it seems its because the inner `router-outlet` in assignment component, but navigating to a direct children doesnt harm the routing.
+We navigate to the children and click on cancel button and we are back to assignment list.
