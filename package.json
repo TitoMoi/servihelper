@@ -62,7 +62,7 @@
     "pako": "^2.1.0",
     "rxjs": "7.8.1",
     "tslib": "2.6.0",
-    "zone.js": "0.14.0"
+    "zone.js": "0.13.3"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^16.0.0",
