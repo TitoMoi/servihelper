@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   @HostListener("window:unload", ["$event"])
   unloadHandler() {
     if (!this.showLockMsg) {
-      this.lockService.releaseLock(true);
+      this.lockService.releaseLock();
     }
   }
 
@@ -67,6 +67,7 @@ export class AppComponent implements OnInit {
     this.configService.prepareFilePaths(online); //1
 
     //LOCK?
+    debugger;
     if (online.isOnline) {
       const lockObj = this.lockService.getLock();
       const isDeathEnd = this.lockService.checkDeathEnd(20);
