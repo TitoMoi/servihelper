@@ -16,7 +16,7 @@
             (click)="toPng('toPngDivId')"
           ></mat-icon>
         </th>
-        <th *ngFor="let at of assignTypes" class="bg-color-white">
+        <th *ngFor="let at of assignTypes" class="bg-color-white sticky-top">
           <div>{{ at | assignTypeNamePipe }}</div>
         </th>
       </thead>
@@ -48,7 +48,7 @@
           (click)="toPng('toPngDivId2')"
         ></mat-icon>
       </th>
-      <th *ngFor="let at of assignTypesAssistant" class="bg-color-white">
+      <th *ngFor="let at of assignTypesAssistant" class="bg-color-white sticky-top">
         {{ at | assignTypeNamePipe }}
       </th>
     </thead>
