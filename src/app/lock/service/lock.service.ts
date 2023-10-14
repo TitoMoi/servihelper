@@ -48,7 +48,6 @@ export class LockService {
   releaseLock() {
     if (this.#lock) {
       this.#lock.lock = false;
-      this.#lock.timestamp = new Date();
       this.saveLockToFile();
     }
   }
