@@ -69,7 +69,6 @@ export class AppComponent implements OnInit {
     //LOCK?
     if (online.isOnline) {
       const lockObj = this.lockService.getLock();
-      debugger;
       const isDeathEnd = this.lockService.checkDeathEnd(20);
       if (isDeathEnd) {
         this.lockService.updateTimestamp();
