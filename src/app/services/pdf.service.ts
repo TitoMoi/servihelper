@@ -37,6 +37,8 @@ export class PdfService {
 
   homeDir = this.configService.homeDir;
 
+  backupLang;
+
   //Pdf file names
   S89 = "S89.pdf";
   S89M = "S89M.pdf";
@@ -179,7 +181,7 @@ export class PdfService {
     const at = this.assignTypeService.getAssignType(a.assignType);
     let themeOrAssignType = a.theme ? a.theme : this.assignTypeNamePipe.transform(at);
 
-    let wordLength = 110;
+    let wordLength = 95;
     //Before create text lines check the length
     if (themeOrAssignType.length > wordLength) {
       const shortedTheme = [];
@@ -209,8 +211,8 @@ export class PdfService {
     let counter = 4;
 
     //The S89 in not available in catalan.
-    let backupLang = "ca";
     if (this.translocoService.getActiveLang() === "ca") {
+      this.backupLang = "ca";
       this.translocoService = this.translocoService.setActiveLang("es");
     }
 
@@ -421,7 +423,7 @@ export class PdfService {
 
       counter -= 1;
     });
-    this.translocoService.setActiveLang(backupLang);
+    if (this.backupLang) this.translocoService.setActiveLang(this.backupLang);
     return doc.output("blob");
   }
 }
