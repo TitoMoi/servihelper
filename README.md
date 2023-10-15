@@ -38,7 +38,13 @@ More help: [Open a Mac app from an unidentified developer](https://support.apple
 
 ## Example images
 
+Native, general purpose assignment slip:
+
 <img src="./pictures/assignment-example.png" alt= "example" width="300" height="320">
+
+S89 slip with theme if is return visit or initial call:
+
+<img src="./pictures/assignment-s89-example.png" alt= "example" width="330" height="420">
 
 ## Example images Territory
 
@@ -59,7 +65,9 @@ The sheet _(assignment)_ to distribute can be customized, so you can add your la
 
 ## What cannot be done or implemented?
 
-Diferent persons working at the same time and being free is not possible.
+Diferent persons working _at the same time_ and being free is not possible.
+
+But it's possible to work one after another.
 
 Paid mode:
 Configure a remote desktop and avoid the need to export and import data manually.
@@ -70,7 +78,21 @@ Free mode:
 
 - Export the app data from administrator one and importing in the app of the administrator two.
 
-There is no sync process, all imported .json files from person one will override the existing ones of person two.
+There is no sync process, all imported files from person one will override the existing ones of person two.
+
+Scenarios for free mode, you can opt the one who suits your team best:
+
+1.  Use built in online mode with a shared folder _(google drive, one drive...)_
+
+- Only required setup of the shared folder.
+- Required knowledge of how to install and run google drive _(or other solution)_
+- Your responsability to ensure that all files are sync before working.
+
+2.  Only use google drive to share copies of servihelper _(or other solution)_
+
+- No setup of online mode _(easy)_
+- Required knowledge of how to install and run google drive.
+- Your responsability to ensure that you have the last backup before working.
 
 ## ¿Can I distribute it?
 
