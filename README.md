@@ -6,7 +6,7 @@ Servihelper is an executable app that runs on the machine _(Windows, Mac or Linu
 
 The program is free.
 
-Your data is managed internally on the local device with .json files, so it never goes to the internet.
+Your data is managed internally on the local device with .json and .gz files, so it never goes to the internet.
 
 Its purpose is for help the Jehovah's witnesses to create and manage all kind of assignments.
 
