@@ -120,13 +120,11 @@ export class PdfService {
 
   /**
    *
-   * @param name the name of the pdf template
-   * @param optionalPath if provided it will look up for the filename in this path
-   * @returns
+   * @param name the lang
    */
-  checkTemplateExists(name: string) {
+  checkLangExists(name: string) {
     if (this.S89 === name) {
-      const availableTemplates = ["en", "ca", "es"];
+      const availableTemplates = ["en", "ca", "es", "fr"];
       return availableTemplates.includes(this.configService.getConfig().lang);
     }
     return false;
@@ -247,11 +245,19 @@ export class PdfService {
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
-      const text = doc.splitTextToSize(this.translocoService.translate("S89_TITLE"), 75);
-      doc.text(text, x, y);
 
       x -= 5;
-      y += 12;
+
+      const xOffset = doc.internal.pageSize.width / 2;
+      const title1 = this.translocoService.translate("S89_TITLE_1");
+      doc.text(title1, xOffset, y, { align: "center" });
+      y += 5;
+      const title2 = this.translocoService.translate("S89_TITLE_2");
+      doc.text(title2, xOffset, y, {
+        align: "center",
+      });
+
+      y += 7;
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.95);
