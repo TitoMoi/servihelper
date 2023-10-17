@@ -70,29 +70,32 @@ Diferent persons working _at the same time_ and being free is not possible.
 But it's possible to work one after another.
 
 Paid mode:
-Configure a remote desktop and avoid the need to export and import data manually.
+Configure a remote desktop and avoid the need to export and import data manually. This required a person
+with medium/ advanced skills and a bit of overhead to configure.
 
 [Guide to configure a remote desktop with kamatera](./KAMATERA.md)
 
 Free mode:
 
-- Export the app data from administrator one and importing in the app of the administrator two.
+_(All the next scenarios have no sync process, all imported files from person one will override the existing ones of person two)_
 
-There is no sync process, all imported files from person one will override the existing ones of person two.
+1. Export the app data from administrator one and importing in the app of the administrator two.
+   _(Easy, no complexity but an overhead to understand wich is the latest copy)_
 
-Scenarios for free mode, you can opt the one who suits your team best:
+2. Enable built in online mode with a shared folder _(google drive, one drive...)_
 
-1.  Use built in online mode with a shared folder _(google drive, one drive...)_
-
-- Only required setup of the shared folder.
+- Required setup inside Servihelper in the config section to configure the shared folder.
 - Required knowledge of how to install and run google drive _(or other solution)_
 - Your responsability to ensure that all files are sync before working.
+  _(Some complexity but later has no overhead, just check you are online and google drive is working)_
 
-2.  Only use google drive to share copies of servihelper _(or other solution)_
+3.  Only use google drive to share copies of servihelper _(or other solution)_
 
-- No setup of online mode _(easy)_
-- Required knowledge of how to install and run google drive.
+- No enable online mode.
+- Required knowledge of how to install and run google drive _(or other solution)_
 - Your responsability to ensure that you have the last backup before working.
+- Import the last backup, work and export it to the shared folder.
+  _(Some complexity and a bit of overhead later, on finish you have to save your backup to the shared folder)_
 
 ## ¿Can I distribute it?
 
@@ -113,7 +116,7 @@ Yes, although it is recommended that you distribute the download link, as a new 
 
 ## When selecting the participant for the assignment, a number is displayed next to it, what is it?
 
-It is the number of times the participant has participated in that room with that type of assignment with that role _(principal or assistant)_
+It is the number of times the participant has participated in that type of assignment with that role _(principal or assistant)_
 
 ## ¿How do I report a bug or ask for a feature?
 
