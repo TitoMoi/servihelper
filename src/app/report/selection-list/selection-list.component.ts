@@ -83,6 +83,7 @@ export class SelectionListComponent implements OnChanges {
     private exportService: ExportService,
     private roomNamePipe: RoomNamePipe,
     private translocoLocaleService: TranslocoLocaleService,
+    private assignTypePipeName: AssignTypeNamePipe,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnChanges(changes: SimpleChanges) {
@@ -429,7 +430,9 @@ export class SelectionListComponent implements OnChanges {
 
         const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
 
-        let themeOrAssignType = a.theme ? a.theme : a.assignType.name;
+        let themeOrAssignType = a.theme
+          ? a.theme
+          : this.assignTypePipeName.transform(a.assignType);
 
         let wordLength = hasMultipleRooms ? 60 : 90;
         //Before create text lines check the length
