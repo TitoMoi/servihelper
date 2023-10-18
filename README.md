@@ -80,22 +80,24 @@ Free mode:
 _(All the next scenarios have no sync process, all imported files from person one will override the existing ones of person two)_
 
 1. Export the app data from administrator one and importing in the app of the administrator two.
-   _(Easy, no complexity but an overhead to understand wich is the latest copy)_
+
+   - Do not activate online mode
+   - Do not use shared folder _(google drive or others...)_
+   - _(Easy, no complexity but an overhead to understand wich and where is the latest copy)_
 
 2. Enable built in online mode with a shared folder _(google drive, one drive...)_
 
-- Required setup inside Servihelper in the config section to configure the shared folder.
-- Required knowledge of how to install and run google drive _(or other solution)_
-- Your responsability to ensure that all files are sync before working.
-  _(Some complexity but later has no overhead, just check you are online and google drive is working)_
+   - Required setup inside Servihelper in the config section to configure the shared folder.
+   - Required knowledge of how to install and run google drive _(or other solution)_
+   - Your responsability to ensure that all files are sync before working.
+   - Warning: Sometimes data is not updated on real time. _(some complexity but later has no overhead, just check you are online and google drive is working and sync)_
 
-3.  Only use google drive to share copies of servihelper _(or other solution)_
+3. Only use google drive to share copies of servihelper _(or other solution)_
 
-- No enable online mode.
-- Required knowledge of how to install and run google drive _(or other solution)_
-- Your responsability to ensure that you have the last backup before working.
-- Import the last backup, work and export it to the shared folder.
-  _(Some complexity and a bit of overhead later, on finish you have to save your backup to the shared folder)_
+   - Do not enable online mode.
+   - Required knowledge of how to install and run google drive _(or other solution)_
+   - Your responsability to ensure that you have the last backup before working.
+   - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, this is the most robust approach and the one i recommend)_
 
 ## ¿Can I distribute it?
 
