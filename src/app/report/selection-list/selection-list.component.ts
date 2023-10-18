@@ -202,7 +202,6 @@ export class SelectionListComponent implements OnChanges {
         styles: { font, fontSize: 11 },
         theme: "plain",
         margin: { vertical: 10, horizontal: 4 },
-        columnStyles: { 0: { cellWidth: 140 }, 1: { cellWidth: 50 } },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
@@ -253,7 +252,6 @@ export class SelectionListComponent implements OnChanges {
         styles: { font, fontSize: 11 },
         theme: "plain",
         margin: { vertical: 10, horizontal: 8 },
-        columnStyles: { 0: { cellWidth: 152 }, 1: { cellWidth: 42 } },
         didParseCell: (data) => {
           //bug fix
           data.cell.text = data.cell.text.map((char) => char.trim());
