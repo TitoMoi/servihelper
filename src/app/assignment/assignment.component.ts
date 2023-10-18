@@ -20,7 +20,14 @@ import {
   RouterLinkActive,
   Router,
 } from "@angular/router";
-import { Observable, Subscription, combineLatest, map, skip } from "rxjs";
+import {
+  Observable,
+  Subscription,
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  skip,
+} from "rxjs";
 import { LastDateService } from "./service/last-date.service";
 import { SortService } from "app/services/sort.service";
 import { RoomService } from "app/room/service/room.service";
@@ -146,15 +153,13 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   ngOnInit() {
     this.subscription.add(
-      this.currentRoleId$.pipe(skip(1)).subscribe(() => {
-        this.router
-          .navigateByUrl("home")
-          .then(() =>
-            this.router.navigate(["assignment/create"], {
-              skipLocationChange: true,
-              queryParams: { prev: "home" },
-            })
-          );
+      this.currentRoleId$.pipe(skip(1), distinctUntilChanged()).subscribe(() => {
+        this.router.navigateByUrl("home").then(() =>
+          this.router.navigate(["assignment/create"], {
+            skipLocationChange: true,
+            queryParams: { prev: "home" },
+          })
+        );
       })
     );
 
