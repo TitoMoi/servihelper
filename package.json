@@ -1,6 +1,6 @@
 {
   "name": "servihelper",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Servihelper",
   "author": {
     "name": "Moisés Medina Vicente",
@@ -51,11 +51,10 @@
     "@ngneat/transloco-optimize": "^5.0.3",
     "@types/leaflet": "^1.9.3",
     "date-fns": "2.30.0",
-    "exceljs": "4.3.0",
     "filenamify": "6.0.0",
     "html-to-image": "1.11.11",
     "jspdf": "2.5.1",
-    "jspdf-autotable": "3.5.28",
+    "jspdf-autotable": "3.7.0",
     "leaflet": "^1.9.4",
     "nanoid": "5.0.1",
     "ngx-editor": "15.3.0",
