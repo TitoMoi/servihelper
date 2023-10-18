@@ -124,7 +124,7 @@ export class PdfService {
    */
   checkLangExists(name: string) {
     if (this.S89 === name) {
-      const availableTemplates = ["en", "ca", "es", "fr", "pt", "it"];
+      const availableTemplates = ["en", "ca", "es", "fr", "pt", "it", "de"];
       return availableTemplates.includes(this.configService.getConfig().lang);
     }
     return false;
@@ -244,7 +244,7 @@ export class PdfService {
       }
 
       doc.setFont(this.font, "bold");
-      doc.setFontSize(11.95);
+      doc.setFontSize(11.2);
 
       x -= 5;
 
@@ -260,12 +260,12 @@ export class PdfService {
       y += 7;
 
       doc.setFont(this.font, "bold");
-      doc.setFontSize(11.95);
+      doc.setFontSize(11.2);
       const s89Name = this.translocoService.translate("S89_NAME");
       let xPosForText = x + doc.getTextWidth(s89Name) + 2;
       doc.text(s89Name, x, y);
       doc.setFont(this.font, "normal");
-      doc.setFontSize(8.76);
+      doc.setFontSize(8.2);
       doc.text(
         this.participantService.getParticipant(assignment.principal).name,
         xPosForText,
@@ -275,12 +275,12 @@ export class PdfService {
       y += 7;
 
       doc.setFont(this.font, "bold");
-      doc.setFontSize(11.95);
+      doc.setFontSize(11.2);
       const s89Assistant = this.translocoService.translate("S89_ASSISTANT");
       xPosForText = x + doc.getTextWidth(s89Assistant) + 2;
       doc.text(s89Assistant, x, y);
       doc.setFont(this.font, "normal");
-      doc.setFontSize(8.76);
+      doc.setFontSize(8.2);
       if (assignment.assistant)
         doc.text(
           this.participantService.getParticipant(assignment.assistant).name,
@@ -291,12 +291,12 @@ export class PdfService {
       y += 7;
 
       doc.setFont(this.font, "bold");
-      doc.setFontSize(11.95);
+      doc.setFontSize(11.2);
       const s89Date = this.translocoService.translate("S89_DATE");
       xPosForText = x + doc.getTextWidth(s89Date) + 2;
       doc.text(s89Date, x, y);
       doc.setFont(this.font, "normal");
-      doc.setFontSize(8.76);
+      doc.setFontSize(8.2);
       doc.text(
         this.translocoLocaleService.localizeDate(
           assignment.date,
@@ -310,7 +310,7 @@ export class PdfService {
       y += 8;
 
       doc.setFont(this.font, "bold");
-      doc.setFontSize(8.76);
+      doc.setFontSize(8.2);
       doc.text(this.translocoService.translate("S89_ASSIGNMENT_TITLE"), x, y);
 
       doc.setFont(this.font, "normal");
@@ -365,7 +365,7 @@ export class PdfService {
       }
 
       doc.setFont(this.font, "bold");
-      doc.setFontSize(8.76);
+      doc.setFontSize(8.2);
 
       doc.text(this.translocoService.translate("S89_ROOMS_TITLE"), x, y);
 
