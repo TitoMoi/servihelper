@@ -4,11 +4,16 @@ table {
   cursor: pointer;
 }
 td {
-  font-size: 14px;
+  font-size: 13px;
   width: auto;
 }
 th {
   font-size: 14px;
+  width: 100%;
+  border: 1px solid black;
+}
+button {
+  font-size: 12px;
 }
 
 @media print {

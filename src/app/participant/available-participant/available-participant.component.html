@@ -17,7 +17,13 @@
           ></mat-icon>
         </th>
         <th *ngFor="let at of assignTypes" class="bg-color-ghostwhite sticky-top">
-          <div>{{ at | assignTypeNamePipe }}</div>
+          <button
+            mat-button
+            [disabled]="isNetStatusOffline"
+            (click)="changeAvailability(null, at, true)"
+          >
+            <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
+          </button>
         </th>
       </thead>
       <tbody>
@@ -49,7 +55,13 @@
         ></mat-icon>
       </th>
       <th *ngFor="let at of assignTypesAssistant" class="bg-color-ghostwhite sticky-top">
-        {{ at | assignTypeNamePipe }}
+        <button
+          mat-button
+          [disabled]="isNetStatusOffline"
+          (click)="changeAvailability(null, at, false)"
+        >
+          <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
+        </button>
       </th>
     </thead>
     <tbody>

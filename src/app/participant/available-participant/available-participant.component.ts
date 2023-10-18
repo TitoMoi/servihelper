@@ -130,6 +130,17 @@ export class AvailableParticipantComponent {
     assignType: AssignTypeInterface,
     isPrincipal: boolean
   ) {
+    //No participant means all participants
+    if (!participant) {
+      for (const p of this.participants) {
+        const participantAt = p.assignTypes.find((at) => at.assignTypeId === assignType.id);
+        isPrincipal
+          ? (participantAt.canPrincipal = !participantAt.canPrincipal)
+          : (participantAt.canAssistant = !participantAt.canAssistant);
+      }
+      return;
+    }
+    //Else one participant
     const participantAt = participant.assignTypes.find(
       (at) => at.assignTypeId === assignType.id
     );
