@@ -201,7 +201,7 @@ export class SelectionListComponent implements OnChanges {
         html: `#table${i}`,
         styles: { font, fontSize: 11 },
         theme: "plain",
-        margin: { vertical: 10, horizontal: 4 },
+        margin: { vertical: 10 },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
@@ -251,7 +251,7 @@ export class SelectionListComponent implements OnChanges {
         html: "#" + tableId,
         styles: { font, fontSize: 11 },
         theme: "plain",
-        margin: { vertical: 10, horizontal: 8 },
+        margin: { vertical: 10 },
         didParseCell: (data) => {
           //bug fix
           data.cell.text = data.cell.text.map((char) => char.trim());
