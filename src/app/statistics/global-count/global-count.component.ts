@@ -188,7 +188,11 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     this.participants = [];
     this.participants = this.participantService.getParticipants(true).filter(
       (p) =>
-        p.available &&
+        (p.available && this.onlyWomenBox.checked
+          ? Boolean(p.isWoman)
+          : false || this.onlyMenBox.checked
+          ? Boolean(p.isWoman) === false
+          : false || (!this.onlyWomenBox.checked && !this.onlyMenBox.checked)) &&
         p.assignTypes
           .filter((at) => this.allowedAssignTypesIds.includes(at.assignTypeId))
           .some((at) => {
