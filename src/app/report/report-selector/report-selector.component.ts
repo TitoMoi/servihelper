@@ -34,6 +34,10 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { SortService } from "app/services/sort.service";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
+import { ConfigService } from "app/config/service/config.service";
+import { ConfigInterface } from "app/config/model/config.model";
+import { RoleInterface } from "app/roles/model/role.model";
+import { Observable, Subscription, combineLatest, map } from "rxjs";
 
 @Component({
   selector: "app-report-selector",
@@ -75,6 +79,12 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
   timeoutExecuted = true; //first time
   //end of props for datepicker hack
 
+  config$: Observable<ConfigInterface> = this.configService.config$;
+  roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
+  currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
+
+  allowedAssignTypesIds = [];
+
   rooms: RoomInterface[] = this.roomService
     .getRooms()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
@@ -101,24 +111,47 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     template: [undefined, Validators.required],
   });
 
+  subscription = new Subscription();
+
   constructor(
     private assignTypeService: AssignTypeService,
     private roomService: RoomService,
     private translocoService: TranslocoService,
     private sortService: SortService,
     private formBuilder: UntypedFormBuilder,
+    private configService: ConfigService,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
     this.selectionForm.markAllAsTouched();
+
+    //prepare emissions, emits also the first time
+    this.subscription.add(
+      combineLatest([this.currentRoleId$, this.roles$]).subscribe(([currentRole, roles]) => {
+        this.allowedAssignTypesIds =
+          currentRole === "administrator"
+            ? this.getAllAssignTypesIds()
+            : roles.find((r) => r.id === currentRole).assignTypesId;
+      })
+    );
   }
 
   ngAfterViewInit() {
-    this.assignTypesSelectRef.options.forEach((item: MatOption) => item.select());
+    const filteredOptions = this.assignTypesSelectRef.options.filter((item: MatOption) =>
+      this.allowedAssignTypesIds.includes(item.value)
+    );
+    for (const o of filteredOptions) {
+      o.select();
+    }
 
     this.roomsSelectRef.options.forEach((item: MatOption) => item.select());
     this.order.options.first.select();
     this.cdr.detectChanges();
+  }
+
+  //first load or Admin
+  getAllAssignTypesIds() {
+    return this.assignTypeService.getAssignTypes()?.map((at) => at.id);
   }
 
   //********* DATEPICKER HACK *************
