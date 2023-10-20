@@ -149,13 +149,13 @@ export class ParticipantService {
    * @returns
    */
   addAssignType(id: string, hasAssistant: boolean) {
-    const participantAssignTypesValue: ParticipantAssignTypeInterface = {
-      assignTypeId: id,
-      canPrincipal: true,
-      canAssistant: hasAssistant,
-    };
-
     for (const participant of this.#participants) {
+      const participantAssignTypesValue: ParticipantAssignTypeInterface = {
+        assignTypeId: id,
+        canPrincipal: true,
+        canAssistant: hasAssistant,
+      };
+
       participant.assignTypes = [...participant.assignTypes, participantAssignTypesValue];
       this.#participantsMap.set(participant.id, participant);
     }
@@ -186,12 +186,12 @@ export class ParticipantService {
    * @returns
    */
   addRoom(roomId: string) {
-    const value = {
-      roomId,
-      available: true,
-    };
-
     for (const participant of this.#participants) {
+      const value = {
+        roomId,
+        available: true,
+      };
+
       participant.rooms = [...participant.rooms, value];
       this.#participantsMap.set(participant.id, participant);
     }
