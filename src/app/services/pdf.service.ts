@@ -13,10 +13,14 @@ import { readFileSync } from "fs";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { TranslocoLocaleService } from "@ngneat/transloco-locale";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import {
+  AssignmentGroupInterface,
+  AssignmentInterface,
+} from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
 import { AssignTypes } from "app/assigntype/model/assigntype.model";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 export type pdfFileNames = "S89" | "S89M";
 @Injectable({
@@ -50,6 +54,7 @@ export class PdfService {
     private participantService: ParticipantService,
     private assignTypeService: AssignTypeService,
     private assignTypeNamePipe: AssignTypeNamePipe,
+    private roomNamePipe: RoomNamePipe,
     private roomService: RoomService
   ) {}
 
@@ -195,6 +200,175 @@ export class PdfService {
       themeOrAssignType = shortedTheme.join(" ") + " (...)";
     }
     return doc.splitTextToSize(themeOrAssignType, 75);
+  }
+
+  calculateY(doc: jsPDF, y: number, isForPrint: boolean) {
+    if (isForPrint && y > 270) {
+      doc.addPage("a4", "p");
+      y = 10;
+    }
+    return y;
+  }
+
+  getPdfHeight(assignmentGroups: AssignmentGroupInterface[]): number {
+    let height = 0;
+    //Title
+    height += 7;
+    //End
+    height += 20;
+
+    let doc = this.getJsPdf({
+      orientation: "portrait",
+      format: [210, 1400],
+      compress: true,
+    });
+
+    doc.setFont(this.font, "bold");
+    doc.setFontSize(11);
+
+    let x = 10;
+    let y = 10;
+
+    const reportTitle = this.configService.getConfig().reportTitle;
+    if (reportTitle) {
+      doc.text(reportTitle, doc.internal.pageSize.width / 2, y, {
+        align: "center",
+      });
+    }
+    y += 7;
+
+    for (const ag of assignmentGroups) {
+      doc.setFont(this.font, "bold");
+      doc.setFontSize(11);
+      //Date
+      const localeDate = this.translocoLocaleService.localizeDate(
+        ag.assignments[0].date,
+        this.translocoLocaleService.getLocale(),
+        { dateStyle: "full" }
+      );
+      doc.text(localeDate, x, y);
+
+      //Room
+      const roomName = this.roomNamePipe.transform(ag.assignments[0].room);
+      doc.text(roomName, 140, y);
+
+      y += 6;
+      doc.setFont(this.font, "normal");
+      doc.setFontSize(10);
+      for (const a of ag.assignments) {
+        const themeOrAssignType = a.theme || this.assignTypeNamePipe.transform(a.assignType);
+
+        let striped = themeOrAssignType.substring(0, 220);
+
+        if (striped.length === 220) {
+          striped = striped + "(...)";
+        }
+
+        let stripedLines = doc.splitTextToSize(striped, 120);
+
+        const heightTheme = 3.5 * (stripedLines.length + 1);
+        doc.text(stripedLines, x, y);
+
+        const participantsNames =
+          a.principal.name + (a.assistant ? "/\n" + a.assistant.name : "");
+
+        let textLinesParticipants = doc.splitTextToSize(participantsNames, 90);
+
+        const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
+
+        doc.text(textLinesParticipants, 140, y);
+
+        const yHeight =
+          heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
+        y += yHeight;
+      }
+      y += 7;
+    }
+    return height + y;
+  }
+
+  /**
+   * Render an inifite list with or without the colored bands
+   * @param assignmentGroups the assignment groups
+   */
+  toPdfBlackWhite(
+    assignmentGroups: AssignmentGroupInterface[],
+    colorBands: boolean,
+    isForPrint: boolean = false
+  ) {
+    const height = this.getPdfHeight(assignmentGroups);
+
+    let doc = this.getJsPdf({
+      orientation: "portrait",
+      format: [210, isForPrint ? 270 : height],
+      compress: true,
+    });
+
+    doc.setFont(this.font, "bold");
+    doc.setFontSize(11);
+
+    let x = 10;
+    let y = 10;
+
+    const reportTitle = this.configService.getConfig().reportTitle;
+    if (reportTitle) {
+      doc.text(reportTitle, doc.internal.pageSize.width / 2, y, {
+        align: "center",
+      });
+    }
+
+    y = this.calculateY(doc, y + 7, isForPrint);
+
+    for (const ag of assignmentGroups) {
+      doc.setFont(this.font, "bold");
+      doc.setFontSize(11);
+      //Date
+      const localeDate = this.translocoLocaleService.localizeDate(
+        ag.assignments[0].date,
+        this.translocoLocaleService.getLocale(),
+        { dateStyle: "full" }
+      );
+      doc.text(localeDate, x, y);
+
+      //Room
+      const roomName = this.roomNamePipe.transform(ag.assignments[0].room);
+      doc.text(roomName, 140, y);
+
+      y = this.calculateY(doc, y + 6, isForPrint);
+
+      doc.setFont(this.font, "normal");
+      doc.setFontSize(10);
+      for (const a of ag.assignments) {
+        const themeOrAssignType = a.theme || this.assignTypeNamePipe.transform(a.assignType);
+
+        let striped = themeOrAssignType.substring(0, 220);
+
+        if (striped.length === 220) {
+          striped = striped + "(...)";
+        }
+
+        let stripedLines = doc.splitTextToSize(striped, 120);
+
+        const heightTheme = 3.5 * (stripedLines.length + 1);
+        doc.text(stripedLines, x, y);
+
+        const participantsNames =
+          a.principal.name + (a.assistant ? "/\n" + a.assistant.name : "");
+
+        let textLinesParticipants = doc.splitTextToSize(participantsNames, 90);
+
+        const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
+
+        doc.text(textLinesParticipants, 140, y);
+
+        const yHeight =
+          heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
+        y = this.calculateY(doc, y + yHeight, isForPrint);
+      }
+      y = this.calculateY(doc, y + 7, isForPrint);
+    }
+
+    return doc.save("assignmentsList");
   }
 
   async toPdfS89(assignments: AssignmentInterface[], is4slips: boolean) {

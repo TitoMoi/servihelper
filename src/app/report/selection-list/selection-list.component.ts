@@ -189,7 +189,7 @@ export class SelectionListComponent implements OnChanges {
   getPdfHeight(): number {
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
-      format: [210, 90000],
+      format: [210, 14400],
     });
 
     const font = this.pdfService.getFontForLang();
@@ -232,7 +232,8 @@ export class SelectionListComponent implements OnChanges {
    *
    */
   toPdf(isForPrint: boolean) {
-    const height = this.getPdfHeight();
+    this.pdfService.toPdfBlackWhite(this.assignmentGroups, false, isForPrint);
+    /* const height = this.getPdfHeight();
     const doc = this.pdfService.getJsPdf({
       orientation: "portrait",
       compress: true,
@@ -266,7 +267,7 @@ export class SelectionListComponent implements OnChanges {
       });
     }
 
-    doc.save(isForPrint ? "assignmentsPrint" : "assignments");
+    doc.save(isForPrint ? "assignmentsPrint" : "assignments"); */
   }
 
   async toPng() {
