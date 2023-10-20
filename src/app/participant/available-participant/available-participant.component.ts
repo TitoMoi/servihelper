@@ -130,16 +130,34 @@ export class AvailableParticipantComponent {
     assignType: AssignTypeInterface,
     isPrincipal: boolean
   ) {
-    //No participant means all participants
+    //No participant means all participants unmark if some has mark or mark all if noone has mark
     if (!participant) {
+      let hasSomeCheck;
+      for (const p of this.participants) {
+        hasSomeCheck = p.assignTypes.some(
+          (at) =>
+            at.assignTypeId === assignType.id &&
+            (isPrincipal ? at.canPrincipal : at.canAssistant)
+        );
+      }
+      if (hasSomeCheck) {
+        for (const p of this.participants) {
+          const participantAt = p.assignTypes.find((at) => at.assignTypeId === assignType.id);
+          isPrincipal
+            ? (participantAt.canPrincipal = false)
+            : (participantAt.canAssistant = false);
+        }
+        return;
+      }
       for (const p of this.participants) {
         const participantAt = p.assignTypes.find((at) => at.assignTypeId === assignType.id);
         isPrincipal
-          ? (participantAt.canPrincipal = !participantAt.canPrincipal)
-          : (participantAt.canAssistant = !participantAt.canAssistant);
+          ? (participantAt.canPrincipal = true)
+          : (participantAt.canAssistant = true);
       }
       return;
     }
+
     //Else one participant
     const participantAt = participant.assignTypes.find(
       (at) => at.assignTypeId === assignType.id
