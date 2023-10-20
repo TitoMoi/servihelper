@@ -359,10 +359,18 @@ export class PdfService {
 
         const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
 
-        doc.text(textLinesParticipants, 140, y);
-
         const yHeight =
           heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
+
+        if (colorBands) {
+          //Rectangles draw to bottom so we need to move the pointer up
+          doc.setFillColor(a.assignType.color);
+
+          doc.rect(135, y - yHeight / 2, 4, yHeight, "F");
+        }
+
+        doc.text(textLinesParticipants, 140, y);
+
         y = this.calculateY(doc, y + yHeight, isForPrint);
       }
       y = this.calculateY(doc, y + 7, isForPrint);

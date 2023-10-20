@@ -232,42 +232,7 @@ export class SelectionListComponent implements OnChanges {
    *
    */
   toPdf(isForPrint: boolean) {
-    this.pdfService.toPdfBlackWhite(this.assignmentGroups, false, isForPrint);
-    /* const height = this.getPdfHeight();
-    const doc = this.pdfService.getJsPdf({
-      orientation: "portrait",
-      compress: true,
-      format: isForPrint ? "a4" : [210, height + 50], //infinite list
-    });
-
-    const font = this.pdfService.getFontForLang();
-
-    doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 8, {
-      align: "center",
-    });
-
-    for (let i = 0; i < this.assignmentGroups.length; i++) {
-      const tableId = `table${i}`;
-      autoTable(doc, {
-        html: "#" + tableId,
-        styles: { font, fontSize: 11 },
-        theme: "plain",
-        margin: { vertical: 10 },
-        didParseCell: (data) => {
-          //bug fix
-          data.cell.text = data.cell.text.map((char) => char.trim());
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          const localName = data.cell.raw["localName"];
-          //date
-          if (localName === "th") {
-            data.cell.styles.fontStyle = "bold";
-            return;
-          }
-        },
-      });
-    }
-
-    doc.save(isForPrint ? "assignmentsPrint" : "assignments"); */
+    this.pdfService.toPdfBlackWhite(this.assignmentGroups, true, isForPrint);
   }
 
   async toPng() {
