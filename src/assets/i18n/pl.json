@@ -152,7 +152,6 @@
   "ICON_GROUP_DELETE": "Usuń wszystkie zadania określonego dnia",
   "ICON_GROUP_MOVE": "Przenieś wszystkie zadania z jednego do drugiego",
   "ICON_HEATMAP": "Pokaż mapę cieplną ze znaczącymi kolorami",
-  "ICON_PDF_INFINITE": "PDF czarny/biały z nieskończoną listą",
   "ICON_PDF_PAGE": "PDF czarny/biały z przerwami stron",
   "ICON_PNG": "Kolorowy obraz PNG",
   "ICON_PRINT": "Arkusze drukowane do dystrybucji",
@@ -381,5 +380,7 @@
   "ASSIGNTYPE_TIME_ICON": "Ta ikona pojawi się, gdy odległość w czasie dla uczestnika nie będzie zadowolona dla tego rodzaju zadania",
   "S89S_TOOLTIP": "Generować indywidualne s89s pdf",
   "S89SM_TOOLTIP": "Wygenerować 4-s89s pdf Zawieranie wszystkich zadań",
-  "TEMPLATE_NOT_AVAILABLE": "PDF niedostępne dla tego lang, wyślij go do {{INFO__CONTACT_ANSWER}} więc może być dostępny w następnej wersji"
+  "TEMPLATE_NOT_AVAILABLE": "PDF niedostępne dla tego lang, wyślij go do {{INFO__CONTACT_ANSWER}} więc może być dostępny w następnej wersji",
+  "ICON_PDF_INFINITE_COLOR": "Wygeneruj nieskończony PDF z pasmami kolorów dla wybranych zadań",
+  "ICON_PDF_INFINITE": "Wygeneruj nieskończony pdf bez pasm kolorów dla wybranych przypisań"
 }

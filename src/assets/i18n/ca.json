@@ -150,7 +150,6 @@
   "ICON_GROUP_DELETE": "Suprimeix totes les tasques de certs dies",
   "ICON_GROUP_MOVE": "Desplaceu totes les tasques d’un dia a un altre",
   "ICON_HEATMAP": "Mostra un mapa de calor amb colors significatius",
-  "ICON_PDF_INFINITE": "PDF Black/White amb llista infinita",
   "ICON_PDF_PAGE": "PDF Black/White amb pauses de pàgina",
   "ICON_PNG": "Imatge PNG colorida",
   "ICON_PRINT": "Fulls d'impressió per distribuir",
@@ -252,7 +251,6 @@
   "PUBLICTHEME_DELETE_TITLE": "Suprimeix el tema públic",
   "PUBLICTHEME_DELETE_WARNING": "Aquesta acció és irreversible",
   "PUBLICTHEME_UPDATE_TITLE": "Actualitzeu el tema públic",
-
   "REPORT_ICON_FOLDER": "Generar fitxers PNG (triga una estona)",
   "REPORT_ICON_PDF_INFINITE": "PDF Black/White amb llista infinita",
   "REPORT_ICON_PDF_PAGE": "PDF Black/White amb pauses de pàgina",
@@ -458,5 +456,7 @@
   "CONFIG_GO_ONLINE_9": "(Quan els altres admins instal·len l'app han d'usar el link del admin principal perquè sincronitzi la carpeta compartida i aparegui en el nou disc virtual)",
   "CONFIG_GO_ONLINE_10": "Quan vegem la carpeta compartida amb els seus fitxers dins, és moment d'activar la manera en línia.",
   "CONFIG_GO_ONLINE_11": "Fes clic en el següent botó i especifica la ruta de la carpeta compartida.",
-  "CONFIG_GO_ONLINE_12": "La ruta a la carpeta compartida és diferent en Windows, Mac o Linux. En Windows és d'aquesta manera: G:\\My Space\\servihelper (lletra pot variar)"
+  "CONFIG_GO_ONLINE_12": "La ruta a la carpeta compartida és diferent en Windows, Mac o Linux. En Windows és d'aquesta manera: G:\\My Space\\servihelper (lletra pot variar)",
+  "ICON_PDF_INFINITE_COLOR": "Genera un PDF infinit amb les bandes de colors per a les asignacions seleccionades",
+  "ICON_PDF_INFINITE": "Genera un PDF infinit sense les bandes de colors per a les asignacions seleccionades"
 }

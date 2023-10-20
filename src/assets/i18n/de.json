@@ -149,7 +149,6 @@
   "ICON_GROUP_DELETE": "Löschen Sie alle Aufgaben eines bestimmten Tages",
   "ICON_GROUP_MOVE": "Bewegen Sie alle Aufgaben von einem Tag in einen anderen",
   "ICON_HEATMAP": "Zeigen Sie eine Wärmekarte mit aussagekräftigen Farben",
-  "ICON_PDF_INFINITE": "PDF Schwarz/Weiß mit unendlicher Liste",
   "ICON_PDF_PAGE": "PDF Schwarz/Weiß mit Seitenunterbrechungen",
   "ICON_PNG": "Buntes PNG -Bild",
   "ICON_PRINT": "Druckblätter zur Verteilung",
@@ -454,5 +453,7 @@
   "CONFIG_GO_ONLINE_9": "(Wenn die anderen Administratoren dieselbe App installieren, Sie müssen Ihren Link verwenden und der Ordner wird mit allen Daten in ihrem Dateisystem angezeigt)",
   "CONFIG_GO_ONLINE_10": "Dann, Lassen Sie uns Servihelper über diesen gemeinsam genutzten Ordner informieren.",
   "CONFIG_GO_ONLINE_11": "Klicken Sie auf die nächste Schaltfläche Slider und ein Eingabefeld zum Einfügen des systemfreien Ordner -Ordnerpfads wird angezeigt.",
-  "CONFIG_GO_ONLINE_12": "Die Route zum gemeinsam genutzten Ordner ändert sich von Windows, Mac or Linux. in Windows sollte so etwas wie sein: G:\\My Space\\servihelper (Brief kann sich ändern)"
+  "CONFIG_GO_ONLINE_12": "Die Route zum gemeinsam genutzten Ordner ändert sich von Windows, Mac or Linux. in Windows sollte so etwas wie sein: G:\\My Space\\servihelper (Brief kann sich ändern)",
+  "ICON_PDF_INFINITE_COLOR": "Generieren Sie ein unendliches PDF mit den Farbbändern für die ausgewählten Zuordnungen",
+  "ICON_PDF_INFINITE": "Generate an infinite pdf without the color bands for the selected assignments"
 }

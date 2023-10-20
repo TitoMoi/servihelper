@@ -152,7 +152,6 @@
   "ICON_GROUP_DELETE": "Verwijder alle opdrachten van een bepaalde dag",
   "ICON_GROUP_MOVE": "Verplaats alle opdrachten van de ene dag naar de andere",
   "ICON_HEATMAP": "Toon een warmtekaart met zinvolle kleuren",
-  "ICON_PDF_INFINITE": "PDF zwart/wit met oneindige lijst",
   "ICON_PDF_PAGE": "PDF zwart/wit met paginakauzes",
   "ICON_PNG": "Kleurrijk PNG -afbeelding",
   "ICON_PRINT": "Printbladen om te distribueren",
@@ -381,5 +380,7 @@
   "ASSIGNTYPE_TIME_ICON": "Dit pictogram verschijnt wanneer de afstand op tijd voor de deelnemer niet is tevreden voor dit toewijzingstype",
   "S89S_TOOLTIP": "Genereer individu s89s pdf",
   "S89SM_TOOLTIP": "Genereer de 4-s89s pdf met alle opdrachten",
-  "TEMPLATE_NOT_AVAILABLE": "PDF niet beschikbaar voor deze lange tijd, stuur het naar {{INFO__CONTACT_ANSWER}} Dus het kan beschikbaar zijn in de volgende versie"
+  "TEMPLATE_NOT_AVAILABLE": "PDF niet beschikbaar voor deze lange tijd, stuur het naar {{INFO__CONTACT_ANSWER}} Dus het kan beschikbaar zijn in de volgende versie",
+  "ICON_PDF_INFINITE_COLOR": "Genereer een oneindige PDF met de kleurenbanden voor de geselecteerde opdrachten",
+  "ICON_PDF_INFINITE": "Genereer een oneindige PDF zonder de kleurenbanden voor de geselecteerde opdrachten"
 }

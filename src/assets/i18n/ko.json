@@ -152,7 +152,6 @@
   "ICON_GROUP_DELETE": "특정 날의 모든 과제를 삭제하십시오",
   "ICON_GROUP_MOVE": "모든 과제를 하루에서 다른 과제로 이동하십시오",
   "ICON_HEATMAP": "의미있는 색상의 히트 맵을 보여줍니다",
-  "ICON_PDF_INFINITE": "무한 목록이있는 PDF 흑백",
   "ICON_PDF_PAGE": "페이지 브레이크가있는 PDF 흑백",
   "ICON_PNG": "화려한 PNG 이미지",
   "ICON_PRINT": "배포 할 시트를 인쇄합니다",
@@ -381,5 +380,7 @@
   "ASSIGNTYPE_TIME_ICON": "이 과제 유형에 대해 참가자의 시간 거리가 만족하지 않을 때이 아이콘이 나타납니다.",
   "S89S_TOOLTIP": "개인을 생성하십시오 s89s pdf",
   "S89SM_TOOLTIP": "생성하십시오 4-s89s pdf 모든 과제를 포함합니다",
-  "TEMPLATE_NOT_AVAILABLE": "이 랭에 PDF를 사용할 수 없으므로 보내주십시오. {{INFO__CONTACT_ANSWER}} 따라서 다음 버전에서 사용할 수 있습니다"
+  "TEMPLATE_NOT_AVAILABLE": "이 랭에 PDF를 사용할 수 없으므로 보내주십시오. {{INFO__CONTACT_ANSWER}} 따라서 다음 버전에서 사용할 수 있습니다",
+  "ICON_PDF_INFINITE_COLOR": "선택된 할당에 대한 컬러 밴드로 무한 PDF를 생성하십시오.",
+  "ICON_PDF_INFINITE": "선택한 할당에 대한 컬러 밴드없이 무한 PDF를 생성하십시오."
 }

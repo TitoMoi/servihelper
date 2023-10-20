@@ -132,17 +132,29 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
           currentRole === "administrator"
             ? this.getAllAssignTypesIds()
             : roles.find((r) => r.id === currentRole).assignTypesId;
+
+        if (this.assignTypesSelectRef) {
+          this.selectFilteredAssignTypes();
+        }
       })
     );
   }
 
-  ngAfterViewInit() {
+  selectFilteredAssignTypes() {
+    for (const o of this.assignTypesSelectRef.options) {
+      o.deselect();
+    }
+
     const filteredOptions = this.assignTypesSelectRef.options.filter((item: MatOption) =>
       this.allowedAssignTypesIds.includes(item.value)
     );
     for (const o of filteredOptions) {
       o.select();
     }
+  }
+
+  ngAfterViewInit() {
+    this.selectFilteredAssignTypes();
 
     this.roomsSelectRef.options.forEach((item: MatOption) => item.select());
     this.order.options.first.select();

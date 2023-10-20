@@ -152,7 +152,6 @@
   "ICON_GROUP_DELETE": "删除某一天的所有作业",
   "ICON_GROUP_MOVE": "将所有作业从一天转移到另一天",
   "ICON_HEATMAP": "显示有意义的颜色的热图",
-  "ICON_PDF_INFINITE": "PDF黑色/白色，无限列表",
   "ICON_PDF_PAGE": "PDF黑色/白色带有页面休息",
   "ICON_PNG": "彩色PNG图像",
   "ICON_PRINT": "打印床单",
@@ -381,5 +380,7 @@
   "ASSIGNTYPE_TIME_ICON": "当参与者的及时距离不满足此作业类型时，此图标将出现",
   "S89S_TOOLTIP": "产生个人 s89s pdf",
   "S89SM_TOOLTIP": "生成 4-s89s pdf 包含所有作业",
-  "TEMPLATE_NOT_AVAILABLE": "pdf不可用，请将其发送给 {{INFO__CONTACT_ANSWER}} 因此，它可以在下一个版本中可用"
+  "TEMPLATE_NOT_AVAILABLE": "pdf不可用，请将其发送给 {{INFO__CONTACT_ANSWER}} 因此，它可以在下一个版本中可用",
+  "ICON_PDF_INFINITE_COLOR": "生成带有颜色带的无限PDF，用于选定的作业",
+  "ICON_PDF_INFINITE": "生成无颜色带的无限PDF用于所选作业"
 }

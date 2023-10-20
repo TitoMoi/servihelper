@@ -152,7 +152,6 @@
   "ICON_GROUP_DELETE": "特定の日のすべての割り当てを削除します",
   "ICON_GROUP_MOVE": "すべての割り当てをある日から別の課題に移動します",
   "ICON_HEATMAP": "意味のある色のヒートマップを表示します",
-  "ICON_PDF_INFINITE": "無限リストを備えたPDFブラック/ホワイト",
   "ICON_PDF_PAGE": "ページブレーク付きのPDFブラック/ホワイト",
   "ICON_PNG": "カラフルなPNG画像",
   "ICON_PRINT": "配布するシートを印刷します",
@@ -381,5 +380,7 @@
   "ASSIGNTYPE_TIME_ICON": "このアイコンは、参加者の距離がこの割り当てタイプに満足していないときに表示されます",
   "S89S_TOOLTIP": "個人を生成します s89s pdf",
   "S89SM_TOOLTIP": "生成します 4-s89s pdf すべての割り当てを含む",
-  "TEMPLATE_NOT_AVAILABLE": "PDFはこのラングでは利用できません、に送ってください {{INFO__CONTACT_ANSWER}} そのため、次のバージョンで利用できます"
+  "TEMPLATE_NOT_AVAILABLE": "PDFはこのラングでは利用できません、に送ってください {{INFO__CONTACT_ANSWER}} そのため、次のバージョンで利用できます",
+  "ICON_PDF_INFINITE_COLOR": "選択した割り当て用のカラーバンドで無限のPDFを生成する",
+  "ICON_PDF_INFINITE": "選択した割り当て用のカラーバンドなしで無限のPDFを生成する"
 }

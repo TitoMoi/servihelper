@@ -1,16 +1,22 @@
 <div *transloco="let t" class="d-flex align-items-center">
   <ng-container *ngIf="hasAssignments(); else noAssignmentsTpl">
     <mat-icon
+      class="m-2 me-4"
+      svgIcon="pdfnocolor"
+      [matTooltip]="t('ICON_PDF_INFINITE')"
+      (click)="toPdf(false, false)"
+    ></mat-icon>
+    <mat-icon
       class="m-2"
       svgIcon="pdf"
-      [matTooltip]="t('ICON_PDF_INFINITE')"
-      (click)="toPdf(false)"
+      [matTooltip]="t('ICON_PDF_INFINITE_COLOR')"
+      (click)="toPdf(true, false)"
     ></mat-icon>
     <mat-icon
       class="m-2"
       svgIcon="pdfblue"
       [matTooltip]="t('ICON_PDF_PAGE')"
-      (click)="toPdf(true)"
+      (click)="toPdf(true, true)"
     ></mat-icon>
     <mat-icon
       class="m-2"

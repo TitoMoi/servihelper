@@ -152,7 +152,6 @@
   "ICON_GROUP_DELETE": "Belirli bir günün tüm ödevlerini silin",
   "ICON_GROUP_MOVE": "Tüm ödevleri bir günden diğerine taşıyın",
   "ICON_HEATMAP": "Anlamlı renklerle bir ısı haritası gösterin",
-  "ICON_PDF_INFINITE": "PDF Siyah/Beyaz Sonsuz Listeli",
   "ICON_PDF_PAGE": "PDF Siyah/Beyaz sayfa molalarıyla",
   "ICON_PNG": "Renkli PNG görüntüsü",
   "ICON_PRINT": "Dağıtmak için sayfalar yazdırın",
@@ -381,5 +380,7 @@
   "ASSIGNTYPE_TIME_ICON": "Bu simge, katılımcı için zaman içinde olan mesafe bu ödev türü için tatmin olmadığında görünecektir.",
   "S89S_TOOLTIP": "Bireysel Oluştur s89s pdf",
   "S89SM_TOOLTIP": "Üretmek 4-s89s pdf tüm ödevleri içerir",
-  "TEMPLATE_NOT_AVAILABLE": "PDF bu lang için mevcut değil, lütfen {{INFO__CONTACT_ANSWER}} so it can be available in the next version"
+  "TEMPLATE_NOT_AVAILABLE": "PDF bu lang için mevcut değil, lütfen {{INFO__CONTACT_ANSWER}} so it can be available in the next version",
+  "ICON_PDF_INFINITE_COLOR": "Seçilen ödevler için renk bantlarıyla sonsuz bir PDF oluşturun",
+  "ICON_PDF_INFINITE": "Seçilen ödevler için renk bantları olmadan sonsuz bir PDF oluşturun"
 }

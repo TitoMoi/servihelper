@@ -148,7 +148,6 @@
   "ICON_GROUP_DELETE": "Supprimer toutes les affectations de certains jours",
   "ICON_GROUP_MOVE": "Déplacer toutes les missions d'un jour à un autre",
   "ICON_HEATMAP": "Afficher une carte thermique avec des couleurs significatives",
-  "ICON_PDF_INFINITE": "PDF noir/blanc avec liste infinie",
   "ICON_PDF_PAGE": "PDF noir/blanc avec des pauses page",
   "ICON_PNG": "Image png colorée",
   "ICON_PRINT": "Feuilles d'impression à distribuer",
@@ -409,7 +408,6 @@
   "RESTART_APP": "La nouvelle configuration nécessite que Servihelper soit fermé et ouvert à nouveau.",
   "APP_OFFLINE": "Servihelper travaille hors ligne. Tous les fichiers de données partagés ont été copiés dans le dossier ServiHelper.",
   "APP_ONLINE_TIMEOUT_REMINDER": "Lorsque vous travaillez en ligne, l'application se ferme après 15 minutes 🕒 S'il n'y a pas d'activité.",
-
   "ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET": "Slips natifs et s89 📝",
   "HOME_IS_ONLINE_ACTIVATED": "⚠️ Le mode en ligne est activé. Veuillez vous assurer d'avoir les derniers fichiers du dossier partagé. Sinon, fermez Servihelper et obtenez-les d'abord.",
   "HOME_ONLINE_CORRUPTION": "⚠️ En cas de corruption des données, Obtenez les dernières données exportées et ajoutez l'extension .zip au fichier, unzip le fichier et écraser le dossier partagé avec son contenu",
@@ -418,7 +416,6 @@
   "CONFIG_DEFAULT_FONT_SIZE_VERTICAL": "Rapports verticaux Taille de la police par défaut dans les pixels (n'affecte pas le pdf)",
   "ICON_PDF_BAND": "Générez un PDF coloré spécialement pour le milieu de la semaine avec des bandes et jusqu'à deux semaines par page",
   "ICON_PDF_BAND_WEEKEND": "Générez un PDF coloré spécialement pour le week-end avec des groupes et jusqu'à cinq semaines par page",
-
   "CONFIG_LAST_EXPORTED_DATE": "Dernière date exportée",
   "STATISTICS_MONTH_RANGE_PICKER": "Sélectionnez une gamme de jours",
   "STATISTICS_ONLY_PRINCIPALS": "Uniquement les directeurs",
@@ -456,5 +453,7 @@
   "CONFIG_GO_ONLINE_9": "(Lorsque les autres administrateurs installent la même application, Ils doivent utiliser votre lien et le dossier apparaîtra sur leur système de fichiers avec toutes les données)",
   "CONFIG_GO_ONLINE_10": "Ensuite, informer ServiHelper de ce dossier partagé.",
   "CONFIG_GO_ONLINE_11": "Cliquez sur le bouton du curseur suivant et un champ de saisie pour coller le chemin du dossier partagé système apparaîtra.",
-  "CONFIG_GO_ONLINE_12": "L'itinéraire vers le dossier partagé change de Windows, Mac or Linux. Dans Windows devrait être quelque chose comme: G:\\My Space\\servihelper (La lettre peut changer)"
+  "CONFIG_GO_ONLINE_12": "L'itinéraire vers le dossier partagé change de Windows, Mac or Linux. Dans Windows devrait être quelque chose comme: G:\\My Space\\servihelper (La lettre peut changer)",
+  "ICON_PDF_INFINITE_COLOR": "Générer un PDF infini avec les bandes de couleur pour les affectations sélectionnées",
+  "ICON_PDF_INFINITE": "Générer un PDF infini sans les bandes de couleur pour les affectations sélectionnées"
 }

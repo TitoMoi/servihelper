@@ -151,7 +151,6 @@
   "ICON_GROUP_DELETE": "Eliminar todas las tareas de ciertos días",
   "ICON_GROUP_MOVE": "Mueva todas las tareas de un día a otro",
   "ICON_HEATMAP": "Mostrar un mapa de calor con colores significativos",
-  "ICON_PDF_INFINITE": "PDF blanco/negro con lista Infinita",
   "ICON_PDF_PAGE": "PDF blanco/negro con saltos de página",
   "ICON_PNG": "Imagen PNG colorida",
   "ICON_PRINT": "Hojas de impresión para distribuir",
@@ -423,7 +422,6 @@
   "STATISTICS_MONTH_RANGE_PICKER": "Selecciona un rango de días",
   "STATISTICS_ONLY_PRINCIPALS": "Solo principales",
   "STATISTICS_ONLY_ASSISTANTS": "Solo asistentes",
-
   "S89_TOOLTIP": "Genera el pdf s89",
   "S89M_TOOLTIP": "Genera el pdf 4-s89",
   "TEMPLATE_NOT_AVAILABLE": "Pdf no disponible para este idioma, estará disponible en la próxima versión",
@@ -458,5 +456,7 @@
   "CONFIG_GO_ONLINE_9": "(Cuando los otros admins instalan la app deben usar el link del admin principal para que sincronice la carpeta compartida y aparezca en el nuevo disco virtual)",
   "CONFIG_GO_ONLINE_10": "Cuando veamos la carpeta compartida con sus ficheros dentro, es momento de activar el modo online",
   "CONFIG_GO_ONLINE_11": "Haz click en el siguiente boton y especifica la ruta de la carpeta compartida.",
-  "CONFIG_GO_ONLINE_12": "La ruta a la carpeta compartida es diferente en Windows, Mac o Linux. En Windows es de esta manera: G:\\My Space\\servihelper (letra puede variar)"
+  "CONFIG_GO_ONLINE_12": "La ruta a la carpeta compartida es diferente en Windows, Mac o Linux. En Windows es de esta manera: G:\\My Space\\servihelper (letra puede variar)",
+  "ICON_PDF_INFINITE_COLOR": "Genera un PDF infinito con las bandas de color para las asignaciones seleccionadas",
+  "ICON_PDF_INFINITE": "Genera un PDF infinito sin las bandas de color para las asignaciones seleccionadas"
 }

@@ -219,7 +219,7 @@ export class PdfService {
 
     let doc = this.getJsPdf({
       orientation: "portrait",
-      format: [210, 1400],
+      format: [210, 9000],
       compress: true,
     });
 
@@ -250,7 +250,7 @@ export class PdfService {
 
       //Room
       const roomName = this.roomNamePipe.transform(ag.assignments[0].room);
-      doc.text(roomName, 140, y);
+      doc.text(roomName, 150, y);
 
       y += 6;
       doc.setFont(this.font, "normal");
@@ -276,7 +276,7 @@ export class PdfService {
 
         const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
 
-        doc.text(textLinesParticipants, 140, y);
+        doc.text(textLinesParticipants, 150, y);
 
         const yHeight =
           heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
@@ -291,7 +291,7 @@ export class PdfService {
    * Render an inifite list with or without the colored bands
    * @param assignmentGroups the assignment groups
    */
-  toPdfBlackWhite(
+  toPdf(
     assignmentGroups: AssignmentGroupInterface[],
     colorBands: boolean,
     isForPrint: boolean = false
@@ -332,7 +332,7 @@ export class PdfService {
 
       //Room
       const roomName = this.roomNamePipe.transform(ag.assignments[0].room);
-      doc.text(roomName, 140, y);
+      doc.text(roomName, 150, y);
 
       y = this.calculateY(doc, y + 6, isForPrint);
 
@@ -365,10 +365,10 @@ export class PdfService {
         if (colorBands) {
           doc.setFillColor(a.assignType.color);
           //Rectangles draw to bottom so we need to move the pointer up
-          doc.rect(135, y - 5 / 1.5, 4, yHeight, "F");
+          doc.rect(145, y - 5 / 1.5, 4, yHeight, "F");
         }
 
-        doc.text(textLinesParticipants, 140, y);
+        doc.text(textLinesParticipants, 150, y);
 
         y = this.calculateY(doc, y + yHeight, isForPrint);
       }

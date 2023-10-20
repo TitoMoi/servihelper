@@ -152,7 +152,6 @@
   "ICON_GROUP_DELETE": "Ștergeți toate misiunile din anumite zile",
   "ICON_GROUP_MOVE": "Mutați toate misiunile de la o zi la alta",
   "ICON_HEATMAP": "Afișați o hartă de căldură cu culori semnificative",
-  "ICON_PDF_INFINITE": "PDF negru/alb cu lista infinită",
   "ICON_PDF_PAGE": "PDF negru/alb cu pauze de pagină",
   "ICON_PNG": "Imagine PNG colorată",
   "ICON_PRINT": "Fișe de tipărire pentru a distribui",
@@ -381,5 +380,7 @@
   "ASSIGNTYPE_TIME_ICON": "Această pictogramă va apărea atunci când distanța în timp pentru participant nu este satisfăcută pentru acest tip de atribuire",
   "S89S_TOOLTIP": "Generează individ s89s pdf",
   "S89SM_TOOLTIP": "Generează 4-s89s pdf conținând toate misiunile",
-  "TEMPLATE_NOT_AVAILABLE": "PDF nu este disponibil pentru acest lang, vă rugăm să -l trimiteți la {{INFO__CONTACT_ANSWER}} so it can be available in the next version"
+  "TEMPLATE_NOT_AVAILABLE": "PDF nu este disponibil pentru acest lang, vă rugăm să -l trimiteți la {{INFO__CONTACT_ANSWER}} so it can be available in the next version",
+  "ICON_PDF_INFINITE_COLOR": "Generați un PDF infinit cu benzile de culoare pentru alocările selectate",
+  "ICON_PDF_INFINITE": "Generați un PDF infinit fără benzile de culori pentru alocările selectate"
 }

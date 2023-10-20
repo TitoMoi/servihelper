@@ -231,8 +231,8 @@ export class SelectionListComponent implements OnChanges {
    * @param isForPrint if true, adds breakpoints in the pages, false generates an infinite list
    *
    */
-  toPdf(isForPrint: boolean) {
-    this.pdfService.toPdfBlackWhite(this.assignmentGroups, true, isForPrint);
+  toPdf(colorBands: boolean, isForPrint: boolean) {
+    this.pdfService.toPdf(this.assignmentGroups, colorBands, isForPrint);
   }
 
   async toPng() {

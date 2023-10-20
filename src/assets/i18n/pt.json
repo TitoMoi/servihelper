@@ -151,7 +151,6 @@
   "ICON_GROUP_DELETE": "Exclua todas as tarefas de determinado dia",
   "ICON_GROUP_MOVE": "Mova todas as tarefas de um dia para outro",
   "ICON_HEATMAP": "Mostre um mapa de calor com cores significativas",
-  "ICON_PDF_INFINITE": "PDF preto/branco com lista infinita",
   "ICON_PDF_PAGE": "PDF preto/branco com quebras de página",
   "ICON_PNG": "Imagem PNG colorida",
   "ICON_PRINT": "Folhas de impressão para distribuir",
@@ -455,5 +454,7 @@
   "CONFIG_GO_ONLINE_9": "(Quando os outros administradores instalam o mesmo aplicativo, Eles precisam usá -lo e a pasta aparecerá no sistema de arquivos com todos os dados)",
   "CONFIG_GO_ONLINE_10": "Então, vamos notificar o servihelper sobre esta pasta compartilhada.",
   "CONFIG_GO_ONLINE_11": "Clique no próximo botão deslizante e em um campo de entrada para colar o caminho da pasta compartilhada do sistema aparecerá.",
-  "CONFIG_GO_ONLINE_12": "A rota para a pasta compartilhada muda de Windows, Mac or Linux. Em Windows deve ser algo como: G:\\My Space\\servihelper (A carta pode mudar)"
+  "CONFIG_GO_ONLINE_12": "A rota para a pasta compartilhada muda de Windows, Mac or Linux. Em Windows deve ser algo como: G:\\My Space\\servihelper (A carta pode mudar)",
+  "ICON_PDF_INFINITE_COLOR": "Gerar um pdf infinito com as faixas coloridas para as atribuições selecionadas",
+  "ICON_PDF_INFINITE": "Gerar um pdf infinito sem as faixas coloridas para as atribuições selecionadas"
 }
