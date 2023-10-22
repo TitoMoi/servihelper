@@ -129,7 +129,7 @@ export class PdfService {
    */
   checkLangExists(name: string) {
     if (this.S89 === name) {
-      const availableTemplates = ["en", "ca", "es", "fr", "pt", "it", "de"];
+      const availableTemplates = ["en", "ca", "es", "fr", "pt", "it", "de", "nl"];
       return availableTemplates.includes(this.configService.getConfig().lang);
     }
     return false;
