@@ -321,7 +321,7 @@ export class PdfService {
 
     for (const ag of assignmentGroups) {
       doc.setFont(this.font, "bold");
-      doc.setFontSize(11);
+      doc.setFontSize(12);
       //Date
       const localeDate = this.translocoLocaleService.localizeDate(
         ag.assignments[0].date,
@@ -337,7 +337,7 @@ export class PdfService {
       y = this.calculateY(doc, y + 6, isForPrint);
 
       doc.setFont(this.font, "normal");
-      doc.setFontSize(10);
+      doc.setFontSize(11);
       for (const a of ag.assignments) {
         const themeOrAssignType = a.theme || this.assignTypeNamePipe.transform(a.assignType);
 
@@ -365,7 +365,7 @@ export class PdfService {
         if (colorBands) {
           doc.setFillColor(a.assignType.color);
           //Rectangles draw to bottom so we need to move the pointer up
-          doc.rect(145, y - 5 / 1.5, 4, yHeight, "F");
+          doc.rect(145, y - 6 / 1.5, 4, yHeight, "F");
         }
 
         doc.text(textLinesParticipants, 150, y);
