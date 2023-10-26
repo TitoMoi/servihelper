@@ -215,7 +215,7 @@ export class PdfService {
     //Title
     height += 7;
     //End
-    height += 20;
+    height += 5;
 
     let doc = this.getJsPdf({
       orientation: "portrait",
