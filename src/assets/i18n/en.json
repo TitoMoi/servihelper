@@ -430,6 +430,8 @@
   "CONFIG_GO_ONLINE_10": "Then, lets notify servihelper about this shared folder.",
   "CONFIG_GO_ONLINE_11": "Click on the next slider button and an input field to paste the system shared folder path will appear.",
   "CONFIG_GO_ONLINE_12": "The route to the shared folder changes from Windows, Mac or Linux. In Windows should be something like: G:\\My Space\\servihelper (letter can change)",
-  "ICON_PDF_INFINITE_COLOR": "Generate an infinite pdf with the color bands for the selected assignments",
-  "ICON_PDF_INFINITE": "Generate an infinite pdf without the color bands for the selected assignments"
+  "ICON_PDF_INFINITE_COLOR": "Generate an infinite pdf with the color bands for digital distribution. If printing 🖨️ is needed select fewer days to fit a portrait a4 page.",
+  "ICON_PDF_INFINITE": "Generate an infinite pdf without the color bands for digital distribution. If printing 🖨️ is needed select fewer days to fit a portrait a4 page.",
+  "ICON_NO_COLOR_SECTION": "No color section",
+  "ICON_COLOR_SECTION": "Color section"
 }

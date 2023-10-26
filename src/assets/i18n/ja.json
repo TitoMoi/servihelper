@@ -381,6 +381,9 @@
   "S89S_TOOLTIP": "個人を生成します s89s pdf",
   "S89SM_TOOLTIP": "生成します 4-s89s pdf すべての割り当てを含む",
   "TEMPLATE_NOT_AVAILABLE": "PDFはこのラングでは利用できません、に送ってください {{INFO__CONTACT_ANSWER}} そのため、次のバージョンで利用できます",
-  "ICON_PDF_INFINITE_COLOR": "選択した割り当て用のカラーバンドで無限のPDFを生成する",
-  "ICON_PDF_INFINITE": "選択した割り当て用のカラーバンドなしで無限のPDFを生成する"
+
+  "ICON_PDF_INFINITE_COLOR": "デジタルディストリビューション用のカラーバンドで無限のPDFを生成する. 印刷する場合 🖨️ 必要なのは、ポートレートA4ページに適合するために選択する日数を選択します.",
+  "ICON_PDF_INFINITE": "デジタルディストリビューション用のカラーバンドなしで無限のPDFを生成する. 印刷する場合 🖨️ 必要なのは、ポートレートA4ページに適合するために選択する日数を選択します.",
+  "ICON_NO_COLOR_SECTION": "色セクションはありません",
+  "ICON_COLOR_SECTION": "色セクション"
 }

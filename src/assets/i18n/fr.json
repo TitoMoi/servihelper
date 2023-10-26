@@ -454,6 +454,9 @@
   "CONFIG_GO_ONLINE_10": "Ensuite, informer ServiHelper de ce dossier partagé.",
   "CONFIG_GO_ONLINE_11": "Cliquez sur le bouton du curseur suivant et un champ de saisie pour coller le chemin du dossier partagé système apparaîtra.",
   "CONFIG_GO_ONLINE_12": "L'itinéraire vers le dossier partagé change de Windows, Mac or Linux. Dans Windows devrait être quelque chose comme: G:\\My Space\\servihelper (La lettre peut changer)",
-  "ICON_PDF_INFINITE_COLOR": "Générer un PDF infini avec les bandes de couleur pour les affectations sélectionnées",
-  "ICON_PDF_INFINITE": "Générer un PDF infini sans les bandes de couleur pour les affectations sélectionnées"
+
+  "ICON_PDF_INFINITE_COLOR": "Générer un PDF infini avec les bandes de couleur pour la distribution numérique. Si l'impression 🖨️ est nécessaire, sélectionnez moins de jours pour s'adapter à une page portrait A4.",
+  "ICON_PDF_INFINITE": "Générer un PDF infini sans les bandes de couleur pour la distribution numérique. Si l'impression 🖨️ est nécessaire, sélectionnez moins de jours pour s'adapter à une page portrait A4.",
+  "ICON_NO_COLOR_SECTION": "Aucune section de couleur",
+  "ICON_COLOR_SECTION": "Section de couleur"
 }

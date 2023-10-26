@@ -381,6 +381,9 @@
   "S89S_TOOLTIP": "Generează individ s89s pdf",
   "S89SM_TOOLTIP": "Generează 4-s89s pdf conținând toate misiunile",
   "TEMPLATE_NOT_AVAILABLE": "PDF nu este disponibil pentru acest lang, vă rugăm să -l trimiteți la {{INFO__CONTACT_ANSWER}} so it can be available in the next version",
-  "ICON_PDF_INFINITE_COLOR": "Generați un PDF infinit cu benzile de culoare pentru alocările selectate",
-  "ICON_PDF_INFINITE": "Generați un PDF infinit fără benzile de culori pentru alocările selectate"
+
+  "ICON_PDF_INFINITE_COLOR": "Generați un PDF infinit cu benzile de culori pentru distribuție digitală. Dacă tipărirea 🖨️ este necesar să selectați mai puține zile pentru a se potrivi cu o pagină Portret A4.",
+  "ICON_PDF_INFINITE": "Generați un PDF infinit fără benzi de culoare pentru distribuție digitală. Dacă tipărirea 🖨️ este necesar să selectați mai puține zile pentru a se potrivi cu o pagină Portret A4.",
+  "ICON_NO_COLOR_SECTION": "Fără secțiune de culoare",
+  "ICON_COLOR_SECTION": "Secțiune de culoare"
 }

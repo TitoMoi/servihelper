@@ -381,6 +381,9 @@
   "S89S_TOOLTIP": "Generować indywidualne s89s pdf",
   "S89SM_TOOLTIP": "Wygenerować 4-s89s pdf Zawieranie wszystkich zadań",
   "TEMPLATE_NOT_AVAILABLE": "PDF niedostępne dla tego lang, wyślij go do {{INFO__CONTACT_ANSWER}} więc może być dostępny w następnej wersji",
-  "ICON_PDF_INFINITE_COLOR": "Wygeneruj nieskończony PDF z pasmami kolorów dla wybranych zadań",
-  "ICON_PDF_INFINITE": "Wygeneruj nieskończony pdf bez pasm kolorów dla wybranych przypisań"
+
+  "ICON_PDF_INFINITE_COLOR": "Wygeneruj nieskończony pdf z pasmami kolorów do dystrybucji cyfrowej. Jeśli drukowanie 🖨️ jest potrzebne wybierz mniej dni, aby dopasować stronę portretową A4.",
+  "ICON_PDF_INFINITE": "Wygeneruj nieskończony pdf bez pasm kolorów do dystrybucji cyfrowej. Jeśli drukowanie 🖨️ jest potrzebne wybierz mniej dni, aby dopasować stronę portretową A4.",
+  "ICON_NO_COLOR_SECTION": "Brak sekcji kolorów",
+  "ICON_COLOR_SECTION": "Sekcja kolorów"
 }

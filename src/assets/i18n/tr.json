@@ -381,6 +381,9 @@
   "S89S_TOOLTIP": "Bireysel Oluştur s89s pdf",
   "S89SM_TOOLTIP": "Üretmek 4-s89s pdf tüm ödevleri içerir",
   "TEMPLATE_NOT_AVAILABLE": "PDF bu lang için mevcut değil, lütfen {{INFO__CONTACT_ANSWER}} so it can be available in the next version",
-  "ICON_PDF_INFINITE_COLOR": "Seçilen ödevler için renk bantlarıyla sonsuz bir PDF oluşturun",
-  "ICON_PDF_INFINITE": "Seçilen ödevler için renk bantları olmadan sonsuz bir PDF oluşturun"
+
+  "ICON_PDF_INFINITE_COLOR": "Dijital dağıtım için renk bantlarıyla sonsuz bir PDF oluşturun. Baskı 🖨️ Bir Portre A4 sayfasına uymak için daha az gün seçin.",
+  "ICON_PDF_INFINITE": "Dijital dağıtım için renk bantları olmadan sonsuz bir PDF oluşturun. Baskı 🖨️ Bir Portre A4 sayfasına uymak için daha az gün seçin.",
+  "ICON_NO_COLOR_SECTION": "Renk Bölümü Yok",
+  "ICON_COLOR_SECTION": "Renk bölümü"
 }

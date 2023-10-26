@@ -457,6 +457,9 @@
   "CONFIG_GO_ONLINE_10": "Quan vegem la carpeta compartida amb els seus fitxers dins, és moment d'activar la manera en línia.",
   "CONFIG_GO_ONLINE_11": "Fes clic en el següent botó i especifica la ruta de la carpeta compartida.",
   "CONFIG_GO_ONLINE_12": "La ruta a la carpeta compartida és diferent en Windows, Mac o Linux. En Windows és d'aquesta manera: G:\\My Space\\servihelper (lletra pot variar)",
-  "ICON_PDF_INFINITE_COLOR": "Genera un PDF infinit amb les bandes de colors per a les asignacions seleccionades",
-  "ICON_PDF_INFINITE": "Genera un PDF infinit sense les bandes de colors per a les asignacions seleccionades"
+
+  "ICON_PDF_INFINITE_COLOR": "Genera un PDF infinit amb les bandes de colors per a la distribució digital. Si es necessita imprimir 🖨️ seleccioneu menys dies per ajustarse a una pàgina vertical A4.",
+  "ICON_PDF_INFINITE": "Genera un PDF infinit sense les bandes de colors per a la distribució digital. Si es necessita imprimir 🖨️ seleccioneu menys dies per ajustarse a una pàgina vertical A4.",
+  "ICON_NO_COLOR_SECTION": "Secció sense color",
+  "ICON_COLOR_SECTION": "Secció de colors"
 }

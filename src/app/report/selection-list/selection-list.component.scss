@@ -1,6 +1,11 @@
 mat-icon {
   height: 28px;
   width: 28px;
+
+  &.reduceIconSize {
+    height: 24px;
+    width: 24px;
+  }
 }
 
 table {

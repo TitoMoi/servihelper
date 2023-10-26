@@ -454,6 +454,9 @@
   "CONFIG_GO_ONLINE_10": "Dan, Laten we op de hoogte stellen servihelper over deze gedeelde map.",
   "CONFIG_GO_ONLINE_11": "Klik op de volgende schuifknop en een invoerveld om te plakken dat het System Shared Folder Path wordt weergegeven.",
   "CONFIG_GO_ONLINE_12": "De route naar de gedeelde map verandert van van Windows, Mac or Linux. in Windows zou zoiets moeten zijn: G:\\My Space\\servihelper (Brief kan veranderen)",
-  "ICON_PDF_INFINITE_COLOR": "Genereer een oneindige PDF met de kleurenbanden voor de geselecteerde opdrachten",
-  "ICON_PDF_INFINITE": "Genereer een oneindige PDF zonder de kleurenbanden voor de geselecteerde opdrachten"
+
+  "ICON_PDF_INFINITE_COLOR": "Genereer een oneindige PDF met de kleurenbanden voor digitale distributie. Als het afdrukken 🖨️ is nodig Selecteer minder dagen om een portret A4 -pagina te passen.",
+  "ICON_PDF_INFINITE": "Genereer een oneindige PDF zonder de kleurenbanden voor digitale distributie. Als het afdrukken 🖨️ is nodig Selecteer minder dagen om een portret A4 -pagina te passen.",
+  "ICON_NO_COLOR_SECTION": "Geen kleurengedeelte",
+  "ICON_COLOR_SECTION": "Kleurgedeelte"
 }

@@ -455,6 +455,9 @@
   "CONFIG_GO_ONLINE_10": "Então, vamos notificar o servihelper sobre esta pasta compartilhada.",
   "CONFIG_GO_ONLINE_11": "Clique no próximo botão deslizante e em um campo de entrada para colar o caminho da pasta compartilhada do sistema aparecerá.",
   "CONFIG_GO_ONLINE_12": "A rota para a pasta compartilhada muda de Windows, Mac or Linux. Em Windows deve ser algo como: G:\\My Space\\servihelper (A carta pode mudar)",
-  "ICON_PDF_INFINITE_COLOR": "Gerar um pdf infinito com as faixas coloridas para as atribuições selecionadas",
-  "ICON_PDF_INFINITE": "Gerar um pdf infinito sem as faixas coloridas para as atribuições selecionadas"
+
+  "ICON_PDF_INFINITE_COLOR": "Gerar um pdf infinito com as faixas coloridas para distribuição digital. Se imprimir 🖨️ é necessário selecionar menos dias para caber em uma página de retrato A4.",
+  "ICON_PDF_INFINITE": "Gerar um pdf infinito sem as faixas coloridas para distribuição digital. Se imprimir 🖨️ é necessário selecionar menos dias para caber em uma página de retrato A4.",
+  "ICON_NO_COLOR_SECTION": "Sem seção de cores",
+  "ICON_COLOR_SECTION": "Seção de cores"
 }

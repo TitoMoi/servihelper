@@ -454,6 +454,9 @@
   "CONFIG_GO_ONLINE_10": "Dann, Lassen Sie uns Servihelper über diesen gemeinsam genutzten Ordner informieren.",
   "CONFIG_GO_ONLINE_11": "Klicken Sie auf die nächste Schaltfläche Slider und ein Eingabefeld zum Einfügen des systemfreien Ordner -Ordnerpfads wird angezeigt.",
   "CONFIG_GO_ONLINE_12": "Die Route zum gemeinsam genutzten Ordner ändert sich von Windows, Mac or Linux. in Windows sollte so etwas wie sein: G:\\My Space\\servihelper (Brief kann sich ändern)",
-  "ICON_PDF_INFINITE_COLOR": "Generieren Sie ein unendliches PDF mit den Farbbändern für die ausgewählten Zuordnungen",
-  "ICON_PDF_INFINITE": "Generate an infinite pdf without the color bands for the selected assignments"
+
+  "ICON_PDF_INFINITE_COLOR": "Generieren Sie ein unendliches PDF mit den Farbbändern für die digitale Verteilung. Wenn drucken 🖨️ Es wird benötigt.",
+  "ICON_PDF_INFINITE": "Generieren Sie ein unendliches PDF ohne Farbbänder für die digitale Verteilung. Wenn drucken 🖨️ Es wird benötigt.",
+  "ICON_NO_COLOR_SECTION": "Kein Farbabschnitt",
+  "ICON_COLOR_SECTION": "Farbabschnitt"
 }

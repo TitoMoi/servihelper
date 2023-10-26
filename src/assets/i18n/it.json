@@ -452,6 +452,9 @@
   "CONFIG_GO_ONLINE_10": "Quindi, lascia che notifica servihelper su questa cartella condivisa.",
   "CONFIG_GO_ONLINE_11": "Fare clic sul pulsante Slider successivo e un campo di input per incollare il percorso della cartella condivisa del sistema.",
   "CONFIG_GO_ONLINE_12": "Il percorso verso la cartella condivisa cambia da Windows, Mac or Linux. Nella Windows dovrebbe essere qualcosa di simile: G:\\My Space\\servihelper (La lettera può cambiare)",
-  "ICON_PDF_INFINITE_COLOR": "Genera un PDF infinito con le bande di colori per le assegnazioni selezionate",
-  "ICON_PDF_INFINITE": "Genera un PDF infinito senza le bande di colori per le assegnazioni selezionate"
+
+  "ICON_PDF_INFINITE_COLOR": "Genera un PDF infinito con le bande di colori per la distribuzione digitale. Se stampa 🖨️ è necessario selezionare meno giorni per adattarsi a una pagina di ritratto A4.",
+  "ICON_PDF_INFINITE": "Genera un PDF infinito senza le bande di colori per la distribuzione digitale. Se stampa 🖨️ è necessario selezionare meno giorni per adattarsi a una pagina di ritratto A4.",
+  "ICON_NO_COLOR_SECTION": "Nessuna sezione di colore",
+  "ICON_COLOR_SECTION": "Sezione dei colori"
 }

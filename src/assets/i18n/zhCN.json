@@ -381,6 +381,9 @@
   "S89S_TOOLTIP": "产生个人 s89s pdf",
   "S89SM_TOOLTIP": "生成 4-s89s pdf 包含所有作业",
   "TEMPLATE_NOT_AVAILABLE": "pdf不可用，请将其发送给 {{INFO__CONTACT_ANSWER}} 因此，它可以在下一个版本中可用",
-  "ICON_PDF_INFINITE_COLOR": "生成带有颜色带的无限PDF，用于选定的作业",
-  "ICON_PDF_INFINITE": "生成无颜色带的无限PDF用于所选作业"
+
+  "ICON_PDF_INFINITE_COLOR": "生成一个无限的PDF，该pdf带有用于数字发行的颜色带. 如果打印 🖨️ 需要选择较少的日子以适合肖像A4页面.",
+  "ICON_PDF_INFINITE": "生成一个无限的PDF，而没有颜色带进行数字分配. 如果打印 🖨️ 需要选择较少的日子以适合肖像A4页面.",
+  "ICON_NO_COLOR_SECTION": "没有颜色部分",
+  "ICON_COLOR_SECTION": "颜色部分"
 }
