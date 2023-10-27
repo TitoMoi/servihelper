@@ -123,11 +123,10 @@ export class ParticipantService {
           }
           return 0;
         });
-
-        this.saveParticipantsToFile();
+        break;
       }
     }
-    return false;
+    this.saveParticipantsToFile();
   }
 
   /**
@@ -157,6 +156,23 @@ export class ParticipantService {
       };
 
       participant.assignTypes = [...participant.assignTypes, participantAssignTypesValue];
+      this.#participantsMap.set(participant.id, participant);
+    }
+
+    this.saveParticipantsToFile();
+  }
+
+  /**
+   *
+   * @param id the id of the assignType to update
+   * @returns
+   */
+  updateAssignType(id: string, hasAssistant: boolean) {
+    for (const participant of this.#participants) {
+      const pAssignType = participant.assignTypes.find((at) => at.assignTypeId === id);
+
+      pAssignType.canAssistant = hasAssistant;
+
       this.#participantsMap.set(participant.id, participant);
     }
 

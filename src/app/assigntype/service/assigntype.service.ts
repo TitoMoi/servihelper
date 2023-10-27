@@ -105,6 +105,7 @@ export class AssignTypeService {
         this.#assignTypes[i] = assignType;
 
         this.#assignTypesMap.set(assignType.id, assignType);
+        break;
       }
     }
     //save assignTypes with the updated assignType
