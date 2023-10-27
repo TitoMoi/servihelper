@@ -1,19 +1,33 @@
 <div *transloco="let t" class="d-flex align-items-center">
   <ng-container *ngIf="hasAssignments(); else noAssignmentsTpl">
-    <mat-icon
-      class="m-2"
-      svgIcon="pdfblue"
-      aria-label="icon"
-      [matTooltip]="t('ICON_PDF_PAGE')"
-      (click)="toPdfForPrint()"
-    ></mat-icon>
-    <mat-icon
-      class="m-2"
-      svgIcon="png"
-      aria-label="icon"
-      [matTooltip]="t('ICON_PNG')"
-      (click)="toPng()"
-    ></mat-icon>
+    <div id="noColorSectionDiv" class="border me-3">
+      <mat-icon
+        class="m-2 me-3 mb-4"
+        svgIcon="nocolorsection"
+        [matTooltip]="t('ICON_NO_COLOR_SECTION')"
+      ></mat-icon>
+      <mat-icon
+        class="m-2"
+        svgIcon="pdfnocolor"
+        aria-label="icon"
+        [matTooltip]="t('ICON_PDF_PAGE')"
+        (click)="toPdfForPrint()"
+      ></mat-icon>
+    </div>
+    <div id="colorSectionDiv" class="border">
+      <mat-icon
+        class="m-2 me-3 mb-4 reduceIconSize"
+        svgIcon="colorsection"
+        [matTooltip]="t('ICON_COLOR_SECTION')"
+      ></mat-icon>
+      <mat-icon
+        class="m-2"
+        svgIcon="png"
+        aria-label="icon"
+        [matTooltip]="t('ICON_PNG')"
+        (click)="toPng()"
+      ></mat-icon>
+    </div>
   </ng-container>
   <ng-template #noAssignmentsTpl>
     {{ t("REPORT_NO_ASSIGNMENTS") }}

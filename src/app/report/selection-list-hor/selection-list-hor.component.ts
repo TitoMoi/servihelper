@@ -190,15 +190,13 @@ export class SelectionListHorComponent implements OnChanges {
       align: "center",
     });
 
-    /* let firstTable = true; */
-
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       const tableId = `table${i}`;
       autoTable(doc, {
         html: "#" + tableId,
-        styles: { font, fontSize: 10 },
+        styles: { font, fontSize: 10, cellPadding: 1.5 },
         theme: "plain",
-        margin: { vertical: 10, horizontal: 4 },
+        margin: { vertical: 4, horizontal: 4 },
         didParseCell: (data) => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw["id"];
@@ -216,9 +214,8 @@ export class SelectionListHorComponent implements OnChanges {
           }
         },
       });
-      /* firstTable = false; */
     }
-    doc.save("assignmentsPrint");
+    doc.save("assignmentsLandscape");
   }
 
   async toPng() {
