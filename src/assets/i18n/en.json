@@ -433,5 +433,6 @@
   "ICON_PDF_INFINITE_COLOR": "Generate an infinite pdf with the color bands for digital distribution. If printing 🖨️ is needed select fewer days to fit a portrait a4 page.",
   "ICON_PDF_INFINITE": "Generate an infinite pdf without the color bands for digital distribution. If printing 🖨️ is needed select fewer days to fit a portrait a4 page.",
   "ICON_NO_COLOR_SECTION": "No color section",
-  "ICON_COLOR_SECTION": "Color section"
+  "ICON_COLOR_SECTION": "Color section",
+  "NOTE_SHOW_IN_HOME": "Show this note on the home section"
 }

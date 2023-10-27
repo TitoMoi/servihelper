@@ -385,5 +385,6 @@
   "ICON_PDF_INFINITE_COLOR": "Wygeneruj nieskończony pdf z pasmami kolorów do dystrybucji cyfrowej. Jeśli drukowanie 🖨️ jest potrzebne wybierz mniej dni, aby dopasować stronę portretową A4.",
   "ICON_PDF_INFINITE": "Wygeneruj nieskończony pdf bez pasm kolorów do dystrybucji cyfrowej. Jeśli drukowanie 🖨️ jest potrzebne wybierz mniej dni, aby dopasować stronę portretową A4.",
   "ICON_NO_COLOR_SECTION": "Brak sekcji kolorów",
-  "ICON_COLOR_SECTION": "Sekcja kolorów"
+  "ICON_COLOR_SECTION": "Sekcja kolorów",
+  "NOTE_SHOW_IN_HOME": "Pokaż tę notatkę w sekcji domowej"
 }

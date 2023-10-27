@@ -7,7 +7,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomService } from "app/room/service/room.service";
 import { writeFileSync, writeJsonSync } from "fs-extra";
 
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
 import { NgIf, NgClass, AsyncPipe } from "@angular/common";
@@ -20,6 +20,7 @@ import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 import { OnlineService } from "app/online/service/online.service";
+import { NoteInterface } from "app/note/model/note.model";
 
 @Component({
   selector: "app-home",
@@ -28,7 +29,7 @@ import { OnlineService } from "app/online/service/online.service";
   standalone: true,
   imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgIf, NgClass, AsyncPipe],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   // If zip is loaded and saved
   isZipLoaded = false;
 
@@ -38,6 +39,8 @@ export class HomeComponent {
   config$ = this.configService.config$;
 
   isOnline = this.onlineService.getOnline().isOnline;
+
+  noteHome: NoteInterface;
 
   constructor(
     private configService: ConfigService,
@@ -55,6 +58,9 @@ export class HomeComponent {
     private territoryGroupService: TerritoryGroupService,
     private dateAdapter: DateAdapter<NativeDateAdapter>
   ) {}
+  ngOnInit(): void {
+    this.noteHome = this.noteService.getNotes().find((n) => n.showInHome);
+  }
 
   downloadFiles() {
     const zip = new AdmZip();

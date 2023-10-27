@@ -20,6 +20,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
 import { AsyncPipe, NgIf } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @Component({
   selector: "app-create-update-note",
@@ -34,6 +35,7 @@ import { MatIconModule } from "@angular/material/icon";
     AutoFocusDirective,
     NgxEditorModule,
     MatButtonModule,
+    MatCheckboxModule,
     RouterLink,
     AsyncPipe,
     NgIf,
@@ -53,6 +55,7 @@ export class CreateUpdateNoteComponent implements OnDestroy {
   form: UntypedFormGroup = this.formBuilder.group({
     id: this.n?.id,
     name: [this.n?.name, Validators.required],
+    showInHome: [this.n ? this.n.showInHome : false],
     editorContent: this.n
       ? this.n.editorContent
       : new UntypedFormControl({ value: undefined, disabled: false }, Validators.required),

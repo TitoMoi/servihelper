@@ -46,6 +46,7 @@
         </div>
       </ng-container>
     </ng-container>
+    <div *ngIf="noteHome" class="border mt-4" [innerHTML]="noteHome.editorHTML"></div>
   </div>
   <ng-template #isOnlineTpl>
     {{ t("HOME_IS_ONLINE_ACTIVATED") }}

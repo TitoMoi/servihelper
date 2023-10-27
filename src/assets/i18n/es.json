@@ -461,5 +461,6 @@
   "ICON_PDF_INFINITE_COLOR": "Genera un PDF infinito con las bandas de color para la distribución digital. Si se necesita imprimir 🖨️ seleccione menos días para ajustarse a una página vertical a4.",
   "ICON_PDF_INFINITE": "Genera un PDF infinito sin las bandas de color para la distribución digital. Si se necesita imprimir 🖨️ seleccione menos días para ajustarse a una página vertical a4.",
   "ICON_NO_COLOR_SECTION": "Sección sin color",
-  "ICON_COLOR_SECTION": "Sección a color"
+  "ICON_COLOR_SECTION": "Sección a color",
+  "NOTE_SHOW_IN_HOME": "Muestra esta nota en la sección de inicio"
 }

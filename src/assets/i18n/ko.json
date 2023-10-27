@@ -385,5 +385,6 @@
   "ICON_PDF_INFINITE_COLOR": "디지털 분포를위한 컬러 밴드로 무한 PDF 생성. 인쇄하는 경우 🖨️ 초상화 a4 페이지에 맞게 몇 일을 선택해야합니다..",
   "ICON_PDF_INFINITE": "디지털 분포를위한 컬러 밴드없이 무한 PDF 생성. 인쇄하는 경우 🖨️ 초상화 a4 페이지에 맞게 몇 일을 선택해야합니다..",
   "ICON_NO_COLOR_SECTION": "색상 섹션이 없습니다",
-  "ICON_COLOR_SECTION": "색상 섹션"
+  "ICON_COLOR_SECTION": "색상 섹션",
+  "NOTE_SHOW_IN_HOME": "이 메모를 홈 섹션에 표시하십시오"
 }

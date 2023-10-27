@@ -458,5 +458,6 @@
   "ICON_PDF_INFINITE_COLOR": "Genereer een oneindige PDF met de kleurenbanden voor digitale distributie. Als het afdrukken 🖨️ is nodig Selecteer minder dagen om een portret A4 -pagina te passen.",
   "ICON_PDF_INFINITE": "Genereer een oneindige PDF zonder de kleurenbanden voor digitale distributie. Als het afdrukken 🖨️ is nodig Selecteer minder dagen om een portret A4 -pagina te passen.",
   "ICON_NO_COLOR_SECTION": "Geen kleurengedeelte",
-  "ICON_COLOR_SECTION": "Kleurgedeelte"
+  "ICON_COLOR_SECTION": "Kleurgedeelte",
+  "NOTE_SHOW_IN_HOME": "Toon deze opmerking over het thuisgedeelte"
 }

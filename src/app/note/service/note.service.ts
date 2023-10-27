@@ -50,6 +50,11 @@ export class NoteService {
    * @returns true if note is saved false if not
    */
   createNote(note: NoteInterface): boolean {
+    if (note.showInHome) {
+      for (let i = 0; i < this.#notes.length; i++) {
+        this.#notes[i].showInHome = false;
+      }
+    }
     //Generate id for the note
     note.id = nanoid(this.configService.nanoMaxCharId);
     //trim the name
@@ -77,6 +82,12 @@ export class NoteService {
    */
   updateNote(note: NoteInterface): boolean {
     //update note
+    if (note.showInHome) {
+      for (let i = 0; i < this.#notes.length; i++) {
+        this.#notes[i].showInHome = false;
+      }
+    }
+
     for (let i = 0; i < this.#notes.length; i++) {
       if (this.#notes[i].id === note.id) {
         //trim the name

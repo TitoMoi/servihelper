@@ -458,5 +458,6 @@
   "ICON_PDF_INFINITE_COLOR": "Générer un PDF infini avec les bandes de couleur pour la distribution numérique. Si l'impression 🖨️ est nécessaire, sélectionnez moins de jours pour s'adapter à une page portrait A4.",
   "ICON_PDF_INFINITE": "Générer un PDF infini sans les bandes de couleur pour la distribution numérique. Si l'impression 🖨️ est nécessaire, sélectionnez moins de jours pour s'adapter à une page portrait A4.",
   "ICON_NO_COLOR_SECTION": "Aucune section de couleur",
-  "ICON_COLOR_SECTION": "Section de couleur"
+  "ICON_COLOR_SECTION": "Section de couleur",
+  "NOTE_SHOW_IN_HOME": "Afficher cette note sur la section d'accueil"
 }

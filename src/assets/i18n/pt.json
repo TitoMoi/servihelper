@@ -459,5 +459,6 @@
   "ICON_PDF_INFINITE_COLOR": "Gerar um pdf infinito com as faixas coloridas para distribuição digital. Se imprimir 🖨️ é necessário selecionar menos dias para caber em uma página de retrato A4.",
   "ICON_PDF_INFINITE": "Gerar um pdf infinito sem as faixas coloridas para distribuição digital. Se imprimir 🖨️ é necessário selecionar menos dias para caber em uma página de retrato A4.",
   "ICON_NO_COLOR_SECTION": "Sem seção de cores",
-  "ICON_COLOR_SECTION": "Seção de cores"
+  "ICON_COLOR_SECTION": "Seção de cores",
+  "NOTE_SHOW_IN_HOME": "Mostre esta nota na seção doméstica"
 }

@@ -385,5 +385,6 @@
   "ICON_PDF_INFINITE_COLOR": "Dijital dağıtım için renk bantlarıyla sonsuz bir PDF oluşturun. Baskı 🖨️ Bir Portre A4 sayfasına uymak için daha az gün seçin.",
   "ICON_PDF_INFINITE": "Dijital dağıtım için renk bantları olmadan sonsuz bir PDF oluşturun. Baskı 🖨️ Bir Portre A4 sayfasına uymak için daha az gün seçin.",
   "ICON_NO_COLOR_SECTION": "Renk Bölümü Yok",
-  "ICON_COLOR_SECTION": "Renk bölümü"
+  "ICON_COLOR_SECTION": "Renk bölümü",
+  "NOTE_SHOW_IN_HOME": "Bu notu ana bölümde göster"
 }

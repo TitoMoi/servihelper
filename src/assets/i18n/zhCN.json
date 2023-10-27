@@ -385,5 +385,6 @@
   "ICON_PDF_INFINITE_COLOR": "生成一个无限的PDF，该pdf带有用于数字发行的颜色带. 如果打印 🖨️ 需要选择较少的日子以适合肖像A4页面.",
   "ICON_PDF_INFINITE": "生成一个无限的PDF，而没有颜色带进行数字分配. 如果打印 🖨️ 需要选择较少的日子以适合肖像A4页面.",
   "ICON_NO_COLOR_SECTION": "没有颜色部分",
-  "ICON_COLOR_SECTION": "颜色部分"
+  "ICON_COLOR_SECTION": "颜色部分",
+  "NOTE_SHOW_IN_HOME": "在家庭部分显示此注释"
 }

@@ -458,5 +458,6 @@
   "ICON_PDF_INFINITE_COLOR": "Generieren Sie ein unendliches PDF mit den Farbbändern für die digitale Verteilung. Wenn drucken 🖨️ Es wird benötigt.",
   "ICON_PDF_INFINITE": "Generieren Sie ein unendliches PDF ohne Farbbänder für die digitale Verteilung. Wenn drucken 🖨️ Es wird benötigt.",
   "ICON_NO_COLOR_SECTION": "Kein Farbabschnitt",
-  "ICON_COLOR_SECTION": "Farbabschnitt"
+  "ICON_COLOR_SECTION": "Farbabschnitt",
+  "NOTE_SHOW_IN_HOME": "Zeigen Sie diese Notiz im Heimbereich an"
 }

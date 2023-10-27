@@ -17,6 +17,11 @@
     <ngx-editor spellcheck="false" [editor]="editor" formControlName="editorContent">
     </ngx-editor>
   </div>
+  <div class="col mt-3">
+    <mat-checkbox labelPosition="before" color="primary" formControlName="showInHome">{{
+      t("NOTE_SHOW_IN_HOME")
+    }}</mat-checkbox>
+  </div>
   <div class="mt-3">
     <button
       class="me-3"

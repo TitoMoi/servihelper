@@ -1,6 +1,7 @@
 export interface NoteInterface {
   id: string;
   name: string;
+  showInHome: boolean;
   editorContent: Record<string, any>;
   editorHTML: string;
 }
