@@ -8,14 +8,15 @@ The program is free.
 
 Your data is managed internally on the local device with .json and .gz files, so it never goes to the internet.
 
-Its purpose is for help the Jehovah's witnesses to create and manage all kind of assignments.
+Its purpose is for help the Jehovah's witnesses to:
 
-Also supports territory creation and distribution.
+- Create and manage all kind of assignments _(Also public speech assignments)_
+- Territory creation and distribution.
 
-Also supports public speech assignments.
+The purpose of Servihelper is:
 
-The purpose of servihelper is not to be the best app out there, but to provide a free cost for the user and free cost for the
-developer _(Servihelper has no mantainance fee)_ and also provide a very friendly user interface.
+- Provide a free cost for the user _(you)_ and a free cost for the developer _(me)_
+- Also provide a very friendly user interface.
 
 ## Download links
 
@@ -69,17 +70,17 @@ Diferent persons working _at the same time_ and being free is not possible.
 
 But it's possible to work one after another.
 
-Paid mode:
+**Paid mode**:
 Configure a remote desktop and avoid the need to export and import data manually. This required a person
 with medium/ advanced skills and a bit of overhead to configure.
 
 [Guide to configure a remote desktop with kamatera](./KAMATERA.md)
 
-Free mode:
+**Free mode**:
 
 _(All the next scenarios have no sync process, all imported files from person one will override the existing ones of person two)_
 
-1. Export the app data from administrator one and importing in the app of the administrator two.
+1. Export the app data from administrator one and importing in the app of the administrator two _(not recommended)_
 
    - Do not activate online mode
    - Do not use shared folder _(google drive or others...)_
@@ -88,14 +89,14 @@ _(All the next scenarios have no sync process, all imported files from person on
 2. Enable built in online mode with a shared folder _(google drive, one drive...)_
 
    - Required setup inside Servihelper in the config section to configure the shared folder.
-   - Required knowledge of how to install and run google drive _(or other solution)_
+   - Required knowledge of how to install and run google drive app _(or other solution)_
    - Your responsability to ensure that all files are sync before working.
    - Warning: Sometimes data is not updated on real time. _(some complexity but later has no overhead, just check you are online and google drive is working and sync)_
 
-3. Only use google drive to share copies of servihelper _(or other solution)_
+3. Use only google drive _(or other solution)_ to centralize and share copies of servihelper. 
 
    - Do not enable online mode.
-   - Required knowledge of how to install and run google drive _(or other solution)_
+   - Required knowledge of how to install and run google drive app _(or other solution)_
    - Your responsability to ensure that you have the last backup before working.
    - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, this is the most robust approach and the one i recommend)_
 
