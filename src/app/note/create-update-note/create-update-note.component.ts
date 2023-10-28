@@ -50,7 +50,7 @@ export class CreateUpdateNoteComponent implements OnDestroy {
   isUpdate = this.n ? true : false;
 
   editor: Editor = new Editor();
-  toolbar: Toolbar = [["bold"], ["italic"], ["underline"]];
+  toolbar: Toolbar = [["bold"], ["italic"], ["underline"], ["bullet_list"]];
 
   form: UntypedFormGroup = this.formBuilder.group({
     id: this.n?.id,
