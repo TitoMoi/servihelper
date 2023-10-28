@@ -32,11 +32,6 @@ mac -> security tab -> general tab and below the section are the instructions to
 
 More help: [Open a Mac app from an unidentified developer](https://support.apple.com/en-gb/guide/mac-help/mh40616/mac)
 
-## ¿What can be done?
-
-- All kinds of assignments can be created and distributed physically _(print)_ or digitally.
-- Create territories and distribute them.
-
 ## Example images
 
 Native, general purpose assignment slip:
@@ -47,7 +42,7 @@ S89 slip with theme if is return visit or initial call:
 
 <img src="./pictures/assignment-s89-example.png" alt= "example" width="330" height="420">
 
-## Example images Territory
+## Example territory images
 
 Overview:
 <img src="./pictures/map.png" alt= "map-overview">
@@ -62,19 +57,13 @@ Heatmap:
 
 Available interface languages are at the end of the page.
 
-The sheet _(assignment)_ to distribute can be customized, so you can add your language when distributing.
+In case your language is not supported, the native sheet _(assignment)_ to distribute can be customized so you can add your language when distributing.
 
 ## What cannot be done or implemented?
 
 Diferent persons working _at the same time_ and being free is not possible.
 
 But it's possible to work one after another.
-
-**Paid mode**:
-Configure a remote desktop and avoid the need to export and import data manually. This required a person
-with medium/ advanced skills and a bit of overhead to configure.
-
-[Guide to configure a remote desktop with kamatera](./KAMATERA.md)
 
 **Free mode**:
 
@@ -98,24 +87,31 @@ _(All the next scenarios have no sync process, all imported files from person on
    - Do not enable online mode.
    - Required knowledge of how to install and run google drive app _(or other solution)_
    - Your responsability to ensure that you have the last backup before working.
-   - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, this is the most robust approach and the one i recommend)_
+   - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, this is the most robust approach and the one i recommend)_  
+
+**Paid mode**:
+Configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure _(not recommended)_
+
+[Guide to configure a remote desktop with kamatera](./KAMATERA.md)
 
 ## ¿Can I distribute it?
 
-Yes, although it is recommended that you distribute the download link, as a new version may have come out with some correction.
+Yes, although it is recommended that you distribute the download link, as a new version may have come out with some correction or new feature.
 
 ## ¿How do I distribute the assignments?
 
-- Digital distribution
-
+- Digital distribution:
   - In the assignments section, an icon sheet appears in the -Image- column. Click, watch the preview and copy to clipboard. Then paste on whatsapp.
-  - On report section select "multiple sheets" and click "generate png files" button, it will create a folder for each participant with his assignments in .png format.
+  - On report section select "multiple sheets and s89 slips" and click "generate png files" button for native or s89 slips, it will create a folder for each participant with his assignments.
 
-- Print - On the reports section select "multiple sheets" there is a print button.
+- Print:
+  - On the reports section select "multiple sheets" there is a print button for the native slips.
+  - On generating the s89 slips you can open the pdf and print it.
 
 ## ¿How do I distribute the territories?
 
-- There is a link that you can distribute for each territory. If you want to short the link before send it you can use some online tool like shortUrl.
+- There is a link that you can distribute for each territory.
+- You can also distribute a pdf _(more friendly)_
 
 ## When selecting the participant for the assignment, a number is displayed next to it, what is it?
 
