@@ -93,7 +93,10 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   allowedAssignTypesIds = [];
   config$: Observable<ConfigInterface> = this.configService.config$;
   roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
-  currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
+  currentRoleId$: Observable<string> = this.config$.pipe(
+    map((config) => config.role),
+    distinctUntilChanged()
+  );
 
   observer: IntersectionObserver = new IntersectionObserver((entries) => {
     //observe the last row
@@ -153,7 +156,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   ngOnInit() {
     this.subscription.add(
-      this.currentRoleId$.pipe(skip(1), distinctUntilChanged()).subscribe(() => {
+      this.currentRoleId$.pipe(skip(1)).subscribe(() => {
         this.router.navigateByUrl("home").then(() =>
           this.router.navigate(["assignment/create"], {
             skipLocationChange: true,
