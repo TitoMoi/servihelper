@@ -101,8 +101,6 @@ The key diference is the mantainance.
 Clearly, the emulated version is more mantainable as we do not depend on third persons or new pdf version
 that cannot be manipulated.
 
-## Pdf forms
-
 ## Reminders (experimental)
 
 It is possible to send a reminder with the google event old api _(can be disabled at any moment)_: https://support.google.com/calendar/thread/128416249/calendar-url-generator-which-parameters?hl=en
@@ -115,3 +113,5 @@ On `assignment.component.ts` we do a fake pagination.
 
 To reload `assignment.component.ts` we do a navigation to home and then we navigate back to assignment but to his child create: `assignment/create` this is because navigating only to assignment the routes become inestable, it seems its because the inner `router-outlet` in assignment component, but navigating to a direct children doesnt harm the routing.
 We navigate to the children and click on cancel button and we are back to assignment list.
+
+The translation values for the assign type keys and room keys are in `src/assets/i18n` this is a dependency on the translation. The administrator can give a name to the assign type and room keys and this initial translation wont be used anymore.
