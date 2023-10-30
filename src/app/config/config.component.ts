@@ -230,7 +230,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
       this.matSnackBar.open(
         this.translocoService.translate("CONFIG_SAVED") + " 🔧 ",
         this.translocoService.translate("CLOSE"),
-        { duration: 3500 }
+        { duration: 2500 }
       );
     }
     this.subscription.unsubscribe();

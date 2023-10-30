@@ -12,7 +12,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { Observable, Subscription, combineLatest, map } from "rxjs";
 import { RoleInterface } from "app/roles/model/role.model";
 import { ConfigInterface } from "app/config/model/config.model";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ExportService } from "app/services/export.service";
 import { MatIconModule } from "@angular/material/icon";
@@ -21,6 +21,7 @@ import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { LockService } from "app/lock/service/lock.service";
 import { OnlineService } from "app/online/service/online.service";
 import { MatButtonModule } from "@angular/material/button";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-available-participant",
@@ -33,6 +34,7 @@ import { MatButtonModule } from "@angular/material/button";
     MatTooltipModule,
     MatIconModule,
     MatButtonModule,
+    MatSnackBarModule,
   ],
   templateUrl: "./available-participant.component.html",
   styleUrls: ["./available-participant.component.scss"],
@@ -68,6 +70,8 @@ export class AvailableParticipantComponent {
     private exportService: ExportService,
     private lockService: LockService,
     private onlineService: OnlineService,
+    private translocoService: TranslocoService,
+    private matSnackBar: MatSnackBar,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -101,6 +105,12 @@ export class AvailableParticipantComponent {
   }
 
   ngOnDestroy(): void {
+    this.matSnackBar.open(
+      this.translocoService.translate("CONFIG_SAVED"),
+      this.translocoService.translate("CLOSE"),
+      { duration: 2500 }
+    );
+
     this.subscription.unsubscribe();
     this.participantService.saveParticipantsToFile();
     this.lockService.updateTimestamp();
