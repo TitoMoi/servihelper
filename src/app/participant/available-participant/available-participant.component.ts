@@ -58,6 +58,9 @@ export class AvailableParticipantComponent {
   //To not create too many subscriptions on the template
   isNetStatusOffline = false;
 
+  //To show or not the snackbar
+  hasChanges = false;
+
   config$: Observable<ConfigInterface> = this.configService.config$;
   roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
   currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
@@ -105,15 +108,16 @@ export class AvailableParticipantComponent {
   }
 
   ngOnDestroy(): void {
-    this.matSnackBar.open(
-      this.translocoService.translate("CONFIG_SAVED"),
-      this.translocoService.translate("CLOSE"),
-      { duration: 2500 }
-    );
-
     this.subscription.unsubscribe();
-    this.participantService.saveParticipantsToFile();
-    this.lockService.updateTimestamp();
+    if (this.hasChanges) {
+      this.matSnackBar.open(
+        this.translocoService.translate("CONFIG_SAVED"),
+        this.translocoService.translate("CLOSE"),
+        { duration: 2000 }
+      );
+      this.participantService.saveParticipantsToFile();
+      this.lockService.updateTimestamp();
+    }
   }
 
   checkIncludesAssignTypeAsPrincipal(
@@ -140,6 +144,7 @@ export class AvailableParticipantComponent {
     assignType: AssignTypeInterface,
     isPrincipal: boolean
   ) {
+    this.hasChanges = true;
     //No participant means all participants unmark if some has mark or mark all if noone has mark
     if (!participant) {
       let hasSomeCheck;
