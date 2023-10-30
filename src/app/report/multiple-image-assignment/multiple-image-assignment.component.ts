@@ -32,7 +32,6 @@ import { ExportService } from "app/services/export.service";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { MatChipsModule } from "@angular/material/chips";
 import { PdfService } from "app/services/pdf.service";
-import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
@@ -91,7 +90,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private exportService: ExportService,
     private publicThemeService: PublicThemeService,
     private pdfService: PdfService,
-    private assignTypeNamePipe: AssignTypeNamePipe,
     private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef
   ) {}
@@ -139,7 +137,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         principal: this.participantService.getParticipant(a.principal).name,
         assistant: this.participantService.getParticipant(a.assistant)?.name,
         room: this.roomNamePipe.transform(this.roomService.getRoom(a.room)),
-        assignType: this.assignTypeNamePipe.transform(
+        assignType: this.assignTypeService.getNameOrTranslation(
           this.assignTypeService.getAssignType(a.assignType)
         ),
         footerNote: this.noteService.getNote(a.footerNote)?.editorHTML,
@@ -259,9 +257,10 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       if (this.pdfService.isAllowedTypeForS89(a)) {
         const pdfBytes = await this.pdfService.toPdfS89([a], false);
         const participantName = this.participantService.getParticipant(a.principal).name;
-        const assignTypeName = this.assignTypeNamePipe.transform(
+        const assignTypeName = this.assignTypeService.getNameOrTranslation(
           this.assignTypeService.getAssignType(a.assignType)
         );
+
         //Ensure the filename is valid for the system
         const fileNamePath = filenamifyPath(
           path.join(

@@ -55,7 +55,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
     private roomService: RoomService,
-    private assignTypeNamePipe: AssignTypeNamePipe,
     private roomNamePipe: RoomNamePipe
   ) {
     this.searchForm = this.formBuilder.group({
@@ -97,7 +96,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
       this.results.push({
         isPrincipalResult: isPrincipalLiteral,
-        assignTypeName: this.assignTypeNamePipe.transform(assignType),
+        assignTypeName: this.assignTypeService.getNameOrTranslation(assignType),
         date: new Date(assignment.date),
         roomName: this.roomNamePipe.transform(room),
       });

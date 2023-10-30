@@ -6,7 +6,6 @@ import {
 import { Injectable } from "@angular/core";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { ParticipantService } from "app/participant/service/participant.service";
-import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
@@ -26,7 +25,6 @@ export class SharedService {
   appVersion = version;
 
   constructor(
-    private assignTypeNamePipe: AssignTypeNamePipe,
     private sheetTitleService: SheetTitleService,
     private roomService: RoomService,
     private assignmentService: AssignmentService,
@@ -149,7 +147,7 @@ export class SharedService {
     const filename =
       this.participantService.getParticipant(assignment.principal).name +
       "-" +
-      this.assignTypeNamePipe.transform(
+      this.assignTypeService.getNameOrTranslation(
         this.assignTypeService.getAssignType(assignment.assignType)
       );
     return filename;

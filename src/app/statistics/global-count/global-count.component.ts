@@ -58,7 +58,6 @@ import { CommonModule } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { ExportService } from "app/services/export.service";
-import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
@@ -113,7 +112,6 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     private translocoService: TranslocoService,
     private sortService: SortService,
     private exportService: ExportService,
-    private assignTypeNamePipe: AssignTypeNamePipe,
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef
   ) {
@@ -243,7 +241,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
         participant.lastAssignmentDate = assignment.date;
         //Search the assignmentType and inject
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
-        participant.lastAssignType = this.assignTypeNamePipe.transform(assignType);
+        participant.lastAssignType = this.assignTypeService.getNameOrTranslation(assignType);
       }
     }
 
@@ -275,7 +273,8 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
         participant.penultimateAssignmentDate = assignment?.date;
         //Search the assignmentType and inject
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
-        participant.penultimateAssignType = this.assignTypeNamePipe.transform(assignType);
+        participant.penultimateAssignType =
+          this.assignTypeService.getNameOrTranslation(assignType);
       }
     }
 

@@ -19,7 +19,6 @@ import {
 } from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
 import { AssignTypes } from "app/assigntype/model/assigntype.model";
-import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 export type pdfFileNames = "S89" | "S89M";
@@ -53,7 +52,6 @@ export class PdfService {
     private translocoLocaleService: TranslocoLocaleService,
     private participantService: ParticipantService,
     private assignTypeService: AssignTypeService,
-    private assignTypeNamePipe: AssignTypeNamePipe,
     private roomNamePipe: RoomNamePipe,
     private roomService: RoomService
   ) {}
@@ -182,7 +180,9 @@ export class PdfService {
 
   shortAssignTypeTheme(doc: jsPDF, a: AssignmentInterface): string {
     const at = this.assignTypeService.getAssignType(a.assignType);
-    let themeOrAssignType = a.theme ? a.theme : this.assignTypeNamePipe.transform(at);
+    let themeOrAssignType = a.theme
+      ? a.theme
+      : this.assignTypeService.getNameOrTranslation(at);
 
     let wordLength = 95;
     //Before create text lines check the length
@@ -256,7 +256,8 @@ export class PdfService {
       doc.setFont(this.font, "normal");
       doc.setFontSize(10);
       for (const a of ag.assignments) {
-        const themeOrAssignType = a.theme || this.assignTypeNamePipe.transform(a.assignType);
+        const themeOrAssignType =
+          a.theme || this.assignTypeService.getNameOrTranslation(a.assignType);
 
         let striped = themeOrAssignType.substring(0, 220);
 
@@ -339,7 +340,8 @@ export class PdfService {
       doc.setFont(this.font, "normal");
       doc.setFontSize(10.5);
       for (const a of ag.assignments) {
-        const themeOrAssignType = a.theme || this.assignTypeNamePipe.transform(a.assignType);
+        const themeOrAssignType =
+          a.theme || this.assignTypeService.getNameOrTranslation(a.assignType);
 
         let striped = themeOrAssignType.substring(0, 220);
 

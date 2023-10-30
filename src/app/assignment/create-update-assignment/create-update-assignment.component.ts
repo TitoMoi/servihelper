@@ -223,7 +223,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog,
     private onlineService: OnlineService,
-    private assignTypeNamePipe: AssignTypeNamePipe,
     private roomNamePipe: RoomNamePipe,
     private cdr: ChangeDetectorRef
   ) {
@@ -938,7 +937,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       messageList.push(
         this.roomNamePipe.transform(this.roomService.getRoom(pa.room)) +
           " - " +
-          this.assignTypeNamePipe.transform(
+          this.assignTypeService.getNameOrTranslation(
             this.assignTypeService.getAssignType(pa.assignType)
           )
       );

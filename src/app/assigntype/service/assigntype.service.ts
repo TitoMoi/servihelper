@@ -4,6 +4,7 @@ import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
+import { TranslocoService } from "@ngneat/transloco";
 
 @Injectable({
   providedIn: "root",
@@ -28,7 +29,14 @@ export class AssignTypeService {
     "congregationBibleStudy",
   ];
 
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private translocoService: TranslocoService
+  ) {}
+
+  getNameOrTranslation(at: AssignTypeInterface) {
+    return at.name ? at.name : this.translocoService.translate(at.tKey);
+  }
 
   /**
    *
