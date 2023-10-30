@@ -19,7 +19,6 @@ import {
 } from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
 import { AssignTypes } from "app/assigntype/model/assigntype.model";
-import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 export type pdfFileNames = "S89" | "S89M";
 @Injectable({
@@ -52,7 +51,6 @@ export class PdfService {
     private translocoLocaleService: TranslocoLocaleService,
     private participantService: ParticipantService,
     private assignTypeService: AssignTypeService,
-    private roomNamePipe: RoomNamePipe,
     private roomService: RoomService
   ) {}
 
@@ -249,7 +247,7 @@ export class PdfService {
       doc.text(localeDate, x, y);
 
       //Room
-      const roomName = this.roomNamePipe.transform(ag.assignments[0].room);
+      const roomName = this.roomService.getNameOrTranslation(ag.assignments[0].room);
       doc.text(roomName, 150, y);
 
       y += 6;
@@ -332,7 +330,7 @@ export class PdfService {
       doc.text(localeDate, x, y);
 
       //Room
-      const roomName = this.roomNamePipe.transform(ag.assignments[0].room);
+      const roomName = this.roomService.getNameOrTranslation(ag.assignments[0].room);
       doc.text(roomName, 150, y);
 
       y = this.calculateY(doc, y + 6, isForPrint);

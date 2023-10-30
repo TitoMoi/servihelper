@@ -20,7 +20,6 @@ import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { NgIf, NgFor } from "@angular/common";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
-import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
   selector: "app-search",
@@ -54,8 +53,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
-    private roomService: RoomService,
-    private roomNamePipe: RoomNamePipe
+    private roomService: RoomService
   ) {
     this.searchForm = this.formBuilder.group({
       participant: [undefined],
@@ -98,7 +96,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         isPrincipalResult: isPrincipalLiteral,
         assignTypeName: this.assignTypeService.getNameOrTranslation(assignType),
         date: new Date(assignment.date),
-        roomName: this.roomNamePipe.transform(room),
+        roomName: this.roomService.getNameOrTranslation(room),
       });
     }
   }

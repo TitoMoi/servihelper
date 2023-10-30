@@ -120,8 +120,6 @@ export class AssignmentService {
   }
 
   /**
-   *
-   * @returns save in memory assignments to file, true if assignments are saved to disk or false if some error happens.
    * performance: dont mark flag hasChanged to true because this.assignments in memory is already updated
    */
   saveAssignmentsToFile() {

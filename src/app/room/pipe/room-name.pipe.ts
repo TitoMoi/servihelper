@@ -1,19 +1,15 @@
-import { Injectable, Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from "@angular/core";
 import { RoomInterface } from "../model/room.model";
-import { TranslocoService } from "@ngneat/transloco";
+import { RoomService } from "../service/room.service";
 
-//We need the pipe becomes injectable for excel.service.ts
 @Pipe({
   name: "roomNamePipe",
   standalone: true,
 })
-@Injectable({
-  providedIn: "root",
-})
 export class RoomNamePipe implements PipeTransform {
-  constructor(private translocoService: TranslocoService) {}
+  constructor(private roomService: RoomService) {}
 
   transform(r: RoomInterface): string {
-    return r.name ? r.name : this.translocoService.translate(r.tKey);
+    return this.roomService.getNameOrTranslation(r);
   }
 }

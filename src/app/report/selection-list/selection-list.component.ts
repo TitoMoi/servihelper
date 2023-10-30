@@ -81,7 +81,6 @@ export class SelectionListComponent implements OnChanges {
     private sortService: SortService,
     private pdfService: PdfService,
     private exportService: ExportService,
-    private roomNamePipe: RoomNamePipe,
     private translocoLocaleService: TranslocoLocaleService,
     private cdr: ChangeDetectorRef
   ) {}
@@ -359,19 +358,19 @@ export class SelectionListComponent implements OnChanges {
       if (hasMultipleRooms) {
         const [room1, room2] = this.getRooms(ag);
         doc.text(
-          this.roomNamePipe.transform(room1),
+          this.roomService.getNameOrTranslation(room1),
           x + this.getMaxWidth(hasMultipleRooms),
           y
         );
         doc.text(
-          this.roomNamePipe.transform(room2),
+          this.roomService.getNameOrTranslation(room2),
           x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(hasMultipleRooms),
           y
         );
       } else {
         const [room1] = this.getRooms(ag);
         doc.text(
-          this.roomNamePipe.transform(room1),
+          this.roomService.getNameOrTranslation(room1),
           x + this.getMaxWidth(hasMultipleRooms),
           y
         );

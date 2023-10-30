@@ -4,6 +4,7 @@ import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
+import { TranslocoService } from "@ngneat/transloco";
 
 @Injectable({
   providedIn: "root",
@@ -16,8 +17,14 @@ export class RoomService {
   //The map of rooms for look up of rooms
   #roomsMap: Map<string, RoomInterface> = new Map();
 
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private translocoService: TranslocoService
+  ) {}
 
+  getNameOrTranslation(r: RoomInterface): string {
+    return r.name ? r.name : this.translocoService.translate(r.tKey);
+  }
   /**
    *
    * @returns RoomInterface[] the array of rooms
