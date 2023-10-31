@@ -75,19 +75,19 @@ _(All the next scenarios have no sync process, all imported files from person on
    - Do not use shared folder _(google drive or others...)_
    - _(Easy, no complexity but an overhead to understand wich and where is the latest copy)_
 
-2. Enable built in online mode with a shared folder _(google drive, one drive...)_
+2. Enable built in online mode with a shared folder _(google drive, one drive... also not recommended)_
 
    - Required setup inside Servihelper in the config section to configure the shared folder.
    - Required knowledge of how to install and run google drive app _(or other solution)_
    - Your responsability to ensure that all files are sync before working.
    - Warning: Sometimes data is not updated on real time. _(some complexity but later has no overhead, just check you are online and google drive is working and sync)_
 
-3. Use only google drive _(or other solution)_ to centralize and share copies of servihelper. 
+3. Use **only** google drive _(or other solution)_ to centralize and share copies of servihelper. 
 
    - Do not enable online mode.
    - Required knowledge of how to install and run google drive app _(or other solution)_
    - Your responsability to ensure that you have the last backup before working.
-   - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, this is the most robust approach and the one i recommend)_  
+   - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, **this is the most robust approach and the one i recommend**)_  
 
 **Paid mode**:
 Configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure _(not recommended)_
