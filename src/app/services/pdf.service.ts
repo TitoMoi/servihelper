@@ -85,19 +85,16 @@ export class PdfService {
   }
 
   addJapaneseFont() {
-    //Japanese
     this.jsPdf.addFileToVFS("meiryo-normal.ttf", meiryo);
     this.jsPdf.addFont("meiryo-normal.ttf", "meiryo", "normal");
   }
 
   addKoreanFont() {
-    //Korean
     this.jsPdf.addFileToVFS("malgun.ttf", malgun);
     this.jsPdf.addFont("malgun.ttf", "malgun", "normal");
   }
 
   addSimplifiedChineseFont() {
-    //Simplified Chinese
     this.jsPdf.addFileToVFS("simsun.ttf", simsun);
     this.jsPdf.addFont("simsun.ttf", "simsun", "normal");
   }
@@ -111,17 +108,13 @@ export class PdfService {
     this.jsPdf.addFont("notosansbold.ttf", "notosans", "normal", 700);
   }
 
-  /**
-   *
-   * @returns meiryo for japanese, malgun for korean, simsun for simplified chinese and noto sans for else.
-   */
   getFontForLang() {
     return this.font;
   }
 
   /**
    *
-   * @param name the lang
+   * @param name Check if the lang exists for the template name
    */
   checkLangExists(name: string) {
     if (this.S89 === name) {
