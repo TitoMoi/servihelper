@@ -42,14 +42,14 @@
       <a
         mat-raised-button
         color="warn"
-        [disabled]="!mapForm.controls.participants.value.length"
+        [disabled]="!territoryForm.controls.participants.value.length"
         [matTooltip]="t('MAP_CLEAR_HISTORY')"
         (click)="clearHistory()"
         >{{ t("MAP_CREATE_CLEAR_HISTORY") }}</a
       >
     </div>
   </div>
-  <form [formGroup]="mapForm" novalidate>
+  <form [formGroup]="territoryForm" novalidate>
     <div class="row">
       <div class="col">
         <mat-form-field>
@@ -84,7 +84,7 @@
           <mat-select
             required
             multiple
-            [formControl]="mapForm.controls.groups"
+            [formControl]="territoryForm.controls.groups"
             [disableRipple]="true"
           >
             <mat-option *ngFor="let tg of territoryGroups" [value]="tg.id">
@@ -109,13 +109,14 @@
         svgIcon="png"
         aria-label="icon"
         [matTooltip]="t('ICON_PNG')"
-        (click)="toPng(mapForm.controls.name.value)"
+        (click)="toPng(territoryForm.controls.name.value)"
       ></mat-icon>
     </button>
   </div>
   <!-- The reference for leaflet to load the map -->
   <!-- its map2 because on router navigation from heatmap its not displayed as it should be -->
   <div id="map2" class="mb-2"></div>
+  <div *ngIf="imageExists()" id="imageDiv" class="mb-2"></div>
   <button mat-raised-button type="button" class="me-3" (click)="goBack()">
     {{ t("BUTTON_CANCEL") }}
   </button>
@@ -124,7 +125,7 @@
     color="primary"
     type="button"
     (click)="save()"
-    [disabled]="mapForm.invalid || (netStatusOffline$ | async)"
+    [disabled]="territoryForm.invalid || (netStatusOffline$ | async)"
   >
     {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
     <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>

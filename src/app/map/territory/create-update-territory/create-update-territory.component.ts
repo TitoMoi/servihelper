@@ -87,10 +87,11 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   isUpdate = this.loadedTerritory ? true : false;
 
   //TerritoryContextInterface
-  mapForm = this.formBuilder.group({
+  territoryForm = this.formBuilder.group({
     id: [this.loadedTerritory?.id],
     name: [this.loadedTerritory?.name, Validators.required],
     poligonId: [this.loadedTerritory?.poligonId],
+    image: [this.loadedTerritory?.image],
     assignedDates: [this.loadedTerritory?.assignedDates || []],
     returnedDates: [this.loadedTerritory?.returnedDates || []],
     participants: [this.loadedTerritory?.participants || []],
@@ -127,7 +128,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   get selectedParticipant() {
     if (this.isTerritoryActive()) {
-      return this.mapForm.controls.participants.value.at(-1);
+      return this.territoryForm.controls.participants.value.at(-1);
     }
   }
 
@@ -238,6 +239,10 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.markerRef.push(new Marker(latLng).addTo(this.map));
   }
 
+  imageExists() {
+    return Boolean(this.territoryForm.controls.image.value);
+  }
+
   /** @returns boolean polygonExists if we have id but its not persisted yet
    */
   polygonExists() {
@@ -296,7 +301,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     const polygon = this.polygonForm.value as PolygonInterface;
     //handle participant and save territory
     this.handleParticipant(this.temporalParticipant);
-    const territory = this.mapForm.value as TerritoryContextInterface;
+    const territory = this.territoryForm.value as TerritoryContextInterface;
     if (this.isUpdate) {
       if (this.polygonExistsAndPersisted()) {
         this.polygonService.updatePolygon(polygon);
@@ -333,15 +338,15 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
    */
   isTerritoryActive() {
     return (
-      this.mapForm.controls.participants.value.length >
-      this.mapForm.controls.returnedDates.value.length
+      this.territoryForm.controls.participants.value.length >
+      this.territoryForm.controls.returnedDates.value.length
     );
   }
 
   clearHistory() {
-    this.mapForm.controls.participants.setValue([]);
-    this.mapForm.controls.assignedDates.setValue([]);
-    this.mapForm.controls.returnedDates.setValue([]);
+    this.territoryForm.controls.participants.setValue([]);
+    this.territoryForm.controls.assignedDates.setValue([]);
+    this.territoryForm.controls.returnedDates.setValue([]);
     this.save();
   }
 
@@ -353,19 +358,19 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   handleParticipant(participantId) {
     if (participantId) {
       if (!this.isUpdate) {
-        this.mapForm.controls.participants.value.push(participantId);
-        this.mapForm.controls.assignedDates.value.push(new Date());
+        this.territoryForm.controls.participants.value.push(participantId);
+        this.territoryForm.controls.assignedDates.value.push(new Date());
       } else {
         /* update, we can already have a participant that has returned the territory
       he can be assigned again and it counts as a new assignment */
         //case territory is active but we need to change the participant
         if (this.isTerritoryActive()) {
-          this.mapForm.controls.participants.value.pop();
-          this.mapForm.controls.participants.value.push(participantId);
+          this.territoryForm.controls.participants.value.pop();
+          this.territoryForm.controls.participants.value.push(participantId);
         } else {
           //Territory is returned and its not the first time as this case is !this.isUpdate
-          this.mapForm.controls.participants.value.push(participantId);
-          this.mapForm.controls.assignedDates.value.push(new Date());
+          this.territoryForm.controls.participants.value.push(participantId);
+          this.territoryForm.controls.assignedDates.value.push(new Date());
         }
       }
     }

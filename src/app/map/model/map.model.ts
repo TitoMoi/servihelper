@@ -10,6 +10,7 @@ export interface TerritoryContextInterface {
   id: string;
   name: string;
   poligonId: string;
+  image: string; //base64
   assignedDates?: Date[]; //When its assigned
   returnedDates?: Date[]; //When its returned
   participants?: string[]; //Participants assigned
