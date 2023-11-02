@@ -62,6 +62,7 @@ export class ConfigService {
   sheetTitlePath;
   publicThemePath;
   territoriesPath;
+  terrImagesPath;
   territoryGroupsPath;
   polygonsPath;
 
@@ -111,6 +112,7 @@ export class ConfigService {
     this.sheetTitlePath = path.join(this.sourceFilesPath, this.sheetTitleFilename);
     this.publicThemePath = path.join(this.sourceFilesPath, this.publicThemeFilename);
     this.territoriesPath = path.join(this.sourceFilesPath, this.territoriesFilename);
+    this.terrImagesPath = path.join(this.sourceFilesPath, "images");
     this.territoryGroupsPath = path.join(this.sourceFilesPath, this.territoryGroupsFilename);
     this.polygonsPath = path.join(this.sourceFilesPath, this.polygonsFilename);
     return true;

@@ -27,6 +27,7 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, Validators, NonNullableFormBuilder } from "@angular/forms";
 import { TerritoryService } from "../service/territory.service";
 import { PolygonService } from "../service/polygon.service";
+import { TerrImageService } from "../service/terr-image.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { AutoFocusDirective } from "app/directives/autofocus/autofocus.directive";
@@ -43,12 +44,16 @@ import { MatOptionModule } from "@angular/material/core";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
 import { ExportService } from "app/services/export.service";
 import { OnlineService } from "app/online/service/online.service";
+import { NgOptimizedImage } from "@angular/common";
+import { nanoid } from "nanoid";
+import path from "path";
 
 @Component({
   selector: "app-create-update-territory",
   standalone: true,
   imports: [
     CommonModule,
+    NgOptimizedImage,
     TranslocoModule,
     MatButtonModule,
     RouterLink,
@@ -72,6 +77,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   private territoryService = inject(TerritoryService);
   private territoryGroupService = inject(TerritoryGroupService);
   private polygonService = inject(PolygonService);
+  private terrImageService = inject(TerrImageService);
   private configService = inject(ConfigService);
   private cdr = inject(ChangeDetectorRef);
   private participantService = inject(ParticipantService);
@@ -91,7 +97,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     id: [this.loadedTerritory?.id],
     name: [this.loadedTerritory?.name, Validators.required],
     poligonId: [this.loadedTerritory?.poligonId],
-    image: [this.loadedTerritory?.image],
+    image: [], //Just a temporal store until its saved to disk
+    imageId: [this.loadedTerritory?.imageId],
     assignedDates: [this.loadedTerritory?.assignedDates || []],
     returnedDates: [this.loadedTerritory?.returnedDates || []],
     participants: [this.loadedTerritory?.participants || []],
@@ -239,8 +246,47 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.markerRef.push(new Marker(latLng).addTo(this.map));
   }
 
+  /**
+   * Generate a URL for the img src attr
+   */
+  uploadImageFile(event) {
+    const files = event.target.files;
+
+    if (files.length === 0) return;
+
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.territoryForm.controls.image.setValue(reader.result);
+      this.cdr.detectChanges();
+    };
+    reader.readAsDataURL(files[0]);
+  }
+
+  imagePath() {
+    if (this.imagePersisted()) {
+      return path.join(
+        this.configService.terrImagesPath,
+        this.territoryForm.controls.imageId.value
+      );
+    }
+    if (this.imageExists()) {
+      return this.territoryForm.controls.image.value;
+    }
+
+    return null;
+  }
+
   imageExists() {
     return Boolean(this.territoryForm.controls.image.value);
+  }
+
+  imagePersisted() {
+    return this.territoryForm.controls.imageId.value;
   }
 
   /** @returns boolean polygonExists if we have id but its not persisted yet
@@ -301,7 +347,17 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     const polygon = this.polygonForm.value as PolygonInterface;
     //handle participant and save territory
     this.handleParticipant(this.temporalParticipant);
+
     const territory = this.territoryForm.value as TerritoryContextInterface;
+
+    //If image exists save or update it
+    const image = this.territoryForm.controls.image.value;
+    if (image) {
+      const imageId = nanoid(this.configService.nanoMaxCharId);
+      territory.imageId = imageId;
+      this.terrImageService.saveImage(image, imageId);
+    }
+
     if (this.isUpdate) {
       if (this.polygonExistsAndPersisted()) {
         this.polygonService.updatePolygon(polygon);

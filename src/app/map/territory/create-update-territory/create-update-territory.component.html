@@ -95,7 +95,7 @@
       </div>
     </div>
   </form>
-  <div class="d-flex">
+  <div class="d-flex align-items-center">
     <button mat-icon-button [disabled]="!polygonExists()">
       <mat-icon
         svgIcon="clipboard"
@@ -104,7 +104,7 @@
         (click)="toClipboard()"
       ></mat-icon>
     </button>
-    <button mat-icon-button [disabled]="!polygonExists()">
+    <button mat-icon-button [disabled]="!polygonExists()" class="me-5">
       <mat-icon
         svgIcon="png"
         aria-label="icon"
@@ -112,11 +112,25 @@
         (click)="toPng(territoryForm.controls.name.value)"
       ></mat-icon>
     </button>
+    <div>
+      <label for="image-upload">
+        <mat-icon
+          id="addImageId"
+          svgIcon="addimage"
+          [matTooltip]="t('TERRITORY_ADD_IMAGE')"
+        ></mat-icon>
+      </label>
+      <input id="image-upload" type="file" (change)="uploadImageFile($event)" />
+    </div>
   </div>
   <!-- The reference for leaflet to load the map -->
   <!-- its map2 because on router navigation from heatmap its not displayed as it should be -->
-  <div id="map2" class="mb-2"></div>
-  <div *ngIf="imageExists()" id="imageDiv" class="mb-2"></div>
+  <div
+    [attr.hidden]="territoryForm.controls.image.value || territoryForm.controls.imageId.value"
+    id="map2"
+    class="mb-2"
+  ></div>
+  <div><img *ngIf="imageExists()" [src]="imagePath()" id="imageDiv" class="mb-2" /></div>
   <button mat-raised-button type="button" class="me-3" (click)="goBack()">
     {{ t("BUTTON_CANCEL") }}
   </button>
