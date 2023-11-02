@@ -34,12 +34,9 @@
           >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
         >
       </div>
-      <a
-        mat-raised-button
-        [disabled]="!polygonExists() || isUpdate"
-        (click)="removePolygon()"
-        >{{ t("MAP_CREATE_REMOVE_POLYGON") }}</a
-      >
+      <a mat-raised-button [disabled]="!polygonExists()" (click)="removePolygon()">{{
+        t("MAP_CREATE_REMOVE_POLYGON")
+      }}</a>
     </div>
     <div class="d-flex align-items-center">
       <a
