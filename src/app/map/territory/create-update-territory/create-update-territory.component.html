@@ -5,10 +5,21 @@
         mat-raised-button
         color="primary"
         class="me-2"
-        [disabled]="!markerRef.length"
+        [disabled]="!markerRef.length || polygonExists()"
         (click)="removeMarkers()"
-        >{{ t("MAP_CREATE_REMOVE_MARKERS") }}</a
+        >{{ t("MAP_CREATE_REMOVE_MARKERS") }}
+        <mat-icon class="ms-1" svgIcon="mapmarker"></mat-icon
+      ></a>
+      <a
+        mat-raised-button
+        color="primary"
+        class="me-2"
+        [disabled]="!markerRef.length || polygonExists()"
+        (click)="removeLastMarker()"
       >
+        {{ t("MAP_CREATE_DELETE_LAST_MARKER") }}
+        <mat-icon class="ms-1" svgIcon="mapmarker"></mat-icon>
+      </a>
       <div
         [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')"
         [matTooltipDisabled]="!isCreatePolygonBtnDisabled()"

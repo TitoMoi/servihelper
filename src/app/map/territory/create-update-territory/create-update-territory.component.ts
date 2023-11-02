@@ -269,6 +269,14 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.polygonForm.controls.latLngList.patchValue([]);
   }
 
+  removeLastMarker() {
+    this.markerRef.pop().remove();
+    //Remove the last point in the polygon
+    const latLngList = this.polygonForm.controls.latLngList.value;
+    latLngList.pop();
+    this.polygonForm.controls.latLngList.patchValue(latLngList);
+  }
+
   //We need to save or update the polygon and the map, also update the last click point
   save() {
     //Save polygon
