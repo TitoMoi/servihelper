@@ -175,8 +175,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "¿ servihelper 란 무엇입니까?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "기계에서 실행되는 프로그램입니다.데이터는 내부적으로 관리되므로 인터넷으로 가지 않습니다.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "지도를 만듭니다",
-  "MAP_CLEAR_HISTORY": "날짜를 생성하고 반환 한 모든 참가자를 지우지 만 영토를 유지하십시오.",
-  "MAP_CREATE_CLEAR_HISTORY": "명확한 역사",
   "MAP_CREATE_CREATE_POLYGON": "다각형을 만듭니다",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "적어도 두 개의 마커가 필요합니다",
   "MAP_CREATE_REMOVE_MARKERS": "마커를 제거하십시오",
@@ -387,6 +385,7 @@
   "ICON_NO_COLOR_SECTION": "색상 섹션이 없습니다",
   "ICON_COLOR_SECTION": "색상 섹션",
   "NOTE_SHOW_IN_HOME": "이 메모를 홈 섹션에 표시하십시오",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "조심하세요!영토는 다시 시작되며 이름 만 있고지도는 유지됩니다.현재 참가자와 모든 날짜가 지워집니다",
+  "MAP_CREATE_CLEAR_HISTORY": "역사를 삭제하십시오",
+  "MAP_CREATE_DELETE_LAST_MARKER": "마지막 마커를 삭제하십시오"
 }

@@ -175,8 +175,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "什么是Servihelper？",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "这是一个在计算机上运行的程序。您的数据在内部进行管理，因此它永远不会访问Internet。",
   "MAP_BUTTON_CREATE_MAP_TITLE": "创建地图",
-  "MAP_CLEAR_HISTORY": "清除所有参与者，创建和返回日期，但保持领土",
-  "MAP_CREATE_CLEAR_HISTORY": "清除历史记录",
   "MAP_CREATE_CREATE_POLYGON": "创建多边形",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "至少需要两个标记",
   "MAP_CREATE_REMOVE_MARKERS": "删除标记",
@@ -387,6 +385,7 @@
   "ICON_NO_COLOR_SECTION": "没有颜色部分",
   "ICON_COLOR_SECTION": "颜色部分",
   "NOTE_SHOW_IN_HOME": "在家庭部分显示此注释",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "当心！该领域重新启动，只保留了名称和地图。目前的参与者和所有日期已清除",
+  "MAP_CREATE_CLEAR_HISTORY": "删除历史记录",
+  "MAP_CREATE_DELETE_LAST_MARKER": "删除最后一个标记"
 }

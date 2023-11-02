@@ -175,8 +175,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "¿Co to jest Servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Jest to program działający na maszynie.Twoje dane są zarządzane wewnętrznie, więc nigdy nie trafia do Internetu.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Utwórz mapę",
-  "MAP_CLEAR_HISTORY": "Wyczyść wszystkich uczestników, utworzone i zwrócone daty, ale zachowaj terytorium",
-  "MAP_CREATE_CLEAR_HISTORY": "Czysta historia",
   "MAP_CREATE_CREATE_POLYGON": "Utwórz Polygon",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "Wymagane są co najmniej dwa markery",
   "MAP_CREATE_REMOVE_MARKERS": "Usuń markery",
@@ -387,6 +385,7 @@
   "ICON_NO_COLOR_SECTION": "Brak sekcji kolorów",
   "ICON_COLOR_SECTION": "Sekcja kolorów",
   "NOTE_SHOW_IN_HOME": "Pokaż tę notatkę w sekcji domowej",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "Bądź ostrożny!Terytorium jest ponownie uruchomione, tylko nazwa i mapa są przechowywane.Obecny uczestnik i wszystkie daty są oczyszczone",
+  "MAP_CREATE_CLEAR_HISTORY": "Usuń historię",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Usuń ostatni znacznik"
 }

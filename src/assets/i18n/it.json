@@ -172,8 +172,6 @@
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "È un programma che funziona sulla macchina. I tuoi dati sono gestiti internamente, quindi non vanno mai su Internet.",
   "Info_how_to_work_answer": "Il primo crea i suoi compiti, esporta i dati dalla sezione domestica e li lascia in un sito condiviso da quelli responsabili, il secondo lo importa e crea i suoi compiti, e così via.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Crea mappa",
-  "MAP_CLEAR_HISTORY": "Cancella tutti i partecipanti, create e restituite date ma mantieni il territorio",
-  "MAP_CREATE_CLEAR_HISTORY": "Cancellare la cronologia",
   "MAP_CREATE_CREATE_POLYGON": "Crea poligono",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "Sono richiesti almeno due marcatori",
   "MAP_CREATE_REMOVE_MARKERS": "Rimuovere i marcatori",
@@ -458,6 +456,7 @@
   "ICON_NO_COLOR_SECTION": "Nessuna sezione di colore",
   "ICON_COLOR_SECTION": "Sezione dei colori",
   "NOTE_SHOW_IN_HOME": "Mostra questa nota nella sezione Home",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "Stai attento! Il territorio viene riavviato, solo il nome e la mappa sono conservati.L'attuale partecipante e tutte le date vengono cancellate",
+  "MAP_CREATE_CLEAR_HISTORY": "Elimina la storia",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Elimina l'ultimo marcatore"
 }

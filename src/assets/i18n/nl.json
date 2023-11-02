@@ -172,8 +172,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "¿Wat is servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Het is een programma dat op de machine draait.Uw gegevens worden intern beheerd, dus het gaat nooit naar internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Maak kaart",
-  "MAP_CLEAR_HISTORY": "Wis alle deelnemers, gecreëerde en geretourneerde datums, maar bewaar het territorium",
-  "MAP_CREATE_CLEAR_HISTORY": "Geschiedenis wissen",
   "MAP_CREATE_CREATE_POLYGON": "Maak een polygoon",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "Er zijn ten minste twee markeringen vereist",
   "MAP_CREATE_REMOVE_MARKERS": "Markeringen verwijderen",
@@ -460,6 +458,7 @@
   "ICON_NO_COLOR_SECTION": "Geen kleurengedeelte",
   "ICON_COLOR_SECTION": "Kleurgedeelte",
   "NOTE_SHOW_IN_HOME": "Toon deze opmerking over het thuisgedeelte",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "Wees voorzichtig!Het gebied wordt opnieuw gestart, alleen de naam en de kaart worden bewaard.De huidige deelnemer en alle datums worden gewist",
+  "MAP_CREATE_CLEAR_HISTORY": "Verwijder geschiedenis",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Verwijder de laatste marker"
 }

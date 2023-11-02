@@ -175,8 +175,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "¿Τι είναι το Servihelper;",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Πρόκειται για ένα πρόγραμμα που εκτελείται στο μηχάνημα.Τα δεδομένα σας διαχειρίζονται εσωτερικά, οπότε δεν πηγαίνει ποτέ στο Διαδίκτυο.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Δημιουργία χάρτη",
-  "MAP_CLEAR_HISTORY": "Καθαρίστε όλους τους συμμετέχοντες, που δημιουργήθηκαν και επέστρεψαν ημερομηνίες, αλλά διατηρούν την επικράτεια",
-  "MAP_CREATE_CLEAR_HISTORY": "Καθαρισμός ιστορικού",
   "MAP_CREATE_CREATE_POLYGON": "Δημιουργία πολύγωνου",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "Απαιτούνται τουλάχιστον δύο δείκτες",
   "MAP_CREATE_REMOVE_MARKERS": "Αφαιρέστε τους δείκτες",
@@ -387,6 +385,7 @@
   "ICON_NO_COLOR_SECTION": "Χωρίς χρωματική ενότητα",
   "ICON_COLOR_SECTION": "Χρωματική ενότητα",
   "NOTE_SHOW_IN_HOME": "Δείξτε αυτήν τη σημείωση στο τμήμα του σπιτιού",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "Πρόσεχε!Το έδαφος επανεκκινείται, μόνο το όνομα και ο χάρτης διατηρούνται.Ο σημερινός συμμετέχων και όλες οι ημερομηνίες εκκαθαρίζονται",
+  "MAP_CREATE_CLEAR_HISTORY": "Διαγραφή ιστορικού",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Διαγραφή τελευταίου δείκτη"
 }

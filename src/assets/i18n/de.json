@@ -459,7 +459,7 @@
   "ICON_COLOR_SECTION": "Farbabschnitt",
   "NOTE_SHOW_IN_HOME": "Zeigen Sie diese Notiz im Heimbereich an",
 
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_CLEAR_HISTORY": "Delete history",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "Seien Sie vorsichtig!Das Gebiet wird neu gestartet, nur der Name und die Karte werden aufbewahrt.Der derzeitige Teilnehmer und alle Daten werden gelöscht",
+  "MAP_CREATE_CLEAR_HISTORY": "Verlauf löschen",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Letzte Marker löschen"
 }

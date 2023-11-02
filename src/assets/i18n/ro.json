@@ -173,8 +173,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "Ce este Servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Este un program care rulează pe mașină.Datele dvs. sunt gestionate intern, deci nu merge niciodată pe internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Creați hartă",
-  "MAP_CLEAR_HISTORY": "Ștergeți toți participanții, create și returnate date, dar păstrați teritoriul",
-  "MAP_CREATE_CLEAR_HISTORY": "Sterge istoricul",
   "MAP_CREATE_CREATE_POLYGON": "Creați poligon",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "Sunt necesare cel puțin doi markeri",
   "MAP_CREATE_REMOVE_MARKERS": "Scoateți markerii",
@@ -461,6 +459,7 @@
   "ICON_NO_COLOR_SECTION": "Fără secțiune de culoare",
   "ICON_COLOR_SECTION": "Secțiune de culoare",
   "NOTE_SHOW_IN_HOME": "Afișați această notă în secțiunea de acasă",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "Atenție!Teritoriul este repornit, doar numele și harta sunt păstrate.Participantul actual și toate datele sunt șterse",
+  "MAP_CREATE_CLEAR_HISTORY": "Ștergeți istoria",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Ștergeți ultimul marker"
 }

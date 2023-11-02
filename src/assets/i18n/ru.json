@@ -172,8 +172,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "¿Что такое Servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Это программа, которая работает на машине.Ваши данные управляются внутри, поэтому они никогда не ходят в Интернет.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Создать карту",
-  "MAP_CLEAR_HISTORY": "Очистите всех участников, созданы и возвращенные даты, но сохраните территорию",
-  "MAP_CREATE_CLEAR_HISTORY": "Чистая история",
   "MAP_CREATE_CREATE_POLYGON": "Создать многоугольник",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "Требуется как минимум два маркера",
   "MAP_CREATE_REMOVE_MARKERS": "Удалить маркеры",
@@ -465,6 +463,7 @@
   "ICON_NO_COLOR_SECTION": "Нет цвета",
   "ICON_COLOR_SECTION": "Цветовая секция",
   "NOTE_SHOW_IN_HOME": "Покажите эту записку в разделе «Домашний",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "Будь осторожен!Территория перезапускается, только имя и карта сохраняются.Текущий участник и все даты очищены",
+  "MAP_CREATE_CLEAR_HISTORY": "Удалить историю",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Удалить последний маркер"
 }

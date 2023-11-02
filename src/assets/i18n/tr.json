@@ -175,8 +175,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "¿ServiHelper nedir?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Makinede çalışan bir programdır.Verileriniz dahili olarak yönetilir, bu nedenle asla internete gitmez.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Harita Oluştur",
-  "MAP_CLEAR_HISTORY": "Tüm katılımcıları temizleyin, tarihleri oluşturdu ve döndürdü, ancak bölgeyi koru",
-  "MAP_CREATE_CLEAR_HISTORY": "Açık tarih",
   "MAP_CREATE_CREATE_POLYGON": "Çokgen Oluştur",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "En az iki işaret gereklidir",
   "MAP_CREATE_REMOVE_MARKERS": "İşaretleri kaldır",
@@ -387,6 +385,7 @@
   "ICON_NO_COLOR_SECTION": "Renk Bölümü Yok",
   "ICON_COLOR_SECTION": "Renk bölümü",
   "NOTE_SHOW_IN_HOME": "Bu notu ana bölümde göster",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "Dikkat olmak! Bölge yeniden başlatıldı, sadece isim ve harita tutulur.Mevcut katılımcı ve tüm tarihler temizlendi",
+  "MAP_CREATE_CLEAR_HISTORY": "Geçmişi sil",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Son İşaretleyiciyi Sil"
 }

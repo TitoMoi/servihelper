@@ -175,8 +175,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "Serviherhelper क्या है?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "यह एक कार्यक्रम है जो मशीन पर चलता है।आपका डेटा आंतरिक रूप से प्रबंधित किया जाता है, इसलिए यह कभी भी इंटरनेट पर नहीं जाता है।",
   "MAP_BUTTON_CREATE_MAP_TITLE": "नक्शा बनाएँ",
-  "MAP_CLEAR_HISTORY": "सभी प्रतिभागियों को साफ करें, बनाई और लौटी तारीखें लेकिन क्षेत्र को बनाए रखें",
-  "MAP_CREATE_CLEAR_HISTORY": "इतिहास मिटा दें",
   "MAP_CREATE_CREATE_POLYGON": "बहुभुज बनाएँ",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "कम से कम दो मार्करों की आवश्यकता होती है",
   "MAP_CREATE_REMOVE_MARKERS": "मार्कर निकालें",
@@ -387,6 +385,7 @@
   "ICON_NO_COLOR_SECTION": "कोई रंग अनुभाग नहीं",
   "ICON_COLOR_SECTION": "रंग धारा",
   "NOTE_SHOW_IN_HOME": "होम सेक्शन पर यह नोट दिखाएं",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "ध्यान से!क्षेत्र को फिर से शुरू किया जाता है, केवल नाम और नक्शा रखा जाता है।वर्तमान प्रतिभागी और सभी तिथियों को मंजूरी दे दी गई है",
+  "MAP_CREATE_CLEAR_HISTORY": "हिस्ट्री हटाएं",
+  "MAP_CREATE_DELETE_LAST_MARKER": "अंतिम मार्कर हटाएं"
 }

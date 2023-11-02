@@ -175,8 +175,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "¿servihelperとは何ですか？",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "マシンで実行されるプログラムです。データは内部で管理されているため、インターネットに行くことはありません。",
   "MAP_BUTTON_CREATE_MAP_TITLE": "マップを作成します",
-  "MAP_CLEAR_HISTORY": "すべての参加者をクリアし、作成および返品された日付ですが、領土を維持します",
-  "MAP_CREATE_CLEAR_HISTORY": "履歴をクリア",
   "MAP_CREATE_CREATE_POLYGON": "ポリゴンを作成します",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "少なくとも2つのマーカーが必要です",
   "MAP_CREATE_REMOVE_MARKERS": "マーカーを取り外します",
@@ -387,6 +385,7 @@
   "ICON_NO_COLOR_SECTION": "色セクションはありません",
   "ICON_COLOR_SECTION": "色セクション",
   "NOTE_SHOW_IN_HOME": "自宅のセクションにこのメモを表示します",
-  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CLEAR_HISTORY": "気をつけて！領土が再起動され、名前とマップのみが保持されます。現在の参加者とすべての日付はクリアされています",
+  "MAP_CREATE_CLEAR_HISTORY": "履歴を削除します",
+  "MAP_CREATE_DELETE_LAST_MARKER": "最後のマーカーを削除します"
 }
