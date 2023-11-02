@@ -238,12 +238,19 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.markerRef.push(new Marker(latLng).addTo(this.map));
   }
 
-  /**
-   *
-   * @returns polygonExists if we have id
+  /** @returns boolean polygonExists if we have id but its not persisted yet
    */
   polygonExists() {
     return Boolean(this.polygonForm.controls.id.value);
+  }
+
+  /** @returns boolean polygonExistsAndPersisted if we have id and its persisted
+   */
+  polygonExistsAndPersisted() {
+    return (
+      this.polygonExists() &&
+      this.polygonService.getPolygon(this.polygonForm.controls.id.value)
+    );
   }
 
   createPolygon() {
@@ -291,8 +298,13 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.handleParticipant(this.temporalParticipant);
     const territory = this.mapForm.value as TerritoryContextInterface;
     if (this.isUpdate) {
-      if (this.polygonExists()) {
+      if (this.polygonExistsAndPersisted()) {
         this.polygonService.updatePolygon(polygon);
+      }
+      //Only exists in the UI
+      if (this.polygonExists()) {
+        const polygonId = this.polygonService.createPolygon(polygon);
+        territory.poligonId = polygonId;
       }
       this.territoryService.updateTerritory(territory);
     } else {
