@@ -163,12 +163,14 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       : this.configService.getConfig().lastMapClick;
     const zoom = this.isUpdate ? 17 : 13;
 
-    this.map = new Map("map2", { center }).setView(viewPosition, zoom);
+    this.map = new Map("map2", { center, attributionControl: false }).setView(
+      viewPosition,
+      zoom
+    );
 
     this.tile = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(this.map);
 
     //Add polygon if exists
