@@ -124,7 +124,7 @@
     color="primary"
     type="button"
     (click)="save()"
-    [disabled]="mapForm.invalid || !polygonExists() || (netStatusOffline$ | async)"
+    [disabled]="mapForm.invalid || (netStatusOffline$ | async)"
   >
     {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
     <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>

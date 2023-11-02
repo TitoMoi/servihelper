@@ -158,9 +158,11 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       tempPolygon.remove();
     }
 
-    const viewPosition = this.isUpdate
-      ? this.polygonForm.controls.latLngList.value![0]
-      : this.configService.getConfig().lastMapClick;
+    //Its possible to create a territory without the polygon
+    const viewPosition =
+      this.isUpdate && this.polygonExists()
+        ? this.polygonForm.controls.latLngList.value![0]
+        : this.configService.getConfig().lastMapClick;
     const zoom = this.isUpdate ? 17 : 13;
 
     this.map = new Map("map2", { center, attributionControl: false }).setView(
@@ -207,8 +209,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   ngOnDestroy(): void {
     this.markerRef.forEach((m) => m.remove());
     this.leafletPolygon?.remove();
-    this.tile.remove();
-    this.map.remove();
+    this.tile?.remove();
+    this.map?.remove();
     this.subscription.unsubscribe();
   }
 
@@ -277,22 +279,31 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.polygonForm.controls.latLngList.patchValue(latLngList);
   }
 
-  //We need to save or update the polygon and the map, also update the last click point
+  /**
+   * Save or update the territory, also update the last click point.
+   * The polygon may exist.
+   */
   save() {
-    //Save polygon
     const polygon = this.polygonForm.value as PolygonInterface;
     //handle participant and save territory
     this.handleParticipant(this.temporalParticipant);
     const territory = this.mapForm.value as TerritoryContextInterface;
     if (this.isUpdate) {
-      this.polygonService.updatePolygon(polygon);
+      if (this.polygonExists()) {
+        this.polygonService.updatePolygon(polygon);
+      }
       this.territoryService.updateTerritory(territory);
     } else {
-      const polygonId = this.polygonService.createPolygon(polygon);
-      territory.poligonId = polygonId;
+      if (this.polygonExists()) {
+        const polygonId = this.polygonService.createPolygon(polygon);
+        territory.poligonId = polygonId;
+      }
+
       this.territoryService.createTerritory(territory);
     }
-    this.configService.updateConfigByKey("lastMapClick", polygon.latLngList[0]);
+    if (this.polygonExists()) {
+      this.configService.updateConfigByKey("lastMapClick", polygon.latLngList[0]);
+    }
     //navigate to parent
     const route = this.isUpdate ? "../.." : "..";
     this.router.navigate([route], {
