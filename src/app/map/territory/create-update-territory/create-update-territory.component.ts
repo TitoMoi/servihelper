@@ -250,10 +250,12 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.leafletPolygon = new Polygon(this.polygonForm.controls.latLngList.value).addTo(
       this.map
     );
-    //Because on reset we remove the id and in an update of poligons it should remain
-    this.isUpdate
-      ? this.polygonForm.controls.id.setValue(this.loadedPolygon.id)
-      : this.polygonForm.controls.id.setValue("1");
+    //Because on reset we remove the id and on update of the poligon the id should remain
+    if (this.isUpdate && this.polygonExists()) {
+      this.polygonForm.controls.id.setValue(this.loadedPolygon.id);
+      return;
+    }
+    this.polygonForm.controls.id.setValue("1");
   }
 
   removePolygon() {
