@@ -460,5 +460,7 @@
   "ICON_PDF_INFINITE": "Gerar um pdf infinito sem as faixas coloridas para distribuição digital. Se imprimir 🖨️ é necessário selecionar menos dias para caber em uma página de retrato A4.",
   "ICON_NO_COLOR_SECTION": "Sem seção de cores",
   "ICON_COLOR_SECTION": "Seção de cores",
-  "NOTE_SHOW_IN_HOME": "Mostre esta nota na seção doméstica"
+  "NOTE_SHOW_IN_HOME": "Mostre esta nota na seção doméstica",
+  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
 }

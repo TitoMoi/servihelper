@@ -386,5 +386,7 @@
   "ICON_PDF_INFINITE": "Wygeneruj nieskończony pdf bez pasm kolorów do dystrybucji cyfrowej. Jeśli drukowanie 🖨️ jest potrzebne wybierz mniej dni, aby dopasować stronę portretową A4.",
   "ICON_NO_COLOR_SECTION": "Brak sekcji kolorów",
   "ICON_COLOR_SECTION": "Sekcja kolorów",
-  "NOTE_SHOW_IN_HOME": "Pokaż tę notatkę w sekcji domowej"
+  "NOTE_SHOW_IN_HOME": "Pokaż tę notatkę w sekcji domowej",
+  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
 }

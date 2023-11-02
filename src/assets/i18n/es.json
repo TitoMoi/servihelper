@@ -462,5 +462,7 @@
   "ICON_PDF_INFINITE": "Genera un PDF infinito sin las bandas de color para la distribución digital. Si se necesita imprimir 🖨️ seleccione menos días para ajustarse a una página vertical a4.",
   "ICON_NO_COLOR_SECTION": "Sección sin color",
   "ICON_COLOR_SECTION": "Sección a color",
-  "NOTE_SHOW_IN_HOME": "Muestra esta nota en la sección de inicio"
+  "NOTE_SHOW_IN_HOME": "Muestra esta nota en la sección de inicio",
+  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
 }

@@ -149,8 +149,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "¿What is servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "It is a program that runs on the machine. Your data is managed internally, so it never goes to the internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Create map",
-  "MAP_CLEAR_HISTORY": "Clear all participants, created and returned dates but keep the territory",
-  "MAP_CREATE_CLEAR_HISTORY": "Clear history",
   "MAP_CREATE_CREATE_POLYGON": "Create polygon",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "At least two markers are required",
   "MAP_CREATE_REMOVE_MARKERS": "Remove markers",
@@ -434,5 +432,9 @@
   "ICON_PDF_INFINITE": "Generate an infinite pdf without the color bands for digital distribution. If printing 🖨️ is needed select fewer days to fit a portrait a4 page.",
   "ICON_NO_COLOR_SECTION": "No color section",
   "ICON_COLOR_SECTION": "Color section",
-  "NOTE_SHOW_IN_HOME": "Show this note on the home section"
+  "NOTE_SHOW_IN_HOME": "Show this note on the home section",
+
+  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
+  "MAP_CREATE_CLEAR_HISTORY": "Delete history",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
 }

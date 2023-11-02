@@ -460,5 +460,7 @@
   "ICON_PDF_INFINITE": "Generați un PDF infinit fără benzi de culoare pentru distribuție digitală. Dacă tipărirea 🖨️ este necesar să selectați mai puține zile pentru a se potrivi cu o pagină Portret A4.",
   "ICON_NO_COLOR_SECTION": "Fără secțiune de culoare",
   "ICON_COLOR_SECTION": "Secțiune de culoare",
-  "NOTE_SHOW_IN_HOME": "Afișați această notă în secțiunea de acasă"
+  "NOTE_SHOW_IN_HOME": "Afișați această notă în secțiunea de acasă",
+  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
 }

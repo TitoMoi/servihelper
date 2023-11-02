@@ -386,5 +386,7 @@
   "ICON_PDF_INFINITE": "Dijital dağıtım için renk bantları olmadan sonsuz bir PDF oluşturun. Baskı 🖨️ Bir Portre A4 sayfasına uymak için daha az gün seçin.",
   "ICON_NO_COLOR_SECTION": "Renk Bölümü Yok",
   "ICON_COLOR_SECTION": "Renk bölümü",
-  "NOTE_SHOW_IN_HOME": "Bu notu ana bölümde göster"
+  "NOTE_SHOW_IN_HOME": "Bu notu ana bölümde göster",
+  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
 }

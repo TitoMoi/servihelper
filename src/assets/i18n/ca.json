@@ -173,8 +173,8 @@
   "INFO__WHAT_IS_SERVIHELPER": "Què és servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "És un programa que s'executa en la màquina. Les seues dades es gestionen de manera interna, per la qual cosa mai ixen a internet.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Crea mapa",
-  "MAP_CLEAR_HISTORY": "Esborreu tots els participants, creen i retornen les dates, però mantenen el territori",
-  "MAP_CREATE_CLEAR_HISTORY": "Història clara",
+  "MAP_CLEAR_HISTORY": "Compte! El territori es reinicia, nomès es manté el nom i el mapa. El participant actual i les dates de asignació i retorn s'esborren totes",
+  "MAP_CREATE_CLEAR_HISTORY": "Eliminar historial",
   "MAP_CREATE_CREATE_POLYGON": "Crea polígon",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "Es requereixen almenys dos marcadors",
   "MAP_CREATE_REMOVE_MARKERS": "Remoure els marcadors",
@@ -325,7 +325,7 @@
   "TERRITORY_TABLE_HEADER_DELETE": "Esborrar",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Enllaç de mapa",
   "TERRITORY_TABLE_HEADER_NAME": "Nom",
-  "TERRITORY_TABLE_HEADER_RETURN": "Territori de retorn",
+  "TERRITORY_TABLE_HEADER_RETURN": "Retornar territori",
   "TERRITORY_TABLE_NEVER_ASSIGNED": "Mai assignat",
   "TERRITORY_TABLE_RETURNED": "Retornada",
   "TITLE_CREATE_TITLE": "Crear títol",
@@ -462,5 +462,6 @@
   "ICON_PDF_INFINITE": "Genera un PDF infinit sense les bandes de colors per a la distribució digital. Si es necessita imprimir 🖨️ seleccioneu menys dies per ajustarse a una pàgina vertical A4.",
   "ICON_NO_COLOR_SECTION": "Secció sense color",
   "ICON_COLOR_SECTION": "Secció de colors",
-  "NOTE_SHOW_IN_HOME": "Mostra aquesta nota a la secció de inici"
+  "NOTE_SHOW_IN_HOME": "Mostra aquesta nota a la secció de inici",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Esborrar l'últim marcador"
 }

@@ -464,5 +464,7 @@
   "ICON_PDF_INFINITE": "Генерировать бесконечный PDF без цветовых полос для цифрового распределения. Если печать 🖨️ необходимо выбрать меньше дней, чтобы соответствовать странице портрета A4.",
   "ICON_NO_COLOR_SECTION": "Нет цвета",
   "ICON_COLOR_SECTION": "Цветовая секция",
-  "NOTE_SHOW_IN_HOME": "Покажите эту записку в разделе «Домашний"
+  "NOTE_SHOW_IN_HOME": "Покажите эту записку в разделе «Домашний",
+  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
 }

@@ -386,5 +386,7 @@
   "ICON_PDF_INFINITE": "生成一个无限的PDF，而没有颜色带进行数字分配. 如果打印 🖨️ 需要选择较少的日子以适合肖像A4页面.",
   "ICON_NO_COLOR_SECTION": "没有颜色部分",
   "ICON_COLOR_SECTION": "颜色部分",
-  "NOTE_SHOW_IN_HOME": "在家庭部分显示此注释"
+  "NOTE_SHOW_IN_HOME": "在家庭部分显示此注释",
+  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
 }

@@ -172,8 +172,6 @@
   "INFO__WHAT_IS_SERVIHELPER": "Was ist Servihelper?",
   "INFO__WHAT_IS_SERVIHELPER_ANSWER": "Es ist ein Programm, das auf dem Computer ausgeführt wird. Ihre Daten werden intern verwaltet, sodass es nie ins Internet geht.",
   "MAP_BUTTON_CREATE_MAP_TITLE": "Karte erstellen",
-  "MAP_CLEAR_HISTORY": "Löschen Sie alle Teilnehmer, erstellte und zurückgegebene Daten, behalten Sie aber das Territorium",
-  "MAP_CREATE_CLEAR_HISTORY": "Klare Geschichte",
   "MAP_CREATE_CREATE_POLYGON": "Polygon erstellen",
   "MAP_CREATE_CREATE_POLYGON_TOOLTIP": "Mindestens zwei Marker sind erforderlich",
   "MAP_CREATE_REMOVE_MARKERS": "Marker entfernen",
@@ -459,5 +457,9 @@
   "ICON_PDF_INFINITE": "Generieren Sie ein unendliches PDF ohne Farbbänder für die digitale Verteilung. Wenn drucken 🖨️ Es wird benötigt.",
   "ICON_NO_COLOR_SECTION": "Kein Farbabschnitt",
   "ICON_COLOR_SECTION": "Farbabschnitt",
-  "NOTE_SHOW_IN_HOME": "Zeigen Sie diese Notiz im Heimbereich an"
+  "NOTE_SHOW_IN_HOME": "Zeigen Sie diese Notiz im Heimbereich an",
+
+  "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
+  "MAP_CREATE_CLEAR_HISTORY": "Delete history",
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
 }
