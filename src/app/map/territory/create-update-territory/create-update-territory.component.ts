@@ -92,6 +92,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   isUpdate = this.loadedTerritory ? true : false;
 
+  //The path or the image when is loaded for the first time
+  imagePath;
+
   //TerritoryContextInterface
   territoryForm = this.formBuilder.group({
     id: [this.loadedTerritory?.id],
@@ -252,12 +255,15 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   uploadImageFile(event) {
     const files = event.target.files;
 
+    console.log(files[0]);
     if (files.length === 0) return;
 
     const mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
       return;
     }
+
+    this.imagePath = files[0].path;
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -267,7 +273,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     reader.readAsDataURL(files[0]);
   }
 
-  imagePath() {
+  getImagePath() {
     if (this.imagePersisted()) {
       return path.join(
         this.configService.terrImagesPath,
@@ -277,7 +283,6 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     if (this.imageExists()) {
       return this.territoryForm.controls.image.value;
     }
-
     return null;
   }
 
@@ -286,7 +291,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   imagePersisted() {
-    return this.territoryForm.controls.imageId.value;
+    return Boolean(this.territoryForm.controls.imageId.value);
   }
 
   /** @returns boolean polygonExists if we have id but its not persisted yet
@@ -350,25 +355,39 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
     const territory = this.territoryForm.value as TerritoryContextInterface;
 
-    //If image exists save or update it
     const image = this.territoryForm.controls.image.value;
-    if (image) {
-      const imageId = nanoid(this.configService.nanoMaxCharId);
-      territory.imageId = imageId;
-      this.terrImageService.saveImage(image, imageId);
-    }
 
     if (this.isUpdate) {
+      //imagePath should be undefined if has value means a creation or an override
+      if (this.imagePath) {
+        //update image
+        if (territory.imageId) {
+          this.terrImageService.saveImage(this.imagePath, territory.imageId);
+        }
+        //create image
+        const imageId = nanoid(this.configService.nanoMaxCharId);
+        territory.imageId = imageId;
+        this.terrImageService.saveImage(this.imagePath, imageId);
+      }
+
       if (this.polygonExistsAndPersisted()) {
         this.polygonService.updatePolygon(polygon);
       }
-      //Only exists in the UI
+
+      //Only exists in the UI this can happen as we can create a territory without polygon
       if (this.polygonExists()) {
         const polygonId = this.polygonService.createPolygon(polygon);
         territory.poligonId = polygonId;
       }
       this.territoryService.updateTerritory(territory);
     } else {
+      //If image exists save or update it
+      if (image) {
+        const imageId = nanoid(this.configService.nanoMaxCharId);
+        territory.imageId = imageId;
+        this.terrImageService.saveImage(this.imagePath, imageId);
+      }
+
       if (this.polygonExists()) {
         const polygonId = this.polygonService.createPolygon(polygon);
         territory.poligonId = polygonId;

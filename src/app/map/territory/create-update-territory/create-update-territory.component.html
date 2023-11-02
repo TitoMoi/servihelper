@@ -130,7 +130,14 @@
     id="map2"
     class="mb-2"
   ></div>
-  <div><img *ngIf="imageExists()" [src]="imagePath()" id="imageDiv" class="mb-2" /></div>
+  <div>
+    <img
+      *ngIf="imageExists() || imagePersisted()"
+      [src]="getImagePath()"
+      id="imageDiv"
+      class="mb-2"
+    />
+  </div>
   <button mat-raised-button type="button" class="me-3" (click)="goBack()">
     {{ t("BUTTON_CANCEL") }}
   </button>

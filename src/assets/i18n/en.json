@@ -436,5 +436,6 @@
 
   "MAP_CLEAR_HISTORY": "Be careful! The territory is restarted, only the name and the map are kept. The current participant and all the dates are cleared",
   "MAP_CREATE_CLEAR_HISTORY": "Delete history",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker"
+  "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker",
+  "TERRITORY_ADD_IMAGE": "Add an image to this territory, this action will disable the map."
 }

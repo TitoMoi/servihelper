@@ -10,7 +10,7 @@ export interface TerritoryContextInterface {
   id: string;
   name: string;
   poligonId: string;
-  image: Uint8Array;
+  image: string; //temporal base64
   imageId: string;
   assignedDates?: Date[]; //When its assigned
   returnedDates?: Date[]; //When its returned
