@@ -278,10 +278,12 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     }
     //Order matters, a territory may have no image so the persisted is last option
     if (this.imagePersisted()) {
-      return path.join(
+      //Add a timestamp so the browser will think its different image and dont cache it
+      let imgPath = `${path.join(
         this.configService.terrImagesPath,
         this.territoryForm.controls.imageId.value
-      );
+      )}?${nanoid(5)}`;
+      return imgPath;
     }
     return null;
   }
