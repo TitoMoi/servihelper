@@ -18,6 +18,7 @@
     "tsc:main": "tsc ./app/main.ts",
     "start": "npm-run-all -p electron:serve ng:serve",
     "build": "ng build -c production",
+    "build:debug": "ng build -c debug",
     "ng:serve": "ng serve -c dev",
     "transloco:optimize": "transloco-optimize dist/assets/i18n",
     "electron:serve-tsc": "tsc -p tsconfig.json",
