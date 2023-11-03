@@ -115,3 +115,5 @@ To reload `assignment.component.ts` we do a navigation to home and then we navig
 We navigate to the children and click on cancel button and we are back to assignment list.
 
 The translation values for the assign type keys and room keys are in `src/assets/i18n` this is a dependency on the translation. The administrator can give a name to the assign type and room keys and this initial translation wont be used anymore.
+
+On development, the images of the maps doesnt load if we edit a territory, its looking into `src/app/assets/source/images` you can put there images but remove them later so they dont get uploaded in a commit.
