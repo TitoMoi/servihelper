@@ -90,6 +90,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.polygonRefList.forEach((ref) => ref.remove());
     this.tile.remove();
+    this.map.off();
     this.map.remove();
   }
 

@@ -160,7 +160,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     Marker.prototype.options.icon = iconDefault;
   }
 
-  ngAfterViewInit(): void {
+  initMap() {
     //Get center and destroy polygon
     let center: LatLng;
     if (this.polygonExists()) {
@@ -193,7 +193,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
     //You can get the type of the events using the on method
     /* this.map.on("click", (e: LeafletMouseEvent) => {
-    }) */
+}) */
 
     //https://leafletjs.com/reference.html#map-click
     this.subscription.add(
@@ -217,11 +217,24 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.cdr.detectChanges();
   }
 
-  ngOnDestroy(): void {
-    this.markerRef.forEach((m) => m.remove());
+  removeMap() {
+    for (const m of this.markerRef) {
+      m.remove();
+    }
     this.leafletPolygon?.remove();
     this.tile?.remove();
+    this.map?.off();
     this.map?.remove();
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.territoryForm.controls.imageId.value) {
+      this.initMap();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.removeMap();
     this.subscription.unsubscribe();
   }
 
@@ -270,6 +283,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       this.cdr.detectChanges();
     };
     reader.readAsDataURL(files[0]);
+
+    this.removeMap();
   }
 
   getImagePath() {
@@ -294,6 +309,20 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   imagePersisted() {
     return Boolean(this.territoryForm.controls.imageId.value);
+  }
+
+  removeImage() {
+    this.territoryForm.controls.image.patchValue(null);
+
+    if (this.territoryForm.controls.imageId.value) {
+      this.terrImageService.deleteImage(this.territoryForm.controls.imageId.value);
+      this.territoryForm.controls.imageId.patchValue(null);
+    }
+
+    this.initMap();
+
+    //For some reason the map is not rendered as expected when the image is removed so we need this.
+    setTimeout(() => this.map.invalidateSize(), 0);
   }
 
   /** @returns boolean polygonExists if we have id but its not persisted yet
