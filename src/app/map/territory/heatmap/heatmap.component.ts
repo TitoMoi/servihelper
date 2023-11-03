@@ -72,12 +72,14 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   greenColor = "#8afa84";
 
   ngAfterViewInit(): void {
-    this.map = new Map("map").setView(this.loadedPolygons[0].latLngList[0], 13);
+    this.map = new Map("map", { attributionControl: false }).setView(
+      this.loadedPolygons[0].latLngList[0],
+      13
+    );
 
     this.tile = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(this.map);
 
     this.createPolygons();

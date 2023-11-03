@@ -66,6 +66,7 @@
               <div class="grid-row">
                 <div class="grid-item d-flex align-items-center">
                   <mat-icon
+                    *ngIf="terr.poligonId"
                     class="me-3"
                     #iconMapLink
                     routerLinkActive="active"
@@ -75,6 +76,7 @@
                   ></mat-icon>
                   <mat-icon
                     routerLinkActive="active"
+                    *ngIf="terr.poligonId || terr.imageId"
                     svgIcon="pdf"
                     (click)="toPdf(terr)"
                     aria-label="Side nav toggle icon"

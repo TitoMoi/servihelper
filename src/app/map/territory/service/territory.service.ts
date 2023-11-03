@@ -5,12 +5,16 @@ import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { LockService } from "app/lock/service/lock.service";
 import { inflate, deflate } from "pako";
+import { TerrImageService } from "./terr-image.service";
+import { PolygonService } from "./polygon.service";
 @Injectable({
   providedIn: "root",
 })
 export class TerritoryService {
   private configService = inject(ConfigService);
   private lockService = inject(LockService);
+  private terrImageService = inject(TerrImageService);
+  private polygonService = inject(PolygonService);
 
   //flag to indicate that territories file has changed
   hasChanged = true;
@@ -131,9 +135,21 @@ export class TerritoryService {
    * @returns true if territory is deleted and saved false otherwise
    */
   deleteTerritory(id: string): boolean {
+    //first delete image or polygon associated
+
+    const terr = this.getTerritory(id);
+
+    if (terr.imageId) {
+      this.terrImageService.deleteImage(terr.imageId);
+    }
+    if (terr.poligonId) {
+      this.polygonService.deletePolygon(terr.poligonId);
+    }
+
     //delete territory
     this.#territoriesMap.delete(id);
     this.#territories = this.#territories.filter((b) => b.id !== id);
+
     //save territories
     return this.#saveTerritoriesToFile();
   }

@@ -255,7 +255,6 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   uploadImageFile(event) {
     const files = event.target.files;
 
-    console.log(files[0]);
     if (files.length === 0) return;
 
     const mimeType = files[0].type;
@@ -274,14 +273,15 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   getImagePath() {
+    if (this.imageExists()) {
+      return this.territoryForm.controls.image.value;
+    }
+    //Order matters, a territory may have no image so the persisted is last option
     if (this.imagePersisted()) {
       return path.join(
         this.configService.terrImagesPath,
         this.territoryForm.controls.imageId.value
       );
-    }
-    if (this.imageExists()) {
-      return this.territoryForm.controls.image.value;
     }
     return null;
   }
@@ -363,11 +363,12 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
         //update image
         if (territory.imageId) {
           this.terrImageService.saveImage(this.imagePath, territory.imageId);
+        } else {
+          //create image
+          const imageId = nanoid(this.configService.nanoMaxCharId);
+          territory.imageId = imageId;
+          this.terrImageService.saveImage(this.imagePath, imageId);
         }
-        //create image
-        const imageId = nanoid(this.configService.nanoMaxCharId);
-        territory.imageId = imageId;
-        this.terrImageService.saveImage(this.imagePath, imageId);
       }
 
       if (this.polygonExistsAndPersisted()) {
