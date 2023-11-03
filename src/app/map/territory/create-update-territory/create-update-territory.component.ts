@@ -218,19 +218,14 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   removeMap() {
-    for (const m of this.markerRef) {
-      m.remove();
-    }
-    this.leafletPolygon?.remove();
+    this.removePolygon(); //also removes markers
     this.tile?.remove();
     this.map?.off();
     this.map?.remove();
   }
 
   ngAfterViewInit(): void {
-    if (!this.territoryForm.controls.imageId.value) {
-      this.initMap();
-    }
+    this.initMap();
   }
 
   ngOnDestroy(): void {
@@ -284,7 +279,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     };
     reader.readAsDataURL(files[0]);
 
-    this.removeMap();
+    this.removePolygon(); //Also removes markers
   }
 
   getImagePath() {
@@ -318,8 +313,6 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       this.terrImageService.deleteImage(this.territoryForm.controls.imageId.value);
       this.territoryForm.controls.imageId.patchValue(null);
     }
-
-    this.initMap();
 
     //For some reason the map is not rendered as expected when the image is removed so we need this.
     setTimeout(() => this.map.invalidateSize(), 0);
@@ -355,13 +348,15 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   removePolygon() {
     this.polygonForm.controls.id.patchValue(null);
     this.polygonForm.controls.latLngList.patchValue([]);
-    this.leafletPolygon.remove();
+    this.leafletPolygon?.remove();
     this.removeMarkers();
     this.cdr.detectChanges();
   }
 
   removeMarkers() {
-    this.markerRef.forEach((m) => m.remove());
+    for (const m of this.markerRef) {
+      m.remove();
+    }
     this.markerRef = [];
     //Remove the points in the polygon
     this.polygonForm.controls.latLngList.patchValue([]);
