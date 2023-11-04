@@ -55,7 +55,8 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   private exportService = inject(ExportService);
   private router = inject(Router);
 
-  loadedTerritories = this.territoryService.getTerritories();
+  //Load only territories that have poligonId
+  loadedTerritories = this.territoryService.getTerritories().filter((t) => t.poligonId);
   loadedPolygons = this.polygonService.getPolygons();
 
   //The leaflet map
