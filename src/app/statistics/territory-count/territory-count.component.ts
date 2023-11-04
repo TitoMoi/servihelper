@@ -36,6 +36,9 @@ export class TerritoryCountComponent implements OnInit {
     .getParticipants()
     .filter((participant) => !participant.isExternal);
 
+  //To show the table ordered by territory
+  orderByTerritory = false;
+
   constructor(
     private territoryService: TerritoryService,
     private participantService: ParticipantService,
