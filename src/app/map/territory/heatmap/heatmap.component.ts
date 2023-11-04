@@ -56,8 +56,8 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   private router = inject(Router);
 
   //Load only territories that have poligonId
-  loadedTerritories = this.territoryService.getTerritories().filter((t) => t.poligonId);
-  loadedPolygons = this.polygonService.getPolygons();
+  loadedTerritories = this.territoryService.getTerritories().filter((t) => t.poligonId) || [];
+  loadedPolygons = this.polygonService.getPolygons() || [];
 
   //The leaflet map
   map: Map;
@@ -73,26 +73,30 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   greenColor = "#8afa84";
 
   ngAfterViewInit(): void {
-    this.map = new Map("map", { attributionControl: false }).setView(
-      this.loadedPolygons[0].latLngList[0],
-      13
-    );
+    if (this.loadedPolygons.length) {
+      this.map = new Map("map", { attributionControl: false }).setView(
+        this.loadedPolygons[0].latLngList[0],
+        13
+      );
 
-    this.tile = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      minZoom: 3,
-    }).addTo(this.map);
+      this.tile = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        minZoom: 3,
+      }).addTo(this.map);
 
-    this.createPolygons();
+      this.createPolygons();
 
-    this.cdr.detectChanges();
+      this.cdr.detectChanges();
+    }
   }
 
   ngOnDestroy(): void {
-    this.polygonRefList.forEach((ref) => ref.remove());
-    this.tile.remove();
-    this.map.off();
-    this.map.remove();
+    for (let p of this.polygonRefList) {
+      p.remove();
+    }
+    this.tile?.remove();
+    this.map?.off();
+    this.map?.remove();
   }
 
   createPolygons() {

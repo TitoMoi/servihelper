@@ -403,6 +403,11 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
           territory.imageId = imageId;
           this.terrImageService.saveImage(this.imagePath, imageId);
         }
+        //if there is a image we should remove the polygon from the territory
+        if (territory.poligonId) {
+          this.polygonService.deletePolygon(territory.poligonId);
+          territory.poligonId = null;
+        }
       }
 
       if (this.shouldRemovePersistedImage) {
