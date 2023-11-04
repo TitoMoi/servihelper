@@ -390,5 +390,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "Son İşaretleyiciyi Sil",
   "TERRITORY_ADD_IMAGE": "Bir resim ekleyin ve haritayı devre dışı bırakın",
   "TERRITORY_REMOVE_IMAGE": "Görüntüyü kaldırın ve haritayı etkinleştirin",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Bölgeye Göre Sipariş"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Bölgeye Göre Sipariş",
+  "HEATMAP_NO_POLYGONS": "Gösterilecek çokgenler olan bölgeler yok"
 }

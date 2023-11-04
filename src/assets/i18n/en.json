@@ -439,5 +439,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "Delete last marker",
   "TERRITORY_ADD_IMAGE": "Add an image and disable the map.",
   "TERRITORY_REMOVE_IMAGE": "Remove the image and enable the map.",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Order by territory"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Order by territory",
+  "HEATMAP_NO_POLYGONS": "There are no territories with polygons to show"
 }

@@ -463,5 +463,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "Supprimer le dernier marqueur",
   "TERRITORY_ADD_IMAGE": "Ajouter une image et désactiver la carte",
   "TERRITORY_REMOVE_IMAGE": "Supprimer l'image et activer la carte",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordre par territoire"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordre par territoire",
+  "HEATMAP_NO_POLYGONS": "Il n'y a pas de territoires avec des polygones à montrer"
 }

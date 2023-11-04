@@ -390,5 +390,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "Usuń ostatni znacznik",
   "TERRITORY_ADD_IMAGE": "Dodaj obraz i wyłącz mapę",
   "TERRITORY_REMOVE_IMAGE": "Usuń obraz i włącz mapę",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Zamówienie według terytorium"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Zamówienie według terytorium",
+  "HEATMAP_NO_POLYGONS": "Nie ma terytoriów z wielokątami do pokazania"
 }

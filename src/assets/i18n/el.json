@@ -390,5 +390,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "Διαγραφή τελευταίου δείκτη",
   "TERRITORY_ADD_IMAGE": "Προσθέστε μια εικόνα και απενεργοποιήστε τον χάρτη",
   "TERRITORY_REMOVE_IMAGE": "Αφαιρέστε την εικόνα και ενεργοποιήστε τον χάρτη",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Παραγγελία από την επικράτεια"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Παραγγελία από την επικράτεια",
+  "HEATMAP_NO_POLYGONS": "Δεν υπάρχουν εδάφη με πολύγωνα για να δείξουν"
 }

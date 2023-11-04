@@ -463,5 +463,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "Verwijder de laatste marker",
   "TERRITORY_ADD_IMAGE": "Voeg een afbeelding toe en schakel de kaart uit",
   "TERRITORY_REMOVE_IMAGE": "Verwijder de afbeelding en schakel de kaart in",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Bestel per territorium"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Bestel per territorium",
+  "HEATMAP_NO_POLYGONS": "Er zijn geen territoria met polygonen om te laten zien"
 }

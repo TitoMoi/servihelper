@@ -464,5 +464,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "Exclua o último marcador",
   "TERRITORY_ADD_IMAGE": "Adicione uma imagem e desative o mapa",
   "TERRITORY_REMOVE_IMAGE": "Remova a imagem e ative o mapa",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordem por território"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordem por território",
+  "HEATMAP_NO_POLYGONS": "Não há territórios com polígonos para mostrar"
 }

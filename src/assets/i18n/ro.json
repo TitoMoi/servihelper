@@ -464,5 +464,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "Ștergeți ultimul marker",
   "TERRITORY_ADD_IMAGE": "Adăugați o imagine și dezactivați harta",
   "TERRITORY_REMOVE_IMAGE": "Eliminați imaginea și activați harta",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Comandați pe teritoriu"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Comandați pe teritoriu",
+  "HEATMAP_NO_POLYGONS": "Nu există teritorii cu poligoane de arătat"
 }

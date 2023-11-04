@@ -466,5 +466,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "Esborrar l'últim marcador",
   "TERRITORY_ADD_IMAGE": "Afegeix una imatge i desactiva el mapa",
   "TERRITORY_REMOVE_IMAGE": "Elimina la imatge i activa el mapa",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordenació per territori"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordenació per territori",
+  "HEATMAP_NO_POLYGONS": "No hi ha territoris amb polígons per mostrar"
 }

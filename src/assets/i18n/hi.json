@@ -390,5 +390,6 @@
   "MAP_CREATE_DELETE_LAST_MARKER": "अंतिम मार्कर हटाएं",
   "TERRITORY_ADD_IMAGE": "एक छवि जोड़ें और मानचित्र को अक्षम करें",
   "TERRITORY_REMOVE_IMAGE": "छवि निकालें और मानचित्र को सक्षम करें",
-  "STATISTICS_COUNT_TERRITORY_ORDER": "Order by territory"
+  "STATISTICS_COUNT_TERRITORY_ORDER": "क्षेत्र द्वारा आदेश",
+  "HEATMAP_NO_POLYGONS": "दिखाने के लिए बहुभुज के साथ कोई क्षेत्र नहीं हैं"
 }
