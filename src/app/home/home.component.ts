@@ -113,9 +113,9 @@ export class HomeComponent implements OnInit {
             zipEntry.entryName
           );
 
-          const isFile = lstatSync(destinyPath).isFile();
+          const stats = lstatSync(destinyPath, { throwIfNoEntry: false });
 
-          if (isFile) {
+          if (stats?.isFile()) {
             const data = (zipEntry.entryName as string).endsWith(".gz")
               ? zipEntry.getData()
               : zipEntry.getData().toString("utf8");
