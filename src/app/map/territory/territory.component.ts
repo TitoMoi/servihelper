@@ -16,6 +16,9 @@ import { PolygonService } from "./service/polygon.service";
 import { clipboard } from "electron";
 import { OnlineService } from "app/online/service/online.service";
 import { PdfService } from "app/services/pdf.service";
+import path from "path";
+import { ConfigService } from "app/config/service/config.service";
+import { readFileSync } from "fs-extra";
 
 @Component({
   selector: "app-territory",
@@ -56,6 +59,7 @@ export class TerritoryComponent {
     private onlineService: OnlineService,
     private pdfService: PdfService,
     private translocoService: TranslocoService,
+    private configService: ConfigService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -114,11 +118,37 @@ export class TerritoryComponent {
     doc.setFontSize(this.pdfService.getTextFontSize());
     doc.setFont(this.pdfService.font, "normal");
 
-    const mapLinkText =
-      this.translocoService.translate("TERRITORY_TABLE_HEADER_MAPLINK") + ":";
-    doc.text(mapLinkText, x, y + 20, {});
-    doc.setTextColor("blue");
-    doc.textWithLink(t.name, x, y + 30, { url: this.getUrlWithPolygonParams(t).toString() });
+    if (t.imageId) {
+      y += 5;
+      const imagePath = path.join(this.configService.terrImagesPath, t.imageId);
+      const uint8array = new Uint8Array(readFileSync(imagePath));
+      const imgProps = doc.getImageProperties(uint8array);
+
+      let height = imgProps.height;
+      let width = imgProps.width;
+      const ratio = height / width;
+
+      if (height > 240 || width > 180) {
+        if (height > width) {
+          height = 240;
+          width = height * (1 / ratio);
+          // Making reciprocal of ratio because ration of height as width is no valid here needs width as height
+        } else if (width > height) {
+          width = 180;
+          height = width * ratio;
+          // Ratio is valid here
+        }
+      }
+      doc.addImage(uint8array, "png", x, y, width, height, null, "MEDIUM");
+    }
+
+    if (t.poligonId) {
+      const mapLinkText =
+        this.translocoService.translate("TERRITORY_TABLE_HEADER_MAPLINK") + ":";
+      doc.text(mapLinkText, x, y + 20, {});
+      doc.setTextColor("blue");
+      doc.textWithLink(t.name, x, y + 30, { url: this.getUrlWithPolygonParams(t).toString() });
+    }
 
     doc.save(t.name);
   }
