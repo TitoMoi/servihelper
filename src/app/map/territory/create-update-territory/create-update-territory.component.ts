@@ -100,7 +100,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     id: [this.loadedTerritory?.id],
     name: [this.loadedTerritory?.name, Validators.required],
     poligonId: [this.loadedTerritory?.poligonId],
-    image: [], //Just a temporal store until its saved to disk
+    image: [], //Just a temporal base64 store until its saved to disk
     imageId: [this.loadedTerritory?.imageId],
     assignedDates: [this.loadedTerritory?.assignedDates || []],
     returnedDates: [this.loadedTerritory?.returnedDates || []],
@@ -135,6 +135,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   //Simulate a form control
   temporalParticipant;
+
+  //To mark if the persisted image should be removed on update
+  shouldRemovePersistedImage = false;
 
   get selectedParticipant() {
     if (this.isTerritoryActive()) {
@@ -270,6 +273,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       return;
     }
 
+    //In case we delete an image and then upload a new one.
+    this.shouldRemovePersistedImage = false;
+
     this.imagePath = files[0].path;
 
     const reader = new FileReader();
@@ -307,10 +313,12 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   removeImage() {
+    this.imagePath = null;
+
     this.territoryForm.controls.image.patchValue(null);
 
     if (this.territoryForm.controls.imageId.value) {
-      this.terrImageService.deleteImage(this.territoryForm.controls.imageId.value);
+      this.shouldRemovePersistedImage = true;
       this.territoryForm.controls.imageId.patchValue(null);
     }
 
@@ -395,6 +403,10 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
           territory.imageId = imageId;
           this.terrImageService.saveImage(this.imagePath, imageId);
         }
+      }
+
+      if (this.shouldRemovePersistedImage) {
+        this.terrImageService.deleteImage(this.loadedTerritory.imageId);
       }
 
       if (this.polygonExistsAndPersisted()) {
