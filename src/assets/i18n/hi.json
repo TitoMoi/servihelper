@@ -387,5 +387,8 @@
   "NOTE_SHOW_IN_HOME": "होम सेक्शन पर यह नोट दिखाएं",
   "MAP_CLEAR_HISTORY": "ध्यान से!क्षेत्र को फिर से शुरू किया जाता है, केवल नाम और नक्शा रखा जाता है।वर्तमान प्रतिभागी और सभी तिथियों को मंजूरी दे दी गई है",
   "MAP_CREATE_CLEAR_HISTORY": "हिस्ट्री हटाएं",
-  "MAP_CREATE_DELETE_LAST_MARKER": "अंतिम मार्कर हटाएं"
+  "MAP_CREATE_DELETE_LAST_MARKER": "अंतिम मार्कर हटाएं",
+  "TERRITORY_ADD_IMAGE": "एक छवि जोड़ें और मानचित्र को अक्षम करें",
+  "TERRITORY_REMOVE_IMAGE": "छवि निकालें और मानचित्र को सक्षम करें",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Order by territory"
 }

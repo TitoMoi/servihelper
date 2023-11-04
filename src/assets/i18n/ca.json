@@ -463,5 +463,8 @@
   "ICON_NO_COLOR_SECTION": "Secció sense color",
   "ICON_COLOR_SECTION": "Secció de colors",
   "NOTE_SHOW_IN_HOME": "Mostra aquesta nota a la secció de inici",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Esborrar l'últim marcador"
+  "MAP_CREATE_DELETE_LAST_MARKER": "Esborrar l'últim marcador",
+  "TERRITORY_ADD_IMAGE": "Afegeix una imatge i desactiva el mapa",
+  "TERRITORY_REMOVE_IMAGE": "Elimina la imatge i activa el mapa",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordenació per territori"
 }

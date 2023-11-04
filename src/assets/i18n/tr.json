@@ -387,5 +387,8 @@
   "NOTE_SHOW_IN_HOME": "Bu notu ana bölümde göster",
   "MAP_CLEAR_HISTORY": "Dikkat olmak! Bölge yeniden başlatıldı, sadece isim ve harita tutulur.Mevcut katılımcı ve tüm tarihler temizlendi",
   "MAP_CREATE_CLEAR_HISTORY": "Geçmişi sil",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Son İşaretleyiciyi Sil"
+  "MAP_CREATE_DELETE_LAST_MARKER": "Son İşaretleyiciyi Sil",
+  "TERRITORY_ADD_IMAGE": "Bir resim ekleyin ve haritayı devre dışı bırakın",
+  "TERRITORY_REMOVE_IMAGE": "Görüntüyü kaldırın ve haritayı etkinleştirin",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Bölgeye Göre Sipariş"
 }

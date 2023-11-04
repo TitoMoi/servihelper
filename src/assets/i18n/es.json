@@ -463,5 +463,8 @@
   "NOTE_SHOW_IN_HOME": "Muestra esta nota en la sección de inicio",
   "MAP_CLEAR_HISTORY": "Atención! El territorio se reinicia, solo el nombre y el poligono se mantienen. El participante actual y las fechas de asignación y retorno se borran.",
   "MAP_CREATE_CLEAR_HISTORY": "Eliminar historial",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Borrar último marcador"
+  "MAP_CREATE_DELETE_LAST_MARKER": "Borrar último marcador",
+  "TERRITORY_ADD_IMAGE": "Agregar una imagen y deshabilitar el mapa",
+  "TERRITORY_REMOVE_IMAGE": "Eliminar la imagen y habilitar el mapa",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordenar por territorio"
 }

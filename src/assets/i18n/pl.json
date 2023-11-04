@@ -387,5 +387,8 @@
   "NOTE_SHOW_IN_HOME": "Pokaż tę notatkę w sekcji domowej",
   "MAP_CLEAR_HISTORY": "Bądź ostrożny!Terytorium jest ponownie uruchomione, tylko nazwa i mapa są przechowywane.Obecny uczestnik i wszystkie daty są oczyszczone",
   "MAP_CREATE_CLEAR_HISTORY": "Usuń historię",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Usuń ostatni znacznik"
+  "MAP_CREATE_DELETE_LAST_MARKER": "Usuń ostatni znacznik",
+  "TERRITORY_ADD_IMAGE": "Dodaj obraz i wyłącz mapę",
+  "TERRITORY_REMOVE_IMAGE": "Usuń obraz i włącz mapę",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Zamówienie według terytorium"
 }

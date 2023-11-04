@@ -461,5 +461,8 @@
   "NOTE_SHOW_IN_HOME": "Afișați această notă în secțiunea de acasă",
   "MAP_CLEAR_HISTORY": "Atenție!Teritoriul este repornit, doar numele și harta sunt păstrate.Participantul actual și toate datele sunt șterse",
   "MAP_CREATE_CLEAR_HISTORY": "Ștergeți istoria",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Ștergeți ultimul marker"
+  "MAP_CREATE_DELETE_LAST_MARKER": "Ștergeți ultimul marker",
+  "TERRITORY_ADD_IMAGE": "Adăugați o imagine și dezactivați harta",
+  "TERRITORY_REMOVE_IMAGE": "Eliminați imaginea și activați harta",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Comandați pe teritoriu"
 }

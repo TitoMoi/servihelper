@@ -458,5 +458,8 @@
   "NOTE_SHOW_IN_HOME": "Mostra questa nota nella sezione Home",
   "MAP_CLEAR_HISTORY": "Stai attento! Il territorio viene riavviato, solo il nome e la mappa sono conservati.L'attuale partecipante e tutte le date vengono cancellate",
   "MAP_CREATE_CLEAR_HISTORY": "Elimina la storia",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Elimina l'ultimo marcatore"
+  "MAP_CREATE_DELETE_LAST_MARKER": "Elimina l'ultimo marcatore",
+  "TERRITORY_ADD_IMAGE": "Aggiungi un'immagine e disabilita la mappa",
+  "TERRITORY_REMOVE_IMAGE": "Rimuovi l'immagine e abilita la mappa",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordine per territorio"
 }

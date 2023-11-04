@@ -387,5 +387,8 @@
   "NOTE_SHOW_IN_HOME": "在家庭部分显示此注释",
   "MAP_CLEAR_HISTORY": "当心！该领域重新启动，只保留了名称和地图。目前的参与者和所有日期已清除",
   "MAP_CREATE_CLEAR_HISTORY": "删除历史记录",
-  "MAP_CREATE_DELETE_LAST_MARKER": "删除最后一个标记"
+  "MAP_CREATE_DELETE_LAST_MARKER": "删除最后一个标记",
+  "TERRITORY_ADD_IMAGE": "添加图像并禁用地图",
+  "TERRITORY_REMOVE_IMAGE": "删除图像并启用地图",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "按领土命令"
 }

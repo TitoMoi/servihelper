@@ -387,5 +387,8 @@
   "NOTE_SHOW_IN_HOME": "이 메모를 홈 섹션에 표시하십시오",
   "MAP_CLEAR_HISTORY": "조심하세요!영토는 다시 시작되며 이름 만 있고지도는 유지됩니다.현재 참가자와 모든 날짜가 지워집니다",
   "MAP_CREATE_CLEAR_HISTORY": "역사를 삭제하십시오",
-  "MAP_CREATE_DELETE_LAST_MARKER": "마지막 마커를 삭제하십시오"
+  "MAP_CREATE_DELETE_LAST_MARKER": "마지막 마커를 삭제하십시오",
+  "TERRITORY_ADD_IMAGE": "이미지를 추가하고지도를 비활성화하십시오",
+  "TERRITORY_REMOVE_IMAGE": "이미지를 제거하고지도를 활성화하십시오",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "영토별로 주문하십시오"
 }

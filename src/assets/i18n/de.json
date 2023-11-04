@@ -461,5 +461,8 @@
 
   "MAP_CLEAR_HISTORY": "Seien Sie vorsichtig!Das Gebiet wird neu gestartet, nur der Name und die Karte werden aufbewahrt.Der derzeitige Teilnehmer und alle Daten werden gelöscht",
   "MAP_CREATE_CLEAR_HISTORY": "Verlauf löschen",
-  "MAP_CREATE_DELETE_LAST_MARKER": "Letzte Marker löschen"
+  "MAP_CREATE_DELETE_LAST_MARKER": "Letzte Marker löschen",
+  "TERRITORY_ADD_IMAGE": "Fügen Sie ein Bild hinzu und deaktivieren Sie die Karte",
+  "TERRITORY_REMOVE_IMAGE": "Entfernen Sie das Bild und aktivieren Sie die Karte",
+  "STATISTICS_COUNT_TERRITORY_ORDER": "Ordnung nach Territorium"
 }
