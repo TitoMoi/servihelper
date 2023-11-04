@@ -5,7 +5,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteService } from "app/note/service/note.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
-import { writeFileSync, writeJsonSync } from "fs-extra";
+import { lstatSync, writeFileSync, writeJsonSync } from "fs-extra";
 
 import { Component, OnInit } from "@angular/core";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
     // reading archives
     zip.getEntries().forEach((zipEntry) => {
       switch (
-        zipEntry.entryName //entryName = participant.json, assignment.gz, ...
+        zipEntry.entryName //entryName = participant.json, assignment.gz, images/ ...
       ) {
         case this.configService.configFilename:
           const currentConfig = this.configService.getConfig(); //Default config
@@ -108,14 +108,19 @@ export class HomeComponent implements OnInit {
           writeJsonSync(this.configService.configPath, finalConfig);
           break;
         default:
-          const resolvedPath = path.join(
+          const destinyPath = path.join(
             this.configService.sourceFilesPath,
             zipEntry.entryName
           );
-          const data = (zipEntry.entryName as string).endsWith(".gz")
-            ? zipEntry.getData()
-            : zipEntry.getData().toString("utf8");
-          writeFileSync(resolvedPath, data);
+
+          const isFile = lstatSync(destinyPath).isFile();
+
+          if (isFile) {
+            const data = (zipEntry.entryName as string).endsWith(".gz")
+              ? zipEntry.getData()
+              : zipEntry.getData().toString("utf8");
+            writeFileSync(destinyPath, data);
+          }
       }
     });
 
