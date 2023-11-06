@@ -391,5 +391,9 @@
   "TERRITORY_ADD_IMAGE": "画像を追加して、マップを無効にします",
   "TERRITORY_REMOVE_IMAGE": "画像を削除し、マップを有効にします",
   "STATISTICS_COUNT_TERRITORY_ORDER": "領土ごとに注文します",
-  "HEATMAP_NO_POLYGONS": "表示するポリゴンのある領土はありません"
+  "HEATMAP_NO_POLYGONS": "表示するポリゴンのある領土はありません",
+  "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "削除された参加者",
+  "TERRITORY_MEETING_POINT": "ミーティングポイントURLをコピーして貼り付けます（Googleマップまたはその他）",
+  "TERRITORY_PDF_MEETING_POINT": "ミーティングポイントURL",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "私をクリックして、ミーティングポイントURLを開きます"
 }

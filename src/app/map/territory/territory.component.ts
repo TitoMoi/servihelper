@@ -118,6 +118,27 @@ export class TerritoryComponent {
     doc.setFontSize(this.pdfService.getTextFontSize());
     doc.setFont(this.pdfService.font, "normal");
 
+    if (t.meetingPointUrl) {
+      y += 7;
+      const meetingPointTitle = this.translocoService.translate("TERRITORY_PDF_MEETING_POINT");
+      doc.text(meetingPointTitle + ":", x, y);
+      try {
+        //Validate the url syntax
+        new URL(t.meetingPointUrl);
+        y += 5;
+        doc.setTextColor("blue");
+        const meetingPointClickText = this.translocoService.translate(
+          "TERRITORY_PDF_MEETING_POINT_CLICK"
+        );
+        doc.textWithLink(meetingPointClickText, x, y, { url: t.meetingPointUrl });
+      } catch (error) {
+        //not valid url put it as regular text
+        y += 5;
+        doc.text(t.meetingPointUrl, x, y);
+      }
+      doc.setTextColor("black");
+    }
+
     if (t.imageId) {
       y += 5;
       const imagePath = path.join(this.configService.terrImagesPath, t.imageId);

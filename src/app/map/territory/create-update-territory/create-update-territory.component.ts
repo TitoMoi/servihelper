@@ -5,6 +5,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
   inject,
 } from "@angular/core";
 import { CommonModule, Location } from "@angular/common";
@@ -29,7 +30,7 @@ import { TerritoryService } from "../service/territory.service";
 import { PolygonService } from "../service/polygon.service";
 import { TerrImageService } from "../service/terr-image.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
+import { MatInput, MatInputModule } from "@angular/material/input";
 import { AutoFocusDirective } from "app/directives/autofocus/autofocus.directive";
 import { ConfigService } from "app/config/service/config.service";
 import {
@@ -95,6 +96,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   //The path or the image when is loaded for the first time
   imagePath;
 
+  @ViewChild("terrNameInput") terrNameInput: MatInput;
+
   //TerritoryContextInterface
   territoryForm = this.formBuilder.group({
     id: [this.loadedTerritory?.id],
@@ -102,6 +105,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     poligonId: [this.loadedTerritory?.poligonId],
     image: [], //Just a temporal base64 store until its saved to disk
     imageId: [this.loadedTerritory?.imageId],
+    meetingPointUrl: [this.loadedTerritory?.meetingPointUrl],
     assignedDates: [this.loadedTerritory?.assignedDates || []],
     returnedDates: [this.loadedTerritory?.returnedDates || []],
     participants: [this.loadedTerritory?.participants || []],
@@ -130,7 +134,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   //OTHER DATA NOT RELATED TO THE MAP STRUCTURE
   participants: ParticipantInterface[] = this.participantService
     .getParticipants()
-    .filter((p) => Boolean(p.isExternal) === false);
+    .filter((p) => Boolean(p.isExternal) === false && p.available);
   territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService.getTerritoryGroups();
 
   //Simulate a form control
@@ -229,6 +233,10 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   ngAfterViewInit(): void {
     this.initMap();
+
+    if (!this.isUpdate) {
+      this.territoryForm.markAllAsTouched();
+    }
   }
 
   ngOnDestroy(): void {

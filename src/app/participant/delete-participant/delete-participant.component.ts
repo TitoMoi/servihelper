@@ -13,6 +13,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
 import { AsyncPipe, NgIf } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
+import { TerritoryService } from "app/map/territory/service/territory.service";
 
 @Component({
   selector: "app-delete-participant",
@@ -46,6 +47,7 @@ export class DeleteParticipantComponent {
     private formBuilder: UntypedFormBuilder,
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
+    private territoryService: TerritoryService,
     private router: Router,
     private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute
@@ -55,6 +57,8 @@ export class DeleteParticipantComponent {
     this.participantService.deleteParticipant(participant.id);
 
     this.assignmentService.deleteAssignmentsByParticipant(participant.id);
+
+    this.territoryService.returnActiveTerritoriesByParticipant(participant.id);
 
     //navigate to parent
     this.router.navigate(["../.."], {

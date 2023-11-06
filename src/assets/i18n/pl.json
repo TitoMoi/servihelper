@@ -391,5 +391,9 @@
   "TERRITORY_ADD_IMAGE": "Dodaj obraz i wyłącz mapę",
   "TERRITORY_REMOVE_IMAGE": "Usuń obraz i włącz mapę",
   "STATISTICS_COUNT_TERRITORY_ORDER": "Zamówienie według terytorium",
-  "HEATMAP_NO_POLYGONS": "Nie ma terytoriów z wielokątami do pokazania"
+  "HEATMAP_NO_POLYGONS": "Nie ma terytoriów z wielokątami do pokazania",
+  "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "Usunięty uczestnik",
+  "TERRITORY_MEETING_POINT": "Kopiuj i wklej adres URL punktu spotkań (Mapy Google lub inne)",
+  "TERRITORY_PDF_MEETING_POINT": "URL punktu spotkań",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Kliknij mnie, aby otworzyć adres URL punktu spotkań"
 }

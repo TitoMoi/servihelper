@@ -469,5 +469,9 @@
   "TERRITORY_ADD_IMAGE": "Добавить изображение и отключить карту",
   "TERRITORY_REMOVE_IMAGE": "Удалить изображение и включить карту",
   "STATISTICS_COUNT_TERRITORY_ORDER": "Порядок по территории",
-  "HEATMAP_NO_POLYGONS": "Нет территорий с многоугольниками, чтобы показать"
+  "HEATMAP_NO_POLYGONS": "Нет территорий с многоугольниками, чтобы показать",
+  "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "Удаленный участник",
+  "TERRITORY_MEETING_POINT": "Скопировать и вставить URL -адрес точки встречи (карты Google или другие)",
+  "TERRITORY_PDF_MEETING_POINT": "URL -адрес точки встречи",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Нажмите меня, чтобы открыть URL -адрес точки встречи"
 }

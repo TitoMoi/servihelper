@@ -122,11 +122,11 @@ export class TerritoryService {
         territory.m = new Date();
         this.#territories[i] = territory;
         this.#territoriesMap.set(territory.id, territory);
-        //save territories with the updated territory
-        return this.#saveTerritoriesToFile();
+        break;
       }
     }
-    return false;
+    //save territories with the updated territory
+    return this.#saveTerritoriesToFile();
   }
 
   /**
@@ -152,6 +152,17 @@ export class TerritoryService {
 
     //save territories
     return this.#saveTerritoriesToFile();
+  }
+
+  /** @param id the id of the participant */
+  returnActiveTerritoriesByParticipant(id: string) {
+    for (let t of this.#territories) {
+      //Territory is unassigned
+      if (t.assignedDates.length === t.returnedDates.length) continue;
+      if (t.participants.at(-1) === id) {
+        this.returnTerritory(t.id);
+      }
+    }
   }
 
   /**

@@ -51,15 +51,31 @@
   </div>
   <form [formGroup]="territoryForm" novalidate>
     <div class="row">
-      <div class="col">
+      <div class="col-6">
         <mat-form-field>
           <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
           <input
+            #terrNameInput
             matInput
             [appautofocus]="isUpdate ? false : true"
             spellcheck="false"
             formControlName="name"
           />
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>{{ t("TERRITORY_GROUP_LABEL") }}</mat-label>
+          <mat-select
+            required
+            multiple
+            [formControl]="territoryForm.controls.groups"
+            [disableRipple]="true"
+          >
+            <mat-option *ngFor="let tg of territoryGroups" [value]="tg.id">
+              {{ tg.name }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>
@@ -80,17 +96,9 @@
       </div>
       <div class="col-6">
         <mat-form-field subscriptSizing="dynamic">
-          <mat-label>{{ t("TERRITORY_GROUP_LABEL") }}</mat-label>
-          <mat-select
-            required
-            multiple
-            [formControl]="territoryForm.controls.groups"
-            [disableRipple]="true"
-          >
-            <mat-option *ngFor="let tg of territoryGroups" [value]="tg.id">
-              {{ tg.name }}
-            </mat-option>
-          </mat-select>
+          <mat-label>{{ t("TERRITORY_MEETING_POINT") }}</mat-label>
+          <mat-icon matPrefix svgIcon="inputlink"></mat-icon>
+          <input matInput spellcheck="false" formControlName="meetingPointUrl" />
         </mat-form-field>
       </div>
     </div>

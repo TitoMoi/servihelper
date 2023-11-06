@@ -391,5 +391,9 @@
   "TERRITORY_ADD_IMAGE": "एक छवि जोड़ें और मानचित्र को अक्षम करें",
   "TERRITORY_REMOVE_IMAGE": "छवि निकालें और मानचित्र को सक्षम करें",
   "STATISTICS_COUNT_TERRITORY_ORDER": "क्षेत्र द्वारा आदेश",
-  "HEATMAP_NO_POLYGONS": "दिखाने के लिए बहुभुज के साथ कोई क्षेत्र नहीं हैं"
+  "HEATMAP_NO_POLYGONS": "दिखाने के लिए बहुभुज के साथ कोई क्षेत्र नहीं हैं",
+  "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "हटाए गए प्रतिभागी",
+  "TERRITORY_MEETING_POINT": "मीटिंग प्वाइंट URL (Google मानचित्र या अन्य) कॉपी और पेस्ट करें",
+  "TERRITORY_PDF_MEETING_POINT": "बैठक बिंदु URL",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "मीटिंग पॉइंट URL खोलने के लिए मुझे क्लिक करें"
 }

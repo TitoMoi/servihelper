@@ -465,5 +465,9 @@
   "TERRITORY_ADD_IMAGE": "Fügen Sie ein Bild hinzu und deaktivieren Sie die Karte",
   "TERRITORY_REMOVE_IMAGE": "Entfernen Sie das Bild und aktivieren Sie die Karte",
   "STATISTICS_COUNT_TERRITORY_ORDER": "Ordnung nach Territorium",
-  "HEATMAP_NO_POLYGONS": "Es gibt keine Gebiete mit Polygonen zu zeigen"
+  "HEATMAP_NO_POLYGONS": "Es gibt keine Gebiete mit Polygonen zu zeigen",
+  "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "Teilnehmer gelöscht",
+  "TERRITORY_MEETING_POINT": "Kopieren und Einfügen von URL der Besprechungspunkte (Google Maps oder andere)",
+  "TERRITORY_PDF_MEETING_POINT": "Die Treffpunkt -URL",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Klicken Sie auf mich, um die URL der Besprechungspunkte zu öffnen"
 }

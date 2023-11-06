@@ -31,7 +31,11 @@
                 <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
               </div>
               <div class="col-auto" *ngFor="let p of terr.participants; let i = index">
-                <div>{{ (p | participantPipe).name }}</div>
+                <div>
+                  {{
+                    (p | participantPipe)?.name || t("STATISTICS_COUNT_TERRITORY_P_NOT_FOUND")
+                  }}
+                </div>
                 <div>{{ terr.assignedDates[i] | translocoDate : { dateStyle: "short" } }}</div>
                 <div>{{ terr.returnedDates[i] | translocoDate : { dateStyle: "short" } }}</div>
               </div>

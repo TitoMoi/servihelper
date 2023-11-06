@@ -462,5 +462,9 @@
   "TERRITORY_ADD_IMAGE": "Aggiungi un'immagine e disabilita la mappa",
   "TERRITORY_REMOVE_IMAGE": "Rimuovi l'immagine e abilita la mappa",
   "STATISTICS_COUNT_TERRITORY_ORDER": "Ordine per territorio",
-  "HEATMAP_NO_POLYGONS": "Non ci sono territori con poligoni da mostrare"
+  "HEATMAP_NO_POLYGONS": "Non ci sono territori con poligoni da mostrare",
+  "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "Partecipante cancellato",
+  "TERRITORY_MEETING_POINT": "Copia e incolla l'URL del punto di incontro (Google Maps o altro)",
+  "TERRITORY_PDF_MEETING_POINT": "L'URL del punto d'incontro",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Cliccami per aprire l'URL del punto d'incontro"
 }

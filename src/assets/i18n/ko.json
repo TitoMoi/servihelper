@@ -391,5 +391,9 @@
   "TERRITORY_ADD_IMAGE": "이미지를 추가하고지도를 비활성화하십시오",
   "TERRITORY_REMOVE_IMAGE": "이미지를 제거하고지도를 활성화하십시오",
   "STATISTICS_COUNT_TERRITORY_ORDER": "영토별로 주문하십시오",
-  "HEATMAP_NO_POLYGONS": "다각형이있는 영토는 없습니다"
+  "HEATMAP_NO_POLYGONS": "다각형이있는 영토는 없습니다",
+  "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "삭제 된 참가자",
+  "TERRITORY_MEETING_POINT": "회의 포인트 URL 복사 및 붙여 넣기 (Google지도 또는 기타)",
+  "TERRITORY_PDF_MEETING_POINT": "회의 지점 URL",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Click me to open the meeting point url"
 }

@@ -237,6 +237,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     if (this.activatedRoute.snapshot.queryParams.prev === "home") {
       this.cancelBtn.nativeElement.click();
     }
+    if (!this.isUpdate) this.form.markAllAsTouched();
   }
 
   ngOnInit() {

@@ -12,6 +12,7 @@ export interface TerritoryContextInterface {
   poligonId: string;
   image: string; //temporal base64
   imageId: string;
+  meetingPointUrl: string; //url
   assignedDates?: Date[]; //When its assigned
   returnedDates?: Date[]; //When its returned
   participants?: string[]; //Participants assigned

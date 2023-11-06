@@ -465,5 +465,9 @@
   "TERRITORY_ADD_IMAGE": "Adăugați o imagine și dezactivați harta",
   "TERRITORY_REMOVE_IMAGE": "Eliminați imaginea și activați harta",
   "STATISTICS_COUNT_TERRITORY_ORDER": "Comandați pe teritoriu",
-  "HEATMAP_NO_POLYGONS": "Nu există teritorii cu poligoane de arătat"
+  "HEATMAP_NO_POLYGONS": "Nu există teritorii cu poligoane de arătat",
+  "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "Participantul șters",
+  "TERRITORY_MEETING_POINT": "Copiați și lipiți URL -ul punctului de întâlnire (Google Maps sau altul)",
+  "TERRITORY_PDF_MEETING_POINT": "URL -ul punctului de întâlnire",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Faceți clic pe mine pentru a deschide URL -ul punctului de întâlnire"
 }

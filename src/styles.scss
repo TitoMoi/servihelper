@@ -43,6 +43,10 @@ mat-form-field {
 //Cannot specify height or width here, component level is more specific but cursor is agnostic
 mat-icon {
   cursor: pointer;
+
+  &.cursor-arrow {
+    cursor: default;
+  }
 }
 
 .app-align-items-center {

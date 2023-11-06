@@ -467,5 +467,9 @@
   "TERRITORY_ADD_IMAGE": "Afegeix una imatge i desactiva el mapa",
   "TERRITORY_REMOVE_IMAGE": "Elimina la imatge i activa el mapa",
   "STATISTICS_COUNT_TERRITORY_ORDER": "Ordenació per territori",
-  "HEATMAP_NO_POLYGONS": "No hi ha territoris amb polígons per mostrar"
+  "HEATMAP_NO_POLYGONS": "No hi ha territoris amb polígons per mostrar",
+  "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "Participant suprimit",
+  "TERRITORY_MEETING_POINT": "Copia i pega l’URL del punt de trobada (Google Maps o altres)",
+  "TERRITORY_PDF_MEETING_POINT": "L’URL del punt de trobada",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Feu clic per obrir l’URL del punt de trobada"
 }
