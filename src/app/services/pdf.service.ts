@@ -386,6 +386,8 @@ export class PdfService {
     if (this.translocoService.getActiveLang() === "ca") {
       this.backupLang = "ca";
       this.translocoService = this.translocoService.setActiveLang("es");
+    } else {
+      this.backupLang = null;
     }
 
     assignments.forEach((assignment, i) => {
