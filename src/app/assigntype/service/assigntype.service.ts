@@ -17,13 +17,18 @@ export class AssignTypeService {
   //The map of assignTypes for look up of by id
   #assignTypesMap: Map<string, AssignTypeInterface> = new Map();
 
+  //Section
   treasuresAssignmentTypes: AssignTypes[] = ["spiritualGems", "treasures", "bibleReading"];
+
+  //Section
   improvePreachingAssignmentTypes: AssignTypes[] = [
     "initialCall",
     "returnVisit",
     "bibleStudy",
     "talk",
   ];
+
+  //Section
   liveAsChristiansAssignmentTypes: AssignTypes[] = [
     "livingAsChristians",
     "congregationBibleStudy",

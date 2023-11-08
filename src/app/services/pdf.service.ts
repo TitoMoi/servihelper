@@ -145,7 +145,7 @@ export class PdfService {
   }
 
   getDateFontSize() {
-    return 14;
+    return 13.5;
   }
 
   getTextFontSize() {
@@ -230,7 +230,7 @@ export class PdfService {
 
     for (const ag of assignmentGroups) {
       doc.setFont(this.font, "bold");
-      doc.setFontSize(11);
+      doc.setFontSize(this.getDateFontSize());
       //Date
       const localeDate = this.translocoLocaleService.localizeDate(
         ag.assignments[0].date,
@@ -244,8 +244,10 @@ export class PdfService {
       doc.text(roomName, 150, y);
 
       y += 6;
+
       doc.setFont(this.font, "normal");
-      doc.setFontSize(10);
+      doc.setFontSize(this.getTextFontSize());
+
       for (const a of ag.assignments) {
         const themeOrAssignType =
           a.theme || this.assignTypeService.getNameOrTranslation(a.assignType);
@@ -297,7 +299,7 @@ export class PdfService {
     });
 
     doc.setFont(this.font, "bold");
-    doc.setFontSize(12);
+    doc.setFontSize(this.getDateFontSize()); //It's not date but the same font size
 
     let x = 10;
     let y = 10;
@@ -313,7 +315,7 @@ export class PdfService {
 
     for (const ag of assignmentGroups) {
       doc.setFont(this.font, "bold");
-      doc.setFontSize(11.5);
+      doc.setFontSize(this.getDateFontSize());
       //Date
       const localeDate = this.translocoLocaleService.localizeDate(
         ag.assignments[0].date,
@@ -329,7 +331,8 @@ export class PdfService {
       y = this.calculateY(doc, y + 6, isForPrint);
 
       doc.setFont(this.font, "normal");
-      doc.setFontSize(10.5);
+      doc.setFontSize(this.getTextFontSize());
+
       for (const a of ag.assignments) {
         const themeOrAssignType =
           a.theme || this.assignTypeService.getNameOrTranslation(a.assignType);
