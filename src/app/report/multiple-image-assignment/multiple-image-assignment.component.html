@@ -22,27 +22,21 @@
         [matTooltip]="t('ICON_FOLDER')"
         (click)="createAssignmentsInFolder()"
       ></mat-icon>
-      <mat-chip-listbox aria-label="Fish selection">
-        <div
-          [matTooltip]="t('TEMPLATE_NOT_AVAILABLE')"
-          [matTooltipDisabled]="!templateS89Exists"
-        >
+      <mat-chip-listbox aria-label="Fish selection" class="ms-4">
+        <div [matTooltip]="t('TEMPLATE_NOT_AVAILABLE')" [matTooltipDisabled]="existsS89">
           <mat-chip-option
             (click)="toPdfS89()"
             [matTooltip]="t('S89_TOOLTIP')"
-            [disabled]="templateS89Exists"
+            [disabled]="!existsS89 || !existsAssignmentsForS89"
             ><mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
             <span id="pdfAcronim">S89</span></mat-chip-option
           >
         </div>
-        <div
-          [matTooltip]="t('TEMPLATE_NOT_AVAILABLE')"
-          [matTooltipDisabled]="!templateS89Exists"
-        >
+        <div [matTooltip]="t('TEMPLATE_NOT_AVAILABLE')" [matTooltipDisabled]="existsS89">
           <mat-chip-option
             (click)="toPdfS89M()"
             [matTooltip]="t('S89M_TOOLTIP')"
-            [disabled]="templateS89Exists"
+            [disabled]="!existsS89 || !existsAssignmentsForS89"
           >
             <mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
             <span id="pdfAcronim">4-S89</span>

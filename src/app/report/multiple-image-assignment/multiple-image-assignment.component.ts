@@ -65,7 +65,9 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
   homeDir = this.configService.homeDir;
 
-  templateS89Exists = !this.pdfService.checkLangExists(this.pdfService.S89);
+  existsS89 = this.pdfService.checkLangExists(this.pdfService.S89);
+
+  existsAssignmentsForS89 = false;
 
   //Title bindings
   assignmentHeaderTitle = this.configService.getConfig().assignmentHeaderTitle;
@@ -98,6 +100,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       this.assignmentsWithNames = [];
       this.filterAssignments().then(() => {
         this.prepareAssignmentsData();
+        this.checkIfAreS89Assignments();
         this.cdr.detectChanges();
       });
     }
@@ -160,6 +163,12 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       );
     }
     this.cdr.detectChanges();
+  }
+
+  checkIfAreS89Assignments() {
+    this.existsAssignmentsForS89 = this.#assignments.some((a) =>
+      this.pdfService.isAllowedTypeForS89(a)
+    );
   }
 
   async toPng() {
