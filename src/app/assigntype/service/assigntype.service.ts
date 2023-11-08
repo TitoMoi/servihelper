@@ -43,6 +43,17 @@ export class AssignTypeService {
     return at.name ? at.name : this.translocoService.translate(at.tKey);
   }
 
+  isAllowedTypeForS89(assignTypeId: string): boolean {
+    const type = this.getAssignType(assignTypeId).type;
+    return (
+      type === "bibleReading" ||
+      type === "initialCall" ||
+      type === "returnVisit" ||
+      type === "bibleStudy" ||
+      type === "talk"
+    );
+  }
+
   /**
    *
    * @returns AssignTypeInterface[] the array of assignTypes

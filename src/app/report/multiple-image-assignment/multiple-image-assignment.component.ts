@@ -167,7 +167,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
   checkIfAreS89Assignments() {
     this.existsAssignmentsForS89 = this.#assignments.some((a) =>
-      this.pdfService.isAllowedTypeForS89(a)
+      this.assignTypeService.isAllowedTypeForS89(a.assignType)
     );
   }
 
@@ -261,7 +261,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
     for (const [index, a] of this.#assignments.entries()) {
-      if (this.pdfService.isAllowedTypeForS89(a)) {
+      if (this.assignTypeService.isAllowedTypeForS89(a.assignType)) {
         const pdfBytes = await this.pdfService.toPdfS89([a], false);
         const participantName = this.participantService.getParticipant(a.principal).name;
         const assignTypeName = this.assignTypeService.getNameOrTranslation(

@@ -136,7 +136,7 @@ export class ImageAssignmentComponent {
   }
 
   isAllowedTypeForS89() {
-    return this.pdfService.isAllowedTypeForS89(this.assignment);
+    return this.assignTypeService.isAllowedTypeForS89(this.assignment.assignType);
   }
 
   async toPng() {

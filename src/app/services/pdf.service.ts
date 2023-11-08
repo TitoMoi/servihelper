@@ -152,17 +152,6 @@ export class PdfService {
     return 11;
   }
 
-  isAllowedTypeForS89(assignment: AssignmentInterface): boolean {
-    const type = this.assignTypeService.getAssignType(assignment.assignType).type;
-    return (
-      type === "bibleReading" ||
-      type === "initialCall" ||
-      type === "returnVisit" ||
-      type === "bibleStudy" ||
-      type === "talk"
-    );
-  }
-
   addHeavyCheckImg(doc: jsPDF, x, y) {
     const image = path.join(this.configService.iconsFilesPath, "heavycheck.png");
     const uint8array = new Uint8Array(readFileSync(image));
@@ -375,7 +364,9 @@ export class PdfService {
   }
 
   async toPdfS89(assignments: AssignmentInterface[], is4slips: boolean) {
-    assignments = assignments.filter((a) => this.isAllowedTypeForS89(a));
+    assignments = assignments.filter((a) =>
+      this.assignTypeService.isAllowedTypeForS89(a.assignType)
+    );
 
     let doc = this.getJsPdf({
       orientation: "portrait",
