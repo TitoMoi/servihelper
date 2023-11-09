@@ -107,6 +107,19 @@ export class HomeComponent implements OnInit {
           let finalConfig = { ...currentConfig, ...incomingConfig };
           writeJsonSync(this.configService.configPath, finalConfig);
           break;
+        case this.configService.assignTypesFilename:
+          const incomingAtList = JSON.parse(zipEntry.getData().toString("utf8"));
+          //Read current assignTypes
+          const currentAtList = this.assignTypeService.getAssignTypes();
+
+          //Update current assignTypes with incoming assignTypes
+          const finalAtList = incomingAtList.map((incomingAt) => {
+            const currentAt = currentAtList.find((at) => at.id === incomingAt.id);
+            return { ...currentAt, ...incomingAt }; //updates or adds
+          });
+          //save it
+          writeJsonSync(this.configService.assignTypesPath, finalAtList);
+          break;
         default:
           const destinyPath = path.join(
             this.configService.sourceFilesPath,
