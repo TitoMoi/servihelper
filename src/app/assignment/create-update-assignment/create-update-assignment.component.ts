@@ -754,7 +754,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       "interestInOthers",
       "livingAsChristians",
       "congregationBibleStudy",
-      "chairman",
     ].includes(type);
   }
 
