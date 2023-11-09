@@ -101,22 +101,11 @@
   {
     "id": "14",
     "name": "",
-    "tKey": "ASSIGNTYPES_EXPLAINBELIEFSTALK",
-    "hasAssistant": false,
-    "repeat": false,
-    "type": "explainBeliefsTalk",
-    "order": 82,
-    "color": "#C48430",
-    "days": null
-  },
-  {
-    "id": "15",
-    "name": "",
     "tKey": "ASSIGNTYPES_EXPLAINBELIEFS",
     "hasAssistant": true,
     "repeat": false,
     "type": "explainBeliefs",
-    "order": 84,
+    "order": 82,
     "color": "#C48430",
     "days": null
   },

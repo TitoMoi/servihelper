@@ -27,7 +27,6 @@ export type AssignTypes =
   | "bibleStudy"
   | "talk"
   | "explainBeliefs"
-  | "explainBeliefsTalk"
   | "livingAsChristians"
   | "congregationBibleStudy"
   | "other";

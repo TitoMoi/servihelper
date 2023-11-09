@@ -731,7 +731,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
-  /** Check if the type is inside a group of types */
+  /** This functions are created to get the exhaust time period */
   isOfTypeAssignTypes(type: AssignTypes) {
     return [
       "bibleReading",
@@ -740,7 +740,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       "talk",
       "bibleStudy",
       "explainBeliefs",
-      "explainBeliefsTalk",
     ].includes(type);
   }
 

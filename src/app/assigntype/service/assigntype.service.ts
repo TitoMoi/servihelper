@@ -22,10 +22,12 @@ export class AssignTypeService {
 
   //Section
   improvePreachingAssignmentTypes: AssignTypes[] = [
+    "interestInOthers",
     "initialCall",
     "returnVisit",
     "bibleStudy",
     "talk",
+    "explainBeliefs",
   ];
 
   //Section
