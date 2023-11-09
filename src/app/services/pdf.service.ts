@@ -363,6 +363,9 @@ export class PdfService {
     return doc.save("assignmentsList");
   }
 
+  /**
+   * Creates a slip s89 or a 4-slip89 pdf
+   */
   async toPdfS89(assignments: AssignmentInterface[], is4slips: boolean) {
     let doc = this.getJsPdf({
       orientation: "portrait",
@@ -484,31 +487,32 @@ export class PdfService {
       x += 5;
       y += 5;
 
-      const type = this.assignTypeService.getAssignType(assignment.assignType).type;
+      const at = this.assignTypeService.getAssignType(assignment.assignType);
+      const type = at.type;
 
       doc.rect(x, y - 2.5, 3, 3);
       if (type === "bibleReading") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.translocoService.translate("S89_BIBLEREADING"), x + 5, y);
+      doc.text(this.assignTypeService.getNameOrTranslationByType("bibleReading"), x + 5, y);
 
       doc.rect(x + 45, y - 2.5, 3, 3);
       if (type === "bibleStudy") this.addHeavyCheckImg(doc, x + 45, y - 2.5);
-      doc.text(this.translocoService.translate("S89_BIBLESTUDY"), x + 50, y);
+      doc.text(this.assignTypeService.getNameOrTranslationByType("bibleStudy"), x + 50, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
       if (type === "initialCall") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.translocoService.translate("S89_INITIALCALL"), x + 5, y);
+      doc.text(this.assignTypeService.getNameOrTranslationByType("initialCall"), x + 5, y);
 
       doc.rect(x + 45, y - 2.5, 3, 3);
       if (type === "talk") this.addHeavyCheckImg(doc, x + 45, y - 2.5);
-      doc.text(this.translocoService.translate("S89_TALK"), x + 50, y);
+      doc.text(this.assignTypeService.getNameOrTranslationByType("talk"), x + 50, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
       if (type === "returnVisit") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.translocoService.translate("S89_RETURNVISIT"), x + 5, y);
+      doc.text(this.assignTypeService.getNameOrTranslationByType("returnVisit"), x + 5, y);
 
       //Cif its not included in the current s89 format then goes to the other checkbox
       doc.rect(x + 45, y - 2.5, 3, 3);

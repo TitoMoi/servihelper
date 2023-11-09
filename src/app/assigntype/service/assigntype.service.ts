@@ -45,6 +45,11 @@ export class AssignTypeService {
     return at.name ? at.name : this.translocoService.translate(at.tKey);
   }
 
+  getNameOrTranslationByType(type: AssignTypes) {
+    const at = this.#assignTypes.find((at) => at.type === type);
+    return this.getNameOrTranslation(at);
+  }
+
   isAllowedTypeForS89(type: string): boolean {
     if (!type) return false;
 
