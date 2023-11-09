@@ -21,6 +21,7 @@ import { PublicThemeService } from "app/public-theme/service/public-theme.servic
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 import { OnlineService } from "app/online/service/online.service";
 import { NoteInterface } from "app/note/model/note.model";
+import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 
 @Component({
   selector: "app-home",
@@ -108,15 +109,24 @@ export class HomeComponent implements OnInit {
           writeJsonSync(this.configService.configPath, finalConfig);
           break;
         case this.configService.assignTypesFilename:
-          const incomingAtList = JSON.parse(zipEntry.getData().toString("utf8"));
+          const incomingAtList: AssignTypeInterface[] = JSON.parse(
+            zipEntry.getData().toString("utf8")
+          );
           //Read current assignTypes
           const currentAtList = this.assignTypeService.getAssignTypes();
 
           //Update current assignTypes with incoming assignTypes
           const finalAtList = incomingAtList.map((incomingAt) => {
             const currentAt = currentAtList.find((at) => at.id === incomingAt.id);
-            return { ...currentAt, ...incomingAt }; //updates or adds
+            return { ...currentAt, ...incomingAt } as AssignTypeInterface; //updates or adds
           });
+
+          //Add the current assignTypes that are not on the final list
+          for (const at of currentAtList) {
+            const exists = finalAtList.some((fat) => fat.id === at.id);
+            if (!exists) finalAtList.push(at);
+          }
+
           //save it
           writeJsonSync(this.configService.assignTypesPath, finalAtList);
           break;
