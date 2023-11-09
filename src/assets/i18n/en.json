@@ -445,5 +445,8 @@
   "STATISTICS_COUNT_TERRITORY_P_NOT_FOUND": "Deleted participant",
   "TERRITORY_MEETING_POINT": "Copy and paste meeting point url (google maps or other)",
   "TERRITORY_PDF_MEETING_POINT": "The meeting point url",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Click me to open the meeting point url"
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Click me to open the meeting point url",
+
+  "ASSIGNTYPES_INTERESTINOTHERS": "Interest in others",
+  "ASSIGNTYPES_EXPLAINBELIEFS": "Explain your beliefs"
 }

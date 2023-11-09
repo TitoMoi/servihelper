@@ -40,7 +40,7 @@
     "repeat": false,
     "type": "treasures",
     "order": 30,
-    "color": "#616261",
+    "color": "#2a6b77",
     "days": null
   },
   {
@@ -51,7 +51,7 @@
     "repeat": false,
     "type": "spiritualGems",
     "order": 40,
-    "color": "#616261",
+    "color": "#2a6b77",
     "days": null
   },
   {
@@ -62,7 +62,18 @@
     "repeat": false,
     "type": "bibleReading",
     "order": 50,
-    "color": "#616261",
+    "color": "#2a6b77",
+    "days": null
+  },
+  {
+    "id": "13",
+    "name": "",
+    "tKey": "ASSIGNTYPES_INTERESTINOTHERS",
+    "hasAssistant": false,
+    "repeat": true,
+    "type": "interestInOthers",
+    "order": 55,
+    "color": "#C48430",
     "days": null
   },
   {
@@ -84,6 +95,28 @@
     "repeat": false,
     "type": "talk",
     "order": 80,
+    "color": "#C48430",
+    "days": null
+  },
+  {
+    "id": "14",
+    "name": "",
+    "tKey": "ASSIGNTYPES_EXPLAINBELIEFSTALK",
+    "hasAssistant": false,
+    "repeat": false,
+    "type": "explainBeliefsTalk",
+    "order": 82,
+    "color": "#C48430",
+    "days": null
+  },
+  {
+    "id": "15",
+    "name": "",
+    "tKey": "ASSIGNTYPES_EXPLAINBELIEFS",
+    "hasAssistant": true,
+    "repeat": false,
+    "type": "explainBeliefs",
+    "order": 84,
     "color": "#C48430",
     "days": null
   },

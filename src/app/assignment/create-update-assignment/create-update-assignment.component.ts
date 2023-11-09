@@ -733,7 +733,15 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   /** Check if the type is inside a group of types */
   isOfTypeAssignTypes(type: AssignTypes) {
-    return ["bibleReading", "initialCall", "returnVisit", "talk", "bibleStudy"].includes(type);
+    return [
+      "bibleReading",
+      "initialCall",
+      "returnVisit",
+      "talk",
+      "bibleStudy",
+      "explainBeliefs",
+      "explainBeliefsTalk",
+    ].includes(type);
   }
 
   isOfTypePrayer(type: AssignTypes) {
@@ -744,6 +752,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     return [
       "treasures",
       "spiritualGems",
+      "interestInOthers",
       "livingAsChristians",
       "congregationBibleStudy",
       "chairman",
