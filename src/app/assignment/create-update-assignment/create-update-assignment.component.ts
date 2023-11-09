@@ -349,7 +349,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
     this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
     this.warningIfAlreadyHasWork();
-    this.checkIfCollision();
+    this.checkIfExhausted();
   }
   /** (Form) batch clean principalId and assistantId, should not call other batch operations inside */
   batchCleanPrincipalAssistant() {
@@ -599,7 +599,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
-  checkIfCollision() {
+  checkIfExhausted() {
     let currentDate: Date = this.gfv("date");
     const room = this.gfv("room");
     const at = this.gfv("assignType");
@@ -610,7 +610,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       const closeOthersTreasuresEtcDays =
         this.configService.getConfig().closeToOthersTreasuresEtcDays;
 
-      /* get the threshold of the assign type */
+      /* get the threshold of the assign type itself */
       const at = this.assignTypeService.getAssignType(this.gfv("assignType"));
       const atType = at.type;
       const days = at?.days;
@@ -746,6 +746,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       "spiritualGems",
       "livingAsChristians",
       "congregationBibleStudy",
+      "chairman",
     ].includes(type);
   }
 
