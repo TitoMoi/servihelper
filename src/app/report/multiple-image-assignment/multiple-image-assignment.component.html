@@ -27,7 +27,7 @@
           <mat-chip-option
             (click)="toPdfS89()"
             [matTooltip]="t('S89_TOOLTIP')"
-            [disabled]="!existsS89 || !existsAssignmentsForS89"
+            [disabled]="!existsS89"
             ><mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
             <span id="pdfAcronim">S89</span></mat-chip-option
           >
@@ -36,7 +36,7 @@
           <mat-chip-option
             (click)="toPdfS89M()"
             [matTooltip]="t('S89M_TOOLTIP')"
-            [disabled]="!existsS89 || !existsAssignmentsForS89"
+            [disabled]="!existsS89"
           >
             <mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
             <span id="pdfAcronim">4-S89</span>

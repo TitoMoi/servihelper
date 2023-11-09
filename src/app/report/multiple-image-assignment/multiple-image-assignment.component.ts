@@ -100,7 +100,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       this.assignmentsWithNames = [];
       this.filterAssignments().then(() => {
         this.prepareAssignmentsData();
-        this.checkIfAreS89Assignments();
         this.cdr.detectChanges();
       });
     }
@@ -163,12 +162,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       );
     }
     this.cdr.detectChanges();
-  }
-
-  checkIfAreS89Assignments() {
-    this.existsAssignmentsForS89 = this.#assignments.some((a) =>
-      this.assignTypeService.isAllowedTypeForS89(a.assignType)
-    );
   }
 
   async toPng() {
@@ -238,6 +231,39 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     this.cdr.detectChanges();
   }
 
+  /**
+   * Create a pdf for each assignment in a folder for each participant
+   */
+  async toPdfS89() {
+    //Clean directory "assignments" first
+    removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
+
+    for (const [index, a] of this.#assignments.entries()) {
+      const pdfBytes = await this.pdfService.toPdfS89([a], false);
+      const participantName = this.participantService.getParticipant(a.principal).name;
+      const assignTypeName = this.assignTypeService.getNameOrTranslation(
+        this.assignTypeService.getAssignType(a.assignType)
+      );
+
+      //Ensure the filename is valid for the system
+      const fileNamePath = filenamifyPath(
+        path.join(
+          this.homeDir,
+          "assignments",
+          participantName,
+          index + "-" + assignTypeName + ".pdf"
+        )
+      );
+      ensureFileSync(fileNamePath);
+      writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer()));
+    }
+    this.assignmentsInFolderCreated = true;
+    this.cdr.detectChanges();
+  }
+
+  /**
+   * Create a single pdf containing all the assignments
+   */
   async toPdfS89M() {
     //Clean directory "assignments" first
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
@@ -252,35 +278,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     ensureFileSync(fileNamePath);
     writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer()));
 
-    this.assignmentsInFolderCreated = true;
-    this.cdr.detectChanges();
-  }
-
-  async toPdfS89() {
-    //Clean directory "assignments" first
-    removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
-
-    for (const [index, a] of this.#assignments.entries()) {
-      if (this.assignTypeService.isAllowedTypeForS89(a.assignType)) {
-        const pdfBytes = await this.pdfService.toPdfS89([a], false);
-        const participantName = this.participantService.getParticipant(a.principal).name;
-        const assignTypeName = this.assignTypeService.getNameOrTranslation(
-          this.assignTypeService.getAssignType(a.assignType)
-        );
-
-        //Ensure the filename is valid for the system
-        const fileNamePath = filenamifyPath(
-          path.join(
-            this.homeDir,
-            "assignments",
-            participantName,
-            index + "-" + assignTypeName + ".pdf"
-          )
-        );
-        ensureFileSync(fileNamePath);
-        writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer()));
-      }
-    }
     this.assignmentsInFolderCreated = true;
     this.cdr.detectChanges();
   }

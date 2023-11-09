@@ -364,10 +364,6 @@ export class PdfService {
   }
 
   async toPdfS89(assignments: AssignmentInterface[], is4slips: boolean) {
-    assignments = assignments.filter((a) =>
-      this.assignTypeService.isAllowedTypeForS89(a.assignType)
-    );
-
     let doc = this.getJsPdf({
       orientation: "portrait",
       format: is4slips ? "a4" : [113.03, 85.09],
@@ -495,7 +491,7 @@ export class PdfService {
       doc.text(this.translocoService.translate("S89_BIBLEREADING"), x + 5, y);
 
       doc.rect(x + 45, y - 2.5, 3, 3);
-      if (type === "bibleStudy") this.addHeavyCheckImg(doc, x, y - 2.5);
+      if (type === "bibleStudy") this.addHeavyCheckImg(doc, x + 45, y - 2.5);
       doc.text(this.translocoService.translate("S89_BIBLESTUDY"), x + 50, y);
 
       y += 5;
@@ -505,7 +501,7 @@ export class PdfService {
       doc.text(this.translocoService.translate("S89_INITIALCALL"), x + 5, y);
 
       doc.rect(x + 45, y - 2.5, 3, 3);
-      if (type === "talk") this.addHeavyCheckImg(doc, x, y - 2.5);
+      if (type === "talk") this.addHeavyCheckImg(doc, x + 45, y - 2.5);
       doc.text(this.translocoService.translate("S89_TALK"), x + 50, y);
 
       y += 5;
@@ -514,16 +510,18 @@ export class PdfService {
       if (type === "returnVisit") this.addHeavyCheckImg(doc, x, y - 2.5);
       doc.text(this.translocoService.translate("S89_RETURNVISIT"), x + 5, y);
 
+      //Cif its not included in the current s89 format then goes to the other checkbox
       doc.rect(x + 45, y - 2.5, 3, 3);
-      if (type === "other") this.addHeavyCheckImg(doc, x, y - 2.5);
+      if (!this.assignTypeService.isAllowedTypeForS89(type))
+        this.addHeavyCheckImg(doc, x + 45, y - 2.5);
       doc.text(this.translocoService.translate("S89_OTHER"), x + 50, y);
 
       y += 5;
 
       x -= 5;
 
-      const canBeRepeated: AssignTypes[] = ["initialCall", "returnVisit"];
-      if (canBeRepeated.includes(type) && assignment.theme) {
+      const showThemeList: AssignTypes[] = ["initialCall", "returnVisit"];
+      if (showThemeList.includes(type) || !this.assignTypeService.isAllowedTypeForS89(type)) {
         y += 1;
         doc.setFontSize(7);
         const themeText = this.shortAssignTypeTheme(doc, assignment);
