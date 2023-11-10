@@ -133,6 +133,7 @@ export class HomeComponent implements OnInit {
           }
 
           //save it
+          finalAtList.sort((a, b) => (a.order > b.order ? 1 : -1));
           writeJsonSync(this.configService.assignTypesPath, finalAtList);
           break;
         default:
@@ -151,15 +152,6 @@ export class HomeComponent implements OnInit {
           }
       }
     });
-
-    //If we have some new assign type we need to add the reference to all the participants
-    if (nonExistingAssignmentTypes.length) {
-      //Read current participants
-      this.participantService.getParticipants();
-      for (const at of nonExistingAssignmentTypes) {
-        this.participantService.massiveUpdateAssignType(at.id, true);
-      }
-    }
 
     this.configService.hasChanged = true;
     const config = this.configService.getConfig();
@@ -194,6 +186,22 @@ export class HomeComponent implements OnInit {
     this.translocoService = this.translocoService.setActiveLang(lang);
     if (lang === "zhCN") lang = "zh";
     this.dateAdapter.setLocale(lang);
+
+    //If we have some new assign type we need to add the reference to all the participants
+    if (nonExistingAssignmentTypes.length) {
+      //Read current participants reference
+      const participants = this.participantService.getParticipants();
+      for (const p of participants) {
+        for (const at of nonExistingAssignmentTypes) {
+          p.assignTypes.push({
+            assignTypeId: at.id,
+            canPrincipal: true,
+            canAssistant: true,
+          });
+        }
+      }
+      this.participantService.saveParticipantsToFile();
+    }
 
     this.isZipLoaded = true;
   }
