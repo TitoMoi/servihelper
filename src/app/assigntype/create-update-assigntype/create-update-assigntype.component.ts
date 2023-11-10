@@ -96,7 +96,10 @@ export class CreateUpdateAssignTypeComponent {
         });
         //Update the assign type reference for all the participants if has assistant
         const id = this.form.get("id").value;
-        this.participantService.updateAssignType(id, this.form.get("hasAssistant").value);
+        this.participantService.massiveUpdateAssignType(
+          id,
+          this.form.get("hasAssistant").value
+        );
       } else {
         //save the assign type
         const id = this.assignTypeService.createAssignType({

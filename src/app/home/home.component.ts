@@ -90,6 +90,9 @@ export class HomeComponent implements OnInit {
 
   /** Uploads servihelper files, only for OFFLINE */
   uploadZipFiles(event: Event) {
+    //Add the current assignTypes that are not on the final list
+    const nonExistingAssignmentTypes: AssignTypeInterface[] = [];
+
     const zipFile = this.getZipContentFromFileEvent(event);
     /* let zip = new AdmZip();
     zip = zip.readFile(zipFile.path); */
@@ -121,10 +124,12 @@ export class HomeComponent implements OnInit {
             return { ...currentAt, ...incomingAt } as AssignTypeInterface; //updates or adds
           });
 
-          //Add the current assignTypes that are not on the final list
           for (const at of currentAtList) {
             const exists = finalAtList.some((fat) => fat.id === at.id);
-            if (!exists) finalAtList.push(at);
+            if (!exists) {
+              finalAtList.push(at);
+              nonExistingAssignmentTypes.push(at);
+            }
           }
 
           //save it
@@ -146,6 +151,15 @@ export class HomeComponent implements OnInit {
           }
       }
     });
+
+    //If we have some new assign type we need to add the reference to all the participants
+    if (nonExistingAssignmentTypes.length) {
+      //Read current participants
+      this.participantService.getParticipants();
+      for (const at of nonExistingAssignmentTypes) {
+        this.participantService.massiveUpdateAssignType(at.id, true);
+      }
+    }
 
     this.configService.hasChanged = true;
     const config = this.configService.getConfig();

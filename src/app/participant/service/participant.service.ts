@@ -171,7 +171,7 @@ export class ParticipantService {
    * @param id the id of the assignType to update
    * @returns
    */
-  updateAssignType(id: string, hasAssistant: boolean) {
+  massiveUpdateAssignType(id: string, hasAssistant: boolean) {
     for (const participant of this.#participants) {
       const pAssignType = participant.assignTypes.find((at) => at.assignTypeId === id);
 
