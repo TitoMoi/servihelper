@@ -135,10 +135,6 @@ export class ImageAssignmentComponent {
     this.copiedCalendarReminder = true;
   }
 
-  isAllowedTypeForS89() {
-    return this.assignTypeService.isAllowedTypeForS89(this.assignment.assignType);
-  }
-
   async toPng() {
     const filename = this.sharedService.getFilename(this.assignment);
     this.exportService.toPng("assignmentTableId", filename);

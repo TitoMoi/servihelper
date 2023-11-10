@@ -173,7 +173,6 @@
             [matTooltipDisabled]="!templateS89Exists"
           >
             <mat-chip-option
-              *ngIf="isAllowedTypeForS89()"
               [disabled]="templateS89Exists"
               (click)="toPdfS89()"
               [matTooltip]="t('S89_TOOLTIP')"
