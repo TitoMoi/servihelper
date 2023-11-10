@@ -160,7 +160,7 @@ export class TerritoryService {
       //Territory is unassigned
       if (t.assignedDates.length === t.returnedDates.length) continue;
       if (t.participants.at(-1) === id) {
-        this.returnTerritory(t.id);
+        this.returnTerritory(t.id, new Date());
       }
     }
   }
@@ -169,11 +169,11 @@ export class TerritoryService {
    *
    * @param territory the territory to return
    */
-  returnTerritory(id: string) {
+  returnTerritory(id: string, returnDate: Date) {
     //find territory
     const t = this.#territories.find((terr) => terr.id === id);
     //Mark it as returned
-    t.returnedDates.push(new Date());
+    t.returnedDates.push(returnDate);
     //Update territory
     this.updateTerritory(t);
   }

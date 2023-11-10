@@ -60,9 +60,9 @@ export class ReturnTerritoryComponent implements AfterViewInit {
   }
   onSubmit(): void {
     //get id
-    const id = this.form.get("id").value;
+    const { id, returnDate } = this.form.value;
     //return the territory
-    this.territoryService.returnTerritory(id);
+    this.territoryService.returnTerritory(id, returnDate);
 
     //navigate to parent
     this.router.navigate(["../.."], {
