@@ -35,10 +35,14 @@ export class ParticipantService {
     }
     this.hasChanged = false;
     this.#participants = readJSONSync(this.configService.participantsPath);
+    this.updateMapOfParticipants();
+    return deepClone ? structuredClone(this.#participants) : this.#participants;
+  }
+
+  updateMapOfParticipants() {
     for (const participant of this.#participants) {
       this.#participantsMap.set(participant.id, participant);
     }
-    return deepClone ? structuredClone(this.#participants) : this.#participants;
   }
 
   getParticipantsLength() {
@@ -171,8 +175,18 @@ export class ParticipantService {
     for (const participant of this.#participants) {
       const pAssignType = participant.assignTypes.find((at) => at.assignTypeId === id);
 
-      pAssignType.canAssistant = hasAssistant;
-
+      //If we imported new assign types and for some reason on available section this participant
+      //is not available, he doesnt receive a reference, so we need to update it here
+      if (!pAssignType) {
+        const pAtNew: ParticipantAssignTypeInterface = {
+          assignTypeId: id,
+          canPrincipal: true,
+          canAssistant: hasAssistant,
+        };
+        participant.assignTypes.push(pAtNew);
+      } else {
+        pAssignType.canAssistant = hasAssistant;
+      }
       this.#participantsMap.set(participant.id, participant);
     }
 

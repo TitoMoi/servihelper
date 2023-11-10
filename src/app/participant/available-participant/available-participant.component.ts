@@ -42,7 +42,7 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 })
 export class AvailableParticipantComponent {
   participants = this.participantService
-    .getParticipants()
+    .getParticipants() //We get the reference so we are manipulating participants
     .filter((p) => !p.isExternal && p.available)
     .sort(this.sortService.sortParticipantsByGender);
 
@@ -116,6 +116,8 @@ export class AvailableParticipantComponent {
         { duration: 2000 }
       );
       this.participantService.saveParticipantsToFile();
+      this.participantService.updateMapOfParticipants();
+
       this.lockService.updateTimestamp();
     }
   }
@@ -158,6 +160,13 @@ export class AvailableParticipantComponent {
       if (hasSomeCheck) {
         for (const p of this.participants) {
           const participantAt = p.assignTypes.find((at) => at.assignTypeId === assignType.id);
+
+          //This means that the assign type is new from an import, and has no object, we need to create it.
+          if (!participantAt) {
+            this.createNewAssignTypeReference(p, assignType);
+            continue;
+          }
+
           isPrincipal
             ? (participantAt.canPrincipal = false)
             : (participantAt.canAssistant = false);
@@ -166,6 +175,13 @@ export class AvailableParticipantComponent {
       }
       for (const p of this.participants) {
         const participantAt = p.assignTypes.find((at) => at.assignTypeId === assignType.id);
+
+        //This means that the assign type is new from an import, and has no object, we need to create it.
+        if (!participantAt) {
+          this.createNewAssignTypeReference(p, assignType);
+          continue;
+        }
+
         isPrincipal
           ? (participantAt.canPrincipal = true)
           : (participantAt.canAssistant = true);
@@ -177,9 +193,28 @@ export class AvailableParticipantComponent {
     const participantAt = participant.assignTypes.find(
       (at) => at.assignTypeId === assignType.id
     );
+    //This means that the assign type is new from an import, and has no object, we need to create it.
+    if (!participantAt) {
+      const pAtNew: ParticipantAssignTypeInterface = {
+        assignTypeId: assignType.id,
+        canPrincipal: true,
+        canAssistant: true,
+      };
+      participant.assignTypes.push(pAtNew);
+      return;
+    }
     isPrincipal
       ? (participantAt.canPrincipal = !participantAt.canPrincipal)
       : (participantAt.canAssistant = !participantAt.canAssistant);
+  }
+
+  createNewAssignTypeReference(p: ParticipantInterface, assignType: AssignTypeInterface) {
+    const pAtNew: ParticipantAssignTypeInterface = {
+      assignTypeId: assignType.id,
+      canPrincipal: true,
+      canAssistant: true,
+    };
+    p.assignTypes.push(pAtNew);
   }
 
   async toPng(id) {
