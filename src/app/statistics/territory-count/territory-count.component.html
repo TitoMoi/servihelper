@@ -59,22 +59,18 @@
             <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
           </div>
           <ng-container *ngFor="let t of territories; let i = index">
-            <ng-container *ngIf="t.participants.includes(p.id)" class="me-3">
-              <div class="col-auto">
-                <div>{{ t.name }}</div>
-                <div>
-                  {{
-                    t.assignedDates[t.participants.indexOf(p.id)]
-                      | translocoDate : { dateStyle: "short" }
-                  }}
+            <ng-container *ngFor="let pId of t.participants; let j = index">
+              <ng-container *ngIf="p.id === pId" class="me-3">
+                <div class="col-auto">
+                  <div>{{ t.name }}</div>
+                  <div>
+                    {{ t.assignedDates[j] | translocoDate : { dateStyle: "short" } }}
+                  </div>
+                  <div>
+                    {{ t.returnedDates[j] | translocoDate : { dateStyle: "short" } }}
+                  </div>
                 </div>
-                <div>
-                  {{
-                    t.returnedDates[t.participants.indexOf(p.id)]
-                      | translocoDate : { dateStyle: "short" }
-                  }}
-                </div>
-              </div>
+              </ng-container>
             </ng-container>
           </ng-container>
         </div>
