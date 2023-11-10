@@ -236,6 +236,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     //Then, we simulate a click on the cancel
     if (this.activatedRoute.snapshot.queryParams.prev === "home") {
       this.cancelBtn.nativeElement.click();
+      return;
     }
     if (!this.isUpdate) this.form.markAllAsTouched();
   }
