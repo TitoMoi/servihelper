@@ -146,7 +146,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   assignmentsBySelectedDate: AssignmentInterface[] = [];
 
   role$ = this.configService.config$.pipe(
-    map(() => this.configService.getRole(this.configService.getCurrentRole()))
+    map(() => this.configService.getRole(this.configService.getCurrentRoleId()))
   );
 
   role: RoleInterface;

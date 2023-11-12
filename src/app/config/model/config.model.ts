@@ -28,7 +28,7 @@ export interface ConfigInterface {
   reportTitle?: string;
   lastMapClick: LatLngLiteral;
   roles?: RoleInterface[];
-  role?: string;
+  role?: string; //id
   lastImportedDate: Date;
   lastImportedFilename: string;
   lastExportedDate: Date;

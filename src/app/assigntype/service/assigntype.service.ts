@@ -82,6 +82,17 @@ export class AssignTypeService {
     return this.#assignTypes?.length;
   }
 
+  /** Return an array of assign types ids */
+  getAssignTypesIdsByRole() {
+    const roles = this.configService.getRoles();
+    const currentRoleId = this.configService.getCurrentRoleId();
+    if (this.configService.isCurrentRoleAdmin()) {
+      return this.getAssignTypes().map((at) => at.id);
+    } else {
+      return roles.find((r) => r.id === currentRoleId).assignTypesId;
+    }
+  }
+
   /**
    *
    * @returns true if assignTypes are saved to disk or false

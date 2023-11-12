@@ -9,6 +9,9 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
 import { AsyncPipe, NgIf } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
   selector: "app-delete-assignment",
@@ -19,6 +22,8 @@ import { MatIconModule } from "@angular/material/icon";
     TranslocoModule,
     ReactiveFormsModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatButtonModule,
     RouterLink,
     AsyncPipe,
@@ -29,13 +34,19 @@ import { MatIconModule } from "@angular/material/icon";
 export class DeleteAssignmentComponent {
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
+  a = this.assignmentService.getAssignment(this.activatedRoute.snapshot.params.id);
+
   assignmentForm: UntypedFormGroup = this.formBuilder.group({
     id: this.activatedRoute.snapshot.params.id,
+    name: [
+      { value: this.assignTypeService.getAssignType(this.a.assignType).name, disabled: true },
+    ],
   });
 
   constructor(
     private formBuilder: UntypedFormBuilder,
     private assignmentService: AssignmentService,
+    private assignTypeService: AssignTypeService,
     private router: Router,
     private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute

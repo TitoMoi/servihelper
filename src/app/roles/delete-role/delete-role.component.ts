@@ -56,7 +56,7 @@ export class DeleteRoleComponent {
     this.configService.deleteRole(role.id);
 
     //if deleted role is existing role then set the administrator as default
-    if (this.configService.getCurrentRole() === role.id) {
+    if (this.configService.getCurrentRoleId() === role.id) {
       this.configService.setAdminRole();
     }
 

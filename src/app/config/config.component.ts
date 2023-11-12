@@ -72,9 +72,12 @@ import { SharedService } from "app/services/shared.service";
 })
 export class ConfigComponent implements OnInit, OnDestroy {
   @ViewChild("titleSelect") titleSelect: MatSelect;
+
   translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
 
   titles = this.sheetTitleService.getTitles().sort((a, b) => (a.order > b.order ? 1 : -1));
+
+  notes: NoteInterface[] = this.noteService.getNotes();
 
   publicThemes = this.publicThemeService
     .getPublicThemes()
@@ -128,6 +131,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
   isValidPath = false;
   copyFilesError = false;
   saveCompleted = false;
+
   //onlineForm
   onlineForm = this.formBuilder.group({
     isOnline: this.onlineConfig.isOnline,
@@ -165,8 +169,6 @@ export class ConfigComponent implements OnInit, OnDestroy {
     closeToOthersPrayerDays: 30,
     closeToOthersTreasuresEtcDays: 0,
   };
-
-  notes: NoteInterface[] = this.noteService.getNotes();
 
   subscription = new Subscription();
 

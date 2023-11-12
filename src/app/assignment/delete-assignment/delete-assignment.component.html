@@ -5,7 +5,14 @@
       <mat-card-subtitle>{{ t("ASSIGN_DELETE_WARNING") }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <div class="row"></div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>{{ t("ASSIGN_SELECTION_DATES_SELECT_TITLE") }}</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button type="button" class="me-3" routerLink="../..">

@@ -3,7 +3,7 @@ import { APP_CONFIG } from "environments/environment";
 import { readJSONSync, writeJSONSync } from "fs-extra";
 
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, distinctUntilChanged, map, tap } from "rxjs";
 import { RoleInterface } from "app/roles/model/role.model";
 import { nanoid } from "nanoid";
 import path from "path";
@@ -76,6 +76,16 @@ export class ConfigService {
   config$: Observable<ConfigInterface> = this.configSubject$.asObservable();
   // The config in memory object
   #config: ConfigInterface = undefined;
+
+  //Emits when the role changes
+  role$: Observable<string> = this.config$.pipe(
+    map((config) => config.role),
+    distinctUntilChanged(),
+    tap((role) => (this.#role = role))
+  );
+
+  // The current role id
+  #role: string;
 
   constructor() {}
 
@@ -160,8 +170,12 @@ export class ConfigService {
     return this.#config.roles.find((role) => role.id === id);
   }
 
-  getCurrentRole() {
+  getCurrentRoleId() {
     return this.#config.role;
+  }
+
+  isCurrentRoleAdmin() {
+    return this.#role === "administrator";
   }
 
   addRole(role: RoleInterface) {
