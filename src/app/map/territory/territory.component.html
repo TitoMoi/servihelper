@@ -19,9 +19,18 @@
       <mat-icon
         *ngIf="territories.length"
         [routerLink]="['heatmap']"
+        class="ms-3 me-3"
         routerLinkActive="active"
         svgIcon="heatmap"
         [matTooltip]="t('ICON_HEATMAP')"
+        aria-label="Side nav toggle icon"
+      ></mat-icon>
+      <mat-icon
+        *ngIf="territories.length"
+        [routerLink]="['massive-dates']"
+        routerLinkActive="active"
+        svgIcon="calendardates"
+        [matTooltip]="t('ICON_CHANGE_DATES')"
         aria-label="Side nav toggle icon"
       ></mat-icon>
     </div>

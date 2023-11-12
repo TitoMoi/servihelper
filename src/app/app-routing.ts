@@ -39,6 +39,7 @@ import { DeleteTerritoryGroupComponent } from "app/map/territory-group/delete-te
 import { DeleteTerritoryComponent } from "app/map/territory/delete-territory/delete-territory.component";
 import { ReturnTerritoryComponent } from "app/map/territory/return-territory/return-territory.component";
 import { HeatmapComponent } from "app/map/territory/heatmap/heatmap.component";
+import { MassiveDatesTerritoryComponent } from "app/map/territory/massive-dates-territory/massive-dates-territory.component";
 import { DeletePublicThemeComponent } from "app/public-theme/delete-public-theme/delete-public-theme.component";
 import { CreateUpdatePublicThemeComponent } from "app/public-theme/create-update-public-theme/create-update-public-theme.component";
 import { AvailableParticipantComponent } from "app/participant/available-participant/available-participant.component";
@@ -242,6 +243,10 @@ export const routes: Routes = [
       {
         path: "territory/heatmap",
         component: HeatmapComponent,
+      },
+      {
+        path: "territory/massive-dates",
+        component: MassiveDatesTerritoryComponent,
       },
       {
         path: "territoryGroup",
