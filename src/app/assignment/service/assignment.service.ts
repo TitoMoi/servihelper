@@ -107,18 +107,6 @@ export class AssignmentService {
     }
   }
 
-  deleteAssignmentToAssignmentByDateMap(assignment: AssignmentInterface) {
-    const isoDate = new Date(assignment.date).toISOString();
-    let assignmentsByDate = this.#assignmentsByDateMap.get(isoDate);
-    assignmentsByDate = assignmentsByDate.filter((a) => a.id !== assignment.id);
-    if (assignmentsByDate.length) {
-      this.#assignmentsByDateMap.set(isoDate, assignmentsByDate);
-    } else {
-      //dont need the key if we have 0 assignments
-      this.#assignmentsByDateMap.delete(isoDate);
-    }
-  }
-
   /**
    * performance: dont mark flag hasChanged to true because this.assignments in memory is already updated
    */
@@ -288,17 +276,32 @@ export class AssignmentService {
    *
    * @param date the date we want to delete all assignments
    */
-  massiveAssignmentDelete(date: Date) {
+  massiveAssignmentDelete(date: Date, assignTypesIds: string[]) {
     this.#assignments = this.#assignments.filter((a) => {
-      if (new Date(a.date).getTime() === date.getTime()) {
-        this.#assignmentsMap.delete(a.id);
-        this.deleteAssignmentToAssignmentByDateMap(a);
-        return false;
+      if (assignTypesIds && assignTypesIds.includes(a.assignType)) {
+        if (new Date(a.date).getTime() === date.getTime()) {
+          this.#assignmentsMap.delete(a.id);
+          this.deleteAssignmentToAssignmentByDateMap(a);
+          return false;
+        }
+        return true;
       }
       return true;
     });
     //save assignments
     this.saveAssignmentsToFile();
+  }
+
+  deleteAssignmentToAssignmentByDateMap(assignment: AssignmentInterface) {
+    const isoDate = new Date(assignment.date).toISOString();
+    let assignmentsByDate = this.#assignmentsByDateMap.get(isoDate);
+    assignmentsByDate = assignmentsByDate.filter((a) => a.id !== assignment.id);
+    if (assignmentsByDate.length) {
+      this.#assignmentsByDateMap.set(isoDate, assignmentsByDate);
+    } else {
+      //dont need the key if we have 0 assignments
+      this.#assignmentsByDateMap.delete(isoDate);
+    }
   }
 
   /**

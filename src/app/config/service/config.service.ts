@@ -3,7 +3,7 @@ import { APP_CONFIG } from "environments/environment";
 import { readJSONSync, writeJSONSync } from "fs-extra";
 
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, distinctUntilChanged, map, tap } from "rxjs";
+import { BehaviorSubject, Observable, distinctUntilChanged, map } from "rxjs";
 import { RoleInterface } from "app/roles/model/role.model";
 import { nanoid } from "nanoid";
 import path from "path";
@@ -80,8 +80,7 @@ export class ConfigService {
   //Emits when the role changes
   role$: Observable<string> = this.config$.pipe(
     map((config) => config.role),
-    distinctUntilChanged(),
-    tap((role) => (this.#role = role))
+    distinctUntilChanged()
   );
 
   // The current role id
@@ -99,6 +98,7 @@ export class ConfigService {
     }
     this.hasChanged = false;
     this.#config = readJSONSync(this.configPath);
+    this.#role = this.#config.role;
     this.configSubject$.next(this.#config);
     return this.#config;
   }
@@ -135,6 +135,7 @@ export class ConfigService {
     writeJSONSync(this.configPath, this.#config);
     this.hasChanged = true;
     //Notify public listeners
+    this.#role = this.#config.role;
     this.configSubject$.next(this.#config);
   }
 

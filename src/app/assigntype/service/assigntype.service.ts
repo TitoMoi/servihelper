@@ -88,7 +88,7 @@ export class AssignTypeService {
     const currentRoleId = this.configService.getCurrentRoleId();
     if (this.configService.isCurrentRoleAdmin()) {
       return this.getAssignTypes().map((at) => at.id);
-    } else {
+    } else if (roles) {
       return roles.find((r) => r.id === currentRoleId).assignTypesId;
     }
   }

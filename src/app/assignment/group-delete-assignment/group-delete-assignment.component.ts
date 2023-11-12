@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 
@@ -11,8 +11,13 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe, JsonPipe, NgFor, NgIf } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
+import { map, skip } from "rxjs";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
+import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
+import { ConfigService } from "app/config/service/config.service";
 
 @Component({
   selector: "app-group-delete-assignment",
@@ -31,14 +36,20 @@ import { MatIconModule } from "@angular/material/icon";
     RouterLink,
     MatIconModule,
     NgIf,
+    NgFor,
+    JsonPipe,
+    AssignTypePipe,
+    AssignTypeNamePipe,
   ],
 })
-export class GroupDeleteAssignmentComponent {
+export class GroupDeleteAssignmentComponent implements OnInit {
   assignments: AssignmentInterface[];
 
   assignmentsPromise = this.assignmentService
     .getAssignments()
     .then((assignments) => (this.assignments = assignments));
+
+  currentAssignTypesIdsByRole = this.assignTypeService.getAssignTypesIdsByRole();
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
@@ -46,17 +57,36 @@ export class GroupDeleteAssignmentComponent {
     date: [undefined, Validators.required],
   });
 
+  assignmentsToDelete$ = this.form
+    .get("date")
+    .valueChanges.pipe(
+      map((date) =>
+        this.assignmentService
+          .getAssignmentsByDate(date)
+          .filter((a) => this.currentAssignTypesIdsByRole.includes(a.assignType))
+      )
+    );
+
   constructor(
     private assignmentService: AssignmentService,
+    private assignTypeService: AssignTypeService,
     private formBuilder: UntypedFormBuilder,
     private router: Router,
     private onlineService: OnlineService,
+    private configService: ConfigService,
     private activatedRoute: ActivatedRoute
   ) {}
+  ngOnInit(): void {
+    //skip the first one as role$ is a hot observable
+    this.configService.role$.pipe(skip(1)).subscribe(() => {
+      this.currentAssignTypesIdsByRole = this.assignTypeService.getAssignTypesIdsByRole();
+      this.form.enable(); //Trigger enable just to emit a valueChanges
+    });
+  }
 
   submit() {
     const date: Date = this.form.get("date").value;
-    this.assignmentService.massiveAssignmentDelete(date);
+    this.assignmentService.massiveAssignmentDelete(date, this.currentAssignTypesIdsByRole);
 
     //navigate to parent, one parent for each fragment
     this.router.navigate([".."], {

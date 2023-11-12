@@ -441,5 +441,6 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "ASSIGN_GROUP_DELETE_INFO_DELETE": "Assignments that will be deleted on that date based on the current role"
 }

@@ -5,7 +5,7 @@
         <mat-card-title>{{ t("ASSIGN_GROUP_ASSIGN_DELETE_TITLE") }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div class="row">
+        <div class="row mb-3">
           <div class="col-6">
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_GROUP_DELETE_DATE") }}</mat-label>
@@ -17,6 +17,16 @@
               ></mat-datepicker-toggle>
               <mat-datepicker id="datepickerOriginId" #originPicker></mat-datepicker>
             </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="assignmentsToDelete$ | async as assignmentsToDelete" class="row">
+          <div class="col">
+            <div class="mb-2">{{ t("ASSIGN_GROUP_DELETE_INFO_DELETE") }}:</div>
+            <ul>
+              <li *ngFor="let a of assignmentsToDelete">
+                {{ a.assignType | assignTypePipe | assignTypeNamePipe }}
+              </li>
+            </ul>
           </div>
         </div>
       </mat-card-content>
