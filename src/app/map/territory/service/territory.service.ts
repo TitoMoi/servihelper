@@ -38,12 +38,16 @@ export class TerritoryService {
     if (territoryContent) {
       this.#territories = JSON.parse(inflate(territoryContent, { to: "string" }));
 
-      for (const territory of this.#territories) {
-        this.#territoriesMap.set(territory.id, territory);
-      }
+      this.updateTerritoriesMap();
     }
 
     return deepClone ? structuredClone(this.#territories) : this.#territories;
+  }
+
+  updateTerritoriesMap() {
+    for (const territory of this.#territories) {
+      this.#territoriesMap.set(territory.id, territory);
+    }
   }
 
   /**
@@ -73,6 +77,11 @@ export class TerritoryService {
    */
   getTerritoryNameById(territoryId: string): string {
     return this.#territoriesMap.get(territoryId)!.name;
+  }
+
+  massiveSaveTerritoriesDates() {
+    this.#saveTerritoriesToFile();
+    this.updateTerritoriesMap();
   }
 
   /**

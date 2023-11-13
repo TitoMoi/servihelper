@@ -1,13 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TerritoryService } from "../service/territory.service";
-import {
-  FormArray,
-  FormBuilder,
-  /* FormControl, */
-  FormGroup,
-  ReactiveFormsModule,
-} from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -39,7 +33,7 @@ import { OnlineService } from "app/online/service/online.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
-  territories = this.territoryService.getTerritories();
+  territories = this.territoryService.getTerritories(); //the reference
   territoryGroups = this.territoryGroupService.getTerritoryGroups();
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -67,7 +61,16 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    for (let form of this.formArray) {
+      if (form.valid && form.touched) {
+        const index = this.territories.findIndex((t) => t.id === form.controls.id.value);
+        const t = this.territories[index];
+        this.territories[index] = { ...t, ...form.value };
+      }
+    }
+    this.territoryService.massiveSaveTerritoriesDates();
+  }
 
   //Get the form array
   assignedDates(i: number) {
