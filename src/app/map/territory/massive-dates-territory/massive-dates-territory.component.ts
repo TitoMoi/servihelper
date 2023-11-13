@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/
 import { CommonModule } from "@angular/common";
 import { TerritoryService } from "../service/territory.service";
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -12,6 +12,7 @@ import { TerritoryGroupService } from "app/map/territory-group/service/territory
 import { RouterModule } from "@angular/router";
 import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-massive-dates-territory",
@@ -25,6 +26,7 @@ import { OnlineService } from "app/online/service/online.service";
     MatDatepickerModule,
     RouterModule,
     MatIconModule,
+    MatSnackBarModule,
     MatInputModule,
     ParticipantPipe,
   ],
@@ -44,6 +46,8 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
     private territoryService: TerritoryService,
     private territoryGroupService: TerritoryGroupService,
     private onlineService: OnlineService,
+    private matSnackBar: MatSnackBar,
+    private translocoService: TranslocoService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -62,14 +66,23 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    let hasChanges = false;
     for (let form of this.formArray) {
       if (form.valid && form.touched) {
+        hasChanges = true;
         const index = this.territories.findIndex((t) => t.id === form.controls.id.value);
         const t = this.territories[index];
         this.territories[index] = { ...t, ...form.value };
       }
     }
     this.territoryService.massiveSaveTerritoriesDates();
+    if (hasChanges) {
+      this.matSnackBar.open(
+        this.translocoService.translate("CONFIG_SAVED"),
+        this.translocoService.translate("CLOSE"),
+        { duration: 2000 }
+      );
+    }
   }
 
   //Get the form array
