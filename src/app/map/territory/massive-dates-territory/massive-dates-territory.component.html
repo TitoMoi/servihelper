@@ -1,32 +1,65 @@
 <span *transloco="let t">
-  <div class="row">
-    <div class="col">
-      <ng-container *ngFor="let form of formArray; let i = index">
-        <ng-container [formGroup]="form" novalidate>
-          <div class="d-flex">
-            <mat-form-field>
-              <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-              <input matInput spellcheck="false" formControlName="name" [disabled]="true" />
-            </mat-form-field>
-            <ng-container formArrayName="returnedDates">
-              <ng-container
-                *ngFor="let returnedDate of returnedDates(i).controls; let j = index"
-              >
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_CHOOSE_DATE") }}</mat-label>
-                  <input required matInput [matDatepicker]="picker" [formControlName]="j" />
-                  <mat-datepicker-toggle
-                    matPrefix
-                    [for]="picker"
-                    class="mr-3"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
-                </mat-form-field>
-              </ng-container>
+  <ng-container *ngFor="let form of formArray; let i = index">
+    <ng-container [formGroup]="form" novalidate>
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput spellcheck="false" formControlName="name" [disabled]="true" />
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <ng-container formArrayName="participants">
+            <ng-container *ngFor="let participant of participants(i).controls; let j = index">
+              <mat-form-field>
+                <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+                <input
+                  matInput
+                  spellcheck="false"
+                  [disabled]="true"
+                  [value]="(participant.value | participantPipe).name"
+                />
+              </mat-form-field>
             </ng-container>
-          </div>
-        </ng-container>
-      </ng-container>
-    </div>
-  </div>
+          </ng-container>
+        </div>
+        <div class="col-4">
+          <ng-container formArrayName="assignedDates">
+            <ng-container
+              *ngFor="let returnedDate of returnedDates(i).controls; let j = index"
+            >
+              <mat-form-field>
+                <mat-label>{{ t("ASSIGN_CHOOSE_DATE_ASSIGNED") }}</mat-label>
+                <input required matInput [matDatepicker]="picker" [formControlName]="j" />
+                <mat-datepicker-toggle
+                  matPrefix
+                  [for]="picker"
+                  class="mr-3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
+              </mat-form-field>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="col-4">
+          <ng-container formArrayName="returnedDates">
+            <ng-container
+              *ngFor="let assignedDate of assignedDates(i).controls; let j = index"
+            >
+              <mat-form-field>
+                <mat-label>{{ t("ASSIGN_CHOOSE_DATE_RETURNED") }}</mat-label>
+                <input required matInput [matDatepicker]="picker" [formControlName]="j" />
+                <mat-datepicker-toggle
+                  matPrefix
+                  [for]="picker"
+                  class="mr-3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
+              </mat-form-field>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
 </span>

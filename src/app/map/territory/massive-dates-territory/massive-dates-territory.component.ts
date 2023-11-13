@@ -4,7 +4,7 @@ import { TerritoryService } from "../service/territory.service";
 import {
   FormArray,
   FormBuilder,
-  FormControl,
+  /* FormControl, */
   FormGroup,
   ReactiveFormsModule,
 } from "@angular/forms";
@@ -13,6 +13,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
 
 @Component({
   selector: "app-massive-dates-territory",
@@ -25,6 +26,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     MatFormFieldModule,
     MatDatepickerModule,
     MatInputModule,
+    ParticipantPipe,
   ],
   templateUrl: "./massive-dates-territory.component.html",
   styleUrls: ["./massive-dates-territory.component.scss"],
@@ -42,7 +44,8 @@ export class MassiveDatesTerritoryComponent implements OnInit {
       this.formArray.push(
         this.formBuilder.group({
           id: t.id,
-          name: t.name,
+          participants: this.formBuilder.array(t.participants),
+          name: { value: t.name, disabled: true },
           assignedDates: this.formBuilder.array(t.assignedDates),
           returnedDates: this.formBuilder.array(t.returnedDates),
         })
@@ -50,12 +53,17 @@ export class MassiveDatesTerritoryComponent implements OnInit {
     }
   }
 
-  fc(i: number, name: string, j: number) {
-    return this.formArray[i].get(name)[j] as FormControl;
+  //Get the form array
+  assignedDates(i: number) {
+    return this.formArray[i].controls["returnedDates"] as FormArray;
   }
 
   //Get the form array
   returnedDates(i: number) {
     return this.formArray[i].controls["returnedDates"] as FormArray;
+  }
+
+  participants(i: number) {
+    return this.formArray[i].controls["participants"] as FormArray;
   }
 }
