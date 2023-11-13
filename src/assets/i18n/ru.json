@@ -468,5 +468,8 @@
   "ro": "румынский",
   "ru": "Русский",
   "tr": "турецкий",
-  "zhCN": "китайский язык"
+  "zhCN": "китайский язык",
+  "ICON_CHANGE_DATES": "Обновление территорий даты",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "Назначенный",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Вернулся"
 }

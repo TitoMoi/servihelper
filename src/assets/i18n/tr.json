@@ -399,5 +399,8 @@
   "ro": "Romanya",
   "ru": "Rusça",
   "tr": "Türk",
-  "zhCN": "Çince"
+  "zhCN": "Çince",
+  "ICON_CHANGE_DATES": "Bölgeleri Güncelle",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "Atanmış",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "İade"
 }

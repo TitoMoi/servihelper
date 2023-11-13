@@ -399,5 +399,8 @@
   "ro": "Rumuński",
   "ru": "Rosyjski",
   "tr": "Turecki",
-  "zhCN": "Chiński"
+  "zhCN": "Chiński",
+  "ICON_CHANGE_DATES": "Zaktualizuj daty terytoriów",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "Przydzielony",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Zwrócony"
 }

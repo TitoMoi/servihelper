@@ -469,5 +469,8 @@
   "ro": "Romena",
   "ru": "Russo",
   "tr": "Turca",
-  "zhCN": "Chinês"
+  "zhCN": "Chinês",
+  "ICON_CHANGE_DATES": "Atualizar datas de territórios",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "Atribuída",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Devolvida"
 }

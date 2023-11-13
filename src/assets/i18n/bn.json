@@ -399,5 +399,8 @@
   "ro": "রোমানিয়ান",
   "ru": "রাশিয়ান",
   "tr": "তুর্কি",
-  "zhCN": "চাইনিজ"
+  "zhCN": "চাইনিজ",
+  "ICON_CHANGE_DATES": "অঞ্চলগুলির তারিখ আপডেট করুন",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "নির্ধারিত",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "ফিরে"
 }

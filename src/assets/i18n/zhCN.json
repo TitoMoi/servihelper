@@ -399,5 +399,8 @@
   "ro": "罗马尼亚人",
   "ru": "俄语",
   "tr": "土耳其",
-  "zhCN": "中国人"
+  "zhCN": "中国人",
+  "ICON_CHANGE_DATES": "更新地区日期",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "分配",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "回"
 }

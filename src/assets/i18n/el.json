@@ -399,5 +399,8 @@
   "ro": "ρουμανικός",
   "ru": "Ρωσική",
   "tr": "τούρκικος",
-  "zhCN": "κινέζικα"
+  "zhCN": "κινέζικα",
+  "ICON_CHANGE_DATES": "Ενημερώστε τις ημερομηνίες των εδαφών",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "Ανατεθεί",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Επέστρεψαν"
 }

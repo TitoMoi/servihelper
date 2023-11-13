@@ -467,5 +467,8 @@
   "ro": "Rumänisch",
   "ru": "Russisch",
   "tr": "Türkisch",
-  "zhCN": "Chinesisch"
+  "zhCN": "Chinesisch",
+  "ICON_CHANGE_DATES": "Aktualisieren Sie die Territorien",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "Zugewiesen",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Ist zurückgekommen"
 }

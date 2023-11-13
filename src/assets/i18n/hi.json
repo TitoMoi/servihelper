@@ -399,5 +399,8 @@
   "ro": "रोमानियाई",
   "ru": "रूसी",
   "tr": "तुर्की",
-  "zhCN": "चीनी"
+  "zhCN": "चीनी",
+  "ICON_CHANGE_DATES": "अद्यतन प्रदेशों की तारीखें",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "सौंपा गया",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "लौटा हुआ"
 }

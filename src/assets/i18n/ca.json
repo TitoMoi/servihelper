@@ -467,5 +467,8 @@
   "ro": "Romanès",
   "ru": "Rus",
   "tr": "Turc",
-  "zhCN": "Xinès"
+  "zhCN": "Xinès",
+  "ICON_CHANGE_DATES": "Actualitzar les dates dels territoris",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "Assignat",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Retornat"
 }

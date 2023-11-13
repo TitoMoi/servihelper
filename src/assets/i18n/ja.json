@@ -399,5 +399,8 @@
   "ro": "ルーマニア人",
   "ru": "ロシア",
   "tr": "トルコ語",
-  "zhCN": "中国語"
+  "zhCN": "中国語",
+  "ICON_CHANGE_DATES": "日付を更新します",
+  "ASSIGN_CHOOSE_DATE_ASSIGNED": "割り当て",
+  "ASSIGN_CHOOSE_DATE_RETURNED": "戻ってきた"
 }
