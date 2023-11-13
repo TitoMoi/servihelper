@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TerritoryService } from "../service/territory.service";
 import {
@@ -14,6 +14,10 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
+import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
+import { RouterModule } from "@angular/router";
+import { MatIconModule } from "@angular/material/icon";
+import { OnlineService } from "app/online/service/online.service";
 
 @Component({
   selector: "app-massive-dates-territory",
@@ -25,6 +29,8 @@ import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
     MatButtonModule,
     MatFormFieldModule,
     MatDatepickerModule,
+    RouterModule,
+    MatIconModule,
     MatInputModule,
     ParticipantPipe,
   ],
@@ -32,12 +38,20 @@ import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
   styleUrls: ["./massive-dates-territory.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MassiveDatesTerritoryComponent implements OnInit {
+export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
   territories = this.territoryService.getTerritories();
+  territoryGroups = this.territoryGroupService.getTerritoryGroups();
+
+  netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   formArray: FormGroup[] = [];
 
-  constructor(private territoryService: TerritoryService, private formBuilder: FormBuilder) {}
+  constructor(
+    private territoryService: TerritoryService,
+    private territoryGroupService: TerritoryGroupService,
+    private onlineService: OnlineService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     for (const t of this.territories) {
@@ -53,9 +67,11 @@ export class MassiveDatesTerritoryComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {}
+
   //Get the form array
   assignedDates(i: number) {
-    return this.formArray[i].controls["returnedDates"] as FormArray;
+    return this.formArray[i].controls["assignedDates"] as FormArray;
   }
 
   //Get the form array
