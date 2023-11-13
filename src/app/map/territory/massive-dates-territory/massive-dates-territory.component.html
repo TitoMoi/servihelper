@@ -1,1 +1,32 @@
-<p>massive-dates-territory works!</p>
+<span *transloco="let t">
+  <div class="row">
+    <div class="col">
+      <ng-container *ngFor="let form of formArray; let i = index">
+        <ng-container [formGroup]="form" novalidate>
+          <div class="d-flex">
+            <mat-form-field>
+              <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+              <input matInput spellcheck="false" formControlName="name" [disabled]="true" />
+            </mat-form-field>
+            <ng-container formArrayName="returnedDates">
+              <ng-container
+                *ngFor="let returnedDate of returnedDates(i).controls; let j = index"
+              >
+                <mat-form-field>
+                  <mat-label>{{ t("ASSIGN_CHOOSE_DATE") }}</mat-label>
+                  <input required matInput [matDatepicker]="picker" [formControlName]="j" />
+                  <mat-datepicker-toggle
+                    matPrefix
+                    [for]="picker"
+                    class="mr-3"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
+                </mat-form-field>
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</span>
