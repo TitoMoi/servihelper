@@ -47,11 +47,9 @@
 
     const polygonArray = getUrlPolygonParams();
     if (polygonArray) {
-      var map = L.map("map").setView(polygonArray[0], 17);
+      var map = L.map("map", { attributionControl: false }).setView(polygonArray[0], 17);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
-        attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
       L.control.locate().addTo(map);
       const pol = createPolygon(polygonArray);
