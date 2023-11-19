@@ -20,7 +20,6 @@ import {
 import { RoomService } from "app/room/service/room.service";
 import { AssignTypes } from "app/assigntype/model/assigntype.model";
 
-export type pdfFileNames = "S89" | "S89M";
 @Injectable({
   providedIn: "root",
 })
@@ -118,7 +117,19 @@ export class PdfService {
    */
   checkLangExists(name: string) {
     if (this.S89 === name) {
-      const availableTemplates = ["en", "ca", "es", "fr", "pt", "it", "de", "nl", "ro", "ru"];
+      const availableTemplates = [
+        "en",
+        "ca",
+        "es",
+        "fr",
+        "pt",
+        "it",
+        "de",
+        "nl",
+        "ro",
+        "ru",
+        "ja",
+      ];
       return availableTemplates.includes(this.configService.getConfig().lang);
     }
     return false;
