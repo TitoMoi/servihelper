@@ -468,5 +468,6 @@
   "zhCN": "Cinese",
   "ICON_CHANGE_DATES": "Aggiorna le date dei territori",
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Assegnato",
-  "ASSIGN_CHOOSE_DATE_RETURNED": "Restituito"
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Restituito",
+  "INFO_HOW_TO_WORK_ANSWER": "Missing value for 'INFO_HOW_TO_WORK_ANSWER'"
 }

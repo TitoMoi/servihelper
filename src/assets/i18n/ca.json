@@ -470,5 +470,7 @@
   "zhCN": "Xinès",
   "ICON_CHANGE_DATES": "Actualitzar les dates dels territoris",
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Assignat",
-  "ASSIGN_CHOOSE_DATE_RETURNED": "Retornat"
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Retornat",
+  "S89_TITLE_1": "Missing value for 'S89_TITLE_1'",
+  "S89_TITLE_2": "Missing value for 'S89_TITLE_2'"
 }
