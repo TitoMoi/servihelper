@@ -26,7 +26,10 @@ These files must be updated when adding a new language:
 - app/statistics/global-count/global-count.component.ts
 - app/statistics/principal-count/principal-count.component.ts
 
-Language files must be sorted when adding keys with the scripts/sort-i18json.js
+Language files must be sorted when adding keys with the command: `node scripts/sort-i18json.js`
+
+- It's possible to remove extra keys with `npm run i18n:extract:remove`
+- It's possible to add the missing keys to all the other files with `npm run i18n:find:add`
 
 ## Lazy load
 
