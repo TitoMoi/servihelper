@@ -31,6 +31,7 @@ import {
   UntypedFormGroup,
   Validators,
   ReactiveFormsModule,
+  FormControl,
 } from "@angular/forms";
 import { MatButton, MatButtonModule } from "@angular/material/button";
 import { MatSelect, MatSelectModule } from "@angular/material/select";
@@ -192,7 +193,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       },
       Validators.required,
     ],
-    theme: this.a ? this.a.theme : "",
+    theme: new FormControl(this.a ? this.a.theme : "", { updateOn: "blur" }),
     isPTheme: this.a ? this.a.isPTheme : false,
     onlyWoman: [{ value: this.a ? this.a.onlyWoman : false, disabled: this.a?.isPTheme }],
     onlyMan: [this.a ? this.a.onlyMan : false],

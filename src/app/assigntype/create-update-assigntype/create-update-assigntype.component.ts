@@ -2,7 +2,12 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import {
+  UntypedFormBuilder,
+  Validators,
+  ReactiveFormsModule,
+  FormControl,
+} from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -54,7 +59,7 @@ export class CreateUpdateAssignTypeComponent {
 
   form = this.formBuilder.group({
     id: this.at?.id,
-    name: [this.name, Validators.required],
+    name: new FormControl(this.name, { validators: Validators.required, updateOn: "blur" }),
     hasAssistant: [this.at ? this.at.hasAssistant : false],
     repeat: [this.at ? this.at.repeat : false],
     type: [this.at ? this.at.type : "other"],

@@ -12,7 +12,13 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { FormArray, FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import {
+  FormArray,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+  FormControl,
+} from "@angular/forms";
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
@@ -96,17 +102,25 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   timeoutRef;
   timeoutExecuted = true; //first time
 
-  form = this.formBuilder.group({
-    id: this.p?.id,
-    name: [this.p?.name, Validators.required],
-    group: [this.p?.group],
-    isWoman: this.p ? this.p.isWoman : false,
-    isExternal: this.p ? this.p.isExternal : false,
-    assignTypes: this.formBuilder.array<ParticipantAssignTypeInterface>([]), //do not wrap this into an [], because [...] creates a formControl wrapper
-    rooms: this.formBuilder.array<ParticipantRoomInterface>([]),
-    available: [this.p ? this.p.available : true],
-    notAvailableDates: [this.p ? this.p.notAvailableDates : []],
-  });
+  form = this.formBuilder.group(
+    {
+      id: this.p?.id,
+      name: new FormControl(this.p?.name, {
+        validators: Validators.required,
+        updateOn: "blur",
+      }),
+      group: [this.p?.group],
+      isWoman: this.p ? this.p.isWoman : false,
+      isExternal: this.p ? this.p.isExternal : false,
+      assignTypes: this.formBuilder.array<ParticipantAssignTypeInterface>([]), //do not wrap this into an [], because [...] creates a formControl wrapper
+      rooms: this.formBuilder.array<ParticipantRoomInterface>([]),
+      available: [this.p ? this.p.available : true],
+      notAvailableDates: [this.p ? this.p.notAvailableDates : []],
+    },
+    {
+      updateOn: "blur",
+    }
+  );
 
   constructor(
     private formBuilder: FormBuilder,

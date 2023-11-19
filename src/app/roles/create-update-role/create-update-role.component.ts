@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import {
+  UntypedFormBuilder,
+  Validators,
+  ReactiveFormsModule,
+  FormControl,
+} from "@angular/forms";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
@@ -54,7 +59,7 @@ export class CreateUpdateRoleComponent {
 
   form = this.formBuilder.group({
     id: this.r?.id,
-    name: [this.r?.name, Validators.required],
+    name: new FormControl(this.r?.name, { validators: Validators.required }),
     assignTypesId: [this.r ? this.r.assignTypesId : [], Validators.required],
   });
 

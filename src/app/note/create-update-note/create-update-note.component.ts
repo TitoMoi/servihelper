@@ -10,6 +10,7 @@ import {
   UntypedFormGroup,
   Validators,
   ReactiveFormsModule,
+  FormControl,
 } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
@@ -54,7 +55,7 @@ export class CreateUpdateNoteComponent implements OnDestroy {
 
   form: UntypedFormGroup = this.formBuilder.group({
     id: this.n?.id,
-    name: [this.n?.name, Validators.required],
+    name: new FormControl(this.n?.name, { validators: Validators.required }),
     showInHome: [this.n ? this.n.showInHome : false],
     editorContent: this.n
       ? this.n.editorContent

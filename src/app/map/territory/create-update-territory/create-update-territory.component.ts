@@ -25,7 +25,12 @@ import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { ReactiveFormsModule, Validators, NonNullableFormBuilder } from "@angular/forms";
+import {
+  ReactiveFormsModule,
+  Validators,
+  NonNullableFormBuilder,
+  FormControl,
+} from "@angular/forms";
 import { TerritoryService } from "../service/territory.service";
 import { PolygonService } from "../service/polygon.service";
 import { TerrImageService } from "../service/terr-image.service";
@@ -101,7 +106,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   //TerritoryContextInterface
   territoryForm = this.formBuilder.group({
     id: [this.loadedTerritory?.id],
-    name: [this.loadedTerritory?.name, Validators.required],
+    name: new FormControl(this.loadedTerritory?.name, { validators: Validators.required }),
     poligonId: [this.loadedTerritory?.poligonId],
     image: [], //Just a temporal base64 store until its saved to disk
     imageId: [this.loadedTerritory?.imageId],

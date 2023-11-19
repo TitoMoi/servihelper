@@ -2,7 +2,12 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomService } from "app/room/service/room.service";
 
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import {
+  UntypedFormBuilder,
+  Validators,
+  ReactiveFormsModule,
+  FormControl,
+} from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
@@ -49,7 +54,7 @@ export class CreateUpdateRoomComponent {
 
   form = this.formBuilder.group({
     id: this.r?.id,
-    name: [this.name, Validators.required],
+    name: new FormControl(this.name, { validators: Validators.required, updateOn: "blur" }),
     type: [this.r ? this.r.type : "other"],
     order: [this.r?.order, Validators.required],
   });
