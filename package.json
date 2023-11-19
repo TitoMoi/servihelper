@@ -33,7 +33,6 @@
     "test:watch": "ng test",
     "lint": "ng lint",
     "i18n:extract": "transloco-keys-manager extract",
-    "i18n:extract:remove": "transloco-keys-manager extract --remove-extra-keys",
     "i18n:find": "transloco-keys-manager find",
     "i18n:find:add": "transloco-keys-manager find --add-missing-keys"
   },

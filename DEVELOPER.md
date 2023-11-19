@@ -28,7 +28,8 @@ These files must be updated when adding a new language:
 
 Language files must be sorted when adding keys with the command: `node scripts/sort-i18json.js`
 
-- It's possible to remove extra keys with `npm run i18n:extract:remove`
+- It's NOT possible to remove extra keys with `transloco-keys-manager extract --remove-extra-keys` because some keys are not in the template.
+
 - It's possible to add the missing keys to all the other files with `npm run i18n:find:add`
 
 ## Lazy load
