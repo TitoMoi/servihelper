@@ -470,5 +470,6 @@
   "zhCN": "Chinois",
   "ICON_CHANGE_DATES": "Mettre à jour les dates des territoires",
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Attribué",
-  "ASSIGN_CHOOSE_DATE_RETURNED": "Revenu"
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Revenu",
+  "ASSIGNTYPE_NAME_HINT": "Ne modifiez pas le type, seulement le nom si mal orthographié ou mal."
 }

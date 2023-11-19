@@ -472,5 +472,6 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Assignat",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Retornat",
   "S89_TITLE_1": "Missing value for 'S89_TITLE_1'",
-  "S89_TITLE_2": "Missing value for 'S89_TITLE_2'"
+  "S89_TITLE_2": "Missing value for 'S89_TITLE_2'",
+  "ASSIGNTYPE_NAME_HINT": "No canvieu el tipus, només el nom si esta mal escrit o equivocat."
 }

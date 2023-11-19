@@ -470,5 +470,6 @@
   "zhCN": "Chino",
   "ICON_CHANGE_DATES": "Actualizar fechas de territorios",
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Asignado",
-  "ASSIGN_CHOOSE_DATE_RETURNED": "Devuelto"
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Devuelto",
+  "ASSIGNTYPE_NAME_HINT": "No cambie el tipo, solo el nombre si está mal escrito o incorrecto."
 }

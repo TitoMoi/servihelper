@@ -470,5 +470,6 @@
   "zhCN": "Chinez",
   "ICON_CHANGE_DATES": "Actualizați datele teritoriilor",
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Atribuit",
-  "ASSIGN_CHOOSE_DATE_RETURNED": "Întors"
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Întors",
+  "ASSIGNTYPE_NAME_HINT": "Nu schimbați tipul, doar numele dacă este scris greșit sau greșit."
 }

@@ -84,6 +84,10 @@ export class CreateUpdateAssignTypeComponent {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  isOtherAssignmentType() {
+    return this.form.controls.type.value === "other";
+  }
+
   getBgColor(c: string) {
     return `background-color: ${c}`;
   }

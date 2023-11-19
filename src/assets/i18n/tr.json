@@ -459,5 +459,6 @@
   "S89_AUXILIARYROOM2": "Missing value for 'S89_AUXILIARYROOM2'",
   "S89_FOOTERNOTE": "Missing value for 'S89_FOOTERNOTE'",
   "S89_VERSION": "Missing value for 'S89_VERSION'",
-  "S89_DATE_VERSION": "Missing value for 'S89_DATE_VERSION'"
+  "S89_DATE_VERSION": "Missing value for 'S89_DATE_VERSION'",
+  "ASSIGNTYPE_NAME_HINT": "Türü değiştirmeyin, yalnızca yanlış veya yanlışsa ad."
 }

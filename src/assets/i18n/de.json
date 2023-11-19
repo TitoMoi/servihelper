@@ -470,5 +470,6 @@
   "zhCN": "Chinesisch",
   "ICON_CHANGE_DATES": "Aktualisieren Sie die Territorien",
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Zugewiesen",
-  "ASSIGN_CHOOSE_DATE_RETURNED": "Ist zurückgekommen"
+  "ASSIGN_CHOOSE_DATE_RETURNED": "Ist zurückgekommen",
+  "ASSIGNTYPE_NAME_HINT": "Ändern Sie den Typ nicht, nur den Namen, wenn es falsch geschrieben oder falsch ist."
 }
