@@ -5,14 +5,14 @@ Servihelper aims to:
 - Provide an universal app to create and share assignments or territories on Windows, Mac and Linux.
 - Web app is not possible today as it needs access to the filesystem to be free.
 - 1 repository of code for all 3 platforms _(windows, apple, linux)_
-- It's provided with free development cost _(no apple id)_ with free distribution _(github)_ free use and free colaboration between diferent administrator actors using the function of import and export.
+- It's provided with free development cost _(no apple id)_ with free distribution _(github)_ free use and free colaboration between diferent administrator actors using the function of import and export files.
 - The administrator user must download new versions when they are available and work all together with the same version.
 - Be accessible and provided in as many languages as possible.
 
 ## Development Setup
 
 - After cloning the repository, create a folder "assets" in root _(This is for development and do not modify the originals)_
-- Copy all src/assets content into the new created "assets" folder.
+- Copy all src/assets content into the new created root _"assets"_ folder.
 
 ## Language
 
