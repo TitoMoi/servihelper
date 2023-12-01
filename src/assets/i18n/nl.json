@@ -470,5 +470,6 @@
   "ICON_CHANGE_DATES": "Update territoria datums",
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Toegewezen",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Geretourneerd",
-  "ASSIGNTYPE_NAME_HINT": "Wijzig het type niet, alleen de naam als het verkeerd wordt gespeld of fout."
+  "ASSIGNTYPE_NAME_HINT": "Wijzig het type niet, alleen de naam als het verkeerd wordt gespeld of fout.",
+  "hr": "Kroatisch"
 }

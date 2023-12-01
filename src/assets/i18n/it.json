@@ -470,5 +470,6 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Assegnato",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Restituito",
   "INFO_HOW_TO_WORK_ANSWER": "The first creates its assignments, exports the data from the home section and leaves it in a site shared by those responsible, the second imports it and creates its assignments, and so on.",
-  "ASSIGNTYPE_NAME_HINT": "Non modificare il tipo, solo il nome se errori o sbagliato."
+  "ASSIGNTYPE_NAME_HINT": "Non modificare il tipo, solo il nome se errori o sbagliato.",
+  "hr": "Croata"
 }

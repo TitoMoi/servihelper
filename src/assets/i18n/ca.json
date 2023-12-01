@@ -473,5 +473,6 @@
   "ASSIGN_CHOOSE_DATE_RETURNED": "Retornat",
   "S89_TITLE_1": "OUR CHRISTIAN LIFE AND MINISTRY",
   "S89_TITLE_2": "MEETING ASSIGNMENT",
-  "ASSIGNTYPE_NAME_HINT": "No canvieu el tipus, només el nom si esta mal escrit o equivocat."
+  "ASSIGNTYPE_NAME_HINT": "No canvieu el tipus, només el nom si esta mal escrit o equivocat.",
+  "hr": "Croat"
 }
