@@ -21,10 +21,7 @@ These files must be updated when adding a new language:
 
 - src/assets/i18n/all-locales
 - app/transloco/translocoRoot.module.ts
-- app/assignment/customDateAdapter.ts
-- app/statistics/assistant-count/assistant-count.component.ts
 - app/statistics/global-count/global-count.component.ts
-- app/statistics/principal-count/principal-count.component.ts
 
 Language files must be sorted when adding keys with the command: `node scripts/sort-i18json.js`
 

@@ -40,6 +40,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
         ru: "ru-RU",
         ja: "ja-JA",
         ko: "ko-KO",
+        hr: "hr-HR",
         zhCN: "zh-CN",
         hi: "hi-HI",
         el: "el-EL",
