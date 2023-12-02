@@ -20,7 +20,7 @@ Servihelper uses transloco and transloco locale for dates. And date-fns for stat
 These files must be updated when adding a new language:
 
 - src/assets/i18n/all-locales
-- app/transloco/translocoRoot.module.ts
+- app/transloco/translocoRoot.module.ts _(availableLangs and langToLocaleMapping)_
 - app/statistics/global-count/global-count.component.ts
 - Update README.md available languages.
 

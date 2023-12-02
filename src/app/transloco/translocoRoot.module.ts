@@ -66,6 +66,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
           "it",
           "de",
           "el",
+          "hr",
           "ru",
           "ja",
           "ko",
