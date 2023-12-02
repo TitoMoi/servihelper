@@ -129,6 +129,7 @@ export class PdfService {
         "ro",
         "ru",
         "ja",
+        "hr",
       ];
       return availableTemplates.includes(this.configService.getConfig().lang);
     }
