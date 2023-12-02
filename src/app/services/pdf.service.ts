@@ -429,7 +429,11 @@ export class PdfService {
 
       x -= 5;
 
-      const xOffset = doc.internal.pageSize.width / 2;
+      let xOffset = doc.internal.pageSize.width / (is4slips ? 4 : 2);
+
+      if (is4slips && (counter === 3 || counter === 1)) {
+        xOffset = xOffset * 3;
+      }
       const title1 = this.translocoService.translate("S89_TITLE_1");
       doc.text(title1, xOffset, y, { align: "center" });
       y += 5;
