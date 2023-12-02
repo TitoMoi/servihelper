@@ -96,11 +96,11 @@ Configure a remote desktop and avoid the need to export and import data manually
 
 ## ¿How can i generate an assignment?
 
-When creating an assignment, go to: [jw-meeting-workbook](https://www.jw.org/en/library/jw-meeting-workbook/) open the one you want to create and split the screen between Servihelper and the website.
+When creating an assignment, go to: [jw-meeting-workbook](https://www.jw.org/en/library/jw-meeting-workbook/) open the week you want to create and split the screen between Servihelper and the website.
 
 Then on creating the assignment copy the assignment and put it on the "theme field":
 
-<img src="./pictures/create-assignment.png" alt= "create-assignment">
+<img src="./pictures/split-screen.png" alt= "create-assignment">
 
 ## ¿Can I distribute it?
 
