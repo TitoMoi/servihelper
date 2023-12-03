@@ -447,5 +447,7 @@
   "ICON_CHANGE_DATES": "Update territories dates",
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Assigned",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Returned",
-  "ASSIGNTYPE_NAME_HINT": "Do not change the type, only the name if misspelled or wrong."
+  "ASSIGNTYPE_NAME_HINT": "Do not change the type, only the name if misspelled or wrong.",
+
+  "S89_ASSIGNMENT_NUMBER": "Part no.:"
 }

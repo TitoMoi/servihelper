@@ -18,7 +18,6 @@ import {
   AssignmentInterface,
 } from "app/assignment/model/assignment.model";
 import { RoomService } from "app/room/service/room.service";
-import { AssignTypes } from "app/assigntype/model/assigntype.model";
 
 @Injectable({
   providedIn: "root",
@@ -176,7 +175,7 @@ export class PdfService {
       ? a.theme
       : this.assignTypeService.getNameOrTranslation(at);
 
-    let wordLength = 95;
+    let wordLength = 130;
     //Before create text lines check the length
     if (themeOrAssignType.length > wordLength) {
       const shortedTheme = [];
@@ -387,7 +386,7 @@ export class PdfService {
 
     let counter = 4;
 
-    //The S89 in not available in catalan.
+    // The S89 in not available in catalan.
     if (this.translocoService.getActiveLang() === "ca") {
       this.backupLang = "ca";
       this.translocoService = this.translocoService.setActiveLang("es");
@@ -396,15 +395,15 @@ export class PdfService {
     }
 
     assignments.forEach((assignment, i) => {
-      i = i + 1; //1 index based to count slips
+      i = i + 1; // 1 index based to count slips
       if (counter === 0) {
         doc = doc.addPage("a4", "p");
         counter = 4;
       }
-      //Default value for coord is first slip
+      // Default value for coord is first slip
       let x = 9;
       let y = 7;
-      //Position in the sheet from left to right to bottom left and then right
+      // Position in the sheet from left to right to bottom left and then right
       switch (counter) {
         case 4:
           x = 9;
@@ -444,6 +443,7 @@ export class PdfService {
 
       y += 7;
 
+      // Principal
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.2);
       const s89Name = this.translocoService.translate("S89_NAME");
@@ -459,6 +459,7 @@ export class PdfService {
 
       y += 7;
 
+      // Assistant
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.2);
       const s89Assistant = this.translocoService.translate("S89_ASSISTANT");
@@ -475,6 +476,7 @@ export class PdfService {
 
       y += 7;
 
+      // Date
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.2);
       const s89Date = this.translocoService.translate("S89_DATE");
@@ -492,65 +494,33 @@ export class PdfService {
         y
       );
 
+      y += 7;
+
+      // Assignment number
+      doc.setFont(this.font, "bold");
+      doc.setFontSize(11.2);
+      const s89assignmentNumber = this.translocoService.translate("S89_ASSIGNMENT_NUMBER");
+      xPosForText = x + doc.getTextWidth(s89assignmentNumber) + 2;
+      doc.text(s89assignmentNumber, x, y);
+      doc.setFont(this.font, "normal");
+      doc.setFontSize(8.2);
+      if (assignment.theme) {
+        //If its copied from the web the first letter is the number.
+        const numString = assignment.theme.charAt(0);
+        const num = Number.parseInt(numString);
+        if (Number.isInteger(num)) {
+          doc.text(numString, xPosForText, y);
+        }
+      }
+
+      // theme
+      y += 8;
+      doc.setFontSize(7.2);
+      const themeText = this.shortAssignTypeTheme(doc, assignment);
+      doc.text(themeText, x, y);
       y += 8;
 
-      doc.setFont(this.font, "bold");
-      doc.setFontSize(8.2);
-      doc.text(this.translocoService.translate("S89_ASSIGNMENT_TITLE"), x, y);
-
-      doc.setFont(this.font, "normal");
-
-      x += 5;
-      y += 5;
-
-      const at = this.assignTypeService.getAssignType(assignment.assignType);
-      const type = at.type;
-
-      doc.rect(x, y - 2.5, 3, 3);
-      if (type === "bibleReading") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.assignTypeService.getNameOrTranslationByType("bibleReading"), x + 5, y);
-
-      doc.rect(x + 45, y - 2.5, 3, 3);
-      if (type === "bibleStudy") this.addHeavyCheckImg(doc, x + 45, y - 2.5);
-      doc.text(this.assignTypeService.getNameOrTranslationByType("bibleStudy"), x + 50, y);
-
-      y += 5;
-
-      doc.rect(x, y - 2.5, 3, 3);
-      if (type === "initialCall") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.assignTypeService.getNameOrTranslationByType("initialCall"), x + 5, y);
-
-      doc.rect(x + 45, y - 2.5, 3, 3);
-      if (type === "talk") this.addHeavyCheckImg(doc, x + 45, y - 2.5);
-      doc.text(this.assignTypeService.getNameOrTranslationByType("talk"), x + 50, y);
-
-      y += 5;
-
-      doc.rect(x, y - 2.5, 3, 3);
-      if (type === "returnVisit") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.assignTypeService.getNameOrTranslationByType("returnVisit"), x + 5, y);
-
-      //Cif its not included in the current s89 format then goes to the other checkbox
-      doc.rect(x + 45, y - 2.5, 3, 3);
-      if (!this.assignTypeService.isAllowedTypeForS89(type))
-        this.addHeavyCheckImg(doc, x + 45, y - 2.5);
-      doc.text(this.translocoService.translate("S89_OTHER"), x + 50, y);
-
-      y += 5;
-
-      x -= 5;
-
-      const showThemeList: AssignTypes[] = ["initialCall", "returnVisit"];
-      if (showThemeList.includes(type) || !this.assignTypeService.isAllowedTypeForS89(type)) {
-        y += 1;
-        doc.setFontSize(7);
-        const themeText = this.shortAssignTypeTheme(doc, assignment);
-        doc.text(themeText, x, y);
-        y += 8;
-      } else {
-        //closer gap
-        y += 7;
-      }
+      y += 7;
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(8.2);
