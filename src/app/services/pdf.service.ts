@@ -504,7 +504,7 @@ export class PdfService {
         }
         //If its copied from the web the second letter MAY be a number.
         const numString2 = assignment.theme.charAt(1);
-        const num2 = Number.parseInt(numString);
+        const num2 = Number.parseInt(numString2);
         if (Number.isInteger(num2)) {
           doc.text(numString2, xPosForText + 1.5, y);
         }
