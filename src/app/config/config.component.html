@@ -280,12 +280,65 @@
     <mat-expansion-panel class="mb-2">
       <mat-expansion-panel-header>
         <mat-panel-title>
+          <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
+          <h3 class="m-3">
+            {{ t("CONFIG_ACCORDION_S89_TITLE") }}
+          </h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_TITLE_1") }}</mat-label>
+        <input matInput formControlName="s89Title1" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_TITLE_2") }}</mat-label>
+        <input matInput formControlName="s89Title2" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_PRINCIPAL") }}</mat-label>
+        <input matInput formControlName="s89Principal" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_ASSISTANT") }}</mat-label>
+        <input matInput formControlName="s89Assistant" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_DATE") }}</mat-label>
+        <input matInput formControlName="s89Date" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_NUMBER") }}</mat-label>
+        <input matInput formControlName="s89Number" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_ROOMS_TITLE") }}</mat-label>
+        <input matInput formControlName="s89RoomsTitle" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_BOLD_PART") }}</mat-label>
+        <input matInput formControlName="s89NoteBoldPart" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_CONTENT_PART") }}</mat-label>
+        <input matInput formControlName="s89NoteContentPart" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_VERSION") }}</mat-label>
+        <input matInput formControlName="s89Version" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ t("PLACEHOLDER_S89_DATE_VERSION") }}</mat-label>
+        <input matInput formControlName="s89DateVersion" />
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel class="mb-2">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
           <h3 class="m-3">
             {{ t("CONFIG_ACCORDION_REPORT_TITLE") }}
           </h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
-
       <h4>{{ t("CONFIG_REPORT_TITLE") }}</h4>
       <mat-form-field>
         <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>

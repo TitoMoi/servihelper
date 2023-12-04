@@ -110,31 +110,6 @@ export class PdfService {
     return this.font;
   }
 
-  /**
-   *
-   * @param name Check if the lang exists for the template name
-   */
-  checkLangExists(name: string) {
-    if (this.S89 === name) {
-      const availableTemplates = [
-        "en",
-        "ca",
-        "es",
-        "fr",
-        "pt",
-        "it",
-        "de",
-        "nl",
-        "ro",
-        "ru",
-        "ja",
-        "hr",
-      ];
-      return availableTemplates.includes(this.configService.getConfig().lang);
-    }
-    return false;
-  }
-
   getWeekCounter(isWeekend: boolean) {
     return isWeekend ? 5 : 2;
   }
@@ -378,6 +353,20 @@ export class PdfService {
    * Creates a slip s89 or a 4-slip89 pdf
    */
   async toPdfS89(assignments: AssignmentInterface[], is4slips: boolean) {
+    const {
+      s89Title1,
+      s89Title2,
+      s89Principal,
+      s89Assistant,
+      s89Date,
+      s89Number,
+      s89RoomsTitle,
+      s89NoteBoldPart,
+      s89NoteContentPart,
+      s89Version,
+      s89DateVersion,
+    } = this.configService.getConfig();
+
     let doc = this.getJsPdf({
       orientation: "portrait",
       format: is4slips ? "a4" : [113.03, 85.09],
@@ -433,10 +422,11 @@ export class PdfService {
       if (is4slips && (counter === 3 || counter === 1)) {
         xOffset = xOffset * 3;
       }
-      const title1 = this.translocoService.translate("S89_TITLE_1");
+      // Title 1 and 2
+      const title1 = s89Title1 || this.translocoService.translate("S89_TITLE_1");
       doc.text(title1, xOffset, y, { align: "center" });
       y += 5;
-      const title2 = this.translocoService.translate("S89_TITLE_2");
+      const title2 = s89Title2 || this.translocoService.translate("S89_TITLE_2");
       doc.text(title2, xOffset, y, {
         align: "center",
       });
@@ -446,7 +436,7 @@ export class PdfService {
       // Principal
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.2);
-      const s89Name = this.translocoService.translate("S89_NAME");
+      const s89Name = s89Principal || this.translocoService.translate("S89_NAME");
       let xPosForText = x + doc.getTextWidth(s89Name) + 2;
       doc.text(s89Name, x, y);
       doc.setFont(this.font, "normal");
@@ -462,9 +452,9 @@ export class PdfService {
       // Assistant
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.2);
-      const s89Assistant = this.translocoService.translate("S89_ASSISTANT");
-      xPosForText = x + doc.getTextWidth(s89Assistant) + 2;
-      doc.text(s89Assistant, x, y);
+      const s89AssistantKey = s89Assistant || this.translocoService.translate("S89_ASSISTANT");
+      xPosForText = x + doc.getTextWidth(s89AssistantKey) + 2;
+      doc.text(s89AssistantKey, x, y);
       doc.setFont(this.font, "normal");
       doc.setFontSize(8.2);
       if (assignment.assistant)
@@ -479,9 +469,9 @@ export class PdfService {
       // Date
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.2);
-      const s89Date = this.translocoService.translate("S89_DATE");
-      xPosForText = x + doc.getTextWidth(s89Date) + 2;
-      doc.text(s89Date, x, y);
+      const s89DateKey = s89Date || this.translocoService.translate("S89_DATE");
+      xPosForText = x + doc.getTextWidth(s89DateKey) + 2;
+      doc.text(s89DateKey, x, y);
       doc.setFont(this.font, "normal");
       doc.setFontSize(8.2);
       doc.text(
@@ -499,7 +489,8 @@ export class PdfService {
       // Assignment number
       doc.setFont(this.font, "bold");
       doc.setFontSize(11.2);
-      const s89assignmentNumber = this.translocoService.translate("S89_ASSIGNMENT_NUMBER");
+      const s89assignmentNumber =
+        s89Number || this.translocoService.translate("S89_ASSIGNMENT_NUMBER");
       xPosForText = x + doc.getTextWidth(s89assignmentNumber) + 2;
       doc.text(s89assignmentNumber, x, y);
       doc.setFont(this.font, "normal");
@@ -511,6 +502,12 @@ export class PdfService {
         if (Number.isInteger(num)) {
           doc.text(numString, xPosForText, y);
         }
+        //If its copied from the web the second letter MAY be a number.
+        const numString2 = assignment.theme.charAt(1);
+        const num2 = Number.parseInt(numString);
+        if (Number.isInteger(num2)) {
+          doc.text(numString2, xPosForText + 1.5, y);
+        }
       }
 
       // theme
@@ -518,14 +515,15 @@ export class PdfService {
       doc.setFontSize(7.2);
       const themeText = this.shortAssignTypeTheme(doc, assignment);
       doc.text(themeText, x, y);
-      y += 8;
 
-      y += 7;
+      y += 15;
 
       doc.setFont(this.font, "bold");
       doc.setFontSize(8.2);
 
-      doc.text(this.translocoService.translate("S89_ROOMS_TITLE"), x, y);
+      const roomsTitleKey =
+        s89RoomsTitle || this.translocoService.translate("S89_ROOMS_TITLE");
+      doc.text(roomsTitleKey, x, y);
 
       doc.setFont(this.font, "normal");
 
@@ -554,8 +552,14 @@ export class PdfService {
       x -= 5;
 
       doc.setFontSize(7.07);
+
+      let userFooterText = "";
+      if (s89NoteBoldPart && s89NoteContentPart) {
+        userFooterText = "[b]" + s89NoteBoldPart + "*" + s89NoteContentPart;
+      }
+
       const footerText: string[] = doc.splitTextToSize(
-        this.translocoService.translate("S89_FOOTERNOTE"),
+        userFooterText || this.translocoService.translate("S89_FOOTERNOTE"),
         77
       );
 
@@ -582,8 +586,12 @@ export class PdfService {
 
       y += 4;
 
-      doc.text(this.translocoService.translate("S89_VERSION"), x, y);
-      doc.text(this.translocoService.translate("S89_DATE_VERSION"), x + 15, y);
+      const versionKey = s89Version || this.translocoService.translate("S89_VERSION");
+      doc.text(versionKey, x, y);
+
+      const dateVersionKey =
+        s89DateVersion || this.translocoService.translate("S89_DATE_VERSION");
+      doc.text(dateVersionKey, x + 15, y);
 
       counter -= 1;
     });

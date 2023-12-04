@@ -118,7 +118,7 @@
   "COLOR_YELLOW_EXPLANATION": "More than 4 months old",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Themes for Public Talks",
   "CONFIG_ACCORDION_REPORT_TITLE": "Config reports title, day of the week, date format, colors and fonts",
-  "CONFIG_ACCORDION_SHEET_TITLE": "Config the sheet",
+  "CONFIG_ACCORDION_SHEET_TITLE": "Config the native sheet",
   "CONFIG_ASK_MOVE_FILES": "Do you want to move the current offline files to the shared folder?",
   "CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE": "Sheet assignment type title",
   "CONFIG_ASSIGNMENT_ASSISTANT_TITLE": "Sheet assistant title",
@@ -390,7 +390,6 @@
   "STATISTICS_ONLY_WOMAN": "Only women",
   "STATISTICS_PENULTIMA": "Penultimate date",
   "STATISTICS_ROLE_TIP": "If you change the role, then the statistics will only display the role assignment types.",
-  "TEMPLATE_NOT_AVAILABLE": "This pdf will be available on a next version",
   "TERRITORYGROUP_BUTTON_CREATE_TITLE": "Create territory group",
   "TERRITORYGROUP_COLOR": "The color for this territory group",
   "TERRITORYGROUP_CREATE_TITLE": "Create territory group",
@@ -449,5 +448,19 @@
   "ASSIGN_CHOOSE_DATE_RETURNED": "Returned",
   "ASSIGNTYPE_NAME_HINT": "Do not change the type, only the name if misspelled or wrong.",
 
-  "S89_ASSIGNMENT_NUMBER": "Part no.:"
+  "S89_ASSIGNMENT_NUMBER": "Part no.:",
+  "CONFIG_ACCORDION_S89_TITLE": "Config the s89 slip",
+  "PLACEHOLDER_S89_TITLE_1": "First title line",
+  "PLACEHOLDER_S89_TITLE_2": "Second title line",
+  "PLACEHOLDER_S89_PRINCIPAL": "Name",
+  "PLACEHOLDER_S89_ASSISTANT": "Assistant",
+  "PLACEHOLDER_S89_DATE": "Date",
+  "PLACEHOLDER_S89_NUMBER": "Number part",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Rooms title header",
+  "PLACEHOLDER_S89_BOLD_PART": "Note bold part",
+  "PLACEHOLDER_S89_CONTENT_PART": "Note content part",
+  "PLACEHOLDER_S89_VERSION": "s89 version",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 date version",
+
+  "TEMPLATE_NOT_AVAILABLE": "XXXDELETEMEXXX"
 }

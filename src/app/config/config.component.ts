@@ -123,6 +123,17 @@ export class ConfigComponent implements OnInit, OnDestroy {
     assignmentRoomTitle: this.currentConfig.assignmentRoomTitle,
     assignmentNoteTitle: this.currentConfig.assignmentNoteTitle,
     reportTitle: this.currentConfig.reportTitle,
+    s89Title1: this.currentConfig.s89Title1,
+    s89Title2: this.currentConfig.s89Title2,
+    s89Principal: this.currentConfig.s89Principal,
+    s89Assistant: this.currentConfig.s89Assistant,
+    s89Date: this.currentConfig.s89Date,
+    s89Number: this.currentConfig.s89Number,
+    s89RoomsTitle: this.currentConfig.s89RoomsTitle,
+    s89NoteBoldPart: this.currentConfig.s89NoteBoldPart,
+    s89NoteContentPart: this.currentConfig.s89NoteContentPart,
+    s89Version: this.currentConfig.s89Version,
+    s89DateVersion: this.currentConfig.s89DateVersion,
   });
 
   //ONLINE SECTION
@@ -168,6 +179,17 @@ export class ConfigComponent implements OnInit, OnDestroy {
     closeToOthersDays: 30,
     closeToOthersPrayerDays: 30,
     closeToOthersTreasuresEtcDays: 0,
+    s89Title1: "",
+    s89Title2: "",
+    s89Principal: "",
+    s89Assistant: "",
+    s89Date: "",
+    s89Number: "",
+    s89RoomsTitle: "",
+    s89NoteBoldPart: "",
+    s89NoteContentPart: "",
+    s89Version: "",
+    s89DateVersion: "",
   };
 
   subscription = new Subscription();

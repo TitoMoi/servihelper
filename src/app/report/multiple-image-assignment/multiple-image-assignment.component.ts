@@ -65,8 +65,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
   homeDir = this.configService.homeDir;
 
-  existsS89 = this.pdfService.checkLangExists(this.pdfService.S89);
-
   existsAssignmentsForS89 = false;
 
   //Title bindings

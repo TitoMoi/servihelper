@@ -35,6 +35,17 @@ export interface ConfigInterface {
   closeToOthersDays: number;
   closeToOthersPrayerDays: number;
   closeToOthersTreasuresEtcDays: number;
+  s89Title1: string;
+  s89Title2: string;
+  s89Principal: string;
+  s89Assistant: string;
+  s89Date: string;
+  s89Number: string;
+  s89RoomsTitle: string;
+  s89NoteBoldPart: string;
+  s89NoteContentPart: string;
+  s89Version: string;
+  s89DateVersion: string;
 }
 
 export interface OnlineTemplateDataInterface {
