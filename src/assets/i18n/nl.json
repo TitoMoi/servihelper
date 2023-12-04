@@ -471,5 +471,18 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Toegewezen",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Geretourneerd",
   "ASSIGNTYPE_NAME_HINT": "Wijzig het type niet, alleen de naam als het verkeerd wordt gespeld of fout.",
-  "hr": "Kroatisch"
+  "hr": "Kroatisch",
+  "CONFIG_ACCORDION_S89_TITLE": "Configureer het s89 -blad",
+  "PLACEHOLDER_S89_TITLE_1": "Eerste titelregel",
+  "PLACEHOLDER_S89_TITLE_2": "Tweede titelregel",
+  "PLACEHOLDER_S89_PRINCIPAL": "Naam",
+  "PLACEHOLDER_S89_ASSISTANT": "Assistent",
+  "PLACEHOLDER_S89_DATE": "Datum",
+  "PLACEHOLDER_S89_NUMBER": "Aantal onderdeel",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Kamers titel header",
+  "PLACEHOLDER_S89_BOLD_PART": "Let op vetgedrukt deel",
+  "PLACEHOLDER_S89_CONTENT_PART": "Let op inhoudsdeel",
+  "PLACEHOLDER_S89_VERSION": "s89 versie",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 datumversie",
+  "S89_ASSIGNMENT_NUMBER": "Deel nr.:"
 }

@@ -447,7 +447,6 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Assigned",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Returned",
   "ASSIGNTYPE_NAME_HINT": "Do not change the type, only the name if misspelled or wrong.",
-
   "S89_ASSIGNMENT_NUMBER": "Part no.:",
   "CONFIG_ACCORDION_S89_TITLE": "Config the s89 slip",
   "PLACEHOLDER_S89_TITLE_1": "First title line",
@@ -461,6 +460,5 @@
   "PLACEHOLDER_S89_CONTENT_PART": "Note content part",
   "PLACEHOLDER_S89_VERSION": "s89 version",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 date version",
-
   "TEMPLATE_NOT_AVAILABLE": "XXXDELETEMEXXX"
 }

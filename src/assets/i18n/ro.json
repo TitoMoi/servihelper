@@ -472,5 +472,18 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Atribuit",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Întors",
   "ASSIGNTYPE_NAME_HINT": "Nu schimbați tipul, doar numele dacă este scris greșit sau greșit.",
-  "hr": "Croat"
+  "hr": "Croat",
+  "CONFIG_ACCORDION_S89_TITLE": "Configurați foaia S89",
+  "PLACEHOLDER_S89_TITLE_1": "Prima linie de titlu",
+  "PLACEHOLDER_S89_TITLE_2": "A doua linie de titlu",
+  "PLACEHOLDER_S89_PRINCIPAL": "Nume",
+  "PLACEHOLDER_S89_ASSISTANT": "Asistent",
+  "PLACEHOLDER_S89_DATE": "Data",
+  "PLACEHOLDER_S89_NUMBER": "Număr de număr",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Antetul titlului camerelor",
+  "PLACEHOLDER_S89_BOLD_PART": "Notă parte îndrăzneață",
+  "PLACEHOLDER_S89_CONTENT_PART": "NOTĂ PARTEA CONȚINUTĂ",
+  "PLACEHOLDER_S89_VERSION": "s89 versiune",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 Versiunea datei",
+  "S89_ASSIGNMENT_NUMBER": "Part no.:"
 }

@@ -461,6 +461,18 @@
   "S89_VERSION": "S-89-E",
   "S89_DATE_VERSION": "11/20",
   "ASSIGNTYPE_NAME_HINT": "টাইপটি পরিবর্তন করবেন না, কেবল ভুল বানান বা ভুল হলে নামটি।",
-
-  "hr": "ক্রোয়েশিয়ান"
+  "hr": "ক্রোয়েশিয়ান",
+  "CONFIG_ACCORDION_S89_TITLE": "S89 স্লিপ কনফিগার করুন",
+  "PLACEHOLDER_S89_TITLE_1": "প্রথম শিরোনাম লাইন",
+  "PLACEHOLDER_S89_TITLE_2": "দ্বিতীয় শিরোনাম লাইন",
+  "PLACEHOLDER_S89_PRINCIPAL": "নাম",
+  "PLACEHOLDER_S89_ASSISTANT": "সহকারী",
+  "PLACEHOLDER_S89_DATE": "তারিখ",
+  "PLACEHOLDER_S89_NUMBER": "সংখ্যা অংশ",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "কক্ষ শিরোনাম শিরোনাম",
+  "PLACEHOLDER_S89_BOLD_PART": "সাহসী অংশ নোট করুন",
+  "PLACEHOLDER_S89_CONTENT_PART": "নোট সামগ্রী অংশ",
+  "PLACEHOLDER_S89_VERSION": "S89 সংস্করণ",
+  "PLACEHOLDER_S89_DATE_VERSION": "S89 তারিখ সংস্করণ",
+  "S89_ASSIGNMENT_NUMBER": "পার্ট নং:"
 }

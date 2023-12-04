@@ -461,5 +461,18 @@
   "S89_VERSION": "S-89-E",
   "S89_DATE_VERSION": "11/20",
   "ASSIGNTYPE_NAME_HINT": "タイプを変更しないでください。間違いや間違った場合の名前のみを変更します。",
-  "hr": "クロアチア語"
+  "hr": "クロアチア語",
+  "CONFIG_ACCORDION_S89_TITLE": "S89シートを構成します",
+  "PLACEHOLDER_S89_TITLE_1": "最初のタイトルライン",
+  "PLACEHOLDER_S89_TITLE_2": "2番目のタイトルライン",
+  "PLACEHOLDER_S89_PRINCIPAL": "名前",
+  "PLACEHOLDER_S89_ASSISTANT": "アシスタント",
+  "PLACEHOLDER_S89_DATE": "日付",
+  "PLACEHOLDER_S89_NUMBER": "番号パーツ",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "客室タイトルヘッダー",
+  "PLACEHOLDER_S89_BOLD_PART": "大胆な部分に注意してください",
+  "PLACEHOLDER_S89_CONTENT_PART": "コンテンツの部分に注意してください",
+  "PLACEHOLDER_S89_VERSION": "s89 バージョン",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 日付バージョン",
+  "S89_ASSIGNMENT_NUMBER": "パート番号:"
 }

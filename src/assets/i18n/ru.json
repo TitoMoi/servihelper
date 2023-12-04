@@ -473,5 +473,18 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Назначенный",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Вернулся",
   "ASSIGNTYPE_NAME_HINT": "Не изменяйте тип, только имя, если это неправильно или неправильно.",
-  "hr": "хорватский"
+  "hr": "хорватский",
+  "CONFIG_ACCORDION_S89_TITLE": "Конфигурация листа S89",
+  "PLACEHOLDER_S89_TITLE_1": "Первая титульная линия",
+  "PLACEHOLDER_S89_TITLE_2": "Вторая строка титула",
+  "PLACEHOLDER_S89_PRINCIPAL": "Имя",
+  "PLACEHOLDER_S89_ASSISTANT": "Помощник",
+  "PLACEHOLDER_S89_DATE": "Дата",
+  "PLACEHOLDER_S89_NUMBER": "Номер",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Заголовок заглавных номеров",
+  "PLACEHOLDER_S89_BOLD_PART": "Обратите внимание на жирную часть",
+  "PLACEHOLDER_S89_CONTENT_PART": "Заметьте часть контента",
+  "PLACEHOLDER_S89_VERSION": "s89 версия",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 версия даты",
+  "S89_ASSIGNMENT_NUMBER": "Часть №.:"
 }

@@ -461,5 +461,18 @@
   "S89_VERSION": "S-89-E",
   "S89_DATE_VERSION": "11/20",
   "ASSIGNTYPE_NAME_HINT": "Μην αλλάζετε τον τύπο, μόνο το όνομα εάν λάθη ή λάθος.",
-  "hr": "Κροατία"
+  "hr": "Κροατία",
+  "CONFIG_ACCORDION_S89_TITLE": "Ρυθμίστε το S89 σεντόνι",
+  "PLACEHOLDER_S89_TITLE_1": "Πρώτη γραμμή τίτλου",
+  "PLACEHOLDER_S89_TITLE_2": "Δεύτερη γραμμή τίτλου",
+  "PLACEHOLDER_S89_PRINCIPAL": "Ονομα",
+  "PLACEHOLDER_S89_ASSISTANT": "Βοηθός",
+  "PLACEHOLDER_S89_DATE": "Ημερομηνία",
+  "PLACEHOLDER_S89_NUMBER": "Μέρος μέρος",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Κεφαλίδα τίτλου δωμάτια",
+  "PLACEHOLDER_S89_BOLD_PART": "Σημείωση τολμηρό μέρος",
+  "PLACEHOLDER_S89_CONTENT_PART": "Σημείωση μέρος περιεχομένου",
+  "PLACEHOLDER_S89_VERSION": "s89 εκδοχή",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 έκδοση ημερομηνίας",
+  "S89_ASSIGNMENT_NUMBER": "Μέρος αρ.:"
 }

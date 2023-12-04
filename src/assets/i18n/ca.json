@@ -474,5 +474,18 @@
   "S89_TITLE_1": "OUR CHRISTIAN LIFE AND MINISTRY",
   "S89_TITLE_2": "MEETING ASSIGNMENT",
   "ASSIGNTYPE_NAME_HINT": "No canvieu el tipus, només el nom si esta mal escrit o equivocat.",
-  "hr": "Croat"
+  "hr": "Croat",
+  "CONFIG_ACCORDION_S89_TITLE": "Configureu el full S89",
+  "PLACEHOLDER_S89_TITLE_1": "Primera línia de títol",
+  "PLACEHOLDER_S89_TITLE_2": "Segona línia de títol",
+  "PLACEHOLDER_S89_PRINCIPAL": "Nom",
+  "PLACEHOLDER_S89_ASSISTANT": "Ajudant",
+  "PLACEHOLDER_S89_DATE": "Data",
+  "PLACEHOLDER_S89_NUMBER": "Número part",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Capçalera del títol de les sales",
+  "PLACEHOLDER_S89_BOLD_PART": "Nota part negreta",
+  "PLACEHOLDER_S89_CONTENT_PART": "Nota part del contingut",
+  "PLACEHOLDER_S89_VERSION": "Versió S89",
+  "PLACEHOLDER_S89_DATE_VERSION": "Versió amb data S89",
+  "S89_ASSIGNMENT_NUMBER": "Part núm.:"
 }

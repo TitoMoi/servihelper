@@ -444,5 +444,18 @@
   "ICON_CHANGE_DATES": "Ažurirajte datume teritorija",
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Dodijeljen",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Vraćen",
-  "ASSIGNTYPE_NAME_HINT": "Ne mijenjajte vrstu, samo ime ako je pogrešno napisano ili pogrešno."
+  "ASSIGNTYPE_NAME_HINT": "Ne mijenjajte vrstu, samo ime ako je pogrešno napisano ili pogrešno.",
+  "CONFIG_ACCORDION_S89_TITLE": "Konfigurirajte S89 list",
+  "PLACEHOLDER_S89_TITLE_1": "Prva linija naslova",
+  "PLACEHOLDER_S89_TITLE_2": "Druga linija naslova",
+  "PLACEHOLDER_S89_PRINCIPAL": "Ime",
+  "PLACEHOLDER_S89_ASSISTANT": "Pomoćnik",
+  "PLACEHOLDER_S89_DATE": "Datum",
+  "PLACEHOLDER_S89_NUMBER": "Brojevi",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Zaglavlje naslova sobe",
+  "PLACEHOLDER_S89_BOLD_PART": "Napomena podebljani dio",
+  "PLACEHOLDER_S89_CONTENT_PART": "Napomena dio sadržaja",
+  "PLACEHOLDER_S89_VERSION": "s89 verzija",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 verzija datuma",
+  "S89_ASSIGNMENT_NUMBER": "Dio ne.:"
 }

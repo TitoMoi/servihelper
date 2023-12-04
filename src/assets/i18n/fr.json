@@ -472,5 +472,18 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Attribué",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Revenu",
   "ASSIGNTYPE_NAME_HINT": "Ne modifiez pas le type, seulement le nom si mal orthographié ou mal.",
-  "hr": "Croate"
+  "hr": "Croate",
+  "CONFIG_ACCORDION_S89_TITLE": "Configurez le glissement S89",
+  "PLACEHOLDER_S89_TITLE_1": "Première ligne de titre",
+  "PLACEHOLDER_S89_TITLE_2": "Deuxième ligne de titre",
+  "PLACEHOLDER_S89_PRINCIPAL": "Nom",
+  "PLACEHOLDER_S89_ASSISTANT": "Assistante",
+  "PLACEHOLDER_S89_DATE": "Date",
+  "PLACEHOLDER_S89_NUMBER": "Numéro de numéro",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "En-tête de titre des chambres",
+  "PLACEHOLDER_S89_BOLD_PART": "Note partie audacieuse",
+  "PLACEHOLDER_S89_CONTENT_PART": "Remarque partie du contenu",
+  "PLACEHOLDER_S89_VERSION": "s89 version",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 version de date",
+  "S89_ASSIGNMENT_NUMBER": "Partie no.:"
 }

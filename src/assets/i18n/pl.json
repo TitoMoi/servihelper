@@ -461,5 +461,18 @@
   "S89_VERSION": "S-89-E",
   "S89_DATE_VERSION": "11/20",
   "ASSIGNTYPE_NAME_HINT": "Nie zmieniaj typu, tylko nazwa, jeśli jest błędnie napisana lub źle.",
-  "hr": "Chorwacki"
+  "hr": "Chorwacki",
+  "CONFIG_ACCORDION_S89_TITLE": "Skonfiguruj arkusz S89",
+  "PLACEHOLDER_S89_TITLE_1": "Pierwsza linia tytułowa",
+  "PLACEHOLDER_S89_TITLE_2": "Druga linia tytułowa",
+  "PLACEHOLDER_S89_PRINCIPAL": "Nazwa",
+  "PLACEHOLDER_S89_ASSISTANT": "Asystent",
+  "PLACEHOLDER_S89_DATE": "Data",
+  "PLACEHOLDER_S89_NUMBER": "Część liczbowa",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Nagłówek tytułowy pokoi",
+  "PLACEHOLDER_S89_BOLD_PART": "Zwróć uwagę na odważną część",
+  "PLACEHOLDER_S89_CONTENT_PART": "Zwróć uwagę na część treści",
+  "PLACEHOLDER_S89_VERSION": "s89 wersja",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 Wersja daty",
+  "S89_ASSIGNMENT_NUMBER": "Część nr.:"
 }

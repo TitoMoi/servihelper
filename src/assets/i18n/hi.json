@@ -461,5 +461,18 @@
   "S89_VERSION": "S-89-E",
   "S89_DATE_VERSION": "11/20",
   "ASSIGNTYPE_NAME_HINT": "प्रकार को न बदलें, केवल नाम अगर गलत या गलत है।",
-  "hr": "क्रोएशियाई"
+  "hr": "क्रोएशियाई",
+  "CONFIG_ACCORDION_S89_TITLE": "S89 स्लिप को कॉन्फ़िगर करें",
+  "PLACEHOLDER_S89_TITLE_1": "पहली शीर्षक पंक्ति",
+  "PLACEHOLDER_S89_TITLE_2": "द्वितीय शीर्षक पंक्ति",
+  "PLACEHOLDER_S89_PRINCIPAL": "नाम",
+  "PLACEHOLDER_S89_ASSISTANT": "सहायक",
+  "PLACEHOLDER_S89_DATE": "तारीख",
+  "PLACEHOLDER_S89_NUMBER": "संख्या भाग",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "कमरों का शीर्षक हेडर",
+  "PLACEHOLDER_S89_BOLD_PART": "नोट बोल्ड पार्ट",
+  "PLACEHOLDER_S89_CONTENT_PART": "नोट सामग्री भाग",
+  "PLACEHOLDER_S89_VERSION": "s89 संस्करण",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 दिनांक संस्करण",
+  "S89_ASSIGNMENT_NUMBER": "भाग नहीं।:"
 }

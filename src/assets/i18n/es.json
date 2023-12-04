@@ -472,5 +472,18 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Asignado",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Devuelto",
   "ASSIGNTYPE_NAME_HINT": "No cambie el tipo, solo el nombre si está mal escrito o incorrecto.",
-  "hr": "Croata"
+  "hr": "Croata",
+  "CONFIG_ACCORDION_S89_TITLE": "Configura la hoja s89",
+  "PLACEHOLDER_S89_TITLE_1": "Primera línea de título",
+  "PLACEHOLDER_S89_TITLE_2": "Segunda línea de título",
+  "PLACEHOLDER_S89_PRINCIPAL": "Nombre",
+  "PLACEHOLDER_S89_ASSISTANT": "Asistente",
+  "PLACEHOLDER_S89_DATE": "Fecha",
+  "PLACEHOLDER_S89_NUMBER": "Parte numérica",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Título de las salas",
+  "PLACEHOLDER_S89_BOLD_PART": "Nota parte resaltada",
+  "PLACEHOLDER_S89_CONTENT_PART": "Nota parte de contenido",
+  "PLACEHOLDER_S89_VERSION": "s89 versión",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 versión de fecha",
+  "S89_ASSIGNMENT_NUMBER": "Parte no.:"
 }

@@ -474,5 +474,18 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Atribuída",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Devolvida",
   "ASSIGNTYPE_NAME_HINT": "Não altere o tipo, apenas o nome se incorreto ou errado.",
-  "hr": "Croata"
+  "hr": "Croata",
+  "CONFIG_ACCORDION_S89_TITLE": "Configurar a folha S89",
+  "PLACEHOLDER_S89_TITLE_1": "Primeira linha de título",
+  "PLACEHOLDER_S89_TITLE_2": "Segunda linha de título",
+  "PLACEHOLDER_S89_PRINCIPAL": "Nome",
+  "PLACEHOLDER_S89_ASSISTANT": "Assistente",
+  "PLACEHOLDER_S89_DATE": "Data",
+  "PLACEHOLDER_S89_NUMBER": "Parte número",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Cabeçalho do título dos quartos",
+  "PLACEHOLDER_S89_BOLD_PART": "Observe a parte em negrito",
+  "PLACEHOLDER_S89_CONTENT_PART": "Nota parte do conteúdo",
+  "PLACEHOLDER_S89_VERSION": "s89 versão",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 Versão de data",
+  "S89_ASSIGNMENT_NUMBER": "Parte não.:"
 }

@@ -460,6 +460,19 @@
   "S89_FOOTERNOTE": "[b]Note to student:*The source material and study point for your assignment can be found in the Life and Ministry Meeting Workbook. Please work on the listed study point, which is discussed in the Teaching brochure.",
   "S89_VERSION": "S-89-E",
   "S89_DATE_VERSION": "11/20",
-  "ASSIGNTYPE_NAME_HINT": "Do not change the type, only the name if misspelled or wrong.",
-  "hr": "크로아티아"
+  "ASSIGNTYPE_NAME_HINT": "유형을 변경하지 말고 잘못된 이름 만 있거나 잘못된 경우에만 이름 만 변경하지 마십시오.",
+  "hr": "크로아티아",
+  "CONFIG_ACCORDION_S89_TITLE": "S89 시트를 구성하십시오",
+  "PLACEHOLDER_S89_TITLE_1": "첫 번째 타이틀 라인",
+  "PLACEHOLDER_S89_TITLE_2": "두 번째 타이틀 라인",
+  "PLACEHOLDER_S89_PRINCIPAL": "이름",
+  "PLACEHOLDER_S89_ASSISTANT": "어시스턴트",
+  "PLACEHOLDER_S89_DATE": "날짜",
+  "PLACEHOLDER_S89_NUMBER": "번호 부분",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "객실 제목 헤더",
+  "PLACEHOLDER_S89_BOLD_PART": "참고 대담한 부분",
+  "PLACEHOLDER_S89_CONTENT_PART": "내용 부분에 유의하십시오",
+  "PLACEHOLDER_S89_VERSION": "s89 버전",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 날짜 버전",
+  "S89_ASSIGNMENT_NUMBER": "부품 번호.:"
 }

@@ -461,5 +461,18 @@
   "S89_VERSION": "S-89-E",
   "S89_DATE_VERSION": "11/20",
   "ASSIGNTYPE_NAME_HINT": "Türü değiştirmeyin, yalnızca yanlış veya yanlışsa ad.",
-  "hr": "Hırvat"
+  "hr": "Hırvat",
+  "CONFIG_ACCORDION_S89_TITLE": "S89 sayfasını yapılandırın",
+  "PLACEHOLDER_S89_TITLE_1": "İlk başlık satırı",
+  "PLACEHOLDER_S89_TITLE_2": "İkinci başlık satırı",
+  "PLACEHOLDER_S89_PRINCIPAL": "İsim",
+  "PLACEHOLDER_S89_ASSISTANT": "Asistan",
+  "PLACEHOLDER_S89_DATE": "Tarih",
+  "PLACEHOLDER_S89_NUMBER": "Sayı",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Odalar Başlık Başlığı",
+  "PLACEHOLDER_S89_BOLD_PART": "Kalın kısmı not edin",
+  "PLACEHOLDER_S89_CONTENT_PART": "Note content part",
+  "PLACEHOLDER_S89_VERSION": "s89 versiyon",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 tarih sürümü",
+  "S89_ASSIGNMENT_NUMBER": "Bölüm no.:"
 }

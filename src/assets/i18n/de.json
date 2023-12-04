@@ -472,5 +472,18 @@
   "ASSIGN_CHOOSE_DATE_ASSIGNED": "Zugewiesen",
   "ASSIGN_CHOOSE_DATE_RETURNED": "Ist zurückgekommen",
   "ASSIGNTYPE_NAME_HINT": "Ändern Sie den Typ nicht, nur den Namen, wenn es falsch geschrieben oder falsch ist.",
-  "hr": "Kroatisch"
+  "hr": "Kroatisch",
+  "CONFIG_ACCORDION_S89_TITLE": "Konfigurieren Sie den S89 -Schlupf",
+  "PLACEHOLDER_S89_TITLE_1": "Erste Titellinie",
+  "PLACEHOLDER_S89_TITLE_2": "Zweite Titellinie",
+  "PLACEHOLDER_S89_PRINCIPAL": "name",
+  "PLACEHOLDER_S89_ASSISTANT": "Assistentin",
+  "PLACEHOLDER_S89_DATE": "Datum",
+  "PLACEHOLDER_S89_NUMBER": "Zahlenteil",
+  "PLACEHOLDER_S89_ROOMS_TITLE": "Zimmer Titel Header",
+  "PLACEHOLDER_S89_BOLD_PART": "Beachten Sie einen mutigen Teil",
+  "PLACEHOLDER_S89_CONTENT_PART": "Beachten Sie den Inhaltsteil",
+  "PLACEHOLDER_S89_VERSION": "s89 Ausführung",
+  "PLACEHOLDER_S89_DATE_VERSION": "s89 Datum Version",
+  "S89_ASSIGNMENT_NUMBER": "Teil Nr.:"
 }
