@@ -2,7 +2,7 @@
 
 # Introduction
 
-Servihelper is an executable app that runs on the machine _(Windows, Mac or Linux)_
+Servihelper is an executable app built with web technology that runs on the machine_(Windows, Mac or Linux)_
 
 The program is free.
 
@@ -38,7 +38,7 @@ Native, general purpose assignment slip:
 
 <img src="./pictures/assignment-example.png" alt= "example" width="300" height="320">
 
-S89 slip with theme if is return visit or initial call:
+S89 slip:
 
 <img src="./pictures/assignment-s89-example.png" alt= "example" width="330" height="420">
 
@@ -61,33 +61,36 @@ In case your language is not supported, the native sheet _(assignment)_ to distr
 
 ## What cannot be done or implemented?
 
+Support other programs is not possible, as im a solo developer i cannot guarantee compatibility over time.
 Diferent persons working _at the same time_ and being free is not possible.
 
 But it's possible to work one after another.
 
 **Free mode**:
 
-_(All the next scenarios have no sync process, all imported files from person one will override the existing ones of person two)_
+- _(All the next scenarios have no synchronization process, all imported files from person one will override the existing ones of person two)_
+- _(Maybe one scenario suits your needs better than the other, it is explained the benefits and the disadvantages)_
 
 1. **Use only google drive _(or other solution)_ to centralize and share copies of servihelper.**
 
-   - Do not enable online mode.
+   - Do not enable config -> online mode.
    - Required knowledge of how to install and run google drive app _(or other solution)_
    - Your responsability to ensure that you have the last backup before working.
    - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, **this is the most robust approach and the one i recommend**)_
 
-2. **Export the app data from administrator one and importing in the app of the administrator two _(not recommended)_**
+2. **Export the app data from administrator one and importing in the app of the administrator two sharing the copy through email or whatsapp _(not recommended)_**
 
-   - Do not activate online mode
+   - Do not activate config -> online mode.
    - Do not use shared folder _(google drive or others...)_
    - _(Easy, no complexity but an overhead to understand wich and where is the latest copy)_
 
 3. **Enable built in online mode with a shared folder _(google drive, one drive... also not recommended)_**
 
-   - Required setup inside Servihelper in the config section to configure the shared folder.
+   - Enable config -> online mode _(Required setup inside Servihelper in the config section to configure the shared folder)_
    - Required knowledge of how to install and run google drive app _(or other solution)_
-   - Your responsability to ensure that all files are sync before working.
-   - Warning: Sometimes data is not updated on real time. _(some complexity but later has no overhead, just check you are online and google drive is working and sync)_
+   - Your responsability to ensure that all files are synchronized before working.
+   - Warning: Sometimes data is not updated on real time.
+   - _(this way of work has configuration complexity but later has less overhead, just check you are online and google drive is working and files are up to date)_
 
 **Paid mode**:
 Configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure _(not recommended)_
