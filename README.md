@@ -2,7 +2,7 @@
 
 # Introduction
 
-Servihelper is an executable app that runs on the machine _(Windows, Mac or Linux)_
+Servihelper is an executable app built with web technology that runs on the machine_(Windows, Mac or Linux)_
 
 The program is free.
 
