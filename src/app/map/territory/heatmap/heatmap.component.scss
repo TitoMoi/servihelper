@@ -1,13 +1,10 @@
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
-@import "node_modules/bootstrap/scss/mixins";
-
 #map {
   height: 80svh;
 }
 
 //When width is less than 1200 we understand that height is also reduced
-@include media-breakpoint-down(xl) {
+// `xl` applies to large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {
   #map {
     height: 70svh;
   }
