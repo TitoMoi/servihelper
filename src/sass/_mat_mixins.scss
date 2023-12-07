@@ -1,7 +1,5 @@
 @use "@angular/material" as mat;
 @include mat.core();
-// Custom Theming for Angular Material
-@import "@angular/material/theming";
 
 // Be sure that you only ever include this mixin once!
 // TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
@@ -35,8 +33,7 @@ $servihelper-theme: mat.define-light-theme(
   )
 );
 
-@include mat.core-theme($servihelper-theme);
-// Include theme styles for core and each component used in your app.
+// Include theme styles for core and each material component.
 @include mat.all-component-themes($servihelper-theme);
 
 // Define an alternate dark theme.
