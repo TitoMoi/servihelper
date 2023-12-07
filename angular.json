@@ -43,6 +43,9 @@
               "node_modules/bootstrap/scss/bootstrap-grid.scss",
               "node_modules/bootstrap/scss/bootstrap-utilities.scss",
               "node_modules/leaflet/dist/leaflet.css",
+              "src/css/fonts.css",
+              "src/css/colors.css",
+              "src/sass/theme.scss",
               "src/styles.scss"
             ],
             "scripts": [],
@@ -121,24 +124,24 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "servihelper:build"
+            "buildTarget": "servihelper:build"
           },
           "configurations": {
             "dev": {
-              "browserTarget": "servihelper:build:dev"
+              "buildTarget": "servihelper:build:dev"
             },
             "web": {
-              "browserTarget": "servihelper:build:web"
+              "buildTarget": "servihelper:build:web"
             },
             "production": {
-              "browserTarget": "servihelper:build:production"
+              "buildTarget": "servihelper:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "servihelper:build"
+            "browserTarget": "servihelper:build"
           }
         },
         "test": {
