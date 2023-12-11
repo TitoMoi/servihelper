@@ -1,4 +1,4 @@
-import { APP_CONFIG } from "../../environments/environment"; //Fix relative path
+import { APP_CONFIG } from "../../environments/environment"; // ToDo: Fix relative path
 import { Observable } from "rxjs";
 
 import { HttpClient } from "@angular/common/http";

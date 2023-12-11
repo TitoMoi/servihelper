@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom } from "@angular/core";
+import { importProvidersFrom } from "@angular/core";
 
 import { APP_CONFIG } from "./environments/environment";
 import { bootstrapApplication } from "@angular/platform-browser";
@@ -31,12 +31,10 @@ import { provideRouter } from "@angular/router";
 import { provideTransloco } from "@ngneat/transloco";
 import { TranslocoHttpLoader } from "app/transloco/transloco-loader";
 
-if (APP_CONFIG.production) {
-  enableProdMode();
-}
-
 bootstrapApplication(AppComponent, {
   providers: [
+    provideAnimations(),
+    provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes), //withDebugTracing()
     provideTransloco({
       config: {
@@ -93,8 +91,6 @@ bootstrapApplication(AppComponent, {
         pl: "pl-PL",
       },
     }),
-    provideAnimations(),
-    provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(
       ReactiveFormsModule,
       MatToolbarModule,
