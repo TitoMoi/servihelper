@@ -18,7 +18,7 @@ $servihelper-accent: mat.define-palette(mat.$yellow-palette);
 /* $servihelper-warn: mat.define-palette(mat.$red-palette); */
 
 $custom-typography: mat.define-typography-config(
-  $font-family: "Noto Sans, sans-serif",
+  $font-family: "Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans SC, sans-serif",
 );
 
 // Create the theme object (a Sass map containing all of the palettes).
