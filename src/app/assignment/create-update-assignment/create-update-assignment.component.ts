@@ -95,8 +95,8 @@ import { OnlineService } from "app/online/service/online.service";
     ParticipantPipe,
     PublicThemePipe,
     AssignTypeNamePipe,
-    RoomNamePipe
-],
+    RoomNamePipe,
+  ],
 })
 export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("cancelBtn", { read: ElementRef }) cancelBtn: ElementRef;
@@ -753,7 +753,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     return [
       "treasures",
       "spiritualGems",
-      "interestInOthers",
+      "analysysAudience",
       "livingAsChristians",
       "congregationBibleStudy",
     ].includes(type);

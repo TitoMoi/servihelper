@@ -21,7 +21,7 @@ export type AssignTypes =
   | "treasures"
   | "spiritualGems"
   | "bibleReading"
-  | "interestInOthers"
+  | "analysysAudience"
   | "initialCall"
   | "returnVisit"
   | "bibleStudy"

@@ -71,7 +71,7 @@
     "tKey": "ASSIGNTYPES_ANALYSIS_AUDIENCE",
     "hasAssistant": false,
     "repeat": true,
-    "type": "interestInOthers",
+    "type": "analysysAudience",
     "order": 55,
     "color": "#C48430",
     "days": null
