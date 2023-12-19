@@ -3,7 +3,7 @@
   [formGroup]="participantForm"
   novalidate
   (ngSubmit)="onSubmit(participantForm.value)"
->
+  >
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ t("PARTICIPANT_DELETE_TITLE") }}</mat-card-title>
@@ -28,9 +28,11 @@
         color="warn"
         type="submit"
         [disabled]="netStatusOffline$ | async"
-      >
+        >
         {{ t("BUTTON_DELETE") }}
-        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
+        @if (netStatusOffline$ | async) {
+          <mat-icon svgIcon="nowifi"></mat-icon>
+        }
       </button>
     </mat-card-actions>
   </mat-card>

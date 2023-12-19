@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { TerritoryService } from "../service/territory.service";
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
@@ -18,7 +18,6 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
   selector: "app-massive-dates-territory",
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     TranslocoModule,
     MatButtonModule,
@@ -28,8 +27,8 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     MatIconModule,
     MatSnackBarModule,
     MatInputModule,
-    ParticipantPipe,
-  ],
+    ParticipantPipe
+],
   templateUrl: "./massive-dates-territory.component.html",
   styleUrls: ["./massive-dates-territory.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

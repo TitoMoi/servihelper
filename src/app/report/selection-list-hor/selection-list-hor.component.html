@@ -1,5 +1,5 @@
 <div *transloco="let t" class="d-flex align-items-center">
-  <ng-container *ngIf="hasAssignments(); else noAssignmentsTpl">
+  @if (hasAssignments()) {
     <div id="noColorSectionDiv" class="border me-3">
       <mat-icon
         class="m-2 me-3 mb-4"
@@ -28,58 +28,58 @@
         (click)="toPng()"
       ></mat-icon>
     </div>
-  </ng-container>
-  <ng-template #noAssignmentsTpl>
+  } @else {
     {{ t("REPORT_NO_ASSIGNMENTS") }}
-  </ng-template>
+  }
 </div>
-
 <div id="toPngDivId" class="bg-color-white" style="width: 1020px">
   <div class="fw-bold" [style.textAlign]="'center'">{{ reportTitle }}</div>
-  <ng-container *ngFor="let ag of assignmentGroups; index as i">
+  @for (ag of assignmentGroups; track ag; let i = $index) {
     <table [id]="'table' + i">
       <tr>
         <th
           class="fw-bold"
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSizeHorizontal"
-        >
+          >
           {{
-            ag.assignments[0].date
-              | translocoDate
-                : {
-                    dateStyle: defaultReportDateFormat
-                  }
-          }}
-        </th>
+          ag.assignments[0].date
+          | translocoDate
+          : {
+          dateStyle: defaultReportDateFormat
+        }
+        }}
+      </th>
+      @for (assignment of ag.assignments; track assignment) {
         <th
-          *ngFor="let assignment of ag.assignments"
           [id]="assignment.assignType.id"
           class="fw-bold"
           [style.borderBottom]="'6px solid'"
           [style.borderBottomColor]="
-            (assignment.assignType.id | assignTypePipe).color || 'transparent'
+          (assignment.assignType.id | assignTypePipe).color || 'transparent'
           "
           [style.fontSize]="defaultReportFontSizeHorizontal"
-        >
+          >
           {{ assignment.assignType | assignTypeNamePipe }}
         </th>
-      </tr>
-      <tr>
-        <td [style.fontSize]="defaultReportFontSizeHorizontal">
-          {{ ag.assignments[0].room | roomNamePipe }}
-        </td>
+      }
+    </tr>
+    <tr>
+      <td [style.fontSize]="defaultReportFontSizeHorizontal">
+        {{ ag.assignments[0].room | roomNamePipe }}
+      </td>
+      @for (assignment of ag.assignments; track assignment) {
         <td
-          *ngFor="let assignment of ag.assignments"
           [style.fontSize]="defaultReportFontSizeHorizontal"
-        >
-          {{ assignment.principal.name }}
-          <ng-container *ngIf="assignment.assistant"
-            >/ <br />
-            {{ assignment.assistant.name }}</ng-container
           >
+          {{ assignment.principal.name }}
+          @if (assignment.assistant) {
+            / <br />
+            {{ assignment.assistant.name }}
+          }
         </td>
-      </tr>
-    </table>
-  </ng-container>
+      }
+    </tr>
+  </table>
+}
 </div>

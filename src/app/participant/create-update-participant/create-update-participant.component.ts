@@ -35,7 +35,7 @@ import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatChipsModule } from "@angular/material/chips";
-import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
@@ -62,8 +62,6 @@ import { OnlineService } from "app/online/service/online.service";
     MatInputModule,
     AutoFocusDirective,
     MatCheckboxModule,
-    NgIf,
-    NgFor,
     MatChipsModule,
     MatIconModule,
     MatDatepickerModule,
@@ -76,8 +74,8 @@ import { OnlineService } from "app/online/service/online.service";
     AssignTypeNamePipe,
     RoomPipe,
     RoomNamePipe,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   //Angular material datepicker hacked

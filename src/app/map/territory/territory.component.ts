@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
-import { CommonModule, NgFor, NgIf } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
@@ -29,15 +29,13 @@ import { readFileSync } from "fs-extra";
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
-    NgIf,
-    NgFor,
     MatIconModule,
     MatExpansionModule,
     MatCheckboxModule,
     TranslocoLocaleModule,
     ParticipantPipe,
-    MatTooltipModule,
-  ],
+    MatTooltipModule
+],
   templateUrl: "./territory.component.html",
   styleUrls: ["./territory.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

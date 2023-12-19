@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
@@ -15,14 +15,13 @@ import { SortService } from "app/services/sort.service";
   selector: "app-territory-count",
   standalone: true,
   imports: [
-    CommonModule,
     TranslocoModule,
     MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
     TranslocoLocaleModule,
-    ParticipantPipe,
-  ],
+    ParticipantPipe
+],
   templateUrl: "./territory-count.component.html",
   styleUrls: ["./territory-count.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

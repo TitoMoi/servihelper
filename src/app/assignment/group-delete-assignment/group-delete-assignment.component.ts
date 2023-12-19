@@ -11,7 +11,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
-import { AsyncPipe, JsonPipe, NgFor, NgIf } from "@angular/common";
+import { AsyncPipe, JsonPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { map, skip } from "rxjs";
@@ -35,12 +35,10 @@ import { ConfigService } from "app/config/service/config.service";
     AsyncPipe,
     RouterLink,
     MatIconModule,
-    NgIf,
-    NgFor,
     JsonPipe,
     AssignTypePipe,
-    AssignTypeNamePipe,
-  ],
+    AssignTypeNamePipe
+],
 })
 export class GroupDeleteAssignmentComponent implements OnInit {
   assignments: AssignmentInterface[];

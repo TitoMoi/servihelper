@@ -21,121 +21,127 @@
             class="me-2"
             (change)="changeWoman($event)"
             >{{ t("STATISTICS_ONLY_WOMAN") }}</mat-checkbox
-          >
-          <mat-checkbox
-            #onlyMenBox
-            color="primary"
-            class="me-2"
-            (change)="changeMan($event)"
-            >{{ t("STATISTICS_ONLY_MAN") }}</mat-checkbox
-          >
-          <mat-checkbox
-            #hideExternalsBox
-            color="primary"
-            class="me-3"
-            (change)="changeExternals($event)"
-            >{{ t("STATISTICS_EXCLUDE_EXTERNALS") }}</mat-checkbox
-          >
-          <mat-checkbox
-            #onlyPrincipalsBox
-            color="primary"
-            class="me-3"
-            (change)="changeOnlyPrincipals()"
-            >{{ t("STATISTICS_ONLY_PRINCIPALS") }}</mat-checkbox
-          >
-          <mat-checkbox
-            #onlyAssistantsBox
-            color="primary"
-            class="me-3"
-            (change)="changeOnlyAssistants()"
-            >{{ t("STATISTICS_ONLY_ASSISTANTS") }}</mat-checkbox
-          >
-        </div>
-      </div>
-      <div class="col-auto">
-        <div class="d-flex justify-content-start">
-          <span class="me-3"
-            ><span class="border padding bg-color-lightskyblue2">1</span> -
-            {{ t("STATISTICS_1") }}</span
-          >
-          <span
-            ><span class="border padding bg-color-lightcoral2">2</span> -
-            {{ t("STATISTICS_2") }}</span
-          >
-        </div>
-      </div>
-    </div>
-    <div class="row m-3 justify-content-center">
-      <div class="col-auto">
-        <mat-form-field>
-          <mat-label>{{ t("STATISTICS_MONTH_RANGE_PICKER") }}</mat-label>
-
-          <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
-            <input matStartDate formControlName="dateStart" placeholder="Start date" />
-            <input matEndDate formControlName="dateEnd" placeholder="End date" />
-          </mat-date-range-input>
-          <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-        </mat-form-field>
-      </div>
-    </div>
-    <div id="toPngDivId" class="bg-color-white">
-      <div class="row m-3">
-        <div class="col-2">
-          <b>{{ t("STATISTICS_NAME") }}</b>
-        </div>
-        <div class="col-2">
-          <b>{{ t("STATISTICS_COUNT") }}</b>
-        </div>
-        <div class="col-3">
-          <b>{{ t("STATISTICS_PENULTIMA") }}</b>
-        </div>
-        <div class="col-3">
-          <b>{{ t("STATISTICS_LAST") }}</b>
-        </div>
-        <div class="col-2">
-          <b>{{ t("STATISTICS_DISTANCE") }}</b>
-        </div>
-      </div>
-      <div class="row m-3" *ngFor="let participant of globalList">
-        <div class="col-2">
-          {{ participant.name }}
-        </div>
-        <div class="col-2">
-          {{ participant.count }}
-        </div>
-        <div class="col-3">
-          <span
-            *ngIf="participant.isPrincipalPenultimateAssignment"
-            class="border padding bg-color-lightskyblue2"
-            >1</span
-          >
-          <span
-            *ngIf="participant.isAssistantPenultimateAssignment"
-            class="border padding bg-color-lightcoral2"
-            >2</span
-          >
-          {{ participant.penultimateAssignmentDate | translocoDate : { dateStyle: "medium" } }}
-          - {{ participant.penultimateAssignType }}
-        </div>
-        <div class="col-3">
-          <span
-            *ngIf="participant.isPrincipalLastAssignment === true"
-            class="border padding bg-color-lightskyblue2"
-            >1</span
-          >
-          <span
-            *ngIf="participant.isAssistantLastAssignment === true"
-            class="border padding bg-color-lightcoral2"
-            >2</span
-          >
-          {{ participant.lastAssignmentDate | translocoDate : { dateStyle: "medium" } }}
-          - {{ participant.lastAssignType }}
-        </div>
-        <div class="col-2">
-          {{ participant.distanceBetweenPenultimaAndLast }}
-        </div>
-      </div>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+            >
+            <mat-checkbox
+              #onlyMenBox
+              color="primary"
+              class="me-2"
+              (change)="changeMan($event)"
+              >{{ t("STATISTICS_ONLY_MAN") }}</mat-checkbox
+              >
+              <mat-checkbox
+                #hideExternalsBox
+                color="primary"
+                class="me-3"
+                (change)="changeExternals($event)"
+                >{{ t("STATISTICS_EXCLUDE_EXTERNALS") }}</mat-checkbox
+                >
+                <mat-checkbox
+                  #onlyPrincipalsBox
+                  color="primary"
+                  class="me-3"
+                  (change)="changeOnlyPrincipals()"
+                  >{{ t("STATISTICS_ONLY_PRINCIPALS") }}</mat-checkbox
+                  >
+                  <mat-checkbox
+                    #onlyAssistantsBox
+                    color="primary"
+                    class="me-3"
+                    (change)="changeOnlyAssistants()"
+                    >{{ t("STATISTICS_ONLY_ASSISTANTS") }}</mat-checkbox
+                    >
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="d-flex justify-content-start">
+                    <span class="me-3"
+                      ><span class="border padding bg-color-lightskyblue2">1</span> -
+                      {{ t("STATISTICS_1") }}</span
+                      >
+                      <span
+                        ><span class="border padding bg-color-lightcoral2">2</span> -
+                        {{ t("STATISTICS_2") }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row m-3 justify-content-center">
+                    <div class="col-auto">
+                      <mat-form-field>
+                        <mat-label>{{ t("STATISTICS_MONTH_RANGE_PICKER") }}</mat-label>
+                        <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+                          <input matStartDate formControlName="dateStart" placeholder="Start date" />
+                          <input matEndDate formControlName="dateEnd" placeholder="End date" />
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div id="toPngDivId" class="bg-color-white">
+                    <div class="row m-3">
+                      <div class="col-2">
+                        <b>{{ t("STATISTICS_NAME") }}</b>
+                      </div>
+                      <div class="col-2">
+                        <b>{{ t("STATISTICS_COUNT") }}</b>
+                      </div>
+                      <div class="col-3">
+                        <b>{{ t("STATISTICS_PENULTIMA") }}</b>
+                      </div>
+                      <div class="col-3">
+                        <b>{{ t("STATISTICS_LAST") }}</b>
+                      </div>
+                      <div class="col-2">
+                        <b>{{ t("STATISTICS_DISTANCE") }}</b>
+                      </div>
+                    </div>
+                    @for (participant of globalList; track participant) {
+                      <div class="row m-3">
+                        <div class="col-2">
+                          {{ participant.name }}
+                        </div>
+                        <div class="col-2">
+                          {{ participant.count }}
+                        </div>
+                        <div class="col-3">
+                          @if (participant.isPrincipalPenultimateAssignment) {
+                            <span
+                              class="border padding bg-color-lightskyblue2"
+                              >1</span
+                              >
+                            }
+                            @if (participant.isAssistantPenultimateAssignment) {
+                              <span
+                                class="border padding bg-color-lightcoral2"
+                                >2</span
+                                >
+                              }
+                              {{ participant.penultimateAssignmentDate | translocoDate : { dateStyle: "medium" } }}
+                              - {{ participant.penultimateAssignType }}
+                            </div>
+                            <div class="col-3">
+                              @if (participant.isPrincipalLastAssignment === true) {
+                                <span
+                                  class="border padding bg-color-lightskyblue2"
+                                  >1</span
+                                  >
+                                }
+                                @if (participant.isAssistantLastAssignment === true) {
+                                  <span
+                                    class="border padding bg-color-lightcoral2"
+                                    >2</span
+                                    >
+                                  }
+                                  {{ participant.lastAssignmentDate | translocoDate : { dateStyle: "medium" } }}
+                                  - {{ participant.lastAssignType }}
+                                </div>
+                                <div class="col-2">
+                                  {{ participant.distanceBetweenPenultimaAndLast }}
+                                </div>
+                              </div>
+                            }
+                          </div>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                      

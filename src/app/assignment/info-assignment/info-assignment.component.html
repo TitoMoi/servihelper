@@ -6,7 +6,6 @@
   <div class="px-1">
     <hr />
   </div>
-
   <div mat-dialog-content>
     <div class="grid">
       <div class="fw-bold d-flex align-items-center me-1">
@@ -21,7 +20,7 @@
       <div class="fw-bold d-flex align-items-center me-1">
         {{ t("INFO_ASSIGNMENT_LAST_ASSIGN_DATE") }}
       </div>
-      <ng-container *ngFor="let participant of data">
+      @for (participant of data; track participant) {
         <div class="d-flex align-items-center me-1">
           {{ participant.name }}
         </div>
@@ -34,7 +33,7 @@
         <div class="d-flex align-items-center me-1">
           {{ participant.lastAssignmentDate | translocoDate : { dateStyle: "medium" } }}
         </div>
-      </ng-container>
+      }
     </div>
   </div>
 </ng-container>

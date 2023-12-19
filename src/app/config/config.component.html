@@ -23,436 +23,467 @@
         </div>
         <div class="d-flex mt-2 mb-1">
           <span class="me-3">Google Drive</span
-          ><mat-icon class="me-3" svgIcon="googledrive"></mat-icon>
-          <span class="me-3">Dropbox</span
-          ><mat-icon class="me-3" svgIcon="onedrive"></mat-icon>
-          <span class="me-3">OneDrive</span><mat-icon svgIcon="dropbox"></mat-icon>
-        </div>
-        <div class="mb-1">
-          {{ t("CONFIG_GO_ONLINE_4") }}
-        </div>
-        <div class="mb-1">{{ t("CONFIG_GO_ONLINE_5") }}</div>
-        <div class="mb-1">
-          {{ t("CONFIG_GO_ONLINE_6") }}
-        </div>
-        <div class="mb-1">
-          {{ t("CONFIG_GO_ONLINE_7") }}
-        </div>
-        <div class="mb-1">
-          {{ t("CONFIG_GO_ONLINE_8") }}
-          {{ t("CONFIG_GO_ONLINE_9") }}
-        </div>
-        <div class="mb-1">{{ t("CONFIG_GO_ONLINE_10") }}</div>
-        <div class="mb-1">
-          {{ t("CONFIG_GO_ONLINE_11") }}
-        </div>
-        <h4>{{ t("CONFIG_GO_ONLINE_LABEL") }}</h4>
-        <form [formGroup]="onlineForm" novalidate>
-          <div class="row align-items-baseline mb-3">
-            <div class="col">
-              <mat-slide-toggle
-                #onlineToggle
-                color="primary"
-                class="mb-3 me-3"
-                formControlName="isOnline"
-              >
-                {{ t("CONFIG_GO_ONLINE") }}
-              </mat-slide-toggle>
-              <ng-container *ngIf="(onlineToggle.change | async)?.checked">
-                <div class="mb-1">
-                  {{ t("CONFIG_GO_ONLINE_12") }}
+            ><mat-icon class="me-3" svgIcon="googledrive"></mat-icon>
+            <span class="me-3">Dropbox</span
+              ><mat-icon class="me-3" svgIcon="onedrive"></mat-icon>
+              <span class="me-3">OneDrive</span><mat-icon svgIcon="dropbox"></mat-icon>
+            </div>
+            <div class="mb-1">
+              {{ t("CONFIG_GO_ONLINE_4") }}
+            </div>
+            <div class="mb-1">{{ t("CONFIG_GO_ONLINE_5") }}</div>
+            <div class="mb-1">
+              {{ t("CONFIG_GO_ONLINE_6") }}
+            </div>
+            <div class="mb-1">
+              {{ t("CONFIG_GO_ONLINE_7") }}
+            </div>
+            <div class="mb-1">
+              {{ t("CONFIG_GO_ONLINE_8") }}
+              {{ t("CONFIG_GO_ONLINE_9") }}
+            </div>
+            <div class="mb-1">{{ t("CONFIG_GO_ONLINE_10") }}</div>
+            <div class="mb-1">
+              {{ t("CONFIG_GO_ONLINE_11") }}
+            </div>
+            <h4>{{ t("CONFIG_GO_ONLINE_LABEL") }}</h4>
+            <form [formGroup]="onlineForm" novalidate>
+              <div class="row align-items-baseline mb-3">
+                <div class="col">
+                  <mat-slide-toggle
+                    #onlineToggle
+                    color="primary"
+                    class="mb-3 me-3"
+                    formControlName="isOnline"
+                    >
+                    {{ t("CONFIG_GO_ONLINE") }}
+                  </mat-slide-toggle>
+                  @if ((onlineToggle.change | async)?.checked) {
+                    <div class="mb-1">
+                      {{ t("CONFIG_GO_ONLINE_12") }}
+                    </div>
+                    <mat-form-field>
+                      <mat-label>{{ t("PLACEHOLDER_SHARED_FOLDER_LABEL") }}</mat-label>
+                      <input matInput spellcheck="false" formControlName="path" />
+                      @if (onlineForm.controls.path.errors?.required) {
+                        <mat-error>{{
+                          t("CONFIG_ONLINE_FOLDER_ERROR")
+                        }}</mat-error>
+                      }
+                      @if (isValidPath && !isPathError) {
+                        <mat-hint class="fw-bold">{{
+                          t("CONFIG_IS_VALID_PATH")
+                        }}</mat-hint>
+                      }
+                    </mat-form-field>
+                  }
                 </div>
-                <mat-form-field>
-                  <mat-label>{{ t("PLACEHOLDER_SHARED_FOLDER_LABEL") }}</mat-label>
-                  <input matInput spellcheck="false" formControlName="path" />
-                  <mat-error *ngIf="onlineForm.controls.path.errors?.required">{{
-                    t("CONFIG_ONLINE_FOLDER_ERROR")
-                  }}</mat-error>
-                  <mat-hint *ngIf="isValidPath && !isPathError" class="fw-bold">{{
-                    t("CONFIG_IS_VALID_PATH")
-                  }}</mat-hint>
-                </mat-form-field>
-              </ng-container>
-            </div>
-          </div>
-          <button
-            *ngIf="
-              (onlineToggle.change | async)?.checked && onlineForm.get('path').valueChanges
+              </div>
+              @if (
+                (onlineToggle.change | async)?.checked && onlineForm.get('path').valueChanges
                 | async
-            "
+                ) {
+                <button
+                  mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="mb-2"
+                  (click)="checkAndSaveOnlineMode()"
+                  >
+                  {{ t("BUTTON_CHECK_ONLINE") }}
+                </button>
+              }
+              @if (!servihelperFilesExist && isValidPath) {
+                <div class="mb-2">
+                  <div class="mb-2 me-2">
+                    {{ t("CONFIG_NO_FILES_SHARED_FOLDER") }}: {{ onlineForm.get("path").value }}.
+                    {{ t("CONFIG_ASK_MOVE_FILES") }}
+                  </div>
+                  <div class="mb-2">{{ t("CONFIG_YES_WARNING") }}</div>
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    type="button"
+                    class="mb-2"
+                    (click)="moveOfflineFilesToSharedFolder()"
+                    >
+                    {{ t("BUTTON_YES") }}
+                  </button>
+                  @if (copyFilesError) {
+                    <div>{{ t("CONFIG_CANNOT_COPY") }}.</div>
+                  }
+                </div>
+              }
+            </form>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="mb-2">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="d-flex align-items-center">
+                <mat-icon class="me-2 pe-none" svgIcon="speech"></mat-icon>
+                <h3 class="m-3">
+                  {{ t("CONFIG_ACCORDION_PUBLIC_SPEECH") }}
+                </h3>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <a
             mat-raised-button
+            [disableRipple]="true"
+            class="mt-2"
             color="primary"
-            type="button"
-            class="mb-2"
-            (click)="checkAndSaveOnlineMode()"
-          >
-            {{ t("BUTTON_CHECK_ONLINE") }}
-          </button>
-
-          <div *ngIf="!servihelperFilesExist && isValidPath" class="mb-2">
-            <div class="mb-2 me-2">
-              {{ t("CONFIG_NO_FILES_SHARED_FOLDER") }}: {{ onlineForm.get("path").value }}.
-              {{ t("CONFIG_ASK_MOVE_FILES") }}
-            </div>
-            <div class="mb-2">{{ t("CONFIG_YES_WARNING") }}</div>
-            <button
-              mat-raised-button
-              color="primary"
-              type="button"
-              class="mb-2"
-              (click)="moveOfflineFilesToSharedFolder()"
+            routerLink="createPublicTheme"
+            routerLinkActive="active"
+            [disabled]="netStatusOffline$ | async"
             >
-              {{ t("BUTTON_YES") }}
-            </button>
-            <div *ngIf="copyFilesError">{{ t("CONFIG_CANNOT_COPY") }}.</div>
-          </div>
-        </form>
-      </div>
-    </mat-expansion-panel>
-    <mat-expansion-panel class="mb-2">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <div class="d-flex align-items-center">
-            <mat-icon class="me-2 pe-none" svgIcon="speech"></mat-icon>
-            <h3 class="m-3">
-              {{ t("CONFIG_ACCORDION_PUBLIC_SPEECH") }}
-            </h3>
-          </div>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <a
-        mat-raised-button
-        [disableRipple]="true"
-        class="mt-2"
-        color="primary"
-        routerLink="createPublicTheme"
-        routerLinkActive="active"
-        [disabled]="netStatusOffline$ | async"
-      >
-        {{ t("CONFIG_CREATE_PUBLIC_THEME") }}
-        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
-      </a>
-      <h4 class="me-2">{{ t("CONFIG_AVAILABLE_THEMES") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <mat-select
-          #publicThemeSelect
-          formControlName="assignmentHeaderTitle"
-          required
-          [disableRipple]="true"
-        >
-          <mat-select-trigger *ngIf="publicThemeSelect.value">
-            {{ (publicThemeSelect.value | publicThemePipe)?.name }}
-          </mat-select-trigger>
-          <mat-option *ngFor="let theme of publicThemes" [value]="theme.id">
-            <div class="d-flex align-items-center justify-content-evenly">
-              <mat-icon
-                class="me-4"
-                (click)="stopPropagation($event)"
-                [routerLink]="['updatePublicTheme', theme.id]"
-                routerLinkActive="active"
-                svgIcon="edit"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
-              <mat-icon
-                class="me-4"
-                (click)="stopPropagation($event)"
-                [routerLink]="['deletePublicTheme', theme.id]"
-                routerLinkActive="active"
-                svgIcon="garbage"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
-              <div>{{ theme.name }}</div>
-            </div>
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="!publicThemes.length">{{
-          t("CONFIG_ERROR_NO_AVAILABLE_TITLES")
-        }}</mat-error>
-      </mat-form-field>
-    </mat-expansion-panel>
-    <mat-expansion-panel class="mb-2">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <div class="d-flex align-items-center">
-            <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
-            <h3 class="m-3">
-              {{ t("CONFIG_ACCORDION_SHEET_TITLE") }}
-            </h3>
-          </div>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <a
-        mat-raised-button
-        [disableRipple]="true"
-        color="primary"
-        routerLink="createTitle"
-        routerLinkActive="active"
-        [disabled]="netStatusOffline$ | async"
-      >
-        {{ t("CONFIG_CREATE_TITLE") }}
-        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
-      </a>
-      <h4 class="me-2">{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <mat-select
-          #titleSelect
-          formControlName="assignmentHeaderTitle"
-          required
-          [disableRipple]="true"
-        >
-          <mat-select-trigger *ngIf="titleSelect.value">
-            {{ (titleSelect.value | sheetTitlePipe)?.name }}
-          </mat-select-trigger>
-          <mat-option *ngFor="let t of titles" [value]="t.id">
-            <div class="d-flex align-items-center justify-content-evenly">
-              <mat-icon
-                class="me-4"
-                (click)="stopPropagation($event)"
-                [routerLink]="['updateTitle', t.id]"
-                routerLinkActive="active"
-                svgIcon="edit"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
-              <mat-icon
-                class="me-4"
-                (click)="stopPropagation($event)"
-                [routerLink]="['deleteTitle', t.id]"
-                routerLinkActive="active"
-                svgIcon="garbage"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
-              <div>{{ t.name }}</div>
-            </div>
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="!titles.length">{{
-          t("CONFIG_ERROR_NO_AVAILABLE_TITLES")
-        }}</mat-error>
-      </mat-form-field>
-      <hr class="rounded" />
-      <h4>{{ t("CONFIG_ASSIGNMENT_PRINCIPAL_TITLE") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <input matInput formControlName="assignmentPrincipalTitle" />
-      </mat-form-field>
-      <h4>{{ t("CONFIG_ASSIGNMENT_ASSISTANT_TITLE") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <input matInput formControlName="assignmentAssistantTitle" />
-      </mat-form-field>
-      <h4>{{ t("CONFIG_ASSIGNMENT_DATE_TITLE") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <input matInput formControlName="assignmentDateTitle" />
-      </mat-form-field>
-      <h4>{{ t("CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <input matInput formControlName="assignmentAssignTypeTitle" />
-      </mat-form-field>
-      <h4>{{ t("CONFIG_ASSIGNMENT_THEME_TITLE") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <input matInput formControlName="assignmentThemeTitle" />
-      </mat-form-field>
-      <h4>{{ t("CONFIG_ASSIGNMENT_ROOM_TITLE") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <input matInput formControlName="assignmentRoomTitle" />
-      </mat-form-field>
-      <h4>{{ t("CONFIG_ASSIGNMENT_NOTE_TITLE") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <input matInput formControlName="assignmentNoteTitle" />
-      </mat-form-field>
-      <h4>{{ t("CONFIG_DEFAULT_FOOTER_NOTE") }}</h4>
-      <mat-form-field>
-        <mat-select formControlName="defaultFooterNoteId" required>
-          <mat-option [value]="undefined"> </mat-option>
-          <mat-option *ngFor="let note of notes" [value]="note.id">
-            {{ note.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-expansion-panel>
-    <mat-expansion-panel class="mb-2">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
-          <h3 class="m-3">
-            {{ t("CONFIG_ACCORDION_S89_TITLE") }}
-          </h3>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_TITLE_1") }}</mat-label>
-        <input matInput formControlName="s89Title1" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_TITLE_2") }}</mat-label>
-        <input matInput formControlName="s89Title2" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_PRINCIPAL") }}</mat-label>
-        <input matInput formControlName="s89Principal" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_ASSISTANT") }}</mat-label>
-        <input matInput formControlName="s89Assistant" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_DATE") }}</mat-label>
-        <input matInput formControlName="s89Date" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_NUMBER") }}</mat-label>
-        <input matInput formControlName="s89Number" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_ROOMS_TITLE") }}</mat-label>
-        <input matInput formControlName="s89RoomsTitle" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_BOLD_PART") }}</mat-label>
-        <input matInput formControlName="s89NoteBoldPart" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_CONTENT_PART") }}</mat-label>
-        <input matInput formControlName="s89NoteContentPart" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_VERSION") }}</mat-label>
-        <input matInput formControlName="s89Version" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_S89_DATE_VERSION") }}</mat-label>
-        <input matInput formControlName="s89DateVersion" />
-      </mat-form-field>
-    </mat-expansion-panel>
-    <mat-expansion-panel class="mb-2">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <h3 class="m-3">
-            {{ t("CONFIG_ACCORDION_REPORT_TITLE") }}
-          </h3>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <h4>{{ t("CONFIG_REPORT_TITLE") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-        <input matInput formControlName="reportTitle" />
-      </mat-form-field>
-      <h4>{{ t("CONFIG_DEFAULT_WEEKDAY_BEGINS") }}</h4>
-      <mat-form-field>
-        <mat-select formControlName="defaultWeekDayBegins" required>
-          <mat-option *ngFor="let day of weekDayBegins" [value]="day.value">
-            {{ day.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_FORMAT") }}</h4>
-      <mat-form-field>
-        <mat-select formControlName="defaultReportDateFormat" required>
-          <mat-option *ngFor="let df of translocoDateFormats" [value]="df">
-            {{ df }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_COLOR") }}</h4>
-      <mat-form-field>
-        <mat-label>{{ t("PLACEHOLDER_REPORT_DATE_COLOR") }}</mat-label>
-        <input type="color" matInput formControlName="defaultReportDateColor" />
-      </mat-form-field>
-
-      <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE_VERTICAL") }}</h4>
-      <mat-form-field>
-        <input
-          matInput
-          type="number"
-          formControlName="defaultReportFontSize"
-          [placeholder]="form.controls.defaultReportFontSize.value"
-        />
-      </mat-form-field>
-      <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL") }}</h4>
-      <div class="fst-italic">{{ t("CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL_TIP") }}</div>
-      <mat-form-field>
-        <input
-          matInput
-          type="number"
-          formControlName="defaultReportFontSizeHorizontal"
-          [placeholder]="form.controls.defaultReportFontSizeHorizontal.value"
-        />
-      </mat-form-field>
-    </mat-expansion-panel>
-    <mat-expansion-panel class="mb-2">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <h3 class="m-3">
-            {{ t("CONFIG_TIME_DISTANCE_TITLE") }}
-          </h3>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <h4>{{ t("CONFIG_ISCLOSEOTHERS_LABEL") }}</h4>
-      <mat-form-field>
-        <input
-          matInput
-          type="number"
-          formControlName="closeToOthersDays"
-          [matTooltip]="t('CONFIG_ISCLOSEOTHERS_TOOLTIP')"
-        />
-        <mat-icon matSuffix svgIcon="warningtime"></mat-icon>
-      </mat-form-field>
-      <h4>{{ t("CONFIG_ISCLOSEOTHERS_PRAYER_LABEL") }}</h4>
-      <mat-form-field>
-        <input
-          matInput
-          type="number"
-          formControlName="closeToOthersPrayerDays"
-          [matTooltip]="t('CONFIG_ISCLOSEOTHERS_PRAYER_TOOLTIP')"
-        />
-        <mat-icon matSuffix svgIcon="warningtime"></mat-icon>
-      </mat-form-field>
-      <h4>{{ t("CONFIG_ISCLOSEOTHERS_TREASURESETC_LABEL") }}</h4>
-      <mat-form-field>
-        <input
-          matInput
-          type="number"
-          formControlName="closeToOthersTreasuresEtcDays"
-          [matTooltip]="t('CONFIG_ISCLOSEOTHERS_TREASURESETC_TOOLTIP')"
-        />
-        <mat-icon matSuffix svgIcon="warningtime"></mat-icon>
-      </mat-form-field>
-    </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="!onlineConfig.isOnline" class="mb-2 hover-lightcoral">
-      <mat-expansion-panel-header class="bg-color-lightcoral">
-        <mat-panel-title>
-          <h3 class="m-3">
-            {{ t("CONFIG_RESTART_LABEL") }}
-          </h3>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <button
-        mat-raised-button
-        type="button"
-        color="warn"
-        (click)="confirmDelete = !confirmDelete"
-      >
-        {{ t("CONFIG_RESET_ALL") }}
-      </button>
-      <button
-        *ngIf="confirmDelete"
-        class="ms-2"
-        mat-raised-button
-        type="button"
-        color="warn"
-        (click)="restoreAllData()"
-      >
-        {{ t("CONFIG_RESET_ALL_CONFIRM") }}
-      </button>
-    </mat-expansion-panel>
-  </mat-accordion>
-</form>
+            {{ t("CONFIG_CREATE_PUBLIC_THEME") }}
+            @if (netStatusOffline$ | async) {
+              <mat-icon svgIcon="nowifi"></mat-icon>
+            }
+          </a>
+          <h4 class="me-2">{{ t("CONFIG_AVAILABLE_THEMES") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <mat-select
+              #publicThemeSelect
+              formControlName="assignmentHeaderTitle"
+              required
+              [disableRipple]="true"
+              >
+              @if (publicThemeSelect.value) {
+                <mat-select-trigger>
+                  {{ (publicThemeSelect.value | publicThemePipe)?.name }}
+                </mat-select-trigger>
+              }
+              @for (theme of publicThemes; track theme) {
+                <mat-option [value]="theme.id">
+                  <div class="d-flex align-items-center justify-content-evenly">
+                    <mat-icon
+                      class="me-4"
+                      (click)="stopPropagation($event)"
+                      [routerLink]="['updatePublicTheme', theme.id]"
+                      routerLinkActive="active"
+                      svgIcon="edit"
+                      aria-label="Side nav toggle icon"
+                    ></mat-icon>
+                    <mat-icon
+                      class="me-4"
+                      (click)="stopPropagation($event)"
+                      [routerLink]="['deletePublicTheme', theme.id]"
+                      routerLinkActive="active"
+                      svgIcon="garbage"
+                      aria-label="Side nav toggle icon"
+                    ></mat-icon>
+                    <div>{{ theme.name }}</div>
+                  </div>
+                </mat-option>
+              }
+            </mat-select>
+            @if (!publicThemes.length) {
+              <mat-error>{{
+                t("CONFIG_ERROR_NO_AVAILABLE_TITLES")
+              }}</mat-error>
+            }
+          </mat-form-field>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="mb-2">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="d-flex align-items-center">
+                <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
+                <h3 class="m-3">
+                  {{ t("CONFIG_ACCORDION_SHEET_TITLE") }}
+                </h3>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <a
+            mat-raised-button
+            [disableRipple]="true"
+            color="primary"
+            routerLink="createTitle"
+            routerLinkActive="active"
+            [disabled]="netStatusOffline$ | async"
+            >
+            {{ t("CONFIG_CREATE_TITLE") }}
+            @if (netStatusOffline$ | async) {
+              <mat-icon svgIcon="nowifi"></mat-icon>
+            }
+          </a>
+          <h4 class="me-2">{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <mat-select
+              #titleSelect
+              formControlName="assignmentHeaderTitle"
+              required
+              [disableRipple]="true"
+              >
+              @if (titleSelect.value) {
+                <mat-select-trigger>
+                  {{ (titleSelect.value | sheetTitlePipe)?.name }}
+                </mat-select-trigger>
+              }
+              @for (t of titles; track t) {
+                <mat-option [value]="t.id">
+                  <div class="d-flex align-items-center justify-content-evenly">
+                    <mat-icon
+                      class="me-4"
+                      (click)="stopPropagation($event)"
+                      [routerLink]="['updateTitle', t.id]"
+                      routerLinkActive="active"
+                      svgIcon="edit"
+                      aria-label="Side nav toggle icon"
+                    ></mat-icon>
+                    <mat-icon
+                      class="me-4"
+                      (click)="stopPropagation($event)"
+                      [routerLink]="['deleteTitle', t.id]"
+                      routerLinkActive="active"
+                      svgIcon="garbage"
+                      aria-label="Side nav toggle icon"
+                    ></mat-icon>
+                    <div>{{ t.name }}</div>
+                  </div>
+                </mat-option>
+              }
+            </mat-select>
+            @if (!titles.length) {
+              <mat-error>{{
+                t("CONFIG_ERROR_NO_AVAILABLE_TITLES")
+              }}</mat-error>
+            }
+          </mat-form-field>
+          <hr class="rounded" />
+          <h4>{{ t("CONFIG_ASSIGNMENT_PRINCIPAL_TITLE") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput formControlName="assignmentPrincipalTitle" />
+          </mat-form-field>
+          <h4>{{ t("CONFIG_ASSIGNMENT_ASSISTANT_TITLE") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput formControlName="assignmentAssistantTitle" />
+          </mat-form-field>
+          <h4>{{ t("CONFIG_ASSIGNMENT_DATE_TITLE") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput formControlName="assignmentDateTitle" />
+          </mat-form-field>
+          <h4>{{ t("CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput formControlName="assignmentAssignTypeTitle" />
+          </mat-form-field>
+          <h4>{{ t("CONFIG_ASSIGNMENT_THEME_TITLE") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput formControlName="assignmentThemeTitle" />
+          </mat-form-field>
+          <h4>{{ t("CONFIG_ASSIGNMENT_ROOM_TITLE") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput formControlName="assignmentRoomTitle" />
+          </mat-form-field>
+          <h4>{{ t("CONFIG_ASSIGNMENT_NOTE_TITLE") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput formControlName="assignmentNoteTitle" />
+          </mat-form-field>
+          <h4>{{ t("CONFIG_DEFAULT_FOOTER_NOTE") }}</h4>
+          <mat-form-field>
+            <mat-select formControlName="defaultFooterNoteId" required>
+              <mat-option [value]="undefined"> </mat-option>
+              @for (note of notes; track note) {
+                <mat-option [value]="note.id">
+                  {{ note.name }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="mb-2">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
+              <h3 class="m-3">
+                {{ t("CONFIG_ACCORDION_S89_TITLE") }}
+              </h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_TITLE_1") }}</mat-label>
+            <input matInput formControlName="s89Title1" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_TITLE_2") }}</mat-label>
+            <input matInput formControlName="s89Title2" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_PRINCIPAL") }}</mat-label>
+            <input matInput formControlName="s89Principal" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_ASSISTANT") }}</mat-label>
+            <input matInput formControlName="s89Assistant" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_DATE") }}</mat-label>
+            <input matInput formControlName="s89Date" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_NUMBER") }}</mat-label>
+            <input matInput formControlName="s89Number" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_ROOMS_TITLE") }}</mat-label>
+            <input matInput formControlName="s89RoomsTitle" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_BOLD_PART") }}</mat-label>
+            <input matInput formControlName="s89NoteBoldPart" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_CONTENT_PART") }}</mat-label>
+            <input matInput formControlName="s89NoteContentPart" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_VERSION") }}</mat-label>
+            <input matInput formControlName="s89Version" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_S89_DATE_VERSION") }}</mat-label>
+            <input matInput formControlName="s89DateVersion" />
+          </mat-form-field>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="mb-2">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h3 class="m-3">
+                {{ t("CONFIG_ACCORDION_REPORT_TITLE") }}
+              </h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <h4>{{ t("CONFIG_REPORT_TITLE") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <input matInput formControlName="reportTitle" />
+          </mat-form-field>
+          <h4>{{ t("CONFIG_DEFAULT_WEEKDAY_BEGINS") }}</h4>
+          <mat-form-field>
+            <mat-select formControlName="defaultWeekDayBegins" required>
+              @for (day of weekDayBegins; track day) {
+                <mat-option [value]="day.value">
+                  {{ day.name }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_FORMAT") }}</h4>
+          <mat-form-field>
+            <mat-select formControlName="defaultReportDateFormat" required>
+              @for (df of translocoDateFormats; track df) {
+                <mat-option [value]="df">
+                  {{ df }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_COLOR") }}</h4>
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_REPORT_DATE_COLOR") }}</mat-label>
+            <input type="color" matInput formControlName="defaultReportDateColor" />
+          </mat-form-field>
+          <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE_VERTICAL") }}</h4>
+          <mat-form-field>
+            <input
+              matInput
+              type="number"
+              formControlName="defaultReportFontSize"
+              [placeholder]="form.controls.defaultReportFontSize.value"
+              />
+            </mat-form-field>
+            <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL") }}</h4>
+            <div class="fst-italic">{{ t("CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL_TIP") }}</div>
+            <mat-form-field>
+              <input
+                matInput
+                type="number"
+                formControlName="defaultReportFontSizeHorizontal"
+                [placeholder]="form.controls.defaultReportFontSizeHorizontal.value"
+                />
+              </mat-form-field>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="mb-2">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <h3 class="m-3">
+                    {{ t("CONFIG_TIME_DISTANCE_TITLE") }}
+                  </h3>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <h4>{{ t("CONFIG_ISCLOSEOTHERS_LABEL") }}</h4>
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="closeToOthersDays"
+                  [matTooltip]="t('CONFIG_ISCLOSEOTHERS_TOOLTIP')"
+                  />
+                  <mat-icon matSuffix svgIcon="warningtime"></mat-icon>
+                </mat-form-field>
+                <h4>{{ t("CONFIG_ISCLOSEOTHERS_PRAYER_LABEL") }}</h4>
+                <mat-form-field>
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="closeToOthersPrayerDays"
+                    [matTooltip]="t('CONFIG_ISCLOSEOTHERS_PRAYER_TOOLTIP')"
+                    />
+                    <mat-icon matSuffix svgIcon="warningtime"></mat-icon>
+                  </mat-form-field>
+                  <h4>{{ t("CONFIG_ISCLOSEOTHERS_TREASURESETC_LABEL") }}</h4>
+                  <mat-form-field>
+                    <input
+                      matInput
+                      type="number"
+                      formControlName="closeToOthersTreasuresEtcDays"
+                      [matTooltip]="t('CONFIG_ISCLOSEOTHERS_TREASURESETC_TOOLTIP')"
+                      />
+                      <mat-icon matSuffix svgIcon="warningtime"></mat-icon>
+                    </mat-form-field>
+                  </mat-expansion-panel>
+                  @if (!onlineConfig.isOnline) {
+                    <mat-expansion-panel class="mb-2 hover-lightcoral">
+                      <mat-expansion-panel-header class="bg-color-lightcoral">
+                        <mat-panel-title>
+                          <h3 class="m-3">
+                            {{ t("CONFIG_RESTART_LABEL") }}
+                          </h3>
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <button
+                        mat-raised-button
+                        type="button"
+                        color="warn"
+                        (click)="confirmDelete = !confirmDelete"
+                        >
+                        {{ t("CONFIG_RESET_ALL") }}
+                      </button>
+                      @if (confirmDelete) {
+                        <button
+                          class="ms-2"
+                          mat-raised-button
+                          type="button"
+                          color="warn"
+                          (click)="restoreAllData()"
+                          >
+                          {{ t("CONFIG_RESET_ALL_CONFIRM") }}
+                        </button>
+                      }
+                    </mat-expansion-panel>
+                  }
+                </mat-accordion>
+              </form>
+              

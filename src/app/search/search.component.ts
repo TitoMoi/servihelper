@@ -18,7 +18,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
-import { NgIf, NgFor } from "@angular/common";
+
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
@@ -27,19 +27,17 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
   styleUrls: ["./search.component.scss"],
   standalone: true,
   imports: [
-    NgIf,
     TranslocoModule,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
-    NgFor,
     MatOptionModule,
     MatButtonModule,
     RouterLink,
     TranslocoLocaleModule,
-    AssignTypeNamePipe,
-  ],
+    AssignTypeNamePipe
+],
 })
 export class SearchComponent implements OnInit, OnDestroy {
   searchForm: UntypedFormGroup;

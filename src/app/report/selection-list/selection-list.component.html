@@ -1,5 +1,5 @@
 <div *transloco="let t" class="d-flex align-items-center mb-1">
-  <ng-container *ngIf="hasAssignments(); else noAssignmentsTpl">
+  @if (hasAssignments()) {
     <div id="noColorSectionDiv" class="border me-3">
       <mat-icon
         class="m-2 me-3 mb-4"
@@ -31,7 +31,6 @@
         [matTooltip]="t('ICON_PNG')"
         (click)="toPng()"
       ></mat-icon>
-
       <mat-icon
         class="m-2 ms-5"
         svgIcon="midweeklist"
@@ -45,17 +44,17 @@
         (click)="toPdfBoard(true)"
       ></mat-icon>
     </div>
-  </ng-container>
-  <ng-template #noAssignmentsTpl>
+  } @else {
     {{ t("REPORT_NO_ASSIGNMENTS") }}
-  </ng-template>
+  }
 </div>
-
 <div id="toPngDivId" style="width: 791px; height: auto" class="bg-color-white">
-  <div *ngIf="reportTitle" class="fw-bold p-2" [style.textAlign]="'center'">
-    {{ reportTitle }}
-  </div>
-  <ng-container *ngFor="let ag of assignmentGroups; index as i">
+  @if (reportTitle) {
+    <div class="fw-bold p-2" [style.textAlign]="'center'">
+      {{ reportTitle }}
+    </div>
+  }
+  @for (ag of assignmentGroups; track ag; let i = $index) {
     <table [id]="'table' + i">
       <tr>
         <th
@@ -63,49 +62,53 @@
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
           [style.width]="'65%'"
-        >
+          >
           {{
-            ag.assignments[0].date
-              | translocoDate
-                : {
-                    dateStyle: defaultReportDateFormat
-                  }
-          }}
-        </th>
-        <th
-          [style.backgroundColor]="defaultReportDateColor"
-          [style.fontSize]="defaultReportFontSize"
+          ag.assignments[0].date
+          | translocoDate
+          : {
+          dateStyle: defaultReportDateFormat
+        }
+        }}
+      </th>
+      <th
+        [style.backgroundColor]="defaultReportDateColor"
+        [style.fontSize]="defaultReportFontSize"
         >
-          {{ ag.assignments[0].room | roomNamePipe }}
-        </th>
-      </tr>
-      <tr *ngFor="let assignment of ag.assignments">
+        {{ ag.assignments[0].room | roomNamePipe }}
+      </th>
+    </tr>
+    @for (assignment of ag.assignments; track assignment) {
+      <tr>
         <!-- td id is to find assignType later, not always has name, sometimes has theme -->
         <td
           [id]="assignment.assignType.id"
           class="ps-3 pt-2"
           [style]="
-            getBorderRight((assignment.assignType.id | assignTypePipe).color || 'transparent')
+          getBorderRight((assignment.assignType.id | assignTypePipe).color || 'transparent')
           "
           [style.fontSize]="defaultReportFontSize"
           [style.width]="'65%'"
-        >
+          >
           <div class="me-3">
             {{
-              assignment.theme
-                ? assignment.theme
-                : (assignment.assignType | assignTypeNamePipe)
+            assignment.theme
+            ? assignment.theme
+            : (assignment.assignType | assignTypeNamePipe)
             }}
           </div>
         </td>
         <td class="ps-3" [style.fontSize]="defaultReportFontSize">
           {{ assignment.principal.name
-          }}<span *ngIf="assignment.assistant">
+          }}@if (assignment.assistant) {
+          <span>
             / <br />
             {{ assignment.assistant.name }}</span
-          >
+            >
+          }
         </td>
       </tr>
-    </table>
-  </ng-container>
+    }
+  </table>
+}
 </div>

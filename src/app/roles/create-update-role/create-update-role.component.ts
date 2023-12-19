@@ -11,7 +11,7 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ConfigService } from "app/config/service/config.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -34,15 +34,13 @@ import { OnlineService } from "app/online/service/online.service";
     MatFormFieldModule,
     MatInputModule,
     AutoFocusDirective,
-    NgIf,
-    NgFor,
     MatCheckboxModule,
     MatButtonModule,
     RouterLink,
     AssignTypeNamePipe,
     MatIconModule,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class CreateUpdateRoleComponent {
   assignTypes: AssignTypeInterface[] = this.assignTypeService

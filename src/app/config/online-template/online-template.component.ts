@@ -7,7 +7,7 @@ import { MatInputModule } from "@angular/material/input";
 import { OnlineTemplateDataInterface } from "../model/config.model";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatIconModule } from "@angular/material/icon";
-import { NgIf } from "@angular/common";
+
 
 @Component({
   selector: "app-online-template",
@@ -19,9 +19,8 @@ import { NgIf } from "@angular/common";
     FormsModule,
     MatButtonModule,
     TranslocoModule,
-    MatIconModule,
-    NgIf,
-  ],
+    MatIconModule
+],
   templateUrl: "./online-template.component.html",
   styleUrls: ["./online-template.component.scss"],
 })

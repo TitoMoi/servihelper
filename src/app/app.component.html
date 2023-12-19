@@ -1,14 +1,16 @@
-<app-navigation *ngIf="dataLoaded">
-  <router-outlet></router-outlet>
-</app-navigation>
-
-<div
-  *ngIf="showLockMsg"
-  class="lockMsgFont"
-  style="height: 100%; display: grid; place-items: center"
->
-  <div *transloco="let t">
-    <div class="fw-bold mb-3">{{ t("APP_LOCKED") }}</div>
-    <div class="text-center">{{ t("CHECK_LATER") }}</div>
+@if (dataLoaded) {
+  <app-navigation>
+    <router-outlet></router-outlet>
+  </app-navigation>
+}
+@if (showLockMsg) {
+  <div
+    class="lockMsgFont"
+    style="height: 100%; display: grid; place-items: center"
+    >
+    <div *transloco="let t">
+      <div class="fw-bold mb-3">{{ t("APP_LOCKED") }}</div>
+      <div class="text-center">{{ t("CHECK_LATER") }}</div>
+    </div>
   </div>
-</div>
+}

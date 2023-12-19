@@ -53,7 +53,7 @@ import { MatOptionModule } from "@angular/material/core";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { AsyncPipe, NgFor, NgIf } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitleInterface } from "app/sheet-title/model/sheet-title.model";
@@ -78,7 +78,6 @@ import { OnlineService } from "app/online/service/online.service";
     ReactiveFormsModule,
     MatCardModule,
     RouterModule,
-    NgIf,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
@@ -86,17 +85,18 @@ import { OnlineService } from "app/online/service/online.service";
     AutoFocusDirective,
     MatSelectModule,
     MatTooltipModule,
-    NgFor,
     MatOptionModule,
     MatIconModule,
     MatButtonModule,
     RouterLink,
     AsyncPipe,
+    NgIf,
+    NgFor,
     ParticipantPipe,
     PublicThemePipe,
     AssignTypeNamePipe,
-    RoomNamePipe,
-  ],
+    RoomNamePipe
+],
 })
 export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("cancelBtn", { read: ElementRef }) cancelBtn: ElementRef;

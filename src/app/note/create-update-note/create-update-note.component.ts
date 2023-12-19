@@ -19,7 +19,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 
@@ -39,9 +39,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatCheckboxModule,
     RouterLink,
     AsyncPipe,
-    NgIf,
-    MatIconModule,
-  ],
+    MatIconModule
+],
 })
 export class CreateUpdateNoteComponent implements OnDestroy {
   n = this.noteService.getNote(this.activatedRoute.snapshot.params.id);

@@ -8,7 +8,7 @@ import { RouterLink, Router, ActivatedRoute } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
 import { Validators } from "ngx-editor";
 import { TerritoryService } from "../service/territory.service";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { OnlineService } from "app/online/service/online.service";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -26,10 +26,9 @@ import { ChangeDetectionStrategy } from "@angular/core";
     MatButtonModule,
     MatDatepickerModule,
     RouterLink,
-    NgIf,
     AsyncPipe,
-    MatIconModule,
-  ],
+    MatIconModule
+],
   templateUrl: "./return-territory.component.html",
   styleUrls: ["./return-territory.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

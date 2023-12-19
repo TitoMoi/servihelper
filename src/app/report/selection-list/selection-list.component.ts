@@ -25,7 +25,7 @@ import {
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
 import { TranslocoLocaleModule, TranslocoLocaleService } from "@ngneat/transloco-locale";
-import { NgIf, NgFor } from "@angular/common";
+
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -47,13 +47,11 @@ import jsPDF from "jspdf";
     TranslocoModule,
     MatIconModule,
     MatTooltipModule,
-    NgIf,
-    NgFor,
     TranslocoLocaleModule,
     AssignTypePipe,
     AssignTypeNamePipe,
-    RoomNamePipe,
-  ],
+    RoomNamePipe
+],
 })
 export class SelectionListComponent implements OnChanges {
   @Input() selectedDates: Date[];

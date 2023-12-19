@@ -16,9 +16,9 @@
               spellcheck="false"
               formControlName="name"
             />
-            <mat-hint *ngIf="!isOtherAssignmentType()" class="fst-italic">{{
-              t("ASSIGNTYPE_NAME_HINT")
-            }}</mat-hint>
+            @if (!isOtherAssignmentType()) {
+            <mat-hint class="fst-italic">{{ t("ASSIGNTYPE_NAME_HINT") }}</mat-hint>
+            }
           </mat-form-field>
         </div>
       </div>
@@ -60,9 +60,9 @@
       </div>
       <div class="row justify-content-start align-items-center mb-2">
         <div class="col-auto">
+          @if (colors.length) {
           <button
             mat-raised-button
-            *ngIf="colors.length"
             color="primary"
             type="button"
             [matTooltip]="t('BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP')"
@@ -74,15 +74,18 @@
                 : t("BUTTON_SHOW_AVAILABLE_COLORS")
             }}
           </button>
+          }
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <div class="d-flex" *ngIf="showColors">
-            <ng-container *ngFor="let c of colors">
-              <span class="square me-1" [style]="getBgColor(c)"></span>
-            </ng-container>
+          @if (showColors) {
+          <div class="d-flex">
+            @for (c of colors; track c) {
+            <span class="square me-1" [style]="getBgColor(c)"></span>
+            }
           </div>
+          }
         </div>
       </div>
       <div class="row justify-content-start">
@@ -117,7 +120,9 @@
         [disabled]="form.invalid || (netStatusOffline$ | async)"
       >
         {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
-        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
+        @if (netStatusOffline$ | async) {
+        <mat-icon svgIcon="nowifi"></mat-icon>
+        }
       </button>
     </mat-card-actions>
   </mat-card>

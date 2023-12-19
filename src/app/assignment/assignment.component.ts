@@ -39,7 +39,7 @@ import { AssignTypePipe } from "../assigntype/pipe/assign-type.pipe";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
-import { NgIf, NgFor, NgClass, AsyncPipe } from "@angular/common";
+import { NgClass, AsyncPipe } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
@@ -61,10 +61,8 @@ import { ConfigService } from "app/config/service/config.service";
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
-    NgIf,
     MatIconModule,
     MatTooltipModule,
-    NgFor,
     NgClass,
     AsyncPipe,
     TranslocoLocaleModule,
@@ -72,8 +70,8 @@ import { ConfigService } from "app/config/service/config.service";
     AssignTypeNamePipe,
     RoomPipe,
     RoomNamePipe,
-    ParticipantPipe,
-  ],
+    ParticipantPipe
+],
 })
 export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked {
   //In memory assignments

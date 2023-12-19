@@ -23,8 +23,10 @@
         color="warn"
         type="submit"
         [disabled]="netStatusOffline$ | async"
-      >
-        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
+        >
+        @if (netStatusOffline$ | async) {
+          <mat-icon svgIcon="nowifi"></mat-icon>
+        }
         {{ t("BUTTON_DELETE") }}
       </button>
     </mat-card-actions>

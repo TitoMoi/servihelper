@@ -7,7 +7,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
@@ -27,9 +27,8 @@ import { MatInputModule } from "@angular/material/input";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule,
-    NgIf,
-  ],
+    MatIconModule
+],
 })
 export class DeleteAssignmentComponent {
   netStatusOffline$ = this.onlineService.netStatusOffline$;

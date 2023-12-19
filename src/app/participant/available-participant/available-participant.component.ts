@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { ParticipantService } from "../service/participant.service";
 import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
@@ -27,15 +27,14 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
   selector: "app-available-participant",
   standalone: true,
   imports: [
-    CommonModule,
     AssignTypePipe,
     AssignTypeNamePipe,
     TranslocoModule,
     MatTooltipModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule,
-  ],
+    MatSnackBarModule
+],
   templateUrl: "./available-participant.component.html",
   styleUrls: ["./available-participant.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

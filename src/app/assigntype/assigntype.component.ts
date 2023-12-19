@@ -3,7 +3,7 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 
 import { Component } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
-import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -20,12 +20,10 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
-    NgIf,
-    NgFor,
     MatIconModule,
     AssignTypeNamePipe,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class AssignTypeComponent {
   //In memory assignTypes

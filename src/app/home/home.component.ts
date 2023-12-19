@@ -10,7 +10,7 @@ import { lstatSync, writeFileSync, writeJsonSync } from "fs-extra";
 import { Component, OnInit } from "@angular/core";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
-import { NgIf, NgClass, AsyncPipe } from "@angular/common";
+import { NgClass, AsyncPipe } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import path from "path";
 import { PolygonService } from "app/map/territory/service/polygon.service";
@@ -28,7 +28,7 @@ import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
   standalone: true,
-  imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgIf, NgClass, AsyncPipe],
+  imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgClass, AsyncPipe],
 })
 export class HomeComponent implements OnInit {
   // If zip is loaded and saved

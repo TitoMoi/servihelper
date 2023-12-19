@@ -23,7 +23,7 @@ import { ipcRenderer } from "electron";
 import { ensureFileSync, removeSync, writeFile } from "fs-extra";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatButtonModule } from "@angular/material/button";
-import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -43,15 +43,13 @@ import { PdfService } from "app/services/pdf.service";
     TranslocoModule,
     MatIconModule,
     MatTooltipModule,
-    NgIf,
     MatButtonModule,
-    NgFor,
     TranslocoLocaleModule,
     SheetTitlePipe,
     PublicThemePipe,
     MatChipsModule,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
   @Input() selectedDates: Date[];

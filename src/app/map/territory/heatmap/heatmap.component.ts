@@ -6,7 +6,7 @@ import {
   OnDestroy,
   inject,
 } from "@angular/core";
-import { CommonModule, NgFor, NgIf } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatOptionModule } from "@angular/material/core";
@@ -33,8 +33,6 @@ import { differenceInMonths } from "date-fns";
     TranslocoModule,
     MatButtonModule,
     RouterLink,
-    NgIf,
-    NgFor,
     MatIconModule,
     MatTooltipModule,
     MatFormFieldModule,
@@ -42,8 +40,8 @@ import { differenceInMonths } from "date-fns";
     AutoFocusDirective,
     ReactiveFormsModule,
     MatSelectModule,
-    MatOptionModule,
-  ],
+    MatOptionModule
+],
   templateUrl: "./heatmap.component.html",
   styleUrls: ["./heatmap.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

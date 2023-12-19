@@ -15,175 +15,190 @@
               [appautofocus]="isUpdate ? false : true"
               spellcheck="false"
               formControlName="name"
-            />
-          </mat-form-field>
-        </div>
-        <div class="col-lg-4 col-6">
-          <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_GROUP") }}</mat-label>
-            <mat-select formControlName="group">
-              <mat-option
-                *ngFor="let number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-                [value]="number"
-                >{{ number }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <div class="col-auto">
-            <mat-checkbox labelPosition="before" color="primary" formControlName="available">{{
-              t("PARTICIPANT_CREATE_AVAILABLE")
-            }}</mat-checkbox>
-          </div>
-          <div class="col-auto">
-            <mat-checkbox labelPosition="before" color="primary" formControlName="isWoman">{{
-              t("PARTICIPANT_CREATE_ISWOMAN")
-            }}</mat-checkbox>
-          </div>
-          <div class="col-auto">
-            <mat-checkbox
-              labelPosition="before"
-              color="primary"
-              formControlName="isExternal"
-              >{{ t("PARTICIPANT_CREATE_ISEXTERNAL") }}</mat-checkbox
-            >
-          </div>
-        </div>
-        <div class="participant-overflow">
-          <div class="col-12 mr-auto">
-            <h4 *ngIf="rooms.length">
-              {{ t("PARTICIPANT_CREATE_ROOMS_TITLE") }}
-            </h4>
-            <div class="row">
-              <ng-container formArrayName="rooms">
-                <ng-container *ngFor="let r of getRoomsArray; let i = index">
-                  <ng-container *ngIf="r as participantRoom">
-                    <div class="col-auto" [formGroupName]="i">
-                      <mat-checkbox color="primary" formControlName="available">{{
-                        participantRoom.roomId | roomPipe | roomNamePipe
-                      }}</mat-checkbox>
-                    </div>
-                  </ng-container>
-                </ng-container>
-              </ng-container>
-            </div>
-          </div>
-
-          <!-- principal assignTypes -->
-          <div class="col-12">
-            <h4 *ngIf="assignTypes.length">
-              {{ t("PARTICIPANT_CREATE_ASSIGNTYPE_PRINCIPAL") }}
-            </h4>
-            <div class="row">
-              <ng-container formArrayName="assignTypes">
-                <ng-container *ngFor="let at of getAssignTypesArray; let j = index">
-                  <ng-container *ngIf="at as participantAssignType">
-                    <div class="col-auto" [formGroupName]="j">
-                      <mat-checkbox color="primary" formControlName="canPrincipal">{{
-                        participantAssignType.assignTypeId
-                          | assignTypePipe
-                          | assignTypeNamePipe
-                      }}</mat-checkbox>
-                    </div>
-                  </ng-container>
-                </ng-container>
-              </ng-container>
-            </div>
-          </div>
-
-          <!-- assistant assignTypes -->
-          <div class="col-12">
-            <h4 *ngIf="assignTypes.length">
-              {{ t("PARTICIPANT_CREATE_ASSIGNTYPE_ASSISTANT") }}
-            </h4>
-            <div class="row">
-              <ng-container formArrayName="assignTypes">
-                <ng-container *ngFor="let at of getAssignTypesArray; let z = index">
-                  <ng-container *ngIf="at as participantAssignType">
-                    <div
-                      *ngIf="
-                        (participantAssignType.assignTypeId | assignTypePipe).hasAssistant
-                      "
-                      class="col-auto"
-                      [formGroupName]="z"
-                    >
-                      <mat-checkbox color="primary" formControlName="canAssistant">{{
-                        participantAssignType.assignTypeId
-                          | assignTypePipe
-                          | assignTypeNamePipe
-                      }}</mat-checkbox>
-                    </div>
-                  </ng-container>
-                </ng-container>
-              </ng-container>
-            </div>
-          </div>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <mat-chip-grid
-              #chipList
-              aria-label="PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE"
-              (click)="picker.open()"
-            >
-              <mat-chip-row
-                *ngFor="let date of getNotAvailableDates"
-                selectable="false"
-                removable="true"
-                (removed)="remove(date)"
-              >
-                {{ date | translocoDate : { dateStyle: "short" } }}
-                <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
-              </mat-chip-row>
-              <mat-label *ngIf="!getNotAvailableDates.length">{{
-                t("PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE")
-              }}</mat-label>
-              <input
-                [value]="resetModel"
-                matInput
-                [matDatepicker]="picker"
-                (dateChange)="dateChanged($event)"
-                [matChipInputFor]="chipList"
-                hidden
               />
-            </mat-chip-grid>
-            <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker [startAt]="init" [dateClass]="dateClass"></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button
-        mat-raised-button
-        type="button"
-        class="me-3"
-        [routerLink]="isUpdate ? '../..' : '..'"
-      >
-        {{ t("BUTTON_CANCEL") }}
-      </button>
-      <button
-        mat-raised-button
-        class="me-3"
-        color="primary"
-        type="button"
-        (click)="onSubmit()"
-        [disabled]="form.invalid"
-      >
-        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
-        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
-      </button>
-      <button
-        *ngIf="!isUpdate"
-        mat-raised-button
-        color="accent"
-        type="submit"
-        [disabled]="form.invalid"
-      >
-        {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
-        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4 col-6">
+            <mat-form-field>
+              <mat-label>{{ t("PLACEHOLDER_GROUP") }}</mat-label>
+              <mat-select formControlName="group">
+                @for (number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track number) {
+                  <mat-option
+                    [value]="number"
+                    >{{ number }}</mat-option
+                    >
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              <mat-checkbox labelPosition="before" color="primary" formControlName="available">{{
+                t("PARTICIPANT_CREATE_AVAILABLE")
+              }}</mat-checkbox>
+            </div>
+            <div class="col-auto">
+              <mat-checkbox labelPosition="before" color="primary" formControlName="isWoman">{{
+                t("PARTICIPANT_CREATE_ISWOMAN")
+              }}</mat-checkbox>
+            </div>
+            <div class="col-auto">
+              <mat-checkbox
+                labelPosition="before"
+                color="primary"
+                formControlName="isExternal"
+                >{{ t("PARTICIPANT_CREATE_ISEXTERNAL") }}</mat-checkbox
+                >
+              </div>
+            </div>
+            <div class="participant-overflow">
+              <div class="col-12 mr-auto">
+                @if (rooms.length) {
+                  <h4>
+                    {{ t("PARTICIPANT_CREATE_ROOMS_TITLE") }}
+                  </h4>
+                }
+                <div class="row">
+                  <ng-container formArrayName="rooms">
+                    @for (r of getRoomsArray; track r; let i = $index) {
+                      @if (r; as participantRoom) {
+                        <div class="col-auto" [formGroupName]="i">
+                          <mat-checkbox color="primary" formControlName="available">{{
+                            participantRoom.roomId | roomPipe | roomNamePipe
+                          }}</mat-checkbox>
+                        </div>
+                      }
+                    }
+                  </ng-container>
+                </div>
+              </div>
+              <!-- principal assignTypes -->
+              <div class="col-12">
+                @if (assignTypes.length) {
+                  <h4>
+                    {{ t("PARTICIPANT_CREATE_ASSIGNTYPE_PRINCIPAL") }}
+                  </h4>
+                }
+                <div class="row">
+                  <ng-container formArrayName="assignTypes">
+                    @for (at of getAssignTypesArray; track at; let j = $index) {
+                      @if (at; as participantAssignType) {
+                        <div class="col-auto" [formGroupName]="j">
+                          <mat-checkbox color="primary" formControlName="canPrincipal">{{
+                            participantAssignType.assignTypeId
+                            | assignTypePipe
+                            | assignTypeNamePipe
+                          }}</mat-checkbox>
+                        </div>
+                      }
+                    }
+                  </ng-container>
+                </div>
+              </div>
+              <!-- assistant assignTypes -->
+              <div class="col-12">
+                @if (assignTypes.length) {
+                  <h4>
+                    {{ t("PARTICIPANT_CREATE_ASSIGNTYPE_ASSISTANT") }}
+                  </h4>
+                }
+                <div class="row">
+                  <ng-container formArrayName="assignTypes">
+                    @for (at of getAssignTypesArray; track at; let z = $index) {
+                      @if (at; as participantAssignType) {
+                        @if (
+                          (participantAssignType.assignTypeId | assignTypePipe).hasAssistant
+                          ) {
+                          <div
+                            class="col-auto"
+                            [formGroupName]="z"
+                            >
+                            <mat-checkbox color="primary" formControlName="canAssistant">{{
+                              participantAssignType.assignTypeId
+                              | assignTypePipe
+                              | assignTypeNamePipe
+                            }}</mat-checkbox>
+                          </div>
+                        }
+                      }
+                    }
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <mat-form-field>
+                <mat-chip-grid
+                  #chipList
+                  aria-label="PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE"
+                  (click)="picker.open()"
+                  >
+                  @for (date of getNotAvailableDates; track date) {
+                    <mat-chip-row
+                      selectable="false"
+                      removable="true"
+                      (removed)="remove(date)"
+                      >
+                      {{ date | translocoDate : { dateStyle: "short" } }}
+                      <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
+                    </mat-chip-row>
+                  }
+                  @if (!getNotAvailableDates.length) {
+                    <mat-label>{{
+                      t("PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE")
+                    }}</mat-label>
+                  }
+                  <input
+                    [value]="resetModel"
+                    matInput
+                    [matDatepicker]="picker"
+                    (dateChange)="dateChanged($event)"
+                    [matChipInputFor]="chipList"
+                    hidden
+                    />
+                  </mat-chip-grid>
+                  <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker [startAt]="init" [dateClass]="dateClass"></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-raised-button
+              type="button"
+              class="me-3"
+              [routerLink]="isUpdate ? '../..' : '..'"
+              >
+              {{ t("BUTTON_CANCEL") }}
+            </button>
+            <button
+              mat-raised-button
+              class="me-3"
+              color="primary"
+              type="button"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              >
+              {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+              @if (netStatusOffline$ | async) {
+                <mat-icon svgIcon="nowifi"></mat-icon>
+              }
+            </button>
+            @if (!isUpdate) {
+              <button
+                mat-raised-button
+                color="accent"
+                type="submit"
+                [disabled]="form.invalid"
+                >
+                {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
+                @if (netStatusOffline$ | async) {
+                  <mat-icon svgIcon="nowifi"></mat-icon>
+                }
+              </button>
+            }
+          </mat-card-actions>
+        </mat-card>
+      </form>
+      

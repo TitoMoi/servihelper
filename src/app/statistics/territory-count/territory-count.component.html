@@ -7,7 +7,6 @@
         </h3>
       </mat-panel-title>
     </mat-expansion-panel-header>
-
     <mat-checkbox
       class="ms-3"
       labelPosition="before"
@@ -15,66 +14,72 @@
       (change)="orderByTerritory = !orderByTerritory"
       [disableRipple]="true"
       >{{ t("STATISTICS_COUNT_TERRITORY_ORDER") }}</mat-checkbox
-    >
-    <!-- ORDER BY TERRITORY -->
-    <ng-container *ngIf="orderByTerritory">
-      <ng-container *ngFor="let terr of territories">
-        <div class="row m-2">
-          <div class="col-12 fw-bold mb-1">
-            <span class="border padding">{{ terr.name }}</span>
-          </div>
-          <div class="col">
-            <div class="row m-2">
-              <div class="col-auto">
-                <div>{{ t("PLACEHOLDER_NAME") }}:</div>
-                <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
-                <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
-              </div>
-              <div class="col-auto" *ngFor="let p of terr.participants; let i = index">
-                <div>
-                  {{
-                    (p | participantPipe)?.name || t("STATISTICS_COUNT_TERRITORY_P_NOT_FOUND")
-                  }}
+      >
+      <!-- ORDER BY TERRITORY -->
+      @if (orderByTerritory) {
+        @for (terr of territories; track terr) {
+          <div class="row m-2">
+            <div class="col-12 fw-bold mb-1">
+              <span class="border padding">{{ terr.name }}</span>
+            </div>
+            <div class="col">
+              <div class="row m-2">
+                <div class="col-auto">
+                  <div>{{ t("PLACEHOLDER_NAME") }}:</div>
+                  <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
+                  <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
                 </div>
-                <div>{{ terr.assignedDates[i] | translocoDate : { dateStyle: "short" } }}</div>
-                <div>{{ terr.returnedDates[i] | translocoDate : { dateStyle: "short" } }}</div>
+                @for (p of terr.participants; track p; let i = $index) {
+                  <div class="col-auto">
+                    <div>
+                      {{
+                      (p | participantPipe)?.name || t("STATISTICS_COUNT_TERRITORY_P_NOT_FOUND")
+                      }}
+                    </div>
+                    <div>{{ terr.assignedDates[i] | translocoDate : { dateStyle: "short" } }}</div>
+                    <div>{{ terr.returnedDates[i] | translocoDate : { dateStyle: "short" } }}</div>
+                  </div>
+                }
               </div>
             </div>
           </div>
-        </div>
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="!orderByTerritory">
-      <ng-container *ngFor="let p of participants">
-        <div class="row m-2">
-          <div class="col-12 fw-bold mb-1">
-            <span class="border padding">{{ p.count }}</span> - {{ p.name }}
+        }
+      }
+      @if (!orderByTerritory) {
+        @for (p of participants; track p) {
+          <div class="row m-2">
+            <div class="col-12 fw-bold mb-1">
+              <span class="border padding">{{ p.count }}</span> - {{ p.name }}
+            </div>
           </div>
-        </div>
-        <div class="row m-2">
-          <div *ngIf="p.count" class="col-auto">
-            <div>{{ t("STATISTICS_COUNT_TERRITORY_NAME") }}:</div>
-            <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
-            <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
+          <div class="row m-2">
+            @if (p.count) {
+              <div class="col-auto">
+                <div>{{ t("STATISTICS_COUNT_TERRITORY_NAME") }}:</div>
+                <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
+                <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
+              </div>
+            }
+            @for (t of territories; track t; let i = $index) {
+              @for (pId of t.participants; track pId; let j = $index) {
+                @if (p.id === pId) {
+                  <ng-container class="me-3">
+                    <div class="col-auto">
+                      <div>{{ t.name }}</div>
+                      <div>
+                        {{ t.assignedDates[j] | translocoDate : { dateStyle: "short" } }}
+                      </div>
+                      <div>
+                        {{ t.returnedDates[j] | translocoDate : { dateStyle: "short" } }}
+                      </div>
+                    </div>
+                  </ng-container>
+                }
+              }
+            }
           </div>
-          <ng-container *ngFor="let t of territories; let i = index">
-            <ng-container *ngFor="let pId of t.participants; let j = index">
-              <ng-container *ngIf="p.id === pId" class="me-3">
-                <div class="col-auto">
-                  <div>{{ t.name }}</div>
-                  <div>
-                    {{ t.assignedDates[j] | translocoDate : { dateStyle: "short" } }}
-                  </div>
-                  <div>
-                    {{ t.returnedDates[j] | translocoDate : { dateStyle: "short" } }}
-                  </div>
-                </div>
-              </ng-container>
-            </ng-container>
-          </ng-container>
-        </div>
-      </ng-container>
-    </ng-container>
-  </mat-expansion-panel>
-</mat-accordion>
+        }
+      }
+    </mat-expansion-panel>
+  </mat-accordion>
+  

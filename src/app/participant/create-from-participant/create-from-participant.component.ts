@@ -5,7 +5,7 @@ import { ParticipantInterface } from "../model/participant.model";
 import { ParticipantService } from "../service/participant.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatOptionModule } from "@angular/material/core";
-import { NgFor, NgClass, AsyncPipe } from "@angular/common";
+import { NgClass, AsyncPipe } from "@angular/common";
 import { MatSelectModule } from "@angular/material/select";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
@@ -28,14 +28,13 @@ import { MatIconModule } from "@angular/material/icon";
     MatInputModule,
     AutoFocusDirective,
     MatSelectModule,
-    NgFor,
     MatOptionModule,
     NgClass,
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule,
-  ],
+    MatIconModule
+],
 })
 export class CreateFromParticipantComponent {
   participants: ParticipantInterface[] = this.participantService.getParticipants(true);

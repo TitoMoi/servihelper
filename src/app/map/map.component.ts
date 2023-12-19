@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { MatButtonModule } from "@angular/material/button";
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -18,15 +18,14 @@ import { Subscription } from "rxjs";
   selector: "app-map",
   standalone: true,
   imports: [
-    CommonModule,
     TranslocoModule,
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
     MatRadioModule,
     RouterOutlet,
-    ReactiveFormsModule,
-  ],
+    ReactiveFormsModule
+],
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"],
 })

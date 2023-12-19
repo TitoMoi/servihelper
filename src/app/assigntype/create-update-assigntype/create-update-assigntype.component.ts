@@ -17,7 +17,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { AsyncPipe, CommonModule, NgIf } from "@angular/common";
+import { AsyncPipe, CommonModule } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 
@@ -40,9 +40,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatTooltipModule,
     RouterLink,
     MatIconModule,
-    AsyncPipe,
-    NgIf,
-  ],
+    AsyncPipe
+],
 })
 export class CreateUpdateAssignTypeComponent {
   at = this.assignTypeService.getAssignType(this.activatedRoute.snapshot.params.id);

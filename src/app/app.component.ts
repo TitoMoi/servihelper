@@ -9,7 +9,7 @@ import { OnlineService } from "app/online/service/online.service";
 import { LockService } from "app/lock/service/lock.service";
 import { readdirSync } from "fs-extra";
 import path from "path";
-import { NgIf } from "@angular/common";
+
 import { SharedService } from "./services/shared.service";
 import { TranslocoModule } from "@ngneat/transloco";
 
@@ -18,7 +18,7 @@ import { TranslocoModule } from "@ngneat/transloco";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
   standalone: true,
-  imports: [NavigationComponent, RouterOutlet, NgIf, TranslocoModule],
+  imports: [NavigationComponent, RouterOutlet, TranslocoModule],
 })
 export class AppComponent implements OnInit {
   //Flag to render the app when the paths are resolved (online or offline)

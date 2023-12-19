@@ -11,7 +11,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { TerritoryService } from "app/map/territory/service/territory.service";
 
@@ -28,10 +28,9 @@ import { TerritoryService } from "app/map/territory/service/territory.service";
     MatInputModule,
     MatButtonModule,
     RouterLink,
-    NgIf,
     AsyncPipe,
-    MatIconModule,
-  ],
+    MatIconModule
+],
 })
 export class DeleteParticipantComponent {
   participant = this.participantService.getParticipant(this.activatedRoute.snapshot.params.id);

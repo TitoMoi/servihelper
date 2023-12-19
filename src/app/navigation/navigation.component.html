@@ -6,18 +6,19 @@
     [attr.role]="hideSidenav ? 'dialog' : 'navigation'"
     [mode]="hideSidenav ? 'over' : 'side'"
     [opened]="hideSidenav === false"
-  >
+    >
     <mat-toolbar>
-      <a
-        *ngIf="queryGithubInterval$ | async as githubData"
-        href="#"
-        (click)="openExternalServihelperRepository()"
-      >
-        <div class="new-version-font-size">{{ t("NEW_VERSION_AVAILABLE") }}:</div>
-        <div class="new-version-font-size">
-          {{ githubData.tag_name }}
-        </div>
-      </a>
+      @if (queryGithubInterval$ | async; as githubData) {
+        <a
+          href="#"
+          (click)="openExternalServihelperRepository()"
+          >
+          <div class="new-version-font-size">{{ t("NEW_VERSION_AVAILABLE") }}:</div>
+          <div class="new-version-font-size">
+            {{ githubData.tag_name }}
+          </div>
+        </a>
+      }
     </mat-toolbar>
     <!-- p-0 -> mat-nav-list has padding top and a gap is visible, this padding fix removes it -->
     <mat-nav-list class="p-0">
@@ -96,24 +97,30 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-      >
+        >
         <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
       </button>
       <div class="me-auto">
         <span>Servihelper</span>
       </div>
-      <ng-container *ngIf="(online$ | async).isOnline as isOnlineAlias">
-        <div class="me-3" *ngIf="isOnlineAlias && (netStatusOffline$ | async)">
-          <mat-icon id="noWifiIcon" svgIcon="nowifi" color="warning"></mat-icon>
-        </div>
-        <div class="me-3" *ngIf="isOnlineAlias">{{ t("ONLINE") }}</div>
-      </ng-container>
+      @if ((online$ | async).isOnline; as isOnlineAlias) {
+        @if (isOnlineAlias && (netStatusOffline$ | async)) {
+          <div class="me-3">
+            <mat-icon id="noWifiIcon" svgIcon="nowifi" color="warning"></mat-icon>
+          </div>
+        }
+        @if (isOnlineAlias) {
+          <div class="me-3">{{ t("ONLINE") }}</div>
+        }
+      }
       <div class="d-inline-block me-3">
         <mat-form-field subscriptSizing="dynamic">
           <mat-select [value]="(config$ | async).lang" (selectionChange)="updateLang($event)">
-            <mat-option *ngFor="let lang of availableLangs" [value]="lang">
-              {{ t(lang) }}
-            </mat-option>
+            @for (lang of availableLangs; track lang) {
+              <mat-option [value]="lang">
+                {{ t(lang) }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>
@@ -123,11 +130,13 @@
             color="primary"
             [value]="currentRoleId$ | async"
             (selectionChange)="updateRole($event)"
-          >
+            >
             <mat-option [value]="administratorKey">{{ t("ROLE_ADMINISTRATOR") }}</mat-option>
-            <mat-option *ngFor="let role of roles$ | async" [value]="role.id">
-              {{ role.name }}
-            </mat-option>
+            @for (role of roles$ | async; track role) {
+              <mat-option [value]="role.id">
+                {{ role.name }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>

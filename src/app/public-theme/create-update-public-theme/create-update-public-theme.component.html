@@ -15,36 +15,38 @@
               [appautofocus]="isUpdate ? false : true"
               spellcheck="false"
               formControlName="name"
-            />
-          </mat-form-field>
-
-          <div class="col-6">
-            <mat-form-field>
-              <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
-              <input matInput type="number" formControlName="order" />
+              />
             </mat-form-field>
+            <div class="col-6">
+              <mat-form-field>
+                <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
+                <input matInput type="number" formControlName="order" />
+              </mat-form-field>
+            </div>
           </div>
         </div>
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button
-        mat-raised-button
-        type="button"
-        class="me-3"
-        [routerLink]="isUpdate ? '../..' : '..'"
-      >
-        {{ t("BUTTON_CANCEL") }}
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="form.invalid || (netStatusOffline$ | async)"
-      >
-        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
-        <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          type="button"
+          class="me-3"
+          [routerLink]="isUpdate ? '../..' : '..'"
+          >
+          {{ t("BUTTON_CANCEL") }}
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid || (netStatusOffline$ | async)"
+          >
+          {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+          @if (netStatusOffline$ | async) {
+            <mat-icon svgIcon="nowifi"></mat-icon>
+          }
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

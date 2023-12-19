@@ -9,7 +9,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { Validators } from "ngx-editor";
 import { TerritoryService } from "../service/territory.service";
 import { OnlineService } from "app/online/service/online.service";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
@@ -24,9 +24,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    NgIf,
-    MatIconModule,
-  ],
+    MatIconModule
+],
   templateUrl: "./delete-territory.component.html",
   styleUrls: ["./delete-territory.component.scss"],
 })

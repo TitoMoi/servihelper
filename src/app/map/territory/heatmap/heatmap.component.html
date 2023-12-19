@@ -23,40 +23,40 @@
       <div
         class="me-2"
         [ngStyle]="{
-          width: '25px',
-          height: '25px',
-          'background-color': greenColor,
-          border: '1px solid black'
+        width: '25px',
+        height: '25px',
+        'background-color': greenColor,
+        border: '1px solid black'
         }"
       ></div>
       <span class="me-2">{{ t("COLOR_GREEN_EXPLANATION") }}</span>
       <div
         class="me-2"
         [ngStyle]="{
-          width: '25px',
-          height: '25px',
-          'background-color': blueColor,
-          border: '1px solid black'
+        width: '25px',
+        height: '25px',
+        'background-color': blueColor,
+        border: '1px solid black'
         }"
       ></div>
       <span class="me-2">{{ t("COLOR_BLUE_EXPLANATION") }}</span>
       <div
         class="me-2"
         [ngStyle]="{
-          width: '25px',
-          height: '25px',
-          'background-color': yellowColor,
-          border: '1px solid black'
+        width: '25px',
+        height: '25px',
+        'background-color': yellowColor,
+        border: '1px solid black'
         }"
       ></div>
       <span class="me-2">{{ t("COLOR_YELLOW_EXPLANATION") }}</span>
       <div
         class="me-2"
         [ngStyle]="{
-          width: '25px',
-          height: '25px',
-          'background-color': redColor,
-          border: '1px solid black'
+        width: '25px',
+        height: '25px',
+        'background-color': redColor,
+        border: '1px solid black'
         }"
       ></div>
       <span class="me-2">{{ t("COLOR_RED_EXPLANATION") }}</span>
@@ -65,9 +65,11 @@
   <div class="row">
     <div class="col">
       <!-- The reference for leaflet to load the map -->
-      <div *ngIf="!loadedPolygons.length" class="m-3 fw-bold">
-        {{ t("HEATMAP_NO_POLYGONS") }}
-      </div>
+      @if (!loadedPolygons.length) {
+        <div class="m-3 fw-bold">
+          {{ t("HEATMAP_NO_POLYGONS") }}
+        </div>
+      }
       <div id="map" class="mb-2"></div>
     </div>
   </div>

@@ -16,7 +16,7 @@ import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 import { MatButtonModule } from "@angular/material/button";
-import { AsyncPipe, NgClass, NgFor, NgIf } from "@angular/common";
+import { AsyncPipe, NgClass } from "@angular/common";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelect, MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
@@ -56,9 +56,7 @@ import { SharedService } from "app/services/shared.service";
     MatOptionModule,
     RouterLink,
     RouterLinkActive,
-    NgFor,
     MatButtonModule,
-    NgIf,
     AsyncPipe,
     NgClass,
     MatIconModule,
@@ -67,8 +65,8 @@ import { SharedService } from "app/services/shared.service";
     MatTooltipModule,
     MatSlideToggleModule,
     MatSnackBarModule,
-    MatDialogModule,
-  ],
+    MatDialogModule
+],
 })
 export class ConfigComponent implements OnInit, OnDestroy {
   @ViewChild("titleSelect") titleSelect: MatSelect;

@@ -3,7 +3,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { filter, map, Observable } from "rxjs";
 import { RoleInterface } from "./model/role.model";
 import { MatIconModule } from "@angular/material/icon";
-import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -19,11 +19,9 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
-    NgIf,
-    NgFor,
     MatIconModule,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class RolesComponent implements OnInit {
   roles$: Observable<RoleInterface[]> = this.configService.config$.pipe(

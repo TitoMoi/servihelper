@@ -55,7 +55,7 @@ import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/mate
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { SortService } from "app/services/sort.service";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
-import { CommonModule } from "@angular/common";
+
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { ExportService } from "app/services/export.service";
@@ -72,7 +72,6 @@ import { isWithinInterval } from "date-fns";
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     TranslocoModule,
     MatExpansionModule,
     MatCheckboxModule,
@@ -81,8 +80,8 @@ import { isWithinInterval } from "date-fns";
     MatFormFieldModule,
     MatDatepickerModule,
     ReactiveFormsModule,
-    MatInputModule,
-  ],
+    MatInputModule
+],
 })
 export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;

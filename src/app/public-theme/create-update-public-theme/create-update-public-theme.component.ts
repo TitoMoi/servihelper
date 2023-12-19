@@ -9,7 +9,7 @@ import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { PublicThemeService } from "../service/public-theme.service";
 import { MatIconModule } from "@angular/material/icon";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
@@ -26,9 +26,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     MatIconModule,
-    NgIf,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
   templateUrl: "./create-update-public-theme.component.html",
   styleUrls: ["./create-update-public-theme.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

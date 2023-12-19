@@ -3,13 +3,13 @@
     <div class="d-flex align-items-center">
       <!-- DO NOT REMOVE CODE MAYBE WE NEED IT IN A FUTURE VERSION -->
       <!-- <a
-        mat-raised-button
-        color="primary"
-        class="me-2"
-        [disabled]="!markerRef.length || polygonExists()"
-        (click)="removeMarkers()"
-        >{{ t("MAP_CREATE_REMOVE_MARKERS") }}
-        <mat-icon class="ms-1" svgIcon="mapmarker"></mat-icon
+      mat-raised-button
+      color="primary"
+      class="me-2"
+      [disabled]="!markerRef.length || polygonExists()"
+      (click)="removeMarkers()"
+      >{{ t("MAP_CREATE_REMOVE_MARKERS") }}
+      <mat-icon class="ms-1" svgIcon="mapmarker"></mat-icon
       ></a> -->
       <a
         mat-raised-button
@@ -17,14 +17,14 @@
         class="me-2"
         [disabled]="!markerRef.length || polygonExists()"
         (click)="removeLastMarker()"
-      >
+        >
         {{ t("MAP_CREATE_DELETE_LAST_MARKER") }}
         <mat-icon class="ms-1" svgIcon="mapmarker"></mat-icon>
       </a>
       <div
         [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')"
         [matTooltipDisabled]="!isCreatePolygonBtnDisabled()"
-      >
+        >
         <a
           mat-raised-button
           color="primary"
@@ -32,133 +32,142 @@
           [disabled]="isCreatePolygonBtnDisabled()"
           (click)="createPolygon()"
           >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
-        >
-      </div>
-      <a mat-raised-button [disabled]="!polygonExists()" (click)="removePolygon()">{{
-        t("MAP_CREATE_REMOVE_POLYGON")
-      }}</a>
-    </div>
-    <div class="d-flex align-items-center">
-      <a
-        mat-raised-button
-        color="warn"
-        [disabled]="!territoryForm.controls.participants.value.length"
-        [matTooltip]="t('MAP_CLEAR_HISTORY')"
-        (click)="clearHistory()"
-        >{{ t("MAP_CREATE_CLEAR_HISTORY") }}</a
-      >
-    </div>
-  </div>
-  <form [formGroup]="territoryForm" novalidate>
-    <div class="row">
-      <div class="col-6">
-        <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
-          <input
-            #terrNameInput
-            matInput
-            [appautofocus]="isUpdate ? false : true"
-            spellcheck="false"
-            formControlName="name"
-          />
-        </mat-form-field>
-      </div>
-      <div class="col-6">
-        <mat-form-field subscriptSizing="dynamic">
-          <mat-label>{{ t("TERRITORY_GROUP_LABEL") }}</mat-label>
-          <mat-select
-            required
-            multiple
-            [formControl]="territoryForm.controls.groups"
-            [disableRipple]="true"
           >
-            <mat-option *ngFor="let tg of territoryGroups" [value]="tg.id">
-              {{ tg.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        </div>
+        <a mat-raised-button [disabled]="!polygonExists()" (click)="removePolygon()">{{
+          t("MAP_CREATE_REMOVE_POLYGON")
+        }}</a>
       </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-6">
-        <mat-form-field subscriptSizing="dynamic">
-          <mat-label>{{ t("TERRITORY_PARTICIPANT_LABEL") }}</mat-label>
-          <mat-select
-            (selectionChange)="onParticipantSelect($event)"
-            [value]="temporalParticipant || selectedParticipant"
-            [disableRipple]="true"
+      <div class="d-flex align-items-center">
+        <a
+          mat-raised-button
+          color="warn"
+          [disabled]="!territoryForm.controls.participants.value.length"
+          [matTooltip]="t('MAP_CLEAR_HISTORY')"
+          (click)="clearHistory()"
+          >{{ t("MAP_CREATE_CLEAR_HISTORY") }}</a
           >
-            <mat-option *ngFor="let p of participants" [value]="p.id">
-              {{ p.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        </div>
       </div>
-      <div class="col-6">
-        <mat-form-field subscriptSizing="dynamic">
-          <mat-label>{{ t("TERRITORY_MEETING_POINT") }}</mat-label>
-          <mat-icon matPrefix svgIcon="inputlink"></mat-icon>
-          <input matInput spellcheck="false" formControlName="meetingPointUrl" />
-        </mat-form-field>
-      </div>
-    </div>
-  </form>
-  <div class="d-flex align-items-center">
-    <button mat-icon-button [disabled]="!polygonExists()">
-      <mat-icon
-        svgIcon="clipboard"
-        aria-label="icon"
-        [matTooltip]="t('ICON_CLIPBOARD')"
-        (click)="toClipboard()"
-      ></mat-icon>
-    </button>
-    <button mat-icon-button [disabled]="!polygonExists()" class="me-5">
-      <mat-icon
-        svgIcon="png"
-        aria-label="icon"
-        [matTooltip]="t('ICON_PNG')"
-        (click)="toPng(territoryForm.controls.name.value)"
-      ></mat-icon>
-    </button>
-    <label for="image-upload" class="me-3">
-      <mat-icon svgIcon="imageadd" [matTooltip]="t('TERRITORY_ADD_IMAGE')"></mat-icon>
-    </label>
-    <input id="image-upload" type="file" (change)="uploadImageFile($event)" />
-    <label>
-      <mat-icon
-        *ngIf="territoryForm.controls.imageId.value || territoryForm.controls.image.value"
-        svgIcon="imageremove"
-        (click)="removeImage()"
-        [matTooltip]="t('TERRITORY_REMOVE_IMAGE')"
-      ></mat-icon>
-    </label>
-  </div>
-  <!-- The reference for leaflet to load the map -->
-  <!-- its map2 because on router navigation from heatmap its not displayed as it should be -->
-  <div
-    [attr.hidden]="territoryForm.controls.image.value || territoryForm.controls.imageId.value"
-    id="map2"
-    class="mb-2"
-  ></div>
-  <div>
-    <img
-      *ngIf="imageExists() || imagePersisted()"
-      [src]="getImagePath()"
-      id="imageDiv"
-      class="mb-2"
-    />
-  </div>
-  <button mat-raised-button type="button" class="me-3" (click)="goBack()">
-    {{ t("BUTTON_CANCEL") }}
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    type="button"
-    (click)="save()"
-    [disabled]="territoryForm.invalid || (netStatusOffline$ | async)"
-  >
-    {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
-    <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
-  </button>
-</span>
+      <form [formGroup]="territoryForm" novalidate>
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+              <input
+                #terrNameInput
+                matInput
+                [appautofocus]="isUpdate ? false : true"
+                spellcheck="false"
+                formControlName="name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field subscriptSizing="dynamic">
+                <mat-label>{{ t("TERRITORY_GROUP_LABEL") }}</mat-label>
+                <mat-select
+                  required
+                  multiple
+                  [formControl]="territoryForm.controls.groups"
+                  [disableRipple]="true"
+                  >
+                  @for (tg of territoryGroups; track tg) {
+                    <mat-option [value]="tg.id">
+                      {{ tg.name }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-6">
+              <mat-form-field subscriptSizing="dynamic">
+                <mat-label>{{ t("TERRITORY_PARTICIPANT_LABEL") }}</mat-label>
+                <mat-select
+                  (selectionChange)="onParticipantSelect($event)"
+                  [value]="temporalParticipant || selectedParticipant"
+                  [disableRipple]="true"
+                  >
+                  @for (p of participants; track p) {
+                    <mat-option [value]="p.id">
+                      {{ p.name }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field subscriptSizing="dynamic">
+                <mat-label>{{ t("TERRITORY_MEETING_POINT") }}</mat-label>
+                <mat-icon matPrefix svgIcon="inputlink"></mat-icon>
+                <input matInput spellcheck="false" formControlName="meetingPointUrl" />
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+        <div class="d-flex align-items-center">
+          <button mat-icon-button [disabled]="!polygonExists()">
+            <mat-icon
+              svgIcon="clipboard"
+              aria-label="icon"
+              [matTooltip]="t('ICON_CLIPBOARD')"
+              (click)="toClipboard()"
+            ></mat-icon>
+          </button>
+          <button mat-icon-button [disabled]="!polygonExists()" class="me-5">
+            <mat-icon
+              svgIcon="png"
+              aria-label="icon"
+              [matTooltip]="t('ICON_PNG')"
+              (click)="toPng(territoryForm.controls.name.value)"
+            ></mat-icon>
+          </button>
+          <label for="image-upload" class="me-3">
+            <mat-icon svgIcon="imageadd" [matTooltip]="t('TERRITORY_ADD_IMAGE')"></mat-icon>
+          </label>
+          <input id="image-upload" type="file" (change)="uploadImageFile($event)" />
+          <label>
+            @if (territoryForm.controls.imageId.value || territoryForm.controls.image.value) {
+              <mat-icon
+                svgIcon="imageremove"
+                (click)="removeImage()"
+                [matTooltip]="t('TERRITORY_REMOVE_IMAGE')"
+              ></mat-icon>
+            }
+          </label>
+        </div>
+        <!-- The reference for leaflet to load the map -->
+        <!-- its map2 because on router navigation from heatmap its not displayed as it should be -->
+        <div
+          [attr.hidden]="territoryForm.controls.image.value || territoryForm.controls.imageId.value"
+          id="map2"
+          class="mb-2"
+        ></div>
+        <div>
+          @if (imageExists() || imagePersisted()) {
+            <img
+              [src]="getImagePath()"
+              id="imageDiv"
+              class="mb-2"
+              />
+          }
+        </div>
+        <button mat-raised-button type="button" class="me-3" (click)="goBack()">
+          {{ t("BUTTON_CANCEL") }}
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="save()"
+          [disabled]="territoryForm.invalid || (netStatusOffline$ | async)"
+          >
+          {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+          @if (netStatusOffline$ | async) {
+            <mat-icon svgIcon="nowifi"></mat-icon>
+          }
+        </button>
+      </span>
+      

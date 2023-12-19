@@ -11,7 +11,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 
@@ -28,10 +28,9 @@ import { OnlineService } from "app/online/service/online.service";
     MatInputModule,
     MatButtonModule,
     RouterLink,
-    NgIf,
     AsyncPipe,
-    MatIconModule,
-  ],
+    MatIconModule
+],
 })
 export class DeleteRoomComponent {
   room = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);

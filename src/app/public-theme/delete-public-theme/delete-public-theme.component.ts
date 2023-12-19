@@ -9,7 +9,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { PublicThemeService } from "../service/public-theme.service";
 import { PublicThemeInterface } from "../model/public-theme.model";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 
@@ -24,10 +24,9 @@ import { OnlineService } from "app/online/service/online.service";
     MatInputModule,
     MatButtonModule,
     RouterLink,
-    NgIf,
     AsyncPipe,
-    MatIconModule,
-  ],
+    MatIconModule
+],
   templateUrl: "./delete-public-theme.component.html",
   styleUrls: ["./delete-public-theme.component.scss"],
 })

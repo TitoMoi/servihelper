@@ -24,7 +24,7 @@ import { AssignmentService } from "app/assignment/service/assignment.service";
 import { PdfService } from "app/services/pdf.service";
 import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
-import { NgFor, NgIf } from "@angular/common";
+
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -43,13 +43,11 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     TranslocoModule,
     MatIconModule,
     MatTooltipModule,
-    NgFor,
-    NgIf,
     TranslocoLocaleModule,
     AssignTypePipe,
     AssignTypeNamePipe,
-    RoomNamePipe,
-  ],
+    RoomNamePipe
+],
 })
 export class SelectionListHorComponent implements OnChanges {
   @Input() selectedDates: Date[];

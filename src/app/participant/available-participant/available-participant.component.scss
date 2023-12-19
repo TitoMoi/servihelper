@@ -2,6 +2,14 @@ table {
   table-layout: fixed;
   width: fit-content;
   cursor: pointer;
+
+  & > tbody > tr {
+    &:hover {
+      & > td {
+        background-color: ghostwhite;
+      }
+    }
+  }
 }
 td {
   font-size: 13px;
@@ -11,9 +19,15 @@ th {
   font-size: 14px;
   width: 100%;
   border: 1px solid black;
+
+  & > button {
+    height: 100%;
+  }
 }
+
 button {
   font-size: 12px;
+  width: 100%;
 }
 
 @media print {

@@ -3,7 +3,7 @@ import { RoomService } from "app/room/service/room.service";
 
 import { Component, OnInit } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
-import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -20,12 +20,10 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
-    NgIf,
-    NgFor,
     MatIconModule,
     RoomNamePipe,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class RoomComponent implements OnInit {
   rooms: RoomInterface[];

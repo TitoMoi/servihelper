@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { Component } from "@angular/core";
 import { ReactiveFormsModule, UntypedFormBuilder } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -25,9 +25,8 @@ import { Validators } from "ngx-editor";
     MatButtonModule,
     RouterLink,
     MatIconModule,
-    NgIf,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
   templateUrl: "./delete-territory-group.component.html",
   styleUrls: ["./delete-territory-group.component.scss"],
 })

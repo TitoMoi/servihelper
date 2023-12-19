@@ -10,7 +10,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatIconModule } from "@angular/material/icon";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
@@ -28,9 +28,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     MatIconModule,
-    NgIf,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DeleteRoleComponent {
   role = this.configService.getRole(this.activatedRoute.snapshot.params.id);

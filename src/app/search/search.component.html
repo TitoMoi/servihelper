@@ -1,4 +1,4 @@
-<ng-container *ngIf="participants.length">
+@if (participants.length) {
   <ng-container *transloco="let t">
     <form [formGroup]="searchForm" novalidate>
       <mat-card appearance="outlined">
@@ -13,42 +13,48 @@
               <mat-form-field>
                 <mat-label>{{ t("SEARCH_PARTICIPANT") }}</mat-label>
                 <mat-select formControlName="participant" required>
-                  <mat-option *ngFor="let p of participants" [value]="p">
-                    {{ p.name }}
-                  </mat-option>
+                  @for (p of participants; track p) {
+                    <mat-option [value]="p">
+                      {{ p.name }}
+                    </mat-option>
+                  }
                 </mat-select>
               </mat-form-field>
             </div>
           </div>
-          <div class="row" *ngIf="results.length">
-            <div class="col">
-              {{ t("SEARCH_ISPRINCIPAL") }}
+          @if (results.length) {
+            <div class="row">
+              <div class="col">
+                {{ t("SEARCH_ISPRINCIPAL") }}
+              </div>
+              <div class="col">
+                {{ t("SEARCH_DATE") }}
+              </div>
+              <div class="col">
+                {{ t("SEARCH_ASSIGNTYPE") }}
+              </div>
+              <div class="col">
+                {{ t("SEARCH_ROOM") }}
+              </div>
             </div>
-            <div class="col">
-              {{ t("SEARCH_DATE") }}
-            </div>
-            <div class="col">
-              {{ t("SEARCH_ASSIGNTYPE") }}
-            </div>
-            <div class="col">
-              {{ t("SEARCH_ROOM") }}
-            </div>
-          </div>
+          }
           <hr />
-          <div class="row my-2 g-0" *ngFor="let r of results">
-            <div class="col">
-              {{ t(r.isPrincipalResult) }}
+          @for (r of results; track r) {
+            <div class="row my-2 g-0">
+              <div class="col">
+                {{ t(r.isPrincipalResult) }}
+              </div>
+              <div class="col">
+                {{ r.date | translocoDate : { dateStyle: "long" } }}
+              </div>
+              <div class="col">
+                {{ r.assignTypeName }}
+              </div>
+              <div class="col">
+                {{ r.roomName }}
+              </div>
             </div>
-            <div class="col">
-              {{ r.date | translocoDate : { dateStyle: "long" } }}
-            </div>
-            <div class="col">
-              {{ r.assignTypeName }}
-            </div>
-            <div class="col">
-              {{ r.roomName }}
-            </div>
-          </div>
+          }
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button type="button" routerLink="../assignment">
@@ -58,4 +64,4 @@
       </mat-card>
     </form>
   </ng-container>
-</ng-container>
+}

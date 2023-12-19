@@ -28,7 +28,7 @@ import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { MultipleImageAssignmentComponent } from "../multiple-image-assignment/multiple-image-assignment.component";
 import { SelectionListHorComponent } from "../selection-list-hor/selection-list-hor.component";
 import { SelectionListComponent } from "../selection-list/selection-list.component";
-import { NgFor, NgIf } from "@angular/common";
+
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { SortService } from "app/services/sort.service";
@@ -52,15 +52,13 @@ import { Observable, Subscription, combineLatest, map } from "rxjs";
     MatInputModule,
     MatDatepickerModule,
     MatSelectModule,
-    NgFor,
     MatOptionModule,
-    NgIf,
     SelectionListComponent,
     SelectionListHorComponent,
     MultipleImageAssignmentComponent,
     AssignTypeNamePipe,
-    RoomNamePipe,
-  ],
+    RoomNamePipe
+],
 })
 export class ReportSelectorComponent implements OnInit, AfterViewInit {
   //Angular material datepicker hacked

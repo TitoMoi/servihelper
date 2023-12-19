@@ -1,5 +1,5 @@
 <span *transloco="let t">
-  <ng-container *ngFor="let form of formArray; let i = index">
+  @for (form of formArray; track form; let i = $index) {
     <ng-container [formGroup]="form" novalidate>
       <div class="row">
         <div class="col-12">
@@ -7,7 +7,7 @@
         </div>
         <div class="col-4">
           <ng-container formArrayName="participants">
-            <ng-container *ngFor="let participant of participants(i).controls; let j = index">
+            @for (participant of participants(i).controls; track participant; let j = $index) {
               <mat-form-field>
                 <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
                 <input
@@ -15,48 +15,45 @@
                   spellcheck="false"
                   [disabled]="true"
                   [value]="(participant.value | participantPipe).name"
-                />
-              </mat-form-field>
+                  />
+                </mat-form-field>
+              }
             </ng-container>
-          </ng-container>
-        </div>
-        <div class="col-4">
-          <ng-container formArrayName="assignedDates">
-            <ng-container
-              *ngFor="let assignedDate of assignedDates(i).controls; let j = index"
-            >
-              <mat-form-field>
-                <mat-label>{{ t("ASSIGN_CHOOSE_DATE_ASSIGNED") }}</mat-label>
-                <input required matInput [matDatepicker]="picker" [formControlName]="j" />
-                <mat-datepicker-toggle
-                  matPrefix
-                  [for]="picker"
-                  class="mr-3"
-                ></mat-datepicker-toggle>
-                <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
-              </mat-form-field>
+          </div>
+          <div class="col-4">
+            <ng-container formArrayName="assignedDates">
+              @for (assignedDate of assignedDates(i).controls; track assignedDate; let j = $index) {
+                <mat-form-field>
+                  <mat-label>{{ t("ASSIGN_CHOOSE_DATE_ASSIGNED") }}</mat-label>
+                  <input required matInput [matDatepicker]="picker" [formControlName]="j" />
+                  <mat-datepicker-toggle
+                    matPrefix
+                    [for]="picker"
+                    class="mr-3"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
+                </mat-form-field>
+              }
             </ng-container>
-          </ng-container>
-        </div>
-        <div class="col-4">
-          <ng-container formArrayName="returnedDates">
-            <ng-container
-              *ngFor="let returnedDate of returnedDates(i).controls; let j = index"
-            >
-              <mat-form-field>
-                <mat-label>{{ t("ASSIGN_CHOOSE_DATE_RETURNED") }}</mat-label>
-                <input required matInput [matDatepicker]="picker" [formControlName]="j" />
-                <mat-datepicker-toggle
-                  matPrefix
-                  [for]="picker"
-                  class="mr-3"
-                ></mat-datepicker-toggle>
-                <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
-              </mat-form-field>
+          </div>
+          <div class="col-4">
+            <ng-container formArrayName="returnedDates">
+              @for (returnedDate of returnedDates(i).controls; track returnedDate; let j = $index) {
+                <mat-form-field>
+                  <mat-label>{{ t("ASSIGN_CHOOSE_DATE_RETURNED") }}</mat-label>
+                  <input required matInput [matDatepicker]="picker" [formControlName]="j" />
+                  <mat-datepicker-toggle
+                    matPrefix
+                    [for]="picker"
+                    class="mr-3"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
+                </mat-form-field>
+              }
             </ng-container>
-          </ng-container>
+          </div>
         </div>
-      </div>
-    </ng-container>
-  </ng-container>
-</span>
+      </ng-container>
+    }
+  </span>
+  

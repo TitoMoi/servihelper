@@ -4,9 +4,11 @@
     <div>
       {{ t(data.msgKey) }}
     </div>
-    <div *ngIf="data.isOnline">
-      {{ t("APP_ONLINE_TIMEOUT_REMINDER") }}
-    </div>
+    @if (data.isOnline) {
+      <div>
+        {{ t("APP_ONLINE_TIMEOUT_REMINDER") }}
+      </div>
+    }
     <div>
       {{ t("RESTART_APP") }}
     </div>

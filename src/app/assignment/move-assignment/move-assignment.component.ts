@@ -10,7 +10,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
@@ -28,9 +28,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule,
-    NgIf,
-  ],
+    MatIconModule
+],
 })
 export class MoveAssignmentComponent {
   assignments: AssignmentInterface[];

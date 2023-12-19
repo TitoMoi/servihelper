@@ -1,61 +1,66 @@
 <span *transloco="let t"
   ><a
-    mat-raised-button
-    color="primary"
-    class="mb-3"
-    routerLink="create"
-    routerLinkActive="active"
-    [disabled]="netStatusOffline$ | async"
-    >{{ t("TERRITORYGROUP_BUTTON_CREATE_TITLE") }}
-    <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon
-  ></a>
-  <div *ngIf="territoryGroups?.length" class="table-overflow">
-    <div class="grid">
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_COLOR") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_NAME") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_ORDER") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_EDIT") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_DELETE") }}
-      </div>
-      <ng-container *ngFor="let tg of territoryGroups">
-        <div class="grid-row">
-          <div
-            class="grid-item d-flex align-items-center"
-            [style.backgroundColor]="tg.color"
-          ></div>
-          <div class="grid-item d-flex align-items-center">
-            {{ tg.name }}
+  mat-raised-button
+  color="primary"
+  class="mb-3"
+  routerLink="create"
+  routerLinkActive="active"
+  [disabled]="netStatusOffline$ | async"
+  >{{ t("TERRITORYGROUP_BUTTON_CREATE_TITLE") }}
+  @if (netStatusOffline$ | async) {
+    <mat-icon svgIcon="nowifi"></mat-icon
+      >
+    }</a>
+    @if (territoryGroups?.length) {
+      <div class="table-overflow">
+        <div class="grid">
+          <div class="grid-header-item fw-bold">
+            {{ t("ASSIGNTYPE_TABLE_HEADER_COLOR") }}
           </div>
-          <div class="grid-item d-flex align-items-center">
-            {{ tg.order }}
+          <div class="grid-header-item fw-bold">
+            {{ t("ASSIGNTYPE_TABLE_HEADER_NAME") }}
           </div>
-          <div class="grid-item d-flex align-items-center">
-            <mat-icon
-              [routerLink]="['update', tg.id]"
-              routerLinkActive="active"
-              svgIcon="edit"
-              aria-label="Side nav toggle icon"
-            ></mat-icon>
+          <div class="grid-header-item fw-bold">
+            {{ t("ASSIGNTYPE_TABLE_HEADER_ORDER") }}
           </div>
-          <div class="grid-item d-flex align-items-center">
-            <mat-icon
-              [routerLink]="['delete', tg.id]"
-              routerLinkActive="active"
-              svgIcon="garbage"
-              aria-label="Side nav toggle icon"
-            ></mat-icon>
+          <div class="grid-header-item fw-bold">
+            {{ t("ASSIGNTYPE_TABLE_HEADER_EDIT") }}
           </div>
+          <div class="grid-header-item fw-bold">
+            {{ t("ASSIGNTYPE_TABLE_HEADER_DELETE") }}
+          </div>
+          @for (tg of territoryGroups; track tg) {
+            <div class="grid-row">
+              <div
+                class="grid-item d-flex align-items-center"
+                [style.backgroundColor]="tg.color"
+              ></div>
+              <div class="grid-item d-flex align-items-center">
+                {{ tg.name }}
+              </div>
+              <div class="grid-item d-flex align-items-center">
+                {{ tg.order }}
+              </div>
+              <div class="grid-item d-flex align-items-center">
+                <mat-icon
+                  [routerLink]="['update', tg.id]"
+                  routerLinkActive="active"
+                  svgIcon="edit"
+                  aria-label="Side nav toggle icon"
+                ></mat-icon>
+              </div>
+              <div class="grid-item d-flex align-items-center">
+                <mat-icon
+                  [routerLink]="['delete', tg.id]"
+                  routerLinkActive="active"
+                  svgIcon="garbage"
+                  aria-label="Side nav toggle icon"
+                ></mat-icon>
+              </div>
+            </div>
+          }
         </div>
-      </ng-container>
-    </div>
-  </div>
-</span>
+      </div>
+    }
+  </span>
+  

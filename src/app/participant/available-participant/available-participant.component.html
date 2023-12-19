@@ -16,7 +16,8 @@
             (click)="toPng('toPngDivId')"
           ></mat-icon>
         </th>
-        <th *ngFor="let at of assignTypes" class="bg-color-ghostwhite sticky-top">
+        @for (at of assignTypes; track at) {
+        <th class="bg-color-ghostwhite sticky-top">
           <button
             mat-button
             [disabled]="isNetStatusOffline"
@@ -25,11 +26,14 @@
             <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
           </button>
         </th>
+        }
       </thead>
       <tbody>
-        <tr *ngFor="let p of participants">
+        @for (p of participants; track p) {
+        <tr>
           <td class="fw-bold bg-color-white">{{ p.name }}</td>
-          <td *ngFor="let at of assignTypes" class="bg-color-white text-center">
+          @for (at of assignTypes; track at) {
+          <td class="bg-color-white text-center">
             <button
               mat-button
               [disabled]="isNetStatusOffline"
@@ -38,7 +42,9 @@
               {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔" : "" }}
             </button>
           </td>
+          }
         </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -54,7 +60,8 @@
           (click)="toPng('toPngDivId2')"
         ></mat-icon>
       </th>
-      <th *ngFor="let at of assignTypesAssistant" class="bg-color-ghostwhite sticky-top">
+      @for (at of assignTypesAssistant; track at) {
+      <th class="bg-color-ghostwhite sticky-top">
         <button
           mat-button
           [disabled]="isNetStatusOffline"
@@ -63,18 +70,26 @@
           <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
         </button>
       </th>
+      }
     </thead>
     <tbody>
-      <tr *ngFor="let p of participants">
+      @for (p of participants; track p) {
+      <tr>
         <td class="fw-bold bg-color-white">{{ p.name }}</td>
-        <td
-          *ngFor="let at of assignTypesAssistant"
-          class="bg-color-white text-center"
-          (click)="changeAvailability(p, at, false)"
-        >
-          {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔" : "" }}
+        @for (at of assignTypesAssistant; track at) {
+
+        <td class="bg-color-white text-center">
+          <button
+            mat-button
+            [disabled]="isNetStatusOffline"
+            (click)="changeAvailability(p, at, false)"
+          >
+            {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔" : "" }}
+          </button>
         </td>
+        }
       </tr>
+      }
     </tbody>
   </table>
 </div>

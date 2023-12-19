@@ -20,7 +20,7 @@ import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
-import { NgIf, NgClass } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitlePipe } from "app/sheet-title/pipe/sheet-title.pipe";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -38,7 +38,6 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
   standalone: true,
   imports: [
     TranslocoModule,
-    NgIf,
     NgClass,
     MatButtonModule,
     RouterLink,
@@ -52,8 +51,8 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     MatTooltipModule,
     PublicThemePipe,
     MatChipsModule,
-    RoomNamePipe,
-  ],
+    RoomNamePipe
+],
 })
 export class ImageAssignmentComponent {
   rooms: RoomInterface[];

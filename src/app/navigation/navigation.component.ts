@@ -20,7 +20,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterLink } from "@angular/router";
 import { MatListModule } from "@angular/material/list";
-import { NgIf, NgFor, AsyncPipe } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { OnlineService } from "app/online/service/online.service";
 
@@ -34,17 +34,15 @@ import { OnlineService } from "app/online/service/online.service";
     TranslocoModule,
     MatSidenavModule,
     MatToolbarModule,
-    NgIf,
     MatListModule,
     RouterLink,
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
-    NgFor,
     MatOptionModule,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class NavigationComponent implements OnInit {
   hideSidenav;
