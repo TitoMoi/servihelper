@@ -2,7 +2,7 @@
 
 # Introduction
 
-Servihelper is an executable app built with web technology that runs on the machine_(Windows, Mac or Linux)_
+Servihelper is an executable app built with web technology that runs on the machine _(Windows, Mac or Linux)_
 
 The program is free.
 
@@ -16,7 +16,7 @@ Its purpose is for help the Jehovah's witnesses to:
 And also:
 
 - Provide a free cost for the user _(you)_ and a free cost for the developer _(me)_
-- Also provide a very friendly user interface.
+- Provide a very friendly user interface.
 
 ## Download links
 
@@ -61,10 +61,13 @@ In case your language is not supported, the native sheet _(assignment)_ to distr
 
 ## What cannot be done or implemented?
 
-Support other programs is not possible, as im a solo developer i cannot guarantee compatibility over time.
+Compatibility with other existing programs is not possible, as im a solo developer i cannot guarantee compatibility over time.
+
 Diferent persons working _at the same time_ and being free is not possible.
 
 But it's possible to work one after another.
+
+## Ways of work with multiple administrators
 
 **Free mode**:
 
@@ -73,21 +76,21 @@ But it's possible to work one after another.
 
 1. **Use only google drive _(or other solution)_ to centralize and share copies of servihelper.**
 
-   - Do not enable config -> online mode.
-   - Required knowledge of how to install and run google drive app _(or other solution)_
+   - Do not enable: config -> online mode.
+   - Required knowledge of how to install and run google drive desktop app _(or other solution)_
    - Your responsability to ensure that you have the last backup before working.
    - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, **this is the most robust approach and the one i recommend**)_
 
 2. **Export the app data from administrator one and importing in the app of the administrator two sharing the copy through email or whatsapp _(not recommended)_**
 
-   - Do not activate config -> online mode.
+   - Do not activate: config -> online mode.
    - Do not use shared folder _(google drive or others...)_
    - _(Easy, no complexity but an overhead to understand wich and where is the latest copy)_
 
 3. **Enable built in online mode with a shared folder _(google drive, one drive... also not recommended)_**
 
-   - Enable config -> online mode _(Required setup inside Servihelper in the config section to configure the shared folder)_
-   - Required knowledge of how to install and run google drive app _(or other solution)_
+   - Enable: config -> online mode _(Required setup inside Servihelper in the config section to configure the shared folder)_
+   - Required knowledge of how to install and run google drive desktop app _(or other solution)_
    - Your responsability to ensure that all files are synchronized before working.
    - Warning: Sometimes data is not updated on real time.
    - _(this way of work has configuration complexity but later has less overhead, just check you are online and google drive is working and files are up to date)_
@@ -104,6 +107,8 @@ When creating an assignment, go to: [jw-meeting-workbook](https://www.jw.org/en/
 Then on creating the assignment copy the assignment and put it on the "theme field":
 
 <img src="./pictures/split-screen.png" alt= "create-assignment">
+
+Then, select participant/s and click the create button.
 
 ## ¿Can I distribute it?
 
