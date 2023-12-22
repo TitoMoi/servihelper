@@ -395,7 +395,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
    * Save or update the territory, also update the last click point.
    * The polygon may exist.
    */
-  save() {
+  save(createAnother = false) {
     const polygon = this.polygonForm.value as PolygonInterface;
     //handle participant and save territory
     this.handleParticipant(this.temporalParticipant);
@@ -454,6 +454,17 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     }
     if (this.polygonExists()) {
       this.configService.updateConfigByKey("lastMapClick", polygon.latLngList[0]);
+    }
+
+    if (createAnother) {
+      this.removePolygon();
+      this.territoryForm.reset();
+      this.polygonForm.reset({
+        id: null,
+        latLngList: [],
+        m: null,
+      });
+      return;
     }
     //navigate to parent
     const route = this.isUpdate ? "../.." : "..";
