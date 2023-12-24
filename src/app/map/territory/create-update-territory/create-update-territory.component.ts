@@ -437,6 +437,12 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
         territory.poligonId = polygonId;
       }
       this.territoryService.updateTerritory(territory);
+
+      // navigate to parent
+      const route = "../..";
+      this.router.navigate([route], {
+        relativeTo: this.activatedRoute,
+      });
     } else {
       //If image exists save or update it
       if (image) {
@@ -448,29 +454,28 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       if (this.polygonExists()) {
         const polygonId = this.polygonService.createPolygon(polygon);
         territory.poligonId = polygonId;
+
+        this.configService.updateConfigByKey("lastMapClick", polygon.latLngList[0]);
       }
 
-      this.territoryService.createTerritory(territory);
-    }
-    if (this.polygonExists()) {
-      this.configService.updateConfigByKey("lastMapClick", polygon.latLngList[0]);
-    }
-
-    if (createAnother) {
-      this.removePolygon();
-      this.territoryForm.reset();
-      this.polygonForm.reset({
-        id: null,
-        latLngList: [],
-        m: null,
+      this.territoryService.createTerritory(territory).then(() => {
+        if (createAnother) {
+          this.removePolygon();
+          this.territoryForm.reset();
+          this.polygonForm.reset({
+            id: null,
+            latLngList: [],
+            m: null,
+          });
+          return;
+        }
+        // navigate to parent
+        const route = "..";
+        this.router.navigate([route], {
+          relativeTo: this.activatedRoute,
+        });
       });
-      return;
     }
-    //navigate to parent
-    const route = this.isUpdate ? "../.." : "..";
-    this.router.navigate([route], {
-      relativeTo: this.activatedRoute,
-    });
   }
 
   //OTHER METHODS NOT RELATED WITH MAPS

@@ -86,15 +86,14 @@ export class TerritoryService {
 
   /**
    *
-   * @returns true if territories are saved to disk
+   * @returns the promise to save the territories
    */
-  #saveTerritoriesToFile(): boolean {
+  #saveTerritoriesToFile() {
     //Write territories back to file
     const gziped = deflate(JSON.stringify(this.#territories), { to: "string" });
-    writeFile(this.configService.territoriesPath, gziped);
 
     this.lockService.updateTimestamp();
-    return true;
+    return writeFile(this.configService.territoriesPath, gziped);
   }
 
   /**
@@ -102,7 +101,7 @@ export class TerritoryService {
    * @param territory the territory to create
    * @returns the id of the new territory
    */
-  createTerritory(territory: TerritoryContextInterface): string {
+  createTerritory(territory: TerritoryContextInterface) {
     //Generate id for the territory
     territory.id = nanoid(this.configService.nanoMaxCharId);
     //trim name
@@ -112,9 +111,7 @@ export class TerritoryService {
     this.#territories.push(territory);
     this.#territoriesMap.set(territory.id, territory);
     //save territories with the new territory
-    this.#saveTerritoriesToFile();
-
-    return territory.id;
+    return this.#saveTerritoriesToFile();
   }
 
   /**
@@ -122,7 +119,7 @@ export class TerritoryService {
    * @param territory the territory to update
    * @returns true if territory is updated and saved false otherwise
    */
-  updateTerritory(territory: TerritoryContextInterface): boolean {
+  updateTerritory(territory: TerritoryContextInterface) {
     //update territory
     for (let i = 0; i < this.#territories.length; i++) {
       if (this.#territories[i].id === territory.id) {
@@ -143,7 +140,7 @@ export class TerritoryService {
    * @param territory the territory to delete
    * @returns true if territory is deleted and saved false otherwise
    */
-  deleteTerritory(id: string): boolean {
+  deleteTerritory(id: string) {
     //first delete image or polygon associated
 
     const terr = this.getTerritory(id);
@@ -191,7 +188,7 @@ export class TerritoryService {
    * @param id the id of the territory group we want to delete
    * if the territory groups remains empty at the end then the territory is also removed
    */
-  deleteTerritoryGroupById(id: string): boolean {
+  deleteTerritoryGroupById(id: string) {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#territories.length; i++) {
       this.#territories[i].groups = this.#territories[i].groups.filter((gId) => gId !== id);
