@@ -117,7 +117,8 @@
               }
             </mat-form-field>
           </div>
-          <div *ngIf="isPTheme" class="col-12 mb-2">
+          @if(isPTheme) {
+          <div class="col-12 mb-2">
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_THEME") }}</mat-label>
               <mat-select
@@ -135,12 +136,14 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div *ngIf="!isPTheme" class="col-12 mb-2">
+          } @else {
+          <div class="col-12 mb-2">
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_THEME") }}</mat-label>
               <input matInput spellcheck="false" formControlName="theme" />
             </mat-form-field>
           </div>
+          }
           <div class="col-12 mb-2">
             <div class="d-flex align-items-baseline justify-content-start">
               <span class="d-inline-block me-3">
