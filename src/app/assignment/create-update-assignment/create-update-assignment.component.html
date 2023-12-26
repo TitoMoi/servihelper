@@ -87,12 +87,11 @@
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_ROOM") }}</mat-label>
               <mat-select formControlName="room" required (closed)="warningIfAlreadyHasWork()">
-                <mat-option
-                  *ngFor="let room of rooms; trackBy: trackByIdRoomFn"
-                  [value]="room.id"
-                >
+                @for(room of rooms; track room.id) {
+                <mat-option [value]="room.id">
                   {{ room | roomNamePipe }}
                 </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
@@ -104,17 +103,18 @@
                 required
                 (closed)="warningIfAlreadyHasWork()"
               >
+                @for(assignType of assignTypes; track assignType.id) {
                 <mat-option
-                  *ngFor="let assignType of assignTypes; trackBy: trackByIdAssignTypeFn"
                   [value]="assignType.id"
                   [style.borderLeft]="getBorderLeftStyle(assignType.color)"
                 >
                   {{ assignType | assignTypeNamePipe }}
                 </mat-option>
+                }
               </mat-select>
-              <mat-error *ngIf="noAvailableAssignTypesByRole">{{
-                t("ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES")
-              }}</mat-error>
+              @if (noAvailableAssignTypesByRole) {
+              <mat-error>{{ t("ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES") }}</mat-error>
+              }
             </mat-form-field>
           </div>
           <div *ngIf="isPTheme" class="col-12 mb-2">
