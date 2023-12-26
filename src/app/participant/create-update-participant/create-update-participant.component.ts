@@ -30,7 +30,6 @@ import {
   ParticipantAssignTypeInterface,
 } from "../model/participant.model";
 import { RoomPipe } from "../../room/pipe/room.pipe";
-import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -44,7 +43,6 @@ import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
-import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
 
@@ -70,12 +68,10 @@ import { OnlineService } from "app/online/service/online.service";
     MatOptionModule,
     RouterLink,
     TranslocoLocaleModule,
-    AssignTypePipe,
-    AssignTypeNamePipe,
     RoomPipe,
     RoomNamePipe,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   //Angular material datepicker hacked
