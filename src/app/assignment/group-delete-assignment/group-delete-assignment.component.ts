@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 
@@ -14,7 +14,7 @@ import { OnlineService } from "app/online/service/online.service";
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { map, skip } from "rxjs";
+import { Subscription, map, skip } from "rxjs";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
 import { ConfigService } from "app/config/service/config.service";
@@ -37,10 +37,10 @@ import { ConfigService } from "app/config/service/config.service";
     MatIconModule,
     JsonPipe,
     AssignTypePipe,
-    AssignTypeNamePipe
-],
+    AssignTypeNamePipe,
+  ],
 })
-export class GroupDeleteAssignmentComponent implements OnInit {
+export class GroupDeleteAssignmentComponent implements OnInit, OnDestroy {
   assignments: AssignmentInterface[];
 
   assignmentsPromise = this.assignmentService
@@ -65,6 +65,8 @@ export class GroupDeleteAssignmentComponent implements OnInit {
       )
     );
 
+  subscription = new Subscription();
+
   constructor(
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
@@ -76,10 +78,16 @@ export class GroupDeleteAssignmentComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     //skip the first one as role$ is a hot observable
-    this.configService.role$.pipe(skip(1)).subscribe(() => {
-      this.currentAssignTypesIdsByRole = this.assignTypeService.getAssignTypesIdsByRole();
-      this.form.enable(); //Trigger enable just to emit a valueChanges
-    });
+    this.subscription.add(
+      this.configService.role$.pipe(skip(1)).subscribe(() => {
+        this.currentAssignTypesIdsByRole = this.assignTypeService.getAssignTypesIdsByRole();
+        this.form.enable(); //Trigger enable just to emit a valueChanges
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   submit() {

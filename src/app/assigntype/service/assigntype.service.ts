@@ -86,7 +86,7 @@ export class AssignTypeService {
   getAssignTypesIdsByRole() {
     const roles = this.configService.getRoles();
     const currentRoleId = this.configService.getCurrentRoleId();
-    if (this.configService.isCurrentRoleAdmin()) {
+    if (this.configService.isAdminRole()) {
       return this.getAssignTypes().map((at) => at.id);
     } else if (roles) {
       return roles.find((r) => r.id === currentRoleId).assignTypesId;

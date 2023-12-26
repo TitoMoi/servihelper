@@ -70,8 +70,8 @@ import { ConfigService } from "app/config/service/config.service";
     AssignTypeNamePipe,
     RoomPipe,
     RoomNamePipe,
-    ParticipantPipe
-],
+    ParticipantPipe,
+  ],
 })
 export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked {
   //In memory assignments
@@ -95,6 +95,8 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     map((config) => config.role),
     distinctUntilChanged()
   );
+
+  isAdminRole$ = this.configService.role$.pipe(map(() => this.configService.isAdminRole()));
 
   observer: IntersectionObserver = new IntersectionObserver((entries) => {
     //observe the last row

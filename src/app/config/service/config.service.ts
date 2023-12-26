@@ -175,7 +175,7 @@ export class ConfigService {
     return this.#config.role;
   }
 
-  isCurrentRoleAdmin() {
+  isAdminRole() {
     return this.#role === "administrator";
   }
 
