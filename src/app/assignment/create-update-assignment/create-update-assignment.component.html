@@ -130,9 +130,11 @@
                 <mat-select-trigger *ngIf="publicThemeSelect.value">
                   {{ (publicThemeSelect.value | publicThemePipe).name }}
                 </mat-select-trigger>
-                <mat-option *ngFor="let pTheme of publicThemes" [value]="pTheme.id">
+                @for(pTheme of publicThemes; track pTheme.id) {
+                <mat-option [value]="pTheme.id">
                   <div>{{ getPThemeCount(pTheme.id) }} - {{ pTheme.name }}</div>
                 </mat-option>
+                }
               </mat-select>
               @if (!publicThemes.length) {<mat-error>{{
                 t("ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE")
