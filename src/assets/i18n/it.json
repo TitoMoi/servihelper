@@ -484,5 +484,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 versione",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 versione data",
   "S89_ASSIGNMENT_NUMBER": "Parte n.:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "Alcuni incarichi potrebbero non essere visibili perché il ruolo attuale non è amministratore."
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "Alcuni incarichi potrebbero non essere visibili perché il ruolo attuale non è amministratore.",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "Non sono disponibili temi pubblici, puoi crearli nella sezione Impostazioni"
 }

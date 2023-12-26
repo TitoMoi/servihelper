@@ -474,5 +474,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 wersja",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 Wersja daty",
   "S89_ASSIGNMENT_NUMBER": "Część nr.:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "Niektóre zadania mogą nie być widoczne, ponieważ obecna rola nie jest administratorem."
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "Niektóre zadania mogą nie być widoczne, ponieważ obecna rola nie jest administratorem.",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "Brak dostępnych tematów publicznych, możesz je utworzyć w sekcji Ustawienia"
 }

@@ -485,5 +485,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 versiune",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 Versiunea datei",
   "S89_ASSIGNMENT_NUMBER": "Part no.:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "Este posibil ca unele misiuni să nu fie vizibile, deoarece rolul actual nu este administrator."
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "Este posibil ca unele misiuni să nu fie vizibile, deoarece rolul actual nu este administrator.",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "Nu există teme publice disponibile, le puteți crea în secțiunea Setări"
 }

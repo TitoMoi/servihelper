@@ -474,5 +474,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 版本",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 日期版本",
   "S89_ASSIGNMENT_NUMBER": "部分第:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "某些作业可能不可见，因为当前角色不是管理员。"
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "某些作业可能不可见，因为当前角色不是管理员。",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "没有可用的公共主题，您可以在“设置”部分中创建它们"
 }

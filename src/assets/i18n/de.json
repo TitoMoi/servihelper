@@ -485,5 +485,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 Ausführung",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 Datum Version",
   "S89_ASSIGNMENT_NUMBER": "Teil Nr.:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "Einige Zuordnungen sind möglicherweise nicht sichtbar, da die aktuelle Rolle kein Administrator ist."
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "Einige Zuordnungen sind möglicherweise nicht sichtbar, da die aktuelle Rolle kein Administrator ist.",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "Keine öffentlichen Themen verfügbar. Sie können sie im Abschnitt 'Einstellungen' erstellen"
 }

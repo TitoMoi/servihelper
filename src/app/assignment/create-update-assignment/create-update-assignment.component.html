@@ -134,6 +134,10 @@
                   <div>{{ getPThemeCount(pTheme.id) }} - {{ pTheme.name }}</div>
                 </mat-option>
               </mat-select>
+              @if (!publicThemes.length) {<mat-error>{{
+                t("ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE")
+              }}</mat-error
+              >}
             </mat-form-field>
           </div>
           } @else {

@@ -474,5 +474,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 버전",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 날짜 버전",
   "S89_ASSIGNMENT_NUMBER": "부품 번호.:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "현재 역할이 관리자가 아니기 때문에 일부 과제는 보이지 않을 수 있습니다."
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "현재 역할이 관리자가 아니기 때문에 일부 과제는 보이지 않을 수 있습니다.",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "공개 테마가 없으면 설정 섹션에서 만들 수 있습니다."
 }

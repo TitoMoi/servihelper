@@ -484,5 +484,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 versie",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 datumversie",
   "S89_ASSIGNMENT_NUMBER": "Deel nr.:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "Sommige opdrachten zijn mogelijk niet zichtbaar omdat de huidige rol niet beheerder is."
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "Sommige opdrachten zijn mogelijk niet zichtbaar omdat de huidige rol niet beheerder is.",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "Geen openbare thema's beschikbaar, u kunt ze maken in het gedeelte Instellingen"
 }

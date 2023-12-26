@@ -474,5 +474,6 @@
   "PLACEHOLDER_S89_VERSION": "S89 সংস্করণ",
   "PLACEHOLDER_S89_DATE_VERSION": "S89 তারিখ সংস্করণ",
   "S89_ASSIGNMENT_NUMBER": "পার্ট নং:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "কিছু অ্যাসাইনমেন্ট দৃশ্যমান নাও হতে পারে কারণ বর্তমান ভূমিকা প্রশাসক নয়।"
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "কিছু অ্যাসাইনমেন্ট দৃশ্যমান নাও হতে পারে কারণ বর্তমান ভূমিকা প্রশাসক নয়।",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "কোনও পাবলিক থিম উপলভ্য নয়, আপনি সেগুলি সেটিংস বিভাগে তৈরি করতে পারেন"
 }

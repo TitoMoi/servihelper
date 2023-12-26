@@ -485,5 +485,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 version",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 version de date",
   "S89_ASSIGNMENT_NUMBER": "Partie no.:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "Certaines affectations peuvent ne pas être visibles car le rôle actuel n'est pas administrateur."
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "Certaines affectations peuvent ne pas être visibles car le rôle actuel n'est pas administrateur.",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "Aucun thèmes public disponible, vous pouvez les créer sur la section Paramètres"
 }

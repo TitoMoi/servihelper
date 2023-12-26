@@ -474,5 +474,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 संस्करण",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 दिनांक संस्करण",
   "S89_ASSIGNMENT_NUMBER": "भाग नहीं।:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "कुछ असाइनमेंट दिखाई नहीं दे सकते हैं क्योंकि वर्तमान भूमिका व्यवस्थापक नहीं है।"
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "कुछ असाइनमेंट दिखाई नहीं दे सकते हैं क्योंकि वर्तमान भूमिका व्यवस्थापक नहीं है।",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "कोई सार्वजनिक विषय उपलब्ध नहीं है, आप उन्हें सेटिंग अनुभाग पर बना सकते हैं"
 }

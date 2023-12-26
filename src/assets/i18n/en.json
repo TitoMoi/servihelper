@@ -460,5 +460,6 @@
   "PLACEHOLDER_S89_CONTENT_PART": "Note content part",
   "PLACEHOLDER_S89_VERSION": "s89 version",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 date version",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "Some assignments may not be visible because the current role is not administrator."
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "Some assignments may not be visible because the current role is not administrator.",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "No public themes available, you can create them on the settings section"
 }

@@ -474,5 +474,6 @@
   "PLACEHOLDER_S89_VERSION": "s89 versiyon",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 tarih sürümü",
   "S89_ASSIGNMENT_NUMBER": "Bölüm no.:",
-  "ASSIGN_TABLE_ROLE_VISIBILITY": "Mevcut rol yönetici olmadığı için bazı ödevler görünmeyebilir."
+  "ASSIGN_TABLE_ROLE_VISIBILITY": "Mevcut rol yönetici olmadığı için bazı ödevler görünmeyebilir.",
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "Halka açık tema yok, bunları Ayarlar bölümünde oluşturabilirsiniz"
 }
