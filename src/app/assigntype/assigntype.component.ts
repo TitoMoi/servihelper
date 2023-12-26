@@ -9,6 +9,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
 import { AssignTypeNamePipe } from "./pipe/assign-type-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
   selector: "app-assign-type",
@@ -22,8 +24,9 @@ import { OnlineService } from "app/online/service/online.service";
     RouterLinkActive,
     MatIconModule,
     AssignTypeNamePipe,
-    AsyncPipe
-],
+    MatTooltipModule,
+    AsyncPipe,
+  ],
 })
 export class AssignTypeComponent {
   //In memory assignTypes
@@ -33,8 +36,11 @@ export class AssignTypeComponent {
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
+  participantsLength = this.participantService.getParticipantsLength();
+
   constructor(
     private assignTypeService: AssignTypeService,
+    private participantService: ParticipantService,
     private onlineService: OnlineService
   ) {}
 }
