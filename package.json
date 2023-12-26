@@ -34,7 +34,7 @@
     "lint": "ng lint",
     "i18n:extract": "transloco-keys-manager extract",
     "i18n:find": "transloco-keys-manager find",
-    "i18n:find:add": "transloco-keys-manager find --add-missing-keys && node scripts/replace-18json.js"
+    "i18n:find:add": "transloco-keys-manager find --add-missing-keys && node scripts/replace-i18json.js"
   },
   "dependencies": {
     "@angular/animations": "~17.0.6",
