@@ -460,6 +460,5 @@
   "PLACEHOLDER_S89_CONTENT_PART": "Note content part",
   "PLACEHOLDER_S89_VERSION": "s89 version",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 date version",
-  "TEMPLATE_NOT_AVAILABLE": "XXXDELETEMEXXX",
   "ASSIGN_TABLE_ROLE_VISIBILITY": "Some assignments may not be visible because the current role is not administrator."
 }
