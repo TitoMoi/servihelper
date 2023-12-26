@@ -38,6 +38,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { ConfigInterface } from "app/config/model/config.model";
 import { RoleInterface } from "app/roles/model/role.model";
 import { Observable, Subscription, combineLatest, map } from "rxjs";
+import { AsyncPipe } from "@angular/common";
 
 @Component({
   selector: "app-report-selector",
@@ -57,8 +58,9 @@ import { Observable, Subscription, combineLatest, map } from "rxjs";
     SelectionListHorComponent,
     MultipleImageAssignmentComponent,
     AssignTypeNamePipe,
-    RoomNamePipe
-],
+    RoomNamePipe,
+    AsyncPipe,
+  ],
 })
 export class ReportSelectorComponent implements OnInit, AfterViewInit {
   //Angular material datepicker hacked
@@ -80,6 +82,8 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
   config$: Observable<ConfigInterface> = this.configService.config$;
   roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
   currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
+
+  isAdminRole$ = this.configService.role$.pipe(map(() => this.configService.isAdminRole()));
 
   allowedAssignTypesIds = [];
 

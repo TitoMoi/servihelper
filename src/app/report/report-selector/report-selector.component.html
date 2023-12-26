@@ -10,96 +10,81 @@
             [value]="resetModel"
             [matDatepicker]="picker"
             (dateChange)="dateChanged($event)"
-            />
-            <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker [startAt]="init" [dateClass]="dateClass"></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field>
-            <mat-label>{{ t("ASSIGN_SELECTION_ROOMS_SELECT_TITLE") }}</mat-label>
-            <mat-select #roomsSelect formControlName="rooms" multiple>
-              @for (room of rooms; track room) {
-                <mat-option [value]="room.id">{{
-                  room | roomNamePipe
-                }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field>
-            <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE") }}</mat-label>
-            <mat-select #assignTypesSelect formControlName="assignTypes" multiple>
-              @for (assignType of assignTypes; track assignType) {
-                <mat-option [value]="assignType.id">{{
-                  assignType | assignTypeNamePipe
-                }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field>
-            <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE") }}</mat-label>
-            <mat-select #orderSelect formControlName="order">
-              @for (order of orderOptions; track order) {
-                <mat-option [value]="order">{{
-                  order
-                }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field>
-            <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_TITLE") }}</mat-label>
-            <mat-select #templateSelect formControlName="template">
-              @for (template of templateOptions; track template) {
-                <mat-option [value]="template">{{
-                  template
-                }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
+          />
+          <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker [startAt]="init" [dateClass]="dateClass"></mat-datepicker>
+        </mat-form-field>
       </div>
-    </form>
-    @if (
-      selectedDates.length &&
-      selectionForm.controls.template.value ===
-      t('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL')
-      ) {
-      <app-selection-list
-        [selectedDates]="selectedDates"
-        [assignTypes]="selectionForm.controls.assignTypes.value"
-        [rooms]="selectionForm.controls.rooms.value"
-        [order]="selectionForm.controls.order.value"
-      ></app-selection-list>
-    }
-    @if (
-      selectedDates.length &&
-      selectionForm.controls.template.value ===
-      t('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL')
-      ) {
-      <app-selection-list-hor
-        [selectedDates]="selectedDates"
-        [assignTypes]="selectionForm.controls.assignTypes.value"
-        [rooms]="selectionForm.controls.rooms.value"
-        [order]="selectionForm.controls.order.value"
-      ></app-selection-list-hor>
-    }
-    @if (
-      selectedDates.length &&
-      selectionForm.controls.template.value ===
-      t('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET')
-      ) {
-      <app-multiple-image-assignment
-        [selectedDates]="selectedDates"
-        [assignTypes]="selectionForm.controls.assignTypes.value"
-        [rooms]="selectionForm.controls.rooms.value"
-        [order]="selectionForm.controls.order.value"
-      ></app-multiple-image-assignment>
-    }
-  </ng-container>
-  
+      <div class="col">
+        <mat-form-field>
+          <mat-label>{{ t("ASSIGN_SELECTION_ROOMS_SELECT_TITLE") }}</mat-label>
+          <mat-select #roomsSelect formControlName="rooms" multiple>
+            @for (room of rooms; track room) {
+            <mat-option [value]="room.id">{{ room | roomNamePipe }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_SELECT_TITLE") }}</mat-label>
+          <mat-select #assignTypesSelect formControlName="assignTypes" multiple>
+            @for (assignType of assignTypes; track assignType) {
+            <mat-option [value]="assignType.id">{{
+              assignType | assignTypeNamePipe
+            }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_ORDER_TITLE") }}</mat-label>
+          <mat-select #orderSelect formControlName="order">
+            @for (order of orderOptions; track order) {
+            <mat-option [value]="order">{{ order }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>{{ t("ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_TITLE") }}</mat-label>
+          <mat-select #templateSelect formControlName="template">
+            @for (template of templateOptions; track template) {
+            <mat-option [value]="template">{{ template }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  @if (selectedDates.length && selectionForm.controls.template.value && (isAdminRole$ | async)
+  === false) {
+  <div class="fst-italic mb-2">{{ t("ASSIGN_TABLE_ROLE_VISIBILITY") }}</div>
+  } @if ( selectedDates.length && selectionForm.controls.template.value ===
+  t('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_VERTICAL') ) {
+  <app-selection-list
+    [selectedDates]="selectedDates"
+    [assignTypes]="selectionForm.controls.assignTypes.value"
+    [rooms]="selectionForm.controls.rooms.value"
+    [order]="selectionForm.controls.order.value"
+  ></app-selection-list>
+  } @if ( selectedDates.length && selectionForm.controls.template.value ===
+  t('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_HORIZONTAL') ) {
+  <app-selection-list-hor
+    [selectedDates]="selectedDates"
+    [assignTypes]="selectionForm.controls.assignTypes.value"
+    [rooms]="selectionForm.controls.rooms.value"
+    [order]="selectionForm.controls.order.value"
+  ></app-selection-list-hor>
+  } @if ( selectedDates.length && selectionForm.controls.template.value ===
+  t('ASSIGN_SELECTION_ASSIGNTYPES_TEMPLATE_MULTIPLE_SHEET') ) {
+  <app-multiple-image-assignment
+    [selectedDates]="selectedDates"
+    [assignTypes]="selectionForm.controls.assignTypes.value"
+    [rooms]="selectionForm.controls.rooms.value"
+    [order]="selectionForm.controls.order.value"
+  ></app-multiple-image-assignment>
+  }
+</ng-container>
