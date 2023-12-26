@@ -26,7 +26,8 @@
         }
         <div class="row">
           <div class="col-6">
-            <mat-form-field *ngIf="isMultipleDates">
+            @if(isMultipleDates) {
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_SELECTION_DATES_SELECT_TITLE") }}</mat-label>
               <input
                 matInput
@@ -44,8 +45,8 @@
                 [dateClass]="dateClass"
               ></mat-datepicker>
             </mat-form-field>
-
-            <mat-form-field *ngIf="!isMultipleDates">
+            } @else {
+            <mat-form-field>
               <mat-label>{{ t("ASSIGN_CHOOSE_DATE") }}</mat-label>
               <input
                 required
@@ -66,6 +67,7 @@
                 (closed)="warningIfAlreadyHasWork()"
               ></mat-datepicker>
             </mat-form-field>
+            }
           </div>
           <div class="col-6">
             <mat-form-field>
