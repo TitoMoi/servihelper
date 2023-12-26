@@ -112,9 +112,9 @@
                 </mat-option>
                 }
               </mat-select>
-              @if (noAvailableAssignTypesByRole) {
-              <mat-error>{{ t("ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES") }}</mat-error>
-              }
+              <mat-error *ngIf="noAvailableAssignTypesByRole">{{
+                t("ASSIGN_ERROR_NO_AVAILABLE_ASSIGN_TYPES")
+              }}</mat-error>
             </mat-form-field>
           </div>
           @if(isPTheme) {
@@ -333,9 +333,11 @@
               <mat-label>{{ t("ASSIGN_FOOTER_NOTE") }}</mat-label>
               <mat-select formControlName="footerNote" [disableRipple]="true">
                 <mat-option [value]="undefined"></mat-option>
-                <mat-option *ngFor="let note of footerNotes" [value]="note.id">
+                @for(note of footerNotes; track note.id) {
+                <mat-option [value]="note.id">
                   {{ note.name }}
                 </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
@@ -367,8 +369,8 @@
           <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
           {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         </button>
+        @if(!isUpdate && !isMultipleDates) {
         <button
-          *ngIf="!isUpdate && !isMultipleDates"
           #btnSaveCreateAnother
           mat-raised-button
           color="accent"
@@ -379,6 +381,7 @@
           <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
           {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
         </button>
+        }
       </mat-card-actions>
     </mat-card>
   </form>
