@@ -11,7 +11,8 @@
         }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div *ngIf="!isUpdate" class="row">
+        @if(!isUpdate) {
+        <div class="row">
           <div class="col">
             <mat-checkbox
               labelPosition="before"
@@ -22,6 +23,7 @@
             >
           </div>
         </div>
+        }
         <div class="row">
           <div class="col-6">
             <mat-form-field *ngIf="isMultipleDates">
