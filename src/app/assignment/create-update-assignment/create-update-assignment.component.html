@@ -207,63 +207,66 @@
                 <mat-select-trigger *ngIf="principalSelect.value">
                   {{ (principalSelect.value | participantPipe).name }}
                 </mat-select-trigger>
-                <mat-option
-                  *ngFor="let participant of principals; trackBy: trackByIdFn"
-                  [value]="participant.id"
-                >
+                @for(participant of principals; track participant.id ) {
+
+                <mat-option [value]="participant.id">
                   <div class="grid">
                     <div class="d-flex align-items-center py-1">
+                      @if( participant.hasWork && !isMultipleDates) {
                       <mat-icon
-                        *ngIf="participant.hasWork && !isMultipleDates; else noIcon"
                         (click)="onIconWarningClick($event, participant)"
                         svgIcon="warning"
                         aria-label="icon"
                       ></mat-icon>
+                      } @else if (!participant.hasWork && !isMultipleDates) {
                       <mat-icon
-                        *ngIf="!participant.hasWork && !isMultipleDates; else noIcon"
                         (click)="onPrincipalIconInfoClick($event, participant)"
                         svgIcon="info-blue"
                         aria-label="icon"
                       ></mat-icon>
+                      } @else {
+                      <div></div>
+                      }
                     </div>
-                    <div
-                      *ngIf="!isMultipleDates; else noCount"
-                      class="d-flex align-items-center"
-                    >
+                    @if(!isMultipleDates) {
+                    <div class="d-flex align-items-center">
                       {{ participant.count }}
                     </div>
+                    } @else{
+                    <div></div>
+                    }
                     <div class="d-flex align-items-center">
                       <span class="me-2">{{ participant.name }}</span>
+                      @if(participant.hasCollision && !isMultipleDates) {
                       <mat-icon
-                        *ngIf="participant.hasCollision && !isMultipleDates"
                         class="me-2"
                         svgIcon="time"
                         aria-label="icon"
                         [matTooltip]="t('ASSIGNMENT_COLLISION_TOOLTIP')"
                       ></mat-icon>
+                      } @else if(participant.isCloseToOthers && !isMultipleDates) {
                       <mat-icon
-                        *ngIf="participant.isCloseToOthers && !isMultipleDates"
                         svgIcon="warningtime"
                         aria-label="icon"
                         [matTooltip]="t('ASSIGNMENT_ISCLOSEOTHERS_TOOLTIP')"
                       ></mat-icon>
+                      } @else if(participant.isCloseToOthersPrayer && !isMultipleDates) {
                       <mat-icon
-                        *ngIf="participant.isCloseToOthersPrayer && !isMultipleDates"
                         svgIcon="warningtime"
                         aria-label="icon"
                         [matTooltip]="t('ASSIGNMENT_ISCLOSEOTHERS_PRAYER_TOOLTIP')"
                       ></mat-icon>
+                      } @else if(participant.isCloseToOthersTreasuresEtc && !isMultipleDates) {
                       <mat-icon
-                        *ngIf="participant.isCloseToOthersTreasuresEtc && !isMultipleDates"
                         svgIcon="warningtime"
                         aria-label="icon"
                         [matTooltip]="t('CONFIG_ISCLOSEOTHERS_TREASURESETC_TOOLTIP')"
                       ></mat-icon>
+                      }
                     </div>
-                    <ng-template #noIcon><div></div></ng-template>
-                    <ng-template #noCount><div></div></ng-template>
                   </div>
                 </mat-option>
+                }
               </mat-select>
               <mat-error *ngIf="form.controls.principal.invalid">{{
                 t("ASSIGN_ERROR_PRINCIPAL")
@@ -282,41 +285,46 @@
                 <mat-select-trigger *ngIf="assistantSelect.value">
                   {{ (assistantSelect.value | participantPipe).name }}
                 </mat-select-trigger>
-                <mat-option
-                  *ngFor="let participant of assistants; trackBy: trackByIdFn"
-                  [value]="participant.id"
-                >
+                @for(participant of assistants; track participant.id) {
+                <mat-option [value]="participant.id">
                   <div class="grid">
                     <div>
+                      @if(participant.hasWork && !isMultipleDates) {
                       <mat-icon
-                        *ngIf="participant.hasWork && !isMultipleDates; else noIcon"
                         (click)="onIconWarningClick($event, participant)"
                         svgIcon="warning"
                         aria-label="icon"
                       ></mat-icon>
+                      } @else if(!participant.hasWork && !isMultipleDates) {
                       <mat-icon
-                        *ngIf="!participant.hasWork && !isMultipleDates; else noIcon"
                         (click)="onAssistantIconInfoClick($event, participant)"
                         svgIcon="info-blue"
                         aria-label="icon"
                       ></mat-icon>
+                      } @else {
+                      <div></div>
+                      }
                     </div>
-                    <div *ngIf="!isMultipleDates; else noCount">
+                    @if(!isMultipleDates) {
+                    <div>
                       {{ participant.count }}
                     </div>
+                    } @else {
+                    <div></div>
+                    }
                     <div class="d-flex align-items-center">
                       <span class="me-2">{{ participant.name }}</span>
+                      @if(participant.isCloseToOthers && !isMultipleDates) {
                       <mat-icon
-                        *ngIf="participant.isCloseToOthers && !isMultipleDates"
                         svgIcon="warningtime"
                         aria-label="icon"
                         [matTooltip]="t('ASSIGNMENT_ISCLOSEOTHERS_TOOLTIP')"
                       ></mat-icon>
+                      }
                     </div>
-                    <ng-template #noIcon><div></div></ng-template>
-                    <ng-template #noCount><div></div></ng-template>
                   </div>
                 </mat-option>
+                }
               </mat-select>
             </mat-form-field>
           </div>
