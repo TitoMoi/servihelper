@@ -82,7 +82,7 @@
           @if (showColors) {
           <div class="d-flex">
             @for (c of colors; track c) {
-            <span class="square me-1" [style]="getBgColor(c)"></span>
+            <span class="square me-1 fw-bold" [style]="getBgColor(c)">{{ c }}</span>
             }
           </div>
           }

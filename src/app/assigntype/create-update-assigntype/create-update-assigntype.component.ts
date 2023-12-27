@@ -40,8 +40,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatTooltipModule,
     RouterLink,
     MatIconModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class CreateUpdateAssignTypeComponent {
   at = this.assignTypeService.getAssignType(this.activatedRoute.snapshot.params.id);
@@ -73,6 +73,7 @@ export class CreateUpdateAssignTypeComponent {
       this.assignTypeService
         .getAssignTypes()
         .map((at) => at.color)
+        .map((at) => at.toUpperCase())
         .filter((c) => !!c)
     ),
   ];
