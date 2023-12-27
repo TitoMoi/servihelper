@@ -21,7 +21,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -99,7 +98,6 @@ import { OnlineService } from "app/online/service/online.service";
   ],
 })
 export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild("cancelBtn", { read: ElementRef }) cancelBtn: ElementRef;
   @ViewChild("principalSelect") principalSelect: MatSelect;
   @ViewChild("assistantSelect") assistantSelect: MatSelect;
   @ViewChild("btnSaveCreateAnother") btnSaveCreateAnother: MatButton;
@@ -230,15 +228,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   }
 
   ngAfterViewInit(): void {
-    //We need to navigate here from assignments if the role changes
-    //For some reason navigating again to assignments doesnt work
-    //also navigating to another principal route doesnt work
-    //we need to navigate to a children
-    //Then, we simulate a click on the cancel
-    if (this.activatedRoute.snapshot.queryParams.prev === "home") {
-      this.cancelBtn.nativeElement.click();
-      return;
-    }
     if (!this.isUpdate) this.form.markAllAsTouched();
   }
 

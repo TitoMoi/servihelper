@@ -43,6 +43,7 @@ import { MassiveDatesTerritoryComponent } from "app/map/territory/massive-dates-
 import { DeletePublicThemeComponent } from "app/public-theme/delete-public-theme/delete-public-theme.component";
 import { CreateUpdatePublicThemeComponent } from "app/public-theme/create-update-public-theme/create-update-public-theme.component";
 import { AvailableParticipantComponent } from "app/participant/available-participant/available-participant.component";
+import { FakeAssignmentRouteComponent } from "app/assignment/fake-assignment-route/fake-assignment-route.component";
 export const routes: Routes = [
   {
     path: "",
@@ -132,6 +133,10 @@ export const routes: Routes = [
       {
         path: "image/:id",
         component: ImageAssignmentComponent,
+      },
+      {
+        path: "fake",
+        component: FakeAssignmentRouteComponent,
       },
       {
         path: "create",
