@@ -962,23 +962,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     return `12px solid ${color ? color : "#FFF"}`;
   }
 
-  /**
-   * @param index the index
-   * @param participant the participant to compare
-   * @returns the id of the participant
-   */
-  trackByIdFn(index, participant: ParticipantInterface) {
-    return participant.id;
-  }
-
-  trackByIdRoomFn(index, room: RoomInterface) {
-    return room.id;
-  }
-
-  trackByIdAssignTypeFn(index, assignType: AssignTypeInterface) {
-    return assignType.id;
-  }
-
   //********* DATEPICKER HACK *************
 
   //for Datepicker hack
