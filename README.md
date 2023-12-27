@@ -4,7 +4,9 @@
 
 Servihelper is an executable app built with web technology that runs on the machine _(Windows, Mac or Linux)_
 
-The program is free.
+Doesnt work with Android or Ipad
+
+The program is free. 💵
 
 Your data is managed internally on the local device with .json and .gz files, so it never goes to the internet.
 
@@ -61,13 +63,12 @@ In case your language is not supported, the native sheet _(assignment)_ to distr
 
 ## What cannot be done or implemented?
 
-Compatibility with other existing programs is not possible, as im a solo developer i cannot guarantee compatibility over time.
+- Compatibility with other existing programs is not possible, as im a solo developer i cannot guarantee compatibility over time.
 
-Diferent persons working _at the same time_ and being free is not possible.
+- Diferent persons working _at the same time_ and being free is not possible.
+  But it's possible to work one after another.
 
-But it's possible to work one after another.
-
-## Ways of work with multiple administrators
+## Ways of work with multiple administrators 🧑👨‍🦱👨‍🦰🧔
 
 **Free mode**:
 
@@ -77,26 +78,26 @@ But it's possible to work one after another.
 1. **Use only google drive _(or other solution)_ to centralize and share copies of servihelper.**
 
    - Do not enable: config -> online mode.
-   - Required knowledge of how to install and run google drive desktop app _(or other solution)_
+   - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
    - Your responsability to ensure that you have the last backup before working.
-   - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, **this is the most robust approach and the one i recommend**)_
+   - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, **✅ this is the most robust approach and the one i recommend**)_
 
-2. **Export the app data from administrator one and importing in the app of the administrator two sharing the copy through email or whatsapp _(not recommended)_**
+2. **Export the app data from administrator one and importing in the app of the administrator two sharing the copy through email or whatsapp _(⚠️ not recommended)_**
 
    - Do not activate: config -> online mode.
    - Do not use shared folder _(google drive or others...)_
    - _(Easy, no complexity but an overhead to understand wich and where is the latest copy)_
 
-3. **Enable built in online mode with a shared folder _(google drive, one drive... also not recommended)_**
+3. **Enable built in online mode with a shared folder _(google drive, one drive... ⚠️ also not recommended)_**
 
    - Enable: config -> online mode _(Required setup inside Servihelper in the config section to configure the shared folder)_
-   - Required knowledge of how to install and run google drive desktop app _(or other solution)_
+   - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
    - Your responsability to ensure that all files are synchronized before working.
    - Warning: Sometimes data is not updated on real time.
    - _(this way of work has configuration complexity but later has less overhead, just check you are online and google drive is working and files are up to date)_
 
-**Paid mode**:
-Configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure _(not recommended)_
+**Paid mode 💲**:
+Configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure. And also a platform mantainance over time _(⚠️ not recommended)_
 
 [Guide to configure a remote desktop with kamatera](./KAMATERA.md)
 
@@ -119,7 +120,7 @@ Yes, although it is recommended that you distribute the download link, as a new 
 - Digital distribution:
 
   - In the assignments section, an icon sheet appears in the -Image- column. Click, watch the preview and copy to clipboard. Then paste on whatsapp.
-  - On report section select "multiple sheets and s89 slips" and click "generate png files" button for native or s89 slips, it will create a folder for each participant with his assignments.
+  - On report section select "multiple sheets and s89 slips" and click "generate png files" button for native slips or click s89 slips, it will create a folder for each participant with his assignments.
 
 - Print:
   - On the reports section select "multiple sheets" there is a print button for the native slips.
