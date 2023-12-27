@@ -17,7 +17,11 @@
               formControlName="name"
             />
             @if (!isOtherAssignmentType()) {
-            <mat-hint class="fst-italic">{{ t("ASSIGNTYPE_NAME_HINT") }}</mat-hint>
+            <ng-container>
+              <mat-hint class="fst-italic">{{
+                t("ASSIGNTYPE_NAME_HINT")
+              }}</mat-hint></ng-container
+            >
             }
           </mat-form-field>
         </div>
@@ -121,7 +125,7 @@
       >
         {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         @if (netStatusOffline$ | async) {
-        <mat-icon svgIcon="nowifi"></mat-icon>
+        <ng-container> <mat-icon svgIcon="nowifi"></mat-icon></ng-container>
         }
       </button>
     </mat-card-actions>

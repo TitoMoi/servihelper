@@ -20,18 +20,18 @@
           </div>
         </div>
         @if (assignmentsToDelete$ | async; as assignmentsToDelete) {
-          <div class="row">
-            <div class="col">
-              <div class="mb-2">{{ t("ASSIGN_GROUP_DELETE_INFO_DELETE") }}:</div>
-              <ul>
-                @for (a of assignmentsToDelete; track a) {
-                  <li>
-                    {{ a.assignType | assignTypePipe | assignTypeNamePipe }}
-                  </li>
-                }
-              </ul>
-            </div>
+        <div class="row">
+          <div class="col">
+            <div class="mb-2">{{ t("ASSIGN_GROUP_DELETE_INFO_DELETE") }}:</div>
+            <ul>
+              @for (a of assignmentsToDelete; track a) {
+              <li>
+                {{ a.assignType | assignTypePipe | assignTypeNamePipe }}
+              </li>
+              }
+            </ul>
           </div>
+        </div>
         }
       </mat-card-content>
       <mat-card-actions>
@@ -41,7 +41,7 @@
           [disableRipple]="true"
           type="button"
           routerLink=".."
-          >
+        >
           {{ t("BUTTON_CANCEL") }}
         </button>
         <button
@@ -49,9 +49,9 @@
           color="warn"
           type="submit"
           [disabled]="form.invalid || (netStatusOffline$ | async)"
-          >
+        >
           @if (netStatusOffline$ | async) {
-            <mat-icon svgIcon="nowifi"></mat-icon>
+          <ng-container> <mat-icon svgIcon="nowifi"></mat-icon></ng-container>
           }
           {{ t("BUTTON_DELETE") }}
         </button>

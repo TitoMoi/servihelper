@@ -118,14 +118,18 @@
       >
         {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         @if (netStatusOffline$ | async) {
-        <mat-icon svgIcon="nowifi"></mat-icon>
+        <ng-container>
+          <mat-icon svgIcon="nowifi"></mat-icon>
+        </ng-container>
         }
       </button>
       @if (!isUpdate) {
       <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">
         {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
         @if (netStatusOffline$ | async) {
-        <mat-icon svgIcon="nowifi"></mat-icon>
+        <ng-container>
+          <mat-icon svgIcon="nowifi"></mat-icon>
+        </ng-container>
         }
       </button>
       }

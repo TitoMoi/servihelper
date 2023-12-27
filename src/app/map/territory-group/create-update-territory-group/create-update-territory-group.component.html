@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title
         >{{
-        this.isUpdate ? t("TERRITORYGROUP_UPDATE_TITLE") : t("TERRITORYGROUP_CREATE_TITLE")
+          this.isUpdate ? t("TERRITORYGROUP_UPDATE_TITLE") : t("TERRITORYGROUP_CREATE_TITLE")
         }}
       </mat-card-title>
     </mat-card-header>
@@ -17,42 +17,41 @@
               [appautofocus]="isUpdate ? false : true"
               spellcheck="false"
               formControlName="name"
-              />
-            </mat-form-field>
-          </div>
-          <div class="col-auto">
-            <mat-form-field>
-              <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
-              <input matInput type="number" formControlName="order" />
-            </mat-form-field>
-          </div>
-          <div class="col-auto">
-            <mat-label class="me-3">{{ t("TERRITORYGROUP_COLOR") }}</mat-label>
-            <input type="color" formControlName="color" />
-          </div>
+            />
+          </mat-form-field>
         </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          mat-raised-button
-          type="button"
-          class="me-3"
-          [routerLink]="isUpdate ? '../..' : '..'"
-          >
-          {{ t("BUTTON_CANCEL") }}
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          [disabled]="form.invalid || (netStatusOffline$ | async)"
-          >
-          {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
-          @if (netStatusOffline$ | async) {
-            <mat-icon svgIcon="nowifi"></mat-icon>
-          }
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
-  
+        <div class="col-auto">
+          <mat-form-field>
+            <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
+            <input matInput type="number" formControlName="order" />
+          </mat-form-field>
+        </div>
+        <div class="col-auto">
+          <mat-label class="me-3">{{ t("TERRITORYGROUP_COLOR") }}</mat-label>
+          <input type="color" formControlName="color" />
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        type="button"
+        class="me-3"
+        [routerLink]="isUpdate ? '../..' : '..'"
+      >
+        {{ t("BUTTON_CANCEL") }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid || (netStatusOffline$ | async)"
+      >
+        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+        @if (netStatusOffline$ | async) {
+        <ng-container> <mat-icon svgIcon="nowifi"></mat-icon></ng-container>
+        }
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -9,38 +9,39 @@
       [appautofocus]="isUpdate ? false : true"
       spellcheck="false"
       formControlName="name"
-      />
-    </mat-form-field>
-    <div class="col-12">
-      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-      <ngx-editor spellcheck="false" [editor]="editor" formControlName="editorContent">
-      </ngx-editor>
-    </div>
-    <div class="col mt-3">
-      <mat-checkbox labelPosition="before" color="primary" formControlName="showInHome">{{
-        t("NOTE_SHOW_IN_HOME")
-      }}</mat-checkbox>
-    </div>
-    <div class="mt-3">
-      <button
-        class="me-3"
-        mat-raised-button
-        type="button"
-        [routerLink]="isUpdate ? '../..' : '..'"
-        >
-        {{ t("BUTTON_CANCEL") }}
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="form.invalid || (netStatusOffline$ | async)"
-        >
-        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
-        @if (netStatusOffline$ | async) {
-          <mat-icon svgIcon="nowifi"></mat-icon>
-        }
-      </button>
-    </div>
-  </form>
-  
+    />
+  </mat-form-field>
+  <div class="col-12">
+    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+    <ngx-editor spellcheck="false" [editor]="editor" formControlName="editorContent">
+    </ngx-editor>
+  </div>
+  <div class="col mt-3">
+    <mat-checkbox labelPosition="before" color="primary" formControlName="showInHome">{{
+      t("NOTE_SHOW_IN_HOME")
+    }}</mat-checkbox>
+  </div>
+  <div class="mt-3">
+    <button
+      class="me-3"
+      mat-raised-button
+      type="button"
+      [routerLink]="isUpdate ? '../..' : '..'"
+    >
+      {{ t("BUTTON_CANCEL") }}
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || (netStatusOffline$ | async)"
+    >
+      {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+      @if (netStatusOffline$ | async) {
+      <ng-container>
+        <mat-icon svgIcon="nowifi"></mat-icon>
+      </ng-container>
+      }
+    </button>
+  </div>
+</form>
