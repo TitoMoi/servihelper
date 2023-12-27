@@ -16,58 +16,59 @@
                     matInput
                     [matDatepicker]="originPicker"
                     formControlName="originDate"
-                  />
-                  <mat-datepicker-toggle
-                    matPrefix
-                    [for]="originPicker"
-                    class="mr-3"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker id="datepickerOriginId" #originPicker></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="col-6">
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_MOVE_CHOOSE_DATE_DESTINY") }}</mat-label>
-                  <input
-                    required
-                    matInput
-                    [matDatepicker]="destinyDate"
-                    formControlName="destinyDate"
-                  />
-                  <mat-datepicker-toggle
-                    matPrefix
-                    [for]="destinyDate"
-                    class="mr-3"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker id="datepickerDestinyId" #destinyDate></mat-datepicker>
-                </mat-form-field>
-              </div>
-            </div>
-          </mat-card-content>
-          <mat-card-actions>
-            <button
-              class="me-3"
-              mat-raised-button
-              [disableRipple]="true"
-              type="button"
-              routerLink=".."
-            >
-              {{ t("BUTTON_CANCEL") }}
-            </button>
-            <button
-              mat-raised-button
-              color="primary"
-              type="submit"
-              [disabled]="form.invalid || (netStatusOffline$ | async)"
-            >
-              @if (netStatusOffline$ | async) {
-              <ng-container> <mat-icon svgIcon="nowifi"></mat-icon></ng-container>
-              }
-              {{ t("BUTTON_SAVE") }}
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </form>
-    </ng-container>
-  </div>
-</div>
+                    />
+                    <mat-datepicker-toggle
+                      matPrefix
+                      [for]="originPicker"
+                      class="mr-3"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker id="datepickerOriginId" #originPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field>
+                    <mat-label>{{ t("ASSIGN_MOVE_CHOOSE_DATE_DESTINY") }}</mat-label>
+                    <input
+                      required
+                      matInput
+                      [matDatepicker]="destinyDate"
+                      formControlName="destinyDate"
+                      />
+                      <mat-datepicker-toggle
+                        matPrefix
+                        [for]="destinyDate"
+                        class="mr-3"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker id="datepickerDestinyId" #destinyDate></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions>
+                <button
+                  class="me-3"
+                  mat-raised-button
+                  [disableRipple]="true"
+                  type="button"
+                  routerLink=".."
+                  >
+                  {{ t("BUTTON_CANCEL") }}
+                </button>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  type="submit"
+                  [disabled]="form.invalid || (netStatusOffline$ | async)"
+                  >
+                  @if (netStatusOffline$ | async) {
+                    <mat-icon svgIcon="nowifi"></mat-icon>
+                  }
+                  {{ t("BUTTON_SAVE") }}
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </form>
+        </ng-container>
+      </div>
+    </div>
+    

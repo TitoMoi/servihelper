@@ -162,7 +162,7 @@
   >
     {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
     @if (netStatusOffline$ | async) {
-    <ng-container> <mat-icon svgIcon="nowifi"></mat-icon></ng-container>
+    <mat-icon svgIcon="nowifi"></mat-icon>
     }
   </button>
   @if(!isUpdate) {
@@ -175,7 +175,7 @@
   >
     {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
     @if (netStatusOffline$ | async) {
-    <ng-container> <mat-icon svgIcon="nowifi"></mat-icon></ng-container>
+    <mat-icon svgIcon="nowifi"></mat-icon>
     }
   </button>
   }

@@ -8,55 +8,54 @@
     [disabled]="netStatusOffline$ | async"
     >{{ t("ROOM_BUTTON_CREATE_TITLE") }}
     @if (netStatusOffline$ | async) {
-    <ng-container>
-      <mat-icon svgIcon="nowifi"></mat-icon>
-    </ng-container>
-    }</a
-  >
-  @if (rooms.length) {
-  <div class="table-overflow">
-    <div class="grid">
-      <div class="grid-header-item fw-bold">
-        {{ t("ROOM_TABLE_HEADER_NAME") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ROOM_TABLE_HEADER_ORDER") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ROOM_TABLE_HEADER_EDIT") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ROOM_TABLE_HEADER_DELETE") }}
-      </div>
-      @for (r of rooms; track r) {
-      <div class="grid-row">
-        <div class="grid-item d-flex align-items-center">
-          {{ r | roomNamePipe }}
+      <mat-icon svgIcon="nowifi"></mat-icon
+        >
+      }</a>
+      @if (rooms.length) {
+        <div class="table-overflow">
+          <div class="grid">
+            <div class="grid-header-item fw-bold">
+              {{ t("ROOM_TABLE_HEADER_NAME") }}
+            </div>
+            <div class="grid-header-item fw-bold">
+              {{ t("ROOM_TABLE_HEADER_ORDER") }}
+            </div>
+            <div class="grid-header-item fw-bold">
+              {{ t("ROOM_TABLE_HEADER_EDIT") }}
+            </div>
+            <div class="grid-header-item fw-bold">
+              {{ t("ROOM_TABLE_HEADER_DELETE") }}
+            </div>
+            @for (r of rooms; track r) {
+              <div class="grid-row">
+                <div class="grid-item d-flex align-items-center">
+                  {{ r | roomNamePipe }}
+                </div>
+                <div class="grid-item d-flex align-items-center">
+                  {{ r.order }}
+                </div>
+                <div class="grid-item d-flex align-items-center">
+                  <mat-icon
+                    [routerLink]="['update', r.id]"
+                    routerLinkActive="active"
+                    svgIcon="edit"
+                    aria-label="Side nav toggle icon"
+                  ></mat-icon>
+                </div>
+                <div class="grid-item d-flex align-items-center">
+                  @if (r.type === 'other') {
+                    <mat-icon
+                      [routerLink]="['delete', r.id]"
+                      routerLinkActive="active"
+                      svgIcon="garbage"
+                      aria-label="Side nav toggle icon"
+                    ></mat-icon>
+                  }
+                </div>
+              </div>
+            }
+          </div>
         </div>
-        <div class="grid-item d-flex align-items-center">
-          {{ r.order }}
-        </div>
-        <div class="grid-item d-flex align-items-center">
-          <mat-icon
-            [routerLink]="['update', r.id]"
-            routerLinkActive="active"
-            svgIcon="edit"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
-        </div>
-        <div class="grid-item d-flex align-items-center">
-          @if (r.type === 'other') {
-          <mat-icon
-            [routerLink]="['delete', r.id]"
-            routerLinkActive="active"
-            svgIcon="garbage"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
-          }
-        </div>
-      </div>
       }
-    </div>
-  </div>
-  }
-</span>
+    </span>
+    

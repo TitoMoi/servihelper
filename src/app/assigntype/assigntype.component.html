@@ -11,7 +11,7 @@
           [disabled]="netStatusOffline$ | async"
           >{{ t("ASSIGNTYPE_CREATE_BUTTON") }}
           @if (netStatusOffline$ | async) {
-          <ng-container> <mat-icon svgIcon="nowifi"></mat-icon></ng-container>
+          <mat-icon svgIcon="nowifi"></mat-icon>
           }</a
         >
         @if (participantsLength) {
