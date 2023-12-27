@@ -1,4 +1,4 @@
-import isAfter from "date-fns/isAfter";
+import { isAfter } from "date-fns";
 
 import { AssignmentInterface } from "../assignment/model/assignment.model";
 import { ParticipantInterface } from "../participant/model/participant.model";
