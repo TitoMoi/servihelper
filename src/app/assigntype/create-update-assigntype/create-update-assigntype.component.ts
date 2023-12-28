@@ -17,7 +17,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { AsyncPipe, CommonModule } from "@angular/common";
+import { AsyncPipe, NgIf } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 
@@ -28,7 +28,6 @@ import { OnlineService } from "app/online/service/online.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     TranslocoModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -41,6 +40,7 @@ import { OnlineService } from "app/online/service/online.service";
     RouterLink,
     MatIconModule,
     AsyncPipe,
+    NgIf,
   ],
 })
 export class CreateUpdateAssignTypeComponent {

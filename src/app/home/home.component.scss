@@ -3,15 +3,17 @@ input[type="file"] {
 }
 
 .custom-file-upload {
+  font-size: 14px;
+  letter-spacing: 1.25px;
   background-color: #ffeb3b; //material accent
-  border: 1px solid #ccc;
   border-radius: 4px;
   display: inline-block;
   padding: 6px 12px;
-  
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
+
   cursor: pointer;
   &:hover {
-    background-color: #eddb36;
+    background-color: #f4e138;
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
   }
 }
