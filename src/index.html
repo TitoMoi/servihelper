@@ -9,6 +9,31 @@
     <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico" />
   </head>
   <body>
-    <app-root><h1>Loading...</h1></app-root>
+    <app-root><h1 class="loading-text">Loading...</h1></app-root>
   </body>
 </html>
+<style>
+  @keyframes loadingAnimation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .loading-text {
+    font-size: 76px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px;
+    animation: loadingAnimation 1.5s infinite;
+    background: linear-gradient(90deg, #654e6e, #331d5b);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+</style>
