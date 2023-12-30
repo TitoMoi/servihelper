@@ -24,8 +24,8 @@ import { Subscription } from "rxjs";
     RouterLinkActive,
     MatRadioModule,
     RouterOutlet,
-    ReactiveFormsModule
-],
+    ReactiveFormsModule,
+  ],
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"],
 })
@@ -39,10 +39,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.add(
       this.selectedRadioOptionControl.valueChanges.subscribe((value) =>
         value === "1"
-          ? this.router.navigate(["map/territory"])
-          : this.router.navigate(["map/territoryGroup"])
+          ? this.router.navigate(["/map/territory"])
+          : this.router.navigate(["/map/territoryGroup"])
       )
     );
+
+    /* this.router.((f) => {
+      console.log(f);
+      console.log("children.length", this.activatedRoute.children.length);
+    }); */
   }
 
   ngAfterViewInit(): void {
@@ -52,4 +57,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  getChildrenLength() {}
 }
