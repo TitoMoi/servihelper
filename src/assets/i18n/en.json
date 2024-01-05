@@ -461,5 +461,7 @@
   "PLACEHOLDER_S89_VERSION": "s89 version",
   "PLACEHOLDER_S89_DATE_VERSION": "s89 date version",
   "ASSIGN_TABLE_ROLE_VISIBILITY": "Some assignments may not be visible because the current role is not administrator.",
-  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "No public themes available, you can create them on the settings section"
+  "ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE": "No public themes available, you can create them on the settings section",
+  "ICON_FOLDER_TERRITORIES": "Generate all the territory pdf files",
+  "OPEN_TERRITORIES_FOLDER": "Open territories folder"
 }

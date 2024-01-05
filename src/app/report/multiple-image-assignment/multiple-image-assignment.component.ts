@@ -32,6 +32,7 @@ import { ExportService } from "app/services/export.service";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
 import { MatChipsModule } from "@angular/material/chips";
 import { PdfService } from "app/services/pdf.service";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-multiple-image-assignment",
@@ -48,6 +49,7 @@ import { PdfService } from "app/services/pdf.service";
     SheetTitlePipe,
     PublicThemePipe,
     MatChipsModule,
+    MatProgressSpinnerModule,
     AsyncPipe,
   ],
 })
@@ -60,6 +62,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   assignmentsWithNames: AssignmentInterface[] = [];
 
   assignmentsInFolderCreated = false;
+  showSpinner = false;
 
   homeDir = this.configService.homeDir;
 
@@ -187,6 +190,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
   /** Native slips and png images */
   async createAssignmentsInFolder() {
+    this.showSpinner = true;
     this.assignmentsInFolderCreated = false;
     const assignmentsWithNamesBK = structuredClone(this.assignmentsWithNames);
     //Create a map for every name and their assignments
@@ -204,6 +208,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     //Clean directory "assignments" first
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
+    const promises = [];
     for (const [key, assignments] of assignByNameMap.entries()) {
       for (const [index, a] of assignments.entries()) {
         //update the UI with only 1 assignment each time
@@ -218,13 +223,14 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         const blob = await this.imageToBlob();
         const ab = await blob.arrayBuffer();
         const view = new Uint8Array(ab);
-        writeFile(fileName, view);
+        promises.push(writeFile(fileName, view));
       }
     }
-
+    await Promise.all([...promises]);
     //Restore assignments view
     this.assignmentsWithNames = assignmentsWithNamesBK;
     this.assignmentsInFolderCreated = true;
+    this.showSpinner = false;
     this.cdr.detectChanges();
   }
 
@@ -232,9 +238,12 @@ export class MultipleImageAssignmentComponent implements OnChanges {
    * Create a pdf for each assignment in a folder for each participant
    */
   async toPdfS89() {
+    this.showSpinner = true;
+    this.assignmentsInFolderCreated = false;
     //Clean directory "assignments" first
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
+    const promises = [];
     for (const [index, a] of this.#assignments.entries()) {
       const pdfBytes = await this.pdfService.toPdfS89([a], false);
       const participantName = this.participantService.getParticipant(a.principal).name;
@@ -252,9 +261,11 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         )
       );
       ensureFileSync(fileNamePath);
-      writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer()));
+      promises.push(writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer())));
     }
+    await Promise.all([...promises]);
     this.assignmentsInFolderCreated = true;
+    this.showSpinner = false;
     this.cdr.detectChanges();
   }
 
@@ -262,6 +273,8 @@ export class MultipleImageAssignmentComponent implements OnChanges {
    * Create a single pdf containing all the assignments
    */
   async toPdfS89M() {
+    this.showSpinner = true;
+    this.assignmentsInFolderCreated = false;
     //Clean directory "assignments" first
     removeSync(filenamifyPath(path.join(this.homeDir, "assignments")));
 
@@ -273,10 +286,12 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       path.join(this.homeDir, "assignments", this.pdfService.S89M)
     );
     ensureFileSync(fileNamePath);
-    writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer()));
 
-    this.assignmentsInFolderCreated = true;
-    this.cdr.detectChanges();
+    writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer())).then(() => {
+      this.assignmentsInFolderCreated = true;
+      this.showSpinner = false;
+      this.cdr.detectChanges();
+    });
   }
 
   openAssignmentsFolder() {

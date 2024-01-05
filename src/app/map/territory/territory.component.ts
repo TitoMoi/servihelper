@@ -13,13 +13,14 @@ import { TerritoryGroupService } from "../territory-group/service/territory-grou
 import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { PolygonService } from "./service/polygon.service";
-import { clipboard } from "electron";
+import { clipboard, shell } from "electron";
 import { OnlineService } from "app/online/service/online.service";
 import { PdfService } from "app/services/pdf.service";
 import path from "path";
 import { ConfigService } from "app/config/service/config.service";
 import { ensureFileSync, readFileSync, removeSync, writeFile } from "fs-extra";
 import { filenamifyPath } from "filenamify";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-territory",
@@ -36,6 +37,7 @@ import { filenamifyPath } from "filenamify";
     TranslocoLocaleModule,
     ParticipantPipe,
     MatTooltipModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: "./territory.component.html",
   styleUrls: ["./territory.component.scss"],
@@ -48,6 +50,9 @@ export class TerritoryComponent {
   territoryGroups = this.territoryGroupService
     .getTerritoryGroups()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
+
+  territoriesInFolderCreated = false;
+  showSpinner = false;
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
@@ -105,8 +110,11 @@ export class TerritoryComponent {
   }
 
   async toMultiplePdf() {
+    this.showSpinner = true;
+    this.territoriesInFolderCreated = false;
     //Clean directory "territories" first
     removeSync(filenamifyPath(path.join(this.configService.homeDir, "territories")));
+    const promises = [];
     for (const t of this.territories) {
       const pdfBytes = this.toPdf(t, false);
 
@@ -115,8 +123,12 @@ export class TerritoryComponent {
         path.join(this.configService.homeDir, "territories", t.name + ".pdf")
       );
       ensureFileSync(fileNamePath);
-      writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer()));
+      promises.push(writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer())));
     }
+    await Promise.all([...promises]);
+    this.territoriesInFolderCreated = true;
+    this.showSpinner = false;
+    this.cdr.detectChanges();
   }
 
   /** Generates a territory pdf, if save is true shows a dialog to save the file, otherwise returns the blob pdfBytes */
@@ -191,5 +203,9 @@ export class TerritoryComponent {
     } else {
       return doc.output("blob");
     }
+  }
+
+  openTerritoriesFolder() {
+    shell.openPath(path.join(this.configService.homeDir, "territories"));
   }
 }

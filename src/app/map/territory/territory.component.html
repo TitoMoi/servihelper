@@ -19,29 +19,43 @@
     </div>
     <div class="col-auto">
       @if (territories.length) {
-      <mat-icon
-        [routerLink]="['heatmap']"
-        class="ms-3 me-3"
-        routerLinkActive="active"
-        svgIcon="heatmap"
-        [matTooltip]="t('ICON_HEATMAP')"
-        aria-label="Side nav toggle icon"
-      ></mat-icon>
-      <mat-icon
-        [routerLink]="['massive-dates']"
-        class="me-3"
-        routerLinkActive="active"
-        svgIcon="calendardates"
-        [matTooltip]="t('ICON_CHANGE_DATES')"
-        aria-label="Side nav toggle icon"
-      ></mat-icon>
-      <mat-icon
-        class="me-3"
-        svgIcon="folder"
-        aria-label="Side nav toggle icon"
-        [matTooltip]="t('ICON_FOLDER_TERRITORIES')"
-        (click)="toMultiplePdf()"
-      ></mat-icon>
+      <div class="d-flex align-items-center">
+        <mat-icon
+          [routerLink]="['heatmap']"
+          class="ms-3 me-3"
+          routerLinkActive="active"
+          svgIcon="heatmap"
+          [matTooltip]="t('ICON_HEATMAP')"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+        <mat-icon
+          [routerLink]="['massive-dates']"
+          class="me-3"
+          routerLinkActive="active"
+          svgIcon="calendardates"
+          [matTooltip]="t('ICON_CHANGE_DATES')"
+          aria-label="Side nav toggle icon"
+        ></mat-icon>
+        <mat-icon
+          class="me-3"
+          svgIcon="folder"
+          aria-label="Side nav toggle icon"
+          [matTooltip]="t('ICON_FOLDER_TERRITORIES')"
+          (click)="toMultiplePdf()"
+        ></mat-icon>
+        @if (territoriesInFolderCreated) {
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="openTerritoriesFolder()"
+        >
+          {{ t("OPEN_TERRITORIES_FOLDER") }}
+        </button>
+        } @else if(showSpinner){
+        <mat-spinner class="ms-4" [diameter]="28"></mat-spinner>
+        }
+      </div>
       }
     </div>
   </div>
