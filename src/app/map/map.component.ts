@@ -8,11 +8,18 @@ import {
 } from "@angular/core";
 
 import { MatButtonModule } from "@angular/material/button";
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import {
+  ActivationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from "@angular/router";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatRadioGroup, MatRadioModule } from "@angular/material/radio";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
-import { Subscription } from "rxjs";
+import { Subscription, filter, map } from "rxjs";
+import { AsyncPipe } from "@angular/common";
 
 @Component({
   selector: "app-map",
@@ -25,6 +32,7 @@ import { Subscription } from "rxjs";
     MatRadioModule,
     RouterOutlet,
     ReactiveFormsModule,
+    AsyncPipe,
   ],
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"],
@@ -33,7 +41,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("matRadioGroup") matRadioGroup: MatRadioGroup;
   selectedRadioOptionControl = new FormControl();
 
+  // At level 3 we are inside the create/update/delete...
+  numberOfChildren$ = this.router.events.pipe(
+    filter((event) => event instanceof ActivationEnd),
+    map(
+      () =>
+        this.router.getCurrentNavigation().extractedUrl.root.children.primary.segments.length <
+        3
+    )
+  );
+
   subscription = new Subscription();
+
   constructor(private cdr: ChangeDetectorRef, private router: Router) {}
   ngOnInit(): void {
     this.subscription.add(
@@ -43,11 +62,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           : this.router.navigate(["/map/territoryGroup"])
       )
     );
-
-    /* this.router.((f) => {
-      console.log(f);
-      console.log("children.length", this.activatedRoute.children.length);
-    }); */
   }
 
   ngAfterViewInit(): void {

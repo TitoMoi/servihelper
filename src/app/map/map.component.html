@@ -1,4 +1,5 @@
 <span *transloco="let t">
+  @if(numberOfChildren$ | async) {
   <div class="row mb-2">
     <div class="col">
       <form novalidate>
@@ -17,5 +18,6 @@
       </form>
     </div>
   </div>
+  }
   <router-outlet></router-outlet>
 </span>
