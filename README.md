@@ -20,8 +20,6 @@ And also:
 - Provide a free cost for the user _(you)_ and a free cost for the developer _(me)_
 - ✨ Provide a very friendly user interface ✨
 
-Servihelper will not automate everything over time.
-
 ## Download links
 
 Download app section: [Download for Windows, Mac or Linux](https://github.com/TitoMoi/servihelper/releases).
@@ -68,6 +66,8 @@ Only the time format can't be changed, but you can select a lang that suits your
 ## What cannot be done or implemented?
 
 - Compatibility with other existing programs is not possible, as i can't guarantee compatibility over time.
+
+- Automate everything.
 
 - Diferent persons working _at the same time_ and being free is not possible.
   But it's possible to work one after another.
