@@ -2,23 +2,25 @@
 
 # Introduction
 
-Servihelper is an executable app built with web technology that runs on the machine _(Windows, Mac or Linux)_
+Servihelper is an app that runs on the machine 🖥️ _(Windows, Mac or Linux)_
 
-Doesnt work with Android or Ipad
+Does not work on mobile phone 📱 or tablet.
 
-The program is free. 💵
+The program is free. 🙅‍♂️💵
 
 Your data is managed internally on the local device with .json and .gz files, so it never goes to the internet.
 
 Its purpose is for help the Jehovah's witnesses to:
 
-- Create and manage all kind of assignments _(Also public speech assignments)_
-- Territory creation and distribution.
+- Create and manage all kind of assignments _(Also public speech assignments)_ 📄
+- Territory creation and distribution. 🗺️
 
 And also:
 
 - Provide a free cost for the user _(you)_ and a free cost for the developer _(me)_
-- Provide a very friendly user interface.
+- ✨ Provide a very friendly user interface ✨
+
+Servihelper will not automate everything over time.
 
 ## Download links
 
@@ -61,14 +63,16 @@ Available interface languages are at the end of the page.
 
 In case your language is not supported, the native sheet _(assignment)_ to distribute can be customized so you can add your language when distributing.
 
+Only the time format can't be changed, but you can select a lang that suits your format.
+
 ## What cannot be done or implemented?
 
-- Compatibility with other existing programs is not possible, as im a solo developer i cannot guarantee compatibility over time.
+- Compatibility with other existing programs is not possible, as i can't guarantee compatibility over time.
 
 - Diferent persons working _at the same time_ and being free is not possible.
   But it's possible to work one after another.
 
-## Ways of work with multiple administrators 🧑👨‍🦱👨‍🦰🧔
+## Ways of work with multiple administrators 🧑👨‍🦰🧔
 
 **Free mode**:
 
@@ -80,7 +84,7 @@ In case your language is not supported, the native sheet _(assignment)_ to distr
    - Do not enable: config -> online mode.
    - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
    - Your responsability to ensure that you have the last backup before working.
-   - Import the last backup, work locally and export it to the shared folder. _(little complexity and a bit of overhead later, on finish you have to save your backup to the shared folder and notify, **✅ this is the most robust approach and the one i recommend**)_
+   - Import the last backup, work locally and when finished, export a new copy to the shared folder. _(little complexity and a bit of overhead later, on finish yout work you have to save your backup to the shared folder. **✅ this is the most robust approach and the one i recommend**)_
 
 2. **Export the app data from administrator one and importing in the app of the administrator two sharing the copy through email or whatsapp _(⚠️ not recommended)_**
 
@@ -111,7 +115,7 @@ Then on creating the assignment copy the assignment and put it on the "theme fie
 
 Then, select participant/s and click the create button.
 
-## ¿Can I distribute it?
+## ¿Can I distribute the app?
 
 Yes, although it is recommended that you distribute the download link, as a new version may have come out with some correction or new feature.
 
@@ -119,8 +123,8 @@ Yes, although it is recommended that you distribute the download link, as a new 
 
 - Digital distribution:
 
-  - In the assignments section, an icon sheet appears in the -Image- column. Click, watch the preview and copy to clipboard. Then paste on whatsapp.
-  - On report section select "multiple sheets and s89 slips" and click "generate png files" button for native slips or click s89 slips, it will create a folder for each participant with his assignments.
+  - In the assignments section, an icon sheet appears in the -Image- column. Click, watch the preview and copy to clipboard or generate the s89 slip.
+  - On report section select _"multiple sheets and s89 slips"_ and click "generate png files" button for native slips or click s89 slips, it will create a folder for each participant with his assignments.
 
 - Print:
   - On the reports section select "multiple sheets" there is a print button for the native slips.
@@ -129,11 +133,13 @@ Yes, although it is recommended that you distribute the download link, as a new 
 ## ¿How do I distribute the territories?
 
 - There is a link that you can distribute for each territory.
-- You can also distribute a pdf _(more friendly)_
+- You can also generate and distribute a pdf file _(more friendly)_
 
 ## When selecting the participant for the assignment, a number is displayed next to it, what is it?
 
 It is the number of times the participant has participated in that type of assignment with that role _(principal or assistant)_
+
+The display list is sorted by participation and then is again sorted by time. You can click the _"info"_ blue icon to have more details.
 
 ## ¿How do I report a bug or ask for a feature?
 
@@ -142,10 +148,6 @@ You can use github issues or send me an email to servihelper@gmail.com
 ## ¿Can it be translated to my language?
 
 Yes, send me the file located on assets/i18n/en.json translated attached by email and the name of the language.
-
-## Im a developer, can i contribute?
-
-Yes, fix, perf, refactor, test and docs are welcome.
 
 ### Available languages
 
