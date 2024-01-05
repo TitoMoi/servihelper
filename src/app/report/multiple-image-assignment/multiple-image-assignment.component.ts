@@ -48,8 +48,8 @@ import { PdfService } from "app/services/pdf.service";
     SheetTitlePipe,
     PublicThemePipe,
     MatChipsModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
   @Input() selectedDates: Date[];
@@ -185,6 +185,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     return dataBlob;
   }
 
+  /** Native slips and png images */
   async createAssignmentsInFolder() {
     this.assignmentsInFolderCreated = false;
     const assignmentsWithNamesBK = structuredClone(this.assignmentsWithNames);
@@ -241,7 +242,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         this.assignTypeService.getAssignType(a.assignType)
       );
 
-      //Ensure the filename is valid for the system
+      //Get the filename path and ensure it's valid for the system
       const fileNamePath = filenamifyPath(
         path.join(
           this.homeDir,

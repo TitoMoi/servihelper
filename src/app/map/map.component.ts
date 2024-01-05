@@ -54,6 +54,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription = new Subscription();
 
   constructor(private cdr: ChangeDetectorRef, private router: Router) {}
+
   ngOnInit(): void {
     this.subscription.add(
       this.selectedRadioOptionControl.valueChanges.subscribe((value) =>
@@ -71,6 +72,4 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
-  getChildrenLength() {}
 }

@@ -18,7 +18,8 @@ import { OnlineService } from "app/online/service/online.service";
 import { PdfService } from "app/services/pdf.service";
 import path from "path";
 import { ConfigService } from "app/config/service/config.service";
-import { readFileSync } from "fs-extra";
+import { ensureFileSync, readFileSync, removeSync, writeFile } from "fs-extra";
+import { filenamifyPath } from "filenamify";
 
 @Component({
   selector: "app-territory",
@@ -34,8 +35,8 @@ import { readFileSync } from "fs-extra";
     MatCheckboxModule,
     TranslocoLocaleModule,
     ParticipantPipe,
-    MatTooltipModule
-],
+    MatTooltipModule,
+  ],
   templateUrl: "./territory.component.html",
   styleUrls: ["./territory.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -103,7 +104,23 @@ export class TerritoryComponent {
     });
   }
 
-  toPdf(t: TerritoryContextInterface) {
+  async toMultiplePdf() {
+    //Clean directory "territories" first
+    removeSync(filenamifyPath(path.join(this.configService.homeDir, "territories")));
+    for (const t of this.territories) {
+      const pdfBytes = this.toPdf(t, false);
+
+      //Get the filename path and ensure it's valid for the system
+      const fileNamePath = filenamifyPath(
+        path.join(this.configService.homeDir, "territories", t.name + ".pdf")
+      );
+      ensureFileSync(fileNamePath);
+      writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer()));
+    }
+  }
+
+  /** Generates a territory pdf, if save is true shows a dialog to save the file, otherwise returns the blob pdfBytes */
+  toPdf(t: TerritoryContextInterface, save = true): Blob {
     const doc = this.getPdfSheet();
     doc.setFont(this.pdfService.font, "bold");
 
@@ -169,6 +186,10 @@ export class TerritoryComponent {
       doc.textWithLink(t.name, x, y + 30, { url: this.getUrlWithPolygonParams(t).toString() });
     }
 
-    doc.save(t.name);
+    if (save) {
+      doc.save(t.name);
+    } else {
+      return doc.output("blob");
+    }
   }
 }
