@@ -206,7 +206,6 @@
   "CONFIG_SAVED": "Config saved",
   "CONFIG_SAVE_SHARED_COMPLETED": "All servihelper files are now under the shared folder. You are online now.",
   "CONFIG_SERVIHELPER_FILES_FOUND": "Servihelper files found! Now you are working online!",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distancia en tiempo entre algunos tipos de asignaciones",
   "CONFIG_YES_WARNING": "Be careful! Click {{BUTTON_YES}} only if you are the first one to synchronize the files.",
   "CONFIG_ZIP_UPLOAD": "Subir fichero Zip",
   "CONFIG_ZIP_UPLOADED": "Zip subido",
@@ -482,5 +481,8 @@
   "ro": "Rumano",
   "ru": "Ruso",
   "tr": "Turco",
-  "zhCN": "Chino"
+  "zhCN": "Chino",
+  "CONFIG_EXPLAIN_EXHAUST": "Este reloj advierte que repita o haga una tarea similar incluso si el participante está en la parte superior de la lista por conteo.Esto ayuda al participante a no estar saturado y recibir asignación distribuida con el tiempo.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distancia en días entre algún tipo de tareas",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturado"
 }

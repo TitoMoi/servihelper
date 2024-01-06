@@ -205,7 +205,6 @@
   "CONFIG_SAVED": "Configuració guardada",
   "CONFIG_SAVE_SHARED_COMPLETED": "Tots els fitxers de servihelper ja estan a la carpeta compartida. Estás ja online.",
   "CONFIG_SERVIHELPER_FILES_FOUND": "Fitxers de Servihelper trobats! Ja estas treballant online!",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distancia en temps entre cert tipus d'asignacions",
   "CONFIG_YES_WARNING": "Compte! Fes click a {{BUTTON_YES}} nomes si ets el primer que va a sincronitzar els fitxers",
   "CONFIG_ZIP_UPLOAD": "Pujar Zip",
   "CONFIG_ZIP_UPLOADED": "Zip carregat",
@@ -484,5 +483,8 @@
   "ro": "Romanès",
   "ru": "Rus",
   "tr": "Turc",
-  "zhCN": "Xinès"
+  "zhCN": "Xinès",
+  "CONFIG_EXPLAIN_EXHAUST": "Aquest rellotge adverteix de repetir o fer una tasca similar, fins i tot si el participant es troba a la part superior de la llista per recompte.Això ajuda al participant a no estar saturat i a rebre una tasca distribuïda amb el pas del temps.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distància en dies entre alguns tipus de tasques",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturat"
 }

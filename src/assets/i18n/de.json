@@ -204,7 +204,6 @@
   "CONFIG_SAVED": "Konfigurierte gespeichert",
   "CONFIG_SAVE_SHARED_COMPLETED": "Alle servihelper Dateien befinden sich jetzt unter dem gemeinsam genutzten Ordner. Sie sind jetzt online.",
   "CONFIG_SERVIHELPER_FILES_FOUND": "Servihelper Dateien gefunden! Jetzt arbeiten Sie online!",
-  "CONFIG_TIME_DISTANCE_TITLE": "Zeitabstand zwischen einer Art Aufgaben",
   "CONFIG_YES_WARNING": "Seien Sie vorsichtig! Klicken {{BUTTON_YES}} Nur wenn Sie der erste sind, der die Dateien synchronisiert.",
   "CONFIG_ZIP_UPLOAD": "Zip -Datei hochladen",
   "CONFIG_ZIP_UPLOADED": "ZIP hochgeladen",
@@ -482,5 +481,8 @@
   "ro": "Rumänisch",
   "ru": "Russisch",
   "tr": "Türkisch",
-  "zhCN": "Chinesisch"
+  "zhCN": "Chinesisch",
+  "CONFIG_EXPLAIN_EXHAUST": "Diese Uhr warnt davor, eine ähnliche Zuordnung zu wiederholen oder zu erledigen, selbst wenn der Teilnehmer nach Graf ganz oben auf der Liste steht.Dies hilft dem Teilnehmer, nicht gesättigt zu sein und eine verteilte Zuordnung im Laufe der Zeit zu erhalten.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Entfernung in Tagen zwischen einer Art Aufgaben",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Gesättigt"
 }

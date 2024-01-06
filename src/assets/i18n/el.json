@@ -196,7 +196,6 @@
   "CONFIG_RESET_ALL_CONFIRM": "Επιβεβαιώστε την επανεκκίνηση του προγράμματος",
   "CONFIG_RESTART_LABEL": "Επαναφορά του προγράμματος",
   "CONFIG_SAVED": "Config saved",
-  "CONFIG_TIME_DISTANCE_TITLE": "Απόσταση στο χρόνο μεταξύ κάποιου είδους αποστολής",
   "CONFIG_YES_WARNING": "Be careful! Click {{BUTTON_YES}} only if you are the first one to synchronize the files.",
   "CONFIG_ZIP_UPLOAD": "Μεταφορτώστε το αρχείο zip",
   "CONFIG_ZIP_UPLOADED": "Φερμουάρ που ανεβάστηκε",
@@ -471,5 +470,8 @@
   "ro": "ρουμανικός",
   "ru": "Ρωσική",
   "tr": "τούρκικος",
-  "zhCN": "κινέζικα"
+  "zhCN": "κινέζικα",
+  "CONFIG_EXPLAIN_EXHAUST": "Αυτό το ρολόι προειδοποιεί να επαναλάβει ή να κάνει παρόμοια ανάθεση ακόμη και αν ο συμμετέχων βρίσκεται στην κορυφή της λίστας με τον αριθμό.Αυτό βοηθά τον συμμετέχοντα να μην κορεσθεί και να λάβει κατανεμημένη ανάθεση με την πάροδο του χρόνου.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Απόσταση σε ημέρες μεταξύ κάποιου είδους αποστολής",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Κορεσμένος"
 }

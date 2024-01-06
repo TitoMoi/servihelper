@@ -204,7 +204,6 @@
   "CONFIG_SAVED": "Configage enregistré",
   "CONFIG_SAVE_SHARED_COMPLETED": "Tous les fichiers ServiHelper sont désormais sous le dossier partagé. Vous êtes en ligne maintenant.",
   "CONFIG_SERVIHELPER_FILES_FOUND": "Fichiers ServiHelper trouvés! Maintenant, vous travaillez en ligne!",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distance dans le temps entre une sorte de missions",
   "CONFIG_YES_WARNING": "Sois prudent! Cliquez sur {{BUTTON_YES}} Seulement si vous êtes le premier à synchroniser les fichiers.",
   "CONFIG_ZIP_UPLOAD": "Télécharger le fichier zip",
   "CONFIG_ZIP_UPLOADED": "Zip téléchargé",
@@ -482,5 +481,8 @@
   "ro": "Roumaine",
   "ru": "Russe",
   "tr": "Turque",
-  "zhCN": "Chinois"
+  "zhCN": "Chinois",
+  "CONFIG_EXPLAIN_EXHAUST": "Cette horloge avertit de répéter ou de faire une affectation similaire même si le participant est en haut de la liste par compte.Cela aide le participant à ne pas être saturé et à recevoir une affectation distribuée au fil du temps.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distance en jours entre une sorte de missions",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturée"
 }

@@ -196,7 +196,6 @@
   "CONFIG_RESET_ALL_CONFIRM": "Confirm restart the program",
   "CONFIG_RESTART_LABEL": "プログラムをリセットします",
   "CONFIG_SAVED": "Config saved",
-  "CONFIG_TIME_DISTANCE_TITLE": "ある種の割り当て間の時間の距離",
   "CONFIG_YES_WARNING": "Be careful! Click {{BUTTON_YES}} only if you are the first one to synchronize the files.",
   "CONFIG_ZIP_UPLOAD": "zipファイルをアップロードします",
   "CONFIG_ZIP_UPLOADED": "zipアップロード",
@@ -471,5 +470,8 @@
   "ro": "ルーマニア人",
   "ru": "ロシア",
   "tr": "トルコ語",
-  "zhCN": "中国語"
+  "zhCN": "中国語",
+  "CONFIG_EXPLAIN_EXHAUST": "この時計は、参加者がカウントでリストの一番上にいる場合でも、繰り返しまたは同様の割り当てを行うよう警告します。これにより、参加者は飽和しないようになり、時間の経過とともに分配された割り当てを受け取ります。",
+  "CONFIG_TIME_DISTANCE_TITLE": "ある種の割り当て間の日の距離",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "飽和"
 }

@@ -196,7 +196,6 @@
   "CONFIG_RESET_ALL_CONFIRM": "Programı yeniden başlatın",
   "CONFIG_RESTART_LABEL": "Sıfırlama programı",
   "CONFIG_SAVED": "Config saved",
-  "CONFIG_TIME_DISTANCE_TITLE": "Bir tür ödev arasındaki zaman içinde mesafe",
   "CONFIG_YES_WARNING": "Be careful! Click {{BUTTON_YES}} only if you are the first one to synchronize the files.",
   "CONFIG_ZIP_UPLOAD": "Zip dosyasını yükle",
   "CONFIG_ZIP_UPLOADED": "Zip yüklendi",
@@ -471,5 +470,8 @@
   "ro": "Romanya",
   "ru": "Rusça",
   "tr": "Türk",
-  "zhCN": "Çince"
+  "zhCN": "Çince",
+  "CONFIG_EXPLAIN_EXHAUST": "Bu saat, katılımcı sayılarla listenin başında olsa bile tekrarlama veya benzer bir ödev yapmayı uyarır.Bu, katılımcının doymuş olmamasına ve zaman içinde dağıtılmış ödev almasına yardımcı olur.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Bir çeşit ödev arasındaki günler halinde mesafe",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Doymuş"
 }

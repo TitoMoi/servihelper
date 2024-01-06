@@ -196,7 +196,6 @@
   "CONFIG_RESET_ALL_CONFIRM": "Potwierdź ponownie uruchom program",
   "CONFIG_RESTART_LABEL": "Resetuj program",
   "CONFIG_SAVED": "Config saved",
-  "CONFIG_TIME_DISTANCE_TITLE": "Odległość w czasie między pewnymi zadaniami",
   "CONFIG_YES_WARNING": "Be careful! Click {{BUTTON_YES}} only if you are the first one to synchronize the files.",
   "CONFIG_ZIP_UPLOAD": "Prześlij plik zip",
   "CONFIG_ZIP_UPLOADED": "Przesłane zip",
@@ -471,5 +470,8 @@
   "ro": "Rumuński",
   "ru": "Rosyjski",
   "tr": "Turecki",
-  "zhCN": "Chiński"
+  "zhCN": "Chiński",
+  "CONFIG_EXPLAIN_EXHAUST": "Ten zegar ostrzega przed powtórzeniem lub wykonaniem podobnego zadania, nawet jeśli uczestnik znajduje się na szczycie listy według hrabiego.Pomaga to uczestnikowi nie być nasycone i otrzymywać rozproszone zadanie w czasie.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Odległość w dniach między pewnymi zadaniami",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Nasycony"
 }

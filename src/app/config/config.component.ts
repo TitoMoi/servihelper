@@ -245,6 +245,18 @@ export class ConfigComponent implements OnInit, OnDestroy {
     );
   }
 
+  getTranslationForAssignTypes() {
+    return this.assignTypeService.getTranslationForAssignTypes();
+  }
+
+  getTranslationForPrayers() {
+    return this.assignTypeService.getTranslationForPrayers();
+  }
+
+  getTranslationForTreasuresAndOthers() {
+    return this.assignTypeService.getTranslationForTreasuresAndOthers();
+  }
+
   ngOnDestroy(): void {
     if (this.form.dirty) {
       this.configService.updateConfig({
@@ -259,68 +271,6 @@ export class ConfigComponent implements OnInit, OnDestroy {
       );
     }
     this.subscription.unsubscribe();
-  }
-
-  getTranslationForAssignTypes() {
-    const translations = [];
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.BIBLE_READING)
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.INITIAL_CALL)
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.RETURN_VISIT)
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.TALK)
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.BIBLE_STUDY)
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.EXPLAIN_BELIEFS)
-    );
-    return translations.filter((t) => t).toString();
-  }
-
-  getTranslationForPrayers() {
-    const translations = [];
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.INITIAL_PRAYER)
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.ENDING_PRAYER)
-    );
-    return translations.filter((t) => t).toString();
-  }
-
-  getTranslationForTreasuresAndOthers() {
-    const translations = [];
-
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.TREASURES)
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.SPIRITUAL_GEMS)
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(
-        this.assignTypeService.ANALYSIS_AUDIENCE
-      )
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(
-        this.assignTypeService.LIVING_AS_CHRISTIANS
-      )
-    );
-    translations.push(
-      this.assignTypeService.getNameOrTranslationByType(
-        this.assignTypeService.CONGREGATION_BIBLE_STUDY
-      )
-    );
-
-    return translations.filter((t) => t).toString();
   }
 
   /**

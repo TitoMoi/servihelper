@@ -204,7 +204,6 @@
   "CONFIG_SAVED": "Config",
   "CONFIG_SAVE_SHARED_COMPLETED": "Alle Servihelper -bestanden staan nu onder de gedeelde map. Je bent nu online.",
   "CONFIG_SERVIHELPER_FILES_FOUND": "Servihelper -bestanden gevonden! Nu werkt u online!",
-  "CONFIG_TIME_DISTANCE_TITLE": "Afstand in de tijd tussen een soort opdrachten",
   "CONFIG_YES_WARNING": "Wees voorzichtig! Klik {{BUTTON_YES}} Alleen als u de eerste bent die de bestanden synchroniseert.",
   "CONFIG_ZIP_UPLOAD": "Upload zip -bestand",
   "CONFIG_ZIP_UPLOADED": "Zip geüpload",
@@ -481,5 +480,8 @@
   "ro": "Roemeense",
   "ru": "Russisch",
   "tr": "Turks",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "CONFIG_EXPLAIN_EXHAUST": "Deze klok waarschuwt om te herhalen of een vergelijkbare opdracht te doen, zelfs als de deelnemer bovenaan de lijst staat per telling.Dit helpt de deelnemer om niet verzadigd te zijn en gedistribueerde opdracht in de loop van de tijd te ontvangen.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Afstand in dagen tussen een soort opdrachten",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Verzadigd"
 }

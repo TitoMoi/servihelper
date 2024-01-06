@@ -204,7 +204,6 @@
   "CONFIG_SAVED": "Configurazione salvata",
   "CONFIG_SAVE_SHARED_COMPLETED": "Tutto servihelper I file sono ora nella cartella condivisa. Sei online adesso.",
   "CONFIG_SERVIHELPER_FILES_FOUND": "Servihelper file trovati! Ora stai lavorando online!",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distanza nel tempo tra una sorta di incarichi",
   "CONFIG_YES_WARNING": "Stai attento! Clic {{BUTTON_YES}} Solo se sei il primo a sincronizzare i file.",
   "CONFIG_ZIP_UPLOAD": "Carica file zip",
   "CONFIG_ZIP_UPLOADED": "Caricato zip",
@@ -481,5 +480,8 @@
   "ro": "Rumena",
   "ru": "Russo",
   "tr": "Turca",
-  "zhCN": "Cinese"
+  "zhCN": "Cinese",
+  "CONFIG_EXPLAIN_EXHAUST": "Questo orologio avverte di ripetere o eseguire un incarico simile anche se il partecipante è in cima alla lista per conteggio.Questo aiuta il partecipante a non essere saturato e ricevere un incarico distribuito nel tempo.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distanza in giorni tra una sorta di incarichi",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturata"
 }

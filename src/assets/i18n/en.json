@@ -184,7 +184,6 @@
   "CONFIG_SAVED": "Config saved",
   "CONFIG_SAVE_SHARED_COMPLETED": "All servihelper files are now under the shared folder. You are online now.",
   "CONFIG_SERVIHELPER_FILES_FOUND": "Servihelper files found! Now you are working online!",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distance in time between some kind of assignments",
   "CONFIG_YES_WARNING": "Be careful! Click {{BUTTON_YES}} only if you are the first one to synchronize the files.",
   "CONFIG_ZIP_UPLOAD": "Upload Zip file",
   "CONFIG_ZIP_UPLOADED": "Zip uploaded",
@@ -457,5 +456,8 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "CONFIG_EXPLAIN_EXHAUST": "This clock warns to repeat or do a similar assignment even if the participant is at the top of the list by count. This helps the participant to not being saturated and receive distributed assignment over time.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distance in days between some kind of assignments",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturated"
 }

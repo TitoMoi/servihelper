@@ -196,7 +196,6 @@
   "CONFIG_RESET_ALL_CONFIRM": "确认重新启动程序",
   "CONFIG_RESTART_LABEL": "重置程序",
   "CONFIG_SAVED": "Config saved",
-  "CONFIG_TIME_DISTANCE_TITLE": "某种作业之间的时间距离",
   "CONFIG_YES_WARNING": "Be careful! Click {{BUTTON_YES}} only if you are the first one to synchronize the files.",
   "CONFIG_ZIP_UPLOAD": "上传zip文件",
   "CONFIG_ZIP_UPLOADED": "zip上传",
@@ -214,8 +213,8 @@
   "ICON_GROUP_MOVE": "将所有作业从一天转移到另一天",
   "ICON_HEATMAP": "显示有意义的颜色的热图",
   "ICON_NO_COLOR_SECTION": "没有颜色部分",
-  "ICON_PDF_BAND": "Generate a colorful pdf specially for the midweek with bands and up to two weeks per page",
-  "ICON_PDF_BAND_WEEKEND": "Generate a colorful pdf specially for the weekend with bands and up to five weeks per page",
+  "ICON_PDF_BAND": "在周中专门生成五颜六色的PDF，每页最多两周",
+  "ICON_PDF_BAND_WEEKEND": "在周末和每页最多五个星期的周末生成五颜六色的PDF",
   "ICON_PDF_INFINITE": "生成一个无限的PDF，而没有颜色带进行数字分配. 如果打印 🖨️ 需要选择较少的日子以适合肖像A4页面.",
   "ICON_PDF_INFINITE_COLOR": "生成一个无限的PDF，该pdf带有用于数字发行的颜色带. 如果打印 🖨️ 需要选择较少的日子以适合肖像A4页面.",
   "ICON_PDF_PAGE": "PDF黑色/白色带有页面休息",
@@ -471,5 +470,8 @@
   "ro": "罗马尼亚人",
   "ru": "俄语",
   "tr": "土耳其",
-  "zhCN": "中国人"
+  "zhCN": "中国人",
+  "CONFIG_EXPLAIN_EXHAUST": "该时钟警告要重复或执行类似的作业，即使参与者按数量排名最高。这有助于参与者不饱和并随着时间的推移接收分布式分配。",
+  "CONFIG_TIME_DISTANCE_TITLE": "某种作业之间的几天距离",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "饱和"
 }

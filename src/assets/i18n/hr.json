@@ -183,7 +183,6 @@
   "CONFIG_SAVED": "Config SAVEDED",
   "CONFIG_SAVE_SHARED_COMPLETED": "Sve datoteke Servihelper sada su u zajedničkoj mapi.Sada ste na mreži.",
   "CONFIG_SERVIHELPER_FILES_FOUND": "Pronađene servihelper datSada radite na mreži online!",
-  "CONFIG_TIME_DISTANCE_TITLE": "Udaljenost u vremenu između nekakvih zadataka",
   "CONFIG_YES_WARNING": "Budi oprezanKlikck {{BUTTON_YES}} Samo ako ste prvi koji će sinkronizirati datoteke.",
   "CONFIG_ZIP_UPLOAD": "Prenesite zip datoteku",
   "CONFIG_ZIP_UPLOADED": "Zip preneseni",
@@ -454,5 +453,8 @@
   "ro": "Rumun",
   "ru": "Ruski",
   "tr": "Turski",
-  "zhCN": "Kineski"
+  "zhCN": "Kineski",
+  "CONFIG_EXPLAIN_EXHAUST": "Ovaj sat upozorava da ponovi ili izvrši sličan zadatak, čak i ako je sudionik na vrhu popisa po broju.To pomaže sudioniku da ne bude zasićen i dobije distribuirani zadatak s vremenom.",
+  "CONFIG_TIME_DISTANCE_TITLE": "Udaljenost u danima između nekakvih zadataka",
+  "ASSIGNMENT_SATURATED_TOOLTIP": "Zasićen"
 }

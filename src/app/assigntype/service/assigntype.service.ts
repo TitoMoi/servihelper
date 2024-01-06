@@ -69,6 +69,34 @@ export class AssignTypeService {
     return this.getNameOrTranslation(at);
   }
 
+  getTranslationForAssignTypes() {
+    const translations = [];
+    translations.push(this.getNameOrTranslationByType(this.BIBLE_READING));
+    translations.push(this.getNameOrTranslationByType(this.INITIAL_CALL));
+    translations.push(this.getNameOrTranslationByType(this.RETURN_VISIT));
+    translations.push(this.getNameOrTranslationByType(this.TALK));
+    translations.push(this.getNameOrTranslationByType(this.BIBLE_STUDY));
+    translations.push(this.getNameOrTranslationByType(this.EXPLAIN_BELIEFS));
+    return translations.filter((t) => t).toString();
+  }
+
+  getTranslationForPrayers() {
+    const translations = [];
+    translations.push(this.getNameOrTranslationByType(this.INITIAL_PRAYER));
+    translations.push(this.getNameOrTranslationByType(this.ENDING_PRAYER));
+    return translations.filter((t) => t).toString();
+  }
+
+  getTranslationForTreasuresAndOthers() {
+    const translations = [];
+    translations.push(this.getNameOrTranslationByType(this.TREASURES));
+    translations.push(this.getNameOrTranslationByType(this.SPIRITUAL_GEMS));
+    translations.push(this.getNameOrTranslationByType(this.ANALYSIS_AUDIENCE));
+    translations.push(this.getNameOrTranslationByType(this.LIVING_AS_CHRISTIANS));
+    translations.push(this.getNameOrTranslationByType(this.CONGREGATION_BIBLE_STUDY));
+    return translations.filter((t) => t).toString();
+  }
+
   isAllowedTypeForS89(type: string): boolean {
     if (!type) return false;
 
