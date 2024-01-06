@@ -39,6 +39,7 @@ import { MatDialogModule, MatDialog } from "@angular/material/dialog";
 import { OnlineTemplateComponent } from "app/config/online-template/online-template.component";
 import { LockService } from "app/lock/service/lock.service";
 import { SharedService } from "app/services/shared.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 
 @Component({
   selector: "app-config",
@@ -198,6 +199,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private onlineService: OnlineService,
     private noteService: NoteService,
+    private assignTypeService: AssignTypeService,
     private sheetTitleService: SheetTitleService,
     private publicThemeService: PublicThemeService,
     private translocoService: TranslocoService,
@@ -257,6 +259,68 @@ export class ConfigComponent implements OnInit, OnDestroy {
       );
     }
     this.subscription.unsubscribe();
+  }
+
+  getTranslationForAssignTypes() {
+    const translations = [];
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.BIBLE_READING)
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.INITIAL_CALL)
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.RETURN_VISIT)
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.TALK)
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.BIBLE_STUDY)
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.EXPLAIN_BELIEFS)
+    );
+    return translations.filter((t) => t).toString();
+  }
+
+  getTranslationForPrayers() {
+    const translations = [];
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.INITIAL_PRAYER)
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.ENDING_PRAYER)
+    );
+    return translations.filter((t) => t).toString();
+  }
+
+  getTranslationForTreasuresAndOthers() {
+    const translations = [];
+
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.TREASURES)
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(this.assignTypeService.SPIRITUAL_GEMS)
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(
+        this.assignTypeService.ANALYSIS_AUDIENCE
+      )
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(
+        this.assignTypeService.LIVING_AS_CHRISTIANS
+      )
+    );
+    translations.push(
+      this.assignTypeService.getNameOrTranslationByType(
+        this.assignTypeService.CONGREGATION_BIBLE_STUDY
+      )
+    );
+
+    return translations.filter((t) => t).toString();
   }
 
   /**

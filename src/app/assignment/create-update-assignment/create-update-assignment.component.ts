@@ -725,26 +725,29 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   /** This functions are created to get the exhaust time period */
   isOfTypeAssignTypes(type: AssignTypes) {
     return [
-      "bibleReading",
-      "initialCall",
-      "returnVisit",
-      "talk",
-      "bibleStudy",
-      "explainBeliefs",
+      this.assignTypeService.BIBLE_READING,
+      this.assignTypeService.INITIAL_CALL,
+      this.assignTypeService.RETURN_VISIT,
+      this.assignTypeService.TALK,
+      this.assignTypeService.BIBLE_STUDY,
+      this.assignTypeService.EXPLAIN_BELIEFS,
     ].includes(type);
   }
 
   isOfTypePrayer(type: AssignTypes) {
-    return ["initialPrayer", "endingPrayer"].includes(type);
+    return [
+      this.assignTypeService.INITIAL_PRAYER,
+      this.assignTypeService.ENDING_PRAYER,
+    ].includes(type);
   }
 
   isOfTypeTreasuresAndOthers(type: AssignTypes) {
     return [
-      "treasures",
-      "spiritualGems",
-      "analysysAudience",
-      "livingAsChristians",
-      "congregationBibleStudy",
+      this.assignTypeService.TREASURES,
+      this.assignTypeService.SPIRITUAL_GEMS,
+      this.assignTypeService.ANALYSIS_AUDIENCE,
+      this.assignTypeService.LIVING_AS_CHRISTIANS,
+      this.assignTypeService.CONGREGATION_BIBLE_STUDY,
     ].includes(type);
   }
 

@@ -17,23 +17,41 @@ export class AssignTypeService {
   //The map of assignTypes for look up of by id
   #assignTypesMap: Map<string, AssignTypeInterface> = new Map();
 
+  readonly SPIRITUAL_GEMS = "spiritualGems";
+  readonly TREASURES = "treasures";
+  readonly BIBLE_READING = "bibleReading";
+  readonly ANALYSIS_AUDIENCE = "analysysAudience";
+  readonly INITIAL_CALL = "initialCall";
+  readonly RETURN_VISIT = "returnVisit";
+  readonly TALK = "talk";
+  readonly BIBLE_STUDY = "bibleStudy";
+  readonly INITIAL_PRAYER = "initialPrayer";
+  readonly ENDING_PRAYER = "endingPrayer";
+  readonly LIVING_AS_CHRISTIANS = "livingAsChristians";
+  readonly EXPLAIN_BELIEFS = "explainBeliefs";
+  readonly CONGREGATION_BIBLE_STUDY = "congregationBibleStudy";
+
   //Section
-  treasuresAssignmentTypes: AssignTypes[] = ["spiritualGems", "treasures", "bibleReading"];
+  treasuresAssignmentTypes: AssignTypes[] = [
+    this.SPIRITUAL_GEMS,
+    this.TREASURES,
+    this.BIBLE_READING,
+  ];
 
   //Section
   improvePreachingAssignmentTypes: AssignTypes[] = [
-    "analysysAudience",
-    "initialCall",
-    "returnVisit",
-    "bibleStudy",
-    "talk",
-    "explainBeliefs",
+    this.ANALYSIS_AUDIENCE,
+    this.INITIAL_CALL,
+    this.RETURN_VISIT,
+    this.BIBLE_STUDY,
+    this.TALK,
+    this.EXPLAIN_BELIEFS,
   ];
 
   //Section
   liveAsChristiansAssignmentTypes: AssignTypes[] = [
-    "livingAsChristians",
-    "congregationBibleStudy",
+    this.LIVING_AS_CHRISTIANS,
+    this.CONGREGATION_BIBLE_STUDY,
   ];
 
   constructor(
@@ -47,6 +65,7 @@ export class AssignTypeService {
 
   getNameOrTranslationByType(type: AssignTypes) {
     const at = this.#assignTypes.find((at) => at.type === type);
+    if (!at) return ""; // retro compatibility with wrong interest in others
     return this.getNameOrTranslation(at);
   }
 
