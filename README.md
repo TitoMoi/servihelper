@@ -59,7 +59,7 @@ Heatmap:
 
 Available interface languages are at the end of the page.
 
-In case your language is not supported, the native sheet _(assignment)_ to distribute can be customized so you can add your language when distributing.
+In case your language is not supported, you can customize the native slip and the s89 slip with your language in the config section.
 
 Only the time format can't be changed, but you can select a lang that suits your format.
 
@@ -76,7 +76,7 @@ Only the time format can't be changed, but you can select a lang that suits your
 
 **Free mode**:
 
-- _(All the next scenarios have no synchronization process, all imported files from person one will override the existing ones of person two)_
+- _(The next scenarios 1 and 2 dont have synchronization, all imported copies from person one will override the existing ones of person two)_
 - _(Maybe one scenario suits your needs better than the other, it is explained the benefits and the disadvantages)_
 
 1. **Use only google drive _(or other solution)_ to centralize and share copies of servihelper.**
@@ -98,7 +98,8 @@ Only the time format can't be changed, but you can select a lang that suits your
    - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
    - Your responsability to ensure that all files are synchronized before working.
    - Warning: Sometimes data is not updated on real time.
-   - _(this way of work has configuration complexity but later has less overhead, just check you are online and google drive is working and files are up to date)_
+   - _(this way of work has configuration complexity but later has less overhead, just check you are online and google drive is working and files are up to date before working)_
+   - _(this scenario is not real time, it just works directly with the files instead of with copies)_
 
 **Paid mode 💲**:
 Configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure. And also a platform mantainance over time _(⚠️ not recommended)_
