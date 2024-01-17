@@ -109,6 +109,8 @@ Configure a remote desktop and avoid the need to export and import data manually
 
 When creating an assignment, go to: [jw-meeting-workbook](https://www.jw.org/en/library/jw-meeting-workbook/) open the week you want to create and split the screen between Servihelper and the website.
 
+Another way is open jw library and split the screen between Servihelper and jw library.
+
 Then on creating the assignment copy the assignment and put it on the "theme field":
 
 <img src="./pictures/split-screen.png" alt= "create-assignment">
