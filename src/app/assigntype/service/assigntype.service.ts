@@ -21,6 +21,7 @@ export class AssignTypeService {
   readonly TREASURES = "treasures";
   readonly BIBLE_READING = "bibleReading";
   readonly ANALYSIS_AUDIENCE = "analysysAudience";
+  readonly INTEREST_IN_OTHERS = "interestInOthers"; //ToDo: For compatibility, must be removed on v6
   readonly INITIAL_CALL = "initialCall";
   readonly RETURN_VISIT = "returnVisit";
   readonly TALK = "talk";
@@ -41,6 +42,7 @@ export class AssignTypeService {
   //Section
   improvePreachingAssignmentTypes: AssignTypes[] = [
     this.ANALYSIS_AUDIENCE,
+    this.INTEREST_IN_OTHERS, //ToDo: For compatibility, must be removed on v6
     this.INITIAL_CALL,
     this.RETURN_VISIT,
     this.BIBLE_STUDY,

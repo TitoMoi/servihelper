@@ -22,6 +22,7 @@ export type AssignTypes =
   | "spiritualGems"
   | "bibleReading"
   | "analysysAudience"
+  | "interestInOthers" //ToDo: For compatibility, must be removed on v6
   | "initialCall"
   | "returnVisit"
   | "bibleStudy"
