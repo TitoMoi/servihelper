@@ -471,6 +471,7 @@
   "ru": "Rusça",
   "tr": "Türk",
   "zhCN": "Çince",
-  "CONFIG_EXPLAIN_EXHAUST": "Sarı saat, katılımcının bir grup ödevden bir ödevi X günden daha kısa sürede yapmasını veya tekrar etmesini önlemek içindir (Config kısmından güncellenebilir)",
+  "CONFIG_EXPLAIN_EXHAUST": "Sarı saat, katılımcının bir grup ödevden bir ödevi X günden daha kısa sürede yapmasını veya tekrar etmesini önlemek içindir",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (Config kısmından güncellenebilir)",
   "CONFIG_TIME_DISTANCE_TITLE": "Bir çeşit ödev arasındaki günler halinde mesafe"
 }

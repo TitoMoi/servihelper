@@ -482,6 +482,7 @@
   "ru": "Rusă",
   "tr": "Turc",
   "zhCN": "Chinez",
-  "CONFIG_EXPLAIN_EXHAUST": "Ceasul galben este pentru a împiedica participantul să facă sau să repete o temă dintr-un grup de teme în mai puțin de X zile (Poate fi actualizat în secțiunea de configurare)",
+  "CONFIG_EXPLAIN_EXHAUST": "Ceasul galben este pentru a împiedica participantul să facă sau să repete o temă dintr-un grup de teme în mai puțin de X zile",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (Poate fi actualizat în secțiunea de configurare)",
   "CONFIG_TIME_DISTANCE_TITLE": "Distanța în zile între un fel de misiuni"
 }

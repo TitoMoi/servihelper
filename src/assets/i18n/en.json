@@ -457,6 +457,7 @@
   "ru": "Russian",
   "tr": "Turkish",
   "zhCN": "Chinese",
-  "CONFIG_EXPLAIN_EXHAUST": "The yellow clock is to prevent the participant from repeating OR making an assignment from a group of assignments in less than X days (it can be updated on the config section)",
+  "CONFIG_EXPLAIN_EXHAUST": "The yellow clock is to prevent the participant from repeating OR making an assignment from a group of assignments in less than X days",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (it can be updated on the config section)",
   "CONFIG_TIME_DISTANCE_TITLE": "Distance in days between some kind of assignments"
 }

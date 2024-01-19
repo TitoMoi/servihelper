@@ -484,6 +484,7 @@
   "ru": "Russo",
   "tr": "Turca",
   "zhCN": "Chinês",
-  "CONFIG_EXPLAIN_EXHAUST": "O relógio amarelo serve para evitar que o participante faça ou repita uma tarefa de um grupo de tarefas em menos de X dias (Pode ser atualizado na seção de configuração)",
+  "CONFIG_EXPLAIN_EXHAUST": "O relógio amarelo serve para evitar que o participante faça ou repita uma tarefa de um grupo de tarefas em menos de X dias",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (Pode ser atualizado na seção de configuração)",
   "CONFIG_TIME_DISTANCE_TITLE": "Distância em dias entre algum tipo de tarefas"
 }

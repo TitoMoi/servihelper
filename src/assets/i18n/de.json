@@ -482,6 +482,7 @@
   "ru": "Russisch",
   "tr": "Türkisch",
   "zhCN": "Chinesisch",
-  "CONFIG_EXPLAIN_EXHAUST": "Die gelbe Uhr soll verhindern, dass der Teilnehmer in weniger als X Tagen eine Aufgabe aus einer Gruppe von Aufgaben erledigt oder wiederholt (es kann im Konfigurationsbereich aktualisiert werden)",
+  "CONFIG_EXPLAIN_EXHAUST": "Die gelbe Uhr soll verhindern, dass der Teilnehmer in weniger als X Tagen eine Aufgabe aus einer Gruppe von Aufgaben erledigt oder wiederholt",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (es kann im Konfigurationsbereich aktualisiert werden)",
   "CONFIG_TIME_DISTANCE_TITLE": "Entfernung in Tagen zwischen einer Art Aufgaben"
 }

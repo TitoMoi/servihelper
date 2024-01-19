@@ -481,6 +481,7 @@
   "ru": "Russisch",
   "tr": "Turks",
   "zhCN": "Chinese",
-  "CONFIG_EXPLAIN_EXHAUST": "De gele klok moet voorkomen dat de deelnemer in minder dan X dagen een opdracht uit een groep opdrachten maakt of herhaalt (Het kan worden bijgewerkt in de configuratiesectie)",
+  "CONFIG_EXPLAIN_EXHAUST": "De gele klok moet voorkomen dat de deelnemer in minder dan X dagen een opdracht uit een groep opdrachten maakt of herhaalt",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (Het kan worden bijgewerkt in de configuratiesectie)",
   "CONFIG_TIME_DISTANCE_TITLE": "Afstand in dagen tussen een soort opdrachten"
 }

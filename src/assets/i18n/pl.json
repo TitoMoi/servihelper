@@ -471,6 +471,7 @@
   "ru": "Rosyjski",
   "tr": "Turecki",
   "zhCN": "Chiński",
-  "CONFIG_EXPLAIN_EXHAUST": "Żółty zegar ma uniemożliwić uczestnikowi wykonanie lub powtórzenie zadania z grupy zadań w czasie krótszym niż X dni (Można go zaktualizować w sekcji konfiguracji)",
+  "CONFIG_EXPLAIN_EXHAUST": "Żółty zegar ma uniemożliwić uczestnikowi wykonanie lub powtórzenie zadania z grupy zadań w czasie krótszym niż X dni",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (Można go zaktualizować w sekcji konfiguracji)",
   "CONFIG_TIME_DISTANCE_TITLE": "Odległość w dniach między pewnymi zadaniami"
 }

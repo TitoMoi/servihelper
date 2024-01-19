@@ -484,6 +484,7 @@
   "ru": "Rus",
   "tr": "Turc",
   "zhCN": "Xinès",
-  "CONFIG_EXPLAIN_EXHAUST": "El rellotge groc és per evitar que el participant faci o repeteixi una tasca d'un grup de tasques en menys de X dies (es pot actualitzar a la secció de configuració)",
+  "CONFIG_EXPLAIN_EXHAUST": "El rellotge groc és per evitar que el participant faci o repeteixi una tasca d'un grup de tasques en menys de X dies",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (es pot actualitzar a la secció de configuració)",
   "CONFIG_TIME_DISTANCE_TITLE": "Distància en dies entre alguns tipus de tasques"
 }

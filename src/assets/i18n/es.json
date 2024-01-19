@@ -482,6 +482,7 @@
   "ru": "Ruso",
   "tr": "Turco",
   "zhCN": "Chino",
-  "CONFIG_EXPLAIN_EXHAUST": "El reloj amarillo sirve para evitar que el participante realice o repita una tarea de un grupo de tareas en menos de X días (se puede actualizar en la sección de configuración)",
+  "CONFIG_EXPLAIN_EXHAUST": "El reloj amarillo sirve para evitar que el participante realice o repita una tarea de un grupo de tareas en menos de X días",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (se puede actualizar en la sección de configuración)",
   "CONFIG_TIME_DISTANCE_TITLE": "Distancia en días entre algún tipo de tareas"
 }

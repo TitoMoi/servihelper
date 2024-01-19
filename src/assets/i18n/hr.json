@@ -454,6 +454,7 @@
   "ru": "Ruski",
   "tr": "Turski",
   "zhCN": "Kineski",
-  "CONFIG_EXPLAIN_EXHAUST": "Žuti sat sprječava sudionika da napravi ili ponovi zadatak iz grupe zadataka u roku kraćem od X dana (Može se ažurirati u odjeljku konfiguracije)",
+  "CONFIG_EXPLAIN_EXHAUST": "Žuti sat sprječava sudionika da napravi ili ponovi zadatak iz grupe zadataka u roku kraćem od X dana",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (Može se ažurirati u odjeljku konfiguracije)",
   "CONFIG_TIME_DISTANCE_TITLE": "Udaljenost u danima između nekakvih zadataka"
 }

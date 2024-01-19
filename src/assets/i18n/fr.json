@@ -482,6 +482,7 @@
   "ru": "Russe",
   "tr": "Turque",
   "zhCN": "Chinois",
-  "CONFIG_EXPLAIN_EXHAUST": "L'horloge jaune a pour but d'empêcher le participant de réaliser ou de répéter un devoir d'un groupe de devoirs en moins de X jours (Il peut être mis à jour dans la section config)",
+  "CONFIG_EXPLAIN_EXHAUST": "L'horloge jaune a pour but d'empêcher le participant de réaliser ou de répéter un devoir d'un groupe de devoirs en moins de X jours",
+  "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (Il peut être mis à jour dans la section config)",
   "CONFIG_TIME_DISTANCE_TITLE": "Distance en jours entre une sorte de missions"
 }
