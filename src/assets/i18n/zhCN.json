@@ -471,7 +471,6 @@
   "ru": "俄语",
   "tr": "土耳其",
   "zhCN": "中国人",
-  "CONFIG_EXPLAIN_EXHAUST": "该时钟警告要重复或执行类似的作业，即使参与者按数量排名最高。这有助于参与者不饱和并随着时间的推移接收分布式分配。",
-  "CONFIG_TIME_DISTANCE_TITLE": "某种作业之间的几天距离",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "饱和"
+  "CONFIG_EXPLAIN_EXHAUST": "黄色时钟是为了防止参与者在 X 天内完成或重复一组作业中的作业。（可以在配置部分更新）",
+  "CONFIG_TIME_DISTANCE_TITLE": "某种作业之间的几天距离"
 }

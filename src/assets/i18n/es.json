@@ -482,7 +482,6 @@
   "ru": "Ruso",
   "tr": "Turco",
   "zhCN": "Chino",
-  "CONFIG_EXPLAIN_EXHAUST": "Este reloj advierte que repita o haga una tarea similar incluso si el participante está en la parte superior de la lista por conteo.Esto ayuda al participante a no estar saturado y recibir asignación distribuida con el tiempo.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distancia en días entre algún tipo de tareas",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturado"
+  "CONFIG_EXPLAIN_EXHAUST": "El reloj amarillo sirve para evitar que el participante realice o repita una tarea de un grupo de tareas en menos de X días (se puede actualizar en la sección de configuración)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distancia en días entre algún tipo de tareas"
 }

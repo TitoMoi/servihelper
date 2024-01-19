@@ -590,6 +590,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
+  /** Red and Yellow clock */
   checkIfExhausted() {
     let currentDate: Date = this.gfv("date");
     const room = this.gfv("room");
@@ -644,7 +645,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
           if (
             allDays.some(
               (a) =>
-                this.isOfTypeAssignTypes(atType) &&
+                this.isOfTypeAssignTypes(
+                  this.assignTypeService.getAssignType(a.assignType).type
+                ) &&
                 (a.principal === p.id || a.assistant === p.id)
             )
           ) {

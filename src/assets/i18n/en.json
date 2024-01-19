@@ -457,7 +457,6 @@
   "ru": "Russian",
   "tr": "Turkish",
   "zhCN": "Chinese",
-  "CONFIG_EXPLAIN_EXHAUST": "This clock warns to repeat or do a similar assignment even if the participant is at the top of the list by count. This helps the participant to not being saturated and receive distributed assignment over time.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distance in days between some kind of assignments",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturated"
+  "CONFIG_EXPLAIN_EXHAUST": "The yellow clock is to prevent the participant from repeating OR making an assignment from a group of assignments in less than X days (it can be updated on the config section)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distance in days between some kind of assignments"
 }

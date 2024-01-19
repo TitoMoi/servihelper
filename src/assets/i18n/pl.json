@@ -471,7 +471,6 @@
   "ru": "Rosyjski",
   "tr": "Turecki",
   "zhCN": "Chiński",
-  "CONFIG_EXPLAIN_EXHAUST": "Ten zegar ostrzega przed powtórzeniem lub wykonaniem podobnego zadania, nawet jeśli uczestnik znajduje się na szczycie listy według hrabiego.Pomaga to uczestnikowi nie być nasycone i otrzymywać rozproszone zadanie w czasie.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Odległość w dniach między pewnymi zadaniami",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Nasycony"
+  "CONFIG_EXPLAIN_EXHAUST": "Żółty zegar ma uniemożliwić uczestnikowi wykonanie lub powtórzenie zadania z grupy zadań w czasie krótszym niż X dni (Można go zaktualizować w sekcji konfiguracji)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Odległość w dniach między pewnymi zadaniami"
 }

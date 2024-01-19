@@ -482,7 +482,6 @@
   "ru": "Rusă",
   "tr": "Turc",
   "zhCN": "Chinez",
-  "CONFIG_EXPLAIN_EXHAUST": "Acest ceas avertizează să repete sau să facă o misiune similară, chiar dacă participantul este în partea de sus a listei după numărare.Acest lucru ajută participantul să nu fie saturat și să primească misiune distribuită în timp.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distanța în zile între un fel de misiuni",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturat"
+  "CONFIG_EXPLAIN_EXHAUST": "Ceasul galben este pentru a împiedica participantul să facă sau să repete o temă dintr-un grup de teme în mai puțin de X zile (Poate fi actualizat în secțiunea de configurare)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distanța în zile între un fel de misiuni"
 }

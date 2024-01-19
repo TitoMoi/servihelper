@@ -482,7 +482,6 @@
   "ru": "Russe",
   "tr": "Turque",
   "zhCN": "Chinois",
-  "CONFIG_EXPLAIN_EXHAUST": "Cette horloge avertit de répéter ou de faire une affectation similaire même si le participant est en haut de la liste par compte.Cela aide le participant à ne pas être saturé et à recevoir une affectation distribuée au fil du temps.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distance en jours entre une sorte de missions",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturée"
+  "CONFIG_EXPLAIN_EXHAUST": "L'horloge jaune a pour but d'empêcher le participant de réaliser ou de répéter un devoir d'un groupe de devoirs en moins de X jours (Il peut être mis à jour dans la section config)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distance en jours entre une sorte de missions"
 }

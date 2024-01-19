@@ -484,7 +484,6 @@
   "ru": "Rus",
   "tr": "Turc",
   "zhCN": "Xinès",
-  "CONFIG_EXPLAIN_EXHAUST": "Aquest rellotge adverteix de repetir o fer una tasca similar, fins i tot si el participant es troba a la part superior de la llista per recompte.Això ajuda al participant a no estar saturat i a rebre una tasca distribuïda amb el pas del temps.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distància en dies entre alguns tipus de tasques",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturat"
+  "CONFIG_EXPLAIN_EXHAUST": "El rellotge groc és per evitar que el participant faci o repeteixi una tasca d'un grup de tasques en menys de X dies (es pot actualitzar a la secció de configuració)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distància en dies entre alguns tipus de tasques"
 }

@@ -454,7 +454,6 @@
   "ru": "Ruski",
   "tr": "Turski",
   "zhCN": "Kineski",
-  "CONFIG_EXPLAIN_EXHAUST": "Ovaj sat upozorava da ponovi ili izvrši sličan zadatak, čak i ako je sudionik na vrhu popisa po broju.To pomaže sudioniku da ne bude zasićen i dobije distribuirani zadatak s vremenom.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Udaljenost u danima između nekakvih zadataka",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Zasićen"
+  "CONFIG_EXPLAIN_EXHAUST": "Žuti sat sprječava sudionika da napravi ili ponovi zadatak iz grupe zadataka u roku kraćem od X dana (Može se ažurirati u odjeljku konfiguracije)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Udaljenost u danima između nekakvih zadataka"
 }

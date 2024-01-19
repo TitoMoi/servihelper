@@ -484,7 +484,6 @@
   "ru": "Russo",
   "tr": "Turca",
   "zhCN": "Chinês",
-  "CONFIG_EXPLAIN_EXHAUST": "Este relógio alerta para repetir ou fazer uma tarefa semelhante, mesmo que o participante esteja no topo da lista por contagem.Isso ajuda o participante a não estar saturado e a receber uma tarefa distribuída ao longo do tempo.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distância em dias entre algum tipo de tarefas",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturada"
+  "CONFIG_EXPLAIN_EXHAUST": "O relógio amarelo serve para evitar que o participante faça ou repita uma tarefa de um grupo de tarefas em menos de X dias (Pode ser atualizado na seção de configuração)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distância em dias entre algum tipo de tarefas"
 }

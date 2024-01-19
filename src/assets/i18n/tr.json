@@ -471,7 +471,6 @@
   "ru": "Rusça",
   "tr": "Türk",
   "zhCN": "Çince",
-  "CONFIG_EXPLAIN_EXHAUST": "Bu saat, katılımcı sayılarla listenin başında olsa bile tekrarlama veya benzer bir ödev yapmayı uyarır.Bu, katılımcının doymuş olmamasına ve zaman içinde dağıtılmış ödev almasına yardımcı olur.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Bir çeşit ödev arasındaki günler halinde mesafe",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Doymuş"
+  "CONFIG_EXPLAIN_EXHAUST": "Sarı saat, katılımcının bir grup ödevden bir ödevi X günden daha kısa sürede yapmasını veya tekrar etmesini önlemek içindir (Config kısmından güncellenebilir)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Bir çeşit ödev arasındaki günler halinde mesafe"
 }

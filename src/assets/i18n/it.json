@@ -481,7 +481,6 @@
   "ru": "Russo",
   "tr": "Turca",
   "zhCN": "Cinese",
-  "CONFIG_EXPLAIN_EXHAUST": "Questo orologio avverte di ripetere o eseguire un incarico simile anche se il partecipante è in cima alla lista per conteggio.Questo aiuta il partecipante a non essere saturato e ricevere un incarico distribuito nel tempo.",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distanza in giorni tra una sorta di incarichi",
-  "ASSIGNMENT_SATURATED_TOOLTIP": "Saturata"
+  "CONFIG_EXPLAIN_EXHAUST": "L'orologio giallo serve a impedire al partecipante di eseguire o ripetere un compito da un gruppo di compiti in meno di X giorni (Può essere aggiornato nella sezione di configurazione)",
+  "CONFIG_TIME_DISTANCE_TITLE": "Distanza in giorni tra una sorta di incarichi"
 }
