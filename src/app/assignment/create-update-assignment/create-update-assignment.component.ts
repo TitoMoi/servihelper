@@ -408,7 +408,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         //To modify the template
         this.isPTheme = isPtheme;
         //Clear value of theme
-        this.form.get("theme").reset();
+        if (isPtheme) this.form.get("theme").reset();
         const onlyWomanCtrl = this.form.get("onlyWoman");
         this.isPTheme
           ? onlyWomanCtrl.disable({ emitEvent: false })
