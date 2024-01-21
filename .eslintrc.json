@@ -1,33 +1,25 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "app/**/*",
-    "dist/**/*",
-    "release/**/*",
-    "*.js"
-  ],
+  "ignorePatterns": ["projects/**/*", "dist/**/*", "release/**/*", "*.js"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
-      "parserOptions": {
-        "project": [
-          "./tsconfig.json",
-          "./src/tsconfig.json"
-        ],
-        "createDefaultProgram": true
-      },
+      "files": ["*.ts"],
       "extends": [
-        "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "prettier"
+        "plugin:prettier/recommended"
       ],
       "rules": {
-        "prefer-arrow/prefer-arrow-functions": 0,
-        "jsdoc/newline-after-description": "off",
-        "@angular-eslint/directive-selector": 0,
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
         "@angular-eslint/component-selector": [
           "error",
           {
@@ -39,11 +31,11 @@
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "extends": [
-        "plugin:@angular-eslint/template/recommended"
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility",
+        "plugin:prettier/recommended"
       ],
       "rules": {}
     }

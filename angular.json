@@ -1,7 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "schematicCollections": ["@angular-eslint/schematics"],
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
     "analytics": false
   },
   "version": 1,
@@ -52,7 +54,9 @@
             "customWebpackConfig": {
               "path": "./angular.webpack.js"
             },
-            "allowedCommonJsDependencies": ["adm-zip"]
+            "allowedCommonJsDependencies": [
+              "adm-zip"
+            ]
           },
           "configurations": {
             "dev": {
@@ -152,14 +156,21 @@
             "tsConfig": "tsconfig.test.json",
             "karmaConfig": "src/karma.conf.js",
             "scripts": [],
-            "styles": ["src/styles.scss"],
-            "assets": ["src/assets"]
+            "styles": [
+              "src/styles.scss"
+            ],
+            "assets": [
+              "src/assets"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
