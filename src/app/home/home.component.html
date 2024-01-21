@@ -1,47 +1,55 @@
 <ng-container *transloco="let t">
   @if (!isOnline) {
-  <h3 class="mb-2">{{ t("CONFIG_BACKUP_LABEL_IMPORT") }}</h3>
-  <div class="mb-3">
-    <label
-      for="zip-upload"
-      [ngClass]="{
-        'custom-file-upload-success': isZipLoaded,
-        'custom-file-upload': !isZipLoaded
-      }"
-    >
-      @if (!isZipLoaded) {
-      <span>{{ t("CONFIG_ZIP_UPLOAD") }} ...</span>
-      } @if (isZipLoaded) {
-      <span class="ml-3 d-inline-block">{{ t("CONFIG_ZIP_UPLOADED") }}</span>
+    <h3 class="mb-2">{{ t("CONFIG_BACKUP_LABEL_IMPORT") }}</h3>
+    <div class="mb-3">
+      <label
+        for="zip-upload"
+        [ngClass]="{
+          'custom-file-upload-success': isZipLoaded,
+          'custom-file-upload': !isZipLoaded
+        }"
+      >
+        @if (!isZipLoaded) {
+          <span>{{ t("CONFIG_ZIP_UPLOAD") }} ...</span>
+        }
+        @if (isZipLoaded) {
+          <span class="ml-3 d-inline-block">{{ t("CONFIG_ZIP_UPLOADED") }}</span>
+        }
+      </label>
+      <input id="zip-upload" type="file" (change)="uploadZipFiles($event)" [disabled]="" />
+    </div>
+    @if (config$ | async; as config) {
+      @if (config.lastImportedDate) {
+        <div class="my-3">
+          {{ t("CONFIG_LAST_IMPORTED_DATE") }}:
+          {{ config.lastImportedDate | translocoDate: { dateStyle: "full" } }} -
+          {{ config.lastImportedFilename }}
+        </div>
       }
-    </label>
-    <input id="zip-upload" type="file" (change)="uploadZipFiles($event)" [disabled]="" />
-  </div>
-  @if (config$ | async; as config) { @if (config.lastImportedDate) {
-  <div class="my-3">
-    {{ t("CONFIG_LAST_IMPORTED_DATE") }}:
-    {{ config.lastImportedDate | translocoDate : { dateStyle: "full" } }} -
-    {{ config.lastImportedFilename }}
-  </div>
-  } } } @else {
-  {{ t("HOME_IS_ONLINE_ACTIVATED") }}
-  } @if (isZipLoaded) {
-  <div class="pb-3">
-    <p class="d-inline-block mt-3 green-msg">
-      {{ t("CONFIG_BACKUP_SUCCESS_ALL_FILES") }}
-    </p>
-  </div>
+    }
+  } @else {
+    {{ t("HOME_IS_ONLINE_ACTIVATED") }}
+  }
+  @if (isZipLoaded) {
+    <div class="pb-3">
+      <p class="d-inline-block mt-3 green-msg">
+        {{ t("CONFIG_BACKUP_SUCCESS_ALL_FILES") }}
+      </p>
+    </div>
   }
   <h3>{{ t("CONFIG_BACKUP_LABEL_EXPORT") }}</h3>
   <button mat-raised-button type="button" color="accent" (click)="downloadFiles()">
     {{ t("BUTTON_DOWNLOAD") }}
   </button>
-  @if (config$ | async; as config) { @if (config.lastExportedDate) {
-  <div class="my-3">
-    {{ t("CONFIG_LAST_EXPORTED_DATE") }}:
-    {{ config.lastExportedDate | translocoDate : { dateStyle: "full", timeStyle: "full" } }}
-  </div>
-  } } @if (noteHome) {
-  <div class="border mt-4" [innerHTML]="noteHome.editorHTML"></div>
+  @if (config$ | async; as config) {
+    @if (config.lastExportedDate) {
+      <div class="my-3">
+        {{ t("CONFIG_LAST_EXPORTED_DATE") }}:
+        {{ config.lastExportedDate | translocoDate: { dateStyle: "full", timeStyle: "full" } }}
+      </div>
+    }
+  }
+  @if (noteHome) {
+    <div class="border mt-4" [innerHTML]="noteHome.editorHTML"></div>
   }
 </ng-container>

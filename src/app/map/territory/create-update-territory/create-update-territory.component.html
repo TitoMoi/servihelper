@@ -73,9 +73,9 @@
             [disableRipple]="true"
           >
             @for (tg of territoryGroups; track tg) {
-            <mat-option [value]="tg.id">
-              {{ tg.name }}
-            </mat-option>
+              <mat-option [value]="tg.id">
+                {{ tg.name }}
+              </mat-option>
             }
           </mat-select>
         </mat-form-field>
@@ -91,9 +91,9 @@
             [disableRipple]="true"
           >
             @for (p of participants; track p) {
-            <mat-option [value]="p.id">
-              {{ p.name }}
-            </mat-option>
+              <mat-option [value]="p.id">
+                {{ p.name }}
+              </mat-option>
             }
           </mat-select>
         </mat-form-field>
@@ -130,11 +130,11 @@
     <input id="image-upload" type="file" (change)="uploadImageFile($event)" />
     <label>
       @if (territoryForm.controls.imageId.value || territoryForm.controls.image.value) {
-      <mat-icon
-        svgIcon="imageremove"
-        (click)="removeImage()"
-        [matTooltip]="t('TERRITORY_REMOVE_IMAGE')"
-      ></mat-icon>
+        <mat-icon
+          svgIcon="imageremove"
+          (click)="removeImage()"
+          [matTooltip]="t('TERRITORY_REMOVE_IMAGE')"
+        ></mat-icon>
       }
     </label>
   </div>
@@ -147,7 +147,7 @@
   ></div>
   <div>
     @if (imageExists() || imagePersisted()) {
-    <img [src]="getImagePath()" id="imageDiv" class="mb-2" />
+      <img [src]="getImagePath()" id="imageDiv" class="mb-2" />
     }
   </div>
   <button mat-raised-button type="button" class="me-3" (click)="goBack()">
@@ -162,21 +162,21 @@
   >
     {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
     @if (netStatusOffline$ | async) {
-    <mat-icon svgIcon="nowifi"></mat-icon>
+      <mat-icon svgIcon="nowifi"></mat-icon>
     }
   </button>
-  @if(!isUpdate) {
-  <button
-    mat-raised-button
-    color="accent"
-    type="button"
-    (click)="save(true)"
-    [disabled]="territoryForm.invalid || (netStatusOffline$ | async)"
-  >
-    {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
-    @if (netStatusOffline$ | async) {
-    <mat-icon svgIcon="nowifi"></mat-icon>
-    }
-  </button>
+  @if (!isUpdate) {
+    <button
+      mat-raised-button
+      color="accent"
+      type="button"
+      (click)="save(true)"
+      [disabled]="territoryForm.invalid || (netStatusOffline$ | async)"
+    >
+      {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
+      @if (netStatusOffline$ | async) {
+        <mat-icon svgIcon="nowifi"></mat-icon>
+      }
+    </button>
   }
 </span>

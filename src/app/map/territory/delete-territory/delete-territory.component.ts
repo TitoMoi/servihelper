@@ -24,8 +24,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
   templateUrl: "./delete-territory.component.html",
   styleUrls: ["./delete-territory.component.scss"],
 })
@@ -44,7 +44,7 @@ export class DeleteTerritoryComponent {
     private territoryService: TerritoryService,
     private router: Router,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
   onSubmit(): void {
     //get id

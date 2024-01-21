@@ -10,7 +10,7 @@ import { ParticipantDynamicInterface } from "../participant/model/participant.mo
  */
 export function getDistanceBetweenPenultimaAndLast(
   participantList: ParticipantDynamicInterface[],
-  locale: Locale
+  locale: Locale,
 ): void {
   //Get the distance, i18n sensitive
   for (const participant of participantList) {
@@ -20,7 +20,7 @@ export function getDistanceBetweenPenultimaAndLast(
         new Date(participant.lastAssignmentDate),
         {
           locale,
-        }
+        },
       );
     }
   }

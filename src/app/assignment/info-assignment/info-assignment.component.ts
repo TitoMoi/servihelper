@@ -19,8 +19,8 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     MatIconModule,
     TranslocoLocaleModule,
     RoomPipe,
-    RoomNamePipe
-],
+    RoomNamePipe,
+  ],
 })
 export class InfoAssignmentComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: ParticipantDynamicInterface[]) {}

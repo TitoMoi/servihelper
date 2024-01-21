@@ -122,7 +122,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     private sortService: SortService,
     private formBuilder: UntypedFormBuilder,
     private configService: ConfigService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
   ngOnInit(): void {
     this.selectionForm.markAllAsTouched();
@@ -138,7 +138,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
         if (this.assignTypesSelectRef) {
           this.selectFilteredAssignTypes();
         }
-      })
+      }),
     );
   }
 
@@ -148,7 +148,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
     }
 
     const filteredOptions = this.assignTypesSelectRef.options.filter((item: MatOption) =>
-      this.allowedAssignTypesIds.includes(item.value)
+      this.allowedAssignTypesIds.includes(item.value),
     );
     for (const o of filteredOptions) {
       o.select();

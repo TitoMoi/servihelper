@@ -27,8 +27,8 @@ import { ChangeDetectionStrategy } from "@angular/core";
     MatDatepickerModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
   templateUrl: "./return-territory.component.html",
   styleUrls: ["./return-territory.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,7 +50,7 @@ export class ReturnTerritoryComponent implements AfterViewInit {
     private router: Router,
     private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngAfterViewInit(): void {

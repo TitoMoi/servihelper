@@ -22,15 +22,18 @@ import { OnlineService } from "app/online/service/online.service";
     RouterLinkActive,
     MatIconModule,
     RoomNamePipe,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class RoomComponent implements OnInit {
   rooms: RoomInterface[];
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
-  constructor(private roomService: RoomService, private onlineService: OnlineService) {}
+  constructor(
+    private roomService: RoomService,
+    private onlineService: OnlineService,
+  ) {}
 
   ngOnInit(): void {
     this.rooms = this.roomService.getRooms().sort((a, b) => (a.order > b.order ? 1 : -1));

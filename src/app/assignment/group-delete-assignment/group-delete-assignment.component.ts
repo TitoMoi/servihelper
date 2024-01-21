@@ -61,8 +61,8 @@ export class GroupDeleteAssignmentComponent implements OnInit, OnDestroy {
       map((date) =>
         this.assignmentService
           .getAssignmentsByDate(date)
-          .filter((a) => this.currentAssignTypesIdsByRole.includes(a.assignType))
-      )
+          .filter((a) => this.currentAssignTypesIdsByRole.includes(a.assignType)),
+      ),
     );
 
   subscription = new Subscription();
@@ -74,7 +74,7 @@ export class GroupDeleteAssignmentComponent implements OnInit, OnDestroy {
     private router: Router,
     private onlineService: OnlineService,
     private configService: ConfigService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
   ngOnInit(): void {
     //skip the first one as role$ is a hot observable
@@ -82,7 +82,7 @@ export class GroupDeleteAssignmentComponent implements OnInit, OnDestroy {
       this.configService.role$.pipe(skip(1)).subscribe(() => {
         this.currentAssignTypesIdsByRole = this.assignTypeService.getAssignTypesIdsByRole();
         this.form.enable(); //Trigger enable just to emit a valueChanges
-      })
+      }),
     );
   }
 

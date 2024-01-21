@@ -14,7 +14,10 @@ export class LockService {
 
   isOnline = this.onlineService.getOnline().isOnline;
 
-  constructor(private configService: ConfigService, private onlineService: OnlineService) {}
+  constructor(
+    private configService: ConfigService,
+    private onlineService: OnlineService,
+  ) {}
 
   /**
    * @returns LockInterface

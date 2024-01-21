@@ -4,10 +4,7 @@
   </app-navigation>
 }
 @if (showLockMsg) {
-  <div
-    class="lockMsgFont"
-    style="height: 100%; display: grid; place-items: center"
-    >
+  <div class="lockMsgFont" style="height: 100%; display: grid; place-items: center">
     <div *transloco="let t">
       <div class="fw-bold mb-3">{{ t("APP_LOCKED") }}</div>
       <div class="text-center">{{ t("CHECK_LATER") }}</div>

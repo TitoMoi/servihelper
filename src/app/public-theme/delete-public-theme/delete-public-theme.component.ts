@@ -25,8 +25,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
   templateUrl: "./delete-public-theme.component.html",
   styleUrls: ["./delete-public-theme.component.scss"],
 })
@@ -46,7 +46,7 @@ export class DeletePublicThemeComponent {
     private assignmentService: AssignmentService,
     private router: Router,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   onSubmit(publicTheme: PublicThemeInterface): void {

@@ -1,21 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ReturnTerritoryComponent } from './return-territory.component';
+import { ReturnTerritoryComponent } from "./return-territory.component";
 
-describe('ReturnTerritoryComponent', () => {
+describe("ReturnTerritoryComponent", () => {
   let component: ReturnTerritoryComponent;
   let fixture: ComponentFixture<ReturnTerritoryComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReturnTerritoryComponent]
+      imports: [ReturnTerritoryComponent],
     });
     fixture = TestBed.createComponent(ReturnTerritoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

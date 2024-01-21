@@ -27,8 +27,8 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     MatIconModule,
     MatSnackBarModule,
     MatInputModule,
-    ParticipantPipe
-],
+    ParticipantPipe,
+  ],
   templateUrl: "./massive-dates-territory.component.html",
   styleUrls: ["./massive-dates-territory.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,7 +47,7 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
     private onlineService: OnlineService,
     private matSnackBar: MatSnackBar,
     private translocoService: TranslocoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void {
@@ -59,14 +59,14 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
           name: { value: t.name, disabled: true },
           assignedDates: this.formBuilder.array(t.assignedDates),
           returnedDates: this.formBuilder.array(t.returnedDates),
-        })
+        }),
       );
     }
   }
 
   ngOnDestroy(): void {
     let hasChanges = false;
-    for (let form of this.formArray) {
+    for (const form of this.formArray) {
       if (form.valid && form.touched) {
         hasChanges = true;
         const index = this.territories.findIndex((t) => t.id === form.controls.id.value);
@@ -79,7 +79,7 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
       this.matSnackBar.open(
         this.translocoService.translate("CONFIG_SAVED"),
         this.translocoService.translate("CLOSE"),
-        { duration: 2000 }
+        { duration: 2000 },
       );
     }
   }

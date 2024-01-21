@@ -17,10 +17,10 @@ export class OnlineService {
   #networkStatus$ = new BehaviorSubject(false);
   //We dont want the status "false" we want a true if the condition is meet
   netStatusOffline$ = this.#networkStatus$.pipe(
-    map((status) => this.#online.isOnline && status === false)
+    map((status) => this.#online.isOnline && status === false),
   );
   netStatusOnline$ = this.#networkStatus$.pipe(
-    map((status) => this.#online.isOnline && status === true)
+    map((status) => this.#online.isOnline && status === true),
   );
 
   constructor(private configService: ConfigService) {}

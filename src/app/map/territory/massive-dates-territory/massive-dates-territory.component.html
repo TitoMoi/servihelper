@@ -15,45 +15,52 @@
                   spellcheck="false"
                   [disabled]="true"
                   [value]="(participant.value | participantPipe).name"
-                  />
-                </mat-form-field>
-              }
-            </ng-container>
-          </div>
-          <div class="col-4">
-            <ng-container formArrayName="assignedDates">
-              @for (assignedDate of assignedDates(i).controls; track assignedDate; let j = $index) {
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_CHOOSE_DATE_ASSIGNED") }}</mat-label>
-                  <input required matInput [matDatepicker]="picker" [formControlName]="j" />
-                  <mat-datepicker-toggle
-                    matPrefix
-                    [for]="picker"
-                    class="mr-3"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
-                </mat-form-field>
-              }
-            </ng-container>
-          </div>
-          <div class="col-4">
-            <ng-container formArrayName="returnedDates">
-              @for (returnedDate of returnedDates(i).controls; track returnedDate; let j = $index) {
-                <mat-form-field>
-                  <mat-label>{{ t("ASSIGN_CHOOSE_DATE_RETURNED") }}</mat-label>
-                  <input required matInput [matDatepicker]="picker" [formControlName]="j" />
-                  <mat-datepicker-toggle
-                    matPrefix
-                    [for]="picker"
-                    class="mr-3"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
-                </mat-form-field>
-              }
-            </ng-container>
-          </div>
+                />
+              </mat-form-field>
+            }
+          </ng-container>
         </div>
-      </ng-container>
-    }
-  </span>
-  
+        <div class="col-4">
+          <ng-container formArrayName="assignedDates">
+            @for (
+              assignedDate of assignedDates(i).controls;
+              track assignedDate;
+              let j = $index
+            ) {
+              <mat-form-field>
+                <mat-label>{{ t("ASSIGN_CHOOSE_DATE_ASSIGNED") }}</mat-label>
+                <input required matInput [matDatepicker]="picker" [formControlName]="j" />
+                <mat-datepicker-toggle
+                  matPrefix
+                  [for]="picker"
+                  class="mr-3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
+              </mat-form-field>
+            }
+          </ng-container>
+        </div>
+        <div class="col-4">
+          <ng-container formArrayName="returnedDates">
+            @for (
+              returnedDate of returnedDates(i).controls;
+              track returnedDate;
+              let j = $index
+            ) {
+              <mat-form-field>
+                <mat-label>{{ t("ASSIGN_CHOOSE_DATE_RETURNED") }}</mat-label>
+                <input required matInput [matDatepicker]="picker" [formControlName]="j" />
+                <mat-datepicker-toggle
+                  matPrefix
+                  [for]="picker"
+                  class="mr-3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
+              </mat-form-field>
+            }
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  }
+</span>

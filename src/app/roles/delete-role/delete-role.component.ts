@@ -28,8 +28,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     MatIconModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class DeleteRoleComponent {
   role = this.configService.getRole(this.activatedRoute.snapshot.params.id);
@@ -46,7 +46,7 @@ export class DeleteRoleComponent {
     private configService: ConfigService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService
+    private onlineService: OnlineService,
   ) {}
 
   onSubmit() {

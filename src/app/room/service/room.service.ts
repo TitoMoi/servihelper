@@ -19,7 +19,7 @@ export class RoomService {
 
   constructor(
     private configService: ConfigService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
   ) {}
 
   getNameOrTranslation(r: RoomInterface): string {

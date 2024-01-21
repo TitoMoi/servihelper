@@ -33,8 +33,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
 })
 export class CreateFromParticipantComponent {
   participants: ParticipantInterface[] = this.participantService.getParticipants(true);
@@ -52,14 +52,14 @@ export class CreateFromParticipantComponent {
     private participantService: ParticipantService,
     private router: Router,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   onSubmit(): void {
     const participantId = this.participantForm.get("principal").value;
 
     const participant: ParticipantInterface = structuredClone(
-      this.participantService.getParticipant(participantId)
+      this.participantService.getParticipant(participantId),
     );
 
     //Reset some properties

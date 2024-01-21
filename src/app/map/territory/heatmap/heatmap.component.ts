@@ -40,8 +40,8 @@ import { differenceInMonths } from "date-fns";
     AutoFocusDirective,
     ReactiveFormsModule,
     MatSelectModule,
-    MatOptionModule
-],
+    MatOptionModule,
+  ],
   templateUrl: "./heatmap.component.html",
   styleUrls: ["./heatmap.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -74,7 +74,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
     if (this.loadedPolygons.length) {
       this.map = new Map("map", { attributionControl: false }).setView(
         this.loadedPolygons[0].latLngList[0],
-        13
+        13,
       );
 
       this.tile = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -89,7 +89,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    for (let p of this.polygonRefList) {
+    for (const p of this.polygonRefList) {
       p.remove();
     }
     this.tile?.remove();

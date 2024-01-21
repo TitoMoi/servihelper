@@ -20,13 +20,13 @@ import { OnlineService } from "app/online/service/online.service";
     RouterLink,
     RouterLinkActive,
     MatIconModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class RolesComponent implements OnInit {
   roles$: Observable<RoleInterface[]> = this.configService.config$.pipe(
     filter((config) => config.roles.length > 0),
-    map((config) => config.roles)
+    map((config) => config.roles),
   );
 
   //Table
@@ -34,7 +34,10 @@ export class RolesComponent implements OnInit {
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
-  constructor(private configService: ConfigService, private onlineService: OnlineService) {}
+  constructor(
+    private configService: ConfigService,
+    private onlineService: OnlineService,
+  ) {}
 
   ngOnInit(): void {}
 

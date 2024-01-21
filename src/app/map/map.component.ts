@@ -47,21 +47,24 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     map(
       () =>
         this.router.getCurrentNavigation().extractedUrl.root.children.primary.segments.length <
-        3
-    )
+        3,
+    ),
   );
 
   subscription = new Subscription();
 
-  constructor(private cdr: ChangeDetectorRef, private router: Router) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(
       this.selectedRadioOptionControl.valueChanges.subscribe((value) =>
         value === "1"
           ? this.router.navigate(["/map/territory"])
-          : this.router.navigate(["/map/territoryGroup"])
-      )
+          : this.router.navigate(["/map/territoryGroup"]),
+      ),
     );
   }
 

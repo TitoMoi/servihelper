@@ -162,7 +162,7 @@ export class TerritoryService {
 
   /** @param id the id of the participant */
   returnActiveTerritoriesByParticipant(id: string) {
-    for (let t of this.#territories) {
+    for (const t of this.#territories) {
       //Territory is unassigned
       if (t.assignedDates.length === t.returnedDates.length) continue;
       if (t.participants.at(-1) === id) {

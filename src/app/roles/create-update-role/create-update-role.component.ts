@@ -39,8 +39,8 @@ import { OnlineService } from "app/online/service/online.service";
     RouterLink,
     AssignTypeNamePipe,
     MatIconModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class CreateUpdateRoleComponent {
   assignTypes: AssignTypeInterface[] = this.assignTypeService
@@ -67,7 +67,7 @@ export class CreateUpdateRoleComponent {
     private assignTypeService: AssignTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService
+    private onlineService: OnlineService,
   ) {}
 
   //includes

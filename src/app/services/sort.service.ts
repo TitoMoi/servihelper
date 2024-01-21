@@ -17,7 +17,7 @@ export class SortService {
   constructor(
     private assignTypeService: AssignTypeService,
     private assignmentService: AssignmentService,
-    private roomService: RoomService
+    private roomService: RoomService,
   ) {}
 
   /**
@@ -27,13 +27,13 @@ export class SortService {
    */
   sortAssignmentsByDateThenRoomAndAssignType(
     assignments: AssignmentTableInterface[] | AssignmentInterface[],
-    order: SortOrderType
+    order: SortOrderType,
   ) {
     //Sort by date first
     assignments.sort(
       order === "Desc"
         ? this.assignmentService.sortAssignmentsByDateDesc
-        : this.assignmentService.sortAssignmentsByDateAsc
+        : this.assignmentService.sortAssignmentsByDateAsc,
     );
 
     //Diferent sort, first separate date into arrays, then double sort, first room and then assign type
@@ -66,7 +66,7 @@ export class SortService {
           } else {
             return roomAOrder > roomBOrder ? 1 : -1;
           }
-        }
+        },
       );
     }
 
@@ -87,7 +87,7 @@ export class SortService {
 
   sortByCountAndByDistance(
     a: ParticipantDynamicInterface,
-    b: ParticipantDynamicInterface
+    b: ParticipantDynamicInterface,
   ): number {
     if (a.count < b.count) {
       return -1;
@@ -131,7 +131,7 @@ export class SortService {
 
   sortParticipantsByCountOrDate(
     a: ParticipantDynamicInterface,
-    b: ParticipantDynamicInterface
+    b: ParticipantDynamicInterface,
   ): number {
     if (a.count < b.count) {
       return -1;

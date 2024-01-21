@@ -8,7 +8,6 @@ import { OnlineTemplateDataInterface } from "../model/config.model";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatIconModule } from "@angular/material/icon";
 
-
 @Component({
   selector: "app-online-template",
   standalone: true,
@@ -19,15 +18,15 @@ import { MatIconModule } from "@angular/material/icon";
     FormsModule,
     MatButtonModule,
     TranslocoModule,
-    MatIconModule
-],
+    MatIconModule,
+  ],
   templateUrl: "./online-template.component.html",
   styleUrls: ["./online-template.component.scss"],
 })
 export class OnlineTemplateComponent {
   constructor(
     public dialogRef: MatDialogRef<OnlineTemplateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: OnlineTemplateDataInterface
+    @Inject(MAT_DIALOG_DATA) public data: OnlineTemplateDataInterface,
   ) {
     dialogRef.disableClose = true; //Ask for explicit read
   }

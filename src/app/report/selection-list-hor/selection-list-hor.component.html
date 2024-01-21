@@ -41,45 +41,43 @@
           class="fw-bold"
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSizeHorizontal"
-          >
+        >
           {{
-          ag.assignments[0].date
-          | translocoDate
-          : {
-          dateStyle: defaultReportDateFormat
-        }
-        }}
-      </th>
-      @for (assignment of ag.assignments; track assignment) {
-        <th
-          [id]="assignment.assignType.id"
-          class="fw-bold"
-          [style.borderBottom]="'6px solid'"
-          [style.borderBottomColor]="
-          (assignment.assignType.id | assignTypePipe).color || 'transparent'
-          "
-          [style.fontSize]="defaultReportFontSizeHorizontal"
-          >
-          {{ assignment.assignType | assignTypeNamePipe }}
+            ag.assignments[0].date
+              | translocoDate
+                : {
+                    dateStyle: defaultReportDateFormat
+                  }
+          }}
         </th>
-      }
-    </tr>
-    <tr>
-      <td [style.fontSize]="defaultReportFontSizeHorizontal">
-        {{ ag.assignments[0].room | roomNamePipe }}
-      </td>
-      @for (assignment of ag.assignments; track assignment) {
-        <td
-          [style.fontSize]="defaultReportFontSizeHorizontal"
+        @for (assignment of ag.assignments; track assignment) {
+          <th
+            [id]="assignment.assignType.id"
+            class="fw-bold"
+            [style.borderBottom]="'6px solid'"
+            [style.borderBottomColor]="
+              (assignment.assignType.id | assignTypePipe).color || 'transparent'
+            "
+            [style.fontSize]="defaultReportFontSizeHorizontal"
           >
-          {{ assignment.principal.name }}
-          @if (assignment.assistant) {
-            / <br />
-            {{ assignment.assistant.name }}
-          }
+            {{ assignment.assignType | assignTypeNamePipe }}
+          </th>
+        }
+      </tr>
+      <tr>
+        <td [style.fontSize]="defaultReportFontSizeHorizontal">
+          {{ ag.assignments[0].room | roomNamePipe }}
         </td>
-      }
-    </tr>
-  </table>
-}
+        @for (assignment of ag.assignments; track assignment) {
+          <td [style.fontSize]="defaultReportFontSizeHorizontal">
+            {{ assignment.principal.name }}
+            @if (assignment.assistant) {
+              / <br />
+              {{ assignment.assistant.name }}
+            }
+          </td>
+        }
+      </tr>
+    </table>
+  }
 </div>

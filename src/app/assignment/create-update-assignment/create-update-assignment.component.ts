@@ -145,7 +145,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   assignmentsBySelectedDate: AssignmentInterface[] = [];
 
   role$ = this.configService.config$.pipe(
-    map(() => this.configService.getRole(this.configService.getCurrentRoleId()))
+    map(() => this.configService.getRole(this.configService.getCurrentRoleId())),
   );
 
   role: RoleInterface;
@@ -154,7 +154,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   //Fill the form with the assignment passed by the router
   a: AssignmentInterface = this.assignmentService.getAssignment(
-    this.activatedRoute.snapshot.params.id
+    this.activatedRoute.snapshot.params.id,
   );
 
   isUpdate = this.a !== undefined;
@@ -222,7 +222,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog,
     private onlineService: OnlineService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
     this.getAssignments();
   }
@@ -301,7 +301,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.role = r;
         this.filterAssignmentsByRole();
         this.removeAssignTypesThatAlreadyExistOnDate();
-      })
+      }),
     );
   }
 
@@ -312,7 +312,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.assignments,
         this.principals,
         this.gfv("assignType"),
-        true
+        true,
       );
     }
   }
@@ -324,7 +324,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.assignments,
         this.assistants,
         this.gfv("assignType"),
-        false
+        false,
       );
     }
   }
@@ -375,7 +375,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.filterAssignmentsByRole();
         this.removeAssignTypesThatAlreadyExistOnDate();
         this.batchGetCountSortWarning();
-      })
+      }),
     );
     this.cdr.detectChanges();
   }
@@ -397,7 +397,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
           this.batchCleanGroup();
           this.batchGetCountSortWarning();
           this.enableOrDisableAssistantControl(assignTypeId);
-        })
+        }),
     );
     this.cdr.detectChanges();
   }
@@ -413,7 +413,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.isPTheme
           ? onlyWomanCtrl.disable({ emitEvent: false })
           : onlyWomanCtrl.enable({ emitEvent: false });
-      })
+      }),
     );
   }
 
@@ -442,7 +442,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         //Only man
         this.principals = this.principals.filter((p) => p.isWoman === false && !p.isExternal);
         this.assistants = this.assistants.filter((a) => a.isWoman === false && !a.isExternal);
-      })
+      }),
     );
   }
 
@@ -458,7 +458,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         //Only woman
         this.principals = this.principals.filter((p) => p.isWoman === true);
         this.assistants = this.assistants.filter((a) => a.isWoman === true);
-      })
+      }),
     );
   }
 
@@ -468,7 +468,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.batchCleanPrincipalAssistant();
         this.batchCleanGroup();
         this.batchGetCountSortWarning();
-      })
+      }),
     );
   }
 
@@ -481,7 +481,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         }
         //remove current selected principal from assistants
         this.removePrincipalFromAssistants(newPrincId);
-      })
+      }),
     );
   }
 
@@ -494,7 +494,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         if (group) {
           this.principals = this.principals.filter((p) => p.group === group);
         }
-      })
+      }),
     );
   }
 
@@ -507,7 +507,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   removePrincipalFromAssistants(principalId: string) {
     if (principalId) {
-      for (let [i, a] of this.assistants.entries()) {
+      for (const [i, a] of this.assistants.entries()) {
         if (a.id === principalId) {
           this.assistants.splice(i, 1);
           break;
@@ -526,7 +526,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.gfv("assignType"),
         this.gfv("room"),
         this.gfv("onlyMan"),
-        this.gfv("onlyWoman")
+        this.gfv("onlyWoman"),
       );
 
       this.assistants = this.sharedService.filterAssistantsByAvailable(
@@ -534,7 +534,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.gfv("assignType"),
         this.gfv("room"),
         this.gfv("onlyMan"),
-        this.gfv("onlyWoman")
+        this.gfv("onlyWoman"),
       );
     }
   }
@@ -552,8 +552,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     this.participants = this.participants.filter(
       (p) =>
         !p.notAvailableDates.some(
-          (date) => new Date(dateControlValue).getTime() === new Date(date).getTime()
-        )
+          (date) => new Date(dateControlValue).getTime() === new Date(date).getTime(),
+        ),
     );
   }
 
@@ -614,13 +614,13 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         let allDays: AssignmentInterface[] = [];
         for (var i = 1; i <= days; i++) {
           allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
           );
           allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
           );
         }
-        for (let p of this.principals) {
+        for (const p of this.principals) {
           if (allDays.some((a) => a.assignType === at.id && a.principal === p.id)) {
             p.hasCollision = true;
           }
@@ -634,35 +634,35 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         let allDays: AssignmentInterface[] = [];
         for (var i = 1; i <= closeOthersDays; i++) {
           allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
           );
           allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
           );
         }
 
-        for (let p of this.principals) {
+        for (const p of this.principals) {
           if (
             allDays.some(
               (a) =>
                 this.isOfTypeAssignTypes(
-                  this.assignTypeService.getAssignType(a.assignType).type
+                  this.assignTypeService.getAssignType(a.assignType).type,
                 ) &&
-                (a.principal === p.id || a.assistant === p.id)
+                (a.principal === p.id || a.assistant === p.id),
             )
           ) {
             p.isCloseToOthers = true;
           }
         }
 
-        for (let assist of this.assistants) {
+        for (const assist of this.assistants) {
           if (
             allDays.some(
               (a) =>
                 this.isOfTypeAssignTypes(
-                  this.assignTypeService.getAssignType(a.assignType).type
+                  this.assignTypeService.getAssignType(a.assignType).type,
                 ) &&
-                (a.principal === assist.id || a.assistant === assist.id)
+                (a.principal === assist.id || a.assistant === assist.id),
             )
           ) {
             assist.isCloseToOthers = true;
@@ -677,18 +677,18 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         let allDays: AssignmentInterface[] = [];
         for (var i = 1; i <= closeOthersPrayerDays; i++) {
           allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
           );
           allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
           );
         }
-        for (let p of this.principals) {
+        for (const p of this.principals) {
           if (
             allDays.some(
               (a) =>
                 this.isOfTypePrayer(this.assignTypeService.getAssignType(a.assignType).type) &&
-                a.principal === p.id
+                a.principal === p.id,
             )
           ) {
             p.isCloseToOthersPrayer = true;
@@ -703,19 +703,19 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         let allDays: AssignmentInterface[] = [];
         for (var i = 1; i <= closeOthersTreasuresEtcDays; i++) {
           allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
+            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
           );
           allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
+            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
           );
         }
-        for (let p of this.principals) {
+        for (const p of this.principals) {
           if (
             allDays.some(
               (a) =>
                 this.isOfTypeTreasuresAndOthers(
-                  this.assignTypeService.getAssignType(a.assignType).type
-                ) && a.principal === p.id
+                  this.assignTypeService.getAssignType(a.assignType).type,
+                ) && a.principal === p.id,
             )
           ) {
             p.isCloseToOthersTreasuresEtc = true;
@@ -761,7 +761,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     //administrator is undefined value so this if doesnt apply and can view everything
     if (this.role) {
       this.assignTypes = this.assignTypes.filter((at) =>
-        this.role.assignTypesId.includes(at.id)
+        this.role.assignTypesId.includes(at.id),
       );
     }
 
@@ -785,7 +785,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.assignTypes = this.assignTypes.filter(
           (at) =>
             !assignmentsByDate.some((a) => a.assignType === at.id && a.room === roomValue) ||
-            Boolean(at.repeat)
+            Boolean(at.repeat),
         );
 
         //Reset if assignType selected not in new assignTypes
@@ -935,7 +935,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
     const participantAssignments = this.assignmentService.findAssignmentsByParticipantId(
       participant.id,
-      this.gfv("date")
+      this.gfv("date"),
     );
 
     for (const pa of participantAssignments) {
@@ -943,8 +943,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         this.roomService.getNameOrTranslation(this.roomService.getRoom(pa.room)) +
           " - " +
           this.assignTypeService.getNameOrTranslation(
-            this.assignTypeService.getAssignType(pa.assignType)
-          )
+            this.assignTypeService.getAssignType(pa.assignType),
+          ),
       );
     }
 

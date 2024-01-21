@@ -90,7 +90,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     private exportService: ExportService,
     private publicThemeService: PublicThemeService,
     private pdfService: PdfService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnChanges(): void {
@@ -119,8 +119,8 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         this.assignTypes.includes(assignment.assignType) &&
         this.rooms.includes(assignment.room) &&
         this.selectedDates.some(
-          (date) => new Date(date).getTime() === new Date(assignment.date).getTime()
-        )
+          (date) => new Date(date).getTime() === new Date(assignment.date).getTime(),
+        ),
     );
   }
 
@@ -137,7 +137,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         assistant: this.participantService.getParticipant(a.assistant)?.name,
         room: this.roomService.getNameOrTranslation(this.roomService.getRoom(a.room)),
         assignType: this.assignTypeService.getNameOrTranslation(
-          this.assignTypeService.getAssignType(a.assignType)
+          this.assignTypeService.getAssignType(a.assignType),
         ),
         footerNote: this.noteService.getNote(a.footerNote)?.editorHTML,
         theme: a.isPTheme ? this.publicThemeService.getPublicTheme(a.theme)?.name : a.theme,
@@ -153,11 +153,11 @@ export class MultipleImageAssignmentComponent implements OnChanges {
     //Sort
     if (this.order === "Desc") {
       this.assignmentsWithNames = this.assignmentsWithNames.sort(
-        this.assignmentService.sortAssignmentsByDateDesc
+        this.assignmentService.sortAssignmentsByDateDesc,
       );
     } else {
       this.assignmentsWithNames = this.assignmentsWithNames.sort(
-        this.assignmentService.sortAssignmentsByDateAsc
+        this.assignmentService.sortAssignmentsByDateAsc,
       );
     }
     this.cdr.detectChanges();
@@ -216,7 +216,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
         this.cdr.detectChanges();
         //Ensure the filename is valid for the system
         const fileName = filenamifyPath(
-          path.join(this.homeDir, "assignments", key, index + "-" + a.assignType + ".png")
+          path.join(this.homeDir, "assignments", key, index + "-" + a.assignType + ".png"),
         );
         ensureFileSync(fileName);
         //Create the blob and save it to the fs
@@ -248,7 +248,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
       const pdfBytes = await this.pdfService.toPdfS89([a], false);
       const participantName = this.participantService.getParticipant(a.principal).name;
       const assignTypeName = this.assignTypeService.getNameOrTranslation(
-        this.assignTypeService.getAssignType(a.assignType)
+        this.assignTypeService.getAssignType(a.assignType),
       );
 
       //Get the filename path and ensure it's valid for the system
@@ -257,8 +257,8 @@ export class MultipleImageAssignmentComponent implements OnChanges {
           this.homeDir,
           "assignments",
           participantName,
-          index + "-" + assignTypeName + ".pdf"
-        )
+          index + "-" + assignTypeName + ".pdf",
+        ),
       );
       ensureFileSync(fileNamePath);
       promises.push(writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer())));
@@ -283,7 +283,7 @@ export class MultipleImageAssignmentComponent implements OnChanges {
 
     //Ensure the filename is valid for the system
     const fileNamePath = filenamifyPath(
-      path.join(this.homeDir, "assignments", this.pdfService.S89M)
+      path.join(this.homeDir, "assignments", this.pdfService.S89M),
     );
     ensureFileSync(fileNamePath);
 

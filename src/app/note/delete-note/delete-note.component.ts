@@ -27,8 +27,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
 })
 export class DeleteNoteComponent {
   note = this.noteService.getNote(this.activatedRoute.snapshot.params.id);
@@ -46,7 +46,7 @@ export class DeleteNoteComponent {
     private assignmentService: AssignmentService,
     private router: Router,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   onSubmit(): void {

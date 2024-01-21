@@ -35,8 +35,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     MatIconModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class CreateUpdateRoomComponent {
   r = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);
@@ -65,7 +65,7 @@ export class CreateUpdateRoomComponent {
     private router: Router,
     private translocoService: TranslocoService,
     private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService
+    private onlineService: OnlineService,
   ) {}
 
   onSubmit(): void {

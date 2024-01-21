@@ -25,8 +25,8 @@ import { Validators } from "ngx-editor";
     MatButtonModule,
     RouterLink,
     MatIconModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
   templateUrl: "./delete-territory-group.component.html",
   styleUrls: ["./delete-territory-group.component.scss"],
 })
@@ -46,7 +46,7 @@ export class DeleteTerritoryGroupComponent {
     private territoryService: TerritoryService,
     private router: Router,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
   onSubmit(): void {
     //get id

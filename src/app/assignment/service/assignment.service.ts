@@ -28,7 +28,10 @@ export class AssignmentService {
   //The map of assignments for look up of by date
   #assignmentsByDateMap: Map<Date | string, AssignmentInterface[]> = new Map();
 
-  constructor(private configService: ConfigService, private lockService: LockService) {}
+  constructor(
+    private configService: ConfigService,
+    private lockService: LockService,
+  ) {}
 
   /**
    * @param deepClone if should be cloned or only return reference
@@ -186,7 +189,7 @@ export class AssignmentService {
    */
   sortAssignmentsByDateDesc(
     a: AssignmentInterface | AssignmentTableInterface,
-    b: AssignmentInterface | AssignmentTableInterface
+    b: AssignmentInterface | AssignmentTableInterface,
   ): number {
     const dateA = new Date(a.date).getTime();
     const dateB = new Date(b.date).getTime();
@@ -207,7 +210,7 @@ export class AssignmentService {
    */
   sortAssignmentsByDateAsc(
     a: AssignmentInterface | AssignmentTableInterface,
-    b: AssignmentInterface | AssignmentTableInterface
+    b: AssignmentInterface | AssignmentTableInterface,
   ): number {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
@@ -437,13 +440,13 @@ export class AssignmentService {
     //By date
     if (date) {
       return this.getAssignmentsByDate(date).filter(
-        (a) => a.principal === participantId || a.assistant === participantId
+        (a) => a.principal === participantId || a.assistant === participantId,
       );
     }
     //By all assignments
     return this.#assignments.filter(
       (assignment) =>
-        assignment.principal === participantId || assignment.assistant === participantId
+        assignment.principal === participantId || assignment.assistant === participantId,
     );
   }
 

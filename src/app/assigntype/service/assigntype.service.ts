@@ -58,7 +58,7 @@ export class AssignTypeService {
 
   constructor(
     private configService: ConfigService,
-    private translocoService: TranslocoService
+    private translocoService: TranslocoService,
   ) {}
 
   getNameOrTranslation(at: AssignTypeInterface) {

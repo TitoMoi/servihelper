@@ -207,7 +207,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private lockService: LockService,
     private sharedService: SharedService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
   ngOnInit(): void {
     this.subscription.add(
@@ -232,7 +232,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
             .pipe(take(1))
             .subscribe(() => this.closeApp());
         }
-      })
+      }),
     );
 
     this.subscription.add(
@@ -241,7 +241,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
           statusOffline ? this.form.controls[key].disable() : this.form.controls[key].enable();
         });
         this.cdr.detectChanges();
-      })
+      }),
     );
   }
 
@@ -267,7 +267,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
       this.matSnackBar.open(
         this.translocoService.translate("CONFIG_SAVED") + " 🔧 ",
         this.translocoService.translate("CLOSE"),
-        { duration: 2500 }
+        { duration: 2500 },
       );
     }
     this.subscription.unsubscribe();
@@ -282,7 +282,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
       path.join(this.configService.assetsFilesPath, "source"),
       {
         overwrite: true,
-      }
+      },
     );
 
     //Close the program
@@ -307,7 +307,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     const dirArray = await readdir(path);
 
     this.servihelperFilesExist = dirArray.some((item) =>
-      item.includes(this.configService.configFilename)
+      item.includes(this.configService.configFilename),
     );
     this.cdr.detectChanges();
 

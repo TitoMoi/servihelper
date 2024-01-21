@@ -40,7 +40,7 @@ export class DeleteSheetTitleComponent {
     private assignmentService: AssignmentService,
     private configService: ConfigService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   onSubmit(title: SheetTitleInterface): void {

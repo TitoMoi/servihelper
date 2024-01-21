@@ -18,126 +18,127 @@
           >
             {{ t("ASSIGN_CREATE_TITLE") }}
             @if (netStatusOffline$ | async) {
-            <mat-icon svgIcon="nowifi"></mat-icon>
+              <mat-icon svgIcon="nowifi"></mat-icon>
             }
           </a>
         </div>
         @if (assignmentsTable.length) {
-        <mat-icon
-          class="mx-3"
-          svgIcon="search"
-          routerLink="../search"
-          [matTooltip]="t('ICON_SEARCH')"
-          routerLinkActive="active"
-        ></mat-icon>
-        <mat-icon
-          class="mx-3"
-          svgIcon="switch"
-          routerLink="move"
-          [matTooltip]="t('ICON_GROUP_MOVE')"
-          routerLinkActive="active"
-        ></mat-icon>
-        <mat-icon
-          class="mx-3"
-          svgIcon="calendar-delete"
-          routerLink="group-delete"
-          [matTooltip]="t('ICON_GROUP_DELETE')"
-          routerLinkActive="active"
-        ></mat-icon>
+          <mat-icon
+            class="mx-3"
+            svgIcon="search"
+            routerLink="../search"
+            [matTooltip]="t('ICON_SEARCH')"
+            routerLinkActive="active"
+          ></mat-icon>
+          <mat-icon
+            class="mx-3"
+            svgIcon="switch"
+            routerLink="move"
+            [matTooltip]="t('ICON_GROUP_MOVE')"
+            routerLinkActive="active"
+          ></mat-icon>
+          <mat-icon
+            class="mx-3"
+            svgIcon="calendar-delete"
+            routerLink="group-delete"
+            [matTooltip]="t('ICON_GROUP_DELETE')"
+            routerLinkActive="active"
+          ></mat-icon>
         }
       </div>
     </div>
   </div>
-  @if (assignmentsTable.length) { @if ((isAdminRole$ | async) === false) {
-  <div class="fst-italic">{{ t("ASSIGN_TABLE_ROLE_VISIBILITY") }}</div>
-  }
-  <span class="sticky-top"></span>
-  <div class="table-overflow">
-    <div class="grid">
-      <div class="grid-header-item bg-color-app fw-bold sticky-top">
-        {{ t("ASSIGN_TABLE_HEADER_IMAGE") }}
-      </div>
-      <div class="grid-header-item bg-color-app fw-bold sticky-top">
-        {{ t("ASSIGN_TABLE_HEADER_DATE") }}
-      </div>
-      <div class="grid-header-item bg-color-app fw-bold sticky-top">
-        {{ t("ASSIGN_TABLE_HEADER_PRINCIPAL") }}
-      </div>
-      <div class="grid-header-item bg-color-app fw-bold sticky-top">
-        {{ t("ASSIGN_TABLE_HEADER_ASSISTANT") }}
-      </div>
-      <div class="grid-header-item bg-color-app fw-bold sticky-top">
-        {{ t("ASSIGN_TABLE_HEADER_ASSIGNTYPE") }}
-      </div>
-      <div class="grid-header-item bg-color-app fw-bold sticky-top">
-        {{ t("ASSIGN_TABLE_HEADER_ROOM") }}
-      </div>
-      <div class="grid-header-item bg-color-app bg-color-app fw-bold sticky-top">
-        {{ t("ASSIGN_TABLE_HEADER_EDIT") }}
-      </div>
-      <div class="grid-header-item bg-color-app fw-bold sticky-top">
-        {{ t("ASSIGN_TABLE_HEADER_DELETE") }}
-      </div>
-      @for (a of assignmentsTable; track trackByIdFn($index, a)) {
-      <div class="grid-row">
-        <div
-          id="imageId"
-          [ngClass]="{ borderLeftLightGreen: a.hasBeenClicked }"
-          class="grid-item d-flex align-items-center"
-        >
-          <mat-icon
-            (click)="highlightRow($event, a)"
-            [routerLink]="['image', a.id]"
-            routerLinkActive="active"
-            svgIcon="assignImage"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
+  @if (assignmentsTable.length) {
+    @if ((isAdminRole$ | async) === false) {
+      <div class="fst-italic">{{ t("ASSIGN_TABLE_ROLE_VISIBILITY") }}</div>
+    }
+    <span class="sticky-top"></span>
+    <div class="table-overflow">
+      <div class="grid">
+        <div class="grid-header-item bg-color-app fw-bold sticky-top">
+          {{ t("ASSIGN_TABLE_HEADER_IMAGE") }}
         </div>
-        <div
-          [ngClass]="{ hasDateSeparator: a.hasDateSeparator }"
-          class="grid-item d-flex align-items-center"
-        >
-          {{ a.date | translocoDate : { dateStyle: "medium" } }}
+        <div class="grid-header-item bg-color-app fw-bold sticky-top">
+          {{ t("ASSIGN_TABLE_HEADER_DATE") }}
         </div>
-        <div class="grid-item d-flex align-items-center">
-          {{ (a.principal | participantPipe).name }}
+        <div class="grid-header-item bg-color-app fw-bold sticky-top">
+          {{ t("ASSIGN_TABLE_HEADER_PRINCIPAL") }}
         </div>
-        <div class="grid-item d-flex align-items-center">
-          @if (a.assistant) {
-          {{ (a.assistant | participantPipe).name }}
-          }
+        <div class="grid-header-item bg-color-app fw-bold sticky-top">
+          {{ t("ASSIGN_TABLE_HEADER_ASSISTANT") }}
         </div>
-        @if (a.assignType | assignTypePipe; as assignType) {
-        <div
-          class="grid-item d-flex align-items-center ps-2"
-          [style.borderLeft]="getBorderLeftColor(assignType.color)"
-        >
-          {{ assignType | assignTypeNamePipe }}
+        <div class="grid-header-item bg-color-app fw-bold sticky-top">
+          {{ t("ASSIGN_TABLE_HEADER_ASSIGNTYPE") }}
         </div>
+        <div class="grid-header-item bg-color-app fw-bold sticky-top">
+          {{ t("ASSIGN_TABLE_HEADER_ROOM") }}
+        </div>
+        <div class="grid-header-item bg-color-app bg-color-app fw-bold sticky-top">
+          {{ t("ASSIGN_TABLE_HEADER_EDIT") }}
+        </div>
+        <div class="grid-header-item bg-color-app fw-bold sticky-top">
+          {{ t("ASSIGN_TABLE_HEADER_DELETE") }}
+        </div>
+        @for (a of assignmentsTable; track trackByIdFn($index, a)) {
+          <div class="grid-row">
+            <div
+              id="imageId"
+              [ngClass]="{ borderLeftLightGreen: a.hasBeenClicked }"
+              class="grid-item d-flex align-items-center"
+            >
+              <mat-icon
+                (click)="highlightRow($event, a)"
+                [routerLink]="['image', a.id]"
+                routerLinkActive="active"
+                svgIcon="assignImage"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+            </div>
+            <div
+              [ngClass]="{ hasDateSeparator: a.hasDateSeparator }"
+              class="grid-item d-flex align-items-center"
+            >
+              {{ a.date | translocoDate: { dateStyle: "medium" } }}
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              {{ (a.principal | participantPipe).name }}
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              @if (a.assistant) {
+                {{ (a.assistant | participantPipe).name }}
+              }
+            </div>
+            @if (a.assignType | assignTypePipe; as assignType) {
+              <div
+                class="grid-item d-flex align-items-center ps-2"
+                [style.borderLeft]="getBorderLeftColor(assignType.color)"
+              >
+                {{ assignType | assignTypeNamePipe }}
+              </div>
+            }
+            <div class="grid-item d-flex align-items-center">
+              {{ a.room | roomPipe | roomNamePipe }}
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              <mat-icon
+                (click)="preventDefault($event)"
+                [routerLink]="['update', a.id]"
+                routerLinkActive="active"
+                svgIcon="edit"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              <mat-icon
+                [routerLink]="['delete', a.id]"
+                routerLinkActive="active"
+                svgIcon="garbage"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+            </div>
+          </div>
         }
-        <div class="grid-item d-flex align-items-center">
-          {{ a.room | roomPipe | roomNamePipe }}
-        </div>
-        <div class="grid-item d-flex align-items-center">
-          <mat-icon
-            (click)="preventDefault($event)"
-            [routerLink]="['update', a.id]"
-            routerLinkActive="active"
-            svgIcon="edit"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
-        </div>
-        <div class="grid-item d-flex align-items-center">
-          <mat-icon
-            [routerLink]="['delete', a.id]"
-            routerLinkActive="active"
-            svgIcon="garbage"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
-        </div>
       </div>
-      }
     </div>
-  </div>
   }
 </span>

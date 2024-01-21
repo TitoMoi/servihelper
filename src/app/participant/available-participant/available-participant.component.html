@@ -17,33 +17,33 @@
           ></mat-icon>
         </th>
         @for (at of assignTypes; track at) {
-        <th class="bg-color-ghostwhite sticky-top">
-          <button
-            mat-button
-            [disabled]="isNetStatusOffline"
-            (click)="changeAvailability(null, at, true)"
-          >
-            <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
-          </button>
-        </th>
+          <th class="bg-color-ghostwhite sticky-top">
+            <button
+              mat-button
+              [disabled]="isNetStatusOffline"
+              (click)="changeAvailability(null, at, true)"
+            >
+              <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
+            </button>
+          </th>
         }
       </thead>
       <tbody>
         @for (p of participants; track p) {
-        <tr>
-          <td class="fw-bold bg-color-white">{{ p.name }}</td>
-          @for (at of assignTypes; track at) {
-          <td class="bg-color-white text-center">
-            <button
-              mat-button
-              [disabled]="isNetStatusOffline"
-              (click)="changeAvailability(p, at, true)"
-            >
-              {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔" : "" }}
-            </button>
-          </td>
-          }
-        </tr>
+          <tr>
+            <td class="fw-bold bg-color-white">{{ p.name }}</td>
+            @for (at of assignTypes; track at) {
+              <td class="bg-color-white text-center">
+                <button
+                  mat-button
+                  [disabled]="isNetStatusOffline"
+                  (click)="changeAvailability(p, at, true)"
+                >
+                  {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔" : "" }}
+                </button>
+              </td>
+            }
+          </tr>
         }
       </tbody>
     </table>
@@ -61,34 +61,33 @@
         ></mat-icon>
       </th>
       @for (at of assignTypesAssistant; track at) {
-      <th class="bg-color-lightyellow sticky-top">
-        <button
-          mat-button
-          [disabled]="isNetStatusOffline"
-          (click)="changeAvailability(null, at, false)"
-        >
-          <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
-        </button>
-      </th>
+        <th class="bg-color-lightyellow sticky-top">
+          <button
+            mat-button
+            [disabled]="isNetStatusOffline"
+            (click)="changeAvailability(null, at, false)"
+          >
+            <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
+          </button>
+        </th>
       }
     </thead>
     <tbody>
       @for (p of participants; track p) {
-      <tr>
-        <td class="fw-bold bg-color-white">{{ p.name }}</td>
-        @for (at of assignTypesAssistant; track at) {
-
-        <td class="bg-color-white text-center">
-          <button
-            mat-button
-            [disabled]="isNetStatusOffline"
-            (click)="changeAvailability(p, at, false)"
-          >
-            {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔" : "" }}
-          </button>
-        </td>
-        }
-      </tr>
+        <tr>
+          <td class="fw-bold bg-color-white">{{ p.name }}</td>
+          @for (at of assignTypesAssistant; track at) {
+            <td class="bg-color-white text-center">
+              <button
+                mat-button
+                [disabled]="isNetStatusOffline"
+                (click)="changeAvailability(p, at, false)"
+              >
+                {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔" : "" }}
+              </button>
+            </td>
+          }
+        </tr>
       }
     </tbody>
   </table>

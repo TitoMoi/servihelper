@@ -8,7 +8,9 @@
             <th class="d-block ms-3 me-3 border-bottom fw-bold sheetTitle">
               @if (assignment.sheetTitle) {
                 <div class="mt-1 mb-1">
-                  {{ (assignment.sheetTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE") }}
+                  {{
+                    (assignment.sheetTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE")
+                  }}
                 </div>
               } @else {
                 @if (!assignmentHeaderTitle) {
@@ -19,7 +21,9 @@
                 @if (assignmentHeaderTitle) {
                   <div class="mt-1 mb-1">
                     <!-- This is a workaround, old files have a literal string and its not a key -->
-                    {{ (assignmentHeaderTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE") }}
+                    {{
+                      (assignmentHeaderTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE")
+                    }}
                   </div>
                 }
               }
@@ -28,34 +32,28 @@
           <tr>
             <td class="fw-bold">
               @if (!assignmentPrincipalTitle) {
-                <span class="ms-3 me-3">{{
-                  t("ASSIGN_IMAGE_NAME")
-                }}</span>
+                <span class="ms-3 me-3">{{ t("ASSIGN_IMAGE_NAME") }}</span>
               }
               @if (assignmentPrincipalTitle) {
-                <span class="ms-3 me-3">{{
-                  assignmentPrincipalTitle
-                }}</span>
+                <span class="ms-3 me-3">{{ assignmentPrincipalTitle }}</span>
               }
             </td>
           </tr>
           <tr>
             <td>
-              <span class="ms-3 me-3">{{ (assignment.principal | participantPipe).name }} </span>
+              <span class="ms-3 me-3"
+                >{{ (assignment.principal | participantPipe).name }}
+              </span>
             </td>
           </tr>
           @if (assignment.assistant) {
             <tr>
               <td class="fw-bold">
                 @if (!assignmentAssistantTitle) {
-                  <span class="ms-3 me-3">{{
-                    t("ASSIGN_IMAGE_ASSISTANT")
-                  }}</span>
+                  <span class="ms-3 me-3">{{ t("ASSIGN_IMAGE_ASSISTANT") }}</span>
                 }
                 @if (assignmentAssistantTitle) {
-                  <span class="ms-3 me-3">{{
-                    assignmentAssistantTitle
-                  }}</span>
+                  <span class="ms-3 me-3">{{ assignmentAssistantTitle }}</span>
                 }
               </td>
             </tr>
@@ -63,183 +61,168 @@
           @if (assignment.assistant) {
             <tr>
               <td>
-                <span class="ms-3 me-3">{{ (assignment.assistant | participantPipe).name }}</span>
+                <span class="ms-3 me-3">{{
+                  (assignment.assistant | participantPipe).name
+                }}</span>
               </td>
             </tr>
           }
           <tr>
             <td class="fw-bold">
               @if (!assignmentDateTitle) {
-                <span class="ms-3 me-3">{{
-                  t("ASSIGN_IMAGE_DATE")
-                }}</span>
+                <span class="ms-3 me-3">{{ t("ASSIGN_IMAGE_DATE") }}</span>
               }
               @if (assignmentDateTitle) {
-                <span class="ms-3 me-3">{{
-                  assignmentDateTitle
-                }}</span>
+                <span class="ms-3 me-3">{{ assignmentDateTitle }}</span>
               }
             </td>
           </tr>
           <tr>
             <td>
               <span class="ms-3 me-3">
-                {{ assignment.date | translocoDate : { dateStyle: "full" } }}
+                {{ assignment.date | translocoDate: { dateStyle: "full" } }}
               </span>
             </td>
           </tr>
           <tr>
             <td class="fw-bold">
               @if (!assignmentAssignTypeTitle) {
-                <span class="ms-3 me-3">{{
-                  t("ASSIGN_IMAGE_ASSIGNTYPE")
-                }}</span>
+                <span class="ms-3 me-3">{{ t("ASSIGN_IMAGE_ASSIGNTYPE") }}</span>
               }
               @if (assignmentAssignTypeTitle) {
-                <span class="ms-3 me-3">{{
-                  assignmentAssignTypeTitle
-                }}</span>
+                <span class="ms-3 me-3">{{ assignmentAssignTypeTitle }}</span>
               }
             </td>
           </tr>
           <tr>
             <td>
               <span class="ms-3"></span
-                >{{ assignment.assignType | assignTypePipe | assignTypeNamePipe }}
-              </td>
-            </tr>
-            @if (assignment.theme) {
-              <tr>
-                <td class="fw-bold">
-                  @if (!assignmentThemeTitle) {
-                    <div class="ms-3 me-3">
-                      {{ t("ASSIGN_IMAGE_THEME") }}
-                    </div>
-                  }
-                  @if (assignmentThemeTitle) {
-                    <div class="ms-3 me-3">
-                      {{ assignmentThemeTitle }}
-                    </div>
-                  }
-                </td>
-              </tr>
-            }
-            @if (assignment.theme) {
-              <tr>
-                <td>
-                  <div class="ms-3 me-3">
-                    {{
-                    assignment.isPTheme
-                    ? (assignment.theme | publicThemePipe)?.name
-                    : assignment.theme
-                    }}
-                  </div>
-                </td>
-              </tr>
-            }
+              >{{ assignment.assignType | assignTypePipe | assignTypeNamePipe }}
+            </td>
+          </tr>
+          @if (assignment.theme) {
             <tr>
               <td class="fw-bold">
-                @if (!assignmentRoomTitle) {
-                  <span class="ms-3 me-3">{{
-                    t("ASSIGN_IMAGE_ROOM_PRESENTATION")
-                  }}</span>
+                @if (!assignmentThemeTitle) {
+                  <div class="ms-3 me-3">
+                    {{ t("ASSIGN_IMAGE_THEME") }}
+                  </div>
                 }
-                @if (assignmentRoomTitle) {
-                  <span class="ms-3 me-3">{{
-                    assignmentRoomTitle
-                  }}</span>
+                @if (assignmentThemeTitle) {
+                  <div class="ms-3 me-3">
+                    {{ assignmentThemeTitle }}
+                  </div>
                 }
               </td>
             </tr>
+          }
+          @if (assignment.theme) {
             <tr>
               <td>
-                <div [ngClass]="{ 'mb-3': !footerNoteEditorHTML }" class="ms-3 me-3">
-                  {{ assignment.room | roomPipe | roomNamePipe }}
+                <div class="ms-3 me-3">
+                  {{
+                    assignment.isPTheme
+                      ? (assignment.theme | publicThemePipe)?.name
+                      : assignment.theme
+                  }}
                 </div>
               </td>
             </tr>
-            @if (footerNoteEditorHTML) {
-              <tr>
-                <td class="fw-bold">
-                  @if (!assignmentNoteTitle) {
-                    <span class="ms-3 me-3">{{
-                      t("ASSIGN_IMAGE_FOOTER_NOTE")
-                    }}</span>
-                  }
-                  @if (assignmentNoteTitle) {
-                    <span class="ms-3 me-3">{{
-                      assignmentNoteTitle
-                    }}</span>
-                  }
-                </td>
-              </tr>
-            }
-            @if (footerNoteEditorHTML) {
-              <tr>
-                <td>
-                  <div
-                    class="ms-3 me-3 mb-3 text-justify font-15"
-                    [innerHTML]="footerNoteEditorHTML"
-                  ></div>
-                </td>
-              </tr>
-            }
-          </table>
+          }
+          <tr>
+            <td class="fw-bold">
+              @if (!assignmentRoomTitle) {
+                <span class="ms-3 me-3">{{ t("ASSIGN_IMAGE_ROOM_PRESENTATION") }}</span>
+              }
+              @if (assignmentRoomTitle) {
+                <span class="ms-3 me-3">{{ assignmentRoomTitle }}</span>
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div [ngClass]="{ 'mb-3': !footerNoteEditorHTML }" class="ms-3 me-3">
+                {{ assignment.room | roomPipe | roomNamePipe }}
+              </div>
+            </td>
+          </tr>
+          @if (footerNoteEditorHTML) {
+            <tr>
+              <td class="fw-bold">
+                @if (!assignmentNoteTitle) {
+                  <span class="ms-3 me-3">{{ t("ASSIGN_IMAGE_FOOTER_NOTE") }}</span>
+                }
+                @if (assignmentNoteTitle) {
+                  <span class="ms-3 me-3">{{ assignmentNoteTitle }}</span>
+                }
+              </td>
+            </tr>
+          }
+          @if (footerNoteEditorHTML) {
+            <tr>
+              <td>
+                <div
+                  class="ms-3 me-3 mb-3 text-justify font-15"
+                  [innerHTML]="footerNoteEditorHTML"
+                ></div>
+              </td>
+            </tr>
+          }
+        </table>
+      </div>
+      <div class="col-12 d-print-none">
+        <div class="d-flex app-align-items-center">
+          <button class="m-2" mat-raised-button type="button" routerLink="../..">
+            {{ t("BUTTON_CANCEL") }}
+          </button>
+          <mat-icon
+            class="m-2"
+            svgIcon="clipboard"
+            [matTooltip]="t('ICON_CLIPBOARD')"
+            aria-label="icon"
+            (click)="toClipboard()"
+          ></mat-icon>
+          <mat-icon
+            class="m-2"
+            svgIcon="googlecalendar"
+            aria-label="icon"
+            [matTooltip]="t('ICON_GOOGLECALENDAR')"
+            (click)="toGoogleCalendarUrl()"
+          ></mat-icon>
+          <mat-icon
+            class="m-2"
+            svgIcon="pdf"
+            [matTooltip]="t('ICON_PDF_PAGE')"
+            aria-label="icon"
+            (click)="toPdf()"
+          ></mat-icon>
+          <mat-chip-listbox>
+            <mat-chip-option (click)="toPdfS89()" [matTooltip]="t('S89_TOOLTIP')"
+              ><mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
+              <span id="pdfAcronim">S89</span></mat-chip-option
+            >
+          </mat-chip-listbox>
+          <mat-icon
+            class="m-2"
+            svgIcon="png"
+            [matTooltip]="t('ICON_PNG')"
+            aria-label="icon"
+            (click)="toPng()"
+          ></mat-icon>
         </div>
-        <div class="col-12 d-print-none">
-          <div class="d-flex app-align-items-center">
-            <button class="m-2" mat-raised-button type="button" routerLink="../..">
-              {{ t("BUTTON_CANCEL") }}
-            </button>
-            <mat-icon
-              class="m-2"
-              svgIcon="clipboard"
-              [matTooltip]="t('ICON_CLIPBOARD')"
-              aria-label="icon"
-              (click)="toClipboard()"
-            ></mat-icon>
-            <mat-icon
-              class="m-2"
-              svgIcon="googlecalendar"
-              aria-label="icon"
-              [matTooltip]="t('ICON_GOOGLECALENDAR')"
-              (click)="toGoogleCalendarUrl()"
-            ></mat-icon>
-            <mat-icon
-              class="m-2"
-              svgIcon="pdf"
-              [matTooltip]="t('ICON_PDF_PAGE')"
-              aria-label="icon"
-              (click)="toPdf()"
-            ></mat-icon>
-            <mat-chip-listbox>
-              <mat-chip-option (click)="toPdfS89()" [matTooltip]="t('S89_TOOLTIP')"
-                ><mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
-                <span id="pdfAcronim">S89</span></mat-chip-option
-                >
-              </mat-chip-listbox>
-              <mat-icon
-                class="m-2"
-                svgIcon="png"
-                [matTooltip]="t('ICON_PNG')"
-                aria-label="icon"
-                (click)="toPng()"
-              ></mat-icon>
-            </div>
-          </div>
-          <div class="col-12 col-md-5 col-xl-12">
-            @if (copied) {
-              <p class="m-2 d-inline-block copied">
-                {{ t("ASSIGN_IMAGE_COPIED") }}
-              </p>
-            }
-            @if (copiedCalendarReminder) {
-              <p class="m-2 d-inline-block copied">
-                {{ t("ASSIGN_REMINDER_COPIED") }}
-              </p>
-            }
-          </div>
-        </div>
-      }
-    </ng-container>
-    
+      </div>
+      <div class="col-12 col-md-5 col-xl-12">
+        @if (copied) {
+          <p class="m-2 d-inline-block copied">
+            {{ t("ASSIGN_IMAGE_COPIED") }}
+          </p>
+        }
+        @if (copiedCalendarReminder) {
+          <p class="m-2 d-inline-block copied">
+            {{ t("ASSIGN_REMINDER_COPIED") }}
+          </p>
+        }
+      </div>
+    </div>
+  }
+</ng-container>

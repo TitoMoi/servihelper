@@ -7,7 +7,10 @@ import { TranslocoService } from "@ngneat/transloco";
 /** Adapts the native JS Date for use with cdk-based components that work with dates. */
 @Injectable()
 export class CustomDateAdapter extends NativeDateAdapter {
-  constructor(translocoService: TranslocoService, private configService: ConfigService) {
+  constructor(
+    translocoService: TranslocoService,
+    private configService: ConfigService,
+  ) {
     super(translocoService.getActiveLang());
   }
 

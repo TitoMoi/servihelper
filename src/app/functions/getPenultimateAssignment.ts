@@ -11,12 +11,12 @@ import { ParticipantInterface } from "../participant/model/participant.model";
  */
 export function getPenultimateAssignment(
   assignmentList: AssignmentInterface[],
-  participant: ParticipantInterface
+  participant: ParticipantInterface,
 ): AssignmentInterface | undefined {
   const firstAssignment = assignmentList
     .filter(
       (assignment) =>
-        assignment.principal === participant.id || assignment.assistant === participant.id
+        assignment.principal === participant.id || assignment.assistant === participant.id,
     )
     .sort(compareFn)[1]; //Get penultimate
 

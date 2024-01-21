@@ -33,8 +33,8 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     MatTooltipModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule
-],
+    MatSnackBarModule,
+  ],
   templateUrl: "./available-participant.component.html",
   styleUrls: ["./available-participant.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -74,7 +74,7 @@ export class AvailableParticipantComponent {
     private onlineService: OnlineService,
     private translocoService: TranslocoService,
     private matSnackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -95,14 +95,14 @@ export class AvailableParticipantComponent {
           .filter((at) => this.allowedAssignTypesIds.includes(at.id) && at.hasAssistant);
 
         this.cdr.detectChanges();
-      })
+      }),
     );
 
     this.subscription.add(
       this.netStatusOffline$.subscribe((isOffline) => {
         this.isNetStatusOffline = isOffline;
         this.cdr.detectChanges();
-      })
+      }),
     );
   }
 
@@ -112,7 +112,7 @@ export class AvailableParticipantComponent {
       this.matSnackBar.open(
         this.translocoService.translate("CONFIG_SAVED"),
         this.translocoService.translate("CLOSE"),
-        { duration: 2000 }
+        { duration: 2000 },
       );
       this.participantService.saveParticipantsToFile();
       this.participantService.updateMapOfParticipants();
@@ -123,14 +123,14 @@ export class AvailableParticipantComponent {
 
   checkIncludesAssignTypeAsPrincipal(
     assignTypes: ParticipantAssignTypeInterface[],
-    assignTypeId: string
+    assignTypeId: string,
   ) {
     return assignTypes.some((at) => at.assignTypeId === assignTypeId && at.canPrincipal);
   }
 
   checkIncludesAssignTypeAsAssistant(
     assignTypes: ParticipantAssignTypeInterface[],
-    assignTypeId: string
+    assignTypeId: string,
   ) {
     return assignTypes.some((at) => at.assignTypeId === assignTypeId && at.canAssistant);
   }
@@ -143,7 +143,7 @@ export class AvailableParticipantComponent {
   changeAvailability(
     participant: ParticipantInterface,
     assignType: AssignTypeInterface,
-    isPrincipal: boolean
+    isPrincipal: boolean,
   ) {
     this.hasChanges = true;
     //No participant means all participants unmark if some has mark or mark all if noone has mark
@@ -153,7 +153,7 @@ export class AvailableParticipantComponent {
         hasSomeCheck = p.assignTypes.some(
           (at) =>
             at.assignTypeId === assignType.id &&
-            (isPrincipal ? at.canPrincipal : at.canAssistant)
+            (isPrincipal ? at.canPrincipal : at.canAssistant),
         );
       }
       if (hasSomeCheck) {
@@ -190,7 +190,7 @@ export class AvailableParticipantComponent {
 
     //Else one participant
     const participantAt = participant.assignTypes.find(
-      (at) => at.assignTypeId === assignType.id
+      (at) => at.assignTypeId === assignType.id,
     );
     //This means that the assign type is new from an import, and has no object, we need to create it.
     if (!participantAt) {

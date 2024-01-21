@@ -80,8 +80,8 @@ import { isWithinInterval } from "date-fns";
     MatFormFieldModule,
     MatDatepickerModule,
     ReactiveFormsModule,
-    MatInputModule
-],
+    MatInputModule,
+  ],
 })
 export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
@@ -113,7 +113,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     private sortService: SortService,
     private exportService: ExportService,
     private formBuilder: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
     this.locales = {
       es,
@@ -147,7 +147,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
         if (v.dateStart && v.dateEnd) {
           await this.getStatistics();
         }
-      })
+      }),
     );
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
@@ -157,10 +157,10 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
         if (this.participants.length) {
           getDistanceBetweenPenultimaAndLast(
             this.participants,
-            this.locales[this.translocoService.getActiveLang()]
+            this.locales[this.translocoService.getActiveLang()],
           );
         }
-      })
+      }),
     );
   }
 
@@ -178,7 +178,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
               start: new Date(this.form.value.dateStart),
               end: new Date(this.form.value.dateEnd),
             })
-          : true) //true means get all assignments
+          : true), //true means get all assignments
     );
 
     /* available participants that can do this kind of type assignments
@@ -190,8 +190,8 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
         (p.available && this.onlyWomenBox.checked
           ? Boolean(p.isWoman)
           : false || this.onlyMenBox.checked
-          ? Boolean(p.isWoman) === false
-          : false || (!this.onlyWomenBox.checked && !this.onlyMenBox.checked)) &&
+            ? Boolean(p.isWoman) === false
+            : false || (!this.onlyWomenBox.checked && !this.onlyMenBox.checked)) &&
         p.assignTypes
           .filter((at) => this.allowedAssignTypesIds.includes(at.assignTypeId))
           .some((at) => {
@@ -200,7 +200,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
               (this.onlyAssistantsBox.checked ? !!at.canAssistant : false) ||
               (!this.onlyPrincipalsBox.checked && !this.onlyAssistantsBox.checked)
             );
-          })
+          }),
     ) as ParticipantDynamicInterface[];
 
     //Global
@@ -282,7 +282,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     //Get the distance, i18n sensitive
     getDistanceBetweenPenultimaAndLast(
       this.participants,
-      this.locales[this.translocoService.getActiveLang()]
+      this.locales[this.translocoService.getActiveLang()],
     );
 
     //Order by count and distance

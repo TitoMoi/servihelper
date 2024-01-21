@@ -23,7 +23,7 @@
         color="warn"
         type="submit"
         [disabled]="netStatusOffline$ | async"
-        >
+      >
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>
         }

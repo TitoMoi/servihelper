@@ -41,8 +41,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class NavigationComponent implements OnInit {
   hideSidenav;
@@ -61,11 +61,11 @@ export class NavigationComponent implements OnInit {
 
   queryGithubInterval$ = of(Math.random() > 0.55).pipe(
     filter((doQuery) => doQuery),
-    switchMap(() => this.queryGitHub$)
+    switchMap(() => this.queryGitHub$),
   );
   queryGitHub$ = this.httpClient
     .get<GitHubDataInterface>(
-      "https://api.github.com/repos/titoMoi/servihelper/releases/latest"
+      "https://api.github.com/repos/titoMoi/servihelper/releases/latest",
     )
     .pipe(filter((githubData) => githubData.tag_name !== this.sharedService.appVersion));
 
@@ -89,7 +89,7 @@ export class NavigationComponent implements OnInit {
     ])
     .pipe(
       map((result) => result.matches),
-      shareReplay()
+      shareReplay(),
     );
 
   constructor(
@@ -101,7 +101,7 @@ export class NavigationComponent implements OnInit {
     private onlineService: OnlineService,
     private sharedService: SharedService,
     private httpClient: HttpClient,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {

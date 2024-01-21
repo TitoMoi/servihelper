@@ -39,8 +39,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatCheckboxModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
 })
 export class CreateUpdateNoteComponent implements OnDestroy {
   n = this.noteService.getNote(this.activatedRoute.snapshot.params.id);
@@ -66,7 +66,7 @@ export class CreateUpdateNoteComponent implements OnDestroy {
     private noteService: NoteService,
     private router: Router,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnDestroy(): void {

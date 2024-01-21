@@ -51,8 +51,8 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     MatTooltipModule,
     PublicThemePipe,
     MatChipsModule,
-    RoomNamePipe
-],
+    RoomNamePipe,
+  ],
 })
 export class ImageAssignmentComponent {
   rooms: RoomInterface[];
@@ -76,7 +76,7 @@ export class ImageAssignmentComponent {
   assignmentNoteTitle = this.configService.getConfig().assignmentNoteTitle;
 
   assignment: AssignmentInterface = this.assignmentService.getAssignment(
-    this.activatedRoute.snapshot.params.id
+    this.activatedRoute.snapshot.params.id,
   );
 
   footerNoteEditorHTML: string = this.noteService.getNote(this.assignment.footerNote)
@@ -91,7 +91,7 @@ export class ImageAssignmentComponent {
     private pdfService: PdfService,
     private exportService: ExportService,
     private sharedService: SharedService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   /**
@@ -120,14 +120,14 @@ export class ImageAssignmentComponent {
     &dates=${encodeURI(
       date.toISOString().replace(/-/g, "").replace(/:/g, "").replace(/\./g, "") +
         "/" +
-        dateNextDay.toISOString().replace(/-/g, "").replace(/:/g, "").replace(/\./g, "")
+        dateNextDay.toISOString().replace(/-/g, "").replace(/:/g, "").replace(/\./g, ""),
     )}`;
     url = url.replace(/\s/g, "");
     clipboard.write(
       {
         text: url,
       },
-      "selection"
+      "selection",
     );
     this.copiedCalendarReminder = true;
   }
@@ -172,7 +172,7 @@ export class ImageAssignmentComponent {
     const pdfBytes = await this.pdfService.toPdfS89([this.assignment], false);
     this.sharedService.saveBlobAsPdfFile(
       pdfBytes,
-      this.sharedService.getFilename(this.assignment)
+      this.sharedService.getFilename(this.assignment),
     );
   }
 }

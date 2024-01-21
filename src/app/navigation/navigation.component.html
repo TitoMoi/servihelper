@@ -6,13 +6,10 @@
     [attr.role]="hideSidenav ? 'dialog' : 'navigation'"
     [mode]="hideSidenav ? 'over' : 'side'"
     [opened]="hideSidenav === false"
-    >
+  >
     <mat-toolbar>
       @if (queryGithubInterval$ | async; as githubData) {
-        <a
-          href="#"
-          (click)="openExternalServihelperRepository()"
-          >
+        <a href="#" (click)="openExternalServihelperRepository()">
           <div class="new-version-font-size">{{ t("NEW_VERSION_AVAILABLE") }}:</div>
           <div class="new-version-font-size">
             {{ githubData.tag_name }}
@@ -97,7 +94,7 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        >
+      >
         <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
       </button>
       <div class="me-auto">
@@ -130,7 +127,7 @@
             color="primary"
             [value]="currentRoleId$ | async"
             (selectionChange)="updateRole($event)"
-            >
+          >
             <mat-option [value]="administratorKey">{{ t("ROLE_ADMINISTRATOR") }}</mat-option>
             @for (role of roles$ | async; track role) {
               <mat-option [value]="role.id">

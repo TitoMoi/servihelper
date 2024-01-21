@@ -34,7 +34,7 @@ export class SharedService {
     private territoryService: TerritoryService,
     private territoryGroupService: TerritoryGroupService,
     private polygonService: PolygonService,
-    private noteService: NoteService
+    private noteService: NoteService,
   ) {}
 
   /**
@@ -53,12 +53,12 @@ export class SharedService {
     assignTypeId,
     roomId,
     onlyMan,
-    onlyWoman
+    onlyWoman,
   ): ParticipantInterface[] {
     return principals.filter((p) => {
       const isAvailable = p.available;
       const canAssignType = p.assignTypes.some(
-        (at) => at.assignTypeId === assignTypeId && at.canPrincipal
+        (at) => at.assignTypeId === assignTypeId && at.canPrincipal,
       );
       const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
       const canOnlyMan = onlyMan ? p.isWoman === false : true;
@@ -84,12 +84,12 @@ export class SharedService {
     assignTypeId,
     roomId,
     onlyMan,
-    onlyWoman
+    onlyWoman,
   ): ParticipantInterface[] {
     return assistants.filter((p) => {
       const isAvailable = p.available;
       const canAssignType = p.assignTypes.some(
-        (at) => at.assignTypeId === assignTypeId && at.canAssistant
+        (at) => at.assignTypeId === assignTypeId && at.canAssistant,
       );
       const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
       const canOnlyMan = onlyMan ? p.isWoman === false : true;
@@ -111,7 +111,7 @@ export class SharedService {
     assignmentList: AssignmentInterface[],
     participantList: ParticipantDynamicInterface[],
     assignTypeId: string,
-    isPrincipal: boolean
+    isPrincipal: boolean,
   ): void {
     //set "count" to 0
     for (const p of participantList) {
@@ -148,7 +148,7 @@ export class SharedService {
       this.participantService.getParticipant(assignment.principal).name +
       "-" +
       this.assignTypeService.getNameOrTranslation(
-        this.assignTypeService.getAssignType(assignment.assignType)
+        this.assignTypeService.getAssignType(assignment.assignType),
       );
     return filename;
   }

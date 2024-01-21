@@ -26,8 +26,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     MatIconModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
   templateUrl: "./create-update-public-theme.component.html",
   styleUrls: ["./create-update-public-theme.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,7 +50,7 @@ export class CreateUpdatePublicThemeComponent {
     private publicThemeService: PublicThemeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService
+    private onlineService: OnlineService,
   ) {}
 
   onSubmit(): void {

@@ -40,19 +40,19 @@ export class AppComponent implements OnInit {
     private lockService: LockService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private pdfService: PdfService
+    private pdfService: PdfService,
   ) {
     //Get only svg files and then get only the name part (without extension)
     const files = readdirSync(this.configService.iconsFilesPath)
       .filter((file) => path.extname(file).toLowerCase() === ".svg")
       .map((file) => path.parse(file).name);
     //Register all svg icons
-    for (let file of files) {
+    for (const file of files) {
       this.matIconRegistry.addSvgIcon(
         file,
         this.domSanitizer.bypassSecurityTrustResourceUrl(
-          path.join(this.configService.iconsFilesPath, file + ".svg")
-        )
+          path.join(this.configService.iconsFilesPath, file + ".svg"),
+        ),
       );
     }
     for (const file of files) {

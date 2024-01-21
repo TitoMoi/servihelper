@@ -41,7 +41,7 @@
           [disableRipple]="true"
           type="button"
           routerLink=".."
-          >
+        >
           {{ t("BUTTON_CANCEL") }}
         </button>
         <button
@@ -49,7 +49,7 @@
           color="warn"
           type="submit"
           [disabled]="form.invalid || (netStatusOffline$ | async)"
-          >
+        >
           @if (netStatusOffline$ | async) {
             <mat-icon svgIcon="nowifi"></mat-icon>
           }

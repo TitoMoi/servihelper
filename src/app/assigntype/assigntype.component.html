@@ -11,71 +11,71 @@
           [disabled]="netStatusOffline$ | async"
           >{{ t("ASSIGNTYPE_CREATE_BUTTON") }}
           @if (netStatusOffline$ | async) {
-          <mat-icon svgIcon="nowifi"></mat-icon>
-          }</a
-        >
+            <mat-icon svgIcon="nowifi"></mat-icon>
+          }
+        </a>
         @if (participantsLength) {
-        <mat-icon
-          svgIcon="assigntypeavailable"
-          [routerLink]="['/participant', 'assigntypeavailable']"
-          [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
-          routerLinkActive="active"
-        ></mat-icon>
+          <mat-icon
+            svgIcon="assigntypeavailable"
+            [routerLink]="['/participant', 'assigntypeavailable']"
+            [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
+            routerLinkActive="active"
+          ></mat-icon>
         }
       </div>
     </div>
   </div>
   @if (assignTypes.length) {
-  <div class="table-overflow">
-    <div class="grid">
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_COLOR") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_NAME") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_ORDER") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_EDIT") }}
-      </div>
-      <div class="grid-header-item fw-bold">
-        {{ t("ASSIGNTYPE_TABLE_HEADER_DELETE") }}
-      </div>
-      @for (at of assignTypes; track at) {
-      <div class="grid-row">
-        <div
-          class="grid-item d-flex align-items-center"
-          [style.backgroundColor]="at.color"
-        ></div>
-        <div class="grid-item d-flex align-items-center">
-          {{ at | assignTypeNamePipe }}
+    <div class="table-overflow">
+      <div class="grid">
+        <div class="grid-header-item fw-bold">
+          {{ t("ASSIGNTYPE_TABLE_HEADER_COLOR") }}
         </div>
-        <div class="grid-item d-flex align-items-center">
-          {{ at.order }}
+        <div class="grid-header-item fw-bold">
+          {{ t("ASSIGNTYPE_TABLE_HEADER_NAME") }}
         </div>
-        <div class="grid-item d-flex align-items-center">
-          <mat-icon
-            [routerLink]="['update', at.id]"
-            routerLinkActive="active"
-            svgIcon="edit"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
+        <div class="grid-header-item fw-bold">
+          {{ t("ASSIGNTYPE_TABLE_HEADER_ORDER") }}
         </div>
-        <div class="grid-item d-flex align-items-center">
-          @if (at.type === 'other') {
-          <mat-icon
-            [routerLink]="['delete', at.id]"
-            routerLinkActive="active"
-            svgIcon="garbage"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
-          }
+        <div class="grid-header-item fw-bold">
+          {{ t("ASSIGNTYPE_TABLE_HEADER_EDIT") }}
         </div>
+        <div class="grid-header-item fw-bold">
+          {{ t("ASSIGNTYPE_TABLE_HEADER_DELETE") }}
+        </div>
+        @for (at of assignTypes; track at) {
+          <div class="grid-row">
+            <div
+              class="grid-item d-flex align-items-center"
+              [style.backgroundColor]="at.color"
+            ></div>
+            <div class="grid-item d-flex align-items-center">
+              {{ at | assignTypeNamePipe }}
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              {{ at.order }}
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              <mat-icon
+                [routerLink]="['update', at.id]"
+                routerLinkActive="active"
+                svgIcon="edit"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              @if (at.type === "other") {
+                <mat-icon
+                  [routerLink]="['delete', at.id]"
+                  routerLinkActive="active"
+                  svgIcon="garbage"
+                  aria-label="Side nav toggle icon"
+                ></mat-icon>
+              }
+            </div>
+          </div>
+        }
       </div>
-      }
     </div>
-  </div>
   }
 </span>

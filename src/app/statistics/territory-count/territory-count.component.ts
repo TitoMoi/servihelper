@@ -20,8 +20,8 @@ import { SortService } from "app/services/sort.service";
     MatCheckboxModule,
     MatIconModule,
     TranslocoLocaleModule,
-    ParticipantPipe
-],
+    ParticipantPipe,
+  ],
   templateUrl: "./territory-count.component.html",
   styleUrls: ["./territory-count.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,7 +41,7 @@ export class TerritoryCountComponent implements OnInit {
   constructor(
     private territoryService: TerritoryService,
     private participantService: ParticipantService,
-    private sortService: SortService
+    private sortService: SortService,
   ) {}
   ngOnInit(): void {
     for (let i = 0; i < this.participants.length; i++) {

@@ -41,7 +41,7 @@ export class ExportService {
       {
         image: natImage,
       },
-      "selection"
+      "selection",
     );
     document.body.style.cursor = "default";
   }

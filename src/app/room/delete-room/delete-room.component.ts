@@ -29,8 +29,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
 })
 export class DeleteRoomComponent {
   room = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);
@@ -49,7 +49,7 @@ export class DeleteRoomComponent {
     private assignmentService: AssignmentService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService
+    private onlineService: OnlineService,
   ) {}
 
   onSubmit(room: RoomInterface): void {

@@ -13,7 +13,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
     return this.http.get<Translation>(
       APP_CONFIG.production
         ? __dirname + `/assets/i18n/${lang}.json`
-        : `assets/i18n/${lang}.json`
+        : `assets/i18n/${lang}.json`,
     );
   }
 }

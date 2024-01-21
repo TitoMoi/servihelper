@@ -27,8 +27,8 @@ import { MatInputModule } from "@angular/material/input";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
 })
 export class DeleteAssignmentComponent {
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -48,7 +48,7 @@ export class DeleteAssignmentComponent {
     private assignTypeService: AssignTypeService,
     private router: Router,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   onSubmit(): void {

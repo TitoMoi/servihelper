@@ -64,7 +64,7 @@ export class TerritoryComponent {
     private pdfService: PdfService,
     private translocoService: TranslocoService,
     private configService: ConfigService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   getLengthForGroup(tgId: string) {
@@ -79,7 +79,7 @@ export class TerritoryComponent {
     const servihelperMapUrl = new URL("https://titomoi.github.io/servihelper");
     servihelperMapUrl.searchParams.append(
       "polygon",
-      JSON.stringify(this.polygonService.getPolygon(t.poligonId).latLngList)
+      JSON.stringify(this.polygonService.getPolygon(t.poligonId).latLngList),
     );
     return servihelperMapUrl;
   }
@@ -93,7 +93,7 @@ export class TerritoryComponent {
       {
         text: url.toString(),
       },
-      "selection"
+      "selection",
     );
     document.body.style.cursor = "default";
     setTimeout(() => {
@@ -120,7 +120,7 @@ export class TerritoryComponent {
 
       //Get the filename path and ensure it's valid for the system
       const fileNamePath = filenamifyPath(
-        path.join(this.configService.homeDir, "territories", t.name + ".pdf")
+        path.join(this.configService.homeDir, "territories", t.name + ".pdf"),
       );
       ensureFileSync(fileNamePath);
       promises.push(writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer())));
@@ -136,7 +136,7 @@ export class TerritoryComponent {
     const doc = this.getPdfSheet();
     doc.setFont(this.pdfService.font, "bold");
 
-    let x = this.pdfService.getInitialWidth();
+    const x = this.pdfService.getInitialWidth();
     let y = this.pdfService.getInitialHeight();
 
     doc.setFontSize(14);
@@ -155,7 +155,7 @@ export class TerritoryComponent {
         y += 5;
         doc.setTextColor("blue");
         const meetingPointClickText = this.translocoService.translate(
-          "TERRITORY_PDF_MEETING_POINT_CLICK"
+          "TERRITORY_PDF_MEETING_POINT_CLICK",
         );
         doc.textWithLink(meetingPointClickText, x, y, { url: t.meetingPointUrl });
       } catch (error) {

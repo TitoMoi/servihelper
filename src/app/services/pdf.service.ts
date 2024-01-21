@@ -49,7 +49,7 @@ export class PdfService {
     private translocoLocaleService: TranslocoLocaleService,
     private participantService: ParticipantService,
     private assignTypeService: AssignTypeService,
-    private roomService: RoomService
+    private roomService: RoomService,
   ) {}
 
   registerOnLangChange() {
@@ -154,8 +154,8 @@ export class PdfService {
     //Before create text lines check the length
     if (themeOrAssignType.length > wordLength) {
       const shortedTheme = [];
-      let words = themeOrAssignType.split(" ");
-      for (let w of words) {
+      const words = themeOrAssignType.split(" ");
+      for (const w of words) {
         if (wordLength - w.length > 0) {
           shortedTheme.push(w);
           wordLength -= w.length;
@@ -183,7 +183,7 @@ export class PdfService {
     //End
     height += 5;
 
-    let doc = this.getJsPdf({
+    const doc = this.getJsPdf({
       orientation: "portrait",
       format: [210, 9000],
       compress: true,
@@ -192,7 +192,7 @@ export class PdfService {
     doc.setFont(this.font, "bold");
     doc.setFontSize(11);
 
-    let x = 10;
+    const x = 10;
     let y = 10;
 
     const reportTitle = this.configService.getConfig().reportTitle;
@@ -210,7 +210,7 @@ export class PdfService {
       const localeDate = this.translocoLocaleService.localizeDate(
         ag.assignments[0].date,
         this.translocoLocaleService.getLocale(),
-        { dateStyle: "full" }
+        { dateStyle: "full" },
       );
       doc.text(localeDate, x, y);
 
@@ -233,7 +233,7 @@ export class PdfService {
           striped = striped + "(...)";
         }
 
-        let stripedLines = doc.splitTextToSize(striped, 120);
+        const stripedLines = doc.splitTextToSize(striped, 120);
 
         const heightTheme = 3.5 * (stripedLines.length + 1);
         doc.text(stripedLines, x, y);
@@ -241,7 +241,7 @@ export class PdfService {
         const participantsNames =
           a.principal.name + (a.assistant ? "/\n" + a.assistant.name : "");
 
-        let textLinesParticipants = doc.splitTextToSize(participantsNames, 90);
+        const textLinesParticipants = doc.splitTextToSize(participantsNames, 90);
 
         const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
 
@@ -263,11 +263,11 @@ export class PdfService {
   toPdf(
     assignmentGroups: AssignmentGroupInterface[],
     colorBands: boolean,
-    isForPrint: boolean = false
+    isForPrint: boolean = false,
   ) {
     const height = this.getPdfHeight(assignmentGroups);
 
-    let doc = this.getJsPdf({
+    const doc = this.getJsPdf({
       orientation: "portrait",
       format: [210, isForPrint ? 270 : height],
       compress: true,
@@ -276,7 +276,7 @@ export class PdfService {
     doc.setFont(this.font, "bold");
     doc.setFontSize(this.getDateFontSize()); //It's not date but the same font size
 
-    let x = 10;
+    const x = 10;
     let y = 10;
 
     const reportTitle = this.configService.getConfig().reportTitle;
@@ -295,7 +295,7 @@ export class PdfService {
       const localeDate = this.translocoLocaleService.localizeDate(
         ag.assignments[0].date,
         this.translocoLocaleService.getLocale(),
-        { dateStyle: "full" }
+        { dateStyle: "full" },
       );
       doc.text(localeDate, x, y);
 
@@ -318,7 +318,7 @@ export class PdfService {
           striped = striped + "(...)";
         }
 
-        let stripedLines = doc.splitTextToSize(striped, 120);
+        const stripedLines = doc.splitTextToSize(striped, 120);
 
         const heightTheme = 3.5 * (stripedLines.length + 1);
         doc.text(stripedLines, x, y);
@@ -326,7 +326,7 @@ export class PdfService {
         const participantsNames =
           a.principal.name + (a.assistant ? "/\n" + a.assistant.name : "");
 
-        let textLinesParticipants = doc.splitTextToSize(participantsNames, 90);
+        const textLinesParticipants = doc.splitTextToSize(participantsNames, 90);
 
         const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
 
@@ -444,7 +444,7 @@ export class PdfService {
       doc.text(
         this.participantService.getParticipant(assignment.principal).name,
         xPosForText,
-        y
+        y,
       );
 
       y += 7;
@@ -461,7 +461,7 @@ export class PdfService {
         doc.text(
           this.participantService.getParticipant(assignment.assistant).name,
           xPosForText,
-          y
+          y,
         );
 
       y += 7;
@@ -478,10 +478,10 @@ export class PdfService {
         this.translocoLocaleService.localizeDate(
           assignment.date,
           this.translocoLocaleService.getLocale(),
-          { dateStyle: "full" }
+          { dateStyle: "full" },
         ),
         xPosForText,
-        y
+        y,
       );
 
       y += 7;
@@ -560,7 +560,7 @@ export class PdfService {
 
       const footerText: string[] = doc.splitTextToSize(
         userFooterText || this.translocoService.translate("S89_FOOTERNOTE"),
-        77
+        77,
       );
 
       const startXCached = x;

@@ -190,7 +190,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
     this.map = new Map("map2", { center, attributionControl: false }).setView(
       viewPosition,
-      zoom
+      zoom,
     );
 
     this.tile = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -218,7 +218,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
           this.createMarker(clickEvent.latlng);
           this.cdr.detectChanges();
         }
-      })
+      }),
     );
 
     //zoom the map to the polygon
@@ -308,9 +308,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     //Order matters, a territory may have no image so the persisted is last option
     if (this.imagePersisted()) {
       //Add a timestamp so the browser will think its different image and dont cache it
-      let imgPath = `${path.join(
+      const imgPath = `${path.join(
         this.configService.terrImagesPath,
-        this.territoryForm.controls.imageId.value
+        this.territoryForm.controls.imageId.value,
       )}?${nanoid(5)}`;
       return imgPath;
     }
@@ -356,7 +356,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   createPolygon() {
     this.leafletPolygon = new Polygon(this.polygonForm.controls.latLngList.value).addTo(
-      this.map
+      this.map,
     );
     //Because on reset we remove the id and on update of the poligon the id should remain
     if (this.isUpdate && this.polygonExists()) {

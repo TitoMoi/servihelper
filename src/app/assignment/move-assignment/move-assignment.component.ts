@@ -28,8 +28,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
 })
 export class MoveAssignmentComponent {
   assignments: AssignmentInterface[];
@@ -50,7 +50,7 @@ export class MoveAssignmentComponent {
     private formBuilder: UntypedFormBuilder,
     private router: Router,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   submit() {

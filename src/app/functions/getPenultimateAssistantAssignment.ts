@@ -11,7 +11,7 @@ import { ParticipantInterface } from "../participant/model/participant.model";
  */
 export function getPenultimateAssistantAssignment(
   assignmentList: AssignmentInterface[],
-  participant: ParticipantInterface
+  participant: ParticipantInterface,
 ): AssignmentInterface | undefined {
   const firstAssignment = assignmentList
     .filter((assignment) => assignment.assistant === participant.id)

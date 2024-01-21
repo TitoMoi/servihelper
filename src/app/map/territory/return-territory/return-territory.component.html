@@ -31,7 +31,7 @@
         color="primary"
         type="submit"
         [disabled]="form.invalid || (netStatusOffline$ | async)"
-        >
+      >
         {{ t("BUTTON_CONFIRM") }}
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>

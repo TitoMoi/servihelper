@@ -80,7 +80,7 @@ export class ConfigService {
   //Emits when the role changes
   role$: Observable<string> = this.config$.pipe(
     map((config) => config.role),
-    distinctUntilChanged()
+    distinctUntilChanged(),
   );
 
   // The current role id

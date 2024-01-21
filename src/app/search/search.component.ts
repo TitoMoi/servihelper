@@ -36,8 +36,8 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
     MatButtonModule,
     RouterLink,
     TranslocoLocaleModule,
-    AssignTypeNamePipe
-],
+    AssignTypeNamePipe,
+  ],
 })
 export class SearchComponent implements OnInit, OnDestroy {
   searchForm: UntypedFormGroup;
@@ -51,7 +51,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private participantService: ParticipantService,
     private assignmentService: AssignmentService,
     private assignTypeService: AssignTypeService,
-    private roomService: RoomService
+    private roomService: RoomService,
   ) {
     this.searchForm = this.formBuilder.group({
       participant: [undefined],

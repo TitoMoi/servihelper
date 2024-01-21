@@ -1,23 +1,23 @@
 <span *transloco="let t">
-  @if(numberOfChildren$ | async) {
-  <div class="row mb-2">
-    <div class="col">
-      <form novalidate>
-        <mat-radio-group
-          #matRadioGroup
-          [formControl]="selectedRadioOptionControl"
-          color="primary"
-        >
-          <mat-radio-button #matRadioBtn value="1" routerLink="territory">{{
-            t("MAP_SLIDE_MAPS")
-          }}</mat-radio-button>
-          <mat-radio-button value="2" routerLink="territoryGroup">{{
-            t("MAP_SLIDE_GROUPS")
-          }}</mat-radio-button>
-        </mat-radio-group>
-      </form>
+  @if (numberOfChildren$ | async) {
+    <div class="row mb-2">
+      <div class="col">
+        <form novalidate>
+          <mat-radio-group
+            #matRadioGroup
+            [formControl]="selectedRadioOptionControl"
+            color="primary"
+          >
+            <mat-radio-button #matRadioBtn value="1" routerLink="territory">{{
+              t("MAP_SLIDE_MAPS")
+            }}</mat-radio-button>
+            <mat-radio-button value="2" routerLink="territoryGroup">{{
+              t("MAP_SLIDE_GROUPS")
+            }}</mat-radio-button>
+          </mat-radio-group>
+        </form>
+      </div>
     </div>
-  </div>
   }
   <router-outlet></router-outlet>
 </span>

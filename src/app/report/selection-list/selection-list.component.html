@@ -62,53 +62,55 @@
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
           [style.width]="'65%'"
-          >
-          {{
-          ag.assignments[0].date
-          | translocoDate
-          : {
-          dateStyle: defaultReportDateFormat
-        }
-        }}
-      </th>
-      <th
-        [style.backgroundColor]="defaultReportDateColor"
-        [style.fontSize]="defaultReportFontSize"
         >
-        {{ ag.assignments[0].room | roomNamePipe }}
-      </th>
-    </tr>
-    @for (assignment of ag.assignments; track assignment) {
-      <tr>
-        <!-- td id is to find assignType later, not always has name, sometimes has theme -->
-        <td
-          [id]="assignment.assignType.id"
-          class="ps-3 pt-2"
-          [style]="
-          getBorderRight((assignment.assignType.id | assignTypePipe).color || 'transparent')
-          "
+          {{
+            ag.assignments[0].date
+              | translocoDate
+                : {
+                    dateStyle: defaultReportDateFormat
+                  }
+          }}
+        </th>
+        <th
+          [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
-          [style.width]="'65%'"
-          >
-          <div class="me-3">
-            {{
-            assignment.theme
-            ? assignment.theme
-            : (assignment.assignType | assignTypeNamePipe)
-            }}
-          </div>
-        </td>
-        <td class="ps-3" [style.fontSize]="defaultReportFontSize">
-          {{ assignment.principal.name
-          }}@if (assignment.assistant) {
-          <span>
-            / <br />
-            {{ assignment.assistant.name }}</span
-            >
-          }
-        </td>
+        >
+          {{ ag.assignments[0].room | roomNamePipe }}
+        </th>
       </tr>
-    }
-  </table>
-}
+      @for (assignment of ag.assignments; track assignment) {
+        <tr>
+          <!-- td id is to find assignType later, not always has name, sometimes has theme -->
+          <td
+            [id]="assignment.assignType.id"
+            class="ps-3 pt-2"
+            [style]="
+              getBorderRight(
+                (assignment.assignType.id | assignTypePipe).color || 'transparent'
+              )
+            "
+            [style.fontSize]="defaultReportFontSize"
+            [style.width]="'65%'"
+          >
+            <div class="me-3">
+              {{
+                assignment.theme
+                  ? assignment.theme
+                  : (assignment.assignType | assignTypeNamePipe)
+              }}
+            </div>
+          </td>
+          <td class="ps-3" [style.fontSize]="defaultReportFontSize">
+            {{ assignment.principal.name }}
+            @if (assignment.assistant) {
+              <span>
+                / <br />
+                {{ assignment.assistant.name }}</span
+              >
+            }
+          </td>
+        </tr>
+      }
+    </table>
+  }
 </div>

@@ -46,8 +46,8 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     TranslocoLocaleModule,
     AssignTypePipe,
     AssignTypeNamePipe,
-    RoomNamePipe
-],
+    RoomNamePipe,
+  ],
 })
 export class SelectionListHorComponent implements OnChanges {
   @Input() selectedDates: Date[];
@@ -75,7 +75,7 @@ export class SelectionListHorComponent implements OnChanges {
     private publicThemeService: PublicThemeService,
     private pdfService: PdfService,
     private exportService: ExportService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedDates.length && this.assignTypes) {
@@ -84,7 +84,7 @@ export class SelectionListHorComponent implements OnChanges {
       this.filterAssignments().then(() => {
         this.#assignments = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
           this.#assignments,
-          this.order
+          this.order,
         );
         this.getRelatedData();
         this.cdr.detectChanges();
@@ -105,8 +105,8 @@ export class SelectionListHorComponent implements OnChanges {
         this.assignTypes.includes(assignment.assignType) &&
         this.rooms.includes(assignment.room) &&
         this.selectedDates.some(
-          (date) => new Date(date).getTime() === new Date(assignment.date).getTime()
-        )
+          (date) => new Date(date).getTime() === new Date(assignment.date).getTime(),
+        ),
     );
   }
 
@@ -124,7 +124,7 @@ export class SelectionListHorComponent implements OnChanges {
             return -1;
           }
           return 0;
-        }
+        },
       );
     }
   }

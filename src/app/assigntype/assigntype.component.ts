@@ -41,6 +41,6 @@ export class AssignTypeComponent {
   constructor(
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
-    private onlineService: OnlineService
+    private onlineService: OnlineService,
   ) {}
 }

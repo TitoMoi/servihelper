@@ -25,8 +25,8 @@ import { OnlineService } from "app/online/service/online.service";
     MatCheckboxModule,
     MatIconModule,
     MatTooltipModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ParticipantComponent {
   participants: ParticipantInterface[] = this.participantService
@@ -37,7 +37,7 @@ export class ParticipantComponent {
 
   constructor(
     private participantService: ParticipantService,
-    private onlineService: OnlineService
+    private onlineService: OnlineService,
   ) {}
 
   toggleExternals(event: MatCheckboxChange) {

@@ -93,7 +93,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
   currentRoleId$: Observable<string> = this.config$.pipe(
     map((config) => config.role),
-    distinctUntilChanged()
+    distinctUntilChanged(),
   );
 
   isAdminRole$ = this.configService.role$.pipe(map(() => this.configService.isAdminRole()));
@@ -104,13 +104,13 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
       if (entry.isIntersecting) {
         let assignmentsPage = this.getAssignmentsSlice(
           this.paginationEndIndex,
-          this.paginationEndIndex + 25
+          this.paginationEndIndex + 25,
         );
 
         if (assignmentsPage?.length) {
           //Remove duplicates, this is because we can add an assignment and move the pagination pointer
           assignmentsPage = assignmentsPage.filter(
-            (a) => !this.assignmentsTable.some((at) => at.id === a.id)
+            (a) => !this.assignmentsTable.some((at) => at.id === a.id),
           );
 
           this.assignmentsTable = [
@@ -140,7 +140,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     private onlineService: OnlineService,
     private configService: ConfigService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
     this.getAssignments();
   }
@@ -161,9 +161,9 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
           this.router.navigate(["assignment/fake"], {
             skipLocationChange: true,
             queryParams: { prev: "home" },
-          })
+          }),
         );
-      })
+      }),
     );
 
     //prepare emissions, emits also the first time
@@ -175,9 +175,9 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
             : roles.find((r) => r.id === currentRole).assignTypesId;
 
         this.assignments = this.assignments.filter((a) =>
-          this.allowedAssignTypesIds.includes(a.assignType)
+          this.allowedAssignTypesIds.includes(a.assignType),
         );
-      })
+      }),
     );
 
     const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);
@@ -201,8 +201,8 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
               this.deleteAssignmentInTable(assignment);
               break;
           }
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -245,7 +245,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   updateAssignmentInTable(assignment: AssignmentInterface) {
     const index = this.assignmentsTable.findIndex(
-      (dataElement: AssignmentTableInterface) => dataElement.id === assignment.id
+      (dataElement: AssignmentTableInterface) => dataElement.id === assignment.id,
     );
     //Prepare assignment
     const assignmentTable: AssignmentTableInterface[] = this.prepareRowExtendedValues([
@@ -265,7 +265,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     //sort
     this.assignmentsTable = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
       this.assignmentsTable,
-      "Desc"
+      "Desc",
     );
 
     //Add separator
@@ -298,7 +298,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   prepareRowExtendedValues(
-    assignmentsPage: AssignmentInterface[]
+    assignmentsPage: AssignmentInterface[],
   ): AssignmentTableInterface[] {
     const assignmentsTable: AssignmentTableInterface[] = [];
 

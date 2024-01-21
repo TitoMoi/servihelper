@@ -43,7 +43,7 @@ export class CreateUpdateSheetTitleComponent {
     private formBuilder: UntypedFormBuilder,
     private sheetTitleService: SheetTitleService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   onSubmit(): void {

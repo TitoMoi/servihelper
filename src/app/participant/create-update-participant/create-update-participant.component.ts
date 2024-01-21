@@ -113,7 +113,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     },
     {
       updateOn: "blur",
-    }
+    },
   );
 
   constructor(
@@ -124,7 +124,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private onlineService: OnlineService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   get getRoomsArray(): ParticipantRoomInterface[] {
@@ -189,7 +189,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   addAssignTypes() {
     //reset
     this.form.controls.assignTypes = this.formBuilder.array<ParticipantAssignTypeInterface>(
-      []
+      [],
     );
     //Populate control with assignTypes
     for (const at of this.assignTypes) {

@@ -59,53 +59,56 @@
                 {{ t("CONFIG_GO_ONLINE") }}
               </mat-slide-toggle>
               @if ((onlineToggle.change | async)?.checked) {
-              <div class="mb-1">
-                {{ t("CONFIG_GO_ONLINE_12") }}
-              </div>
-              <mat-form-field>
-                <mat-label>{{ t("PLACEHOLDER_SHARED_FOLDER_LABEL") }}</mat-label>
-                <input matInput spellcheck="false" formControlName="path" />
-                <mat-error *ngIf="onlineForm.controls.path.errors?.required">{{
-                  t("CONFIG_ONLINE_FOLDER_ERROR")
-                }}</mat-error>
-                <mat-hint *ngIf="isValidPath && !isPathError" class="fw-bold">{{
-                  t("CONFIG_IS_VALID_PATH")
-                }}</mat-hint>
-              </mat-form-field>
+                <div class="mb-1">
+                  {{ t("CONFIG_GO_ONLINE_12") }}
+                </div>
+                <mat-form-field>
+                  <mat-label>{{ t("PLACEHOLDER_SHARED_FOLDER_LABEL") }}</mat-label>
+                  <input matInput spellcheck="false" formControlName="path" />
+                  <mat-error *ngIf="onlineForm.controls.path.errors?.required">{{
+                    t("CONFIG_ONLINE_FOLDER_ERROR")
+                  }}</mat-error>
+                  <mat-hint *ngIf="isValidPath && !isPathError" class="fw-bold">{{
+                    t("CONFIG_IS_VALID_PATH")
+                  }}</mat-hint>
+                </mat-form-field>
               }
             </div>
           </div>
-          @if ( (onlineToggle.change | async)?.checked && onlineForm.get('path').valueChanges |
-          async ) {
-          <button
-            mat-raised-button
-            color="primary"
-            type="button"
-            class="mb-2"
-            (click)="checkAndSaveOnlineMode()"
-          >
-            {{ t("BUTTON_CHECK_ONLINE") }}
-          </button>
-          } @if (!servihelperFilesExist && isValidPath) {
-          <div class="mb-2">
-            <div class="mb-2 me-2">
-              {{ t("CONFIG_NO_FILES_SHARED_FOLDER") }}: {{ onlineForm.get("path").value }}.
-              {{ t("CONFIG_ASK_MOVE_FILES") }}
-            </div>
-            <div class="mb-2">{{ t("CONFIG_YES_WARNING") }}</div>
+          @if (
+            (onlineToggle.change | async)?.checked && onlineForm.get("path").valueChanges
+              | async
+          ) {
             <button
               mat-raised-button
               color="primary"
               type="button"
               class="mb-2"
-              (click)="moveOfflineFilesToSharedFolder()"
+              (click)="checkAndSaveOnlineMode()"
             >
-              {{ t("BUTTON_YES") }}
+              {{ t("BUTTON_CHECK_ONLINE") }}
             </button>
-            @if (copyFilesError) {
-            <div>{{ t("CONFIG_CANNOT_COPY") }}.</div>
-            }
-          </div>
+          }
+          @if (!servihelperFilesExist && isValidPath) {
+            <div class="mb-2">
+              <div class="mb-2 me-2">
+                {{ t("CONFIG_NO_FILES_SHARED_FOLDER") }}: {{ onlineForm.get("path").value }}.
+                {{ t("CONFIG_ASK_MOVE_FILES") }}
+              </div>
+              <div class="mb-2">{{ t("CONFIG_YES_WARNING") }}</div>
+              <button
+                mat-raised-button
+                color="primary"
+                type="button"
+                class="mb-2"
+                (click)="moveOfflineFilesToSharedFolder()"
+              >
+                {{ t("BUTTON_YES") }}
+              </button>
+              @if (copyFilesError) {
+                <div>{{ t("CONFIG_CANNOT_COPY") }}.</div>
+              }
+            </div>
           }
         </form>
       </div>
@@ -132,7 +135,7 @@
       >
         {{ t("CONFIG_CREATE_PUBLIC_THEME") }}
         @if (netStatusOffline$ | async) {
-        <mat-icon svgIcon="nowifi"></mat-icon>
+          <mat-icon svgIcon="nowifi"></mat-icon>
         }
       </a>
       <h4 class="me-2">{{ t("CONFIG_AVAILABLE_THEMES") }}</h4>
@@ -148,27 +151,27 @@
             {{ (publicThemeSelect.value | publicThemePipe)?.name }}
           </mat-select-trigger>
           @for (theme of publicThemes; track theme) {
-          <mat-option [value]="theme.id">
-            <div class="d-flex align-items-center justify-content-evenly">
-              <mat-icon
-                class="me-4"
-                (click)="stopPropagation($event)"
-                [routerLink]="['updatePublicTheme', theme.id]"
-                routerLinkActive="active"
-                svgIcon="edit"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
-              <mat-icon
-                class="me-4"
-                (click)="stopPropagation($event)"
-                [routerLink]="['deletePublicTheme', theme.id]"
-                routerLinkActive="active"
-                svgIcon="garbage"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
-              <div>{{ theme.name }}</div>
-            </div>
-          </mat-option>
+            <mat-option [value]="theme.id">
+              <div class="d-flex align-items-center justify-content-evenly">
+                <mat-icon
+                  class="me-4"
+                  (click)="stopPropagation($event)"
+                  [routerLink]="['updatePublicTheme', theme.id]"
+                  routerLinkActive="active"
+                  svgIcon="edit"
+                  aria-label="Side nav toggle icon"
+                ></mat-icon>
+                <mat-icon
+                  class="me-4"
+                  (click)="stopPropagation($event)"
+                  [routerLink]="['deletePublicTheme', theme.id]"
+                  routerLinkActive="active"
+                  svgIcon="garbage"
+                  aria-label="Side nav toggle icon"
+                ></mat-icon>
+                <div>{{ theme.name }}</div>
+              </div>
+            </mat-option>
           }
         </mat-select>
         <mat-error *ngIf="!publicThemes.length">{{
@@ -197,7 +200,7 @@
       >
         {{ t("CONFIG_CREATE_TITLE") }}
         @if (netStatusOffline$ | async) {
-        <mat-icon svgIcon="nowifi"></mat-icon>
+          <mat-icon svgIcon="nowifi"></mat-icon>
         }
       </a>
       <h4 class="me-2">{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
@@ -213,27 +216,27 @@
             {{ (titleSelect.value | sheetTitlePipe)?.name }}
           </mat-select-trigger>
           @for (t of titles; track t) {
-          <mat-option [value]="t.id">
-            <div class="d-flex align-items-center justify-content-evenly">
-              <mat-icon
-                class="me-4"
-                (click)="stopPropagation($event)"
-                [routerLink]="['updateTitle', t.id]"
-                routerLinkActive="active"
-                svgIcon="edit"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
-              <mat-icon
-                class="me-4"
-                (click)="stopPropagation($event)"
-                [routerLink]="['deleteTitle', t.id]"
-                routerLinkActive="active"
-                svgIcon="garbage"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
-              <div>{{ t.name }}</div>
-            </div>
-          </mat-option>
+            <mat-option [value]="t.id">
+              <div class="d-flex align-items-center justify-content-evenly">
+                <mat-icon
+                  class="me-4"
+                  (click)="stopPropagation($event)"
+                  [routerLink]="['updateTitle', t.id]"
+                  routerLinkActive="active"
+                  svgIcon="edit"
+                  aria-label="Side nav toggle icon"
+                ></mat-icon>
+                <mat-icon
+                  class="me-4"
+                  (click)="stopPropagation($event)"
+                  [routerLink]="['deleteTitle', t.id]"
+                  routerLinkActive="active"
+                  svgIcon="garbage"
+                  aria-label="Side nav toggle icon"
+                ></mat-icon>
+                <div>{{ t.name }}</div>
+              </div>
+            </mat-option>
           }
         </mat-select>
         <mat-error *ngIf="!titles.length">{{
@@ -281,9 +284,9 @@
         <mat-select formControlName="defaultFooterNoteId" required>
           <mat-option [value]="undefined"> </mat-option>
           @for (note of notes; track note) {
-          <mat-option [value]="note.id">
-            {{ note.name }}
-          </mat-option>
+            <mat-option [value]="note.id">
+              {{ note.name }}
+            </mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -359,9 +362,9 @@
       <mat-form-field>
         <mat-select formControlName="defaultWeekDayBegins" required>
           @for (day of weekDayBegins; track day) {
-          <mat-option [value]="day.value">
-            {{ day.name }}
-          </mat-option>
+            <mat-option [value]="day.value">
+              {{ day.name }}
+            </mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -369,9 +372,9 @@
       <mat-form-field>
         <mat-select formControlName="defaultReportDateFormat" required>
           @for (df of translocoDateFormats; track df) {
-          <mat-option [value]="df">
-            {{ df }}
-          </mat-option>
+            <mat-option [value]="df">
+              {{ df }}
+            </mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -424,34 +427,34 @@
       </mat-form-field>
     </mat-expansion-panel>
     @if (!onlineConfig.isOnline) {
-    <mat-expansion-panel class="mb-2 hover-lightcoral">
-      <mat-expansion-panel-header class="bg-color-lightcoral">
-        <mat-panel-title>
-          <h3 class="m-3">
-            {{ t("CONFIG_RESTART_LABEL") }}
-          </h3>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <button
-        mat-raised-button
-        type="button"
-        color="warn"
-        (click)="confirmDelete = !confirmDelete"
-      >
-        {{ t("CONFIG_RESET_ALL") }}
-      </button>
-      @if (confirmDelete) {
-      <button
-        class="ms-2"
-        mat-raised-button
-        type="button"
-        color="warn"
-        (click)="restoreAllData()"
-      >
-        {{ t("CONFIG_RESET_ALL_CONFIRM") }}
-      </button>
-      }
-    </mat-expansion-panel>
+      <mat-expansion-panel class="mb-2 hover-lightcoral">
+        <mat-expansion-panel-header class="bg-color-lightcoral">
+          <mat-panel-title>
+            <h3 class="m-3">
+              {{ t("CONFIG_RESTART_LABEL") }}
+            </h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button
+          mat-raised-button
+          type="button"
+          color="warn"
+          (click)="confirmDelete = !confirmDelete"
+        >
+          {{ t("CONFIG_RESET_ALL") }}
+        </button>
+        @if (confirmDelete) {
+          <button
+            class="ms-2"
+            mat-raised-button
+            type="button"
+            color="warn"
+            (click)="restoreAllData()"
+          >
+            {{ t("CONFIG_RESET_ALL_CONFIRM") }}
+          </button>
+        }
+      </mat-expansion-panel>
     }
   </mat-accordion>
 </form>

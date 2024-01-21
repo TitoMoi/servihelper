@@ -74,7 +74,7 @@ export class CreateUpdateAssignTypeComponent {
         .getAssignTypes()
         .map((at) => at.color)
         .map((at) => at.toUpperCase())
-        .filter((c) => !!c)
+        .filter((c) => !!c),
     ),
   ];
   showColors = false;
@@ -86,7 +86,7 @@ export class CreateUpdateAssignTypeComponent {
     private router: Router,
     private translocoService: TranslocoService,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   isOtherAssignmentType() {
@@ -107,7 +107,7 @@ export class CreateUpdateAssignTypeComponent {
         const id = this.form.get("id").value;
         this.participantService.massiveUpdateAssignType(
           id,
-          this.form.get("hasAssistant").value
+          this.form.get("hasAssistant").value,
         );
       } else {
         //save the assign type

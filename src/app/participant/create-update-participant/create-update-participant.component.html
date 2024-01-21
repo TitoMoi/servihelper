@@ -23,7 +23,7 @@
             <mat-label>{{ t("PLACEHOLDER_GROUP") }}</mat-label>
             <mat-select formControlName="group">
               @for (number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track number) {
-              <mat-option [value]="number">{{ number }}</mat-option>
+                <mat-option [value]="number">{{ number }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -51,20 +51,21 @@
         <div class="participant-overflow">
           <div class="col-12 mr-auto">
             @if (rooms.length) {
-            <h4>
-              {{ t("PARTICIPANT_CREATE_ROOMS_TITLE") }}
-            </h4>
+              <h4>
+                {{ t("PARTICIPANT_CREATE_ROOMS_TITLE") }}
+              </h4>
             }
             <div class="row">
               <ng-container formArrayName="rooms">
-                @for (r of getRoomsArray; track r; let i = $index) { @if (r; as
-                participantRoom) {
-                <div class="col-auto" [formGroupName]="i">
-                  <mat-checkbox color="primary" formControlName="available">{{
-                    participantRoom.roomId | roomPipe | roomNamePipe
-                  }}</mat-checkbox>
-                </div>
-                } }
+                @for (r of getRoomsArray; track r; let i = $index) {
+                  @if (r; as participantRoom) {
+                    <div class="col-auto" [formGroupName]="i">
+                      <mat-checkbox color="primary" formControlName="available">{{
+                        participantRoom.roomId | roomPipe | roomNamePipe
+                      }}</mat-checkbox>
+                    </div>
+                  }
+                }
               </ng-container>
             </div>
           </div>
@@ -77,12 +78,13 @@
               (click)="picker.open()"
             >
               @for (date of getNotAvailableDates; track date) {
-              <mat-chip-row selectable="false" removable="true" (removed)="remove(date)">
-                {{ date | translocoDate : { dateStyle: "short" } }}
-                <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
-              </mat-chip-row>
-              } @if (!getNotAvailableDates.length) {
-              <mat-label>{{ t("PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE") }}</mat-label>
+                <mat-chip-row selectable="false" removable="true" (removed)="remove(date)">
+                  {{ date | translocoDate: { dateStyle: "short" } }}
+                  <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
+                </mat-chip-row>
+              }
+              @if (!getNotAvailableDates.length) {
+                <mat-label>{{ t("PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE") }}</mat-label>
               }
               <input
                 [value]="resetModel"
@@ -118,16 +120,16 @@
       >
         {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         @if (netStatusOffline$ | async) {
-        <mat-icon svgIcon="nowifi"></mat-icon>
+          <mat-icon svgIcon="nowifi"></mat-icon>
         }
       </button>
       @if (!isUpdate) {
-      <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">
-        {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
-        @if (netStatusOffline$ | async) {
-        <mat-icon svgIcon="nowifi"></mat-icon>
-        }
-      </button>
+        <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">
+          {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
+          @if (netStatusOffline$ | async) {
+            <mat-icon svgIcon="nowifi"></mat-icon>
+          }
+        </button>
       }
     </mat-card-actions>
   </mat-card>

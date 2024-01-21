@@ -6,67 +6,67 @@
           isUpdate
             ? t("ASSIGN_UPDATE_TITLE")
             : isMultipleDates
-            ? t("ASSIGN_MULTIPLE_CREATE_TITLE")
-            : t("ASSIGN_CREATE_TITLE")
+              ? t("ASSIGN_MULTIPLE_CREATE_TITLE")
+              : t("ASSIGN_CREATE_TITLE")
         }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        @if(!isUpdate) {
-        <div class="row">
-          <div class="col">
-            <mat-checkbox
-              labelPosition="before"
-              color="primary"
-              (change)="toggleIsMultipleDates($event)"
-              [disableRipple]="true"
-              >{{ t("ASSIGN_CHECK_IS_MULTIPLE") }}</mat-checkbox
-            >
+        @if (!isUpdate) {
+          <div class="row">
+            <div class="col">
+              <mat-checkbox
+                labelPosition="before"
+                color="primary"
+                (change)="toggleIsMultipleDates($event)"
+                [disableRipple]="true"
+                >{{ t("ASSIGN_CHECK_IS_MULTIPLE") }}</mat-checkbox
+              >
+            </div>
           </div>
-        </div>
         }
         <div class="row">
           <div class="col-6">
-            @if(isMultipleDates) {
-            <mat-form-field>
-              <mat-label>{{ t("ASSIGN_SELECTION_DATES_SELECT_TITLE") }}</mat-label>
-              <input
-                matInput
-                [value]="resetModel"
-                [matDatepicker]="multipleDatePicker"
-                (dateChange)="dateChanged($event)"
-              />
-              <mat-datepicker-toggle
-                matPrefix
-                [for]="multipleDatePicker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker
-                #multipleDatePicker
-                [startAt]="this.lastDateService.lastDate$ | async"
-                [dateClass]="dateClass"
-              ></mat-datepicker>
-            </mat-form-field>
+            @if (isMultipleDates) {
+              <mat-form-field>
+                <mat-label>{{ t("ASSIGN_SELECTION_DATES_SELECT_TITLE") }}</mat-label>
+                <input
+                  matInput
+                  [value]="resetModel"
+                  [matDatepicker]="multipleDatePicker"
+                  (dateChange)="dateChanged($event)"
+                />
+                <mat-datepicker-toggle
+                  matPrefix
+                  [for]="multipleDatePicker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker
+                  #multipleDatePicker
+                  [startAt]="this.lastDateService.lastDate$ | async"
+                  [dateClass]="dateClass"
+                ></mat-datepicker>
+              </mat-form-field>
             } @else {
-            <mat-form-field>
-              <mat-label>{{ t("ASSIGN_CHOOSE_DATE") }}</mat-label>
-              <input
-                required
-                [appautofocus]="isUpdate ? false : true"
-                matInput
-                [matDatepicker]="picker"
-                formControlName="date"
-              />
-              <mat-datepicker-toggle
-                matPrefix
-                [for]="picker"
-                class="mr-3"
-              ></mat-datepicker-toggle>
-              <mat-datepicker
-                id="assignmentDatepickerId"
-                #picker
-                [startAt]="this.lastDateService.lastDate$ | async"
-                (closed)="warningIfAlreadyHasWork()"
-              ></mat-datepicker>
-            </mat-form-field>
+              <mat-form-field>
+                <mat-label>{{ t("ASSIGN_CHOOSE_DATE") }}</mat-label>
+                <input
+                  required
+                  [appautofocus]="isUpdate ? false : true"
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="date"
+                />
+                <mat-datepicker-toggle
+                  matPrefix
+                  [for]="picker"
+                  class="mr-3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker
+                  id="assignmentDatepickerId"
+                  #picker
+                  [startAt]="this.lastDateService.lastDate$ | async"
+                  (closed)="warningIfAlreadyHasWork()"
+                ></mat-datepicker>
+              </mat-form-field>
             }
           </div>
           <div class="col-6">
@@ -74,10 +74,10 @@
               <mat-label>{{ t("ASSIGN_CHOOSE_SHEET_TITLE") }}</mat-label>
               <mat-select formControlName="sheetTitle">
                 <mat-option value=""></mat-option>
-                @for(title of sheetTitles; track title.id) {
-                <mat-option [value]="title.id">
-                  {{ title.name }}
-                </mat-option>
+                @for (title of sheetTitles; track title.id) {
+                  <mat-option [value]="title.id">
+                    {{ title.name }}
+                  </mat-option>
                 }
               </mat-select>
             </mat-form-field>
@@ -87,10 +87,10 @@
             <mat-form-field>
               <mat-label>{{ t("ASSIGN_ROOM") }}</mat-label>
               <mat-select formControlName="room" required (closed)="warningIfAlreadyHasWork()">
-                @for(room of rooms; track room.id) {
-                <mat-option [value]="room.id">
-                  {{ room | roomNamePipe }}
-                </mat-option>
+                @for (room of rooms; track room.id) {
+                  <mat-option [value]="room.id">
+                    {{ room | roomNamePipe }}
+                  </mat-option>
                 }
               </mat-select>
             </mat-form-field>
@@ -103,13 +103,13 @@
                 required
                 (closed)="warningIfAlreadyHasWork()"
               >
-                @for(assignType of assignTypes; track assignType.id) {
-                <mat-option
-                  [value]="assignType.id"
-                  [style.borderLeft]="getBorderLeftStyle(assignType.color)"
-                >
-                  {{ assignType | assignTypeNamePipe }}
-                </mat-option>
+                @for (assignType of assignTypes; track assignType.id) {
+                  <mat-option
+                    [value]="assignType.id"
+                    [style.borderLeft]="getBorderLeftStyle(assignType.color)"
+                  >
+                    {{ assignType | assignTypeNamePipe }}
+                  </mat-option>
                 }
               </mat-select>
               <mat-error *ngIf="noAvailableAssignTypesByRole">{{
@@ -117,38 +117,37 @@
               }}</mat-error>
             </mat-form-field>
           </div>
-          @if(isPTheme) {
-          <div class="col-12 mb-2">
-            <mat-form-field>
-              <mat-label>{{ t("ASSIGN_THEME") }}</mat-label>
-              <mat-select
-                #publicThemeSelect
-                formControlName="theme"
-                required
-                [disableRipple]="true"
-              >
-                <mat-select-trigger *ngIf="publicThemeSelect.value">
-                  {{ (publicThemeSelect.value | publicThemePipe).name }}
-                </mat-select-trigger>
-                @for(pTheme of publicThemes; track pTheme.id) {
-                <mat-option [value]="pTheme.id">
-                  <div>{{ getPThemeCount(pTheme.id) }} - {{ pTheme.name }}</div>
-                </mat-option>
+          @if (isPTheme) {
+            <div class="col-12 mb-2">
+              <mat-form-field>
+                <mat-label>{{ t("ASSIGN_THEME") }}</mat-label>
+                <mat-select
+                  #publicThemeSelect
+                  formControlName="theme"
+                  required
+                  [disableRipple]="true"
+                >
+                  <mat-select-trigger *ngIf="publicThemeSelect.value">
+                    {{ (publicThemeSelect.value | publicThemePipe).name }}
+                  </mat-select-trigger>
+                  @for (pTheme of publicThemes; track pTheme.id) {
+                    <mat-option [value]="pTheme.id">
+                      <div>{{ getPThemeCount(pTheme.id) }} - {{ pTheme.name }}</div>
+                    </mat-option>
+                  }
+                </mat-select>
+                @if (!publicThemes.length) {
+                  <mat-error>{{ t("ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE") }}</mat-error>
                 }
-              </mat-select>
-              @if (!publicThemes.length) {<mat-error>{{
-                t("ASSIGN_ERROR_NO_PUBLIC_THEMES_AVAILABLE")
-              }}</mat-error
-              >}
-            </mat-form-field>
-          </div>
+              </mat-form-field>
+            </div>
           } @else {
-          <div class="col-12 mb-2">
-            <mat-form-field>
-              <mat-label>{{ t("ASSIGN_THEME") }}</mat-label>
-              <input matInput spellcheck="false" formControlName="theme" />
-            </mat-form-field>
-          </div>
+            <div class="col-12 mb-2">
+              <mat-form-field>
+                <mat-label>{{ t("ASSIGN_THEME") }}</mat-label>
+                <input matInput spellcheck="false" formControlName="theme" />
+              </mat-form-field>
+            </div>
           }
           <div class="col-12 mb-2">
             <div class="d-flex align-items-baseline justify-content-start">
@@ -207,65 +206,66 @@
                 <mat-select-trigger *ngIf="principalSelect.value">
                   {{ (principalSelect.value | participantPipe).name }}
                 </mat-select-trigger>
-                @for(participant of principals; track participant.id ) {
-
-                <mat-option [value]="participant.id">
-                  <div class="grid">
-                    <div class="d-flex align-items-center py-1">
-                      @if( participant.hasWork && !isMultipleDates) {
-                      <mat-icon
-                        (click)="onIconWarningClick($event, participant)"
-                        svgIcon="warning"
-                        aria-label="icon"
-                      ></mat-icon>
-                      } @else if (!participant.hasWork && !isMultipleDates) {
-                      <mat-icon
-                        (click)="onPrincipalIconInfoClick($event, participant)"
-                        svgIcon="info-blue"
-                        aria-label="icon"
-                      ></mat-icon>
+                @for (participant of principals; track participant.id) {
+                  <mat-option [value]="participant.id">
+                    <div class="grid">
+                      <div class="d-flex align-items-center py-1">
+                        @if (participant.hasWork && !isMultipleDates) {
+                          <mat-icon
+                            (click)="onIconWarningClick($event, participant)"
+                            svgIcon="warning"
+                            aria-label="icon"
+                          ></mat-icon>
+                        } @else if (!participant.hasWork && !isMultipleDates) {
+                          <mat-icon
+                            (click)="onPrincipalIconInfoClick($event, participant)"
+                            svgIcon="info-blue"
+                            aria-label="icon"
+                          ></mat-icon>
+                        } @else {
+                          <div></div>
+                        }
+                      </div>
+                      @if (!isMultipleDates) {
+                        <div class="d-flex align-items-center">
+                          {{ participant.count }}
+                        </div>
                       } @else {
-                      <div></div>
+                        <div></div>
                       }
+                      <div class="d-flex align-items-center">
+                        <span class="me-2">{{ participant.name }}</span>
+                        @if (participant.hasCollision && !isMultipleDates) {
+                          <mat-icon
+                            class="me-2"
+                            svgIcon="time"
+                            aria-label="icon"
+                            [matTooltip]="t('ASSIGNMENT_COLLISION_TOOLTIP')"
+                          ></mat-icon>
+                        } @else if (participant.isCloseToOthers && !isMultipleDates) {
+                          <mat-icon
+                            svgIcon="warningtime"
+                            aria-label="icon"
+                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
+                          ></mat-icon>
+                        } @else if (participant.isCloseToOthersPrayer && !isMultipleDates) {
+                          <mat-icon
+                            svgIcon="warningtime"
+                            aria-label="icon"
+                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
+                          ></mat-icon>
+                        } @else if (
+                          participant.isCloseToOthersTreasuresEtc && !isMultipleDates
+                        ) {
+                          <mat-icon
+                            svgIcon="warningtime"
+                            aria-label="icon"
+                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
+                          ></mat-icon>
+                        }
+                      </div>
                     </div>
-                    @if(!isMultipleDates) {
-                    <div class="d-flex align-items-center">
-                      {{ participant.count }}
-                    </div>
-                    } @else{
-                    <div></div>
-                    }
-                    <div class="d-flex align-items-center">
-                      <span class="me-2">{{ participant.name }}</span>
-                      @if(participant.hasCollision && !isMultipleDates) {
-                      <mat-icon
-                        class="me-2"
-                        svgIcon="time"
-                        aria-label="icon"
-                        [matTooltip]="t('ASSIGNMENT_COLLISION_TOOLTIP')"
-                      ></mat-icon>
-                      } @else if(participant.isCloseToOthers && !isMultipleDates) {
-                      <mat-icon
-                        svgIcon="warningtime"
-                        aria-label="icon"
-                        [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
-                      ></mat-icon>
-                      } @else if(participant.isCloseToOthersPrayer && !isMultipleDates) {
-                      <mat-icon
-                        svgIcon="warningtime"
-                        aria-label="icon"
-                        [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
-                      ></mat-icon>
-                      } @else if(participant.isCloseToOthersTreasuresEtc && !isMultipleDates) {
-                      <mat-icon
-                        svgIcon="warningtime"
-                        aria-label="icon"
-                        [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
-                      ></mat-icon>
-                      }
-                    </div>
-                  </div>
-                </mat-option>
+                  </mat-option>
                 }
               </mat-select>
               <mat-error *ngIf="form.controls.principal.invalid">{{
@@ -285,45 +285,45 @@
                 <mat-select-trigger *ngIf="assistantSelect.value">
                   {{ (assistantSelect.value | participantPipe).name }}
                 </mat-select-trigger>
-                @for(participant of assistants; track participant.id) {
-                <mat-option [value]="participant.id">
-                  <div class="grid">
-                    <div>
-                      @if(participant.hasWork && !isMultipleDates) {
-                      <mat-icon
-                        (click)="onIconWarningClick($event, participant)"
-                        svgIcon="warning"
-                        aria-label="icon"
-                      ></mat-icon>
-                      } @else if(!participant.hasWork && !isMultipleDates) {
-                      <mat-icon
-                        (click)="onAssistantIconInfoClick($event, participant)"
-                        svgIcon="info-blue"
-                        aria-label="icon"
-                      ></mat-icon>
+                @for (participant of assistants; track participant.id) {
+                  <mat-option [value]="participant.id">
+                    <div class="grid">
+                      <div>
+                        @if (participant.hasWork && !isMultipleDates) {
+                          <mat-icon
+                            (click)="onIconWarningClick($event, participant)"
+                            svgIcon="warning"
+                            aria-label="icon"
+                          ></mat-icon>
+                        } @else if (!participant.hasWork && !isMultipleDates) {
+                          <mat-icon
+                            (click)="onAssistantIconInfoClick($event, participant)"
+                            svgIcon="info-blue"
+                            aria-label="icon"
+                          ></mat-icon>
+                        } @else {
+                          <div></div>
+                        }
+                      </div>
+                      @if (!isMultipleDates) {
+                        <div>
+                          {{ participant.count }}
+                        </div>
                       } @else {
-                      <div></div>
+                        <div></div>
                       }
+                      <div class="d-flex align-items-center">
+                        <span class="me-2">{{ participant.name }}</span>
+                        @if (participant.isCloseToOthers && !isMultipleDates) {
+                          <mat-icon
+                            svgIcon="warningtime"
+                            aria-label="icon"
+                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
+                          ></mat-icon>
+                        }
+                      </div>
                     </div>
-                    @if(!isMultipleDates) {
-                    <div>
-                      {{ participant.count }}
-                    </div>
-                    } @else {
-                    <div></div>
-                    }
-                    <div class="d-flex align-items-center">
-                      <span class="me-2">{{ participant.name }}</span>
-                      @if(participant.isCloseToOthers && !isMultipleDates) {
-                      <mat-icon
-                        svgIcon="warningtime"
-                        aria-label="icon"
-                        [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
-                      ></mat-icon>
-                      }
-                    </div>
-                  </div>
-                </mat-option>
+                  </mat-option>
                 }
               </mat-select>
             </mat-form-field>
@@ -333,10 +333,10 @@
               <mat-label>{{ t("ASSIGN_FOOTER_NOTE") }}</mat-label>
               <mat-select formControlName="footerNote" [disableRipple]="true">
                 <mat-option [value]="undefined"></mat-option>
-                @for(note of footerNotes; track note.id) {
-                <mat-option [value]="note.id">
-                  {{ note.name }}
-                </mat-option>
+                @for (note of footerNotes; track note.id) {
+                  <mat-option [value]="note.id">
+                    {{ note.name }}
+                  </mat-option>
                 }
               </mat-select>
             </mat-form-field>
@@ -369,18 +369,18 @@
           <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
           {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         </button>
-        @if(!isUpdate && !isMultipleDates) {
-        <button
-          #btnSaveCreateAnother
-          mat-raised-button
-          color="accent"
-          type="submit"
-          [disableRipple]="true"
-          [disabled]="form.invalid || (netStatusOffline$ | async)"
-        >
-          <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
-          {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
-        </button>
+        @if (!isUpdate && !isMultipleDates) {
+          <button
+            #btnSaveCreateAnother
+            mat-raised-button
+            color="accent"
+            type="submit"
+            [disableRipple]="true"
+            [disabled]="form.invalid || (netStatusOffline$ | async)"
+          >
+            <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
+            {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
+          </button>
         }
       </mat-card-actions>
     </mat-card>

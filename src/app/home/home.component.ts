@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
     private polygonService: PolygonService,
     private territoryService: TerritoryService,
     private territoryGroupService: TerritoryGroupService,
-    private dateAdapter: DateAdapter<NativeDateAdapter>
+    private dateAdapter: DateAdapter<NativeDateAdapter>,
   ) {}
   ngOnInit(): void {
     this.noteHome = this.noteService.getNotes().find((n) => n.showInHome);
@@ -108,12 +108,12 @@ export class HomeComponent implements OnInit {
         case this.configService.configFilename:
           const currentConfig = this.configService.getConfig(); //Default config
           const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
-          let finalConfig = { ...currentConfig, ...incomingConfig };
+          const finalConfig = { ...currentConfig, ...incomingConfig };
           writeJsonSync(this.configService.configPath, finalConfig);
           break;
         case this.configService.assignTypesFilename:
           const incomingAtList: AssignTypeInterface[] = JSON.parse(
-            zipEntry.getData().toString("utf8")
+            zipEntry.getData().toString("utf8"),
           );
           //Read current assignTypes
           const currentAtList = this.assignTypeService.getAssignTypes();
@@ -139,7 +139,7 @@ export class HomeComponent implements OnInit {
         default:
           const destinyPath = path.join(
             this.configService.sourceFilesPath,
-            zipEntry.entryName
+            zipEntry.entryName,
           );
 
           const stats = lstatSync(destinyPath, { throwIfNoEntry: false });

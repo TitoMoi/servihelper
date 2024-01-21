@@ -50,8 +50,8 @@ import jsPDF from "jspdf";
     TranslocoLocaleModule,
     AssignTypePipe,
     AssignTypeNamePipe,
-    RoomNamePipe
-],
+    RoomNamePipe,
+  ],
 })
 export class SelectionListComponent implements OnChanges {
   @Input() selectedDates: Date[];
@@ -80,7 +80,7 @@ export class SelectionListComponent implements OnChanges {
     private pdfService: PdfService,
     private exportService: ExportService,
     private translocoLocaleService: TranslocoLocaleService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
   ngOnChanges(changes: SimpleChanges) {
     if (this.selectedDates.length && this.assignTypes) {
@@ -89,7 +89,7 @@ export class SelectionListComponent implements OnChanges {
       this.filterAssignments().then(() => {
         this.#assignments = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
           this.#assignments,
-          this.order
+          this.order,
         );
         this.getRelatedData();
         this.cdr.detectChanges();
@@ -112,8 +112,8 @@ export class SelectionListComponent implements OnChanges {
         this.assignTypes.includes(assignment.assignType) &&
         this.rooms.includes(assignment.room) &&
         this.selectedDates.some(
-          (date) => new Date(date).getTime() === new Date(assignment.date).getTime()
-        )
+          (date) => new Date(date).getTime() === new Date(assignment.date).getTime(),
+        ),
     );
   }
 
@@ -246,7 +246,7 @@ export class SelectionListComponent implements OnChanges {
     return this.translocoLocaleService.localizeDate(
       date,
       this.translocoLocaleService.getLocale(),
-      { dateStyle: this.defaultReportDateFormat }
+      { dateStyle: this.defaultReportDateFormat },
     );
   }
 
@@ -300,7 +300,7 @@ export class SelectionListComponent implements OnChanges {
     x: number,
     y: number,
     imageName: BandNamesWithExtType,
-    a: AssignmentReportInterface
+    a: AssignmentReportInterface,
   ): number {
     y = y - 4; //Rectangles draw to bottom so we need to move the pointer up
     doc.setFillColor(a.assignType.color);
@@ -319,7 +319,7 @@ export class SelectionListComponent implements OnChanges {
 
     const doc = this.getPdfSheet();
 
-    let x = this.pdfService.getInitialWidth();
+    const x = this.pdfService.getInitialWidth();
     let y = this.pdfService.getInitialHeight();
 
     doc.setFont(this.pdfService.font);
@@ -358,19 +358,19 @@ export class SelectionListComponent implements OnChanges {
         doc.text(
           this.roomService.getNameOrTranslation(room1),
           x + this.getMaxWidth(hasMultipleRooms),
-          y
+          y,
         );
         doc.text(
           this.roomService.getNameOrTranslation(room2),
           x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(hasMultipleRooms),
-          y
+          y,
         );
       } else {
         const [room1] = this.getRooms(ag);
         doc.text(
           this.roomService.getNameOrTranslation(room1),
           x + this.getMaxWidth(hasMultipleRooms),
-          y
+          y,
         );
       }
 
@@ -385,7 +385,7 @@ export class SelectionListComponent implements OnChanges {
 
         let textLinesParticipants = doc.splitTextToSize(
           participantsNames,
-          maxLineWidthParticipants
+          maxLineWidthParticipants,
         );
 
         const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
@@ -398,8 +398,8 @@ export class SelectionListComponent implements OnChanges {
         //Before create text lines check the length
         if (themeOrAssignType.length > wordLength) {
           const shortedTheme = [];
-          let words = themeOrAssignType.split(" ");
-          for (let w of words) {
+          const words = themeOrAssignType.split(" ");
+          for (const w of words) {
             if (wordLength - w.length > 0) {
               shortedTheme.push(w);
               wordLength -= w.length;
@@ -449,24 +449,24 @@ export class SelectionListComponent implements OnChanges {
           // the room2 assignments are at the end of the ag because are sorted
           const assign = ag.assignments.find(
             (assign) =>
-              assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
+              assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type,
           );
           const index = ag.assignments.findIndex(
             (assign) =>
-              assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
+              assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type,
           );
           if (assign) {
             participantsNames = this.getParticipantsNames(assign, hasMultipleRooms);
             textLinesParticipants = doc.splitTextToSize(
               participantsNames,
-              maxLineWidthParticipants
+              maxLineWidthParticipants,
             );
             //We need to move the pointer adding the width of the text
             //plus the width of the participant text plus a margin
             doc.text(
               textLinesParticipants,
               x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(hasMultipleRooms),
-              y
+              y,
             );
             ag.assignments.splice(index, 1);
           }

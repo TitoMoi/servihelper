@@ -29,8 +29,8 @@ import { TerritoryService } from "app/map/territory/service/territory.service";
     MatButtonModule,
     RouterLink,
     AsyncPipe,
-    MatIconModule
-],
+    MatIconModule,
+  ],
 })
 export class DeleteParticipantComponent {
   participant = this.participantService.getParticipant(this.activatedRoute.snapshot.params.id);
@@ -49,7 +49,7 @@ export class DeleteParticipantComponent {
     private territoryService: TerritoryService,
     private router: Router,
     private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   onSubmit(participant: ParticipantInterface): void {

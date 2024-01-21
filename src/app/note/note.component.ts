@@ -20,15 +20,18 @@ import { OnlineService } from "app/online/service/online.service";
     RouterLink,
     RouterLinkActive,
     MatIconModule,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class NoteComponent implements OnInit {
   notes: NoteInterface[];
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
-  constructor(private noteService: NoteService, private onlineService: OnlineService) {}
+  constructor(
+    private noteService: NoteService,
+    private onlineService: OnlineService,
+  ) {}
 
   ngOnInit(): void {
     this.notes = this.noteService.getNotes();

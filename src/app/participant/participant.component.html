@@ -7,7 +7,7 @@
       routerLink="create"
       routerLinkActive="active"
       [disabled]="netStatusOffline$ | async"
-      >
+    >
       {{ t("PARTICIPANT_BUTTON_TITLE") }}
       @if (netStatusOffline$ | async) {
         <mat-icon svgIcon="nowifi"></mat-icon>
@@ -21,7 +21,7 @@
         routerLink="create-from"
         routerLinkActive="active"
         [disabled]="netStatusOffline$ | async"
-        >
+      >
         {{ t("PARTICIPANT_COPY_BUTTON_TITLE") }}
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>
@@ -41,65 +41,61 @@
       color="primary"
       (change)="toggleExternals($event)"
       >{{ t("PARTICIPANT_SHOW_EXTERNAL") }}</mat-checkbox
-      >
-      @if (participants.length) {
-        <mat-icon
-          svgIcon="assigntypeavailable"
-          routerLink="assigntypeavailable"
-          [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
-          routerLinkActive="active"
-        ></mat-icon>
-      }
-    </div>
+    >
     @if (participants.length) {
-      <div class="table-overflow">
-        <div class="grid">
-          <div class="grid-header-item fw-bold">
-            {{ t("PARTICIPANT_TABLE_HEADER_PRINCIPAL") }}
-          </div>
-          <div class="grid-header-item fw-bold">
-            {{ t("PARTICIPANT_TABLE_HEADER_GROUP") }}
-          </div>
-          <div class="grid-header-item fw-bold">
-            {{ t("PARTICIPANT_TABLE_HEADER_EDIT") }}
-          </div>
-          <div class="grid-header-item fw-bold">
-            {{ t("PARTICIPANT_TABLE_HEADER_DELETE") }}
-          </div>
-          @for (p of participants; track p) {
-            <div class="grid-row">
-              <div class="grid-item d-flex align-items-center">
-                {{ p.name }}
-                @if (!p.available) {
-                  <mat-icon
-                    class="ms-2 cursor-arrow"
-                    svgIcon="unavailable"
-                  ></mat-icon>
-                }
-              </div>
-              <div class="grid-item d-flex align-items-center">
-                {{ p.group }}
-              </div>
-              <div class="grid-item d-flex align-items-center">
-                <mat-icon
-                  [routerLink]="['update', p.id]"
-                  routerLinkActive="active"
-                  svgIcon="edit"
-                  aria-label="Side nav toggle icon"
-                ></mat-icon>
-              </div>
-              <div class="grid-item d-flex align-items-center">
-                <mat-icon
-                  [routerLink]="['delete', p.id]"
-                  routerLinkActive="active"
-                  svgIcon="garbage"
-                  aria-label="Side nav toggle icon"
-                ></mat-icon>
-              </div>
-            </div>
-          }
-        </div>
-      </div>
+      <mat-icon
+        svgIcon="assigntypeavailable"
+        routerLink="assigntypeavailable"
+        [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
+        routerLinkActive="active"
+      ></mat-icon>
     }
-  </span>
-  
+  </div>
+  @if (participants.length) {
+    <div class="table-overflow">
+      <div class="grid">
+        <div class="grid-header-item fw-bold">
+          {{ t("PARTICIPANT_TABLE_HEADER_PRINCIPAL") }}
+        </div>
+        <div class="grid-header-item fw-bold">
+          {{ t("PARTICIPANT_TABLE_HEADER_GROUP") }}
+        </div>
+        <div class="grid-header-item fw-bold">
+          {{ t("PARTICIPANT_TABLE_HEADER_EDIT") }}
+        </div>
+        <div class="grid-header-item fw-bold">
+          {{ t("PARTICIPANT_TABLE_HEADER_DELETE") }}
+        </div>
+        @for (p of participants; track p) {
+          <div class="grid-row">
+            <div class="grid-item d-flex align-items-center">
+              {{ p.name }}
+              @if (!p.available) {
+                <mat-icon class="ms-2 cursor-arrow" svgIcon="unavailable"></mat-icon>
+              }
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              {{ p.group }}
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              <mat-icon
+                [routerLink]="['update', p.id]"
+                routerLinkActive="active"
+                svgIcon="edit"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+            </div>
+            <div class="grid-item d-flex align-items-center">
+              <mat-icon
+                [routerLink]="['delete', p.id]"
+                routerLinkActive="active"
+                svgIcon="garbage"
+                aria-label="Side nav toggle icon"
+              ></mat-icon>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</span>

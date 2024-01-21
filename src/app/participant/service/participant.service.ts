@@ -23,7 +23,10 @@ export class ParticipantService {
   //The map of participants for look up by id
   #participantsMap: Map<string, ParticipantInterface> = new Map();
 
-  constructor(private configService: ConfigService, private lockService: LockService) {}
+  constructor(
+    private configService: ConfigService,
+    private lockService: LockService,
+  ) {}
 
   /**
    * @param deepClone if should return the cloned array or the reference
@@ -202,7 +205,7 @@ export class ParticipantService {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].assignTypes = this.#participants[i].assignTypes.filter(
-        (at) => at.assignTypeId !== id
+        (at) => at.assignTypeId !== id,
       );
 
       this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);
@@ -238,7 +241,7 @@ export class ParticipantService {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].rooms = this.#participants[i].rooms.filter(
-        (at) => at.roomId !== id
+        (at) => at.roomId !== id,
       );
 
       this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);

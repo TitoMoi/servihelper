@@ -11,12 +11,12 @@ import { ParticipantInterface } from "../participant/model/participant.model";
  */
 export function getLastAssignment(
   assignmentList: AssignmentInterface[],
-  participant: ParticipantInterface
+  participant: ParticipantInterface,
 ): AssignmentInterface | undefined {
   const firstAssignment = assignmentList
     .filter(
       (assignment) =>
-        assignment.assistant === participant.id || assignment.principal === participant.id
+        assignment.assistant === participant.id || assignment.principal === participant.id,
     )
     .sort(compareFn)[0]; //Get first value
 

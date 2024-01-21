@@ -61,30 +61,30 @@
       <div class="row justify-content-start align-items-center mb-2">
         <div class="col-auto">
           @if (colors.length) {
-          <button
-            mat-raised-button
-            color="primary"
-            type="button"
-            [matTooltip]="t('BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP')"
-            (click)="showColors = !showColors"
-          >
-            {{
-              showColors
-                ? t("BUTTON_HIDE_AVAILABLE_COLORS")
-                : t("BUTTON_SHOW_AVAILABLE_COLORS")
-            }}
-          </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="button"
+              [matTooltip]="t('BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP')"
+              (click)="showColors = !showColors"
+            >
+              {{
+                showColors
+                  ? t("BUTTON_HIDE_AVAILABLE_COLORS")
+                  : t("BUTTON_SHOW_AVAILABLE_COLORS")
+              }}
+            </button>
           }
         </div>
       </div>
       <div class="row">
         <div class="col">
           @if (showColors) {
-          <div class="d-flex">
-            @for (c of colors; track c) {
-            <span class="square me-1 fw-bold" [style]="getBgColor(c)">{{ c }}</span>
-            }
-          </div>
+            <div class="d-flex">
+              @for (c of colors; track c) {
+                <span class="square me-1 fw-bold" [style]="getBgColor(c)">{{ c }}</span>
+              }
+            </div>
           }
         </div>
       </div>
@@ -121,7 +121,7 @@
       >
         {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
         @if (netStatusOffline$ | async) {
-        <mat-icon svgIcon="nowifi"></mat-icon>
+          <mat-icon svgIcon="nowifi"></mat-icon>
         }
       </button>
     </mat-card-actions>

@@ -31,6 +31,6 @@ export class TerritoryGroupComponent {
 
   constructor(
     private territoryGroupService: TerritoryGroupService,
-    private onlineService: OnlineService
+    private onlineService: OnlineService,
   ) {}
 }

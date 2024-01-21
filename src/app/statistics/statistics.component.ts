@@ -27,7 +27,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   constructor(
     private configService: ConfigService,
-    private assignTypeService: AssignTypeService
+    private assignTypeService: AssignTypeService,
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           currentRole === "administrator"
             ? this.getAllAssignTypesIds()
             : roles.find((r) => r.id === currentRole).assignTypesId;
-      })
+      }),
     );
   }
 
