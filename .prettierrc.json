@@ -1,6 +1,6 @@
 {
     "printWidth": 95,
-    "endOfLine": "auto",
+    "endOfLine": "lf",
     "overrides": [
         {
           "files": "*.html",

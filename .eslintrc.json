@@ -12,6 +12,12 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "lf"
+          }
+        ],
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -37,7 +43,14 @@
         "plugin:@angular-eslint/template/accessibility",
         "plugin:prettier/recommended"
       ],
-      "rules": {}
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "lf"
+          }
+        ]
+      }
     }
   ]
 }
