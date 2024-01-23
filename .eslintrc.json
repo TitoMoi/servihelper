@@ -1,6 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*", "dist/**/*", "release/**/*", "*.js"],
+  "plugins": ["unused-imports"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -12,18 +13,16 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
+        "complexity": [
+          "error",
+          {
+            "max": 5
+          }
+        ],
         "prettier/prettier": [
           "error",
           {
             "endOfLine": "lf"
-          }
-        ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
           }
         ],
         "@angular-eslint/component-selector": [
@@ -44,10 +43,30 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
+        "@angular-eslint/template/conditional-complexity": [
+          "warn",
+          {
+            "maxComplexity": 3
+          }
+        ],
+        "@angular-eslint/template/cyclomatic-complexity": [
+          "error",
+          {
+            "maxComplexity": 8
+          }
+        ],
         "prettier/prettier": [
           "error",
           {
             "endOfLine": "lf"
+          }
+        ],
+        "unused-imports/no-unused-imports": "error",
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "TSEnumDeclaration",
+            "message": "Don't use enums, use types or unions"
           }
         ]
       }
