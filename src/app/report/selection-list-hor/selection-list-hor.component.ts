@@ -5,14 +5,12 @@ import { RoomService } from "app/room/service/room.service";
 import { SortOrderType, SortService } from "app/services/sort.service";
 import autoTable from "jspdf-autotable";
 
-/* eslint-disable @typescript-eslint/naming-convention */
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
-  SimpleChanges,
 } from "@angular/core";
 
 import {
@@ -77,7 +75,7 @@ export class SelectionListHorComponent implements OnChanges {
     private exportService: ExportService,
     private cdr: ChangeDetectorRef,
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];
       this.assignmentGroups = [];

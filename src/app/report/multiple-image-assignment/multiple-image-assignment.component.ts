@@ -6,7 +6,7 @@ import { RoomService } from "app/room/service/room.service";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { toBlob } from "html-to-image";
 import { filenamifyPath } from "filenamify";
-const path = require("path");
+import * as path from "path";
 import { shell } from "electron";
 
 import {
