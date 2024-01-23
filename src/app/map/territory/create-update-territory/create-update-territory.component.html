@@ -147,7 +147,7 @@
   ></div>
   <div>
     @if (imageExists() || imagePersisted()) {
-      <img [src]="getImagePath()" id="imageDiv" class="mb-2" />
+      <img [src]="getImagePath()" id="imageDiv" class="mb-2" alt="Image preview" />
     }
   </div>
   <button mat-raised-button type="button" class="me-3" (click)="goBack()">

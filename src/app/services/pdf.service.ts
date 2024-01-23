@@ -564,10 +564,10 @@ export class PdfService {
       );
 
       const startXCached = x;
-      footerText.map((text, i) => {
+      footerText.map((text) => {
         if (text) {
           const arrayOfNormalAndBoldText = text.split("*");
-          arrayOfNormalAndBoldText.map((textItems, j) => {
+          arrayOfNormalAndBoldText.map((textItems) => {
             if (textItems.includes("[b]")) {
               textItems = textItems.replace("[b]", "");
               doc.setFont(this.font, "bold");

@@ -2,7 +2,7 @@ export interface NoteInterface {
   id: string;
   name: string;
   showInHome: boolean;
-  editorContent: Record<string, any>;
+  editorContent: Record<string, unknown>;
   editorHTML: string;
 }
 export interface NoteAvailableInterface {

@@ -14,7 +14,6 @@ import {
   Component,
   Input,
   OnChanges,
-  SimpleChanges,
 } from "@angular/core";
 
 import {
@@ -82,7 +81,7 @@ export class SelectionListComponent implements OnChanges {
     private translocoLocaleService: TranslocoLocaleService,
     private cdr: ChangeDetectorRef,
   ) {}
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];
       this.assignmentGroups = [];

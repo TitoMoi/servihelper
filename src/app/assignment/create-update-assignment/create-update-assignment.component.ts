@@ -612,7 +612,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
         //Get all the days before and after, its 1 based index
         let allDays: AssignmentInterface[] = [];
-        for (var i = 1; i <= days; i++) {
+        for (let i = 1; i <= days; i++) {
           allDays = allDays.concat(
             this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
           );
@@ -632,7 +632,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
         //Get all the days before and after, its 1 based index
         let allDays: AssignmentInterface[] = [];
-        for (var i = 1; i <= closeOthersDays; i++) {
+        for (let i = 1; i <= closeOthersDays; i++) {
           allDays = allDays.concat(
             this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
           );
@@ -675,7 +675,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
         //Get all the days before and after, its 1 based index
         let allDays: AssignmentInterface[] = [];
-        for (var i = 1; i <= closeOthersPrayerDays; i++) {
+        for (let i = 1; i <= closeOthersPrayerDays; i++) {
           allDays = allDays.concat(
             this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
           );
@@ -701,7 +701,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
         //Get all the days before and after, its 1 based index
         let allDays: AssignmentInterface[] = [];
-        for (var i = 1; i <= closeOthersTreasuresEtcDays; i++) {
+        for (let i = 1; i <= closeOthersTreasuresEtcDays; i++) {
           allDays = allDays.concat(
             this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
           );

@@ -9,7 +9,7 @@ import { nanoid } from "nanoid";
 import path from "path";
 import { OnlineInterface } from "app/online/model/online.model";
 
-const os = require("os");
+import * as os from "os";
 
 @Injectable({
   providedIn: "root",
@@ -157,7 +157,7 @@ export class ConfigService {
    * @param value the value of the key to update
    * @returns true if config is updated and saved false otherwise
    */
-  updateConfigByKey(key: ConfigOptionsType, value: any) {
+  updateConfigByKey(key: ConfigOptionsType, value) {
     this.#config[key as string] = value;
     //save configs with the updated config
     this.saveConfigToFile();
