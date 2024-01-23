@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { filter, map, Observable } from "rxjs";
 import { RoleInterface } from "./model/role.model";
@@ -23,7 +23,7 @@ import { OnlineService } from "app/online/service/online.service";
     AsyncPipe,
   ],
 })
-export class RolesComponent implements OnInit {
+export class RolesComponent {
   roles$: Observable<RoleInterface[]> = this.configService.config$.pipe(
     filter((config) => config.roles.length > 0),
     map((config) => config.roles),
@@ -38,8 +38,6 @@ export class RolesComponent implements OnInit {
     private configService: ConfigService,
     private onlineService: OnlineService,
   ) {}
-
-  ngOnInit(): void {}
 
   trackByIdFn(index, role: RoleInterface) {
     return role.id;
