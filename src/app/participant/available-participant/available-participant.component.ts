@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 
 import { ParticipantService } from "../service/participant.service";
 import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
@@ -39,7 +45,7 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
   styleUrls: ["./available-participant.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AvailableParticipantComponent {
+export class AvailableParticipantComponent implements OnInit, OnDestroy {
   participants = this.participantService
     .getParticipants() //We get the reference so we are manipulating participants
     .filter((p) => !p.isExternal && p.available)
