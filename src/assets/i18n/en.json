@@ -425,7 +425,6 @@
   "TERRITORY_REMOVE_IMAGE": "Remove the image and enable the map.",
   "TERRITORY_RETURN_TITLE": "Return the territory",
   "TERRITORY_RETURN_WARNING": "You can reassign the territory to another participant",
-  "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Assign participant or edit territory",
   "TERRITORY_TABLE_HEADER_DELETE": "Delete",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Map link",
   "TERRITORY_TABLE_HEADER_NAME": "Name",
@@ -459,5 +458,9 @@
   "zhCN": "Chinese",
   "CONFIG_EXPLAIN_EXHAUST": "The yellow clock is to prevent the participant from repeating OR making an assignment from a group of assignments in less than X days",
   "CONFIG_EXPLAIN_EXHAUST_TOOLTIP": " {{CONFIG_EXPLAIN_EXHAUST}} (it can be updated on the config section)",
-  "CONFIG_TIME_DISTANCE_TITLE": "Distance in days between some kind of assignments"
+  "CONFIG_TIME_DISTANCE_TITLE": "Distance in days between some kind of assignments",
+
+  "PLACEHOLDER_NAME_UNIQUE": "Name must be unique",
+  "TERRITORY_AVAILABLE": "This territory is available",
+  "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Assign or edit territory"
 }

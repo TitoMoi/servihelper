@@ -122,6 +122,10 @@
                         ? (terr.participants?.at(-1) | participantPipe)?.name
                         : t("TERRITORY_NOT_ASSIGNED")
                     }}
+
+                    @if (!terr.available) {
+                      <mat-icon class="ms-2 cursor-arrow" svgIcon="unavailable"></mat-icon>
+                    }
                   </div>
                   <div class="grid-item d-flex align-items-center">
                     <mat-icon

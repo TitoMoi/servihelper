@@ -1,55 +1,48 @@
 <span *transloco="let t">
-  <div class="d-flex justify-content-between mb-2">
-    <div class="d-flex align-items-center">
-      <!-- DO NOT REMOVE CODE MAYBE WE NEED IT IN A FUTURE VERSION -->
-      <!-- <a
-      mat-raised-button
-      color="primary"
-      class="me-2"
-      [disabled]="!markerRef.length || polygonExists()"
-      (click)="removeMarkers()"
-      >{{ t("MAP_CREATE_REMOVE_MARKERS") }}
-      <mat-icon class="ms-1" svgIcon="mapmarker"></mat-icon
-      ></a> -->
-      <a
-        mat-raised-button
-        color="primary"
-        class="me-2"
-        [disabled]="!markerRef.length || polygonExists()"
-        (click)="removeLastMarker()"
-      >
-        {{ t("MAP_CREATE_DELETE_LAST_MARKER") }}
-        <mat-icon class="ms-1" svgIcon="mapmarker"></mat-icon>
-      </a>
-      <div
-        [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')"
-        [matTooltipDisabled]="!isCreatePolygonBtnDisabled()"
-      >
+  <form [formGroup]="territoryForm" novalidate>
+    <div class="d-flex justify-content-between mb-2">
+      <div class="d-flex align-items-center">
         <a
           mat-raised-button
           color="primary"
           class="me-2"
-          [disabled]="isCreatePolygonBtnDisabled()"
-          (click)="createPolygon()"
-          >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
+          [disabled]="!markerRef.length || polygonExists()"
+          (click)="removeLastMarker()"
+        >
+          {{ t("MAP_CREATE_DELETE_LAST_MARKER") }}
+          <mat-icon class="ms-1" svgIcon="mapmarker"></mat-icon>
+        </a>
+        <div
+          [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')"
+          [matTooltipDisabled]="!isCreatePolygonBtnDisabled()"
+        >
+          <a
+            mat-raised-button
+            color="primary"
+            class="me-2"
+            [disabled]="isCreatePolygonBtnDisabled()"
+            (click)="createPolygon()"
+            >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
+          >
+        </div>
+        <a mat-raised-button [disabled]="!polygonExists()" (click)="removePolygon()">{{
+          t("MAP_CREATE_REMOVE_POLYGON")
+        }}</a>
+      </div>
+      <div class="d-flex align-items-center">
+        <mat-checkbox class="me-4" color="primary" formControlName="available">{{
+          t("TERRITORY_AVAILABLE")
+        }}</mat-checkbox>
+        <a
+          mat-raised-button
+          color="warn"
+          [disabled]="!territoryForm.controls.participants.value.length"
+          [matTooltip]="t('MAP_CLEAR_HISTORY')"
+          (click)="clearHistory()"
+          >{{ t("MAP_CREATE_CLEAR_HISTORY") }}</a
         >
       </div>
-      <a mat-raised-button [disabled]="!polygonExists()" (click)="removePolygon()">{{
-        t("MAP_CREATE_REMOVE_POLYGON")
-      }}</a>
     </div>
-    <div class="d-flex align-items-center">
-      <a
-        mat-raised-button
-        color="warn"
-        [disabled]="!territoryForm.controls.participants.value.length"
-        [matTooltip]="t('MAP_CLEAR_HISTORY')"
-        (click)="clearHistory()"
-        >{{ t("MAP_CREATE_CLEAR_HISTORY") }}</a
-      >
-    </div>
-  </div>
-  <form [formGroup]="territoryForm" novalidate>
     <div class="row">
       <div class="col-6">
         <mat-form-field>
@@ -61,6 +54,7 @@
             spellcheck="false"
             formControlName="name"
           />
+          <mat-hint class="fst-italic">{{ t("PLACEHOLDER_NAME_UNIQUE") }}</mat-hint>
         </mat-form-field>
       </div>
       <div class="col-6">

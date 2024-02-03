@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -40,6 +41,7 @@ import { AutoFocusDirective } from "app/directives/autofocus/autofocus.directive
 import { ConfigService } from "app/config/service/config.service";
 import {
   PolygonInterface,
+  TerritoryContext,
   TerritoryContextInterface,
   TerritoryGroupInterface,
 } from "app/map/model/map.model";
@@ -53,6 +55,7 @@ import { OnlineService } from "app/online/service/online.service";
 import { NgOptimizedImage } from "@angular/common";
 import { nanoid } from "nanoid";
 import path from "path";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @Component({
   selector: "app-create-update-territory",
@@ -70,6 +73,7 @@ import path from "path";
     AutoFocusDirective,
     ReactiveFormsModule,
     MatSelectModule,
+    MatCheckboxModule,
     MatOptionModule,
   ],
   templateUrl: "./create-update-territory.component.html",
@@ -91,12 +95,15 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   private location = inject(Location);
   private onlineService = inject(OnlineService);
 
-  loadedTerritory = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
+  loadedTerritory = new TerritoryContext(
+    this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id),
+  );
+
   loadedPolygon = this.polygonService.getPolygon(this.loadedTerritory?.poligonId);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
-  isUpdate = this.loadedTerritory ? true : false;
+  isUpdate = this.loadedTerritory.id ? true : false;
 
   //The path or the image when is loaded for the first time
   imagePath;
@@ -105,17 +112,18 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   //TerritoryContextInterface
   territoryForm = this.formBuilder.group({
-    id: [this.loadedTerritory?.id],
-    name: new FormControl(this.loadedTerritory?.name, { validators: Validators.required }),
-    poligonId: [this.loadedTerritory?.poligonId],
-    image: [], //Just a temporal base64 store until its saved to disk
-    imageId: [this.loadedTerritory?.imageId],
-    meetingPointUrl: [this.loadedTerritory?.meetingPointUrl],
-    assignedDates: [this.loadedTerritory?.assignedDates || []],
-    returnedDates: [this.loadedTerritory?.returnedDates || []],
-    participants: [this.loadedTerritory?.participants || []],
-    groups: [this.loadedTerritory?.groups || [], Validators.required],
-    m: [this.loadedTerritory?.m], //modified is set again on create or update
+    id: [this.loadedTerritory.id],
+    name: new FormControl(this.loadedTerritory.name, { validators: Validators.required }),
+    available: [this.loadedTerritory.available],
+    poligonId: [this.loadedTerritory.poligonId],
+    image: [], //Just a temporal base64 store until its saved to disk, its not part of the model
+    imageId: [this.loadedTerritory.imageId],
+    meetingPointUrl: [this.loadedTerritory.meetingPointUrl],
+    assignedDates: [this.loadedTerritory.assignedDates],
+    returnedDates: [this.loadedTerritory.returnedDates],
+    participants: [this.loadedTerritory.participants],
+    groups: [this.loadedTerritory.groups, Validators.required],
+    m: [this.loadedTerritory.m], //modified is set again on create or update
   });
 
   //PolygonInterface
@@ -172,6 +180,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     Marker.prototype.options.icon = iconDefault;
   }
 
+  /**
+   * Initializes the map.
+   */
   initMap() {
     //Get center and destroy polygon
     let center: LatLng;
