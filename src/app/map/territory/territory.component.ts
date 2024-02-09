@@ -110,21 +110,28 @@ export class TerritoryComponent {
     });
   }
 
+  /**
+   * Generate all the territory pdf files
+   */
   async toMultiplePdf() {
     this.showSpinner = true;
     this.territoriesInFolderCreated = false;
     //Clean directory "territories" first
     removeSync(filenamifyPath(path.join(this.configService.homeDir, "territories")));
     const promises = [];
-    for (const t of this.territories) {
+    for (const t of this.territories.filter((terr) => terr.available)) {
       const pdfBytes = this.toPdf(t, false);
 
-      //Get the filename path and ensure it's valid for the system
-      const fileNamePath = filenamifyPath(
-        path.join(this.configService.homeDir, "territories", t.name + ".pdf"),
-      );
-      ensureFileSync(fileNamePath);
-      promises.push(writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer())));
+      for (const g of t.groups) {
+        // Get the territory group name
+        const tg = this.territoryGroupService.getTerritoryGroup(g);
+        //Get the filename path and ensure it's valid for the system
+        const fileNamePath = filenamifyPath(
+          path.join(this.configService.homeDir, "territories", tg.name, t.name + ".pdf"),
+        );
+        ensureFileSync(fileNamePath);
+        promises.push(writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer())));
+      }
     }
     await Promise.all([...promises]);
     this.territoriesInFolderCreated = true;
