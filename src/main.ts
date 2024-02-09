@@ -6,7 +6,7 @@ import { AppComponent } from "./app/app.component";
 import { withInterceptorsFromDi, provideHttpClient } from "@angular/common/http";
 import { provideTranslocoLocale } from "@ngneat/transloco-locale";
 import { routes } from "./app/app-routing";
-import { provideAnimations } from "@angular/platform-browser/animations";
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { CustomDateAdapter } from "./app/customDateAdapter";
 import { DateAdapter, MatNativeDateModule } from "@angular/material/core";
 import { provideRouter } from "@angular/router";
@@ -15,7 +15,7 @@ import { TranslocoHttpLoader } from "app/transloco/transloco-loader";
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideAnimations(),
+    provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes), //withDebugTracing()
     provideTransloco({

@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { TerritoryContextInterface } from "../../model/map.model";
+import { TerritoryContextClass, TerritoryContextInterface } from "../../model/map.model";
 import { ConfigService } from "app/config/service/config.service";
 import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -19,15 +19,15 @@ export class TerritoryService {
   //flag to indicate that territories file has changed
   hasChanged = true;
   //The array of territories in memory
-  #territories: TerritoryContextInterface[] = [];
+  #territories: TerritoryContextClass[] = [];
   //The territory of territories for look up of territories
-  #territoriesMap: Map<string, TerritoryContextInterface> = new Map();
+  #territoriesMap: Map<string, TerritoryContextClass> = new Map();
 
   /**
    *
    * @returns MapInterface[] the array of territories
    */
-  getTerritories(deepClone = false): TerritoryContextInterface[] {
+  getTerritories(deepClone = false): TerritoryContextClass[] {
     if (!this.hasChanged) {
       return deepClone ? structuredClone(this.#territories) : this.#territories;
     }
@@ -36,7 +36,9 @@ export class TerritoryService {
     const territoryContent = readFileSync(this.configService.territoriesPath);
 
     if (territoryContent) {
-      this.#territories = JSON.parse(inflate(territoryContent, { to: "string" }));
+      this.#territories = (
+        JSON.parse(inflate(territoryContent, { to: "string" })) as TerritoryContextInterface[]
+      ).map((t) => new TerritoryContextClass(t));
 
       this.updateTerritoriesMap();
     }
@@ -53,43 +55,40 @@ export class TerritoryService {
   /**
    *
    * @param id the id of the territory to search for
-   * @returns the territory that can be found
+   * @returns the territory that can be found, if not found returns a new territory
    */
-  getTerritory(id: string | undefined) {
-    //search territory
-    return this.#territoriesMap.get(id);
+  getTerritory(id: string): TerritoryContextClass {
+    const t = this.#territoriesMap.get(id);
+    return t ? t : new TerritoryContextClass();
   }
 
   /**
    *
-   * @param id the id of the polygon to search for
+   * @param id the id of the polygon to search by
    * @returns the territory that owns that polygon
    */
   getTerritoryByPolygonId(polId: string | undefined) {
-    //search territory
     return this.#territories.find((t) => t.poligonId === polId);
   }
 
   /**
    *
-   * @param territoryId the id of the territory to search for the name
+   * @param territoryId the id of the territory to search by
    * @returns the name of the territory
    */
   getTerritoryNameById(territoryId: string): string {
-    return this.#territoriesMap.get(territoryId)!.name;
+    return this.#territoriesMap.get(territoryId).name;
   }
 
+  /**
+   * Saves the last modified dates for all territories.
+   */
   massiveSaveTerritoriesDates() {
     this.#saveTerritoriesToFile();
     this.updateTerritoriesMap();
   }
 
-  /**
-   *
-   * @returns the promise to save the territories
-   */
   #saveTerritoriesToFile() {
-    //Write territories back to file
     const gziped = deflate(JSON.stringify(this.#territories), { to: "string" });
 
     this.lockService.updateTimestamp();
@@ -101,7 +100,7 @@ export class TerritoryService {
    * @param territory the territory to create
    * @returns the id of the new territory
    */
-  createTerritory(territory: TerritoryContextInterface) {
+  createTerritory(territory: TerritoryContextClass) {
     //Generate id for the territory
     territory.id = nanoid(this.configService.nanoMaxCharId);
     //trim name
@@ -119,7 +118,7 @@ export class TerritoryService {
    * @param territory the territory to update
    * @returns true if territory is updated and saved false otherwise
    */
-  updateTerritory(territory: TerritoryContextInterface) {
+  updateTerritory(territory: TerritoryContextClass) {
     //update territory
     for (let i = 0; i < this.#territories.length; i++) {
       if (this.#territories[i].id === territory.id) {

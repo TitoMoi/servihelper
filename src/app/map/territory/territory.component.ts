@@ -5,7 +5,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
-import { TerritoryContext, TerritoryContextInterface } from "../model/map.model";
+import { TerritoryContextClass, TerritoryContextInterface } from "../model/map.model";
 import { TerritoryService } from "./service/territory.service";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
@@ -45,9 +45,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TerritoryComponent {
-  territories: TerritoryContext[] = this.territoryService
+  territories: TerritoryContextClass[] = this.territoryService
     .getTerritories()
-    .map((t) => new TerritoryContext(t))
     .sort((a, b) => (a.name > b.name ? 1 : -1));
   territoryGroups = this.territoryGroupService
     .getTerritoryGroups()

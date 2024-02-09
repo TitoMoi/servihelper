@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
-import { PolygonInterface } from "../../model/map.model";
+import { PolygonClass, PolygonInterface } from "../../model/map.model";
 import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { inflate, deflate } from "pako";
@@ -13,13 +13,14 @@ export class PolygonService {
   //flag to indicate that polygons file has changed
   hasChanged = true;
   //The array of polygons in memory
-  #polygons: PolygonInterface[];
+  #polygons: PolygonClass[];
   //The map of polygons for look up of polygons
   #polygonsMap: Map<string, PolygonInterface> = new Map();
   /**
    *
    * @returns PolygonInterface[] the array of polygons
    */
+  // eslint-disable-next-line complexity
   getPolygons(deepClone = false) {
     if (!this.hasChanged) {
       return deepClone ? structuredClone(this.#polygons) : this.#polygons;
@@ -29,7 +30,9 @@ export class PolygonService {
     const polygonsContent = readFileSync(this.configService.polygonsPath);
 
     if (polygonsContent) {
-      this.#polygons = JSON.parse(inflate(polygonsContent, { to: "string" }));
+      this.#polygons = (
+        JSON.parse(inflate(polygonsContent, { to: "string" })) as PolygonInterface[]
+      ).map((p) => new PolygonClass(p));
 
       for (const polygon of this.#polygons) {
         this.#polygonsMap.set(polygon.id, polygon);
@@ -71,9 +74,9 @@ export class PolygonService {
    * @param id the id of the polygon to search for
    * @returns the polygon that is ALWAYS found
    */
-  getPolygon(id: string | undefined) {
-    //search polygon
-    return this.#polygonsMap.get(id)!;
+  getPolygon(id: string): PolygonClass {
+    const p = this.#polygonsMap.get(id);
+    return p ? p : new PolygonClass();
   }
 
   /**
@@ -81,7 +84,7 @@ export class PolygonService {
    * @param polygon the polygon to update
    * @returns true if polygon is updated and saved false otherwise
    */
-  updatePolygon(polygon: PolygonInterface): boolean {
+  updatePolygon(polygon: PolygonClass): boolean {
     //update polygon
     for (let i = 0; i < this.#polygons.length; i++) {
       if (this.#polygons[i].id === polygon.id) {

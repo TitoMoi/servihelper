@@ -41,7 +41,7 @@ import { AutoFocusDirective } from "app/directives/autofocus/autofocus.directive
 import { ConfigService } from "app/config/service/config.service";
 import {
   PolygonInterface,
-  TerritoryContext,
+  TerritoryContextClass,
   TerritoryContextInterface,
   TerritoryGroupInterface,
 } from "app/map/model/map.model";
@@ -95,11 +95,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   private location = inject(Location);
   private onlineService = inject(OnlineService);
 
-  loadedTerritory = new TerritoryContext(
-    this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id),
-  );
+  loadedTerritory = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
 
-  loadedPolygon = this.polygonService.getPolygon(this.loadedTerritory?.poligonId);
+  loadedPolygon = this.polygonService.getPolygon(this.loadedTerritory.poligonId);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
@@ -411,7 +409,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     //handle participant and save territory
     this.handleParticipant(this.temporalParticipant);
 
-    const territory = this.territoryForm.value as TerritoryContextInterface;
+    const territory = new TerritoryContextClass(
+      this.territoryForm.value as TerritoryContextInterface,
+    );
 
     const image = this.territoryForm.controls.image.value;
 
