@@ -13,6 +13,7 @@ import { RouterModule } from "@angular/router";
 import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { TerritoryIncludesTerrGroupPipe } from "./pipes/territory-includes-terr-group.pipe";
 
 @Component({
   selector: "app-massive-dates-territory",
@@ -28,6 +29,7 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     MatSnackBarModule,
     MatInputModule,
     ParticipantPipe,
+    TerritoryIncludesTerrGroupPipe,
   ],
   templateUrl: "./massive-dates-territory.component.html",
   styleUrls: ["./massive-dates-territory.component.scss"],
@@ -59,6 +61,7 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
           name: { value: t.name, disabled: true },
           assignedDates: this.formBuilder.array(t.assignedDates),
           returnedDates: this.formBuilder.array(t.returnedDates),
+          groups: [t.groups],
         }),
       );
     }
@@ -96,5 +99,9 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
 
   participants(i: number) {
     return this.formArray[i].controls["participants"] as FormArray;
+  }
+
+  getTerrGroupBorder(color: string) {
+    return `${color ? color : "#000"}`;
   }
 }
