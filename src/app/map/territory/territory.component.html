@@ -59,6 +59,11 @@
       }
     </div>
   </div>
+  <div>
+    <mat-checkbox labelPosition="before" color="primary" (change)="sortByLessWorked($event)">{{
+      t("TERRITORY_SORT_BY_LAST_WORKED")
+    }}</mat-checkbox>
+  </div>
 </span>
 @for (tg of territoryGroups; track tg) {
   <div class="mt-3 mb-2">
@@ -92,7 +97,7 @@
             <div class="grid-header-item fw-bold">
               {{ t("TERRITORY_TABLE_HEADER_DELETE") }}
             </div>
-            @for (terr of territories; track terr) {
+            @for (terr of territories; track terr.id) {
               @if (terr.groups.includes(tg.id)) {
                 <div class="grid-row">
                   <div class="grid-item d-flex align-items-center">

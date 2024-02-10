@@ -7,7 +7,7 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
 import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { TerritoryContextClass, TerritoryContextInterface } from "../model/map.model";
 import { TerritoryService } from "./service/territory.service";
-import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { TerritoryGroupService } from "../territory-group/service/territory-group.service";
@@ -22,6 +22,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { ensureFileSync, readFileSync, removeSync, writeFile } from "fs-extra";
 import { filenamifyPath } from "filenamify";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { SortService } from "app/services/sort.service";
 
 @Component({
   selector: "app-territory",
@@ -65,6 +66,7 @@ export class TerritoryComponent {
     private pdfService: PdfService,
     private translocoService: TranslocoService,
     private configService: ConfigService,
+    private sortService: SortService,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -215,5 +217,16 @@ export class TerritoryComponent {
 
   openTerritoriesFolder() {
     shell.openPath(path.join(this.configService.homeDir, "territories"));
+  }
+
+  sortByLessWorked(event: MatCheckboxChange) {
+    if (event.checked) {
+      const filtered = this.territories.filter((t) => t.returnedDates.length);
+      this.territories = filtered.toSorted(this.sortService.sortTerritoriesByLastWorked);
+      return;
+    }
+    this.territories = this.territoryService
+      .getTerritories()
+      .sort((a, b) => (a.name > b.name ? 1 : -1));
   }
 }

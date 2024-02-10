@@ -8,6 +8,7 @@ import { RoomService } from "app/room/service/room.service";
 import { Injectable } from "@angular/core";
 import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
+import { TerritoryContextInterface } from "app/map/model/map.model";
 
 export type SortOrderType = "Asc" | "Desc";
 @Injectable({
@@ -148,5 +149,11 @@ export class SortService {
       return 1;
     }
     return 0;
+  }
+
+  sortTerritoriesByLastWorked(a: TerritoryContextInterface, b: TerritoryContextInterface) {
+    const timeDateA = new Date(a.returnedDates.at(-1))?.getTime();
+    const timeDateB = new Date(b.returnedDates.at(-1))?.getTime();
+    return timeDateA - timeDateB;
   }
 }
