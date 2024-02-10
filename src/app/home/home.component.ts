@@ -1,3 +1,5 @@
+/* eslint-disable no-case-declarations */
+/* eslint-disable complexity */
 import AdmZip from "adm-zip";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
@@ -181,6 +183,8 @@ export class HomeComponent implements OnInit {
     this.polygonService.getPolygons();
     this.territoryService.getTerritories();
     this.territoryGroupService.getTerritoryGroups();
+
+    this.noteHome = this.noteService.getNotes().find((n) => n.showInHome);
 
     let lang = this.configService.getConfig().lang;
     this.translocoService = this.translocoService.setActiveLang(lang);
