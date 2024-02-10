@@ -1,7 +1,7 @@
 <span *transloco="let t">
   @for (terrGroup of territoryGroups; track terrGroup.id) {
     <h1 [style.color]="getTerrGroupBorder(terrGroup.color)" class="my-3 text-center">
-      <span class="fw-bold">{{ terrGroup.name }}</span>
+      <span class="fw-bold terr-group-text-stroke">{{ terrGroup.name }}</span>
     </h1>
     <hr />
 
