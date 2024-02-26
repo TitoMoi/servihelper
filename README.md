@@ -69,6 +69,20 @@ In case your language is not supported, you can customize the native slip and th
 
 Only the time format can't be changed, but you can select a lang that suits your format.
 
+Benefits & Disadvantages of using and offline app:
+
+**Benefits and disadvantages of using an offline app:**
+
+| Offline _(Servihelper)_ vs other online solutions    | Servihelper(offline)                                                                      | Online apps                                                                                                          |     |     |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --- | --- |
+| Free                                                 | Yes                                                                                       | Most yes _(but requires donations to maintain servers and can change in the future)_ and some others you have to pay |     |     |
+| Immediate update and fixes                           | No _(you need to download new version)_                                                   | Yes                                                                                                                  |     |     |
+| Multiple administrators at the same time (real time) | No _(works importing and exporting copies, most of the tasks dont really need real time)_ | Yes                                                                                                                  |     |     |
+| Needs mobile version                                 | No                                                                                        | Some yes _(i see it as overengineering or privacy concerns)_                                                         |     |     |
+| Can receive web attacks and lose data                | No                                                                                        | Yes                                                                                                                  |     |
+| Privacy                                              | Files are in admin. computer or google drive                                              | Files are encrypted on backend servers                                                                               |     |     |
+| Restore backups                                      | Just import an old copy                                                                   | Depends on how app admins. do this                                                                                   |     |     |
+
 ## What cannot be done or implemented?
 
 - Compatibility with other existing programs is not possible, as i can't guarantee compatibility over time.
@@ -112,17 +126,21 @@ Configure a remote desktop and avoid the need to export and import data manually
 
 [Guide to configure a remote desktop with kamatera](./KAMATERA.md)
 
-## ¿How can i generate an assignment?
+## Way to create assignments
 
-When creating an assignment, go to: [jw-meeting-workbook](https://www.jw.org/en/library/jw-meeting-workbook/) open the week you want to create and split the screen between Servihelper and the website.
+Open Servihelper and open jw library app, split the screen between Servihelper and jw library.
 
-Another way is open jw library and split the screen between Servihelper and jw library.
-
-Then on creating the assignment copy the assignment and put it on the "theme field":
+Then on creating the assignment copy the assignment title and put it on the "theme field":
 
 <img src="./pictures/split-screen.png" alt= "create-assignment">
 
-Then, select participant/s and click the create button.
+Then, select the participant/s and click the create button _(or create another assignment)_:
+
+## Best order to create assignments based on priority
+
+1. First, create life & ministry assignments.
+2. Second, create weekend meeting assignments.
+3. Third, create other assignments _(video, audio, etc...)_
 
 ## ¿Can I distribute the app?
 
