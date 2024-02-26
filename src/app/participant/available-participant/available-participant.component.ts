@@ -28,6 +28,7 @@ import { LockService } from "app/lock/service/lock.service";
 import { OnlineService } from "app/online/service/online.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { NgClass } from "@angular/common";
 
 @Component({
   selector: "app-available-participant",
@@ -40,6 +41,7 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     MatIconModule,
     MatButtonModule,
     MatSnackBarModule,
+    NgClass,
   ],
   templateUrl: "./available-participant.component.html",
   styleUrls: ["./available-participant.component.scss"],
@@ -146,6 +148,7 @@ export class AvailableParticipantComponent implements OnInit, OnDestroy {
     return this.assignTypeService.getAssignTypes()?.map((at) => at.id);
   }
 
+  // eslint-disable-next-line complexity
   changeAvailability(
     participant: ParticipantInterface,
     assignType: AssignTypeInterface,

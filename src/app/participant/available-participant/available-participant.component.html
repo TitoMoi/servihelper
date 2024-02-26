@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <div *transloco="let t" class="d-flex">
   <mat-icon class="me-2" svgIcon="info-blue" aria-label="icon"></mat-icon>
   <div>{{ t("STATISTICS_ROLE_TIP") }}</div>
@@ -31,7 +32,12 @@
       <tbody>
         @for (p of participants; track p) {
           <tr>
-            <td class="fw-bold bg-color-white">{{ p.name }}</td>
+            <td
+              class="fw-bold"
+              [ngClass]="p.isWoman ? 'bg-color-pink' : 'bg-color-lightskyblue'"
+            >
+              {{ p.name }}
+            </td>
             @for (at of assignTypes; track at) {
               <td class="bg-color-white text-center">
                 <button
@@ -75,7 +81,12 @@
     <tbody>
       @for (p of participants; track p) {
         <tr>
-          <td class="fw-bold bg-color-white">{{ p.name }}</td>
+          <td
+            class="fw-bold"
+            [ngClass]="p.isWoman ? 'bg-color-pink' : 'bg-color-lightskyblue'"
+          >
+            {{ p.name }}
+          </td>
           @for (at of assignTypesAssistant; track at) {
             <td class="bg-color-white text-center">
               <button
