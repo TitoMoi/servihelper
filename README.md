@@ -34,15 +34,21 @@ mac -> security tab -> general tab and below the section are the instructions to
 
 More help: [Open a Mac app from an unidentified developer](https://support.apple.com/en-gb/guide/mac-help/mh40616/mac)
 
+## The executable is not recognized on Windows
+
+The same as Mac, you need to trust the binary manually, when the smart screen appear, confirm that you want to open it:
+
+<img src="./pictures/windows-smartscreen.png" alt= "windows smart screen">
+
 ## Example images
-
-Native, general purpose assignment slip:
-
-<img src="./pictures/assignment-example.png" alt= "example" width="300" height="320">
 
 S89 slip:
 
 <img src="./pictures/assignment-s89-example.png" alt= "example" width="330" height="420">
+
+Native, general purpose assignment slip:
+
+<img src="./pictures/assignment-example.png" alt= "example" width="300" height="320">
 
 ## Example territory images
 
