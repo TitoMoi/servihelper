@@ -71,17 +71,17 @@ Only the time format can't be changed, but you can select a lang that suits your
 
 Benefits & Disadvantages of using and offline app:
 
-**Benefits and disadvantages of using an offline app:**
+## Benefits and disadvantages of using an offline app
 
-| Offline _(Servihelper)_ vs other online solutions    | Servihelper(offline)                                                                      | Online apps                                                                                                          |     |     |
-| ---------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --- | --- |
-| Free                                                 | Yes                                                                                       | Most yes _(but requires donations to maintain servers and can change in the future)_ and some others you have to pay |     |     |
-| Immediate update and fixes                           | No _(you need to download new version)_                                                   | Yes                                                                                                                  |     |     |
-| Multiple administrators at the same time (real time) | No _(works importing and exporting copies, most of the tasks dont really need real time)_ | Yes                                                                                                                  |     |     |
-| Needs mobile version                                 | No                                                                                        | Some yes _(i see it as overengineering or privacy concerns)_                                                         |     |     |
-| Can receive web attacks and lose data                | No                                                                                        | Yes                                                                                                                  |     |
-| Privacy                                              | Files are in admin. computer or google drive                                              | Files are encrypted on backend servers                                                                               |     |     |
-| Restore backups                                      | Just import an old copy                                                                   | Depends on how app admins. do this                                                                                   |     |     |
+| Offline _(Servihelper)_ vs other online solutions    | Servihelper(offline)                                                                      | Online apps                                                                                                          |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Free                                                 | Yes                                                                                       | Most yes _(but requires donations to maintain servers and can change in the future)_ and some others you have to pay |
+| Immediate update and fixes                           | No _(you need to download new version)_                                                   | Yes                                                                                                                  |
+| Multiple administrators at the same time (real time) | No _(works importing and exporting copies, most of the tasks dont really need real time)_ | Yes                                                                                                                  |
+| Needs mobile version                                 | No                                                                                        | Some yes _(i see it as overengineering or privacy concerns)_                                                         |
+| Can receive web attacks and lose data                | No                                                                                        | Yes                                                                                                                  |
+| Privacy                                              | Files are in admin. computer or google drive                                              | Files are encrypted on backend servers                                                                               |
+| Restore backups                                      | Just import an old copy                                                                   | Depends on how app admins. do this                                                                                   |
 
 ## What cannot be done or implemented?
 
