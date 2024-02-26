@@ -134,7 +134,11 @@ Then on creating the assignment copy the assignment title and put it on the "the
 
 <img src="./pictures/split-screen.png" alt= "create-assignment">
 
-Then, select the participant/s and click the create button _(or create another assignment)_:
+Then, select the participant/s\* and click the create button _(or create another assignment)_:
+
+\*_The algorithm used to sort the participants is based on participation of that assignment type and then are sorted again by time distance. Also, there is a yellow and red clock helpers to distribute the effort along the year._
+
+\*_Only global count by participation is a bad measure and can lead to repeat assignment types. Anyway if you want to see global counts you have them on the statistics section._
 
 ## Best order to create assignments based on priority
 
