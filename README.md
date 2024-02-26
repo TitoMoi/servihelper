@@ -102,7 +102,7 @@ Only the time format can't be changed, but you can select a lang that suits your
    - Do not enable: config -> online mode.
    - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
    - Your responsability to ensure that you have the last backup before working.
-   - Import the last backup, work locally and when finished, export a new copy to the shared folder. _(little complexity and a bit of overhead later, on finish yout work you have to save your backup to the shared folder. **✅ this is the most robust approach and the one i recommend**)_
+   - Import the last backup, work locally and when finished, export a new copy to the shared folder. _(little complexity and a bit of overhead, on finish your work you have to remember to save your backup to the shared folder. **✅ this is the most robust approach and the one i recommend**)_
 
 2. **Export the app data from administrator one and importing in the app of the administrator two sharing the copy through email or whatsapp _(⚠️ not recommended)_**
 
