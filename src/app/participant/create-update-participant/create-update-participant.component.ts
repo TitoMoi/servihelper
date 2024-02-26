@@ -96,25 +96,19 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   timeoutRef;
   timeoutExecuted = true; //first time
 
-  form = this.formBuilder.group(
-    {
-      id: this.p?.id,
-      name: new FormControl(this.p?.name, {
-        validators: Validators.required,
-        updateOn: "blur",
-      }),
-      group: [this.p?.group],
-      isWoman: this.p ? this.p.isWoman : false,
-      isExternal: this.p ? this.p.isExternal : false,
-      assignTypes: this.formBuilder.array<ParticipantAssignTypeInterface>([]), //do not wrap this into an [], because [...] creates a formControl wrapper
-      rooms: this.formBuilder.array<ParticipantRoomInterface>([]),
-      available: [this.p ? this.p.available : true],
-      notAvailableDates: [this.p ? this.p.notAvailableDates : []],
-    },
-    {
-      updateOn: "blur",
-    },
-  );
+  form = this.formBuilder.group({
+    id: this.p?.id,
+    name: new FormControl(this.p?.name, {
+      validators: Validators.required,
+    }),
+    group: [this.p?.group],
+    isWoman: this.p ? this.p.isWoman : false,
+    isExternal: this.p ? this.p.isExternal : false,
+    assignTypes: this.formBuilder.array<ParticipantAssignTypeInterface>([]), //do not wrap this into an [], because [...] creates a formControl wrapper
+    rooms: this.formBuilder.array<ParticipantRoomInterface>([]),
+    available: [this.p ? this.p.available : true],
+    notAvailableDates: [this.p ? this.p.notAvailableDates : []],
+  });
 
   constructor(
     private formBuilder: FormBuilder,
