@@ -69,8 +69,6 @@ In case your language is not supported, you can customize the native slip and th
 
 Only the time format can't be changed, but you can select a lang that suits your format.
 
-Benefits & Disadvantages of using and offline app:
-
 ## Benefits and disadvantages of using an offline app
 
 | Offline _(Servihelper)_ vs other online solutions    | Servihelper(offline)                                                                      | Online apps                                                                                                          |
