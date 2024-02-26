@@ -124,6 +124,7 @@ export class SelectionListComponent implements OnChanges {
    *
    * @param shouldFusionRooms if true, dont create another ag, instead add that assignment to the same ag
    */
+  // eslint-disable-next-line complexity
   getRelatedData(shouldFusionRooms = false) {
     this.assignmentGroups = [];
 
@@ -249,21 +250,28 @@ export class SelectionListComponent implements OnChanges {
     );
   }
 
+  /**
+   * @param hasMultipleRooms if true, will substract a diferent value to the initial pageWidth
+   */
   getMaxWidth(hasMultipleRooms: boolean) {
     return (
       this.pdfService.getPageWidth() -
       this.pdfService.getInitialWidth() -
       this.pdfService.getEndingWidth() -
-      (hasMultipleRooms ? 80 : 60)
+      (hasMultipleRooms ? 100 : 60) // If you modify this, you also have to compensate in getMaxWidthNames
     );
   }
 
+  /**
+   *
+   * @param hasMultipleRooms if true, will substract a diferent value to the initial pageWidth
+   */
   getMaxWidthNames(hasMultipleRooms: boolean) {
     return (
       this.pdfService.getPageWidth() -
       this.pdfService.getInitialWidth() -
       this.pdfService.getEndingWidth() -
-      (hasMultipleRooms ? 140 : 120)
+      (hasMultipleRooms ? 130 : 120) // If you modify this, you also have to compensate in getMaxWidth
     );
   }
 
@@ -311,6 +319,7 @@ export class SelectionListComponent implements OnChanges {
     return y;
   }
 
+  // eslint-disable-next-line complexity
   toPdfBoard(isWeekend = false) {
     const assignmentGroupsBackup = [...this.assignmentGroups];
 
@@ -393,7 +402,7 @@ export class SelectionListComponent implements OnChanges {
           ? a.theme
           : this.assignTypeService.getNameOrTranslation(a.assignType);
 
-        let wordLength = hasMultipleRooms ? 60 : 90;
+        let wordLength = hasMultipleRooms ? 70 : 90;
         //Before create text lines check the length
         if (themeOrAssignType.length > wordLength) {
           const shortedTheme = [];

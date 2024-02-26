@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { Injectable } from "@angular/core";
 import { TranslocoService } from "@ngneat/transloco";
 import { jsPDF, jsPDFOptions } from "jspdf";
@@ -383,8 +384,7 @@ export class PdfService {
       this.backupLang = null;
     }
 
-    assignments.forEach((assignment, i) => {
-      i = i + 1; // 1 index based to count slips
+    assignments.forEach((assignment) => {
       if (counter === 0) {
         doc = doc.addPage("a4", "p");
         counter = 4;
