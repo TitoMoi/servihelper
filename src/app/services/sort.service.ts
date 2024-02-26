@@ -86,6 +86,40 @@ export class SortService {
     return 0;
   }
 
+  // eslint-disable-next-line complexity
+  sortByIsManAndByName(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
+    if (a.isWoman && !b.isWoman) {
+      return 1;
+    }
+    if (!a.isWoman && b.isWoman) {
+      return -1;
+    }
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  }
+
+  // eslint-disable-next-line complexity
+  sortByIsWomanAndByName(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
+    if (a.isWoman && !b.isWoman) {
+      return -1;
+    }
+    if (!a.isWoman && b.isWoman) {
+      return 1;
+    }
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  }
+
   sortByCountAndByDistance(
     a: ParticipantDynamicInterface,
     b: ParticipantDynamicInterface,

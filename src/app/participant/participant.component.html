@@ -69,7 +69,9 @@
         @for (p of participants; track p) {
           <div class="grid-row">
             <div class="grid-item d-flex align-items-center">
-              {{ p.name }}
+              <mat-icon class="me-1" [svgIcon]="p.isWoman ? 'woman' : 'man'"></mat-icon>
+
+              <span> {{ p.name }}</span>
               @if (!p.available) {
                 <mat-icon class="ms-2 cursor-arrow" svgIcon="unavailable"></mat-icon>
               }

@@ -10,6 +10,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { TranslocoModule } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { OnlineService } from "app/online/service/online.service";
+import { SortService } from "app/services/sort.service";
 
 @Component({
   selector: "app-participant",
@@ -31,12 +32,14 @@ import { OnlineService } from "app/online/service/online.service";
 export class ParticipantComponent {
   participants: ParticipantInterface[] = this.participantService
     .getParticipants()
-    .filter((participant) => !participant.isExternal);
+    .filter((participant) => !participant.isExternal)
+    .sort(this.sortService.sortByIsManAndByName);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   constructor(
     private participantService: ParticipantService,
+    private sortService: SortService,
     private onlineService: OnlineService,
   ) {}
 
