@@ -29,7 +29,7 @@ import { OnlineService } from "app/online/service/online.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { NgClass } from "@angular/common";
-
+import { GetNumberOfParticipantsPipe } from "./get-number-of-participants.pipe";
 @Component({
   selector: "app-available-participant",
   standalone: true,
@@ -42,6 +42,7 @@ import { NgClass } from "@angular/common";
     MatButtonModule,
     MatSnackBarModule,
     NgClass,
+    GetNumberOfParticipantsPipe,
   ],
   templateUrl: "./available-participant.component.html",
   styleUrls: ["./available-participant.component.scss"],
@@ -53,7 +54,7 @@ export class AvailableParticipantComponent implements OnInit, OnDestroy {
     .filter((p) => !p.isExternal && p.available)
     .sort(this.sortService.sortParticipantsByGender);
 
-  assignTypes = [];
+  assignTypes: AssignTypeInterface[] = [];
   assignTypesAssistant = [];
 
   allowedAssignTypesIds = [];

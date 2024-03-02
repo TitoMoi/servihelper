@@ -24,7 +24,11 @@
               [disabled]="isNetStatusOffline"
               (click)="changeAvailability(null, at, true)"
             >
-              <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
+              <div class="fw-bold">
+                {{ at | assignTypeNamePipe }} ({{
+                  at.id | getNumberOfParticipantsPipe: "principal"
+                }})
+              </div>
             </button>
           </th>
         }
@@ -73,7 +77,11 @@
             [disabled]="isNetStatusOffline"
             (click)="changeAvailability(null, at, false)"
           >
-            <div class="fw-bold">{{ at | assignTypeNamePipe }}</div>
+            <div class="fw-bold">
+              {{ at | assignTypeNamePipe }} ({{
+                at.id | getNumberOfParticipantsPipe: "assistant"
+              }})
+            </div>
           </button>
         </th>
       }
