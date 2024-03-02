@@ -132,7 +132,6 @@ export class TerritoryComponent {
 
         //Get the last participant id of the territory
         const lastParticipantId = t.participants.at(-1);
-        console.log(lastParticipantId);
         //Get the filename path and ensure it's valid for the system
         const fileNamePath = filenamifyPath(
           path.join(
