@@ -72,6 +72,15 @@ export class TerritoryService {
   }
 
   /**
+   * @param id the id of the territory to search by
+   * @returns true if the territory is active, false otherwise
+   */
+  isActiveTerritory(id: string): boolean {
+    const t = this.getTerritory(id);
+    return t.assignedDates.length > t.returnedDates.length;
+  }
+
+  /**
    *
    * @param territoryId the id of the territory to search by
    * @returns the name of the territory

@@ -130,8 +130,12 @@ export class TerritoryComponent {
         // Get the territory group name
         const tg = this.territoryGroupService.getTerritoryGroup(g);
 
+        let lastParticipantId = "";
         //Get the last participant id of the territory
-        const lastParticipantId = t.participants.at(-1);
+        if (this.territoryService.isActiveTerritory(t.id)) {
+          lastParticipantId = t.participants.at(-1);
+        }
+
         //Get the filename path and ensure it's valid for the system
         const fileNamePath = filenamifyPath(
           path.join(
