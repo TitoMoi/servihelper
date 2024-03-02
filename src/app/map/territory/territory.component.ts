@@ -23,6 +23,7 @@ import { ensureFileSync, readFileSync, removeSync, writeFile } from "fs-extra";
 import { filenamifyPath } from "filenamify";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { SortService } from "app/services/sort.service";
+import { ParticipantService } from "app/participant/service/participant.service";
 
 @Component({
   selector: "app-territory",
@@ -65,6 +66,7 @@ export class TerritoryComponent {
     private onlineService: OnlineService,
     private pdfService: PdfService,
     private translocoService: TranslocoService,
+    private participantService: ParticipantService,
     private configService: ConfigService,
     private sortService: SortService,
     private cdr: ChangeDetectorRef,
@@ -127,9 +129,22 @@ export class TerritoryComponent {
       for (const g of t.groups) {
         // Get the territory group name
         const tg = this.territoryGroupService.getTerritoryGroup(g);
+
+        //Get the last participant id of the territory
+        const lastParticipantId = t.participants.at(-1);
+        console.log(lastParticipantId);
         //Get the filename path and ensure it's valid for the system
         const fileNamePath = filenamifyPath(
-          path.join(this.configService.homeDir, "territories", tg.name, t.name + ".pdf"),
+          path.join(
+            this.configService.homeDir,
+            "territories",
+            tg.name,
+            t.name +
+              (lastParticipantId
+                ? "-" + this.participantService.getParticipant(lastParticipantId).name
+                : "") +
+              ".pdf",
+          ),
         );
         ensureFileSync(fileNamePath);
         promises.push(writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer())));
@@ -149,10 +164,10 @@ export class TerritoryComponent {
     const x = this.pdfService.getInitialWidth();
     let y = this.pdfService.getInitialHeight();
 
-    doc.setFontSize(14);
+    doc.setFontSize(this.pdfService.getTerritoryTextFontSize());
     doc.text(t.name, x, y, {});
 
-    doc.setFontSize(this.pdfService.getTextFontSize());
+    doc.setFontSize(this.pdfService.getTerritoryTextFontSize());
     doc.setFont(this.pdfService.font, "normal");
 
     if (t.meetingPointUrl) {

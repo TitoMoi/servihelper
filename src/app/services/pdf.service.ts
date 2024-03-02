@@ -135,6 +135,10 @@ export class PdfService {
     return 13.5;
   }
 
+  getTerritoryTextFontSize() {
+    return 22;
+  }
+
   getTextFontSize() {
     return 11;
   }
