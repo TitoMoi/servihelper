@@ -124,11 +124,15 @@ Configure a remote desktop and avoid the need to export and import data manually
 
 [Guide to configure a remote desktop with kamatera](./KAMATERA.md)
 
+_(If money is not a concern, it's better in terms of complexity to use another online tool instead of configure a server)_
+
 ## Way to create assignments
 
 Open Servihelper and open jw library app, split the screen between Servihelper and jw library.
 
-Then on creating the assignment copy the assignment title and put it on the "theme field":
+First, create participants.
+
+Then on creating the assignment copy the assignment title from jw library and put it on the "theme field":
 
 <img src="./pictures/split-screen.png" alt= "create-assignment">
 
