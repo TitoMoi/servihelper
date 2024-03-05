@@ -593,136 +593,158 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   /** Red and Yellow clock */
   checkIfExhausted() {
-    let currentDate: Date = this.gfv("date");
-    const room = this.gfv("room");
-    const at = this.gfv("assignType");
+    const currentDate: Date = this.gfv("date");
+    const roomId = this.gfv("room");
+    const atId = this.gfv("assignType");
 
-    if (currentDate && room && at) {
-      const closeOthersDays = this.configService.getConfig().closeToOthersDays;
-      const closeOthersPrayerDays = this.configService.getConfig().closeToOthersPrayerDays;
-      const closeOthersTreasuresEtcDays =
-        this.configService.getConfig().closeToOthersTreasuresEtcDays;
-
-      /* get the threshold of the assign type itself */
-      const at = this.assignTypeService.getAssignType(this.gfv("assignType"));
+    if (currentDate && roomId && atId) {
+      const at = this.assignTypeService.getAssignType(atId);
       const atType = at.type;
-      const days = at?.days;
-      if (days) {
-        //If we edit an assignment, we get the string iso instead of a real date
-        if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
-        //Get all the days before and after, its 1 based index
-        let allDays: AssignmentInterface[] = [];
-        for (let i = 1; i <= days; i++) {
-          allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
-          );
-          allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
-          );
-        }
-        for (const p of this.principals) {
-          if (allDays.some((a) => a.assignType === at.id && a.principal === p.id)) {
-            p.hasCollision = true;
-          }
-        }
-      }
+      //red clock
+      this.checkIfAboveThreshold(currentDate, at);
 
       //Yellow clock assignments
-      if (closeOthersDays && this.isOfTypeAssignTypes(atType)) {
-        //If we edit an assignment, we get the string iso instead of a real date
-        if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+      this.checkIsExhaustedForSchool(currentDate, atType);
 
-        //Get all the days before and after, its 1 based index
-        let allDays: AssignmentInterface[] = [];
-        for (let i = 1; i <= closeOthersDays; i++) {
-          allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
-          );
-          allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
-          );
-        }
+      this.checkIfExhaustedForPrayer(currentDate, atType);
 
-        for (const p of this.principals) {
-          if (
-            allDays.some(
-              (a) =>
-                this.isOfTypeAssignTypes(
-                  this.assignTypeService.getAssignType(a.assignType).type,
-                ) &&
-                (a.principal === p.id || a.assistant === p.id),
-            )
-          ) {
-            p.isCloseToOthers = true;
-          }
-        }
+      this.checkIfExhaustedForTreasures(currentDate, atType);
+    }
+  }
 
-        for (const assist of this.assistants) {
-          if (
-            allDays.some(
-              (a) =>
-                this.isOfTypeAssignTypes(
-                  this.assignTypeService.getAssignType(a.assignType).type,
-                ) &&
-                (a.principal === assist.id || a.assistant === assist.id),
-            )
-          ) {
-            assist.isCloseToOthers = true;
-          }
+  //red clock
+  checkIfAboveThreshold(currentDate: Date, assignType: AssignTypeInterface) {
+    /* get the threshold of the assign type itself */
+
+    const days = assignType?.days;
+    if (days) {
+      //If we edit an assignment, we get the string iso instead of a real date
+      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+      //Get all the days before and after, its 1 based index
+      let allDays: AssignmentInterface[] = [];
+      for (let i = 1; i <= days; i++) {
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
+        );
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
+        );
+      }
+      for (const p of this.principals) {
+        if (allDays.some((a) => a.assignType === assignType.id && a.principal === p.id)) {
+          p.hasCollision = true;
         }
       }
-      if (closeOthersPrayerDays && this.isOfTypePrayer(atType)) {
-        //If we edit an assignment, we get the string iso instead of a real date
-        if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+    }
+  }
 
-        //Get all the days before and after, its 1 based index
-        let allDays: AssignmentInterface[] = [];
-        for (let i = 1; i <= closeOthersPrayerDays; i++) {
-          allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
-          );
-          allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
-          );
-        }
-        for (const p of this.principals) {
-          if (
-            allDays.some(
-              (a) =>
-                this.isOfTypePrayer(this.assignTypeService.getAssignType(a.assignType).type) &&
-                a.principal === p.id,
-            )
-          ) {
-            p.isCloseToOthersPrayer = true;
-          }
+  checkIsExhaustedForSchool(currentDate: Date, atType: AssignTypes) {
+    const closeOthersDays = this.configService.getConfig().closeToOthersDays;
+
+    if (closeOthersDays && this.isOfTypeAssignTypes(atType)) {
+      //If we edit an assignment, we get the string iso instead of a real date
+      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+      //Get all the days before and after, its 1 based index
+      let allDays: AssignmentInterface[] = [];
+      for (let i = 1; i <= closeOthersDays; i++) {
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
+        );
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
+        );
+      }
+
+      for (const p of this.principals) {
+        if (
+          allDays.some(
+            (a) =>
+              this.isOfTypeAssignTypes(
+                this.assignTypeService.getAssignType(a.assignType).type,
+              ) &&
+              (a.principal === p.id || a.assistant === p.id),
+          )
+        ) {
+          p.isCloseToOthers = true;
         }
       }
-      if (closeOthersTreasuresEtcDays && this.isOfTypeTreasuresAndOthers(atType)) {
-        //If we edit an assignment, we get the string iso instead of a real date
-        if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
-        //Get all the days before and after, its 1 based index
-        let allDays: AssignmentInterface[] = [];
-        for (let i = 1; i <= closeOthersTreasuresEtcDays; i++) {
-          allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
-          );
-          allDays = allDays.concat(
-            this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
-          );
+      for (const assist of this.assistants) {
+        if (
+          allDays.some(
+            (a) =>
+              this.isOfTypeAssignTypes(
+                this.assignTypeService.getAssignType(a.assignType).type,
+              ) &&
+              (a.principal === assist.id || a.assistant === assist.id),
+          )
+        ) {
+          assist.isCloseToOthers = true;
         }
-        for (const p of this.principals) {
-          if (
-            allDays.some(
-              (a) =>
-                this.isOfTypeTreasuresAndOthers(
-                  this.assignTypeService.getAssignType(a.assignType).type,
-                ) && a.principal === p.id,
-            )
-          ) {
-            p.isCloseToOthersTreasuresEtc = true;
-          }
+      }
+    }
+  }
+
+  checkIfExhaustedForPrayer(currentDate: Date, atType: AssignTypes) {
+    const closeOthersPrayerDays = this.configService.getConfig().closeToOthersPrayerDays;
+    if (closeOthersPrayerDays && this.isOfTypePrayer(atType)) {
+      //If we edit an assignment, we get the string iso instead of a real date
+      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+      //Get all the days before and after, its 1 based index
+      let allDays: AssignmentInterface[] = [];
+      for (let i = 1; i <= closeOthersPrayerDays; i++) {
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
+        );
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
+        );
+      }
+      for (const p of this.principals) {
+        if (
+          allDays.some(
+            (a) =>
+              this.isOfTypePrayer(this.assignTypeService.getAssignType(a.assignType).type) &&
+              a.principal === p.id,
+          )
+        ) {
+          p.isCloseToOthersPrayer = true;
+        }
+      }
+    }
+  }
+
+  checkIfExhaustedForTreasures(currentDate: Date, atType: AssignTypes) {
+    const closeOthersTreasuresEtcDays =
+      this.configService.getConfig().closeToOthersTreasuresEtcDays;
+    if (closeOthersTreasuresEtcDays && this.isOfTypeTreasuresAndOthers(atType)) {
+      //If we edit an assignment, we get the string iso instead of a real date
+      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+      //Get all the days before and after, its 1 based index
+      let allDays: AssignmentInterface[] = [];
+      for (let i = 1; i <= closeOthersTreasuresEtcDays; i++) {
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
+        );
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
+        );
+      }
+      for (const p of this.principals) {
+        if (
+          allDays.some(
+            (a) =>
+              this.isOfTypeTreasuresAndOthers(
+                this.assignTypeService.getAssignType(a.assignType).type,
+              ) && a.principal === p.id,
+          )
+        ) {
+          p.isCloseToOthersTreasuresEtc = true;
         }
       }
     }
