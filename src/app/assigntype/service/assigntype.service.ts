@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { AssignTypeInterface, AssignTypes } from "app/assigntype/model/assigntype.model";
 import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -97,18 +98,6 @@ export class AssignTypeService {
     translations.push(this.getNameOrTranslationByType(this.LIVING_AS_CHRISTIANS));
     translations.push(this.getNameOrTranslationByType(this.CONGREGATION_BIBLE_STUDY));
     return translations.filter((t) => t).toString();
-  }
-
-  isAllowedTypeForS89(type: string): boolean {
-    if (!type) return false;
-
-    return (
-      type === "bibleReading" ||
-      type === "initialCall" ||
-      type === "returnVisit" ||
-      type === "bibleStudy" ||
-      type === "talk"
-    );
   }
 
   /**
@@ -215,5 +204,33 @@ export class AssignTypeService {
     this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
     //save assignTypes
     return this.saveAssignTypesToFile();
+  }
+
+  //school
+  isOfTypeAssignTypes(type: AssignTypes): boolean {
+    return [
+      this.BIBLE_READING,
+      this.INITIAL_CALL,
+      this.RETURN_VISIT,
+      this.TALK,
+      this.BIBLE_STUDY,
+      this.EXPLAIN_BELIEFS,
+    ].includes(type);
+  }
+
+  //prayer
+  isOfTypePrayer(type: AssignTypes): boolean {
+    return [this.INITIAL_PRAYER, this.ENDING_PRAYER].includes(type);
+  }
+
+  //treasures and others
+  isOfTypeTreasuresAndOthers(type: AssignTypes): boolean {
+    return [
+      this.TREASURES,
+      this.SPIRITUAL_GEMS,
+      this.ANALYSIS_AUDIENCE,
+      this.LIVING_AS_CHRISTIANS,
+      this.CONGREGATION_BIBLE_STUDY,
+    ].includes(type);
   }
 }

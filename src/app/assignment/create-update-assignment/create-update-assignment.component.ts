@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { LastDateService } from "app/assignment/service/last-date.service";
@@ -626,6 +627,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
           }
         }
       }
+
+      //Yellow clock assignments
       if (closeOthersDays && this.isOfTypeAssignTypes(atType)) {
         //If we edit an assignment, we get the string iso instead of a real date
         if (typeof currentDate === "string") currentDate = parseISO(currentDate);
@@ -727,31 +730,15 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   /** This functions are created to get the exhaust time period */
   isOfTypeAssignTypes(type: AssignTypes) {
-    return [
-      this.assignTypeService.BIBLE_READING,
-      this.assignTypeService.INITIAL_CALL,
-      this.assignTypeService.RETURN_VISIT,
-      this.assignTypeService.TALK,
-      this.assignTypeService.BIBLE_STUDY,
-      this.assignTypeService.EXPLAIN_BELIEFS,
-    ].includes(type);
+    return this.assignTypeService.isOfTypeAssignTypes(type);
   }
 
   isOfTypePrayer(type: AssignTypes) {
-    return [
-      this.assignTypeService.INITIAL_PRAYER,
-      this.assignTypeService.ENDING_PRAYER,
-    ].includes(type);
+    return this.assignTypeService.isOfTypePrayer(type);
   }
 
   isOfTypeTreasuresAndOthers(type: AssignTypes) {
-    return [
-      this.assignTypeService.TREASURES,
-      this.assignTypeService.SPIRITUAL_GEMS,
-      this.assignTypeService.ANALYSIS_AUDIENCE,
-      this.assignTypeService.LIVING_AS_CHRISTIANS,
-      this.assignTypeService.CONGREGATION_BIBLE_STUDY,
-    ].includes(type);
+    return this.assignTypeService.isOfTypeTreasuresAndOthers(type);
   }
 
   filterAssignmentsByRole() {
