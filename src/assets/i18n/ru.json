@@ -138,6 +138,7 @@
   "CHECK_LATER": "Пожалуйста, повторите попытку позже.",
   "CLOSE": "Закрывать",
   "CLOSE_APP": "Закрывать servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "Не рекомендуется, потому что имеет еще одно связанное задание, близкое к этой дате.",
   "COLOR_BLUE_EXPLANATION": "Менее 4 месяцев",
   "COLOR_GREEN_EXPLANATION": "Никогда не назначал",
   "COLOR_RED_EXPLANATION": "1 год или более",

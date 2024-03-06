@@ -138,6 +138,7 @@
   "CHECK_LATER": "Bitte versuchen Sie es später erneut.",
   "CLOSE": "Schließen",
   "CLOSE_APP": "Schließen servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "Nicht empfohlen, da bis zu diesem Datum eine andere zugehörige Zuordnung/s enthält.",
   "COLOR_BLUE_EXPLANATION": "Weniger als 4 Monate alt",
   "COLOR_GREEN_EXPLANATION": "Nie zugewiesen",
   "COLOR_RED_EXPLANATION": "1 Jahr alt oder mehr",

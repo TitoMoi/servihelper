@@ -133,6 +133,7 @@
   "BUTTON_YES": "Yes",
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
+  "CLOSE_ASSIGNMENTS_TITLE": "अनुशंसित नहीं है क्योंकि इस तिथि के करीब एक और संबंधित असाइनमेंट है।",
   "COLOR_BLUE_EXPLANATION": "2 महीने से कम पुराना",
   "COLOR_GREEN_EXPLANATION": "कभी नहीं सौंपा गया",
   "COLOR_RED_EXPLANATION": "1 साल या उससे अधिक",

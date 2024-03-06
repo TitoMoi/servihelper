@@ -53,7 +53,7 @@ import { MatOptionModule } from "@angular/material/core";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { AsyncPipe, JsonPipe, NgFor, NgIf } from "@angular/common";
+import { AsyncPipe, NgFor, NgIf } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitleInterface } from "app/sheet-title/model/sheet-title.model";
@@ -66,7 +66,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
-
+import { CloseAssignmentsComponent } from "./close-assignments/close-assignments.component";
 @Component({
   selector: "app-create-update-assignment",
   templateUrl: "./create-update-assignment.component.html",
@@ -96,7 +96,6 @@ import { OnlineService } from "app/online/service/online.service";
     PublicThemePipe,
     AssignTypeNamePipe,
     RoomNamePipe,
-    JsonPipe,
   ],
 })
 export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -946,6 +945,116 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   getBorderLeftStyle(color) {
     return `12px solid ${color ? color : "#FFF"}`;
+  }
+
+  //MOVE LATER
+
+  onYellowClockSchoolClick(e: Event, participant: ParticipantDynamicInterface) {
+    e.preventDefault();
+    e.stopPropagation();
+    const assignments = this.getExhaustedAssignmentsForSchool(participant);
+    this.matDialog.open(CloseAssignmentsComponent, {
+      data: assignments,
+    });
+  }
+
+  onYellowClockPrayerClick(e: Event, participant: ParticipantDynamicInterface) {
+    e.preventDefault();
+    e.stopPropagation();
+    const assignments = this.getExhaustedAssignmentsForPrayer(participant);
+    this.matDialog.open(CloseAssignmentsComponent, {
+      data: assignments,
+    });
+  }
+
+  onYellowClockTreasuresEtcClick(e: Event, participant: ParticipantDynamicInterface) {
+    e.preventDefault();
+    e.stopPropagation();
+    const assignments = this.getExhaustedAssignmentsForTreasuresEtc(participant);
+    this.matDialog.open(CloseAssignmentsComponent, {
+      data: assignments,
+    });
+  }
+
+  getExhaustedAssignmentsForSchool(p: ParticipantInterface) {
+    let currentDate: Date = this.form.controls.date.value;
+    const closeOthersDays = this.configService.getConfig().closeToOthersDays;
+
+    //If we edit an assignment, we get the string iso instead of a real date
+    if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+    //Get all the assignments before and after the days treshold, its 1 based index
+    const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
+      currentDate,
+      closeOthersDays,
+    );
+
+    const foundAssignments: AssignmentInterface[] = [];
+    for (const assign of allDays) {
+      if (
+        this.assignTypeService.isOfTypeAssignTypes(
+          this.assignTypeService.getAssignType(assign.assignType).type,
+        ) &&
+        (assign.principal === p.id || assign.assistant === p.id)
+      ) {
+        foundAssignments.push(assign);
+      }
+    }
+    return foundAssignments;
+  }
+
+  getExhaustedAssignmentsForPrayer(p: ParticipantInterface) {
+    let currentDate: Date = this.form.controls.date.value;
+    const closeOthersPrayerDays = this.configService.getConfig().closeToOthersPrayerDays;
+
+    //If we edit an assignment, we get the string iso instead of a real date
+    if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+    //Get all the assignments before and after the days treshold, its 1 based index
+    const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
+      currentDate,
+      closeOthersPrayerDays,
+    );
+
+    const foundAssignments: AssignmentInterface[] = [];
+    for (const assign of allDays) {
+      if (
+        this.assignTypeService.isOfTypePrayer(
+          this.assignTypeService.getAssignType(assign.assignType).type,
+        ) &&
+        (assign.principal === p.id || assign.assistant === p.id)
+      ) {
+        foundAssignments.push(assign);
+      }
+    }
+    return foundAssignments;
+  }
+
+  getExhaustedAssignmentsForTreasuresEtc(p: ParticipantInterface) {
+    let currentDate: Date = this.form.controls.date.value;
+    const closeOthersTreasuresEtcDays = this.configService.getConfig().closeToOthersPrayerDays;
+
+    //If we edit an assignment, we get the string iso instead of a real date
+    if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+    //Get all the assignments before and after the days treshold, its 1 based index
+    const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
+      currentDate,
+      closeOthersTreasuresEtcDays,
+    );
+
+    const foundAssignments: AssignmentInterface[] = [];
+    for (const assign of allDays) {
+      if (
+        this.assignTypeService.isOfTypeTreasuresAndOthers(
+          this.assignTypeService.getAssignType(assign.assignType).type,
+        ) &&
+        (assign.principal === p.id || assign.assistant === p.id)
+      ) {
+        foundAssignments.push(assign);
+      }
+    }
+    return foundAssignments;
   }
 
   //********* DATEPICKER HACK *************

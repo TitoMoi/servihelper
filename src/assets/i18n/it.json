@@ -138,6 +138,7 @@
   "CHECK_LATER": "Per favore riprova più tardi.",
   "CLOSE": "Vicina",
   "CLOSE_APP": "Vicina servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "Non consigliato perché ha un altro assegnazione/e correlata vicino a questa data.",
   "COLOR_BLUE_EXPLANATION": "Meno di 4 mesi",
   "COLOR_GREEN_EXPLANATION": "Mai assegnato",
   "COLOR_RED_EXPLANATION": "1 anno o più",

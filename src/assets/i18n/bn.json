@@ -133,6 +133,7 @@
   "BUTTON_YES": "হ্যাঁ",
   "CHECK_LATER": "অনুগ্রহ করে একটু পরে আবার চেষ্টা করুন.",
   "CLOSE": "বন্ধ",
+  "CLOSE_ASSIGNMENTS_TITLE": "প্রস্তাবিত নয় কারণ এই তারিখের কাছাকাছি আরও একটি সম্পর্কিত অ্যাসাইনমেন্ট/গুলি রয়েছে।",
   "COLOR_BLUE_EXPLANATION": "2 মাসেরও কম বয়সী",
   "COLOR_GREEN_EXPLANATION": "কখনও অর্পণ করা হয়নি",
   "COLOR_RED_EXPLANATION": "1 বছর বয়সী বা আরও",

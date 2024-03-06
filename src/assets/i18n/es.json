@@ -140,6 +140,7 @@
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
   "CLOSE_APP": "Close servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "No se recomienda porque tiene otra tarea relacionada cerca de esta fecha.",
   "COLOR_BLUE_EXPLANATION": "Menos de 4 meses",
   "COLOR_GREEN_EXPLANATION": "Never assigned",
   "COLOR_RED_EXPLANATION": "1 año o más",

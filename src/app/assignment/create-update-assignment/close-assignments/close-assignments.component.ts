@@ -1,18 +1,30 @@
+/* eslint-disable complexity */
 import { JsonPipe } from "@angular/common";
+import { ChangeDetectionStrategy } from "@angular/core";
 import { Component, Inject } from "@angular/core";
-import { ExhaustedOverlayDataInterface } from "app/assignment/model/assignment.model";
+import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
+import { MatIconModule } from "@angular/material/icon";
+import { TranslocoDirective } from "@ngneat/transloco";
+import { TranslocoDatePipe } from "@ngneat/transloco-locale";
+import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
 
 @Component({
   selector: "app-close-assignments",
   standalone: true,
-  imports: [JsonPipe],
+  imports: [
+    JsonPipe,
+    AssignTypePipe,
+    TranslocoDatePipe,
+    TranslocoDirective,
+    MatIconModule,
+    MatDialogModule,
+  ],
   templateUrl: "./close-assignments.component.html",
   styleUrl: "./close-assignments.component.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CloseAssignmentsComponent {
-  exhaustedData: ExhaustedOverlayDataInterface = this.exhaustedOverlayData;
-  constructor(
-    @Inject(CLOSE_ASSIGNMENTS_DATA_TOKEN)
-    private exhaustedOverlayData: ExhaustedOverlayDataInterface,
-  ) {}
+  closeAssignments: AssignmentInterface[] = this.closeAssignmentsData;
+  constructor(@Inject(MAT_DIALOG_DATA) private closeAssignmentsData: AssignmentInterface[]) {}
 }

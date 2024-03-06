@@ -138,6 +138,7 @@
   "CHECK_LATER": "Veuillez réessayer plus tard.",
   "CLOSE": "Fermer",
   "CLOSE_APP": "Fermer servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "Non recommandé car a une autre affectation/s proche de cette date.",
   "COLOR_BLUE_EXPLANATION": "Moins de 4 mois",
   "COLOR_GREEN_EXPLANATION": "Jamais affecté",
   "COLOR_RED_EXPLANATION": "1 an ou plus",

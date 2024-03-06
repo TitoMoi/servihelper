@@ -133,6 +133,7 @@
   "BUTTON_YES": "Yes",
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
+  "CLOSE_ASSIGNMENTS_TITLE": "別の関連する割り当てがこの日付に近いため、お勧めしません。",
   "COLOR_BLUE_EXPLANATION": "生後2ヶ月未満",
   "COLOR_GREEN_EXPLANATION": "割り当てられない",
   "COLOR_RED_EXPLANATION": "1歳以上",

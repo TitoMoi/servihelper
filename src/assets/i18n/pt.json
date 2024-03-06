@@ -139,6 +139,7 @@
   "CHECK_LATER": "Por favor, tente novamente mais tarde.",
   "CLOSE": "Fechar",
   "CLOSE_APP": "Fechar servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "Não é recomendado porque possui outra atribuição relacionada (s) próxima a esta data.",
   "COLOR_BLUE_EXPLANATION": "Com menos de 4 meses de idade",
   "COLOR_GREEN_EXPLANATION": "Nunca atribuído",
   "COLOR_RED_EXPLANATION": "1 ano de idade ou mais",

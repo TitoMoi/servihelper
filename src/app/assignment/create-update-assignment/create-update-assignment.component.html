@@ -244,18 +244,15 @@
                           ></mat-icon>
                         } @else if (participant.isCloseToOthers && !isMultipleDates) {
                           <mat-icon
-                            [getExhaustedForSchoolOverlay]="{
-                              currentDate: form.controls.date.value,
-                              participant
-                            }"
                             svgIcon="warningtime"
                             aria-label="icon"
+                            (click)="onYellowClockSchoolClick($event, participant)"
                           ></mat-icon>
                         } @else if (participant.isCloseToOthersPrayer && !isMultipleDates) {
                           <mat-icon
                             svgIcon="warningtime"
                             aria-label="icon"
-                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
+                            (click)="onYellowClockPrayerClick($event, participant)"
                           ></mat-icon>
                         } @else if (
                           participant.isCloseToOthersTreasuresEtc && !isMultipleDates
@@ -263,7 +260,7 @@
                           <mat-icon
                             svgIcon="warningtime"
                             aria-label="icon"
-                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
+                            (click)="onYellowClockTreasuresEtcClick($event, participant)"
                           ></mat-icon>
                         }
                       </div>
