@@ -49,3 +49,8 @@ export interface AssignmentTableInterface extends AssignmentInterface {
   hasDateSeparator: boolean; //To separate dates from one day to another
   hasBeenClicked: boolean; //To highlight last row when clicked the sheet
 }
+
+export interface CloseAssignmentsDataContext {
+  assignments: AssignmentInterface[];
+  isRedClock: boolean;
+}

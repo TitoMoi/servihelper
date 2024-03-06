@@ -134,6 +134,7 @@
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
   "CLOSE_ASSIGNMENTS_TITLE": "不推荐，因为还有另一个相关的任务接近此日期。",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "没有足够的时间来重复此任务",
   "COLOR_BLUE_EXPLANATION": "不到2个月大",
   "COLOR_GREEN_EXPLANATION": "从未分配",
   "COLOR_RED_EXPLANATION": "1岁或更多",

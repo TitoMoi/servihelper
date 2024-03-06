@@ -140,6 +140,7 @@
   "CLOSE": "Tancar",
   "CLOSE_APP": "Tancar servihelper",
   "CLOSE_ASSIGNMENTS_TITLE": "No es recomana perquè té una altra tasca relacionada a prop d'aquesta data.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "No ha passat prou temps per poder repetir aquesta tasca",
   "COLOR_BLUE_EXPLANATION": "Menys de 4 mesos",
   "COLOR_GREEN_EXPLANATION": "Mai assignat",
   "COLOR_RED_EXPLANATION": "1 any o més",

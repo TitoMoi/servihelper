@@ -240,7 +240,7 @@
                             class="me-2"
                             svgIcon="time"
                             aria-label="icon"
-                            [matTooltip]="t('ASSIGNMENT_COLLISION_TOOLTIP')"
+                            (click)="onRedClockClick($event, participant)"
                           ></mat-icon>
                         } @else if (participant.isCloseToOthers && !isMultipleDates) {
                           <mat-icon

@@ -949,12 +949,21 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   //MOVE LATER
 
+  onRedClockClick(e: Event, participant: ParticipantDynamicInterface) {
+    e.preventDefault();
+    e.stopPropagation();
+    const assignments = this.getIfAboveThreshold(participant);
+    this.matDialog.open(CloseAssignmentsComponent, {
+      data: { assignments, isRedClock: true },
+    });
+  }
+
   onYellowClockSchoolClick(e: Event, participant: ParticipantDynamicInterface) {
     e.preventDefault();
     e.stopPropagation();
     const assignments = this.getExhaustedAssignmentsForSchool(participant);
     this.matDialog.open(CloseAssignmentsComponent, {
-      data: assignments,
+      data: { assignments, isRedClock: false },
     });
   }
 
@@ -963,7 +972,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     e.stopPropagation();
     const assignments = this.getExhaustedAssignmentsForPrayer(participant);
     this.matDialog.open(CloseAssignmentsComponent, {
-      data: assignments,
+      data: { assignments, isRedClock: false },
     });
   }
 
@@ -972,8 +981,39 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     e.stopPropagation();
     const assignments = this.getExhaustedAssignmentsForTreasuresEtc(participant);
     this.matDialog.open(CloseAssignmentsComponent, {
-      data: assignments,
+      data: { assignments, isRedClock: false },
     });
+  }
+
+  getIfAboveThreshold(p: ParticipantInterface): AssignmentInterface[] {
+    let currentDate: Date = this.form.controls.date.value;
+    const atId: string = this.form.controls.assignType.value;
+    const assignType = this.assignTypeService.getAssignType(atId);
+    /* get the threshold of the assign type itself */
+    const days = assignType?.days;
+    if (days) {
+      //If we edit an assignment, we get the string iso instead of a real date
+      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+
+      //Get all the days before and after, its 1 based index
+      let allDays: AssignmentInterface[] = [];
+      for (let i = 1; i <= days; i++) {
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
+        );
+        allDays = allDays.concat(
+          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
+        );
+      }
+      const foundAssignments: AssignmentInterface[] = [];
+
+      for (const a of allDays) {
+        if (a.assignType === assignType.id && a.principal === p.id) {
+          foundAssignments.push(a);
+        }
+      }
+      return foundAssignments;
+    }
   }
 
   getExhaustedAssignmentsForSchool(p: ParticipantInterface) {

@@ -134,6 +134,7 @@
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
   "CLOSE_ASSIGNMENTS_TITLE": "Δεν συνιστάται επειδή έχει μια άλλη σχετική αποστολή/s κοντά σε αυτή την ημερομηνία.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "Δεν έχει περάσει αρκετός χρόνος για να μπορέσω να επαναλάβουμε αυτήν την ανάθεση",
   "COLOR_BLUE_EXPLANATION": "Λιγότερο των 2 μηνών",
   "COLOR_GREEN_EXPLANATION": "Ποτέ δεν έχει ανατεθεί",
   "COLOR_RED_EXPLANATION": "1 χρονών ή περισσότερο",

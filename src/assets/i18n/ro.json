@@ -139,6 +139,7 @@
   "CLOSE": "Închide",
   "CLOSE_APP": "Închide servihelper",
   "CLOSE_ASSIGNMENTS_TITLE": "Nu este recomandat, deoarece are o altă misiune conexă aproape de această dată.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "Nu a trecut suficient timp pentru a putea repeta această misiune",
   "COLOR_BLUE_EXPLANATION": "Mai puțin de 4 luni",
   "COLOR_GREEN_EXPLANATION": "Nu a fost niciodată repartizat",
   "COLOR_RED_EXPLANATION": "1 an sau mai mult",

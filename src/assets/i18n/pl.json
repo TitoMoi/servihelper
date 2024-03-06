@@ -134,6 +134,7 @@
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
   "CLOSE_ASSIGNMENTS_TITLE": "Nie zalecane, ponieważ ma inne powiązane przypisanie/są bliskie tej daty.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "Minął mało czasu, aby móc powtórzyć to zadanie",
   "COLOR_BLUE_EXPLANATION": "Mniej niż 2 miesiące",
   "COLOR_GREEN_EXPLANATION": "Nigdy nie przypisano",
   "COLOR_RED_EXPLANATION": "1 -letni lub więcej",

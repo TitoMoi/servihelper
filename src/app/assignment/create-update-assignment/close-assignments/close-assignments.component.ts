@@ -8,6 +8,7 @@ import { TranslocoDirective } from "@ngneat/transloco";
 import { TranslocoDatePipe } from "@ngneat/transloco-locale";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
+import { CloseAssignmentsDataContext } from "app/assignment/model/assignment.model";
 
 @Component({
   selector: "app-close-assignments",
@@ -25,6 +26,9 @@ import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CloseAssignmentsComponent {
-  closeAssignments: AssignmentInterface[] = this.closeAssignmentsData;
-  constructor(@Inject(MAT_DIALOG_DATA) private closeAssignmentsData: AssignmentInterface[]) {}
+  closeAssignments: AssignmentInterface[] = this.closeAssignmentsData.assignments;
+  isRedClock = this.closeAssignmentsData.isRedClock;
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private closeAssignmentsData: CloseAssignmentsDataContext,
+  ) {}
 }
