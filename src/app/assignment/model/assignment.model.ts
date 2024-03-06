@@ -1,3 +1,4 @@
+import { InjectionToken } from "@angular/core";
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { RoomInterface } from "app/room/model/room.model";
@@ -41,6 +42,14 @@ export interface AssignmentReportInterface {
   footerNote: string;
 }
 
+export const CLOSE_ASSIGNMENTS_DATA_TOKEN = new InjectionToken<ExhaustedOverlayDataInterface>(
+  "",
+);
+
+export interface ExhaustedOverlayDataInterface {
+  currentDate: Date;
+  participant: ParticipantInterface;
+}
 export interface AssignmentGroupInterface {
   assignments: AssignmentReportInterface[];
 }

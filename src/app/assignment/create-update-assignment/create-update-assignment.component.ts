@@ -53,7 +53,7 @@ import { MatOptionModule } from "@angular/material/core";
 import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { AsyncPipe, NgFor, NgIf } from "@angular/common";
+import { AsyncPipe, JsonPipe, NgFor, NgIf } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 import { SheetTitleInterface } from "app/sheet-title/model/sheet-title.model";
@@ -96,6 +96,7 @@ import { OnlineService } from "app/online/service/online.service";
     PublicThemePipe,
     AssignTypeNamePipe,
     RoomNamePipe,
+    JsonPipe,
   ],
 })
 export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -613,22 +614,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
-  getAllAssignmentsByDaysBeforeAndAfter(
-    currentDate: Date,
-    daysThreshold: number,
-  ): AssignmentInterface[] {
-    let allDays: AssignmentInterface[] = [];
-    for (let i = 1; i <= daysThreshold; i++) {
-      allDays = allDays.concat(
-        this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
-      );
-      allDays = allDays.concat(
-        this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
-      );
-    }
-    return allDays;
-  }
-
   //red clock
   checkIfAboveThreshold(currentDate: Date, assignType: AssignTypeInterface) {
     /* get the threshold of the assign type itself */
@@ -656,21 +641,25 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
+  //yellow clock
   checkIsExhaustedForSchool(currentDate: Date, atType: AssignTypes) {
     const closeOthersDays = this.configService.getConfig().closeToOthersDays;
 
-    if (closeOthersDays && this.isOfTypeAssignTypes(atType)) {
+    if (closeOthersDays && this.assignTypeService.isOfTypeAssignTypes(atType)) {
       //If we edit an assignment, we get the string iso instead of a real date
       if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
       //Get all the assignments before and after the days treshold, its 1 based index
-      const allDays = this.getAllAssignmentsByDaysBeforeAndAfter(currentDate, closeOthersDays);
+      const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
+        currentDate,
+        closeOthersDays,
+      );
 
       for (const p of this.principals) {
         if (
           allDays.some(
             (a) =>
-              this.isOfTypeAssignTypes(
+              this.assignTypeService.isOfTypeAssignTypes(
                 this.assignTypeService.getAssignType(a.assignType).type,
               ) &&
               (a.principal === p.id || a.assistant === p.id),
@@ -684,7 +673,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         if (
           allDays.some(
             (a) =>
-              this.isOfTypeAssignTypes(
+              this.assignTypeService.isOfTypeAssignTypes(
                 this.assignTypeService.getAssignType(a.assignType).type,
               ) &&
               (a.principal === assist.id || a.assistant === assist.id),
@@ -696,14 +685,15 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
+  //yellow clock
   checkIfExhaustedForPrayer(currentDate: Date, atType: AssignTypes) {
     const closeOthersPrayerDays = this.configService.getConfig().closeToOthersPrayerDays;
-    if (closeOthersPrayerDays && this.isOfTypePrayer(atType)) {
+    if (closeOthersPrayerDays && this.assignTypeService.isOfTypePrayer(atType)) {
       //If we edit an assignment, we get the string iso instead of a real date
       if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
       //Get all the assignments before and after the days treshold, its 1 based index
-      const allDays = this.getAllAssignmentsByDaysBeforeAndAfter(
+      const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
         currentDate,
         closeOthersPrayerDays,
       );
@@ -712,8 +702,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         if (
           allDays.some(
             (a) =>
-              this.isOfTypePrayer(this.assignTypeService.getAssignType(a.assignType).type) &&
-              a.principal === p.id,
+              this.assignTypeService.isOfTypePrayer(
+                this.assignTypeService.getAssignType(a.assignType).type,
+              ) && a.principal === p.id,
           )
         ) {
           p.isCloseToOthersPrayer = true;
@@ -722,15 +713,19 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
+  //yellow clock
   checkIfExhaustedForTreasures(currentDate: Date, atType: AssignTypes) {
     const closeOthersTreasuresEtcDays =
       this.configService.getConfig().closeToOthersTreasuresEtcDays;
-    if (closeOthersTreasuresEtcDays && this.isOfTypeTreasuresAndOthers(atType)) {
+    if (
+      closeOthersTreasuresEtcDays &&
+      this.assignTypeService.isOfTypeTreasuresAndOthers(atType)
+    ) {
       //If we edit an assignment, we get the string iso instead of a real date
       if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
       //Get all the assignments before and after the days treshold, its 1 based index
-      const allDays = this.getAllAssignmentsByDaysBeforeAndAfter(
+      const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
         currentDate,
         closeOthersTreasuresEtcDays,
       );
@@ -739,7 +734,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         if (
           allDays.some(
             (a) =>
-              this.isOfTypeTreasuresAndOthers(
+              this.assignTypeService.isOfTypeTreasuresAndOthers(
                 this.assignTypeService.getAssignType(a.assignType).type,
               ) && a.principal === p.id,
           )
@@ -748,19 +743,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         }
       }
     }
-  }
-
-  /** This functions are created to get the exhaust time period */
-  isOfTypeAssignTypes(type: AssignTypes) {
-    return this.assignTypeService.isOfTypeAssignTypes(type);
-  }
-
-  isOfTypePrayer(type: AssignTypes) {
-    return this.assignTypeService.isOfTypePrayer(type);
-  }
-
-  isOfTypeTreasuresAndOthers(type: AssignTypes) {
-    return this.assignTypeService.isOfTypeTreasuresAndOthers(type);
   }
 
   filterAssignmentsByRole() {

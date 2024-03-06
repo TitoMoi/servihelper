@@ -244,9 +244,12 @@
                           ></mat-icon>
                         } @else if (participant.isCloseToOthers && !isMultipleDates) {
                           <mat-icon
+                            [getExhaustedForSchoolOverlay]="{
+                              currentDate: form.controls.date.value,
+                              participant
+                            }"
                             svgIcon="warningtime"
                             aria-label="icon"
-                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
                           ></mat-icon>
                         } @else if (participant.isCloseToOthersPrayer && !isMultipleDates) {
                           <mat-icon
