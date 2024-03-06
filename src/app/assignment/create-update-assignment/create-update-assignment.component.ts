@@ -613,6 +613,22 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
+  getAllAssignmentsByDaysBeforeAndAfter(
+    currentDate: Date,
+    daysThreshold: number,
+  ): AssignmentInterface[] {
+    let allDays: AssignmentInterface[] = [];
+    for (let i = 1; i <= daysThreshold; i++) {
+      allDays = allDays.concat(
+        this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
+      );
+      allDays = allDays.concat(
+        this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
+      );
+    }
+    return allDays;
+  }
+
   //red clock
   checkIfAboveThreshold(currentDate: Date, assignType: AssignTypeInterface) {
     /* get the threshold of the assign type itself */
@@ -647,16 +663,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       //If we edit an assignment, we get the string iso instead of a real date
       if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
-      //Get all the days before and after, its 1 based index
-      let allDays: AssignmentInterface[] = [];
-      for (let i = 1; i <= closeOthersDays; i++) {
-        allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
-        );
-        allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
-        );
-      }
+      //Get all the assignments before and after the days treshold, its 1 based index
+      const allDays = this.getAllAssignmentsByDaysBeforeAndAfter(currentDate, closeOthersDays);
 
       for (const p of this.principals) {
         if (
@@ -694,16 +702,12 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       //If we edit an assignment, we get the string iso instead of a real date
       if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
-      //Get all the days before and after, its 1 based index
-      let allDays: AssignmentInterface[] = [];
-      for (let i = 1; i <= closeOthersPrayerDays; i++) {
-        allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
-        );
-        allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
-        );
-      }
+      //Get all the assignments before and after the days treshold, its 1 based index
+      const allDays = this.getAllAssignmentsByDaysBeforeAndAfter(
+        currentDate,
+        closeOthersPrayerDays,
+      );
+
       for (const p of this.principals) {
         if (
           allDays.some(
@@ -725,16 +729,12 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       //If we edit an assignment, we get the string iso instead of a real date
       if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
-      //Get all the days before and after, its 1 based index
-      let allDays: AssignmentInterface[] = [];
-      for (let i = 1; i <= closeOthersTreasuresEtcDays; i++) {
-        allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
-        );
-        allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
-        );
-      }
+      //Get all the assignments before and after the days treshold, its 1 based index
+      const allDays = this.getAllAssignmentsByDaysBeforeAndAfter(
+        currentDate,
+        closeOthersTreasuresEtcDays,
+      );
+
       for (const p of this.principals) {
         if (
           allDays.some(
