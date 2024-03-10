@@ -9,6 +9,7 @@ import { TranslocoDatePipe } from "@ngneat/transloco-locale";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
 import { CloseAssignmentsDataContext } from "app/assignment/model/assignment.model";
+import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 
 @Component({
   selector: "app-close-assignments",
@@ -16,6 +17,7 @@ import { CloseAssignmentsDataContext } from "app/assignment/model/assignment.mod
   imports: [
     JsonPipe,
     AssignTypePipe,
+    AssignTypeNamePipe,
     TranslocoDatePipe,
     TranslocoDirective,
     MatIconModule,

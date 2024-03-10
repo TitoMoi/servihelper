@@ -16,7 +16,7 @@
     @for (a of closeAssignments; track a.id) {
       <div class="m-2">
         {{ a.date | translocoDate: { dateStyle: "short" } }} -
-        {{ (a.assignType | assignTypePipe).name }}
+        {{ a.assignType | assignTypePipe | assignTypeNamePipe }}
       </div>
     }
   </div>
