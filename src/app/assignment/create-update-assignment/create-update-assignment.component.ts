@@ -1,5 +1,8 @@
 /* eslint-disable complexity */
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
+import {
+  AssignmentInterface,
+  StarvingAssignmentsDataContext,
+} from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { LastDateService } from "app/assignment/service/last-date.service";
 import { AssignTypeInterface, AssignTypes } from "app/assigntype/model/assigntype.model";
@@ -41,6 +44,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { InfoAssignmentComponent } from "../info-assignment/info-assignment.component";
 import { SortService } from "app/services/sort.service";
 import { WarningAssignmentComponent } from "../warning-assignment/warning-assignment.component";
+import { StarvingAssignmentComponent } from "../starving-assignment/starving-assignment.component";
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
@@ -115,6 +119,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   resetModel = undefined;
   timeoutExecuted = true; //first time
   //end of props for datepicker hack
+
+  //Starving
+  starvingSchoolParticipants = [];
 
   availableGroups: number[] = [];
 
@@ -747,32 +754,48 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   //Fork
   checkIsStarvingForSchool() {
+    return; //FEATURE NOT ENABLED
     const currentDate: Date = this.gfv("date");
     const roomId = this.gfv("room");
     const atId = this.gfv("assignType");
 
     if (currentDate && roomId && atId) {
       //Get a list of principals that are not exhausted for school
-      const principals = structuredClone(
-        this.principals.filter((p) => !p.isCloseToOthers && !p.hasCollision && !p.hasWork),
-      );
-      //Get a list of assignments that are for school
-      const assignments = this.assignments.filter((a) =>
-        this.assignTypeService.isOfTypeAssignTypes(
-          this.assignTypeService.getAssignType(a.assignType).type,
-        ),
-      );
-      //As its a new array, reuse the count property to assign the global count
-      for (const p of principals) {
-        p.count = assignments.filter(
-          (a) => a.principal === p.id || a.assistant === p.id,
-        ).length;
+      let principals =
+        structuredClone(
+          this.principals.filter((p) => !p.isCloseToOthers && !p.hasCollision && !p.hasWork),
+        ) ?? [];
+
+      if (principals.length) {
+        //Get a list of assignments that are for school
+        const assignments = this.assignments.filter((a) =>
+          this.assignTypeService.isOfTypeAssignTypes(
+            this.assignTypeService.getAssignType(a.assignType).type,
+          ),
+        );
+        //As its a new array, reuse the count property to assign the global count
+        for (const p of principals) {
+          p.count = assignments.filter((a) => a.principal === p.id).length;
+        }
+        //Sort by count
+        principals.sort((a, b) => (a.count > b.count ? 1 : -1));
+        //Save the global count in case the icon is clicked
+        this.starvingSchoolParticipants = principals;
+        //Get the first participant and assign the starving to the others
+        const lowestCount = principals[0].count;
+        for (const p of principals) {
+          if (p.count === lowestCount) {
+            p.isStarvingSchool = true;
+          }
+        }
+        //Get only the starving
+        principals = principals.filter((p) => p.isStarvingSchool);
+
+        //Get the id of the starving and assign it to the principals list
+        for (const p of principals) {
+          this.principals.find((p1) => p1.id === p.id).isStarvingSchool = true;
+        }
       }
-      //Sort by count
-      principals.sort((a, b) => (a.count > b.count ? 1 : -1));
-      console.log(principals.map((p) => p.name + " " + p.count));
-      //Get the first participant and assign the starving
-      this.principals.find((p) => p.id === principals[0].id).isStarvingSchool = true;
     }
   }
 
@@ -979,8 +1002,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     return `12px solid ${color ? color : "#FFF"}`;
   }
 
-  //MOVE LATER
-
   onRedClockClick(e: Event, participant: ParticipantDynamicInterface) {
     e.preventDefault();
     e.stopPropagation();
@@ -1014,6 +1035,21 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const assignments = this.getExhaustedAssignmentsForTreasuresEtc(participant);
     this.matDialog.open(CloseAssignmentsComponent, {
       data: { assignments, isRedClock: false },
+    });
+  }
+
+  onStarvingSchoolClick(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const starvingContext: StarvingAssignmentsDataContext = {
+      participants: this.starvingSchoolParticipants,
+      isSchool: true,
+      isPrayer: false,
+      isTreasuresEtc: false,
+    };
+    this.matDialog.open(StarvingAssignmentComponent, {
+      data: starvingContext,
     });
   }
 

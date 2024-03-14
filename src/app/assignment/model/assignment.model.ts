@@ -1,5 +1,8 @@
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import {
+  ParticipantDynamicInterface,
+  ParticipantInterface,
+} from "app/participant/model/participant.model";
 import { RoomInterface } from "app/room/model/room.model";
 
 type AssignmentOperationType = "create" | "update" | "delete"; //get is excluded
@@ -53,4 +56,11 @@ export interface AssignmentTableInterface extends AssignmentInterface {
 export interface CloseAssignmentsDataContext {
   assignments: AssignmentInterface[];
   isRedClock: boolean;
+}
+
+export interface StarvingAssignmentsDataContext {
+  participants: ParticipantDynamicInterface[];
+  isSchool: boolean;
+  isPrayer: boolean;
+  isTreasuresEtc: boolean;
 }

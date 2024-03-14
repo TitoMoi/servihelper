@@ -464,5 +464,7 @@
   "ro": "Romanian",
   "ru": "Russian",
   "tr": "Turkish",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Global count of participation for school",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "The global count is shown for participants that are available only as principal and don't have other tasks for the selected date. This is not a good indicator to assign participants because its not fair with the assignment types and doesn't guarantee equallity over time. Only guarantees a round robin queue, but doing like this can lead to repeat the same assign type just because it's your turn. If there are many participants, it's a better idea to increase the 'distance in days clock' (yellow clock)"
 }
