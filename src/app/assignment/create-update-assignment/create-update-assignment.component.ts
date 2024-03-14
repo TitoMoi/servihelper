@@ -66,7 +66,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
-import { CloseAssignmentsComponent } from "./close-assignments/close-assignments.component";
+import { CloseAssignmentsComponent } from "../close-assignments/close-assignments.component";
 @Component({
   selector: "app-create-update-assignment",
   templateUrl: "./create-update-assignment.component.html",
@@ -342,6 +342,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
     this.warningIfAlreadyHasWork();
     this.checkIfExhausted();
+    this.checkIsStarvingForSchool();
   }
   /** (Form) batch clean principalId and assistantId, should not call other batch operations inside */
   batchCleanPrincipalAssistant() {
@@ -744,6 +745,37 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
+  //Fork
+  checkIsStarvingForSchool() {
+    const currentDate: Date = this.gfv("date");
+    const roomId = this.gfv("room");
+    const atId = this.gfv("assignType");
+
+    if (currentDate && roomId && atId) {
+      //Get a list of principals that are not exhausted for school
+      const principals = structuredClone(
+        this.principals.filter((p) => !p.isCloseToOthers && !p.hasCollision && !p.hasWork),
+      );
+      //Get a list of assignments that are for school
+      const assignments = this.assignments.filter((a) =>
+        this.assignTypeService.isOfTypeAssignTypes(
+          this.assignTypeService.getAssignType(a.assignType).type,
+        ),
+      );
+      //As its a new array, reuse the count property to assign the global count
+      for (const p of principals) {
+        p.count = assignments.filter(
+          (a) => a.principal === p.id || a.assistant === p.id,
+        ).length;
+      }
+      //Sort by count
+      principals.sort((a, b) => (a.count > b.count ? 1 : -1));
+      console.log(principals.map((p) => p.name + " " + p.count));
+      //Get the first participant and assign the starving
+      this.principals.find((p) => p.id === principals[0].id).isStarvingSchool = true;
+    }
+  }
+
   filterAssignmentsByRole() {
     //Filter assignTypes by permissions
     this.assignTypes = this.assignTypeService.getAssignTypes();
@@ -985,6 +1017,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     });
   }
 
+  //assignments for red clock window
   getIfAboveThreshold(p: ParticipantInterface): AssignmentInterface[] {
     let currentDate: Date = this.form.controls.date.value;
     const atId: string = this.form.controls.assignType.value;
@@ -1015,7 +1048,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       return foundAssignments;
     }
   }
-
+  //assignments for yellow clock window
   getExhaustedAssignmentsForSchool(p: ParticipantInterface) {
     let currentDate: Date = this.form.controls.date.value;
     const closeOthersDays = this.configService.getConfig().closeToOthersDays;
@@ -1042,7 +1075,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
     return foundAssignments;
   }
-
+  //assignments for yellow clock window
   getExhaustedAssignmentsForPrayer(p: ParticipantInterface) {
     let currentDate: Date = this.form.controls.date.value;
     const closeOthersPrayerDays = this.configService.getConfig().closeToOthersPrayerDays;
@@ -1069,7 +1102,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
     return foundAssignments;
   }
-
+  //assignments for yellow clock window
   getExhaustedAssignmentsForTreasuresEtc(p: ParticipantInterface) {
     let currentDate: Date = this.form.controls.date.value;
     const closeOthersTreasuresEtcDays = this.configService.getConfig().closeToOthersPrayerDays;

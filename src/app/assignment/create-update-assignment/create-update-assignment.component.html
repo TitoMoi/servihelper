@@ -262,6 +262,12 @@
                             aria-label="icon"
                             (click)="onYellowClockTreasuresEtcClick($event, participant)"
                           ></mat-icon>
+                        } @else if (participant.isStarvingSchool && !isMultipleDates) {
+                          <mat-icon
+                            svgIcon="fork"
+                            aria-label="icon"
+                            (click)="onYellowClockTreasuresEtcClick($event, participant)"
+                          ></mat-icon>
                         }
                       </div>
                     </div>

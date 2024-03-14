@@ -28,6 +28,9 @@ export interface ParticipantDynamicInterface extends ParticipantInterface {
   isCloseToOthers?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments,
   isCloseToOthersPrayer?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments
   isCloseToOthersTreasuresEtc?: boolean; //Dynamic value, if the participant has other assignments before or after the required no close participation of the assignments
+  isStarvingSchool?: boolean; //Dynamic value, if the participant has the lowest global participation
+  isStarvinPrayer?: boolean; //Dynamic value, if the participant has the lowest global participation
+  isStarvingTreasuresEtc?: boolean; //Dynamic value, if the participant has the lowest global participation
 }
 
 //We need a model to save because on save there are some unwanted properties from the dynamic model
