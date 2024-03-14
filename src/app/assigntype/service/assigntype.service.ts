@@ -67,14 +67,18 @@ export class AssignTypeService {
   }
 
   getNameOrTranslationByType(type: AssignTypes) {
-    const at = this.#assignTypes.find((at) => at.type === type);
-    if (!at) return ""; // retro compatibility with wrong interest in others
+    let at = this.#assignTypes.find((at) => at.type === type);
+    // retro compatibility with wrong interest type
+    if (!at) {
+      at = this.#assignTypes.find((at) => at.type === "interestInOthers");
+    }
     return this.getNameOrTranslation(at);
   }
 
   getTranslationForAssignTypes() {
     const translations = [];
     translations.push(this.getNameOrTranslationByType(this.BIBLE_READING));
+    translations.push(this.getNameOrTranslationByType(this.ANALYSIS_AUDIENCE));
     translations.push(this.getNameOrTranslationByType(this.INITIAL_CALL));
     translations.push(this.getNameOrTranslationByType(this.RETURN_VISIT));
     translations.push(this.getNameOrTranslationByType(this.TALK));
@@ -94,7 +98,6 @@ export class AssignTypeService {
     const translations = [];
     translations.push(this.getNameOrTranslationByType(this.TREASURES));
     translations.push(this.getNameOrTranslationByType(this.SPIRITUAL_GEMS));
-    translations.push(this.getNameOrTranslationByType(this.ANALYSIS_AUDIENCE));
     translations.push(this.getNameOrTranslationByType(this.LIVING_AS_CHRISTIANS));
     translations.push(this.getNameOrTranslationByType(this.CONGREGATION_BIBLE_STUDY));
     return translations.filter((t) => t).toString();
@@ -215,6 +218,7 @@ export class AssignTypeService {
       this.TALK,
       this.BIBLE_STUDY,
       this.EXPLAIN_BELIEFS,
+      this.ANALYSIS_AUDIENCE,
     ].includes(type);
   }
 
@@ -228,7 +232,6 @@ export class AssignTypeService {
     return [
       this.TREASURES,
       this.SPIRITUAL_GEMS,
-      this.ANALYSIS_AUDIENCE,
       this.LIVING_AS_CHRISTIANS,
       this.CONGREGATION_BIBLE_STUDY,
     ].includes(type);
