@@ -83,7 +83,7 @@ Only the time format can't be changed, but you can select a lang that suits your
 
 ## What cannot be done or implemented?
 
-- Compatibility with other existing programs is not possible, as i can't guarantee compatibility over time.
+- Compatibility with other theocratic existing programs is not possible, as i can't guarantee compatibility over time.
 
 - Automate everything.
 
@@ -97,7 +97,7 @@ Only the time format can't be changed, but you can select a lang that suits your
 - _(The next scenarios 1 and 2 dont have synchronization, all imported copies from person one will override the existing ones of person two)_
 - _(Maybe one scenario suits your needs better than the other, it is explained the benefits and the disadvantages)_
 
-1. **Use only google drive _(or other solution)_ to centralize and share copies of servihelper.**
+1. **Use only 'google drive desktop'  _(or other solution)_ to centralize and share copies of servihelper.**
 
    - Do not enable: config -> online mode.
    - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
@@ -117,14 +117,16 @@ Only the time format can't be changed, but you can select a lang that suits your
    - Your responsability to ensure that all files are synchronized before working.
    - Warning: Sometimes data is not updated on real time.
    - _(this way of work has configuration complexity but later has less overhead, just check you are online and google drive is working and files are up to date before working)_
-   - _(this scenario is not real time, it just works directly with the files instead of with copies)_
+   - _(this scenario is not real time, it just works directly with the files instead of with copies, you must export copies from time to time for security)_
+   - 
 
 **Paid mode 💲**:
-Configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure. And also a platform mantainance over time _(⚠️ not recommended)_
+
+_(If money is not a concern, it's better in terms of complexity to use another theocratic online tool instead of configure a server just for servihelper)_
+
+If you want to continue, configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure. And also a platform mantainance over time _(⚠️ not recommended)_
 
 [Guide to configure a remote desktop with kamatera](./KAMATERA.md)
-
-_(If money is not a concern, it's better in terms of complexity to use another online tool instead of configure a server)_
 
 ## Way to create assignments
 
