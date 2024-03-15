@@ -478,5 +478,7 @@
   "ro": "Rumuński",
   "ru": "Rosyjski",
   "tr": "Turecki",
-  "zhCN": "Chiński"
+  "zhCN": "Chiński",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Globalna liczba uczestnictwa w szkole",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Globalna liczba pokazuje tylko uczestników, którzy są dostępni tylko jako główny i nie mają innych zadań dla wybranej daty.Ten pogląd jest dobry, aby śledzić uczestników, którzy nie wykonują żadnych rodzajów zadań.W każdym razie nie przypisuj uczestnictwa tylko na podstawie tego widoku, ponieważ może to prowadzić do powtarzania typów przypisania tylko dlatego, że jest to zwrot uczestnika."
 }

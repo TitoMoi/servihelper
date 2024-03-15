@@ -489,5 +489,7 @@
   "ro": "Rumano",
   "ru": "Ruso",
   "tr": "Turco",
-  "zhCN": "Chino"
+  "zhCN": "Chino",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Recuento global de participación para la escuela",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "El recuento global solo muestra a los participantes disponibles solo como principales y que no tienen otras tareas para la fecha seleccionada. Esta visión es buena para realizar un seguimiento de aquellos participantes que no hacen todo tipo de tipos de tareas. De todos modos, no asigne participación solo en función de esta visión porque puede conducir a repetir los tipos de asignación solo porque es el turno del participante."
 }

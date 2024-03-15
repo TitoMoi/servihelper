@@ -754,7 +754,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   //Fork
   checkIsStarvingForSchool() {
-    return; //FEATURE NOT ENABLED
     const currentDate: Date = this.gfv("date");
     const roomId = this.gfv("room");
     const atId = this.gfv("assignType");

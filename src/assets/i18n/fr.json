@@ -489,5 +489,7 @@
   "ro": "Roumaine",
   "ru": "Russe",
   "tr": "Turque",
-  "zhCN": "Chinois"
+  "zhCN": "Chinois",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Compte de participation mondiale pour l'école",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Le nombre mondial montre uniquement les participants qui sont disponibles uniquement en tant que directeur et n'ont pas d'autres tâches pour la date sélectionnée.Cette vue est bonne pour garder une trace de ces participants qui ne fait pas tous sortes de types d'affectations.Quoi qu'il en soit, n'attribuez pas la participation uniquement en fonction de cette vue car elle peut conduire à répéter les types d'attribution simplement parce que c'est le virage des participants."
 }

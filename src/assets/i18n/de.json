@@ -489,5 +489,7 @@
   "ro": "Rumänisch",
   "ru": "Russisch",
   "tr": "Türkisch",
-  "zhCN": "Chinesisch"
+  "zhCN": "Chinesisch",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Globale Anzahl der Teilnahme für die Schule",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Die globale Zählung zeigt nur Teilnehmern, die nur als Schulleiter verfügbar sind und keine anderen Aufgaben für das ausgewählte Datum haben.Diese Ansicht ist gut, um die Teilnehmer im Auge zu behalten, die nicht alle Arten von Zuweisungstypen durchführen.Lassen Sie die Teilnahme nicht nur basierend auf dieser Ansicht zuweisen, da sie dazu führen kann, dass sie zu den Zuordnungsarten wiederholt werden, nur weil es sich um die Teilnehmerumdrehung handelt."
 }

@@ -461,5 +461,7 @@
   "ro": "Rumun",
   "ru": "Ruski",
   "tr": "Turski",
-  "zhCN": "Kineski"
+  "zhCN": "Kineski",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Globalni broj sudjelovanja u školi",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Globalni broj prikazuje samo sudionike koji su dostupni samo kao glavni i nemaju druge zadatke za odabrani datum.Ovaj je pogled dobro pratiti one sudionike koji ne rade sve vrste zadataka.U svakom slučaju, ne dodjeljujte sudjelovanje samo na temelju ovog prikaza jer može dovesti do ponovljenih vrsta dodijeljenih samo zato što je to sudionik."
 }

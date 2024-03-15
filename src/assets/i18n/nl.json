@@ -488,5 +488,7 @@
   "ro": "Roemeense",
   "ru": "Russisch",
   "tr": "Turks",
-  "zhCN": "Chinese"
+  "zhCN": "Chinese",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Wereldwijde telling van participatie voor school",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "De wereldwijde telling toont alleen deelnemers die alleen beschikbaar zijn als opdrachtgever en geen andere taken hebben voor de geselecteerde datum.Deze weergave is goed om die deelnemers bij te houden die niet alle soorten opdrachten doen.Hoe dan ook, wijs deelname niet alleen toe op basis van deze weergave, omdat dit kan leiden tot herhaalde toewijzingstypen alleen omdat het de beurt van de deelnemer is."
 }

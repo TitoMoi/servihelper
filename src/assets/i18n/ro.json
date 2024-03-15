@@ -489,5 +489,7 @@
   "ro": "Română",
   "ru": "Rusă",
   "tr": "Turc",
-  "zhCN": "Chinez"
+  "zhCN": "Chinez",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Numărul global de participare pentru școală",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Numărul global arată doar participanții care sunt disponibili doar ca principal și nu au alte sarcini pentru data selectată.Această viziune este bună pentru a urmări acei participanți care nu fac tot felul de tipuri de atribuire.Oricum, nu atribuiți participarea doar pe baza acestei vizualizări, deoarece poate duce la repetări tipuri de atribuire doar pentru că este virajul participantului."
 }
