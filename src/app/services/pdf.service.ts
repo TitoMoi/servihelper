@@ -140,7 +140,7 @@ export class PdfService {
   }
 
   getTextFontSize() {
-    return 11;
+    return 10.5;
   }
 
   addHeavyCheckImg(doc: jsPDF, x, y) {

@@ -319,6 +319,10 @@ export class SelectionListComponent implements OnChanges {
     return y;
   }
 
+  /**
+   * The pdf report that is digitally distributed and also printed
+   * @param isWeekend if true, will generate a weekend report
+   */
   // eslint-disable-next-line complexity
   toPdfBoard(isWeekend = false) {
     const assignmentGroupsBackup = [...this.assignmentGroups];
@@ -353,7 +357,7 @@ export class SelectionListComponent implements OnChanges {
       doc.setFontSize(this.pdfService.getDateFontSize());
       doc.text(dateLocaleFormat, x, y, {});
 
-      //rooms title
+      //rooms title and content
       doc.setFontSize(this.pdfService.getTextFontSize());
 
       const hasMultipleRooms = this.hasMultipleRooms(ag);
