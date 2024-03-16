@@ -2,5 +2,10 @@
   mat-icon {
     width: 24px;
     height: 24px;
+
+    &#unavailableId {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
