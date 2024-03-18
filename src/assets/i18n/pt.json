@@ -493,5 +493,6 @@
   "zhCN": "Chinês",
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Contagem global de participação para a escola",
   "STARVING_ASSIGNMENTS_SUBTITLE": "A contagem global mostra apenas os participantes disponíveis apenas como diretor e não têm outras tarefas para a data selecionada.Essa visão é boa para acompanhar os participantes que não fazem todo o tipo de tipo de atribuição.De qualquer forma, não atribua participação apenas com base nessa visualização, pois ela pode levar a repetir os tipos de atribuir apenas porque é a virada do participante.",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Classificar os territórios devolvidos por menos trabalhados"
+  "TERRITORY_SORT_BY_LAST_WORKED": "Classificar os territórios devolvidos por menos trabalhados",
+  "HEATMAP_EXPLAIN_COLORS": "Quanto tempo o território é atribuído ou quanto tempo o território retornou não atribuído"
 }
