@@ -446,7 +446,6 @@
   "TERRITORY_REMOVE_IMAGE": "Usuń obraz i włącz mapę",
   "TERRITORY_RETURN_TITLE": "Zwróć terytorium",
   "TERRITORY_RETURN_WARNING": "Możesz ponownie przypisać terytorium do innego uczestnika",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Sortuj terytoria według mniejszych prac",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Przypisz lub edytuj terytorium",
   "TERRITORY_TABLE_HEADER_DELETE": "Usuwać",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Link do map",
@@ -480,5 +479,6 @@
   "tr": "Turecki",
   "zhCN": "Chiński",
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Globalna liczba uczestnictwa w szkole",
-  "STARVING_ASSIGNMENTS_SUBTITLE": "Globalna liczba pokazuje tylko uczestników, którzy są dostępni tylko jako główny i nie mają innych zadań dla wybranej daty.Ten pogląd jest dobry, aby śledzić uczestników, którzy nie wykonują żadnych rodzajów zadań.W każdym razie nie przypisuj uczestnictwa tylko na podstawie tego widoku, ponieważ może to prowadzić do powtarzania typów przypisania tylko dlatego, że jest to zwrot uczestnika."
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Globalna liczba pokazuje tylko uczestników, którzy są dostępni tylko jako główny i nie mają innych zadań dla wybranej daty.Ten pogląd jest dobry, aby śledzić uczestników, którzy nie wykonują żadnych rodzajów zadań.W każdym razie nie przypisuj uczestnictwa tylko na podstawie tego widoku, ponieważ może to prowadzić do powtarzania typów przypisania tylko dlatego, że jest to zwrot uczestnika.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Sortować zwrócone terytoria według mniejszych prac"
 }

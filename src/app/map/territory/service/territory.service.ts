@@ -73,11 +73,29 @@ export class TerritoryService {
 
   /**
    * @param id the id of the territory to search by
-   * @returns true if the territory is active, false otherwise
+   * @returns true if the territory is currently assigned, false otherwise
    */
   isActiveTerritory(id: string): boolean {
     const t = this.getTerritory(id);
     return t.assignedDates.length > t.returnedDates.length;
+  }
+
+  /**
+   * @param id the id of the territory to search by
+   * @returns true if the territory is returned, false otherwise
+   */
+  isReturnedTerritory(id: string): boolean {
+    const t = this.getTerritory(id);
+    return t.assignedDates.length === t.returnedDates.length;
+  }
+
+  /**
+   * @param id the id of the territory to search by
+   * @returns true if the territory has not been assigned yet, false otherwise
+   */
+  isNeverAssignedTerritory(id: string): boolean {
+    const t = this.getTerritory(id);
+    return !t.assignedDates.length && !t.returnedDates.length;
   }
 
   /**

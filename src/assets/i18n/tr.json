@@ -446,7 +446,6 @@
   "TERRITORY_REMOVE_IMAGE": "Görüntüyü kaldırın ve haritayı etkinleştirin",
   "TERRITORY_RETURN_TITLE": "Bölgeyi iade et",
   "TERRITORY_RETURN_WARNING": "Bölgeyi başka bir katılımcıya yeniden atayabilirsiniz",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Bölgeleri daha az çalışarak sıralayın",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Bölge atayın veya düzenleyin",
   "TERRITORY_TABLE_HEADER_DELETE": "Silmek",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Harita bağlantısı",
@@ -480,5 +479,6 @@
   "tr": "Türk",
   "zhCN": "Çince",
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Küresel okula katılım sayısı",
-  "STARVING_ASSIGNMENTS_SUBTITLE": "Global sayısı yalnızca sadece müdür olarak mevcut olan ve seçilen tarih için başka görevleri olmayan katılımcıları gösterir.Bu görüş, her türlü atama türünü yapmayan katılımcıları takip etmek iyidir.Her neyse, sadece bu görüşe dayanarak katılım atmayın, çünkü sadece katılımcı dönüşü olduğu için tekrar atama türlerine yol açabilir."
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Global sayısı yalnızca sadece müdür olarak mevcut olan ve seçilen tarih için başka görevleri olmayan katılımcıları gösterir.Bu görüş, her türlü atama türünü yapmayan katılımcıları takip etmek iyidir.Her neyse, sadece bu görüşe dayanarak katılım atmayın, çünkü sadece katılımcı dönüşü olduğu için tekrar atama türlerine yol açabilir.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "İade edilen bölgeleri daha az çalışarak sıralayın"
 }

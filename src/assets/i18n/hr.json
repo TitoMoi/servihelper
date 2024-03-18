@@ -429,7 +429,6 @@
   "TERRITORY_REMOVE_IMAGE": "Uklonite sliku i omogućite kartu.",
   "TERRITORY_RETURN_TITLE": "Vrati teritorij",
   "TERRITORY_RETURN_WARNING": "Teritorij možete prenijeti drugom sudioniku",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Poredajte teritorije prema manje radije",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Dodijelite ili uređivanje teritorija",
   "TERRITORY_TABLE_HEADER_DELETE": "Izbrisati",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Karata",
@@ -463,5 +462,6 @@
   "tr": "Turski",
   "zhCN": "Kineski",
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Globalni broj sudjelovanja u školi",
-  "STARVING_ASSIGNMENTS_SUBTITLE": "Globalni broj prikazuje samo sudionike koji su dostupni samo kao glavni i nemaju druge zadatke za odabrani datum.Ovaj je pogled dobro pratiti one sudionike koji ne rade sve vrste zadataka.U svakom slučaju, ne dodjeljujte sudjelovanje samo na temelju ovog prikaza jer može dovesti do ponovljenih vrsta dodijeljenih samo zato što je to sudionik."
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Globalni broj prikazuje samo sudionike koji su dostupni samo kao glavni i nemaju druge zadatke za odabrani datum.Ovaj je pogled dobro pratiti one sudionike koji ne rade sve vrste zadataka.U svakom slučaju, ne dodjeljujte sudjelovanje samo na temelju ovog prikaza jer može dovesti do ponovljenih vrsta dodijeljenih samo zato što je to sudionik.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Poredajte vraćene teritorije manje radeći"
 }

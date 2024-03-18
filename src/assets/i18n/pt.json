@@ -459,7 +459,6 @@
   "TERRITORY_REMOVE_IMAGE": "Remova a imagem e ative o mapa",
   "TERRITORY_RETURN_TITLE": "Devolver o território",
   "TERRITORY_RETURN_WARNING": "Você pode reatribuir o território para outro participante",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Classificar territórios por menos trabalhados",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Atribuir ou editar território",
   "TERRITORY_TABLE_HEADER_DELETE": "Excluir",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Link do mapa",
@@ -493,5 +492,6 @@
   "tr": "Turca",
   "zhCN": "Chinês",
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Contagem global de participação para a escola",
-  "STARVING_ASSIGNMENTS_SUBTITLE": "A contagem global mostra apenas os participantes disponíveis apenas como diretor e não têm outras tarefas para a data selecionada.Essa visão é boa para acompanhar os participantes que não fazem todo o tipo de tipo de atribuição.De qualquer forma, não atribua participação apenas com base nessa visualização, pois ela pode levar a repetir os tipos de atribuir apenas porque é a virada do participante."
+  "STARVING_ASSIGNMENTS_SUBTITLE": "A contagem global mostra apenas os participantes disponíveis apenas como diretor e não têm outras tarefas para a data selecionada.Essa visão é boa para acompanhar os participantes que não fazem todo o tipo de tipo de atribuição.De qualquer forma, não atribua participação apenas com base nessa visualização, pois ela pode levar a repetir os tipos de atribuir apenas porque é a virada do participante.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Classificar os territórios devolvidos por menos trabalhados"
 }

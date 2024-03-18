@@ -446,7 +446,6 @@
   "TERRITORY_REMOVE_IMAGE": "画像を削除し、マップを有効にします",
   "TERRITORY_RETURN_TITLE": "領土を返します",
   "TERRITORY_RETURN_WARNING": "領土を別の参加者に再割り当てすることができます",
-  "TERRITORY_SORT_BY_LAST_WORKED": "あまり機能しないことで領土を並べ替えます",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "領土を割り当てたり編集したりします",
   "TERRITORY_TABLE_HEADER_DELETE": "消去",
   "TERRITORY_TABLE_HEADER_MAPLINK": "マップリンク",
@@ -480,5 +479,6 @@
   "tr": "トルコ語",
   "zhCN": "中国語",
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "学校への参加のグローバルカウント",
-  "STARVING_ASSIGNMENTS_SUBTITLE": "グローバルカウントには、プリンシパルとしてのみ利用可能で、選択した日付の他のタスクがない参加者のみが表示されます。このビューは、あらゆる種類の割り当てタイプを実行しない参加者を追跡するのに適しています。とにかく、参加者がターンであるという理由だけで繰り返し割り当てタイプにつながる可能性があるため、このビューに基づいてのみ参加を割り当てないでください。"
+  "STARVING_ASSIGNMENTS_SUBTITLE": "グローバルカウントには、プリンシパルとしてのみ利用可能で、選択した日付の他のタスクがない参加者のみが表示されます。このビューは、あらゆる種類の割り当てタイプを実行しない参加者を追跡するのに適しています。とにかく、参加者がターンであるという理由だけで繰り返し割り当てタイプにつながる可能性があるため、このビューに基づいてのみ参加を割り当てないでください。",
+  "TERRITORY_SORT_BY_LAST_WORKED": "返された地域をあまり機能させずに並べ替えます"
 }

@@ -456,7 +456,6 @@
   "TERRITORY_REMOVE_IMAGE": "Rimuovi l'immagine e abilita la mappa",
   "TERRITORY_RETURN_TITLE": "Restituire il territorio",
   "TERRITORY_RETURN_WARNING": "Puoi riassegnare il territorio a un altro partecipante",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Ordina i territori di meno lavorati",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Assegnare o modificare il territorio",
   "TERRITORY_TABLE_HEADER_DELETE": "Eliminare",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Link della mappa",
@@ -490,5 +489,6 @@
   "tr": "Turca",
   "zhCN": "Cinese",
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Conteggio globale della partecipazione per la scuola",
-  "STARVING_ASSIGNMENTS_SUBTITLE": "Il conteggio globale mostra solo i partecipanti disponibili solo come preside e non hanno altri compiti per la data selezionata.Questa visione è buona per tenere traccia di quei partecipanti che non eseguono tutti i tipi di tipi di assegnazione.Ad ogni modo, non assegnare la partecipazione solo in base a questa vista perché può portare a ripetere i tipi di assegnazione solo perché è il turno dei partecipanti."
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Il conteggio globale mostra solo i partecipanti disponibili solo come preside e non hanno altri compiti per la data selezionata.Questa visione è buona per tenere traccia di quei partecipanti che non eseguono tutti i tipi di tipi di assegnazione.Ad ogni modo, non assegnare la partecipazione solo in base a questa vista perché può portare a ripetere i tipi di assegnazione solo perché è il turno dei partecipanti.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Ordina i territori restituiti con meno lavorato"
 }

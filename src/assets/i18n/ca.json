@@ -459,7 +459,6 @@
   "TERRITORY_REMOVE_IMAGE": "Elimina la imatge i activa el mapa",
   "TERRITORY_RETURN_TITLE": "Tornar el territori",
   "TERRITORY_RETURN_WARNING": "Podeu reassignar el territori a un altre participant",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Ordena els territoris per menys treballats",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Assignar o editar el territori",
   "TERRITORY_TABLE_HEADER_DELETE": "Esborrar",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Enllaç de mapa",
@@ -493,5 +492,6 @@
   "tr": "Turc",
   "zhCN": "Xinès",
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Comte de participació global per a l'escola",
-  "STARVING_ASSIGNMENTS_SUBTITLE": "El recompte global només mostra els participants disponibles només com a principals i que no tenen altres tasques per a la data seleccionada.Aquesta visió és bona per fer un seguiment d’aquells participants que no fan tot tipus d’assignacions. De totes maneres, no assigneu la participació només en funció d'aquesta visió perquè pot conduir a repetir tipus d'assignació només perquè és el torn del participant."
+  "STARVING_ASSIGNMENTS_SUBTITLE": "El recompte global només mostra els participants disponibles només com a principals i que no tenen altres tasques per a la data seleccionada.Aquesta visió és bona per fer un seguiment d’aquells participants que no fan tot tipus d’assignacions. De totes maneres, no assigneu la participació només en funció d'aquesta visió perquè pot conduir a repetir tipus d'assignació només perquè és el torn del participant.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Ordena els territories retornats per menys treballats"
 }

@@ -432,7 +432,6 @@
   "TERRITORY_REMOVE_IMAGE": "Remove the image and enable the map.",
   "TERRITORY_RETURN_TITLE": "Return the territory",
   "TERRITORY_RETURN_WARNING": "You can reassign the territory to another participant",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Sort territories by less worked",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Assign or edit territory",
   "TERRITORY_TABLE_HEADER_DELETE": "Delete",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Map link",
@@ -466,5 +465,7 @@
   "tr": "Turkish",
   "zhCN": "Chinese",
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Global count of participation for school",
-  "STARVING_ASSIGNMENTS_SUBTITLE": "The global count only shows participants that are available only as principal and don't have other tasks for the selected date. This view is good to keep track of those participants that doesn't do all kind of assignment types. Anyway, don't assign participation only based on this view because it can lead to repeat assign types just because it's the participant turn."
+  "STARVING_ASSIGNMENTS_SUBTITLE": "The global count only shows participants that are available only as principal and don't have other tasks for the selected date. This view is good to keep track of those participants that doesn't do all kind of assignment types. Anyway, don't assign participation only based on this view because it can lead to repeat assign types just because it's the participant turn.",
+  "HEATMAP_EXPLAIN_COLORS": "How much time territory is assigned or returned territories how much time since is not assigned",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Sort the returned territories by less worked"
 }
