@@ -9,14 +9,24 @@
   </div>
 </span>
 <div class="mb-2">
-  <!-- <app-fake-accordion #globalCountFake></app-fake-accordion> -->
-
-  @defer (on hover) {
+  @defer (when showGlobalCount; prefetch on viewport(fakeGlobalAccordion)) {
     <app-global-count [allowedAssignTypesIds]="allowedAssignTypesIds"></app-global-count>
   } @placeholder {
-    <p>Loading...</p>
+    <app-fake-accordion
+      #fakeGlobalAccordion
+      [titleKey]="'STATISTICS_COUNT_GLOBAL_TITLE'"
+      (click)="showGlobalCount = true"
+    ></app-fake-accordion>
   }
 </div>
 <div class="mb-2">
-  <app-territory-count></app-territory-count>
+  @defer (when showTerritoryCount; prefetch on viewport(fakeTerritoryCount)) {
+    <app-territory-count></app-territory-count>
+  } @placeholder {
+    <app-fake-accordion
+      #fakeTerritoryCount
+      [titleKey]="'STATISTICS_COUNT_TERRITORY_TITLE'"
+      (click)="showTerritoryCount = true"
+    ></app-fake-accordion>
+  }
 </div>

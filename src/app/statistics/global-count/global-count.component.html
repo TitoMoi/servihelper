@@ -1,5 +1,6 @@
 <mat-accordion *transloco="let t">
-  <mat-expansion-panel>
+  <!-- By default its expanded because we are controlling the rendering in a parent defer condition -->
+  <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h3 class="m-3">

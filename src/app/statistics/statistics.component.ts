@@ -25,6 +25,9 @@ import { FakeAccordionComponent } from "app/statistics/fake-accordion/fake-accor
 export class StatisticsComponent implements OnInit, OnDestroy {
   allowedAssignTypesIds = [];
 
+  showGlobalCount = false;
+  showTerritoryCount = false;
+
   subscription = new Subscription();
 
   config$: Observable<ConfigInterface> = this.configService.config$;
