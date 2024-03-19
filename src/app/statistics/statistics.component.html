@@ -8,7 +8,7 @@
     </div>
   </div>
 </span>
-<div class="mb-2">
+<div class="mb-3">
   @defer (when showGlobalCount; prefetch on viewport(fakeGlobalAccordion)) {
     <app-global-count [allowedAssignTypesIds]="allowedAssignTypesIds"></app-global-count>
   } @placeholder {
@@ -19,7 +19,7 @@
     ></app-fake-accordion>
   }
 </div>
-<div class="mb-2">
+<div class="mb-3">
   @defer (when showTerritoryCount; prefetch on viewport(fakeTerritoryCount)) {
     <app-territory-count></app-territory-count>
   } @placeholder {

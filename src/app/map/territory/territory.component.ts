@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
+import { TranslocoDirective, TranslocoService } from "@ngneat/transloco";
 import { TerritoryContextClass, TerritoryContextInterface } from "../model/map.model";
 import { TerritoryService } from "./service/territory.service";
 import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
@@ -30,7 +30,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
   standalone: true,
   imports: [
     CommonModule,
-    TranslocoModule,
+    TranslocoDirective,
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
