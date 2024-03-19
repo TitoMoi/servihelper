@@ -9,7 +9,6 @@ import { TerritoryContextClass, TerritoryContextInterface } from "../model/map.m
 import { TerritoryService } from "./service/territory.service";
 import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
-import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { TerritoryGroupService } from "../territory-group/service/territory-group.service";
 import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -37,7 +36,6 @@ import { ParticipantService } from "app/participant/service/participant.service"
     MatIconModule,
     MatExpansionModule,
     MatCheckboxModule,
-    TranslocoLocaleModule,
     ParticipantPipe,
     MatTooltipModule,
     MatProgressSpinnerModule,
