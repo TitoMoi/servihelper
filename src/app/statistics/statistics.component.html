@@ -9,7 +9,13 @@
   </div>
 </span>
 <div class="mb-2">
-  <app-global-count [allowedAssignTypesIds]="allowedAssignTypesIds"></app-global-count>
+  <!-- <app-fake-accordion #globalCountFake></app-fake-accordion> -->
+
+  @defer (on hover) {
+    <app-global-count [allowedAssignTypesIds]="allowedAssignTypesIds"></app-global-count>
+  } @placeholder {
+    <p>Loading...</p>
+  }
 </div>
 <div class="mb-2">
   <app-territory-count></app-territory-count>
