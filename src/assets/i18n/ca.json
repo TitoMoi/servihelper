@@ -454,8 +454,7 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Creeu un territori i assigneu-lo a aquest grup",
   "TERRITORY_NO_TGROUPS_CREATED": "Creeu primer un grup de territori",
   "TERRITORY_PARTICIPANT_LABEL": "Seleccioneu el participant",
-  "TERRITORY_PDF_MEETING_POINT": "L’URL del punt de trobada",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Feu clic per obrir l’URL del punt de trobada",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Obriu el punt de trobada",
   "TERRITORY_REMOVE_IMAGE": "Elimina la imatge i activa el mapa",
   "TERRITORY_RETURN_TITLE": "Tornar el territori",
   "TERRITORY_RETURN_WARNING": "Podeu reassignar el territori a un altre participant",
@@ -494,5 +493,7 @@
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Comte de participació global per a l'escola",
   "STARVING_ASSIGNMENTS_SUBTITLE": "El recompte global només mostra els participants disponibles només com a principals i que no tenen altres tasques per a la data seleccionada.Aquesta visió és bona per fer un seguiment d’aquells participants que no fan tot tipus d’assignacions. De totes maneres, no assigneu la participació només en funció d'aquesta visió perquè pot conduir a repetir tipus d'assignació només perquè és el torn del participant.",
   "TERRITORY_SORT_BY_LAST_WORKED": "Ordena els territories retornats per menys treballats",
-  "HEATMAP_EXPLAIN_COLORS": "Quant de temps du el territori assignat o quant de temps du el territori retornat sense asignar"
+  "HEATMAP_EXPLAIN_COLORS": "Quant de temps du el territori assignat o quant de temps du el territori retornat sense asignar",
+
+  "TERRITORY_PDF_MEETING_POINT": "Punt de trobada"
 }

@@ -441,8 +441,7 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "領土を作成して、このグループに割り当ててください",
   "TERRITORY_NO_TGROUPS_CREATED": "最初に領土グループを作成します",
   "TERRITORY_PARTICIPANT_LABEL": "参加者を選択します",
-  "TERRITORY_PDF_MEETING_POINT": "ミーティングポイントURL",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "私をクリックして、ミーティングポイントURLを開きます",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "ミーティングポイントを開きます",
   "TERRITORY_REMOVE_IMAGE": "画像を削除し、マップを有効にします",
   "TERRITORY_RETURN_TITLE": "領土を返します",
   "TERRITORY_RETURN_WARNING": "領土を別の参加者に再割り当てすることができます",
@@ -481,5 +480,7 @@
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "学校への参加のグローバルカウント",
   "STARVING_ASSIGNMENTS_SUBTITLE": "グローバルカウントには、プリンシパルとしてのみ利用可能で、選択した日付の他のタスクがない参加者のみが表示されます。このビューは、あらゆる種類の割り当てタイプを実行しない参加者を追跡するのに適しています。とにかく、参加者がターンであるという理由だけで繰り返し割り当てタイプにつながる可能性があるため、このビューに基づいてのみ参加を割り当てないでください。",
   "TERRITORY_SORT_BY_LAST_WORKED": "返された地域をあまり機能させずに並べ替えます",
-  "HEATMAP_EXPLAIN_COLORS": "領土はどのくらいの期間割り当てられていますか、またはどのくらいの期間領土が割り当てられていませんか"
+  "HEATMAP_EXPLAIN_COLORS": "領土はどのくらいの期間割り当てられていますか、またはどのくらいの期間領土が割り当てられていませんか",
+
+  "TERRITORY_PDF_MEETING_POINT": "ミーティングポイント"
 }

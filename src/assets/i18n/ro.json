@@ -452,8 +452,7 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Vă rugăm să creați un teritoriu și să -l atribuiți acestui grup",
   "TERRITORY_NO_TGROUPS_CREATED": "Creați mai întâi un grup de teritoriu",
   "TERRITORY_PARTICIPANT_LABEL": "Selectați participant",
-  "TERRITORY_PDF_MEETING_POINT": "URL -ul punctului de întâlnire",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Faceți clic pe mine pentru a deschide URL -ul punctului de întâlnire",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Deschideți punctul de întâlnire",
   "TERRITORY_REMOVE_IMAGE": "Eliminați imaginea și activați harta",
   "TERRITORY_RETURN_TITLE": "Întoarceți teritoriul",
   "TERRITORY_RETURN_WARNING": "Puteți reasigna teritoriul unui alt participant",
@@ -492,5 +491,7 @@
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Numărul global de participare pentru școală",
   "STARVING_ASSIGNMENTS_SUBTITLE": "Numărul global arată doar participanții care sunt disponibili doar ca principal și nu au alte sarcini pentru data selectată.Această viziune este bună pentru a urmări acei participanți care nu fac tot felul de tipuri de atribuire.Oricum, nu atribuiți participarea doar pe baza acestei vizualizări, deoarece poate duce la repetări tipuri de atribuire doar pentru că este virajul participantului.",
   "TERRITORY_SORT_BY_LAST_WORKED": "Sortează teritoriile returnate după mai puțin lucrat",
-  "HEATMAP_EXPLAIN_COLORS": "Cât timp este atribuit teritoriul sau cât timp este returnat teritoriul"
+  "HEATMAP_EXPLAIN_COLORS": "Cât timp este atribuit teritoriul sau cât timp este returnat teritoriul",
+
+  "TERRITORY_PDF_MEETING_POINT": "Loc de întâlnire"
 }

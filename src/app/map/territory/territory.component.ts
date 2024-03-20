@@ -172,13 +172,13 @@ export class TerritoryComponent {
     doc.setFont(this.pdfService.font, "normal");
 
     if (t.meetingPointUrl) {
-      y += 7;
+      y += 20;
       const meetingPointTitle = this.translocoService.translate("TERRITORY_PDF_MEETING_POINT");
       doc.text(meetingPointTitle + ":", x, y);
       try {
         //Validate the url syntax
         new URL(t.meetingPointUrl);
-        y += 5;
+        y += 20;
         doc.setTextColor("blue");
         const meetingPointClickText = this.translocoService.translate(
           "TERRITORY_PDF_MEETING_POINT_CLICK",
@@ -186,7 +186,7 @@ export class TerritoryComponent {
         doc.textWithLink(meetingPointClickText, x, y, { url: t.meetingPointUrl });
       } catch (error) {
         //not valid url put it as regular text
-        y += 5;
+        y += 20;
         doc.text(t.meetingPointUrl, x, y);
       }
       doc.setTextColor("black");
@@ -219,9 +219,14 @@ export class TerritoryComponent {
     if (t.poligonId) {
       const mapLinkText =
         this.translocoService.translate("TERRITORY_TABLE_HEADER_MAPLINK") + ":";
-      doc.text(mapLinkText, x, y + 20, {});
+
+      doc.text(mapLinkText, doc.internal.pageSize.width / 2, y + 50, { align: "center" });
       doc.setTextColor("blue");
-      doc.textWithLink(t.name, x, y + 30, { url: this.getUrlWithPolygonParams(t).toString() });
+      doc.setFont(this.pdfService.font, "bold");
+      doc.textWithLink(t.name, doc.internal.pageSize.width / 2, y + 75, {
+        url: this.getUrlWithPolygonParams(t).toString(),
+        align: "center",
+      });
     }
 
     if (save) {

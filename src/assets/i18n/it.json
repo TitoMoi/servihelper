@@ -451,8 +451,7 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Si prega di creare un territorio e assegnarlo a questo gruppo",
   "TERRITORY_NO_TGROUPS_CREATED": "Crea prima un gruppo di territorio",
   "TERRITORY_PARTICIPANT_LABEL": "Seleziona il partecipante",
-  "TERRITORY_PDF_MEETING_POINT": "L'URL del punto d'incontro",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Cliccami per aprire l'URL del punto d'incontro",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Apri il punto di riunione",
   "TERRITORY_REMOVE_IMAGE": "Rimuovi l'immagine e abilita la mappa",
   "TERRITORY_RETURN_TITLE": "Restituire il territorio",
   "TERRITORY_RETURN_WARNING": "Puoi riassegnare il territorio a un altro partecipante",
@@ -491,5 +490,7 @@
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Conteggio globale della partecipazione per la scuola",
   "STARVING_ASSIGNMENTS_SUBTITLE": "Il conteggio globale mostra solo i partecipanti disponibili solo come preside e non hanno altri compiti per la data selezionata.Questa visione è buona per tenere traccia di quei partecipanti che non eseguono tutti i tipi di tipi di assegnazione.Ad ogni modo, non assegnare la partecipazione solo in base a questa vista perché può portare a ripetere i tipi di assegnazione solo perché è il turno dei partecipanti.",
   "TERRITORY_SORT_BY_LAST_WORKED": "Ordina i territori restituiti con meno lavorato",
-  "HEATMAP_EXPLAIN_COLORS": "Quanto tempo è assegnato il territorio o quanto dura il territorio non assegnato"
+  "HEATMAP_EXPLAIN_COLORS": "Quanto tempo è assegnato il territorio o quanto dura il territorio non assegnato",
+
+  "TERRITORY_PDF_MEETING_POINT": "Punto d'incontro"
 }

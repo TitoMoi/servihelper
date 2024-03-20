@@ -424,8 +424,7 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Molimo stvorite teritorij i dodijelite ga ovoj grupi",
   "TERRITORY_NO_TGROUPS_CREATED": "Prvo stvorite teritorijsku grupu",
   "TERRITORY_PARTICIPANT_LABEL": "Odaberite sudionika",
-  "TERRITORY_PDF_MEETING_POINT": "URL točke sastanka",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Kliknite me da otvorim URL točke sastanka",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Otvorite mjesto za sastanke",
   "TERRITORY_REMOVE_IMAGE": "Uklonite sliku i omogućite kartu.",
   "TERRITORY_RETURN_TITLE": "Vrati teritorij",
   "TERRITORY_RETURN_WARNING": "Teritorij možete prenijeti drugom sudioniku",
@@ -464,5 +463,7 @@
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Globalni broj sudjelovanja u školi",
   "STARVING_ASSIGNMENTS_SUBTITLE": "Globalni broj prikazuje samo sudionike koji su dostupni samo kao glavni i nemaju druge zadatke za odabrani datum.Ovaj je pogled dobro pratiti one sudionike koji ne rade sve vrste zadataka.U svakom slučaju, ne dodjeljujte sudjelovanje samo na temelju ovog prikaza jer može dovesti do ponovljenih vrsta dodijeljenih samo zato što je to sudionik.",
   "TERRITORY_SORT_BY_LAST_WORKED": "Poredajte vraćene teritorije manje radeći",
-  "HEATMAP_EXPLAIN_COLORS": "Koliko je dugo dodijeljen teritorij ili koliko dugo se teritorij vraća nedozvine"
+  "HEATMAP_EXPLAIN_COLORS": "Koliko je dugo dodijeljen teritorij ili koliko dugo se teritorij vraća nedozvine",
+
+  "TERRITORY_PDF_MEETING_POINT": "Točka susreta"
 }

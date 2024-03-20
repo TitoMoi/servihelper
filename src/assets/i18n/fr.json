@@ -452,8 +452,7 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Veuillez créer un territoire et l'attribuer à ce groupe",
   "TERRITORY_NO_TGROUPS_CREATED": "Créer un groupe de territoire en premier",
   "TERRITORY_PARTICIPANT_LABEL": "Sélectionnez le participant",
-  "TERRITORY_PDF_MEETING_POINT": "L'URL du point de rencontre",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Cliquez sur moi pour ouvrir l'URL du point de réunion",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Ouvrir le point de rencontre",
   "TERRITORY_REMOVE_IMAGE": "Supprimer l'image et activer la carte",
   "TERRITORY_RETURN_TITLE": "Retournez le territoire",
   "TERRITORY_RETURN_WARNING": "Vous pouvez réaffecter le territoire à un autre participant",
@@ -492,5 +491,7 @@
   "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Compte de participation mondiale pour l'école",
   "STARVING_ASSIGNMENTS_SUBTITLE": "Le nombre mondial montre uniquement les participants qui sont disponibles uniquement en tant que directeur et n'ont pas d'autres tâches pour la date sélectionnée.Cette vue est bonne pour garder une trace de ces participants qui ne fait pas tous sortes de types d'affectations.Quoi qu'il en soit, n'attribuez pas la participation uniquement en fonction de cette vue car elle peut conduire à répéter les types d'attribution simplement parce que c'est le virage des participants.",
   "TERRITORY_SORT_BY_LAST_WORKED": "Trier les territoires retournés par moins de travail",
-  "HEATMAP_EXPLAIN_COLORS": "Combien de temps le territoire est-il attribué ou combien de temps le territoire est-il retourné"
+  "HEATMAP_EXPLAIN_COLORS": "Combien de temps le territoire est-il attribué ou combien de temps le territoire est-il retourné",
+
+  "TERRITORY_PDF_MEETING_POINT": "Point de rencontre"
 }
