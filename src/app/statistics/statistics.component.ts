@@ -8,16 +8,25 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ConfigInterface } from "app/config/model/config.model";
 import { RoleInterface } from "app/roles/model/role.model";
 import { MatIconModule } from "@angular/material/icon";
-
+import { FakeAccordionComponent } from "app/statistics/fake-accordion/fake-accordion.component";
 @Component({
   selector: "app-statistics",
   templateUrl: "./statistics.component.html",
   styleUrls: ["./statistics.component.scss"],
   standalone: true,
-  imports: [GlobalCountComponent, TerritoryCountComponent, TranslocoModule, MatIconModule],
+  imports: [
+    GlobalCountComponent,
+    TerritoryCountComponent,
+    TranslocoModule,
+    MatIconModule,
+    FakeAccordionComponent,
+  ],
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
   allowedAssignTypesIds = [];
+
+  showGlobalCount = false;
+  showTerritoryCount = false;
 
   subscription = new Subscription();
 

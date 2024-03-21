@@ -240,19 +240,19 @@
                             class="me-2"
                             svgIcon="time"
                             aria-label="icon"
-                            [matTooltip]="t('ASSIGNMENT_COLLISION_TOOLTIP')"
+                            (click)="onRedClockClick($event, participant)"
                           ></mat-icon>
                         } @else if (participant.isCloseToOthers && !isMultipleDates) {
                           <mat-icon
                             svgIcon="warningtime"
                             aria-label="icon"
-                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
+                            (click)="onYellowClockSchoolClick($event, participant)"
                           ></mat-icon>
                         } @else if (participant.isCloseToOthersPrayer && !isMultipleDates) {
                           <mat-icon
                             svgIcon="warningtime"
                             aria-label="icon"
-                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
+                            (click)="onYellowClockPrayerClick($event, participant)"
                           ></mat-icon>
                         } @else if (
                           participant.isCloseToOthersTreasuresEtc && !isMultipleDates
@@ -260,7 +260,13 @@
                           <mat-icon
                             svgIcon="warningtime"
                             aria-label="icon"
-                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"
+                            (click)="onYellowClockTreasuresEtcClick($event, participant)"
+                          ></mat-icon>
+                        } @else if (participant.isStarvingSchool && !isMultipleDates) {
+                          <mat-icon
+                            svgIcon="fork"
+                            aria-label="icon"
+                            (click)="onStarvingSchoolClick($event)"
                           ></mat-icon>
                         }
                       </div>

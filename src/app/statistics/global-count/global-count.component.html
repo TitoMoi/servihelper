@@ -1,5 +1,6 @@
 <mat-accordion *transloco="let t">
-  <mat-expansion-panel>
+  <!-- By default its expanded because we are controlling the rendering in a parent defer condition -->
+  <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h3 class="m-3">
@@ -99,7 +100,16 @@
       @for (participant of globalList; track participant) {
         <div class="row m-3">
           <div class="col-2">
-            {{ participant.name }}
+            <div class="d-flex align-items-center">
+              <span>{{ participant.name }}</span>
+              @if (!participant.available) {
+                <mat-icon
+                  id="unavailableId"
+                  class="ms-1 cursor-arrow"
+                  svgIcon="unavailable"
+                ></mat-icon>
+              }
+            </div>
           </div>
           <div class="col-2">
             {{ participant.count }}

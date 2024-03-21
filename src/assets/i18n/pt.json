@@ -139,6 +139,8 @@
   "CHECK_LATER": "Por favor, tente novamente mais tarde.",
   "CLOSE": "Fechar",
   "CLOSE_APP": "Fechar servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "Não é recomendado porque possui outra atribuição relacionada (s) próxima a esta data.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "Não há tempo suficiente para poder repetir esta tarefa",
   "COLOR_BLUE_EXPLANATION": "Com menos de 4 meses de idade",
   "COLOR_GREEN_EXPLANATION": "Nunca atribuído",
   "COLOR_RED_EXPLANATION": "1 ano de idade ou mais",
@@ -452,12 +454,10 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Crie um território e atribua -o a este grupo",
   "TERRITORY_NO_TGROUPS_CREATED": "Crie um grupo de território primeiro",
   "TERRITORY_PARTICIPANT_LABEL": "Selecione participante",
-  "TERRITORY_PDF_MEETING_POINT": "O URL do ponto de encontro",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Click me to open the meeting point url",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Abra o ponto de encontro",
   "TERRITORY_REMOVE_IMAGE": "Remova a imagem e ative o mapa",
   "TERRITORY_RETURN_TITLE": "Devolver o território",
   "TERRITORY_RETURN_WARNING": "Você pode reatribuir o território para outro participante",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Classificar territórios por menos trabalhados",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Atribuir ou editar território",
   "TERRITORY_TABLE_HEADER_DELETE": "Excluir",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Link do mapa",
@@ -489,5 +489,11 @@
   "ro": "Romena",
   "ru": "Russo",
   "tr": "Turca",
-  "zhCN": "Chinês"
+  "zhCN": "Chinês",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Contagem global de participação para a escola",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "A contagem global mostra apenas os participantes disponíveis apenas como diretor e não têm outras tarefas para a data selecionada.Essa visão é boa para acompanhar os participantes que não fazem todo o tipo de tipo de atribuição.De qualquer forma, não atribua participação apenas com base nessa visualização, pois ela pode levar a repetir os tipos de atribuir apenas porque é a virada do participante.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Classificar os territórios devolvidos por menos trabalhados",
+  "HEATMAP_EXPLAIN_COLORS": "Quanto tempo o território é atribuído ou quanto tempo o território retornou não atribuído",
+
+  "TERRITORY_PDF_MEETING_POINT": "Ponto de encontro"
 }

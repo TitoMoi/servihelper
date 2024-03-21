@@ -1,5 +1,8 @@
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
-import { ParticipantInterface } from "app/participant/model/participant.model";
+import {
+  ParticipantDynamicInterface,
+  ParticipantInterface,
+} from "app/participant/model/participant.model";
 import { RoomInterface } from "app/room/model/room.model";
 
 type AssignmentOperationType = "create" | "update" | "delete"; //get is excluded
@@ -48,4 +51,16 @@ export interface AssignmentGroupInterface {
 export interface AssignmentTableInterface extends AssignmentInterface {
   hasDateSeparator: boolean; //To separate dates from one day to another
   hasBeenClicked: boolean; //To highlight last row when clicked the sheet
+}
+
+export interface CloseAssignmentsDataContext {
+  assignments: AssignmentInterface[];
+  isRedClock: boolean;
+}
+
+export interface StarvingAssignmentsDataContext {
+  participants: ParticipantDynamicInterface[];
+  isSchool: boolean;
+  isPrayer: boolean;
+  isTreasuresEtc: boolean;
 }

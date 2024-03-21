@@ -140,6 +140,8 @@
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
   "CLOSE_APP": "Close servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "No se recomienda porque tiene otra tarea relacionada cerca de esta fecha.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "No ha pasado suficiente tiempo para poder repetir esta tarea",
   "COLOR_BLUE_EXPLANATION": "Menos de 4 meses",
   "COLOR_GREEN_EXPLANATION": "Never assigned",
   "COLOR_RED_EXPLANATION": "1 año o más",
@@ -450,12 +452,10 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Crea un territorio y asignarlo a este grupo",
   "TERRITORY_NO_TGROUPS_CREATED": "Crear primero un grupo de territorio",
   "TERRITORY_PARTICIPANT_LABEL": "Seleccionar participante",
-  "TERRITORY_PDF_MEETING_POINT": "La URL del punto de reunión",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Haz clic en mí para abrir la URL del punto de reunión",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Abrir el punto de reunión",
   "TERRITORY_REMOVE_IMAGE": "Eliminar la imagen y habilitar el mapa",
   "TERRITORY_RETURN_TITLE": "Devuelve el territorio",
   "TERRITORY_RETURN_WARNING": "Puedes reasignar el territorio a otro participante",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Ordenar territorios por menos trabajados",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Asignar o editar territorio",
   "TERRITORY_TABLE_HEADER_DELETE": "Borrar",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Enlace de mapa",
@@ -487,5 +487,11 @@
   "ro": "Rumano",
   "ru": "Ruso",
   "tr": "Turco",
-  "zhCN": "Chino"
+  "zhCN": "Chino",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Recuento global de participación para la escuela",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "El recuento global solo muestra a los participantes disponibles solo como principales y que no tienen otras tareas para la fecha seleccionada. Esta visión es buena para realizar un seguimiento de aquellos participantes que no hacen todo tipo de tipos de tareas. De todos modos, no asigne participación solo en función de esta visión porque puede conducir a repetir los tipos de asignación solo porque es el turno del participante.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Ordena los territorios devueltos por menos trabajado",
+  "HEATMAP_EXPLAIN_COLORS": "Cuanto tiempo lleva el territorio o cuanto tiempo hace el territorio no se ha asignado",
+
+  "TERRITORY_PDF_MEETING_POINT": "Punto de encuentro"
 }

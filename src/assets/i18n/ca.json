@@ -139,6 +139,8 @@
   "CHECK_LATER": "Per favor prova mes tard.",
   "CLOSE": "Tancar",
   "CLOSE_APP": "Tancar servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "No es recomana perquè té una altra tasca relacionada a prop d'aquesta data.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "No ha passat prou temps per poder repetir aquesta tasca",
   "COLOR_BLUE_EXPLANATION": "Menys de 4 mesos",
   "COLOR_GREEN_EXPLANATION": "Mai assignat",
   "COLOR_RED_EXPLANATION": "1 any o més",
@@ -452,12 +454,10 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Creeu un territori i assigneu-lo a aquest grup",
   "TERRITORY_NO_TGROUPS_CREATED": "Creeu primer un grup de territori",
   "TERRITORY_PARTICIPANT_LABEL": "Seleccioneu el participant",
-  "TERRITORY_PDF_MEETING_POINT": "L’URL del punt de trobada",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Feu clic per obrir l’URL del punt de trobada",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Obriu el punt de trobada",
   "TERRITORY_REMOVE_IMAGE": "Elimina la imatge i activa el mapa",
   "TERRITORY_RETURN_TITLE": "Tornar el territori",
   "TERRITORY_RETURN_WARNING": "Podeu reassignar el territori a un altre participant",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Ordena els territoris per menys treballats",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Assignar o editar el territori",
   "TERRITORY_TABLE_HEADER_DELETE": "Esborrar",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Enllaç de mapa",
@@ -489,5 +489,11 @@
   "ro": "Romanès",
   "ru": "Rus",
   "tr": "Turc",
-  "zhCN": "Xinès"
+  "zhCN": "Xinès",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Comte de participació global per a l'escola",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "El recompte global només mostra els participants disponibles només com a principals i que no tenen altres tasques per a la data seleccionada.Aquesta visió és bona per fer un seguiment d’aquells participants que no fan tot tipus d’assignacions. De totes maneres, no assigneu la participació només en funció d'aquesta visió perquè pot conduir a repetir tipus d'assignació només perquè és el torn del participant.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Ordena els territories retornats per menys treballats",
+  "HEATMAP_EXPLAIN_COLORS": "Quant de temps du el territori assignat o quant de temps du el territori retornat sense asignar",
+
+  "TERRITORY_PDF_MEETING_POINT": "Punt de trobada"
 }

@@ -133,6 +133,8 @@
   "BUTTON_YES": "Yes",
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
+  "CLOSE_ASSIGNMENTS_TITLE": "不推荐，因为还有另一个相关的任务接近此日期。",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "没有足够的时间来重复此任务",
   "COLOR_BLUE_EXPLANATION": "不到2个月大",
   "COLOR_GREEN_EXPLANATION": "从未分配",
   "COLOR_RED_EXPLANATION": "1岁或更多",
@@ -439,12 +441,10 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "请创建一个领域并将其分配给该组",
   "TERRITORY_NO_TGROUPS_CREATED": "首先创建一个区域组",
   "TERRITORY_PARTICIPANT_LABEL": "选择参与者",
-  "TERRITORY_PDF_MEETING_POINT": "会议点URL",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "点击我打开会议点URL",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "开会点",
   "TERRITORY_REMOVE_IMAGE": "删除图像并启用地图",
   "TERRITORY_RETURN_TITLE": "返回领土",
   "TERRITORY_RETURN_WARNING": "您可以将领土重新分配给另一个参与者",
-  "TERRITORY_SORT_BY_LAST_WORKED": "用较少的工作来对领土进行排序",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "分配或编辑区域",
   "TERRITORY_TABLE_HEADER_DELETE": "删除",
   "TERRITORY_TABLE_HEADER_MAPLINK": "地图链接",
@@ -476,5 +476,11 @@
   "ro": "罗马尼亚人",
   "ru": "俄语",
   "tr": "土耳其",
-  "zhCN": "中国人"
+  "zhCN": "中国人",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "全球参加学校的计数",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "全球数量仅显示仅作为本金可用的参与者，并且在选定的日期没有其他任务。这种观点可以很好地跟踪那些不从事各种作业类型的参与者。无论如何，不要仅基于此视图分配参与，因为它可以导致重复分配类型，因为它是参与者的转弯。",
+  "TERRITORY_SORT_BY_LAST_WORKED": "用少的工作对返回的地区进行排序",
+  "HEATMAP_EXPLAIN_COLORS": "分配的领土多长时间或未分配的领土返回了多长时间",
+
+  "TERRITORY_PDF_MEETING_POINT": "会面点"
 }

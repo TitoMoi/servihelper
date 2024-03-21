@@ -24,6 +24,7 @@ import { Map, Polygon, TileLayer } from "leaflet";
 import { TerritoryService } from "../service/territory.service";
 import { TerritoryContextInterface } from "app/map/model/map.model";
 import { differenceInMonths } from "date-fns";
+import { ParticipantService } from "app/participant/service/participant.service";
 
 @Component({
   selector: "app-heatmap",
@@ -50,6 +51,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   polygonService = inject(PolygonService);
   private cdr = inject(ChangeDetectorRef);
   private territoryService = inject(TerritoryService);
+  private participantService = inject(ParticipantService);
   private exportService = inject(ExportService);
   private router = inject(Router);
 
@@ -67,9 +69,9 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
 
   //colors
   redColor = "#fc6868";
-  yellowColor = "#fafaa0";
-  blueColor = "#92d4fc";
-  greenColor = "#8afa84";
+  yellowColor = "#faf1a0";
+  blueColor = "#77cafc";
+  greenColor = "#d784fa";
 
   ngAfterViewInit(): void {
     if (this.loadedPolygons.length) {
@@ -105,7 +107,13 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
       const leafletPolygonRef = new Polygon(polygon.latLngList);
       this.polygonRefList.push(leafletPolygonRef);
       //bind the name and a callback method to open edit mode
-      leafletPolygonRef.bindTooltip(terr.name);
+
+      leafletPolygonRef.bindTooltip(
+        terr.name +
+          (terr.participants.at(-1)
+            ? " " + this.participantService.getParticipant(terr.participants.at(-1)).name
+            : ""),
+      );
       leafletPolygonRef.on("click", () => {
         const terr = this.territoryService.getTerritoryByPolygonId(polygon.id);
         this.router.navigate([`map/territory/update/${terr.id}`]);
@@ -117,18 +125,22 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
+  // eslint-disable-next-line complexity
   getColorBasedOnTimeDistance(territory: TerritoryContextInterface): string {
-    if (territory.assignedDates.length) {
-      const territoryLastAssignedDate = new Date(territory.assignedDates.at(-1));
-      if (territoryLastAssignedDate) {
-        const distanceInMonths = differenceInMonths(territoryLastAssignedDate, new Date());
-        /* how to reason the includes? https://date-fns.org/v2.30.0/docs/formatDistance#description */
-        if (distanceInMonths >= 12) return this.redColor;
-        if (distanceInMonths >= 4) return this.yellowColor;
-      }
-      return this.blueColor;
+    //It's never assigned
+    if (this.territoryService.isNeverAssignedTerritory(territory.id)) return this.greenColor;
+    //It's active or returned
+    const isActiveTerritory = this.territoryService.isActiveTerritory(territory.id);
+    const territoryLastDate = new Date(
+      isActiveTerritory ? territory.assignedDates.at(-1) : territory.returnedDates.at(-1),
+    );
+    if (territoryLastDate) {
+      const distanceInMonths = differenceInMonths(territoryLastDate, new Date());
+      /* how to reason the includes? https://date-fns.org/v2.30.0/docs/formatDistance#description */
+      if (distanceInMonths >= 12) return this.redColor;
+      if (distanceInMonths >= 4) return this.yellowColor;
     }
-    return this.greenColor;
+    return this.blueColor;
   }
 
   /**

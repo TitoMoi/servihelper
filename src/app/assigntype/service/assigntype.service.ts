@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { AssignTypeInterface, AssignTypes } from "app/assigntype/model/assigntype.model";
 import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -66,14 +67,18 @@ export class AssignTypeService {
   }
 
   getNameOrTranslationByType(type: AssignTypes) {
-    const at = this.#assignTypes.find((at) => at.type === type);
-    if (!at) return ""; // retro compatibility with wrong interest in others
+    let at = this.#assignTypes.find((at) => at.type === type);
+    // retro compatibility with wrong interest type
+    if (!at) {
+      at = this.#assignTypes.find((at) => at.type === "interestInOthers");
+    }
     return this.getNameOrTranslation(at);
   }
 
   getTranslationForAssignTypes() {
     const translations = [];
     translations.push(this.getNameOrTranslationByType(this.BIBLE_READING));
+    translations.push(this.getNameOrTranslationByType(this.ANALYSIS_AUDIENCE));
     translations.push(this.getNameOrTranslationByType(this.INITIAL_CALL));
     translations.push(this.getNameOrTranslationByType(this.RETURN_VISIT));
     translations.push(this.getNameOrTranslationByType(this.TALK));
@@ -93,22 +98,9 @@ export class AssignTypeService {
     const translations = [];
     translations.push(this.getNameOrTranslationByType(this.TREASURES));
     translations.push(this.getNameOrTranslationByType(this.SPIRITUAL_GEMS));
-    translations.push(this.getNameOrTranslationByType(this.ANALYSIS_AUDIENCE));
     translations.push(this.getNameOrTranslationByType(this.LIVING_AS_CHRISTIANS));
     translations.push(this.getNameOrTranslationByType(this.CONGREGATION_BIBLE_STUDY));
     return translations.filter((t) => t).toString();
-  }
-
-  isAllowedTypeForS89(type: string): boolean {
-    if (!type) return false;
-
-    return (
-      type === "bibleReading" ||
-      type === "initialCall" ||
-      type === "returnVisit" ||
-      type === "bibleStudy" ||
-      type === "talk"
-    );
   }
 
   /**
@@ -215,5 +207,33 @@ export class AssignTypeService {
     this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
     //save assignTypes
     return this.saveAssignTypesToFile();
+  }
+
+  //school
+  isOfTypeAssignTypes(type: AssignTypes): boolean {
+    return [
+      this.BIBLE_READING,
+      this.INITIAL_CALL,
+      this.RETURN_VISIT,
+      this.TALK,
+      this.BIBLE_STUDY,
+      this.EXPLAIN_BELIEFS,
+      this.ANALYSIS_AUDIENCE,
+    ].includes(type);
+  }
+
+  //prayer
+  isOfTypePrayer(type: AssignTypes): boolean {
+    return [this.INITIAL_PRAYER, this.ENDING_PRAYER].includes(type);
+  }
+
+  //treasures and others
+  isOfTypeTreasuresAndOthers(type: AssignTypes): boolean {
+    return [
+      this.TREASURES,
+      this.SPIRITUAL_GEMS,
+      this.LIVING_AS_CHRISTIANS,
+      this.CONGREGATION_BIBLE_STUDY,
+    ].includes(type);
   }
 }

@@ -135,12 +135,16 @@ export class PdfService {
     return 13.5;
   }
 
-  getTerritoryTextFontSize() {
-    return 22;
+  getTextFontSize() {
+    return 10.5;
   }
 
-  getTextFontSize() {
-    return 11;
+  /**
+   * Get the font size for the territory pdf
+   * @returns number, the font size
+   */
+  getTerritoryTextFontSize() {
+    return 36;
   }
 
   addHeavyCheckImg(doc: jsPDF, x, y) {

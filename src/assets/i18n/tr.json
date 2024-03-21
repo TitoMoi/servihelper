@@ -133,6 +133,8 @@
   "BUTTON_YES": "Yes",
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
+  "CLOSE_ASSIGNMENTS_TITLE": "Bu tarihe yakın başka bir ilgili ödev/olduğu için önerilmez.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "Bu ödevi tekrarlayabilmek için yeterli zaman geçmedi",
   "COLOR_BLUE_EXPLANATION": "2 aydan az eski",
   "COLOR_GREEN_EXPLANATION": "Asla atanmadı",
   "COLOR_RED_EXPLANATION": "1 yaşında veya daha fazla",
@@ -439,12 +441,10 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Lütfen bir bölge oluşturun ve bu gruba atayın",
   "TERRITORY_NO_TGROUPS_CREATED": "Önce bir bölge grubu oluşturun",
   "TERRITORY_PARTICIPANT_LABEL": "Katılımcı seçin",
-  "TERRITORY_PDF_MEETING_POINT": "Toplantı Noktası URL'si",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Toplantı Noktası URL'sini açmak için beni tıklayın",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Toplantı noktasını aç",
   "TERRITORY_REMOVE_IMAGE": "Görüntüyü kaldırın ve haritayı etkinleştirin",
   "TERRITORY_RETURN_TITLE": "Bölgeyi iade et",
   "TERRITORY_RETURN_WARNING": "Bölgeyi başka bir katılımcıya yeniden atayabilirsiniz",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Bölgeleri daha az çalışarak sıralayın",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Bölge atayın veya düzenleyin",
   "TERRITORY_TABLE_HEADER_DELETE": "Silmek",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Harita bağlantısı",
@@ -476,5 +476,11 @@
   "ro": "Romanya",
   "ru": "Rusça",
   "tr": "Türk",
-  "zhCN": "Çince"
+  "zhCN": "Çince",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Küresel okula katılım sayısı",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Global sayısı yalnızca sadece müdür olarak mevcut olan ve seçilen tarih için başka görevleri olmayan katılımcıları gösterir.Bu görüş, her türlü atama türünü yapmayan katılımcıları takip etmek iyidir.Her neyse, sadece bu görüşe dayanarak katılım atmayın, çünkü sadece katılımcı dönüşü olduğu için tekrar atama türlerine yol açabilir.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "İade edilen bölgeleri daha az çalışarak sıralayın",
+  "HEATMAP_EXPLAIN_COLORS": "Bölge ne kadar sürer veya bölge ne kadar atanır.",
+
+  "TERRITORY_PDF_MEETING_POINT": "Buluşma noktası"
 }

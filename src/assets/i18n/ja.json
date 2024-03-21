@@ -133,6 +133,8 @@
   "BUTTON_YES": "Yes",
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
+  "CLOSE_ASSIGNMENTS_TITLE": "別の関連する割り当てがこの日付に近いため、お勧めしません。",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "この割り当てを繰り返すことができるのに十分な時間が経過していません",
   "COLOR_BLUE_EXPLANATION": "生後2ヶ月未満",
   "COLOR_GREEN_EXPLANATION": "割り当てられない",
   "COLOR_RED_EXPLANATION": "1歳以上",
@@ -439,12 +441,10 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "領土を作成して、このグループに割り当ててください",
   "TERRITORY_NO_TGROUPS_CREATED": "最初に領土グループを作成します",
   "TERRITORY_PARTICIPANT_LABEL": "参加者を選択します",
-  "TERRITORY_PDF_MEETING_POINT": "ミーティングポイントURL",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "私をクリックして、ミーティングポイントURLを開きます",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "ミーティングポイントを開きます",
   "TERRITORY_REMOVE_IMAGE": "画像を削除し、マップを有効にします",
   "TERRITORY_RETURN_TITLE": "領土を返します",
   "TERRITORY_RETURN_WARNING": "領土を別の参加者に再割り当てすることができます",
-  "TERRITORY_SORT_BY_LAST_WORKED": "あまり機能しないことで領土を並べ替えます",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "領土を割り当てたり編集したりします",
   "TERRITORY_TABLE_HEADER_DELETE": "消去",
   "TERRITORY_TABLE_HEADER_MAPLINK": "マップリンク",
@@ -476,5 +476,11 @@
   "ro": "ルーマニア人",
   "ru": "ロシア",
   "tr": "トルコ語",
-  "zhCN": "中国語"
+  "zhCN": "中国語",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "学校への参加のグローバルカウント",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "グローバルカウントには、プリンシパルとしてのみ利用可能で、選択した日付の他のタスクがない参加者のみが表示されます。このビューは、あらゆる種類の割り当てタイプを実行しない参加者を追跡するのに適しています。とにかく、参加者がターンであるという理由だけで繰り返し割り当てタイプにつながる可能性があるため、このビューに基づいてのみ参加を割り当てないでください。",
+  "TERRITORY_SORT_BY_LAST_WORKED": "返された地域をあまり機能させずに並べ替えます",
+  "HEATMAP_EXPLAIN_COLORS": "領土はどのくらいの期間割り当てられていますか、またはどのくらいの期間領土が割り当てられていませんか",
+
+  "TERRITORY_PDF_MEETING_POINT": "ミーティングポイント"
 }

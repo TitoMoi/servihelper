@@ -138,6 +138,8 @@
   "CHECK_LATER": "Bitte versuchen Sie es später erneut.",
   "CLOSE": "Schließen",
   "CLOSE_APP": "Schließen servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "Nicht empfohlen, da bis zu diesem Datum eine andere zugehörige Zuordnung/s enthält.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "Nicht genug Zeit ist vergangen, um diese Aufgabe wiederholen zu können",
   "COLOR_BLUE_EXPLANATION": "Weniger als 4 Monate alt",
   "COLOR_GREEN_EXPLANATION": "Nie zugewiesen",
   "COLOR_RED_EXPLANATION": "1 Jahr alt oder mehr",
@@ -450,12 +452,10 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Bitte erstellen Sie ein Gebiet und weisen Sie es dieser Gruppe zu",
   "TERRITORY_NO_TGROUPS_CREATED": "Erstellen Sie zuerst eine Gebietsgruppe",
   "TERRITORY_PARTICIPANT_LABEL": "Wählen Sie den Teilnehmer aus",
-  "TERRITORY_PDF_MEETING_POINT": "Die Treffpunkt -URL",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Klicken Sie auf mich, um die URL der Besprechungspunkte zu öffnen",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Öffnen Sie den Treffpunkt",
   "TERRITORY_REMOVE_IMAGE": "Entfernen Sie das Bild und aktivieren Sie die Karte",
   "TERRITORY_RETURN_TITLE": "Kehren Sie das Territorium zurück",
   "TERRITORY_RETURN_WARNING": "Sie können das Territorium einem anderen Teilnehmer zuweisen",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Sortieren Sie Gebiete nach weniger Arbeit",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Territorium zuweisen oder bearbeiten",
   "TERRITORY_TABLE_HEADER_DELETE": "Löschen",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Kartenlink",
@@ -487,5 +487,11 @@
   "ro": "Rumänisch",
   "ru": "Russisch",
   "tr": "Türkisch",
-  "zhCN": "Chinesisch"
+  "zhCN": "Chinesisch",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Globale Anzahl der Teilnahme für die Schule",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Die globale Zählung zeigt nur Teilnehmern, die nur als Schulleiter verfügbar sind und keine anderen Aufgaben für das ausgewählte Datum haben.Diese Ansicht ist gut, um die Teilnehmer im Auge zu behalten, die nicht alle Arten von Zuweisungstypen durchführen.Lassen Sie die Teilnahme nicht nur basierend auf dieser Ansicht zuweisen, da sie dazu führen kann, dass sie zu den Zuordnungsarten wiederholt werden, nur weil es sich um die Teilnehmerumdrehung handelt.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Sortieren Sie die zurückgekehrten Gebiete durch weniger Arbeit",
+  "HEATMAP_EXPLAIN_COLORS": "Wie lange wird das Gebiet zugewiesen oder wie lange ist das Territorium nicht zugewiesen?",
+
+  "TERRITORY_PDF_MEETING_POINT": "Treffpunkt"
 }

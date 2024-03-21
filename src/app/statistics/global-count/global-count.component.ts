@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";

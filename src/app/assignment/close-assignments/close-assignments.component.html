@@ -1,0 +1,23 @@
+<ng-container *transloco="let t">
+  <div mat-dialog-title class="d-flex align-items-center justify-content-start">
+    <mat-icon
+      class="me-3"
+      [svgIcon]="isRedClock ? 'time' : 'warningtime'"
+      aria-label="icon"
+    ></mat-icon>
+    <div>
+      {{ isRedClock ? t("CLOSE_ASSIGNMENTS_TITLE_RED") : t("CLOSE_ASSIGNMENTS_TITLE") }}
+    </div>
+  </div>
+  <div class="px-1">
+    <hr />
+  </div>
+  <div mat-dialog-content class="text-black">
+    @for (a of closeAssignments; track a.id) {
+      <div class="m-2">
+        {{ a.date | translocoDate: { dateStyle: "short" } }} -
+        {{ a.assignType | assignTypePipe | assignTypeNamePipe }}
+      </div>
+    }
+  </div>
+</ng-container>

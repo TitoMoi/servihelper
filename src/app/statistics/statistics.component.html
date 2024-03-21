@@ -8,9 +8,25 @@
     </div>
   </div>
 </span>
-<div class="mb-2">
-  <app-global-count [allowedAssignTypesIds]="allowedAssignTypesIds"></app-global-count>
+<div class="mb-3">
+  @defer (when showGlobalCount; prefetch on viewport(fakeGlobalAccordion)) {
+    <app-global-count [allowedAssignTypesIds]="allowedAssignTypesIds"></app-global-count>
+  } @placeholder {
+    <app-fake-accordion
+      #fakeGlobalAccordion
+      [titleKey]="'STATISTICS_COUNT_GLOBAL_TITLE'"
+      (click)="showGlobalCount = true"
+    ></app-fake-accordion>
+  }
 </div>
-<div class="mb-2">
-  <app-territory-count></app-territory-count>
+<div class="mb-3">
+  @defer (when showTerritoryCount; prefetch on viewport(fakeTerritoryCount)) {
+    <app-territory-count></app-territory-count>
+  } @placeholder {
+    <app-fake-accordion
+      #fakeTerritoryCount
+      [titleKey]="'STATISTICS_COUNT_TERRITORY_TITLE'"
+      (click)="showTerritoryCount = true"
+    ></app-fake-accordion>
+  }
 </div>

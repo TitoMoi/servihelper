@@ -1,0 +1,19 @@
+<ng-container *transloco="let t">
+  <div mat-dialog-title class="d-flex align-items-center justify-content-start">
+    <mat-icon class="me-3" [svgIcon]="'fork'" aria-label="icon"></mat-icon>
+    <div class="mx-2">
+      {{ t("STARVING_ASSIGNMENTS_TITLE_SCHOOL") }}
+    </div>
+  </div>
+  <span style="max-width: 70svw" class="mx-3 fst-italic">{{
+    t("STARVING_ASSIGNMENTS_SUBTITLE")
+  }}</span>
+  <div class="px-1">
+    <hr />
+  </div>
+  <div mat-dialog-content class="text-black">
+    @for (p of participants; track p.id) {
+      <div class="m-2">{{ p.count }} - {{ p.name }}</div>
+    }
+  </div>
+</ng-container>

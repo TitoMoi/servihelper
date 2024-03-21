@@ -4,12 +4,11 @@ import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
+import { TranslocoDirective, TranslocoService } from "@ngneat/transloco";
 import { TerritoryContextClass, TerritoryContextInterface } from "../model/map.model";
 import { TerritoryService } from "./service/territory.service";
 import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
-import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
 import { TerritoryGroupService } from "../territory-group/service/territory-group.service";
 import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -30,14 +29,13 @@ import { ParticipantService } from "app/participant/service/participant.service"
   standalone: true,
   imports: [
     CommonModule,
-    TranslocoModule,
+    TranslocoDirective,
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
     MatIconModule,
     MatExpansionModule,
     MatCheckboxModule,
-    TranslocoLocaleModule,
     ParticipantPipe,
     MatTooltipModule,
     MatProgressSpinnerModule,
@@ -130,8 +128,12 @@ export class TerritoryComponent {
         // Get the territory group name
         const tg = this.territoryGroupService.getTerritoryGroup(g);
 
+        let lastParticipantId = "";
         //Get the last participant id of the territory
-        const lastParticipantId = t.participants.at(-1);
+        if (this.territoryService.isActiveTerritory(t.id)) {
+          lastParticipantId = t.participants.at(-1);
+        }
+
         //Get the filename path and ensure it's valid for the system
         const fileNamePath = filenamifyPath(
           path.join(
@@ -170,13 +172,13 @@ export class TerritoryComponent {
     doc.setFont(this.pdfService.font, "normal");
 
     if (t.meetingPointUrl) {
-      y += 7;
+      y += 20;
       const meetingPointTitle = this.translocoService.translate("TERRITORY_PDF_MEETING_POINT");
       doc.text(meetingPointTitle + ":", x, y);
       try {
         //Validate the url syntax
         new URL(t.meetingPointUrl);
-        y += 5;
+        y += 20;
         doc.setTextColor("blue");
         const meetingPointClickText = this.translocoService.translate(
           "TERRITORY_PDF_MEETING_POINT_CLICK",
@@ -184,7 +186,7 @@ export class TerritoryComponent {
         doc.textWithLink(meetingPointClickText, x, y, { url: t.meetingPointUrl });
       } catch (error) {
         //not valid url put it as regular text
-        y += 5;
+        y += 20;
         doc.text(t.meetingPointUrl, x, y);
       }
       doc.setTextColor("black");
@@ -217,9 +219,14 @@ export class TerritoryComponent {
     if (t.poligonId) {
       const mapLinkText =
         this.translocoService.translate("TERRITORY_TABLE_HEADER_MAPLINK") + ":";
-      doc.text(mapLinkText, x, y + 20, {});
+
+      doc.text(mapLinkText, doc.internal.pageSize.width / 2, y + 50, { align: "center" });
       doc.setTextColor("blue");
-      doc.textWithLink(t.name, x, y + 30, { url: this.getUrlWithPolygonParams(t).toString() });
+      doc.setFont(this.pdfService.font, "bold");
+      doc.textWithLink(t.name, doc.internal.pageSize.width / 2, y + 75, {
+        url: this.getUrlWithPolygonParams(t).toString(),
+        align: "center",
+      });
     }
 
     if (save) {

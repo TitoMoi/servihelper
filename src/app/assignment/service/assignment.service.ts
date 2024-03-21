@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import {
   AssignmentInterface,
   AssignmentOperationInterface,
@@ -11,6 +12,7 @@ import { Subject } from "rxjs";
 import { ConfigService } from "app/config/service/config.service";
 import { LockService } from "app/lock/service/lock.service";
 import { inflate, deflate } from "pako";
+import { addDays, subDays } from "date-fns";
 
 @Injectable({
   providedIn: "root",
@@ -466,5 +468,17 @@ export class AssignmentService {
     }
     //save assignments
     this.saveAssignmentsToFile();
+  }
+
+  getAllAssignmentsByDaysBeforeAndAfter(
+    currentDate: Date,
+    daysThreshold: number,
+  ): AssignmentInterface[] {
+    let allDays: AssignmentInterface[] = [];
+    for (let i = 1; i <= daysThreshold; i++) {
+      allDays = allDays.concat(this.getAssignmentsByDate(addDays(currentDate, i)));
+      allDays = allDays.concat(this.getAssignmentsByDate(subDays(currentDate, i)));
+    }
+    return allDays;
   }
 }

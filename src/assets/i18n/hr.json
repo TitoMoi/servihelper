@@ -117,6 +117,8 @@
   "CHECK_LATER": "Molimo pokušajte ponovo kasnije.",
   "CLOSE": "Zatvoriti",
   "CLOSE_APP": "Zatvori Servihelper",
+  "CLOSE_ASSIGNMENTS_TITLE": "Ne preporučuje se jer ima još jedan srodni zadatak u blizini ovog datuma.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "Nije prošlo dovoljno vremena da biste mogli ponoviti ovaj zadatak",
   "COLOR_BLUE_EXPLANATION": "Manje od 4 mjeseca",
   "COLOR_GREEN_EXPLANATION": "Nikad dodijeljen",
   "COLOR_RED_EXPLANATION": "1 godina ili više",
@@ -422,12 +424,10 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "Molimo stvorite teritorij i dodijelite ga ovoj grupi",
   "TERRITORY_NO_TGROUPS_CREATED": "Prvo stvorite teritorijsku grupu",
   "TERRITORY_PARTICIPANT_LABEL": "Odaberite sudionika",
-  "TERRITORY_PDF_MEETING_POINT": "URL točke sastanka",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Kliknite me da otvorim URL točke sastanka",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "Otvorite mjesto za sastanke",
   "TERRITORY_REMOVE_IMAGE": "Uklonite sliku i omogućite kartu.",
   "TERRITORY_RETURN_TITLE": "Vrati teritorij",
   "TERRITORY_RETURN_WARNING": "Teritorij možete prenijeti drugom sudioniku",
-  "TERRITORY_SORT_BY_LAST_WORKED": "Poredajte teritorije prema manje radije",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "Dodijelite ili uređivanje teritorija",
   "TERRITORY_TABLE_HEADER_DELETE": "Izbrisati",
   "TERRITORY_TABLE_HEADER_MAPLINK": "Karata",
@@ -459,5 +459,11 @@
   "ro": "Rumun",
   "ru": "Ruski",
   "tr": "Turski",
-  "zhCN": "Kineski"
+  "zhCN": "Kineski",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "Globalni broj sudjelovanja u školi",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Globalni broj prikazuje samo sudionike koji su dostupni samo kao glavni i nemaju druge zadatke za odabrani datum.Ovaj je pogled dobro pratiti one sudionike koji ne rade sve vrste zadataka.U svakom slučaju, ne dodjeljujte sudjelovanje samo na temelju ovog prikaza jer može dovesti do ponovljenih vrsta dodijeljenih samo zato što je to sudionik.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "Poredajte vraćene teritorije manje radeći",
+  "HEATMAP_EXPLAIN_COLORS": "Koliko je dugo dodijeljen teritorij ili koliko dugo se teritorij vraća nedozvine",
+
+  "TERRITORY_PDF_MEETING_POINT": "Točka susreta"
 }

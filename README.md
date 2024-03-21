@@ -83,7 +83,7 @@ Only the time format can't be changed, but you can select a lang that suits your
 
 ## What cannot be done or implemented?
 
-- Compatibility with other existing programs is not possible, as i can't guarantee compatibility over time.
+- Compatibility with other theocratic existing programs is not possible, as i can't guarantee compatibility over time.
 
 - Automate everything.
 
@@ -97,7 +97,7 @@ Only the time format can't be changed, but you can select a lang that suits your
 - _(The next scenarios 1 and 2 dont have synchronization, all imported copies from person one will override the existing ones of person two)_
 - _(Maybe one scenario suits your needs better than the other, it is explained the benefits and the disadvantages)_
 
-1. **Use only google drive _(or other solution)_ to centralize and share copies of servihelper.**
+1. **Use 'google drive desktop app' _(or other solution)_ to centralize and share copies of servihelper.**
 
    - Do not enable: config -> online mode.
    - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
@@ -117,14 +117,15 @@ Only the time format can't be changed, but you can select a lang that suits your
    - Your responsability to ensure that all files are synchronized before working.
    - Warning: Sometimes data is not updated on real time.
    - _(this way of work has configuration complexity but later has less overhead, just check you are online and google drive is working and files are up to date before working)_
-   - _(this scenario is not real time, it just works directly with the files instead of with copies)_
+   - _(this scenario is not real time, it just works directly with the files instead of with copies, you must export copies from time to time for security)_
 
 **Paid mode 💲**:
-Configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure. And also a platform mantainance over time _(⚠️ not recommended)_
+
+_(If money is not a concern, it's better in terms of complexity to use another theocratic online tool instead of configure a server just for servihelper)_
+
+If you want to continue, configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure. And also a platform mantainance over time _(⚠️ not recommended)_
 
 [Guide to configure a remote desktop with kamatera](./KAMATERA.md)
-
-_(If money is not a concern, it's better in terms of complexity to use another online tool instead of configure a server)_
 
 ## Way to create assignments
 
@@ -138,11 +139,13 @@ Then on creating the assignment copy the assignment title from jw library and pu
 
 Then, select the participant/s\* and click the create button _(or create another assignment)_:
 
-\*_The algorithm used to sort the participants is based on participation of that assignment type and then are sorted again by time distance. Also, there is a yellow and red clock helpers to distribute the effort along the year._
+\*_The algorithm used to sort the participants is based on participation of that assignment type and then are sorted again by time distance. Also, there is a yellow and red clock helpers to distribute the effort along the year._ This ensures equallity among all the participants, but there are special cases where you need the global participation view.
 
-\*_Only global count by participation is a bad measure and can lead to repeat assignment types. Anyway if you want to see global counts you have them on the statistics section._
+\*The global view: Assign participants only by global count _(round robin queue)_ is a **bad measure** and can lead to repeat assignment types just because it's the participant turn. It's better to assign participants by assignment type and then by time distance. This way, the participants will have a more balanced work load. When there are many participants, it's a good idea to increase the 'distance in days clock' _(yellow clock in settings section)_ that prevents the participant to take another assignment in a long time. Anyway, when creating the assignment you also have the global count option.
 
-## Best order to create assignments based on priority
+The global view ensures faster times to make an assignment but punishes the participant to do diferent assignment types. Use this view wisely.
+
+## Best order to create assignment types based on priority
 
 1. First, create life & ministry assignments.
 2. Second, create weekend meeting assignments.

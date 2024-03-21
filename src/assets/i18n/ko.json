@@ -133,6 +133,8 @@
   "BUTTON_YES": "Yes",
   "CHECK_LATER": "Please try again later.",
   "CLOSE": "Close",
+  "CLOSE_ASSIGNMENTS_TITLE": "이 날짜에 가까운 다른 관련 과제가 있기 때문에 권장되지 않습니다.",
+  "CLOSE_ASSIGNMENTS_TITLE_RED": "이 과제를 반복 할 수있는 시간이 충분하지 않았습니다.",
   "COLOR_BLUE_EXPLANATION": "2 개월 미만",
   "COLOR_GREEN_EXPLANATION": "할당되지 않았습니다",
   "COLOR_RED_EXPLANATION": "1 세 이상",
@@ -439,12 +441,10 @@
   "TERRITORY_NO_TERRITORY_PLACEHOLDER": "영토를 만들어이 그룹에 할당하십시오",
   "TERRITORY_NO_TGROUPS_CREATED": "먼저 테리토리 그룹을 만듭니다",
   "TERRITORY_PARTICIPANT_LABEL": "참가자를 선택하십시오",
-  "TERRITORY_PDF_MEETING_POINT": "회의 지점 URL",
-  "TERRITORY_PDF_MEETING_POINT_CLICK": "Click me to open the meeting point url",
+  "TERRITORY_PDF_MEETING_POINT_CLICK": "회의 지점을여십시오",
   "TERRITORY_REMOVE_IMAGE": "이미지를 제거하고지도를 활성화하십시오",
   "TERRITORY_RETURN_TITLE": "영토를 반환하십시오",
   "TERRITORY_RETURN_WARNING": "영토를 다른 참가자에게 재 할 수 있습니다",
-  "TERRITORY_SORT_BY_LAST_WORKED": "덜 작동하는 영토를 정렬하십시오",
   "TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT": "영역을 할당하거나 편집합니다",
   "TERRITORY_TABLE_HEADER_DELETE": "삭제",
   "TERRITORY_TABLE_HEADER_MAPLINK": "지도 링크",
@@ -476,5 +476,11 @@
   "ro": "루마니아 사람",
   "ru": "러시아인",
   "tr": "터키",
-  "zhCN": "중국인"
+  "zhCN": "중국인",
+  "STARVING_ASSIGNMENTS_TITLE_SCHOOL": "학교에 대한 글로벌 참여 수",
+  "STARVING_ASSIGNMENTS_SUBTITLE": "Global Count는 교장으로 만 사용할 수 있고 선택한 날짜에 대한 다른 작업이없는 참가자 만 보여줍니다.이 견해는 모든 종류의 과제 유형을 수행하지 않는 참가자를 추적하는 것이 좋습니다.어쨌든, 참가자 회전이기 때문에 반복 할당 유형으로 이어질 수 있기 때문에이보기에 따라 참여 만 할당하지 마십시오.",
+  "TERRITORY_SORT_BY_LAST_WORKED": "덜 일한 상태로 돌아온 영토를 정렬하십시오",
+  "HEATMAP_EXPLAIN_COLORS": "영토는 얼마나 오래 지정되었거나 영토가 할당되지 않은 시간이 얼마나 걸립니까?",
+
+  "TERRITORY_PDF_MEETING_POINT": "미팅 포인트"
 }

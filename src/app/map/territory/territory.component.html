@@ -64,113 +64,115 @@
       t("TERRITORY_SORT_BY_LAST_WORKED")
     }}</mat-checkbox>
   </div>
-</span>
-@for (tg of territoryGroups; track tg) {
-  <div class="mt-3 mb-2">
-    <mat-accordion *transloco="let t">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <h3 class="d-flex">
-              <div
-                class="me-3"
-                [ngStyle]="{ width: '25px', height: '25px', 'background-color': tg.color }"
-              ></div>
-              <span>{{ tg.name }} - {{ getLengthForGroup(tg.id) }}</span>
-            </h3>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        @if (territories.length) {
-          <div class="grid">
-            <div class="grid-header-item fw-bold">
-              {{ t("TERRITORY_TABLE_HEADER_MAPLINK") }}
-            </div>
-            <div class="grid-header-item fw-bold">
-              {{ t("TERRITORY_TABLE_HEADER_NAME") }}
-            </div>
-            <div class="grid-header-item fw-bold">
-              {{ t("TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT") }}
-            </div>
-            <div class="grid-header-item fw-bold">
-              {{ t("TERRITORY_TABLE_HEADER_RETURN") }}
-            </div>
-            <div class="grid-header-item fw-bold">
-              {{ t("TERRITORY_TABLE_HEADER_DELETE") }}
-            </div>
-            @for (terr of territories; track terr.id) {
-              @if (terr.groups.includes(tg.id)) {
-                <div class="grid-row">
-                  <div class="grid-item d-flex align-items-center">
-                    @if (terr.poligonId) {
-                      <mat-icon
-                        class="me-3"
-                        #iconMapLink
-                        routerLinkActive="active"
-                        svgIcon="maplink"
-                        (click)="generateMapLink(terr, iconMapLink)"
-                        aria-label="Side nav toggle icon"
-                      ></mat-icon>
-                    }
-                    @if (terr.poligonId || terr.imageId) {
-                      <mat-icon
-                        routerLinkActive="active"
-                        svgIcon="pdf"
-                        (click)="toPdf(terr)"
-                        aria-label="Side nav toggle icon"
-                      ></mat-icon>
-                    }
-                  </div>
-                  <div class="grid-item d-flex align-items-center">
-                    {{ terr.name }} -
-                    {{
-                      terr.returnedDates.length !== terr.participants.length
-                        ? (terr.participants?.at(-1) | participantPipe)?.name
-                        : t("TERRITORY_NOT_ASSIGNED")
-                    }}
-                    @if (!terr.available) {
-                      <mat-icon class="ms-2 cursor-arrow" svgIcon="unavailable"></mat-icon>
-                    }
-                  </div>
-                  <div class="grid-item d-flex align-items-center">
-                    <mat-icon
-                      [routerLink]="['update', terr.id]"
-                      routerLinkActive="active"
-                      svgIcon="edit"
-                      aria-label="Side nav toggle icon"
-                    ></mat-icon>
-                  </div>
-                  <div class="grid-item d-flex align-items-center">
-                    @if (terr.participants.length > terr.returnedDates.length) {
-                      <mat-icon
-                        [routerLink]="['return', terr.id]"
-                        routerLinkActive="active"
-                        svgIcon="return"
-                        aria-label="Side nav toggle icon"
-                      ></mat-icon>
-                    } @else {
-                      {{
-                        terr.participants.length === 0 && terr.returnedDates.length === 0
-                          ? t("TERRITORY_TABLE_NEVER_ASSIGNED")
-                          : t("TERRITORY_TABLE_RETURNED")
-                      }}
-                    }
-                  </div>
-                  <div class="grid-item d-flex align-items-center">
-                    <mat-icon
-                      [routerLink]="['delete', terr.id]"
-                      routerLinkActive="active"
-                      svgIcon="garbage"
-                      aria-label="Side nav toggle icon"
-                    ></mat-icon>
-                  </div>
+  @for (tg of territoryGroups; track tg) {
+    <div class="mt-3 mb-2">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h3 class="d-flex">
+                <div
+                  class="me-3"
+                  [ngStyle]="{ width: '25px', height: '25px', 'background-color': tg.color }"
+                ></div>
+                <span>{{ tg.name }} - {{ getLengthForGroup(tg.id) }}</span>
+              </h3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+            @if (territories.length) {
+              <div class="grid">
+                <div class="grid-header-item fw-bold">
+                  {{ t("TERRITORY_TABLE_HEADER_MAPLINK") }}
                 </div>
-              }
+                <div class="grid-header-item fw-bold">
+                  {{ t("TERRITORY_TABLE_HEADER_NAME") }}
+                </div>
+                <div class="grid-header-item fw-bold">
+                  {{ t("TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT") }}
+                </div>
+                <div class="grid-header-item fw-bold">
+                  {{ t("TERRITORY_TABLE_HEADER_RETURN") }}
+                </div>
+                <div class="grid-header-item fw-bold">
+                  {{ t("TERRITORY_TABLE_HEADER_DELETE") }}
+                </div>
+                @for (terr of territories; track terr.id) {
+                  @if (terr.groups.includes(tg.id)) {
+                    <div class="grid-row">
+                      <div class="grid-item d-flex align-items-center">
+                        @if (terr.poligonId) {
+                          <mat-icon
+                            class="me-3"
+                            #iconMapLink
+                            routerLinkActive="active"
+                            svgIcon="maplink"
+                            (click)="generateMapLink(terr, iconMapLink)"
+                            aria-label="Side nav toggle icon"
+                          ></mat-icon>
+                        }
+                        @if (terr.poligonId || terr.imageId) {
+                          <mat-icon
+                            routerLinkActive="active"
+                            svgIcon="pdf"
+                            (click)="toPdf(terr)"
+                            aria-label="Side nav toggle icon"
+                          ></mat-icon>
+                        }
+                      </div>
+                      <div class="grid-item d-flex align-items-center">
+                        {{ terr.name }} -
+                        {{
+                          terr.returnedDates.length !== terr.participants.length
+                            ? (terr.participants?.at(-1) | participantPipe)?.name
+                            : t("TERRITORY_NOT_ASSIGNED")
+                        }}
+                        @if (!terr.available) {
+                          <mat-icon class="ms-2 cursor-arrow" svgIcon="unavailable"></mat-icon>
+                        }
+                      </div>
+                      <div class="grid-item d-flex align-items-center">
+                        <mat-icon
+                          [routerLink]="['update', terr.id]"
+                          routerLinkActive="active"
+                          svgIcon="edit"
+                          aria-label="Side nav toggle icon"
+                        ></mat-icon>
+                      </div>
+                      <div class="grid-item d-flex align-items-center">
+                        @if (terr.participants.length > terr.returnedDates.length) {
+                          <mat-icon
+                            [routerLink]="['return', terr.id]"
+                            routerLinkActive="active"
+                            svgIcon="return"
+                            aria-label="Side nav toggle icon"
+                          ></mat-icon>
+                        } @else {
+                          {{
+                            terr.participants.length === 0 && terr.returnedDates.length === 0
+                              ? t("TERRITORY_TABLE_NEVER_ASSIGNED")
+                              : t("TERRITORY_TABLE_RETURNED")
+                          }}
+                        }
+                      </div>
+                      <div class="grid-item d-flex align-items-center">
+                        <mat-icon
+                          [routerLink]="['delete', terr.id]"
+                          routerLinkActive="active"
+                          svgIcon="garbage"
+                          aria-label="Side nav toggle icon"
+                        ></mat-icon>
+                      </div>
+                    </div>
+                  }
+                }
+              </div>
+            } @else {
+              <div>{{ t("TERRITORY_NO_TERRITORY_PLACEHOLDER") }}</div>
             }
-          </div>
-        } @else {
-          <div>{{ t("TERRITORY_NO_TERRITORY_PLACEHOLDER") }}</div>
-        }
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-}
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  }
+</span>

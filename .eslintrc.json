@@ -55,12 +55,6 @@
             "maxComplexity": 8
           }
         ],
-        "prettier/prettier": [
-          "error",
-          {
-            "endOfLine": "lf"
-          }
-        ],
         "unused-imports/no-unused-imports": "error",
         "no-restricted-syntax": [
           "error",
