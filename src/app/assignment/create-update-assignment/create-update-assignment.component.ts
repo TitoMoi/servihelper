@@ -758,7 +758,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const roomId = this.gfv("room");
     const atId = this.gfv("assignType");
 
-    if (currentDate && roomId && atId) {
+    if (currentDate && roomId && atId && this.assignTypeService.isOfTypeAssignTypes(
+      this.assignTypeService.getAssignType(atId).type,
+    )) {
       //Get a list of principals that are not exhausted for school
       let principals =
         structuredClone(
