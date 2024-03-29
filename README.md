@@ -117,7 +117,7 @@ Only the time format can't be changed, but you can select a lang that suits your
    - Your responsability to ensure that all files are synchronized before working.
    - Warning: Sometimes data is not updated on real time.
    - _(this way of work has configuration complexity but later has less overhead, just check you are online and google drive is working and files are up to date before working)_
-   - _(this scenario is not real time, it just works directly with the files instead of with copies, you must export copies from time to time for security)_
+   - _(this scenario is not real time, it just works directly with the files instead of with copies, *you MUST export a security copy* from time to time for security)_
 
 **Paid mode 💲**:
 
