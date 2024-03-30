@@ -295,7 +295,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Seite 1 von 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Vorherige",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Kann Assistent",
-  "PARTICIPANT_AVAILABLE_LIST": "Zeigen Sie eine Tabelle der Teilnehmer mit verfügbaren Zuordnungstypen an",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Kann Principal",
   "PARTICIPANT_BUTTON_TITLE": "Teilnehmer erstellen",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Wählen Sie, dass die Tage nicht verfügbar sind",
@@ -493,5 +492,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Sortieren Sie die zurückgekehrten Gebiete durch weniger Arbeit",
   "HEATMAP_EXPLAIN_COLORS": "Wie lange wird das Gebiet zugewiesen oder wie lange ist das Territorium nicht zugewiesen?",
   "TERRITORY_PDF_MEETING_POINT": "Treffpunkt",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Berechtigungsliste"
 }

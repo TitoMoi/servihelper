@@ -288,7 +288,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Sayfa 1/1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Öncesi",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Can asistan",
-  "PARTICIPANT_AVAILABLE_LIST": "Mevcut atama türlerine sahip katılımcıların bir tablosunu gösterin",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Müdür olabilir",
   "PARTICIPANT_BUTTON_TITLE": "Katılımcı Oluştur",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Günleri Seçin Mevcut Değil",
@@ -482,5 +481,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "İade edilen bölgeleri daha az çalışarak sıralayın",
   "HEATMAP_EXPLAIN_COLORS": "Bölge ne kadar sürer veya bölge ne kadar atanır.",
   "TERRITORY_PDF_MEETING_POINT": "Buluşma noktası",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "İzinler Listesi"
 }

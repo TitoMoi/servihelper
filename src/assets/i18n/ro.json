@@ -295,7 +295,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Pagina 1 din 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Anterior",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Poate asistent",
-  "PARTICIPANT_AVAILABLE_LIST": "Afișați un tabel de participanți cu tipuri de atribuire disponibile",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Poate director",
   "PARTICIPANT_BUTTON_TITLE": "Creați participant",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Alegeți zilele nu este disponibil",
@@ -493,5 +492,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Sortează teritoriile returnate după mai puțin lucrat",
   "HEATMAP_EXPLAIN_COLORS": "Cât timp este atribuit teritoriul sau cât timp este returnat teritoriul",
   "TERRITORY_PDF_MEETING_POINT": "Loc de întâlnire",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Lista de permisiuni"
 }

@@ -288,7 +288,6 @@
   "PAGINATOR_PAGE_1_OF_1": "1/1ページ",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "前",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "アシスタントができます",
-  "PARTICIPANT_AVAILABLE_LIST": "利用可能な割り当てタイプを持つ参加者のテーブルを表示します",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "プリンシパルができます",
   "PARTICIPANT_BUTTON_TITLE": "参加者を作成します",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "日が利用できないことを選択してください",
@@ -482,5 +481,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "返された地域をあまり機能させずに並べ替えます",
   "HEATMAP_EXPLAIN_COLORS": "領土はどのくらいの期間割り当てられていますか、またはどのくらいの期間領土が割り当てられていませんか",
   "TERRITORY_PDF_MEETING_POINT": "ミーティングポイント",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "権限リスト"
 }

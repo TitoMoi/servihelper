@@ -295,7 +295,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Страница 1 из 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Предыдущий",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Может помощник",
-  "PARTICIPANT_AVAILABLE_LIST": "Показать таблицу участников с доступными типами назначения",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Может принципал",
   "PARTICIPANT_BUTTON_TITLE": "Создайте участника",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Выберите дни, не доступны",
@@ -494,5 +493,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Сортировать возвращенные территории меньше рабочих",
   "HEATMAP_EXPLAIN_COLORS": "Сколько времени назначена территория или как долго территория возвращается без назначения",
   "TERRITORY_PDF_MEETING_POINT": "Место встречи",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Список разрешений"
 }

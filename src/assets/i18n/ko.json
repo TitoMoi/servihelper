@@ -288,7 +288,6 @@
   "PAGINATOR_PAGE_1_OF_1": "1/1 페이지",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "이전의",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "조수가 될 수 있습니다",
-  "PARTICIPANT_AVAILABLE_LIST": "사용 가능한 할당 유형이있는 참가자 테이블을 보여줍니다",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "교장",
   "PARTICIPANT_BUTTON_TITLE": "참가자를 만드십시오",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "날을 선택할 수 없습니다",
@@ -482,5 +481,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "덜 일한 상태로 돌아온 영토를 정렬하십시오",
   "HEATMAP_EXPLAIN_COLORS": "영토는 얼마나 오래 지정되었거나 영토가 할당되지 않은 시간이 얼마나 걸립니까?",
   "TERRITORY_PDF_MEETING_POINT": "미팅 포인트",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "권한 목록"
 }

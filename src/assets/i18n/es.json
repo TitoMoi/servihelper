@@ -297,7 +297,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Página 1 de 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Anterior",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Puede asistente",
-  "PARTICIPANT_AVAILABLE_LIST": "Muestra una tabla de participantes con sus respectivos tipos de asignaciones",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Puede principal",
   "PARTICIPANT_BUTTON_TITLE": "Crear participante",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Elige los días que no está disponible",
@@ -493,5 +492,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Ordena los territorios devueltos por menos trabajado",
   "HEATMAP_EXPLAIN_COLORS": "Cuanto tiempo lleva el territorio o cuanto tiempo hace el territorio no se ha asignado",
   "TERRITORY_PDF_MEETING_POINT": "Punto de encuentro",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Lista de permisos"
 }

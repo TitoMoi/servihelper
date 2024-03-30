@@ -295,7 +295,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Pagina 1 van 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Vorig",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Kan assistent",
-  "PARTICIPANT_AVAILABLE_LIST": "Toon een tabel met deelnemers met beschikbare opdrachttypen",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Kan directeur",
   "PARTICIPANT_BUTTON_TITLE": "Creëer deelnemer",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Kies de dagen zijn niet beschikbaar",
@@ -492,5 +491,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Sorteer de geretourneerde gebieden op minder gewerkt",
   "HEATMAP_EXPLAIN_COLORS": "Hoe lang is het territorium toegewezen of hoe lang is het territorium niet toegewezen",
   "TERRITORY_PDF_MEETING_POINT": "Ontmoetingspunt",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Machtigingslijst"
 }

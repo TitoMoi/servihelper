@@ -274,7 +274,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Stranica 1 od 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Prethodni",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Može asistent",
-  "PARTICIPANT_AVAILABLE_LIST": "Promijenite dodjelu vrsta sudionika iz prikaza tablice",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Može li glavni",
   "PARTICIPANT_BUTTON_TITLE": "Stvorite sudionik",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Odaberite dani nisu dostupni",
@@ -465,5 +464,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Poredajte vraćene teritorije manje radeći",
   "HEATMAP_EXPLAIN_COLORS": "Koliko je dugo dodijeljen teritorij ili koliko dugo se teritorij vraća nedozvine",
   "TERRITORY_PDF_MEETING_POINT": "Točka susreta",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Popis dozvola"
 }

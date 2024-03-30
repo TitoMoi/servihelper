@@ -22,11 +22,7 @@
             [disabled]="netStatusOffline$ | async"
           >
             <span>{{ t("ASSIGNTYPE_AVAILABLE_LIST") }}</span>
-            <mat-icon
-              svgIcon="assigntypeavailable"
-              [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
-              routerLinkActive="active"
-            ></mat-icon>
+            <mat-icon svgIcon="assigntypeavailable" routerLinkActive="active"></mat-icon>
             @if (netStatusOffline$ | async) {
               <mat-icon svgIcon="nowifi"></mat-icon>
             }

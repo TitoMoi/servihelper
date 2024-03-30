@@ -288,7 +288,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Σελίδα 1 από 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Προηγούμενος",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Μπορεί βοηθός",
-  "PARTICIPANT_AVAILABLE_LIST": "Εμφάνιση ενός πίνακα συμμετεχόντων με διαθέσιμους τύπους αποστολής",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Κύριος",
   "PARTICIPANT_BUTTON_TITLE": "Δημιουργία συμμετέχοντα",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Επιλέξτε τις ημέρες δεν είναι διαθέσιμες",
@@ -482,5 +481,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Ταξινόμηση των επιστρεφόμενων εδαφών με λιγότερο επεξεργασμένα",
   "HEATMAP_EXPLAIN_COLORS": "Πόσο καιρό ανατεθεί η επικράτεια ή πόσο καιρό επιστρέφεται το έδαφος",
   "TERRITORY_PDF_MEETING_POINT": "Σημείο συνάντησης",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Λίστα δικαιωμάτων"
 }

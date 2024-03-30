@@ -288,7 +288,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Strona 1 z 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Poprzedni",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Może asystent",
-  "PARTICIPANT_AVAILABLE_LIST": "Pokaż tabelę uczestników z dostępnymi typami zadań",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Może główny",
   "PARTICIPANT_BUTTON_TITLE": "Utwórz uczestnika",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Wybierz dni nie są dostępne",
@@ -482,5 +481,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Sortować zwrócone terytoria według mniejszych prac",
   "HEATMAP_EXPLAIN_COLORS": "Jak długo przypisane jest terytorium lub jak długo jest zwrócone przez terytorium",
   "TERRITORY_PDF_MEETING_POINT": "Punkt spotkania",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Lista uprawnień"
 }

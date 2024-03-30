@@ -288,7 +288,6 @@
   "PAGINATOR_PAGE_1_OF_1": "1 নং পৃষ্ঠার 1 নং",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "আগে",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "সহকারী করতে পারেন",
-  "PARTICIPANT_AVAILABLE_LIST": "উপলভ্য অ্যাসাইনমেন্ট প্রকার সহ অংশগ্রহণকারীদের একটি সারণী দেখান",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "অধ্যক্ষ করতে পারেন",
   "PARTICIPANT_BUTTON_TITLE": "অংশগ্রহণকারী তৈরি করুন",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "দিনগুলি উপলভ্য নয় চয়ন করুন",
@@ -482,5 +481,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "কম কাজ করে ফিরে আসা অঞ্চলগুলি বাছাই করুন",
   "HEATMAP_EXPLAIN_COLORS": "অঞ্চলটি কতক্ষণ নির্ধারিত হয় বা কতক্ষণ অঞ্চলটি স্বাক্ষরিত হয়?",
   "TERRITORY_PDF_MEETING_POINT": "সাক্ষাতের স্থান",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "অনুমতি তালিকা"
 }

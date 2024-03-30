@@ -1,6 +1,6 @@
 {
-  "APP_LOCKED": "Servihelper is being used by another administrator 👨‍💻",
-  "APP_ONLINE_TIMEOUT_REMINDER": "When working online the app will close after 15 minuts 🕒 if there is no activity.",
+  "APP_LOCKED": "Servihelper正在另一位管理员使用 👨‍💻",
+  "APP_ONLINE_TIMEOUT_REMINDER": "在线工作时，该应用将在15分钟后关闭 🕒 如果没有活动",
   "ASSIGNMENT_COLLISION_TOOLTIP": "参与者在当前日期之前或之后具有相同的作业类型，并且在此任务类型的门槛之内",
   "ASSIGNMENT_ISCLOSEOTHERS_PRAYER_TOOLTIP": "不推荐，因为参与者还有另一个类型任务 {{ASSIGNTYPES_INITIALPRAYER}} 或者 {{ASSIGNTYPES_ENDINGPRAYER}} 很接近",
   "ASSIGNMENT_ISCLOSEOTHERS_TOOLTIP": "不推荐，因为参与者还有另一个类型任务 {{ASSIGNTYPES_BIBLEREADING}} 或者 {{ASSIGNTYPES_INITIALCALL}} 或者 {{ASSIGNTYPES_RETURNVISIT}} 或者 {{ASSIGNTYPES_BIBLESTUDY}} 或者 {{ASSIGNTYPES_TALK}} 很接近",
@@ -288,7 +288,6 @@
   "PAGINATOR_PAGE_1_OF_1": "第1页，共1页",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "以前的",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "可以助理",
-  "PARTICIPANT_AVAILABLE_LIST": "显示具有可用作业类型的参与者表",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "可以校长",
   "PARTICIPANT_BUTTON_TITLE": "创建参与者",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "选择日子不可用",
@@ -482,5 +481,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "用少的工作对返回的地区进行排序",
   "HEATMAP_EXPLAIN_COLORS": "分配的领土多长时间或未分配的领土返回了多长时间",
   "TERRITORY_PDF_MEETING_POINT": "会面点",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "权限列表"
 }

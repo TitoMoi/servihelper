@@ -296,7 +296,6 @@
   "PAGINATOR_PAGE_1_OF_1": "Pàgina 1 de 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "Anterior",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "Pot ajudant",
-  "PARTICIPANT_AVAILABLE_LIST": "Mostra una taula de participants amb els tipus d'assignació disponibles",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "Pot principal",
   "PARTICIPANT_BUTTON_TITLE": "Crear participant",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "Tria els dies que no està disponible",
@@ -495,5 +494,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Ordena els territories retornats per menys treballats",
   "HEATMAP_EXPLAIN_COLORS": "Quant de temps du el territori assignat o quant de temps du el territori retornat sense asignar",
   "TERRITORY_PDF_MEETING_POINT": "Punt de trobada",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Llista de permisos"
 }

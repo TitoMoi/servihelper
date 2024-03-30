@@ -288,7 +288,6 @@
   "PAGINATOR_PAGE_1_OF_1": "पेज 1 का 1",
   "PAGINATOR_PREVIOUS_PAGE_LABEL": "पिछला",
   "PARTICIPANT_AVAILABLE_ASSISTANT": "सहायक कर सकते हैं",
-  "PARTICIPANT_AVAILABLE_LIST": "उपलब्ध असाइनमेंट प्रकारों के साथ प्रतिभागियों की एक तालिका दिखाएं",
   "PARTICIPANT_AVAILABLE_PRINCIPAL": "प्रिंसिपल कर सकते हैं",
   "PARTICIPANT_BUTTON_TITLE": "प्रतिभागी बनाएं",
   "PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE": "चुनें दिन उपलब्ध नहीं है",
@@ -482,5 +481,5 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "कम काम करके लौटे हुए क्षेत्रों को क्रमबद्ध करें",
   "HEATMAP_EXPLAIN_COLORS": "इस क्षेत्र को कब तक सौंपा गया है या कब तक क्षेत्र को अनसुना किया गया है",
   "TERRITORY_PDF_MEETING_POINT": "बैठक बिंदु",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
+  "ASSIGNTYPE_AVAILABLE_LIST": "अनुमतियाँ सूची"
 }
