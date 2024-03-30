@@ -19,12 +19,6 @@
             "max": 5
           }
         ],
-        "prettier/prettier": [
-          "error",
-          {
-            "endOfLine": "lf"
-          }
-        ],
         "@angular-eslint/component-selector": [
           "error",
           {

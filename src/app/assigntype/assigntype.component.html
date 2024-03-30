@@ -15,12 +15,22 @@
           }
         </a>
         @if (participantsLength) {
-          <mat-icon
-            svgIcon="assigntypeavailable"
+          <button
+            mat-raised-button
+            color="accent"
             [routerLink]="['/participant', 'assigntypeavailable']"
-            [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
-            routerLinkActive="active"
-          ></mat-icon>
+            [disabled]="netStatusOffline$ | async"
+          >
+            <span>{{ t("ASSIGNTYPE_AVAILABLE_LIST") }}</span>
+            <mat-icon
+              svgIcon="assigntypeavailable"
+              [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
+              routerLinkActive="active"
+            ></mat-icon>
+            @if (netStatusOffline$ | async) {
+              <mat-icon svgIcon="nowifi"></mat-icon>
+            }
+          </button>
         }
       </div>
     </div>

@@ -481,6 +481,6 @@
   "STARVING_ASSIGNMENTS_SUBTITLE": "Globalna liczba pokazuje tylko uczestników, którzy są dostępni tylko jako główny i nie mają innych zadań dla wybranej daty.Ten pogląd jest dobry, aby śledzić uczestników, którzy nie wykonują żadnych rodzajów zadań.W każdym razie nie przypisuj uczestnictwa tylko na podstawie tego widoku, ponieważ może to prowadzić do powtarzania typów przypisania tylko dlatego, że jest to zwrot uczestnika.",
   "TERRITORY_SORT_BY_LAST_WORKED": "Sortować zwrócone terytoria według mniejszych prac",
   "HEATMAP_EXPLAIN_COLORS": "Jak długo przypisane jest terytorium lub jak długo jest zwrócone przez terytorium",
-
-  "TERRITORY_PDF_MEETING_POINT": "Punkt spotkania"
+  "TERRITORY_PDF_MEETING_POINT": "Punkt spotkania",
+  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
 }

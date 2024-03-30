@@ -481,6 +481,6 @@
   "STARVING_ASSIGNMENTS_SUBTITLE": "Global sayısı yalnızca sadece müdür olarak mevcut olan ve seçilen tarih için başka görevleri olmayan katılımcıları gösterir.Bu görüş, her türlü atama türünü yapmayan katılımcıları takip etmek iyidir.Her neyse, sadece bu görüşe dayanarak katılım atmayın, çünkü sadece katılımcı dönüşü olduğu için tekrar atama türlerine yol açabilir.",
   "TERRITORY_SORT_BY_LAST_WORKED": "İade edilen bölgeleri daha az çalışarak sıralayın",
   "HEATMAP_EXPLAIN_COLORS": "Bölge ne kadar sürer veya bölge ne kadar atanır.",
-
-  "TERRITORY_PDF_MEETING_POINT": "Buluşma noktası"
+  "TERRITORY_PDF_MEETING_POINT": "Buluşma noktası",
+  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
 }

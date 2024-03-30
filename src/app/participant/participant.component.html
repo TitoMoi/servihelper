@@ -27,6 +27,23 @@
           <mat-icon svgIcon="nowifi"></mat-icon>
         }
       </button>
+      <button
+        class="mb-2"
+        mat-raised-button
+        color="accent"
+        [routerLink]="['/participant', 'assigntypeavailable']"
+        [disabled]="netStatusOffline$ | async"
+      >
+        <span>{{ t("ASSIGNTYPE_AVAILABLE_LIST") }}</span>
+        <mat-icon
+          svgIcon="assigntypeavailable"
+          [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
+          routerLinkActive="active"
+        ></mat-icon>
+        @if (netStatusOffline$ | async) {
+          <mat-icon svgIcon="nowifi"></mat-icon>
+        }
+      </button>
     }
   </div>
   <div class="d-flex align-items-center">
@@ -42,14 +59,6 @@
       (change)="toggleExternals($event)"
       >{{ t("PARTICIPANT_SHOW_EXTERNAL") }}</mat-checkbox
     >
-    @if (participants.length) {
-      <mat-icon
-        svgIcon="assigntypeavailable"
-        routerLink="assigntypeavailable"
-        [matTooltip]="t('PARTICIPANT_AVAILABLE_LIST')"
-        routerLinkActive="active"
-      ></mat-icon>
-    }
   </div>
   @if (participants.length) {
     <div class="table-overflow">

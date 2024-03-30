@@ -1,5 +1,5 @@
 mat-icon {
-  height: 28px;
+  height: auto;
   width: 28px;
 }
 
@@ -30,4 +30,12 @@ mat-icon {
       background-color: white;
     }
   }
+}
+
+//Override, icon appears as cropped on bottom.
+.mat-mdc-button > .mat-icon,
+.mat-mdc-unelevated-button > .mat-icon,
+.mat-mdc-raised-button > .mat-icon,
+.mat-mdc-outlined-button > .mat-icon {
+  height: auto;
 }

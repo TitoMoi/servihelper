@@ -492,6 +492,6 @@
   "STARVING_ASSIGNMENTS_SUBTITLE": "El recuento global solo muestra a los participantes disponibles solo como principales y que no tienen otras tareas para la fecha seleccionada. Esta visión es buena para realizar un seguimiento de aquellos participantes que no hacen todo tipo de tipos de tareas. De todos modos, no asigne participación solo en función de esta visión porque puede conducir a repetir los tipos de asignación solo porque es el turno del participante.",
   "TERRITORY_SORT_BY_LAST_WORKED": "Ordena los territorios devueltos por menos trabajado",
   "HEATMAP_EXPLAIN_COLORS": "Cuanto tiempo lleva el territorio o cuanto tiempo hace el territorio no se ha asignado",
-
-  "TERRITORY_PDF_MEETING_POINT": "Punto de encuentro"
+  "TERRITORY_PDF_MEETING_POINT": "Punto de encuentro",
+  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
 }

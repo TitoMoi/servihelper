@@ -1,12 +1,12 @@
 {
-    "printWidth": 95,
-    "endOfLine": "lf",
-    "overrides": [
-        {
-          "files": "*.html",
-          "options": {
-            "parser": "angular"
-          }
-        }
-      ]
+  "printWidth": 95,
+  "endOfLine": "crlf",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
 }

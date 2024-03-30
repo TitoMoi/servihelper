@@ -1,3 +1,8 @@
+mat-icon {
+  height: 28px;
+  width: 28px;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr 0.5fr 1fr 1fr;
@@ -27,7 +32,10 @@
   }
 }
 
-mat-icon {
-  height: 28px;
-  width: 28px;
+//Override, icon appears as cropped on bottom.
+.mat-mdc-button > .mat-icon,
+.mat-mdc-unelevated-button > .mat-icon,
+.mat-mdc-raised-button > .mat-icon,
+.mat-mdc-outlined-button > .mat-icon {
+  height: auto;
 }

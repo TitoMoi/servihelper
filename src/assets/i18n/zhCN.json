@@ -481,6 +481,6 @@
   "STARVING_ASSIGNMENTS_SUBTITLE": "全球数量仅显示仅作为本金可用的参与者，并且在选定的日期没有其他任务。这种观点可以很好地跟踪那些不从事各种作业类型的参与者。无论如何，不要仅基于此视图分配参与，因为它可以导致重复分配类型，因为它是参与者的转弯。",
   "TERRITORY_SORT_BY_LAST_WORKED": "用少的工作对返回的地区进行排序",
   "HEATMAP_EXPLAIN_COLORS": "分配的领土多长时间或未分配的领土返回了多长时间",
-
-  "TERRITORY_PDF_MEETING_POINT": "会面点"
+  "TERRITORY_PDF_MEETING_POINT": "会面点",
+  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
 }

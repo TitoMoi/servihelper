@@ -491,6 +491,6 @@
   "STARVING_ASSIGNMENTS_SUBTITLE": "De wereldwijde telling toont alleen deelnemers die alleen beschikbaar zijn als opdrachtgever en geen andere taken hebben voor de geselecteerde datum.Deze weergave is goed om die deelnemers bij te houden die niet alle soorten opdrachten doen.Hoe dan ook, wijs deelname niet alleen toe op basis van deze weergave, omdat dit kan leiden tot herhaalde toewijzingstypen alleen omdat het de beurt van de deelnemer is.",
   "TERRITORY_SORT_BY_LAST_WORKED": "Sorteer de geretourneerde gebieden op minder gewerkt",
   "HEATMAP_EXPLAIN_COLORS": "Hoe lang is het territorium toegewezen of hoe lang is het territorium niet toegewezen",
-
-  "TERRITORY_PDF_MEETING_POINT": "Ontmoetingspunt"
+  "TERRITORY_PDF_MEETING_POINT": "Ontmoetingspunt",
+  "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list"
 }
