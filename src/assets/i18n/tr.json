@@ -481,5 +481,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "İade edilen bölgeleri daha az çalışarak sıralayın",
   "HEATMAP_EXPLAIN_COLORS": "Bölge ne kadar sürer veya bölge ne kadar atanır.",
   "TERRITORY_PDF_MEETING_POINT": "Buluşma noktası",
-  "ASSIGNTYPE_AVAILABLE_LIST": "İzinler Listesi"
+  "ASSIGNTYPE_AVAILABLE_LIST": "İzinler Listesi",
+  "TERRITORY_DELETE_ZERO_DELETE": "Hiçbir toprak silinmeyecek çünkü hepsi başka bir gruba ait",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "silinecek:"
 }

@@ -494,5 +494,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Ordena els territories retornats per menys treballats",
   "HEATMAP_EXPLAIN_COLORS": "Quant de temps du el territori assignat o quant de temps du el territori retornat sense asignar",
   "TERRITORY_PDF_MEETING_POINT": "Punt de trobada",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Llista de permisos"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Llista de permisos",
+  "TERRITORY_DELETE_ZERO_DELETE": "No se eliminaran territoris perquè tots pertanyen a un altre grup",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "es suprimirà:"
 }

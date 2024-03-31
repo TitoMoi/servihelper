@@ -481,5 +481,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "কম কাজ করে ফিরে আসা অঞ্চলগুলি বাছাই করুন",
   "HEATMAP_EXPLAIN_COLORS": "অঞ্চলটি কতক্ষণ নির্ধারিত হয় বা কতক্ষণ অঞ্চলটি স্বাক্ষরিত হয়?",
   "TERRITORY_PDF_MEETING_POINT": "সাক্ষাতের স্থান",
-  "ASSIGNTYPE_AVAILABLE_LIST": "অনুমতি তালিকা"
+  "ASSIGNTYPE_AVAILABLE_LIST": "অনুমতি তালিকা",
+  "TERRITORY_DELETE_ZERO_DELETE": "কোনও অঞ্চল মুছে ফেলা হবে না কারণ এগুলি সমস্তই অন্য একটি দলের অন্তর্ভুক্ত",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "মুছে ফেলা হবে"
 }

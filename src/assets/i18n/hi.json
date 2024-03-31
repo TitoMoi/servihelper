@@ -481,5 +481,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "कम काम करके लौटे हुए क्षेत्रों को क्रमबद्ध करें",
   "HEATMAP_EXPLAIN_COLORS": "इस क्षेत्र को कब तक सौंपा गया है या कब तक क्षेत्र को अनसुना किया गया है",
   "TERRITORY_PDF_MEETING_POINT": "बैठक बिंदु",
-  "ASSIGNTYPE_AVAILABLE_LIST": "अनुमतियाँ सूची"
+  "ASSIGNTYPE_AVAILABLE_LIST": "अनुमतियाँ सूची",
+  "TERRITORY_DELETE_ZERO_DELETE": "कोई क्षेत्र नहीं हटाया जाएगा क्योंकि वे सभी दूसरे समूह के हैं",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "हटा दिया जाएगा:"
 }

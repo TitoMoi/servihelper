@@ -481,5 +481,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "用少的工作对返回的地区进行排序",
   "HEATMAP_EXPLAIN_COLORS": "分配的领土多长时间或未分配的领土返回了多长时间",
   "TERRITORY_PDF_MEETING_POINT": "会面点",
-  "ASSIGNTYPE_AVAILABLE_LIST": "权限列表"
+  "ASSIGNTYPE_AVAILABLE_LIST": "权限列表",
+  "TERRITORY_DELETE_ZERO_DELETE": "没有任何领土会被删除，因为它们都属于另一组",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "将被删除:"
 }

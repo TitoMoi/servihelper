@@ -481,5 +481,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Ταξινόμηση των επιστρεφόμενων εδαφών με λιγότερο επεξεργασμένα",
   "HEATMAP_EXPLAIN_COLORS": "Πόσο καιρό ανατεθεί η επικράτεια ή πόσο καιρό επιστρέφεται το έδαφος",
   "TERRITORY_PDF_MEETING_POINT": "Σημείο συνάντησης",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Λίστα δικαιωμάτων"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Λίστα δικαιωμάτων",
+  "TERRITORY_DELETE_ZERO_DELETE": "Κανένα εδάφη δεν θα διαγραφεί επειδή όλα αυτά ανήκουν σε άλλη ομάδα",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "θα διαγραφεί:"
 }

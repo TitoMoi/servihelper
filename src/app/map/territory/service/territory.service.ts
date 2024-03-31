@@ -72,6 +72,15 @@ export class TerritoryService {
   }
 
   /**
+   *
+   * @param tgId the territory group id
+   * @returns a list of territories
+   */
+  getTerritoriesByTerritoryGroupId(tgId: string) {
+    return this.#territories.filter((t) => t.groups.includes(tgId));
+  }
+
+  /**
    * @param id the id of the territory to search by
    * @returns true if the territory is currently assigned, false otherwise
    */

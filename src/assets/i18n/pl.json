@@ -481,5 +481,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Sortować zwrócone terytoria według mniejszych prac",
   "HEATMAP_EXPLAIN_COLORS": "Jak długo przypisane jest terytorium lub jak długo jest zwrócone przez terytorium",
   "TERRITORY_PDF_MEETING_POINT": "Punkt spotkania",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Lista uprawnień"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Lista uprawnień",
+  "TERRITORY_DELETE_ZERO_DELETE": "Żadne terytoria nie zostaną usunięte, ponieważ wszystkie należą do innej grupy",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "zostanie usunięty:"
 }

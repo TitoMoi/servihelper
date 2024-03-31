@@ -492,5 +492,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Trier les territoires retournés par moins de travail",
   "HEATMAP_EXPLAIN_COLORS": "Combien de temps le territoire est-il attribué ou combien de temps le territoire est-il retourné",
   "TERRITORY_PDF_MEETING_POINT": "Point de rencontre",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Liste des autorisations"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Liste des autorisations",
+  "TERRITORY_DELETE_ZERO_DELETE": "Aucun territoire ne sera supprimé car tous appartiennent à un autre groupe",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "sera supprimé:"
 }

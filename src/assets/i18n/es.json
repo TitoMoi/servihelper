@@ -492,5 +492,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Ordena los territorios devueltos por menos trabajado",
   "HEATMAP_EXPLAIN_COLORS": "Cuanto tiempo lleva el territorio o cuanto tiempo hace el territorio no se ha asignado",
   "TERRITORY_PDF_MEETING_POINT": "Punto de encuentro",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Lista de permisos"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Lista de permisos",
+  "TERRITORY_DELETE_ZERO_DELETE": "No se eliminarán los territorios porque todos pertenecen a otro grupo",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "será borrado:"
 }

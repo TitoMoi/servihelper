@@ -481,5 +481,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "返された地域をあまり機能させずに並べ替えます",
   "HEATMAP_EXPLAIN_COLORS": "領土はどのくらいの期間割り当てられていますか、またはどのくらいの期間領土が割り当てられていませんか",
   "TERRITORY_PDF_MEETING_POINT": "ミーティングポイント",
-  "ASSIGNTYPE_AVAILABLE_LIST": "権限リスト"
+  "ASSIGNTYPE_AVAILABLE_LIST": "権限リスト",
+  "TERRITORY_DELETE_ZERO_DELETE": "それらのすべてが別のグループに属しているため、領土は削除されません",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "削除されます"
 }

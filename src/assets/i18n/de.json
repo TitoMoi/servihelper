@@ -492,5 +492,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Sortieren Sie die zurückgekehrten Gebiete durch weniger Arbeit",
   "HEATMAP_EXPLAIN_COLORS": "Wie lange wird das Gebiet zugewiesen oder wie lange ist das Territorium nicht zugewiesen?",
   "TERRITORY_PDF_MEETING_POINT": "Treffpunkt",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Berechtigungsliste"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Berechtigungsliste",
+  "TERRITORY_DELETE_ZERO_DELETE": "Es werden keine Gebiete gelöscht, weil alle zu einer anderen Gruppe gehören",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "wird gelöscht:"
 }

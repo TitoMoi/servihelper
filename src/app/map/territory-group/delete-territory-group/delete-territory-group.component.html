@@ -16,6 +16,22 @@
           </mat-form-field>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col">
+          @if (!territoriesToBeDeleted.length) {
+            {{ t("TERRITORY_DELETE_ZERO_DELETE") }}
+          } @else {
+            <p>
+              {{ territoriesToBeDeleted.length }}
+              {{ t("TERRITORY_DELETE_HAS_TERR_DELETE") }}
+            </p>
+            @for (terr of territoriesToBeDeleted; track $index) {
+              <div>{{ terr.name }}</div>
+            }
+          }
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button type="button" class="me-3" routerLink="../..">

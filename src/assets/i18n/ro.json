@@ -492,5 +492,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Sortează teritoriile returnate după mai puțin lucrat",
   "HEATMAP_EXPLAIN_COLORS": "Cât timp este atribuit teritoriul sau cât timp este returnat teritoriul",
   "TERRITORY_PDF_MEETING_POINT": "Loc de întâlnire",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Lista de permisiuni"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Lista de permisiuni",
+  "TERRITORY_DELETE_ZERO_DELETE": "Niciun teritoriu nu va fi șters pentru că toate aparțin unui alt grup",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "va fi sters:"
 }

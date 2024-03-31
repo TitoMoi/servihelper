@@ -464,5 +464,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Poredajte vraćene teritorije manje radeći",
   "HEATMAP_EXPLAIN_COLORS": "Koliko je dugo dodijeljen teritorij ili koliko dugo se teritorij vraća nedozvine",
   "TERRITORY_PDF_MEETING_POINT": "Točka susreta",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Popis dozvola"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Popis dozvola",
+  "TERRITORY_DELETE_ZERO_DELETE": "Neće se izbrisati ni teritoriji jer svi pripadaju drugoj grupi",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "bit će izbrisani:"
 }

@@ -1,5 +1,5 @@
-import { AsyncPipe } from "@angular/common";
-import { Component } from "@angular/core";
+import { AsyncPipe, JsonPipe } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
 import { ReactiveFormsModule, UntypedFormBuilder } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -26,14 +26,22 @@ import { Validators } from "ngx-editor";
     RouterLink,
     MatIconModule,
     AsyncPipe,
+    JsonPipe,
   ],
   templateUrl: "./delete-territory-group.component.html",
   styleUrls: ["./delete-territory-group.component.scss"],
 })
-export class DeleteTerritoryGroupComponent {
-  tg = this.territoryGroupService.getTerritoryGroup(this.activatedRoute.snapshot.params.id);
+export class DeleteTerritoryGroupComponent implements OnInit {
+  tgId = this.activatedRoute.snapshot.params.id;
+
+  tg = this.territoryGroupService.getTerritoryGroup(this.tgId);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
+
+  territoriesToBeDeleted =
+    this.territoryService
+      .getTerritoriesByTerritoryGroupId(this.tgId)
+      .filter((t) => t.groups.length === 1) ?? [];
 
   form = this.formBuilder.group({
     id: this.tg.id,
@@ -48,6 +56,9 @@ export class DeleteTerritoryGroupComponent {
     private onlineService: OnlineService,
     private activatedRoute: ActivatedRoute,
   ) {}
+
+  ngOnInit(): void {}
+
   onSubmit(): void {
     //get id
     const id = this.form.get("id").value;

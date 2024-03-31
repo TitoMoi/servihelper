@@ -493,5 +493,7 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Сортировать возвращенные территории меньше рабочих",
   "HEATMAP_EXPLAIN_COLORS": "Сколько времени назначена территория или как долго территория возвращается без назначения",
   "TERRITORY_PDF_MEETING_POINT": "Место встречи",
-  "ASSIGNTYPE_AVAILABLE_LIST": "Список разрешений"
+  "ASSIGNTYPE_AVAILABLE_LIST": "Список разрешений",
+  "TERRITORY_DELETE_ZERO_DELETE": "Территории не будут удалены, потому что все они принадлежат другой группе",
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "будет удален:"
 }
