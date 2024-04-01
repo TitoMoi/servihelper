@@ -130,7 +130,7 @@ export class TerritoryComponent {
 
         let lastParticipantId = "";
         //Get the last participant id of the territory
-        if (this.territoryService.isActiveTerritory(t.id)) {
+        if (this.territoryService.isActiveTerritory(t)) {
           lastParticipantId = t.participants.at(-1);
         }
 

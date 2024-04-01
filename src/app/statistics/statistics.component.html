@@ -30,3 +30,14 @@
     ></app-fake-accordion>
   }
 </div>
+<div class="mb-3">
+  @defer (when showTerritoryGraphics; prefetch on viewport(fakeTerritoryCount)) {
+    <app-territory-graphics></app-territory-graphics>
+  } @placeholder {
+    <app-fake-accordion
+      #fakeTerritoryCount
+      [titleKey]="'STATISTICS_TERRITORY_GRAPHICS'"
+      (click)="showTerritoryGraphics = true"
+    ></app-fake-accordion>
+  }
+</div>

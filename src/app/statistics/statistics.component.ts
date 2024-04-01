@@ -9,6 +9,7 @@ import { ConfigInterface } from "app/config/model/config.model";
 import { RoleInterface } from "app/roles/model/role.model";
 import { MatIconModule } from "@angular/material/icon";
 import { FakeAccordionComponent } from "app/statistics/fake-accordion/fake-accordion.component";
+import { TerritoryGraphicsComponent } from "app/statistics/territory-graphics/territory-graphics.component";
 @Component({
   selector: "app-statistics",
   templateUrl: "./statistics.component.html",
@@ -17,6 +18,7 @@ import { FakeAccordionComponent } from "app/statistics/fake-accordion/fake-accor
   imports: [
     GlobalCountComponent,
     TerritoryCountComponent,
+    TerritoryGraphicsComponent,
     TranslocoModule,
     MatIconModule,
     FakeAccordionComponent,
@@ -27,6 +29,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   showGlobalCount = false;
   showTerritoryCount = false;
+  showTerritoryGraphics = false;
 
   subscription = new Subscription();
 

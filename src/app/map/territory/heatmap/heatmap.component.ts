@@ -23,8 +23,8 @@ import { PolygonService } from "../service/polygon.service";
 import { Map, Polygon, TileLayer } from "leaflet";
 import { TerritoryService } from "../service/territory.service";
 import { TerritoryContextInterface } from "app/map/model/map.model";
-import { differenceInMonths } from "date-fns";
 import { ParticipantService } from "app/participant/service/participant.service";
+import { GraphicService } from "app/services/graphic.service";
 
 @Component({
   selector: "app-heatmap",
@@ -53,6 +53,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   private territoryService = inject(TerritoryService);
   private participantService = inject(ParticipantService);
   private exportService = inject(ExportService);
+  private graphicService = inject(GraphicService);
   private router = inject(Router);
 
   //Load only territories that have poligonId and are available
@@ -68,10 +69,10 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   polygonRefList: Polygon[] = [];
 
   //colors
-  redColor = "#fc6868";
-  yellowColor = "#faf1a0";
-  blueColor = "#77cafc";
-  greenColor = "#d784fa";
+  redColor = this.graphicService.redColor;
+  yellowColor = this.graphicService.yellowColor;
+  blueColor = this.graphicService.blueColor;
+  purpleColor = this.graphicService.purpleColor;
 
   ngAfterViewInit(): void {
     if (this.loadedPolygons.length) {
@@ -128,18 +129,16 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
   // eslint-disable-next-line complexity
   getColorBasedOnTimeDistance(territory: TerritoryContextInterface): string {
     //It's never assigned
-    if (this.territoryService.isNeverAssignedTerritory(territory.id)) return this.greenColor;
-    //It's active or returned
-    const isActiveTerritory = this.territoryService.isActiveTerritory(territory.id);
-    const territoryLastDate = new Date(
-      isActiveTerritory ? territory.assignedDates.at(-1) : territory.returnedDates.at(-1),
-    );
-    if (territoryLastDate) {
-      const distanceInMonths = differenceInMonths(territoryLastDate, new Date());
-      /* how to reason the includes? https://date-fns.org/v2.30.0/docs/formatDistance#description */
-      if (distanceInMonths >= 12) return this.redColor;
-      if (distanceInMonths >= 4) return this.yellowColor;
+    if (this.territoryService.isNeverAssignedTerritory(territory)) return this.purpleColor;
+
+    if (this.territoryService.isOverdueTerritory(territory)) {
+      return this.redColor;
     }
+
+    if (this.territoryService.isMoreThan4Months(territory)) {
+      return this.yellowColor;
+    }
+
     return this.blueColor;
   }
 

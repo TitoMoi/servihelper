@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-6">
+    <div #containerRef class="bg-color-white">
+      <h3 class="pt-1 text-center">All territories</h3>
+      <ngx-charts-pie-chart
+        [view]="[containerRef.offsetWidth, 400]"
+        [scheme]="colorScheme"
+        [results]="getAllTerritories()"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        [legendPosition]="legendPosition"
+        [labels]="showLabels"
+      >
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
+
+  @for (tg of territoryGroups; track $index) {
+    <div class="col-6">
+      <div class="bg-color-white">
+        <h3 #containerRef class="pt-1 text-center">{{ tg.name }}</h3>
+        <ngx-charts-pie-chart
+          [view]="[containerRef.offsetWidth, 400]"
+          [scheme]="colorScheme"
+          [results]="getAllTerritories(tg.id)"
+          [gradient]="gradient"
+          [legend]="showLegend"
+          [legendPosition]="legendPosition"
+          [labels]="showLabels"
+        >
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
+  }
+</div>

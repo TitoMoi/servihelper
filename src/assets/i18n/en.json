@@ -469,5 +469,10 @@
   "TERRITORY_SORT_BY_LAST_WORKED": "Sort the returned territories by less worked",
   "ASSIGNTYPE_AVAILABLE_LIST": "Permissions list",
   "TERRITORY_DELETE_ZERO_DELETE": "No territories will be deleted because all of them belong to another group",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "will be deleted:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "will be deleted:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Show territory graphics",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Never assigned",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "It's being worked or returned < 4 months",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Being worked or returned > 4 months",
+  "TERRITORY_GRAPHICS_OVERDUE": "Overdue > 12 months"
 }

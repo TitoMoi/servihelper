@@ -7,6 +7,7 @@ import { LockService } from "app/lock/service/lock.service";
 import { inflate, deflate } from "pako";
 import { TerrImageService } from "./terr-image.service";
 import { PolygonService } from "./polygon.service";
+import { differenceInMonths } from "date-fns";
 @Injectable({
   providedIn: "root",
 })
@@ -84,8 +85,7 @@ export class TerritoryService {
    * @param id the id of the territory to search by
    * @returns true if the territory is currently assigned, false otherwise
    */
-  isActiveTerritory(id: string): boolean {
-    const t = this.getTerritory(id);
+  isActiveTerritory(t: TerritoryContextInterface): boolean {
     return t.assignedDates.length > t.returnedDates.length;
   }
 
@@ -93,17 +93,46 @@ export class TerritoryService {
    * @param id the id of the territory to search by
    * @returns true if the territory is returned, false otherwise
    */
-  isReturnedTerritory(id: string): boolean {
-    const t = this.getTerritory(id);
+  isReturnedTerritory(t: TerritoryContextInterface): boolean {
     return t.assignedDates.length === t.returnedDates.length;
+  }
+
+  /**
+   * Assigned more than 12 months or returned with more than 12 months without being worked
+   */
+  isOverdueTerritory(t: TerritoryContextInterface): boolean {
+    //It's active or returned?
+    const isActiveTerritory = this.isActiveTerritory(t);
+    const territoryLastDate = new Date(
+      isActiveTerritory ? t.assignedDates.at(-1) : t.returnedDates.at(-1),
+    );
+    if (territoryLastDate) {
+      const distanceInMonths = differenceInMonths(territoryLastDate, new Date());
+      if (distanceInMonths >= 12) return true;
+      return false;
+    }
+  }
+  /**
+   * Assigned more than 4 months or returned with more than 4 months without being worked
+   */
+  isMoreThan4Months(t: TerritoryContextInterface): boolean {
+    //It's active or returned?
+    const isActiveTerritory = this.isActiveTerritory(t);
+    const territoryLastDate = new Date(
+      isActiveTerritory ? t.assignedDates.at(-1) : t.returnedDates.at(-1),
+    );
+    if (territoryLastDate) {
+      const distanceInMonths = differenceInMonths(territoryLastDate, new Date());
+      if (distanceInMonths >= 4) return true;
+      return false;
+    }
   }
 
   /**
    * @param id the id of the territory to search by
    * @returns true if the territory has not been assigned yet, false otherwise
    */
-  isNeverAssignedTerritory(id: string): boolean {
-    const t = this.getTerritory(id);
+  isNeverAssignedTerritory(t: TerritoryContextInterface): boolean {
     return !t.assignedDates.length && !t.returnedDates.length;
   }
 
