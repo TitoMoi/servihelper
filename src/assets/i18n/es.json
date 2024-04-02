@@ -498,8 +498,8 @@
   "STATISTICS_TERRITORY_GRAPHICS": "Mostrar gráficos de territorio",
   "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Nunca asignado",
   "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "Se está trabajando o devuelto < 4 meses",
-  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Ser trabajado o devuelto > 4 meses",
-  "TERRITORY_GRAPHICS_OVERDUE": "Ser trabajado o devuelto > 12 meses",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Se está trabajando o devuelto > 4 meses",
+  "TERRITORY_GRAPHICS_OVERDUE": "Se está trabajando o devuelto > 12 meses",
   "TERRITORY_GRAPHICS_ALL_TERR": "Todos los territorios disponibles",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Número de territorios disponibles y no disponibles"
 }
