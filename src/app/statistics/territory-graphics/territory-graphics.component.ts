@@ -1,26 +1,23 @@
 /* eslint-disable complexity */
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { GraphicService } from "app/services/graphic.service";
-import { Color, LegendPosition, NgxChartsModule, ScaleType } from "@swimlane/ngx-charts";
+import { Color, NgxChartsModule, ScaleType } from "@swimlane/ngx-charts";
 import { TerritoryService } from "app/map/territory/service/territory.service";
-import { TranslocoService } from "@ngneat/transloco";
+import { TranslocoDirective, TranslocoService } from "@ngneat/transloco";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
 import { TerritoryContextClass } from "app/map/model/map.model";
+import { MatExpansionModule } from "@angular/material/expansion";
 
 @Component({
   selector: "app-territory-graphics",
   standalone: true,
-  imports: [NgxChartsModule],
+  imports: [NgxChartsModule, MatExpansionModule, TranslocoDirective],
   templateUrl: "./territory-graphics.component.html",
   styleUrl: "./territory-graphics.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TerritoryGraphicsComponent {
-  showLegend = false;
-  showLabels = true;
   gradient = false;
-
-  legendPosition = LegendPosition.Right;
 
   //colors
   redColor = this.graphicService.redColor;

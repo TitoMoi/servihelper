@@ -55,3 +55,10 @@ mat-icon {
 .padding {
   padding: 2px 6px;
 }
+
+//OVERRIDES
+ngx-charts-advanced-legend {
+  div.advanced-pie-legend {
+    line-height: 32px;
+  }
+}

@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
-import { TranslocoModule } from "@ngneat/transloco";
-import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { TranslocoDirective } from "@ngneat/transloco";
+import { TranslocoDatePipe } from "@ngneat/transloco-locale";
 import { TerritoryService } from "app/map/territory/service/territory.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
@@ -15,11 +15,11 @@ import { SortService } from "app/services/sort.service";
   selector: "app-territory-count",
   standalone: true,
   imports: [
-    TranslocoModule,
+    TranslocoDirective,
     MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
-    TranslocoLocaleModule,
+    TranslocoDatePipe,
     ParticipantPipe,
   ],
   templateUrl: "./territory-count.component.html",

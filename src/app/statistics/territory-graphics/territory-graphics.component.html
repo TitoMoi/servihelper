@@ -1,35 +1,42 @@
-<div class="row">
-  <div class="col-6">
-    <div #containerRef class="bg-color-white">
-      <h3 class="pt-1 text-center">All territories</h3>
-      <ngx-charts-pie-chart
-        [view]="[containerRef.offsetWidth, 400]"
-        [scheme]="colorScheme"
-        [results]="getAllTerritories()"
-        [gradient]="gradient"
-        [legend]="showLegend"
-        [legendPosition]="legendPosition"
-        [labels]="showLabels"
-      >
-      </ngx-charts-pie-chart>
-    </div>
-  </div>
+<mat-accordion *transloco="let t">
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3 class="m-3">
+          {{ t("STATISTICS_COUNT_TERRITORY_TITLE") }}
+        </h3>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
 
-  @for (tg of territoryGroups; track $index) {
-    <div class="col-6">
-      <div class="bg-color-white">
-        <h3 #containerRef class="pt-1 text-center">{{ tg.name }}</h3>
-        <ngx-charts-pie-chart
-          [view]="[containerRef.offsetWidth, 400]"
-          [scheme]="colorScheme"
-          [results]="getAllTerritories(tg.id)"
-          [gradient]="gradient"
-          [legend]="showLegend"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-        >
-        </ngx-charts-pie-chart>
+    <div class="row">
+      <div class="col-12">
+        <div #containerRef class="bg-color-white">
+          <h3 class="pt-1">ALL TERRITORIES GROUPED</h3>
+          <ngx-charts-advanced-pie-chart
+            [view]="[containerRef.offsetWidth, 360]"
+            [scheme]="colorScheme"
+            [results]="getAllTerritories()"
+            [gradient]="gradient"
+          >
+          </ngx-charts-advanced-pie-chart>
+        </div>
       </div>
+
+      @for (tg of territoryGroups; track $index) {
+        <div class="col-12">
+          <div class="bg-color-white">
+            <h3 #containerRef class="pt-1">{{ tg.name }}</h3>
+            <ngx-charts-advanced-pie-chart
+              [view]="[containerRef.offsetWidth, 360]"
+              [scheme]="colorScheme"
+              [results]="getAllTerritories(tg.id)"
+              [gradient]="gradient"
+              [animations]="false"
+            >
+            </ngx-charts-advanced-pie-chart>
+          </div>
+        </div>
+      }
     </div>
-  }
-</div>
+  </mat-expansion-panel>
+</mat-accordion>

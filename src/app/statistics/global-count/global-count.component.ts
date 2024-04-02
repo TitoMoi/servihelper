@@ -53,9 +53,9 @@ import {
   ViewChild,
 } from "@angular/core";
 import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
-import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
+import { TranslocoService, TranslocoDirective } from "@ngneat/transloco";
 import { SortService } from "app/services/sort.service";
-import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { TranslocoDatePipe } from "@ngneat/transloco-locale";
 
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
@@ -73,11 +73,11 @@ import { isWithinInterval } from "date-fns";
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    TranslocoModule,
+    TranslocoDirective,
     MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
-    TranslocoLocaleModule,
+    TranslocoDatePipe,
     MatFormFieldModule,
     MatDatepickerModule,
     ReactiveFormsModule,
