@@ -12,7 +12,7 @@
   <div class="px-1">
     <hr />
   </div>
-  <div mat-dialog-content class="text-black">
+  <div mat-dialog-content>
     @for (a of closeAssignments; track a.id) {
       <div class="m-2">
         {{ a.date | translocoDate: { dateStyle: "short" } }} -

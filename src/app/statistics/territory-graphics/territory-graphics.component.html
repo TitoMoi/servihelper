@@ -3,20 +3,26 @@
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h3 class="m-3">
-          {{ t("STATISTICS_COUNT_TERRITORY_TITLE") }}
+          {{ t("STATISTICS_TERRITORY_GRAPHICS") }}
         </h3>
       </mat-panel-title>
     </mat-expansion-panel-header>
 
     <div class="row">
       <div class="col-12">
+        <span class="fst-italic"
+          >{{ t("TERRITORY_GRAPHICS_TOTAL_NUMBER") }}: {{ territories.length }}</span
+        >
+      </div>
+      <div class="col-12">
         <div #containerRef class="bg-color-white">
-          <h3 class="pt-1">ALL TERRITORIES GROUPED</h3>
+          <h3 class="pt-1">{{ t("TERRITORY_GRAPHICS_ALL_TERR") }}</h3>
           <ngx-charts-advanced-pie-chart
-            [view]="[containerRef.offsetWidth, 360]"
+            [view]="[containerRef.offsetWidth, 320]"
             [scheme]="colorScheme"
             [results]="getAllTerritories()"
             [gradient]="gradient"
+            (select)="showSelect()"
           >
           </ngx-charts-advanced-pie-chart>
         </div>
@@ -27,11 +33,12 @@
           <div class="bg-color-white">
             <h3 #containerRef class="pt-1">{{ tg.name }}</h3>
             <ngx-charts-advanced-pie-chart
-              [view]="[containerRef.offsetWidth, 360]"
+              [view]="[containerRef.offsetWidth, 320]"
               [scheme]="colorScheme"
               [results]="getAllTerritories(tg.id)"
               [gradient]="gradient"
               [animations]="false"
+              (select)="showSelect(tg.id)"
             >
             </ngx-charts-advanced-pie-chart>
           </div>

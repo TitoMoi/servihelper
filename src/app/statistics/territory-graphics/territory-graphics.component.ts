@@ -7,11 +7,13 @@ import { TranslocoDirective, TranslocoService } from "@ngneat/transloco";
 import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
 import { TerritoryContextClass } from "app/map/model/map.model";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { TerritoryGroupDataComponent } from "app/statistics/territory-graphics/territory-group-data/territory-group-data.component";
 
 @Component({
   selector: "app-territory-graphics",
   standalone: true,
-  imports: [NgxChartsModule, MatExpansionModule, TranslocoDirective],
+  imports: [NgxChartsModule, MatExpansionModule, TranslocoDirective, MatDialogModule],
   templateUrl: "./territory-graphics.component.html",
   styleUrl: "./territory-graphics.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,6 +52,7 @@ export class TerritoryGraphicsComponent {
     private territoryService: TerritoryService,
     private territoryGroupService: TerritoryGroupService,
     private translocoService: TranslocoService,
+    private matDialog: MatDialog,
   ) {}
 
   /**
@@ -57,8 +60,8 @@ export class TerritoryGraphicsComponent {
    */
   getAllTerritories(tgId?: string) {
     // position 0 = neverAssigned
-    // 1 =  beingWorkedOrReturnedLess
-    // 2 =  beingWorkedOrReturnedMore
+    // 1 =  beingWorkedOrReturnedLess4
+    // 2 =  beingWorkedOrReturnedMore4
     // 3 =  overdue
     const data = [];
 
@@ -70,6 +73,8 @@ export class TerritoryGraphicsComponent {
     } else {
       territoriesByGroup = this.territories;
     }
+    //Filter the not available
+    territoriesByGroup = territoriesByGroup.filter((t) => t.available);
 
     //Prepare objects for data
     const neverWorked = {
@@ -113,5 +118,11 @@ export class TerritoryGraphicsComponent {
     data[3] = overdue;
 
     return data;
+  }
+
+  showSelect(tgId?: string) {
+    this.matDialog.open(TerritoryGroupDataComponent, {
+      data: tgId,
+    });
   }
 }

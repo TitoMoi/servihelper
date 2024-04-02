@@ -1,0 +1,48 @@
+<ng-container *transloco="let t">
+  <div mat-dialog-title class="d-flex align-items-center justify-content-start">
+    <div class="mx-2">
+      {{ territoryGroup ? territoryGroup.name : t("TERRITORY_GRAPHICS_ALL_TERR") }}
+    </div>
+  </div>
+  <div class="px-1">
+    <hr />
+  </div>
+  <div mat-dialog-content>
+    <h4 [style.border-bottom]="getNeverAssignedBottomBorder()">{{ neverAssigned }}</h4>
+    <div>
+      @for (name of neverWorked.value; track $index) {
+        {{ name }}
+      }
+      @if (!neverWorked.value.length) {
+        -
+      }
+    </div>
+    <h4 [style.border-bottom]="getLessThan4BottomBorder()">{{ beingWorkedOrReturnedLess }}</h4>
+    <div>
+      @for (name of beingWorkedLess4.value; track $index) {
+        {{ name }}
+      }
+      @if (!beingWorkedLess4.value.length) {
+        -
+      }
+    </div>
+    <h4 [style.border-bottom]="getMoreThan4BottomBorder()">{{ beingWorkedOrReturnedMore }}</h4>
+    <div>
+      @for (name of beingWorkedMore4.value; track $index) {
+        {{ name }}
+      }
+      @if (!beingWorkedMore4.value.length) {
+        -
+      }
+    </div>
+    <h4 [style.border-bottom]="getOverdueBottomBorder()">{{ overdueTitle }}</h4>
+    <div>
+      @for (name of overdue.value; track $index) {
+        {{ name }}
+      }
+      @if (!overdue.value.length) {
+        -
+      }
+    </div>
+  </div>
+</ng-container>
