@@ -483,5 +483,12 @@
   "TERRITORY_PDF_MEETING_POINT": "Σημείο συνάντησης",
   "ASSIGNTYPE_AVAILABLE_LIST": "Λίστα δικαιωμάτων",
   "TERRITORY_DELETE_ZERO_DELETE": "Κανένα εδάφη δεν θα διαγραφεί επειδή όλα αυτά ανήκουν σε άλλη ομάδα",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "θα διαγραφεί:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "θα διαγραφεί:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Εμφάνιση γραφικών εδάφους",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Ποτέ δεν έχει ανατεθεί",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "Εργάστηκε ή επιστρέφεται < 4 μήνες",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Εργάστηκε ή επιστρέφεται > 4 μήνες",
+  "TERRITORY_GRAPHICS_OVERDUE": "Εργάστηκε ή επιστρέφεται > 12 μήνες",
+  "TERRITORY_GRAPHICS_ALL_TERR": "Όλα τα διαθέσιμα εδάφη",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Αριθμός διαθέσιμων και όχι διαθέσιμων περιοχών"
 }

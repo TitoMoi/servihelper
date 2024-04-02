@@ -474,7 +474,7 @@
   "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Never assigned",
   "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "It's being worked or returned < 4 months",
   "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Being worked or returned > 4 months",
-  "TERRITORY_GRAPHICS_OVERDUE": "Overdue > 12 months",
+  "TERRITORY_GRAPHICS_OVERDUE": "Being worked or returned > 12 months",
   "TERRITORY_GRAPHICS_ALL_TERR": "All available territories",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Number of available and not available territories"
 }

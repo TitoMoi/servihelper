@@ -483,5 +483,12 @@
   "TERRITORY_PDF_MEETING_POINT": "बैठक बिंदु",
   "ASSIGNTYPE_AVAILABLE_LIST": "अनुमतियाँ सूची",
   "TERRITORY_DELETE_ZERO_DELETE": "कोई क्षेत्र नहीं हटाया जाएगा क्योंकि वे सभी दूसरे समूह के हैं",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "हटा दिया जाएगा:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "हटा दिया जाएगा:",
+  "STATISTICS_TERRITORY_GRAPHICS": "शो टेरिटरी ग्राफिक्स",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "कभी नहीं सौंपा गया",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "यह काम किया जा रहा है या लौटाया गया है < 4 महीने",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "काम किया जा रहा है या लौटा > 4 महीने",
+  "TERRITORY_GRAPHICS_OVERDUE": "काम किया जा रहा है या लौटा > 12 महीने",
+  "TERRITORY_GRAPHICS_ALL_TERR": "सभी उपलब्ध क्षेत्र",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "उपलब्ध और उपलब्ध प्रदेशों की संख्या"
 }

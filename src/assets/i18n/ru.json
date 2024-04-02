@@ -495,5 +495,12 @@
   "TERRITORY_PDF_MEETING_POINT": "Место встречи",
   "ASSIGNTYPE_AVAILABLE_LIST": "Список разрешений",
   "TERRITORY_DELETE_ZERO_DELETE": "Территории не будут удалены, потому что все они принадлежат другой группе",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "будет удален:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "будет удален:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Показать графику территории",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Никогда не назначал",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "Он работает или возвращается < 4 месяца",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Работать или возвращать > 4 месяца",
+  "TERRITORY_GRAPHICS_OVERDUE": "Работать или возвращать > 12 месяцев",
+  "TERRITORY_GRAPHICS_ALL_TERR": "Все доступные территории",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Количество доступных и недоступных территорий"
 }

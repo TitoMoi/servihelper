@@ -466,5 +466,12 @@
   "TERRITORY_PDF_MEETING_POINT": "Točka susreta",
   "ASSIGNTYPE_AVAILABLE_LIST": "Popis dozvola",
   "TERRITORY_DELETE_ZERO_DELETE": "Neće se izbrisati ni teritoriji jer svi pripadaju drugoj grupi",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "bit će izbrisani:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "bit će izbrisani:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Prikaži teritorijsku grafiku",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Nikad dodijeljen",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "Radi se ili vraća < 4 mjeseca",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Rad ili se vraća > 4 mjeseca",
+  "TERRITORY_GRAPHICS_OVERDUE": "Rad ili se vraća > 12 mjeseci",
+  "TERRITORY_GRAPHICS_ALL_TERR": "Svi dostupni teritoriji",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Broj dostupnih, a ne dostupnih teritorija"
 }

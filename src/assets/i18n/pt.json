@@ -496,5 +496,12 @@
   "TERRITORY_PDF_MEETING_POINT": "Ponto de encontro",
   "ASSIGNTYPE_AVAILABLE_LIST": "Lista de permissões",
   "TERRITORY_DELETE_ZERO_DELETE": "Nenhum território será excluído porque todos pertencem a outro grupo",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "será deletado:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "será deletado:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Mostre gráficos de território",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Nunca atribuído",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "Está sendo trabalhado ou retornado < 4 meses",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Sendo trabalhado ou devolvido > 4 meses",
+  "TERRITORY_GRAPHICS_OVERDUE": "Sendo trabalhado ou devolvido > 12 meses",
+  "TERRITORY_GRAPHICS_ALL_TERR": "Todos os territórios disponíveis",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Número de territórios disponíveis e não disponíveis"
 }

@@ -494,5 +494,12 @@
   "TERRITORY_PDF_MEETING_POINT": "Loc de întâlnire",
   "ASSIGNTYPE_AVAILABLE_LIST": "Lista de permisiuni",
   "TERRITORY_DELETE_ZERO_DELETE": "Niciun teritoriu nu va fi șters pentru că toate aparțin unui alt grup",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "va fi sters:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "va fi sters:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Afișați grafică pe teritoriu",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Nu a fost niciodată repartizat",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "Este lucrat sau returnat < 4 luni",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "A fi lucrat sau returnat > 4 luni",
+  "TERRITORY_GRAPHICS_OVERDUE": "A fi lucrat sau returnat > 12 luni",
+  "TERRITORY_GRAPHICS_ALL_TERR": "Toate teritoriile disponibile",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Numărul de teritorii disponibile și nu disponibile"
 }

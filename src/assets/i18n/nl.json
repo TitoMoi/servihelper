@@ -493,5 +493,12 @@
   "TERRITORY_PDF_MEETING_POINT": "Ontmoetingspunt",
   "ASSIGNTYPE_AVAILABLE_LIST": "Machtigingslijst",
   "TERRITORY_DELETE_ZERO_DELETE": "Er worden geen territoria verwijderd omdat ze allemaal tot een andere groep behoren",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "zal worden verwijderd:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "zal worden verwijderd:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Toon territoriumafbeeldingen",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Nooit toegewezen",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "Het wordt gewerkt of geretourneerd < 4 maanden",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Werken of geretourneerd > 4 maanden",
+  "TERRITORY_GRAPHICS_OVERDUE": "Werken of geretourneerd > 12 maanden",
+  "TERRITORY_GRAPHICS_ALL_TERR": "Alle beschikbare gebieden",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Aantal beschikbare en niet beschikbare gebieden"
 }

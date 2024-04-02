@@ -483,5 +483,12 @@
   "TERRITORY_PDF_MEETING_POINT": "সাক্ষাতের স্থান",
   "ASSIGNTYPE_AVAILABLE_LIST": "অনুমতি তালিকা",
   "TERRITORY_DELETE_ZERO_DELETE": "কোনও অঞ্চল মুছে ফেলা হবে না কারণ এগুলি সমস্তই অন্য একটি দলের অন্তর্ভুক্ত",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "মুছে ফেলা হবে"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "মুছে ফেলা হবে",
+  "STATISTICS_TERRITORY_GRAPHICS": "অঞ্চল গ্রাফিক্স দেখান",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "কখনও অর্পণ করা হয়নি",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "এটি কাজ করা হচ্ছে বা ফিরে < 4 মাস",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "কাজ করা বা ফিরে আসা > 4 মাস",
+  "TERRITORY_GRAPHICS_OVERDUE": "কাজ করা বা ফিরে আসা > 12 মাস",
+  "TERRITORY_GRAPHICS_ALL_TERR": "সমস্ত উপলব্ধ অঞ্চল",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "উপলব্ধ এবং উপলভ্য অঞ্চলগুলির সংখ্যা"
 }

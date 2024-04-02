@@ -493,5 +493,12 @@
   "TERRITORY_PDF_MEETING_POINT": "Punto d'incontro",
   "ASSIGNTYPE_AVAILABLE_LIST": "Elenco delle autorizzazioni",
   "TERRITORY_DELETE_ZERO_DELETE": "Nessun territorio verrà eliminato perché tutti appartengono a un altro gruppo",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "sarà cancellato:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "sarà cancellato:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Mostra la grafica del territorio",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Mai assegnato",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "Viene lavorato o restituito < 4 mesi",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Essere lavorato o restituito > 4 mesi",
+  "TERRITORY_GRAPHICS_OVERDUE": "Essere lavorato o restituito > 12 mesi",
+  "TERRITORY_GRAPHICS_ALL_TERR": "Tutti i territori disponibili",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Numero di territori disponibili e non disponibili"
 }

@@ -494,5 +494,12 @@
   "TERRITORY_PDF_MEETING_POINT": "Treffpunkt",
   "ASSIGNTYPE_AVAILABLE_LIST": "Berechtigungsliste",
   "TERRITORY_DELETE_ZERO_DELETE": "Es werden keine Gebiete gelöscht, weil alle zu einer anderen Gruppe gehören",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "wird gelöscht:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "wird gelöscht:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Territoriumgrafiken zeigen",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Nie zugewiesen",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "Es wird bearbeitet oder < 4 Monate zurückgegeben",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "Bearbeitet oder zurückgegeben > 4 Monate",
+  "TERRITORY_GRAPHICS_OVERDUE": "Bearbeitet oder zurückgegeben > 12 Monate zurückkehren",
+  "TERRITORY_GRAPHICS_ALL_TERR": "Alle verfügbaren Gebiete",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Anzahl der verfügbaren und nicht verfügbaren Gebiete"
 }

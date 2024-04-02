@@ -496,5 +496,12 @@
   "TERRITORY_PDF_MEETING_POINT": "Punt de trobada",
   "ASSIGNTYPE_AVAILABLE_LIST": "Llista de permisos",
   "TERRITORY_DELETE_ZERO_DELETE": "No se eliminaran territoris perquè tots pertanyen a un altre grup",
-  "TERRITORY_DELETE_HAS_TERR_DELETE": "es suprimirà:"
+  "TERRITORY_DELETE_HAS_TERR_DELETE": "es suprimirà:",
+  "STATISTICS_TERRITORY_GRAPHICS": "Mostra gràfics del territori",
+  "TERRITORY_GRAPHICS_NEVER_ASSIGNED": "Mai assignat",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS": "S’està treballant o retornat < 4 mesos",
+  "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "S’està treballant o retornat > 4 mesos",
+  "TERRITORY_GRAPHICS_OVERDUE": "S’està treballant o retornat > 12 mesos",
+  "TERRITORY_GRAPHICS_ALL_TERR": "Tots els territoris disponibles",
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Nombre de territoris disponibles i no disponibles"
 }
