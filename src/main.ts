@@ -1,4 +1,4 @@
-import { importProvidersFrom } from "@angular/core";
+import { APP_INITIALIZER, importProvidersFrom, inject } from "@angular/core";
 
 import { APP_CONFIG } from "./environments/environment";
 import { bootstrapApplication } from "@angular/platform-browser";
@@ -12,9 +12,45 @@ import { DateAdapter, MatNativeDateModule } from "@angular/material/core";
 import { provideRouter } from "@angular/router";
 import { provideTransloco } from "@ngneat/transloco";
 import { TranslocoHttpLoader } from "app/transloco/transloco-loader";
+import { ConfigService } from "app/config/service/config.service";
+import { OnlineService } from "app/online/service/online.service";
+import { LockService } from "app/lock/service/lock.service";
 
 bootstrapApplication(AppComponent, {
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: () => {
+        const configService = inject(ConfigService);
+        const onlineService = inject(OnlineService);
+        const lockService = inject(LockService);
+
+        const online = onlineService.getOnline();
+        // Adapt paths based on online
+        configService.prepareFilePaths(online);
+
+        // Check if we are online to take the lock
+        if (online.isOnline) {
+          lockService.initGetLock();
+          const isIdleAdmin = lockService.checkIdleAdmin(15);
+          if (isIdleAdmin) {
+            lockService.updateTimestamp();
+          } else {
+            lockService.takeLockAndTimestamp();
+            lockService.intervalNoActivity();
+          }
+        }
+
+        return () =>
+          configService.getConfigAsync().then((config) => {
+            configService.config = config;
+            configService.role = config.role;
+
+            configService.hasChanged = false;
+          });
+      },
+    },
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes), //withDebugTracing()

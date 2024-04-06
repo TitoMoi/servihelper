@@ -20,14 +20,7 @@ import {
   RouterLinkActive,
   Router,
 } from "@angular/router";
-import {
-  Observable,
-  Subscription,
-  combineLatest,
-  distinctUntilChanged,
-  map,
-  skip,
-} from "rxjs";
+import { Subscription, map, skip } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
 import { SortService } from "app/services/sort.service";
 import { RoomService } from "app/room/service/room.service";
@@ -36,17 +29,15 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { ParticipantPipe } from "../participant/pipe/participant.pipe";
 import { RoomPipe } from "../room/pipe/room.pipe";
 import { AssignTypePipe } from "../assigntype/pipe/assign-type.pipe";
-import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+import { TranslocoDatePipe } from "@ngneat/transloco-locale";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
 import { NgClass, AsyncPipe } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoDirective } from "@ngneat/transloco";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
-import { ConfigInterface } from "app/config/model/config.model";
-import { RoleInterface } from "app/roles/model/role.model";
 import { ConfigService } from "app/config/service/config.service";
 
 @Component({
@@ -57,7 +48,7 @@ import { ConfigService } from "app/config/service/config.service";
   standalone: true,
   imports: [
     RouterOutlet,
-    TranslocoModule,
+    TranslocoDirective,
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
@@ -65,7 +56,7 @@ import { ConfigService } from "app/config/service/config.service";
     MatTooltipModule,
     NgClass,
     AsyncPipe,
-    TranslocoLocaleModule,
+    TranslocoDatePipe,
     AssignTypePipe,
     AssignTypeNamePipe,
     RoomPipe,
@@ -89,12 +80,15 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   inOnline = this.onlineService.getOnline().isOnline;
 
   allowedAssignTypesIds = [];
-  config$: Observable<ConfigInterface> = this.configService.config$;
-  roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
-  currentRoleId$: Observable<string> = this.config$.pipe(
-    map((config) => config.role),
-    distinctUntilChanged(),
-  );
+
+  config = this.configService.config;
+
+  roles = this.config.roles;
+
+  currentRoleId: string = this.config.role;
+
+  // To know when the role changes
+  role$ = this.configService.role$;
 
   isAdminRole$ = this.configService.role$.pipe(map(() => this.configService.isAdminRole()));
 
@@ -156,7 +150,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   ngOnInit() {
     this.subscription.add(
-      this.currentRoleId$.pipe(skip(1)).subscribe(() => {
+      this.role$.pipe(skip(1)).subscribe(() => {
         this.router.navigateByUrl("home").then(() =>
           this.router.navigate(["assignment/fake"], {
             skipLocationChange: true,
@@ -168,11 +162,10 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
     //prepare emissions, emits also the first time
     this.subscription.add(
-      combineLatest([this.currentRoleId$, this.roles$]).subscribe(([currentRole, roles]) => {
-        this.allowedAssignTypesIds =
-          currentRole === "administrator"
-            ? this.getAllAssignTypesIds()
-            : roles.find((r) => r.id === currentRole).assignTypesId;
+      this.role$.subscribe((roleId) => {
+        this.allowedAssignTypesIds = this.configService.isAdminRole()
+          ? this.getAllAssignTypesIds()
+          : this.configService.getRole(roleId).assignTypesId;
 
         this.assignments = this.assignments.filter((a) =>
           this.allowedAssignTypesIds.includes(a.assignType),
@@ -263,22 +256,24 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   sortAndUpdateSeparator() {
     //sort
-    this.assignmentsTable = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
-      this.assignmentsTable,
-      "Desc",
-    );
+    if (this.assignmentsTable.length) {
+      this.assignmentsTable = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
+        this.assignmentsTable,
+        "Desc",
+      );
 
-    //Add separator
-    for (const tableRow of this.assignmentsTable) {
-      //reset
-      tableRow.hasDateSeparator = false;
-      if (
-        new Date(tableRow.date).getTime() !==
-        new Date(this.lastDateService.lastDashedDate).getTime()
-      ) {
-        tableRow.hasDateSeparator = true;
-        //update last dashed date
-        this.lastDateService.lastDashedDate = tableRow.date;
+      //Add separator
+      for (const tableRow of this.assignmentsTable) {
+        //reset
+        tableRow.hasDateSeparator = false;
+        if (
+          new Date(tableRow.date).getTime() !==
+          new Date(this.lastDateService.lastDashedDate).getTime()
+        ) {
+          tableRow.hasDateSeparator = true;
+          //update last dashed date
+          this.lastDateService.lastDashedDate = tableRow.date;
+        }
       }
     }
   }

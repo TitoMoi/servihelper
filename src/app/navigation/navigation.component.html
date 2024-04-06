@@ -112,7 +112,7 @@
       }
       <div class="d-inline-block me-3">
         <mat-form-field subscriptSizing="dynamic">
-          <mat-select [value]="(config$ | async).lang" (selectionChange)="updateLang($event)">
+          <mat-select [value]="config.lang" (selectionChange)="updateLang($event)">
             @for (lang of availableLangs; track lang) {
               <mat-option [value]="lang">
                 {{ t(lang) }}
@@ -125,11 +125,11 @@
         <mat-form-field subscriptSizing="dynamic">
           <mat-select
             color="primary"
-            [value]="currentRoleId$ | async"
+            [value]="currentRoleId"
             (selectionChange)="updateRole($event)"
           >
             <mat-option [value]="administratorKey">{{ t("ROLE_ADMINISTRATOR") }}</mat-option>
-            @for (role of roles$ | async; track role) {
+            @for (role of roles; track role) {
               <mat-option [value]="role.id">
                 {{ role.name }}
               </mat-option>

@@ -15,7 +15,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from "@angular/router";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoDirective } from "@ngneat/transloco";
 import { MatRadioGroup, MatRadioModule } from "@angular/material/radio";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { Subscription, filter, map } from "rxjs";
@@ -25,7 +25,7 @@ import { AsyncPipe } from "@angular/common";
   selector: "app-map",
   standalone: true,
   imports: [
-    TranslocoModule,
+    TranslocoDirective,
     MatButtonModule,
     RouterLink,
     RouterLinkActive,

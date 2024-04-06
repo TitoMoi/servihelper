@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { Injectable } from "@angular/core";
 import { LockInterface } from "app/lock/model/lock.model";
 import { ConfigService } from "app/config/service/config.service";
@@ -10,7 +11,7 @@ import { ipcRenderer } from "electron";
   providedIn: "root",
 })
 export class LockService {
-  #lock: LockInterface = undefined;
+  lockObj: LockInterface = undefined;
 
   isOnline = this.onlineService.getOnline().isOnline;
 
@@ -22,60 +23,60 @@ export class LockService {
   /**
    * @returns LockInterface
    */
-  getLock(): LockInterface {
+  initGetLock(): LockInterface {
     if (this.isOnline) {
       try {
-        this.#lock = readJSONSync(this.configService.lockPath);
-        return this.#lock;
+        this.lockObj = readJSONSync(this.configService.lockPath);
+        return this.lockObj;
       } catch (e) {
         //This should never happen, prevent a death file
-        this.#lock = {
+        this.lockObj = {
           lock: false,
           timestamp: new Date(),
         };
         this.saveLockToFile();
-        return this.#lock;
+        return this.lockObj;
       }
     }
   }
 
   /** Set lock to true */
   takeLock() {
-    if (this.#lock) {
-      this.#lock.lock = true;
+    if (this.lockObj) {
+      this.lockObj.lock = true;
       this.saveLockToFile();
     }
   }
 
   /** Set lock to false */
   releaseLock() {
-    if (this.#lock) {
-      this.#lock.lock = false;
+    if (this.lockObj) {
+      this.lockObj.lock = false;
       this.saveLockToFile();
     }
   }
 
   updateTimestamp() {
-    if (this.#lock) {
-      this.#lock.timestamp = new Date();
+    if (this.lockObj) {
+      this.lockObj.timestamp = new Date();
       this.saveLockToFile();
     }
   }
 
   takeLockAndTimestamp() {
-    this.#lock.lock = true;
-    this.#lock.timestamp = new Date();
+    this.lockObj.lock = true;
+    this.lockObj.timestamp = new Date();
     this.saveLockToFile();
   }
 
   /**
-   * When the lock remains true, after 20 minuts without timestamp allow the app to take it.
-   * So, if we encounter a lock true and a timestamp above 20 min we must take the app.
+   * When the lock remains true, after 'mins' without timestamp allow the app to take it.
+   * So, if we encounter a lock true and a timestamp above 'mins' we must take the app.
    */
-  checkDeathEnd(mins: number): boolean {
-    if (this.#lock.lock) {
+  checkIdleAdmin(mins: number): boolean {
+    if (this.lockObj.lock) {
       const { years, days, months, hours, minutes } = intervalToDuration({
-        start: new Date(this.#lock.timestamp),
+        start: new Date(this.lockObj.timestamp),
         end: new Date(),
       });
       if (years || days || months || hours) {
@@ -96,7 +97,7 @@ export class LockService {
   intervalNoActivity() {
     //900000 millisecons is 15 min
     setInterval(() => {
-      const isDeathEnd = this.checkDeathEnd(15);
+      const isDeathEnd = this.checkIdleAdmin(15);
       if (isDeathEnd) {
         //shared function but we get a circular di injection
         ipcRenderer.send("closeApp");
@@ -104,15 +105,11 @@ export class LockService {
     }, 900000);
   }
 
-  /* checkTimer(){
-    if(this.#lock.timestamp)
-  } */
-
   /** Save the lock only if we are online */
   saveLockToFile() {
     if (this.isOnline) {
       //Make sure the file is saved
-      writeJsonSync(this.configService.lockPath, this.#lock);
+      writeJsonSync(this.configService.lockPath, this.lockObj);
     }
   }
 }

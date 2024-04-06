@@ -100,8 +100,6 @@ export class HomeComponent implements OnInit {
     zip = zip.readFile(zipFile.path); */
     const zip = new AdmZip(zipFile.path);
 
-    //First of all prepare the paths, online file is already available
-    this.configService.prepareFilePaths({ isOnline: false, path: "" });
     // reading archives
     zip.getEntries().forEach((zipEntry) => {
       switch (

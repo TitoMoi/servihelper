@@ -11,7 +11,6 @@ import { shell } from "electron";
 import { SharedService } from "app/services/shared.service";
 import { HttpClient } from "@angular/common/http";
 import { GitHubDataInterface } from "./model/navigation.model";
-import { ConfigInterface } from "app/config/model/config.model";
 import { RoleInterface } from "app/roles/model/role.model";
 import { UntypedFormBuilder } from "@angular/forms";
 import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
@@ -49,11 +48,15 @@ export class NavigationComponent implements OnInit {
 
   config = this.configService.getConfig();
 
+  roles: RoleInterface[] = this.config.roles;
+
+  lang = this.config.lang;
+
+  currentRoleId: string = this.config.role;
+
   online$ = this.onlineService.online$;
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
-
-  lang = this.config.lang;
 
   administratorKey = this.configService.administratorKey;
 
@@ -68,12 +71,6 @@ export class NavigationComponent implements OnInit {
       "https://api.github.com/repos/titoMoi/servihelper/releases/latest",
     )
     .pipe(filter((githubData) => githubData.tag_name !== this.sharedService.appVersion));
-
-  config$: Observable<ConfigInterface> = this.configService.config$;
-
-  roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
-
-  currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
 
   roleForm = this.formBuilder.group({
     roleId: [this.administratorKey],

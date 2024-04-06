@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { OnlineInterface } from "app/online/model/online.model";
 import { ConfigService } from "app/config/service/config.service";
-import { readJSONSync, writeJson } from "fs-extra";
+import { readJSONSync, writeJsonSync } from "fs-extra";
 import { BehaviorSubject, Observable, fromEvent, map, merge, of } from "rxjs";
 
 @Injectable({
@@ -25,7 +25,7 @@ export class OnlineService {
 
   constructor(private configService: ConfigService) {}
 
-  prepareHasInternetAccess() {
+  prepareCheckInternetAccess() {
     if (this.#online.isOnline) {
       merge(of(null), fromEvent(window, "online"), fromEvent(window, "offline"))
         .pipe(map(() => navigator.onLine))
@@ -55,6 +55,6 @@ export class OnlineService {
 
   saveOnlineToFile() {
     //Write rooms back to file
-    writeJson(this.configService.onlinePath, this.#online);
+    writeJsonSync(this.configService.onlinePath, this.#online);
   }
 }

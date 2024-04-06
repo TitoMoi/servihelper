@@ -112,9 +112,6 @@ export class AssignmentService {
     }
   }
 
-  /**
-   * performance: dont mark flag hasChanged to true because this.assignments in memory is already updated
-   */
   saveAssignmentsToFile() {
     //Write assignments back to file
     const gziped = deflate(JSON.stringify(this.#assignments), { to: "string" });

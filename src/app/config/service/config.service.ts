@@ -1,9 +1,9 @@
 import { ConfigInterface, ConfigOptionsType } from "app/config/model/config.model";
 import { APP_CONFIG } from "environments/environment";
-import { readJSONSync, writeJSONSync } from "fs-extra";
+import { readJSONSync, readJson, writeJSONSync } from "fs-extra";
 
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, distinctUntilChanged, map } from "rxjs";
+import { Observable, Subject, distinctUntilChanged, map } from "rxjs";
 import { RoleInterface } from "app/roles/model/role.model";
 import { nanoid } from "nanoid";
 import path from "path";
@@ -69,38 +69,46 @@ export class ConfigService {
   // Flag to indicate that config file has changed
   hasChanged = true;
 
-  private configSubject$: BehaviorSubject<ConfigInterface> = new BehaviorSubject(undefined);
+  private configSubject$: Subject<ConfigInterface> = new Subject();
   /**
    * Like the private inner config object but public and observable
    */
   config$: Observable<ConfigInterface> = this.configSubject$.asObservable();
-  // The config in memory object
-  #config: ConfigInterface = undefined;
 
-  //Emits when the role changes
+  // The config in memory object
+  config: ConfigInterface = undefined;
+
+  //Emits when the config changes
   role$: Observable<string> = this.config$.pipe(
     map((config) => config.role),
     distinctUntilChanged(),
   );
 
   // The current role id
-  #role: string;
+  role: string;
 
   constructor() {}
 
+  /**
+   * To initialize the app
+   * @returns the config file
+   */
+  getConfigAsync(): Promise<ConfigInterface> {
+    return readJson(this.configPath);
+  }
   /**
    *
    * @returns ConfigInterface
    */
   getConfig(): ConfigInterface {
     if (!this.hasChanged) {
-      return this.#config;
+      return this.config;
     }
     this.hasChanged = false;
-    this.#config = readJSONSync(this.configPath);
-    this.#role = this.#config.role;
-    this.configSubject$.next(this.#config);
-    return this.#config;
+    this.config = readJSONSync(this.configPath);
+    this.role = this.config.role;
+    this.configSubject$.next(this.config);
+    return this.config;
   }
 
   prepareFilePaths(onlineConfig: OnlineInterface): boolean {
@@ -128,15 +136,14 @@ export class ConfigService {
     return true;
   }
   /**
-   *
-   * @returns true if configs are saved to disk or false
+   * private method to save to file
    */
   saveConfigToFile() {
-    writeJSONSync(this.configPath, this.#config);
+    writeJSONSync(this.configPath, this.config);
     this.hasChanged = true;
     //Notify public listeners
-    this.#role = this.#config.role;
-    this.configSubject$.next(this.#config);
+    this.role = this.config.role;
+    this.configSubject$.next(this.config);
   }
 
   /**
@@ -146,7 +153,7 @@ export class ConfigService {
    */
   updateConfig(config: ConfigInterface) {
     //update config
-    this.#config = config;
+    this.config = config;
     //save configs with the updated config
     this.saveConfigToFile();
   }
@@ -158,48 +165,48 @@ export class ConfigService {
    * @returns true if config is updated and saved false otherwise
    */
   updateConfigByKey(key: ConfigOptionsType, value) {
-    this.#config[key as string] = value;
+    this.config[key as string] = value;
     //save configs with the updated config
     this.saveConfigToFile();
   }
 
   getRoles() {
-    return this.#config.roles;
+    return this.config.roles;
   }
 
   getRole(id: string): RoleInterface {
-    return this.#config.roles.find((role) => role.id === id);
+    return this.config.roles.find((role) => role.id === id);
   }
 
   getCurrentRoleId() {
-    return this.#config.role;
+    return this.config.role;
   }
 
   isAdminRole() {
-    return this.#role === "administrator";
+    return this.role === "administrator";
   }
 
   addRole(role: RoleInterface) {
     role.id = nanoid(this.nanoMaxCharId);
     role.name = role.name.trim();
-    this.#config.roles.push(role);
+    this.config.roles.push(role);
     this.saveConfigToFile();
   }
 
   updateRole(role: RoleInterface) {
     role.name = role.name.trim();
-    const index = this.#config.roles.findIndex((r) => r.id === role.id);
-    this.#config.roles[index] = role;
+    const index = this.config.roles.findIndex((r) => r.id === role.id);
+    this.config.roles[index] = role;
     this.saveConfigToFile();
   }
 
   deleteRole(id) {
-    this.#config.roles = this.#config.roles.filter((role) => role.id !== id);
+    this.config.roles = this.config.roles.filter((role) => role.id !== id);
     this.saveConfigToFile();
   }
 
   setAdminRole() {
-    this.#config.role = this.administratorKey;
+    this.config.role = this.administratorKey;
     this.saveConfigToFile();
   }
 }

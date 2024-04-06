@@ -9,20 +9,17 @@ import { OnlineService } from "app/online/service/online.service";
 import { LockService } from "app/lock/service/lock.service";
 import { readdirSync } from "fs-extra";
 import path from "path";
-
-import { SharedService } from "./services/shared.service";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoDirective } from "@ngneat/transloco";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
   standalone: true,
-  imports: [NavigationComponent, RouterOutlet, TranslocoModule],
+  imports: [NavigationComponent, RouterOutlet, TranslocoDirective],
 })
 export class AppComponent implements OnInit {
-  //Flag to render the app when the paths are resolved (online or offline)
-  dataLoaded = false;
+  //Flag to show a blocking screen or render the app or not if its being used by another admin (online mode)
   showLockMsg = false;
 
   //Register when we quit the app, works with the cross X
@@ -34,7 +31,6 @@ export class AppComponent implements OnInit {
   }
 
   constructor(
-    private sharedService: SharedService,
     private configService: ConfigService,
     private onlineService: OnlineService,
     private lockService: LockService,
@@ -61,33 +57,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pdfService.registerOnLangChange();
-    const online = this.onlineService.getOnline();
-    this.onlineService.prepareHasInternetAccess();
-    this.configService.prepareFilePaths(online); //1
-
-    //LOCK?
-    if (online.isOnline) {
-      const lockObj = this.lockService.getLock();
-      const isDeathEnd = this.lockService.checkDeathEnd(20);
-      if (isDeathEnd) {
-        this.lockService.updateTimestamp();
-        this.loadData();
-      } else {
-        if (lockObj.lock) {
-          this.showLockMsg = true;
-        } else {
-          this.lockService.takeLockAndTimestamp();
-          this.loadData();
-          this.lockService.intervalNoActivity();
-        }
+    if (this.onlineService.getOnline().isOnline) {
+      if (this.lockService.lockObj.lock) {
+        this.showLockMsg = true;
+        return;
       }
-    } else {
-      this.loadData();
+      this.onlineService.prepareCheckInternetAccess();
     }
-  }
-  loadData() {
-    this.configService.getConfig();
-    this.dataLoaded = this.sharedService.getAllData();
+
+    // Lang changes
+    this.pdfService.registerOnLangChange();
   }
 }
