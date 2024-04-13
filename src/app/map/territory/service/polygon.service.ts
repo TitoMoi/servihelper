@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { PolygonClass, PolygonInterface } from "../../model/map.model";
-import { readFile, writeFile } from "fs-extra";
+import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { inflate, deflate } from "pako";
 @Injectable({
@@ -27,7 +27,7 @@ export class PolygonService {
     }
     this.hasChanged = false;
 
-    const polygonsContent = readFile(this.configService.polygonsPath);
+    const polygonsContent = readFileSync(this.configService.polygonsPath);
 
     if (polygonsContent) {
       this.#polygons = (
