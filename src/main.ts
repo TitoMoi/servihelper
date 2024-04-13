@@ -3,7 +3,7 @@ import { APP_INITIALIZER, importProvidersFrom, inject } from "@angular/core";
 import { APP_CONFIG } from "./environments/environment";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { AppComponent } from "./app/app.component";
-import { withInterceptorsFromDi, provideHttpClient } from "@angular/common/http";
+import { provideHttpClient } from "@angular/common/http";
 import { provideTranslocoLocale } from "@ngneat/transloco-locale";
 import { routes } from "./app/app-routing";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
@@ -26,19 +26,21 @@ bootstrapApplication(AppComponent, {
         const onlineService = inject(OnlineService);
         const lockService = inject(LockService);
 
+        // Are we online mode?
         const online = onlineService.getOnline();
-        // Adapt paths based on online
+
+        // Adapt paths based on online or offline
         configService.prepareFilePaths(online);
 
-        // Check if we are online to take the lock
+        // If we are online check if we must take the lock from another admin
         if (online.isOnline) {
           lockService.initGetLock();
-          const isIdleAdmin = lockService.checkIdleAdmin(15);
+          const isIdleAdmin = lockService.isAdminIdle(15);
           if (isIdleAdmin) {
-            lockService.updateTimestamp();
-          } else {
             lockService.takeLockAndTimestamp();
             lockService.intervalNoActivity();
+          } else {
+            lockService.updateTimestamp();
           }
         }
 
@@ -52,7 +54,7 @@ bootstrapApplication(AppComponent, {
       },
     },
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(),
     provideRouter(routes), //withDebugTracing()
     provideTransloco({
       config: {

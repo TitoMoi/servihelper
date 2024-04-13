@@ -21,7 +21,7 @@ export class LockService {
   ) {}
 
   /**
-   * @returns LockInterface
+   * Inits the lock status and returns a copy
    */
   initGetLock(): LockInterface {
     if (this.isOnline) {
@@ -73,36 +73,43 @@ export class LockService {
    * When the lock remains true, after 'mins' without timestamp allow the app to take it.
    * So, if we encounter a lock true and a timestamp above 'mins' we must take the app.
    */
-  checkIdleAdmin(mins: number): boolean {
+  isAdminIdle(mins: number): boolean {
     if (this.lockObj.lock) {
       const { years, days, months, hours, minutes } = intervalToDuration({
         start: new Date(this.lockObj.timestamp),
         end: new Date(),
       });
+      // Is idle by more than 1 hour then we must take the lock
       if (years || days || months || hours) {
         return true;
       }
+
+      // Is idle by more than 'mins' then we must take the lock
       if (minutes > mins) {
         return true;
       }
+
+      // Is currently working
       return false;
     }
+
+    // Lock is released so it's not necessary to check 'mins'
     return false;
   }
 
   /**
+   * Check every 15 min if the current admin is idle, then close the app.
    * If there is no activity or the network status is offline, the user wont we able to update the timestamp.
-   * Then the user will be logged out.
+   * Then the user will be logged out creating an inconsistency.
+   * We check in the APP_INITIALIZER if there is an idleAdmin so we can prevent that scenario.
    */
   intervalNoActivity() {
-    //900000 millisecons is 15 min
     setInterval(() => {
-      const isDeathEnd = this.checkIdleAdmin(15);
-      if (isDeathEnd) {
-        //shared function but we get a circular di injection
+      const isAdminIdle = this.isAdminIdle(15);
+      if (isAdminIdle) {
         ipcRenderer.send("closeApp");
       }
-    }, 900000);
+    }, 900000); // 900000 millisecons is 15 min
   }
 
   /** Save the lock only if we are online */
