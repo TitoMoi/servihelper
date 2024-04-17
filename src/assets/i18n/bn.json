@@ -490,5 +490,12 @@
   "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE": "কাজ করা বা ফিরে আসা > 4 মাস",
   "TERRITORY_GRAPHICS_OVERDUE": "কাজ করা বা ফিরে আসা > 12 মাস",
   "TERRITORY_GRAPHICS_ALL_TERR": "সমস্ত উপলব্ধ অঞ্চল",
-  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "উপলব্ধ এবং উপলভ্য অঞ্চলগুলির সংখ্যা"
+  "TERRITORY_GRAPHICS_TOTAL_NUMBER": "উপলব্ধ এবং উপলভ্য অঞ্চলগুলির সংখ্যা",
+  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
+  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
+  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
+  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_NAME": "Servihelper"
 }
