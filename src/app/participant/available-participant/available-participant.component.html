@@ -1,32 +1,86 @@
 <!-- eslint-disable prettier/prettier -->
-<div *transloco="let t" class="d-flex">
-  <mat-icon class="me-2" svgIcon="info-blue" aria-label="icon"></mat-icon>
-  <div>{{ t("STATISTICS_ROLE_TIP") }}</div>
-</div>
-<div class="table-overflow">
-  <div id="toPngDivId">
-    <table class="mb-3">
+<ng-container *transloco="let t">
+  <div class="d-flex">
+    <mat-icon class="me-2" svgIcon="info-blue" aria-label="icon"></mat-icon>
+    <div>{{ t("STATISTICS_ROLE_TIP") }}</div>
+  </div>
+  <div class="table-overflow">
+    <div id="toPngDivId">
+      <table class="mb-3">
+        <thead>
+          <th class="bg-color-white">
+            <div>{{ t("PARTICIPANT_AVAILABLE_PRINCIPAL") }}</div>
+            <mat-icon
+              class="m-2 no-print"
+              svgIcon="png"
+              aria-label="icon"
+              [matTooltip]="t('ICON_PNG')"
+              (click)="toPng('toPngDivId')"
+            ></mat-icon>
+          </th>
+          @for (at of assignTypes; track at) {
+            <th class="bg-color-ghostwhite sticky-top">
+              <button
+                mat-button
+                [disabled]="isNetStatusOffline"
+                (click)="changeAvailability(null, at, true)"
+              >
+                <div class="fw-bold">
+                  {{ at | assignTypeNamePipe }} ({{
+                    at.id | getNumberOfParticipantsPipe: "principal"
+                  }})
+                </div>
+              </button>
+            </th>
+          }
+        </thead>
+        <tbody>
+          @for (p of participants; track p) {
+            <tr>
+              <td
+                class="fw-bold"
+                [ngClass]="p.isWoman ? 'bg-color-pink' : 'bg-color-lightskyblue'"
+              >
+                {{ p.name }}
+              </td>
+              @for (at of assignTypes; track at) {
+                <td class="bg-color-white text-center">
+                  <button
+                    mat-button
+                    [disabled]="isNetStatusOffline"
+                    (click)="changeAvailability(p, at, true)"
+                  >
+                    {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔" : "" }}
+                  </button>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <table id="toPngDivId2">
       <thead>
-        <th *transloco="let t" class="bg-color-white">
-          <div>{{ t("PARTICIPANT_AVAILABLE_PRINCIPAL") }}</div>
+        <th class="bg-color-white">
+          <div>{{ t("PARTICIPANT_AVAILABLE_ASSISTANT") }}</div>
           <mat-icon
-            class="m-2 no-print"
+            class="m-2"
             svgIcon="png"
             aria-label="icon"
             [matTooltip]="t('ICON_PNG')"
-            (click)="toPng('toPngDivId')"
+            (click)="toPng('toPngDivId2')"
           ></mat-icon>
         </th>
-        @for (at of assignTypes; track at) {
-          <th class="bg-color-ghostwhite sticky-top">
+        @for (at of assignTypesAssistant; track at) {
+          <th class="bg-color-lightyellow sticky-top">
             <button
               mat-button
               [disabled]="isNetStatusOffline"
-              (click)="changeAvailability(null, at, true)"
+              (click)="changeAvailability(null, at, false)"
             >
               <div class="fw-bold">
                 {{ at | assignTypeNamePipe }} ({{
-                  at.id | getNumberOfParticipantsPipe: "principal"
+                  at.id | getNumberOfParticipantsPipe: "assistant"
                 }})
               </div>
             </button>
@@ -42,14 +96,14 @@
             >
               {{ p.name }}
             </td>
-            @for (at of assignTypes; track at) {
+            @for (at of assignTypesAssistant; track at) {
               <td class="bg-color-white text-center">
                 <button
                   mat-button
                   [disabled]="isNetStatusOffline"
-                  (click)="changeAvailability(p, at, true)"
+                  (click)="changeAvailability(p, at, false)"
                 >
-                  {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? "✔" : "" }}
+                  {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔" : "" }}
                 </button>
               </td>
             }
@@ -58,56 +112,4 @@
       </tbody>
     </table>
   </div>
-  <table id="toPngDivId2">
-    <thead>
-      <th *transloco="let t" class="bg-color-white">
-        <div>{{ t("PARTICIPANT_AVAILABLE_ASSISTANT") }}</div>
-        <mat-icon
-          class="m-2"
-          svgIcon="png"
-          aria-label="icon"
-          [matTooltip]="t('ICON_PNG')"
-          (click)="toPng('toPngDivId2')"
-        ></mat-icon>
-      </th>
-      @for (at of assignTypesAssistant; track at) {
-        <th class="bg-color-lightyellow sticky-top">
-          <button
-            mat-button
-            [disabled]="isNetStatusOffline"
-            (click)="changeAvailability(null, at, false)"
-          >
-            <div class="fw-bold">
-              {{ at | assignTypeNamePipe }} ({{
-                at.id | getNumberOfParticipantsPipe: "assistant"
-              }})
-            </div>
-          </button>
-        </th>
-      }
-    </thead>
-    <tbody>
-      @for (p of participants; track p) {
-        <tr>
-          <td
-            class="fw-bold"
-            [ngClass]="p.isWoman ? 'bg-color-pink' : 'bg-color-lightskyblue'"
-          >
-            {{ p.name }}
-          </td>
-          @for (at of assignTypesAssistant; track at) {
-            <td class="bg-color-white text-center">
-              <button
-                mat-button
-                [disabled]="isNetStatusOffline"
-                (click)="changeAvailability(p, at, false)"
-              >
-                {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? "✔" : "" }}
-              </button>
-            </td>
-          }
-        </tr>
-      }
-    </tbody>
-  </table>
-</div>
+</ng-container>

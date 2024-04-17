@@ -15,10 +15,9 @@ import {
 } from "../model/participant.model";
 import { SortService } from "app/services/sort.service";
 import { ConfigService } from "app/config/service/config.service";
-import { Observable, Subscription, combineLatest, map } from "rxjs";
-import { RoleInterface } from "app/roles/model/role.model";
+import { Observable, Subscription, map } from "rxjs";
 import { ConfigInterface } from "app/config/model/config.model";
-import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
+import { TranslocoDirective, TranslocoService } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ExportService } from "app/services/export.service";
 import { MatIconModule } from "@angular/material/icon";
@@ -36,7 +35,7 @@ import { GetNumberOfParticipantsPipe } from "./get-number-of-participants.pipe";
   imports: [
     AssignTypePipe,
     AssignTypeNamePipe,
-    TranslocoModule,
+    TranslocoDirective,
     MatTooltipModule,
     MatIconModule,
     MatButtonModule,
@@ -70,7 +69,6 @@ export class AvailableParticipantComponent implements OnInit, OnDestroy {
   hasChanges = false;
 
   config$: Observable<ConfigInterface> = this.configService.config$;
-  roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
   currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
 
   constructor(
@@ -87,23 +85,11 @@ export class AvailableParticipantComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    //prepare emissions, emits also the first time
+    this.getData();
+
     this.subscription.add(
-      combineLatest([this.currentRoleId$, this.roles$]).subscribe(([currentRole, roles]) => {
-        this.allowedAssignTypesIds =
-          currentRole === "administrator"
-            ? this.getAllAssignTypesIds()
-            : roles.find((r) => r.id === currentRole).assignTypesId;
-
-        this.assignTypes = this.assignTypeService
-          .getAssignTypes()
-          .filter((at) => this.allowedAssignTypesIds.includes(at.id));
-
-        this.assignTypesAssistant = this.assignTypeService
-          .getAssignTypes()
-          .filter((at) => this.allowedAssignTypesIds.includes(at.id) && at.hasAssistant);
-
-        this.cdr.detectChanges();
+      this.currentRoleId$.subscribe(() => {
+        this.getData();
       }),
     );
 
@@ -128,6 +114,26 @@ export class AvailableParticipantComponent implements OnInit, OnDestroy {
 
       this.lockService.updateTimestamp();
     }
+  }
+
+  getData() {
+    if (this.configService.isAdminRole()) {
+      this.allowedAssignTypesIds = this.getAllAssignTypesIds();
+    } else {
+      this.allowedAssignTypesIds = this.configService
+        .getRoles()
+        .find((r) => r.id === this.configService.role).assignTypesId;
+    }
+
+    this.assignTypes = this.assignTypeService
+      .getAssignTypes()
+      .filter((at) => this.allowedAssignTypesIds.includes(at.id));
+
+    this.assignTypesAssistant = this.assignTypeService
+      .getAssignTypes()
+      .filter((at) => this.allowedAssignTypesIds.includes(at.id) && at.hasAssistant);
+
+    this.cdr.detectChanges();
   }
 
   checkIncludesAssignTypeAsPrincipal(

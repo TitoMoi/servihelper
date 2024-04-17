@@ -17,6 +17,7 @@ import { OnlineService } from "app/online/service/online.service";
 import { RoomService } from "app/room/service/room.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
+import { AssignmentService } from "app/assignment/service/assignment.service";
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -30,6 +31,7 @@ bootstrapApplication(AppComponent, {
         const roomService = inject(RoomService);
         const assignTypeService = inject(AssignTypeService);
         const participantService = inject(ParticipantService);
+        const assignmentService = inject(AssignmentService);
 
         // Get the online object status
         const onlineObj = onlineService.getOnline();
@@ -42,6 +44,7 @@ bootstrapApplication(AppComponent, {
         roomService.getRooms();
         assignTypeService.getAssignTypes();
         participantService.getParticipants();
+        assignmentService.getAssignments();
 
         return () =>
           configService.getConfigAsync().then((config) => {
