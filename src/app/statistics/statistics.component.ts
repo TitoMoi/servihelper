@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TerritoryCountComponent } from "./territory-count/territory-count.component";
 import { GlobalCountComponent } from "./global-count/global-count.component";
 import { TranslocoModule } from "@ngneat/transloco";
-import { Observable, Subscription, combineLatest, map } from "rxjs";
+import { Observable, Subscription, map } from "rxjs";
 import { ConfigService } from "app/config/service/config.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ConfigInterface } from "app/config/model/config.model";
@@ -43,19 +43,24 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    //prepare emissions, emits also the first time
-    this.subscription.add(
-      combineLatest([this.currentRoleId$, this.roles$]).subscribe(([currentRole, roles]) => {
-        this.allowedAssignTypesIds =
-          currentRole === "administrator"
-            ? this.getAllAssignTypesIds()
-            : roles.find((r) => r.id === currentRole).assignTypesId;
-      }),
-    );
+    this.getData();
+
+    //prepare for changes
+    this.subscription.add(this.currentRoleId$.subscribe(() => this.getData()));
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  getData() {
+    if (this.configService.isAdminRole()) {
+      this.allowedAssignTypesIds = this.getAllAssignTypesIds();
+    } else {
+      this.allowedAssignTypesIds = this.configService
+        .getRoles()
+        .find((r) => r.id === this.configService.role).assignTypesId;
+    }
   }
 
   //first load or Admin
