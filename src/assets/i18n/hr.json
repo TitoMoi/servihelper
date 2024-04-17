@@ -480,5 +480,6 @@
   "TAKE_CONTROL_3": "U slučaju da on ima da se ažuriraju datoteke, mora ažurirati datoteke prije nego što radite.Zatim, nakon što vidite promjene, ponovno pokrenite {{APP_NAME}}.",
   "TAKE_CONTROL_4": "U slučaju da nema datoteka na čekanju, Rad je ažuriran, ali zaključavanje izdanja nije ažurirano na platformi, u tom slučaju i dalje{{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Nastavi na{{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Kopiran"
 }

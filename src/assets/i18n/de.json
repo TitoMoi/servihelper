@@ -508,5 +508,6 @@
   "TAKE_CONTROL_3": "Für den Fall, dass er Dateien zum Aktualisieren ausstehend hat, Er muss die Dateien aktualisieren, bevor Sie arbeiten. Nachdem Sie die Änderungen gesehen haben, starten Sie dann neu {{APP_NAME}}.",
   "TAKE_CONTROL_4": "Falls er keine anhängigen Dateien hat, Die Arbeit wurde aktualisiert, die Release -Sperre wurde jedoch nicht auf der Plattform aktualisiert, in diesem Fall weiterhin {{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Weiter {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Kopiert"
 }

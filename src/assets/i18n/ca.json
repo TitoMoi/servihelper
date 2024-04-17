@@ -510,5 +510,6 @@
   "TAKE_CONTROL_3": "En cas que tingui pendents fitxers per ser actualitzats, ha d’actualitzar els fitxer. Aleshores, després de tu veure els canvis, reinicieu {{APP_NAME}}.",
   "TAKE_CONTROL_4": "En cas que no tingui fitxers pendents, El treball s'ha actualitzat, però el 'pany' no s'ha actualitzat a la plataforma, en aquest cas continua:",
   "TAKE_CONTROL_BTN": "Continuar a {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Copiat"
 }

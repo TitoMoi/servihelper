@@ -508,5 +508,6 @@
   "TAKE_CONTROL_3": "Au cas où il a des fichiers en attente pour être mis à jour, il doit mettre à jour les fichiers avant de travailler.Ensuite, après avoir vu les changements, redémarrez {{APP_NAME}}.",
   "TAKE_CONTROL_4": "Au cas où il n'a pas de fichiers en attente, le travail a été mis à jour mais le verrouillage de la version n'a pas été mis à jour sur la plate-forme, dans ce cas, continue {{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Continuer à {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Copié"
 }

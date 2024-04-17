@@ -497,5 +497,6 @@
   "TAKE_CONTROL_3": "W przypadku, gdy ma ono aktualizację plików, musi zaktualizować pliki przed pracą. Następnie, po zobaczeniu zmian, uruchom ponownie {{APP_NAME}}.",
   "TAKE_CONTROL_4": "W przypadku, gdy nie ma oczekujących plików, praca została zaktualizowana, ale blokada wydania nie została zaktualizowana na platformie, w takim przypadku kontynuuj{{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Kontynuuj {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Skopiowane"
 }

@@ -483,5 +483,6 @@
   "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
   "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Copied"
 }

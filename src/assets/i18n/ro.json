@@ -508,5 +508,6 @@
   "TAKE_CONTROL_3": "În cazul în care el are fișiere pendinte pentru a fi actualizate, el trebuie să actualizeze fișierele înainte de a lucra.Apoi, după ce vedeți modificările, reporniți {{APP_NAME}}.",
   "TAKE_CONTROL_4": "În cazul în care el nu are fișiere pendinte, lucrarea a fost actualizată, dar blocarea eliberării nu a fost actualizată pe platformă, în acest caz continuă {{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Continuă să {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Copiat"
 }

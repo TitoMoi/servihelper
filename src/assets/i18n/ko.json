@@ -497,5 +497,6 @@
   "TAKE_CONTROL_3": "그가 업데이트 할 파일이있는 경우, 작업하기 전에 파일을 업데이트해야합니다.그런 다음 변경 사항이 표시된 후 다시 시작하십시오 {{APP_NAME}}.",
   "TAKE_CONTROL_4": "보류중인 파일이없는 경우 작업이 업데이트되었지만 릴리스 잠금이 플랫폼에서 업데이트되지 않았습니다.이 경우 계속 {{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "계속하십시오 {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "복사"
 }

@@ -497,5 +497,6 @@
   "TAKE_CONTROL_3": "彼が更新される予定のファイルを持っている場合、彼はあなたが作業する前にファイルを更新する必要があります。次に、変更を確認した後、再起動します {{APP_NAME}}.",
   "TAKE_CONTROL_4": "彼が保留中のファイルがない場合、作業は更新されましたが、リリースロックはプラットフォーム上で更新されていません。{{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "続けます {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "コピー"
 }

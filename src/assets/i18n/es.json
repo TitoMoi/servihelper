@@ -508,5 +508,6 @@
   "TAKE_CONTROL_3": "En caso de que tenga archivos pendientes para actualizarse, el debe actualizar los archivos antes de que puedas trabajar. Luego, después de ver los cambios en la plataforma, reinicia {{APP_NAME}}.",
   "TAKE_CONTROL_4": "En caso de que no tenga archivos pendientes, el trabajo se ha actualizado, pero el 'lock' no se ha actualizado en la plataforma, en ese caso continúa:",
   "TAKE_CONTROL_BTN": "Continuar a {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Copiado"
 }

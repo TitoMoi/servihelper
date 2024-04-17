@@ -102,21 +102,20 @@
     </div>
   </form>
   <div class="d-flex align-items-center">
-    <button mat-icon-button [disabled]="!polygonExists()">
+    <button mat-icon-button [disabled]="!polygonExists()" (click)="toClipboard()">
       <mat-icon
         svgIcon="clipboard"
         aria-label="icon"
         [matTooltip]="t('ICON_CLIPBOARD')"
-        (click)="toClipboard()"
       ></mat-icon>
     </button>
-    <button mat-icon-button [disabled]="!polygonExists()" class="me-5">
-      <mat-icon
-        svgIcon="png"
-        aria-label="icon"
-        [matTooltip]="t('ICON_PNG')"
-        (click)="toPng(territoryForm.controls.name.value)"
-      ></mat-icon>
+    <button
+      mat-icon-button
+      [disabled]="!polygonExists()"
+      class="me-5"
+      (click)="toPng(territoryForm.controls.name.value)"
+    >
+      <mat-icon svgIcon="png" aria-label="icon" [matTooltip]="t('ICON_PNG')"></mat-icon>
     </button>
     <label for="image-upload" class="me-3">
       <mat-icon svgIcon="imageadd" [matTooltip]="t('TERRITORY_ADD_IMAGE')"></mat-icon>

@@ -507,5 +507,6 @@
   "TAKE_CONTROL_3": "Nel caso in cui abbia file in attesa di essere aggiornato, deve aggiornare i file prima di lavorare. Quindi, dopo aver visto le modifiche, riavvia {{APP_NAME}}.",
   "TAKE_CONTROL_4": "Nel caso in cui non abbia file in sospeso, il lavoro è stato aggiornato ma il blocco di rilascio non è stato aggiornato sulla piattaforma, in tal caso continua a{{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Continuare a {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Copiato"
 }

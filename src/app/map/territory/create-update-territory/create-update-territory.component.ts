@@ -23,7 +23,7 @@ import {
 import { Subscription, fromEvent } from "rxjs";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import {
@@ -56,6 +56,7 @@ import { NgOptimizedImage } from "@angular/common";
 import { nanoid } from "nanoid";
 import path from "path";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-create-update-territory",
@@ -94,6 +95,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   private exportService = inject(ExportService);
   private location = inject(Location);
   private onlineService = inject(OnlineService);
+  private matSnackBar = inject(MatSnackBar);
+  private translocoService = inject(TranslocoService);
 
   loadedTerritory = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
 
@@ -536,11 +539,16 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   async toClipboard() {
-    this.exportService.toClipboard("map2");
+    await this.exportService.toClipboard("map2");
+    this.matSnackBar.open(
+      this.translocoService.translate("COPIED"),
+      this.translocoService.translate("CLOSE"),
+      { duration: 2000 },
+    );
     this.cdr.detectChanges();
   }
 
   async toPng(mapName: string) {
-    this.exportService.toPng("map2", mapName);
+    await this.exportService.toPng("map2", mapName);
   }
 }

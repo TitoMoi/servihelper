@@ -497,5 +497,6 @@
   "TAKE_CONTROL_3": "Güncellenmeyi bekleyen dosyaları olması durumunda, çalışmadan önce dosyaları güncellemelidir.Ardından, değişiklikleri gördükten sonra yeniden başlatın {{APP_NAME}}.",
   "TAKE_CONTROL_4": "Bekleyen bir dosyası yoksa, çalışma güncellendi, ancak yayın kilidi platformda güncellenmedi, bu durumda devam ediyor {{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Devam etmek {{APP_NAME}}",
-  "APP_NAME": "Servihelper"
+  "APP_NAME": "Servihelper",
+  "COPIED": "Kopyalanmış"
 }
