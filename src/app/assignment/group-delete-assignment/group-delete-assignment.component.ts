@@ -41,11 +41,7 @@ import { ConfigService } from "app/config/service/config.service";
   ],
 })
 export class GroupDeleteAssignmentComponent implements OnInit, OnDestroy {
-  assignments: AssignmentInterface[];
-
-  assignmentsPromise = this.assignmentService
-    .getAssignments()
-    .then((assignments) => (this.assignments = assignments));
+  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
 
   currentAssignTypesIdsByRole = this.assignTypeService.getAssignTypesIdsByRole();
 

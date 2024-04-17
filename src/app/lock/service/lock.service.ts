@@ -11,7 +11,7 @@ import { ipcRenderer } from "electron";
   providedIn: "root",
 })
 export class LockService {
-  lockObj: LockInterface = undefined;
+  lockObj: LockInterface;
 
   isOnline = this.onlineService.getOnline().isOnline;
 
@@ -29,7 +29,7 @@ export class LockService {
         this.lockObj = readJSONSync(this.configService.lockPath);
         return this.lockObj;
       } catch (e) {
-        //This should never happen, prevent a death file
+        //This should never happen, prevent a corrupted file
         this.lockObj = {
           lock: false,
           timestamp: new Date(),
@@ -70,43 +70,38 @@ export class LockService {
   }
 
   /**
-   * When the lock remains true, after 'mins' without timestamp allow the app to take it.
-   * So, if we encounter a lock true and a timestamp above 'mins' we must take the app.
+   * Checks if the timestamp has not been updated in 'mins' time
    */
-  isAdminIdle(mins: number): boolean {
-    if (this.lockObj.lock) {
-      const { years, days, months, hours, minutes } = intervalToDuration({
-        start: new Date(this.lockObj.timestamp),
-        end: new Date(),
-      });
-      // Is idle by more than 1 hour then we must take the lock
-      if (years || days || months || hours) {
-        return true;
-      }
-
-      // Is idle by more than 'mins' then we must take the lock
-      if (minutes > mins) {
-        return true;
-      }
-
-      // Is currently working
-      return false;
+  isTimestampNotBeingUpdated(mins: number): boolean {
+    const { years, days, months, hours, minutes } = intervalToDuration({
+      start: new Date(this.lockObj.timestamp),
+      end: new Date(),
+    });
+    // Is idle by more than 1 hour then we must take the lock
+    if (years || days || months || hours) {
+      return true;
     }
 
-    // Lock is released so it's not necessary to check 'mins'
+    // Is idle by more than 'mins' then we must take the lock
+    if (minutes > mins) {
+      return true;
+    }
+
+    // Is currently working
     return false;
   }
 
   /**
    * Check every 15 min if the current admin is idle, then close the app.
-   * If there is no activity or the network status is offline, the user wont we able to update the timestamp.
-   * Then the user will be logged out creating an inconsistency.
+   * If the user is logged out and he has no internet or files are not updated on the platform,
+   * the user wont we able to update the timestamp.
    * We check in the APP_INITIALIZER if there is an idleAdmin so we can prevent that scenario.
    */
-  intervalNoActivity() {
+  setIntervalIsAdminIdle() {
     setInterval(() => {
-      const isAdminIdle = this.isAdminIdle(15);
+      const isAdminIdle = this.isTimestampNotBeingUpdated(15);
       if (isAdminIdle) {
+        this.releaseLock();
         ipcRenderer.send("closeApp");
       }
     }, 900000); // 900000 millisecons is 15 min

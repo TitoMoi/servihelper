@@ -14,7 +14,9 @@ import { provideTransloco } from "@ngneat/transloco";
 import { TranslocoHttpLoader } from "app/transloco/transloco-loader";
 import { ConfigService } from "app/config/service/config.service";
 import { OnlineService } from "app/online/service/online.service";
-import { LockService } from "app/lock/service/lock.service";
+import { RoomService } from "app/room/service/room.service";
+import { ParticipantService } from "app/participant/service/participant.service";
+import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -24,25 +26,22 @@ bootstrapApplication(AppComponent, {
       useFactory: () => {
         const configService = inject(ConfigService);
         const onlineService = inject(OnlineService);
-        const lockService = inject(LockService);
 
-        // Are we online mode?
-        const online = onlineService.getOnline();
+        const roomService = inject(RoomService);
+        const assignTypeService = inject(AssignTypeService);
+        const participantService = inject(ParticipantService);
+
+        // Get the online object status
+        const onlineObj = onlineService.getOnline();
 
         // Adapt paths based on online or offline
-        configService.prepareFilePaths(online);
+        configService.prepareFilePaths(onlineObj);
 
-        // If we are online check if we must take the lock from another admin
-        if (online.isOnline) {
-          lockService.initGetLock();
-          const isIdleAdmin = lockService.isAdminIdle(15);
-          if (isIdleAdmin) {
-            lockService.takeLockAndTimestamp();
-            lockService.intervalNoActivity();
-          } else {
-            lockService.updateTimestamp();
-          }
-        }
+        // Load data, altough it may seem expensive, preparing the cache here avoids to repeat a getX on every
+        // component that needs the data
+        roomService.getRooms();
+        assignTypeService.getAssignTypes();
+        participantService.getParticipants();
 
         return () =>
           configService.getConfigAsync().then((config) => {

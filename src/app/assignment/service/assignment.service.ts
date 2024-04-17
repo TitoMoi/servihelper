@@ -4,7 +4,7 @@ import {
   AssignmentOperationInterface,
   AssignmentTableInterface,
 } from "app/assignment/model/assignment.model";
-import { readFile, writeFile } from "fs-extra";
+import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
 import { Injectable } from "@angular/core";
@@ -39,13 +39,13 @@ export class AssignmentService {
    * @param deepClone if should be cloned or only return reference
    * @returns AssignmentInterface[] the array of assignments or null
    */
-  async getAssignments(deepClone = false): Promise<AssignmentInterface[]> {
+  getAssignments(deepClone = false): AssignmentInterface[] {
     if (!this.hasChanged) {
       return deepClone ? structuredClone(this.#assignments) : this.#assignments;
     }
     this.hasChanged = false;
 
-    const assignContent = await readFile(this.configService.assignmentsPath);
+    const assignContent = readFileSync(this.configService.assignmentsPath);
 
     if (assignContent) {
       this.#assignments = JSON.parse(inflate(assignContent, { to: "string" }));

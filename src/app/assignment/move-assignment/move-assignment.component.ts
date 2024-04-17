@@ -32,11 +32,7 @@ import { MatIconModule } from "@angular/material/icon";
   ],
 })
 export class MoveAssignmentComponent {
-  assignments: AssignmentInterface[];
-
-  assignmentsPromise = this.assignmentService
-    .getAssignments()
-    .then((assignments) => (this.assignments = assignments));
+  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 

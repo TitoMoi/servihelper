@@ -66,7 +66,7 @@ import { ConfigService } from "app/config/service/config.service";
 })
 export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked {
   //In memory assignments
-  assignments: AssignmentInterface[] = [];
+  assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
 
   //The assignments
   assignmentsTable: AssignmentTableInterface[] = [];
@@ -135,13 +135,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     private configService: ConfigService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-  ) {
-    this.getAssignments();
-  }
-
-  async getAssignments() {
-    this.assignments = await this.assignmentService.getAssignments();
-  }
+  ) {}
 
   //first load or Admin
   getAllAssignTypesIds() {
@@ -173,11 +167,6 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
       }),
     );
 
-    const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);
-    this.assignmentsTable = this.prepareRowExtendedValues(assignmentsPage);
-
-    this.sortAndUpdateSeparator();
-
     //Listen for assignments updates (create, update, delete)
     this.subscription.add(
       this.assignmentService.assignment$.subscribe(
@@ -197,6 +186,11 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
         },
       ),
     );
+
+    const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);
+    this.assignmentsTable = this.prepareRowExtendedValues(assignmentsPage);
+
+    this.sortAndUpdateSeparator();
   }
 
   ngAfterViewChecked(): void {
