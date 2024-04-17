@@ -543,7 +543,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.matSnackBar.open(
       this.translocoService.translate("COPIED"),
       this.translocoService.translate("CLOSE"),
-      { duration: 2000 },
+      { duration: 3000, verticalPosition: "top" },
     );
     this.cdr.detectChanges();
   }

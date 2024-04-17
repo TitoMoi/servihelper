@@ -18,6 +18,9 @@ import { RoomService } from "app/room/service/room.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { AssignmentService } from "app/assignment/service/assignment.service";
+import { PolygonService } from "app/map/territory/service/polygon.service";
+import { TerritoryService } from "app/map/territory/service/territory.service";
+import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -33,6 +36,10 @@ bootstrapApplication(AppComponent, {
         const participantService = inject(ParticipantService);
         const assignmentService = inject(AssignmentService);
 
+        const polygonService = inject(PolygonService);
+        const territoryService = inject(TerritoryService);
+        const territoryGroupService = inject(TerritoryGroupService);
+
         // Get the online object status
         const onlineObj = onlineService.getOnline();
 
@@ -45,6 +52,10 @@ bootstrapApplication(AppComponent, {
         assignTypeService.getAssignTypes();
         participantService.getParticipants();
         assignmentService.getAssignments();
+
+        polygonService.getPolygons();
+        territoryService.getTerritories();
+        territoryGroupService.getTerritoryGroups();
 
         return () =>
           configService.getConfigAsync().then((config) => {
