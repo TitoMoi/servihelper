@@ -504,11 +504,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "Sendo trabalhado ou devolvido > 12 meses",
   "TERRITORY_GRAPHICS_ALL_TERR": "Todos os territórios disponíveis",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Número de territórios disponíveis e não disponíveis",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "O aplicativo está sendo usado por outro administrador, mas parece que não foi fechado como esperado",
+  "TAKE_CONTROL": "Isso acontece quando os arquivos são salvos e imediatamente atualizados no Google Drive, SharePoint ... Mas depois de 15 minutos da última operação de salvamento, the 'lock' 🔒 não é liberado.",
+  "TAKE_CONTROL_2": "Isso significa que ele perdeu a Internet no processo ou a plataforma selecionada não atualizou os arquivos por qualquer motivo.Por favor, pergunte a ele se houve algum problema.",
+  "TAKE_CONTROL_3": "Caso ele tenha arquivos pendentes para serem atualizados, ele deve atualizar os arquivos antes de trabalhar.Então, depois de ver as mudanças, reinicie {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "Caso ele não tenha arquivos pendentes, o trabalho foi atualizado, mas o bloqueio de liberação não foi atualizado na plataforma, nesse caso continue a{{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "Continua a {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

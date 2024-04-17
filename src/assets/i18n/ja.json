@@ -491,11 +491,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "12か月以上働いたり返還されたりします",
   "TERRITORY_GRAPHICS_ALL_TERR": "利用可能なすべての地域",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "利用可能で利用できない地域の数",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "アプリは別の管理者によって使用されていますが、予想どおり閉じていなかったようです",
+  "TAKE_CONTROL": "これはときに起こります ファイルが保存され、Googleドライブ、SharePointですぐに更新されます... しかし、最後の保存操作の15分後, the 'lock' 🔒 リリースされていません.",
+  "TAKE_CONTROL_2": "これは、彼がプロセスでインターネットを失ったか、選択したプラットフォームが何らかの理由でファイルを更新しなかったことを意味します。問題があるかどうか彼に尋ねてください。",
+  "TAKE_CONTROL_3": "彼が更新される予定のファイルを持っている場合、彼はあなたが作業する前にファイルを更新する必要があります。次に、変更を確認した後、再起動します {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "彼が保留中のファイルがない場合、作業は更新されましたが、リリースロックはプラットフォーム上で更新されていません。{{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "続けます {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

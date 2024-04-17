@@ -491,11 +491,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "Εργάστηκε ή επιστρέφεται > 12 μήνες",
   "TERRITORY_GRAPHICS_ALL_TERR": "Όλα τα διαθέσιμα εδάφη",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Αριθμός διαθέσιμων και όχι διαθέσιμων περιοχών",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "Η εφαρμογή χρησιμοποιείται από άλλο διαχειριστή, αλλά φαίνεται ότι δεν έκλεισε όπως αναμενόταν",
+  "TAKE_CONTROL": "Αυτό συμβαίνει όταν Τα αρχεία αποθηκεύονται και ενημερώνονται αμέσως στο Google Drive, SharePoint... Αλλά μετά από 15 λεπτά της τελευταίας λειτουργίας αποθήκευσης, ο 'lock' 🔒 δεν απελευθερώνεται.",
+  "TAKE_CONTROL_2": "Αυτό σημαίνει ότι έχασε το Διαδίκτυο στη διαδικασία ή η επιλεγμένη πλατφόρμα δεν ενημέρωσε τα αρχεία με οποιονδήποτε λόγο.Ρωτήστε τον αν υπήρξε κάποιο πρόβλημα.",
+  "TAKE_CONTROL_3": "Σε περίπτωση που έχει αρχεία που εκκρεμούν για να ενημερωθούν, Πρέπει να ενημερώσει τα αρχεία πριν εργαστείτε. Στη συνέχεια, αφού δείτε τις αλλαγές, επανεκκινήστε {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "Σε περίπτωση που δεν έχει εκκρεμή αρχεία, Το έργο έχει ενημερωθεί, αλλά η κλειδαριά απελευθέρωσης δεν έχει ενημερωθεί στην πλατφόρμα, στην περίπτωση αυτή συνεχίζει {{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "Συνέχισε να {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

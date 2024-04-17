@@ -503,11 +503,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "Работать или возвращать > 12 месяцев",
   "TERRITORY_GRAPHICS_ALL_TERR": "Все доступные территории",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Количество доступных и недоступных территорий",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "Приложение используется другим администратором, но, кажется, не закрыто, как и ожидалось",
+  "TAKE_CONTROL": "Это происходит, когда Файлы сохраняются и сразу обновляются на Google Drive, SharePoint ... Но через 15 минут последней операции сохранения, the 'lock' 🔒 не выпущен.",
+  "TAKE_CONTROL_2": "Это означает, что он потерял Интернет в процессе или выбранная платформа не обновила файлы по какой -либо причине.Пожалуйста, спросите его, были ли проблемы.",
+  "TAKE_CONTROL_3": "Если у него есть файлы, ожидающие обновления, он должен обновить файлы, прежде чем вы работаете.Затем, после того, как вы увидите изменения, перезапустите {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "Если у него нет ожидающих файлов, работа была обновлена, но блокировка релиза не была обновлена на платформе, в этом случае продолжайте {{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "Продолжать {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

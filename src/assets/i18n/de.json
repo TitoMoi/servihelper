@@ -502,11 +502,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "Bearbeitet oder zurückgegeben > 12 Monate zurückkehren",
   "TERRITORY_GRAPHICS_ALL_TERR": "Alle verfügbaren Gebiete",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Anzahl der verfügbaren und nicht verfügbaren Gebiete",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "Die App wird von einem anderen Administrator verwendet, scheint aber wie erwartet nicht geschlossen zu sein",
+  "TAKE_CONTROL": "Dies geschieht, wenn Dateien werden auf Google Drive, SharePoint ... gespeichert und sofort aktualisiert. Aber nach 15 Minuten des letzten Save Operation, Die 'lock' 🔒 wird nicht veröffentlicht.",
+  "TAKE_CONTROL_2": "Dies bedeutet, dass er dabei das Internet verloren hat oder die ausgewählte Plattform die Dateien nicht aus irgendeinem Grund aktualisiert hat.Bitte fragen Sie ihn, ob es ein Problem gab.",
+  "TAKE_CONTROL_3": "Für den Fall, dass er Dateien zum Aktualisieren ausstehend hat, Er muss die Dateien aktualisieren, bevor Sie arbeiten. Nachdem Sie die Änderungen gesehen haben, starten Sie dann neu {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "Falls er keine anhängigen Dateien hat, Die Arbeit wurde aktualisiert, die Release -Sperre wurde jedoch nicht auf der Plattform aktualisiert, in diesem Fall weiterhin {{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "Weiter {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

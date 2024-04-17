@@ -474,11 +474,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "Rad ili se vraća > 12 mjeseci",
   "TERRITORY_GRAPHICS_ALL_TERR": "Svi dostupni teritoriji",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Broj dostupnih, a ne dostupnih teritorija",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "Aplikaciju koristi drugi administrator, ali čini se da se nije zatvorio kako se očekivalo",
+  "TAKE_CONTROL": "To se događa kad Datoteke se spremaju i odmah se ažuriraju na Google Drive, SharePoint ... Ali nakon 15 minuta posljednje operacije spremanja, a 'lock' 🔒 nije objavljen.",
+  "TAKE_CONTROL_2": "To znači da je izgubio internet u procesu ili odabrana platforma nije ažurirala datoteke iz bilo kojeg razloga.Molim vas pitajte ga je li postojao neki problem.",
+  "TAKE_CONTROL_3": "U slučaju da on ima da se ažuriraju datoteke, mora ažurirati datoteke prije nego što radite.Zatim, nakon što vidite promjene, ponovno pokrenite {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "U slučaju da nema datoteka na čekanju, Rad je ažuriran, ali zaključavanje izdanja nije ažurirano na platformi, u tom slučaju i dalje{{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "Nastavi na{{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

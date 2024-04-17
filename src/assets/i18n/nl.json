@@ -501,11 +501,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "Werken of geretourneerd > 12 maanden",
   "TERRITORY_GRAPHICS_ALL_TERR": "Alle beschikbare gebieden",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Aantal beschikbare en niet beschikbare gebieden",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "De app wordt gebruikt door een andere beheerder, maar lijkt dat niet is gesloten zoals verwacht",
+  "TAKE_CONTROL": "Dit gebeurt wanneer Bestanden worden opgeslagen en onmiddellijk bijgewerkt op Google Drive, SharePoint ... Maar na 15 minuten van de laatste opslagbewerking, the 'lock' 🔒 wordt niet vrijgegeven.",
+  "TAKE_CONTROL_2": "Dit betekent dat hij internet in het proces heeft verloren of dat het geselecteerde platform de bestanden om welke reden dan ook niet heeft bijgewerkt.Vraag hem alsjeblieft of er een probleem is geweest.",
+  "TAKE_CONTROL_3": "Als hij bestanden heeft die moeten worden bijgewerkt, moet hij de bestanden bijwerken voordat u werkt.Nadat u de wijzigingen hebt gezien, start u opnieuw op {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "In het geval dat hij geen hangende bestanden heeft, is het werk bijgewerkt, maar het release -slot is niet bijgewerkt op het platform, in dat geval doorgaan {{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "Doorgaan met {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

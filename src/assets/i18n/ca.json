@@ -504,11 +504,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "S’està treballant o retornat > 12 mesos",
   "TERRITORY_GRAPHICS_ALL_TERR": "Tots els territoris disponibles",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Nombre de territoris disponibles i no disponibles",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "L’aplicació ha sigut utilitzada per un altre administrador, però sembla que no es va tancar com s’esperava.",
+  "TAKE_CONTROL": "Això passa quan els fitxers es desen i s’actualitzen immediatament a Google Drive, SharePoint. Però després de 15 minuts de l’última operació de guardat, el 'pany' 🔒 no està alliberat.",
+  "TAKE_CONTROL_2": "Això vol dir que va perdre Internet en el procés o la plataforma seleccionada no va actualitzar els fitxers per qualsevol motiu. Si us plau, pregunteu-li si hi ha hagut algun problema.",
+  "TAKE_CONTROL_3": "En cas que tingui pendents fitxers per ser actualitzats, ha d’actualitzar els fitxer. Aleshores, després de tu veure els canvis, reinicieu {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "En cas que no tingui fitxers pendents, El treball s'ha actualitzat, però el 'pany' no s'ha actualitzat a la plataforma, en aquest cas continua:",
+  "TAKE_CONTROL_BTN": "Continuar a {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

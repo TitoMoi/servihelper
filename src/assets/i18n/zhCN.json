@@ -491,11 +491,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "工作或返回 > 12 个月",
   "TERRITORY_GRAPHICS_ALL_TERR": "所有可用领土",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "可用的且无法可用的地区",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "该应用程序正在另一名管理员使用，但似乎并未按预期关闭",
+  "TAKE_CONTROL": "这会发生 {{APP_NAME}} 文件保存并立即在Google驱动器上更新，SharePoint ... 但是最后一次保存操作15分钟后, the 'lock' 🔒 未发布.",
+  "TAKE_CONTROL_2": "这意味着他在此过程中丢失了互联网或所选平台没有出于任何原因更新文件。请问他是否有问题。",
+  "TAKE_CONTROL_3": "如果他有要更新的文件，则必须在您上班之前更新文件。然后，看到更改后，重新启动 {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "如果他没有待处理的文件，则已更新工作，但是释放锁在平台上尚未更新，在这种情况下， {{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "继续 {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

@@ -502,11 +502,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "Se está trabajando o devuelto > 12 meses",
   "TERRITORY_GRAPHICS_ALL_TERR": "Todos los territorios disponibles",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Número de territorios disponibles y no disponibles",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "La aplicación ha sido utilizada por otro administrador, pero parece que no se cerró como se esperaba.",
+  "TAKE_CONTROL": "Esto sucede cuando los archivos se guardan e inmediatamente se actualizan en Google Drive, SharePoint ... Pero después de 15 minutos de la última operación de guardado, el 'lock' 🔒 no se libera.",
+  "TAKE_CONTROL_2": "Esto significa que perdió internet en el proceso o la plataforma seleccionada no actualizó los archivos por cualquier razón. Pregúntele si ha podido guardar sus cambios.",
+  "TAKE_CONTROL_3": "En caso de que tenga archivos pendientes para actualizarse, el debe actualizar los archivos antes de que puedas trabajar. Luego, después de ver los cambios en la plataforma, reinicia {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "En caso de que no tenga archivos pendientes, el trabajo se ha actualizado, pero el 'lock' no se ha actualizado en la plataforma, en ese caso continúa:",
+  "TAKE_CONTROL_BTN": "Continuar a {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }

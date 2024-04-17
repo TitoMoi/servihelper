@@ -491,11 +491,11 @@
   "TERRITORY_GRAPHICS_OVERDUE": "Pracujący lub zwracany > 12 miesięcy",
   "TERRITORY_GRAPHICS_ALL_TERR": "Wszystkie dostępne terytoria",
   "TERRITORY_GRAPHICS_TOTAL_NUMBER": "Liczba dostępnych i niedostępnych terytoriów",
-  "APP_LOCKED_WARNING": "The app is being used by another admin but seems that didn't closed as expected",
-  "TAKE_CONTROL": "This happens when {{APP_NAME}} files are saved and immediatly updated on google drive, sharepoint... but after 15 mins of the last save operation, the 'lock' 🔒 is not released.",
-  "TAKE_CONTROL_2": "This means that he lost internet in the process or the selected platform didn't updated the files by whatever reason. Please ask him if there has been some problem.",
-  "TAKE_CONTROL_3": "In case he has files pending to be updated, he must update the files before you work. Then, after you see the changes, restart {{APP_NAME}}.",
-  "TAKE_CONTROL_4": "In case he has NO pending files, the work has been updated but the release lock has not been updated on the platform, in that case continue to {{APP_NAME}}.",
-  "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
+  "APP_LOCKED_WARNING": "Aplikacja jest używana przez innego administratora, ale wydaje się, że nie zamknięto zgodnie z oczekiwaniami",
+  "TAKE_CONTROL": "Dzieje się tak, kiedy Pliki są zapisywane i natychmiast aktualizowane na Dysku Google, SharePoint ... Ale po 15 minutach ostatniej operacji zapisu, the 'lock' 🔒 nie jest wydany.",
+  "TAKE_CONTROL_2": "Oznacza to, że stracił Internet w tym procesie lub wybrana platforma nie zaktualizowała plików z jakiegokolwiek powodu.Zapytaj go, czy wystąpił jakiś problem.",
+  "TAKE_CONTROL_3": "W przypadku, gdy ma ono aktualizację plików, musi zaktualizować pliki przed pracą. Następnie, po zobaczeniu zmian, uruchom ponownie {{APP_NAME}}.",
+  "TAKE_CONTROL_4": "W przypadku, gdy nie ma oczekujących plików, praca została zaktualizowana, ale blokada wydania nie została zaktualizowana na platformie, w takim przypadku kontynuuj{{APP_NAME}}.",
+  "TAKE_CONTROL_BTN": "Kontynuuj {{APP_NAME}}",
   "APP_NAME": "Servihelper"
 }
