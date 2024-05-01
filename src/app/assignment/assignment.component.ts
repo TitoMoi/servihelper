@@ -20,7 +20,7 @@ import {
   RouterLinkActive,
   Router,
 } from "@angular/router";
-import { Subscription, map, skip } from "rxjs";
+import { Subscription, map } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
 import { SortService } from "app/services/sort.service";
 import { RoomService } from "app/room/service/room.service";
@@ -139,30 +139,17 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   //first load or Admin
   getAllAssignTypesIds() {
-    return this.assignTypeService.getAssignTypes()?.map((at) => at.id);
+    return this.assignTypeService.getAssignTypes().map((at) => at.id);
   }
 
   ngOnInit() {
     this.subscription.add(
-      this.role$.pipe(skip(1)).subscribe(() => {
+      this.role$.subscribe(() => {
         this.router.navigateByUrl("home").then(() =>
           this.router.navigate(["assignment/fake"], {
             skipLocationChange: true,
             queryParams: { prev: "home" },
           }),
-        );
-      }),
-    );
-
-    //prepare emissions, emits also the first time
-    this.subscription.add(
-      this.role$.subscribe((roleId) => {
-        this.allowedAssignTypesIds = this.configService.isAdminRole()
-          ? this.getAllAssignTypesIds()
-          : this.configService.getRole(roleId).assignTypesId;
-
-        this.assignments = this.assignments.filter((a) =>
-          this.allowedAssignTypesIds.includes(a.assignType),
         );
       }),
     );
@@ -185,6 +172,15 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
           }
         },
       ),
+    );
+
+    // First load
+    this.allowedAssignTypesIds = this.configService.isAdminRole()
+      ? this.getAllAssignTypesIds()
+      : this.configService.getRole(this.configService.role).assignTypesId;
+
+    this.assignments = this.assignments.filter((a) =>
+      this.allowedAssignTypesIds.includes(a.assignType),
     );
 
     const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);

@@ -4,7 +4,7 @@ import { readJSONSync, readJson, writeJSONSync } from "fs-extra";
 
 import { Injectable } from "@angular/core";
 import { Observable, Subject, distinctUntilChanged, map } from "rxjs";
-import { RoleInterface } from "app/roles/model/role.model";
+import { RoleClass, RoleInterface } from "app/roles/model/role.model";
 import { nanoid } from "nanoid";
 import path from "path";
 import { OnlineInterface } from "app/online/model/online.model";
@@ -171,11 +171,12 @@ export class ConfigService {
   }
 
   getRoles() {
-    return this.config.roles;
+    return this.config.roles.map((r) => new RoleClass(r));
   }
 
-  getRole(id: string): RoleInterface {
-    return this.config.roles.find((role) => role.id === id);
+  //Returns the searched role or a new RoleClass
+  getRole(id?: string): RoleInterface {
+    return new RoleClass(this.config.roles.find((role) => role.id === id));
   }
 
   getCurrentRoleId() {

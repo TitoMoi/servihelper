@@ -79,7 +79,7 @@
         <div class="grid-header-item bg-color-app fw-bold sticky-top">
           {{ t("ASSIGN_TABLE_HEADER_DELETE") }}
         </div>
-        @for (a of assignmentsTable; track trackByIdFn($index, a)) {
+        @for (a of assignmentsTable; track a) {
           <div class="grid-row">
             <div
               id="imageId"

@@ -130,9 +130,9 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
       this.allowedAssignTypesIds = this.getAllAssignTypesIds();
     } else {
       this.isAdmin = false;
-      this.allowedAssignTypesIds = this.configService
-        .getRoles()
-        .find((r) => r.id === this.configService.role).assignTypesId;
+      this.allowedAssignTypesIds = this.configService.getRole(
+        this.configService.role,
+      ).assignTypesId;
     }
 
     this.configService.role$.subscribe(() => {
@@ -141,9 +141,9 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
         this.allowedAssignTypesIds = this.getAllAssignTypesIds();
       } else {
         this.isAdmin = false;
-        this.allowedAssignTypesIds = this.configService
-          .getRoles()
-          .find((r) => r.id === this.configService.role).assignTypesId;
+        this.allowedAssignTypesIds = this.configService.getRole(
+          this.configService.role,
+        ).assignTypesId;
       }
       this.selectFilteredAssignTypes();
       this.cdr.detectChanges();

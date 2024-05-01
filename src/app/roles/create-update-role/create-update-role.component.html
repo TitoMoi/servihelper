@@ -41,6 +41,46 @@
           </div>
         </div>
       </div>
+      <h4>Days of the week that applies the rol</h4>
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="col-auto">
+            <mat-checkbox color="primary" [formControl]="form.controls.monday">{{
+              monday
+            }}</mat-checkbox>
+          </div>
+          <div class="col-auto">
+            <mat-checkbox color="primary" [formControl]="form.controls.tuesday">{{
+              tuesday
+            }}</mat-checkbox>
+          </div>
+          <div class="col-auto">
+            <mat-checkbox color="primary" [formControl]="form.controls.wednesday">{{
+              wednesday
+            }}</mat-checkbox>
+          </div>
+          <div class="col-auto">
+            <mat-checkbox color="primary" [formControl]="form.controls.thursday">{{
+              thursday
+            }}</mat-checkbox>
+          </div>
+          <div class="col-auto">
+            <mat-checkbox color="primary" [formControl]="form.controls.friday">{{
+              friday
+            }}</mat-checkbox>
+          </div>
+          <div class="col-auto">
+            <mat-checkbox color="primary" [formControl]="form.controls.saturday">{{
+              saturday
+            }}</mat-checkbox>
+          </div>
+          <div class="col-auto">
+            <mat-checkbox color="primary" [formControl]="form.controls.sunday">{{
+              sunday
+            }}</mat-checkbox>
+          </div>
+        </div>
+      </form>
     </mat-card-content>
     <mat-card-actions>
       <button

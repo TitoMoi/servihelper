@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import {
-  UntypedFormBuilder,
-  Validators,
-  ReactiveFormsModule,
-  FormControl,
-} from "@angular/forms";
+import { FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
@@ -20,6 +15,8 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
+import { format } from "date-fns";
+import { RoleInterface } from "../model/role.model";
 
 @Component({
   selector: "app-create-update-role",
@@ -47,22 +44,35 @@ export class CreateUpdateRoleComponent {
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
-  r = this.configService
-    .getRoles()
-    .find((role) => role.id === this.activatedRoute.snapshot.params.id);
+  r = this.configService.getRole(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
-  isUpdate = this.r ? true : false;
+  isUpdate = this.r.id ? true : false;
+
+  monday = format(new Date(2024, 5, 6), "EEEE");
+  tuesday = format(new Date(2024, 5, 7), "EEEE");
+  wednesday = format(new Date(2024, 5, 8), "EEEE");
+  thursday = format(new Date(2024, 5, 9), "EEEE");
+  friday = format(new Date(2024, 5, 10), "EEEE");
+  saturday = format(new Date(2024, 5, 11), "EEEE");
+  sunday = format(new Date(2024, 5, 12), "EEEE");
 
   form = this.formBuilder.group({
-    id: this.r?.id,
-    name: new FormControl(this.r?.name, { validators: Validators.required }),
-    assignTypesId: [this.r ? this.r.assignTypesId : [], Validators.required],
+    id: this.r.id,
+    name: [this.r.name, { validators: Validators.required }],
+    assignTypesId: [this.r.assignTypesId, Validators.required],
+    monday: [this.r.friday],
+    tuesday: [this.r.tuesday],
+    wednesday: [this.r.wednesday],
+    thursday: [this.r.thursday],
+    friday: [this.r.friday],
+    saturday: [this.r.saturday],
+    sunday: [this.r.sunday],
   });
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private configService: ConfigService,
     private assignTypeService: AssignTypeService,
     private router: Router,
@@ -90,7 +100,7 @@ export class CreateUpdateRoleComponent {
   }
 
   onSubmit() {
-    const value = this.form.value;
+    const value = this.form.value as RoleInterface;
 
     if (this.isUpdate) {
       this.configService.updateRole(value);
