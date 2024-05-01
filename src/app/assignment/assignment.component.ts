@@ -39,6 +39,7 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
 import { ConfigService } from "app/config/service/config.service";
+import { format } from "date-fns";
 
 @Component({
   selector: "app-assignment",
@@ -181,8 +182,9 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
       ? this.getAllAssignTypesIds()
       : this.configService.getRole(this.configService.role).assignTypesId;
 
-    this.assignments = this.assignments.filter((a) =>
-      this.allowedAssignTypesIds.includes(a.assignType),
+    this.assignments = this.assignments.filter(
+      (a) =>
+        this.allowedAssignTypesIds.includes(a.assignType) && this.isWeekdayAllowed(a.date),
     );
 
     const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);
@@ -202,6 +204,12 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   ngOnDestroy(): void {
     this.observer.disconnect();
     this.subscription.unsubscribe();
+  }
+
+  isWeekdayAllowed(date: Date) {
+    const dayName = format(date, "EEEE").toLowerCase();
+    const role = this.configService.getRole(this.configService.getCurrentRoleId());
+    return role[dayName];
   }
 
   isCreateAssignmentDisabled() {

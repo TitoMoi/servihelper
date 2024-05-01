@@ -57,9 +57,9 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     if (this.configService.isAdminRole()) {
       this.allowedAssignTypesIds = this.getAllAssignTypesIds();
     } else {
-      this.allowedAssignTypesIds = this.configService
-        .getRoles()
-        .find((r) => r.id === this.configService.role).assignTypesId;
+      this.allowedAssignTypesIds = this.configService.getRole(
+        this.configService.getCurrentRoleId(),
+      ).assignTypesId;
     }
   }
 

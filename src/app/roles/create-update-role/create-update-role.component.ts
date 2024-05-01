@@ -11,12 +11,33 @@ import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directi
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 import { format } from "date-fns";
 import { RoleInterface } from "../model/role.model";
+import {
+  bn,
+  ca,
+  de,
+  el,
+  enGB,
+  es,
+  fr,
+  hi,
+  hr,
+  it,
+  ja,
+  ko,
+  nl,
+  pl,
+  pt,
+  ro,
+  ru,
+  tr,
+  zhCN,
+} from "date-fns/locale";
 
 @Component({
   selector: "app-create-update-role",
@@ -48,15 +69,53 @@ export class CreateUpdateRoleComponent {
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
+  locales = {
+    bn,
+    ca,
+    de,
+    el,
+    en: enGB,
+    es,
+    fr,
+    hi,
+    hr,
+    it,
+    ja,
+    ko,
+    nl,
+    pl,
+    pt,
+    ro,
+    ru,
+    tr,
+    zhCN,
+  };
+
   isUpdate = this.r.id ? true : false;
 
-  monday = format(new Date(2024, 5, 6), "EEEE");
-  tuesday = format(new Date(2024, 5, 7), "EEEE");
-  wednesday = format(new Date(2024, 5, 8), "EEEE");
-  thursday = format(new Date(2024, 5, 9), "EEEE");
-  friday = format(new Date(2024, 5, 10), "EEEE");
-  saturday = format(new Date(2024, 5, 11), "EEEE");
-  sunday = format(new Date(2024, 5, 12), "EEEE");
+  // Months are 0 index based
+  monday = format(new Date(2024, 4, 6), "EEEE", {
+    locale: this.locales[this.translocoService.getActiveLang()],
+  });
+
+  tuesday = format(new Date(2024, 4, 7), "EEEE", {
+    locale: this.locales[this.translocoService.getActiveLang()],
+  });
+  wednesday = format(new Date(2024, 4, 8), "EEEE", {
+    locale: this.locales[this.translocoService.getActiveLang()],
+  });
+  thursday = format(new Date(2024, 4, 9), "EEEE", {
+    locale: this.locales[this.translocoService.getActiveLang()],
+  });
+  friday = format(new Date(2024, 4, 10), "EEEE", {
+    locale: this.locales[this.translocoService.getActiveLang()],
+  });
+  saturday = format(new Date(2024, 4, 11), "EEEE", {
+    locale: this.locales[this.translocoService.getActiveLang()],
+  });
+  sunday = format(new Date(2024, 4, 12), "EEEE", {
+    locale: this.locales[this.translocoService.getActiveLang()],
+  });
 
   form = this.formBuilder.group({
     id: this.r.id,
@@ -77,6 +136,7 @@ export class CreateUpdateRoleComponent {
     private assignTypeService: AssignTypeService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private translocoService: TranslocoService,
     private onlineService: OnlineService,
   ) {}
 

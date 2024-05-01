@@ -116,6 +116,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
   ) {
+    //Key is the locale as servihelper understands, right is date-fns, most of them are the same
     this.locales = {
       es,
       ca,
