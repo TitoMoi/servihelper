@@ -262,7 +262,13 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   goBack() {
-    this.location.back();
+    // navigate back to heatmap or parent
+    const prev = this.activatedRoute.snapshot.queryParams.prev;
+    if (prev === "heatmap") {
+      this.router.navigate(["map/territory/heatmap"]);
+    } else {
+      this.location.back();
+    }
   }
 
   /**
@@ -452,11 +458,13 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       }
       this.territoryService.updateTerritory(territory);
 
-      // navigate to parent
-      const route = "../..";
-      this.router.navigate([route], {
-        relativeTo: this.activatedRoute,
-      });
+      // navigate back to heatmap or parent
+      const prev = this.activatedRoute.snapshot.queryParams.prev;
+      if (prev === "heatmap") {
+        this.router.navigate(["map/territory/heatmap"]);
+      } else {
+        this.location.back();
+      }
     } else {
       //If image exists save or update it
       if (image) {
@@ -483,11 +491,13 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
           });
           return;
         }
-        // navigate to parent
-        const route = "..";
-        this.router.navigate([route], {
-          relativeTo: this.activatedRoute,
-        });
+        // navigate back to heatmap or parent
+        const prev = this.activatedRoute.snapshot.queryParams.prev;
+        if (prev === "heatmap") {
+          this.router.navigate(["map/territory/heatmap"]);
+        } else {
+          this.location.back();
+        }
       });
     }
   }

@@ -117,7 +117,10 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
       );
       leafletPolygonRef.on("click", () => {
         const terr = this.territoryService.getTerritoryByPolygonId(polygon.id);
-        this.router.navigate([`map/territory/update/${terr.id}`]);
+        this.router.navigate([`map/territory/update/${terr.id}`], {
+          skipLocationChange: true,
+          queryParams: { prev: "heatmap" },
+        });
       });
       const color = this.getColorBasedOnTimeDistance(terr);
       leafletPolygonRef.setStyle({ fillColor: color, color: color });

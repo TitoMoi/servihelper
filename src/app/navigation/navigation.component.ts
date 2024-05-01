@@ -62,10 +62,12 @@ export class NavigationComponent implements OnInit {
 
   availableLangs = undefined;
 
+  //As an alternative to this, we can put a button so the user can manually check
   queryGithubInterval$ = of(Math.random() > 0.55).pipe(
     filter((doQuery) => doQuery),
     switchMap(() => this.queryGitHub$),
   );
+
   queryGitHub$ = this.httpClient
     .get<GitHubDataInterface>(
       "https://api.github.com/repos/titoMoi/servihelper/releases/latest",
