@@ -46,6 +46,8 @@ import { OnlineService } from "app/online/service/online.service";
 export class NavigationComponent implements OnInit {
   hideSidenav;
 
+  config$ = this.configService.config$;
+
   config = this.configService.getConfig();
 
   roles: RoleInterface[] = this.config.roles;
@@ -117,6 +119,12 @@ export class NavigationComponent implements OnInit {
     //Create only 1 subscription on the model, as i need it after to check if drawer can be closed
     this.#hideSidenav$.subscribe((hideSidenav) => {
       this.hideSidenav = hideSidenav;
+      this.cdr.detectChanges();
+    });
+
+    this.config$.subscribe((config) => {
+      this.roles = config.roles;
+      this.lang = config.lang;
       this.cdr.detectChanges();
     });
   }
