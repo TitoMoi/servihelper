@@ -20,7 +20,7 @@ import {
   RouterLinkActive,
   Router,
 } from "@angular/router";
-import { Subscription, map } from "rxjs";
+import { Subscription } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
 import { SortService } from "app/services/sort.service";
 import { RoomService } from "app/room/service/room.service";
@@ -90,7 +90,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   // To know when the role changes
   role$ = this.configService.role$;
 
-  isAdminRole$ = this.configService.role$.pipe(map(() => this.configService.isAdminRole()));
+  isAdmin = false;
 
   observer: IntersectionObserver = new IntersectionObserver((entries) => {
     //observe the last row
@@ -175,7 +175,9 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     );
 
     // First load
-    this.allowedAssignTypesIds = this.configService.isAdminRole()
+    this.isAdmin = this.configService.isAdminRole();
+
+    this.allowedAssignTypesIds = this.isAdmin
       ? this.getAllAssignTypesIds()
       : this.configService.getRole(this.configService.role).assignTypesId;
 
