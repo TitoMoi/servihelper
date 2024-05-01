@@ -37,7 +37,7 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { ConfigService } from "app/config/service/config.service";
 import { ConfigInterface } from "app/config/model/config.model";
 import { RoleInterface } from "app/roles/model/role.model";
-import { Observable, Subscription, combineLatest, map } from "rxjs";
+import { Observable, Subscription, map } from "rxjs";
 import { AsyncPipe } from "@angular/common";
 
 @Component({
@@ -81,9 +81,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
 
   config$: Observable<ConfigInterface> = this.configService.config$;
   roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
-  currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
-
-  isAdminRole$ = this.configService.role$.pipe(map(() => this.configService.isAdminRole()));
+  isAdmin = false;
 
   allowedAssignTypesIds = [];
 
@@ -127,19 +125,29 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.selectionForm.markAllAsTouched();
 
-    //prepare emissions, emits also the first time
-    this.subscription.add(
-      combineLatest([this.currentRoleId$, this.roles$]).subscribe(([currentRole, roles]) => {
-        this.allowedAssignTypesIds =
-          currentRole === "administrator"
-            ? this.getAllAssignTypesIds()
-            : roles.find((r) => r.id === currentRole).assignTypesId;
+    if (this.configService.isAdminRole()) {
+      this.isAdmin = true;
+      this.allowedAssignTypesIds = this.getAllAssignTypesIds();
+    } else {
+      this.isAdmin = false;
+      this.allowedAssignTypesIds = this.configService
+        .getRoles()
+        .find((r) => r.id === this.configService.role).assignTypesId;
+    }
 
-        if (this.assignTypesSelectRef) {
-          this.selectFilteredAssignTypes();
-        }
-      }),
-    );
+    this.configService.role$.subscribe(() => {
+      if (this.configService.isAdminRole()) {
+        this.isAdmin = true;
+        this.allowedAssignTypesIds = this.getAllAssignTypesIds();
+      } else {
+        this.isAdmin = false;
+        this.allowedAssignTypesIds = this.configService
+          .getRoles()
+          .find((r) => r.id === this.configService.role).assignTypesId;
+      }
+      this.selectFilteredAssignTypes();
+      this.cdr.detectChanges();
+    });
   }
 
   selectFilteredAssignTypes() {
@@ -165,7 +173,7 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
 
   //first load or Admin
   getAllAssignTypesIds() {
-    return this.assignTypeService.getAssignTypes()?.map((at) => at.id);
+    return this.assignTypeService.getAssignTypes().map((at) => at.id);
   }
 
   //********* DATEPICKER HACK *************

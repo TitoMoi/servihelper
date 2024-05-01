@@ -13,7 +13,7 @@
   </a>
   <div class="mb-2">{{ t("ROLE_EXPLANATION") }}</div>
   <div class="mb-2">{{ t("ROLE_EXPLANATION2") }}</div>
-  @if (roles$ | async; as roles) {
+  @if (roles.length) {
     <div class="grid">
       <div class="grid-header-item fw-bold">
         {{ t("ROLE_TABLE_HEADER_NAME") }}

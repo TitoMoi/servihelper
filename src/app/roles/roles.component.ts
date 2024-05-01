@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
-import { filter, map, Observable } from "rxjs";
 import { RoleInterface } from "./model/role.model";
 import { MatIconModule } from "@angular/material/icon";
 import { AsyncPipe } from "@angular/common";
@@ -24,10 +23,7 @@ import { OnlineService } from "app/online/service/online.service";
   ],
 })
 export class RolesComponent {
-  roles$: Observable<RoleInterface[]> = this.configService.config$.pipe(
-    filter((config) => config.roles.length > 0),
-    map((config) => config.roles),
-  );
+  roles: RoleInterface[] = this.configService.getRoles();
 
   //Table
   displayedColumns: string[] = ["name", "editIcon", "deleteIcon"];
@@ -38,8 +34,4 @@ export class RolesComponent {
     private configService: ConfigService,
     private onlineService: OnlineService,
   ) {}
-
-  trackByIdFn(index, role: RoleInterface) {
-    return role.id;
-  }
 }

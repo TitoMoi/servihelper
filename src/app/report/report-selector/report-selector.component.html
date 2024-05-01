@@ -59,11 +59,7 @@
       </div>
     </div>
   </form>
-  @if (
-    selectedDates.length &&
-    selectionForm.controls.template.value &&
-    (isAdminRole$ | async) === false
-  ) {
+  @if (selectedDates.length && selectionForm.controls.template.value && isAdmin === false) {
     <div class="fst-italic mb-2">{{ t("ASSIGN_TABLE_ROLE_VISIBILITY") }}</div>
   }
   @if (
