@@ -248,6 +248,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       this.enableOrDisableAssistantControl(this.gfv("assignType"));
     }
 
+    this.role = this.configService.getRole(this.configService.getCurrentRoleId());
+    this.filterAssignmentsByRole();
+    this.removeAssignTypesThatAlreadyExistOnDate();
+
     //Prepare the form changes
     this.prepareRole();
     this.prepareDateSub();

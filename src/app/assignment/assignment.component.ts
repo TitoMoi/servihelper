@@ -13,13 +13,7 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import {
-  ActivatedRoute,
-  RouterOutlet,
-  RouterLink,
-  RouterLinkActive,
-  Router,
-} from "@angular/router";
+import { ActivatedRoute, RouterOutlet, RouterLink, RouterLinkActive } from "@angular/router";
 import { Subscription } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
 import { SortService } from "app/services/sort.service";
@@ -93,34 +87,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   isAdmin = false;
 
-  observer: IntersectionObserver = new IntersectionObserver((entries) => {
-    //observe the last row
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        let assignmentsPage = this.getAssignmentsSlice(
-          this.paginationEndIndex,
-          this.paginationEndIndex + 25,
-        );
-
-        if (assignmentsPage?.length) {
-          //Remove duplicates, this is because we can add an assignment and move the pagination pointer
-          assignmentsPage = assignmentsPage.filter(
-            (a) => !this.assignmentsTable.some((at) => at.id === a.id),
-          );
-
-          this.assignmentsTable = [
-            ...this.assignmentsTable,
-            ...this.prepareRowExtendedValues(assignmentsPage),
-          ];
-
-          this.sortAndUpdateSeparator();
-        }
-
-        this.observer.unobserve(entry.target);
-        this.cdr.detectChanges();
-      }
-    }
-  });
+  observer: IntersectionObserver;
 
   subscription: Subscription = new Subscription();
 
@@ -134,7 +101,6 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     private sortService: SortService,
     private onlineService: OnlineService,
     private configService: ConfigService,
-    private router: Router,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -144,17 +110,6 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   ngOnInit() {
-    this.subscription.add(
-      this.role$.subscribe(() => {
-        this.router.navigateByUrl("home").then(() =>
-          this.router.navigate(["assignment/fake"], {
-            skipLocationChange: true,
-            queryParams: { prev: "home" },
-          }),
-        );
-      }),
-    );
-
     //Listen for assignments updates (create, update, delete)
     this.subscription.add(
       this.assignmentService.assignment$.subscribe(
@@ -175,7 +130,36 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
       ),
     );
 
-    // First load
+    //React to role changes
+    this.subscription.add(
+      this.role$.subscribe(() => {
+        this.observer.disconnect();
+        this.assignmentsTable = [];
+        this.assignments = this.assignmentService.getAssignments();
+
+        this.isAdmin = this.configService.isAdminRole();
+
+        this.allowedAssignTypesIds = this.isAdmin
+          ? this.getAllAssignTypesIds()
+          : this.configService.getRole(this.configService.role).assignTypesId;
+
+        this.assignments = this.assignments.filter(
+          (a) =>
+            this.allowedAssignTypesIds.includes(a.assignType) && this.isWeekdayAllowed(a.date),
+        );
+
+        const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);
+        this.assignmentsTable = this.prepareRowExtendedValues(assignmentsPage);
+
+        this.sortAndUpdateSeparator();
+
+        this.createObserver();
+
+        this.cdr.detectChanges();
+      }),
+    );
+
+    // the same as when the role changes but this is first load
     this.isAdmin = this.configService.isAdminRole();
 
     this.allowedAssignTypesIds = this.isAdmin
@@ -191,6 +175,10 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     this.assignmentsTable = this.prepareRowExtendedValues(assignmentsPage);
 
     this.sortAndUpdateSeparator();
+
+    this.createObserver();
+
+    this.cdr.detectChanges();
   }
 
   ngAfterViewChecked(): void {
@@ -204,6 +192,37 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   ngOnDestroy(): void {
     this.observer.disconnect();
     this.subscription.unsubscribe();
+  }
+
+  createObserver() {
+    this.observer = new IntersectionObserver((entries) => {
+      //observe the last row
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          let assignmentsPage = this.getAssignmentsSlice(
+            this.paginationEndIndex,
+            this.paginationEndIndex + 25,
+          );
+
+          if (assignmentsPage?.length) {
+            //Remove duplicates, this is because we can add an assignment and move the pagination pointer
+            assignmentsPage = assignmentsPage.filter(
+              (a) => !this.assignmentsTable.some((at) => at.id === a.id),
+            );
+
+            this.assignmentsTable = [
+              ...this.assignmentsTable,
+              ...this.prepareRowExtendedValues(assignmentsPage),
+            ];
+
+            this.sortAndUpdateSeparator();
+          }
+
+          this.observer.unobserve(entry.target);
+          this.cdr.detectChanges();
+        }
+      }
+    });
   }
 
   isWeekdayAllowed(date: Date) {
