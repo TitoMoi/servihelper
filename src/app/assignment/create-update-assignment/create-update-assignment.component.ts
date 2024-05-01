@@ -248,6 +248,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       this.enableOrDisableAssistantControl(this.gfv("assignType"));
     }
 
+    // Because role is now observable and not behaviour we need to trigger the first time
     this.role = this.configService.getRole(this.configService.getCurrentRoleId());
     this.filterAssignmentsByRole();
     this.removeAssignTypesThatAlreadyExistOnDate();
