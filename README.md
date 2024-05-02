@@ -110,7 +110,7 @@ Only the time format can't be changed, but you can select a lang that suits your
    - Do not use shared folder _(google drive or others...)_
    - _(Easy, no complexity but an overhead to understand wich and where is the latest copy)_
 
-3. **Enable built in online mode with a shared folder _(google drive, one drive... ⚠️ also not recommended)_**
+3. **Enable built in online mode with a shared folder _(google drive, one drive... advanced mode)_**
 
    - Enable: config -> online mode _(Required setup inside Servihelper in the config section to configure the shared folder)_
    - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
