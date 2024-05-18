@@ -111,7 +111,7 @@ export class HeatmapComponent implements AfterViewInit, OnDestroy {
 
       leafletPolygonRef.bindTooltip(
         terr.name +
-          (terr.participants.at(-1)
+          (this.territoryService.isActiveTerritory(terr) && terr.participants.at(-1)
             ? " " + this.participantService.getParticipant(terr.participants.at(-1)).name
             : ""),
       );

@@ -107,7 +107,7 @@ export class TerritoryService {
       isActiveTerritory ? t.assignedDates.at(-1) : t.returnedDates.at(-1),
     );
     if (territoryLastDate) {
-      const distanceInMonths = differenceInMonths(territoryLastDate, new Date());
+      const distanceInMonths = Math.abs(differenceInMonths(territoryLastDate, new Date()));
       if (distanceInMonths >= 12) return true;
       return false;
     }
@@ -122,7 +122,7 @@ export class TerritoryService {
       isActiveTerritory ? t.assignedDates.at(-1) : t.returnedDates.at(-1),
     );
     if (territoryLastDate) {
-      const distanceInMonths = differenceInMonths(territoryLastDate, new Date());
+      const distanceInMonths = Math.abs(differenceInMonths(territoryLastDate, new Date()));
       if (distanceInMonths >= 4) return true;
       return false;
     }
