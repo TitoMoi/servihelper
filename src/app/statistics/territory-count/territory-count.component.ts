@@ -29,6 +29,7 @@ import { SortService } from "app/services/sort.service";
 export class TerritoryCountComponent implements OnInit {
   territories = this.territoryService
     .getTerritories()
+    .filter((t) => t.available)
     .sort((a, b) => (a.name > b.name ? 1 : -1));
 
   participants: ParticipantDynamicInterface[] = this.participantService

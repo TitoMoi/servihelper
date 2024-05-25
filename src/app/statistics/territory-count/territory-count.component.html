@@ -22,29 +22,31 @@
           <div class="col-12 fw-bold mb-1">
             <span class="border padding">{{ terr.name }}</span>
           </div>
-          <div class="col">
-            <div class="row m-2">
-              <div class="col-auto">
-                <div>{{ t("PLACEHOLDER_NAME") }}:</div>
-                <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
-                <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
+          <div class="row m-2">
+            <div class="col-auto">
+              <div>{{ t("PLACEHOLDER_NAME") }}:</div>
+              <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
+              <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
+            </div>
+            <div class="col-10">
+              <div class="row">
+                @for (p of terr.participants; track p; let i = $index) {
+                  <div class="col-auto">
+                    <div>
+                      {{
+                        (p | participantPipe)?.name ||
+                          t("STATISTICS_COUNT_TERRITORY_P_NOT_FOUND")
+                      }}
+                    </div>
+                    <div>
+                      {{ terr.assignedDates[i] | translocoDate: { dateStyle: "short" } }}
+                    </div>
+                    <div>
+                      {{ terr.returnedDates[i] | translocoDate: { dateStyle: "short" } }}
+                    </div>
+                  </div>
+                }
               </div>
-              @for (p of terr.participants; track p; let i = $index) {
-                <div class="col-auto">
-                  <div>
-                    {{
-                      (p | participantPipe)?.name ||
-                        t("STATISTICS_COUNT_TERRITORY_P_NOT_FOUND")
-                    }}
-                  </div>
-                  <div>
-                    {{ terr.assignedDates[i] | translocoDate: { dateStyle: "short" } }}
-                  </div>
-                  <div>
-                    {{ terr.returnedDates[i] | translocoDate: { dateStyle: "short" } }}
-                  </div>
-                </div>
-              }
             </div>
           </div>
         </div>
@@ -65,23 +67,27 @@
               <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
             </div>
           }
-          @for (t of territories; track t; let i = $index) {
-            @for (pId of t.participants; track pId; let j = $index) {
-              @if (p.id === pId) {
-                <ng-container class="me-3">
-                  <div class="col-auto">
-                    <div>{{ t.name }}</div>
-                    <div>
-                      {{ t.assignedDates[j] | translocoDate: { dateStyle: "short" } }}
-                    </div>
-                    <div>
-                      {{ t.returnedDates[j] | translocoDate: { dateStyle: "short" } }}
-                    </div>
-                  </div>
-                </ng-container>
+          <div class="col-10">
+            <div class="row">
+              @for (t of territories; track t; let i = $index) {
+                @for (pId of t.participants; track pId; let j = $index) {
+                  @if (p.id === pId) {
+                    <ng-container class="me-3">
+                      <div class="col-auto">
+                        <div>{{ t.name }}</div>
+                        <div>
+                          {{ t.assignedDates[j] | translocoDate: { dateStyle: "short" } }}
+                        </div>
+                        <div>
+                          {{ t.returnedDates[j] | translocoDate: { dateStyle: "short" } }}
+                        </div>
+                      </div>
+                    </ng-container>
+                  }
+                }
               }
-            }
-          }
+            </div>
+          </div>
         </div>
       }
     }
