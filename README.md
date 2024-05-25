@@ -4,7 +4,7 @@
 
 Servihelper is an app that runs on the machine 🖥️ _(Windows, Mac or Linux)_
 
-Does not work on mobile phone 📱 or tablet.
+Does not work on mobile phone 📱 or tablet _(Android, iOS)_ But it works on Windows tablet.
 
 The program is free. 🙅‍♂️💵
 
