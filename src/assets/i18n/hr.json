@@ -481,5 +481,6 @@
   "TAKE_CONTROL_4": "U slučaju da nema datoteka na čekanju, Rad je ažuriran, ali zaključavanje izdanja nije ažurirano na platformi, u tom slučaju i dalje{{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Nastavi na{{APP_NAME}}",
   "APP_NAME": "Servihelper",
-  "COPIED": "Kopiran"
+  "COPIED": "Kopiran",
+  "COMPRESSED": "Komprimiran"
 }

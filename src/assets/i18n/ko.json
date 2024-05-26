@@ -498,5 +498,6 @@
   "TAKE_CONTROL_4": "보류중인 파일이없는 경우 작업이 업데이트되었지만 릴리스 잠금이 플랫폼에서 업데이트되지 않았습니다.이 경우 계속 {{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "계속하십시오 {{APP_NAME}}",
   "APP_NAME": "Servihelper",
-  "COPIED": "복사"
+  "COPIED": "복사",
+  "COMPRESSED": "압축"
 }

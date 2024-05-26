@@ -50,11 +50,11 @@ export class NavigationComponent implements OnInit {
 
   config = this.configService.getConfig();
 
-  roles: RoleInterface[] = this.config.roles;
-
   lang = this.config.lang;
 
-  currentRoleId: string = this.config.role;
+  roles: RoleInterface[] = this.config.roles;
+
+  currentRoleId = this.config.role;
 
   online$ = this.onlineService.online$;
 

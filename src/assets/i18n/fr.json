@@ -509,5 +509,6 @@
   "TAKE_CONTROL_4": "Au cas où il n'a pas de fichiers en attente, le travail a été mis à jour mais le verrouillage de la version n'a pas été mis à jour sur la plate-forme, dans ce cas, continue {{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Continuer à {{APP_NAME}}",
   "APP_NAME": "Servihelper",
-  "COPIED": "Copié"
+  "COPIED": "Copié",
+  "COMPRESSED": "Comprimée"
 }

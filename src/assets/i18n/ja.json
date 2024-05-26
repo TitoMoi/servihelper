@@ -498,5 +498,6 @@
   "TAKE_CONTROL_4": "彼が保留中のファイルがない場合、作業は更新されましたが、リリースロックはプラットフォーム上で更新されていません。{{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "続けます {{APP_NAME}}",
   "APP_NAME": "Servihelper",
-  "COPIED": "コピー"
+  "COPIED": "コピー",
+  "COMPRESSED": "圧縮"
 }

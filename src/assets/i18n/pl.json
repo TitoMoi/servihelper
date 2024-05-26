@@ -498,5 +498,6 @@
   "TAKE_CONTROL_4": "W przypadku, gdy nie ma oczekujących plików, praca została zaktualizowana, ale blokada wydania nie została zaktualizowana na platformie, w takim przypadku kontynuuj{{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Kontynuuj {{APP_NAME}}",
   "APP_NAME": "Servihelper",
-  "COPIED": "Skopiowane"
+  "COPIED": "Skopiowane",
+  "COMPRESSED": "Sprężony"
 }

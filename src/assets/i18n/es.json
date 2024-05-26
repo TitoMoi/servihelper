@@ -509,5 +509,6 @@
   "TAKE_CONTROL_4": "En caso de que no tenga archivos pendientes, el trabajo se ha actualizado, pero el 'lock' no se ha actualizado en la plataforma, en ese caso continúa:",
   "TAKE_CONTROL_BTN": "Continuar a {{APP_NAME}}",
   "APP_NAME": "Servihelper",
-  "COPIED": "Copiado"
+  "COPIED": "Copiado",
+  "COMPRESSED": "Comprimido"
 }

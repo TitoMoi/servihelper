@@ -162,8 +162,8 @@ export class TerritoryComponent {
     const doc = this.getPdfSheet();
     doc.setFont(this.pdfService.font, "bold");
 
-    const x = this.pdfService.getInitialWidth();
-    let y = this.pdfService.getInitialHeight();
+    const x = this.pdfService.getInitialWidth(false);
+    let y = this.pdfService.getInitialHeight(false);
 
     doc.setFontSize(this.pdfService.getTerritoryTextFontSize());
     doc.text(t.name, x, y, {});

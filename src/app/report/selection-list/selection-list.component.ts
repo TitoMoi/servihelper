@@ -35,6 +35,7 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { readFileSync } from "fs-extra";
 import path from "path";
 import jsPDF from "jspdf";
+import { isSameMonth } from "date-fns";
 
 @Component({
   selector: "app-selection-list",
@@ -253,11 +254,11 @@ export class SelectionListComponent implements OnChanges {
   /**
    * @param hasMultipleRooms if true, will substract a diferent value to the initial pageWidth
    */
-  getMaxWidth(hasMultipleRooms: boolean) {
+  getMaxWidth(hasMultipleRooms: boolean, compressed: boolean) {
     return (
       this.pdfService.getPageWidth() -
-      this.pdfService.getInitialWidth() -
-      this.pdfService.getEndingWidth() -
+      this.pdfService.getInitialWidth(compressed) -
+      this.pdfService.getEndingWidth(compressed) -
       (hasMultipleRooms ? 100 : 60) // If you modify this, you also have to compensate in getMaxWidthNames
     );
   }
@@ -266,13 +267,25 @@ export class SelectionListComponent implements OnChanges {
    *
    * @param hasMultipleRooms if true, will substract a diferent value to the initial pageWidth
    */
-  getMaxWidthNames(hasMultipleRooms: boolean) {
+  getMaxWidthNames(hasMultipleRooms: boolean, compressed: boolean) {
     return (
       this.pdfService.getPageWidth() -
-      this.pdfService.getInitialWidth() -
-      this.pdfService.getEndingWidth() -
+      this.pdfService.getInitialWidth(compressed) -
+      this.pdfService.getEndingWidth(compressed) -
       (hasMultipleRooms ? 130 : 120) // If you modify this, you also have to compensate in getMaxWidth
     );
+  }
+
+  groupBelongsToMonthOf5Weeks(
+    currentAg: AssignmentGroupInterface,
+    agList: AssignmentGroupInterface[],
+  ) {
+    let weeks = 0;
+    for (const ag of agList) {
+      if (isSameMonth(currentAg.assignments[0].date, ag.assignments[0].date)) weeks++;
+    }
+    console.log("monthHas5Weeks", weeks);
+    return weeks === 5;
   }
 
   hasMultipleRooms(ag: AssignmentGroupInterface): boolean {
@@ -322,27 +335,33 @@ export class SelectionListComponent implements OnChanges {
   /**
    * The pdf report that is digitally distributed and also printed
    * @param isWeekend if true, will generate a weekend report
+   * @param compressed if true, will compress all the space in the sheet
    */
   // eslint-disable-next-line complexity
-  toPdfBoard(isWeekend = false) {
+  toPdfBoard(isWeekend = false, compressed = false) {
     const assignmentGroupsBackup = [...this.assignmentGroups];
 
     this.getRelatedData(true);
 
     const doc = this.getPdfSheet();
 
-    const x = this.pdfService.getInitialWidth();
-    let y = this.pdfService.getInitialHeight();
+    const x = this.pdfService.getInitialWidth(compressed);
+    let y = this.pdfService.getInitialHeight(compressed);
 
     doc.setFont(this.pdfService.font);
 
-    let weekCounter = this.pdfService.getWeekCounter(isWeekend);
+    const has5Weeks = this.groupBelongsToMonthOf5Weeks(
+      this.assignmentGroups[0],
+      this.assignmentGroups,
+    );
+    let weekCounter = this.pdfService.getWeekCounter(isWeekend, compressed, has5Weeks);
 
     for (const ag of this.assignmentGroups) {
+      const has5Weeks = this.groupBelongsToMonthOf5Weeks(ag, this.assignmentGroups);
       if (!weekCounter) {
-        weekCounter = this.pdfService.getWeekCounter(isWeekend);
+        weekCounter = this.pdfService.getWeekCounter(isWeekend, compressed, has5Weeks);
         doc.addPage("a4", "p");
-        y = this.pdfService.getInitialHeight();
+        y = this.pdfService.getInitialHeight(compressed);
       }
 
       //Initialize the bands
@@ -354,41 +373,43 @@ export class SelectionListComponent implements OnChanges {
       const dateLocaleFormat = this.getFormatedDate(ag.assignments[0].date);
 
       doc.setFont(this.pdfService.font, "bold");
-      doc.setFontSize(this.pdfService.getDateFontSize());
+      doc.setFontSize(this.pdfService.getDateFontSize(compressed));
       doc.text(dateLocaleFormat, x, y, {});
 
       //rooms title and content
-      doc.setFontSize(this.pdfService.getTextFontSize());
+      doc.setFontSize(this.pdfService.getTextFontSize(compressed, has5Weeks));
 
       const hasMultipleRooms = this.hasMultipleRooms(ag);
 
-      const maxLineWidth = this.getMaxWidth(hasMultipleRooms);
-      const maxLineWidthParticipants = this.getMaxWidthNames(hasMultipleRooms);
+      const maxLineWidth = this.getMaxWidth(hasMultipleRooms, compressed);
+      const maxLineWidthParticipants = this.getMaxWidthNames(hasMultipleRooms, compressed);
 
       if (hasMultipleRooms) {
         const [room1, room2] = this.getRooms(ag);
         doc.text(
           this.roomService.getNameOrTranslation(room1),
-          x + this.getMaxWidth(hasMultipleRooms),
+          x + this.getMaxWidth(hasMultipleRooms, compressed),
           y,
         );
         doc.text(
           this.roomService.getNameOrTranslation(room2),
-          x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(hasMultipleRooms),
+          x +
+            this.getMaxWidth(hasMultipleRooms, compressed) +
+            this.getMaxWidthNames(hasMultipleRooms, compressed),
           y,
         );
       } else {
         const [room1] = this.getRooms(ag);
         doc.text(
           this.roomService.getNameOrTranslation(room1),
-          x + this.getMaxWidth(hasMultipleRooms),
+          x + this.getMaxWidth(hasMultipleRooms, compressed),
           y,
         );
       }
 
       doc.setFont(this.pdfService.font, "normal");
       //move the pointer to the assignments section
-      y = y + 10;
+      y = y + (compressed ? 5 : 10);
 
       for (const a of ag.assignments) {
         let height = 0;
@@ -400,13 +421,14 @@ export class SelectionListComponent implements OnChanges {
           maxLineWidthParticipants,
         );
 
-        const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
+        const heightParticipantNames =
+          (compressed ? (has5Weeks ? 2 : 2.5) : 3.5) * (textLinesParticipants.length + 1);
 
         let themeOrAssignType = a.theme
           ? a.theme
           : this.assignTypeService.getNameOrTranslation(a.assignType);
 
-        let wordLength = hasMultipleRooms ? 70 : 90;
+        let wordLength = (hasMultipleRooms ? 70 : 90) - (compressed ? 21 : 0);
         //Before create text lines check the length
         if (themeOrAssignType.length > wordLength) {
           const shortedTheme = [];
@@ -424,37 +446,44 @@ export class SelectionListComponent implements OnChanges {
 
         const textLinesTheme = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
 
-        const heightTheme = 3.5 * (textLinesTheme.length + 1);
+        const heightTheme = (compressed ? 2 : 3.5) * (textLinesTheme.length + 1);
 
         height = heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
-        //Bands
-        if (a.assignType.type === "chairman" && isWeekend) {
-          y = this.addBand(doc, x, y, "publicspeech.png", a);
-        }
-        if (
-          this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
-          !treasuresFromWordBand
-        ) {
-          y = this.addBand(doc, x, y, "treasures.png", a);
-          treasuresFromWordBand = true;
-        }
-        if (
-          this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
-          !improvePreachingBand
-        ) {
-          y = this.addBand(doc, x, y, "wheat.png", a);
-          improvePreachingBand = true;
-        }
-        if (
-          this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
-          !livingAsChristiansBand
-        ) {
-          y = this.addBand(doc, x, y, "sheep.png", a);
-          livingAsChristiansBand = true;
+
+        if (!compressed) {
+          //Bands
+          if (a.assignType.type === "chairman" && isWeekend) {
+            y = this.addBand(doc, x, y, "publicspeech.png", a);
+          }
+          if (
+            this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
+            !treasuresFromWordBand
+          ) {
+            y = this.addBand(doc, x, y, "treasures.png", a);
+            treasuresFromWordBand = true;
+          }
+          if (
+            this.assignTypeService.improvePreachingAssignmentTypes.includes(
+              a.assignType.type,
+            ) &&
+            !improvePreachingBand
+          ) {
+            y = this.addBand(doc, x, y, "wheat.png", a);
+            improvePreachingBand = true;
+          }
+          if (
+            this.assignTypeService.liveAsChristiansAssignmentTypes.includes(
+              a.assignType.type,
+            ) &&
+            !livingAsChristiansBand
+          ) {
+            y = this.addBand(doc, x, y, "sheep.png", a);
+            livingAsChristiansBand = true;
+          }
         }
         doc.text(textLinesTheme, x, y);
         //We need to move the pointer adding the width of the text plus a margin
-        doc.text(textLinesParticipants, x + this.getMaxWidth(hasMultipleRooms), y);
+        doc.text(textLinesParticipants, x + this.getMaxWidth(hasMultipleRooms, compressed), y);
 
         if (hasMultipleRooms) {
           //Find the equivalent on room2, paint participants and remove the assignment
@@ -477,7 +506,9 @@ export class SelectionListComponent implements OnChanges {
             //plus the width of the participant text plus a margin
             doc.text(
               textLinesParticipants,
-              x + this.getMaxWidth(hasMultipleRooms) + this.getMaxWidthNames(hasMultipleRooms),
+              x +
+                this.getMaxWidth(hasMultipleRooms, compressed) +
+                this.getMaxWidthNames(hasMultipleRooms, compressed),
               y,
             );
             ag.assignments.splice(index, 1);
@@ -488,7 +519,7 @@ export class SelectionListComponent implements OnChanges {
         y = y + height;
       }
       //Separator betweek weeks
-      y = y + 5;
+      y = y + (compressed ? 2.5 : 5);
       weekCounter--;
     }
 

@@ -498,5 +498,6 @@
   "TAKE_CONTROL_4": "如果他没有待处理的文件，则已更新工作，但是释放锁在平台上尚未更新，在这种情况下， {{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "继续 {{APP_NAME}}",
   "APP_NAME": "Servihelper",
-  "COPIED": "复制"
+  "COPIED": "复制",
+  "COMPRESSED": "压缩"
 }

@@ -511,5 +511,6 @@
   "TAKE_CONTROL_4": "Caso ele não tenha arquivos pendentes, o trabalho foi atualizado, mas o bloqueio de liberação não foi atualizado na plataforma, nesse caso continue a{{APP_NAME}}.",
   "TAKE_CONTROL_BTN": "Continua a {{APP_NAME}}",
   "APP_NAME": "Servihelper",
-  "COPIED": "Copiada"
+  "COPIED": "Copiada",
+  "COMPRESSED": "Comprimida"
 }

@@ -1,48 +1,62 @@
 <div *transloco="let t" class="d-flex align-items-center mb-1">
   @if (hasAssignments()) {
-    <div id="noColorSectionDiv" class="border me-3">
-      <mat-icon
-        class="m-2 me-3 mb-4"
-        svgIcon="nocolorsection"
-        [matTooltip]="t('ICON_NO_COLOR_SECTION')"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="pdfnocolor"
-        [matTooltip]="t('ICON_PDF_INFINITE')"
-        (click)="toPdf(false, false)"
-      ></mat-icon>
+    <div id="noColorSectionDiv" class="col-auto border me-3">
+      <div class="d-flex">
+        <mat-icon
+          class="m-2 me-3 mb-4"
+          svgIcon="nocolorsection"
+          [matTooltip]="t('ICON_NO_COLOR_SECTION')"
+        ></mat-icon>
+        <mat-icon
+          class="m-2"
+          svgIcon="pdfnocolor"
+          [matTooltip]="t('ICON_PDF_INFINITE')"
+          (click)="toPdf(false, false)"
+        ></mat-icon>
+        <span class="mx-2 mt-2">
+          <div class="d-flex flex-column align-items-center">
+            <mat-icon
+              svgIcon="midweeklistnocolor"
+              [matTooltip]="t('ICON_PDF_BAND')"
+              (click)="toPdfBoard(false, true)"
+            ></mat-icon>
+            <span class="f-small uppercase">{{ t("COMPRESSED") }}</span>
+          </div>
+        </span>
+      </div>
     </div>
-    <div id="colorSectionDiv" class="border">
-      <mat-icon
-        class="m-2 me-3 mb-4 reduceIconSize"
-        svgIcon="colorsection"
-        [matTooltip]="t('ICON_COLOR_SECTION')"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="pdf"
-        [matTooltip]="t('ICON_PDF_INFINITE_COLOR')"
-        (click)="toPdf(true, false)"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="png"
-        [matTooltip]="t('ICON_PNG')"
-        (click)="toPng()"
-      ></mat-icon>
-      <mat-icon
-        class="m-2 ms-5"
-        svgIcon="midweeklist"
-        [matTooltip]="t('ICON_PDF_BAND')"
-        (click)="toPdfBoard(false)"
-      ></mat-icon>
-      <mat-icon
-        class="m-2"
-        svgIcon="weekendlist"
-        [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
-        (click)="toPdfBoard(true)"
-      ></mat-icon>
+    <div id="colorSectionDiv" class="col-auto border">
+      <div class="d-flex">
+        <mat-icon
+          class="m-2 me-3 mb-4 reduceIconSize"
+          svgIcon="colorsection"
+          [matTooltip]="t('ICON_COLOR_SECTION')"
+        ></mat-icon>
+        <mat-icon
+          class="m-2"
+          svgIcon="pdf"
+          [matTooltip]="t('ICON_PDF_INFINITE_COLOR')"
+          (click)="toPdf(true, false)"
+        ></mat-icon>
+        <mat-icon
+          class="m-2"
+          svgIcon="png"
+          [matTooltip]="t('ICON_PNG')"
+          (click)="toPng()"
+        ></mat-icon>
+        <mat-icon
+          class="m-2 ms-5"
+          svgIcon="midweeklist"
+          [matTooltip]="t('ICON_PDF_BAND')"
+          (click)="toPdfBoard(false)"
+        ></mat-icon>
+        <mat-icon
+          class="m-2"
+          svgIcon="weekendlist"
+          [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
+          (click)="toPdfBoard(true)"
+        ></mat-icon>
+      </div>
     </div>
   } @else {
     {{ t("REPORT_NO_ASSIGNMENTS") }}

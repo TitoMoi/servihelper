@@ -56,6 +56,14 @@ mat-icon {
   padding: 2px 6px;
 }
 
+.f-small {
+  font-size: 0.6rem;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
 //OVERRIDES
 ngx-charts-advanced-legend {
   div.advanced-pie-legend {

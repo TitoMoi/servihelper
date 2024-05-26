@@ -111,32 +111,32 @@ export class PdfService {
     return this.font;
   }
 
-  getWeekCounter(isWeekend: boolean) {
-    return isWeekend ? 5 : 2;
+  getWeekCounter(isWeekend: boolean, isCompressed: boolean, has5Weeks: boolean) {
+    return isWeekend ? 5 : isCompressed ? (has5Weeks ? 5 : 4) : 2;
   }
 
-  getInitialHeight() {
-    return 20;
+  getInitialHeight(isCompressed: boolean) {
+    return isCompressed ? 10 : 20;
   }
 
-  getInitialWidth() {
-    return 15;
+  getInitialWidth(isCompressed: boolean) {
+    return isCompressed ? 5 : 15;
   }
 
-  getEndingWidth() {
-    return 15;
+  getEndingWidth(isCompressed: boolean) {
+    return isCompressed ? 5 : 15;
   }
 
   getPageWidth() {
     return 210;
   }
 
-  getDateFontSize() {
-    return 13.5;
+  getDateFontSize(isCompressed: boolean) {
+    return isCompressed ? 10 : 13.5;
   }
 
-  getTextFontSize() {
-    return 10.5;
+  getTextFontSize(isCompressed: boolean, isMultipleOf5 = false) {
+    return isCompressed ? (isMultipleOf5 ? 8 : 9.5) : 10.5;
   }
 
   /**
@@ -214,7 +214,7 @@ export class PdfService {
 
     for (const ag of assignmentGroups) {
       doc.setFont(this.font, "bold");
-      doc.setFontSize(this.getDateFontSize());
+      doc.setFontSize(this.getDateFontSize(false));
       //Date
       const localeDate = this.translocoLocaleService.localizeDate(
         ag.assignments[0].date,
@@ -230,7 +230,7 @@ export class PdfService {
       y += 6;
 
       doc.setFont(this.font, "normal");
-      doc.setFontSize(this.getTextFontSize());
+      doc.setFontSize(this.getTextFontSize(false));
 
       for (const a of ag.assignments) {
         const themeOrAssignType =
@@ -283,7 +283,7 @@ export class PdfService {
     });
 
     doc.setFont(this.font, "bold");
-    doc.setFontSize(this.getDateFontSize()); //It's not date but the same font size
+    doc.setFontSize(this.getDateFontSize(false)); //It's not date but the same font size
 
     const x = 10;
     let y = 10;
@@ -299,7 +299,7 @@ export class PdfService {
 
     for (const ag of assignmentGroups) {
       doc.setFont(this.font, "bold");
-      doc.setFontSize(this.getDateFontSize());
+      doc.setFontSize(this.getDateFontSize(false));
       //Date
       const localeDate = this.translocoLocaleService.localizeDate(
         ag.assignments[0].date,
@@ -315,7 +315,7 @@ export class PdfService {
       y = this.calculateY(doc, y + 6, isForPrint);
 
       doc.setFont(this.font, "normal");
-      doc.setFontSize(this.getTextFontSize());
+      doc.setFontSize(this.getTextFontSize(false));
 
       for (const a of ag.assignments) {
         const themeOrAssignType =
