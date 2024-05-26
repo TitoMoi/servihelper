@@ -284,7 +284,6 @@ export class SelectionListComponent implements OnChanges {
     for (const ag of agList) {
       if (isSameMonth(currentAg.assignments[0].date, ag.assignments[0].date)) weeks++;
     }
-    console.log("monthHas5Weeks", weeks);
     return weeks === 5;
   }
 

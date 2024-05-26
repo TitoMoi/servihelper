@@ -482,5 +482,6 @@
   "TAKE_CONTROL_BTN": "Nastavi na{{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "Kopiran",
-  "COMPRESSED": "Komprimiran"
+  "COMPRESSED": "Komprimiran",
+  "ICON_PDF_BAND_BLACK": "Generirajte PDF posebno za srednji tjedan bez bendova i do pet tjedana po stranici"
 }

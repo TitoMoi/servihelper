@@ -510,5 +510,6 @@
   "TAKE_CONTROL_BTN": "Continuă să {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "Copiat",
-  "COMPRESSED": "Comprimat"
+  "COMPRESSED": "Comprimat",
+  "ICON_PDF_BAND_BLACK": "Generați un PDF special pentru mijlocul săptămânii fără trupe și până la cinci săptămâni pe pagină"
 }

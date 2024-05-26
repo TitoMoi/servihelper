@@ -499,5 +499,6 @@
   "TAKE_CONTROL_BTN": "계속하십시오 {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "복사",
-  "COMPRESSED": "압축"
+  "COMPRESSED": "압축",
+  "ICON_PDF_BAND_BLACK": "밴드없이 주중에 특별히 PDF를 생성하고 페이지 당 최대 5 주"
 }

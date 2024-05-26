@@ -512,5 +512,6 @@
   "TAKE_CONTROL_BTN": "Continua a {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "Copiada",
-  "COMPRESSED": "Comprimida"
+  "COMPRESSED": "Comprimida",
+  "ICON_PDF_BAND_BLACK": "Gerar um PDF especialmente para o meio da semana sem bandas e até cinco semanas por página"
 }

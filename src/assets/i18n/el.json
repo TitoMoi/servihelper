@@ -499,5 +499,6 @@
   "TAKE_CONTROL_BTN": "Συνέχισε να {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "Αντιγραφεί",
-  "COMPRESSED": "Συμπιεσμένος"
+  "COMPRESSED": "Συμπιεσμένος",
+  "ICON_PDF_BAND_BLACK": "Δημιουργήστε ένα PDF ειδικά για τη μέση εβδομάδα χωρίς συγκροτήματα και έως πέντε εβδομάδες ανά σελίδα"
 }

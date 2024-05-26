@@ -499,5 +499,6 @@
   "TAKE_CONTROL_BTN": "Devam etmek {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "Kopyalanmış",
-  "COMPRESSED": "Sıkıştırılmış"
+  "COMPRESSED": "Sıkıştırılmış",
+  "ICON_PDF_BAND_BLACK": "Bantsız ve sayfa başına beş haftaya kadar hafta ortası için özel olarak bir PDF oluşturun"
 }

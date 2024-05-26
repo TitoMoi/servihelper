@@ -499,5 +499,6 @@
   "TAKE_CONTROL_BTN": "Kontynuuj {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "Skopiowane",
-  "COMPRESSED": "Sprężony"
+  "COMPRESSED": "Sprężony",
+  "ICON_PDF_BAND_BLACK": "Wygeneruj PDF specjalnie dla środkowego tygodnia bez zespołów i do pięciu tygodni na stronę"
 }

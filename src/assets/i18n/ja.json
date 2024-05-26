@@ -499,5 +499,6 @@
   "TAKE_CONTROL_BTN": "続けます {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "コピー",
-  "COMPRESSED": "圧縮"
+  "COMPRESSED": "圧縮",
+  "ICON_PDF_BAND_BLACK": "バンドなしで週の半ばに特別にPDFを生成し、1ページあたり最大5週間"
 }

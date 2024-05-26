@@ -499,5 +499,6 @@
   "TAKE_CONTROL_BTN": "চলবে {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "অনুলিপি",
-  "COMPRESSED": "সংকুচিত"
+  "COMPRESSED": "সংকুচিত",
+  "ICON_PDF_BAND_BLACK": "ব্যান্ড ছাড়াই মিডউইকের জন্য বিশেষভাবে একটি পিডিএফ তৈরি করুন এবং প্রতি পৃষ্ঠায় পাঁচ সপ্তাহ পর্যন্ত"
 }

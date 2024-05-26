@@ -509,5 +509,6 @@
   "TAKE_CONTROL_BTN": "Doorgaan met {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "Gekopieerd",
-  "COMPRESSED": "Gecomprimeerd"
+  "COMPRESSED": "Gecomprimeerd",
+  "ICON_PDF_BAND_BLACK": "Genereer een PDF speciaal voor de midweek zonder bands en maximaal vijf weken per pagina"
 }

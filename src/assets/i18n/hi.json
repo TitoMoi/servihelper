@@ -499,5 +499,6 @@
   "TAKE_CONTROL_BTN": "करने के लिए जारी {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "कॉपी किया गया",
-  "COMPRESSED": "दबा हुआ"
+  "COMPRESSED": "दबा हुआ",
+  "ICON_PDF_BAND_BLACK": "बिना बैंड के मिडवेक के लिए विशेष रूप से एक पीडीएफ उत्पन्न करें और प्रति पृष्ठ पांच सप्ताह तक"
 }

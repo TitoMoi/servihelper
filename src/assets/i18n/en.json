@@ -485,5 +485,6 @@
   "TAKE_CONTROL_BTN": "Continue to {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "Copied",
-  "COMPRESSED": "Compressed"
+  "COMPRESSED": "Compressed",
+  "ICON_PDF_BAND_BLACK": "Generate a pdf specially for the midweek without bands and up to five weeks per page"
 }

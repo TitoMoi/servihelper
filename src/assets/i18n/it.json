@@ -509,5 +509,6 @@
   "TAKE_CONTROL_BTN": "Continuare a {{APP_NAME}}",
   "APP_NAME": "Servihelper",
   "COPIED": "Copiato",
-  "COMPRESSED": "Compressa"
+  "COMPRESSED": "Compressa",
+  "ICON_PDF_BAND_BLACK": "Genera un PDF specialmente per l'inferenza senza band e fino a cinque settimane per pagina"
 }
