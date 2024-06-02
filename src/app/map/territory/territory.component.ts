@@ -242,7 +242,9 @@ export class TerritoryComponent {
 
   sortByLessWorked(event: MatCheckboxChange) {
     if (event.checked) {
-      const filtered = this.territories.filter((t) => t.returnedDates.length);
+      const filtered = this.territories.filter(
+        (t) => t.returnedDates.length && !this.territoryService.isActiveTerritory(t),
+      );
       this.territories = filtered.toSorted(this.sortService.sortTerritoriesByLastWorked);
       return;
     }

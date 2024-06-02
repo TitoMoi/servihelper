@@ -136,7 +136,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "প্রস্তাবিত নয় কারণ এই তারিখের কাছাকাছি আরও একটি সম্পর্কিত অ্যাসাইনমেন্ট/গুলি রয়েছে।",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "এই অ্যাসাইনমেন্টটি পুনরাবৃত্তি করতে সক্ষম হওয়ার জন্য পর্যাপ্ত সময় কাটেনি",
   "COLOR_BLUE_EXPLANATION": "2 মাসেরও কম বয়সী",
-  "COLOR_GREEN_EXPLANATION": "কখনও অর্পণ করা হয়নি",
+  "COLOR_PURPLE_EXPLANATION": "কখনও অর্পণ করা হয়নি",
   "COLOR_RED_EXPLANATION": "1 বছর বয়সী বা আরও",
   "COLOR_YELLOW_EXPLANATION": "দুই মাসেরও বেশি পুরানো",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "পাবলিক আলোচনার জন্য থিম",

@@ -141,7 +141,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "Non consigliato perché ha un altro assegnazione/e correlata vicino a questa data.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "Non è passato abbastanza tempo per essere in grado di ripetere questo incarico",
   "COLOR_BLUE_EXPLANATION": "Meno di 4 mesi",
-  "COLOR_GREEN_EXPLANATION": "Mai assegnato",
+  "COLOR_PURPLE_EXPLANATION": "Mai assegnato",
   "COLOR_RED_EXPLANATION": "1 anno o più",
   "COLOR_YELLOW_EXPLANATION": "Più di 4 mesi",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Temi per colloqui pubblici",

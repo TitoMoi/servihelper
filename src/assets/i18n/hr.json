@@ -120,7 +120,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "Ne preporučuje se jer ima još jedan srodni zadatak u blizini ovog datuma.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "Nije prošlo dovoljno vremena da biste mogli ponoviti ovaj zadatak",
   "COLOR_BLUE_EXPLANATION": "Manje od 4 mjeseca",
-  "COLOR_GREEN_EXPLANATION": "Nikad dodijeljen",
+  "COLOR_PURPLE_EXPLANATION": "Nikad dodijeljen",
   "COLOR_RED_EXPLANATION": "1 godina ili više",
   "COLOR_YELLOW_EXPLANATION": "Više od 4 mjeseca",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Teme za javne razgovore",

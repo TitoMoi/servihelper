@@ -141,7 +141,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "Nicht empfohlen, da bis zu diesem Datum eine andere zugehörige Zuordnung/s enthält.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "Nicht genug Zeit ist vergangen, um diese Aufgabe wiederholen zu können",
   "COLOR_BLUE_EXPLANATION": "Weniger als 4 Monate alt",
-  "COLOR_GREEN_EXPLANATION": "Nie zugewiesen",
+  "COLOR_PURPLE_EXPLANATION": "Nie zugewiesen",
   "COLOR_RED_EXPLANATION": "1 Jahr alt oder mehr",
   "COLOR_YELLOW_EXPLANATION": "Mehr als 4 Monate alt",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Themen für öffentliche Gespräche",

@@ -136,7 +136,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "अनुशंसित नहीं है क्योंकि इस तिथि के करीब एक और संबंधित असाइनमेंट है।",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "इस असाइनमेंट को दोहराने में सक्षम होने के लिए पर्याप्त समय नहीं बीता है",
   "COLOR_BLUE_EXPLANATION": "2 महीने से कम पुराना",
-  "COLOR_GREEN_EXPLANATION": "कभी नहीं सौंपा गया",
+  "COLOR_PURPLE_EXPLANATION": "कभी नहीं सौंपा गया",
   "COLOR_RED_EXPLANATION": "1 साल या उससे अधिक",
   "COLOR_YELLOW_EXPLANATION": "दो महीने से अधिक पुराना है",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "सार्वजनिक वार्ता के लिए थीम",

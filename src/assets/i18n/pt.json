@@ -142,7 +142,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "Não é recomendado porque possui outra atribuição relacionada (s) próxima a esta data.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "Não há tempo suficiente para poder repetir esta tarefa",
   "COLOR_BLUE_EXPLANATION": "Com menos de 4 meses de idade",
-  "COLOR_GREEN_EXPLANATION": "Nunca atribuído",
+  "COLOR_PURPLE_EXPLANATION": "Nunca atribuído",
   "COLOR_RED_EXPLANATION": "1 ano de idade ou mais",
   "COLOR_YELLOW_EXPLANATION": "Mais de 4 meses de idade",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Temas para palestras públicas",

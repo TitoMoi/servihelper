@@ -120,7 +120,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "Not recommended because has another related assignment/s close to this date.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "Not enough time has passed to be able to repeat this assignment",
   "COLOR_BLUE_EXPLANATION": "Less than 4 months old",
-  "COLOR_GREEN_EXPLANATION": "Never assigned",
+  "COLOR_PURPLE_EXPLANATION": "Never assigned",
   "COLOR_RED_EXPLANATION": "1 year old or more",
   "COLOR_YELLOW_EXPLANATION": "More than 4 months old",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Themes for Public Talks",

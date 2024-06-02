@@ -136,7 +136,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "Bu tarihe yakın başka bir ilgili ödev/olduğu için önerilmez.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "Bu ödevi tekrarlayabilmek için yeterli zaman geçmedi",
   "COLOR_BLUE_EXPLANATION": "2 aydan az eski",
-  "COLOR_GREEN_EXPLANATION": "Asla atanmadı",
+  "COLOR_PURPLE_EXPLANATION": "Asla atanmadı",
   "COLOR_RED_EXPLANATION": "1 yaşında veya daha fazla",
   "COLOR_YELLOW_EXPLANATION": "İki aydan fazla",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Halka açık görüşmeler için temalar",

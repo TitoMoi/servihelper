@@ -141,7 +141,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "Не рекомендуется, потому что имеет еще одно связанное задание, близкое к этой дате.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "Не хватало времени, чтобы иметь возможность повторить это задание",
   "COLOR_BLUE_EXPLANATION": "Менее 4 месяцев",
-  "COLOR_GREEN_EXPLANATION": "Никогда не назначал",
+  "COLOR_PURPLE_EXPLANATION": "Никогда не назначал",
   "COLOR_RED_EXPLANATION": "1 год или более",
   "COLOR_YELLOW_EXPLANATION": "Более 4 месяцев",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Темы для публичных разговоров",

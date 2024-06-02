@@ -136,7 +136,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "이 날짜에 가까운 다른 관련 과제가 있기 때문에 권장되지 않습니다.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "이 과제를 반복 할 수있는 시간이 충분하지 않았습니다.",
   "COLOR_BLUE_EXPLANATION": "2 개월 미만",
-  "COLOR_GREEN_EXPLANATION": "할당되지 않았습니다",
+  "COLOR_PURPLE_EXPLANATION": "할당되지 않았습니다",
   "COLOR_RED_EXPLANATION": "1 세 이상",
   "COLOR_YELLOW_EXPLANATION": "2 개월 이상",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "공개 대화를위한 테마",

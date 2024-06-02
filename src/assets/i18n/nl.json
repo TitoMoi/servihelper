@@ -141,7 +141,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "Niet aanbevolen omdat heeft een andere gerelateerde opdracht/s dicht bij deze datum.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "Er is niet genoeg tijd verstreken om deze opdracht te kunnen herhalen",
   "COLOR_BLUE_EXPLANATION": "Minder dan 4 maanden oud",
-  "COLOR_GREEN_EXPLANATION": "Nooit toegewezen",
+  "COLOR_PURPLE_EXPLANATION": "Nooit toegewezen",
   "COLOR_RED_EXPLANATION": "1 jaar oud of meer",
   "COLOR_YELLOW_EXPLANATION": "Meer dan 4 maanden oud",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Thema's voor openbare gesprekken",

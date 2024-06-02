@@ -141,7 +141,7 @@
   "CLOSE_ASSIGNMENTS_TITLE": "Non recommandé car a une autre affectation/s proche de cette date.",
   "CLOSE_ASSIGNMENTS_TITLE_RED": "Pas assez de temps est passé pour pouvoir répéter cette affectation",
   "COLOR_BLUE_EXPLANATION": "Moins de 4 mois",
-  "COLOR_GREEN_EXPLANATION": "Jamais affecté",
+  "COLOR_PURPLE_EXPLANATION": "Jamais affecté",
   "COLOR_RED_EXPLANATION": "1 an ou plus",
   "COLOR_YELLOW_EXPLANATION": "Plus de 4 mois",
   "CONFIG_ACCORDION_PUBLIC_SPEECH": "Thèmes pour les conférences publiques",
