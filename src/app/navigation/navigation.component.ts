@@ -106,6 +106,7 @@ export class NavigationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.currentRoleId);
     this.availableLangs = this.translocoService.getAvailableLangs();
 
     //Special condition for the ca because doesnt have the s89 in ca
@@ -123,6 +124,7 @@ export class NavigationComponent implements OnInit {
     });
 
     this.config$.subscribe((config) => {
+      this.currentRoleId = config.role;
       this.roles = config.roles;
       this.lang = config.lang;
       this.cdr.detectChanges();
