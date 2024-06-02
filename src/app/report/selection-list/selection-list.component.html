@@ -3,6 +3,7 @@
     <div id="noColorSectionDiv" class="col-auto border me-3">
       <div class="d-flex">
         <mat-icon
+          id="iconHeaderId"
           class="m-2 me-3 mb-4"
           svgIcon="nocolorsection"
           [matTooltip]="t('ICON_NO_COLOR_SECTION')"
@@ -28,6 +29,7 @@
     <div id="colorSectionDiv" class="col-auto border">
       <div class="d-flex">
         <mat-icon
+          id="iconHeaderId"
           class="m-2 me-3 mb-4 reduceIconSize"
           svgIcon="colorsection"
           [matTooltip]="t('ICON_COLOR_SECTION')"
@@ -52,7 +54,7 @@
         ></mat-icon>
         <mat-icon
           class="m-2"
-          svgIcon="weekendlist"
+          svgIcon="weekendcolorlist"
           [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
           (click)="toPdfBoard(true)"
         ></mat-icon>
