@@ -99,6 +99,7 @@ The key diference is the mantainance.
 | Immediate change             | No       | Yes         |     |     |
 | Translation effort           | No       | Yes         |     |     |
 | Template check if exists     | Yes      | No          |     |     |
+| keeps internal pdf variables | Yes      | No          |
 
 Clearly, the emulated version is more mantainable as we do not depend on third persons or new pdf version
 that cannot be manipulated.

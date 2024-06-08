@@ -427,15 +427,15 @@ export class SelectionListComponent implements OnChanges {
           ? a.theme
           : this.assignTypeService.getNameOrTranslation(a.assignType);
 
-        let wordLength = (hasMultipleRooms ? 70 : 90) - (compressed ? 21 : 0);
+        let PhraseLength = (hasMultipleRooms ? 70 : 90) - (compressed ? 21 : 0);
         //Before create text lines check the length
-        if (themeOrAssignType.length > wordLength) {
+        if (themeOrAssignType.length > PhraseLength) {
           const shortedTheme = [];
           const words = themeOrAssignType.split(" ");
           for (const w of words) {
-            if (wordLength - w.length > 0) {
+            if (PhraseLength - w.length > 0) {
               shortedTheme.push(w);
-              wordLength -= w.length;
+              PhraseLength -= w.length;
             } else {
               break;
             }
