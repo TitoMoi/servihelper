@@ -43,6 +43,14 @@
             [matTooltip]="t('ICON_FOLDER_TERRITORIES')"
             (click)="toMultiplePdf()"
           ></mat-icon>
+          <mat-icon
+            class="ms-3 me-3"
+            [routerLink]="['dataReadyS13']"
+            routerLinkActive="active"
+            svgIcon="pdf"
+            [matTooltip]="t('ICON_S13')"
+            aria-label="Side nav toggle icon"
+          ></mat-icon>
           @if (territoriesInFolderCreated) {
             <button
               mat-raised-button

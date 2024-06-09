@@ -43,6 +43,8 @@ import { MassiveDatesTerritoryComponent } from "app/map/territory/massive-dates-
 import { DeletePublicThemeComponent } from "app/public-theme/delete-public-theme/delete-public-theme.component";
 import { CreateUpdatePublicThemeComponent } from "app/public-theme/create-update-public-theme/create-update-public-theme.component";
 import { AvailableParticipantComponent } from "app/participant/available-participant/available-participant.component";
+import { DataReadyS13Component } from "app/map/data-ready-s13/data-ready-s13.component";
+
 export const routes: Routes = [
   {
     path: "",
@@ -243,6 +245,10 @@ export const routes: Routes = [
       {
         path: "territory/heatmap",
         component: HeatmapComponent,
+      },
+      {
+        path: "territory/dataReadyS13",
+        component: DataReadyS13Component,
       },
       {
         path: "territory/massive-dates",
