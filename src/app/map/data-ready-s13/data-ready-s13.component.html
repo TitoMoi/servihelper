@@ -1,5 +1,5 @@
 <h3>Data ready for S13</h3>
-<h4>Select and Copy with Control + C (Windows) or equivalent on Mac, Linux</h4>
+<h4>Select the white data and Copy with Control + C (Windows) or equivalent on Mac, Linux</h4>
 <h4>
   On Word side, click on -first row, third column- then right click and Paste with option
   'overwrite cells'
@@ -10,8 +10,8 @@
   <table cellspacing="0" cellpadding="0" width="0">
     <thead>
       <tr>
-        <!-- <td class="no-border" rowspan="2"></td>
-        <td class="no-border" rowspan="2"></td> -->
+        <td class="no-border" rowspan="2"></td>
+        <td class="no-border" rowspan="2"></td>
         <td class="no-border" colspan="2"></td>
         <td class="no-border" colspan="2"></td>
         <td class="no-border" colspan="2"></td>
@@ -31,15 +31,15 @@
     <tbody>
       @for (t of territories; track $index) {
         <tr>
-          <!-- <td tabindex="0" class="center" rowspan="2">{{ t.name }}</td>
-          <td tabindex="0" class="center" rowspan="2">
+          <td tabindex="0" class="center no-select" rowspan="2">{{ t.name }}</td>
+          <td tabindex="0" class="center no-select" rowspan="2">
             {{
               t.returnedDates.at(-1) ??
                 t.returnedDates.at(-2) ??
                 t.returnedDates.at(-3) ??
                 t.returnedDates.at(-4) | translocoDate: { dateStyle: "short" }
             }}
-          </td> -->
+          </td>
           @if (t.participants.at(-1)) {
             <td colspan="2">{{ (t.participants.at(-1) | participantPipe)?.name }}</td>
           }
