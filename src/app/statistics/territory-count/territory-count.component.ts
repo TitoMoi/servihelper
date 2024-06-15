@@ -46,15 +46,18 @@ export class TerritoryCountComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     for (let i = 0; i < this.participants.length; i++) {
-      this.getTerritoryCount(this.participants[i]);
+      this.getActiveTerritoryCount(this.participants[i]);
     }
     this.participants.sort(this.sortService.sortParticipantsByCount).reverse();
   }
 
-  getTerritoryCount(p: ParticipantDynamicInterface): void {
+  getActiveTerritoryCount(p: ParticipantDynamicInterface): void {
     p.count = 0;
     for (let i = 0; i < this.territories.length; i++) {
-      this.territories[i].participants.some((pId) => pId === p.id) ? p.count++ : "";
+      this.territoryService.isActiveTerritory(this.territories[i]) &&
+      this.territories[i].participants.at(-1) === p.id
+        ? p.count++
+        : "";
     }
   }
 }

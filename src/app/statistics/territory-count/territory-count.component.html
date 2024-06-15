@@ -30,7 +30,7 @@
             </div>
             <div class="col-10">
               <div class="row">
-                @for (p of terr.participants; track p; let i = $index) {
+                @for (p of terr.participants.slice(-4); track p; let i = $index) {
                   <div class="col-auto">
                     <div>
                       {{
@@ -60,18 +60,17 @@
           </div>
         </div>
         <div class="row m-2">
-          @if (p.count) {
-            <div class="col-auto">
-              <div>{{ t("STATISTICS_COUNT_TERRITORY_NAME") }}:</div>
-              <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
-              <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
-            </div>
-          }
+          <div class="col-auto">
+            <div>{{ t("STATISTICS_COUNT_TERRITORY_NAME") }}:</div>
+            <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
+            <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
+          </div>
+
           <div class="col-10">
             <div class="row">
               @for (t of territories; track t; let i = $index) {
                 @for (pId of t.participants; track pId; let j = $index) {
-                  @if (p.id === pId) {
+                  @if (p.id === pId && !t.returnedDates[j]) {
                     <ng-container class="me-3">
                       <div class="col-auto">
                         <div>{{ t.name }}</div>

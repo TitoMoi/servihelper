@@ -1,14 +1,16 @@
 <h3>Data ready for S13</h3>
-<h4>Copy with Control + C (Windows) or equivalent on Mac, Linux</h4>
-<h4>On Word side, select the columns and Control + V (Paste)</h4>
+<h4>Select and Copy with Control + C (Windows) or equivalent on Mac, Linux</h4>
+<h4>
+  On Word side, select the first cell, then right click and "Paste option 'overwrite cells'
+</h4>
 <hr />
 
 @for (territories of territoriesChunks; track $index) {
   <table cellspacing="0" cellpadding="0" width="0">
     <thead>
       <tr>
-        <!-- <td class="no-border" rowspan="2"></td>
-        <td class="no-border" rowspan="2"></td> -->
+        <td class="no-border" rowspan="2"></td>
+        <td class="no-border" rowspan="2"></td>
         <td class="no-border" colspan="2"></td>
         <td class="no-border" colspan="2"></td>
         <td class="no-border" colspan="2"></td>
@@ -28,8 +30,8 @@
     <tbody>
       @for (t of territories; track $index) {
         <tr>
-          <!-- <td class="center" rowspan="2">{{ t.name }}</td>
-          <td class="center" rowspan="2">
+          <!-- <td tabindex="0" class="center" rowspan="2">{{ t.name }}</td>
+          <td tabindex="0" class="center" rowspan="2">
             {{
               t.returnedDates.at(-1) ??
                 t.returnedDates.at(-2) ??
