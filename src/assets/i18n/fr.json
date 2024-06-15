@@ -511,5 +511,6 @@
   "APP_NAME": "Servihelper",
   "COPIED": "Copié",
   "COMPRESSED": "Comprimée",
-  "ICON_PDF_BAND_BLACK": "Générez un PDF spécialement pour le milieu de la semaine sans bandes et jusqu'à cinq semaines par page"
+  "ICON_PDF_BAND_BLACK": "Générez un PDF spécialement pour le milieu de la semaine sans bandes et jusqu'à cinq semaines par page",
+  "ICON_S13": "Données prêtes pour S13"
 }

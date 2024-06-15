@@ -500,5 +500,6 @@
   "APP_NAME": "Servihelper",
   "COPIED": "Skopiowane",
   "COMPRESSED": "Sprężony",
-  "ICON_PDF_BAND_BLACK": "Wygeneruj PDF specjalnie dla środkowego tygodnia bez zespołów i do pięciu tygodni na stronę"
+  "ICON_PDF_BAND_BLACK": "Wygeneruj PDF specjalnie dla środkowego tygodnia bez zespołów i do pięciu tygodni na stronę",
+  "ICON_S13": "Dane gotowe do S13"
 }

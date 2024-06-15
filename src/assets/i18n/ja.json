@@ -500,5 +500,6 @@
   "APP_NAME": "Servihelper",
   "COPIED": "コピー",
   "COMPRESSED": "圧縮",
-  "ICON_PDF_BAND_BLACK": "バンドなしで週の半ばに特別にPDFを生成し、1ページあたり最大5週間"
+  "ICON_PDF_BAND_BLACK": "バンドなしで週の半ばに特別にPDFを生成し、1ページあたり最大5週間",
+  "ICON_S13": "S13の準備ができています"
 }

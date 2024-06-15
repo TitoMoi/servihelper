@@ -486,5 +486,6 @@
   "APP_NAME": "Servihelper",
   "COPIED": "Copied",
   "COMPRESSED": "Compressed",
-  "ICON_PDF_BAND_BLACK": "Generate a pdf specially for the midweek without bands and up to five weeks per page"
+  "ICON_PDF_BAND_BLACK": "Generate a pdf specially for the midweek without bands and up to five weeks per page",
+  "ICON_S13": "Data ready for S13"
 }

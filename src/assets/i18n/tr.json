@@ -500,5 +500,6 @@
   "APP_NAME": "Servihelper",
   "COPIED": "Kopyalanmış",
   "COMPRESSED": "Sıkıştırılmış",
-  "ICON_PDF_BAND_BLACK": "Bantsız ve sayfa başına beş haftaya kadar hafta ortası için özel olarak bir PDF oluşturun"
+  "ICON_PDF_BAND_BLACK": "Bantsız ve sayfa başına beş haftaya kadar hafta ortası için özel olarak bir PDF oluşturun",
+  "ICON_S13": "S13 için hazır veriler"
 }

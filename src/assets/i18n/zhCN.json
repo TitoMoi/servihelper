@@ -500,5 +500,6 @@
   "APP_NAME": "Servihelper",
   "COPIED": "复制",
   "COMPRESSED": "压缩",
-  "ICON_PDF_BAND_BLACK": "专门为周三没有乐队生成PDF，每页最多五个星期"
+  "ICON_PDF_BAND_BLACK": "专门为周三没有乐队生成PDF，每页最多五个星期",
+  "ICON_S13": "准备S13的数据"
 }

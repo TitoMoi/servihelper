@@ -500,5 +500,6 @@
   "APP_NAME": "Servihelper",
   "COPIED": "복사",
   "COMPRESSED": "압축",
-  "ICON_PDF_BAND_BLACK": "밴드없이 주중에 특별히 PDF를 생성하고 페이지 당 최대 5 주"
+  "ICON_PDF_BAND_BLACK": "밴드없이 주중에 특별히 PDF를 생성하고 페이지 당 최대 5 주",
+  "ICON_S13": "S13에 대한 데이터 준비"
 }
