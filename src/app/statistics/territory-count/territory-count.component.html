@@ -63,7 +63,6 @@
           <div class="col-auto">
             <div>{{ t("STATISTICS_COUNT_TERRITORY_NAME") }}:</div>
             <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
-            <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
           </div>
 
           <div class="col-10">
@@ -76,9 +75,6 @@
                         <div>{{ t.name }}</div>
                         <div>
                           {{ t.assignedDates[j] | translocoDate: { dateStyle: "short" } }}
-                        </div>
-                        <div>
-                          {{ t.returnedDates[j] | translocoDate: { dateStyle: "short" } }}
                         </div>
                       </div>
                     </ng-container>
