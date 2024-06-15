@@ -3,95 +3,93 @@
 <h4>On Word side, select the columns and Control + V (Paste)</h4>
 <hr />
 
-<div class="d-flex">
-  <table>
+@for (territories of territoriesChunks; track $index) {
+  <table cellspacing="0" cellpadding="0" width="0">
     <thead>
       <tr>
-        <td>Territory names</td>
+        <!-- <td class="no-border" rowspan="2"></td>
+        <td class="no-border" rowspan="2"></td> -->
+        <td class="no-border" colspan="2"></td>
+        <td class="no-border" colspan="2"></td>
+        <td class="no-border" colspan="2"></td>
+        <td class="no-border" colspan="2"></td>
+      </tr>
+      <tr>
+        <td class="no-border"></td>
+        <td class="no-border"></td>
+        <td class="no-border"></td>
+        <td class="no-border"></td>
+        <td class="no-border"></td>
+        <td class="no-border"></td>
+        <td class="no-border"></td>
+        <td class="no-border"></td>
       </tr>
     </thead>
     <tbody>
       @for (t of territories; track $index) {
         <tr>
-          <td>{{ t.name }}</td>
+          <!-- <td class="center" rowspan="2">{{ t.name }}</td>
+          <td class="center" rowspan="2">
+            {{
+              t.returnedDates.at(-1) ??
+                t.returnedDates.at(-2) ??
+                t.returnedDates.at(-3) ??
+                t.returnedDates.at(-4) | translocoDate: { dateStyle: "short" }
+            }}
+          </td> -->
+          @if (t.participants.at(-1)) {
+            <td colspan="2">{{ (t.participants.at(-1) | participantPipe)?.name }}</td>
+          }
+          @if (t.participants.at(-2)) {
+            <td colspan="2">{{ (t.participants.at(-2) | participantPipe)?.name }}</td>
+          }
+          @if (t.participants.at(-3)) {
+            <td colspan="2">{{ (t.participants.at(-3) | participantPipe)?.name }}</td>
+          }
+          @if (t.participants.at(-4)) {
+            <td colspan="2">{{ (t.participants.at(-4) | participantPipe)?.name }}</td>
+          }
+        </tr>
+        <tr>
+          @if (t.assignedDates.at(-1)) {
+            <td>{{ t.assignedDates.at(-1) | translocoDate: { dateStyle: "short" } }}</td>
+          }
+          @if (t.returnedDates.at(-1)) {
+            <td>{{ t.returnedDates.at(-1) | translocoDate: { dateStyle: "short" } }}</td>
+          }
+          @if (t.assignedDates.at(-2)) {
+            <td>
+              {{ t.assignedDates.at(-2) | translocoDate: { dateStyle: "short" } }}
+            </td>
+          }
+          @if (t.returnedDates.at(-2)) {
+            <td>
+              {{ t.returnedDates.at(-2) | translocoDate: { dateStyle: "short" } }}
+            </td>
+          }
+          @if (t.assignedDates.at(-3)) {
+            <td>
+              {{ t.assignedDates.at(-3) | translocoDate: { dateStyle: "short" } }}
+            </td>
+          }
+          @if (t.returnedDates.at(-3)) {
+            <td>
+              {{ t.returnedDates.at(-3) | translocoDate: { dateStyle: "short" } }}
+            </td>
+          }
+          @if (t.assignedDates.at(-4)) {
+            <td>
+              {{ t.assignedDates.at(-4) | translocoDate: { dateStyle: "short" } }}
+            </td>
+            @if (t.returnedDates.at(-4)) {
+              <td>
+                {{ t.returnedDates.at(-4) | translocoDate: { dateStyle: "short" } }}
+              </td>
+            }
+          }
         </tr>
       }
     </tbody>
   </table>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">First column</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (t of territories; track $index) {
-        <tr>
-          <td colspan="2">{{ (t.participants.at(-1) | participantPipe)?.name }}</td>
-        </tr>
-        <tr>
-          <td>{{ t.assignedDates.at(-1) | translocoDate: { dateStyle: "short" } }}</td>
-          <td>{{ t.returnedDates.at(-1) | translocoDate: { dateStyle: "short" } }}</td>
-        </tr>
-      }
-    </tbody>
-  </table>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">Second column</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (t of territories; track $index) {
-        <tr>
-          <td colspan="2">{{ (t.participants.at(-2) | participantPipe)?.name ?? " " }}</td>
-        </tr>
-        <tr>
-          <td>
-            {{ (t.assignedDates.at(-2) | translocoDate: { dateStyle: "short" }) ?? " " }}
-          </td>
-          <td>
-            {{ (t.returnedDates.at(-2) | translocoDate: { dateStyle: "short" }) ?? " " }}
-          </td>
-        </tr>
-      }
-    </tbody>
-  </table>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">Third column</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (t of territories; track $index) {
-        <tr>
-          <td colspan="2">{{ (t.participants.at(-3) | participantPipe)?.name }}</td>
-        </tr>
-        <tr>
-          <td>{{ t.assignedDates.at(-3) | translocoDate: { dateStyle: "short" } }}</td>
-          <td>{{ t.returnedDates.at(-3) | translocoDate: { dateStyle: "short" } }}</td>
-        </tr>
-      }
-    </tbody>
-  </table>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">Fourth column</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (t of territories; track $index) {
-        <tr>
-          <td colspan="2">{{ (t.participants.at(-4) | participantPipe)?.name }}</td>
-        </tr>
-        <tr>
-          <td>{{ t.assignedDates.at(-4) | translocoDate: { dateStyle: "short" } }}</td>
-          <td>{{ t.returnedDates.at(-4) | translocoDate: { dateStyle: "short" } }}</td>
-        </tr>
-      }
-    </tbody>
-  </table>
-</div>
+  <hr />
+}

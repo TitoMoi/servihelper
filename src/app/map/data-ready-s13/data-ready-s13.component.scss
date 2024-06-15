@@ -1,6 +1,23 @@
 table {
+  width: 526.15pt;
+  margin-left: -1.5pt;
+  border-collapse: collapse;
+  border: none;
+
   td {
+    border: 1px solid black;
+    padding: 0cm 1.4pt 0cm 1.4pt;
     font-size: 10.5pt;
     vertical-align: top;
+    text-align: center;
+
+    &.no-border {
+      border: none;
+    }
+
+    &.center {
+      vertical-align: middle;
+      text-align: center;
+    }
   }
 }
