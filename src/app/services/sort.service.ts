@@ -120,6 +120,16 @@ export class SortService {
     return 0;
   }
 
+  sortByCount(a: number, b: number) {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  }
+
   sortByCountAndByDistance(
     a: ParticipantDynamicInterface,
     b: ParticipantDynamicInterface,

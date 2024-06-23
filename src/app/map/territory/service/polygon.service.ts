@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { PolygonClass, PolygonInterface } from "../../model/map.model";
-import { readFileSync, writeFile } from "fs-extra";
+import { readFileSync, writeFileSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { inflate, deflate } from "pako";
 @Injectable({
@@ -47,7 +47,7 @@ export class PolygonService {
   #savePolygonsToFile(): boolean {
     //Write polygons back to file
     const gziped = deflate(JSON.stringify(this.#polygons), { to: "string" });
-    writeFile(this.configService.polygonsPath, gziped);
+    writeFileSync(this.configService.polygonsPath, gziped);
     return true;
   }
 

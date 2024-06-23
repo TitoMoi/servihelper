@@ -480,25 +480,24 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
         this.configService.updateConfigByKey("lastMapClick", polygon.latLngList[0]);
       }
 
-      this.territoryService.createTerritory(territory).then(() => {
-        if (createAnother) {
-          this.removePolygon();
-          this.territoryForm.reset();
-          this.polygonForm.reset({
-            id: null,
-            latLngList: [],
-            m: null,
-          });
-          return;
-        }
-        // navigate back to heatmap or parent
-        const prev = this.activatedRoute.snapshot.queryParams.prev;
-        if (prev === "heatmap") {
-          this.router.navigate(["map/territory/heatmap"]);
-        } else {
-          this.location.back();
-        }
-      });
+      this.territoryService.createTerritory(territory);
+      if (createAnother) {
+        this.removePolygon();
+        this.territoryForm.reset();
+        this.polygonForm.reset({
+          id: null,
+          latLngList: [],
+          m: null,
+        });
+        return;
+      }
+      // navigate back to heatmap or parent
+      const prev = this.activatedRoute.snapshot.queryParams.prev;
+      if (prev === "heatmap") {
+        this.router.navigate(["map/territory/heatmap"]);
+      } else {
+        this.location.back();
+      }
     }
   }
 

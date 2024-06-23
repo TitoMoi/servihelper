@@ -7,14 +7,20 @@ import { ParticipantInterface } from "../participant/model/participant.model";
  *
  * @param assignmentList array the list of assignments
  * @param participant object the participant
+ * @param assignTypeId the id of the assignType to be more specific
  * @returns the penultimate assignment or undefined
  */
 export function getPenultimatePrincipalAssignment(
   assignmentList: AssignmentInterface[],
   participant: ParticipantInterface,
+  assignTypeId?: string,
 ): AssignmentInterface | undefined {
   const firstAssignment = assignmentList
-    .filter((assignment) => assignment.principal === participant.id)
+    .filter((assignment) =>
+      assignTypeId
+        ? assignment.principal === participant.id && assignment.assignType === assignTypeId
+        : assignment.principal === participant.id,
+    )
     .sort(compareFn)[1]; //Get penultimate
 
   return firstAssignment ? firstAssignment : undefined;

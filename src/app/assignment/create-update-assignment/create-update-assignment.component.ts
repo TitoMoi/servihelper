@@ -59,18 +59,25 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { AsyncPipe, NgFor, NgIf } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
-import { TranslocoModule } from "@ngneat/transloco";
+import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
 import { SheetTitleInterface } from "app/sheet-title/model/sheet-title.model";
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 import { PublicThemeInterface } from "app/public-theme/model/public-theme.model";
 import { PublicThemeService } from "app/public-theme/service/public-theme.service";
 import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
-import { addDays, parseISO, subDays } from "date-fns";
+import { addDays, differenceInDays, parseISO, subDays } from "date-fns";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
 import { CloseAssignmentsComponent } from "../close-assignments/close-assignments.component";
+import {
+  /*  getLastAssistantAssignment, */
+  getLastPrincipalAssignment,
+  /* getPenultimateAssistantAssignment, */
+  getPenultimatePrincipalAssignment,
+} from "app/functions";
+import { DateFnsLocaleService } from "app/services/date-fns-locale.service";
 @Component({
   selector: "app-create-update-assignment",
   templateUrl: "./create-update-assignment.component.html",
@@ -143,7 +150,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   //A flag to indicate that all assign types for the current role have been scheduled
   noAvailableAssignTypesByRole = false;
   //to filter available dates
-  participants: ParticipantInterface[] = [];
+  participants: ParticipantDynamicInterface[] = [];
 
   principals: ParticipantDynamicInterface[] = [];
   assistants: ParticipantDynamicInterface[] = [];
@@ -208,6 +215,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     group: [this.a ? this.a.group : 0], //null is not working
     assistant: [this.a?.assistant], //participant id
     footerNote: this.a ? this.a.footerNote : this.config.defaultFooterNoteId, //Note id
+    onlySortByTime: [false],
   });
 
   //Subscriptions
@@ -230,6 +238,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog,
     private onlineService: OnlineService,
+    private dateFnsLocaleService: DateFnsLocaleService,
+    private translocoService: TranslocoService,
     private cdr: ChangeDetectorRef,
   ) {
     this.getAssignments();
@@ -255,6 +265,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
     //Prepare the form changes
     this.prepareRole();
+    this.prepareOnlySortByTime();
     this.prepareDateSub();
     this.prepareRoomSub();
     this.prepareIsPublicSpeechAssignTypeSub();
@@ -308,6 +319,15 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     return this.form.get(formControlName).value;
   }
 
+  prepareOnlySortByTime() {
+    this.subscription.add(
+      this.form.get("onlySortByTime").valueChanges.subscribe(() => {
+        this.batchCleanPrincipalAssistant();
+        this.batchCleanGroup();
+        this.batchGetCountSortWarning();
+      }),
+    );
+  }
   prepareRole() {
     this.subscription.add(
       this.role$.subscribe((r) => {
@@ -320,7 +340,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   /** (view) Set count and last assignment date for principals */
   setPrincipalsCountAndLastDate() {
-    if (!this.isMultipleDates) {
+    if (!this.isMultipleDates && !this.gfv("onlySortByTime")) {
       this.sharedService.setCountAndLastAssignmentDateAndRoom(
         this.assignments,
         this.principals,
@@ -342,16 +362,51 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
   }
 
+  /**
+   * Sort the participants by time distance from latest selected assignment or belonging to a group to the selected form date
+   */
+  sortByTimeDistance() {
+    const selectedDate = this.gfv("date");
+    this.principals.sort((a, b) => {
+      const diffInDaysA = differenceInDays(new Date(a.lastAssignmentDate), selectedDate);
+      const diffInDaysB = differenceInDays(new Date(b.lastAssignmentDate), selectedDate);
+      if (diffInDaysA < diffInDaysB) {
+        return -1;
+      }
+      if (diffInDaysA > diffInDaysB) {
+        return 1;
+      }
+      return 0;
+    });
+    this.assistants.sort((a, b) => {
+      const diffInDaysA = differenceInDays(new Date(a.lastAssignmentDate), selectedDate);
+      const diffInDaysB = differenceInDays(new Date(b.lastAssignmentDate), selectedDate);
+      if (diffInDaysA < diffInDaysB) {
+        return -1;
+      }
+      if (diffInDaysA > diffInDaysB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
   /** Batch operation, should not call other batch operations inside
    */
   batchGetCountSortWarning() {
+    this.getTimeDistance();
     this.getPrincipalAndAssistant();
     this.setOnlyExternals();
     this.getAvailableGroups();
     this.setPrincipalsCountAndLastDate();
     this.setAssistantsCountAndLastDate();
-    this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
-    this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
+    if (this.gfv("onlySortByTime")) {
+      this.sortByTimeDistance();
+    } else {
+      this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
+      this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
+    }
+
     this.warningIfAlreadyHasWork();
     this.checkIfExhausted();
     this.checkIsStarvingForSchool();
@@ -759,53 +814,55 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   //Fork
   checkIsStarvingForSchool() {
-    const currentDate: Date = this.gfv("date");
-    const roomId = this.gfv("room");
-    const atId = this.gfv("assignType");
+    if (!this.gfv("onlySortByTime")) {
+      const currentDate: Date = this.gfv("date");
+      const roomId = this.gfv("room");
+      const atId = this.gfv("assignType");
 
-    // Check that the selected at is of school type
-    if (
-      currentDate &&
-      roomId &&
-      atId &&
-      this.assignTypeService.isOfTypeAssignTypes(
-        this.assignTypeService.getAssignType(atId).type,
-      )
-    ) {
-      //Get a list of principals that are not exhausted for school
-      let principals =
-        structuredClone(
-          this.principals.filter((p) => !p.isCloseToOthers && !p.hasCollision && !p.hasWork),
-        ) ?? [];
+      // Check that the selected at is of school type
+      if (
+        currentDate &&
+        roomId &&
+        atId &&
+        this.assignTypeService.isOfTypeAssignTypes(
+          this.assignTypeService.getAssignType(atId).type,
+        )
+      ) {
+        //Get a list of principals that are not exhausted for school
+        let principals =
+          structuredClone(
+            this.principals.filter((p) => !p.isCloseToOthers && !p.hasCollision && !p.hasWork),
+          ) ?? [];
 
-      if (principals.length) {
-        //Get a list of assignments that are for school
-        const assignments = this.assignments.filter((a) =>
-          this.assignTypeService.isOfTypeAssignTypes(
-            this.assignTypeService.getAssignType(a.assignType).type,
-          ),
-        );
-        //As its a new array, reuse the count property to assign the global count
-        for (const p of principals) {
-          p.count = assignments.filter((a) => a.principal === p.id).length;
-        }
-        //Sort by count
-        principals.sort((a, b) => (a.count > b.count ? 1 : -1));
-        //Save the global count in case the icon is clicked
-        this.starvingSchoolParticipants = principals;
-        //Get the first participant and assign the starving to the others
-        const lowestCount = principals[0].count;
-        for (const p of principals) {
-          if (p.count === lowestCount) {
-            p.isStarvingSchool = true;
+        if (principals.length) {
+          //Get a list of assignments that are for school
+          const assignments = this.assignments.filter((a) =>
+            this.assignTypeService.isOfTypeAssignTypes(
+              this.assignTypeService.getAssignType(a.assignType).type,
+            ),
+          );
+          //As its a new array, reuse the count property to assign the global count
+          for (const p of principals) {
+            p.count = assignments.filter((a) => a.principal === p.id).length;
           }
-        }
-        //Get only the starving
-        principals = principals.filter((p) => p.isStarvingSchool);
+          //Sort by count
+          principals.sort((a, b) => (a.count > b.count ? 1 : -1));
+          //Save the global count in case the icon is clicked
+          this.starvingSchoolParticipants = principals;
+          //Get the first participant and assign the starving to the others
+          const lowestCount = principals[0].count;
+          for (const p of principals) {
+            if (p.count === lowestCount) {
+              p.isStarvingSchool = true;
+            }
+          }
+          //Get only the starving
+          principals = principals.filter((p) => p.isStarvingSchool);
 
-        //Get the id of the starving and assign it to the principals list
-        for (const p of principals) {
-          this.principals.find((p1) => p1.id === p.id).isStarvingSchool = true;
+          //Get the id of the starving and assign it to the principals list
+          for (const p of principals) {
+            this.principals.find((p1) => p1.id === p.id).isStarvingSchool = true;
+          }
         }
       }
     }
@@ -1176,6 +1233,58 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       }
     }
     return foundAssignments;
+  }
+
+  //TIME DISTANCE BETWEEN PENULTIMATE AND LATEST
+
+  getTimeDistance() {
+    const assignType = this.gfv("assignType");
+    const selectedDate = this.gfv("date");
+    if (this.gfv("onlySortByTime") && assignType) {
+      //Get the lastAssignmentDate
+      for (const participant of this.participants) {
+        //principals
+        const assignment = getLastPrincipalAssignment(
+          this.assignments,
+          participant,
+          assignType,
+        );
+        if (assignment) participant.isPrincipalLastAssignment = true;
+
+        if (assignment) {
+          participant.lastAssignmentDate = assignment.date;
+          //Search the assignmentType and inject
+          const assignType = this.assignTypeService.getAssignType(assignment.assignType);
+          participant.lastAssignType = this.assignTypeService.getNameOrTranslation(assignType);
+        }
+      }
+
+      //Get the penultimateAssignment
+      for (const participant of this.participants) {
+        //principals
+        const assignment = getPenultimatePrincipalAssignment(
+          this.assignments,
+          participant,
+          assignType,
+        );
+        if (assignment) participant.isPrincipalPenultimateAssignment = true;
+
+        if (assignment) {
+          participant.penultimateAssignmentDate = assignment?.date;
+          //Search the assignmentType and inject
+          const assignType = this.assignTypeService.getAssignType(assignment.assignType);
+          participant.penultimateAssignType =
+            this.assignTypeService.getNameOrTranslation(assignType);
+        }
+      }
+
+      //Get the distance, i18n sensitive
+      this.sharedService.getDistanceBetweenPenultimaAndLast(
+        this.participants,
+        this.dateFnsLocaleService.locales[this.translocoService.getActiveLang()],
+        selectedDate,
+      );
+    }
   }
 
   //********* DATEPICKER HACK *************

@@ -150,36 +150,50 @@
             </div>
           }
           <div class="col-12 mb-2">
-            <div class="d-flex align-items-baseline justify-content-start">
-              <span class="d-inline-block me-3">
-                <mat-icon class="me-2" svgIcon="woman" aria-label="icon"></mat-icon>
-                <mat-checkbox
-                  labelPosition="before"
-                  color="primary"
-                  formControlName="onlyWoman"
-                  [disableRipple]="true"
-                  >{{ t("ASSIGN_ONLY_WOMEN") }}</mat-checkbox
-                >
-              </span>
-              <span class="d-inline-block me-3">
-                <mat-icon class="me-2" svgIcon="man" aria-label="icon"></mat-icon>
-                <mat-checkbox
-                  labelPosition="before"
-                  color="primary"
-                  formControlName="onlyMan"
-                  [disableRipple]="true"
-                  >{{ t("ASSIGN_ONLY_MEN") }}</mat-checkbox
-                >
-              </span>
-              <span>
-                <mat-checkbox
-                  labelPosition="before"
-                  color="primary"
-                  formControlName="onlyExternals"
-                  [disableRipple]="true"
-                  >{{ t("ASSIGN_ONLY_EXTERNALS") }}</mat-checkbox
-                >
-              </span>
+            <div class="d-flex align-items-baseline justify-content-between">
+              <div>
+                <span class="d-inline-block me-3">
+                  <mat-icon class="me-2" svgIcon="woman" aria-label="icon"></mat-icon>
+                  <mat-checkbox
+                    labelPosition="before"
+                    color="primary"
+                    formControlName="onlyWoman"
+                    [disableRipple]="true"
+                    >{{ t("ASSIGN_ONLY_WOMEN") }}</mat-checkbox
+                  >
+                </span>
+                <span class="d-inline-block me-3">
+                  <mat-icon class="me-2" svgIcon="man" aria-label="icon"></mat-icon>
+                  <mat-checkbox
+                    labelPosition="before"
+                    color="primary"
+                    formControlName="onlyMan"
+                    [disableRipple]="true"
+                    >{{ t("ASSIGN_ONLY_MEN") }}</mat-checkbox
+                  >
+                </span>
+                <span>
+                  <mat-checkbox
+                    labelPosition="before"
+                    color="primary"
+                    formControlName="onlyExternals"
+                    [disableRipple]="true"
+                    >{{ t("ASSIGN_ONLY_EXTERNALS") }}</mat-checkbox
+                  >
+                </span>
+              </div>
+              <div>
+                <span class="d-flex align-items-center">
+                  <mat-icon class="me-2" svgIcon="clock" aria-label="icon"></mat-icon>
+                  <mat-checkbox
+                    labelPosition="before"
+                    formControlName="onlySortByTime"
+                    color="primary"
+                    [disableRipple]="true"
+                    >{{ t("ASSIGN_SORT_ONLY_TIME") }}</mat-checkbox
+                  >
+                </span>
+              </div>
             </div>
           </div>
           <div class="col-1 mb-2">
@@ -207,71 +221,78 @@
                   {{ (principalSelect.value | participantPipe).name }}
                 </mat-select-trigger>
                 @for (participant of principals; track participant.id) {
-                  <mat-option [value]="participant.id">
-                    <div class="grid">
-                      <div class="d-flex align-items-center py-1">
-                        @if (participant.hasWork && !isMultipleDates) {
-                          <mat-icon
-                            (click)="onIconWarningClick($event, participant)"
-                            svgIcon="warning"
-                            aria-label="icon"
-                          ></mat-icon>
-                        } @else if (!participant.hasWork && !isMultipleDates) {
-                          <mat-icon
-                            (click)="onPrincipalIconInfoClick($event, participant)"
-                            svgIcon="info-blue"
-                            aria-label="icon"
-                          ></mat-icon>
+                  @if (participant.distanceBetweenPenultimaAndLast) {
+                    <mat-option [value]="participant.id">
+                      <span>{{ participant.name }}</span> -
+                      <span>{{ participant.distanceBetweenPenultimaAndLast }}</span>
+                    </mat-option>
+                  } @else {
+                    <mat-option [value]="participant.id">
+                      <div class="grid">
+                        <div class="d-flex align-items-center py-1">
+                          @if (participant.hasWork && !isMultipleDates) {
+                            <mat-icon
+                              (click)="onIconWarningClick($event, participant)"
+                              svgIcon="warning"
+                              aria-label="icon"
+                            ></mat-icon>
+                          } @else if (!participant.hasWork && !isMultipleDates) {
+                            <mat-icon
+                              (click)="onPrincipalIconInfoClick($event, participant)"
+                              svgIcon="info-blue"
+                              aria-label="icon"
+                            ></mat-icon>
+                          } @else {
+                            <div></div>
+                          }
+                        </div>
+                        @if (!isMultipleDates) {
+                          <div class="d-flex align-items-center">
+                            {{ participant.count }}
+                          </div>
                         } @else {
                           <div></div>
                         }
-                      </div>
-                      @if (!isMultipleDates) {
                         <div class="d-flex align-items-center">
-                          {{ participant.count }}
+                          <span class="me-2">{{ participant.name }}</span>
+                          @if (participant.hasCollision && !isMultipleDates) {
+                            <mat-icon
+                              class="me-2"
+                              svgIcon="time"
+                              aria-label="icon"
+                              (click)="onRedClockClick($event, participant)"
+                            ></mat-icon>
+                          } @else if (participant.isCloseToOthers && !isMultipleDates) {
+                            <mat-icon
+                              svgIcon="warningtime"
+                              aria-label="icon"
+                              (click)="onYellowClockSchoolClick($event, participant)"
+                            ></mat-icon>
+                          } @else if (participant.isCloseToOthersPrayer && !isMultipleDates) {
+                            <mat-icon
+                              svgIcon="warningtime"
+                              aria-label="icon"
+                              (click)="onYellowClockPrayerClick($event, participant)"
+                            ></mat-icon>
+                          } @else if (
+                            participant.isCloseToOthersTreasuresEtc && !isMultipleDates
+                          ) {
+                            <mat-icon
+                              svgIcon="warningtime"
+                              aria-label="icon"
+                              (click)="onYellowClockTreasuresEtcClick($event, participant)"
+                            ></mat-icon>
+                          } @else if (participant.isStarvingSchool && !isMultipleDates) {
+                            <mat-icon
+                              svgIcon="fork"
+                              aria-label="icon"
+                              (click)="onStarvingSchoolClick($event)"
+                            ></mat-icon>
+                          }
                         </div>
-                      } @else {
-                        <div></div>
-                      }
-                      <div class="d-flex align-items-center">
-                        <span class="me-2">{{ participant.name }}</span>
-                        @if (participant.hasCollision && !isMultipleDates) {
-                          <mat-icon
-                            class="me-2"
-                            svgIcon="time"
-                            aria-label="icon"
-                            (click)="onRedClockClick($event, participant)"
-                          ></mat-icon>
-                        } @else if (participant.isCloseToOthers && !isMultipleDates) {
-                          <mat-icon
-                            svgIcon="warningtime"
-                            aria-label="icon"
-                            (click)="onYellowClockSchoolClick($event, participant)"
-                          ></mat-icon>
-                        } @else if (participant.isCloseToOthersPrayer && !isMultipleDates) {
-                          <mat-icon
-                            svgIcon="warningtime"
-                            aria-label="icon"
-                            (click)="onYellowClockPrayerClick($event, participant)"
-                          ></mat-icon>
-                        } @else if (
-                          participant.isCloseToOthersTreasuresEtc && !isMultipleDates
-                        ) {
-                          <mat-icon
-                            svgIcon="warningtime"
-                            aria-label="icon"
-                            (click)="onYellowClockTreasuresEtcClick($event, participant)"
-                          ></mat-icon>
-                        } @else if (participant.isStarvingSchool && !isMultipleDates) {
-                          <mat-icon
-                            svgIcon="fork"
-                            aria-label="icon"
-                            (click)="onStarvingSchoolClick($event)"
-                          ></mat-icon>
-                        }
                       </div>
-                    </div>
-                  </mat-option>
+                    </mat-option>
+                  }
                 }
               </mat-select>
               <mat-error *ngIf="form.controls.principal.invalid">{{

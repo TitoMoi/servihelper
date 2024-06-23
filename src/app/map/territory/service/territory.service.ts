@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { TerritoryContextClass, TerritoryContextInterface } from "../../model/map.model";
 import { ConfigService } from "app/config/service/config.service";
-import { readFileSync, writeFile } from "fs-extra";
+import { readFileSync, writeFileSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { LockService } from "app/lock/service/lock.service";
 import { inflate, deflate } from "pako";
@@ -157,7 +157,7 @@ export class TerritoryService {
     const gziped = deflate(JSON.stringify(this.#territories), { to: "string" });
 
     this.lockService.updateTimestamp();
-    return writeFile(this.configService.territoriesPath, gziped);
+    return writeFileSync(this.configService.territoriesPath, gziped);
   }
 
   /**
@@ -175,7 +175,7 @@ export class TerritoryService {
     this.#territories.push(territory);
     this.#territoriesMap.set(territory.id, territory);
     //save territories with the new territory
-    return this.#saveTerritoriesToFile();
+    this.#saveTerritoriesToFile();
   }
 
   /**

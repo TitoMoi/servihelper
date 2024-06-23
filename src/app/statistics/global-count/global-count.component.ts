@@ -3,7 +3,6 @@ import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import {
-  getDistanceBetweenPenultimaAndLast,
   getLastAssignment,
   getLastAssistantAssignment,
   getLastPrincipalAssignment,
@@ -19,27 +18,6 @@ import {
   ParticipantInterface,
 } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
-import {
-  bn,
-  ca,
-  de,
-  el,
-  enGB,
-  es,
-  fr,
-  hi,
-  hr,
-  it,
-  ja,
-  ko,
-  nl,
-  pl,
-  pt,
-  ro,
-  ru,
-  tr,
-  zhCN,
-} from "date-fns/locale";
 import { Subscription } from "rxjs";
 
 import {
@@ -56,7 +34,7 @@ import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/mate
 import { TranslocoService, TranslocoDirective } from "@ngneat/transloco";
 import { SortService } from "app/services/sort.service";
 import { TranslocoDatePipe } from "@ngneat/transloco-locale";
-
+import { DateFnsLocaleService } from "app/services/date-fns-locale.service";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { ExportService } from "app/services/export.service";
@@ -65,6 +43,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { isWithinInterval } from "date-fns";
+import { SharedService } from "app/services/shared.service";
 
 @Component({
   selector: "app-global-count",
@@ -95,8 +74,6 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
 
   globalList: ParticipantInterface[] & ParticipantDynamicInterface[];
 
-  locales;
-
   participants = [];
 
   form = this.formBuilder.group<Record<string, Date>>({
@@ -114,31 +91,10 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     private sortService: SortService,
     private exportService: ExportService,
     private formBuilder: FormBuilder,
+    private dateFnsLocaleService: DateFnsLocaleService,
+    private sharedService: SharedService,
     private cdr: ChangeDetectorRef,
-  ) {
-    //Key is the locale as servihelper understands, right is date-fns, most of them are the same
-    this.locales = {
-      es,
-      ca,
-      en: enGB,
-      pt,
-      de,
-      fr,
-      it,
-      ru,
-      ja,
-      ko,
-      hr,
-      zhCN,
-      hi,
-      el,
-      bn,
-      nl,
-      ro,
-      tr,
-      pl,
-    };
-  }
+  ) {}
   ngOnChanges() {
     this.getStatistics();
   }
@@ -157,9 +113,9 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
       this.translocoService.langChanges$.subscribe(() => {
         //Assistant
         if (this.participants.length) {
-          getDistanceBetweenPenultimaAndLast(
+          this.sharedService.getDistanceBetweenPenultimaAndLast(
             this.participants,
-            this.locales[this.translocoService.getActiveLang()],
+            this.dateFnsLocaleService.locales[this.translocoService.getActiveLang()],
           );
         }
       }),
@@ -282,9 +238,9 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     //Get the distance, i18n sensitive
-    getDistanceBetweenPenultimaAndLast(
+    this.sharedService.getDistanceBetweenPenultimaAndLast(
       this.participants,
-      this.locales[this.translocoService.getActiveLang()],
+      this.dateFnsLocaleService.locales[this.translocoService.getActiveLang()],
     );
 
     //Order by count and distance

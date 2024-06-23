@@ -514,5 +514,6 @@
   "COPIED": "Copiat",
   "COMPRESSED": "Comprimit",
   "ICON_PDF_BAND_BLACK": "Genera un PDF especialment per a la mitja setmana sense bandes i fins a cinc setmanes per pàgina",
-  "ICON_S13": "Dades preparades per a S13"
+  "ICON_S13": "Dades preparades per a S13",
+  "ASSIGN_SORT_ONLY_TIME": "Ordena només per temps"
 }

@@ -1,7 +1,8 @@
+/* eslint-disable complexity */
 import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { TerritoryGroupInterface } from "../../model/map.model";
-import { readFileSync, writeFile } from "fs-extra";
+import { readFileSync, writeFileSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 import { LockService } from "app/lock/service/lock.service";
 import { inflate, deflate } from "pako";
@@ -46,7 +47,7 @@ export class TerritoryGroupService {
   #saveTerritoryGroupsToFile(): boolean {
     //Write territories group back to file
     const gziped = deflate(JSON.stringify(this.#territoryGroups), { to: "string" });
-    writeFile(this.configService.territoryGroupsPath, gziped);
+    writeFileSync(this.configService.territoryGroupsPath, gziped);
 
     this.lockService.updateTimestamp();
     return true;

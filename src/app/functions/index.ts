@@ -5,7 +5,6 @@ export { getLastAssignment } from "./getLastAssignment";
 export { getPenultimatePrincipalAssignment } from "./getPenultimatePrincipalAssignment";
 export { getPenultimateAssistantAssignment } from "./getPenultimateAssistantAssignment";
 export { getPenultimateAssignment } from "./getPenultimateAssignment";
-export { getDistanceBetweenPenultimaAndLast } from "./getDistanceBetweenPenultimaAndLast";
 export { setPrincipalCountById } from "./setPrincipalCountById";
 export { setAssistantCountById } from "./setAssistantCountById";
 export { setCountById } from "./setCountById";

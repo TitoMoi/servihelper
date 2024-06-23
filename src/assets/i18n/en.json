@@ -487,5 +487,7 @@
   "COPIED": "Copied",
   "COMPRESSED": "Compressed",
   "ICON_PDF_BAND_BLACK": "Generate a pdf specially for the midweek without bands and up to five weeks per page",
-  "ICON_S13": "Data ready for S13"
+  "ICON_S13": "Data ready for S13",
+  "ASSIGN_SORT_ONLY_TIME": "Sort only by time",
+  "SORT_NO_DISTANCE": "No distance"
 }

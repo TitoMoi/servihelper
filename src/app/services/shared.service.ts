@@ -9,6 +9,8 @@ import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ipcRenderer } from "electron";
+import { Locale, formatDistanceStrict } from "date-fns";
+import { TranslocoService } from "@ngneat/transloco";
 const { version } = require("../../../package.json");
 
 @Injectable({
@@ -20,6 +22,7 @@ export class SharedService {
   constructor(
     private assignTypeService: AssignTypeService,
     private participantService: ParticipantService,
+    private translocoService: TranslocoService,
   ) {}
 
   /**
@@ -153,6 +156,42 @@ export class SharedService {
     link.download = filename;
     link.click();
     link.remove();
+  }
+
+  getDistanceBetweenPenultimaAndLast(
+    participantList: ParticipantDynamicInterface[],
+    locale: Locale,
+    lastSelectedDate?: Date,
+  ): void {
+    //Get the distance, i18n sensitive
+    for (const participant of participantList) {
+      //This means that the distance must be from last to today
+      if (lastSelectedDate && participant.lastAssignmentDate) {
+        participant.distanceBetweenPenultimaAndLast = formatDistanceStrict(
+          new Date(participant.lastAssignmentDate),
+          lastSelectedDate,
+          {
+            locale,
+          },
+        );
+      }
+      if (
+        participant.penultimateAssignmentDate &&
+        participant.lastAssignmentDate &&
+        !lastSelectedDate
+      ) {
+        participant.distanceBetweenPenultimaAndLast = formatDistanceStrict(
+          new Date(participant.penultimateAssignmentDate),
+          new Date(participant.lastAssignmentDate),
+          {
+            locale,
+          },
+        );
+      }
+      if (!participant.distanceBetweenPenultimaAndLast)
+        participant.distanceBetweenPenultimaAndLast =
+          this.translocoService.translate("SORT_NO_DISTANCE");
+    }
   }
 
   closeApp() {
