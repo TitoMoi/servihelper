@@ -183,7 +183,7 @@
                 </span>
               </div>
               <div>
-                <span class="d-flex align-items-center">
+                <span class="d-flex align-items-center justify-content-end">
                   <mat-icon class="me-2" svgIcon="clock" aria-label="icon"></mat-icon>
                   <mat-checkbox
                     labelPosition="before"
@@ -193,6 +193,7 @@
                     >{{ t("ASSIGN_SORT_ONLY_TIME") }}</mat-checkbox
                   >
                 </span>
+                <div class="fst-italic f-small">{{ t("SORT_NO_DISTANCE_HINT") }}</div>
               </div>
             </div>
           </div>
@@ -224,6 +225,9 @@
                   @if (participant.distanceBetweenPenultimaAndLast) {
                     <mat-option [value]="participant.id">
                       <span>{{ participant.name }}</span> -
+                      @if (participant.isPrincipalLastAssignment) {
+                        <span> {{ participant.lastAssignType }}</span> -
+                      }
                       <span>{{ participant.distanceBetweenPenultimaAndLast }}</span>
                     </mat-option>
                   } @else {

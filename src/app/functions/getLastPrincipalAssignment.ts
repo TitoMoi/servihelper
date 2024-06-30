@@ -13,12 +13,13 @@ import { ParticipantInterface } from "../participant/model/participant.model";
 export function getLastPrincipalAssignment(
   assignmentList: AssignmentInterface[],
   participant: ParticipantInterface,
-  assignTypeId?: string,
+  assignTypeIdList?: string[],
 ): AssignmentInterface | undefined {
   const firstAssignment = assignmentList
     .filter((assignment) =>
-      assignTypeId
-        ? assignment.principal === participant.id && assignment.assignType === assignTypeId
+      assignTypeIdList
+        ? assignment.principal === participant.id &&
+          assignTypeIdList.includes(assignment.assignType)
         : assignment.principal === participant.id,
     )
     .sort(compareFn)[0]; //Get first value

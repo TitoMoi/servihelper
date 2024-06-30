@@ -158,6 +158,12 @@ export class SharedService {
     link.remove();
   }
 
+  /**
+   *
+   * @param participantList The participant list
+   * @param locale the date-fns locale
+   * @param lastSelectedDate if this param exists, the comparison is between latest date and this date
+   */
   getDistanceBetweenPenultimaAndLast(
     participantList: ParticipantDynamicInterface[],
     locale: Locale,

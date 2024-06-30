@@ -22,7 +22,7 @@ export class AssignTypeService {
   readonly TREASURES = "treasures";
   readonly BIBLE_READING = "bibleReading";
   readonly ANALYSIS_AUDIENCE = "analysysAudience";
-  readonly INTEREST_IN_OTHERS = "interestInOthers"; //ToDo: For compatibility, must be removed on v6
+  readonly INTEREST_IN_OTHERS = "interestInOthers"; //ToDo: This one is ANALYSIS_AUDIENCE, we keep it for compatibility, must be removed on v6
   readonly INITIAL_CALL = "initialCall";
   readonly RETURN_VISIT = "returnVisit";
   readonly TALK = "talk";
@@ -33,14 +33,14 @@ export class AssignTypeService {
   readonly EXPLAIN_BELIEFS = "explainBeliefs";
   readonly CONGREGATION_BIBLE_STUDY = "congregationBibleStudy";
 
-  //Section
+  //Section as jw color bands
   treasuresAssignmentTypes: AssignTypes[] = [
     this.SPIRITUAL_GEMS,
     this.TREASURES,
     this.BIBLE_READING,
   ];
 
-  //Section
+  //Section as jw color bands
   improvePreachingAssignmentTypes: AssignTypes[] = [
     this.ANALYSIS_AUDIENCE,
     this.INTEREST_IN_OTHERS, //ToDo: For compatibility, must be removed on v6
@@ -51,7 +51,7 @@ export class AssignTypeService {
     this.EXPLAIN_BELIEFS,
   ];
 
-  //Section
+  //Section as jw color bands
   liveAsChristiansAssignmentTypes: AssignTypes[] = [
     this.LIVING_AS_CHRISTIANS,
     this.CONGREGATION_BIBLE_STUDY,
@@ -121,6 +121,10 @@ export class AssignTypeService {
 
   getAssignTypesLength() {
     return this.#assignTypes?.length;
+  }
+
+  getAssignTypeIdByType(type: AssignTypes) {
+    return this.#assignTypes.find((at) => at.type === type)?.id; //ToDo: For compatibility, ? must be removed on v6
   }
 
   /** Return an array of assign types ids */
@@ -209,8 +213,18 @@ export class AssignTypeService {
     return this.saveAssignTypesToFile();
   }
 
-  //school
-  isOfTypeAssignTypes(type: AssignTypes): boolean {
+  // prayer - As we understand assign types are related
+  isOfTypePrayer(type: AssignTypes): boolean {
+    return [this.INITIAL_PRAYER, this.ENDING_PRAYER].includes(type);
+  }
+
+  // prayer - As we understand assign types are related
+  getTypesForPrayer(): AssignTypes[] {
+    return [this.INITIAL_PRAYER, this.ENDING_PRAYER];
+  }
+
+  // school - As we understand assign types are related
+  isOfTypeSchoolAssignTypes(type: AssignTypes): boolean {
     return [
       this.BIBLE_READING,
       this.INITIAL_CALL,
@@ -219,15 +233,26 @@ export class AssignTypeService {
       this.BIBLE_STUDY,
       this.EXPLAIN_BELIEFS,
       this.ANALYSIS_AUDIENCE,
+      this.INTEREST_IN_OTHERS, //ToDo: For compatibility, must be removed on v6
     ].includes(type);
   }
 
-  //prayer
-  isOfTypePrayer(type: AssignTypes): boolean {
-    return [this.INITIAL_PRAYER, this.ENDING_PRAYER].includes(type);
+  // school - As we understand assign types are related
+  getTypesForSchoolAssignTypes(): AssignTypes[] {
+    return [
+      this.INTEREST_IN_OTHERS,
+      this.BIBLE_READING,
+      this.INITIAL_CALL,
+      this.RETURN_VISIT,
+      this.TALK,
+      this.BIBLE_STUDY,
+      this.EXPLAIN_BELIEFS,
+      this.ANALYSIS_AUDIENCE,
+      //ToDo: For compatibility, must be removed on v6
+    ];
   }
 
-  //treasures and others
+  // treasures and others - As we understand assign types are related
   isOfTypeTreasuresAndOthers(type: AssignTypes): boolean {
     return [
       this.TREASURES,
@@ -235,5 +260,15 @@ export class AssignTypeService {
       this.LIVING_AS_CHRISTIANS,
       this.CONGREGATION_BIBLE_STUDY,
     ].includes(type);
+  }
+
+  // treasures and others - As we understand assign types are related
+  getTypesForTreasuresAndOthers(): AssignTypes[] {
+    return [
+      this.TREASURES,
+      this.SPIRITUAL_GEMS,
+      this.LIVING_AS_CHRISTIANS,
+      this.CONGREGATION_BIBLE_STUDY,
+    ];
   }
 }

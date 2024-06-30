@@ -71,12 +71,7 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
 import { CloseAssignmentsComponent } from "../close-assignments/close-assignments.component";
-import {
-  /*  getLastAssistantAssignment, */
-  getLastPrincipalAssignment,
-  /* getPenultimateAssistantAssignment, */
-  getPenultimatePrincipalAssignment,
-} from "app/functions";
+import { getLastPrincipalAssignment } from "app/functions";
 import { DateFnsLocaleService } from "app/services/date-fns-locale.service";
 @Component({
   selector: "app-create-update-assignment",
@@ -712,7 +707,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   checkIsExhaustedForSchool(currentDate: Date, atType: AssignTypes) {
     const closeOthersDays = this.configService.getConfig().closeToOthersDays;
 
-    if (closeOthersDays && this.assignTypeService.isOfTypeAssignTypes(atType)) {
+    if (closeOthersDays && this.assignTypeService.isOfTypeSchoolAssignTypes(atType)) {
       //If we edit an assignment, we get the string iso instead of a real date
       if (typeof currentDate === "string") currentDate = parseISO(currentDate);
 
@@ -726,7 +721,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         if (
           allDays.some(
             (a) =>
-              this.assignTypeService.isOfTypeAssignTypes(
+              this.assignTypeService.isOfTypeSchoolAssignTypes(
                 this.assignTypeService.getAssignType(a.assignType).type,
               ) &&
               (a.principal === p.id || a.assistant === p.id),
@@ -740,7 +735,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         if (
           allDays.some(
             (a) =>
-              this.assignTypeService.isOfTypeAssignTypes(
+              this.assignTypeService.isOfTypeSchoolAssignTypes(
                 this.assignTypeService.getAssignType(a.assignType).type,
               ) &&
               (a.principal === assist.id || a.assistant === assist.id),
@@ -824,7 +819,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         currentDate &&
         roomId &&
         atId &&
-        this.assignTypeService.isOfTypeAssignTypes(
+        this.assignTypeService.isOfTypeSchoolAssignTypes(
           this.assignTypeService.getAssignType(atId).type,
         )
       ) {
@@ -837,7 +832,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         if (principals.length) {
           //Get a list of assignments that are for school
           const assignments = this.assignments.filter((a) =>
-            this.assignTypeService.isOfTypeAssignTypes(
+            this.assignTypeService.isOfTypeSchoolAssignTypes(
               this.assignTypeService.getAssignType(a.assignType).type,
             ),
           );
@@ -1170,7 +1165,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const foundAssignments: AssignmentInterface[] = [];
     for (const assign of allDays) {
       if (
-        this.assignTypeService.isOfTypeAssignTypes(
+        this.assignTypeService.isOfTypeSchoolAssignTypes(
           this.assignTypeService.getAssignType(assign.assignType).type,
         ) &&
         (assign.principal === p.id || assign.assistant === p.id)
@@ -1235,46 +1230,54 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     return foundAssignments;
   }
 
-  //TIME DISTANCE BETWEEN PENULTIMATE AND LATEST
+  //TIME DISTANCE BETWEEN LATEST AND SELECTED DATE
 
   getTimeDistance() {
-    const assignType = this.gfv("assignType");
+    const assignTypeId = this.gfv("assignType");
     const selectedDate = this.gfv("date");
-    if (this.gfv("onlySortByTime") && assignType) {
+    if (this.gfv("onlySortByTime") && assignTypeId) {
       //Get the lastAssignmentDate
+      const assignTypeObj = this.assignTypeService.getAssignType(assignTypeId);
+
       for (const participant of this.participants) {
         //principals
+
+        //If assignment is not part of a group, the last date must be specific to that assign type.
+        //If it's part of a group, then just return the latest
+        let assignTypeIdList = [];
+
+        if (this.assignTypeService.isOfTypePrayer(assignTypeObj.type)) {
+          for (const type of this.assignTypeService.getTypesForPrayer()) {
+            assignTypeIdList.push(this.assignTypeService.getAssignTypeIdByType(type));
+          }
+        }
+        if (this.assignTypeService.isOfTypeSchoolAssignTypes(assignTypeObj.type)) {
+          for (const type of this.assignTypeService.getTypesForSchoolAssignTypes()) {
+            assignTypeIdList.push(this.assignTypeService.getAssignTypeIdByType(type));
+          }
+        }
+        if (this.assignTypeService.isOfTypeTreasuresAndOthers(assignTypeObj.type)) {
+          for (const type of this.assignTypeService.getTypesForTreasuresAndOthers()) {
+            assignTypeIdList.push(this.assignTypeService.getAssignTypeIdByType(type));
+          }
+        }
+
+        //Filter possible null values //ToDo: For compatibility, must be removed on v6
+        assignTypeIdList = assignTypeIdList.filter((at) => at);
+
         const assignment = getLastPrincipalAssignment(
           this.assignments,
           participant,
-          assignType,
+          assignTypeIdList,
         );
+
         if (assignment) participant.isPrincipalLastAssignment = true;
 
         if (assignment) {
           participant.lastAssignmentDate = assignment.date;
           //Search the assignmentType and inject
-          const assignType = this.assignTypeService.getAssignType(assignment.assignType);
-          participant.lastAssignType = this.assignTypeService.getNameOrTranslation(assignType);
-        }
-      }
-
-      //Get the penultimateAssignment
-      for (const participant of this.participants) {
-        //principals
-        const assignment = getPenultimatePrincipalAssignment(
-          this.assignments,
-          participant,
-          assignType,
-        );
-        if (assignment) participant.isPrincipalPenultimateAssignment = true;
-
-        if (assignment) {
-          participant.penultimateAssignmentDate = assignment?.date;
-          //Search the assignmentType and inject
-          const assignType = this.assignTypeService.getAssignType(assignment.assignType);
-          participant.penultimateAssignType =
-            this.assignTypeService.getNameOrTranslation(assignType);
+          const aTypeObj = this.assignTypeService.getAssignType(assignment.assignType);
+          participant.lastAssignType = this.assignTypeService.getNameOrTranslation(aTypeObj);
         }
       }
 
