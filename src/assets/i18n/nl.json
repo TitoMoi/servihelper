@@ -511,5 +511,11 @@
   "COPIED": "Gekopieerd",
   "COMPRESSED": "Gecomprimeerd",
   "ICON_PDF_BAND_BLACK": "Genereer een PDF speciaal voor de midweek zonder bands en maximaal vijf weken per pagina",
-  "ICON_S13": "Gegevens klaar voor S13"
+  "ICON_S13": "Gegevens klaar voor S13",
+  "ASSIGN_SORT_ONLY_TIME": "Sorteer alleen op de tijd",
+  "SORT_NO_DISTANCE": "Geen afstand",
+  "SORT_NO_DISTANCE_HINT": "Afstand van de laatste deelname tot de geselecteerde datum",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Classic Sorteren of uitschakelen",
+  "CONFIG_EXPLAIN_TIME_SORT": "Wat is de afstand van de laatste deelname tot de geselecteerde datum?",
+  "CONFIG_TIME_SORT_CHECK": "Standaard klassieke sorteer"
 }

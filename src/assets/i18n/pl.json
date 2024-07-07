@@ -501,5 +501,11 @@
   "COPIED": "Skopiowane",
   "COMPRESSED": "Sprężony",
   "ICON_PDF_BAND_BLACK": "Wygeneruj PDF specjalnie dla środkowego tygodnia bez zespołów i do pięciu tygodni na stronę",
-  "ICON_S13": "Dane gotowe do S13"
+  "ICON_S13": "Dane gotowe do S13",
+  "ASSIGN_SORT_ONLY_TIME": "Sortuj tylko czas",
+  "SORT_NO_DISTANCE": "Bez dystansu",
+  "SORT_NO_DISTANCE_HINT": "Odległość od ostatniego uczestnictwa do wybranej daty",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Włącz lub wyłącz klasyczny sort",
+  "CONFIG_EXPLAIN_TIME_SORT": "Jaka jest odległość od najnowszego uczestnictwa do wybranej daty?",
+  "CONFIG_TIME_SORT_CHECK": "Domyślnie włącz klasyczny sort"
 }

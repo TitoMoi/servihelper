@@ -511,5 +511,11 @@
   "COPIED": "Copiato",
   "COMPRESSED": "Compressa",
   "ICON_PDF_BAND_BLACK": "Genera un PDF specialmente per l'inferenza senza band e fino a cinque settimane per pagina",
-  "ICON_S13": "Dati pronti per S13"
+  "ICON_S13": "Dati pronti per S13",
+  "ASSIGN_SORT_ONLY_TIME": "Ordina solo per tempo",
+  "SORT_NO_DISTANCE": "Nessuna distanza",
+  "SORT_NO_DISTANCE_HINT": "Distanza dall'ultima partecipazione alla data selezionata",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Abilita o disabilita l'ordinamento classico",
+  "CONFIG_EXPLAIN_TIME_SORT": "Qual è la distanza dall'ultima partecipazione alla data selezionata?",
+  "CONFIG_TIME_SORT_CHECK": "Abilita l'ordinamento classico per impostazione predefinita"
 }

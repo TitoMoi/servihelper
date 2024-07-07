@@ -210,7 +210,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     group: [this.a ? this.a.group : 0], //null is not working
     assistant: [this.a?.assistant], //participant id
     footerNote: this.a ? this.a.footerNote : this.config.defaultFooterNoteId, //Note id
-    onlySortByTime: [false],
+    onlySortByTime: [this.config.isClassicSortEnabled],
   });
 
   //Subscriptions

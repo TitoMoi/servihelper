@@ -490,5 +490,8 @@
   "ICON_S13": "Data ready for S13",
   "ASSIGN_SORT_ONLY_TIME": "Sort only by time",
   "SORT_NO_DISTANCE": "No distance",
-  "SORT_NO_DISTANCE_HINT": "Distance from last participation to the selected date"
+  "SORT_NO_DISTANCE_HINT": "Distance from last participation to the selected date",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Enable or disable classic sort",
+  "CONFIG_EXPLAIN_TIME_SORT": "What is the distance from the latest participation to the selected date?",
+  "CONFIG_TIME_SORT_CHECK": "Enable classic sort by default"
 }

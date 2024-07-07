@@ -501,5 +501,11 @@
   "COPIED": "コピー",
   "COMPRESSED": "圧縮",
   "ICON_PDF_BAND_BLACK": "バンドなしで週の半ばに特別にPDFを生成し、1ページあたり最大5週間",
-  "ICON_S13": "S13の準備ができています"
+  "ICON_S13": "S13の準備ができています",
+  "ASSIGN_SORT_ONLY_TIME": "時間のみを並べ替えます",
+  "SORT_NO_DISTANCE": "距離なし",
+  "SORT_NO_DISTANCE_HINT": "最後の参加から選択した日付までの距離",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "クラシックソートを有効または無効にします",
+  "CONFIG_EXPLAIN_TIME_SORT": "最新の参加から選択された日付までの距離はどれくらいですか？",
+  "CONFIG_TIME_SORT_CHECK": "デフォルトでクラシックソートを有効にします"
 }

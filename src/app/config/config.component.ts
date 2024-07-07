@@ -40,6 +40,7 @@ import { OnlineTemplateComponent } from "app/config/online-template/online-templ
 import { LockService } from "app/lock/service/lock.service";
 import { SharedService } from "app/services/shared.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @Component({
   selector: "app-config",
@@ -68,6 +69,7 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
     MatSlideToggleModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatCheckboxModule,
   ],
 })
 export class ConfigComponent implements OnInit, OnDestroy {
@@ -134,6 +136,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     s89NoteContentPart: this.currentConfig.s89NoteContentPart,
     s89Version: this.currentConfig.s89Version,
     s89DateVersion: this.currentConfig.s89DateVersion,
+    isClassicSortEnabled: this.currentConfig.isClassicSortEnabled,
   });
 
   //ONLINE SECTION
@@ -190,6 +193,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     s89NoteContentPart: "",
     s89Version: "",
     s89DateVersion: "",
+    isClassicSortEnabled: false,
   };
 
   subscription = new Subscription();

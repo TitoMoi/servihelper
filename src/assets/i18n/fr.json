@@ -512,5 +512,11 @@
   "COPIED": "Copié",
   "COMPRESSED": "Comprimée",
   "ICON_PDF_BAND_BLACK": "Générez un PDF spécialement pour le milieu de la semaine sans bandes et jusqu'à cinq semaines par page",
-  "ICON_S13": "Données prêtes pour S13"
+  "ICON_S13": "Données prêtes pour S13",
+  "ASSIGN_SORT_ONLY_TIME": "Triez uniquement par le temps",
+  "SORT_NO_DISTANCE": "Aucune distance",
+  "SORT_NO_DISTANCE_HINT": "Distance de la dernière participation à la date sélectionnée",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Activer ou désactiver le tri classique",
+  "CONFIG_EXPLAIN_TIME_SORT": "Quelle est la distance entre la dernière participation à la date sélectionnée?",
+  "CONFIG_TIME_SORT_CHECK": "Activer le tri classique par défaut"
 }

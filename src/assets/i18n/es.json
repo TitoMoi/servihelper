@@ -513,5 +513,10 @@
   "COMPRESSED": "Comprimido",
   "ICON_PDF_BAND_BLACK": "Genere un PDF especialmente para la mitad de la semana sin bandas y hasta cinco semanas por página",
   "ICON_S13": "Datos preparados para el S13",
-  "ASSIGN_SORT_ONLY_TIME": "Ordena solo por tiempo"
+  "ASSIGN_SORT_ONLY_TIME": "Ordena solo por tiempo",
+  "SORT_NO_DISTANCE": "No hay distancia",
+  "SORT_NO_DISTANCE_HINT": "Distancia de la última participación a la fecha seleccionada",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Habilitar o deshabilitar el tipo clásico",
+  "CONFIG_EXPLAIN_TIME_SORT": "¿Cuál es la distancia de la última participación a la fecha seleccionada?",
+  "CONFIG_TIME_SORT_CHECK": "Habilitar el orden clásico de forma predeterminada"
 }

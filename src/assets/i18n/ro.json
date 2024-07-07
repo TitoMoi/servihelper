@@ -512,5 +512,11 @@
   "COPIED": "Copiat",
   "COMPRESSED": "Comprimat",
   "ICON_PDF_BAND_BLACK": "Generați un PDF special pentru mijlocul săptămânii fără trupe și până la cinci săptămâni pe pagină",
-  "ICON_S13": "Date gata pentru S13"
+  "ICON_S13": "Date gata pentru S13",
+  "ASSIGN_SORT_ONLY_TIME": "Sortează doar după timp",
+  "SORT_NO_DISTANCE": "Fără distanță",
+  "SORT_NO_DISTANCE_HINT": "Distanța de la ultima participare până la data selectată",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Activați sau dezactivați sortarea clasică",
+  "CONFIG_EXPLAIN_TIME_SORT": "Care este distanța de la ultima participare la data selectată?",
+  "CONFIG_TIME_SORT_CHECK": "Activați sortarea clasică în mod implicit"
 }

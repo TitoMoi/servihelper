@@ -515,5 +515,10 @@
   "COMPRESSED": "Comprimit",
   "ICON_PDF_BAND_BLACK": "Genera un PDF especialment per a la mitja setmana sense bandes i fins a cinc setmanes per pàgina",
   "ICON_S13": "Dades preparades per a S13",
-  "ASSIGN_SORT_ONLY_TIME": "Ordena només per temps"
+  "ASSIGN_SORT_ONLY_TIME": "Ordena només per temps",
+  "SORT_NO_DISTANCE": "Sense distància",
+  "SORT_NO_DISTANCE_HINT": "Distància des de la darrera participació fins a la data seleccionada",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Activa o desactiva el tipus clàssic",
+  "CONFIG_EXPLAIN_TIME_SORT": "Quina és la distància de la darrera participació a la data seleccionada?",
+  "CONFIG_TIME_SORT_CHECK": "Activa de manera predeterminada l'ordenació clàssica"
 }

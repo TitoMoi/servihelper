@@ -514,5 +514,11 @@
   "COPIED": "Copiada",
   "COMPRESSED": "Comprimida",
   "ICON_PDF_BAND_BLACK": "Gerar um PDF especialmente para o meio da semana sem bandas e até cinco semanas por página",
-  "ICON_S13": "Dados prontos para S13"
+  "ICON_S13": "Dados prontos para S13",
+  "ASSIGN_SORT_ONLY_TIME": "Classificar apenas pelo tempo",
+  "SORT_NO_DISTANCE": "Sem distância",
+  "SORT_NO_DISTANCE_HINT": "Distância da última participação até a data selecionada",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Ativar ou desativar o tipo clássico",
+  "CONFIG_EXPLAIN_TIME_SORT": "Qual é a distância da participação mais recente até a data selecionada?",
+  "CONFIG_TIME_SORT_CHECK": "Ativar classificação clássica por padrão"
 }

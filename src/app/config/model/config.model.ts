@@ -46,6 +46,7 @@ export interface ConfigInterface {
   s89NoteContentPart: string;
   s89Version: string;
   s89DateVersion: string;
+  isClassicSortEnabled: boolean;
 }
 
 export interface OnlineTemplateDataInterface {

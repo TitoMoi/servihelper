@@ -512,5 +512,11 @@
   "COPIED": "Kopiert",
   "COMPRESSED": "Komprimiert",
   "ICON_PDF_BAND_BLACK": "Generieren Sie ein PDF speziell für die Woche ohne Bänder und bis zu fünf Wochen pro Seite",
-  "ICON_S13": "Daten bereit für S13"
+  "ICON_S13": "Daten bereit für S13",
+  "ASSIGN_SORT_ONLY_TIME": "Nur nach Zeit sortieren",
+  "SORT_NO_DISTANCE": "Keine Distanz",
+  "SORT_NO_DISTANCE_HINT": "Entfernung von der letzten Teilnahme bis zum ausgewählten Datum",
+  "CONFIG_TIME_SORT_METHOD_TITLE": "Klassische Sortier ermöglichen oder deaktivieren",
+  "CONFIG_EXPLAIN_TIME_SORT": "Was ist die Entfernung von der neuesten Teilnahme bis zum ausgewählten Datum?",
+  "CONFIG_TIME_SORT_CHECK": "Aktivieren Sie standardmäßig die klassische Sortierung"
 }
