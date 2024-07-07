@@ -1235,13 +1235,20 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   getTimeDistance() {
     const assignTypeId = this.gfv("assignType");
     const selectedDate = this.gfv("date");
+
+    //Clear first
+    for (const p of this.participants) {
+      p.isPrincipalLastAssignment = false;
+      p.lastAssignmentDate = null;
+      p.lastAssignType = null;
+      p.distanceBetweenPenultimaAndLast = null;
+    }
+
     if (this.gfv("onlySortByTime") && assignTypeId) {
       //Get the lastAssignmentDate
       const assignTypeObj = this.assignTypeService.getAssignType(assignTypeId);
 
       for (const participant of this.participants) {
-        //principals
-
         //If assignment is not part of a group, the last date must be specific to that assign type.
         //If it's part of a group, then just return the latest
         let assignTypeIdList = [];
@@ -1260,6 +1267,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
           for (const type of this.assignTypeService.getTypesForTreasuresAndOthers()) {
             assignTypeIdList.push(this.assignTypeService.getAssignTypeIdByType(type));
           }
+        } else {
+          // Means it's an assignment that doesnt belong to a group
+          assignTypeIdList.push(
+            this.assignTypeService.getAssignTypeIdByType(assignTypeObj.type),
+          );
         }
 
         //Filter possible null values //ToDo: For compatibility, must be removed on v6
