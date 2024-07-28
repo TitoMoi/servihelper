@@ -67,7 +67,7 @@
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "~17.0.0",
+    "@angular-builders/custom-webpack": "~18.0.0",
     "@angular-eslint/builder": "18.1.0",
     "@angular-eslint/eslint-plugin": "18.1.0",
     "@angular-eslint/eslint-plugin-template": "18.1.0",
@@ -111,9 +111,5 @@
   },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "browserslist": [
-    "chrome 91",
-    "last 2 Safari versions"
-  ]
+  }
 }
