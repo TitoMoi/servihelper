@@ -10,7 +10,6 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "allowJs": true,
     "noImplicitOverride": true,
