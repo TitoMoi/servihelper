@@ -1,56 +1,22 @@
 @use "@angular/material" as mat;
 @include mat.core();
 
-// Be sure that you only ever include this mixin once!
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy($custom-typography);`
-
-//Available color palettes: https://material.io/design/color/
-$servihelper-primary: mat.m2-define-palette(mat.$m2-deep-purple-palette);
-$servihelper-accent: mat.m2-define-palette(mat.$m2-yellow-palette);
-// The warn palette is optional (defaults to red).
-/* $servihelper-warn: mat.define-palette(mat.$red-palette); */
-
-$custom-typography: mat.m2-define-typography-config(
-  $font-family: "Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans SC, sans-serif",
-);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$servihelper-theme: mat.m2-define-light-theme(
+$theme: mat.define-light-theme(
   (
     color: (
-      primary: $servihelper-primary,
-      accent: $servihelper-accent,
+      theme-type: light,
+      primary: mat.$deep-purple-palette,
     ),
-    typography: $custom-typography,
-    density: 0,
-  )
-);
-
-// Include theme styles for core and each material component.
-@include mat.all-component-themes($servihelper-theme);
-
-// Define an alternate dark theme.
-
-/* $dark-primary: mat.define-palette(mat.$grey-palette, 50, 900);
-$dark-accent: mat.define-palette(mat.$amber-palette, 50, 100, 200);
-$dark-warn: mat.define-palette(mat.$red-palette);
-$dark-theme: mat.define-dark-theme(
-  (
-    color: (
-      primary: $dark-primary,
-      accent: $dark-accent,
-      warn: $dark-warn,
+    typography: (
+      brand-family: "Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans SC, sans-serif",
+    ),
+    density: (
+      scale: 0,
     ),
   )
 );
 
-.servihelper-contrast-theme {
-  @include mat.all-legacy-component-colors($dark-theme);
-} */
+html {
+  // Apply the theme by default
+  @include mat.core-theme($theme);
+}
