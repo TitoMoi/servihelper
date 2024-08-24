@@ -1,6 +1,7 @@
 :host {
   //Top right of mat-drawer is rounded, we want it sharp
   --mat-sidenav-container-shape: 0px;
+  --mat-sidenav-content-background-color: #fafafa;
 
   //Recomended from angular material, assignment type doesnt fit by default
   mat-sidenav {
@@ -8,13 +9,18 @@
     width: auto;
   }
 
-  #noWifiIcon {
-    height: 32px;
-    width: 32px;
+  /* only for the right toolbar */
+  mat-toolbar * > mat-icon {
+    color: white;
   }
 
   //no other solution is provided
   mat-list-item * > mat-icon {
+    height: 32px;
+    width: 32px;
+  }
+
+  #noWifiIcon {
     height: 32px;
     width: 32px;
   }
@@ -26,5 +32,10 @@
 
   .new-version-font-size {
     font-size: 0.85rem;
+  }
+
+  .servihelper-logo {
+    color: white;
+    font-size: smaller;
   }
 }
