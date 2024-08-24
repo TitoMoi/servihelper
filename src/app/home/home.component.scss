@@ -5,8 +5,8 @@ input[type="file"] {
 .custom-file-upload {
   font-size: 14px;
   color: #8866bb;
-  letter-spacing: 0.5px;
-  background-color: white; //material accent
+  letter-spacing: 0.05ch;
+  background-color: #fffbff; //material accent
   border-radius: 60px;
   display: inline-block;
   padding: 8px 14px;
@@ -14,7 +14,7 @@ input[type="file"] {
 
   cursor: pointer;
   &:hover {
-    background-color: #f8edff;
+    background-color: #fef7ff;
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
   }
 }
