@@ -1,24 +1,30 @@
-//Recomended from angular material, assignment type doesnt fit by default
-mat-nav-list {
-  width: 230px;
-}
+:host {
+  //Top right of mat-drawer is rounded, we want it sharp
+  --mat-sidenav-container-shape: 0px;
 
-#noWifiIcon {
-  height: 32px;
-  width: 32px;
-}
+  //Recomended from angular material, assignment type doesnt fit by default
+  mat-sidenav {
+    background-color: white;
+    width: auto;
+  }
 
-//no other solution is provided
-mat-list-item * > mat-icon {
-  height: 32px;
-  width: 32px;
-}
+  #noWifiIcon {
+    height: 32px;
+    width: 32px;
+  }
 
-//To break words of "types of assignments" in the left side menu and fit
-.white-space-pre-wrap {
-  white-space: pre-wrap;
-}
+  //no other solution is provided
+  mat-list-item * > mat-icon {
+    height: 32px;
+    width: 32px;
+  }
 
-.new-version-font-size {
-  font-size: 0.85rem;
+  //To break words of "types of assignments" in the left side menu and fit
+  .white-space-pre-wrap {
+    white-space: pre-wrap;
+  }
+
+  .new-version-font-size {
+    font-size: 0.85rem;
+  }
 }

@@ -9,7 +9,7 @@
           [matTooltipDisabled]="!isCreateAssignmentDisabled()"
         >
           <a
-            mat-raised-button
+            mat-flat-button
             [disableRipple]="true"
             [disabled]="isCreateAssignmentDisabled() || (netStatusOffline$ | async)"
             color="primary"
