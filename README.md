@@ -121,6 +121,8 @@ Only the time format can't be changed, but you can select a lang that suits your
 
 **Paid mode 💲**:
 
+- If you need real time, to share territories or update assignments in the meetings, you can conect to your PC through teamviewer app or another remote desktop solution.
+
 _(If money is not a concern, it's better in terms of complexity to use another theocratic online tool instead of configure a server just for servihelper)_
 
 If you want to continue, configure a remote desktop and avoid the need to export and import data manually. This requires a person with medium/advanced skills and a bit of overhead to configure. And also a platform mantainance over time _(⚠️ not recommended)_
