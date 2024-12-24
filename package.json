@@ -1,6 +1,6 @@
 {
   "name": "servihelper",
-  "version": "5.15.0",
+  "version": "5.15.1",
   "description": "Servihelper",
   "author": {
     "name": "Moisés Medina Vicente",
@@ -113,3 +113,4 @@
     "node": ">=14.0.0"
   }
 }
+
