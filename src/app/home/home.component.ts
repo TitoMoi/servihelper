@@ -124,9 +124,12 @@ export class HomeComponent implements OnInit {
             return { ...currentAt, ...incomingAt } as AssignTypeInterface; //updates or adds
           });
 
+          // maybe the admins want to delete some old assign types
+          // but we need to preserve the special ones
+          // because we can release a new version with some new special assign type
           for (const at of currentAtList) {
             const exists = finalAtList.some((fat) => fat.id === at.id);
-            if (!exists) {
+            if (!exists && at.type !== "other") {
               finalAtList.push(at);
               nonExistingAssignmentTypes.push(at);
             }
@@ -189,7 +192,7 @@ export class HomeComponent implements OnInit {
     if (lang === "zhCN") lang = "zh";
     this.dateAdapter.setLocale(lang);
 
-    //If we have some new assign type we need to add the reference to all the participants
+    //If we have some new core assign type we need to add the reference to all the participants
     if (nonExistingAssignmentTypes.length) {
       //Read current participants reference
       const participants = this.participantService.getParticipants();
