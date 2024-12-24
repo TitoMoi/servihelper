@@ -4,25 +4,19 @@ table {
   border-collapse: collapse;
   border: none;
 
+  th {
+    padding: 0;
+  }
   td {
     border: 1px solid black;
     padding: 0cm 1.4pt 0cm 1.4pt;
-    font-size: 10.5pt;
+    font-size: 10.2pt;
     vertical-align: top;
     text-align: center;
-
-    &.no-border {
-      border: none;
-    }
 
     &.center {
       vertical-align: middle;
       text-align: center;
-    }
-
-    &.no-select {
-      user-select: none;
-      background-color: lightgray;
     }
   }
 }
