@@ -171,7 +171,7 @@ Yes, although it is recommended that you distribute the download link, as a new 
 ## ¿How do I distribute the territories?
 
 - There is a link that you can distribute for each territory.
-- You can also generate and distribute a pdf file _(more friendly)_
+- You can also generate and distribute an image or a pdf file _(more friendly)_
 
 ## When selecting the participant for the assignment, a number is displayed next to it, what is it?
 
