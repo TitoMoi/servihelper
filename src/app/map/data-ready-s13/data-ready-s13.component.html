@@ -1,12 +1,15 @@
 <h3>Data ready for S13</h3>
-<h4>Select the white data and Copy with Control + C (Windows) or equivalent on Mac, Linux</h4>
 <h4>
-  On Word side, click on -first row, third column- then right click and Paste with option
-  <span class="fst-italic"> 'overwrite cells'</span>
+  Select all the rows <span class="fst-italic">(table 1 or table 2, but not both)</span> and
+  copy with Control + C <span class="fst-italic"> (Windows)</span> or equivalent on Mac, Linux
+</h4>
+<h4>
+  On Word side, select all the rows, then paste with option
+  <span class="fst-italic"> 'keep only text'</span>
 </h4>
 <hr />
 
-<div class="row justify-content-center g-3">
+<div class="row justify-content-center g-5">
   <div class="col-auto">
     @for (territories of territoriesChunks; track $index) {
       <table>
@@ -48,69 +51,91 @@
             <th colspan="2"></th>
           </tr>
           <tr>
-            <th class="no-border"></th>
-            <th class="no-border"></th>
-            <th class="no-border"></th>
-            <th class="no-border"></th>
-            <th class="no-border"></th>
-            <th class="no-border"></th>
-            <th class="no-border"></th>
-            <th class="no-border"></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           @for (t of territories; track $index) {
             <tr>
-              @if (t.participants.at(-1)) {
-                <td colspan="2">{{ (t.participants.at(-1) | participantPipe)?.name }}</td>
-              }
-              @if (t.participants.at(-2)) {
-                <td colspan="2">{{ (t.participants.at(-2) | participantPipe)?.name }}</td>
-              }
-              @if (t.participants.at(-3)) {
-                <td colspan="2">{{ (t.participants.at(-3) | participantPipe)?.name }}</td>
-              }
-              @if (t.participants.at(-4)) {
-                <td colspan="2">{{ (t.participants.at(-4) | participantPipe)?.name }}</td>
-              }
+              <td style="background-color: lightgray" colspan="2">
+                {{ (t.participants.at(-1) | participantPipe)?.name }}
+              </td>
+
+              <td style="background-color: lightgray" colspan="2">
+                {{ (t.participants.at(-2) | participantPipe)?.name }}
+              </td>
+
+              <td style="background-color: lightgray" colspan="2">
+                {{ (t.participants.at(-3) | participantPipe)?.name }}
+              </td>
+
+              <td style="background-color: lightgray" colspan="2">
+                {{ (t.participants.at(-4) | participantPipe)?.name }}
+              </td>
             </tr>
             <tr>
-              @if (t.assignedDates.at(-1)) {
-                <td>{{ t.assignedDates.at(-1) | translocoDate: { dateStyle: "short" } }}</td>
-              }
-              @if (t.returnedDates.at(-1)) {
-                <td>{{ t.returnedDates.at(-1) | translocoDate: { dateStyle: "short" } }}</td>
-              }
-              @if (t.assignedDates.at(-2)) {
-                <td>
-                  {{ t.assignedDates.at(-2) | translocoDate: { dateStyle: "short" } }}
-                </td>
-              }
-              @if (t.returnedDates.at(-2)) {
-                <td>
-                  {{ t.returnedDates.at(-2) | translocoDate: { dateStyle: "short" } }}
-                </td>
-              }
-              @if (t.assignedDates.at(-3)) {
-                <td>
-                  {{ t.assignedDates.at(-3) | translocoDate: { dateStyle: "short" } }}
-                </td>
-              }
-              @if (t.returnedDates.at(-3)) {
-                <td>
-                  {{ t.returnedDates.at(-3) | translocoDate: { dateStyle: "short" } }}
-                </td>
-              }
-              @if (t.assignedDates.at(-4)) {
-                <td>
-                  {{ t.assignedDates.at(-4) | translocoDate: { dateStyle: "short" } }}
-                </td>
-                @if (t.returnedDates.at(-4)) {
-                  <td>
-                    {{ t.returnedDates.at(-4) | translocoDate: { dateStyle: "short" } }}
-                  </td>
-                }
-              }
+              <td>
+                {{
+                  t.assignedDates[t.participants.length - 1]
+                    | translocoDate: { dateStyle: "short" }
+                }}
+              </td>
+
+              <td>
+                {{
+                  t.returnedDates[t.participants.length - 1]
+                    | translocoDate: { dateStyle: "short" }
+                }}
+              </td>
+
+              <td>
+                {{
+                  t.assignedDates[t.participants.length - 2]
+                    | translocoDate: { dateStyle: "short" }
+                }}
+              </td>
+
+              <td>
+                {{
+                  t.returnedDates[t.participants.length - 2]
+                    | translocoDate: { dateStyle: "short" }
+                }}
+              </td>
+
+              <td>
+                {{
+                  t.assignedDates[t.participants.length - 3]
+                    | translocoDate: { dateStyle: "short" }
+                }}
+              </td>
+
+              <td>
+                {{
+                  t.returnedDates[t.participants.length - 3]
+                    | translocoDate: { dateStyle: "short" }
+                }}
+              </td>
+
+              <td>
+                {{
+                  t.assignedDates[t.participants.length - 4]
+                    | translocoDate: { dateStyle: "short" }
+                }}
+              </td>
+
+              <td>
+                {{
+                  t.returnedDates[t.participants.length - 4]
+                    | translocoDate: { dateStyle: "short" }
+                }}
+              </td>
             </tr>
           }
         </tbody>
