@@ -71,7 +71,7 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
 import { CloseAssignmentsComponent } from "../close-assignments/close-assignments.component";
-import { getLastPrincipalAssignment } from "app/functions";
+import { getLastPrincipalAssignment, getPenultimatePrincipalAssignment } from "app/functions";
 import { DateFnsLocaleService } from "app/services/date-fns-locale.service";
 @Component({
   selector: "app-create-update-assignment",
@@ -149,6 +149,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   principals: ParticipantDynamicInterface[] = [];
   assistants: ParticipantDynamicInterface[] = [];
+  companions: ParticipantDynamicInterface[] = [];
+
   footerNotes: NoteInterface[] = this.noteService.getNotes();
   assignments: AssignmentInterface[];
 
@@ -360,20 +362,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   /**
    * Sort the participants by time distance from latest selected assignment or belonging to a group to the selected form date
    */
-  sortByTimeDistance() {
+  sortPrincipalsByTimeDistance() {
     const selectedDate = this.gfv("date");
     this.principals.sort((a, b) => {
-      const diffInDaysA = differenceInDays(new Date(a.lastAssignmentDate), selectedDate);
-      const diffInDaysB = differenceInDays(new Date(b.lastAssignmentDate), selectedDate);
-      if (diffInDaysA < diffInDaysB) {
-        return -1;
-      }
-      if (diffInDaysA > diffInDaysB) {
-        return 1;
-      }
-      return 0;
-    });
-    this.assistants.sort((a, b) => {
       const diffInDaysA = differenceInDays(new Date(a.lastAssignmentDate), selectedDate);
       const diffInDaysB = differenceInDays(new Date(b.lastAssignmentDate), selectedDate);
       if (diffInDaysA < diffInDaysB) {
@@ -395,8 +386,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     this.getAvailableGroups();
     this.setPrincipalsCountAndLastDate();
     this.setAssistantsCountAndLastDate();
+
     if (this.gfv("onlySortByTime")) {
-      this.sortByTimeDistance();
+      this.sortPrincipalsByTimeDistance();
+      this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
     } else {
       this.principals.sort(this.sortService.sortParticipantsByCountOrDate);
       this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
@@ -405,6 +398,37 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     this.warningIfAlreadyHasWork();
     this.checkIfExhausted();
     this.checkIsStarvingForSchool();
+  }
+
+  /** Sets the last two companions for the principal */
+  setWomanCompanions() {
+    const principalId = this.gfv("principal");
+    if (principalId) {
+      this.companions = [];
+      let lastAssistant, penultAssistant;
+      const lastAssign = getLastPrincipalAssignment(
+        this.assignments,
+        this.participantService.getParticipant(principalId),
+      );
+      const penultAssign = getPenultimatePrincipalAssignment(
+        this.assignments,
+        this.participantService.getParticipant(principalId),
+      );
+
+      if (lastAssign?.assistant) {
+        lastAssistant = this.participantService.getParticipant(lastAssign.assistant);
+      }
+      if (penultAssign?.assistant) {
+        penultAssistant = this.participantService.getParticipant(penultAssign.assistant);
+      }
+
+      if (lastAssistant) {
+        this.companions.push(lastAssistant);
+      }
+      if (penultAssistant) {
+        this.companions.push(penultAssistant);
+      }
+    }
   }
   /** (Form) batch clean principalId and assistantId, should not call other batch operations inside */
   batchCleanPrincipalAssistant() {
@@ -542,6 +566,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         //Check if older principal should be included in assistants
         if (this.isUpdate) {
           this.batchGetCountSortWarning();
+        }
+        if (this.participantService.getParticipant(newPrincId).isWoman) {
+          this.setWomanCompanions();
         }
         //remove current selected principal from assistants
         this.removePrincipalFromAssistants(newPrincId);

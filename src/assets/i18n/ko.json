@@ -507,5 +507,6 @@
   "SORT_NO_DISTANCE_HINT": "마지막 참여에서 선택한 날짜까지의 거리",
   "CONFIG_TIME_SORT_METHOD_TITLE": "클래식 정렬을 활성화 또는 비활성화하십시오",
   "CONFIG_EXPLAIN_TIME_SORT": "최신 참여에서 선택한 날짜까지의 거리는 얼마입니까?",
-  "CONFIG_TIME_SORT_CHECK": "기본적으로 클래식 정렬을 활성화하십시오"
+  "CONFIG_TIME_SORT_CHECK": "기본적으로 클래식 정렬을 활성화하십시오",
+  "ASSIGN_LAST_COMPANIONS": "마지막 도우미"
 }

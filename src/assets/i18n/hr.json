@@ -490,5 +490,6 @@
   "SORT_NO_DISTANCE_HINT": "Udaljenost od posljednjeg sudjelovanja do odabranog datuma",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Omogući ili onemogućite klasičnu sortu",
   "CONFIG_EXPLAIN_TIME_SORT": "Kolika je udaljenost od najnovijeg sudjelovanja do odabranog datuma?",
-  "CONFIG_TIME_SORT_CHECK": "Omogućite klasičnu sortu prema zadanim postavkama"
+  "CONFIG_TIME_SORT_CHECK": "Omogućite klasičnu sortu prema zadanim postavkama",
+  "ASSIGN_LAST_COMPANIONS": "Posljednji pomagači"
 }

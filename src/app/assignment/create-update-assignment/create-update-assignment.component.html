@@ -302,6 +302,19 @@
               <mat-error *ngIf="form.controls.principal.invalid">{{
                 t("ASSIGN_ERROR_PRINCIPAL")
               }}</mat-error>
+
+              <mat-hint *ngIf="form.controls.principal.value">
+                @if (companions.length) {
+                  <span>{{ t("ASSIGN_LAST_COMPANIONS") }}:</span>
+                  @for (comp of companions; track $index; let first = $first) {
+                    @if (first) {
+                      {{ comp.name }},
+                    } @else {
+                      {{ comp.name }}
+                    }
+                  }
+                }
+              </mat-hint>
             </mat-form-field>
           </div>
           <div class="col-12 mb-2">

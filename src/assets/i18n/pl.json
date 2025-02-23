@@ -507,5 +507,6 @@
   "SORT_NO_DISTANCE_HINT": "Odległość od ostatniego uczestnictwa do wybranej daty",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Włącz lub wyłącz klasyczny sort",
   "CONFIG_EXPLAIN_TIME_SORT": "Jaka jest odległość od najnowszego uczestnictwa do wybranej daty?",
-  "CONFIG_TIME_SORT_CHECK": "Domyślnie włącz klasyczny sort"
+  "CONFIG_TIME_SORT_CHECK": "Domyślnie włącz klasyczny sort",
+  "ASSIGN_LAST_COMPANIONS": "Ostatni pomocnicy"
 }

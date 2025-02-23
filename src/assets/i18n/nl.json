@@ -517,5 +517,6 @@
   "SORT_NO_DISTANCE_HINT": "Afstand van de laatste deelname tot de geselecteerde datum",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Classic Sorteren of uitschakelen",
   "CONFIG_EXPLAIN_TIME_SORT": "Wat is de afstand van de laatste deelname tot de geselecteerde datum?",
-  "CONFIG_TIME_SORT_CHECK": "Standaard klassieke sorteer"
+  "CONFIG_TIME_SORT_CHECK": "Standaard klassieke sorteer",
+  "ASSIGN_LAST_COMPANIONS": "Laatste helpers"
 }

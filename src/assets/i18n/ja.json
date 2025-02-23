@@ -507,5 +507,6 @@
   "SORT_NO_DISTANCE_HINT": "最後の参加から選択した日付までの距離",
   "CONFIG_TIME_SORT_METHOD_TITLE": "クラシックソートを有効または無効にします",
   "CONFIG_EXPLAIN_TIME_SORT": "最新の参加から選択された日付までの距離はどれくらいですか？",
-  "CONFIG_TIME_SORT_CHECK": "デフォルトでクラシックソートを有効にします"
+  "CONFIG_TIME_SORT_CHECK": "デフォルトでクラシックソートを有効にします",
+  "ASSIGN_LAST_COMPANIONS": "最後のヘルパー"
 }

@@ -507,5 +507,6 @@
   "SORT_NO_DISTANCE_HINT": "अंतिम भागीदारी से चयनित तिथि तक की दूरी",
   "CONFIG_TIME_SORT_METHOD_TITLE": "क्लासिक सॉर्ट को सक्षम या अक्षम करें",
   "CONFIG_EXPLAIN_TIME_SORT": "नवीनतम भागीदारी से चयनित तिथि तक की दूरी क्या है?",
-  "CONFIG_TIME_SORT_CHECK": "डिफ़ॉल्ट रूप से क्लासिक सॉर्ट सक्षम करें"
+  "CONFIG_TIME_SORT_CHECK": "डिफ़ॉल्ट रूप से क्लासिक सॉर्ट सक्षम करें",
+  "ASSIGN_LAST_COMPANIONS": "आखिरी सहायक"
 }

@@ -520,5 +520,6 @@
   "SORT_NO_DISTANCE_HINT": "Distància des de la darrera participació fins a la data seleccionada",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Activa o desactiva el tipus clàssic",
   "CONFIG_EXPLAIN_TIME_SORT": "Quina és la distància de la darrera participació a la data seleccionada?",
-  "CONFIG_TIME_SORT_CHECK": "Activa de manera predeterminada l'ordenació clàssica"
+  "CONFIG_TIME_SORT_CHECK": "Activa de manera predeterminada l'ordenació clàssica",
+  "ASSIGN_LAST_COMPANIONS": "Últims ajudants"
 }

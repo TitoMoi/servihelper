@@ -507,5 +507,6 @@
   "SORT_NO_DISTANCE_HINT": "Son katılımdan seçilen tarihe mesafe",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Klasik sıralamayı etkinleştirin veya devre dışı bırakın",
   "CONFIG_EXPLAIN_TIME_SORT": "En son katılımdan seçilen tarihe olan mesafe nedir?",
-  "CONFIG_TIME_SORT_CHECK": "Varsayılan olarak klasik sıralamayı etkinleştirin"
+  "CONFIG_TIME_SORT_CHECK": "Varsayılan olarak klasik sıralamayı etkinleştirin",
+  "ASSIGN_LAST_COMPANIONS": "Son Yardımcılar"
 }

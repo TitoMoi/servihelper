@@ -518,5 +518,6 @@
   "SORT_NO_DISTANCE_HINT": "Distanța de la ultima participare până la data selectată",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Activați sau dezactivați sortarea clasică",
   "CONFIG_EXPLAIN_TIME_SORT": "Care este distanța de la ultima participare la data selectată?",
-  "CONFIG_TIME_SORT_CHECK": "Activați sortarea clasică în mod implicit"
+  "CONFIG_TIME_SORT_CHECK": "Activați sortarea clasică în mod implicit",
+  "ASSIGN_LAST_COMPANIONS": "Ultimii ajutoare"
 }

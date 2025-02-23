@@ -507,5 +507,6 @@
   "SORT_NO_DISTANCE_HINT": "从上次参与到选定日期的距离",
   "CONFIG_TIME_SORT_METHOD_TITLE": "启用或禁用经典排序",
   "CONFIG_EXPLAIN_TIME_SORT": "从最新参与到选定日期的距离是多少？",
-  "CONFIG_TIME_SORT_CHECK": "默认启用经典排序"
+  "CONFIG_TIME_SORT_CHECK": "默认启用经典排序",
+  "ASSIGN_LAST_COMPANIONS": "最后的帮助者"
 }

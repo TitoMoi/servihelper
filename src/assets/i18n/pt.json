@@ -520,5 +520,6 @@
   "SORT_NO_DISTANCE_HINT": "Distância da última participação até a data selecionada",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Ativar ou desativar o tipo clássico",
   "CONFIG_EXPLAIN_TIME_SORT": "Qual é a distância da participação mais recente até a data selecionada?",
-  "CONFIG_TIME_SORT_CHECK": "Ativar classificação clássica por padrão"
+  "CONFIG_TIME_SORT_CHECK": "Ativar classificação clássica por padrão",
+  "ASSIGN_LAST_COMPANIONS": "Últimos ajudantes"
 }

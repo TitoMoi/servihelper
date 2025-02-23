@@ -35,7 +35,7 @@ export class ExportService {
   async toClipboard(elemId: string) {
     document.body.style.cursor = "wait";
     const node = document.getElementById(elemId);
-    const dataUrl = await toPng(node);
+    const dataUrl = await toPng(node, { pixelRatio: 2 });
     const natImage = nativeImage.createFromDataURL(dataUrl);
     clipboard.write(
       {

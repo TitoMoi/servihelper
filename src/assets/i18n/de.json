@@ -518,5 +518,6 @@
   "SORT_NO_DISTANCE_HINT": "Entfernung von der letzten Teilnahme bis zum ausgewählten Datum",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Klassische Sortier ermöglichen oder deaktivieren",
   "CONFIG_EXPLAIN_TIME_SORT": "Was ist die Entfernung von der neuesten Teilnahme bis zum ausgewählten Datum?",
-  "CONFIG_TIME_SORT_CHECK": "Aktivieren Sie standardmäßig die klassische Sortierung"
+  "CONFIG_TIME_SORT_CHECK": "Aktivieren Sie standardmäßig die klassische Sortierung",
+  "ASSIGN_LAST_COMPANIONS": "Letzte Helfer"
 }

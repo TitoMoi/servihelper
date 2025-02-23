@@ -517,5 +517,6 @@
   "SORT_NO_DISTANCE_HINT": "Distanza dall'ultima partecipazione alla data selezionata",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Abilita o disabilita l'ordinamento classico",
   "CONFIG_EXPLAIN_TIME_SORT": "Qual è la distanza dall'ultima partecipazione alla data selezionata?",
-  "CONFIG_TIME_SORT_CHECK": "Abilita l'ordinamento classico per impostazione predefinita"
+  "CONFIG_TIME_SORT_CHECK": "Abilita l'ordinamento classico per impostazione predefinita",
+  "ASSIGN_LAST_COMPANIONS": "Ultimi aiutanti"
 }

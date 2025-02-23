@@ -518,5 +518,6 @@
   "SORT_NO_DISTANCE_HINT": "Distance de la dernière participation à la date sélectionnée",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Activer ou désactiver le tri classique",
   "CONFIG_EXPLAIN_TIME_SORT": "Quelle est la distance entre la dernière participation à la date sélectionnée?",
-  "CONFIG_TIME_SORT_CHECK": "Activer le tri classique par défaut"
+  "CONFIG_TIME_SORT_CHECK": "Activer le tri classique par défaut",
+  "ASSIGN_LAST_COMPANIONS": "Derniers assistants"
 }

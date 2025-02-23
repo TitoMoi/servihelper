@@ -507,5 +507,6 @@
   "SORT_NO_DISTANCE_HINT": "নির্বাচিত তারিখ থেকে শেষ অংশগ্রহণ থেকে দূরত্ব",
   "CONFIG_TIME_SORT_METHOD_TITLE": "ক্লাসিক বাছাই সক্ষম বা অক্ষম করুন",
   "CONFIG_EXPLAIN_TIME_SORT": "নির্বাচিত তারিখের সর্বশেষ অংশগ্রহণ থেকে দূরত্ব কত?",
-  "CONFIG_TIME_SORT_CHECK": "ডিফল্টরূপে ক্লাসিক বাছাই সক্ষম করুন"
+  "CONFIG_TIME_SORT_CHECK": "ডিফল্টরূপে ক্লাসিক বাছাই সক্ষম করুন",
+  "ASSIGN_LAST_COMPANIONS": "শেষ সাহায্যকারী"
 }

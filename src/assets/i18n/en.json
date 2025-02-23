@@ -493,5 +493,6 @@
   "SORT_NO_DISTANCE_HINT": "Distance from last participation to the selected date",
   "CONFIG_TIME_SORT_METHOD_TITLE": "Enable or disable classic sort",
   "CONFIG_EXPLAIN_TIME_SORT": "What is the distance from the latest participation to the selected date?",
-  "CONFIG_TIME_SORT_CHECK": "Enable classic sort by default"
+  "CONFIG_TIME_SORT_CHECK": "Enable classic sort by default",
+  "ASSIGN_LAST_COMPANIONS": "Last helpers"
 }
