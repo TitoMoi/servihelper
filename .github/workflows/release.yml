@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
-          node-version: 20
+          node-version: 22
       - name: Step 1 - install dependencies
         run: npm install
       - name: Step 2 - build the frontend
@@ -22,7 +22,7 @@ jobs:
       - name: Step 4 - package with Electron builder and clean release folder
         run: npm run release:linux
       - name: Step 5 - Use the Upload Artifact GitHub Action
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: servihelper-linux
           path: release
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
-          node-version: 20
+          node-version: 22
       - name: Step 1 - install dependencies
         run: npm install
       - name: Step 2 - build the frontend
@@ -43,7 +43,7 @@ jobs:
       - name: Step 4 - package with Electron builder and clean release folder
         run: npm run release:mac:universal
       - name: Step 5 - Use the Upload Artifact GitHub Action
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: servihelper-mac
           path: release
@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
         with:
-          node-version: 20
+          node-version: 22
       - name: Step 1 - install dependencies
         run: npm install
       - name: Step 2 - build the frontend
@@ -64,7 +64,7 @@ jobs:
       - name: Step 4 - package with Electron builder and clean release folder
         run: npm run release:windows
       - name: Step 5 - Use the Upload Artifact GitHub Action
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: servihelper-windows
           path: release
