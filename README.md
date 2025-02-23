@@ -101,7 +101,7 @@ Only the time format can't be changed, but you can select a lang that suits your
 
    - Do not enable: config -> online mode.
    - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
-   - Your responsability to ensure that you have the last backup before working.
+   - Your responsibility to ensure that you have the last backup before working.
    - Import the last backup, work locally and when finished, export a new copy to the shared folder. _(little complexity and a bit of overhead, on finish your work you have to remember to save your backup to the shared folder. **✅ this is the most robust approach and the one i recommend**)_
 
 2. **Export the app data from administrator one and importing in the app of the administrator two sharing the copy through email or whatsapp _(⚠️ not recommended)_**
@@ -114,10 +114,11 @@ Only the time format can't be changed, but you can select a lang that suits your
 
    - Enable: config -> online mode _(Required setup inside Servihelper in the config section to configure the shared folder)_
    - Required knowledge of how to install and run google drive desktop app _(or other desktop solution)_
-   - Your responsability to ensure that all files are synchronized before working.
+   - Your responsibility to ensure that all files are synchronized before working.
    - Warning: Sometimes data is not updated on real time.
    - _(this way of work has configuration complexity but later has less overhead, just check you are online and google drive is working and files are up to date before working)_
    - _(this scenario is not real time, it just works directly with the files instead of with copies, *you MUST export a security copy* from time to time for security)_
+   - Make sure the files appear on the shared folder and are not only "on demand"
 
 **Paid mode 💲**:
 
