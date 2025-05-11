@@ -402,9 +402,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   /** Sets the last two companions for the principal */
   setWomanCompanions() {
+    this.companions = [];
     const principalId = this.gfv("principal");
-    if (principalId) {
-      this.companions = [];
+    if (principalId && this.participantService.getParticipant(principalId).isWoman) {
       let lastAssistant, penultAssistant;
       const lastAssign = getLastPrincipalAssignment(
         this.assignments,
@@ -567,9 +567,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         if (this.isUpdate) {
           this.batchGetCountSortWarning();
         }
-        if (this.participantService.getParticipant(newPrincId).isWoman) {
-          this.setWomanCompanions();
-        }
+
+        this.setWomanCompanions();
+
         //remove current selected principal from assistants
         this.removePrincipalFromAssistants(newPrincId);
       }),
