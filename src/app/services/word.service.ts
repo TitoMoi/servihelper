@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
-/* import PizZipUtils from "pizzip/utils/index.js"; */
 import { saveAs } from "file-saver";
 import { S13TerritoryEntry } from "app/map/model/map.model";
 import { ConfigService } from "app/config/service/config.service";
 import { readFileSync } from "fs-extra";
+import path from "path";
 
 @Injectable({
   providedIn: "root",
@@ -15,12 +15,10 @@ export class WordService {
 
   constructor(private configService: ConfigService) {}
 
-  /* loadFile(url, callback) {
-    PizZipUtils.getBinaryContent(url, callback);
-  } */
-
   generateS13(serviceYear: string, entries: S13TerritoryEntry[]) {
-    const content = readFileSync("assets/source/templates/S-13.docx");
+    const content = readFileSync(
+      path.join(this.configService.sourceFilesPath, "templates", "S-13.docx"),
+    );
 
     const zip = new PizZip(content);
     const doc = new Docxtemplater(zip, {
