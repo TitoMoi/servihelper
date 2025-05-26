@@ -16,7 +16,7 @@ import { DateFormatStyles } from "@ngneat/transloco-locale";
 
 import { ConfigInterface, WeekDaysBegin } from "./model/config.model";
 import { MatButtonModule } from "@angular/material/button";
-import { AsyncPipe, NgClass, NgIf } from "@angular/common";
+import { AsyncPipe, NgIf } from "@angular/common";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelect, MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
@@ -61,7 +61,6 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatButtonModule,
     AsyncPipe,
     NgIf,
-    NgClass,
     MatIconModule,
     SheetTitlePipe,
     PublicThemePipe,
@@ -125,6 +124,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     assignmentRoomTitle: this.currentConfig.assignmentRoomTitle,
     assignmentNoteTitle: this.currentConfig.assignmentNoteTitle,
     reportTitle: this.currentConfig.reportTitle,
+    isClassicSortEnabled: this.currentConfig.isClassicSortEnabled,
     s89Title1: this.currentConfig.s89Title1,
     s89Title2: this.currentConfig.s89Title2,
     s89Principal: this.currentConfig.s89Principal,
@@ -136,7 +136,13 @@ export class ConfigComponent implements OnInit, OnDestroy {
     s89NoteContentPart: this.currentConfig.s89NoteContentPart,
     s89Version: this.currentConfig.s89Version,
     s89DateVersion: this.currentConfig.s89DateVersion,
-    isClassicSortEnabled: this.currentConfig.isClassicSortEnabled,
+    s13Title: this.currentConfig.s13Title,
+    s13YearService: this.currentConfig.s13YearService,
+    s13TerrNumber: this.currentConfig.s13TerrNumber,
+    s13LastCompletedDate: this.currentConfig.s13LastCompletedDate,
+    s13AssignedTo: this.currentConfig.s13AssignedTo,
+    s13AssignedDate: this.currentConfig.s13AssignedDate,
+    s13CompletedDate: this.currentConfig.s13CompletedDate,
   });
 
   //ONLINE SECTION
@@ -182,6 +188,7 @@ export class ConfigComponent implements OnInit, OnDestroy {
     closeToOthersDays: 30,
     closeToOthersPrayerDays: 30,
     closeToOthersTreasuresEtcDays: 0,
+    isClassicSortEnabled: false,
     s89Title1: "",
     s89Title2: "",
     s89Principal: "",
@@ -193,7 +200,13 @@ export class ConfigComponent implements OnInit, OnDestroy {
     s89NoteContentPart: "",
     s89Version: "",
     s89DateVersion: "",
-    isClassicSortEnabled: false,
+    s13Title: "",
+    s13YearService: "",
+    s13TerrNumber: "",
+    s13LastCompletedDate: "",
+    s13AssignedTo: "",
+    s13AssignedDate: "",
+    s13CompletedDate: "",
   };
 
   subscription = new Subscription();

@@ -519,5 +519,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Activer ou désactiver le tri classique",
   "CONFIG_EXPLAIN_TIME_SORT": "Quelle est la distance entre la dernière participation à la date sélectionnée?",
   "CONFIG_TIME_SORT_CHECK": "Activer le tri classique par défaut",
-  "ASSIGN_LAST_COMPANIONS": "Derniers assistants"
+  "ASSIGN_LAST_COMPANIONS": "Derniers assistants",
+  "CONFIG_ACCORDION_S13_TITLE": "Configurez le rapport du territoire S13",
+  "PLACEHOLDER_S13_TITLE": "Titre",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Service d'année",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Numéro de territoire",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Dernière date terminée",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Attribué à",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Date assignée",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Date retournée"
 }

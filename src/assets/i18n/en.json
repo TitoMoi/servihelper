@@ -494,5 +494,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Enable or disable classic sort",
   "CONFIG_EXPLAIN_TIME_SORT": "What is the distance from the latest participation to the selected date?",
   "CONFIG_TIME_SORT_CHECK": "Enable classic sort by default",
-  "ASSIGN_LAST_COMPANIONS": "Last helpers"
+  "ASSIGN_LAST_COMPANIONS": "Last helpers",
+  "CONFIG_ACCORDION_S13_TITLE": "Config the s13 territory report",
+  "PLACEHOLDER_S13_TITLE": "Title",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Year service",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Territory number",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Last completed date",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Assigned to",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Assigned date",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Returned date"
 }

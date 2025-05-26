@@ -521,5 +521,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Activa o desactiva el tipus clàssic",
   "CONFIG_EXPLAIN_TIME_SORT": "Quina és la distància de la darrera participació a la data seleccionada?",
   "CONFIG_TIME_SORT_CHECK": "Activa de manera predeterminada l'ordenació clàssica",
-  "ASSIGN_LAST_COMPANIONS": "Últims ajudants"
+  "ASSIGN_LAST_COMPANIONS": "Últims ajudants",
+  "CONFIG_ACCORDION_S13_TITLE": "Configureu l’informe del territori S13",
+  "PLACEHOLDER_S13_TITLE": "Títol",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Any de servici",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Número de territori",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Última data de finalització",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Assignat a",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Data assignada",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Data retornada"
 }

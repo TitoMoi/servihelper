@@ -521,5 +521,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Ativar ou desativar o tipo clássico",
   "CONFIG_EXPLAIN_TIME_SORT": "Qual é a distância da participação mais recente até a data selecionada?",
   "CONFIG_TIME_SORT_CHECK": "Ativar classificação clássica por padrão",
-  "ASSIGN_LAST_COMPANIONS": "Últimos ajudantes"
+  "ASSIGN_LAST_COMPANIONS": "Últimos ajudantes",
+  "CONFIG_ACCORDION_S13_TITLE": "Configurar o relatório do território S13",
+  "PLACEHOLDER_S13_TITLE": "Título",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Serviço de ano",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Número do território",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Última data concluída",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Atribuído a",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Data atribuída",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Data retornada"
 }

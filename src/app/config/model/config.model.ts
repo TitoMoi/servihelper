@@ -35,6 +35,7 @@ export interface ConfigInterface {
   closeToOthersDays: number;
   closeToOthersPrayerDays: number;
   closeToOthersTreasuresEtcDays: number;
+  isClassicSortEnabled: boolean;
   s89Title1: string;
   s89Title2: string;
   s89Principal: string;
@@ -46,7 +47,13 @@ export interface ConfigInterface {
   s89NoteContentPart: string;
   s89Version: string;
   s89DateVersion: string;
-  isClassicSortEnabled: boolean;
+  s13Title: string;
+  s13YearService: string;
+  s13TerrNumber: string;
+  s13LastCompletedDate: string;
+  s13AssignedTo: string;
+  s13AssignedDate: string;
+  s13CompletedDate: string;
 }
 
 export interface OnlineTemplateDataInterface {

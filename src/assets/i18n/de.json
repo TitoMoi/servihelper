@@ -519,5 +519,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Klassische Sortier ermöglichen oder deaktivieren",
   "CONFIG_EXPLAIN_TIME_SORT": "Was ist die Entfernung von der neuesten Teilnahme bis zum ausgewählten Datum?",
   "CONFIG_TIME_SORT_CHECK": "Aktivieren Sie standardmäßig die klassische Sortierung",
-  "ASSIGN_LAST_COMPANIONS": "Letzte Helfer"
+  "ASSIGN_LAST_COMPANIONS": "Letzte Helfer",
+  "CONFIG_ACCORDION_S13_TITLE": "Konfigurieren Sie den S13 Territory Report",
+  "PLACEHOLDER_S13_TITLE": "Titel",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Jahresservice",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Territoriumszahl",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Zuletzt fertiggestelltes Datum",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Zugewiesen an",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Datum zugewiesen",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Datum zurückgegeben"
 }

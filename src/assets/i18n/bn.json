@@ -508,5 +508,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "ক্লাসিক বাছাই সক্ষম বা অক্ষম করুন",
   "CONFIG_EXPLAIN_TIME_SORT": "নির্বাচিত তারিখের সর্বশেষ অংশগ্রহণ থেকে দূরত্ব কত?",
   "CONFIG_TIME_SORT_CHECK": "ডিফল্টরূপে ক্লাসিক বাছাই সক্ষম করুন",
-  "ASSIGN_LAST_COMPANIONS": "শেষ সাহায্যকারী"
+  "ASSIGN_LAST_COMPANIONS": "শেষ সাহায্যকারী",
+  "CONFIG_ACCORDION_S13_TITLE": "এস 13 টেরিটরি রিপোর্টটি কনফিগার করুন",
+  "PLACEHOLDER_S13_TITLE": "শিরোনাম",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "বছর পরিষেবা",
+  "PLACEHOLDER_S13_TERR_NUMBER": "অঞ্চল নম্বর",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "শেষ সমাপ্ত তারিখ",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "নির্ধারিত",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "নির্ধারিত তারিখ",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "ফিরে আসার তারিখ"
 }

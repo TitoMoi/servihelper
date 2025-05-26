@@ -508,5 +508,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "클래식 정렬을 활성화 또는 비활성화하십시오",
   "CONFIG_EXPLAIN_TIME_SORT": "최신 참여에서 선택한 날짜까지의 거리는 얼마입니까?",
   "CONFIG_TIME_SORT_CHECK": "기본적으로 클래식 정렬을 활성화하십시오",
-  "ASSIGN_LAST_COMPANIONS": "마지막 도우미"
+  "ASSIGN_LAST_COMPANIONS": "마지막 도우미",
+  "CONFIG_ACCORDION_S13_TITLE": "S13 영토 보고서를 구성하십시오",
+  "PLACEHOLDER_S13_TITLE": "제목",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "연도 서비스",
+  "PLACEHOLDER_S13_TERR_NUMBER": "영토 번호",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "마지막으로 완료된 날짜",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "할당",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "할당 날짜",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "반환 날짜"
 }

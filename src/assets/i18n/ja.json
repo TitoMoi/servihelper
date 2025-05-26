@@ -508,5 +508,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "クラシックソートを有効または無効にします",
   "CONFIG_EXPLAIN_TIME_SORT": "最新の参加から選択された日付までの距離はどれくらいですか？",
   "CONFIG_TIME_SORT_CHECK": "デフォルトでクラシックソートを有効にします",
-  "ASSIGN_LAST_COMPANIONS": "最後のヘルパー"
+  "ASSIGN_LAST_COMPANIONS": "最後のヘルパー",
+  "CONFIG_ACCORDION_S13_TITLE": "S13準州レポートを構成します",
+  "PLACEHOLDER_S13_TITLE": "タイトル",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "年のサービス",
+  "PLACEHOLDER_S13_TERR_NUMBER": "領土番号",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "最後に完了した日付",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "に割り当てられます",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "割り当てられた日付",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "返された日付"
 }

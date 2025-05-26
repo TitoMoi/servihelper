@@ -508,5 +508,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Ενεργοποιήστε ή απενεργοποιήστε το κλασικό είδος",
   "CONFIG_EXPLAIN_TIME_SORT": "Ποια είναι η απόσταση από την τελευταία συμμετοχή στην επιλεγμένη ημερομηνία;",
   "CONFIG_TIME_SORT_CHECK": "Ενεργοποίηση κλασικής ταξινόμησης από προεπιλογή",
-  "ASSIGN_LAST_COMPANIONS": "Τελευταίος βοηθός"
+  "ASSIGN_LAST_COMPANIONS": "Τελευταίος βοηθός",
+  "CONFIG_ACCORDION_S13_TITLE": "Ρυθμίστε την αναφορά του εδάφους S13",
+  "PLACEHOLDER_S13_TITLE": "Τίτλος",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Υπηρεσία έτους",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Αριθμός εδάφους",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Τελευταία ολοκληρωμένη ημερομηνία",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Ανατέθηκε σε",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Ημερομηνία εκχώρησης",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Ημερομηνία που επέστρεψε"
 }

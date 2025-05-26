@@ -518,5 +518,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Abilita o disabilita l'ordinamento classico",
   "CONFIG_EXPLAIN_TIME_SORT": "Qual è la distanza dall'ultima partecipazione alla data selezionata?",
   "CONFIG_TIME_SORT_CHECK": "Abilita l'ordinamento classico per impostazione predefinita",
-  "ASSIGN_LAST_COMPANIONS": "Ultimi aiutanti"
+  "ASSIGN_LAST_COMPANIONS": "Ultimi aiutanti",
+  "CONFIG_ACCORDION_S13_TITLE": "Configura il rapporto S13 Territory",
+  "PLACEHOLDER_S13_TITLE": "Titolo",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Servizio anno",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Numero del territorio",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Ultima data completata",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Assegnato a",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Data assegnata",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Data restituita"
 }

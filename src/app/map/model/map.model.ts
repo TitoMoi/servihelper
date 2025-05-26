@@ -90,3 +90,20 @@ export interface TerritoryGroupInterface {
   color: string;
   order: number;
 }
+
+export interface S13TerritoryEntry {
+  terr_number: string;
+  last_completed_date: string;
+  participant1: string;
+  participant2: string;
+  participant3: string;
+  participant4: string;
+  assigned1: string;
+  returned1: string;
+  assigned2: string;
+  returned2: string;
+  assigned3: string;
+  returned3: string;
+  assigned4: string;
+  returned4: string;
+}

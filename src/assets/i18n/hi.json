@@ -508,5 +508,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "क्लासिक सॉर्ट को सक्षम या अक्षम करें",
   "CONFIG_EXPLAIN_TIME_SORT": "नवीनतम भागीदारी से चयनित तिथि तक की दूरी क्या है?",
   "CONFIG_TIME_SORT_CHECK": "डिफ़ॉल्ट रूप से क्लासिक सॉर्ट सक्षम करें",
-  "ASSIGN_LAST_COMPANIONS": "आखिरी सहायक"
+  "ASSIGN_LAST_COMPANIONS": "आखिरी सहायक",
+  "CONFIG_ACCORDION_S13_TITLE": "S13 क्षेत्र रिपोर्ट को कॉन्फ़िगर करें",
+  "PLACEHOLDER_S13_TITLE": "शीर्षक",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "वर्ष सेवा",
+  "PLACEHOLDER_S13_TERR_NUMBER": "क्षेत्र संख्या",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "अंतिम पूर्ण तिथि",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "को सौंपना",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "सौंपी गई तारीख",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "लौटी तिथि"
 }

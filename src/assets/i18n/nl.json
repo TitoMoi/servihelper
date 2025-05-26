@@ -518,5 +518,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Classic Sorteren of uitschakelen",
   "CONFIG_EXPLAIN_TIME_SORT": "Wat is de afstand van de laatste deelname tot de geselecteerde datum?",
   "CONFIG_TIME_SORT_CHECK": "Standaard klassieke sorteer",
-  "ASSIGN_LAST_COMPANIONS": "Laatste helpers"
+  "ASSIGN_LAST_COMPANIONS": "Laatste helpers",
+  "CONFIG_ACCORDION_S13_TITLE": "Configureer het S13 Territory Report",
+  "PLACEHOLDER_S13_TITLE": "Titel",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Jaarservice",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Territoriumnummer",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Laatst voltooide datum",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Toegewezen aan",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Toegewezen datum",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Geretourneerde datum"
 }

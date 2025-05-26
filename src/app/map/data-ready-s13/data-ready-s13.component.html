@@ -1,12 +1,17 @@
 <h3>Data ready for S13</h3>
-<h4>
-  Select all the rows <span class="fst-italic">(table 1 or table 2, but not both)</span> and
-  copy with Control + C <span class="fst-italic"> (Windows)</span> or equivalent on Mac, Linux
-</h4>
-<h4>
-  On Word side, select all the rows, right click and paste with option
-  <span class="fst-italic"> 'keep only text'</span>
-</h4>
+
+<div class="row">
+  <div class="col">
+    <mat-form-field subscriptSizing="dynamic">
+      <mat-label>Service year</mat-label>
+      <input type="number" matInput spellcheck="false" [formControl]="serviceYearControl" />
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-icon class="m-2" svgIcon="word" aria-label="icon" (click)="toS13Pdf()"></mat-icon>
+  </div>
+</div>
+<h4>Summary</h4>
 <hr />
 
 <div class="row justify-content-center g-5">
@@ -65,19 +70,19 @@
           @for (t of territories; track $index) {
             <tr>
               <td style="background-color: lightgray" colspan="2">
-                {{ (t.participants.at(-1) | participantPipe)?.name }}
+                {{ (t.participants.at(-1) | participantPipe)?.name ?? "------------" }}
               </td>
 
               <td style="background-color: lightgray" colspan="2">
-                {{ (t.participants.at(-2) | participantPipe)?.name }}
+                {{ (t.participants.at(-2) | participantPipe)?.name ?? "------------" }}
               </td>
 
               <td style="background-color: lightgray" colspan="2">
-                {{ (t.participants.at(-3) | participantPipe)?.name }}
+                {{ (t.participants.at(-3) | participantPipe)?.name ?? "------------" }}
               </td>
 
               <td style="background-color: lightgray" colspan="2">
-                {{ (t.participants.at(-4) | participantPipe)?.name }}
+                {{ (t.participants.at(-4) | participantPipe)?.name ?? "------------" }}
               </td>
             </tr>
             <tr>

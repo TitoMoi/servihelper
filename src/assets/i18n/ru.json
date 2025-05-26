@@ -520,5 +520,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Включить или отключить классический сортинг",
   "CONFIG_EXPLAIN_TIME_SORT": "Какое расстояние от последнего участия до выбранной даты?",
   "CONFIG_TIME_SORT_CHECK": "Включить классический сортинг по умолчанию",
-  "ASSIGN_LAST_COMPANIONS": "Последние помощники"
+  "ASSIGN_LAST_COMPANIONS": "Последние помощники",
+  "CONFIG_ACCORDION_S13_TITLE": "Конфигурация отчета о территории S13",
+  "PLACEHOLDER_S13_TITLE": "Заголовок",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Год обслуживания",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Номер территории",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Последняя завершенная дата",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Назначен",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Назначенная дата",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Возвращенная дата"
 }

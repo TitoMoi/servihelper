@@ -1,22 +1,29 @@
-table {
-  background-color: white;
-  margin-left: -1.5pt;
-  border-collapse: collapse;
-  border: none;
-
-  th {
-    padding: 0;
+:host {
+  mat-icon {
+    height: 28px;
+    width: 28px;
   }
-  td {
-    border: 1px solid black;
-    padding: 0cm 1.4pt 0cm 1.4pt;
-    font-size: 10.2pt;
-    vertical-align: top;
-    text-align: center;
 
-    &.center {
-      vertical-align: middle;
+  table {
+    background-color: white;
+    margin-left: -1.5pt;
+    border-collapse: collapse;
+    border: none;
+
+    th {
+      padding: 0;
+    }
+    td {
+      border: 1px solid black;
+      padding: 0cm 1.4pt 0cm 1.4pt;
+      font-size: 10.2pt;
+      vertical-align: top;
       text-align: center;
+
+      &.center {
+        vertical-align: middle;
+        text-align: center;
+      }
     }
   }
 }

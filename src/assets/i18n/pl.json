@@ -508,5 +508,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Włącz lub wyłącz klasyczny sort",
   "CONFIG_EXPLAIN_TIME_SORT": "Jaka jest odległość od najnowszego uczestnictwa do wybranej daty?",
   "CONFIG_TIME_SORT_CHECK": "Domyślnie włącz klasyczny sort",
-  "ASSIGN_LAST_COMPANIONS": "Ostatni pomocnicy"
+  "ASSIGN_LAST_COMPANIONS": "Ostatni pomocnicy",
+  "CONFIG_ACCORDION_S13_TITLE": "Skonfiguruj raport terytorium S13",
+  "PLACEHOLDER_S13_TITLE": "Tytuł",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Usługa roku",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Numer terytorium",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Ostatnia ukończona data",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Przypisane do",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Przypisana data",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Zwrócona data"
 }

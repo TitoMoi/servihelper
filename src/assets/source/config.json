@@ -23,6 +23,7 @@
   "closeToOthersDays": 30,
   "closeToOthersPrayerDays": 30,
   "closeToOthersTreasuresEtcDays": 0,
+  "isClassicSortEnabled": false,
   "s89Title1": "",
   "s89Title2": "",
   "s89Principal": "",
@@ -34,5 +35,11 @@
   "s89NoteContentPart": "",
   "s89Version": "",
   "s89DateVersion": "",
-  "isClassicSortEnabled": false
+  "s13Title": "",
+  "s13YearService": "",
+  "s13TerrNumber": "",
+  "s13LastCompletedDate": "",
+  "s13AssignedTo": "",
+  "s13AssignedDate": "",
+  "s13CompletedDate": ""
 }

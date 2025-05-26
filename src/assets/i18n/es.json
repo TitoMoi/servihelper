@@ -519,5 +519,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Habilitar o deshabilitar el tipo clásico",
   "CONFIG_EXPLAIN_TIME_SORT": "¿Cuál es la distancia de la última participación a la fecha seleccionada?",
   "CONFIG_TIME_SORT_CHECK": "Habilitar el orden clásico de forma predeterminada",
-  "ASSIGN_LAST_COMPANIONS": "Últimas ayudantes"
+  "ASSIGN_LAST_COMPANIONS": "Últimas ayudantes",
+  "CONFIG_ACCORDION_S13_TITLE": "Configura la hoja de territorios s13",
+  "PLACEHOLDER_S13_TITLE": "Título",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Año de servicio",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Número de territorio",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Última fecha completado",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Asignado a",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Fecha que se asignó",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Fecha que se devolvió"
 }

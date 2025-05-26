@@ -508,5 +508,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Klasik sıralamayı etkinleştirin veya devre dışı bırakın",
   "CONFIG_EXPLAIN_TIME_SORT": "En son katılımdan seçilen tarihe olan mesafe nedir?",
   "CONFIG_TIME_SORT_CHECK": "Varsayılan olarak klasik sıralamayı etkinleştirin",
-  "ASSIGN_LAST_COMPANIONS": "Son Yardımcılar"
+  "ASSIGN_LAST_COMPANIONS": "Son Yardımcılar",
+  "CONFIG_ACCORDION_S13_TITLE": "S13 Bölge Raporunu Yapılandırın",
+  "PLACEHOLDER_S13_TITLE": "Başlık",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Yıl hizmeti",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Bölge numarası",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Son tamamlanan tarih",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Atanmış",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Atanan tarih",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "İade tarihi"
 }

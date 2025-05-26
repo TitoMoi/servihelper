@@ -519,5 +519,13 @@
   "CONFIG_TIME_SORT_METHOD_TITLE": "Activați sau dezactivați sortarea clasică",
   "CONFIG_EXPLAIN_TIME_SORT": "Care este distanța de la ultima participare la data selectată?",
   "CONFIG_TIME_SORT_CHECK": "Activați sortarea clasică în mod implicit",
-  "ASSIGN_LAST_COMPANIONS": "Ultimii ajutoare"
+  "ASSIGN_LAST_COMPANIONS": "Ultimii ajutoare",
+  "CONFIG_ACCORDION_S13_TITLE": "Configurați raportul teritoriului S13",
+  "PLACEHOLDER_S13_TITLE": "Titlu",
+  "PLACEHOLDER_S13_YEAR_SERVICE": "Serviciu de an",
+  "PLACEHOLDER_S13_TERR_NUMBER": "Numărul teritoriului",
+  "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Ultima dată finalizată",
+  "PLACEHOLDER_S13_ASSIGNED_TO": "Alocat la",
+  "PLACEHOLDER_S13_ASSIGNED_DATE": "Data atribuită",
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Data returnată"
 }
