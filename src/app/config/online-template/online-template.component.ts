@@ -9,19 +9,18 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-  selector: "app-online-template",
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    TranslocoModule,
-    MatIconModule,
-  ],
-  templateUrl: "./online-template.component.html",
-  styleUrls: ["./online-template.component.scss"],
+    selector: "app-online-template",
+    imports: [
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        TranslocoModule,
+        MatIconModule,
+    ],
+    templateUrl: "./online-template.component.html",
+    styleUrls: ["./online-template.component.scss"]
 })
 export class OnlineTemplateComponent {
   constructor(

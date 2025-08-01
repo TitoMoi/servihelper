@@ -11,19 +11,18 @@ import { RoomNamePipe } from "./pipe/room-name.pipe";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-room",
-  templateUrl: "./room.component.html",
-  styleUrls: ["./room.component.scss"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    MatIconModule,
-    RoomNamePipe,
-    AsyncPipe,
-  ],
+    selector: "app-room",
+    templateUrl: "./room.component.html",
+    styleUrls: ["./room.component.scss"],
+    imports: [
+        TranslocoModule,
+        MatButtonModule,
+        RouterLink,
+        RouterLinkActive,
+        MatIconModule,
+        RoomNamePipe,
+        AsyncPipe,
+    ]
 })
 export class RoomComponent implements OnInit {
   rooms: RoomInterface[];

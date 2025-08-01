@@ -14,22 +14,21 @@ import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-  selector: "app-move-assignment",
-  templateUrl: "./move-assignment.component.html",
-  styleUrls: ["./move-assignment.component.scss"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatButtonModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
+    selector: "app-move-assignment",
+    templateUrl: "./move-assignment.component.html",
+    styleUrls: ["./move-assignment.component.scss"],
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ]
 })
 export class MoveAssignmentComponent {
   assignments: AssignmentInterface[] = this.assignmentService.getAssignments();

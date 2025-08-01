@@ -59,27 +59,26 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
-  selector: "app-create-update-territory",
-  standalone: true,
-  imports: [
-    CommonModule,
-    NgOptimizedImage,
-    TranslocoModule,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
-    MatTooltipModule,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatOptionModule,
-  ],
-  templateUrl: "./create-update-territory.component.html",
-  styleUrls: ["./create-update-territory.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-create-update-territory",
+    imports: [
+        CommonModule,
+        NgOptimizedImage,
+        TranslocoModule,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        MatTooltipModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatOptionModule,
+    ],
+    templateUrl: "./create-update-territory.component.html",
+    styleUrls: ["./create-update-territory.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, OnDestroy {
   private formBuilder = inject(NonNullableFormBuilder);

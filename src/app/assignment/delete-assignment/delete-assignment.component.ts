@@ -14,21 +14,20 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { MatInputModule } from "@angular/material/input";
 
 @Component({
-  selector: "app-delete-assignment",
-  templateUrl: "./delete-assignment.component.html",
-  styleUrls: ["./delete-assignment.component.scss"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
+    selector: "app-delete-assignment",
+    templateUrl: "./delete-assignment.component.html",
+    styleUrls: ["./delete-assignment.component.scss"],
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ]
 })
 export class DeleteAssignmentComponent {
   netStatusOffline$ = this.onlineService.netStatusOffline$;

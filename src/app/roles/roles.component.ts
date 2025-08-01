@@ -9,18 +9,17 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-roles",
-  templateUrl: "./roles.component.html",
-  styleUrls: ["./roles.component.scss"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    MatIconModule,
-    AsyncPipe,
-  ],
+    selector: "app-roles",
+    templateUrl: "./roles.component.html",
+    styleUrls: ["./roles.component.scss"],
+    imports: [
+        TranslocoModule,
+        MatButtonModule,
+        RouterLink,
+        RouterLinkActive,
+        MatIconModule,
+        AsyncPipe,
+    ]
 })
 export class RolesComponent {
   roles: RoleInterface[] = this.configService.getRoles();

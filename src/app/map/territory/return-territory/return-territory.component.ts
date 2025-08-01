@@ -15,23 +15,22 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
-  selector: "app-delete-territory",
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
-  templateUrl: "./return-territory.component.html",
-  styleUrls: ["./return-territory.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-delete-territory",
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ],
+    templateUrl: "./return-territory.component.html",
+    styleUrls: ["./return-territory.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReturnTerritoryComponent implements AfterViewInit {
   t = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);

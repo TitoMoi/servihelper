@@ -14,22 +14,21 @@ import { OnlineService } from "app/online/service/online.service";
 import { Validators } from "ngx-editor";
 
 @Component({
-  selector: "app-delete-territory-group",
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
-    AsyncPipe,
-    JsonPipe,
-  ],
-  templateUrl: "./delete-territory-group.component.html",
-  styleUrls: ["./delete-territory-group.component.scss"],
+    selector: "app-delete-territory-group",
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        AsyncPipe,
+        JsonPipe,
+    ],
+    templateUrl: "./delete-territory-group.component.html",
+    styleUrls: ["./delete-territory-group.component.scss"]
 })
 export class DeleteTerritoryGroupComponent implements OnInit {
   tgId = this.activatedRoute.snapshot.params.id;

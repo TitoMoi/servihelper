@@ -11,12 +11,11 @@ import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { TerritoryGroupDataComponent } from "app/statistics/territory-graphics/territory-group-data/territory-group-data.component";
 
 @Component({
-  selector: "app-territory-graphics",
-  standalone: true,
-  imports: [NgxChartsModule, MatExpansionModule, TranslocoDirective, MatDialogModule],
-  templateUrl: "./territory-graphics.component.html",
-  styleUrl: "./territory-graphics.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-territory-graphics",
+    imports: [NgxChartsModule, MatExpansionModule, TranslocoDirective, MatDialogModule],
+    templateUrl: "./territory-graphics.component.html",
+    styleUrl: "./territory-graphics.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryGraphicsComponent {
   gradient = false;

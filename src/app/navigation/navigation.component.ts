@@ -24,24 +24,23 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-navigation",
-  templateUrl: "./navigation.component.html",
-  styleUrls: ["./navigation.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    RouterLink,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatOptionModule,
-    AsyncPipe,
-  ],
+    selector: "app-navigation",
+    templateUrl: "./navigation.component.html",
+    styleUrls: ["./navigation.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        RouterLink,
+        MatIconModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatOptionModule,
+        AsyncPipe,
+    ]
 })
 export class NavigationComponent implements OnInit {
   hideSidenav;

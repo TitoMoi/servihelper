@@ -14,21 +14,20 @@ import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-delete-public-theme",
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
-  templateUrl: "./delete-public-theme.component.html",
-  styleUrls: ["./delete-public-theme.component.scss"],
+    selector: "app-delete-public-theme",
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ],
+    templateUrl: "./delete-public-theme.component.html",
+    styleUrls: ["./delete-public-theme.component.scss"]
 })
 export class DeletePublicThemeComponent {
   publicTheme = this.publicThemeService.getPublicTheme(this.activatedRoute.snapshot.params.id);

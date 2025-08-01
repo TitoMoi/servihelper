@@ -9,18 +9,17 @@ import { TerritoryGroupService } from "./service/territory-group.service";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-territory-group",
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslocoModule,
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    MatIconModule,
-  ],
-  templateUrl: "./territory-group.component.html",
-  styleUrls: ["./territory-group.component.scss"],
+    selector: "app-territory-group",
+    imports: [
+        CommonModule,
+        TranslocoModule,
+        MatButtonModule,
+        RouterLink,
+        RouterLinkActive,
+        MatIconModule,
+    ],
+    templateUrl: "./territory-group.component.html",
+    styleUrls: ["./territory-group.component.scss"]
 })
 export class TerritoryGroupComponent {
   territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService

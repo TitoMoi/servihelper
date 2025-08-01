@@ -40,25 +40,24 @@ import {
 } from "date-fns/locale";
 
 @Component({
-  selector: "app-create-update-role",
-  templateUrl: "./create-update-role.component.html",
-  styleUrls: ["./create-update-role.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    MatCheckboxModule,
-    MatButtonModule,
-    RouterLink,
-    AssignTypeNamePipe,
-    MatIconModule,
-    AsyncPipe,
-  ],
+    selector: "app-create-update-role",
+    templateUrl: "./create-update-role.component.html",
+    styleUrls: ["./create-update-role.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        MatCheckboxModule,
+        MatButtonModule,
+        RouterLink,
+        AssignTypeNamePipe,
+        MatIconModule,
+        AsyncPipe,
+    ]
 })
 export class CreateUpdateRoleComponent {
   assignTypes: AssignTypeInterface[] = this.assignTypeService

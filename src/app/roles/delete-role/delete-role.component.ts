@@ -14,22 +14,21 @@ import { AsyncPipe } from "@angular/common";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-delete-role",
-  templateUrl: "./delete-role.component.html",
-  styleUrls: ["./delete-role.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
-    AsyncPipe,
-  ],
+    selector: "app-delete-role",
+    templateUrl: "./delete-role.component.html",
+    styleUrls: ["./delete-role.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        AsyncPipe,
+    ]
 })
 export class DeleteRoleComponent {
   role = this.configService.getRole(this.activatedRoute.snapshot.params.id);

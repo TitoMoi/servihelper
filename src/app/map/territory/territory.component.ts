@@ -25,24 +25,23 @@ import { SortService } from "app/services/sort.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 
 @Component({
-  selector: "app-territory",
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslocoDirective,
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    MatIconModule,
-    MatExpansionModule,
-    MatCheckboxModule,
-    ParticipantPipe,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-  ],
-  templateUrl: "./territory.component.html",
-  styleUrls: ["./territory.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-territory",
+    imports: [
+        CommonModule,
+        TranslocoDirective,
+        MatButtonModule,
+        RouterLink,
+        RouterLinkActive,
+        MatIconModule,
+        MatExpansionModule,
+        MatCheckboxModule,
+        ParticipantPipe,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+    ],
+    templateUrl: "./territory.component.html",
+    styleUrls: ["./territory.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryComponent {
   territories: TerritoryContextClass[] = this.territoryService

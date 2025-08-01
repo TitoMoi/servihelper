@@ -32,27 +32,26 @@ import { SharedService } from "app/services/shared.service";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
-  selector: "app-image-assignment",
-  templateUrl: "./image-assignment.component.html",
-  styleUrls: ["./image-assignment.component.css"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    NgClass,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
-    TranslocoLocaleModule,
-    AssignTypePipe,
-    AssignTypeNamePipe,
-    RoomPipe,
-    ParticipantPipe,
-    SheetTitlePipe,
-    MatTooltipModule,
-    PublicThemePipe,
-    MatChipsModule,
-    RoomNamePipe,
-  ],
+    selector: "app-image-assignment",
+    templateUrl: "./image-assignment.component.html",
+    styleUrls: ["./image-assignment.component.css"],
+    imports: [
+        TranslocoModule,
+        NgClass,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        TranslocoLocaleModule,
+        AssignTypePipe,
+        AssignTypeNamePipe,
+        RoomPipe,
+        ParticipantPipe,
+        SheetTitlePipe,
+        MatTooltipModule,
+        PublicThemePipe,
+        MatChipsModule,
+        RoomNamePipe,
+    ]
 })
 export class ImageAssignmentComponent {
   rooms: RoomInterface[];

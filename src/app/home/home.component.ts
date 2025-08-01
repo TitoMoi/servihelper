@@ -26,11 +26,10 @@ import { NoteInterface } from "app/note/model/note.model";
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"],
-  standalone: true,
-  imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgClass, AsyncPipe],
+    selector: "app-home",
+    templateUrl: "./home.component.html",
+    styleUrls: ["./home.component.scss"],
+    imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgClass, AsyncPipe]
 })
 export class HomeComponent implements OnInit {
   // If zip is loaded and saved

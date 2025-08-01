@@ -16,25 +16,24 @@ import { OnlineService } from "app/online/service/online.service";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-  selector: "app-create-from-participant",
-  templateUrl: "./create-from-participant.component.html",
-  styleUrls: ["./create-from-participant.component.scss"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    MatSelectModule,
-    MatOptionModule,
-    NgClass,
-    MatButtonModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
+    selector: "app-create-from-participant",
+    templateUrl: "./create-from-participant.component.html",
+    styleUrls: ["./create-from-participant.component.scss"],
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        MatSelectModule,
+        MatOptionModule,
+        NgClass,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ]
 })
 export class CreateFromParticipantComponent {
   participants: ParticipantInterface[] = this.participantService.getParticipants(true);

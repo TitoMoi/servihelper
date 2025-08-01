@@ -19,12 +19,11 @@ import { TranslocoDirective } from "@ngneat/transloco";
 import { MatButtonModule } from "@angular/material/button";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
-  standalone: true,
-  imports: [NavigationComponent, RouterOutlet, TranslocoDirective, MatButtonModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.scss"],
+    imports: [NavigationComponent, RouterOutlet, TranslocoDirective, MatButtonModule],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   // Flag to show a blocking screen with information.

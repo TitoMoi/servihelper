@@ -12,18 +12,17 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 
 @Component({
-  selector: "app-data-ready-s13",
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    ParticipantPipe,
-    TranslocoDatePipe,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-  ],
-  templateUrl: "./data-ready-s13.component.html",
-  styleUrl: "./data-ready-s13.component.scss",
+    selector: "app-data-ready-s13",
+    imports: [
+        ReactiveFormsModule,
+        ParticipantPipe,
+        TranslocoDatePipe,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+    ],
+    templateUrl: "./data-ready-s13.component.html",
+    styleUrl: "./data-ready-s13.component.scss"
 })
 export class DataReadyS13Component implements OnInit {
   chunkSize = 20;

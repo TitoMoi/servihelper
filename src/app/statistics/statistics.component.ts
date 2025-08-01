@@ -11,18 +11,17 @@ import { MatIconModule } from "@angular/material/icon";
 import { FakeAccordionComponent } from "app/statistics/fake-accordion/fake-accordion.component";
 import { TerritoryGraphicsComponent } from "app/statistics/territory-graphics/territory-graphics.component";
 @Component({
-  selector: "app-statistics",
-  templateUrl: "./statistics.component.html",
-  styleUrls: ["./statistics.component.scss"],
-  standalone: true,
-  imports: [
-    GlobalCountComponent,
-    TerritoryCountComponent,
-    TerritoryGraphicsComponent,
-    TranslocoModule,
-    MatIconModule,
-    FakeAccordionComponent,
-  ],
+    selector: "app-statistics",
+    templateUrl: "./statistics.component.html",
+    styleUrls: ["./statistics.component.scss"],
+    imports: [
+        GlobalCountComponent,
+        TerritoryCountComponent,
+        TerritoryGraphicsComponent,
+        TranslocoModule,
+        MatIconModule,
+        FakeAccordionComponent,
+    ]
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
   allowedAssignTypesIds = [];

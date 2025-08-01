@@ -13,21 +13,20 @@ import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-  selector: "app-delete-territory",
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
-  templateUrl: "./delete-territory.component.html",
-  styleUrls: ["./delete-territory.component.scss"],
+    selector: "app-delete-territory",
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ],
+    templateUrl: "./delete-territory.component.html",
+    styleUrls: ["./delete-territory.component.scss"]
 })
 export class DeleteTerritoryComponent {
   t = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);

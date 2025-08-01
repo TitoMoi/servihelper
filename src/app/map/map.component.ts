@@ -22,20 +22,19 @@ import { Subscription, filter, map } from "rxjs";
 import { AsyncPipe } from "@angular/common";
 
 @Component({
-  selector: "app-map",
-  standalone: true,
-  imports: [
-    TranslocoDirective,
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    MatRadioModule,
-    RouterOutlet,
-    ReactiveFormsModule,
-    AsyncPipe,
-  ],
-  templateUrl: "./map.component.html",
-  styleUrls: ["./map.component.scss"],
+    selector: "app-map",
+    imports: [
+        TranslocoDirective,
+        MatButtonModule,
+        RouterLink,
+        RouterLinkActive,
+        MatRadioModule,
+        RouterOutlet,
+        ReactiveFormsModule,
+        AsyncPipe,
+    ],
+    templateUrl: "./map.component.html",
+    styleUrls: ["./map.component.scss"]
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("matRadioGroup") matRadioGroup: MatRadioGroup;

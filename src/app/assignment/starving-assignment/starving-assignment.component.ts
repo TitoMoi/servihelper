@@ -5,13 +5,11 @@ import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { StarvingAssignmentsDataContext } from "../model/assignment.model";
 @Component({
-  selector: "app-starving-assignment",
-  standalone: true,
-  imports: [TranslocoDirective, MatIconModule, MatDialogModule],
-  templateUrl: "./starving-assignment.component.html",
-  styleUrl: "./starving-assignment.component.scss",
-
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-starving-assignment",
+    imports: [TranslocoDirective, MatIconModule, MatDialogModule],
+    templateUrl: "./starving-assignment.component.html",
+    styleUrl: "./starving-assignment.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StarvingAssignmentComponent {
   participants = this.starvingDataContext.participants;

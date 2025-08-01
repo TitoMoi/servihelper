@@ -11,22 +11,21 @@ import { MatCardModule } from "@angular/material/card";
 import { TranslocoModule } from "@ngneat/transloco";
 
 @Component({
-  selector: "app-create-update-sheet-title",
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    MatButtonModule,
-    RouterLink,
-  ],
-  templateUrl: "./create-update-sheet-title.component.html",
-  styleUrls: ["./create-update-sheet-title.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-create-update-sheet-title",
+    imports: [
+        TranslocoModule,
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        MatButtonModule,
+        RouterLink,
+    ],
+    templateUrl: "./create-update-sheet-title.component.html",
+    styleUrls: ["./create-update-sheet-title.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUpdateSheetTitleComponent {
   t = this.sheetTitleService.getTitle(this.activatedRoute.snapshot.params.id);

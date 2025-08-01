@@ -12,19 +12,18 @@ import { ParticipantDynamicInterface } from "app/participant/model/participant.m
 import { SortService } from "app/services/sort.service";
 
 @Component({
-  selector: "app-territory-count",
-  standalone: true,
-  imports: [
-    TranslocoDirective,
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatIconModule,
-    TranslocoDatePipe,
-    ParticipantPipe,
-  ],
-  templateUrl: "./territory-count.component.html",
-  styleUrls: ["./territory-count.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-territory-count",
+    imports: [
+        TranslocoDirective,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatIconModule,
+        TranslocoDatePipe,
+        ParticipantPipe,
+    ],
+    templateUrl: "./territory-count.component.html",
+    styleUrls: ["./territory-count.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryCountComponent implements OnInit {
   territories = this.territoryService

@@ -24,23 +24,22 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @Component({
-  selector: "app-create-update-note",
-  templateUrl: "./create-update-note.component.html",
-  styleUrls: ["./create-update-note.component.css"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    NgxEditorModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
+    selector: "app-create-update-note",
+    templateUrl: "./create-update-note.component.html",
+    styleUrls: ["./create-update-note.component.css"],
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        NgxEditorModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ]
 })
 export class CreateUpdateNoteComponent implements OnDestroy {
   n = this.noteService.getNote(this.activatedRoute.snapshot.params.id);

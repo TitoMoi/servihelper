@@ -13,24 +13,23 @@ import { AsyncPipe } from "@angular/common";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-create-update-public-theme",
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
-    AsyncPipe,
-  ],
-  templateUrl: "./create-update-public-theme.component.html",
-  styleUrls: ["./create-update-public-theme.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-create-update-public-theme",
+    imports: [
+        TranslocoModule,
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        AsyncPipe,
+    ],
+    templateUrl: "./create-update-public-theme.component.html",
+    styleUrls: ["./create-update-public-theme.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUpdatePublicThemeComponent {
   theme = this.publicThemeService.getPublicTheme(this.activatedRoute.snapshot.params.id);

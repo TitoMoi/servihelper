@@ -14,21 +14,20 @@ import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-  selector: "app-delete-note",
-  templateUrl: "./delete-note.component.html",
-  styleUrls: ["./delete-note.component.css"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
+    selector: "app-delete-note",
+    templateUrl: "./delete-note.component.html",
+    styleUrls: ["./delete-note.component.css"],
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ]
 })
 export class DeleteNoteComponent {
   note = this.noteService.getNote(this.activatedRoute.snapshot.params.id);

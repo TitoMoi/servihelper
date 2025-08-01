@@ -16,21 +16,20 @@ import { MatIconModule } from "@angular/material/icon";
 import { TerritoryService } from "app/map/territory/service/territory.service";
 
 @Component({
-  selector: "app-delete-participant",
-  templateUrl: "./delete-participant.component.html",
-  styleUrls: ["./delete-participant.component.css"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
+    selector: "app-delete-participant",
+    templateUrl: "./delete-participant.component.html",
+    styleUrls: ["./delete-participant.component.css"],
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ]
 })
 export class DeleteParticipantComponent {
   participant = this.participantService.getParticipant(this.activatedRoute.snapshot.params.id);

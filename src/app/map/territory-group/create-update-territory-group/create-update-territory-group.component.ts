@@ -19,22 +19,21 @@ import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-create-update-territory-group",
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslocoModule,
-    MatButtonModule,
-    RouterLink,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatIconModule,
-  ],
-  templateUrl: "./create-update-territory-group.component.html",
-  styleUrls: ["./create-update-territory-group.component.scss"],
+    selector: "app-create-update-territory-group",
+    imports: [
+        CommonModule,
+        TranslocoModule,
+        MatButtonModule,
+        RouterLink,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatIconModule,
+    ],
+    templateUrl: "./create-update-territory-group.component.html",
+    styleUrls: ["./create-update-territory-group.component.scss"]
 })
 export class CreateUpdateTerritoryGroupComponent {
   territoryGroupService = inject(TerritoryGroupService);

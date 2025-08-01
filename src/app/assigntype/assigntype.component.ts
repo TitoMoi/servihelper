@@ -13,20 +13,19 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
-  selector: "app-assign-type",
-  templateUrl: "./assigntype.component.html",
-  styleUrls: ["./assigntype.component.scss"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    MatIconModule,
-    AssignTypeNamePipe,
-    MatTooltipModule,
-    AsyncPipe,
-  ],
+    selector: "app-assign-type",
+    templateUrl: "./assigntype.component.html",
+    styleUrls: ["./assigntype.component.scss"],
+    imports: [
+        TranslocoModule,
+        MatButtonModule,
+        RouterLink,
+        RouterLinkActive,
+        MatIconModule,
+        AssignTypeNamePipe,
+        MatTooltipModule,
+        AsyncPipe,
+    ]
 })
 export class AssignTypeComponent {
   //In memory assignTypes

@@ -20,23 +20,22 @@ import { AsyncPipe } from "@angular/common";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-create-update-room",
-  templateUrl: "./create-update-room.component.html",
-  styleUrls: ["./create-update-room.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
-    AsyncPipe,
-  ],
+    selector: "app-create-update-room",
+    templateUrl: "./create-update-room.component.html",
+    styleUrls: ["./create-update-room.component.css"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        AsyncPipe,
+    ]
 })
 export class CreateUpdateRoomComponent {
   r = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);

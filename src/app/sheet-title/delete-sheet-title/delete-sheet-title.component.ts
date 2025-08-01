@@ -12,19 +12,18 @@ import { ConfigService } from "app/config/service/config.service";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
 @Component({
-  selector: "app-delete-sheet-title",
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-  ],
-  templateUrl: "./delete-sheet-title.component.html",
-  styleUrls: ["./delete-sheet-title.component.scss"],
+    selector: "app-delete-sheet-title",
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+    ],
+    templateUrl: "./delete-sheet-title.component.html",
+    styleUrls: ["./delete-sheet-title.component.scss"]
 })
 export class DeleteSheetTitleComponent {
   title = this.sheetTitleService.getTitle(this.activatedRoute.snapshot.params.id);

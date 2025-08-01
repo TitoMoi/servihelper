@@ -22,26 +22,25 @@ import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-create-update-assign-type",
-  templateUrl: "./create-update-assigntype.component.html",
-  styleUrls: ["./create-update-assigntype.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatTooltipModule,
-    RouterLink,
-    MatIconModule,
-    AsyncPipe,
-    NgIf,
-  ],
+    selector: "app-create-update-assign-type",
+    templateUrl: "./create-update-assigntype.component.html",
+    styleUrls: ["./create-update-assigntype.component.css"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatTooltipModule,
+        RouterLink,
+        MatIconModule,
+        AsyncPipe,
+        NgIf,
+    ]
 })
 export class CreateUpdateAssignTypeComponent {
   at = this.assignTypeService.getAssignType(this.activatedRoute.snapshot.params.id);

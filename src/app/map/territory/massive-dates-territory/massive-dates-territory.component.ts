@@ -16,24 +16,23 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { TerritoryIncludesTerrGroupPipe } from "./pipes/territory-includes-terr-group.pipe";
 
 @Component({
-  selector: "app-massive-dates-territory",
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    TranslocoModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    RouterModule,
-    MatIconModule,
-    MatSnackBarModule,
-    MatInputModule,
-    ParticipantPipe,
-    TerritoryIncludesTerrGroupPipe,
-  ],
-  templateUrl: "./massive-dates-territory.component.html",
-  styleUrls: ["./massive-dates-territory.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-massive-dates-territory",
+    imports: [
+        ReactiveFormsModule,
+        TranslocoModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        RouterModule,
+        MatIconModule,
+        MatSnackBarModule,
+        MatInputModule,
+        ParticipantPipe,
+        TerritoryIncludesTerrGroupPipe,
+    ],
+    templateUrl: "./massive-dates-territory.component.html",
+    styleUrls: ["./massive-dates-territory.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
   territories = this.territoryService.getTerritories(); //the reference

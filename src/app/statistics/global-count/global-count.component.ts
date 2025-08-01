@@ -46,22 +46,21 @@ import { isWithinInterval } from "date-fns";
 import { SharedService } from "app/services/shared.service";
 
 @Component({
-  selector: "app-global-count",
-  templateUrl: "./global-count.component.html",
-  styleUrls: ["./global-count.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoDirective,
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatIconModule,
-    TranslocoDatePipe,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
+    selector: "app-global-count",
+    templateUrl: "./global-count.component.html",
+    styleUrls: ["./global-count.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoDirective,
+        MatExpansionModule,
+        MatCheckboxModule,
+        MatIconModule,
+        TranslocoDatePipe,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ]
 })
 export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;

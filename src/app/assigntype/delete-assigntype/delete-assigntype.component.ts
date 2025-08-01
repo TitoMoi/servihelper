@@ -15,21 +15,20 @@ import { AsyncPipe } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-  selector: "app-delete-assign-type",
-  templateUrl: "./delete-assigntype.component.html",
-  styleUrls: ["./delete-assigntype.component.css"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
+    selector: "app-delete-assign-type",
+    templateUrl: "./delete-assigntype.component.html",
+    styleUrls: ["./delete-assigntype.component.css"],
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ]
 })
 export class DeleteAssignTypeComponent {
   assignType = this.assignTypeService.getAssignType(this.activatedRoute.snapshot.params.id);

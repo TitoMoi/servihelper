@@ -35,23 +35,22 @@ import { PdfService } from "app/services/pdf.service";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
-  selector: "app-multiple-image-assignment",
-  templateUrl: "./multiple-image-assignment.component.html",
-  styleUrls: ["./multiple-image-assignment.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatButtonModule,
-    TranslocoLocaleModule,
-    SheetTitlePipe,
-    PublicThemePipe,
-    MatChipsModule,
-    MatProgressSpinnerModule,
-    AsyncPipe,
-  ],
+    selector: "app-multiple-image-assignment",
+    templateUrl: "./multiple-image-assignment.component.html",
+    styleUrls: ["./multiple-image-assignment.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatButtonModule,
+        TranslocoLocaleModule,
+        SheetTitlePipe,
+        PublicThemePipe,
+        MatChipsModule,
+        MatProgressSpinnerModule,
+        AsyncPipe,
+    ]
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
   @Input() selectedDates: Date[];

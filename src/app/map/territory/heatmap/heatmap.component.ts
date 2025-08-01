@@ -27,25 +27,24 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { GraphicService } from "app/services/graphic.service";
 
 @Component({
-  selector: "app-heatmap",
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslocoModule,
-    MatButtonModule,
-    RouterLink,
-    MatIconModule,
-    MatTooltipModule,
-    MatFormFieldModule,
-    MatInputModule,
-    AutoFocusDirective,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatOptionModule,
-  ],
-  templateUrl: "./heatmap.component.html",
-  styleUrls: ["./heatmap.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-heatmap",
+    imports: [
+        CommonModule,
+        TranslocoModule,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        MatTooltipModule,
+        MatFormFieldModule,
+        MatInputModule,
+        AutoFocusDirective,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatOptionModule,
+    ],
+    templateUrl: "./heatmap.component.html",
+    styleUrls: ["./heatmap.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatmapComponent implements AfterViewInit, OnDestroy {
   polygonService = inject(PolygonService);

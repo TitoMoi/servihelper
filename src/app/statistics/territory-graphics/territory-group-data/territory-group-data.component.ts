@@ -9,12 +9,11 @@ import { TerritoryGroupService } from "app/map/territory-group/service/territory
 import { GraphicService } from "app/services/graphic.service";
 
 @Component({
-  selector: "app-territory-group-data",
-  standalone: true,
-  imports: [MatDialogModule, TranslocoDirective],
-  templateUrl: "./territory-group-data.component.html",
-  styleUrl: "./territory-group-data.component.scss",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-territory-group-data",
+    imports: [MatDialogModule, TranslocoDirective],
+    templateUrl: "./territory-group-data.component.html",
+    styleUrl: "./territory-group-data.component.scss",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryGroupDataComponent implements OnInit {
   neverAssigned = this.translocoService.translate("TERRITORY_GRAPHICS_NEVER_ASSIGNED");

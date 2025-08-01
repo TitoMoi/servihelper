@@ -30,22 +30,21 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { NgClass } from "@angular/common";
 import { GetNumberOfParticipantsPipe } from "./get-number-of-participants.pipe";
 @Component({
-  selector: "app-available-participant",
-  standalone: true,
-  imports: [
-    AssignTypePipe,
-    AssignTypeNamePipe,
-    TranslocoDirective,
-    MatTooltipModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    NgClass,
-    GetNumberOfParticipantsPipe,
-  ],
-  templateUrl: "./available-participant.component.html",
-  styleUrls: ["./available-participant.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-available-participant",
+    imports: [
+        AssignTypePipe,
+        AssignTypeNamePipe,
+        TranslocoDirective,
+        MatTooltipModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        NgClass,
+        GetNumberOfParticipantsPipe,
+    ],
+    templateUrl: "./available-participant.component.html",
+    styleUrls: ["./available-participant.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailableParticipantComponent implements OnInit, OnDestroy {
   participants = this.participantService

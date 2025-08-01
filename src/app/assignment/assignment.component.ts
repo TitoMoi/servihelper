@@ -36,28 +36,27 @@ import { ConfigService } from "app/config/service/config.service";
 import { format } from "date-fns";
 
 @Component({
-  selector: "app-assignment",
-  templateUrl: "./assignment.component.html",
-  styleUrls: ["./assignment.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    TranslocoDirective,
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    MatIconModule,
-    MatTooltipModule,
-    NgClass,
-    AsyncPipe,
-    TranslocoDatePipe,
-    AssignTypePipe,
-    AssignTypeNamePipe,
-    RoomPipe,
-    RoomNamePipe,
-    ParticipantPipe,
-  ],
+    selector: "app-assignment",
+    templateUrl: "./assignment.component.html",
+    styleUrls: ["./assignment.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        RouterOutlet,
+        TranslocoDirective,
+        MatButtonModule,
+        RouterLink,
+        RouterLinkActive,
+        MatIconModule,
+        MatTooltipModule,
+        NgClass,
+        AsyncPipe,
+        TranslocoDatePipe,
+        AssignTypePipe,
+        AssignTypeNamePipe,
+        RoomPipe,
+        RoomNamePipe,
+        ParticipantPipe,
+    ]
 })
 export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked {
   //In memory assignments

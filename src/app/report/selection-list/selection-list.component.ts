@@ -38,20 +38,19 @@ import jsPDF from "jspdf";
 import { isSameMonth } from "date-fns";
 
 @Component({
-  selector: "app-selection-list",
-  templateUrl: "./selection-list.component.html",
-  styleUrls: ["./selection-list.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    MatIconModule,
-    MatTooltipModule,
-    TranslocoLocaleModule,
-    AssignTypePipe,
-    AssignTypeNamePipe,
-    RoomNamePipe,
-  ],
+    selector: "app-selection-list",
+    templateUrl: "./selection-list.component.html",
+    styleUrls: ["./selection-list.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        MatIconModule,
+        MatTooltipModule,
+        TranslocoLocaleModule,
+        AssignTypePipe,
+        AssignTypeNamePipe,
+        RoomNamePipe,
+    ]
 })
 export class SelectionListComponent implements OnChanges {
   @Input() selectedDates: Date[];

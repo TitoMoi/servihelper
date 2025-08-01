@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, importProvidersFrom, inject } from "@angular/core";
+import { importProvidersFrom, inject, provideAppInitializer } from "@angular/core";
 
 import { APP_CONFIG } from "./environments/environment";
 import { bootstrapApplication } from "@angular/platform-browser";
@@ -24,10 +24,8 @@ import { TerritoryGroupService } from "app/map/territory-group/service/territory
 
 bootstrapApplication(AppComponent, {
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: () => {
+    provideAppInitializer(() => {
+      const initializerFn = (() => {
         const configService = inject(ConfigService);
         const onlineService = inject(OnlineService);
 
@@ -64,8 +62,9 @@ bootstrapApplication(AppComponent, {
 
             configService.hasChanged = false;
           });
-      },
-    },
+      })();
+      return initializerFn();
+    }),
     provideAnimationsAsync(),
     provideHttpClient(),
     provideRouter(routes), //withDebugTracing()

@@ -16,21 +16,20 @@ import { MatIconModule } from "@angular/material/icon";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-delete-room",
-  templateUrl: "./delete-room.component.html",
-  styleUrls: ["./delete-room.component.css"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterLink,
-    AsyncPipe,
-    MatIconModule,
-  ],
+    selector: "app-delete-room",
+    templateUrl: "./delete-room.component.html",
+    styleUrls: ["./delete-room.component.css"],
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        RouterLink,
+        AsyncPipe,
+        MatIconModule,
+    ]
 })
 export class DeleteRoomComponent {
   room = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);

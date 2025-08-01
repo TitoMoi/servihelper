@@ -10,18 +10,17 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { OnlineService } from "app/online/service/online.service";
 
 @Component({
-  selector: "app-note",
-  templateUrl: "./note.component.html",
-  styleUrls: ["./note.component.scss"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    MatIconModule,
-    AsyncPipe,
-  ],
+    selector: "app-note",
+    templateUrl: "./note.component.html",
+    styleUrls: ["./note.component.scss"],
+    imports: [
+        TranslocoModule,
+        MatButtonModule,
+        RouterLink,
+        RouterLinkActive,
+        MatIconModule,
+        AsyncPipe,
+    ]
 })
 export class NoteComponent implements OnInit {
   notes: NoteInterface[];

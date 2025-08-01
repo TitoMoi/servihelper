@@ -13,21 +13,20 @@ import { OnlineService } from "app/online/service/online.service";
 import { SortService } from "app/services/sort.service";
 
 @Component({
-  selector: "app-participant",
-  templateUrl: "./participant.component.html",
-  styleUrls: ["./participant.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    MatCheckboxModule,
-    MatIconModule,
-    MatTooltipModule,
-    AsyncPipe,
-  ],
+    selector: "app-participant",
+    templateUrl: "./participant.component.html",
+    styleUrls: ["./participant.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        MatButtonModule,
+        RouterLink,
+        RouterLinkActive,
+        MatCheckboxModule,
+        MatIconModule,
+        MatTooltipModule,
+        AsyncPipe,
+    ]
 })
 export class ParticipantComponent {
   participants: ParticipantInterface[] = this.participantService

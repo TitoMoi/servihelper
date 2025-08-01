@@ -41,26 +41,25 @@ import { Observable, Subscription, map } from "rxjs";
 import { AsyncPipe } from "@angular/common";
 
 @Component({
-  selector: "app-report-selector",
-  templateUrl: "./report-selector.component.html",
-  styleUrls: ["./report-selector.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatOptionModule,
-    SelectionListComponent,
-    SelectionListHorComponent,
-    MultipleImageAssignmentComponent,
-    AssignTypeNamePipe,
-    RoomNamePipe,
-    AsyncPipe,
-  ],
+    selector: "app-report-selector",
+    templateUrl: "./report-selector.component.html",
+    styleUrls: ["./report-selector.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatOptionModule,
+        SelectionListComponent,
+        SelectionListHorComponent,
+        MultipleImageAssignmentComponent,
+        AssignTypeNamePipe,
+        RoomNamePipe,
+        AsyncPipe,
+    ]
 })
 export class ReportSelectorComponent implements OnInit, AfterViewInit {
   //Angular material datepicker hacked

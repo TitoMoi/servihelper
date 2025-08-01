@@ -32,20 +32,19 @@ import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
 import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
 
 @Component({
-  selector: "app-selection-list-hor",
-  templateUrl: "./selection-list-hor.component.html",
-  styleUrls: ["./selection-list-hor.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    MatIconModule,
-    MatTooltipModule,
-    TranslocoLocaleModule,
-    AssignTypePipe,
-    AssignTypeNamePipe,
-    RoomNamePipe,
-  ],
+    selector: "app-selection-list-hor",
+    templateUrl: "./selection-list-hor.component.html",
+    styleUrls: ["./selection-list-hor.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TranslocoModule,
+        MatIconModule,
+        MatTooltipModule,
+        TranslocoLocaleModule,
+        AssignTypePipe,
+        AssignTypeNamePipe,
+        RoomNamePipe,
+    ]
 })
 export class SelectionListHorComponent implements OnChanges {
   @Input() selectedDates: Date[];

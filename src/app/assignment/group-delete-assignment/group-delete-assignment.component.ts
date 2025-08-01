@@ -20,25 +20,24 @@ import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
 import { ConfigService } from "app/config/service/config.service";
 
 @Component({
-  selector: "app-group-delete-assignment",
-  templateUrl: "./group-delete-assignment.component.html",
-  styleUrls: ["./group-delete-assignment.component.scss"],
-  standalone: true,
-  imports: [
-    TranslocoModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatButtonModule,
-    AsyncPipe,
-    RouterLink,
-    MatIconModule,
-    JsonPipe,
-    AssignTypePipe,
-    AssignTypeNamePipe,
-  ],
+    selector: "app-group-delete-assignment",
+    templateUrl: "./group-delete-assignment.component.html",
+    styleUrls: ["./group-delete-assignment.component.scss"],
+    imports: [
+        TranslocoModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatButtonModule,
+        AsyncPipe,
+        RouterLink,
+        MatIconModule,
+        JsonPipe,
+        AssignTypePipe,
+        AssignTypeNamePipe,
+    ]
 })
 export class GroupDeleteAssignmentComponent implements OnInit, OnDestroy {
   assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
