@@ -9,9 +9,8 @@ describe('TerritoryGroupDataComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TerritoryGroupDataComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(TerritoryGroupDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

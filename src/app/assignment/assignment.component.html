@@ -6,17 +6,15 @@
       <div class="d-flex align-items-center">
         <div
           [matTooltip]="t('ASSIGN_CREATE_TITLE_TOOLTIP')"
-          [matTooltipDisabled]="!isCreateAssignmentDisabled()"
-        >
+          [matTooltipDisabled]="!isCreateAssignmentDisabled()">
           <a
             mat-flat-button
             [disableRipple]="true"
             [disabled]="isCreateAssignmentDisabled() || (netStatusOffline$ | async)"
             color="primary"
             routerLink="create"
-            routerLinkActive="active"
-          >
-            {{ t("ASSIGN_CREATE_TITLE") }}
+            routerLinkActive="active">
+            {{ t('ASSIGN_CREATE_TITLE') }}
             @if (netStatusOffline$ | async) {
               <mat-icon svgIcon="nowifi"></mat-icon>
             }
@@ -28,77 +26,71 @@
             svgIcon="search"
             routerLink="../search"
             [matTooltip]="t('ICON_SEARCH')"
-            routerLinkActive="active"
-          ></mat-icon>
+            routerLinkActive="active"></mat-icon>
           <mat-icon
             class="mx-3"
             svgIcon="switch"
             routerLink="move"
             [matTooltip]="t('ICON_GROUP_MOVE')"
-            routerLinkActive="active"
-          ></mat-icon>
+            routerLinkActive="active"></mat-icon>
           <mat-icon
             class="mx-3"
             svgIcon="calendar-delete"
             routerLink="group-delete"
             [matTooltip]="t('ICON_GROUP_DELETE')"
-            routerLinkActive="active"
-          ></mat-icon>
+            routerLinkActive="active"></mat-icon>
         }
       </div>
     </div>
   </div>
   @if (assignmentsTable.length) {
     @if (!isAdmin) {
-      <div class="fst-italic">{{ t("ASSIGN_TABLE_ROLE_VISIBILITY") }}</div>
+      <div class="fst-italic">{{ t('ASSIGN_TABLE_ROLE_VISIBILITY') }}</div>
     }
     <span class="sticky-top"></span>
     <div class="table-overflow">
       <div class="grid">
         <div class="grid-header-item bg-color-app fw-bold sticky-top">
-          {{ t("ASSIGN_TABLE_HEADER_IMAGE") }}
+          {{ t('ASSIGN_TABLE_HEADER_IMAGE') }}
         </div>
         <div class="grid-header-item bg-color-app fw-bold sticky-top">
-          {{ t("ASSIGN_TABLE_HEADER_DATE") }}
+          {{ t('ASSIGN_TABLE_HEADER_DATE') }}
         </div>
         <div class="grid-header-item bg-color-app fw-bold sticky-top">
-          {{ t("ASSIGN_TABLE_HEADER_PRINCIPAL") }}
+          {{ t('ASSIGN_TABLE_HEADER_PRINCIPAL') }}
         </div>
         <div class="grid-header-item bg-color-app fw-bold sticky-top">
-          {{ t("ASSIGN_TABLE_HEADER_ASSISTANT") }}
+          {{ t('ASSIGN_TABLE_HEADER_ASSISTANT') }}
         </div>
         <div class="grid-header-item bg-color-app fw-bold sticky-top">
-          {{ t("ASSIGN_TABLE_HEADER_ASSIGNTYPE") }}
+          {{ t('ASSIGN_TABLE_HEADER_ASSIGNTYPE') }}
         </div>
         <div class="grid-header-item bg-color-app fw-bold sticky-top">
-          {{ t("ASSIGN_TABLE_HEADER_ROOM") }}
+          {{ t('ASSIGN_TABLE_HEADER_ROOM') }}
         </div>
         <div class="grid-header-item bg-color-app bg-color-app fw-bold sticky-top">
-          {{ t("ASSIGN_TABLE_HEADER_EDIT") }}
+          {{ t('ASSIGN_TABLE_HEADER_EDIT') }}
         </div>
         <div class="grid-header-item bg-color-app fw-bold sticky-top">
-          {{ t("ASSIGN_TABLE_HEADER_DELETE") }}
+          {{ t('ASSIGN_TABLE_HEADER_DELETE') }}
         </div>
         @for (a of assignmentsTable; track a) {
           <div class="grid-row">
             <div
               id="imageId"
               [ngClass]="{ borderLeftLightGreen: a.hasBeenClicked }"
-              class="grid-item d-flex align-items-center"
-            >
+              class="grid-item d-flex align-items-center">
               <mat-icon
                 (click)="highlightRow($event, a)"
                 [routerLink]="['image', a.id]"
                 routerLinkActive="active"
                 svgIcon="assignImage"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
+                aria-label="Side nav toggle icon"></mat-icon>
             </div>
             <div
               [ngClass]="{ hasDateSeparator: a.hasDateSeparator }"
-              class="grid-item d-flex align-items-center"
-            >
-              {{ a.date | translocoDate: { dateStyle: "medium" } }}
+              class="grid-item d-flex align-items-center">
+              {{ a.date | translocoDate: { dateStyle: 'medium' } }}
             </div>
             <div class="grid-item d-flex align-items-center">
               {{ (a.principal | participantPipe).name }}
@@ -111,8 +103,7 @@
             @if (a.assignType | assignTypePipe; as assignType) {
               <div
                 class="grid-item d-flex align-items-center ps-2"
-                [style.borderLeft]="getBorderLeftColor(assignType.color)"
-              >
+                [style.borderLeft]="getBorderLeftColor(assignType.color)">
                 {{ assignType | assignTypeNamePipe }}
               </div>
             }
@@ -125,16 +116,14 @@
                 [routerLink]="['update', a.id]"
                 routerLinkActive="active"
                 svgIcon="edit"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
+                aria-label="Side nav toggle icon"></mat-icon>
             </div>
             <div class="grid-item d-flex align-items-center">
               <mat-icon
                 [routerLink]="['delete', a.id]"
                 routerLinkActive="active"
                 svgIcon="garbage"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
+                aria-label="Side nav toggle icon"></mat-icon>
             </div>
           </div>
         }

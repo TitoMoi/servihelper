@@ -6,9 +6,8 @@
       color="primary"
       routerLink="create"
       routerLinkActive="active"
-      [disabled]="netStatusOffline$ | async"
-    >
-      {{ t("PARTICIPANT_BUTTON_TITLE") }}
+      [disabled]="netStatusOffline$ | async">
+      {{ t('PARTICIPANT_BUTTON_TITLE') }}
       @if (netStatusOffline$ | async) {
         <mat-icon svgIcon="nowifi"></mat-icon>
       }
@@ -20,9 +19,8 @@
         color="accent"
         routerLink="create-from"
         routerLinkActive="active"
-        [disabled]="netStatusOffline$ | async"
-      >
-        {{ t("PARTICIPANT_COPY_BUTTON_TITLE") }}
+        [disabled]="netStatusOffline$ | async">
+        {{ t('PARTICIPANT_COPY_BUTTON_TITLE') }}
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>
         }
@@ -32,9 +30,8 @@
         mat-raised-button
         color="accent"
         [routerLink]="['/participant', 'assigntypeavailable']"
-        [disabled]="netStatusOffline$ | async"
-      >
-        <span>{{ t("ASSIGNTYPE_AVAILABLE_LIST") }}</span>
+        [disabled]="netStatusOffline$ | async">
+        <span>{{ t('ASSIGNTYPE_AVAILABLE_LIST') }}</span>
         <mat-icon svgIcon="assigntypeavailable" routerLinkActive="active"></mat-icon>
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>
@@ -45,7 +42,7 @@
   <div class="d-flex align-items-center">
     @if (participants.length) {
       <span class="me-3">
-        {{ t("PARTICIPANT_TOTAL_PARTICIPANTS") }}: {{ participants.length }}
+        {{ t('PARTICIPANT_TOTAL_PARTICIPANTS') }}: {{ participants.length }}
       </span>
     }
     <mat-checkbox
@@ -53,23 +50,23 @@
       labelPosition="before"
       color="primary"
       (change)="toggleExternals($event)"
-      >{{ t("PARTICIPANT_SHOW_EXTERNAL") }}</mat-checkbox
+      >{{ t('PARTICIPANT_SHOW_EXTERNAL') }}</mat-checkbox
     >
   </div>
   @if (participants.length) {
     <div class="table-overflow">
       <div class="grid">
         <div class="grid-header-item fw-bold">
-          {{ t("PARTICIPANT_TABLE_HEADER_PRINCIPAL") }}
+          {{ t('PARTICIPANT_TABLE_HEADER_PRINCIPAL') }}
         </div>
         <div class="grid-header-item fw-bold">
-          {{ t("PARTICIPANT_TABLE_HEADER_GROUP") }}
+          {{ t('PARTICIPANT_TABLE_HEADER_GROUP') }}
         </div>
         <div class="grid-header-item fw-bold">
-          {{ t("PARTICIPANT_TABLE_HEADER_EDIT") }}
+          {{ t('PARTICIPANT_TABLE_HEADER_EDIT') }}
         </div>
         <div class="grid-header-item fw-bold">
-          {{ t("PARTICIPANT_TABLE_HEADER_DELETE") }}
+          {{ t('PARTICIPANT_TABLE_HEADER_DELETE') }}
         </div>
         @for (p of participants; track p) {
           <div class="grid-row">
@@ -89,16 +86,14 @@
                 [routerLink]="['update', p.id]"
                 routerLinkActive="active"
                 svgIcon="edit"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
+                aria-label="Side nav toggle icon"></mat-icon>
             </div>
             <div class="grid-item d-flex align-items-center">
               <mat-icon
                 [routerLink]="['delete', p.id]"
                 routerLinkActive="active"
                 svgIcon="garbage"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
+                aria-label="Side nav toggle icon"></mat-icon>
             </div>
           </div>
         }

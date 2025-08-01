@@ -1,12 +1,12 @@
-import { Injectable, inject } from "@angular/core";
-import { SheetTitleInterface } from "../model/sheet-title.model";
-import { readJSONSync, writeJson } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
+import { Injectable, inject } from '@angular/core';
+import { SheetTitleInterface } from '../model/sheet-title.model';
+import { readJSONSync, writeJson } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
 
-import { ConfigService } from "app/config/service/config.service";
+import { ConfigService } from 'app/config/service/config.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class SheetTitleService {
   private configService = inject(ConfigService);
@@ -22,7 +22,7 @@ export class SheetTitleService {
    * @returns the sheet title or undefined
    */
   getTitle(id: string): SheetTitleInterface | undefined {
-    return this.#titles.find((t) => t.id === id);
+    return this.#titles.find(t => t.id === id);
   }
 
   /**
@@ -78,7 +78,7 @@ export class SheetTitleService {
    * @returns true if sheet title is deleted and saved false otherwise
    */
   deleteSheetTitle(id: string): boolean {
-    this.#titles = this.#titles.filter((t) => t.id !== id);
+    this.#titles = this.#titles.filter(t => t.id !== id);
 
     //save titles
     return this.saveSheetTitlesToFile();

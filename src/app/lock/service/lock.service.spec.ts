@@ -1,8 +1,8 @@
-import { TestBed } from "@angular/core/testing";
+import { TestBed } from '@angular/core/testing';
 
-import { LockService } from "./lock.service";
+import { LockService } from './lock.service';
 
-describe("LockService", () => {
+describe('LockService', () => {
   let service: LockService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe("LockService", () => {
     service = TestBed.inject(LockService);
   });
 
-  it("should be created", () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });

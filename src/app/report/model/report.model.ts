@@ -1,5 +1,1 @@
-export type BandNamesWithExtType =
-  | "treasures.png"
-  | "wheat.png"
-  | "sheep.png"
-  | "publicspeech.png";
+export type BandNamesWithExtType = 'treasures.png' | 'wheat.png' | 'sheep.png' | 'publicspeech.png';

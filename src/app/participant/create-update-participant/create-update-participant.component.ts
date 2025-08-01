@@ -5,7 +5,15 @@ import { RoomInterface } from 'app/room/model/room.model';
 import { RoomService } from 'app/room/service/room.service';
 
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,

@@ -1,6 +1,6 @@
-import { DateFormatStyles } from "@ngneat/transloco-locale";
-import { RoleInterface } from "app/roles/model/role.model";
-import { LatLngLiteral } from "leaflet";
+import { DateFormatStyles } from '@ngneat/transloco-locale';
+import { RoleInterface } from 'app/roles/model/role.model';
+import { LatLngLiteral } from 'leaflet';
 
 export type ConfigOptionsType = keyof ConfigInterface;
 

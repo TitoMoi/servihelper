@@ -3,7 +3,7 @@
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h3 class="m-3">
-          {{ t("STATISTICS_COUNT_TERRITORY_TITLE") }}
+          {{ t('STATISTICS_COUNT_TERRITORY_TITLE') }}
         </h3>
       </mat-panel-title>
     </mat-expansion-panel-header>
@@ -13,7 +13,7 @@
       color="primary"
       (change)="orderByTerritory = !orderByTerritory"
       [disableRipple]="true"
-      >{{ t("STATISTICS_COUNT_TERRITORY_ORDER") }}</mat-checkbox
+      >{{ t('STATISTICS_COUNT_TERRITORY_ORDER') }}</mat-checkbox
     >
     <!-- ORDER BY TERRITORY -->
     @if (orderByTerritory) {
@@ -24,9 +24,9 @@
           </div>
           <div class="row m-2">
             <div class="col-auto">
-              <div>{{ t("PLACEHOLDER_NAME") }}:</div>
-              <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
-              <div>{{ t("STATISTICS_COUNT_TERRITORY_RETURNED") }}:</div>
+              <div>{{ t('PLACEHOLDER_NAME') }}:</div>
+              <div>{{ t('STATISTICS_COUNT_TERRITORY_ASSIGNED') }}:</div>
+              <div>{{ t('STATISTICS_COUNT_TERRITORY_RETURNED') }}:</div>
             </div>
             <div class="col-10">
               <div class="row">
@@ -34,15 +34,14 @@
                   <div class="col-auto">
                     <div>
                       {{
-                        (p | participantPipe)?.name ||
-                          t("STATISTICS_COUNT_TERRITORY_P_NOT_FOUND")
+                        (p | participantPipe)?.name || t('STATISTICS_COUNT_TERRITORY_P_NOT_FOUND')
                       }}
                     </div>
                     <div>
-                      {{ terr.assignedDates[i] | translocoDate: { dateStyle: "short" } }}
+                      {{ terr.assignedDates[i] | translocoDate: { dateStyle: 'short' } }}
                     </div>
                     <div>
-                      {{ terr.returnedDates[i] | translocoDate: { dateStyle: "short" } }}
+                      {{ terr.returnedDates[i] | translocoDate: { dateStyle: 'short' } }}
                     </div>
                   </div>
                 }
@@ -61,8 +60,8 @@
         </div>
         <div class="row m-2">
           <div class="col-auto">
-            <div>{{ t("STATISTICS_COUNT_TERRITORY_NAME") }}:</div>
-            <div>{{ t("STATISTICS_COUNT_TERRITORY_ASSIGNED") }}:</div>
+            <div>{{ t('STATISTICS_COUNT_TERRITORY_NAME') }}:</div>
+            <div>{{ t('STATISTICS_COUNT_TERRITORY_ASSIGNED') }}:</div>
           </div>
 
           <div class="col-10">
@@ -74,7 +73,7 @@
                       <div class="col-auto">
                         <div>{{ t.name }}</div>
                         <div>
-                          {{ t.assignedDates[j] | translocoDate: { dateStyle: "short" } }}
+                          {{ t.assignedDates[j] | translocoDate: { dateStyle: 'short' } }}
                         </div>
                       </div>
                     </ng-container>

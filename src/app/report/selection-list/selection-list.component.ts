@@ -1,50 +1,57 @@
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { ConfigService } from "app/config/service/config.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomService } from "app/room/service/room.service";
-import { SortOrderType, SortService } from "app/services/sort.service";
-import { PdfService } from "app/services/pdf.service";
-import autoTable from "jspdf-autotable";
-import { BandNamesWithExtType } from "app/report/model/report.model";
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomService } from 'app/room/service/room.service';
+import { SortOrderType, SortService } from 'app/services/sort.service';
+import { PdfService } from 'app/services/pdf.service';
+import autoTable from 'jspdf-autotable';
+import { BandNamesWithExtType } from 'app/report/model/report.model';
 
 /* eslint-disable @typescript-eslint/naming-convention */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, inject } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  inject
+} from '@angular/core';
 
 import {
   AssignmentGroupInterface,
   AssignmentInterface,
-  AssignmentReportInterface,
-} from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
-import { TranslocoLocaleModule, TranslocoLocaleService } from "@ngneat/transloco-locale";
+  AssignmentReportInterface
+} from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { AssignTypePipe } from '../../assigntype/pipe/assign-type.pipe';
+import { TranslocoLocaleModule, TranslocoLocaleService } from '@ngneat/transloco-locale';
 
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { MatIconModule } from "@angular/material/icon";
-import { TranslocoModule } from "@ngneat/transloco";
-import { ExportService } from "app/services/export.service";
-import { PublicThemeService } from "app/public-theme/service/public-theme.service";
-import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
-import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
-import { readFileSync } from "fs-extra";
-import path from "path";
-import jsPDF from "jspdf";
-import { isSameMonth } from "date-fns";
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslocoModule } from '@ngneat/transloco';
+import { ExportService } from 'app/services/export.service';
+import { PublicThemeService } from 'app/public-theme/service/public-theme.service';
+import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
+import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
+import { readFileSync } from 'fs-extra';
+import path from 'path';
+import jsPDF from 'jspdf';
+import { isSameMonth } from 'date-fns';
 
 @Component({
-    selector: "app-selection-list",
-    templateUrl: "./selection-list.component.html",
-    styleUrls: ["./selection-list.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        TranslocoModule,
-        MatIconModule,
-        MatTooltipModule,
-        TranslocoLocaleModule,
-        AssignTypePipe,
-        AssignTypeNamePipe,
-        RoomNamePipe,
-    ]
+  selector: 'app-selection-list',
+  templateUrl: './selection-list.component.html',
+  styleUrls: ['./selection-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslocoModule,
+    MatIconModule,
+    MatTooltipModule,
+    TranslocoLocaleModule,
+    AssignTypePipe,
+    AssignTypeNamePipe,
+    RoomNamePipe
+  ]
 })
 export class SelectionListComponent implements OnChanges {
   assignTypeService = inject(AssignTypeService);
@@ -64,7 +71,7 @@ export class SelectionListComponent implements OnChanges {
   @Input() rooms: string[];
   @Input() order: SortOrderType;
 
-  defaultReportFontSize = this.configService.getConfig().defaultReportFontSize + "px";
+  defaultReportFontSize = this.configService.getConfig().defaultReportFontSize + 'px';
   defaultReportDateFormat = this.configService.getConfig().defaultReportDateFormat;
   defaultReportDateColor = this.configService.getConfig().defaultReportDateColor;
 
@@ -80,7 +87,7 @@ export class SelectionListComponent implements OnChanges {
       this.filterAssignments().then(() => {
         this.#assignments = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
           this.#assignments,
-          this.order,
+          this.order
         );
         this.getRelatedData();
         this.cdr.detectChanges();
@@ -99,12 +106,12 @@ export class SelectionListComponent implements OnChanges {
     this.#assignments = await this.assignmentService.getAssignments(true);
 
     this.#assignments = this.#assignments.filter(
-      (assignment) =>
+      assignment =>
         this.assignTypes.includes(assignment.assignType) &&
         this.rooms.includes(assignment.room) &&
         this.selectedDates.some(
-          (date) => new Date(date).getTime() === new Date(assignment.date).getTime(),
-        ),
+          date => new Date(date).getTime() === new Date(assignment.date).getTime()
+        )
     );
   }
 
@@ -121,7 +128,7 @@ export class SelectionListComponent implements OnChanges {
     this.assignmentGroups = [];
 
     let assignGroup: AssignmentGroupInterface = {
-      assignments: [],
+      assignments: []
     };
 
     let currentDate;
@@ -141,7 +148,7 @@ export class SelectionListComponent implements OnChanges {
         currentDate = assignment.date;
         firstRoomId = assignment.room;
         assignGroup = {
-          assignments: [],
+          assignments: []
         };
       }
 
@@ -159,7 +166,7 @@ export class SelectionListComponent implements OnChanges {
         onlyMan: false,
         principal: this.participantService.getParticipant(assignment.principal),
         assistant: this.participantService.getParticipant(assignment.assistant),
-        footerNote: "",
+        footerNote: ''
       });
     }
     //last assign group who is out of the loop
@@ -176,8 +183,8 @@ export class SelectionListComponent implements OnChanges {
    */
   getPdfHeight(): number {
     const doc = this.pdfService.getJsPdf({
-      orientation: "portrait",
-      format: [210, 14400],
+      orientation: 'portrait',
+      format: [210, 14400]
     });
 
     const font = this.pdfService.getFontForLang();
@@ -188,27 +195,27 @@ export class SelectionListComponent implements OnChanges {
       autoTable(doc, {
         html: `#table${i}`,
         styles: { font, fontSize: 11 },
-        theme: "plain",
+        theme: 'plain',
         margin: { vertical: 10 },
-        didParseCell: (data) => {
+        didParseCell: data => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
-          const id = data.cell.raw["id"];
+          const id = data.cell.raw['id'];
           // eslint-disable-next-line @typescript-eslint/dot-notation
-          const localName = data.cell.raw["localName"];
+          const localName = data.cell.raw['localName'];
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
-            data.cell.styles.fontStyle = "bold";
+            data.cell.styles.fontStyle = 'bold';
             return;
           }
           //date
-          if (localName === "th") {
-            data.cell.styles.fontStyle = "bold";
+          if (localName === 'th') {
+            data.cell.styles.fontStyle = 'bold';
             return;
           }
         },
-        didDrawPage: (data) => {
+        didDrawPage: data => {
           totalHeight = data.cursor.y;
-        },
+        }
       });
     }
     return totalHeight;
@@ -224,22 +231,20 @@ export class SelectionListComponent implements OnChanges {
   }
 
   async toPng() {
-    this.exportService.toPng("toPngDivId", "assignments");
+    this.exportService.toPng('toPngDivId', 'assignments');
   }
 
   getPdfSheet() {
     return this.pdfService.getJsPdf({
-      orientation: "portrait",
-      format: "a4",
+      orientation: 'portrait',
+      format: 'a4'
     });
   }
 
   getFormatedDate(date: Date) {
-    return this.translocoLocaleService.localizeDate(
-      date,
-      this.translocoLocaleService.getLocale(),
-      { dateStyle: this.defaultReportDateFormat },
-    );
+    return this.translocoLocaleService.localizeDate(date, this.translocoLocaleService.getLocale(), {
+      dateStyle: this.defaultReportDateFormat
+    });
   }
 
   /**
@@ -269,7 +274,7 @@ export class SelectionListComponent implements OnChanges {
 
   groupBelongsToMonthOf5Weeks(
     currentAg: AssignmentGroupInterface,
-    agList: AssignmentGroupInterface[],
+    agList: AssignmentGroupInterface[]
   ) {
     let weeks = 0;
     for (const ag of agList) {
@@ -279,22 +284,22 @@ export class SelectionListComponent implements OnChanges {
   }
 
   hasMultipleRooms(ag: AssignmentGroupInterface): boolean {
-    const rooms = ag.assignments.map((a) => a.room);
+    const rooms = ag.assignments.map(a => a.room);
     const roomsSet = new Set(rooms);
     return roomsSet.size > 1;
   }
 
   getRooms(ag: AssignmentGroupInterface) {
-    const rooms = ag.assignments.map((a) => a.room);
+    const rooms = ag.assignments.map(a => a.room);
     const roomsSet = new Set(rooms);
     return [...roomsSet];
   }
 
   getParticipantsNames(a: AssignmentReportInterface, hasMultipleRooms: boolean) {
     if (!hasMultipleRooms) {
-      return a.principal.name + (a.assistant ? "/ " + a.assistant.name : "");
+      return a.principal.name + (a.assistant ? '/ ' + a.assistant.name : '');
     }
-    return a.principal.name + (a.assistant ? "/\n" + a.assistant.name : "");
+    return a.principal.name + (a.assistant ? '/\n' + a.assistant.name : '');
   }
 
   /**
@@ -310,14 +315,14 @@ export class SelectionListComponent implements OnChanges {
     x: number,
     y: number,
     imageName: BandNamesWithExtType,
-    a: AssignmentReportInterface,
+    a: AssignmentReportInterface
   ): number {
     y = y - 4; //Rectangles draw to bottom so we need to move the pointer up
     doc.setFillColor(a.assignType.color);
-    doc.rect(x, y, 180, 4, "F");
+    doc.rect(x, y, 180, 4, 'F');
     const image = path.join(this.configService.iconsFilesPath, imageName);
     const uint8array = new Uint8Array(readFileSync(image));
-    doc.addImage(uint8array, "png", x, y, 4, 4);
+    doc.addImage(uint8array, 'png', x, y, 4, 4);
     y = y + 9;
     return y;
   }
@@ -342,7 +347,7 @@ export class SelectionListComponent implements OnChanges {
 
     const has5Weeks = this.groupBelongsToMonthOf5Weeks(
       this.assignmentGroups[0],
-      this.assignmentGroups,
+      this.assignmentGroups
     );
     let weekCounter = this.pdfService.getWeekCounter(isWeekend, compressed, has5Weeks);
 
@@ -350,7 +355,7 @@ export class SelectionListComponent implements OnChanges {
       const has5Weeks = this.groupBelongsToMonthOf5Weeks(ag, this.assignmentGroups);
       if (!weekCounter) {
         weekCounter = this.pdfService.getWeekCounter(isWeekend, compressed, has5Weeks);
-        doc.addPage("a4", "p");
+        doc.addPage('a4', 'p');
         y = this.pdfService.getInitialHeight(compressed);
       }
 
@@ -362,7 +367,7 @@ export class SelectionListComponent implements OnChanges {
       //date
       const dateLocaleFormat = this.getFormatedDate(ag.assignments[0].date);
 
-      doc.setFont(this.pdfService.font, "bold");
+      doc.setFont(this.pdfService.font, 'bold');
       doc.setFontSize(this.pdfService.getDateFontSize(compressed));
       doc.text(dateLocaleFormat, x, y, {});
 
@@ -379,25 +384,25 @@ export class SelectionListComponent implements OnChanges {
         doc.text(
           this.roomService.getNameOrTranslation(room1),
           x + this.getMaxWidth(hasMultipleRooms, compressed),
-          y,
+          y
         );
         doc.text(
           this.roomService.getNameOrTranslation(room2),
           x +
             this.getMaxWidth(hasMultipleRooms, compressed) +
             this.getMaxWidthNames(hasMultipleRooms, compressed),
-          y,
+          y
         );
       } else {
         const [room1] = this.getRooms(ag);
         doc.text(
           this.roomService.getNameOrTranslation(room1),
           x + this.getMaxWidth(hasMultipleRooms, compressed),
-          y,
+          y
         );
       }
 
-      doc.setFont(this.pdfService.font, "normal");
+      doc.setFont(this.pdfService.font, 'normal');
       //move the pointer to the assignments section
       y = y + (compressed ? 5 : 10);
 
@@ -408,7 +413,7 @@ export class SelectionListComponent implements OnChanges {
 
         let textLinesParticipants = doc.splitTextToSize(
           participantsNames,
-          maxLineWidthParticipants,
+          maxLineWidthParticipants
         );
 
         const heightParticipantNames =
@@ -422,7 +427,7 @@ export class SelectionListComponent implements OnChanges {
         //Before create text lines check the length
         if (themeOrAssignType.length > PhraseLength) {
           const shortedTheme = [];
-          const words = themeOrAssignType.split(" ");
+          const words = themeOrAssignType.split(' ');
           for (const w of words) {
             if (PhraseLength - w.length > 0) {
               shortedTheme.push(w);
@@ -431,7 +436,7 @@ export class SelectionListComponent implements OnChanges {
               break;
             }
           }
-          themeOrAssignType = shortedTheme.join(" ") + " (...)";
+          themeOrAssignType = shortedTheme.join(' ') + ' (...)';
         }
 
         const textLinesTheme = doc.splitTextToSize(themeOrAssignType, maxLineWidth);
@@ -442,32 +447,28 @@ export class SelectionListComponent implements OnChanges {
 
         if (!compressed) {
           //Bands
-          if (a.assignType.type === "chairman" && isWeekend) {
-            y = this.addBand(doc, x, y, "publicspeech.png", a);
+          if (a.assignType.type === 'chairman' && isWeekend) {
+            y = this.addBand(doc, x, y, 'publicspeech.png', a);
           }
           if (
             this.assignTypeService.treasuresAssignmentTypes.includes(a.assignType.type) &&
             !treasuresFromWordBand
           ) {
-            y = this.addBand(doc, x, y, "treasures.png", a);
+            y = this.addBand(doc, x, y, 'treasures.png', a);
             treasuresFromWordBand = true;
           }
           if (
-            this.assignTypeService.improvePreachingAssignmentTypes.includes(
-              a.assignType.type,
-            ) &&
+            this.assignTypeService.improvePreachingAssignmentTypes.includes(a.assignType.type) &&
             !improvePreachingBand
           ) {
-            y = this.addBand(doc, x, y, "wheat.png", a);
+            y = this.addBand(doc, x, y, 'wheat.png', a);
             improvePreachingBand = true;
           }
           if (
-            this.assignTypeService.liveAsChristiansAssignmentTypes.includes(
-              a.assignType.type,
-            ) &&
+            this.assignTypeService.liveAsChristiansAssignmentTypes.includes(a.assignType.type) &&
             !livingAsChristiansBand
           ) {
-            y = this.addBand(doc, x, y, "sheep.png", a);
+            y = this.addBand(doc, x, y, 'sheep.png', a);
             livingAsChristiansBand = true;
           }
         }
@@ -479,18 +480,16 @@ export class SelectionListComponent implements OnChanges {
           //Find the equivalent on room2, paint participants and remove the assignment
           // the room2 assignments are at the end of the ag because are sorted
           const assign = ag.assignments.find(
-            (assign) =>
-              assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type,
+            assign => assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
           );
           const index = ag.assignments.findIndex(
-            (assign) =>
-              assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type,
+            assign => assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
           );
           if (assign) {
             participantsNames = this.getParticipantsNames(assign, hasMultipleRooms);
             textLinesParticipants = doc.splitTextToSize(
               participantsNames,
-              maxLineWidthParticipants,
+              maxLineWidthParticipants
             );
             //We need to move the pointer adding the width of the text
             //plus the width of the participant text plus a margin
@@ -499,7 +498,7 @@ export class SelectionListComponent implements OnChanges {
               x +
                 this.getMaxWidth(hasMultipleRooms, compressed) +
                 this.getMaxWidthNames(hasMultipleRooms, compressed),
-              y,
+              y
             );
             ag.assignments.splice(index, 1);
           }
@@ -516,6 +515,6 @@ export class SelectionListComponent implements OnChanges {
     //Restore related data so the html wont jump
     this.assignmentGroups = assignmentGroupsBackup;
 
-    doc.save(isWeekend ? "assignmentsWeekend" : "assignmentsMidweek");
+    doc.save(isWeekend ? 'assignmentsWeekend' : 'assignmentsMidweek');
   }
 }

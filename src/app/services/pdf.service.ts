@@ -1,27 +1,27 @@
 /* eslint-disable complexity */
-import { Injectable, inject } from "@angular/core";
-import { TranslocoService } from "@ngneat/transloco";
-import { jsPDF, jsPDFOptions } from "jspdf";
+import { Injectable, inject } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
+import { jsPDF, jsPDFOptions } from 'jspdf';
 
-import meiryo from "../../resources/base64fonts/meiryo";
-import malgun from "../../resources/base64fonts/malgun";
-import simsun from "../../resources/base64fonts/simsun";
-import notosans from "../../resources/base64fonts/notosans";
-import notosansbold from "../../resources/base64fonts/notosansbold";
-import path from "path";
-import { ConfigService } from "app/config/service/config.service";
-import { readFileSync } from "fs";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { TranslocoLocaleService } from "@ngneat/transloco-locale";
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
+import meiryo from '../../resources/base64fonts/meiryo';
+import malgun from '../../resources/base64fonts/malgun';
+import simsun from '../../resources/base64fonts/simsun';
+import notosans from '../../resources/base64fonts/notosans';
+import notosansbold from '../../resources/base64fonts/notosansbold';
+import path from 'path';
+import { ConfigService } from 'app/config/service/config.service';
+import { readFileSync } from 'fs';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { TranslocoLocaleService } from '@ngneat/transloco-locale';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
 import {
   AssignmentGroupInterface,
-  AssignmentInterface,
-} from "app/assignment/model/assignment.model";
-import { RoomService } from "app/room/service/room.service";
+  AssignmentInterface
+} from 'app/assignment/model/assignment.model';
+import { RoomService } from 'app/room/service/room.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class PdfService {
   private configService = inject(ConfigService);
@@ -34,9 +34,9 @@ export class PdfService {
   jsPdf: jsPDF;
 
   langToFont = {
-    ja: "meiryo",
-    ko: "malgun",
-    zhCN: "simsun",
+    ja: 'meiryo',
+    ko: 'malgun',
+    zhCN: 'simsun'
   };
 
   font;
@@ -48,13 +48,13 @@ export class PdfService {
   backupLang;
 
   //Pdf file names
-  S89 = "S89.pdf";
-  S89M = "S89M.pdf";
+  S89 = 'S89.pdf';
+  S89M = 'S89M.pdf';
 
   registerOnLangChange() {
-    this.translocoService.langChanges$.subscribe((lang) => {
+    this.translocoService.langChanges$.subscribe(lang => {
       this.font = this.langToFont[lang];
-      if (!this.font) this.font = "notosans";
+      if (!this.font) this.font = 'notosans';
     });
   }
 
@@ -65,16 +65,16 @@ export class PdfService {
   getJsPdf(jsPdfOptions: jsPDFOptions): jsPDF {
     this.jsPdf = new jsPDF(jsPdfOptions);
 
-    if (this.font === "meiryo") {
+    if (this.font === 'meiryo') {
       this.addJapaneseFont();
     }
-    if (this.font === "malgun") {
+    if (this.font === 'malgun') {
       this.addKoreanFont();
     }
-    if (this.font === "simsun") {
+    if (this.font === 'simsun') {
       this.addSimplifiedChineseFont();
     }
-    if (this.font === "notosans") {
+    if (this.font === 'notosans') {
       this.addNotoSansFont();
     }
 
@@ -82,27 +82,27 @@ export class PdfService {
   }
 
   addJapaneseFont() {
-    this.jsPdf.addFileToVFS("meiryo-normal.ttf", meiryo);
-    this.jsPdf.addFont("meiryo-normal.ttf", "meiryo", "normal");
+    this.jsPdf.addFileToVFS('meiryo-normal.ttf', meiryo);
+    this.jsPdf.addFont('meiryo-normal.ttf', 'meiryo', 'normal');
   }
 
   addKoreanFont() {
-    this.jsPdf.addFileToVFS("malgun.ttf", malgun);
-    this.jsPdf.addFont("malgun.ttf", "malgun", "normal");
+    this.jsPdf.addFileToVFS('malgun.ttf', malgun);
+    this.jsPdf.addFont('malgun.ttf', 'malgun', 'normal');
   }
 
   addSimplifiedChineseFont() {
-    this.jsPdf.addFileToVFS("simsun.ttf", simsun);
-    this.jsPdf.addFont("simsun.ttf", "simsun", "normal");
+    this.jsPdf.addFileToVFS('simsun.ttf', simsun);
+    this.jsPdf.addFont('simsun.ttf', 'simsun', 'normal');
   }
 
   addNotoSansFont() {
     //Latin, Cyrilic
-    this.jsPdf.addFileToVFS("notosans.ttf", notosans);
-    this.jsPdf.addFont("notosans.ttf", "notosans", "normal");
+    this.jsPdf.addFileToVFS('notosans.ttf', notosans);
+    this.jsPdf.addFont('notosans.ttf', 'notosans', 'normal');
     //Bold
-    this.jsPdf.addFileToVFS("notosansbold.ttf", notosansbold);
-    this.jsPdf.addFont("notosansbold.ttf", "notosans", "normal", 700);
+    this.jsPdf.addFileToVFS('notosansbold.ttf', notosansbold);
+    this.jsPdf.addFont('notosansbold.ttf', 'notosans', 'normal', 700);
   }
 
   getFontForLang() {
@@ -146,22 +146,20 @@ export class PdfService {
   }
 
   addHeavyCheckImg(doc: jsPDF, x, y) {
-    const image = path.join(this.configService.iconsFilesPath, "heavycheck.png");
+    const image = path.join(this.configService.iconsFilesPath, 'heavycheck.png');
     const uint8array = new Uint8Array(readFileSync(image));
-    doc.addImage(uint8array, "PNG", x, y, 3, 3);
+    doc.addImage(uint8array, 'PNG', x, y, 3, 3);
   }
 
   shortAssignTypeTheme(doc: jsPDF, a: AssignmentInterface): string {
     const at = this.assignTypeService.getAssignType(a.assignType);
-    let themeOrAssignType = a.theme
-      ? a.theme
-      : this.assignTypeService.getNameOrTranslation(at);
+    let themeOrAssignType = a.theme ? a.theme : this.assignTypeService.getNameOrTranslation(at);
 
     let wordLength = 130;
     //Before create text lines check the length
     if (themeOrAssignType.length > wordLength) {
       const shortedTheme = [];
-      const words = themeOrAssignType.split(" ");
+      const words = themeOrAssignType.split(' ');
       for (const w of words) {
         if (wordLength - w.length > 0) {
           shortedTheme.push(w);
@@ -170,14 +168,14 @@ export class PdfService {
           break;
         }
       }
-      themeOrAssignType = shortedTheme.join(" ") + " (...)";
+      themeOrAssignType = shortedTheme.join(' ') + ' (...)';
     }
     return doc.splitTextToSize(themeOrAssignType, 75);
   }
 
   calculateY(doc: jsPDF, y: number, isForPrint: boolean) {
     if (isForPrint && y > 270) {
-      doc.addPage("a4", "p");
+      doc.addPage('a4', 'p');
       y = 10;
     }
     return y;
@@ -191,12 +189,12 @@ export class PdfService {
     height += 5;
 
     const doc = this.getJsPdf({
-      orientation: "portrait",
+      orientation: 'portrait',
       format: [210, 9000],
-      compress: true,
+      compress: true
     });
 
-    doc.setFont(this.font, "bold");
+    doc.setFont(this.font, 'bold');
     doc.setFontSize(11);
 
     const x = 10;
@@ -205,19 +203,19 @@ export class PdfService {
     const reportTitle = this.configService.getConfig().reportTitle;
     if (reportTitle) {
       doc.text(reportTitle, doc.internal.pageSize.width / 2, y, {
-        align: "center",
+        align: 'center'
       });
     }
     y += 7;
 
     for (const ag of assignmentGroups) {
-      doc.setFont(this.font, "bold");
+      doc.setFont(this.font, 'bold');
       doc.setFontSize(this.getDateFontSize(false));
       //Date
       const localeDate = this.translocoLocaleService.localizeDate(
         ag.assignments[0].date,
         this.translocoLocaleService.getLocale(),
-        { dateStyle: "full" },
+        { dateStyle: 'full' }
       );
       doc.text(localeDate, x, y);
 
@@ -227,7 +225,7 @@ export class PdfService {
 
       y += 6;
 
-      doc.setFont(this.font, "normal");
+      doc.setFont(this.font, 'normal');
       doc.setFontSize(this.getTextFontSize(false));
 
       for (const a of ag.assignments) {
@@ -237,7 +235,7 @@ export class PdfService {
         let striped = themeOrAssignType.substring(0, 220);
 
         if (striped.length === 220) {
-          striped = striped + "(...)";
+          striped = striped + '(...)';
         }
 
         const stripedLines = doc.splitTextToSize(striped, 120);
@@ -245,8 +243,7 @@ export class PdfService {
         const heightTheme = 3.5 * (stripedLines.length + 1);
         doc.text(stripedLines, x, y);
 
-        const participantsNames =
-          a.principal.name + (a.assistant ? "/\n" + a.assistant.name : "");
+        const participantsNames = a.principal.name + (a.assistant ? '/\n' + a.assistant.name : '');
 
         const textLinesParticipants = doc.splitTextToSize(participantsNames, 90);
 
@@ -254,8 +251,7 @@ export class PdfService {
 
         doc.text(textLinesParticipants, 150, y);
 
-        const yHeight =
-          heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
+        const yHeight = heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
         y += yHeight;
       }
       y += 7;
@@ -270,17 +266,17 @@ export class PdfService {
   toPdf(
     assignmentGroups: AssignmentGroupInterface[],
     colorBands: boolean,
-    isForPrint: boolean = false,
+    isForPrint: boolean = false
   ) {
     const height = this.getPdfHeight(assignmentGroups);
 
     const doc = this.getJsPdf({
-      orientation: "portrait",
+      orientation: 'portrait',
       format: [210, isForPrint ? 270 : height],
-      compress: true,
+      compress: true
     });
 
-    doc.setFont(this.font, "bold");
+    doc.setFont(this.font, 'bold');
     doc.setFontSize(this.getDateFontSize(false)); //It's not date but the same font size
 
     const x = 10;
@@ -289,20 +285,20 @@ export class PdfService {
     const reportTitle = this.configService.getConfig().reportTitle;
     if (reportTitle) {
       doc.text(reportTitle, doc.internal.pageSize.width / 2, y, {
-        align: "center",
+        align: 'center'
       });
     }
 
     y = this.calculateY(doc, y + 7, isForPrint);
 
     for (const ag of assignmentGroups) {
-      doc.setFont(this.font, "bold");
+      doc.setFont(this.font, 'bold');
       doc.setFontSize(this.getDateFontSize(false));
       //Date
       const localeDate = this.translocoLocaleService.localizeDate(
         ag.assignments[0].date,
         this.translocoLocaleService.getLocale(),
-        { dateStyle: "full" },
+        { dateStyle: 'full' }
       );
       doc.text(localeDate, x, y);
 
@@ -312,7 +308,7 @@ export class PdfService {
 
       y = this.calculateY(doc, y + 6, isForPrint);
 
-      doc.setFont(this.font, "normal");
+      doc.setFont(this.font, 'normal');
       doc.setFontSize(this.getTextFontSize(false));
 
       for (const a of ag.assignments) {
@@ -322,7 +318,7 @@ export class PdfService {
         let striped = themeOrAssignType.substring(0, 220);
 
         if (striped.length === 220) {
-          striped = striped + "(...)";
+          striped = striped + '(...)';
         }
 
         const stripedLines = doc.splitTextToSize(striped, 120);
@@ -330,20 +326,18 @@ export class PdfService {
         const heightTheme = 3.5 * (stripedLines.length + 1);
         doc.text(stripedLines, x, y);
 
-        const participantsNames =
-          a.principal.name + (a.assistant ? "/\n" + a.assistant.name : "");
+        const participantsNames = a.principal.name + (a.assistant ? '/\n' + a.assistant.name : '');
 
         const textLinesParticipants = doc.splitTextToSize(participantsNames, 90);
 
         const heightParticipantNames = 3.5 * (textLinesParticipants.length + 1);
 
-        const yHeight =
-          heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
+        const yHeight = heightTheme > heightParticipantNames ? heightTheme : heightParticipantNames;
 
         if (colorBands) {
           doc.setFillColor(a.assignType.color);
           //Rectangles draw to bottom so we need to move the pointer up
-          doc.rect(145, y - 6 / 1.5, 4, yHeight, "F");
+          doc.rect(145, y - 6 / 1.5, 4, yHeight, 'F');
         }
 
         doc.text(textLinesParticipants, 150, y);
@@ -353,7 +347,7 @@ export class PdfService {
       y = this.calculateY(doc, y + 7, isForPrint);
     }
 
-    return doc.save("assignmentsList");
+    return doc.save('assignmentsList');
   }
 
   /**
@@ -371,28 +365,28 @@ export class PdfService {
       s89NoteBoldPart,
       s89NoteContentPart,
       s89Version,
-      s89DateVersion,
+      s89DateVersion
     } = this.configService.getConfig();
 
     let doc = this.getJsPdf({
-      orientation: "portrait",
-      format: is4slips ? "a4" : [113.03, 85.09],
-      compress: true,
+      orientation: 'portrait',
+      format: is4slips ? 'a4' : [113.03, 85.09],
+      compress: true
     });
 
     let counter = 4;
 
     // The S89 in not available in catalan.
-    if (this.translocoService.getActiveLang() === "ca") {
-      this.backupLang = "ca";
-      this.translocoService = this.translocoService.setActiveLang("es");
+    if (this.translocoService.getActiveLang() === 'ca') {
+      this.backupLang = 'ca';
+      this.translocoService = this.translocoService.setActiveLang('es');
     } else {
       this.backupLang = null;
     }
 
-    assignments.forEach((assignment) => {
+    assignments.forEach(assignment => {
       if (counter === 0) {
-        doc = doc.addPage("a4", "p");
+        doc = doc.addPage('a4', 'p');
         counter = 4;
       }
       // Default value for coord is first slip
@@ -418,7 +412,7 @@ export class PdfService {
           break;
       }
 
-      doc.setFont(this.font, "bold");
+      doc.setFont(this.font, 'bold');
       doc.setFontSize(11.2);
 
       x -= 5;
@@ -429,77 +423,69 @@ export class PdfService {
         xOffset = xOffset * 3;
       }
       // Title 1 and 2
-      const title1 = s89Title1 || this.translocoService.translate("S89_TITLE_1");
-      doc.text(title1, xOffset, y, { align: "center" });
+      const title1 = s89Title1 || this.translocoService.translate('S89_TITLE_1');
+      doc.text(title1, xOffset, y, { align: 'center' });
       y += 5;
-      const title2 = s89Title2 || this.translocoService.translate("S89_TITLE_2");
+      const title2 = s89Title2 || this.translocoService.translate('S89_TITLE_2');
       doc.text(title2, xOffset, y, {
-        align: "center",
+        align: 'center'
       });
 
       y += 7;
 
       // Principal
-      doc.setFont(this.font, "bold");
+      doc.setFont(this.font, 'bold');
       doc.setFontSize(11.2);
-      const s89Name = s89Principal || this.translocoService.translate("S89_NAME");
+      const s89Name = s89Principal || this.translocoService.translate('S89_NAME');
       let xPosForText = x + doc.getTextWidth(s89Name) + 2;
       doc.text(s89Name, x, y);
-      doc.setFont(this.font, "normal");
+      doc.setFont(this.font, 'normal');
       doc.setFontSize(8.2);
-      doc.text(
-        this.participantService.getParticipant(assignment.principal).name,
-        xPosForText,
-        y,
-      );
+      doc.text(this.participantService.getParticipant(assignment.principal).name, xPosForText, y);
 
       y += 7;
 
       // Assistant
-      doc.setFont(this.font, "bold");
+      doc.setFont(this.font, 'bold');
       doc.setFontSize(11.2);
-      const s89AssistantKey = s89Assistant || this.translocoService.translate("S89_ASSISTANT");
+      const s89AssistantKey = s89Assistant || this.translocoService.translate('S89_ASSISTANT');
       xPosForText = x + doc.getTextWidth(s89AssistantKey) + 2;
       doc.text(s89AssistantKey, x, y);
-      doc.setFont(this.font, "normal");
+      doc.setFont(this.font, 'normal');
       doc.setFontSize(8.2);
       if (assignment.assistant)
-        doc.text(
-          this.participantService.getParticipant(assignment.assistant).name,
-          xPosForText,
-          y,
-        );
+        doc.text(this.participantService.getParticipant(assignment.assistant).name, xPosForText, y);
 
       y += 7;
 
       // Date
-      doc.setFont(this.font, "bold");
+      doc.setFont(this.font, 'bold');
       doc.setFontSize(11.2);
-      const s89DateKey = s89Date || this.translocoService.translate("S89_DATE");
+      const s89DateKey = s89Date || this.translocoService.translate('S89_DATE');
       xPosForText = x + doc.getTextWidth(s89DateKey) + 2;
       doc.text(s89DateKey, x, y);
-      doc.setFont(this.font, "normal");
+      doc.setFont(this.font, 'normal');
       doc.setFontSize(8.2);
       doc.text(
         this.translocoLocaleService.localizeDate(
           assignment.date,
           this.translocoLocaleService.getLocale(),
-          { dateStyle: "full" },
+          { dateStyle: 'full' }
         ),
         xPosForText,
-        y,
+        y
       );
 
       y += 7;
 
       // Assignment number
-      doc.setFont(this.font, "bold");
+      doc.setFont(this.font, 'bold');
       doc.setFontSize(11.2);
       const s89assignmentNumber =
-        s89Number || this.translocoService.translate("S89_ASSIGNMENT_NUMBER");
+        s89Number || this.translocoService.translate('S89_ASSIGNMENT_NUMBER');
       xPosForText = x + doc.getTextWidth(s89assignmentNumber) + 2;
       doc.text(s89assignmentNumber, x, y);
-      doc.setFont(this.font, "normal");
+      doc.setFont(this.font, 'normal');
       doc.setFontSize(8.2);
       if (assignment.theme) {
         //If its copied from the web the first letter is the number.
@@ -524,14 +510,13 @@ export class PdfService {
 
       y += 15;
 
-      doc.setFont(this.font, "bold");
+      doc.setFont(this.font, 'bold');
       doc.setFontSize(8.2);
 
-      const roomsTitleKey =
-        s89RoomsTitle || this.translocoService.translate("S89_ROOMS_TITLE");
+      const roomsTitleKey = s89RoomsTitle || this.translocoService.translate('S89_ROOMS_TITLE');
       doc.text(roomsTitleKey, x, y);
 
-      doc.setFont(this.font, "normal");
+      doc.setFont(this.font, 'normal');
 
       x += 5;
       y += 5;
@@ -539,46 +524,46 @@ export class PdfService {
       const roomType = this.roomService.getRoom(assignment.room).type;
 
       doc.rect(x, y - 2.5, 3, 3);
-      if (roomType === "mainHall") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.translocoService.translate("S89_MAINHALL"), x + 5, y);
+      if (roomType === 'mainHall') this.addHeavyCheckImg(doc, x, y - 2.5);
+      doc.text(this.translocoService.translate('S89_MAINHALL'), x + 5, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
-      if (roomType === "auxiliaryRoom1") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.translocoService.translate("S89_AUXILIARYROOM1"), x + 5, y);
+      if (roomType === 'auxiliaryRoom1') this.addHeavyCheckImg(doc, x, y - 2.5);
+      doc.text(this.translocoService.translate('S89_AUXILIARYROOM1'), x + 5, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
-      if (roomType === "auxiliaryRoom2") this.addHeavyCheckImg(doc, x, y - 2.5);
-      doc.text(this.translocoService.translate("S89_AUXILIARYROOM2"), x + 5, y);
+      if (roomType === 'auxiliaryRoom2') this.addHeavyCheckImg(doc, x, y - 2.5);
+      doc.text(this.translocoService.translate('S89_AUXILIARYROOM2'), x + 5, y);
 
       y += 7;
       x -= 5;
 
       doc.setFontSize(7.07);
 
-      let userFooterText = "";
+      let userFooterText = '';
       if (s89NoteBoldPart && s89NoteContentPart) {
-        userFooterText = "[b]" + s89NoteBoldPart + "*" + s89NoteContentPart;
+        userFooterText = '[b]' + s89NoteBoldPart + '*' + s89NoteContentPart;
       }
 
       const footerText: string[] = doc.splitTextToSize(
-        userFooterText || this.translocoService.translate("S89_FOOTERNOTE"),
-        77,
+        userFooterText || this.translocoService.translate('S89_FOOTERNOTE'),
+        77
       );
 
       const startXCached = x;
-      footerText.map((text) => {
+      footerText.map(text => {
         if (text) {
-          const arrayOfNormalAndBoldText = text.split("*");
-          arrayOfNormalAndBoldText.map((textItems) => {
-            if (textItems.includes("[b]")) {
-              textItems = textItems.replace("[b]", "");
-              doc.setFont(this.font, "bold");
+          const arrayOfNormalAndBoldText = text.split('*');
+          arrayOfNormalAndBoldText.map(textItems => {
+            if (textItems.includes('[b]')) {
+              textItems = textItems.replace('[b]', '');
+              doc.setFont(this.font, 'bold');
             } else {
-              doc.setFont(this.font, "normal");
+              doc.setFont(this.font, 'normal');
             }
 
             doc.text(textItems, x, y);
@@ -592,16 +577,15 @@ export class PdfService {
 
       y += 4;
 
-      const versionKey = s89Version || this.translocoService.translate("S89_VERSION");
+      const versionKey = s89Version || this.translocoService.translate('S89_VERSION');
       doc.text(versionKey, x, y);
 
-      const dateVersionKey =
-        s89DateVersion || this.translocoService.translate("S89_DATE_VERSION");
+      const dateVersionKey = s89DateVersion || this.translocoService.translate('S89_DATE_VERSION');
       doc.text(dateVersionKey, x + 15, y);
 
       counter -= 1;
     });
     if (this.backupLang) this.translocoService.setActiveLang(this.backupLang);
-    return doc.output("blob");
+    return doc.output('blob');
   }
 }

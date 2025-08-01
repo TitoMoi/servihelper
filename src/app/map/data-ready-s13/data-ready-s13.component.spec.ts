@@ -9,9 +9,8 @@ describe('DataReadyS13Component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DataReadyS13Component]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(DataReadyS13Component);
     component = fixture.componentInstance;
     fixture.detectChanges();

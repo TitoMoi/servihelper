@@ -7,31 +7,29 @@
           color="primary"
           class="me-2"
           [disabled]="!markerRef.length || polygonExists()"
-          (click)="removeLastMarker()"
-        >
-          {{ t("MAP_CREATE_DELETE_LAST_MARKER") }}
+          (click)="removeLastMarker()">
+          {{ t('MAP_CREATE_DELETE_LAST_MARKER') }}
           <mat-icon class="ms-1" svgIcon="mapmarker"></mat-icon>
         </a>
         <div
           [matTooltip]="t('MAP_CREATE_CREATE_POLYGON_TOOLTIP')"
-          [matTooltipDisabled]="!isCreatePolygonBtnDisabled()"
-        >
+          [matTooltipDisabled]="!isCreatePolygonBtnDisabled()">
           <a
             mat-raised-button
             color="primary"
             class="me-2"
             [disabled]="isCreatePolygonBtnDisabled()"
             (click)="createPolygon()"
-            >{{ t("MAP_CREATE_CREATE_POLYGON") }}</a
+            >{{ t('MAP_CREATE_CREATE_POLYGON') }}</a
           >
         </div>
         <a mat-raised-button [disabled]="!polygonExists()" (click)="removePolygon()">{{
-          t("MAP_CREATE_REMOVE_POLYGON")
+          t('MAP_CREATE_REMOVE_POLYGON')
         }}</a>
       </div>
       <div class="d-flex align-items-center">
         <mat-checkbox class="me-4" color="primary" formControlName="available">{{
-          t("TERRITORY_AVAILABLE")
+          t('TERRITORY_AVAILABLE')
         }}</mat-checkbox>
         <a
           mat-raised-button
@@ -39,33 +37,31 @@
           [disabled]="!territoryForm.controls.participants.value.length"
           [matTooltip]="t('MAP_CLEAR_HISTORY')"
           (click)="clearHistory()"
-          >{{ t("MAP_CREATE_CLEAR_HISTORY") }}</a
+          >{{ t('MAP_CREATE_CLEAR_HISTORY') }}</a
         >
       </div>
     </div>
     <div class="row">
       <div class="col-6">
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <input
             #terrNameInput
             matInput
             [appautofocus]="isUpdate ? false : true"
             spellcheck="false"
-            formControlName="name"
-          />
-          <mat-hint class="fst-italic">{{ t("PLACEHOLDER_NAME_UNIQUE") }}</mat-hint>
+            formControlName="name" />
+          <mat-hint class="fst-italic">{{ t('PLACEHOLDER_NAME_UNIQUE') }}</mat-hint>
         </mat-form-field>
       </div>
       <div class="col-6">
         <mat-form-field subscriptSizing="dynamic">
-          <mat-label>{{ t("TERRITORY_GROUP_LABEL") }}</mat-label>
+          <mat-label>{{ t('TERRITORY_GROUP_LABEL') }}</mat-label>
           <mat-select
             required
             multiple
             [formControl]="territoryForm.controls.groups"
-            [disableRipple]="true"
-          >
+            [disableRipple]="true">
             @for (tg of territoryGroups; track tg) {
               <mat-option [value]="tg.id">
                 {{ tg.name }}
@@ -78,12 +74,11 @@
     <div class="row mb-2">
       <div class="col-6">
         <mat-form-field subscriptSizing="dynamic">
-          <mat-label>{{ t("TERRITORY_PARTICIPANT_LABEL") }}</mat-label>
+          <mat-label>{{ t('TERRITORY_PARTICIPANT_LABEL') }}</mat-label>
           <mat-select
             (selectionChange)="onParticipantSelect($event)"
             [value]="temporalParticipant || selectedParticipant"
-            [disableRipple]="true"
-          >
+            [disableRipple]="true">
             @for (p of participants; track p) {
               <mat-option [value]="p.id">
                 {{ p.name }}
@@ -94,7 +89,7 @@
       </div>
       <div class="col-6">
         <mat-form-field subscriptSizing="dynamic">
-          <mat-label>{{ t("TERRITORY_MEETING_POINT") }}</mat-label>
+          <mat-label>{{ t('TERRITORY_MEETING_POINT') }}</mat-label>
           <mat-icon matPrefix svgIcon="inputlink"></mat-icon>
           <input matInput spellcheck="false" formControlName="meetingPointUrl" />
         </mat-form-field>
@@ -103,18 +98,13 @@
   </form>
   <div class="d-flex align-items-center">
     <button mat-icon-button [disabled]="!polygonExists()" (click)="toClipboard()">
-      <mat-icon
-        svgIcon="clipboard"
-        aria-label="icon"
-        [matTooltip]="t('ICON_CLIPBOARD')"
-      ></mat-icon>
+      <mat-icon svgIcon="clipboard" aria-label="icon" [matTooltip]="t('ICON_CLIPBOARD')"></mat-icon>
     </button>
     <button
       mat-icon-button
       [disabled]="!polygonExists()"
       class="me-5"
-      (click)="toPng(territoryForm.controls.name.value)"
-    >
+      (click)="toPng(territoryForm.controls.name.value)">
       <mat-icon svgIcon="png" aria-label="icon" [matTooltip]="t('ICON_PNG')"></mat-icon>
     </button>
     <label for="image-upload" class="me-3">
@@ -126,8 +116,7 @@
         <mat-icon
           svgIcon="imageremove"
           (click)="removeImage()"
-          [matTooltip]="t('TERRITORY_REMOVE_IMAGE')"
-        ></mat-icon>
+          [matTooltip]="t('TERRITORY_REMOVE_IMAGE')"></mat-icon>
       }
     </label>
   </div>
@@ -136,24 +125,22 @@
   <div
     [attr.hidden]="territoryForm.controls.image.value || territoryForm.controls.imageId.value"
     id="map2"
-    class="mb-2"
-  ></div>
+    class="mb-2"></div>
   <div>
     @if (imageExists() || imagePersisted()) {
       <img [src]="getImagePath()" id="imageDiv" class="mb-2" alt="Image preview" />
     }
   </div>
   <button mat-raised-button type="button" class="me-3" (click)="goBack()">
-    {{ t("BUTTON_CANCEL") }}
+    {{ t('BUTTON_CANCEL') }}
   </button>
   <button
     mat-raised-button
     color="primary"
     type="button"
     (click)="save()"
-    [disabled]="territoryForm.invalid || (netStatusOffline$ | async)"
-  >
-    {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+    [disabled]="territoryForm.invalid || (netStatusOffline$ | async)">
+    {{ isUpdate ? t('BUTTON_UPDATE') : t('BUTTON_SAVE') }}
     @if (netStatusOffline$ | async) {
       <mat-icon svgIcon="nowifi"></mat-icon>
     }
@@ -164,9 +151,8 @@
       color="accent"
       type="button"
       (click)="save(true)"
-      [disabled]="territoryForm.invalid || (netStatusOffline$ | async)"
-    >
-      {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
+      [disabled]="territoryForm.invalid || (netStatusOffline$ | async)">
+      {{ t('BUTTON_SAVE_CREATE_ANOTHER') }}
       @if (netStatusOffline$ | async) {
         <mat-icon svgIcon="nowifi"></mat-icon>
       }

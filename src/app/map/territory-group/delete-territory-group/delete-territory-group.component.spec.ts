@@ -1,21 +1,21 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteTerritoryGroupComponent } from "./delete-territory-group.component";
+import { DeleteTerritoryGroupComponent } from './delete-territory-group.component';
 
-describe("DeleteTerritoryGroupComponent", () => {
+describe('DeleteTerritoryGroupComponent', () => {
   let component: DeleteTerritoryGroupComponent;
   let fixture: ComponentFixture<DeleteTerritoryGroupComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [DeleteTerritoryGroupComponent],
+      imports: [DeleteTerritoryGroupComponent]
     });
     fixture = TestBed.createComponent(DeleteTerritoryGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,55 +1,63 @@
 import {
   AssignmentInterface,
   AssignmentOperationInterface,
-  AssignmentTableInterface,
-} from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
+  AssignmentTableInterface
+} from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
 
-import { AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from "@angular/core";
-import { ActivatedRoute, RouterOutlet, RouterLink, RouterLinkActive } from "@angular/router";
-import { Subscription } from "rxjs";
-import { LastDateService } from "./service/last-date.service";
-import { SortService } from "app/services/sort.service";
-import { RoomService } from "app/room/service/room.service";
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { ParticipantPipe } from "../participant/pipe/participant.pipe";
-import { RoomPipe } from "../room/pipe/room.pipe";
-import { AssignTypePipe } from "../assigntype/pipe/assign-type.pipe";
-import { TranslocoDatePipe } from "@ngneat/transloco-locale";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { MatIconModule } from "@angular/material/icon";
-import { NgClass, AsyncPipe } from "@angular/common";
-import { MatButtonModule } from "@angular/material/button";
-import { TranslocoDirective } from "@ngneat/transloco";
-import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
-import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
-import { OnlineService } from "app/online/service/online.service";
-import { ConfigService } from "app/config/service/config.service";
-import { format } from "date-fns";
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject
+} from '@angular/core';
+import { ActivatedRoute, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { LastDateService } from './service/last-date.service';
+import { SortService } from 'app/services/sort.service';
+import { RoomService } from 'app/room/service/room.service';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { ParticipantPipe } from '../participant/pipe/participant.pipe';
+import { RoomPipe } from '../room/pipe/room.pipe';
+import { AssignTypePipe } from '../assigntype/pipe/assign-type.pipe';
+import { TranslocoDatePipe } from '@ngneat/transloco-locale';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
+import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
+import { OnlineService } from 'app/online/service/online.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { format } from 'date-fns';
 
 @Component({
-    selector: "app-assignment",
-    templateUrl: "./assignment.component.html",
-    styleUrls: ["./assignment.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        RouterOutlet,
-        TranslocoDirective,
-        MatButtonModule,
-        RouterLink,
-        RouterLinkActive,
-        MatIconModule,
-        MatTooltipModule,
-        NgClass,
-        AsyncPipe,
-        TranslocoDatePipe,
-        AssignTypePipe,
-        AssignTypeNamePipe,
-        RoomPipe,
-        RoomNamePipe,
-        ParticipantPipe,
-    ]
+  selector: 'app-assignment',
+  templateUrl: './assignment.component.html',
+  styleUrls: ['./assignment.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    RouterOutlet,
+    TranslocoDirective,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    MatIconModule,
+    MatTooltipModule,
+    NgClass,
+    AsyncPipe,
+    TranslocoDatePipe,
+    AssignTypePipe,
+    AssignTypeNamePipe,
+    RoomPipe,
+    RoomNamePipe,
+    ParticipantPipe
+  ]
 })
 export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked {
   activatedRoute = inject(ActivatedRoute);
@@ -96,7 +104,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   //first load or Admin
   getAllAssignTypesIds() {
-    return this.assignTypeService.getAssignTypes().map((at) => at.id);
+    return this.assignTypeService.getAssignTypes().map(at => at.id);
   }
 
   ngOnInit() {
@@ -106,18 +114,18 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
         (assignmentOperation: AssignmentOperationInterface) => {
           const assignment = assignmentOperation.assignment;
           switch (assignmentOperation.operationType) {
-            case "create":
+            case 'create':
               this.addAssignmentToTable(assignment);
               break;
-            case "update":
+            case 'update':
               this.updateAssignmentInTable(assignment);
               break;
-            case "delete":
+            case 'delete':
               this.deleteAssignmentInTable(assignment);
               break;
           }
-        },
-      ),
+        }
+      )
     );
 
     //React to role changes
@@ -134,8 +142,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
           : this.configService.getRole(this.configService.role).assignTypesId;
 
         this.assignments = this.assignments.filter(
-          (a) =>
-            this.allowedAssignTypesIds.includes(a.assignType) && this.isWeekdayAllowed(a.date),
+          a => this.allowedAssignTypesIds.includes(a.assignType) && this.isWeekdayAllowed(a.date)
         );
 
         const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);
@@ -146,7 +153,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
         this.createObserver();
 
         this.cdr.detectChanges();
-      }),
+      })
     );
 
     // the same as when the role changes but this is first load
@@ -157,8 +164,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
       : this.configService.getRole(this.configService.role).assignTypesId;
 
     this.assignments = this.assignments.filter(
-      (a) =>
-        this.allowedAssignTypesIds.includes(a.assignType) && this.isWeekdayAllowed(a.date),
+      a => this.allowedAssignTypesIds.includes(a.assignType) && this.isWeekdayAllowed(a.date)
     );
 
     const assignmentsPage = this.getAssignmentsSlice(0, this.paginationEndIndex);
@@ -185,24 +191,24 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   createObserver() {
-    this.observer = new IntersectionObserver((entries) => {
+    this.observer = new IntersectionObserver(entries => {
       //observe the last row
       for (const entry of entries) {
         if (entry.isIntersecting) {
           let assignmentsPage = this.getAssignmentsSlice(
             this.paginationEndIndex,
-            this.paginationEndIndex + 25,
+            this.paginationEndIndex + 25
           );
 
           if (assignmentsPage?.length) {
             //Remove duplicates, this is because we can add an assignment and move the pagination pointer
             assignmentsPage = assignmentsPage.filter(
-              (a) => !this.assignmentsTable.some((at) => at.id === a.id),
+              a => !this.assignmentsTable.some(at => at.id === a.id)
             );
 
             this.assignmentsTable = [
               ...this.assignmentsTable,
-              ...this.prepareRowExtendedValues(assignmentsPage),
+              ...this.prepareRowExtendedValues(assignmentsPage)
             ];
 
             this.sortAndUpdateSeparator();
@@ -216,7 +222,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   isWeekdayAllowed(date: Date) {
-    const dayName = format(date, "EEEE").toLowerCase();
+    const dayName = format(date, 'EEEE').toLowerCase();
     const role = this.configService.getRole(this.configService.getCurrentRoleId());
     return role[dayName];
   }
@@ -237,9 +243,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   addAssignmentToTable(assignment: AssignmentInterface) {
-    const assignmentTable: AssignmentTableInterface[] = this.prepareRowExtendedValues([
-      assignment,
-    ]);
+    const assignmentTable: AssignmentTableInterface[] = this.prepareRowExtendedValues([assignment]);
     this.assignmentsTable.push(assignmentTable[0]);
 
     this.sortAndUpdateSeparator();
@@ -247,19 +251,17 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   updateAssignmentInTable(assignment: AssignmentInterface) {
     const index = this.assignmentsTable.findIndex(
-      (dataElement: AssignmentTableInterface) => dataElement.id === assignment.id,
+      (dataElement: AssignmentTableInterface) => dataElement.id === assignment.id
     );
     //Prepare assignment
-    const assignmentTable: AssignmentTableInterface[] = this.prepareRowExtendedValues([
-      assignment,
-    ]);
+    const assignmentTable: AssignmentTableInterface[] = this.prepareRowExtendedValues([assignment]);
     //swap the assignment
     this.assignmentsTable[index] = assignmentTable[0];
     this.sortAndUpdateSeparator();
   }
 
   deleteAssignmentInTable(assignment) {
-    this.assignmentsTable = this.assignmentsTable.filter((da) => da.id !== assignment.id);
+    this.assignmentsTable = this.assignmentsTable.filter(da => da.id !== assignment.id);
     this.sortAndUpdateSeparator();
   }
 
@@ -268,7 +270,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
     if (this.assignmentsTable.length) {
       this.assignmentsTable = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
         this.assignmentsTable,
-        "Desc",
+        'Desc'
       );
 
       //Add separator
@@ -288,22 +290,20 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   getBorderLeftColor(color: string) {
-    return `20px solid ${color ? color : "#FFF"}`;
+    return `20px solid ${color ? color : '#FFF'}`;
   }
 
   /** query is based on id because we cannot rely on css classes as they can change
    */
   queryAllMatRows() {
-    this.rows = document.querySelectorAll("#imageId");
+    this.rows = document.querySelectorAll('#imageId');
   }
 
   trackByIdFn(index, assignment: AssignmentTableInterface) {
     return assignment.id;
   }
 
-  prepareRowExtendedValues(
-    assignmentsPage: AssignmentInterface[],
-  ): AssignmentTableInterface[] {
+  prepareRowExtendedValues(assignmentsPage: AssignmentInterface[]): AssignmentTableInterface[] {
     const assignmentsTable: AssignmentTableInterface[] = [];
 
     for (const assignment of assignmentsPage) {
@@ -322,7 +322,7 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
         onlyExternals: assignment.onlyExternals,
         footerNote: assignment.footerNote,
         hasDateSeparator: undefined,
-        hasBeenClicked: undefined,
+        hasBeenClicked: undefined
       };
       assignmentsTable.push(assignmentsTableInterface);
     }

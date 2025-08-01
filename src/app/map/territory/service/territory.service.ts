@@ -1,15 +1,15 @@
-import { Injectable, inject } from "@angular/core";
-import { TerritoryContextClass, TerritoryContextInterface } from "../../model/map.model";
-import { ConfigService } from "app/config/service/config.service";
-import { readFileSync, writeFileSync } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
-import { LockService } from "app/lock/service/lock.service";
-import { inflate, deflate } from "pako";
-import { TerrImageService } from "./terr-image.service";
-import { PolygonService } from "./polygon.service";
-import { differenceInMonths } from "date-fns";
+import { Injectable, inject } from '@angular/core';
+import { TerritoryContextClass, TerritoryContextInterface } from '../../model/map.model';
+import { ConfigService } from 'app/config/service/config.service';
+import { readFileSync, writeFileSync } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
+import { LockService } from 'app/lock/service/lock.service';
+import { inflate, deflate } from 'pako';
+import { TerrImageService } from './terr-image.service';
+import { PolygonService } from './polygon.service';
+import { differenceInMonths } from 'date-fns';
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class TerritoryService {
   private configService = inject(ConfigService);
@@ -38,8 +38,8 @@ export class TerritoryService {
 
     if (territoryContent) {
       this.#territories = (
-        JSON.parse(inflate(territoryContent, { to: "string" })) as TerritoryContextInterface[]
-      ).map((t) => new TerritoryContextClass(t));
+        JSON.parse(inflate(territoryContent, { to: 'string' })) as TerritoryContextInterface[]
+      ).map(t => new TerritoryContextClass(t));
 
       this.updateTerritoriesMap();
     }
@@ -69,7 +69,7 @@ export class TerritoryService {
    * @returns the territory that owns that polygon
    */
   getTerritoryByPolygonId(polId: string | undefined) {
-    return this.#territories.find((t) => t.poligonId === polId);
+    return this.#territories.find(t => t.poligonId === polId);
   }
 
   /**
@@ -78,7 +78,7 @@ export class TerritoryService {
    * @returns a list of territories
    */
   getTerritoriesByTerritoryGroupId(tgId: string) {
-    return this.#territories.filter((t) => t.groups.includes(tgId));
+    return this.#territories.filter(t => t.groups.includes(tgId));
   }
 
   /**
@@ -104,7 +104,7 @@ export class TerritoryService {
     //It's active or returned?
     const isActiveTerritory = this.isActiveTerritory(t);
     const territoryLastDate = new Date(
-      isActiveTerritory ? t.assignedDates.at(-1) : t.returnedDates.at(-1),
+      isActiveTerritory ? t.assignedDates.at(-1) : t.returnedDates.at(-1)
     );
     if (territoryLastDate) {
       const distanceInMonths = Math.abs(differenceInMonths(territoryLastDate, new Date()));
@@ -119,7 +119,7 @@ export class TerritoryService {
     //It's active or returned?
     const isActiveTerritory = this.isActiveTerritory(t);
     const territoryLastDate = new Date(
-      isActiveTerritory ? t.assignedDates.at(-1) : t.returnedDates.at(-1),
+      isActiveTerritory ? t.assignedDates.at(-1) : t.returnedDates.at(-1)
     );
     if (territoryLastDate) {
       const distanceInMonths = Math.abs(differenceInMonths(territoryLastDate, new Date()));
@@ -154,7 +154,7 @@ export class TerritoryService {
   }
 
   #saveTerritoriesToFile() {
-    const gziped = deflate(JSON.stringify(this.#territories), { to: "string" });
+    const gziped = deflate(JSON.stringify(this.#territories), { to: 'string' });
 
     this.lockService.updateTimestamp();
     return writeFileSync(this.configService.territoriesPath, gziped);
@@ -218,7 +218,7 @@ export class TerritoryService {
 
     //delete territory
     this.#territoriesMap.delete(id);
-    this.#territories = this.#territories.filter((b) => b.id !== id);
+    this.#territories = this.#territories.filter(b => b.id !== id);
 
     //save territories
     return this.#saveTerritoriesToFile();
@@ -241,7 +241,7 @@ export class TerritoryService {
    */
   returnTerritory(id: string, returnDate: Date) {
     //find territory
-    const t = this.#territories.find((terr) => terr.id === id);
+    const t = this.#territories.find(terr => terr.id === id);
     //Mark it as returned
     t.returnedDates.push(returnDate);
     //Update territory
@@ -255,12 +255,12 @@ export class TerritoryService {
   deleteTerritoryGroupById(id: string) {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#territories.length; i++) {
-      this.#territories[i].groups = this.#territories[i].groups.filter((gId) => gId !== id);
+      this.#territories[i].groups = this.#territories[i].groups.filter(gId => gId !== id);
 
       this.#territoriesMap.set(this.#territories[i].id, this.#territories[i]);
     }
     //Remove the empty groups territories
-    this.#territories = this.#territories.filter((t) => t.groups.length);
+    this.#territories = this.#territories.filter(t => t.groups.length);
 
     return this.#saveTerritoriesToFile();
   }

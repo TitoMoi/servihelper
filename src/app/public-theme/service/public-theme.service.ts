@@ -1,12 +1,12 @@
-import { Injectable, inject } from "@angular/core";
-import { PublicThemeInterface } from "../model/public-theme.model";
-import { readJSONSync, writeJson } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
+import { Injectable, inject } from '@angular/core';
+import { PublicThemeInterface } from '../model/public-theme.model';
+import { readJSONSync, writeJson } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
 
-import { ConfigService } from "app/config/service/config.service";
+import { ConfigService } from 'app/config/service/config.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class PublicThemeService {
   private configService = inject(ConfigService);
@@ -22,7 +22,7 @@ export class PublicThemeService {
    * @returns the public theme
    */
   getPublicTheme(id: string): PublicThemeInterface {
-    return this.#publicThemes.find((t) => t.id === id)!;
+    return this.#publicThemes.find(t => t.id === id)!;
   }
 
   /**
@@ -77,7 +77,7 @@ export class PublicThemeService {
    * @returns true if public theme is deleted and saved false otherwise
    */
   deletePublicTheme(id: string): boolean {
-    this.#publicThemes = this.#publicThemes.filter((t) => t.id !== id);
+    this.#publicThemes = this.#publicThemes.filter(t => t.id !== id);
 
     //save public themes
     return this.savePublicThemesToFile();

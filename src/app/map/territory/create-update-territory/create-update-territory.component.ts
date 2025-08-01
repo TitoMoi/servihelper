@@ -7,9 +7,9 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-  inject,
-} from "@angular/core";
-import { CommonModule, Location } from "@angular/common";
+  inject
+} from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
 import {
   icon,
   Map,
@@ -18,67 +18,67 @@ import {
   Marker,
   LeafletMouseEvent,
   LatLngLiteral,
-  LatLng,
-} from "leaflet";
-import { Subscription, fromEvent } from "rxjs";
-import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+  LatLng
+} from 'leaflet';
+import { Subscription, fromEvent } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   ReactiveFormsModule,
   Validators,
   NonNullableFormBuilder,
-  FormControl,
-} from "@angular/forms";
-import { TerritoryService } from "../service/territory.service";
-import { PolygonService } from "../service/polygon.service";
-import { TerrImageService } from "../service/terr-image.service";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInput, MatInputModule } from "@angular/material/input";
-import { AutoFocusDirective } from "app/directives/autofocus/autofocus.directive";
-import { ConfigService } from "app/config/service/config.service";
+  FormControl
+} from '@angular/forms';
+import { TerritoryService } from '../service/territory.service';
+import { PolygonService } from '../service/polygon.service';
+import { TerrImageService } from '../service/terr-image.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { AutoFocusDirective } from 'app/directives/autofocus/autofocus.directive';
+import { ConfigService } from 'app/config/service/config.service';
 import {
   PolygonInterface,
   TerritoryContextClass,
   TerritoryContextInterface,
-  TerritoryGroupInterface,
-} from "app/map/model/map.model";
-import { ParticipantInterface } from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { MatSelectChange, MatSelectModule } from "@angular/material/select";
-import { MatOptionModule } from "@angular/material/core";
-import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
-import { ExportService } from "app/services/export.service";
-import { OnlineService } from "app/online/service/online.service";
-import { NgOptimizedImage } from "@angular/common";
-import { nanoid } from "nanoid";
-import path from "path";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatSnackBar } from "@angular/material/snack-bar";
+  TerritoryGroupInterface
+} from 'app/map/model/map.model';
+import { ParticipantInterface } from 'app/participant/model/participant.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
+import { ExportService } from 'app/services/export.service';
+import { OnlineService } from 'app/online/service/online.service';
+import { NgOptimizedImage } from '@angular/common';
+import { nanoid } from 'nanoid';
+import path from 'path';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-    selector: "app-create-update-territory",
-    imports: [
-        CommonModule,
-        NgOptimizedImage,
-        TranslocoModule,
-        MatButtonModule,
-        RouterLink,
-        MatIconModule,
-        MatTooltipModule,
-        MatFormFieldModule,
-        MatInputModule,
-        AutoFocusDirective,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatOptionModule,
-    ],
-    templateUrl: "./create-update-territory.component.html",
-    styleUrls: ["./create-update-territory.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-create-update-territory',
+  imports: [
+    CommonModule,
+    NgOptimizedImage,
+    TranslocoModule,
+    MatButtonModule,
+    RouterLink,
+    MatIconModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AutoFocusDirective,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatOptionModule
+  ],
+  templateUrl: './create-update-territory.component.html',
+  styleUrls: ['./create-update-territory.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, OnDestroy {
   private formBuilder = inject(NonNullableFormBuilder);
@@ -108,7 +108,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   //The path or the image when is loaded for the first time
   imagePath;
 
-  @ViewChild("terrNameInput") terrNameInput: MatInput;
+  @ViewChild('terrNameInput') terrNameInput: MatInput;
 
   //TerritoryContextInterface
   territoryForm = this.formBuilder.group({
@@ -123,14 +123,14 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     returnedDates: [this.loadedTerritory.returnedDates],
     participants: [this.loadedTerritory.participants],
     groups: [this.loadedTerritory.groups, Validators.required],
-    m: [this.loadedTerritory.m], //modified is set again on create or update
+    m: [this.loadedTerritory.m] //modified is set again on create or update
   });
 
   //PolygonInterface
   polygonForm = this.formBuilder.group({
     id: [this.loadedPolygon?.id],
     latLngList: [this.loadedPolygon?.latLngList || []], //User do clicks on map
-    m: [this.loadedPolygon?.m], //modified is set again on create or update
+    m: [this.loadedPolygon?.m] //modified is set again on create or update
   });
 
   subscription: Subscription = new Subscription();
@@ -147,7 +147,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   //OTHER DATA NOT RELATED TO THE MAP STRUCTURE
   participants: ParticipantInterface[] = this.participantService
     .getParticipants()
-    .filter((p) => Boolean(p.isExternal) === false && p.available);
+    .filter(p => Boolean(p.isExternal) === false && p.available);
   territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService.getTerritoryGroups();
 
   //Simulate a form control
@@ -164,9 +164,9 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
   ngOnInit(): void {
     //Bug of leaflet fix
-    const iconRetinaUrl = "assets/marker-icon-2x.png";
-    const iconUrl = "assets/marker-icon.png";
-    const shadowUrl = "assets/marker-shadow.png";
+    const iconRetinaUrl = 'assets/marker-icon-2x.png';
+    const iconUrl = 'assets/marker-icon.png';
+    const shadowUrl = 'assets/marker-shadow.png';
     const iconDefault = icon({
       iconRetinaUrl,
       iconUrl,
@@ -175,7 +175,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
       tooltipAnchor: [16, -28],
-      shadowSize: [41, 41],
+      shadowSize: [41, 41]
     });
     Marker.prototype.options.icon = iconDefault;
   }
@@ -199,14 +199,11 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
         : this.configService.getConfig().lastMapClick;
     const zoom = this.isUpdate ? 17 : 13;
 
-    this.map = new Map("map2", { center, attributionControl: false }).setView(
-      viewPosition,
-      zoom,
-    );
+    this.map = new Map('map2', { center, attributionControl: false }).setView(viewPosition, zoom);
 
-    this.tile = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    this.tile = new TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      minZoom: 3,
+      minZoom: 3
     }).addTo(this.map);
 
     //Add polygon if exists
@@ -220,7 +217,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
     //https://leafletjs.com/reference.html#map-click
     this.subscription.add(
-      fromEvent(this.map, "click").subscribe((clickEvent: LeafletMouseEvent) => {
+      fromEvent(this.map, 'click').subscribe((clickEvent: LeafletMouseEvent) => {
         if (!this.polygonExists()) {
           const latLngListControl = this.polygonForm.controls.latLngList;
           const latLngList = latLngListControl.value;
@@ -229,7 +226,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
           this.createMarker(clickEvent.latlng);
           this.cdr.detectChanges();
         }
-      }),
+      })
     );
 
     //zoom the map to the polygon
@@ -263,8 +260,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   goBack() {
     // navigate back to heatmap or parent
     const prev = this.activatedRoute.snapshot.queryParams.prev;
-    if (prev === "heatmap") {
-      this.router.navigate(["map/territory/heatmap"]);
+    if (prev === 'heatmap') {
+      this.router.navigate(['map/territory/heatmap']);
     } else {
       this.location.back();
     }
@@ -327,7 +324,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
       //Add a timestamp so the browser will think its different image and dont cache it
       const imgPath = `${path.join(
         this.configService.terrImagesPath,
-        this.territoryForm.controls.imageId.value,
+        this.territoryForm.controls.imageId.value
       )}?${nanoid(5)}`;
       return imgPath;
     }
@@ -366,21 +363,18 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
    */
   polygonExistsAndPersisted() {
     return (
-      this.polygonExists() &&
-      this.polygonService.getPolygon(this.polygonForm.controls.id.value)
+      this.polygonExists() && this.polygonService.getPolygon(this.polygonForm.controls.id.value)
     );
   }
 
   createPolygon() {
-    this.leafletPolygon = new Polygon(this.polygonForm.controls.latLngList.value).addTo(
-      this.map,
-    );
+    this.leafletPolygon = new Polygon(this.polygonForm.controls.latLngList.value).addTo(this.map);
     //Because on reset we remove the id and on update of the poligon the id should remain
     if (this.isUpdate && this.polygonExists()) {
       this.polygonForm.controls.id.setValue(this.loadedPolygon.id);
       return;
     }
-    this.polygonForm.controls.id.setValue("1");
+    this.polygonForm.controls.id.setValue('1');
   }
 
   removePolygon() {
@@ -418,7 +412,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
     this.handleParticipant(this.temporalParticipant);
 
     const territory = new TerritoryContextClass(
-      this.territoryForm.value as TerritoryContextInterface,
+      this.territoryForm.value as TerritoryContextInterface
     );
 
     const image = this.territoryForm.controls.image.value;
@@ -459,8 +453,8 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
 
       // navigate back to heatmap or parent
       const prev = this.activatedRoute.snapshot.queryParams.prev;
-      if (prev === "heatmap") {
-        this.router.navigate(["map/territory/heatmap"]);
+      if (prev === 'heatmap') {
+        this.router.navigate(['map/territory/heatmap']);
       } else {
         this.location.back();
       }
@@ -476,7 +470,7 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
         const polygonId = this.polygonService.createPolygon(polygon);
         territory.poligonId = polygonId;
 
-        this.configService.updateConfigByKey("lastMapClick", polygon.latLngList[0]);
+        this.configService.updateConfigByKey('lastMapClick', polygon.latLngList[0]);
       }
 
       this.territoryService.createTerritory(territory);
@@ -486,14 +480,14 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
         this.polygonForm.reset({
           id: null,
           latLngList: [],
-          m: null,
+          m: null
         });
         return;
       }
       // navigate back to heatmap or parent
       const prev = this.activatedRoute.snapshot.queryParams.prev;
-      if (prev === "heatmap") {
-        this.router.navigate(["map/territory/heatmap"]);
+      if (prev === 'heatmap') {
+        this.router.navigate(['map/territory/heatmap']);
       } else {
         this.location.back();
       }
@@ -547,16 +541,16 @@ export class CreateUpdateTerritoryComponent implements OnInit, AfterViewInit, On
   }
 
   async toClipboard() {
-    await this.exportService.toClipboard("map2");
+    await this.exportService.toClipboard('map2');
     this.matSnackBar.open(
-      this.translocoService.translate("COPIED"),
-      this.translocoService.translate("CLOSE"),
-      { duration: 3000, verticalPosition: "top" },
+      this.translocoService.translate('COPIED'),
+      this.translocoService.translate('CLOSE'),
+      { duration: 3000, verticalPosition: 'top' }
     );
     this.cdr.detectChanges();
   }
 
   async toPng(mapName: string) {
-    await this.exportService.toPng("map2", mapName);
+    await this.exportService.toPng('map2', mapName);
   }
 }

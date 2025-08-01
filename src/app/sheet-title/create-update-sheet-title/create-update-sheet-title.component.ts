@@ -1,31 +1,31 @@
-import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
+import { SheetTitleService } from 'app/sheet-title/service/sheet-title.service';
 
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { MatButtonModule } from "@angular/material/button";
-import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
-import { MatInputModule } from "@angular/material/input";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatCardModule } from "@angular/material/card";
-import { TranslocoModule } from "@ngneat/transloco";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { AutoFocusDirective } from '../../directives/autofocus/autofocus.directive';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @Component({
-    selector: "app-create-update-sheet-title",
-    imports: [
-        TranslocoModule,
-        TranslocoModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        AutoFocusDirective,
-        MatButtonModule,
-        RouterLink,
-    ],
-    templateUrl: "./create-update-sheet-title.component.html",
-    styleUrls: ["./create-update-sheet-title.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-create-update-sheet-title',
+  imports: [
+    TranslocoModule,
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AutoFocusDirective,
+    MatButtonModule,
+    RouterLink
+  ],
+  templateUrl: './create-update-sheet-title.component.html',
+  styleUrls: ['./create-update-sheet-title.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUpdateSheetTitleComponent {
   private formBuilder = inject(UntypedFormBuilder);
@@ -40,7 +40,7 @@ export class CreateUpdateSheetTitleComponent {
   form = this.formBuilder.group({
     id: this.t?.id,
     name: [this.t?.name, Validators.required],
-    order: [this.t?.order, Validators.required],
+    order: [this.t?.order, Validators.required]
   });
 
   onSubmit(): void {
@@ -52,9 +52,9 @@ export class CreateUpdateSheetTitleComponent {
     }
 
     //navigate to parent
-    const route = this.isUpdate ? "../.." : "..";
+    const route = this.isUpdate ? '../..' : '..';
     this.router.navigate([route], {
-      relativeTo: this.activatedRoute,
+      relativeTo: this.activatedRoute
     });
   }
 }

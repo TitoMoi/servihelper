@@ -5,12 +5,11 @@
     [disableClose]="hideSidenav === false"
     [attr.role]="hideSidenav ? 'dialog' : 'navigation'"
     [mode]="hideSidenav ? 'over' : 'side'"
-    [opened]="hideSidenav === false"
-  >
+    [opened]="hideSidenav === false">
     <mat-toolbar>
       @if (queryGithubInterval$ | async; as githubData) {
         <a href="#" (click)="openExternalServihelperRepository()">
-          <div class="new-version-font-size">{{ t("NEW_VERSION_AVAILABLE") }}:</div>
+          <div class="new-version-font-size">{{ t('NEW_VERSION_AVAILABLE') }}:</div>
           <div class="new-version-font-size">
             {{ githubData.tag_name }}
           </div>
@@ -21,67 +20,67 @@
     <mat-nav-list class="p-0">
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="/">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_HOME") }}</span>
+          <span>{{ t('NAV_HOME') }}</span>
           <mat-icon svgIcon="download"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="assignType">
         <div class="d-flex justify-content-between align-items-center">
-          <span class="white-space-pre-wrap">{{ t("NAV_ASSIGN_TYPE") }}</span>
+          <span class="white-space-pre-wrap">{{ t('NAV_ASSIGN_TYPE') }}</span>
           <mat-icon svgIcon="abc"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="room">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_ROOM") }}</span>
+          <span>{{ t('NAV_ROOM') }}</span>
           <mat-icon svgIcon="room"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="note">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_NOTE") }}</span>
+          <span>{{ t('NAV_NOTE') }}</span>
           <mat-icon svgIcon="notes"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="participant">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_PARTICIPANT") }}</span>
+          <span>{{ t('NAV_PARTICIPANT') }}</span>
           <mat-icon svgIcon="participants"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="assignment">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_ASSIGNMENT") }}</span>
+          <span>{{ t('NAV_ASSIGNMENT') }}</span>
           <mat-icon svgIcon="assignment"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="selectionSheets">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_REPORTS") }}</span>
+          <span>{{ t('NAV_REPORTS') }}</span>
           <mat-icon svgIcon="lists"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="statistics">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_STATISTICS") }}</span>
+          <span>{{ t('NAV_STATISTICS') }}</span>
           <mat-icon svgIcon="statistics"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="map">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_MAPS") }}</span>
+          <span>{{ t('NAV_MAPS') }}</span>
           <mat-icon svgIcon="map"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="config">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_CONFIG") }}</span>
+          <span>{{ t('NAV_CONFIG') }}</span>
           <mat-icon svgIcon="config"></mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item (click)="closeDrawer(drawer)" routerLink="info">
         <div class="d-flex justify-content-between align-items-center">
-          <span>{{ t("NAV_INFO") }}</span>
+          <span>{{ t('NAV_INFO') }}</span>
           <mat-icon svgIcon="info" aria-label="Side nav toggle icon"></mat-icon>
         </div>
       </mat-list-item>
@@ -89,12 +88,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar style="background-color: #8866bb" class="justify-content-end">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-      >
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
       </button>
       <div class="me-auto">
@@ -107,7 +101,7 @@
           </div>
         }
         @if (isOnlineAlias) {
-          <div class="me-3">{{ t("ONLINE") }}</div>
+          <div class="me-3">{{ t('ONLINE') }}</div>
         }
       }
       <div class="d-inline-block me-3">
@@ -126,9 +120,8 @@
           <mat-select
             color="primary"
             [value]="currentRoleId"
-            (selectionChange)="updateRole($event)"
-          >
-            <mat-option [value]="administratorKey">{{ t("ROLE_ADMINISTRATOR") }}</mat-option>
+            (selectionChange)="updateRole($event)">
+            <mat-option [value]="administratorKey">{{ t('ROLE_ADMINISTRATOR') }}</mat-option>
             @for (role of roles; track role) {
               <mat-option [value]="role.id">
                 {{ role.name }}
@@ -138,12 +131,7 @@
         </mat-form-field>
       </div>
       <div class="d-inline-block me-3">
-        <mat-icon
-          id="avatarIconId"
-          svgIcon="avatar"
-          aria-label="icon"
-          routerLink="role"
-        ></mat-icon>
+        <mat-icon id="avatarIconId" svgIcon="avatar" aria-label="icon" routerLink="role"></mat-icon>
       </div>
     </mat-toolbar>
     <div class="m-3">

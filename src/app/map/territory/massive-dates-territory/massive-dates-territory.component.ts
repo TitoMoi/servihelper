@@ -1,38 +1,38 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
 
-import { TerritoryService } from "../service/territory.service";
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
-import { MatButtonModule } from "@angular/material/button";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
-import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
-import { RouterModule } from "@angular/router";
-import { MatIconModule } from "@angular/material/icon";
-import { OnlineService } from "app/online/service/online.service";
-import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
-import { TerritoryIncludesTerrGroupPipe } from "./pipes/territory-includes-terr-group.pipe";
+import { TerritoryService } from '../service/territory.service';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ParticipantPipe } from 'app/participant/pipe/participant.pipe';
+import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { OnlineService } from 'app/online/service/online.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TerritoryIncludesTerrGroupPipe } from './pipes/territory-includes-terr-group.pipe';
 
 @Component({
-    selector: "app-massive-dates-territory",
-    imports: [
-        ReactiveFormsModule,
-        TranslocoModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatDatepickerModule,
-        RouterModule,
-        MatIconModule,
-        MatSnackBarModule,
-        MatInputModule,
-        ParticipantPipe,
-        TerritoryIncludesTerrGroupPipe,
-    ],
-    templateUrl: "./massive-dates-territory.component.html",
-    styleUrls: ["./massive-dates-territory.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-massive-dates-territory',
+  imports: [
+    ReactiveFormsModule,
+    TranslocoModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    RouterModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatInputModule,
+    ParticipantPipe,
+    TerritoryIncludesTerrGroupPipe
+  ],
+  templateUrl: './massive-dates-territory.component.html',
+  styleUrls: ['./massive-dates-territory.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
   private territoryService = inject(TerritoryService);
@@ -58,8 +58,8 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
           name: { value: t.name, disabled: true },
           assignedDates: this.formBuilder.array(t.assignedDates),
           returnedDates: this.formBuilder.array(t.returnedDates),
-          groups: [t.groups],
-        }),
+          groups: [t.groups]
+        })
       );
     }
   }
@@ -69,7 +69,7 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
     for (const form of this.formArray) {
       if (form.valid && form.touched) {
         hasChanges = true;
-        const index = this.territories.findIndex((t) => t.id === form.controls.id.value);
+        const index = this.territories.findIndex(t => t.id === form.controls.id.value);
         const t = this.territories[index];
         this.territories[index] = { ...t, ...form.value };
       }
@@ -77,28 +77,28 @@ export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
     this.territoryService.massiveSaveTerritoriesDates();
     if (hasChanges) {
       this.matSnackBar.open(
-        this.translocoService.translate("CONFIG_SAVED"),
-        this.translocoService.translate("CLOSE"),
-        { duration: 2000 },
+        this.translocoService.translate('CONFIG_SAVED'),
+        this.translocoService.translate('CLOSE'),
+        { duration: 2000 }
       );
     }
   }
 
   //Get the form array
   assignedDates(i: number) {
-    return this.formArray[i].controls["assignedDates"] as FormArray;
+    return this.formArray[i].controls['assignedDates'] as FormArray;
   }
 
   //Get the form array
   returnedDates(i: number) {
-    return this.formArray[i].controls["returnedDates"] as FormArray;
+    return this.formArray[i].controls['returnedDates'] as FormArray;
   }
 
   participants(i: number) {
-    return this.formArray[i].controls["participants"] as FormArray;
+    return this.formArray[i].controls['participants'] as FormArray;
   }
 
   getTerrGroupBorder(color: string) {
-    return `${color ? color : "#000"}`;
+    return `${color ? color : '#000'}`;
   }
 }

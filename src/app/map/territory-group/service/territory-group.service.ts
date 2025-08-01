@@ -1,13 +1,13 @@
 /* eslint-disable complexity */
-import { Injectable, inject } from "@angular/core";
-import { ConfigService } from "app/config/service/config.service";
-import { TerritoryGroupInterface } from "../../model/map.model";
-import { readFileSync, writeFileSync } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
-import { LockService } from "app/lock/service/lock.service";
-import { inflate, deflate } from "pako";
+import { Injectable, inject } from '@angular/core';
+import { ConfigService } from 'app/config/service/config.service';
+import { TerritoryGroupInterface } from '../../model/map.model';
+import { readFileSync, writeFileSync } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
+import { LockService } from 'app/lock/service/lock.service';
+import { inflate, deflate } from 'pako';
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class TerritoryGroupService {
   private configService = inject(ConfigService);
@@ -32,7 +32,7 @@ export class TerritoryGroupService {
     const territoryGroupContent = readFileSync(this.configService.territoryGroupsPath);
 
     if (territoryGroupContent) {
-      this.#territoryGroups = JSON.parse(inflate(territoryGroupContent, { to: "string" }));
+      this.#territoryGroups = JSON.parse(inflate(territoryGroupContent, { to: 'string' }));
 
       for (const gm of this.#territoryGroups) {
         this.#territoryGroupsMap.set(gm.id!, gm);
@@ -46,7 +46,7 @@ export class TerritoryGroupService {
    */
   #saveTerritoryGroupsToFile(): boolean {
     //Write territories group back to file
-    const gziped = deflate(JSON.stringify(this.#territoryGroups), { to: "string" });
+    const gziped = deflate(JSON.stringify(this.#territoryGroups), { to: 'string' });
     writeFileSync(this.configService.territoryGroupsPath, gziped);
 
     this.lockService.updateTimestamp();
@@ -105,7 +105,7 @@ export class TerritoryGroupService {
   deleteTerritoryGroup(id: string): boolean {
     //delete territoryGroup
     this.#territoryGroupsMap.delete(id);
-    this.#territoryGroups = this.#territoryGroups.filter((b) => b.id !== id);
+    this.#territoryGroups = this.#territoryGroups.filter(b => b.id !== id);
     //save territoryGroups
     return this.#saveTerritoryGroupsToFile();
   }

@@ -1,20 +1,20 @@
 /* eslint-disable complexity */
 import {
   ParticipantDynamicInterface,
-  ParticipantInterface,
-} from "app/participant/model/participant.model";
+  ParticipantInterface
+} from 'app/participant/model/participant.model';
 
-import { Injectable, inject } from "@angular/core";
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { ipcRenderer } from "electron";
-import { Locale, formatDistanceStrict } from "date-fns";
-import { TranslocoService } from "@ngneat/transloco";
-const { version } = require("../../../package.json");
+import { Injectable, inject } from '@angular/core';
+import { AssignmentInterface } from 'app/assignment/model/assignment.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ipcRenderer } from 'electron';
+import { Locale, formatDistanceStrict } from 'date-fns';
+import { TranslocoService } from '@ngneat/transloco';
+const { version } = require('../../../package.json');
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class SharedService {
   private assignTypeService = inject(AssignTypeService);
@@ -39,14 +39,14 @@ export class SharedService {
     assignTypeId,
     roomId,
     onlyMan,
-    onlyWoman,
+    onlyWoman
   ): ParticipantInterface[] {
-    return principals.filter((p) => {
+    return principals.filter(p => {
       const isAvailable = p.available;
       const canAssignType = p.assignTypes.some(
-        (at) => at.assignTypeId === assignTypeId && at.canPrincipal,
+        at => at.assignTypeId === assignTypeId && at.canPrincipal
       );
-      const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
+      const canRoom = p.rooms.some(r => r.roomId === roomId && r.available);
       const canOnlyMan = onlyMan ? p.isWoman === false : true;
       const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
 
@@ -70,14 +70,14 @@ export class SharedService {
     assignTypeId,
     roomId,
     onlyMan,
-    onlyWoman,
+    onlyWoman
   ): ParticipantInterface[] {
-    return assistants.filter((p) => {
+    return assistants.filter(p => {
       const isAvailable = p.available;
       const canAssignType = p.assignTypes.some(
-        (at) => at.assignTypeId === assignTypeId && at.canAssistant,
+        at => at.assignTypeId === assignTypeId && at.canAssistant
       );
-      const canRoom = p.rooms.some((r) => r.roomId === roomId && r.available);
+      const canRoom = p.rooms.some(r => r.roomId === roomId && r.available);
       const canOnlyMan = onlyMan ? p.isWoman === false : true;
       const canOnlyWoman = onlyWoman ? p.isWoman === true : true;
 
@@ -97,7 +97,7 @@ export class SharedService {
     assignmentList: AssignmentInterface[],
     participantList: ParticipantDynamicInterface[],
     assignTypeId: string,
-    isPrincipal: boolean,
+    isPrincipal: boolean
   ): void {
     //set "count" to 0
     for (const p of participantList) {
@@ -132,16 +132,16 @@ export class SharedService {
   getFilename(assignment: AssignmentInterface): string {
     const filename =
       this.participantService.getParticipant(assignment.principal).name +
-      "-" +
+      '-' +
       this.assignTypeService.getNameOrTranslation(
-        this.assignTypeService.getAssignType(assignment.assignType),
+        this.assignTypeService.getAssignType(assignment.assignType)
       );
     return filename;
   }
 
   saveUInt8ArrayAsPdfFile(uint8Array: Uint8Array, filename: string) {
-    const blob = new Blob([uint8Array], { type: "application/pdf" });
-    const link = document.createElement("a");
+    const blob = new Blob([uint8Array], { type: 'application/pdf' });
+    const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
     link.download = filename;
     link.click();
@@ -149,7 +149,7 @@ export class SharedService {
   }
 
   saveBlobAsPdfFile(blob: Blob, filename: string) {
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
     link.download = filename;
     link.click();
@@ -165,7 +165,7 @@ export class SharedService {
   getDistanceBetweenPenultimaAndLast(
     participantList: ParticipantDynamicInterface[],
     locale: Locale,
-    lastSelectedDate?: Date,
+    lastSelectedDate?: Date
   ): void {
     //Get the distance, i18n sensitive
     for (const participant of participantList) {
@@ -175,8 +175,8 @@ export class SharedService {
           new Date(participant.lastAssignmentDate),
           lastSelectedDate,
           {
-            locale,
-          },
+            locale
+          }
         );
       }
       if (
@@ -188,17 +188,17 @@ export class SharedService {
           new Date(participant.penultimateAssignmentDate),
           new Date(participant.lastAssignmentDate),
           {
-            locale,
-          },
+            locale
+          }
         );
       }
       if (!participant.distanceBetweenPenultimaAndLast)
         participant.distanceBetweenPenultimaAndLast =
-          this.translocoService.translate("SORT_NO_DISTANCE");
+          this.translocoService.translate('SORT_NO_DISTANCE');
     }
   }
 
   closeApp() {
-    ipcRenderer.send("closeApp");
+    ipcRenderer.send('closeApp');
   }
 }

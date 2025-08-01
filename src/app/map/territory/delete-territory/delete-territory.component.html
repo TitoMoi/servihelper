@@ -1,14 +1,14 @@
 <form *transloco="let t" [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{ t("TERRITORY_DELETE_TITLE") }}</mat-card-title>
-      <mat-card-subtitle>{{ t("TERRITORY_DELETE_WARNING") }}</mat-card-subtitle>
+      <mat-card-title>{{ t('TERRITORY_DELETE_TITLE') }}</mat-card-title>
+      <mat-card-subtitle>{{ t('TERRITORY_DELETE_WARNING') }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
             <input matInput formControlName="name" />
           </mat-form-field>
         </div>
@@ -16,15 +16,10 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button type="button" class="me-3" routerLink="../..">
-        {{ t("BUTTON_CANCEL") }}
+        {{ t('BUTTON_CANCEL') }}
       </button>
-      <button
-        mat-raised-button
-        color="warn"
-        type="submit"
-        [disabled]="netStatusOffline$ | async"
-      >
-        {{ t("BUTTON_DELETE") }}
+      <button mat-raised-button color="warn" type="submit" [disabled]="netStatusOffline$ | async">
+        {{ t('BUTTON_DELETE') }}
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>
         }

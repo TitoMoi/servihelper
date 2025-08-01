@@ -2,21 +2,20 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{
-        isUpdate ? t("ROLE_UPDATE_TITLE") : t("ROLE_CREATE_TITLE")
+        isUpdate ? t('ROLE_UPDATE_TITLE') : t('ROLE_CREATE_TITLE')
       }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
             <input
               matInput
               required
               [appautofocus]="isUpdate ? false : true"
               spellcheck="false"
-              formControlName="name"
-            />
+              formControlName="name" />
           </mat-form-field>
         </div>
       </div>
@@ -24,7 +23,7 @@
         <div class="col">
           @if (assignTypes.length) {
             <h4>
-              {{ isUpdate ? t("ROLE_UPDATE_SUBTITLE") : t("ROLE_CREATE_SUBTITLE") }}
+              {{ isUpdate ? t('ROLE_UPDATE_SUBTITLE') : t('ROLE_CREATE_SUBTITLE') }}
             </h4>
           }
           <div class="row mb-2">
@@ -83,21 +82,15 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button
-        mat-raised-button
-        type="button"
-        class="me-3"
-        [routerLink]="isUpdate ? '../..' : '..'"
-      >
-        {{ t("BUTTON_CANCEL") }}
+      <button mat-raised-button type="button" class="me-3" [routerLink]="isUpdate ? '../..' : '..'">
+        {{ t('BUTTON_CANCEL') }}
       </button>
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="form.invalid || (netStatusOffline$ | async)"
-      >
-        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+        [disabled]="form.invalid || (netStatusOffline$ | async)">
+        {{ isUpdate ? t('BUTTON_UPDATE') : t('BUTTON_SAVE') }}
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>
         }

@@ -3,10 +3,9 @@
     <mat-icon
       class="me-3"
       [svgIcon]="isRedClock ? 'time' : 'warningtime'"
-      aria-label="icon"
-    ></mat-icon>
+      aria-label="icon"></mat-icon>
     <div>
-      {{ isRedClock ? t("CLOSE_ASSIGNMENTS_TITLE_RED") : t("CLOSE_ASSIGNMENTS_TITLE") }}
+      {{ isRedClock ? t('CLOSE_ASSIGNMENTS_TITLE_RED') : t('CLOSE_ASSIGNMENTS_TITLE') }}
     </div>
   </div>
   <div class="px-1">
@@ -15,7 +14,7 @@
   <div mat-dialog-content>
     @for (a of closeAssignments; track a.id) {
       <div class="m-2">
-        {{ a.date | translocoDate: { dateStyle: "short" } }} -
+        {{ a.date | translocoDate: { dateStyle: 'short' } }} -
         {{ a.assignType | assignTypePipe | assignTypeNamePipe }}
       </div>
     }

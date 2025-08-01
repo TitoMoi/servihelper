@@ -1,10 +1,10 @@
-import { Pipe, PipeTransform, inject } from "@angular/core";
-import { PublicThemeService } from "../service/public-theme.service";
-import { PublicThemeInterface } from "../model/public-theme.model";
+import { Pipe, PipeTransform, inject } from '@angular/core';
+import { PublicThemeService } from '../service/public-theme.service';
+import { PublicThemeInterface } from '../model/public-theme.model';
 
 @Pipe({
-  name: "publicThemePipe",
-  standalone: true,
+  name: 'publicThemePipe',
+  standalone: true
 })
 export class PublicThemePipe implements PipeTransform {
   private publicThemeService = inject(PublicThemeService);

@@ -6,7 +6,7 @@ import { ParticipantService } from 'app/participant/service/participant.service'
 import { RoomService } from 'app/room/service/room.service';
 import { Subscription } from 'rxjs';
 
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';

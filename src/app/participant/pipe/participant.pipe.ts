@@ -1,10 +1,10 @@
-import { Pipe, PipeTransform, inject } from "@angular/core";
-import { ParticipantInterface } from "../model/participant.model";
-import { ParticipantService } from "../service/participant.service";
+import { Pipe, PipeTransform, inject } from '@angular/core';
+import { ParticipantInterface } from '../model/participant.model';
+import { ParticipantService } from '../service/participant.service';
 
 @Pipe({
-  name: "participantPipe",
-  standalone: true,
+  name: 'participantPipe',
+  standalone: true
 })
 export class ParticipantPipe implements PipeTransform {
   private participantService = inject(ParticipantService);

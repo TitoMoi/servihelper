@@ -2,19 +2,18 @@
   <form [formGroup]="form" novalidate (ngSubmit)="submit()">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ t("ASSIGN_GROUP_ASSIGN_DELETE_TITLE") }}</mat-card-title>
+        <mat-card-title>{{ t('ASSIGN_GROUP_ASSIGN_DELETE_TITLE') }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="row mb-3">
           <div class="col-6">
             <mat-form-field>
-              <mat-label>{{ t("ASSIGN_GROUP_DELETE_DATE") }}</mat-label>
+              <mat-label>{{ t('ASSIGN_GROUP_DELETE_DATE') }}</mat-label>
               <input required matInput [matDatepicker]="originPicker" formControlName="date" />
               <mat-datepicker-toggle
                 matPrefix
                 [for]="originPicker"
-                class="mr-3"
-              ></mat-datepicker-toggle>
+                class="mr-3"></mat-datepicker-toggle>
               <mat-datepicker id="datepickerOriginId" #originPicker></mat-datepicker>
             </mat-form-field>
           </div>
@@ -22,7 +21,7 @@
         @if (assignmentsToDelete$ | async; as assignmentsToDelete) {
           <div class="row">
             <div class="col">
-              <div class="mb-2">{{ t("ASSIGN_GROUP_DELETE_INFO_DELETE") }}:</div>
+              <div class="mb-2">{{ t('ASSIGN_GROUP_DELETE_INFO_DELETE') }}:</div>
               <ul>
                 @for (a of assignmentsToDelete; track a) {
                   <li>
@@ -35,25 +34,18 @@
         }
       </mat-card-content>
       <mat-card-actions>
-        <button
-          class="me-3"
-          mat-raised-button
-          [disableRipple]="true"
-          type="button"
-          routerLink=".."
-        >
-          {{ t("BUTTON_CANCEL") }}
+        <button class="me-3" mat-raised-button [disableRipple]="true" type="button" routerLink="..">
+          {{ t('BUTTON_CANCEL') }}
         </button>
         <button
           mat-raised-button
           color="warn"
           type="submit"
-          [disabled]="form.invalid || (netStatusOffline$ | async)"
-        >
+          [disabled]="form.invalid || (netStatusOffline$ | async)">
           @if (netStatusOffline$ | async) {
             <mat-icon svgIcon="nowifi"></mat-icon>
           }
-          {{ t("BUTTON_DELETE") }}
+          {{ t('BUTTON_DELETE') }}
         </button>
       </mat-card-actions>
     </mat-card>

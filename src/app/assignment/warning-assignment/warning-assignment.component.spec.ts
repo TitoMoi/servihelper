@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WarningAssignmentComponent } from "./warning-assignment.component";
+import { WarningAssignmentComponent } from './warning-assignment.component';
 
-describe("WarningAssignmentComponent", () => {
+describe('WarningAssignmentComponent', () => {
   let component: WarningAssignmentComponent;
   let fixture: ComponentFixture<WarningAssignmentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WarningAssignmentComponent],
+      imports: [WarningAssignmentComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(WarningAssignmentComponent);
@@ -16,7 +16,7 @@ describe("WarningAssignmentComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

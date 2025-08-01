@@ -1,32 +1,32 @@
-import { Component, inject } from "@angular/core";
-import { ReactiveFormsModule, UntypedFormBuilder } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { RouterLink, Router, ActivatedRoute } from "@angular/router";
-import { TranslocoModule } from "@ngneat/transloco";
-import { Validators } from "ngx-editor";
-import { TerritoryService } from "../service/territory.service";
-import { OnlineService } from "app/online/service/online.service";
-import { AsyncPipe } from "@angular/common";
-import { MatIconModule } from "@angular/material/icon";
+import { Component, inject } from '@angular/core';
+import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { TranslocoModule } from '@ngneat/transloco';
+import { Validators } from 'ngx-editor';
+import { TerritoryService } from '../service/territory.service';
+import { OnlineService } from 'app/online/service/online.service';
+import { AsyncPipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    selector: "app-delete-territory",
-    imports: [
-        TranslocoModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        RouterLink,
-        AsyncPipe,
-        MatIconModule,
-    ],
-    templateUrl: "./delete-territory.component.html",
-    styleUrls: ["./delete-territory.component.scss"]
+  selector: 'app-delete-territory',
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    RouterLink,
+    AsyncPipe,
+    MatIconModule
+  ],
+  templateUrl: './delete-territory.component.html',
+  styleUrls: ['./delete-territory.component.scss']
 })
 export class DeleteTerritoryComponent {
   private formBuilder = inject(UntypedFormBuilder);
@@ -41,17 +41,17 @@ export class DeleteTerritoryComponent {
 
   form = this.formBuilder.group({
     id: this.t.id,
-    name: [{ value: this.t.name, disabled: true }, Validators.required],
+    name: [{ value: this.t.name, disabled: true }, Validators.required]
   });
   onSubmit(): void {
     //get id
-    const id = this.form.get("id").value;
+    const id = this.form.get('id').value;
     //delete the territory
     this.territoryService.deleteTerritory(id);
 
     //navigate to parent
-    this.router.navigate(["../.."], {
-      relativeTo: this.activatedRoute,
+    this.router.navigate(['../..'], {
+      relativeTo: this.activatedRoute
     });
   }
 }

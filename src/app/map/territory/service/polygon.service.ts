@@ -1,11 +1,11 @@
-import { Injectable, inject } from "@angular/core";
-import { ConfigService } from "app/config/service/config.service";
-import { PolygonClass, PolygonInterface } from "../../model/map.model";
-import { readFileSync, writeFileSync } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
-import { inflate, deflate } from "pako";
+import { Injectable, inject } from '@angular/core';
+import { ConfigService } from 'app/config/service/config.service';
+import { PolygonClass, PolygonInterface } from '../../model/map.model';
+import { readFileSync, writeFileSync } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
+import { inflate, deflate } from 'pako';
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class PolygonService {
   private configService = inject(ConfigService);
@@ -31,8 +31,8 @@ export class PolygonService {
 
     if (polygonsContent) {
       this.#polygons = (
-        JSON.parse(inflate(polygonsContent, { to: "string" })) as PolygonInterface[]
-      ).map((p) => new PolygonClass(p));
+        JSON.parse(inflate(polygonsContent, { to: 'string' })) as PolygonInterface[]
+      ).map(p => new PolygonClass(p));
 
       for (const polygon of this.#polygons) {
         this.#polygonsMap.set(polygon.id, polygon);
@@ -46,7 +46,7 @@ export class PolygonService {
    */
   #savePolygonsToFile(): boolean {
     //Write polygons back to file
-    const gziped = deflate(JSON.stringify(this.#polygons), { to: "string" });
+    const gziped = deflate(JSON.stringify(this.#polygons), { to: 'string' });
     writeFileSync(this.configService.polygonsPath, gziped);
     return true;
   }
@@ -106,7 +106,7 @@ export class PolygonService {
   deletePolygon(id: string): boolean {
     //delete polygon
     this.#polygonsMap.delete(id);
-    this.#polygons = this.#polygons.filter((b) => b.id !== id);
+    this.#polygons = this.#polygons.filter(b => b.id !== id);
     //save polygons
     return this.#savePolygonsToFile();
   }

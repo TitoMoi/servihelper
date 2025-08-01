@@ -6,22 +6,19 @@
           id="iconHeaderId"
           class="m-2 me-3 mb-4"
           svgIcon="nocolorsection"
-          [matTooltip]="t('ICON_NO_COLOR_SECTION')"
-        ></mat-icon>
+          [matTooltip]="t('ICON_NO_COLOR_SECTION')"></mat-icon>
         <mat-icon
           class="m-2"
           svgIcon="pdfnocolor"
           [matTooltip]="t('ICON_PDF_INFINITE')"
-          (click)="toPdf(false, false)"
-        ></mat-icon>
+          (click)="toPdf(false, false)"></mat-icon>
         <span class="mx-2 mt-2">
           <div class="d-flex flex-column align-items-center">
             <mat-icon
               svgIcon="midweeklistnocolor"
               [matTooltip]="t('ICON_PDF_BAND_BLACK')"
-              (click)="toPdfBoard(false, true)"
-            ></mat-icon>
-            <span class="f-small uppercase">{{ t("COMPRESSED") }}</span>
+              (click)="toPdfBoard(false, true)"></mat-icon>
+            <span class="f-small uppercase">{{ t('COMPRESSED') }}</span>
           </div>
         </span>
       </div>
@@ -32,36 +29,31 @@
           id="iconHeaderId"
           class="m-2 me-3 mb-4 reduceIconSize"
           svgIcon="colorsection"
-          [matTooltip]="t('ICON_COLOR_SECTION')"
-        ></mat-icon>
+          [matTooltip]="t('ICON_COLOR_SECTION')"></mat-icon>
         <mat-icon
           class="m-2"
           svgIcon="pdf"
           [matTooltip]="t('ICON_PDF_INFINITE_COLOR')"
-          (click)="toPdf(true, false)"
-        ></mat-icon>
+          (click)="toPdf(true, false)"></mat-icon>
         <mat-icon
           class="m-2"
           svgIcon="png"
           [matTooltip]="t('ICON_PNG')"
-          (click)="toPng()"
-        ></mat-icon>
+          (click)="toPng()"></mat-icon>
         <mat-icon
           class="m-2 ms-5"
           svgIcon="midweeklist"
           [matTooltip]="t('ICON_PDF_BAND')"
-          (click)="toPdfBoard(false)"
-        ></mat-icon>
+          (click)="toPdfBoard(false)"></mat-icon>
         <mat-icon
           class="m-2"
           svgIcon="weekendcolorlist"
           [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
-          (click)="toPdfBoard(true)"
-        ></mat-icon>
+          (click)="toPdfBoard(true)"></mat-icon>
       </div>
     </div>
   } @else {
-    {{ t("REPORT_NO_ASSIGNMENTS") }}
+    {{ t('REPORT_NO_ASSIGNMENTS') }}
   }
 </div>
 <div id="toPngDivId" style="width: 791px; height: auto" class="bg-color-white">
@@ -77,8 +69,7 @@
           class="fw-bold pt-2 pb-2"
           [style.backgroundColor]="defaultReportDateColor"
           [style.fontSize]="defaultReportFontSize"
-          [style.width]="'65%'"
-        >
+          [style.width]="'65%'">
           {{
             ag.assignments[0].date
               | translocoDate
@@ -89,8 +80,7 @@
         </th>
         <th
           [style.backgroundColor]="defaultReportDateColor"
-          [style.fontSize]="defaultReportFontSize"
-        >
+          [style.fontSize]="defaultReportFontSize">
           {{ ag.assignments[0].room | roomNamePipe }}
         </th>
       </tr>
@@ -101,18 +91,13 @@
             [id]="assignment.assignType.id"
             class="ps-3 pt-2"
             [style]="
-              getBorderRight(
-                (assignment.assignType.id | assignTypePipe).color || 'transparent'
-              )
+              getBorderRight((assignment.assignType.id | assignTypePipe).color || 'transparent')
             "
             [style.fontSize]="defaultReportFontSize"
-            [style.width]="'65%'"
-          >
+            [style.width]="'65%'">
             <div class="me-3">
               {{
-                assignment.theme
-                  ? assignment.theme
-                  : (assignment.assignType | assignTypeNamePipe)
+                assignment.theme ? assignment.theme : (assignment.assignType | assignTypeNamePipe)
               }}
             </div>
           </td>

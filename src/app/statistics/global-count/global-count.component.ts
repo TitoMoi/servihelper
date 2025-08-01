@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
-import { AssignmentInterface } from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
+import { AssignmentInterface } from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
 import {
   getLastAssignment,
   getLastAssistantAssignment,
@@ -11,47 +11,57 @@ import {
   getPenultimatePrincipalAssignment,
   setAssistantCountById,
   setCountById,
-  setPrincipalCountById,
-} from "app/functions";
+  setPrincipalCountById
+} from 'app/functions';
 import {
   ParticipantDynamicInterface,
-  ParticipantInterface,
-} from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { Subscription } from "rxjs";
+  ParticipantInterface
+} from 'app/participant/model/participant.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { Subscription } from 'rxjs';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, inject } from "@angular/core";
-import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
-import { TranslocoService, TranslocoDirective } from "@ngneat/transloco";
-import { SortService } from "app/services/sort.service";
-import { TranslocoDatePipe } from "@ngneat/transloco-locale";
-import { DateFnsLocaleService } from "app/services/date-fns-locale.service";
-import { MatIconModule } from "@angular/material/icon";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { ExportService } from "app/services/export.service";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
-import { MatInputModule } from "@angular/material/input";
-import { isWithinInterval } from "date-fns";
-import { SharedService } from "app/services/shared.service";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject
+} from '@angular/core';
+import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { TranslocoService, TranslocoDirective } from '@ngneat/transloco';
+import { SortService } from 'app/services/sort.service';
+import { TranslocoDatePipe } from '@ngneat/transloco-locale';
+import { DateFnsLocaleService } from 'app/services/date-fns-locale.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ExportService } from 'app/services/export.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { isWithinInterval } from 'date-fns';
+import { SharedService } from 'app/services/shared.service';
 
 @Component({
-    selector: "app-global-count",
-    templateUrl: "./global-count.component.html",
-    styleUrls: ["./global-count.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        TranslocoDirective,
-        MatExpansionModule,
-        MatCheckboxModule,
-        MatIconModule,
-        TranslocoDatePipe,
-        MatFormFieldModule,
-        MatDatepickerModule,
-        ReactiveFormsModule,
-        MatInputModule,
-    ]
+  selector: 'app-global-count',
+  templateUrl: './global-count.component.html',
+  styleUrls: ['./global-count.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslocoDirective,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatIconModule,
+    TranslocoDatePipe,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatInputModule
+  ]
 })
 export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   private assignmentService = inject(AssignmentService);
@@ -65,11 +75,11 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   private sharedService = inject(SharedService);
   private cdr = inject(ChangeDetectorRef);
 
-  @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
-  @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
-  @ViewChild("hideExternalsBox") hideExternalsBox: MatCheckbox;
-  @ViewChild("onlyPrincipalsBox") onlyPrincipalsBox: MatCheckbox;
-  @ViewChild("onlyAssistantsBox") onlyAssistantsBox: MatCheckbox;
+  @ViewChild('onlyWomenBox') onlyWomenBox: MatCheckbox;
+  @ViewChild('onlyMenBox') onlyMenBox: MatCheckbox;
+  @ViewChild('hideExternalsBox') hideExternalsBox: MatCheckbox;
+  @ViewChild('onlyPrincipalsBox') onlyPrincipalsBox: MatCheckbox;
+  @ViewChild('onlyAssistantsBox') onlyAssistantsBox: MatCheckbox;
 
   @Input() allowedAssignTypesIds: string[];
 
@@ -79,7 +89,7 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
 
   form = this.formBuilder.group<Record<string, Date>>({
     dateStart: null,
-    dateEnd: null,
+    dateEnd: null
   });
 
   subscription: Subscription = new Subscription();
@@ -89,11 +99,11 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.form.valueChanges.subscribe(async (v) => {
+      this.form.valueChanges.subscribe(async v => {
         if (v.dateStart && v.dateEnd) {
           await this.getStatistics();
         }
-      }),
+      })
     );
 
     //Subscribe to lang changes and update "distanceBetweenPenultimaAndLast"
@@ -103,10 +113,10 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
         if (this.participants.length) {
           this.sharedService.getDistanceBetweenPenultimaAndLast(
             this.participants,
-            this.dateFnsLocaleService.locales[this.translocoService.getActiveLang()],
+            this.dateFnsLocaleService.locales[this.translocoService.getActiveLang()]
           );
         }
-      }),
+      })
     );
   }
 
@@ -116,15 +126,15 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
 
   async getStatistics() {
     const assignments = (await this.assignmentService.getAssignments(true)).filter(
-      (a) =>
+      a =>
         this.allowedAssignTypesIds.includes(a.assignType) &&
         (this.form.value.dateStart && this.form.value.dateEnd
           ? // For the date within the interval
             isWithinInterval(new Date(a.date), {
               start: new Date(this.form.value.dateStart),
-              end: new Date(this.form.value.dateEnd),
+              end: new Date(this.form.value.dateEnd)
             })
-          : true), //true means get all assignments
+          : true) //true means get all assignments
     );
 
     /* available participants that can do this kind of type assignments
@@ -132,21 +142,21 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     and watch if he can participate in some of this assign types */
     this.participants = [];
     this.participants = this.participantService.getParticipants(true).filter(
-      (p) =>
+      p =>
         (p.available && this.onlyWomenBox.checked
           ? Boolean(p.isWoman)
           : false || this.onlyMenBox.checked
             ? Boolean(p.isWoman) === false
             : false || (!this.onlyWomenBox.checked && !this.onlyMenBox.checked)) &&
         p.assignTypes
-          .filter((at) => this.allowedAssignTypesIds.includes(at.assignTypeId))
-          .some((at) => {
+          .filter(at => this.allowedAssignTypesIds.includes(at.assignTypeId))
+          .some(at => {
             return (
               (this.onlyPrincipalsBox.checked ? !!at.canPrincipal : false) ||
               (this.onlyAssistantsBox.checked ? !!at.canAssistant : false) ||
               (!this.onlyPrincipalsBox.checked && !this.onlyAssistantsBox.checked)
             );
-          }),
+          })
     ) as ParticipantDynamicInterface[];
 
     //Global
@@ -199,10 +209,8 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
       if (!this.onlyPrincipalsBox.checked && !this.onlyAssistantsBox.checked) {
         assignment = getPenultimateAssignment(assignments, participant);
         if (assignment) {
-          participant.isPrincipalPenultimateAssignment =
-            assignment.principal === participant.id;
-          participant.isAssistantPenultimateAssignment =
-            assignment.assistant === participant.id;
+          participant.isPrincipalPenultimateAssignment = assignment.principal === participant.id;
+          participant.isAssistantPenultimateAssignment = assignment.assistant === participant.id;
         }
       }
       //principals
@@ -220,15 +228,14 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
         participant.penultimateAssignmentDate = assignment?.date;
         //Search the assignmentType and inject
         const assignType = this.assignTypeService.getAssignType(assignment.assignType);
-        participant.penultimateAssignType =
-          this.assignTypeService.getNameOrTranslation(assignType);
+        participant.penultimateAssignType = this.assignTypeService.getNameOrTranslation(assignType);
       }
     }
 
     //Get the distance, i18n sensitive
     this.sharedService.getDistanceBetweenPenultimaAndLast(
       this.participants,
-      this.dateFnsLocaleService.locales[this.translocoService.getActiveLang()],
+      this.dateFnsLocaleService.locales[this.translocoService.getActiveLang()]
     );
 
     //Order by count and distance
@@ -291,18 +298,18 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
     if (!event.checked) {
       return;
     }
-    this.globalList = this.globalList.filter((participant) => !participant.isExternal);
+    this.globalList = this.globalList.filter(participant => !participant.isExternal);
   }
 
   filterOnlyMen() {
-    return this.globalList.filter((participant) => !participant.isWoman);
+    return this.globalList.filter(participant => !participant.isWoman);
   }
 
   filterOnlyWomen() {
-    return this.globalList.filter((participant) => participant.isWoman);
+    return this.globalList.filter(participant => participant.isWoman);
   }
 
   async toPng() {
-    this.exportService.toPng("toPngDivId", "statistics-global");
+    this.exportService.toPng('toPngDivId', 'statistics-global');
   }
 }

@@ -1,29 +1,29 @@
-import { Component, inject } from "@angular/core";
-import { ReactiveFormsModule, UntypedFormBuilder, Validators } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { TranslocoModule } from "@ngneat/transloco";
-import { SheetTitleService } from "../service/sheet-title.service";
-import { SheetTitleInterface } from "../model/sheet-title.model";
-import { ConfigService } from "app/config/service/config.service";
-import { AssignmentService } from "app/assignment/service/assignment.service";
+import { Component, inject } from '@angular/core';
+import { ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { TranslocoModule } from '@ngneat/transloco';
+import { SheetTitleService } from '../service/sheet-title.service';
+import { SheetTitleInterface } from '../model/sheet-title.model';
+import { ConfigService } from 'app/config/service/config.service';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
 
 @Component({
-    selector: "app-delete-sheet-title",
-    imports: [
-        TranslocoModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        RouterLink,
-    ],
-    templateUrl: "./delete-sheet-title.component.html",
-    styleUrls: ["./delete-sheet-title.component.scss"]
+  selector: 'app-delete-sheet-title',
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    RouterLink
+  ],
+  templateUrl: './delete-sheet-title.component.html',
+  styleUrls: ['./delete-sheet-title.component.scss']
 })
 export class DeleteSheetTitleComponent {
   private formBuilder = inject(UntypedFormBuilder);
@@ -37,7 +37,7 @@ export class DeleteSheetTitleComponent {
 
   form = this.formBuilder.group({
     id: this.title.id,
-    name: [{ value: this.title.name, disabled: true }, Validators.required],
+    name: [{ value: this.title.name, disabled: true }, Validators.required]
   });
 
   onSubmit(title: SheetTitleInterface): void {
@@ -52,13 +52,13 @@ export class DeleteSheetTitleComponent {
       const config = this.configService.getConfig();
 
       if (config.assignmentHeaderTitle === title.id) {
-        this.configService.updateConfigByKey("assignmentHeaderTitle", "");
+        this.configService.updateConfigByKey('assignmentHeaderTitle', '');
       }
     }
 
     //navigate to parent
-    this.router.navigate(["../.."], {
-      relativeTo: this.activatedRoute,
+    this.router.navigate(['../..'], {
+      relativeTo: this.activatedRoute
     });
   }
 }

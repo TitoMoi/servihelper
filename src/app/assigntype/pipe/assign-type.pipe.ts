@@ -1,10 +1,10 @@
-import { Pipe, PipeTransform, inject } from "@angular/core";
-import { AssignTypeInterface } from "../model/assigntype.model";
-import { AssignTypeService } from "../service/assigntype.service";
+import { Pipe, PipeTransform, inject } from '@angular/core';
+import { AssignTypeInterface } from '../model/assigntype.model';
+import { AssignTypeService } from '../service/assigntype.service';
 
 @Pipe({
-  name: "assignTypePipe",
-  standalone: true,
+  name: 'assignTypePipe',
+  standalone: true
 })
 export class AssignTypePipe implements PipeTransform {
   private assignTypeService = inject(AssignTypeService);

@@ -3,7 +3,7 @@
     <div class="col">
       <div class="d-flex">
         <mat-icon class="me-2" svgIcon="info-blue" aria-label="icon"></mat-icon>
-        <div>{{ t("STATISTICS_ROLE_TIP") }}</div>
+        <div>{{ t('STATISTICS_ROLE_TIP') }}</div>
       </div>
     </div>
   </div>
@@ -15,8 +15,7 @@
     <app-fake-accordion
       #fakeGlobalAccordion
       [titleKey]="'STATISTICS_COUNT_GLOBAL_TITLE'"
-      (click)="showGlobalCount = true"
-    ></app-fake-accordion>
+      (click)="showGlobalCount = true"></app-fake-accordion>
   }
 </div>
 <div class="mb-3">
@@ -26,8 +25,7 @@
     <app-fake-accordion
       #fakeTerritoryCount
       [titleKey]="'STATISTICS_COUNT_TERRITORY_TITLE'"
-      (click)="showTerritoryCount = true"
-    ></app-fake-accordion>
+      (click)="showTerritoryCount = true"></app-fake-accordion>
   }
 </div>
 <div class="mb-3">
@@ -37,7 +35,6 @@
     <app-fake-accordion
       #fakeTerritoryCount
       [titleKey]="'STATISTICS_TERRITORY_GRAPHICS'"
-      (click)="showTerritoryGraphics = true"
-    ></app-fake-accordion>
+      (click)="showTerritoryGraphics = true"></app-fake-accordion>
   }
 </div>

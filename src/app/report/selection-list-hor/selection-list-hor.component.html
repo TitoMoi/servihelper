@@ -4,32 +4,28 @@
       <mat-icon
         class="m-2 me-3 mb-4"
         svgIcon="nocolorsection"
-        [matTooltip]="t('ICON_NO_COLOR_SECTION')"
-      ></mat-icon>
+        [matTooltip]="t('ICON_NO_COLOR_SECTION')"></mat-icon>
       <mat-icon
         class="m-2"
         svgIcon="pdfnocolor"
         aria-label="icon"
         [matTooltip]="t('ICON_PDF_PAGE')"
-        (click)="toPdfForPrint()"
-      ></mat-icon>
+        (click)="toPdfForPrint()"></mat-icon>
     </div>
     <div id="colorSectionDiv" class="border">
       <mat-icon
         class="m-2 me-3 mb-4 reduceIconSize"
         svgIcon="colorsection"
-        [matTooltip]="t('ICON_COLOR_SECTION')"
-      ></mat-icon>
+        [matTooltip]="t('ICON_COLOR_SECTION')"></mat-icon>
       <mat-icon
         class="m-2"
         svgIcon="png"
         aria-label="icon"
         [matTooltip]="t('ICON_PNG')"
-        (click)="toPng()"
-      ></mat-icon>
+        (click)="toPng()"></mat-icon>
     </div>
   } @else {
-    {{ t("REPORT_NO_ASSIGNMENTS") }}
+    {{ t('REPORT_NO_ASSIGNMENTS') }}
   }
 </div>
 <div id="toPngDivId" class="bg-color-white" style="width: 1020px">
@@ -40,8 +36,7 @@
         <th
           class="fw-bold"
           [style.backgroundColor]="defaultReportDateColor"
-          [style.fontSize]="defaultReportFontSizeHorizontal"
-        >
+          [style.fontSize]="defaultReportFontSizeHorizontal">
           {{
             ag.assignments[0].date
               | translocoDate
@@ -58,8 +53,7 @@
             [style.borderBottomColor]="
               (assignment.assignType.id | assignTypePipe).color || 'transparent'
             "
-            [style.fontSize]="defaultReportFontSizeHorizontal"
-          >
+            [style.fontSize]="defaultReportFontSizeHorizontal">
             {{ assignment.assignType | assignTypeNamePipe }}
           </th>
         }

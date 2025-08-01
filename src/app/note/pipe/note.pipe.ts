@@ -1,10 +1,10 @@
-import { Pipe, PipeTransform, inject } from "@angular/core";
-import { NoteInterface } from "../model/note.model";
-import { NoteService } from "../service/note.service";
+import { Pipe, PipeTransform, inject } from '@angular/core';
+import { NoteInterface } from '../model/note.model';
+import { NoteService } from '../service/note.service';
 
 @Pipe({
-  name: "notePipe",
-  standalone: true,
+  name: 'notePipe',
+  standalone: true
 })
 export class NotePipe implements PipeTransform {
   private noteService = inject(NoteService);

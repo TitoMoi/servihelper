@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GlobalCountComponent } from "./global-count.component";
+import { GlobalCountComponent } from './global-count.component';
 
-describe("GlobalCountComponent", () => {
+describe('GlobalCountComponent', () => {
   let component: GlobalCountComponent;
   let fixture: ComponentFixture<GlobalCountComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GlobalCountComponent],
+      imports: [GlobalCountComponent]
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe("GlobalCountComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,24 +1,23 @@
 import {
   AssignmentInterface,
-  AssignmentTableInterface,
-} from "app/assignment/model/assignment.model";
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { RoomService } from "app/room/service/room.service";
+  AssignmentTableInterface
+} from 'app/assignment/model/assignment.model';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { RoomService } from 'app/room/service/room.service';
 
-import { Injectable, inject } from "@angular/core";
-import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { TerritoryContextInterface } from "app/map/model/map.model";
+import { Injectable, inject } from '@angular/core';
+import { ParticipantDynamicInterface } from 'app/participant/model/participant.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { TerritoryContextInterface } from 'app/map/model/map.model';
 
-export type SortOrderType = "Asc" | "Desc";
+export type SortOrderType = 'Asc' | 'Desc';
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class SortService {
   private assignTypeService = inject(AssignTypeService);
   private assignmentService = inject(AssignmentService);
   private roomService = inject(RoomService);
-
 
   /**
    *
@@ -27,13 +26,13 @@ export class SortService {
    */
   sortAssignmentsByDateThenRoomAndAssignType(
     assignments: AssignmentTableInterface[] | AssignmentInterface[],
-    order: SortOrderType,
+    order: SortOrderType
   ) {
     //Sort by date first
     assignments.sort(
-      order === "Desc"
+      order === 'Desc'
         ? this.assignmentService.sortAssignmentsByDateDesc
-        : this.assignmentService.sortAssignmentsByDateAsc,
+        : this.assignmentService.sortAssignmentsByDateAsc
     );
 
     //Diferent sort, first separate date into arrays, then double sort, first room and then assign type
@@ -66,7 +65,7 @@ export class SortService {
           } else {
             return roomAOrder > roomBOrder ? 1 : -1;
           }
-        },
+        }
       );
     }
 
@@ -129,10 +128,7 @@ export class SortService {
     return 0;
   }
 
-  sortByCountAndByDistance(
-    a: ParticipantDynamicInterface,
-    b: ParticipantDynamicInterface,
-  ): number {
+  sortByCountAndByDistance(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface): number {
     if (a.count < b.count) {
       return -1;
     }
@@ -140,18 +136,14 @@ export class SortService {
       return 1;
     }
     if (
-      new Date(a.lastAssignmentDate).getTime() -
-        new Date(a.penultimateAssignmentDate).getTime() <
-      new Date(b.lastAssignmentDate).getTime() -
-        new Date(b.penultimateAssignmentDate).getTime()
+      new Date(a.lastAssignmentDate).getTime() - new Date(a.penultimateAssignmentDate).getTime() <
+      new Date(b.lastAssignmentDate).getTime() - new Date(b.penultimateAssignmentDate).getTime()
     ) {
       return -1;
     }
     if (
-      new Date(a.lastAssignmentDate).getTime() -
-        new Date(a.penultimateAssignmentDate).getTime() >
-      new Date(b.lastAssignmentDate).getTime() -
-        new Date(b.penultimateAssignmentDate).getTime()
+      new Date(a.lastAssignmentDate).getTime() - new Date(a.penultimateAssignmentDate).getTime() >
+      new Date(b.lastAssignmentDate).getTime() - new Date(b.penultimateAssignmentDate).getTime()
     ) {
       return 1;
     }
@@ -175,7 +167,7 @@ export class SortService {
 
   sortParticipantsByCountOrDate(
     a: ParticipantDynamicInterface,
-    b: ParticipantDynamicInterface,
+    b: ParticipantDynamicInterface
   ): number {
     if (a.count < b.count) {
       return -1;

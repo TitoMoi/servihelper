@@ -14,20 +14,20 @@ export interface AssignTypeInterface {
 }
 
 export type AssignTypes =
-  | "chairman"
-  | "publicSpeech"
-  | "initialPrayer"
-  | "endingPrayer"
-  | "treasures"
-  | "spiritualGems"
-  | "bibleReading"
-  | "analysysAudience"
-  | "interestInOthers" //ToDo: For compatibility, must be removed on v6
-  | "initialCall"
-  | "returnVisit"
-  | "bibleStudy"
-  | "talk"
-  | "explainBeliefs"
-  | "livingAsChristians"
-  | "congregationBibleStudy"
-  | "other";
+  | 'chairman'
+  | 'publicSpeech'
+  | 'initialPrayer'
+  | 'endingPrayer'
+  | 'treasures'
+  | 'spiritualGems'
+  | 'bibleReading'
+  | 'analysysAudience'
+  | 'interestInOthers' //ToDo: For compatibility, must be removed on v6
+  | 'initialCall'
+  | 'returnVisit'
+  | 'bibleStudy'
+  | 'talk'
+  | 'explainBeliefs'
+  | 'livingAsChristians'
+  | 'congregationBibleStudy'
+  | 'other';

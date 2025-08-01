@@ -1,23 +1,30 @@
-import { ConfigService } from "app/config/service/config.service";
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit, inject } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
-import { PdfService } from "./services/pdf.service";
-import { RouterOutlet } from "@angular/router";
-import { NavigationComponent } from "./navigation/navigation.component";
-import { OnlineService } from "app/online/service/online.service";
-import { LockService } from "app/lock/service/lock.service";
-import { readdirSync } from "fs-extra";
-import path from "path";
-import { TranslocoDirective } from "@ngneat/transloco";
-import { MatButtonModule } from "@angular/material/button";
+import { ConfigService } from 'app/config/service/config.service';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  OnInit,
+  inject
+} from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { PdfService } from './services/pdf.service';
+import { RouterOutlet } from '@angular/router';
+import { NavigationComponent } from './navigation/navigation.component';
+import { OnlineService } from 'app/online/service/online.service';
+import { LockService } from 'app/lock/service/lock.service';
+import { readdirSync } from 'fs-extra';
+import path from 'path';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: "app-root",
-    templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.scss"],
-    imports: [NavigationComponent, RouterOutlet, TranslocoDirective, MatButtonModule],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  imports: [NavigationComponent, RouterOutlet, TranslocoDirective, MatButtonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   private configService = inject(ConfigService);
@@ -34,7 +41,7 @@ export class AppComponent implements OnInit {
   // Flag to show a blocking screen with information.
   showWarningMsg = false;
   //Register when we quit the app, works with the cross X
-  @HostListener("window:unload", ["$event"])
+  @HostListener('window:unload', ['$event'])
   unloadHandler() {
     if (!this.showLockMsg && !this.showWarningMsg) {
       this.lockService.releaseLock();
@@ -44,15 +51,15 @@ export class AppComponent implements OnInit {
   constructor() {
     //Get only svg files and then get only the name part (without extension)
     const files = readdirSync(this.configService.iconsFilesPath)
-      .filter((file) => path.extname(file).toLowerCase() === ".svg")
-      .map((file) => path.parse(file).name);
+      .filter(file => path.extname(file).toLowerCase() === '.svg')
+      .map(file => path.parse(file).name);
     //Register all svg icons
     for (const file of files) {
       this.matIconRegistry.addSvgIcon(
         file,
         this.domSanitizer.bypassSecurityTrustResourceUrl(
-          path.join(this.configService.iconsFilesPath, file + ".svg"),
-        ),
+          path.join(this.configService.iconsFilesPath, file + '.svg')
+        )
       );
     }
     for (const file of files) {

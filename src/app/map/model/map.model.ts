@@ -1,4 +1,4 @@
-import { LatLngLiteral } from "leaflet";
+import { LatLngLiteral } from 'leaflet';
 
 //The data that we want to associate with a map, this is not the leaflet map, polygon or whatever object from the library
 

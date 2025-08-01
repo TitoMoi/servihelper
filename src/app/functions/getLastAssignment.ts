@@ -1,7 +1,7 @@
-import { isAfter } from "date-fns";
+import { isAfter } from 'date-fns';
 
-import { AssignmentInterface } from "../assignment/model/assignment.model";
-import { ParticipantInterface } from "../participant/model/participant.model";
+import { AssignmentInterface } from '../assignment/model/assignment.model';
+import { ParticipantInterface } from '../participant/model/participant.model';
 
 /**
  *
@@ -11,12 +11,12 @@ import { ParticipantInterface } from "../participant/model/participant.model";
  */
 export function getLastAssignment(
   assignmentList: AssignmentInterface[],
-  participant: ParticipantInterface,
+  participant: ParticipantInterface
 ): AssignmentInterface | undefined {
   const firstAssignment = assignmentList
     .filter(
-      (assignment) =>
-        assignment.assistant === participant.id || assignment.principal === participant.id,
+      assignment =>
+        assignment.assistant === participant.id || assignment.principal === participant.id
     )
     .sort(compareFn)[0]; //Get first value
 

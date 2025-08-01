@@ -4,7 +4,7 @@
     <mat-expansion-panel-header>
       <mat-panel-title>
         <h3 class="m-3">
-          {{ t("STATISTICS_COUNT_GLOBAL_TITLE") }}
+          {{ t('STATISTICS_COUNT_GLOBAL_TITLE') }}
         </h3>
       </mat-panel-title>
     </mat-expansion-panel-header>
@@ -16,40 +16,32 @@
       </div>
       <div class="col-auto">
         <div class="d-flex align-items-center">
-          <mat-checkbox
-            #onlyWomenBox
-            color="primary"
-            class="me-2"
-            (change)="changeWoman($event)"
-            >{{ t("STATISTICS_ONLY_WOMAN") }}</mat-checkbox
-          >
-          <mat-checkbox
-            #onlyMenBox
-            color="primary"
-            class="me-2"
-            (change)="changeMan($event)"
-            >{{ t("STATISTICS_ONLY_MAN") }}</mat-checkbox
-          >
+          <mat-checkbox #onlyWomenBox color="primary" class="me-2" (change)="changeWoman($event)">{{
+            t('STATISTICS_ONLY_WOMAN')
+          }}</mat-checkbox>
+          <mat-checkbox #onlyMenBox color="primary" class="me-2" (change)="changeMan($event)">{{
+            t('STATISTICS_ONLY_MAN')
+          }}</mat-checkbox>
           <mat-checkbox
             #hideExternalsBox
             color="primary"
             class="me-3"
             (change)="changeExternals($event)"
-            >{{ t("STATISTICS_EXCLUDE_EXTERNALS") }}</mat-checkbox
+            >{{ t('STATISTICS_EXCLUDE_EXTERNALS') }}</mat-checkbox
           >
           <mat-checkbox
             #onlyPrincipalsBox
             color="primary"
             class="me-3"
             (change)="changeOnlyPrincipals()"
-            >{{ t("STATISTICS_ONLY_PRINCIPALS") }}</mat-checkbox
+            >{{ t('STATISTICS_ONLY_PRINCIPALS') }}</mat-checkbox
           >
           <mat-checkbox
             #onlyAssistantsBox
             color="primary"
             class="me-3"
             (change)="changeOnlyAssistants()"
-            >{{ t("STATISTICS_ONLY_ASSISTANTS") }}</mat-checkbox
+            >{{ t('STATISTICS_ONLY_ASSISTANTS') }}</mat-checkbox
           >
         </div>
       </div>
@@ -57,11 +49,11 @@
         <div class="d-flex justify-content-start">
           <span class="me-3"
             ><span class="border padding bg-color-lightskyblue2">1</span> -
-            {{ t("STATISTICS_1") }}</span
+            {{ t('STATISTICS_1') }}</span
           >
           <span
             ><span class="border padding bg-color-lightcoral2">2</span> -
-            {{ t("STATISTICS_2") }}</span
+            {{ t('STATISTICS_2') }}</span
           >
         </div>
       </div>
@@ -69,7 +61,7 @@
     <div class="row m-3 justify-content-center">
       <div class="col-auto">
         <mat-form-field>
-          <mat-label>{{ t("STATISTICS_MONTH_RANGE_PICKER") }}</mat-label>
+          <mat-label>{{ t('STATISTICS_MONTH_RANGE_PICKER') }}</mat-label>
           <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
             <input matStartDate formControlName="dateStart" placeholder="Start date" />
             <input matEndDate formControlName="dateEnd" placeholder="End date" />
@@ -82,19 +74,19 @@
     <div id="toPngDivId" class="bg-color-white">
       <div class="row m-3">
         <div class="col-2">
-          <b>{{ t("STATISTICS_NAME") }}</b>
+          <b>{{ t('STATISTICS_NAME') }}</b>
         </div>
         <div class="col-2">
-          <b>{{ t("STATISTICS_COUNT") }}</b>
+          <b>{{ t('STATISTICS_COUNT') }}</b>
         </div>
         <div class="col-3">
-          <b>{{ t("STATISTICS_PENULTIMA") }}</b>
+          <b>{{ t('STATISTICS_PENULTIMA') }}</b>
         </div>
         <div class="col-3">
-          <b>{{ t("STATISTICS_LAST") }}</b>
+          <b>{{ t('STATISTICS_LAST') }}</b>
         </div>
         <div class="col-2">
-          <b>{{ t("STATISTICS_DISTANCE") }}</b>
+          <b>{{ t('STATISTICS_DISTANCE') }}</b>
         </div>
       </div>
       @for (participant of globalList; track participant) {
@@ -106,8 +98,7 @@
                 <mat-icon
                   id="unavailableId"
                   class="ms-1 cursor-arrow"
-                  svgIcon="unavailable"
-                ></mat-icon>
+                  svgIcon="unavailable"></mat-icon>
               }
             </div>
           </div>
@@ -121,9 +112,7 @@
             @if (participant.isAssistantPenultimateAssignment) {
               <span class="border padding bg-color-lightcoral2">2</span>
             }
-            {{
-              participant.penultimateAssignmentDate | translocoDate: { dateStyle: "medium" }
-            }}
+            {{ participant.penultimateAssignmentDate | translocoDate: { dateStyle: 'medium' } }}
             - {{ participant.penultimateAssignType }}
           </div>
           <div class="col-3">
@@ -133,7 +122,7 @@
             @if (participant.isAssistantLastAssignment === true) {
               <span class="border padding bg-color-lightcoral2">2</span>
             }
-            {{ participant.lastAssignmentDate | translocoDate: { dateStyle: "medium" } }}
+            {{ participant.lastAssignmentDate | translocoDate: { dateStyle: 'medium' } }}
             - {{ participant.lastAssignType }}
           </div>
           <div class="col-2">

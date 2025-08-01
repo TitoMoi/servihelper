@@ -2,59 +2,57 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title
-        >{{ this.isUpdate ? t("ASSIGNTYPE_UPDATE_TITLE") : t("ASSIGNTYPE_CREATE_TITLE") }}
+        >{{ this.isUpdate ? t('ASSIGNTYPE_UPDATE_TITLE') : t('ASSIGNTYPE_CREATE_TITLE') }}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row mb-2">
         <div class="col-12">
           <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
             <input
               matInput
               [appautofocus]="isUpdate ? false : true"
               spellcheck="false"
-              formControlName="name"
-            />
+              formControlName="name" />
             <mat-hint *ngIf="!isOtherAssignmentType()" class="fst-italic">{{
-              t("ASSIGNTYPE_NAME_HINT")
+              t('ASSIGNTYPE_NAME_HINT')
             }}</mat-hint>
           </mat-form-field>
         </div>
       </div>
       <div class="row justify-content-start align-items-center">
         <div class="col-12 mb-2">
-          {{ t("ASSIGNTYPE_ORDER_LABEL") }}
+          {{ t('ASSIGNTYPE_ORDER_LABEL') }}
         </div>
         <div class="col-auto">
           <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_ORDER") }}</mat-label>
+            <mat-label>{{ t('PLACEHOLDER_ORDER') }}</mat-label>
             <input matInput type="number" formControlName="order" />
           </mat-form-field>
         </div>
       </div>
       <div class="row justify-content-start align-items-center">
         <div class="col-12 mb-2">
-          {{ t("ASSIGNTYPE_DAYS_LABEL") }}
+          {{ t('ASSIGNTYPE_DAYS_LABEL') }}
         </div>
         <div class="col-auto">
           <div class="d-flex align-items-center">
             <mat-form-field>
-              <mat-label>{{ t("PLACEHOLDER_TIME") }}</mat-label>
+              <mat-label>{{ t('PLACEHOLDER_TIME') }}</mat-label>
               <input matInput type="number" formControlName="days" />
               <mat-icon
                 matSuffix
                 svgIcon="time"
                 class="me-2"
-                [matTooltip]="t('ASSIGNTYPE_TIME_ICON')"
-              ></mat-icon>
+                [matTooltip]="t('ASSIGNTYPE_TIME_ICON')"></mat-icon>
             </mat-form-field>
           </div>
         </div>
       </div>
       <div class="row justify-content-start align-items-center mb-2">
         <div class="col-auto">
-          <mat-label class="me-3">{{ t("ASSIGNTYPE_COLOR") }}</mat-label>
+          <mat-label class="me-3">{{ t('ASSIGNTYPE_COLOR') }}</mat-label>
           <input type="color" formControlName="color" />
         </div>
       </div>
@@ -66,12 +64,9 @@
               color="primary"
               type="button"
               [matTooltip]="t('BUTTON_SHOW_AVAILABLE_COLORS_TOOLTIP')"
-              (click)="showColors = !showColors"
-            >
+              (click)="showColors = !showColors">
               {{
-                showColors
-                  ? t("BUTTON_HIDE_AVAILABLE_COLORS")
-                  : t("BUTTON_SHOW_AVAILABLE_COLORS")
+                showColors ? t('BUTTON_HIDE_AVAILABLE_COLORS') : t('BUTTON_SHOW_AVAILABLE_COLORS')
               }}
             </button>
           }
@@ -90,36 +85,27 @@
       </div>
       <div class="row justify-content-start">
         <div class="col-auto">
-          <mat-checkbox
-            labelPosition="before"
-            color="primary"
-            formControlName="hasAssistant"
-            >{{ t("ASSIGNTYPE_HAS_ASSISTANT") }}</mat-checkbox
-          >
+          <mat-checkbox labelPosition="before" color="primary" formControlName="hasAssistant">{{
+            t('ASSIGNTYPE_HAS_ASSISTANT')
+          }}</mat-checkbox>
         </div>
         <div class="col-auto">
           <mat-checkbox labelPosition="before" color="primary" formControlName="repeat">{{
-            t("ASSIGNTYPE_REPEAT")
+            t('ASSIGNTYPE_REPEAT')
           }}</mat-checkbox>
         </div>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button
-        mat-raised-button
-        type="button"
-        class="me-3"
-        [routerLink]="isUpdate ? '../..' : '..'"
-      >
-        {{ t("BUTTON_CANCEL") }}
+      <button mat-raised-button type="button" class="me-3" [routerLink]="isUpdate ? '../..' : '..'">
+        {{ t('BUTTON_CANCEL') }}
       </button>
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="form.invalid || (netStatusOffline$ | async)"
-      >
-        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+        [disabled]="form.invalid || (netStatusOffline$ | async)">
+        {{ isUpdate ? t('BUTTON_UPDATE') : t('BUTTON_SAVE') }}
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>
         }

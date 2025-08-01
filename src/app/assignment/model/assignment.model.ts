@@ -1,11 +1,11 @@
-import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
+import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
 import {
   ParticipantDynamicInterface,
-  ParticipantInterface,
-} from "app/participant/model/participant.model";
-import { RoomInterface } from "app/room/model/room.model";
+  ParticipantInterface
+} from 'app/participant/model/participant.model';
+import { RoomInterface } from 'app/room/model/room.model';
 
-type AssignmentOperationType = "create" | "update" | "delete"; //get is excluded
+type AssignmentOperationType = 'create' | 'update' | 'delete'; //get is excluded
 
 export interface AssignmentOperationInterface {
   assignment: AssignmentInterface;

@@ -1,14 +1,14 @@
 /* eslint-disable complexity */
-import { Injectable, inject } from "@angular/core";
-import { LockInterface } from "app/lock/model/lock.model";
-import { ConfigService } from "app/config/service/config.service";
-import { readJSONSync, writeJsonSync } from "fs-extra";
-import { intervalToDuration } from "date-fns";
-import { OnlineService } from "app/online/service/online.service";
-import { ipcRenderer } from "electron";
+import { Injectable, inject } from '@angular/core';
+import { LockInterface } from 'app/lock/model/lock.model';
+import { ConfigService } from 'app/config/service/config.service';
+import { readJSONSync, writeJsonSync } from 'fs-extra';
+import { intervalToDuration } from 'date-fns';
+import { OnlineService } from 'app/online/service/online.service';
+import { ipcRenderer } from 'electron';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class LockService {
   private configService = inject(ConfigService);
@@ -30,7 +30,7 @@ export class LockService {
         //This should never happen, prevent a corrupted file
         this.lockObj = {
           lock: false,
-          timestamp: new Date(),
+          timestamp: new Date()
         };
         this.saveLockToFile();
         return this.lockObj;
@@ -73,7 +73,7 @@ export class LockService {
   isTimestampNotBeingUpdated(mins: number): boolean {
     const { years, days, months, hours, minutes } = intervalToDuration({
       start: new Date(this.lockObj.timestamp),
-      end: new Date(),
+      end: new Date()
     });
     // Is idle by more than 1 hour then we must take the lock
     if (years || days || months || hours) {
@@ -100,7 +100,7 @@ export class LockService {
       const isAdminIdle = this.isTimestampNotBeingUpdated(15);
       if (isAdminIdle) {
         this.releaseLock();
-        ipcRenderer.send("closeApp");
+        ipcRenderer.send('closeApp');
       }
     }, 900000); // 900000 millisecons is 15 min
   }

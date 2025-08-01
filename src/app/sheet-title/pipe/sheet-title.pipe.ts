@@ -1,10 +1,10 @@
-import { Pipe, PipeTransform, inject } from "@angular/core";
-import { SheetTitleService } from "../service/sheet-title.service";
-import { SheetTitleInterface } from "../model/sheet-title.model";
+import { Pipe, PipeTransform, inject } from '@angular/core';
+import { SheetTitleService } from '../service/sheet-title.service';
+import { SheetTitleInterface } from '../model/sheet-title.model';
 
 @Pipe({
-  name: "sheetTitlePipe",
-  standalone: true,
+  name: 'sheetTitlePipe',
+  standalone: true
 })
 export class SheetTitlePipe implements PipeTransform {
   private sheetTitleService = inject(SheetTitleService);

@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FakeAccordionComponent } from "./fake-accordion.component";
+import { FakeAccordionComponent } from './fake-accordion.component';
 
-describe("FakeAccordionComponent", () => {
+describe('FakeAccordionComponent', () => {
   let component: FakeAccordionComponent;
   let fixture: ComponentFixture<FakeAccordionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FakeAccordionComponent],
+      imports: [FakeAccordionComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(FakeAccordionComponent);
@@ -16,7 +16,7 @@ describe("FakeAccordionComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TerritoryGraphicsComponent } from "./territory-graphics.component";
+import { TerritoryGraphicsComponent } from './territory-graphics.component';
 
-describe("TerritoryGraphicsComponent", () => {
+describe('TerritoryGraphicsComponent', () => {
   let component: TerritoryGraphicsComponent;
   let fixture: ComponentFixture<TerritoryGraphicsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TerritoryGraphicsComponent],
+      imports: [TerritoryGraphicsComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TerritoryGraphicsComponent);
@@ -16,7 +16,7 @@ describe("TerritoryGraphicsComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

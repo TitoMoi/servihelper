@@ -14,19 +14,14 @@
             </div>
             <div class="col-4">
               <ng-container formArrayName="participants">
-                @for (
-                  participant of participants(i).controls;
-                  track participant;
-                  let j = $index
-                ) {
+                @for (participant of participants(i).controls; track participant; let j = $index) {
                   <mat-form-field>
-                    <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+                    <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
                     <input
                       matInput
                       spellcheck="false"
                       [disabled]="true"
-                      [value]="(participant.value | participantPipe).name"
-                    />
+                      [value]="(participant.value | participantPipe).name" />
                   </mat-form-field>
                 }
               </ng-container>
@@ -39,13 +34,12 @@
                   let j = $index
                 ) {
                   <mat-form-field>
-                    <mat-label>{{ t("ASSIGN_CHOOSE_DATE_ASSIGNED") }}</mat-label>
+                    <mat-label>{{ t('ASSIGN_CHOOSE_DATE_ASSIGNED') }}</mat-label>
                     <input required matInput [matDatepicker]="picker" [formControlName]="j" />
                     <mat-datepicker-toggle
                       matPrefix
                       [for]="picker"
-                      class="mr-3"
-                    ></mat-datepicker-toggle>
+                      class="mr-3"></mat-datepicker-toggle>
                     <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
                   </mat-form-field>
                 }
@@ -59,13 +53,12 @@
                   let j = $index
                 ) {
                   <mat-form-field>
-                    <mat-label>{{ t("ASSIGN_CHOOSE_DATE_RETURNED") }}</mat-label>
+                    <mat-label>{{ t('ASSIGN_CHOOSE_DATE_RETURNED') }}</mat-label>
                     <input required matInput [matDatepicker]="picker" [formControlName]="j" />
                     <mat-datepicker-toggle
                       matPrefix
                       [for]="picker"
-                      class="mr-3"
-                    ></mat-datepicker-toggle>
+                      class="mr-3"></mat-datepicker-toggle>
                     <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
                   </mat-form-field>
                 }

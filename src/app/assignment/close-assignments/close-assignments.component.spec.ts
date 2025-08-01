@@ -9,9 +9,8 @@ describe('CloseAssignmentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CloseAssignmentsComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CloseAssignmentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,4 +1,4 @@
-import { toHTML } from "ngx-editor";
+import { toHTML } from 'ngx-editor';
 
 /**
  *

@@ -1,12 +1,12 @@
-import { Pipe, PipeTransform, inject } from "@angular/core";
+import { Pipe, PipeTransform, inject } from '@angular/core';
 
-import { TerritoryService } from "../territory/service/territory.service";
+import { TerritoryService } from '../territory/service/territory.service';
 
-import { TerritoryContextInterface } from "../model/map.model";
+import { TerritoryContextInterface } from '../model/map.model';
 
 @Pipe({
-  name: "isActiveTerritoryPipe",
-  standalone: true,
+  name: 'isActiveTerritoryPipe',
+  standalone: true
 })
 export class IsActiveTerritoryPipe implements PipeTransform {
   private territoryService = inject(TerritoryService);

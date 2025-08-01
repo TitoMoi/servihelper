@@ -1,99 +1,108 @@
 /* eslint-disable complexity */
 import {
   AssignmentInterface,
-  StarvingAssignmentsDataContext,
-} from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { LastDateService } from "app/assignment/service/last-date.service";
-import { AssignTypeInterface, AssignTypes } from "app/assigntype/model/assigntype.model";
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { ConfigService } from "app/config/service/config.service";
-import { NoteInterface } from "app/note/model/note.model";
-import { NoteService } from "app/note/service/note.service";
+  StarvingAssignmentsDataContext
+} from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { LastDateService } from 'app/assignment/service/last-date.service';
+import { AssignTypeInterface, AssignTypes } from 'app/assigntype/model/assigntype.model';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { NoteInterface } from 'app/note/model/note.model';
+import { NoteService } from 'app/note/service/note.service';
 import {
   ParticipantDynamicInterface,
-  ParticipantInterface,
-} from "app/participant/model/participant.model";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomInterface } from "app/room/model/room.model";
-import { RoomService } from "app/room/service/room.service";
-import { SharedService } from "app/services/shared.service";
-import { Subscription, filter, map } from "rxjs";
+  ParticipantInterface
+} from 'app/participant/model/participant.model';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomInterface } from 'app/room/model/room.model';
+import { RoomService } from 'app/room/service/room.service';
+import { SharedService } from 'app/services/shared.service';
+import { Subscription, filter, map } from 'rxjs';
 
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, inject } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject
+} from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
   ReactiveFormsModule,
-  FormControl,
-} from "@angular/forms";
-import { MatButton, MatButtonModule } from "@angular/material/button";
-import { MatSelect, MatSelectModule } from "@angular/material/select";
-import { ActivatedRoute, Router, RouterLink, RouterModule } from "@angular/router";
-import { RoleInterface } from "app/roles/model/role.model";
-import { MatDialog } from "@angular/material/dialog";
-import { InfoAssignmentComponent } from "../info-assignment/info-assignment.component";
-import { SortService } from "app/services/sort.service";
-import { WarningAssignmentComponent } from "../warning-assignment/warning-assignment.component";
-import { StarvingAssignmentComponent } from "../starving-assignment/starving-assignment.component";
+  FormControl
+} from '@angular/forms';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
+import { RoleInterface } from 'app/roles/model/role.model';
+import { MatDialog } from '@angular/material/dialog';
+import { InfoAssignmentComponent } from '../info-assignment/info-assignment.component';
+import { SortService } from 'app/services/sort.service';
+import { WarningAssignmentComponent } from '../warning-assignment/warning-assignment.component';
+import { StarvingAssignmentComponent } from '../starving-assignment/starving-assignment.component';
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
-  MatDatepickerModule,
-} from "@angular/material/datepicker";
-import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
-import { ParticipantPipe } from "../../participant/pipe/participant.pipe";
-import { MatIconModule } from "@angular/material/icon";
-import { MatOptionModule } from "@angular/material/core";
-import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
-import { MatInputModule } from "@angular/material/input";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { AsyncPipe, NgFor, NgIf } from "@angular/common";
-import { MatCardModule } from "@angular/material/card";
-import { TranslocoModule, TranslocoService } from "@ngneat/transloco";
-import { SheetTitleInterface } from "app/sheet-title/model/sheet-title.model";
-import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
-import { PublicThemeInterface } from "app/public-theme/model/public-theme.model";
-import { PublicThemeService } from "app/public-theme/service/public-theme.service";
-import { PublicThemePipe } from "app/public-theme/pipe/public-theme.pipe";
-import { addDays, differenceInDays, parseISO, subDays } from "date-fns";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
-import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
-import { OnlineService } from "app/online/service/online.service";
-import { CloseAssignmentsComponent } from "../close-assignments/close-assignments.component";
-import { getLastPrincipalAssignment, getPenultimatePrincipalAssignment } from "app/functions";
-import { DateFnsLocaleService } from "app/services/date-fns-locale.service";
+  MatDatepickerModule
+} from '@angular/material/datepicker';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { ParticipantPipe } from '../../participant/pipe/participant.pipe';
+import { MatIconModule } from '@angular/material/icon';
+import { MatOptionModule } from '@angular/material/core';
+import { AutoFocusDirective } from '../../directives/autofocus/autofocus.directive';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { SheetTitleInterface } from 'app/sheet-title/model/sheet-title.model';
+import { SheetTitleService } from 'app/sheet-title/service/sheet-title.service';
+import { PublicThemeInterface } from 'app/public-theme/model/public-theme.model';
+import { PublicThemeService } from 'app/public-theme/service/public-theme.service';
+import { PublicThemePipe } from 'app/public-theme/pipe/public-theme.pipe';
+import { addDays, differenceInDays, parseISO, subDays } from 'date-fns';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
+import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
+import { OnlineService } from 'app/online/service/online.service';
+import { CloseAssignmentsComponent } from '../close-assignments/close-assignments.component';
+import { getLastPrincipalAssignment, getPenultimatePrincipalAssignment } from 'app/functions';
+import { DateFnsLocaleService } from 'app/services/date-fns-locale.service';
 @Component({
-    selector: "app-create-update-assignment",
-    templateUrl: "./create-update-assignment.component.html",
-    styleUrls: ["./create-update-assignment.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        TranslocoModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        RouterModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDatepickerModule,
-        AutoFocusDirective,
-        MatSelectModule,
-        MatTooltipModule,
-        MatOptionModule,
-        MatIconModule,
-        MatButtonModule,
-        RouterLink,
-        AsyncPipe,
-        NgIf,
-        NgFor,
-        ParticipantPipe,
-        PublicThemePipe,
-        AssignTypeNamePipe,
-        RoomNamePipe,
-    ]
+  selector: 'app-create-update-assignment',
+  templateUrl: './create-update-assignment.component.html',
+  styleUrls: ['./create-update-assignment.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    RouterModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    AutoFocusDirective,
+    MatSelectModule,
+    MatTooltipModule,
+    MatOptionModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterLink,
+    AsyncPipe,
+    NgIf,
+    NgFor,
+    ParticipantPipe,
+    PublicThemePipe,
+    AssignTypeNamePipe,
+    RoomNamePipe
+  ]
 })
 export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, OnDestroy {
   lastDateService = inject(LastDateService);
@@ -116,12 +125,12 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   private translocoService = inject(TranslocoService);
   private cdr = inject(ChangeDetectorRef);
 
-  @ViewChild("principalSelect") principalSelect: MatSelect;
-  @ViewChild("assistantSelect") assistantSelect: MatSelect;
-  @ViewChild("btnSaveCreateAnother") btnSaveCreateAnother: MatButton;
+  @ViewChild('principalSelect') principalSelect: MatSelect;
+  @ViewChild('assistantSelect') assistantSelect: MatSelect;
+  @ViewChild('btnSaveCreateAnother') btnSaveCreateAnother: MatButton;
 
   //Angular material datepicker hacked
-  @ViewChild("multipleDatePicker") datePickerRef: MatDatepicker<Date>;
+  @ViewChild('multipleDatePicker') datePickerRef: MatDatepicker<Date>;
 
   //Props for the datepicker multiple dates hack
   isMultipleDates = false;
@@ -138,9 +147,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   availableGroups: number[] = [];
 
-  rooms: RoomInterface[] = this.roomService
-    .getRooms()
-    .sort((a, b) => (a.order > b.order ? 1 : -1));
+  rooms: RoomInterface[] = this.roomService.getRooms().sort((a, b) => (a.order > b.order ? 1 : -1));
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
@@ -168,7 +175,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   assignmentsBySelectedDate: AssignmentInterface[] = [];
 
   role$ = this.configService.config$.pipe(
-    map(() => this.configService.getRole(this.configService.getCurrentRoleId())),
+    map(() => this.configService.getRole(this.configService.getCurrentRoleId()))
   );
 
   role: RoleInterface;
@@ -177,7 +184,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   //Fill the form with the assignment passed by the router
   a: AssignmentInterface = this.assignmentService.getAssignment(
-    this.activatedRoute.snapshot.params.id,
+    this.activatedRoute.snapshot.params.id
   );
 
   isUpdate = this.a !== undefined;
@@ -194,27 +201,27 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     date: [
       {
         value: this.a?.date,
-        disabled: this.a ? true : false,
+        disabled: this.a ? true : false
       },
-      Validators.required,
+      Validators.required
     ],
     room: [
       //Room id
       {
         value: this.a?.room,
-        disabled: this.a ? true : false,
+        disabled: this.a ? true : false
       },
-      Validators.required,
+      Validators.required
     ],
     assignType: [
       //AssignType id
       {
         value: this.a?.assignType,
-        disabled: this.a ? true : false,
+        disabled: this.a ? true : false
       },
-      Validators.required,
+      Validators.required
     ],
-    theme: new FormControl(this.a ? this.a.theme : "", { updateOn: "blur" }),
+    theme: new FormControl(this.a ? this.a.theme : '', { updateOn: 'blur' }),
     isPTheme: this.a ? this.a.isPTheme : false,
     onlyWoman: [{ value: this.a ? this.a.onlyWoman : false, disabled: this.a?.isPTheme }],
     onlyMan: [this.a ? this.a.onlyMan : false],
@@ -223,7 +230,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     group: [this.a ? this.a.group : 0], //null is not working
     assistant: [this.a?.assistant], //participant id
     footerNote: this.a ? this.a.footerNote : this.config.defaultFooterNoteId, //Note id
-    onlySortByTime: [this.config.isClassicSortEnabled],
+    onlySortByTime: [this.config.isClassicSortEnabled]
   });
 
   //Subscriptions
@@ -242,8 +249,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     if (this.isUpdate) {
       this.getParticipantsAvailableOnDate();
       this.batchGetCountSortWarning();
-      this.removePrincipalFromAssistants(this.gfv("principal"));
-      this.enableOrDisableAssistantControl(this.gfv("assignType"));
+      this.removePrincipalFromAssistants(this.gfv('principal'));
+      this.enableOrDisableAssistantControl(this.gfv('assignType'));
     }
 
     // Because role is now observable and not behaviour we need to trigger the first time
@@ -270,9 +277,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   }
 
   toggleIsMultipleDates(e: MatCheckboxChange) {
-    const dateCtrl = this.form.get("date");
+    const dateCtrl = this.form.get('date');
     //Reset first
-    this.form.get("date").reset();
+    this.form.get('date').reset();
     this.selectedDates = [];
 
     if (e.checked) {
@@ -309,31 +316,31 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   prepareOnlySortByTime() {
     this.subscription.add(
-      this.form.get("onlySortByTime").valueChanges.subscribe(() => {
+      this.form.get('onlySortByTime').valueChanges.subscribe(() => {
         this.batchCleanPrincipalAssistant();
         this.batchCleanGroup();
         this.batchGetCountSortWarning();
-      }),
+      })
     );
   }
   prepareRole() {
     this.subscription.add(
-      this.role$.subscribe((r) => {
+      this.role$.subscribe(r => {
         this.role = r;
         this.filterAssignmentsByRole();
         this.removeAssignTypesThatAlreadyExistOnDate();
-      }),
+      })
     );
   }
 
   /** (view) Set count and last assignment date for principals */
   setPrincipalsCountAndLastDate() {
-    if (!this.isMultipleDates && !this.gfv("onlySortByTime")) {
+    if (!this.isMultipleDates && !this.gfv('onlySortByTime')) {
       this.sharedService.setCountAndLastAssignmentDateAndRoom(
         this.assignments,
         this.principals,
-        this.gfv("assignType"),
-        true,
+        this.gfv('assignType'),
+        true
       );
     }
   }
@@ -344,8 +351,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       this.sharedService.setCountAndLastAssignmentDateAndRoom(
         this.assignments,
         this.assistants,
-        this.gfv("assignType"),
-        false,
+        this.gfv('assignType'),
+        false
       );
     }
   }
@@ -354,7 +361,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
    * Sort the participants by time distance from latest selected assignment or belonging to a group to the selected form date
    */
   sortPrincipalsByTimeDistance() {
-    const selectedDate = this.gfv("date");
+    const selectedDate = this.gfv('date');
     this.principals.sort((a, b) => {
       const diffInDaysA = differenceInDays(new Date(a.lastAssignmentDate), selectedDate);
       const diffInDaysB = differenceInDays(new Date(b.lastAssignmentDate), selectedDate);
@@ -378,7 +385,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     this.setPrincipalsCountAndLastDate();
     this.setAssistantsCountAndLastDate();
 
-    if (this.gfv("onlySortByTime")) {
+    if (this.gfv('onlySortByTime')) {
       this.sortPrincipalsByTimeDistance();
       this.assistants.sort(this.sortService.sortParticipantsByCountOrDate);
     } else {
@@ -394,16 +401,16 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   /** Sets the last two companions for the principal */
   setWomanCompanions() {
     this.companions = [];
-    const principalId = this.gfv("principal");
+    const principalId = this.gfv('principal');
     if (principalId && this.participantService.getParticipant(principalId).isWoman) {
       let lastAssistant, penultAssistant;
       const lastAssign = getLastPrincipalAssignment(
         this.assignments,
-        this.participantService.getParticipant(principalId),
+        this.participantService.getParticipant(principalId)
       );
       const penultAssign = getPenultimatePrincipalAssignment(
         this.assignments,
-        this.participantService.getParticipant(principalId),
+        this.participantService.getParticipant(principalId)
       );
 
       if (lastAssign?.assistant) {
@@ -423,17 +430,17 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   }
   /** (Form) batch clean principalId and assistantId, should not call other batch operations inside */
   batchCleanPrincipalAssistant() {
-    this.form.get("principal").reset(undefined, { emitEvent: false });
-    this.form.get("assistant").reset(undefined, { emitEvent: false });
+    this.form.get('principal').reset(undefined, { emitEvent: false });
+    this.form.get('assistant').reset(undefined, { emitEvent: false });
   }
 
   /** (Form) batch clean group, should not call other batch operations inside */
   batchCleanGroup() {
-    this.form.get("group").reset(0, { emitEvent: false });
+    this.form.get('group').reset(0, { emitEvent: false });
   }
 
   prepareDateSub() {
-    this.subscription = this.form.get("date").valueChanges.subscribe((date) => {
+    this.subscription = this.form.get('date').valueChanges.subscribe(date => {
       this.lastDateService.lastDate = date;
 
       this.batchCleanPrincipalAssistant();
@@ -448,13 +455,13 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   prepareRoomSub() {
     this.subscription.add(
-      this.form.get("room").valueChanges.subscribe(() => {
+      this.form.get('room').valueChanges.subscribe(() => {
         this.batchCleanPrincipalAssistant();
         this.batchCleanGroup();
         this.filterAssignmentsByRole();
         this.removeAssignTypesThatAlreadyExistOnDate();
         this.batchGetCountSortWarning();
-      }),
+      })
     );
     this.cdr.detectChanges();
   }
@@ -462,37 +469,37 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   prepareAssignTypeSub() {
     this.subscription.add(
       this.form
-        .get("assignType")
-        .valueChanges.pipe(filter((at) => at))
+        .get('assignType')
+        .valueChanges.pipe(filter(at => at))
         .subscribe((assignTypeId: string) => {
           //is public speech
           const isPSpeech =
-            this.assignTypeService.getAssignType(assignTypeId).type === "publicSpeech";
+            this.assignTypeService.getAssignType(assignTypeId).type === 'publicSpeech';
           isPSpeech
-            ? this.form.get("isPTheme").setValue(true)
-            : this.form.get("isPTheme").setValue(false);
+            ? this.form.get('isPTheme').setValue(true)
+            : this.form.get('isPTheme').setValue(false);
           //Other assign types
           this.batchCleanPrincipalAssistant();
           this.batchCleanGroup();
           this.batchGetCountSortWarning();
           this.enableOrDisableAssistantControl(assignTypeId);
-        }),
+        })
     );
     this.cdr.detectChanges();
   }
 
   prepareIsPublicSpeechAssignTypeSub() {
     this.subscription.add(
-      this.form.get("isPTheme").valueChanges.subscribe((isPtheme: boolean) => {
+      this.form.get('isPTheme').valueChanges.subscribe((isPtheme: boolean) => {
         //To modify the template
         this.isPTheme = isPtheme;
         //Clear value of theme
-        if (isPtheme) this.form.get("theme").reset();
-        const onlyWomanCtrl = this.form.get("onlyWoman");
+        if (isPtheme) this.form.get('theme').reset();
+        const onlyWomanCtrl = this.form.get('onlyWoman');
         this.isPTheme
           ? onlyWomanCtrl.disable({ emitEvent: false })
           : onlyWomanCtrl.enable({ emitEvent: false });
-      }),
+      })
     );
   }
 
@@ -500,9 +507,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   enableOrDisableAssistantControl(assignTypeId) {
     if (assignTypeId) {
       if (this.assignTypeService.getAssignType(assignTypeId).hasAssistant) {
-        this.form.get("assistant").enable({ emitEvent: false });
+        this.form.get('assistant').enable({ emitEvent: false });
       } else {
-        this.form.get("assistant").disable({ emitEvent: false });
+        this.form.get('assistant').disable({ emitEvent: false });
       }
       this.cdr.detectChanges();
     }
@@ -510,7 +517,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   prepareOnlyManSub() {
     this.subscription.add(
-      this.form.get("onlyMan").valueChanges.subscribe((onlyMan) => {
+      this.form.get('onlyMan').valueChanges.subscribe(onlyMan => {
         this.batchCleanPrincipalAssistant();
         this.batchCleanGroup();
 
@@ -519,15 +526,15 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
           return;
         }
         //Only man
-        this.principals = this.principals.filter((p) => p.isWoman === false && !p.isExternal);
-        this.assistants = this.assistants.filter((a) => a.isWoman === false && !a.isExternal);
-      }),
+        this.principals = this.principals.filter(p => p.isWoman === false && !p.isExternal);
+        this.assistants = this.assistants.filter(a => a.isWoman === false && !a.isExternal);
+      })
     );
   }
 
   prepareOnlyWomanSub() {
     this.subscription.add(
-      this.form.get("onlyWoman").valueChanges.subscribe((onlyWoman) => {
+      this.form.get('onlyWoman').valueChanges.subscribe(onlyWoman => {
         this.batchCleanPrincipalAssistant();
         this.batchCleanGroup();
         if (!onlyWoman) {
@@ -535,25 +542,25 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
           return;
         }
         //Only woman
-        this.principals = this.principals.filter((p) => p.isWoman === true);
-        this.assistants = this.assistants.filter((a) => a.isWoman === true);
-      }),
+        this.principals = this.principals.filter(p => p.isWoman === true);
+        this.assistants = this.assistants.filter(a => a.isWoman === true);
+      })
     );
   }
 
   prepareOnlyExternalsSub() {
     this.subscription.add(
-      this.form.get("onlyExternals").valueChanges.subscribe(() => {
+      this.form.get('onlyExternals').valueChanges.subscribe(() => {
         this.batchCleanPrincipalAssistant();
         this.batchCleanGroup();
         this.batchGetCountSortWarning();
-      }),
+      })
     );
   }
 
   preparePrincipalSub() {
     this.subscription.add(
-      this.form.get("principal").valueChanges.subscribe((newPrincId) => {
+      this.form.get('principal').valueChanges.subscribe(newPrincId => {
         //Check if older principal should be included in assistants
         if (this.isUpdate) {
           this.batchGetCountSortWarning();
@@ -563,28 +570,28 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
         //remove current selected principal from assistants
         this.removePrincipalFromAssistants(newPrincId);
-      }),
+      })
     );
   }
 
   prepareGroupSub() {
     this.subscription.add(
-      this.form.get("group").valueChanges.subscribe((group) => {
+      this.form.get('group').valueChanges.subscribe(group => {
         this.batchCleanPrincipalAssistant();
         this.batchGetCountSortWarning();
         //0 is all groups so we skip the if
         if (group) {
-          this.principals = this.principals.filter((p) => p.group === group);
+          this.principals = this.principals.filter(p => p.group === group);
         }
-      }),
+      })
     );
   }
 
   setOnlyExternals() {
     //Only externals
-    const onlyExternals = this.gfv("onlyExternals");
-    this.principals = this.principals.filter((p) => Boolean(p.isExternal) === onlyExternals); //Compatibility, isExternal can be undefined
-    this.assistants = this.assistants.filter((p) => Boolean(p.isExternal) === onlyExternals);
+    const onlyExternals = this.gfv('onlyExternals');
+    this.principals = this.principals.filter(p => Boolean(p.isExternal) === onlyExternals); //Compatibility, isExternal can be undefined
+    this.assistants = this.assistants.filter(p => Boolean(p.isExternal) === onlyExternals);
   }
 
   removePrincipalFromAssistants(principalId: string) {
@@ -602,21 +609,21 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
    * Gets the principal and assistant based on the available participants, room, assignType and only selectors
    */
   getPrincipalAndAssistant() {
-    if (this.gfv("room") && this.gfv("assignType")) {
+    if (this.gfv('room') && this.gfv('assignType')) {
       this.principals = this.sharedService.filterPrincipalsByAvailable(
         structuredClone(this.participants),
-        this.gfv("assignType"),
-        this.gfv("room"),
-        this.gfv("onlyMan"),
-        this.gfv("onlyWoman"),
+        this.gfv('assignType'),
+        this.gfv('room'),
+        this.gfv('onlyMan'),
+        this.gfv('onlyWoman')
       );
 
       this.assistants = this.sharedService.filterAssistantsByAvailable(
         structuredClone(this.participants),
-        this.gfv("assignType"),
-        this.gfv("room"),
-        this.gfv("onlyMan"),
-        this.gfv("onlyWoman"),
+        this.gfv('assignType'),
+        this.gfv('room'),
+        this.gfv('onlyMan'),
+        this.gfv('onlyWoman')
       );
     }
   }
@@ -630,41 +637,41 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     if (this.isMultipleDates) {
       return;
     }
-    const dateControlValue = this.gfv("date");
+    const dateControlValue = this.gfv('date');
     this.participants = this.participants.filter(
-      (p) =>
+      p =>
         !p.notAvailableDates.some(
-          (date) => new Date(dateControlValue).getTime() === new Date(date).getTime(),
-        ),
+          date => new Date(dateControlValue).getTime() === new Date(date).getTime()
+        )
     );
   }
 
   /** Get available non undefined groups, group them and sort in ascendant order */
   getAvailableGroups() {
     this.availableGroups = [
-      ...new Set(this.principals.filter((p) => p.group).map((p) => p.group)),
+      ...new Set(this.principals.filter(p => p.group).map(p => p.group))
     ].sort((n1, n2) => (n1 > n2 ? 1 : 0));
   }
 
   /** Highlight the principal or assistant if already has work */
   warningIfAlreadyHasWork() {
     if (!this.isMultipleDates) {
-      const dateValue = this.gfv("date");
-      const room = this.gfv("room");
-      const assignType = this.gfv("assignType");
+      const dateValue = this.gfv('date');
+      const room = this.gfv('room');
+      const assignType = this.gfv('assignType');
 
       if (dateValue && room && assignType) {
         for (const p of this.principals) {
           const hasWork = this.assignmentService
             .getAssignmentsByDate(dateValue)
-            .some((a) => a.principal === p.id || a.assistant === p.id);
+            .some(a => a.principal === p.id || a.assistant === p.id);
           p.hasWork = hasWork;
         }
 
         for (const as of this.assistants) {
           const hasWork = this.assignmentService
             .getAssignmentsByDate(dateValue)
-            .some((a) => a.principal === as.id || a.assistant === as.id);
+            .some(a => a.principal === as.id || a.assistant === as.id);
 
           as.hasWork = hasWork;
         }
@@ -674,9 +681,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   /** Red and Yellow clock */
   checkIfExhausted() {
-    const currentDate: Date = this.gfv("date");
-    const roomId = this.gfv("room");
-    const atId = this.gfv("assignType");
+    const currentDate: Date = this.gfv('date');
+    const roomId = this.gfv('room');
+    const atId = this.gfv('assignType');
 
     if (currentDate && roomId && atId) {
       const at = this.assignTypeService.getAssignType(atId);
@@ -701,20 +708,20 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const days = assignType?.days;
     if (days) {
       //If we edit an assignment, we get the string iso instead of a real date
-      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+      if (typeof currentDate === 'string') currentDate = parseISO(currentDate);
 
       //Get all the days before and after, its 1 based index
       let allDays: AssignmentInterface[] = [];
       for (let i = 1; i <= days; i++) {
         allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
+          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
         );
         allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
+          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
         );
       }
       for (const p of this.principals) {
-        if (allDays.some((a) => a.assignType === assignType.id && a.principal === p.id)) {
+        if (allDays.some(a => a.assignType === assignType.id && a.principal === p.id)) {
           p.hasCollision = true;
         }
       }
@@ -727,22 +734,22 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
     if (closeOthersDays && this.assignTypeService.isOfTypeSchoolAssignTypes(atType)) {
       //If we edit an assignment, we get the string iso instead of a real date
-      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+      if (typeof currentDate === 'string') currentDate = parseISO(currentDate);
 
       //Get all the assignments before and after the days treshold, its 1 based index
       const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
         currentDate,
-        closeOthersDays,
+        closeOthersDays
       );
 
       for (const p of this.principals) {
         if (
           allDays.some(
-            (a) =>
+            a =>
               this.assignTypeService.isOfTypeSchoolAssignTypes(
-                this.assignTypeService.getAssignType(a.assignType).type,
+                this.assignTypeService.getAssignType(a.assignType).type
               ) &&
-              (a.principal === p.id || a.assistant === p.id),
+              (a.principal === p.id || a.assistant === p.id)
           )
         ) {
           p.isCloseToOthers = true;
@@ -752,11 +759,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       for (const assist of this.assistants) {
         if (
           allDays.some(
-            (a) =>
+            a =>
               this.assignTypeService.isOfTypeSchoolAssignTypes(
-                this.assignTypeService.getAssignType(a.assignType).type,
+                this.assignTypeService.getAssignType(a.assignType).type
               ) &&
-              (a.principal === assist.id || a.assistant === assist.id),
+              (a.principal === assist.id || a.assistant === assist.id)
           )
         ) {
           assist.isCloseToOthers = true;
@@ -770,21 +777,21 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const closeOthersPrayerDays = this.configService.getConfig().closeToOthersPrayerDays;
     if (closeOthersPrayerDays && this.assignTypeService.isOfTypePrayer(atType)) {
       //If we edit an assignment, we get the string iso instead of a real date
-      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+      if (typeof currentDate === 'string') currentDate = parseISO(currentDate);
 
       //Get all the assignments before and after the days treshold, its 1 based index
       const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
         currentDate,
-        closeOthersPrayerDays,
+        closeOthersPrayerDays
       );
 
       for (const p of this.principals) {
         if (
           allDays.some(
-            (a) =>
+            a =>
               this.assignTypeService.isOfTypePrayer(
-                this.assignTypeService.getAssignType(a.assignType).type,
-              ) && a.principal === p.id,
+                this.assignTypeService.getAssignType(a.assignType).type
+              ) && a.principal === p.id
           )
         ) {
           p.isCloseToOthersPrayer = true;
@@ -797,26 +804,23 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   checkIfExhaustedForTreasures(currentDate: Date, atType: AssignTypes) {
     const closeOthersTreasuresEtcDays =
       this.configService.getConfig().closeToOthersTreasuresEtcDays;
-    if (
-      closeOthersTreasuresEtcDays &&
-      this.assignTypeService.isOfTypeTreasuresAndOthers(atType)
-    ) {
+    if (closeOthersTreasuresEtcDays && this.assignTypeService.isOfTypeTreasuresAndOthers(atType)) {
       //If we edit an assignment, we get the string iso instead of a real date
-      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+      if (typeof currentDate === 'string') currentDate = parseISO(currentDate);
 
       //Get all the assignments before and after the days treshold, its 1 based index
       const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
         currentDate,
-        closeOthersTreasuresEtcDays,
+        closeOthersTreasuresEtcDays
       );
 
       for (const p of this.principals) {
         if (
           allDays.some(
-            (a) =>
+            a =>
               this.assignTypeService.isOfTypeTreasuresAndOthers(
-                this.assignTypeService.getAssignType(a.assignType).type,
-              ) && a.principal === p.id,
+                this.assignTypeService.getAssignType(a.assignType).type
+              ) && a.principal === p.id
           )
         ) {
           p.isCloseToOthersTreasuresEtc = true;
@@ -827,10 +831,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   //Fork
   checkIsStarvingForSchool() {
-    if (!this.gfv("onlySortByTime")) {
-      const currentDate: Date = this.gfv("date");
-      const roomId = this.gfv("room");
-      const atId = this.gfv("assignType");
+    if (!this.gfv('onlySortByTime')) {
+      const currentDate: Date = this.gfv('date');
+      const roomId = this.gfv('room');
+      const atId = this.gfv('assignType');
 
       // Check that the selected at is of school type
       if (
@@ -838,25 +842,25 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         roomId &&
         atId &&
         this.assignTypeService.isOfTypeSchoolAssignTypes(
-          this.assignTypeService.getAssignType(atId).type,
+          this.assignTypeService.getAssignType(atId).type
         )
       ) {
         //Get a list of principals that are not exhausted for school
         let principals =
           structuredClone(
-            this.principals.filter((p) => !p.isCloseToOthers && !p.hasCollision && !p.hasWork),
+            this.principals.filter(p => !p.isCloseToOthers && !p.hasCollision && !p.hasWork)
           ) ?? [];
 
         if (principals.length) {
           //Get a list of assignments that are for school
-          const assignments = this.assignments.filter((a) =>
+          const assignments = this.assignments.filter(a =>
             this.assignTypeService.isOfTypeSchoolAssignTypes(
-              this.assignTypeService.getAssignType(a.assignType).type,
-            ),
+              this.assignTypeService.getAssignType(a.assignType).type
+            )
           );
           //As its a new array, reuse the count property to assign the global count
           for (const p of principals) {
-            p.count = assignments.filter((a) => a.principal === p.id).length;
+            p.count = assignments.filter(a => a.principal === p.id).length;
           }
           //Sort by count
           principals.sort((a, b) => (a.count > b.count ? 1 : -1));
@@ -870,11 +874,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
             }
           }
           //Get only the starving
-          principals = principals.filter((p) => p.isStarvingSchool);
+          principals = principals.filter(p => p.isStarvingSchool);
 
           //Get the id of the starving and assign it to the principals list
           for (const p of principals) {
-            this.principals.find((p1) => p1.id === p.id).isStarvingSchool = true;
+            this.principals.find(p1 => p1.id === p.id).isStarvingSchool = true;
           }
         }
       }
@@ -887,9 +891,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
     //administrator is undefined value so this if doesnt apply and can view everything
     if (this.role) {
-      this.assignTypes = this.assignTypes.filter((at) =>
-        this.role.assignTypesId.includes(at.id),
-      );
+      this.assignTypes = this.assignTypes.filter(at => this.role.assignTypesId.includes(at.id));
     }
 
     this.assignTypes.sort((a, b) => (a.order > b.order ? 1 : -1));
@@ -901,28 +903,28 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
    */
   removeAssignTypesThatAlreadyExistOnDate() {
     if (!this.isUpdate && !this.isMultipleDates) {
-      const dateValue = this.gfv("date");
-      const roomValue = this.gfv("room");
-      const assignTypeValue = this.gfv("assignType");
+      const dateValue = this.gfv('date');
+      const roomValue = this.gfv('room');
+      const assignTypeValue = this.gfv('assignType');
       this.noAvailableAssignTypesByRole = false;
 
       if (dateValue && roomValue) {
         const assignmentsByDate = this.assignmentService.getAssignmentsByDate(dateValue);
 
         this.assignTypes = this.assignTypes.filter(
-          (at) =>
-            !assignmentsByDate.some((a) => a.assignType === at.id && a.room === roomValue) ||
-            Boolean(at.repeat),
+          at =>
+            !assignmentsByDate.some(a => a.assignType === at.id && a.room === roomValue) ||
+            Boolean(at.repeat)
         );
 
         //Reset if assignType selected not in new assignTypes
-        if (!this.assignTypes.some((at) => at.id === assignTypeValue))
-          this.form.get("assignType").reset(undefined, { emitEvent: false });
+        if (!this.assignTypes.some(at => at.id === assignTypeValue))
+          this.form.get('assignType').reset(undefined, { emitEvent: false });
 
         if (!this.assignTypes.length) {
           this.noAvailableAssignTypesByRole = true;
           //Do not let the user click as there are no assign types
-          this.form.get("assignType").markAsTouched();
+          this.form.get('assignType').markAsTouched();
         }
       }
     }
@@ -932,11 +934,11 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
    * Special characters that are not visual and are hidden, even for code editors.
    */
   removeGremlings() {
-    const themeControl = this.form.get("theme");
+    const themeControl = this.form.get('theme');
     const value = themeControl.value;
     if (value)
-      themeControl.patchValue(value.replace(/\u200B/g, ""), {
-        emitEvent: false,
+      themeControl.patchValue(value.replace(/\u200B/g, ''), {
+        emitEvent: false
       });
   }
 
@@ -953,7 +955,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       for (const d of this.selectedDates) {
         assignmentsToSave.push({
           ...this.form.value,
-          date: d,
+          date: d
         });
       }
       this.assignmentService.createMultipleAssignments(assignmentsToSave);
@@ -964,9 +966,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     }
 
     //navigate to parent, one parent for each fragment
-    const parentRoute = this.isUpdate ? "../.." : "..";
+    const parentRoute = this.isUpdate ? '../..' : '..';
     this.router.navigate([parentRoute], {
-      relativeTo: this.activatedRoute,
+      relativeTo: this.activatedRoute
     });
   }
 
@@ -976,26 +978,26 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     this.assignmentService.createAssignment(this.form.value);
 
     //Save current values
-    const date = this.gfv("date");
-    const sheetTitle = this.gfv("sheetTitle");
-    const footerNote = this.gfv("footerNote");
-    const room = this.gfv("room");
-    const onlyMan = this.gfv("onlyMan");
-    const onlyWoman = this.gfv("onlyWoman");
-    const onlyExternals = this.gfv("onlyExternals");
+    const date = this.gfv('date');
+    const sheetTitle = this.gfv('sheetTitle');
+    const footerNote = this.gfv('footerNote');
+    const room = this.gfv('room');
+    const onlyMan = this.gfv('onlyMan');
+    const onlyWoman = this.gfv('onlyWoman');
+    const onlyExternals = this.gfv('onlyExternals');
 
     //Reset form
     this.form.reset({ emitEvent: false });
 
     //Restore values
-    this.form.get("date").setValue(date, { emitEvent: false });
-    this.form.get("sheetTitle").setValue(sheetTitle, { emitEvent: false });
-    this.form.get("footerNote").setValue(footerNote, { emitEvent: false });
-    this.form.get("room").setValue(room, { emitEvent: false });
-    this.form.get("onlyMan").setValue(onlyMan, { emitEvent: false });
-    this.form.get("onlyWoman").setValue(onlyWoman, { emitEvent: false });
-    this.form.get("onlyExternals").setValue(onlyExternals, { emitEvent: false });
-    this.form.get("group").setValue(0, { emitEvent: false });
+    this.form.get('date').setValue(date, { emitEvent: false });
+    this.form.get('sheetTitle').setValue(sheetTitle, { emitEvent: false });
+    this.form.get('footerNote').setValue(footerNote, { emitEvent: false });
+    this.form.get('room').setValue(room, { emitEvent: false });
+    this.form.get('onlyMan').setValue(onlyMan, { emitEvent: false });
+    this.form.get('onlyWoman').setValue(onlyWoman, { emitEvent: false });
+    this.form.get('onlyExternals').setValue(onlyExternals, { emitEvent: false });
+    this.form.get('group').setValue(0, { emitEvent: false });
 
     this.getParticipantsAvailableOnDate();
 
@@ -1017,12 +1019,12 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   }
 
   getPrincipalName(principalId) {
-    const principal = this.principals.find((p) => p.id === principalId);
+    const principal = this.principals.find(p => p.id === principalId);
     return principal?.name;
   }
 
   getAssistantName(assistantId) {
-    const assistant = this.assistants.find((a) => a.id === assistantId);
+    const assistant = this.assistants.find(a => a.id === assistantId);
     return assistant?.name;
   }
 
@@ -1034,9 +1036,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     e.preventDefault();
     e.stopPropagation();
     //Get a list of participants for that date with that count with that role
-    const principalsSameCount = this.principals.filter((p) => p.count === participant.count);
+    const principalsSameCount = this.principals.filter(p => p.count === participant.count);
     this.matDialog.open(InfoAssignmentComponent, {
-      data: principalsSameCount,
+      data: principalsSameCount
     });
   }
 
@@ -1044,9 +1046,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     e.preventDefault();
     e.stopPropagation();
     //Get a list of participants for that date with that count with that role
-    const assistantsSameCount = this.assistants.filter((p) => p.count === participant.count);
+    const assistantsSameCount = this.assistants.filter(p => p.count === participant.count);
     this.matDialog.open(InfoAssignmentComponent, {
-      data: assistantsSameCount,
+      data: assistantsSameCount
     });
   }
 
@@ -1062,26 +1064,26 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
     const participantAssignments = this.assignmentService.findAssignmentsByParticipantId(
       participant.id,
-      this.gfv("date"),
+      this.gfv('date')
     );
 
     for (const pa of participantAssignments) {
       messageList.push(
         this.roomService.getNameOrTranslation(this.roomService.getRoom(pa.room)) +
-          " - " +
+          ' - ' +
           this.assignTypeService.getNameOrTranslation(
-            this.assignTypeService.getAssignType(pa.assignType),
-          ),
+            this.assignTypeService.getAssignType(pa.assignType)
+          )
       );
     }
 
     this.matDialog.open(WarningAssignmentComponent, {
-      data: messageList,
+      data: messageList
     });
   }
 
   getBorderLeftStyle(color) {
-    return `12px solid ${color ? color : "#FFF"}`;
+    return `12px solid ${color ? color : '#FFF'}`;
   }
 
   onRedClockClick(e: Event, participant: ParticipantDynamicInterface) {
@@ -1089,7 +1091,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     e.stopPropagation();
     const assignments = this.getIfAboveThreshold(participant);
     this.matDialog.open(CloseAssignmentsComponent, {
-      data: { assignments, isRedClock: true },
+      data: { assignments, isRedClock: true }
     });
   }
 
@@ -1098,7 +1100,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     e.stopPropagation();
     const assignments = this.getExhaustedAssignmentsForSchool(participant);
     this.matDialog.open(CloseAssignmentsComponent, {
-      data: { assignments, isRedClock: false },
+      data: { assignments, isRedClock: false }
     });
   }
 
@@ -1107,7 +1109,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     e.stopPropagation();
     const assignments = this.getExhaustedAssignmentsForPrayer(participant);
     this.matDialog.open(CloseAssignmentsComponent, {
-      data: { assignments, isRedClock: false },
+      data: { assignments, isRedClock: false }
     });
   }
 
@@ -1116,7 +1118,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     e.stopPropagation();
     const assignments = this.getExhaustedAssignmentsForTreasuresEtc(participant);
     this.matDialog.open(CloseAssignmentsComponent, {
-      data: { assignments, isRedClock: false },
+      data: { assignments, isRedClock: false }
     });
   }
 
@@ -1128,10 +1130,10 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       participants: this.starvingSchoolParticipants,
       isSchool: true,
       isPrayer: false,
-      isTreasuresEtc: false,
+      isTreasuresEtc: false
     };
     this.matDialog.open(StarvingAssignmentComponent, {
-      data: starvingContext,
+      data: starvingContext
     });
   }
 
@@ -1144,16 +1146,16 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const days = assignType?.days;
     if (days) {
       //If we edit an assignment, we get the string iso instead of a real date
-      if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+      if (typeof currentDate === 'string') currentDate = parseISO(currentDate);
 
       //Get all the days before and after, its 1 based index
       let allDays: AssignmentInterface[] = [];
       for (let i = 1; i <= days; i++) {
         allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i)),
+          this.assignmentService.getAssignmentsByDate(addDays(currentDate, i))
         );
         allDays = allDays.concat(
-          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i)),
+          this.assignmentService.getAssignmentsByDate(subDays(currentDate, i))
         );
       }
       const foundAssignments: AssignmentInterface[] = [];
@@ -1172,19 +1174,19 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const closeOthersDays = this.configService.getConfig().closeToOthersDays;
 
     //If we edit an assignment, we get the string iso instead of a real date
-    if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+    if (typeof currentDate === 'string') currentDate = parseISO(currentDate);
 
     //Get all the assignments before and after the days treshold, its 1 based index
     const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
       currentDate,
-      closeOthersDays,
+      closeOthersDays
     );
 
     const foundAssignments: AssignmentInterface[] = [];
     for (const assign of allDays) {
       if (
         this.assignTypeService.isOfTypeSchoolAssignTypes(
-          this.assignTypeService.getAssignType(assign.assignType).type,
+          this.assignTypeService.getAssignType(assign.assignType).type
         ) &&
         (assign.principal === p.id || assign.assistant === p.id)
       ) {
@@ -1199,19 +1201,19 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const closeOthersPrayerDays = this.configService.getConfig().closeToOthersPrayerDays;
 
     //If we edit an assignment, we get the string iso instead of a real date
-    if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+    if (typeof currentDate === 'string') currentDate = parseISO(currentDate);
 
     //Get all the assignments before and after the days treshold, its 1 based index
     const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
       currentDate,
-      closeOthersPrayerDays,
+      closeOthersPrayerDays
     );
 
     const foundAssignments: AssignmentInterface[] = [];
     for (const assign of allDays) {
       if (
         this.assignTypeService.isOfTypePrayer(
-          this.assignTypeService.getAssignType(assign.assignType).type,
+          this.assignTypeService.getAssignType(assign.assignType).type
         ) &&
         (assign.principal === p.id || assign.assistant === p.id)
       ) {
@@ -1226,19 +1228,19 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const closeOthersTreasuresEtcDays = this.configService.getConfig().closeToOthersPrayerDays;
 
     //If we edit an assignment, we get the string iso instead of a real date
-    if (typeof currentDate === "string") currentDate = parseISO(currentDate);
+    if (typeof currentDate === 'string') currentDate = parseISO(currentDate);
 
     //Get all the assignments before and after the days treshold, its 1 based index
     const allDays = this.assignmentService.getAllAssignmentsByDaysBeforeAndAfter(
       currentDate,
-      closeOthersTreasuresEtcDays,
+      closeOthersTreasuresEtcDays
     );
 
     const foundAssignments: AssignmentInterface[] = [];
     for (const assign of allDays) {
       if (
         this.assignTypeService.isOfTypeTreasuresAndOthers(
-          this.assignTypeService.getAssignType(assign.assignType).type,
+          this.assignTypeService.getAssignType(assign.assignType).type
         ) &&
         (assign.principal === p.id || assign.assistant === p.id)
       ) {
@@ -1251,8 +1253,8 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   //TIME DISTANCE BETWEEN LATEST AND SELECTED DATE
 
   getTimeDistance() {
-    const assignTypeId = this.gfv("assignType");
-    const selectedDate = this.gfv("date");
+    const assignTypeId = this.gfv('assignType');
+    const selectedDate = this.gfv('date');
 
     //Clear first
     for (const p of this.participants) {
@@ -1262,7 +1264,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       p.distanceBetweenPenultimaAndLast = null;
     }
 
-    if (this.gfv("onlySortByTime") && assignTypeId) {
+    if (this.gfv('onlySortByTime') && assignTypeId) {
       //Get the lastAssignmentDate
       const assignTypeObj = this.assignTypeService.getAssignType(assignTypeId);
 
@@ -1287,18 +1289,16 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
           }
         } else {
           // Means it's an assignment that doesnt belong to a group
-          assignTypeIdList.push(
-            this.assignTypeService.getAssignTypeIdByType(assignTypeObj.type),
-          );
+          assignTypeIdList.push(this.assignTypeService.getAssignTypeIdByType(assignTypeObj.type));
         }
 
         //Filter possible null values //ToDo: For compatibility, must be removed on v6
-        assignTypeIdList = assignTypeIdList.filter((at) => at);
+        assignTypeIdList = assignTypeIdList.filter(at => at);
 
         const assignment = getLastPrincipalAssignment(
           this.assignments,
           participant,
-          assignTypeIdList,
+          assignTypeIdList
         );
 
         if (assignment) participant.isPrincipalLastAssignment = true;
@@ -1315,7 +1315,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
       this.sharedService.getDistanceBetweenPenultimaAndLast(
         this.participants,
         this.dateFnsLocaleService.locales[this.translocoService.getActiveLang()],
-        selectedDate,
+        selectedDate
       );
     }
   }
@@ -1325,7 +1325,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   //for Datepicker hack
   public dateClass = (date: Date) => {
     if (this.findDate(date) !== -1) {
-      return ["selected"];
+      return ['selected'];
     }
     return [];
   };
@@ -1353,7 +1353,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
         // eslint-disable-next-line no-underscore-dangle
         this.datePickerRef[
           // eslint-disable-next-line @typescript-eslint/dot-notation
-          "_componentRef"
+          '_componentRef'
         ].instance._calendar.monthView._createWeekCells();
 
         this.timeoutRef = setTimeout(() => {
@@ -1373,6 +1373,6 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
 
   //for Datepicker hack
   private findDate(date: Date): number {
-    return this.selectedDates.map((m) => +m).indexOf(+date);
+    return this.selectedDates.map(m => +m).indexOf(+date);
   }
 }

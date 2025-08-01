@@ -1,19 +1,19 @@
 /* eslint-disable complexity */
-import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 
-import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
-import { TerritoryContextClass } from "app/map/model/map.model";
-import { TranslocoDirective, TranslocoService } from "@ngneat/transloco";
-import { TerritoryService } from "app/map/territory/service/territory.service";
-import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
-import { GraphicService } from "app/services/graphic.service";
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { TerritoryContextClass } from 'app/map/model/map.model';
+import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { TerritoryService } from 'app/map/territory/service/territory.service';
+import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
+import { GraphicService } from 'app/services/graphic.service';
 
 @Component({
-    selector: "app-territory-group-data",
-    imports: [MatDialogModule, TranslocoDirective],
-    templateUrl: "./territory-group-data.component.html",
-    styleUrl: "./territory-group-data.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-territory-group-data',
+  imports: [MatDialogModule, TranslocoDirective],
+  templateUrl: './territory-group-data.component.html',
+  styleUrl: './territory-group-data.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryGroupDataComponent implements OnInit {
   private tgId = inject(MAT_DIALOG_DATA);
@@ -22,14 +22,14 @@ export class TerritoryGroupDataComponent implements OnInit {
   private graphicService = inject(GraphicService);
   private translocoService = inject(TranslocoService);
 
-  neverAssigned = this.translocoService.translate("TERRITORY_GRAPHICS_NEVER_ASSIGNED");
+  neverAssigned = this.translocoService.translate('TERRITORY_GRAPHICS_NEVER_ASSIGNED');
   beingWorkedOrReturnedLess = this.translocoService.translate(
-    "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS",
+    'TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS'
   );
   beingWorkedOrReturnedMore = this.translocoService.translate(
-    "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE",
+    'TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE'
   );
-  overdueTitle = this.translocoService.translate("TERRITORY_GRAPHICS_OVERDUE");
+  overdueTitle = this.translocoService.translate('TERRITORY_GRAPHICS_OVERDUE');
 
   territories = this.territoryService.getTerritories();
 
@@ -45,25 +45,25 @@ export class TerritoryGroupDataComponent implements OnInit {
   neverWorkedData: string[] = [];
   neverWorked = {
     name: this.neverAssigned,
-    value: this.neverWorkedData,
+    value: this.neverWorkedData
   };
 
   beingWorkedLess4Data: string[] = [];
   beingWorkedLess4 = {
     name: this.beingWorkedOrReturnedLess,
-    value: this.beingWorkedLess4Data,
+    value: this.beingWorkedLess4Data
   };
 
   beingWorkedMore4Data: string[] = [];
   beingWorkedMore4 = {
     name: this.beingWorkedOrReturnedMore,
-    value: this.beingWorkedMore4Data,
+    value: this.beingWorkedMore4Data
   };
 
   overdueData: string[] = [];
   overdue = {
     name: this.overdueTitle,
-    value: this.overdueData,
+    value: this.overdueData
   };
 
   ngOnInit(): void {
@@ -76,7 +76,7 @@ export class TerritoryGroupDataComponent implements OnInit {
       territoriesByGroup = this.territories;
     }
     //Filter the not available
-    territoriesByGroup = territoriesByGroup.filter((t) => t.available);
+    territoriesByGroup = territoriesByGroup.filter(t => t.available);
 
     // Assign based on status
     for (const t of territoriesByGroup) {

@@ -9,9 +9,8 @@ describe('StarvingAssignmentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [StarvingAssignmentComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(StarvingAssignmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

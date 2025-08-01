@@ -1,13 +1,13 @@
-import { RoomInterface } from "app/room/model/room.model";
-import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
+import { RoomInterface } from 'app/room/model/room.model';
+import { readJSONSync, writeJson, writeJsonSync } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
 
-import { Injectable, inject } from "@angular/core";
-import { ConfigService } from "app/config/service/config.service";
-import { TranslocoService } from "@ngneat/transloco";
+import { Injectable, inject } from '@angular/core';
+import { ConfigService } from 'app/config/service/config.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class RoomService {
   private configService = inject(ConfigService);
@@ -112,7 +112,7 @@ export class RoomService {
   deleteRoom(id: string): boolean {
     //delete room
     this.#roomsMap.delete(id);
-    this.#rooms = this.#rooms.filter((b) => b.id !== id);
+    this.#rooms = this.#rooms.filter(b => b.id !== id);
     //save rooms
     return this.saveRoomsToFile();
   }

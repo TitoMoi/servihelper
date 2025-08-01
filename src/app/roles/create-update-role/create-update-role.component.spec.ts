@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateRoleComponent } from "./create-role.component";
+import { CreateRoleComponent } from './create-role.component';
 
-describe("CreateRoleComponent", () => {
+describe('CreateRoleComponent', () => {
   let component: CreateRoleComponent;
   let fixture: ComponentFixture<CreateRoleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateRoleComponent],
+      imports: [CreateRoleComponent]
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe("CreateRoleComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

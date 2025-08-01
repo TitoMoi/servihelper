@@ -1,44 +1,51 @@
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { ConfigService } from "app/config/service/config.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomService } from "app/room/service/room.service";
-import { SortOrderType, SortService } from "app/services/sort.service";
-import autoTable from "jspdf-autotable";
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomService } from 'app/room/service/room.service';
+import { SortOrderType, SortService } from 'app/services/sort.service';
+import autoTable from 'jspdf-autotable';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, inject } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  inject
+} from '@angular/core';
 
 import {
   AssignmentGroupInterface,
   AssignmentInterface,
-  AssignmentReportInterface,
-} from "app/assignment/model/assignment.model";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { PdfService } from "app/services/pdf.service";
-import { AssignTypePipe } from "../../assigntype/pipe/assign-type.pipe";
-import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
+  AssignmentReportInterface
+} from 'app/assignment/model/assignment.model';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { PdfService } from 'app/services/pdf.service';
+import { AssignTypePipe } from '../../assigntype/pipe/assign-type.pipe';
+import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
 
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { MatIconModule } from "@angular/material/icon";
-import { TranslocoModule } from "@ngneat/transloco";
-import { ExportService } from "app/services/export.service";
-import { PublicThemeService } from "app/public-theme/service/public-theme.service";
-import { AssignTypeNamePipe } from "app/assigntype/pipe/assign-type-name.pipe";
-import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslocoModule } from '@ngneat/transloco';
+import { ExportService } from 'app/services/export.service';
+import { PublicThemeService } from 'app/public-theme/service/public-theme.service';
+import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
+import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
 
 @Component({
-    selector: "app-selection-list-hor",
-    templateUrl: "./selection-list-hor.component.html",
-    styleUrls: ["./selection-list-hor.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        TranslocoModule,
-        MatIconModule,
-        MatTooltipModule,
-        TranslocoLocaleModule,
-        AssignTypePipe,
-        AssignTypeNamePipe,
-        RoomNamePipe,
-    ]
+  selector: 'app-selection-list-hor',
+  templateUrl: './selection-list-hor.component.html',
+  styleUrls: ['./selection-list-hor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslocoModule,
+    MatIconModule,
+    MatTooltipModule,
+    TranslocoLocaleModule,
+    AssignTypePipe,
+    AssignTypeNamePipe,
+    RoomNamePipe
+  ]
 })
 export class SelectionListHorComponent implements OnChanges {
   assignTypeService = inject(AssignTypeService);
@@ -58,7 +65,7 @@ export class SelectionListHorComponent implements OnChanges {
   @Input() order: SortOrderType;
 
   defaultReportFontSizeHorizontal =
-    this.configService.getConfig().defaultReportFontSizeHorizontal + "px";
+    this.configService.getConfig().defaultReportFontSizeHorizontal + 'px';
   defaultReportDateFormat = this.configService.getConfig().defaultReportDateFormat;
   defaultReportDateColor = this.configService.getConfig().defaultReportDateColor;
   reportTitle = this.configService.getConfig().reportTitle;
@@ -73,7 +80,7 @@ export class SelectionListHorComponent implements OnChanges {
       this.filterAssignments().then(() => {
         this.#assignments = this.sortService.sortAssignmentsByDateThenRoomAndAssignType(
           this.#assignments,
-          this.order,
+          this.order
         );
         this.getRelatedData();
         this.cdr.detectChanges();
@@ -90,31 +97,29 @@ export class SelectionListHorComponent implements OnChanges {
   async filterAssignments() {
     this.#assignments = await this.assignmentService.getAssignments(true);
     this.#assignments = this.#assignments.filter(
-      (assignment) =>
+      assignment =>
         this.assignTypes.includes(assignment.assignType) &&
         this.rooms.includes(assignment.room) &&
         this.selectedDates.some(
-          (date) => new Date(date).getTime() === new Date(assignment.date).getTime(),
-        ),
+          date => new Date(date).getTime() === new Date(assignment.date).getTime()
+        )
     );
   }
 
   sortAssignmentByAssignTypeOrder() {
     for (const ag of this.assignmentGroups) {
-      ag.assignments.sort(
-        (a: AssignmentReportInterface, b: AssignmentReportInterface): number => {
-          const orderA = this.assignTypeService.getAssignType(a.assignType.id).order;
-          const orderB = this.assignTypeService.getAssignType(b.assignType.id).order;
+      ag.assignments.sort((a: AssignmentReportInterface, b: AssignmentReportInterface): number => {
+        const orderA = this.assignTypeService.getAssignType(a.assignType.id).order;
+        const orderB = this.assignTypeService.getAssignType(b.assignType.id).order;
 
-          if (orderA > orderB) {
-            return 1;
-          }
-          if (orderA < orderB) {
-            return -1;
-          }
-          return 0;
-        },
-      );
+        if (orderA > orderB) {
+          return 1;
+        }
+        if (orderA < orderB) {
+          return -1;
+        }
+        return 0;
+      });
     }
   }
 
@@ -125,7 +130,7 @@ export class SelectionListHorComponent implements OnChanges {
     this.assignmentGroups = [];
 
     let assignGroup: AssignmentGroupInterface = {
-      assignments: [],
+      assignments: []
     };
 
     let currentDate;
@@ -144,7 +149,7 @@ export class SelectionListHorComponent implements OnChanges {
         currentDate = assignment.date;
         firstRoomId = assignment.room;
         assignGroup = {
-          assignments: [],
+          assignments: []
         };
       }
 
@@ -161,7 +166,7 @@ export class SelectionListHorComponent implements OnChanges {
         onlyMan: false,
         principal: this.participantService.getParticipant(assignment.principal),
         assistant: this.participantService.getParticipant(assignment.assistant),
-        footerNote: "",
+        footerNote: ''
       });
     }
     //last assign group who is out of the loop
@@ -169,43 +174,43 @@ export class SelectionListHorComponent implements OnChanges {
   }
 
   toPdfForPrint() {
-    const doc = this.pdfService.getJsPdf({ orientation: "landscape" });
+    const doc = this.pdfService.getJsPdf({ orientation: 'landscape' });
 
     const font = this.pdfService.getFontForLang();
 
     doc.text(this.reportTitle, doc.internal.pageSize.width / 2, 8, {
-      align: "center",
+      align: 'center'
     });
 
     for (let i = 0; i < this.assignmentGroups.length; i++) {
       const tableId = `table${i}`;
       autoTable(doc, {
-        html: "#" + tableId,
+        html: '#' + tableId,
         styles: { font, fontSize: 10, cellPadding: 1.5 },
-        theme: "plain",
+        theme: 'plain',
         margin: { vertical: 4, horizontal: 4 },
-        didParseCell: (data) => {
+        didParseCell: data => {
           // eslint-disable-next-line @typescript-eslint/dot-notation
-          const id = data.cell.raw["id"];
+          const id = data.cell.raw['id'];
           // eslint-disable-next-line @typescript-eslint/dot-notation
-          const localName = data.cell.raw["localName"];
+          const localName = data.cell.raw['localName'];
 
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
-            data.cell.styles.fontStyle = "bold";
+            data.cell.styles.fontStyle = 'bold';
             return;
           }
-          if (localName === "th" && !assignType) {
+          if (localName === 'th' && !assignType) {
             //the "or" condition is necessary, otherwise pdf is not showed in acrobat reader
-            data.cell.styles.fontStyle = "bold";
+            data.cell.styles.fontStyle = 'bold';
           }
-        },
+        }
       });
     }
-    doc.save("assignmentsLandscape");
+    doc.save('assignmentsLandscape');
   }
 
   async toPng() {
-    this.exportService.toPng("toPngDivId", "assignments");
+    this.exportService.toPng('toPngDivId', 'assignments');
   }
 }

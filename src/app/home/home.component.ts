@@ -1,35 +1,35 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable complexity */
-import AdmZip from "adm-zip";
-import { AssignmentService } from "app/assignment/service/assignment.service";
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { ConfigService } from "app/config/service/config.service";
-import { NoteService } from "app/note/service/note.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomService } from "app/room/service/room.service";
-import { lstatSync, writeFileSync, writeJsonSync } from "fs-extra";
+import AdmZip from 'adm-zip';
+import { AssignmentService } from 'app/assignment/service/assignment.service';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { NoteService } from 'app/note/service/note.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomService } from 'app/room/service/room.service';
+import { lstatSync, writeFileSync, writeJsonSync } from 'fs-extra';
 
-import { Component, OnInit, inject } from "@angular/core";
-import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
-import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
-import { NgClass, AsyncPipe } from "@angular/common";
-import { MatButtonModule } from "@angular/material/button";
-import path from "path";
-import { PolygonService } from "app/map/territory/service/polygon.service";
-import { TerritoryService } from "app/map/territory/service/territory.service";
-import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
-import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
-import { PublicThemeService } from "app/public-theme/service/public-theme.service";
-import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
-import { OnlineService } from "app/online/service/online.service";
-import { NoteInterface } from "app/note/model/note.model";
-import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
+import { Component, OnInit, inject } from '@angular/core';
+import { TranslocoService, TranslocoModule } from '@ngneat/transloco';
+import { DateAdapter, NativeDateAdapter } from '@angular/material/core';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import path from 'path';
+import { PolygonService } from 'app/map/territory/service/polygon.service';
+import { TerritoryService } from 'app/map/territory/service/territory.service';
+import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
+import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
+import { PublicThemeService } from 'app/public-theme/service/public-theme.service';
+import { SheetTitleService } from 'app/sheet-title/service/sheet-title.service';
+import { OnlineService } from 'app/online/service/online.service';
+import { NoteInterface } from 'app/note/model/note.model';
+import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
 
 @Component({
-    selector: "app-home",
-    templateUrl: "./home.component.html",
-    styleUrls: ["./home.component.scss"],
-    imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgClass, AsyncPipe]
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgClass, AsyncPipe]
 })
 export class HomeComponent implements OnInit {
   private configService = inject(ConfigService);
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
 
   noteHome: NoteInterface;
   ngOnInit(): void {
-    this.noteHome = this.noteService.getNotes().find((n) => n.showInHome);
+    this.noteHome = this.noteService.getNotes().find(n => n.showInHome);
   }
 
   downloadFiles() {
@@ -73,11 +73,11 @@ export class HomeComponent implements OnInit {
     this.configService.updateConfig(config);
 
     zip.toBuffer((buffer: Buffer) => {
-      const blob = new Blob([buffer], { type: "application/octet" });
-      const zipLink = document.createElement("a");
+      const blob = new Blob([buffer], { type: 'application/octet' });
+      const zipLink = document.createElement('a');
       zipLink.href = window.URL.createObjectURL(blob);
       //No extension to prevent mac to auto unzip folder
-      zipLink.setAttribute("download", "servihelper-files");
+      zipLink.setAttribute('download', 'servihelper-files');
       zipLink.click();
     });
   }
@@ -98,26 +98,26 @@ export class HomeComponent implements OnInit {
     const zip = new AdmZip(zipFile.path);
 
     // reading archives
-    zip.getEntries().forEach((zipEntry) => {
+    zip.getEntries().forEach(zipEntry => {
       switch (
         zipEntry.entryName //entryName = participant.json, assignment.gz, images/ ...
       ) {
         case this.configService.configFilename:
           const currentConfig = this.configService.getConfig(); //Default config
-          const incomingConfig = JSON.parse(zipEntry.getData().toString("utf8"));
+          const incomingConfig = JSON.parse(zipEntry.getData().toString('utf8'));
           const finalConfig = { ...currentConfig, ...incomingConfig };
           writeJsonSync(this.configService.configPath, finalConfig);
           break;
         case this.configService.assignTypesFilename:
           const incomingAtList: AssignTypeInterface[] = JSON.parse(
-            zipEntry.getData().toString("utf8"),
+            zipEntry.getData().toString('utf8')
           );
           //Read current assignTypes
           const currentAtList = this.assignTypeService.getAssignTypes();
 
           //Update current assignTypes with incoming assignTypes
-          const finalAtList = incomingAtList.map((incomingAt) => {
-            const currentAt = currentAtList.find((at) => at.id === incomingAt.id);
+          const finalAtList = incomingAtList.map(incomingAt => {
+            const currentAt = currentAtList.find(at => at.id === incomingAt.id);
             return { ...currentAt, ...incomingAt } as AssignTypeInterface; //updates or adds
           });
 
@@ -125,8 +125,8 @@ export class HomeComponent implements OnInit {
           // but we need to preserve the special ones
           // because we can release a new version with some new special assign type
           for (const at of currentAtList) {
-            const exists = finalAtList.some((fat) => fat.id === at.id);
-            if (!exists && at.type !== "other") {
+            const exists = finalAtList.some(fat => fat.id === at.id);
+            if (!exists && at.type !== 'other') {
               finalAtList.push(at);
               nonExistingAssignmentTypes.push(at);
             }
@@ -137,17 +137,14 @@ export class HomeComponent implements OnInit {
           writeJsonSync(this.configService.assignTypesPath, finalAtList);
           break;
         default:
-          const destinyPath = path.join(
-            this.configService.sourceFilesPath,
-            zipEntry.entryName,
-          );
+          const destinyPath = path.join(this.configService.sourceFilesPath, zipEntry.entryName);
 
           const stats = lstatSync(destinyPath, { throwIfNoEntry: false });
 
           if (stats?.isFile()) {
-            const data = (zipEntry.entryName as string).endsWith(".gz")
+            const data = (zipEntry.entryName as string).endsWith('.gz')
               ? zipEntry.getData()
-              : zipEntry.getData().toString("utf8");
+              : zipEntry.getData().toString('utf8');
             writeFileSync(destinyPath, data);
           }
       }
@@ -182,11 +179,11 @@ export class HomeComponent implements OnInit {
     this.territoryService.getTerritories();
     this.territoryGroupService.getTerritoryGroups();
 
-    this.noteHome = this.noteService.getNotes().find((n) => n.showInHome);
+    this.noteHome = this.noteService.getNotes().find(n => n.showInHome);
 
     let lang = this.configService.getConfig().lang;
     this.translocoService = this.translocoService.setActiveLang(lang);
-    if (lang === "zhCN") lang = "zh";
+    if (lang === 'zhCN') lang = 'zh';
     this.dateAdapter.setLocale(lang);
 
     //If we have some new core assign type we need to add the reference to all the participants
@@ -198,7 +195,7 @@ export class HomeComponent implements OnInit {
           p.assignTypes.push({
             assignTypeId: at.id,
             canPrincipal: true,
-            canAssistant: true,
+            canAssistant: true
           });
         }
       }

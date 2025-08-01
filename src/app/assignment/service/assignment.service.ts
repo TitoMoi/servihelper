@@ -2,20 +2,20 @@
 import {
   AssignmentInterface,
   AssignmentOperationInterface,
-  AssignmentTableInterface,
-} from "app/assignment/model/assignment.model";
-import { readFileSync, writeFile } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
+  AssignmentTableInterface
+} from 'app/assignment/model/assignment.model';
+import { readFileSync, writeFile } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
 
-import { Injectable, inject } from "@angular/core";
-import { Subject } from "rxjs";
-import { ConfigService } from "app/config/service/config.service";
-import { LockService } from "app/lock/service/lock.service";
-import { inflate, deflate } from "pako";
-import { addDays, subDays } from "date-fns";
+import { Injectable, inject } from '@angular/core';
+import { Subject } from 'rxjs';
+import { ConfigService } from 'app/config/service/config.service';
+import { LockService } from 'app/lock/service/lock.service';
+import { inflate, deflate } from 'pako';
+import { addDays, subDays } from 'date-fns';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class AssignmentService {
   private configService = inject(ConfigService);
@@ -24,8 +24,7 @@ export class AssignmentService {
   //flag to indicate that assignments file has changed
   hasChanged = true;
   //To track assignment create, update or delete
-  assignment$: Subject<AssignmentOperationInterface> =
-    new Subject<AssignmentOperationInterface>();
+  assignment$: Subject<AssignmentOperationInterface> = new Subject<AssignmentOperationInterface>();
   //The array of assignments in memory
   #assignments: AssignmentInterface[] = [];
   //The map of assignments for look up of by id
@@ -46,7 +45,7 @@ export class AssignmentService {
     const assignContent = readFileSync(this.configService.assignmentsPath);
 
     if (assignContent) {
-      this.#assignments = JSON.parse(inflate(assignContent, { to: "string" }));
+      this.#assignments = JSON.parse(inflate(assignContent, { to: 'string' }));
 
       //populate maps for first run
       for (const assignment of this.#assignments) {
@@ -112,7 +111,7 @@ export class AssignmentService {
 
   saveAssignmentsToFile() {
     //Write assignments back to file
-    const gziped = deflate(JSON.stringify(this.#assignments), { to: "string" });
+    const gziped = deflate(JSON.stringify(this.#assignments), { to: 'string' });
     writeFile(this.configService.assignmentsPath, gziped);
     //Notify the lock we are working
     this.lockService.updateTimestamp();
@@ -142,7 +141,7 @@ export class AssignmentService {
       //Notify
       const assignmentOperation: AssignmentOperationInterface = {
         assignment,
-        operationType: "create",
+        operationType: 'create'
       };
       this.assignment$.next(assignmentOperation);
     }
@@ -173,7 +172,7 @@ export class AssignmentService {
     //Notify
     const assignmentOperation: AssignmentOperationInterface = {
       assignment,
-      operationType: "create",
+      operationType: 'create'
     };
     this.assignment$.next(assignmentOperation);
   }
@@ -186,7 +185,7 @@ export class AssignmentService {
    */
   sortAssignmentsByDateDesc(
     a: AssignmentInterface | AssignmentTableInterface,
-    b: AssignmentInterface | AssignmentTableInterface,
+    b: AssignmentInterface | AssignmentTableInterface
   ): number {
     const dateA = new Date(a.date).getTime();
     const dateB = new Date(b.date).getTime();
@@ -207,7 +206,7 @@ export class AssignmentService {
    */
   sortAssignmentsByDateAsc(
     a: AssignmentInterface | AssignmentTableInterface,
-    b: AssignmentInterface | AssignmentTableInterface,
+    b: AssignmentInterface | AssignmentTableInterface
   ): number {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
@@ -249,7 +248,7 @@ export class AssignmentService {
     //Notify
     const assignmentOperation: AssignmentOperationInterface = {
       assignment,
-      operationType: "update",
+      operationType: 'update'
     };
     this.assignment$.next(assignmentOperation);
   }
@@ -277,7 +276,7 @@ export class AssignmentService {
    * @param date the date we want to delete all assignments
    */
   massiveAssignmentDelete(date: Date, assignTypesIds: string[]) {
-    this.#assignments = this.#assignments.filter((a) => {
+    this.#assignments = this.#assignments.filter(a => {
       if (assignTypesIds && assignTypesIds.includes(a.assignType)) {
         if (new Date(a.date).getTime() === date.getTime()) {
           this.#assignmentsMap.delete(a.id);
@@ -295,7 +294,7 @@ export class AssignmentService {
   deleteAssignmentToAssignmentByDateMap(assignment: AssignmentInterface) {
     const isoDate = new Date(assignment.date).toISOString();
     let assignmentsByDate = this.#assignmentsByDateMap.get(isoDate);
-    assignmentsByDate = assignmentsByDate.filter((a) => a.id !== assignment.id);
+    assignmentsByDate = assignmentsByDate.filter(a => a.id !== assignment.id);
     if (assignmentsByDate.length) {
       this.#assignmentsByDateMap.set(isoDate, assignmentsByDate);
     } else {
@@ -313,7 +312,7 @@ export class AssignmentService {
     //The assignment to delete
     const assignment = this.#assignmentsMap.get(id);
     //delete assignment
-    this.#assignments = this.#assignments.filter((a) => a.id !== id);
+    this.#assignments = this.#assignments.filter(a => a.id !== id);
     //this map delete order is important because AssignmentByDateMap needs an assignment not an id
     this.deleteAssignmentToAssignmentByDateMap(assignment);
     this.#assignmentsMap.delete(id);
@@ -323,7 +322,7 @@ export class AssignmentService {
     //Notify
     const assignmentOperation: AssignmentOperationInterface = {
       assignment,
-      operationType: "delete",
+      operationType: 'delete'
     };
     this.assignment$.next(assignmentOperation);
   }
@@ -338,7 +337,7 @@ export class AssignmentService {
     this.#assignmentsByDateMap = new Map();
 
     //delete assignments of the participant being the principal
-    this.#assignments = this.#assignments.filter((a) => a.principal !== participantId);
+    this.#assignments = this.#assignments.filter(a => a.principal !== participantId);
 
     //Reset to undefined in assistant
     for (const assignment of this.#assignments) {
@@ -360,7 +359,7 @@ export class AssignmentService {
     this.#assignmentsMap = new Map();
     this.#assignmentsByDateMap = new Map();
     //delete assignments
-    this.#assignments = this.#assignments.filter((a) => a.room !== id);
+    this.#assignments = this.#assignments.filter(a => a.room !== id);
 
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
@@ -378,8 +377,8 @@ export class AssignmentService {
     this.#assignmentsMap = new Map();
     this.#assignmentsByDateMap = new Map();
     //delete sheet title property
-    this.#assignments.forEach((a) => {
-      if (a.sheetTitle === id) a.sheetTitle = "";
+    this.#assignments.forEach(a => {
+      if (a.sheetTitle === id) a.sheetTitle = '';
     });
 
     this.updateAssignmentMaps();
@@ -392,8 +391,8 @@ export class AssignmentService {
     this.#assignmentsMap = new Map();
     this.#assignmentsByDateMap = new Map();
     //delete sheet title property
-    this.#assignments.forEach((a) => {
-      if (a.isPTheme && a.theme === id) a.theme = "";
+    this.#assignments.forEach(a => {
+      if (a.isPTheme && a.theme === id) a.theme = '';
     });
 
     this.updateAssignmentMaps();
@@ -416,7 +415,7 @@ export class AssignmentService {
     this.#assignmentsMap = new Map();
 
     //delete assignments
-    this.#assignments = this.#assignments.filter((a) => a.assignType !== id);
+    this.#assignments = this.#assignments.filter(a => a.assignType !== id);
 
     for (const assignment of this.#assignments) {
       this.#assignmentsMap.set(assignment.id, assignment);
@@ -437,13 +436,12 @@ export class AssignmentService {
     //By date
     if (date) {
       return this.getAssignmentsByDate(date).filter(
-        (a) => a.principal === participantId || a.assistant === participantId,
+        a => a.principal === participantId || a.assistant === participantId
       );
     }
     //By all assignments
     return this.#assignments.filter(
-      (assignment) =>
-        assignment.principal === participantId || assignment.assistant === participantId,
+      assignment => assignment.principal === participantId || assignment.assistant === participantId
     );
   }
 
@@ -467,7 +465,7 @@ export class AssignmentService {
 
   getAllAssignmentsByDaysBeforeAndAfter(
     currentDate: Date,
-    daysThreshold: number,
+    daysThreshold: number
   ): AssignmentInterface[] {
     let allDays: AssignmentInterface[] = [];
     for (let i = 1; i <= daysThreshold; i++) {

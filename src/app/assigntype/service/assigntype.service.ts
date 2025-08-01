@@ -1,14 +1,14 @@
 /* eslint-disable complexity */
-import { AssignTypeInterface, AssignTypes } from "app/assigntype/model/assigntype.model";
-import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
+import { AssignTypeInterface, AssignTypes } from 'app/assigntype/model/assigntype.model';
+import { readJSONSync, writeJson, writeJsonSync } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
 
-import { Injectable, inject } from "@angular/core";
-import { ConfigService } from "app/config/service/config.service";
-import { TranslocoService } from "@ngneat/transloco";
+import { Injectable, inject } from '@angular/core';
+import { ConfigService } from 'app/config/service/config.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class AssignTypeService {
   private configService = inject(ConfigService);
@@ -21,26 +21,26 @@ export class AssignTypeService {
   //The map of assignTypes for look up of by id
   #assignTypesMap: Map<string, AssignTypeInterface> = new Map();
 
-  readonly SPIRITUAL_GEMS = "spiritualGems";
-  readonly TREASURES = "treasures";
-  readonly BIBLE_READING = "bibleReading";
-  readonly ANALYSIS_AUDIENCE = "analysysAudience";
-  readonly INTEREST_IN_OTHERS = "interestInOthers"; //ToDo: This one is ANALYSIS_AUDIENCE, we keep it for compatibility, must be removed on v6
-  readonly INITIAL_CALL = "initialCall";
-  readonly RETURN_VISIT = "returnVisit";
-  readonly TALK = "talk";
-  readonly BIBLE_STUDY = "bibleStudy";
-  readonly INITIAL_PRAYER = "initialPrayer";
-  readonly ENDING_PRAYER = "endingPrayer";
-  readonly LIVING_AS_CHRISTIANS = "livingAsChristians";
-  readonly EXPLAIN_BELIEFS = "explainBeliefs";
-  readonly CONGREGATION_BIBLE_STUDY = "congregationBibleStudy";
+  readonly SPIRITUAL_GEMS = 'spiritualGems';
+  readonly TREASURES = 'treasures';
+  readonly BIBLE_READING = 'bibleReading';
+  readonly ANALYSIS_AUDIENCE = 'analysysAudience';
+  readonly INTEREST_IN_OTHERS = 'interestInOthers'; //ToDo: This one is ANALYSIS_AUDIENCE, we keep it for compatibility, must be removed on v6
+  readonly INITIAL_CALL = 'initialCall';
+  readonly RETURN_VISIT = 'returnVisit';
+  readonly TALK = 'talk';
+  readonly BIBLE_STUDY = 'bibleStudy';
+  readonly INITIAL_PRAYER = 'initialPrayer';
+  readonly ENDING_PRAYER = 'endingPrayer';
+  readonly LIVING_AS_CHRISTIANS = 'livingAsChristians';
+  readonly EXPLAIN_BELIEFS = 'explainBeliefs';
+  readonly CONGREGATION_BIBLE_STUDY = 'congregationBibleStudy';
 
   //Section as jw color bands
   treasuresAssignmentTypes: AssignTypes[] = [
     this.SPIRITUAL_GEMS,
     this.TREASURES,
-    this.BIBLE_READING,
+    this.BIBLE_READING
   ];
 
   //Section as jw color bands
@@ -51,13 +51,13 @@ export class AssignTypeService {
     this.RETURN_VISIT,
     this.BIBLE_STUDY,
     this.TALK,
-    this.EXPLAIN_BELIEFS,
+    this.EXPLAIN_BELIEFS
   ];
 
   //Section as jw color bands
   liveAsChristiansAssignmentTypes: AssignTypes[] = [
     this.LIVING_AS_CHRISTIANS,
-    this.CONGREGATION_BIBLE_STUDY,
+    this.CONGREGATION_BIBLE_STUDY
   ];
 
   getNameOrTranslation(at: AssignTypeInterface) {
@@ -65,10 +65,10 @@ export class AssignTypeService {
   }
 
   getNameOrTranslationByType(type: AssignTypes) {
-    let at = this.#assignTypes.find((at) => at.type === type);
+    let at = this.#assignTypes.find(at => at.type === type);
     // retro compatibility with wrong interest type
     if (!at) {
-      at = this.#assignTypes.find((at) => at.type === "interestInOthers");
+      at = this.#assignTypes.find(at => at.type === 'interestInOthers');
     }
     return this.getNameOrTranslation(at);
   }
@@ -82,14 +82,14 @@ export class AssignTypeService {
     translations.push(this.getNameOrTranslationByType(this.TALK));
     translations.push(this.getNameOrTranslationByType(this.BIBLE_STUDY));
     translations.push(this.getNameOrTranslationByType(this.EXPLAIN_BELIEFS));
-    return translations.filter((t) => t).toString();
+    return translations.filter(t => t).toString();
   }
 
   getTranslationForPrayers() {
     const translations = [];
     translations.push(this.getNameOrTranslationByType(this.INITIAL_PRAYER));
     translations.push(this.getNameOrTranslationByType(this.ENDING_PRAYER));
-    return translations.filter((t) => t).toString();
+    return translations.filter(t => t).toString();
   }
 
   getTranslationForTreasuresAndOthers() {
@@ -98,7 +98,7 @@ export class AssignTypeService {
     translations.push(this.getNameOrTranslationByType(this.SPIRITUAL_GEMS));
     translations.push(this.getNameOrTranslationByType(this.LIVING_AS_CHRISTIANS));
     translations.push(this.getNameOrTranslationByType(this.CONGREGATION_BIBLE_STUDY));
-    return translations.filter((t) => t).toString();
+    return translations.filter(t => t).toString();
   }
 
   /**
@@ -122,7 +122,7 @@ export class AssignTypeService {
   }
 
   getAssignTypeIdByType(type: AssignTypes) {
-    return this.#assignTypes.find((at) => at.type === type)?.id; //ToDo: For compatibility, ? must be removed on v6
+    return this.#assignTypes.find(at => at.type === type)?.id; //ToDo: For compatibility, ? must be removed on v6
   }
 
   /** Return an array of assign types ids */
@@ -130,9 +130,9 @@ export class AssignTypeService {
     const roles = this.configService.getRoles();
     const currentRoleId = this.configService.getCurrentRoleId();
     if (this.configService.isAdminRole()) {
-      return this.getAssignTypes().map((at) => at.id);
+      return this.getAssignTypes().map(at => at.id);
     } else if (roles) {
-      return roles.find((r) => r.id === currentRoleId).assignTypesId;
+      return roles.find(r => r.id === currentRoleId).assignTypesId;
     }
   }
 
@@ -206,7 +206,7 @@ export class AssignTypeService {
   deleteAssignType(id: string): boolean {
     //delete assignType
     this.#assignTypesMap.delete(id);
-    this.#assignTypes = this.#assignTypes.filter((b) => b.id !== id);
+    this.#assignTypes = this.#assignTypes.filter(b => b.id !== id);
     //save assignTypes
     return this.saveAssignTypesToFile();
   }
@@ -231,7 +231,7 @@ export class AssignTypeService {
       this.BIBLE_STUDY,
       this.EXPLAIN_BELIEFS,
       this.ANALYSIS_AUDIENCE,
-      this.INTEREST_IN_OTHERS, //ToDo: For compatibility, must be removed on v6
+      this.INTEREST_IN_OTHERS //ToDo: For compatibility, must be removed on v6
     ].includes(type);
   }
 
@@ -245,7 +245,7 @@ export class AssignTypeService {
       this.TALK,
       this.BIBLE_STUDY,
       this.EXPLAIN_BELIEFS,
-      this.ANALYSIS_AUDIENCE,
+      this.ANALYSIS_AUDIENCE
       //ToDo: For compatibility, must be removed on v6
     ];
   }
@@ -256,7 +256,7 @@ export class AssignTypeService {
       this.TREASURES,
       this.SPIRITUAL_GEMS,
       this.LIVING_AS_CHRISTIANS,
-      this.CONGREGATION_BIBLE_STUDY,
+      this.CONGREGATION_BIBLE_STUDY
     ].includes(type);
   }
 
@@ -266,7 +266,7 @@ export class AssignTypeService {
       this.TREASURES,
       this.SPIRITUAL_GEMS,
       this.LIVING_AS_CHRISTIANS,
-      this.CONGREGATION_BIBLE_STUDY,
+      this.CONGREGATION_BIBLE_STUDY
     ];
   }
 }

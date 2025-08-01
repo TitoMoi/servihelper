@@ -1,21 +1,21 @@
 /* eslint-disable complexity */
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { GraphicService } from "app/services/graphic.service";
-import { Color, NgxChartsModule, ScaleType } from "@swimlane/ngx-charts";
-import { TerritoryService } from "app/map/territory/service/territory.service";
-import { TranslocoDirective, TranslocoService } from "@ngneat/transloco";
-import { TerritoryGroupService } from "app/map/territory-group/service/territory-group.service";
-import { TerritoryContextClass } from "app/map/model/map.model";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { MatDialog, MatDialogModule } from "@angular/material/dialog";
-import { TerritoryGroupDataComponent } from "app/statistics/territory-graphics/territory-group-data/territory-group-data.component";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { GraphicService } from 'app/services/graphic.service';
+import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
+import { TerritoryService } from 'app/map/territory/service/territory.service';
+import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
+import { TerritoryContextClass } from 'app/map/model/map.model';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { TerritoryGroupDataComponent } from 'app/statistics/territory-graphics/territory-group-data/territory-group-data.component';
 
 @Component({
-    selector: "app-territory-graphics",
-    imports: [NgxChartsModule, MatExpansionModule, TranslocoDirective, MatDialogModule],
-    templateUrl: "./territory-graphics.component.html",
-    styleUrl: "./territory-graphics.component.scss",
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-territory-graphics',
+  imports: [NgxChartsModule, MatExpansionModule, TranslocoDirective, MatDialogModule],
+  templateUrl: './territory-graphics.component.html',
+  styleUrl: './territory-graphics.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryGraphicsComponent {
   private graphicService = inject(GraphicService);
@@ -33,20 +33,20 @@ export class TerritoryGraphicsComponent {
   purpleColor = this.graphicService.purpleColor;
 
   colorScheme: Color = {
-    name: "servihelper",
+    name: 'servihelper',
     group: ScaleType.Linear,
     selectable: false,
-    domain: [this.purpleColor, this.blueColor, this.yellowColor, this.redColor],
+    domain: [this.purpleColor, this.blueColor, this.yellowColor, this.redColor]
   };
 
-  neverAssigned = this.translocoService.translate("TERRITORY_GRAPHICS_NEVER_ASSIGNED");
+  neverAssigned = this.translocoService.translate('TERRITORY_GRAPHICS_NEVER_ASSIGNED');
   beingWorkedOrReturnedLess = this.translocoService.translate(
-    "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS",
+    'TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS'
   );
   beingWorkedOrReturnedMore = this.translocoService.translate(
-    "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE",
+    'TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_MORE'
   );
-  overdue = this.translocoService.translate("TERRITORY_GRAPHICS_OVERDUE");
+  overdue = this.translocoService.translate('TERRITORY_GRAPHICS_OVERDUE');
 
   territories = this.territoryService.getTerritories();
 
@@ -71,24 +71,24 @@ export class TerritoryGraphicsComponent {
       territoriesByGroup = this.territories;
     }
     //Filter the not available
-    territoriesByGroup = territoriesByGroup.filter((t) => t.available);
+    territoriesByGroup = territoriesByGroup.filter(t => t.available);
 
     //Prepare objects for data
     const neverWorked = {
       name: this.neverAssigned,
-      value: 0,
+      value: 0
     };
     const beingWorkedLess4 = {
       name: this.beingWorkedOrReturnedLess,
-      value: 0,
+      value: 0
     };
     const beingWorkedMore4 = {
       name: this.beingWorkedOrReturnedMore,
-      value: 0,
+      value: 0
     };
     const overdue = {
       name: this.overdue,
-      value: 0,
+      value: 0
     };
 
     // Assign based on status
@@ -119,7 +119,7 @@ export class TerritoryGraphicsComponent {
 
   showSelect(tgId?: string) {
     this.matDialog.open(TerritoryGroupDataComponent, {
-      data: tgId,
+      data: tgId
     });
   }
 }

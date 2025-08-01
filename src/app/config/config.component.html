@@ -6,7 +6,7 @@
           <div class="d-flex align-items-center">
             <mat-icon svgIcon="online"></mat-icon>
             <h3 class="m-3">
-              {{ t("CONFIG_GO_ONLINE") }}
+              {{ t('CONFIG_GO_ONLINE') }}
             </h3>
           </div>
         </mat-panel-title>
@@ -14,40 +14,39 @@
       <ng-template matExpansionPanelContent>
         <div class="explanation">
           <div class="mb-1">
-            {{ t("CONFIG_GO_ONLINE_1") }}
+            {{ t('CONFIG_GO_ONLINE_1') }}
           </div>
           <div class="mb-1">
-            <b>{{ t("CONFIG_GO_ONLINE_2") }}</b>
+            <b>{{ t('CONFIG_GO_ONLINE_2') }}</b>
           </div>
           <div class="mb-1">
-            {{ t("CONFIG_GO_ONLINE_3") }}
+            {{ t('CONFIG_GO_ONLINE_3') }}
           </div>
           <div class="d-flex mt-2 mb-1">
             <span class="me-3">Google Drive</span
             ><mat-icon class="me-3" svgIcon="googledrive"></mat-icon>
-            <span class="me-3">Dropbox</span
-            ><mat-icon class="me-3" svgIcon="onedrive"></mat-icon>
+            <span class="me-3">Dropbox</span><mat-icon class="me-3" svgIcon="onedrive"></mat-icon>
             <span class="me-3">OneDrive</span><mat-icon svgIcon="dropbox"></mat-icon>
           </div>
           <div class="mb-1">
-            {{ t("CONFIG_GO_ONLINE_4") }}
+            {{ t('CONFIG_GO_ONLINE_4') }}
           </div>
-          <div class="mb-1">{{ t("CONFIG_GO_ONLINE_5") }}</div>
+          <div class="mb-1">{{ t('CONFIG_GO_ONLINE_5') }}</div>
           <div class="mb-1">
-            {{ t("CONFIG_GO_ONLINE_6") }}
-          </div>
-          <div class="mb-1">
-            {{ t("CONFIG_GO_ONLINE_7") }}
+            {{ t('CONFIG_GO_ONLINE_6') }}
           </div>
           <div class="mb-1">
-            {{ t("CONFIG_GO_ONLINE_8") }}
-            {{ t("CONFIG_GO_ONLINE_9") }}
+            {{ t('CONFIG_GO_ONLINE_7') }}
           </div>
-          <div class="mb-1">{{ t("CONFIG_GO_ONLINE_10") }}</div>
           <div class="mb-1">
-            {{ t("CONFIG_GO_ONLINE_11") }}
+            {{ t('CONFIG_GO_ONLINE_8') }}
+            {{ t('CONFIG_GO_ONLINE_9') }}
           </div>
-          <h4>{{ t("CONFIG_GO_ONLINE_LABEL") }}</h4>
+          <div class="mb-1">{{ t('CONFIG_GO_ONLINE_10') }}</div>
+          <div class="mb-1">
+            {{ t('CONFIG_GO_ONLINE_11') }}
+          </div>
+          <h4>{{ t('CONFIG_GO_ONLINE_LABEL') }}</h4>
           <form [formGroup]="onlineForm" novalidate>
             <div class="row align-items-baseline mb-3">
               <div class="col">
@@ -55,59 +54,55 @@
                   #onlineToggle
                   color="primary"
                   class="mb-3 me-3"
-                  formControlName="isOnline"
-                >
-                  {{ t("CONFIG_GO_ONLINE") }}
+                  formControlName="isOnline">
+                  {{ t('CONFIG_GO_ONLINE') }}
                 </mat-slide-toggle>
                 @if ((onlineToggle.change | async)?.checked) {
                   <div class="mb-1">
-                    {{ t("CONFIG_GO_ONLINE_12") }}
+                    {{ t('CONFIG_GO_ONLINE_12') }}
                   </div>
                   <mat-form-field>
-                    <mat-label>{{ t("PLACEHOLDER_SHARED_FOLDER_LABEL") }}</mat-label>
+                    <mat-label>{{ t('PLACEHOLDER_SHARED_FOLDER_LABEL') }}</mat-label>
                     <input matInput spellcheck="false" formControlName="path" />
                     <mat-error *ngIf="onlineForm.controls.path.errors?.required">{{
-                      t("CONFIG_ONLINE_FOLDER_ERROR")
+                      t('CONFIG_ONLINE_FOLDER_ERROR')
                     }}</mat-error>
                     <mat-hint *ngIf="isValidPath && !isPathError" class="fw-bold">{{
-                      t("CONFIG_IS_VALID_PATH")
+                      t('CONFIG_IS_VALID_PATH')
                     }}</mat-hint>
                   </mat-form-field>
                 }
               </div>
             </div>
             @if (
-              (onlineToggle.change | async)?.checked && onlineForm.get("path").valueChanges
-                | async
+              (onlineToggle.change | async)?.checked && onlineForm.get('path').valueChanges | async
             ) {
               <button
                 mat-raised-button
                 color="primary"
                 type="button"
                 class="mb-2"
-                (click)="checkAndSaveOnlineMode()"
-              >
-                {{ t("BUTTON_CHECK_ONLINE") }}
+                (click)="checkAndSaveOnlineMode()">
+                {{ t('BUTTON_CHECK_ONLINE') }}
               </button>
             }
             @if (!servihelperFilesExist && isValidPath) {
               <div class="mb-2">
                 <div class="mb-2 me-2">
-                  {{ t("CONFIG_NO_FILES_SHARED_FOLDER") }}: {{ onlineForm.get("path").value }}.
-                  {{ t("CONFIG_ASK_MOVE_FILES") }}
+                  {{ t('CONFIG_NO_FILES_SHARED_FOLDER') }}: {{ onlineForm.get('path').value }}.
+                  {{ t('CONFIG_ASK_MOVE_FILES') }}
                 </div>
-                <div class="mb-2">{{ t("CONFIG_YES_WARNING") }}</div>
+                <div class="mb-2">{{ t('CONFIG_YES_WARNING') }}</div>
                 <button
                   mat-raised-button
                   color="primary"
                   type="button"
                   class="mb-2"
-                  (click)="moveOfflineFilesToSharedFolder()"
-                >
-                  {{ t("BUTTON_YES") }}
+                  (click)="moveOfflineFilesToSharedFolder()">
+                  {{ t('BUTTON_YES') }}
                 </button>
                 @if (copyFilesError) {
-                  <div>{{ t("CONFIG_CANNOT_COPY") }}.</div>
+                  <div>{{ t('CONFIG_CANNOT_COPY') }}.</div>
                 }
               </div>
             }
@@ -121,7 +116,7 @@
           <div class="d-flex align-items-center">
             <mat-icon class="me-2 pe-none" svgIcon="speech"></mat-icon>
             <h3 class="m-3">
-              {{ t("CONFIG_ACCORDION_PUBLIC_SPEECH") }}
+              {{ t('CONFIG_ACCORDION_PUBLIC_SPEECH') }}
             </h3>
           </div>
         </mat-panel-title>
@@ -134,22 +129,20 @@
           color="primary"
           routerLink="createPublicTheme"
           routerLinkActive="active"
-          [disabled]="netStatusOffline$ | async"
-        >
-          {{ t("CONFIG_CREATE_PUBLIC_THEME") }}
+          [disabled]="netStatusOffline$ | async">
+          {{ t('CONFIG_CREATE_PUBLIC_THEME') }}
           @if (netStatusOffline$ | async) {
             <mat-icon svgIcon="nowifi"></mat-icon>
           }
         </a>
-        <h4 class="me-2">{{ t("CONFIG_AVAILABLE_THEMES") }}</h4>
+        <h4 class="me-2">{{ t('CONFIG_AVAILABLE_THEMES') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <mat-select
             #publicThemeSelect
             formControlName="assignmentHeaderTitle"
             required
-            [disableRipple]="true"
-          >
+            [disableRipple]="true">
             <mat-select-trigger *ngIf="publicThemeSelect.value">
               {{ (publicThemeSelect.value | publicThemePipe)?.name }}
             </mat-select-trigger>
@@ -162,23 +155,21 @@
                     [routerLink]="['updatePublicTheme', theme.id]"
                     routerLinkActive="active"
                     svgIcon="edit"
-                    aria-label="Side nav toggle icon"
-                  ></mat-icon>
+                    aria-label="Side nav toggle icon"></mat-icon>
                   <mat-icon
                     class="me-4"
                     (click)="stopPropagation($event)"
                     [routerLink]="['deletePublicTheme', theme.id]"
                     routerLinkActive="active"
                     svgIcon="garbage"
-                    aria-label="Side nav toggle icon"
-                  ></mat-icon>
+                    aria-label="Side nav toggle icon"></mat-icon>
                   <div>{{ theme.name }}</div>
                 </div>
               </mat-option>
             }
           </mat-select>
           <mat-error *ngIf="!publicThemes.length">{{
-            t("CONFIG_ERROR_NO_AVAILABLE_TITLES")
+            t('CONFIG_ERROR_NO_AVAILABLE_TITLES')
           }}</mat-error>
         </mat-form-field>
       </ng-template>
@@ -189,7 +180,7 @@
           <div class="d-flex align-items-center">
             <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
             <h3 class="m-3">
-              {{ t("CONFIG_ACCORDION_SHEET_TITLE") }}
+              {{ t('CONFIG_ACCORDION_SHEET_TITLE') }}
             </h3>
           </div>
         </mat-panel-title>
@@ -201,22 +192,20 @@
           color="primary"
           routerLink="createTitle"
           routerLinkActive="active"
-          [disabled]="netStatusOffline$ | async"
-        >
-          {{ t("CONFIG_CREATE_TITLE") }}
+          [disabled]="netStatusOffline$ | async">
+          {{ t('CONFIG_CREATE_TITLE') }}
           @if (netStatusOffline$ | async) {
             <mat-icon svgIcon="nowifi"></mat-icon>
           }
         </a>
-        <h4 class="me-2">{{ t("CONFIG_ASSIGNMENT_TITLE") }}</h4>
+        <h4 class="me-2">{{ t('CONFIG_ASSIGNMENT_TITLE') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <mat-select
             #titleSelect
             formControlName="assignmentHeaderTitle"
             required
-            [disableRipple]="true"
-          >
+            [disableRipple]="true">
             <mat-select-trigger *ngIf="titleSelect.value">
               {{ (titleSelect.value | sheetTitlePipe)?.name }}
             </mat-select-trigger>
@@ -229,62 +218,58 @@
                     [routerLink]="['updateTitle', t.id]"
                     routerLinkActive="active"
                     svgIcon="edit"
-                    aria-label="Side nav toggle icon"
-                  ></mat-icon>
+                    aria-label="Side nav toggle icon"></mat-icon>
                   <mat-icon
                     class="me-4"
                     (click)="stopPropagation($event)"
                     [routerLink]="['deleteTitle', t.id]"
                     routerLinkActive="active"
                     svgIcon="garbage"
-                    aria-label="Side nav toggle icon"
-                  ></mat-icon>
+                    aria-label="Side nav toggle icon"></mat-icon>
                   <div>{{ t.name }}</div>
                 </div>
               </mat-option>
             }
           </mat-select>
-          <mat-error *ngIf="!titles.length">{{
-            t("CONFIG_ERROR_NO_AVAILABLE_TITLES")
-          }}</mat-error>
+          <mat-error *ngIf="!titles.length">{{ t('CONFIG_ERROR_NO_AVAILABLE_TITLES') }}</mat-error>
         </mat-form-field>
         <hr class="rounded" />
-        <h4>{{ t("CONFIG_ASSIGNMENT_PRINCIPAL_TITLE") }}</h4>
+        <h4>{{ t('CONFIG_ASSIGNMENT_PRINCIPAL_TITLE') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <input matInput formControlName="assignmentPrincipalTitle" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_ASSIGNMENT_ASSISTANT_TITLE") }}</h4>
+        <h4>{{ t('CONFIG_ASSIGNMENT_ASSISTANT_TITLE') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <input matInput formControlName="assignmentAssistantTitle" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_ASSIGNMENT_DATE_TITLE") }}</h4>
+        <h4>{{ t('CONFIG_ASSIGNMENT_DATE_TITLE') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <input matInput formControlName="assignmentDateTitle" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE") }}</h4>
+        <h4>{{ t('CONFIG_ASSIGNMENT_ASSIGNTYPE_TITLE') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <input matInput formControlName="assignmentAssignTypeTitle" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_ASSIGNMENT_THEME_TITLE") }}</h4>
+        <h4>{{ t('CONFIG_ASSIGNMENT_THEME_TITLE') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <input matInput formControlName="assignmentThemeTitle" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_ASSIGNMENT_ROOM_TITLE") }}</h4>
+        <h4>{{ t('CONFIG_ASSIGNMENT_ROOM_TITLE') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <input matInput formControlName="assignmentRoomTitle" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_ASSIGNMENT_NOTE_TITLE") }}</h4>
+        <h4>{{ t('CONFIG_ASSIGNMENT_NOTE_TITLE') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <input matInput formControlName="assignmentNoteTitle" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_DEFAULT_FOOTER_NOTE") }}</h4>
+        <h4>{{ t('CONFIG_DEFAULT_FOOTER_NOTE') }}</h4>
         <mat-form-field>
           <mat-select formControlName="defaultFooterNoteId" required>
             <mat-option [value]="undefined"> </mat-option>
@@ -302,53 +287,53 @@
         <mat-panel-title>
           <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
           <h3 class="m-3">
-            {{ t("CONFIG_ACCORDION_S89_TITLE") }}
+            {{ t('CONFIG_ACCORDION_S89_TITLE') }}
           </h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_TITLE_1") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_TITLE_1') }}</mat-label>
           <input matInput formControlName="s89Title1" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_TITLE_2") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_TITLE_2') }}</mat-label>
           <input matInput formControlName="s89Title2" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_PRINCIPAL") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_PRINCIPAL') }}</mat-label>
           <input matInput formControlName="s89Principal" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_ASSISTANT") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_ASSISTANT') }}</mat-label>
           <input matInput formControlName="s89Assistant" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_DATE") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_DATE') }}</mat-label>
           <input matInput formControlName="s89Date" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_NUMBER") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_NUMBER') }}</mat-label>
           <input matInput formControlName="s89Number" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_ROOMS_TITLE") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_ROOMS_TITLE') }}</mat-label>
           <input matInput formControlName="s89RoomsTitle" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_BOLD_PART") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_BOLD_PART') }}</mat-label>
           <input matInput formControlName="s89NoteBoldPart" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_CONTENT_PART") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_CONTENT_PART') }}</mat-label>
           <input matInput formControlName="s89NoteContentPart" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_VERSION") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_VERSION') }}</mat-label>
           <input matInput formControlName="s89Version" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S89_DATE_VERSION") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S89_DATE_VERSION') }}</mat-label>
           <input matInput formControlName="s89DateVersion" />
         </mat-form-field>
       </ng-template>
@@ -358,37 +343,37 @@
         <mat-panel-title>
           <mat-icon class="me-2 pe-none" svgIcon="sheet-title"></mat-icon>
           <h3 class="m-3">
-            {{ t("CONFIG_ACCORDION_S13_TITLE") }}
+            {{ t('CONFIG_ACCORDION_S13_TITLE') }}
           </h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S13_TITLE") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S13_TITLE') }}</mat-label>
           <input matInput formControlName="s13Title" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S13_YEAR_SERVICE") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S13_YEAR_SERVICE') }}</mat-label>
           <input matInput formControlName="s13YearService" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S13_TERR_NUMBER") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S13_TERR_NUMBER') }}</mat-label>
           <input matInput formControlName="s13TerrNumber" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S13_LAST_COMPLETED_DATE") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S13_LAST_COMPLETED_DATE') }}</mat-label>
           <input matInput formControlName="s13LastCompletedDate" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S13_ASSIGNED_TO") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S13_ASSIGNED_TO') }}</mat-label>
           <input matInput formControlName="s13AssignedTo" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S13_ASSIGNED_DATE") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S13_ASSIGNED_DATE') }}</mat-label>
           <input matInput formControlName="s13AssignedDate" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_S13_COMPLETED_DATE") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_S13_COMPLETED_DATE') }}</mat-label>
           <input matInput formControlName="s13CompletedDate" />
         </mat-form-field>
       </ng-template>
@@ -397,17 +382,17 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <h3 class="m-3">
-            {{ t("CONFIG_ACCORDION_REPORT_TITLE") }}
+            {{ t('CONFIG_ACCORDION_REPORT_TITLE') }}
           </h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent>
-        <h4>{{ t("CONFIG_REPORT_TITLE") }}</h4>
+        <h4>{{ t('CONFIG_REPORT_TITLE') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
           <input matInput formControlName="reportTitle" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_DEFAULT_WEEKDAY_BEGINS") }}</h4>
+        <h4>{{ t('CONFIG_DEFAULT_WEEKDAY_BEGINS') }}</h4>
         <mat-form-field>
           <mat-select formControlName="defaultWeekDayBegins" required>
             @for (day of weekDayBegins; track day) {
@@ -417,7 +402,7 @@
             }
           </mat-select>
         </mat-form-field>
-        <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_FORMAT") }}</h4>
+        <h4>{{ t('CONFIG_DEFAULT_REPORT_DATE_FORMAT') }}</h4>
         <mat-form-field>
           <mat-select formControlName="defaultReportDateFormat" required>
             @for (df of translocoDateFormats; track df) {
@@ -427,29 +412,27 @@
             }
           </mat-select>
         </mat-form-field>
-        <h4>{{ t("CONFIG_DEFAULT_REPORT_DATE_COLOR") }}</h4>
+        <h4>{{ t('CONFIG_DEFAULT_REPORT_DATE_COLOR') }}</h4>
         <mat-form-field>
-          <mat-label>{{ t("PLACEHOLDER_REPORT_DATE_COLOR") }}</mat-label>
+          <mat-label>{{ t('PLACEHOLDER_REPORT_DATE_COLOR') }}</mat-label>
           <input type="color" matInput formControlName="defaultReportDateColor" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE_VERTICAL") }}</h4>
+        <h4>{{ t('CONFIG_DEFAULT_FONT_SIZE_VERTICAL') }}</h4>
         <mat-form-field>
           <input
             matInput
             type="number"
             formControlName="defaultReportFontSize"
-            [placeholder]="form.controls.defaultReportFontSize.value"
-          />
+            [placeholder]="form.controls.defaultReportFontSize.value" />
         </mat-form-field>
-        <h4>{{ t("CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL") }}</h4>
-        <div class="fst-italic">{{ t("CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL_TIP") }}</div>
+        <h4>{{ t('CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL') }}</h4>
+        <div class="fst-italic">{{ t('CONFIG_DEFAULT_FONT_SIZE_HORIZONTAL_TIP') }}</div>
         <mat-form-field>
           <input
             matInput
             type="number"
             formControlName="defaultReportFontSizeHorizontal"
-            [placeholder]="form.controls.defaultReportFontSizeHorizontal.value"
-          />
+            [placeholder]="form.controls.defaultReportFontSizeHorizontal.value" />
         </mat-form-field>
       </ng-template>
     </mat-expansion-panel>
@@ -458,12 +441,12 @@
         <mat-panel-title>
           <mat-icon svgIcon="warningtime"></mat-icon>
           <h3 class="m-3">
-            {{ t("CONFIG_TIME_DISTANCE_TITLE") }}
+            {{ t('CONFIG_TIME_DISTANCE_TITLE') }}
           </h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent
-        ><span class="fst-italic">{{ t("CONFIG_EXPLAIN_EXHAUST") }}</span>
+        ><span class="fst-italic">{{ t('CONFIG_EXPLAIN_EXHAUST') }}</span>
         <h4>{{ getTranslationForAssignTypes() }}</h4>
         <mat-form-field>
           <input matInput type="number" formControlName="closeToOthersDays" />
@@ -477,8 +460,7 @@
           <input
             matInput
             type="number"
-            formControlName="closeToOthersTreasuresEtcDays"
-          /> </mat-form-field
+            formControlName="closeToOthersTreasuresEtcDays" /> </mat-form-field
       ></ng-template>
     </mat-expansion-panel>
     <mat-expansion-panel class="mb-2">
@@ -486,14 +468,14 @@
         <mat-panel-title>
           <mat-icon svgIcon="clock"></mat-icon>
           <h3 class="m-3">
-            {{ t("CONFIG_TIME_SORT_METHOD_TITLE") }}
+            {{ t('CONFIG_TIME_SORT_METHOD_TITLE') }}
           </h3>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent
-        ><div class="fst-italic">{{ t("CONFIG_EXPLAIN_TIME_SORT") }}</div>
+        ><div class="fst-italic">{{ t('CONFIG_EXPLAIN_TIME_SORT') }}</div>
         <mat-checkbox formControlName="isClassicSortEnabled" color="primary">{{
-          t("CONFIG_TIME_SORT_CHECK")
+          t('CONFIG_TIME_SORT_CHECK')
         }}</mat-checkbox>
       </ng-template>
     </mat-expansion-panel>
@@ -502,7 +484,7 @@
         <mat-expansion-panel-header class="bg-color-lightcoral">
           <mat-panel-title>
             <h3 class="m-3">
-              {{ t("CONFIG_RESTART_LABEL") }}
+              {{ t('CONFIG_RESTART_LABEL') }}
             </h3>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -510,9 +492,8 @@
           mat-raised-button
           type="button"
           color="warn"
-          (click)="confirmDelete = !confirmDelete"
-        >
-          {{ t("CONFIG_RESET_ALL") }}
+          (click)="confirmDelete = !confirmDelete">
+          {{ t('CONFIG_RESET_ALL') }}
         </button>
         @if (confirmDelete) {
           <button
@@ -520,9 +501,8 @@
             mat-raised-button
             type="button"
             color="warn"
-            (click)="restoreAllData()"
-          >
-            {{ t("CONFIG_RESET_ALL_CONFIRM") }}
+            (click)="restoreAllData()">
+            {{ t('CONFIG_RESET_ALL_CONFIRM') }}
           </button>
         }
       </mat-expansion-panel>

@@ -6,7 +6,7 @@
     routerLink="create"
     routerLinkActive="active"
     [disabled]="netStatusOffline$ | async"
-    >{{ t("NOTE_BUTTON_CREATE_TITLE") }}
+    >{{ t('NOTE_BUTTON_CREATE_TITLE') }}
     @if (netStatusOffline$ | async) {
       <mat-icon svgIcon="nowifi"></mat-icon>
     }
@@ -15,13 +15,13 @@
     <div class="table-overflow">
       <div class="grid">
         <div class="grid-header-item fw-bold">
-          {{ t("NOTE_TABLE_HEADER_NAME") }}
+          {{ t('NOTE_TABLE_HEADER_NAME') }}
         </div>
         <div class="grid-header-item fw-bold">
-          {{ t("NOTE_TABLE_HEADER_EDIT") }}
+          {{ t('NOTE_TABLE_HEADER_EDIT') }}
         </div>
         <div class="grid-header-item fw-bold">
-          {{ t("NOTE_TABLE_HEADER_DELETE") }}
+          {{ t('NOTE_TABLE_HEADER_DELETE') }}
         </div>
         @for (n of notes; track n) {
           <div class="grid-row">
@@ -33,16 +33,14 @@
                 [routerLink]="['update', n.id]"
                 routerLinkActive="active"
                 svgIcon="edit"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
+                aria-label="Side nav toggle icon"></mat-icon>
             </div>
             <div class="grid-item d-flex align-items-center">
               <mat-icon
                 [routerLink]="['delete', n.id]"
                 routerLinkActive="active"
                 svgIcon="garbage"
-                aria-label="Side nav toggle icon"
-              ></mat-icon>
+                aria-label="Side nav toggle icon"></mat-icon>
             </div>
           </div>
         }

@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportSelectorComponent } from "./report-selector.component";
+import { ReportSelectorComponent } from './report-selector.component';
 
-describe("SelectionSheetsAssignmentComponent", () => {
+describe('SelectionSheetsAssignmentComponent', () => {
   let component: ReportSelectorComponent;
   let fixture: ComponentFixture<ReportSelectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReportSelectorComponent],
+      imports: [ReportSelectorComponent]
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe("SelectionSheetsAssignmentComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

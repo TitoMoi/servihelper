@@ -1,11 +1,11 @@
-import { Injectable, inject } from "@angular/core";
-import { OnlineInterface } from "app/online/model/online.model";
-import { ConfigService } from "app/config/service/config.service";
-import { readJSONSync, writeJsonSync } from "fs-extra";
-import { BehaviorSubject, Observable, fromEvent, map, merge, of } from "rxjs";
+import { Injectable, inject } from '@angular/core';
+import { OnlineInterface } from 'app/online/model/online.model';
+import { ConfigService } from 'app/config/service/config.service';
+import { readJSONSync, writeJsonSync } from 'fs-extra';
+import { BehaviorSubject, Observable, fromEvent, map, merge, of } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class OnlineService {
   private configService = inject(ConfigService);
@@ -19,17 +19,17 @@ export class OnlineService {
   #networkStatus$ = new BehaviorSubject(false);
   //We dont want the status "false" we want a true if the condition is meet
   netStatusOffline$ = this.#networkStatus$.pipe(
-    map((status) => this.#online.isOnline && status === false),
+    map(status => this.#online.isOnline && status === false)
   );
   netStatusOnline$ = this.#networkStatus$.pipe(
-    map((status) => this.#online.isOnline && status === true),
+    map(status => this.#online.isOnline && status === true)
   );
 
   prepareCheckInternetAccess() {
     if (this.#online.isOnline) {
-      merge(of(null), fromEvent(window, "online"), fromEvent(window, "offline"))
+      merge(of(null), fromEvent(window, 'online'), fromEvent(window, 'offline'))
         .pipe(map(() => navigator.onLine))
-        .subscribe((status) => this.#networkStatus$.next(status));
+        .subscribe(status => this.#networkStatus$.next(status));
     }
   }
 

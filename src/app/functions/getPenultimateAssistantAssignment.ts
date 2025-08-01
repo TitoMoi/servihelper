@@ -1,7 +1,7 @@
-import { isAfter } from "date-fns";
+import { isAfter } from 'date-fns';
 
-import { AssignmentInterface } from "../assignment/model/assignment.model";
-import { ParticipantInterface } from "../participant/model/participant.model";
+import { AssignmentInterface } from '../assignment/model/assignment.model';
+import { ParticipantInterface } from '../participant/model/participant.model';
 
 /**
  *
@@ -11,10 +11,10 @@ import { ParticipantInterface } from "../participant/model/participant.model";
  */
 export function getPenultimateAssistantAssignment(
   assignmentList: AssignmentInterface[],
-  participant: ParticipantInterface,
+  participant: ParticipantInterface
 ): AssignmentInterface | undefined {
   const firstAssignment = assignmentList
-    .filter((assignment) => assignment.assistant === participant.id)
+    .filter(assignment => assignment.assistant === participant.id)
     .sort(compareFn)[1]; //Get penultimate
 
   return firstAssignment ? firstAssignment : undefined;

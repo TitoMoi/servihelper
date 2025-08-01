@@ -1,45 +1,45 @@
-import { editorJsonToHtml } from "app/functions/editorJsonToHtml";
-import { NoteInterface } from "app/note/model/note.model";
-import { NoteService } from "app/note/service/note.service";
-import { Editor, Toolbar, NgxEditorModule } from "ngx-editor";
+import { editorJsonToHtml } from 'app/functions/editorJsonToHtml';
+import { NoteInterface } from 'app/note/model/note.model';
+import { NoteService } from 'app/note/service/note.service';
+import { Editor, Toolbar, NgxEditorModule } from 'ngx-editor';
 
-import { Component, OnDestroy, inject } from "@angular/core";
+import { Component, OnDestroy, inject } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
   ReactiveFormsModule,
-  FormControl,
-} from "@angular/forms";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { MatButtonModule } from "@angular/material/button";
-import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
-import { MatInputModule } from "@angular/material/input";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { TranslocoModule } from "@ngneat/transloco";
-import { OnlineService } from "app/online/service/online.service";
-import { AsyncPipe } from "@angular/common";
-import { MatIconModule } from "@angular/material/icon";
-import { MatCheckboxModule } from "@angular/material/checkbox";
+  FormControl
+} from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { AutoFocusDirective } from '../../directives/autofocus/autofocus.directive';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { TranslocoModule } from '@ngneat/transloco';
+import { OnlineService } from 'app/online/service/online.service';
+import { AsyncPipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-    selector: "app-create-update-note",
-    templateUrl: "./create-update-note.component.html",
-    styleUrls: ["./create-update-note.component.css"],
-    imports: [
-        TranslocoModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        AutoFocusDirective,
-        NgxEditorModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        RouterLink,
-        AsyncPipe,
-        MatIconModule,
-    ]
+  selector: 'app-create-update-note',
+  templateUrl: './create-update-note.component.html',
+  styleUrls: ['./create-update-note.component.css'],
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AutoFocusDirective,
+    NgxEditorModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    RouterLink,
+    AsyncPipe,
+    MatIconModule
+  ]
 })
 export class CreateUpdateNoteComponent implements OnDestroy {
   private formBuilder = inject(UntypedFormBuilder);
@@ -55,7 +55,7 @@ export class CreateUpdateNoteComponent implements OnDestroy {
   isUpdate = this.n ? true : false;
 
   editor: Editor = new Editor();
-  toolbar: Toolbar = [["bold"], ["italic"], ["underline"], ["bullet_list"]];
+  toolbar: Toolbar = [['bold'], ['italic'], ['underline'], ['bullet_list']];
 
   form: UntypedFormGroup = this.formBuilder.group({
     id: this.n?.id,
@@ -63,7 +63,7 @@ export class CreateUpdateNoteComponent implements OnDestroy {
     showInHome: [this.n ? this.n.showInHome : false],
     editorContent: this.n
       ? this.n.editorContent
-      : new UntypedFormControl({ value: undefined, disabled: false }, Validators.required),
+      : new UntypedFormControl({ value: undefined, disabled: false }, Validators.required)
   });
 
   ngOnDestroy(): void {
@@ -81,10 +81,10 @@ export class CreateUpdateNoteComponent implements OnDestroy {
       this.noteService.createNote(note);
     }
 
-    const route = this.isUpdate ? "../.." : "..";
+    const route = this.isUpdate ? '../..' : '..';
     //navigate to parent
     this.router.navigate([route], {
-      relativeTo: this.activatedRoute,
+      relativeTo: this.activatedRoute
     });
   }
 }

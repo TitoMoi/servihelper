@@ -1,47 +1,47 @@
 /* eslint-disable complexity */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { MatButtonModule } from "@angular/material/button";
-import { MatIcon, MatIconModule } from "@angular/material/icon";
-import { RouterLink, RouterLinkActive } from "@angular/router";
-import { TranslocoDirective, TranslocoService } from "@ngneat/transloco";
-import { TerritoryContextClass, TerritoryContextInterface } from "../model/map.model";
-import { TerritoryService } from "./service/territory.service";
-import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { TerritoryGroupService } from "../territory-group/service/territory-group.service";
-import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { PolygonService } from "./service/polygon.service";
-import { clipboard, shell } from "electron";
-import { OnlineService } from "app/online/service/online.service";
-import { PdfService } from "app/services/pdf.service";
-import path from "path";
-import { ConfigService } from "app/config/service/config.service";
-import { ensureFileSync, readFileSync, removeSync, writeFile } from "fs-extra";
-import { filenamifyPath } from "filenamify";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { SortService } from "app/services/sort.service";
-import { ParticipantService } from "app/participant/service/participant.service";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { TerritoryContextClass, TerritoryContextInterface } from '../model/map.model';
+import { TerritoryService } from './service/territory.service';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { TerritoryGroupService } from '../territory-group/service/territory-group.service';
+import { ParticipantPipe } from 'app/participant/pipe/participant.pipe';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { PolygonService } from './service/polygon.service';
+import { clipboard, shell } from 'electron';
+import { OnlineService } from 'app/online/service/online.service';
+import { PdfService } from 'app/services/pdf.service';
+import path from 'path';
+import { ConfigService } from 'app/config/service/config.service';
+import { ensureFileSync, readFileSync, removeSync, writeFile } from 'fs-extra';
+import { filenamifyPath } from 'filenamify';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SortService } from 'app/services/sort.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
 
 @Component({
-    selector: "app-territory",
-    imports: [
-        CommonModule,
-        TranslocoDirective,
-        MatButtonModule,
-        RouterLink,
-        RouterLinkActive,
-        MatIconModule,
-        MatExpansionModule,
-        MatCheckboxModule,
-        ParticipantPipe,
-        MatTooltipModule,
-        MatProgressSpinnerModule,
-    ],
-    templateUrl: "./territory.component.html",
-    styleUrls: ["./territory.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-territory',
+  imports: [
+    CommonModule,
+    TranslocoDirective,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    MatIconModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    ParticipantPipe,
+    MatTooltipModule,
+    MatProgressSpinnerModule
+  ],
+  templateUrl: './territory.component.html',
+  styleUrls: ['./territory.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryComponent {
   private territoryService = inject(TerritoryService);
@@ -76,36 +76,36 @@ export class TerritoryComponent {
   }
 
   getUrlWithPolygonParams(t: TerritoryContextInterface) {
-    const servihelperMapUrl = new URL("https://titomoi.github.io/servihelper");
+    const servihelperMapUrl = new URL('https://titomoi.github.io/servihelper');
     servihelperMapUrl.searchParams.append(
-      "polygon",
-      JSON.stringify(this.polygonService.getPolygon(t.poligonId).latLngList),
+      'polygon',
+      JSON.stringify(this.polygonService.getPolygon(t.poligonId).latLngList)
     );
     return servihelperMapUrl;
   }
 
   generateMapLink(t: TerritoryContextInterface, matIcon: MatIcon) {
-    matIcon.svgIcon = "clipboard";
+    matIcon.svgIcon = 'clipboard';
     this.cdr.detectChanges();
-    document.body.style.cursor = "wait";
+    document.body.style.cursor = 'wait';
     const url = this.getUrlWithPolygonParams(t);
     clipboard.write(
       {
-        text: url.toString(),
+        text: url.toString()
       },
-      "selection",
+      'selection'
     );
-    document.body.style.cursor = "default";
+    document.body.style.cursor = 'default';
     setTimeout(() => {
-      matIcon.svgIcon = "maplink";
+      matIcon.svgIcon = 'maplink';
       this.cdr.detectChanges();
     }, 500);
   }
 
   getPdfSheet() {
     return this.pdfService.getJsPdf({
-      orientation: "portrait",
-      format: "a4",
+      orientation: 'portrait',
+      format: 'a4'
     });
   }
 
@@ -116,16 +116,16 @@ export class TerritoryComponent {
     this.showSpinner = true;
     this.territoriesInFolderCreated = false;
     //Clean directory "territories" first
-    removeSync(filenamifyPath(path.join(this.configService.homeDir, "territories")));
+    removeSync(filenamifyPath(path.join(this.configService.homeDir, 'territories')));
     const promises = [];
-    for (const t of this.territories.filter((terr) => terr.available)) {
+    for (const t of this.territories.filter(terr => terr.available)) {
       const pdfBytes = this.toPdf(t, false);
 
       for (const g of t.groups) {
         // Get the territory group name
         const tg = this.territoryGroupService.getTerritoryGroup(g);
 
-        let lastParticipantId = "";
+        let lastParticipantId = '';
         //Get the last participant id of the territory
         if (this.territoryService.isActiveTerritory(t)) {
           lastParticipantId = t.participants.at(-1);
@@ -135,14 +135,14 @@ export class TerritoryComponent {
         const fileNamePath = filenamifyPath(
           path.join(
             this.configService.homeDir,
-            "territories",
+            'territories',
             tg.name,
             t.name +
               (lastParticipantId
-                ? "-" + this.participantService.getParticipant(lastParticipantId).name
-                : "") +
-              ".pdf",
-          ),
+                ? '-' + this.participantService.getParticipant(lastParticipantId).name
+                : '') +
+              '.pdf'
+          )
         );
         ensureFileSync(fileNamePath);
         promises.push(writeFile(fileNamePath, new Uint8Array(await pdfBytes.arrayBuffer())));
@@ -157,7 +157,7 @@ export class TerritoryComponent {
   /** Generates a territory pdf, if save is true shows a dialog to save the file, otherwise returns the blob pdfBytes */
   toPdf(t: TerritoryContextInterface, save = true): Blob {
     const doc = this.getPdfSheet();
-    doc.setFont(this.pdfService.font, "bold");
+    doc.setFont(this.pdfService.font, 'bold');
 
     const x = this.pdfService.getInitialWidth(false);
     let y = this.pdfService.getInitialHeight(false);
@@ -166,19 +166,19 @@ export class TerritoryComponent {
     doc.text(t.name, x, y, {});
 
     doc.setFontSize(this.pdfService.getTerritoryTextFontSize());
-    doc.setFont(this.pdfService.font, "normal");
+    doc.setFont(this.pdfService.font, 'normal');
 
     if (t.meetingPointUrl) {
       y += 20;
-      const meetingPointTitle = this.translocoService.translate("TERRITORY_PDF_MEETING_POINT");
-      doc.text(meetingPointTitle + ":", x, y);
+      const meetingPointTitle = this.translocoService.translate('TERRITORY_PDF_MEETING_POINT');
+      doc.text(meetingPointTitle + ':', x, y);
       try {
         //Validate the url syntax
         new URL(t.meetingPointUrl);
         y += 20;
-        doc.setTextColor("blue");
+        doc.setTextColor('blue');
         const meetingPointClickText = this.translocoService.translate(
-          "TERRITORY_PDF_MEETING_POINT_CLICK",
+          'TERRITORY_PDF_MEETING_POINT_CLICK'
         );
         doc.textWithLink(meetingPointClickText, x, y, { url: t.meetingPointUrl });
       } catch (error) {
@@ -186,7 +186,7 @@ export class TerritoryComponent {
         y += 20;
         doc.text(t.meetingPointUrl, x, y);
       }
-      doc.setTextColor("black");
+      doc.setTextColor('black');
     }
 
     if (t.imageId) {
@@ -210,37 +210,36 @@ export class TerritoryComponent {
           // Ratio is valid here
         }
       }
-      doc.addImage(uint8array, "png", x, y, width, height, null, "MEDIUM");
+      doc.addImage(uint8array, 'png', x, y, width, height, null, 'MEDIUM');
     }
 
     if (t.poligonId) {
-      const mapLinkText =
-        this.translocoService.translate("TERRITORY_TABLE_HEADER_MAPLINK") + ":";
+      const mapLinkText = this.translocoService.translate('TERRITORY_TABLE_HEADER_MAPLINK') + ':';
 
-      doc.text(mapLinkText, doc.internal.pageSize.width / 2, y + 50, { align: "center" });
-      doc.setTextColor("blue");
-      doc.setFont(this.pdfService.font, "bold");
+      doc.text(mapLinkText, doc.internal.pageSize.width / 2, y + 50, { align: 'center' });
+      doc.setTextColor('blue');
+      doc.setFont(this.pdfService.font, 'bold');
       doc.textWithLink(t.name, doc.internal.pageSize.width / 2, y + 75, {
         url: this.getUrlWithPolygonParams(t).toString(),
-        align: "center",
+        align: 'center'
       });
     }
 
     if (save) {
       doc.save(t.name);
     } else {
-      return doc.output("blob");
+      return doc.output('blob');
     }
   }
 
   openTerritoriesFolder() {
-    shell.openPath(path.join(this.configService.homeDir, "territories"));
+    shell.openPath(path.join(this.configService.homeDir, 'territories'));
   }
 
   sortByLessWorked(event: MatCheckboxChange) {
     if (event.checked) {
       const filtered = this.territories.filter(
-        (t) => t.returnedDates.length && !this.territoryService.isActiveTerritory(t),
+        t => t.returnedDates.length && !this.territoryService.isActiveTerritory(t)
       );
       this.territories = filtered.toSorted(this.sortService.sortTerritoriesByLastWorked);
       return;

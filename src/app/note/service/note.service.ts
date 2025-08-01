@@ -1,12 +1,12 @@
-import { NoteInterface } from "app/note/model/note.model";
-import { readJSONSync, writeJson } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
+import { NoteInterface } from 'app/note/model/note.model';
+import { readJSONSync, writeJson } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
 
-import { Injectable, inject } from "@angular/core";
-import { ConfigService } from "app/config/service/config.service";
+import { Injectable, inject } from '@angular/core';
+import { ConfigService } from 'app/config/service/config.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class NoteService {
   private configService = inject(ConfigService);
@@ -108,7 +108,7 @@ export class NoteService {
    */
   deleteNote(id: string): boolean {
     //delete note
-    this.#notes = this.#notes.filter((b) => b.id !== id);
+    this.#notes = this.#notes.filter(b => b.id !== id);
     this.#notesMap.delete(id);
     //save notes
     return this.#saveNotesToFile();

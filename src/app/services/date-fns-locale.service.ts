@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   bn,
   ca,
@@ -18,11 +18,11 @@ import {
   ro,
   ru,
   tr,
-  zhCN,
-} from "date-fns/locale";
+  zhCN
+} from 'date-fns/locale';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class DateFnsLocaleService {
   locales;
@@ -47,7 +47,7 @@ export class DateFnsLocaleService {
       nl,
       ro,
       tr,
-      pl,
+      pl
     };
   }
 }

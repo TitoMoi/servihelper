@@ -7,22 +7,19 @@
           svgIcon="png"
           aria-label="icon"
           [matTooltip]="t('ICON_PNG')"
-          (click)="toPng()"
-        ></mat-icon>
+          (click)="toPng()"></mat-icon>
         <mat-icon
           class="m-2"
           svgIcon="printer"
           aria-label="icon"
           [matTooltip]="t('ICON_PRINT')"
-          (click)="createHiddenWindowForPrint()"
-        ></mat-icon>
+          (click)="createHiddenWindowForPrint()"></mat-icon>
         <mat-icon
           class="m-2"
           svgIcon="folder"
           aria-label="icon"
           [matTooltip]="t('ICON_FOLDER')"
-          (click)="createAssignmentsInFolder()"
-        ></mat-icon>
+          (click)="createAssignmentsInFolder()"></mat-icon>
         <mat-chip-listbox aria-label="Fish selection" class="ms-4">
           <mat-chip-option (click)="toPdfS89()" [matTooltip]="t('S89_TOOLTIP')"
             ><mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
@@ -39,20 +36,19 @@
             color="primary"
             class="m-2"
             type="button"
-            (click)="openAssignmentsFolder()"
-          >
-            {{ t("OPEN_ASSIGNMENTS_SHEET_FOLDER") }}
+            (click)="openAssignmentsFolder()">
+            {{ t('OPEN_ASSIGNMENTS_SHEET_FOLDER') }}
           </button>
         } @else if (showSpinner) {
           <mat-spinner class="ms-4" [diameter]="28"></mat-spinner>
         }
       </div>
     } @else {
-      {{ t("REPORT_NO_ASSIGNMENTS") }}
+      {{ t('REPORT_NO_ASSIGNMENTS') }}
     }
   </div>
   <div class="m-2">
-    {{ t("NUMBER_OF_ASSIGNMENTS") + assignmentsWithNames.length }}
+    {{ t('NUMBER_OF_ASSIGNMENTS') + assignmentsWithNames.length }}
   </div>
   <div id="assignmentDiv" class="col-auto bg-color-white">
     <div class="d-flex flex-wrap align-items-start">
@@ -65,23 +61,21 @@
             vertical-align: top;
             margin-left: 4px;
             margin-right: 4px;
-            font-family: &quot;Noto Sans&quot;, &quot;Noto Sans JP&quot;,
-              &quot;Noto Sans KR&quot;, &quot;Noto Sans SC&quot;, sans-serif;
-          "
-        >
+            font-family: 'Noto Sans', 'Noto Sans JP', 'Noto Sans KR', 'Noto Sans SC', sans-serif;
+          ">
           @if (a.sheetTitle) {
             <h4 class="m-1" style="text-align: center">
-              {{ (a.sheetTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE") }}
+              {{ (a.sheetTitle | sheetTitlePipe)?.name || t('ASSIGN_IMAGE_TITLE') }}
             </h4>
           } @else {
             <h4 class="m-1" style="text-align: center">
               @if (!assignmentHeaderTitle) {
-                <span>{{ t("ASSIGN_IMAGE_TITLE") }}</span>
+                <span>{{ t('ASSIGN_IMAGE_TITLE') }}</span>
               }
               <!-- This OR condition is a workaround, old files have a literal string and its not a key -->
               @if (assignmentHeaderTitle) {
                 <span>{{
-                  (assignmentHeaderTitle | sheetTitlePipe)?.name || t("ASSIGN_IMAGE_TITLE")
+                  (assignmentHeaderTitle | sheetTitlePipe)?.name || t('ASSIGN_IMAGE_TITLE')
                 }}</span>
               }
             </h4>
@@ -89,7 +83,7 @@
           <hr class="m-1" />
           <div class="m-1">
             @if (!assignmentPrincipalTitle) {
-              <b>{{ t("ASSIGN_IMAGE_NAME") }}</b>
+              <b>{{ t('ASSIGN_IMAGE_NAME') }}</b>
             }
             @if (assignmentPrincipalTitle) {
               <b>{{ assignmentPrincipalTitle }}</b>
@@ -99,7 +93,7 @@
           @if (a.assistant) {
             <div class="m-1">
               @if (!assignmentAssistantTitle) {
-                <b>{{ t("ASSIGN_IMAGE_ASSISTANT") }}</b>
+                <b>{{ t('ASSIGN_IMAGE_ASSISTANT') }}</b>
               }
               @if (assignmentAssistantTitle) {
                 <b>{{ assignmentAssistantTitle }}</b>
@@ -109,18 +103,18 @@
           }
           <div class="m-1">
             @if (!assignmentDateTitle) {
-              <b>{{ t("ASSIGN_IMAGE_DATE") }}</b>
+              <b>{{ t('ASSIGN_IMAGE_DATE') }}</b>
             }
             @if (assignmentDateTitle) {
               <b>{{ assignmentDateTitle }}</b>
             }
           </div>
           <div class="m-1">
-            {{ a.date | translocoDate: { dateStyle: "full" } }}
+            {{ a.date | translocoDate: { dateStyle: 'full' } }}
           </div>
           <div class="m-1">
             @if (!assignmentAssignTypeTitle) {
-              <b>{{ t("ASSIGN_IMAGE_ASSIGNTYPE") }}</b>
+              <b>{{ t('ASSIGN_IMAGE_ASSIGNTYPE') }}</b>
             }
             @if (assignmentAssignTypeTitle) {
               <b>{{ assignmentAssignTypeTitle }}</b>
@@ -130,7 +124,7 @@
           @if (a.theme) {
             <div class="m-1">
               @if (!assignmentThemeTitle) {
-                <b>{{ t("ASSIGN_IMAGE_THEME") }}</b>
+                <b>{{ t('ASSIGN_IMAGE_THEME') }}</b>
               }
               @if (assignmentThemeTitle) {
                 <b>{{ assignmentThemeTitle }}</b>
@@ -142,7 +136,7 @@
           }
           <div class="m-1">
             @if (!assignmentRoomTitle) {
-              <b>{{ t("ASSIGN_IMAGE_ROOM_PRESENTATION") }}</b>
+              <b>{{ t('ASSIGN_IMAGE_ROOM_PRESENTATION') }}</b>
             }
             @if (assignmentRoomTitle) {
               <b>{{ assignmentRoomTitle }}</b>
@@ -152,7 +146,7 @@
           @if (a.footerNote) {
             <div class="m-1">
               @if (!assignmentNoteTitle) {
-                <b>{{ t("ASSIGN_IMAGE_FOOTER_NOTE") }}</b>
+                <b>{{ t('ASSIGN_IMAGE_FOOTER_NOTE') }}</b>
               }
               @if (assignmentNoteTitle) {
                 <b>{{ assignmentNoteTitle }}</b>

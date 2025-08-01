@@ -6,23 +6,23 @@
     routerLink="create"
     routerLinkActive="active"
     [disabled]="netStatusOffline$ | async"
-    >{{ t("ROLE_BUTTON_CREATE") }}
+    >{{ t('ROLE_BUTTON_CREATE') }}
     @if (netStatusOffline$ | async) {
       <mat-icon svgIcon="nowifi"></mat-icon>
     }
   </a>
-  <div class="mb-2">{{ t("ROLE_EXPLANATION") }}</div>
-  <div class="mb-2">{{ t("ROLE_EXPLANATION2") }}</div>
+  <div class="mb-2">{{ t('ROLE_EXPLANATION') }}</div>
+  <div class="mb-2">{{ t('ROLE_EXPLANATION2') }}</div>
   @if (roles.length) {
     <div class="grid">
       <div class="grid-header-item fw-bold">
-        {{ t("ROLE_TABLE_HEADER_NAME") }}
+        {{ t('ROLE_TABLE_HEADER_NAME') }}
       </div>
       <div class="grid-header-item fw-bold">
-        {{ t("ROLE_TABLE_HEADER_EDIT") }}
+        {{ t('ROLE_TABLE_HEADER_EDIT') }}
       </div>
       <div class="grid-header-item fw-bold">
-        {{ t("ROLE_TABLE_HEADER_DELETE") }}
+        {{ t('ROLE_TABLE_HEADER_DELETE') }}
       </div>
       @for (r of roles; track r) {
         <div class="grid-row">
@@ -34,16 +34,14 @@
               [routerLink]="['update', r.id]"
               routerLinkActive="active"
               svgIcon="edit"
-              aria-label="Side nav toggle icon"
-            ></mat-icon>
+              aria-label="Side nav toggle icon"></mat-icon>
           </div>
           <div class="d-flex align-items-center justify-content-start">
             <mat-icon
               [routerLink]="['delete', r.id]"
               routerLinkActive="active"
               svgIcon="garbage"
-              aria-label="Side nav toggle icon"
-            ></mat-icon>
+              aria-label="Side nav toggle icon"></mat-icon>
           </div>
         </div>
       }

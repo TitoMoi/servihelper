@@ -1,8 +1,8 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: "isRoleCheckedPipe",
-  standalone: true,
+  name: 'isRoleCheckedPipe',
+  standalone: true
 })
 export class IsRoleCheckedPipe implements PipeTransform {
   transform(atId: string, assignTypesId: string[]): boolean {

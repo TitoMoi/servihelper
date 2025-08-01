@@ -3,15 +3,14 @@
     <div
       class="col-auto me-3"
       [matTooltip]="t('TERRITORY_NO_TGROUPS_CREATED')"
-      [matTooltipDisabled]="!!territoryGroups.length"
-    >
+      [matTooltipDisabled]="!!territoryGroups.length">
       <a
         mat-flat-button
         color="primary"
         routerLink="create"
         routerLinkActive="active"
         [disabled]="!territoryGroups.length || (netStatusOffline$ | async)"
-        >{{ t("TERRITORY_BUTTON_CREATE_TITLE") }}
+        >{{ t('TERRITORY_BUTTON_CREATE_TITLE') }}
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>
         }
@@ -26,39 +25,34 @@
             routerLinkActive="active"
             svgIcon="heatmap"
             [matTooltip]="t('ICON_HEATMAP')"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
+            aria-label="Side nav toggle icon"></mat-icon>
           <mat-icon
             [routerLink]="['massive-dates']"
             class="me-3"
             routerLinkActive="active"
             svgIcon="calendardates"
             [matTooltip]="t('ICON_CHANGE_DATES')"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
+            aria-label="Side nav toggle icon"></mat-icon>
           <mat-icon
             class="me-3"
             svgIcon="folder"
             aria-label="Side nav toggle icon"
             [matTooltip]="t('ICON_FOLDER_TERRITORIES')"
-            (click)="toMultiplePdf()"
-          ></mat-icon>
+            (click)="toMultiplePdf()"></mat-icon>
           <mat-icon
             class="ms-3 me-3"
             [routerLink]="['dataReadyS13']"
             routerLinkActive="active"
             svgIcon="datatable"
             [matTooltip]="t('ICON_S13')"
-            aria-label="Side nav toggle icon"
-          ></mat-icon>
+            aria-label="Side nav toggle icon"></mat-icon>
           @if (territoriesInFolderCreated) {
             <button
               mat-raised-button
               color="primary"
               type="button"
-              (click)="openTerritoriesFolder()"
-            >
-              {{ t("OPEN_TERRITORIES_FOLDER") }}
+              (click)="openTerritoriesFolder()">
+              {{ t('OPEN_TERRITORIES_FOLDER') }}
             </button>
           } @else if (showSpinner) {
             <mat-spinner class="ms-4" [diameter]="28"></mat-spinner>
@@ -69,7 +63,7 @@
   </div>
   <div>
     <mat-checkbox labelPosition="before" color="primary" (change)="sortByLessWorked($event)">{{
-      t("TERRITORY_SORT_BY_LAST_WORKED")
+      t('TERRITORY_SORT_BY_LAST_WORKED')
     }}</mat-checkbox>
   </div>
   @for (tg of territoryGroups; track tg) {
@@ -81,8 +75,7 @@
               <h3 class="d-flex">
                 <div
                   class="me-3"
-                  [ngStyle]="{ width: '25px', height: '25px', 'background-color': tg.color }"
-                ></div>
+                  [ngStyle]="{ width: '25px', height: '25px', 'background-color': tg.color }"></div>
                 <span>{{ tg.name }} - {{ getLengthForGroup(tg.id) }}</span>
               </h3>
             </mat-panel-title>
@@ -91,19 +84,19 @@
             @if (territories.length) {
               <div class="grid">
                 <div class="grid-header-item fw-bold">
-                  {{ t("TERRITORY_TABLE_HEADER_MAPLINK") }}
+                  {{ t('TERRITORY_TABLE_HEADER_MAPLINK') }}
                 </div>
                 <div class="grid-header-item fw-bold">
-                  {{ t("TERRITORY_TABLE_HEADER_NAME") }}
+                  {{ t('TERRITORY_TABLE_HEADER_NAME') }}
                 </div>
                 <div class="grid-header-item fw-bold">
-                  {{ t("TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT") }}
+                  {{ t('TERRITORY_TABLE_HEADER_ASSIGN_OR_EDIT') }}
                 </div>
                 <div class="grid-header-item fw-bold">
-                  {{ t("TERRITORY_TABLE_HEADER_RETURN") }}
+                  {{ t('TERRITORY_TABLE_HEADER_RETURN') }}
                 </div>
                 <div class="grid-header-item fw-bold">
-                  {{ t("TERRITORY_TABLE_HEADER_DELETE") }}
+                  {{ t('TERRITORY_TABLE_HEADER_DELETE') }}
                 </div>
                 @for (terr of territories; track terr.id) {
                   @if (terr.groups.includes(tg.id)) {
@@ -116,16 +109,14 @@
                             routerLinkActive="active"
                             svgIcon="maplink"
                             (click)="generateMapLink(terr, iconMapLink)"
-                            aria-label="Side nav toggle icon"
-                          ></mat-icon>
+                            aria-label="Side nav toggle icon"></mat-icon>
                         }
                         @if (terr.poligonId || terr.imageId) {
                           <mat-icon
                             routerLinkActive="active"
                             svgIcon="pdf"
                             (click)="toPdf(terr)"
-                            aria-label="Side nav toggle icon"
-                          ></mat-icon>
+                            aria-label="Side nav toggle icon"></mat-icon>
                         }
                       </div>
                       <div class="grid-item d-flex align-items-center">
@@ -133,7 +124,7 @@
                         {{
                           terr.returnedDates.length !== terr.participants.length
                             ? (terr.participants?.at(-1) | participantPipe)?.name
-                            : t("TERRITORY_NOT_ASSIGNED")
+                            : t('TERRITORY_NOT_ASSIGNED')
                         }}
                         @if (!terr.available) {
                           <mat-icon class="ms-2 cursor-arrow" svgIcon="unavailable"></mat-icon>
@@ -144,8 +135,7 @@
                           [routerLink]="['update', terr.id]"
                           routerLinkActive="active"
                           svgIcon="edit"
-                          aria-label="Side nav toggle icon"
-                        ></mat-icon>
+                          aria-label="Side nav toggle icon"></mat-icon>
                       </div>
                       <div class="grid-item d-flex align-items-center">
                         @if (terr.participants.length > terr.returnedDates.length) {
@@ -153,13 +143,12 @@
                             [routerLink]="['return', terr.id]"
                             routerLinkActive="active"
                             svgIcon="return"
-                            aria-label="Side nav toggle icon"
-                          ></mat-icon>
+                            aria-label="Side nav toggle icon"></mat-icon>
                         } @else {
                           {{
                             terr.participants.length === 0 && terr.returnedDates.length === 0
-                              ? t("TERRITORY_TABLE_NEVER_ASSIGNED")
-                              : t("TERRITORY_TABLE_RETURNED")
+                              ? t('TERRITORY_TABLE_NEVER_ASSIGNED')
+                              : t('TERRITORY_TABLE_RETURNED')
                           }}
                         }
                       </div>
@@ -168,15 +157,14 @@
                           [routerLink]="['delete', terr.id]"
                           routerLinkActive="active"
                           svgIcon="garbage"
-                          aria-label="Side nav toggle icon"
-                        ></mat-icon>
+                          aria-label="Side nav toggle icon"></mat-icon>
                       </div>
                     </div>
                   }
                 }
               </div>
             } @else {
-              <div>{{ t("TERRITORY_NO_TERRITORY_PLACEHOLDER") }}</div>
+              <div>{{ t('TERRITORY_NO_TERRITORY_PLACEHOLDER') }}</div>
             }
           </ng-template>
         </mat-expansion-panel>

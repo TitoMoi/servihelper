@@ -1,23 +1,23 @@
 import {
   ParticipantAssignTypeInterface,
   ParticipantInterface,
-  ParticipantModel,
-} from "app/participant/model/participant.model";
-import { writeJson, readJSONSync } from "fs-extra";
-import { nanoid } from "nanoid/non-secure";
+  ParticipantModel
+} from 'app/participant/model/participant.model';
+import { writeJson, readJSONSync } from 'fs-extra';
+import { nanoid } from 'nanoid/non-secure';
 
-import { Injectable, inject } from "@angular/core";
-import { ConfigService } from "app/config/service/config.service";
-import { LockService } from "app/lock/service/lock.service";
+import { Injectable, inject } from '@angular/core';
+import { ConfigService } from 'app/config/service/config.service';
+import { LockService } from 'app/lock/service/lock.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class ParticipantService {
   private configService = inject(ConfigService);
   private lockService = inject(LockService);
 
-  readonly filename = "participant.json";
+  readonly filename = 'participant.json';
 
   //flag to indicate that participants file has changed
   hasChanged = true;
@@ -141,7 +141,7 @@ export class ParticipantService {
    */
   deleteParticipant(id: string) {
     //delete participant
-    this.#participants = this.#participants.filter((b) => b.id !== id);
+    this.#participants = this.#participants.filter(b => b.id !== id);
     this.#participantsMap.delete(id);
     //save participants
     this.saveParticipantsToFile();
@@ -157,7 +157,7 @@ export class ParticipantService {
       const participantAssignTypesValue: ParticipantAssignTypeInterface = {
         assignTypeId: id,
         canPrincipal: true,
-        canAssistant: hasAssistant,
+        canAssistant: hasAssistant
       };
 
       participant.assignTypes = [...participant.assignTypes, participantAssignTypesValue];
@@ -174,7 +174,7 @@ export class ParticipantService {
    */
   massiveUpdateAssignType(id: string, hasAssistant: boolean) {
     for (const participant of this.#participants) {
-      const pAssignType = participant.assignTypes.find((at) => at.assignTypeId === id);
+      const pAssignType = participant.assignTypes.find(at => at.assignTypeId === id);
 
       //If we imported new assign types and for some reason on available section this participant
       //is not available, he doesnt receive a reference, so we need to update it here
@@ -182,7 +182,7 @@ export class ParticipantService {
         const pAtNew: ParticipantAssignTypeInterface = {
           assignTypeId: id,
           canPrincipal: true,
-          canAssistant: hasAssistant,
+          canAssistant: hasAssistant
         };
         participant.assignTypes.push(pAtNew);
       } else {
@@ -203,7 +203,7 @@ export class ParticipantService {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].assignTypes = this.#participants[i].assignTypes.filter(
-        (at) => at.assignTypeId !== id,
+        at => at.assignTypeId !== id
       );
 
       this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);
@@ -220,7 +220,7 @@ export class ParticipantService {
     for (const participant of this.#participants) {
       const value = {
         roomId,
-        available: true,
+        available: true
       };
 
       participant.rooms = [...participant.rooms, value];
@@ -238,9 +238,7 @@ export class ParticipantService {
   deleteRoom(id: string) {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
-      this.#participants[i].rooms = this.#participants[i].rooms.filter(
-        (at) => at.roomId !== id,
-      );
+      this.#participants[i].rooms = this.#participants[i].rooms.filter(at => at.roomId !== id);
 
       this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);
     }

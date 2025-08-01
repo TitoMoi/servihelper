@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoomComponent } from "./room.component";
+import { RoomComponent } from './room.component';
 
-describe("RoomComponent", () => {
+describe('RoomComponent', () => {
   let component: RoomComponent;
   let fixture: ComponentFixture<RoomComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RoomComponent],
+      imports: [RoomComponent]
     }).compileComponents();
   });
 
@@ -18,7 +18,7 @@ describe("RoomComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

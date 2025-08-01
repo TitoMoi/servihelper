@@ -16,4 +16,4 @@ export interface RoomTableInterface {
   order: number;
 }
 
-export type RoomTypes = "mainHall" | "auxiliaryRoom1" | "auxiliaryRoom2" | "other";
+export type RoomTypes = 'mainHall' | 'auxiliaryRoom1' | 'auxiliaryRoom2' | 'other';

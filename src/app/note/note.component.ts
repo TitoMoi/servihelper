@@ -1,26 +1,26 @@
-import { NoteInterface } from "app/note/model/note.model";
-import { NoteService } from "app/note/service/note.service";
+import { NoteInterface } from 'app/note/model/note.model';
+import { NoteService } from 'app/note/service/note.service';
 
-import { Component, OnInit, inject } from "@angular/core";
-import { MatIconModule } from "@angular/material/icon";
-import { AsyncPipe } from "@angular/common";
-import { RouterLink, RouterLinkActive } from "@angular/router";
-import { MatButtonModule } from "@angular/material/button";
-import { TranslocoModule } from "@ngneat/transloco";
-import { OnlineService } from "app/online/service/online.service";
+import { Component, OnInit, inject } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { AsyncPipe } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { TranslocoModule } from '@ngneat/transloco';
+import { OnlineService } from 'app/online/service/online.service';
 
 @Component({
-    selector: "app-note",
-    templateUrl: "./note.component.html",
-    styleUrls: ["./note.component.scss"],
-    imports: [
-        TranslocoModule,
-        MatButtonModule,
-        RouterLink,
-        RouterLinkActive,
-        MatIconModule,
-        AsyncPipe,
-    ]
+  selector: 'app-note',
+  templateUrl: './note.component.html',
+  styleUrls: ['./note.component.scss'],
+  imports: [
+    TranslocoModule,
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive,
+    MatIconModule,
+    AsyncPipe
+  ]
 })
 export class NoteComponent implements OnInit {
   private noteService = inject(NoteService);
