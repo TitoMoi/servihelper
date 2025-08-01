@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-} from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from "@angular/core";
 
 import { ParticipantService } from "../service/participant.service";
 import { AssignTypePipe } from "app/assigntype/pipe/assign-type.pipe";
@@ -47,6 +41,17 @@ import { GetNumberOfParticipantsPipe } from "./get-number-of-participants.pipe";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailableParticipantComponent implements OnInit, OnDestroy {
+  private participantService = inject(ParticipantService);
+  private assignTypeService = inject(AssignTypeService);
+  private sortService = inject(SortService);
+  private configService = inject(ConfigService);
+  private exportService = inject(ExportService);
+  private lockService = inject(LockService);
+  private onlineService = inject(OnlineService);
+  private translocoService = inject(TranslocoService);
+  private matSnackBar = inject(MatSnackBar);
+  private cdr = inject(ChangeDetectorRef);
+
   participants = this.participantService
     .getParticipants() //We get the reference so we are manipulating participants
     .filter((p) => !p.isExternal && p.available)
@@ -69,19 +74,6 @@ export class AvailableParticipantComponent implements OnInit, OnDestroy {
 
   config$: Observable<ConfigInterface> = this.configService.config$;
   currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
-
-  constructor(
-    private participantService: ParticipantService,
-    private assignTypeService: AssignTypeService,
-    private sortService: SortService,
-    private configService: ConfigService,
-    private exportService: ExportService,
-    private lockService: LockService,
-    private onlineService: OnlineService,
-    private translocoService: TranslocoService,
-    private matSnackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef,
-  ) {}
 
   ngOnInit(): void {
     this.getData();

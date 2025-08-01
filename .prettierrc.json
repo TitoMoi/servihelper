@@ -1,6 +1,12 @@
 {
-  "printWidth": 95,
-  "endOfLine": "crlf",
+  "tabWidth": 2,
+  "useTabs": false,
+  "bracketSameLine": true,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "trailingComma": "none",
+  "printWidth": 100,
+  "singleQuote": true,
   "overrides": [
     {
       "files": "*.html",

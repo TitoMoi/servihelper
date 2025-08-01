@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
@@ -23,10 +23,12 @@ import { MatIconModule } from "@angular/material/icon";
     styleUrls: ["./online-template.component.scss"]
 })
 export class OnlineTemplateComponent {
-  constructor(
-    public dialogRef: MatDialogRef<OnlineTemplateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: OnlineTemplateDataInterface,
-  ) {
+  dialogRef = inject<MatDialogRef<OnlineTemplateComponent>>(MatDialogRef);
+  data = inject<OnlineTemplateDataInterface>(MAT_DIALOG_DATA);
+
+  constructor() {
+    const dialogRef = this.dialogRef;
+
     dialogRef.disableClose = true; //Ask for explicit read
   }
 

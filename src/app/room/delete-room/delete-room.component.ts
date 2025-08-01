@@ -3,7 +3,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
@@ -32,6 +32,14 @@ import { OnlineService } from "app/online/service/online.service";
     ]
 })
 export class DeleteRoomComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private roomService = inject(RoomService);
+  private participantService = inject(ParticipantService);
+  private assignmentService = inject(AssignmentService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private onlineService = inject(OnlineService);
+
   room = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -40,16 +48,6 @@ export class DeleteRoomComponent {
     id: this.room.id,
     name: [{ value: this.room.name, disabled: true }, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private roomService: RoomService,
-    private participantService: ParticipantService,
-    private assignmentService: AssignmentService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService,
-  ) {}
 
   onSubmit(room: RoomInterface): void {
     //delete room

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from "@angular/core";
 
 import { TerritoryService } from "../service/territory.service";
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
@@ -35,21 +35,19 @@ import { TerritoryIncludesTerrGroupPipe } from "./pipes/territory-includes-terr-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MassiveDatesTerritoryComponent implements OnInit, OnDestroy {
+  private territoryService = inject(TerritoryService);
+  private territoryGroupService = inject(TerritoryGroupService);
+  private onlineService = inject(OnlineService);
+  private matSnackBar = inject(MatSnackBar);
+  private translocoService = inject(TranslocoService);
+  private formBuilder = inject(FormBuilder);
+
   territories = this.territoryService.getTerritories(); //the reference
   territoryGroups = this.territoryGroupService.getTerritoryGroups();
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   formArray: FormGroup[] = [];
-
-  constructor(
-    private territoryService: TerritoryService,
-    private territoryGroupService: TerritoryGroupService,
-    private onlineService: OnlineService,
-    private matSnackBar: MatSnackBar,
-    private translocoService: TranslocoService,
-    private formBuilder: FormBuilder,
-  ) {}
 
   ngOnInit(): void {
     for (const t of this.territories) {

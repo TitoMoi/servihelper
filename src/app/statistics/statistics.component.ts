@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { TerritoryCountComponent } from "./territory-count/territory-count.component";
 import { GlobalCountComponent } from "./global-count/global-count.component";
 import { TranslocoModule } from "@ngneat/transloco";
@@ -24,6 +24,9 @@ import { TerritoryGraphicsComponent } from "app/statistics/territory-graphics/te
     ]
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
+  private configService = inject(ConfigService);
+  private assignTypeService = inject(AssignTypeService);
+
   allowedAssignTypesIds = [];
 
   showGlobalCount = false;
@@ -35,11 +38,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   config$: Observable<ConfigInterface> = this.configService.config$;
   roles$: Observable<RoleInterface[]> = this.config$.pipe(map((config) => config.roles));
   currentRoleId$: Observable<string> = this.config$.pipe(map((config) => config.role));
-
-  constructor(
-    private configService: ConfigService,
-    private assignTypeService: AssignTypeService,
-  ) {}
 
   ngOnInit(): void {
     this.getData();

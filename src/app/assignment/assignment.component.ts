@@ -5,14 +5,7 @@ import {
 } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
-import {
-  AfterViewChecked,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-} from "@angular/core";
+import { AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, RouterOutlet, RouterLink, RouterLinkActive } from "@angular/router";
 import { Subscription } from "rxjs";
 import { LastDateService } from "./service/last-date.service";
@@ -59,6 +52,17 @@ import { format } from "date-fns";
     ]
 })
 export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked {
+  activatedRoute = inject(ActivatedRoute);
+  private assignmentService = inject(AssignmentService);
+  private roomService = inject(RoomService);
+  private assignTypeService = inject(AssignTypeService);
+  private participantService = inject(ParticipantService);
+  private lastDateService = inject(LastDateService);
+  private sortService = inject(SortService);
+  private onlineService = inject(OnlineService);
+  private configService = inject(ConfigService);
+  private cdr = inject(ChangeDetectorRef);
+
   //In memory assignments
   assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
 
@@ -89,19 +93,6 @@ export class AssignmentComponent implements OnInit, OnDestroy, AfterViewChecked 
   observer: IntersectionObserver;
 
   subscription: Subscription = new Subscription();
-
-  constructor(
-    public activatedRoute: ActivatedRoute,
-    private assignmentService: AssignmentService,
-    private roomService: RoomService,
-    private assignTypeService: AssignTypeService,
-    private participantService: ParticipantService,
-    private lastDateService: LastDateService,
-    private sortService: SortService,
-    private onlineService: OnlineService,
-    private configService: ConfigService,
-    private cdr: ChangeDetectorRef,
-  ) {}
 
   //first load or Admin
   getAllAssignTypesIds() {

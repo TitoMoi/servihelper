@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { SharedService } from "app/services/shared.service";
 import { TranslocoModule } from "@ngneat/transloco";
 
@@ -9,7 +9,7 @@ import { TranslocoModule } from "@ngneat/transloco";
     imports: [TranslocoModule]
 })
 export class QuestionComponent {
-  appVersion = this.sharedService.appVersion;
+  private sharedService = inject(SharedService);
 
-  constructor(private sharedService: SharedService) {}
+  appVersion = this.sharedService.appVersion;
 }

@@ -2,25 +2,24 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{
-        isUpdate ? t("PARTICIPANT_UPDATE_TITLE") : t("PARTICIPANT_CREATE_TITLE")
+        isUpdate ? t('PARTICIPANT_UPDATE_TITLE') : t('PARTICIPANT_CREATE_TITLE')
       }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col-12">
           <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_NAME") }}</mat-label>
+            <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
             <input
               matInput
               [appautofocus]="isUpdate ? false : true"
               spellcheck="false"
-              formControlName="name"
-            />
+              formControlName="name" />
           </mat-form-field>
         </div>
         <div class="col-lg-4 col-6">
           <mat-form-field>
-            <mat-label>{{ t("PLACEHOLDER_GROUP") }}</mat-label>
+            <mat-label>{{ t('PLACEHOLDER_GROUP') }}</mat-label>
             <mat-select formControlName="group">
               @for (number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track number) {
                 <mat-option [value]="number">{{ number }}</mat-option>
@@ -31,28 +30,25 @@
         <div class="row">
           <div class="col-auto">
             <mat-checkbox labelPosition="before" color="primary" formControlName="available">{{
-              t("PARTICIPANT_CREATE_AVAILABLE")
+              t('PARTICIPANT_CREATE_AVAILABLE')
             }}</mat-checkbox>
           </div>
           <div class="col-auto">
             <mat-checkbox labelPosition="before" color="primary" formControlName="isWoman">{{
-              t("PARTICIPANT_CREATE_ISWOMAN")
+              t('PARTICIPANT_CREATE_ISWOMAN')
             }}</mat-checkbox>
           </div>
           <div class="col-auto">
-            <mat-checkbox
-              labelPosition="before"
-              color="primary"
-              formControlName="isExternal"
-              >{{ t("PARTICIPANT_CREATE_ISEXTERNAL") }}</mat-checkbox
-            >
+            <mat-checkbox labelPosition="before" color="primary" formControlName="isExternal">{{
+              t('PARTICIPANT_CREATE_ISEXTERNAL')
+            }}</mat-checkbox>
           </div>
         </div>
         <div class="participant-overflow">
           <div class="col-12 mr-auto">
             @if (rooms.length) {
               <h4>
-                {{ t("PARTICIPANT_CREATE_ROOMS_TITLE") }}
+                {{ t('PARTICIPANT_CREATE_ROOMS_TITLE') }}
               </h4>
             }
             <div class="row">
@@ -75,16 +71,15 @@
             <mat-chip-grid
               #chipList
               aria-label="PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE"
-              (click)="picker.open()"
-            >
+              (click)="picker.open()">
               @for (date of getNotAvailableDates; track date) {
                 <mat-chip-row selectable="false" removable="true" (removed)="remove(date)">
-                  {{ date | translocoDate: { dateStyle: "short" } }}
+                  {{ date | translocoDate: { dateStyle: 'short' } }}
                   <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
                 </mat-chip-row>
               }
               @if (!getNotAvailableDates.length) {
-                <mat-label>{{ t("PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE") }}</mat-label>
+                <mat-label>{{ t('PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE') }}</mat-label>
               }
               <input
                 [value]="resetModel"
@@ -92,8 +87,7 @@
                 [matDatepicker]="picker"
                 (dateChange)="dateChanged($event)"
                 [matChipInputFor]="chipList"
-                hidden
-              />
+                hidden />
             </mat-chip-grid>
             <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker [startAt]="init" [dateClass]="dateClass"></mat-datepicker>
@@ -102,13 +96,8 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button
-        mat-raised-button
-        type="button"
-        class="me-3"
-        [routerLink]="isUpdate ? '../..' : '..'"
-      >
-        {{ t("BUTTON_CANCEL") }}
+      <button mat-raised-button type="button" class="me-3" [routerLink]="isUpdate ? '../..' : '..'">
+        {{ t('BUTTON_CANCEL') }}
       </button>
       <button
         mat-raised-button
@@ -116,16 +105,15 @@
         color="primary"
         type="button"
         (click)="onSubmit()"
-        [disabled]="form.invalid"
-      >
-        {{ isUpdate ? t("BUTTON_UPDATE") : t("BUTTON_SAVE") }}
+        [disabled]="form.invalid">
+        {{ isUpdate ? t('BUTTON_UPDATE') : t('BUTTON_SAVE') }}
         @if (netStatusOffline$ | async) {
           <mat-icon svgIcon="nowifi"></mat-icon>
         }
       </button>
       @if (!isUpdate) {
         <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">
-          {{ t("BUTTON_SAVE_CREATE_ANOTHER") }}
+          {{ t('BUTTON_SAVE_CREATE_ANOTHER') }}
           @if (netStatusOffline$ | async) {
             <mat-icon svgIcon="nowifi"></mat-icon>
           }

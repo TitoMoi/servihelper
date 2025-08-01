@@ -2,7 +2,7 @@ import { RoomInterface } from "app/room/model/room.model";
 import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { TranslocoService } from "@ngneat/transloco";
 
@@ -10,17 +10,15 @@ import { TranslocoService } from "@ngneat/transloco";
   providedIn: "root",
 })
 export class RoomService {
+  private configService = inject(ConfigService);
+  private translocoService = inject(TranslocoService);
+
   //flag to indicate that rooms file has changed
   hasChanged = true;
   //The array of rooms in memory
   #rooms: RoomInterface[] = [];
   //The map of rooms for look up of rooms
   #roomsMap: Map<string, RoomInterface> = new Map();
-
-  constructor(
-    private configService: ConfigService,
-    private translocoService: TranslocoService,
-  ) {}
 
   getNameOrTranslation(r: RoomInterface): string {
     return r.name ? r.name : this.translocoService.translate(r.tKey);

@@ -8,13 +8,7 @@ import autoTable from "jspdf-autotable";
 import { BandNamesWithExtType } from "app/report/model/report.model";
 
 /* eslint-disable @typescript-eslint/naming-convention */
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-} from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, inject } from "@angular/core";
 
 import {
   AssignmentGroupInterface,
@@ -53,6 +47,18 @@ import { isSameMonth } from "date-fns";
     ]
 })
 export class SelectionListComponent implements OnChanges {
+  assignTypeService = inject(AssignTypeService);
+  configService = inject(ConfigService);
+  private roomService = inject(RoomService);
+  private participantService = inject(ParticipantService);
+  private assignmentService = inject(AssignmentService);
+  private publicThemeService = inject(PublicThemeService);
+  private sortService = inject(SortService);
+  private pdfService = inject(PdfService);
+  private exportService = inject(ExportService);
+  private translocoLocaleService = inject(TranslocoLocaleService);
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() selectedDates: Date[];
   @Input() assignTypes: string[];
   @Input() rooms: string[];
@@ -67,20 +73,6 @@ export class SelectionListComponent implements OnChanges {
   assignmentGroups: AssignmentGroupInterface[] = [];
 
   #assignments: AssignmentInterface[] = [];
-
-  constructor(
-    public assignTypeService: AssignTypeService,
-    public configService: ConfigService,
-    private roomService: RoomService,
-    private participantService: ParticipantService,
-    private assignmentService: AssignmentService,
-    private publicThemeService: PublicThemeService,
-    private sortService: SortService,
-    private pdfService: PdfService,
-    private exportService: ExportService,
-    private translocoLocaleService: TranslocoLocaleService,
-    private cdr: ChangeDetectorRef,
-  ) {}
   ngOnChanges() {
     if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];

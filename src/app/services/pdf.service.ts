@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { TranslocoService } from "@ngneat/transloco";
 import { jsPDF, jsPDFOptions } from "jspdf";
 
@@ -24,6 +24,13 @@ import { RoomService } from "app/room/service/room.service";
   providedIn: "root",
 })
 export class PdfService {
+  private configService = inject(ConfigService);
+  private translocoService = inject(TranslocoService);
+  private translocoLocaleService = inject(TranslocoLocaleService);
+  private participantService = inject(ParticipantService);
+  private assignTypeService = inject(AssignTypeService);
+  private roomService = inject(RoomService);
+
   jsPdf: jsPDF;
 
   langToFont = {
@@ -43,15 +50,6 @@ export class PdfService {
   //Pdf file names
   S89 = "S89.pdf";
   S89M = "S89M.pdf";
-
-  constructor(
-    private configService: ConfigService,
-    private translocoService: TranslocoService,
-    private translocoLocaleService: TranslocoLocaleService,
-    private participantService: ParticipantService,
-    private assignTypeService: AssignTypeService,
-    private roomService: RoomService,
-  ) {}
 
   registerOnLangChange() {
     this.translocoService.langChanges$.subscribe((lang) => {

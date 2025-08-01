@@ -1,17 +1,17 @@
 @if (participants.length) {
   <ng-container *transloco="let t">
-    <form [formGroup]="searchForm" novalidate>
+    <form novalidate [formGroup]="searchForm">
       <mat-card appearance="outlined">
         <mat-card-header>
           <mat-card-title>
-            {{ t("SEARCH_PARTICIPANT_TITLE") }}
+            {{ t('SEARCH_PARTICIPANT_TITLE') }}
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="row g-0">
             <div class="col">
               <mat-form-field>
-                <mat-label>{{ t("SEARCH_PARTICIPANT") }}</mat-label>
+                <mat-label>{{ t('SEARCH_PARTICIPANT') }}</mat-label>
                 <mat-select formControlName="participant" required>
                   @for (p of participants; track p) {
                     <mat-option [value]="p">
@@ -25,16 +25,16 @@
           @if (results.length) {
             <div class="row">
               <div class="col">
-                {{ t("SEARCH_ISPRINCIPAL") }}
+                {{ t('SEARCH_ISPRINCIPAL') }}
               </div>
               <div class="col">
-                {{ t("SEARCH_DATE") }}
+                {{ t('SEARCH_DATE') }}
               </div>
               <div class="col">
-                {{ t("SEARCH_ASSIGNTYPE") }}
+                {{ t('SEARCH_ASSIGNTYPE') }}
               </div>
               <div class="col">
-                {{ t("SEARCH_ROOM") }}
+                {{ t('SEARCH_ROOM') }}
               </div>
             </div>
           }
@@ -45,7 +45,7 @@
                 {{ t(r.isPrincipalResult) }}
               </div>
               <div class="col">
-                {{ r.date | translocoDate: { dateStyle: "long" } }}
+                {{ r.date | translocoDate: { dateStyle: 'long' } }}
               </div>
               <div class="col">
                 {{ r.assignTypeName }}
@@ -58,7 +58,7 @@
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button type="button" routerLink="../assignment">
-            {{ t("BUTTON_CANCEL") }}
+            {{ t('BUTTON_CANCEL') }}
           </button>
         </mat-card-actions>
       </mat-card>

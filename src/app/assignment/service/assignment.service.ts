@@ -7,7 +7,7 @@ import {
 import { readFileSync, writeFile } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Subject } from "rxjs";
 import { ConfigService } from "app/config/service/config.service";
 import { LockService } from "app/lock/service/lock.service";
@@ -18,6 +18,9 @@ import { addDays, subDays } from "date-fns";
   providedIn: "root",
 })
 export class AssignmentService {
+  private configService = inject(ConfigService);
+  private lockService = inject(LockService);
+
   //flag to indicate that assignments file has changed
   hasChanged = true;
   //To track assignment create, update or delete
@@ -29,11 +32,6 @@ export class AssignmentService {
   #assignmentsMap: Map<string, AssignmentInterface> = new Map();
   //The map of assignments for look up of by date
   #assignmentsByDateMap: Map<Date | string, AssignmentInterface[]> = new Map();
-
-  constructor(
-    private configService: ConfigService,
-    private lockService: LockService,
-  ) {}
 
   /**
    * @param deepClone if should be cloned or only return reference

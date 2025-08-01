@@ -1,7 +1,7 @@
 import { ParticipantService } from "app/participant/service/participant.service";
 import { RoomService } from "app/room/service/room.service";
 
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import {
   UntypedFormBuilder,
   Validators,
@@ -38,6 +38,14 @@ import { OnlineService } from "app/online/service/online.service";
     ]
 })
 export class CreateUpdateRoomComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private roomService = inject(RoomService);
+  private participantService = inject(ParticipantService);
+  private router = inject(Router);
+  private translocoService = inject(TranslocoService);
+  private activatedRoute = inject(ActivatedRoute);
+  private onlineService = inject(OnlineService);
+
   r = this.roomService.getRoom(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -56,16 +64,6 @@ export class CreateUpdateRoomComponent {
     type: [this.r ? this.r.type : "other"],
     order: [this.r?.order, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private roomService: RoomService,
-    private participantService: ParticipantService,
-    private router: Router,
-    private translocoService: TranslocoService,
-    private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService,
-  ) {}
 
   onSubmit(): void {
     const room = this.form.value;

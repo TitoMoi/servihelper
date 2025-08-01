@@ -5,7 +5,7 @@ import {
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { RoomService } from "app/room/service/room.service";
 
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { TerritoryContextInterface } from "app/map/model/map.model";
@@ -15,11 +15,10 @@ export type SortOrderType = "Asc" | "Desc";
   providedIn: "root",
 })
 export class SortService {
-  constructor(
-    private assignTypeService: AssignTypeService,
-    private assignmentService: AssignmentService,
-    private roomService: RoomService,
-  ) {}
+  private assignTypeService = inject(AssignTypeService);
+  private assignmentService = inject(AssignmentService);
+  private roomService = inject(RoomService);
+
 
   /**
    *

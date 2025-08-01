@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 import { saveAs } from "file-saver";
@@ -11,9 +11,9 @@ import path from "path";
   providedIn: "root",
 })
 export class WordService {
-  config = this.configService.getConfig();
+  private configService = inject(ConfigService);
 
-  constructor(private configService: ConfigService) {}
+  config = this.configService.getConfig();
 
   generateS13(serviceYear: string, entries: S13TerritoryEntry[]) {
     const content = readFileSync(

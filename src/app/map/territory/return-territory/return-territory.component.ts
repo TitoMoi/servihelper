@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, inject } from "@angular/core";
 import { ReactiveFormsModule, UntypedFormBuilder } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -33,6 +33,13 @@ import { ChangeDetectionStrategy } from "@angular/core";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReturnTerritoryComponent implements AfterViewInit {
+  private formBuilder = inject(UntypedFormBuilder);
+  private territoryService = inject(TerritoryService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+  private cdr = inject(ChangeDetectorRef);
+
   t = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -42,15 +49,6 @@ export class ReturnTerritoryComponent implements AfterViewInit {
     name: [{ value: this.t.name, disabled: true }, Validators.required],
     returnDate: [{ value: undefined }, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private territoryService: TerritoryService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-    private cdr: ChangeDetectorRef,
-  ) {}
 
   ngAfterViewInit(): void {
     this.form.markAllAsTouched();

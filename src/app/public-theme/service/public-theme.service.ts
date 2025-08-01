@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { PublicThemeInterface } from "../model/public-theme.model";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -9,12 +9,12 @@ import { ConfigService } from "app/config/service/config.service";
   providedIn: "root",
 })
 export class PublicThemeService {
+  private configService = inject(ConfigService);
+
   //flag to indicate that public theme file has changed
   hasChanged = true;
   //The array of public themes in memory
   #publicThemes: PublicThemeInterface[] = [];
-
-  constructor(private configService: ConfigService) {}
 
   /**
    *

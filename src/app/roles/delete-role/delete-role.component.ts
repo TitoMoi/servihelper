@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 import { ConfigService } from "app/config/service/config.service";
@@ -31,6 +31,12 @@ import { OnlineService } from "app/online/service/online.service";
     ]
 })
 export class DeleteRoleComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private configService = inject(ConfigService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private onlineService = inject(OnlineService);
+
   role = this.configService.getRole(this.activatedRoute.snapshot.params.id);
 
   roleForm = this.formBuilder.group({
@@ -39,14 +45,6 @@ export class DeleteRoleComponent {
   });
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private configService: ConfigService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService,
-  ) {}
 
   onSubmit() {
     const role: RoleInterface = this.roleForm.value;

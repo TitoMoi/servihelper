@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ReactiveFormsModule, UntypedFormBuilder, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -26,21 +26,19 @@ import { AssignmentService } from "app/assignment/service/assignment.service";
     styleUrls: ["./delete-sheet-title.component.scss"]
 })
 export class DeleteSheetTitleComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private sheetTitleService = inject(SheetTitleService);
+  private assignmentService = inject(AssignmentService);
+  private configService = inject(ConfigService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+
   title = this.sheetTitleService.getTitle(this.activatedRoute.snapshot.params.id);
 
   form = this.formBuilder.group({
     id: this.title.id,
     name: [{ value: this.title.name, disabled: true }, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private sheetTitleService: SheetTitleService,
-    private assignmentService: AssignmentService,
-    private configService: ConfigService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   onSubmit(title: SheetTitleInterface): void {
     //delete room

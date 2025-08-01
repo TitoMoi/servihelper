@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { ParticipantDynamicInterface } from "app/participant/model/participant.model";
 import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
@@ -21,6 +21,6 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
         RoomNamePipe,
     ]
 })
-export class InfoAssignmentComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ParticipantDynamicInterface[]) {}
+export class InfoAssignmentComponent {  data = inject(MAT_DIALOG_DATA);
+
 }

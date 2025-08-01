@@ -3,7 +3,7 @@ import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { Editor, Toolbar, NgxEditorModule } from "ngx-editor";
 
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, inject } from "@angular/core";
 import {
   UntypedFormBuilder,
   UntypedFormControl,
@@ -42,6 +42,12 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     ]
 })
 export class CreateUpdateNoteComponent implements OnDestroy {
+  private formBuilder = inject(UntypedFormBuilder);
+  private noteService = inject(NoteService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   n = this.noteService.getNote(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -59,14 +65,6 @@ export class CreateUpdateNoteComponent implements OnDestroy {
       ? this.n.editorContent
       : new UntypedFormControl({ value: undefined, disabled: false }, Validators.required),
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private noteService: NoteService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   ngOnDestroy(): void {
     this.editor.destroy();

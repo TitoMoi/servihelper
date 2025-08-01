@@ -20,16 +20,7 @@ import {
 import { ParticipantService } from "app/participant/service/participant.service";
 import { Subscription } from "rxjs";
 
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, inject } from "@angular/core";
 import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
 import { TranslocoService, TranslocoDirective } from "@ngneat/transloco";
 import { SortService } from "app/services/sort.service";
@@ -63,6 +54,17 @@ import { SharedService } from "app/services/shared.service";
     ]
 })
 export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
+  private assignmentService = inject(AssignmentService);
+  private assignTypeService = inject(AssignTypeService);
+  private participantService = inject(ParticipantService);
+  private translocoService = inject(TranslocoService);
+  private sortService = inject(SortService);
+  private exportService = inject(ExportService);
+  private formBuilder = inject(FormBuilder);
+  private dateFnsLocaleService = inject(DateFnsLocaleService);
+  private sharedService = inject(SharedService);
+  private cdr = inject(ChangeDetectorRef);
+
   @ViewChild("onlyWomenBox") onlyWomenBox: MatCheckbox;
   @ViewChild("onlyMenBox") onlyMenBox: MatCheckbox;
   @ViewChild("hideExternalsBox") hideExternalsBox: MatCheckbox;
@@ -81,19 +83,6 @@ export class GlobalCountComponent implements OnInit, OnChanges, OnDestroy {
   });
 
   subscription: Subscription = new Subscription();
-
-  constructor(
-    private assignmentService: AssignmentService,
-    private assignTypeService: AssignTypeService,
-    private participantService: ParticipantService,
-    private translocoService: TranslocoService,
-    private sortService: SortService,
-    private exportService: ExportService,
-    private formBuilder: FormBuilder,
-    private dateFnsLocaleService: DateFnsLocaleService,
-    private sharedService: SharedService,
-    private cdr: ChangeDetectorRef,
-  ) {}
   ngOnChanges() {
     this.getStatistics();
   }

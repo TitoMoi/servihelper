@@ -3,7 +3,7 @@ import { AssignTypeInterface, AssignTypes } from "app/assigntype/model/assigntyp
 import { readJSONSync, writeJson, writeJsonSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { TranslocoService } from "@ngneat/transloco";
 
@@ -11,6 +11,9 @@ import { TranslocoService } from "@ngneat/transloco";
   providedIn: "root",
 })
 export class AssignTypeService {
+  private configService = inject(ConfigService);
+  private translocoService = inject(TranslocoService);
+
   //flag to indicate that assignTypes file has changed
   hasChanged = true;
   //The array of assignTypes in memory
@@ -56,11 +59,6 @@ export class AssignTypeService {
     this.LIVING_AS_CHRISTIANS,
     this.CONGREGATION_BIBLE_STUDY,
   ];
-
-  constructor(
-    private configService: ConfigService,
-    private translocoService: TranslocoService,
-  ) {}
 
   getNameOrTranslation(at: AssignTypeInterface) {
     return at.name ? at.name : this.translocoService.translate(at.tKey);

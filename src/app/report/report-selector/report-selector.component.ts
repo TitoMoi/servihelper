@@ -3,14 +3,7 @@ import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { RoomInterface } from "app/room/model/room.model";
 import { RoomService } from "app/room/service/room.service";
 
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, inject } from "@angular/core";
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -62,6 +55,14 @@ import { AsyncPipe } from "@angular/common";
     ]
 })
 export class ReportSelectorComponent implements OnInit, AfterViewInit {
+  private assignTypeService = inject(AssignTypeService);
+  private roomService = inject(RoomService);
+  private translocoService = inject(TranslocoService);
+  private sortService = inject(SortService);
+  private formBuilder = inject(UntypedFormBuilder);
+  private configService = inject(ConfigService);
+  private cdr = inject(ChangeDetectorRef);
+
   //Angular material datepicker hacked
   @ViewChild(MatDatepicker) datePickerRef: MatDatepicker<Date>;
 
@@ -111,16 +112,6 @@ export class ReportSelectorComponent implements OnInit, AfterViewInit {
   });
 
   subscription = new Subscription();
-
-  constructor(
-    private assignTypeService: AssignTypeService,
-    private roomService: RoomService,
-    private translocoService: TranslocoService,
-    private sortService: SortService,
-    private formBuilder: UntypedFormBuilder,
-    private configService: ConfigService,
-    private cdr: ChangeDetectorRef,
-  ) {}
   ngOnInit(): void {
     this.selectionForm.markAllAsTouched();
 

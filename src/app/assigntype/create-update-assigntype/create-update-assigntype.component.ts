@@ -1,7 +1,7 @@
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import {
   UntypedFormBuilder,
   Validators,
@@ -43,6 +43,14 @@ import { OnlineService } from "app/online/service/online.service";
     ]
 })
 export class CreateUpdateAssignTypeComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private assignTypeService = inject(AssignTypeService);
+  private participantService = inject(ParticipantService);
+  private router = inject(Router);
+  private translocoService = inject(TranslocoService);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   at = this.assignTypeService.getAssignType(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -77,16 +85,6 @@ export class CreateUpdateAssignTypeComponent {
     ),
   ];
   showColors = false;
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private assignTypeService: AssignTypeService,
-    private participantService: ParticipantService,
-    private router: Router,
-    private translocoService: TranslocoService,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   isOtherAssignmentType() {
     return this.form.controls.type.value === "other";

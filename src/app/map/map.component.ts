@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, inject } from "@angular/core";
 
 import { MatButtonModule } from "@angular/material/button";
 import {
@@ -37,6 +30,9 @@ import { AsyncPipe } from "@angular/common";
     styleUrls: ["./map.component.scss"]
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+  private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
+
   @ViewChild("matRadioGroup") matRadioGroup: MatRadioGroup;
   selectedRadioOptionControl = new FormControl();
 
@@ -51,11 +47,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   );
 
   subscription = new Subscription();
-
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private router: Router,
-  ) {}
 
   ngOnInit(): void {
     this.subscription.add(

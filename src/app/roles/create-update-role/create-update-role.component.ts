@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
@@ -60,6 +60,14 @@ import {
     ]
 })
 export class CreateUpdateRoleComponent {
+  private formBuilder = inject(FormBuilder);
+  private configService = inject(ConfigService);
+  private assignTypeService = inject(AssignTypeService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private translocoService = inject(TranslocoService);
+  private onlineService = inject(OnlineService);
+
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
@@ -128,16 +136,6 @@ export class CreateUpdateRoleComponent {
     saturday: [this.r.saturday],
     sunday: [this.r.sunday],
   });
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private configService: ConfigService,
-    private assignTypeService: AssignTypeService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private translocoService: TranslocoService,
-    private onlineService: OnlineService,
-  ) {}
 
   //includes
   isChecked(id: string): boolean {

@@ -1,6 +1,6 @@
 import { AssignmentService } from "app/assignment/service/assignment.service";
 
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
@@ -30,6 +30,13 @@ import { MatInputModule } from "@angular/material/input";
     ]
 })
 export class DeleteAssignmentComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private assignmentService = inject(AssignmentService);
+  private assignTypeService = inject(AssignTypeService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   a = this.assignmentService.getAssignment(this.activatedRoute.snapshot.params.id);
@@ -40,15 +47,6 @@ export class DeleteAssignmentComponent {
       { value: this.assignTypeService.getAssignType(this.a.assignType).name, disabled: true },
     ],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private assignmentService: AssignmentService,
-    private assignTypeService: AssignTypeService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   onSubmit(): void {
     this.assignmentService.deleteAssignment(this.assignmentForm.get("id").value);

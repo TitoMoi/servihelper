@@ -2,7 +2,7 @@ import { AssignmentService } from "app/assignment/service/assignment.service";
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
@@ -32,6 +32,14 @@ import { TerritoryService } from "app/map/territory/service/territory.service";
     ]
 })
 export class DeleteParticipantComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private participantService = inject(ParticipantService);
+  private assignmentService = inject(AssignmentService);
+  private territoryService = inject(TerritoryService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   participant = this.participantService.getParticipant(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -40,16 +48,6 @@ export class DeleteParticipantComponent {
     id: this.participant.id,
     name: [{ value: this.participant.name, disabled: true }, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private participantService: ParticipantService,
-    private assignmentService: AssignmentService,
-    private territoryService: TerritoryService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   onSubmit(participant: ParticipantInterface): void {
     this.participantService.deleteParticipant(participant.id);

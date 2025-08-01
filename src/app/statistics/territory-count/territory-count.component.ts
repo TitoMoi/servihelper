@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
@@ -26,6 +26,10 @@ import { SortService } from "app/services/sort.service";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryCountComponent implements OnInit {
+  private territoryService = inject(TerritoryService);
+  private participantService = inject(ParticipantService);
+  private sortService = inject(SortService);
+
   territories = this.territoryService
     .getTerritories()
     .filter((t) => t.available)
@@ -37,12 +41,6 @@ export class TerritoryCountComponent implements OnInit {
 
   //To show the table ordered by territory
   orderByTerritory = false;
-
-  constructor(
-    private territoryService: TerritoryService,
-    private participantService: ParticipantService,
-    private sortService: SortService,
-  ) {}
   ngOnInit(): void {
     for (let i = 0; i < this.participants.length; i++) {
       this.getActiveTerritoryCount(this.participants[i]);

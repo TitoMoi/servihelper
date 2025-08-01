@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ReactiveFormsModule, UntypedFormBuilder } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -29,6 +29,12 @@ import { MatIconModule } from "@angular/material/icon";
     styleUrls: ["./delete-territory.component.scss"]
 })
 export class DeleteTerritoryComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private territoryService = inject(TerritoryService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   t = this.territoryService.getTerritory(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -37,14 +43,6 @@ export class DeleteTerritoryComponent {
     id: this.t.id,
     name: [{ value: this.t.name, disabled: true }, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private territoryService: TerritoryService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
   onSubmit(): void {
     //get id
     const id = this.form.get("id").value;

@@ -1,84 +1,84 @@
-import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
-import { AssignTypeService } from "app/assigntype/service/assigntype.service";
-import { ParticipantService } from "app/participant/service/participant.service";
-import { RoomInterface } from "app/room/model/room.model";
-import { RoomService } from "app/room/service/room.service";
+import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomInterface } from 'app/room/model/room.model';
+import { RoomService } from 'app/room/service/room.service';
 
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
-  Validators,
-  ReactiveFormsModule,
   FormControl,
-} from "@angular/forms";
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatOptionModule } from '@angular/material/core';
 import {
   MatDatepicker,
   MatDatepickerInputEvent,
-  MatDatepickerModule,
-} from "@angular/material/datepicker";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+  MatDatepickerModule
+} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
+import { OnlineService } from 'app/online/service/online.service';
+import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
+import { AutoFocusDirective } from '../../directives/autofocus/autofocus.directive';
+import { RoomPipe } from '../../room/pipe/room.pipe';
 import {
-  ParticipantRoomInterface,
   ParticipantAssignTypeInterface,
-} from "../model/participant.model";
-import { RoomPipe } from "../../room/pipe/room.pipe";
-import { TranslocoLocaleModule } from "@ngneat/transloco-locale";
-import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import { MatChipsModule } from "@angular/material/chips";
-import { AsyncPipe } from "@angular/common";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { AutoFocusDirective } from "../../directives/autofocus/autofocus.directive";
-import { MatInputModule } from "@angular/material/input";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatCardModule } from "@angular/material/card";
-import { TranslocoModule } from "@ngneat/transloco";
-import { MatSelectModule } from "@angular/material/select";
-import { MatOptionModule } from "@angular/material/core";
-import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
-import { OnlineService } from "app/online/service/online.service";
+  ParticipantRoomInterface
+} from '../model/participant.model';
 
 @Component({
-    selector: "app-create-update-participant",
-    templateUrl: "./create-update-participant.component.html",
-    styleUrls: ["./create-update-participant.component.css"],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        TranslocoModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        AutoFocusDirective,
-        MatCheckboxModule,
-        MatChipsModule,
-        MatIconModule,
-        MatDatepickerModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatOptionModule,
-        RouterLink,
-        TranslocoLocaleModule,
-        RoomPipe,
-        RoomNamePipe,
-        AsyncPipe,
-    ]
+  selector: 'app-create-update-participant',
+  templateUrl: './create-update-participant.component.html',
+  styleUrls: ['./create-update-participant.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    TranslocoModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AutoFocusDirective,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatOptionModule,
+    RouterLink,
+    TranslocoLocaleModule,
+    RoomPipe,
+    RoomNamePipe,
+    AsyncPipe
+  ]
 })
 export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
+  private formBuilder = inject(FormBuilder);
+  private participantService = inject(ParticipantService);
+  private roomService = inject(RoomService);
+  private assignTypeService = inject(AssignTypeService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private onlineService = inject(OnlineService);
+  private cdr = inject(ChangeDetectorRef);
+
   //Angular material datepicker hacked
   @ViewChild(MatDatepicker) datePickerRef: MatDatepicker<Date>;
 
-  rooms: RoomInterface[] = this.roomService
-    .getRooms()
-    .sort((a, b) => (a.order > b.order ? 1 : -1));
+  rooms: RoomInterface[] = this.roomService.getRooms().sort((a, b) => (a.order > b.order ? 1 : -1));
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
@@ -98,7 +98,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   form = this.formBuilder.group({
     id: this.p?.id,
     name: new FormControl(this.p?.name, {
-      validators: Validators.required,
+      validators: Validators.required
     }),
     group: [this.p?.group],
     isWoman: this.p ? this.p.isWoman : false,
@@ -106,19 +106,8 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     assignTypes: this.formBuilder.array<ParticipantAssignTypeInterface>([]), //do not wrap this into an [], because [...] creates a formControl wrapper
     rooms: this.formBuilder.array<ParticipantRoomInterface>([]),
     available: [this.p ? this.p.available : true],
-    notAvailableDates: [this.p ? this.p.notAvailableDates : []],
+    notAvailableDates: [this.p ? this.p.notAvailableDates : []]
   });
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private participantService: ParticipantService,
-    private roomService: RoomService,
-    private assignTypeService: AssignTypeService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService,
-    private cdr: ChangeDetectorRef,
-  ) {}
 
   get getRoomsArray(): ParticipantRoomInterface[] {
     //rooms is the FormArray, value is the array
@@ -155,10 +144,10 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
       const roomGroup = this.formBuilder.group({
         //ParticipantRoomInterface
         roomId: [r.roomId, Validators.required],
-        available: [r.available, Validators.required],
+        available: [r.available, Validators.required]
       });
       //Add assignType to the form
-      const fa = this.form.get("rooms") as FormArray;
+      const fa = this.form.get('rooms') as FormArray;
 
       fa.push(roomGroup);
     }
@@ -171,19 +160,17 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
         //ParticipantAssignTypesInterface
         assignTypeId: [at.assignTypeId, Validators.required],
         canPrincipal: [at.canPrincipal, Validators.required],
-        canAssistant: [at.canAssistant],
+        canAssistant: [at.canAssistant]
       });
       //Add assignType to the form
-      const fa = this.form.get("assignTypes") as FormArray;
+      const fa = this.form.get('assignTypes') as FormArray;
       fa.push(assignType);
     }
   }
 
   addAssignTypes() {
     //reset
-    this.form.controls.assignTypes = this.formBuilder.array<ParticipantAssignTypeInterface>(
-      [],
-    );
+    this.form.controls.assignTypes = this.formBuilder.array<ParticipantAssignTypeInterface>([]);
     //Populate control with assignTypes
     for (const at of this.assignTypes) {
       this.addAssignType(at);
@@ -194,7 +181,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     const at = {
       assignTypeId: a.id,
       canPrincipal: true,
-      canAssistant: a.hasAssistant,
+      canAssistant: a.hasAssistant
     };
 
     const assignTypeFormGroup = this.formBuilder.group<ParticipantAssignTypeInterface>(at);
@@ -216,7 +203,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   addRoom(r: RoomInterface) {
     const room: ParticipantRoomInterface = {
       roomId: r.id,
-      available: true,
+      available: true
     };
 
     const roomGroup = this.formBuilder.group<ParticipantRoomInterface>(room);
@@ -233,20 +220,20 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
       this.createParticipant();
     }
 
-    const route = this.isUpdate ? "../.." : "..";
+    const route = this.isUpdate ? '../..' : '..';
     //navigate to parent
     this.router.navigate([route], {
-      relativeTo: this.activatedRoute,
+      relativeTo: this.activatedRoute
     });
   }
 
   submitAndCreate(): void {
     this.createParticipant();
 
-    this.form.get("name").reset(undefined, { emitEvent: false });
-    this.form.get("isWoman").reset(false, { emitEvent: false });
-    this.form.get("isExternal").reset(false, { emitEvent: false });
-    this.form.get("notAvailableDates").reset([], { emitEvent: false });
+    this.form.get('name').reset(undefined, { emitEvent: false });
+    this.form.get('isWoman').reset(false, { emitEvent: false });
+    this.form.get('isExternal').reset(false, { emitEvent: false });
+    this.form.get('notAvailableDates').reset([], { emitEvent: false });
     this.addAssignTypes();
     this.addRooms();
   }
@@ -258,7 +245,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   /** code for the datepicker hack*/
   public dateClass = (date: Date) => {
     if (this.findDate(date) !== -1) {
-      return ["selected"];
+      return ['selected'];
     }
     return [];
   };
@@ -281,7 +268,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
         // eslint-disable-next-line no-underscore-dangle
         this.datePickerRef[
           // eslint-disable-next-line @typescript-eslint/dot-notation
-          "_componentRef"
+          '_componentRef'
         ].instance._calendar.monthView._createWeekCells();
 
         this.timeoutRef = setTimeout(() => {
@@ -301,6 +288,6 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
 
   /** code for the datepicker hack*/
   private findDate(date: Date): number {
-    return this.getNotAvailableDates.map((m) => +m).indexOf(+date);
+    return this.getNotAvailableDates.map(m => +m).indexOf(+date);
   }
 }

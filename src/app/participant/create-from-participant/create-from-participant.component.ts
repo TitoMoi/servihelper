@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 import { ParticipantInterface } from "../model/participant.model";
@@ -36,6 +36,12 @@ import { MatIconModule } from "@angular/material/icon";
     ]
 })
 export class CreateFromParticipantComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private participantService = inject(ParticipantService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   participants: ParticipantInterface[] = this.participantService.getParticipants(true);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -45,14 +51,6 @@ export class CreateFromParticipantComponent {
     name: [undefined, Validators.required],
     principal: [undefined, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private participantService: ParticipantService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   onSubmit(): void {
     const participantId = this.participantForm.get("principal").value;

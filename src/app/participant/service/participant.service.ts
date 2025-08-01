@@ -6,7 +6,7 @@ import {
 import { writeJson, readJSONSync } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 import { LockService } from "app/lock/service/lock.service";
 
@@ -14,6 +14,9 @@ import { LockService } from "app/lock/service/lock.service";
   providedIn: "root",
 })
 export class ParticipantService {
+  private configService = inject(ConfigService);
+  private lockService = inject(LockService);
+
   readonly filename = "participant.json";
 
   //flag to indicate that participants file has changed
@@ -22,11 +25,6 @@ export class ParticipantService {
   #participants: ParticipantInterface[] = undefined;
   //The map of participants for look up by id
   #participantsMap: Map<string, ParticipantInterface> = new Map();
-
-  constructor(
-    private configService: ConfigService,
-    private lockService: LockService,
-  ) {}
 
   /**
    * @param deepClone if should return the cloned array or the reference

@@ -9,7 +9,7 @@ import { ParticipantInterface } from "app/participant/model/participant.model";
 import { RoomInterface } from "app/room/model/room.model";
 import autoTable from "jspdf-autotable";
 
-import { ChangeDetectorRef, Component } from "@angular/core";
+import { ChangeDetectorRef, Component, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { PdfService } from "app/services/pdf.service";
 import { clipboard } from "electron";
@@ -54,6 +54,16 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     ]
 })
 export class ImageAssignmentComponent {
+  private assignmentService = inject(AssignmentService);
+  private assignTypeService = inject(AssignTypeService);
+  private noteService = inject(NoteService);
+  private activatedRoute = inject(ActivatedRoute);
+  private configService = inject(ConfigService);
+  private pdfService = inject(PdfService);
+  private exportService = inject(ExportService);
+  private sharedService = inject(SharedService);
+  private cdr = inject(ChangeDetectorRef);
+
   rooms: RoomInterface[];
   assignTypes: AssignTypeInterface[];
   principalList: ParticipantInterface[];
@@ -80,18 +90,6 @@ export class ImageAssignmentComponent {
 
   footerNoteEditorHTML: string = this.noteService.getNote(this.assignment.footerNote)
     ?.editorHTML;
-
-  constructor(
-    private assignmentService: AssignmentService,
-    private assignTypeService: AssignTypeService,
-    private noteService: NoteService,
-    private activatedRoute: ActivatedRoute,
-    private configService: ConfigService,
-    private pdfService: PdfService,
-    private exportService: ExportService,
-    private sharedService: SharedService,
-    private cdr: ChangeDetectorRef,
-  ) {}
 
   /**
    * Copy image to the clipboard

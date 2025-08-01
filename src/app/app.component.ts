@@ -1,11 +1,5 @@
 import { ConfigService } from "app/config/service/config.service";
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  HostListener,
-  OnInit,
-} from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit, inject } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { PdfService } from "./services/pdf.service";
@@ -26,6 +20,14 @@ import { MatButtonModule } from "@angular/material/button";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private onlineService = inject(OnlineService);
+  private lockService = inject(LockService);
+  private matIconRegistry = inject(MatIconRegistry);
+  private domSanitizer = inject(DomSanitizer);
+  private pdfService = inject(PdfService);
+  private cdr = inject(ChangeDetectorRef);
+
   // Flag to show a blocking screen with information.
   showLockMsg = false;
 
@@ -39,15 +41,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  constructor(
-    private configService: ConfigService,
-    private onlineService: OnlineService,
-    private lockService: LockService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
-    private pdfService: PdfService,
-    private cdr: ChangeDetectorRef,
-  ) {
+  constructor() {
     //Get only svg files and then get only the name part (without extension)
     const files = readdirSync(this.configService.iconsFilesPath)
       .filter((file) => path.extname(file).toLowerCase() === ".svg")

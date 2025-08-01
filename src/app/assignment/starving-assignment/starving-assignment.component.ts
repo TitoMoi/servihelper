@@ -1,4 +1,4 @@
-import { Component, Inject, ChangeDetectionStrategy } from "@angular/core";
+import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
 import { TranslocoDirective } from "@ngneat/transloco";
 
 import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
@@ -12,9 +12,7 @@ import { StarvingAssignmentsDataContext } from "../model/assignment.model";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StarvingAssignmentComponent {
-  participants = this.starvingDataContext.participants;
+  private starvingDataContext = inject<StarvingAssignmentsDataContext>(MAT_DIALOG_DATA);
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private starvingDataContext: StarvingAssignmentsDataContext,
-  ) {}
+  participants = this.starvingDataContext.participants;
 }

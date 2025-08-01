@@ -1,7 +1,7 @@
 import { AssignmentService } from "app/assignment/service/assignment.service";
 import { NoteService } from "app/note/service/note.service";
 
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
@@ -30,6 +30,13 @@ import { MatIconModule } from "@angular/material/icon";
     ]
 })
 export class DeleteNoteComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private noteService = inject(NoteService);
+  private assignmentService = inject(AssignmentService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   note = this.noteService.getNote(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -38,15 +45,6 @@ export class DeleteNoteComponent {
     id: this.note.id,
     name: [{ value: this.note.name, disabled: true }, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private noteService: NoteService,
-    private assignmentService: AssignmentService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   onSubmit(): void {
     const note = this.noteForm.value;

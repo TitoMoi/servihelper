@@ -2,7 +2,7 @@ import { AssignmentService } from "app/assignment/service/assignment.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
@@ -31,6 +31,14 @@ import { MatIconModule } from "@angular/material/icon";
     ]
 })
 export class DeleteAssignTypeComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private assignTypeService = inject(AssignTypeService);
+  private participantService = inject(ParticipantService);
+  private assignmentService = inject(AssignmentService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   assignType = this.assignTypeService.getAssignType(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -39,16 +47,6 @@ export class DeleteAssignTypeComponent {
     id: this.assignType.id,
     name: [{ value: this.assignType.name, disabled: true }, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private assignTypeService: AssignTypeService,
-    private participantService: ParticipantService,
-    private assignmentService: AssignmentService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   onSubmit(): void {
     //get id

@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { LockInterface } from "app/lock/model/lock.model";
 import { ConfigService } from "app/config/service/config.service";
 import { readJSONSync, writeJsonSync } from "fs-extra";
@@ -11,14 +11,12 @@ import { ipcRenderer } from "electron";
   providedIn: "root",
 })
 export class LockService {
+  private configService = inject(ConfigService);
+  private onlineService = inject(OnlineService);
+
   lockObj: LockInterface;
 
   isOnline = this.onlineService.getOnline().isOnline;
-
-  constructor(
-    private configService: ConfigService,
-    private onlineService: OnlineService,
-  ) {}
 
   /**
    * Inits the lock status and returns a copy

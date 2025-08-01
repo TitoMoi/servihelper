@@ -9,7 +9,7 @@ import { ParticipantService } from "app/participant/service/participant.service"
 import { RoomService } from "app/room/service/room.service";
 import { lstatSync, writeFileSync, writeJsonSync } from "fs-extra";
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateAdapter, NativeDateAdapter } from "@angular/material/core";
 import { NgClass, AsyncPipe } from "@angular/common";
@@ -32,6 +32,21 @@ import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
     imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgClass, AsyncPipe]
 })
 export class HomeComponent implements OnInit {
+  private configService = inject(ConfigService);
+  private onlineService = inject(OnlineService);
+  private roomService = inject(RoomService);
+  private assignTypeService = inject(AssignTypeService);
+  private noteService = inject(NoteService);
+  private participantService = inject(ParticipantService);
+  private assignmentService = inject(AssignmentService);
+  private publicThemeService = inject(PublicThemeService);
+  private sheetTitleService = inject(SheetTitleService);
+  private translocoService = inject(TranslocoService);
+  private polygonService = inject(PolygonService);
+  private territoryService = inject(TerritoryService);
+  private territoryGroupService = inject(TerritoryGroupService);
+  private dateAdapter = inject<DateAdapter<NativeDateAdapter>>(DateAdapter);
+
   // If zip is loaded and saved
   isZipLoaded = false;
 
@@ -43,23 +58,6 @@ export class HomeComponent implements OnInit {
   isOnline = this.onlineService.getOnline().isOnline;
 
   noteHome: NoteInterface;
-
-  constructor(
-    private configService: ConfigService,
-    private onlineService: OnlineService,
-    private roomService: RoomService,
-    private assignTypeService: AssignTypeService,
-    private noteService: NoteService,
-    private participantService: ParticipantService,
-    private assignmentService: AssignmentService,
-    private publicThemeService: PublicThemeService,
-    private sheetTitleService: SheetTitleService,
-    private translocoService: TranslocoService,
-    private polygonService: PolygonService,
-    private territoryService: TerritoryService,
-    private territoryGroupService: TerritoryGroupService,
-    private dateAdapter: DateAdapter<NativeDateAdapter>,
-  ) {}
   ngOnInit(): void {
     this.noteHome = this.noteService.getNotes().find((n) => n.showInHome);
   }

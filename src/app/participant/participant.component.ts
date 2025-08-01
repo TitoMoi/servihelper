@@ -1,7 +1,7 @@
 import { ParticipantInterface } from "app/participant/model/participant.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { MatCheckboxChange, MatCheckboxModule } from "@angular/material/checkbox";
 import { MatIconModule } from "@angular/material/icon";
 import { AsyncPipe } from "@angular/common";
@@ -29,18 +29,16 @@ import { SortService } from "app/services/sort.service";
     ]
 })
 export class ParticipantComponent {
+  private participantService = inject(ParticipantService);
+  private sortService = inject(SortService);
+  private onlineService = inject(OnlineService);
+
   participants: ParticipantInterface[] = this.participantService
     .getParticipants()
     .filter((participant) => !participant.isExternal)
     .sort(this.sortService.sortByIsManAndByName);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
-
-  constructor(
-    private participantService: ParticipantService,
-    private sortService: SortService,
-    private onlineService: OnlineService,
-  ) {}
 
   toggleExternals(event: MatCheckboxChange) {
     if (event.checked) {

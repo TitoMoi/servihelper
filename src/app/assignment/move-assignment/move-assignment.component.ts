@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { AssignmentInterface } from "../model/assignment.model";
@@ -31,6 +31,12 @@ import { MatIconModule } from "@angular/material/icon";
     ]
 })
 export class MoveAssignmentComponent {
+  private assignmentService = inject(AssignmentService);
+  private formBuilder = inject(UntypedFormBuilder);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -39,14 +45,6 @@ export class MoveAssignmentComponent {
     originDate: [undefined, Validators.required],
     destinyDate: [undefined, Validators.required],
   });
-
-  constructor(
-    private assignmentService: AssignmentService,
-    private formBuilder: UntypedFormBuilder,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   submit() {
     const initialDate: Date = this.form.get("originDate").value;

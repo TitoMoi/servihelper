@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { GraphicService } from "app/services/graphic.service";
 import { Color, NgxChartsModule, ScaleType } from "@swimlane/ngx-charts";
 import { TerritoryService } from "app/map/territory/service/territory.service";
@@ -18,6 +18,12 @@ import { TerritoryGroupDataComponent } from "app/statistics/territory-graphics/t
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryGraphicsComponent {
+  private graphicService = inject(GraphicService);
+  private territoryService = inject(TerritoryService);
+  private territoryGroupService = inject(TerritoryGroupService);
+  private translocoService = inject(TranslocoService);
+  private matDialog = inject(MatDialog);
+
   gradient = false;
 
   //colors
@@ -45,14 +51,6 @@ export class TerritoryGraphicsComponent {
   territories = this.territoryService.getTerritories();
 
   territoryGroups = this.territoryGroupService.getTerritoryGroups();
-
-  constructor(
-    private graphicService: GraphicService,
-    private territoryService: TerritoryService,
-    private territoryGroupService: TerritoryGroupService,
-    private translocoService: TranslocoService,
-    private matDialog: MatDialog,
-  ) {}
 
   /**
    * Get all the territory values for the keys

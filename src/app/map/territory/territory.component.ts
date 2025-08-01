@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIcon, MatIconModule } from "@angular/material/icon";
@@ -44,6 +44,17 @@ import { ParticipantService } from "app/participant/service/participant.service"
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryComponent {
+  private territoryService = inject(TerritoryService);
+  private territoryGroupService = inject(TerritoryGroupService);
+  private polygonService = inject(PolygonService);
+  private onlineService = inject(OnlineService);
+  private pdfService = inject(PdfService);
+  private translocoService = inject(TranslocoService);
+  private participantService = inject(ParticipantService);
+  private configService = inject(ConfigService);
+  private sortService = inject(SortService);
+  private cdr = inject(ChangeDetectorRef);
+
   territories: TerritoryContextClass[] = this.territoryService
     .getTerritories()
     .sort((a, b) => (a.name > b.name ? 1 : -1));
@@ -55,19 +66,6 @@ export class TerritoryComponent {
   showSpinner = false;
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
-
-  constructor(
-    private territoryService: TerritoryService,
-    private territoryGroupService: TerritoryGroupService,
-    private polygonService: PolygonService,
-    private onlineService: OnlineService,
-    private pdfService: PdfService,
-    private translocoService: TranslocoService,
-    private participantService: ParticipantService,
-    private configService: ConfigService,
-    private sortService: SortService,
-    private cdr: ChangeDetectorRef,
-  ) {}
 
   getLengthForGroup(tgId: string) {
     let count = 0;

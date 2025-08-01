@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform, inject } from "@angular/core";
 import { PublicThemeService } from "../service/public-theme.service";
 import { PublicThemeInterface } from "../model/public-theme.model";
 
@@ -7,7 +7,8 @@ import { PublicThemeInterface } from "../model/public-theme.model";
   standalone: true,
 })
 export class PublicThemePipe implements PipeTransform {
-  constructor(private publicThemeService: PublicThemeService) {}
+  private publicThemeService = inject(PublicThemeService);
+
   /**Given the id of the public theme return the public theme */
   transform(id: string): PublicThemeInterface | undefined {
     return this.publicThemeService.getPublicTheme(id);

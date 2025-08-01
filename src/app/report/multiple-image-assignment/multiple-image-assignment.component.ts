@@ -9,13 +9,7 @@ import { filenamifyPath } from "filenamify";
 import * as path from "path";
 import { shell } from "electron";
 
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-} from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, inject } from "@angular/core";
 
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { AssignmentService } from "app/assignment/service/assignment.service";
@@ -53,6 +47,17 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     ]
 })
 export class MultipleImageAssignmentComponent implements OnChanges {
+  assignTypeService = inject(AssignTypeService);
+  private roomService = inject(RoomService);
+  private participantService = inject(ParticipantService);
+  private assignmentService = inject(AssignmentService);
+  private noteService = inject(NoteService);
+  private configService = inject(ConfigService);
+  private exportService = inject(ExportService);
+  private publicThemeService = inject(PublicThemeService);
+  private pdfService = inject(PdfService);
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() selectedDates: Date[];
   @Input() assignTypes: string[];
   @Input() rooms: string[];
@@ -78,19 +83,6 @@ export class MultipleImageAssignmentComponent implements OnChanges {
   assignmentNoteTitle = this.configService.getConfig().assignmentNoteTitle;
 
   #assignments: AssignmentInterface[] = [];
-
-  constructor(
-    public assignTypeService: AssignTypeService,
-    private roomService: RoomService,
-    private participantService: ParticipantService,
-    private assignmentService: AssignmentService,
-    private noteService: NoteService,
-    private configService: ConfigService,
-    private exportService: ExportService,
-    private publicThemeService: PublicThemeService,
-    private pdfService: PdfService,
-    private cdr: ChangeDetectorRef,
-  ) {}
 
   ngOnChanges(): void {
     if (this.selectedDates.length && this.assignTypes) {

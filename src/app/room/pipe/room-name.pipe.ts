@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform, inject } from "@angular/core";
 import { RoomInterface } from "../model/room.model";
 import { RoomService } from "../service/room.service";
 
@@ -7,7 +7,8 @@ import { RoomService } from "../service/room.service";
   standalone: true,
 })
 export class RoomNamePipe implements PipeTransform {
-  constructor(private roomService: RoomService) {}
+  private roomService = inject(RoomService);
+
 
   transform(r: RoomInterface): string {
     return this.roomService.getNameOrTranslation(r);

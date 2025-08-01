@@ -1,6 +1,6 @@
 import { SheetTitleService } from "app/sheet-title/service/sheet-title.service";
 
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
@@ -28,6 +28,11 @@ import { TranslocoModule } from "@ngneat/transloco";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUpdateSheetTitleComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private sheetTitleService = inject(SheetTitleService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+
   t = this.sheetTitleService.getTitle(this.activatedRoute.snapshot.params.id);
 
   isUpdate = this.t ? true : false;
@@ -37,13 +42,6 @@ export class CreateUpdateSheetTitleComponent {
     name: [this.t?.name, Validators.required],
     order: [this.t?.order, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private sheetTitleService: SheetTitleService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   onSubmit(): void {
     const title = this.form.value;

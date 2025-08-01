@@ -3,7 +3,7 @@ import { Observable, of } from "rxjs";
 import { filter, map, shareReplay, switchMap } from "rxjs/operators";
 
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from "@angular/core";
 import { DateAdapter, NativeDateAdapter, MatOptionModule } from "@angular/material/core";
 import { MatSelectChange, MatSelectModule } from "@angular/material/select";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
@@ -43,6 +43,16 @@ import { OnlineService } from "app/online/service/online.service";
     ]
 })
 export class NavigationComponent implements OnInit {
+  private formBuilder = inject(UntypedFormBuilder);
+  private breakpointObserver = inject(BreakpointObserver);
+  private translocoService = inject(TranslocoService);
+  private dateAdapter = inject<DateAdapter<NativeDateAdapter>>(DateAdapter);
+  private configService = inject(ConfigService);
+  private onlineService = inject(OnlineService);
+  private sharedService = inject(SharedService);
+  private httpClient = inject(HttpClient);
+  private cdr = inject(ChangeDetectorRef);
+
   hideSidenav;
 
   config$ = this.configService.config$;
@@ -91,18 +101,6 @@ export class NavigationComponent implements OnInit {
       map((result) => result.matches),
       shareReplay(),
     );
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private breakpointObserver: BreakpointObserver,
-    private translocoService: TranslocoService,
-    private dateAdapter: DateAdapter<NativeDateAdapter>,
-    private configService: ConfigService,
-    private onlineService: OnlineService,
-    private sharedService: SharedService,
-    private httpClient: HttpClient,
-    private cdr: ChangeDetectorRef,
-  ) {}
 
   ngOnInit() {
     this.availableLangs = this.translocoService.getAvailableLangs();

@@ -4,7 +4,7 @@ import {
   ParticipantInterface,
 } from "app/participant/model/participant.model";
 
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { AssignmentInterface } from "app/assignment/model/assignment.model";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
@@ -17,13 +17,11 @@ const { version } = require("../../../package.json");
   providedIn: "root",
 })
 export class SharedService {
-  appVersion = version;
+  private assignTypeService = inject(AssignTypeService);
+  private participantService = inject(ParticipantService);
+  private translocoService = inject(TranslocoService);
 
-  constructor(
-    private assignTypeService: AssignTypeService,
-    private participantService: ParticipantService,
-    private translocoService: TranslocoService,
-  ) {}
+  appVersion = version;
 
   /**
    *

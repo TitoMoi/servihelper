@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { TerritoryService } from "../territory/service/territory.service";
 import { ParticipantService } from "app/participant/service/participant.service";
 import { ParticipantPipe } from "app/participant/pipe/participant.pipe";
@@ -25,6 +25,11 @@ import { MatInputModule } from "@angular/material/input";
     styleUrl: "./data-ready-s13.component.scss"
 })
 export class DataReadyS13Component implements OnInit {
+  private territoryService = inject(TerritoryService);
+  private participantService = inject(ParticipantService);
+  private translocoLocaleService = inject(TranslocoLocaleService);
+  private wordService = inject(WordService);
+
   chunkSize = 20;
 
   territoriesSource = this.territoryService.getTerritories().filter((t) => t.available);
@@ -33,13 +38,6 @@ export class DataReadyS13Component implements OnInit {
   participants = this.participantService.getParticipants();
 
   serviceYearControl = new FormControl();
-
-  constructor(
-    private territoryService: TerritoryService,
-    private participantService: ParticipantService,
-    private translocoLocaleService: TranslocoLocaleService,
-    private wordService: WordService,
-  ) {}
   ngOnInit(): void {
     for (let i = 0; i < this.territoriesSource.length; i += this.chunkSize) {
       const chunk = this.territoriesSource.slice(i, i + this.chunkSize);

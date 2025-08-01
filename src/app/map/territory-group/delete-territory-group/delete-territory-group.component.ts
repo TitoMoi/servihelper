@@ -1,5 +1,5 @@
 import { AsyncPipe, JsonPipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ReactiveFormsModule, UntypedFormBuilder } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -31,6 +31,13 @@ import { Validators } from "ngx-editor";
     styleUrls: ["./delete-territory-group.component.scss"]
 })
 export class DeleteTerritoryGroupComponent implements OnInit {
+  private formBuilder = inject(UntypedFormBuilder);
+  private territoryGroupService = inject(TerritoryGroupService);
+  private territoryService = inject(TerritoryService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   tgId = this.activatedRoute.snapshot.params.id;
 
   tg = this.territoryGroupService.getTerritoryGroup(this.tgId);
@@ -46,15 +53,6 @@ export class DeleteTerritoryGroupComponent implements OnInit {
     id: this.tg.id,
     name: [{ value: this.tg.name, disabled: true }, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private territoryGroupService: TerritoryGroupService,
-    private territoryService: TerritoryService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   ngOnInit(): void {}
 

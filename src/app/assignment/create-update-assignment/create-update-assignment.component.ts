@@ -20,15 +20,7 @@ import { RoomService } from "app/room/service/room.service";
 import { SharedService } from "app/services/shared.service";
 import { Subscription, filter, map } from "rxjs";
 
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, inject } from "@angular/core";
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -104,6 +96,26 @@ import { DateFnsLocaleService } from "app/services/date-fns-locale.service";
     ]
 })
 export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, OnDestroy {
+  lastDateService = inject(LastDateService);
+  private formBuilder = inject(UntypedFormBuilder);
+  private assignmentService = inject(AssignmentService);
+  private roomService = inject(RoomService);
+  private assignTypeService = inject(AssignTypeService);
+  private participantService = inject(ParticipantService);
+  private noteService = inject(NoteService);
+  private configService = inject(ConfigService);
+  private sheetTitleService = inject(SheetTitleService);
+  private publicThemeService = inject(PublicThemeService);
+  private sharedService = inject(SharedService);
+  private sortService = inject(SortService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private matDialog = inject(MatDialog);
+  private onlineService = inject(OnlineService);
+  private dateFnsLocaleService = inject(DateFnsLocaleService);
+  private translocoService = inject(TranslocoService);
+  private cdr = inject(ChangeDetectorRef);
+
   @ViewChild("principalSelect") principalSelect: MatSelect;
   @ViewChild("assistantSelect") assistantSelect: MatSelect;
   @ViewChild("btnSaveCreateAnother") btnSaveCreateAnother: MatButton;
@@ -217,27 +229,7 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
   //Subscriptions
   subscription = new Subscription();
 
-  constructor(
-    public lastDateService: LastDateService,
-    private formBuilder: UntypedFormBuilder,
-    private assignmentService: AssignmentService,
-    private roomService: RoomService,
-    private assignTypeService: AssignTypeService,
-    private participantService: ParticipantService,
-    private noteService: NoteService,
-    private configService: ConfigService,
-    private sheetTitleService: SheetTitleService,
-    private publicThemeService: PublicThemeService,
-    private sharedService: SharedService,
-    private sortService: SortService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private matDialog: MatDialog,
-    private onlineService: OnlineService,
-    private dateFnsLocaleService: DateFnsLocaleService,
-    private translocoService: TranslocoService,
-    private cdr: ChangeDetectorRef,
-  ) {
+  constructor() {
     this.getAssignments();
   }
 

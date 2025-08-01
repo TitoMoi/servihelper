@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform, inject } from "@angular/core";
 import { ParticipantService } from "app/participant/service/participant.service";
 
 type participantAssignTypeOptionType = "principal" | "assistant";
@@ -8,7 +8,8 @@ type participantAssignTypeOptionType = "principal" | "assistant";
   standalone: true,
 })
 export class GetNumberOfParticipantsPipe implements PipeTransform {
-  constructor(private participantService: ParticipantService) {}
+  private participantService = inject(ParticipantService);
+
   transform(atId: string, optionType: participantAssignTypeOptionType = "principal"): number {
     const participants = this.participantService.getParticipants();
     let count = 0;

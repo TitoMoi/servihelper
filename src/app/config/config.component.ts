@@ -2,14 +2,7 @@ import { ConfigService } from "app/config/service/config.service";
 import { NoteInterface } from "app/note/model/note.model";
 import { NoteService } from "app/note/service/note.service";
 import { copySync, existsSync, readdir, removeSync } from "fs-extra";
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, inject } from "@angular/core";
 import { UntypedFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { TranslocoService, TranslocoModule } from "@ngneat/transloco";
 import { DateFormatStyles } from "@ngneat/transloco-locale";
@@ -71,6 +64,20 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     ]
 })
 export class ConfigComponent implements OnInit, OnDestroy {
+  private formBuilder = inject(UntypedFormBuilder);
+  private configService = inject(ConfigService);
+  private onlineService = inject(OnlineService);
+  private noteService = inject(NoteService);
+  private assignTypeService = inject(AssignTypeService);
+  private sheetTitleService = inject(SheetTitleService);
+  private publicThemeService = inject(PublicThemeService);
+  private translocoService = inject(TranslocoService);
+  private matSnackBar = inject(MatSnackBar);
+  private matDialog = inject(MatDialog);
+  private lockService = inject(LockService);
+  private sharedService = inject(SharedService);
+  private cdr = inject(ChangeDetectorRef);
+
   @ViewChild("titleSelect") titleSelect: MatSelect;
 
   translocoDateFormats: DateFormatStyles[] = ["short", "medium", "long", "full"];
@@ -209,22 +216,6 @@ export class ConfigComponent implements OnInit, OnDestroy {
   };
 
   subscription = new Subscription();
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private configService: ConfigService,
-    private onlineService: OnlineService,
-    private noteService: NoteService,
-    private assignTypeService: AssignTypeService,
-    private sheetTitleService: SheetTitleService,
-    private publicThemeService: PublicThemeService,
-    private translocoService: TranslocoService,
-    private matSnackBar: MatSnackBar,
-    private matDialog: MatDialog,
-    private lockService: LockService,
-    private sharedService: SharedService,
-    private cdr: ChangeDetectorRef,
-  ) {}
   ngOnInit(): void {
     this.subscription.add(
       this.onlineForm.get("isOnline").valueChanges.subscribe((isOnline) => {

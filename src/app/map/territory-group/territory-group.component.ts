@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -22,14 +22,12 @@ import { OnlineService } from "app/online/service/online.service";
     styleUrls: ["./territory-group.component.scss"]
 })
 export class TerritoryGroupComponent {
+  private territoryGroupService = inject(TerritoryGroupService);
+  private onlineService = inject(OnlineService);
+
   territoryGroups: TerritoryGroupInterface[] = this.territoryGroupService
     .getTerritoryGroups()
     .sort((a, b) => (a.order > b.order ? 1 : -1));
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
-
-  constructor(
-    private territoryGroupService: TerritoryGroupService,
-    private onlineService: OnlineService,
-  ) {}
 }

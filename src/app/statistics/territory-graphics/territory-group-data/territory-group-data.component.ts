@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 
 import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { TerritoryContextClass } from "app/map/model/map.model";
@@ -16,6 +16,12 @@ import { GraphicService } from "app/services/graphic.service";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TerritoryGroupDataComponent implements OnInit {
+  private tgId = inject(MAT_DIALOG_DATA);
+  private territoryService = inject(TerritoryService);
+  private territoryGroupService = inject(TerritoryGroupService);
+  private graphicService = inject(GraphicService);
+  private translocoService = inject(TranslocoService);
+
   neverAssigned = this.translocoService.translate("TERRITORY_GRAPHICS_NEVER_ASSIGNED");
   beingWorkedOrReturnedLess = this.translocoService.translate(
     "TERRITORY_GRAPHICS_BEING_WORKED_OR_RETURNED_LESS",
@@ -59,14 +65,6 @@ export class TerritoryGroupDataComponent implements OnInit {
     name: this.overdueTitle,
     value: this.overdueData,
   };
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private tgId: string,
-    private territoryService: TerritoryService,
-    private territoryGroupService: TerritoryGroupService,
-    private graphicService: GraphicService,
-    private translocoService: TranslocoService,
-  ) {}
 
   ngOnInit(): void {
     //All territories or the ones that belong to the group

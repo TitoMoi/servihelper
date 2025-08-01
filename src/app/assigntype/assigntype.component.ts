@@ -1,7 +1,7 @@
 import { AssignTypeInterface } from "app/assigntype/model/assigntype.model";
 import { AssignTypeService } from "app/assigntype/service/assigntype.service";
 
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { AsyncPipe } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
@@ -28,6 +28,10 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     ]
 })
 export class AssignTypeComponent {
+  private assignTypeService = inject(AssignTypeService);
+  private participantService = inject(ParticipantService);
+  private onlineService = inject(OnlineService);
+
   //In memory assignTypes
   assignTypes: AssignTypeInterface[] = this.assignTypeService
     .getAssignTypes()
@@ -36,10 +40,4 @@ export class AssignTypeComponent {
   netStatusOffline$ = this.onlineService.netStatusOffline$;
 
   participantsLength = this.participantService.getParticipantsLength();
-
-  constructor(
-    private assignTypeService: AssignTypeService,
-    private participantService: ParticipantService,
-    private onlineService: OnlineService,
-  ) {}
 }

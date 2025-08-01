@@ -5,13 +5,7 @@ import { RoomService } from "app/room/service/room.service";
 import { SortOrderType, SortService } from "app/services/sort.service";
 import autoTable from "jspdf-autotable";
 
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-} from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, inject } from "@angular/core";
 
 import {
   AssignmentGroupInterface,
@@ -47,6 +41,17 @@ import { RoomNamePipe } from "app/room/pipe/room-name.pipe";
     ]
 })
 export class SelectionListHorComponent implements OnChanges {
+  assignTypeService = inject(AssignTypeService);
+  configService = inject(ConfigService);
+  private roomService = inject(RoomService);
+  private participantService = inject(ParticipantService);
+  private assignmentService = inject(AssignmentService);
+  private sortService = inject(SortService);
+  private publicThemeService = inject(PublicThemeService);
+  private pdfService = inject(PdfService);
+  private exportService = inject(ExportService);
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() selectedDates: Date[];
   @Input() assignTypes: string[];
   @Input() rooms: string[];
@@ -61,19 +66,6 @@ export class SelectionListHorComponent implements OnChanges {
   assignmentGroups: AssignmentGroupInterface[] = [];
 
   #assignments: AssignmentInterface[] = [];
-
-  constructor(
-    public assignTypeService: AssignTypeService,
-    public configService: ConfigService,
-    private roomService: RoomService,
-    private participantService: ParticipantService,
-    private assignmentService: AssignmentService,
-    private sortService: SortService,
-    private publicThemeService: PublicThemeService,
-    private pdfService: PdfService,
-    private exportService: ExportService,
-    private cdr: ChangeDetectorRef,
-  ) {}
   ngOnChanges(): void {
     if (this.selectedDates.length && this.assignTypes) {
       this.#assignments = [];

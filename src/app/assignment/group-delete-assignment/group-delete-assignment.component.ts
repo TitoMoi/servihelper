@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 
@@ -40,6 +40,14 @@ import { ConfigService } from "app/config/service/config.service";
     ]
 })
 export class GroupDeleteAssignmentComponent implements OnInit, OnDestroy {
+  private assignmentService = inject(AssignmentService);
+  private assignTypeService = inject(AssignTypeService);
+  private formBuilder = inject(UntypedFormBuilder);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private configService = inject(ConfigService);
+  private activatedRoute = inject(ActivatedRoute);
+
   assignments: AssignmentInterface[] = this.assignmentService.getAssignments();
 
   currentAssignTypesIdsByRole = this.assignTypeService.getAssignTypesIdsByRole();
@@ -61,16 +69,6 @@ export class GroupDeleteAssignmentComponent implements OnInit, OnDestroy {
     );
 
   subscription = new Subscription();
-
-  constructor(
-    private assignmentService: AssignmentService,
-    private assignTypeService: AssignTypeService,
-    private formBuilder: UntypedFormBuilder,
-    private router: Router,
-    private onlineService: OnlineService,
-    private configService: ConfigService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
   ngOnInit(): void {
     //skip the first one as role$ is a hot observable
     this.subscription.add(

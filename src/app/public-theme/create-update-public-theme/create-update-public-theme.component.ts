@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatButtonModule } from "@angular/material/button";
@@ -32,6 +32,12 @@ import { OnlineService } from "app/online/service/online.service";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUpdatePublicThemeComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private publicThemeService = inject(PublicThemeService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private onlineService = inject(OnlineService);
+
   theme = this.publicThemeService.getPublicTheme(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -43,14 +49,6 @@ export class CreateUpdatePublicThemeComponent {
     name: [this.theme?.name, Validators.required],
     order: [this.theme?.order, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private publicThemeService: PublicThemeService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private onlineService: OnlineService,
-  ) {}
 
   onSubmit(): void {
     const publicTheme = this.form.value;

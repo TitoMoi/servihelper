@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ReactiveFormsModule, UntypedFormBuilder, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -30,6 +30,13 @@ import { OnlineService } from "app/online/service/online.service";
     styleUrls: ["./delete-public-theme.component.scss"]
 })
 export class DeletePublicThemeComponent {
+  private formBuilder = inject(UntypedFormBuilder);
+  private publicThemeService = inject(PublicThemeService);
+  private assignmentService = inject(AssignmentService);
+  private router = inject(Router);
+  private onlineService = inject(OnlineService);
+  private activatedRoute = inject(ActivatedRoute);
+
   publicTheme = this.publicThemeService.getPublicTheme(this.activatedRoute.snapshot.params.id);
 
   netStatusOffline$ = this.onlineService.netStatusOffline$;
@@ -38,15 +45,6 @@ export class DeletePublicThemeComponent {
     id: this.publicTheme.id,
     name: [{ value: this.publicTheme.name, disabled: true }, Validators.required],
   });
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private publicThemeService: PublicThemeService,
-    private assignmentService: AssignmentService,
-    private router: Router,
-    private onlineService: OnlineService,
-    private activatedRoute: ActivatedRoute,
-  ) {}
 
   onSubmit(publicTheme: PublicThemeInterface): void {
     //delete room

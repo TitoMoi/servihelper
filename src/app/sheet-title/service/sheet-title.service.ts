@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { SheetTitleInterface } from "../model/sheet-title.model";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
@@ -9,12 +9,12 @@ import { ConfigService } from "app/config/service/config.service";
   providedIn: "root",
 })
 export class SheetTitleService {
+  private configService = inject(ConfigService);
+
   //flag to indicate that sheet title file has changed
   hasChanged = true;
   //The array of sheet titles in memory
   #titles: SheetTitleInterface[] = [];
-
-  constructor(private configService: ConfigService) {}
 
   /**
    *

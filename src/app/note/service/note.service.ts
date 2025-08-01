@@ -2,21 +2,21 @@ import { NoteInterface } from "app/note/model/note.model";
 import { readJSONSync, writeJson } from "fs-extra";
 import { nanoid } from "nanoid/non-secure";
 
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { ConfigService } from "app/config/service/config.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class NoteService {
+  private configService = inject(ConfigService);
+
   //flag to indicate that notes file has changed
   hasChanged = true;
   //The array of notes in memory
   #notes: NoteInterface[] = [];
   //The map of notes for look up of by id
   #notesMap: Map<string, NoteInterface> = new Map();
-
-  constructor(private configService: ConfigService) {}
 
   /**
    *
