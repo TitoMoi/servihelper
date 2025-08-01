@@ -72,11 +72,11 @@
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "~18.0.0",
-    "@angular-eslint/builder": "18.1.0",
-    "@angular-eslint/eslint-plugin": "18.1.0",
-    "@angular-eslint/eslint-plugin-template": "18.1.0",
-    "@angular-eslint/schematics": "18.1.0",
-    "@angular-eslint/template-parser": "18.1.0",
+    "@angular-eslint/builder": "20.1.1",
+    "@angular-eslint/eslint-plugin": "20.1.1",
+    "@angular-eslint/eslint-plugin-template": "20.1.1",
+    "@angular-eslint/schematics": "20.1.1",
+    "@angular-eslint/template-parser": "20.1.1",
     "@angular/build": "^18.1.2",
     "@angular/cli": "~18.1.2",
     "@angular/compiler-cli": "~18.1.2",
@@ -117,4 +117,3 @@
     "node": ">=14.0.0"
   }
 }
-
