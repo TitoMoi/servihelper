@@ -1,5 +1,4 @@
 /* eslint-disable no-case-declarations */
-/* eslint-disable complexity */
 import AdmZip from 'adm-zip';
 import { AssignmentService } from 'app/assignment/service/assignment.service';
 import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
@@ -9,27 +8,28 @@ import { ParticipantService } from 'app/participant/service/participant.service'
 import { RoomService } from 'app/room/service/room.service';
 import { lstatSync, writeFileSync, writeJsonSync } from 'fs-extra';
 
-import { Component, OnInit, inject } from '@angular/core';
-import { TranslocoService, TranslocoModule } from '@ngneat/transloco';
-import { DateAdapter, NativeDateAdapter } from '@angular/material/core';
-import { NgClass, AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import path from 'path';
+import { DateAdapter, NativeDateAdapter } from '@angular/material/core';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
+import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
+import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
 import { PolygonService } from 'app/map/territory/service/polygon.service';
 import { TerritoryService } from 'app/map/territory/service/territory.service';
-import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
-import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
+import { NoteInterface } from 'app/note/model/note.model';
+import { OnlineService } from 'app/online/service/online.service';
 import { PublicThemeService } from 'app/public-theme/service/public-theme.service';
 import { SheetTitleService } from 'app/sheet-title/service/sheet-title.service';
-import { OnlineService } from 'app/online/service/online.service';
-import { NoteInterface } from 'app/note/model/note.model';
-import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
+import path from 'path';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgClass, AsyncPipe]
+  imports: [TranslocoModule, TranslocoLocaleModule, MatButtonModule, NgClass, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
   private configService = inject(ConfigService);
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
     this.noteHome = this.noteService.getNotes().find(n => n.showInHome);
   }
 
-  downloadFiles() {
+  downloadFiles(): void {
     const zip = new AdmZip();
     zip.addLocalFolder(this.configService.sourceFilesPath);
 
@@ -82,13 +82,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getZipContentFromFileEvent(event: Event) {
+  getZipContentFromFileEvent(event: Event): File {
     const target = event.target as HTMLInputElement;
     return target.files[0];
   }
 
   /** Uploads servihelper files, only for OFFLINE */
-  uploadZipFiles(event: Event) {
+  uploadZipFiles(event: Event): void {
     //Add the current assignTypes that are not on the final list
     const nonExistingAssignmentTypes: AssignTypeInterface[] = [];
 

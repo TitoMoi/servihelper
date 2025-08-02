@@ -1,24 +1,24 @@
 /* eslint-disable complexity */
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { jsPDF, jsPDFOptions } from 'jspdf';
 
-import meiryo from '../../resources/base64fonts/meiryo';
-import malgun from '../../resources/base64fonts/malgun';
-import simsun from '../../resources/base64fonts/simsun';
-import notosans from '../../resources/base64fonts/notosans';
-import notosansbold from '../../resources/base64fonts/notosansbold';
-import path from 'path';
-import { ConfigService } from 'app/config/service/config.service';
-import { readFileSync } from 'fs';
-import { ParticipantService } from 'app/participant/service/participant.service';
 import { TranslocoLocaleService } from '@ngneat/transloco-locale';
-import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
 import {
   AssignmentGroupInterface,
   AssignmentInterface
 } from 'app/assignment/model/assignment.model';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
 import { RoomService } from 'app/room/service/room.service';
+import { readFileSync } from 'fs';
+import path from 'path';
+import malgun from '../../resources/base64fonts/malgun';
+import meiryo from '../../resources/base64fonts/meiryo';
+import notosans from '../../resources/base64fonts/notosans';
+import notosansbold from '../../resources/base64fonts/notosansbold';
+import simsun from '../../resources/base64fonts/simsun';
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +54,9 @@ export class PdfService {
   registerOnLangChange() {
     this.translocoService.langChanges$.subscribe(lang => {
       this.font = this.langToFont[lang];
-      if (!this.font) this.font = 'notosans';
+      if (!this.font) {
+        this.font = 'notosans';
+      }
     });
   }
 
@@ -263,11 +265,7 @@ export class PdfService {
    * Render an inifite list with or without the colored bands
    * @param assignmentGroups the assignment groups
    */
-  toPdf(
-    assignmentGroups: AssignmentGroupInterface[],
-    colorBands: boolean,
-    isForPrint: boolean = false
-  ) {
+  toPdf(assignmentGroups: AssignmentGroupInterface[], colorBands: boolean, isForPrint = false) {
     const height = this.getPdfHeight(assignmentGroups);
 
     const doc = this.getJsPdf({
@@ -453,8 +451,9 @@ export class PdfService {
       doc.text(s89AssistantKey, x, y);
       doc.setFont(this.font, 'normal');
       doc.setFontSize(8.2);
-      if (assignment.assistant)
+      if (assignment.assistant) {
         doc.text(this.participantService.getParticipant(assignment.assistant).name, xPosForText, y);
+      }
 
       y += 7;
 
@@ -524,19 +523,25 @@ export class PdfService {
       const roomType = this.roomService.getRoom(assignment.room).type;
 
       doc.rect(x, y - 2.5, 3, 3);
-      if (roomType === 'mainHall') this.addHeavyCheckImg(doc, x, y - 2.5);
+      if (roomType === 'mainHall') {
+        this.addHeavyCheckImg(doc, x, y - 2.5);
+      }
       doc.text(this.translocoService.translate('S89_MAINHALL'), x + 5, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
-      if (roomType === 'auxiliaryRoom1') this.addHeavyCheckImg(doc, x, y - 2.5);
+      if (roomType === 'auxiliaryRoom1') {
+        this.addHeavyCheckImg(doc, x, y - 2.5);
+      }
       doc.text(this.translocoService.translate('S89_AUXILIARYROOM1'), x + 5, y);
 
       y += 5;
 
       doc.rect(x, y - 2.5, 3, 3);
-      if (roomType === 'auxiliaryRoom2') this.addHeavyCheckImg(doc, x, y - 2.5);
+      if (roomType === 'auxiliaryRoom2') {
+        this.addHeavyCheckImg(doc, x, y - 2.5);
+      }
       doc.text(this.translocoService.translate('S89_AUXILIARYROOM2'), x + 5, y);
 
       y += 7;
@@ -585,7 +590,9 @@ export class PdfService {
 
       counter -= 1;
     });
-    if (this.backupLang) this.translocoService.setActiveLang(this.backupLang);
+    if (this.backupLang) {
+      this.translocoService.setActiveLang(this.backupLang);
+    }
     return doc.output('blob');
   }
 }

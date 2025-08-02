@@ -1,4 +1,4 @@
-<form *transloco="let t" [formGroup]="form" novalidate (ngSubmit)="submitAndCreate()">
+<form *transloco="let t" novalidate [formGroup]="form" (ngSubmit)="submitAndCreate()">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{
@@ -11,10 +11,10 @@
           <mat-form-field>
             <mat-label>{{ t('PLACEHOLDER_NAME') }}</mat-label>
             <input
+              formControlName="name"
               matInput
-              [appautofocus]="isUpdate ? false : true"
               spellcheck="false"
-              formControlName="name" />
+              [appautofocus]="isUpdate ? false : true" />
           </mat-form-field>
         </div>
         <div class="col-lg-4 col-6">
@@ -27,19 +27,28 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <div class="col-4">Current publisher registry: {{ currentPublisherRegistry$ | async }}</div>
+        <div class="col-4">
+          <span>{{ t('PLACEHOLDER_UPLOAD_PUBLISHER_REGISTRY') }}</span>
+          <input
+            id="zip-upload"
+            type="file"
+            [disabled]=""
+            (change)="uploadPublisherRegistry($event)" />
+        </div>
         <div class="row">
           <div class="col-auto">
-            <mat-checkbox labelPosition="before" color="primary" formControlName="available">{{
+            <mat-checkbox color="primary" formControlName="available" labelPosition="before">{{
               t('PARTICIPANT_CREATE_AVAILABLE')
             }}</mat-checkbox>
           </div>
           <div class="col-auto">
-            <mat-checkbox labelPosition="before" color="primary" formControlName="isWoman">{{
+            <mat-checkbox color="primary" formControlName="isWoman" labelPosition="before">{{
               t('PARTICIPANT_CREATE_ISWOMAN')
             }}</mat-checkbox>
           </div>
           <div class="col-auto">
-            <mat-checkbox labelPosition="before" color="primary" formControlName="isExternal">{{
+            <mat-checkbox color="primary" formControlName="isExternal" labelPosition="before">{{
               t('PARTICIPANT_CREATE_ISEXTERNAL')
             }}</mat-checkbox>
           </div>
@@ -53,7 +62,7 @@
             }
             <div class="row">
               <ng-container formArrayName="rooms">
-                @for (r of getRoomsArray; track r; let i = $index) {
+                @for (r of getRoomsArray; track r.roomId; let i = $index) {
                   @if (r; as participantRoom) {
                     <div class="col-auto" [formGroupName]="i">
                       <mat-checkbox color="primary" formControlName="available">{{
@@ -73,49 +82,49 @@
               aria-label="PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE"
               (click)="picker.open()">
               @for (date of getNotAvailableDates; track date) {
-                <mat-chip-row selectable="false" removable="true" (removed)="remove(date)">
+                <mat-chip-row removable="true" selectable="false" (removed)="remove(date)">
                   {{ date | translocoDate: { dateStyle: 'short' } }}
-                  <mat-icon matChipRemove svgIcon="garbage"></mat-icon>
+                  <mat-icon matChipRemove svgIcon="garbage" />
                 </mat-chip-row>
               }
               @if (!getNotAvailableDates.length) {
                 <mat-label>{{ t('PARTICIPANT_CHOOSE_DATE_NOT_AVAILABLE') }}</mat-label>
               }
               <input
-                [value]="resetModel"
+                hidden
                 matInput
-                [matDatepicker]="picker"
-                (dateChange)="dateChanged($event)"
                 [matChipInputFor]="chipList"
-                hidden />
+                [matDatepicker]="picker"
+                [value]="resetModel"
+                (dateChange)="dateChanged($event)" />
             </mat-chip-grid>
-            <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker [startAt]="init" [dateClass]="dateClass"></mat-datepicker>
+            <mat-datepicker-toggle matPrefix [for]="picker" />
+            <mat-datepicker #picker [dateClass]="dateClass" [startAt]="init" />
           </mat-form-field>
         </div>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button type="button" class="me-3" [routerLink]="isUpdate ? '../..' : '..'">
+      <button class="me-3" mat-raised-button type="button" [routerLink]="isUpdate ? '../..' : '..'">
         {{ t('BUTTON_CANCEL') }}
       </button>
       <button
-        mat-raised-button
         class="me-3"
         color="primary"
+        mat-raised-button
         type="button"
-        (click)="onSubmit()"
-        [disabled]="form.invalid">
+        [disabled]="form.invalid"
+        (click)="onSubmit()">
         {{ isUpdate ? t('BUTTON_UPDATE') : t('BUTTON_SAVE') }}
         @if (netStatusOffline$ | async) {
-          <mat-icon svgIcon="nowifi"></mat-icon>
+          <mat-icon svgIcon="nowifi" />
         }
       </button>
       @if (!isUpdate) {
-        <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">
+        <button color="accent" mat-raised-button type="submit" [disabled]="form.invalid">
           {{ t('BUTTON_SAVE_CREATE_ANOTHER') }}
           @if (netStatusOffline$ | async) {
-            <mat-icon svgIcon="nowifi"></mat-icon>
+            <mat-icon svgIcon="nowifi" />
           }
         </button>
       }

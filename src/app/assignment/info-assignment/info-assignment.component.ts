@@ -1,12 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { ParticipantDynamicInterface } from 'app/participant/model/participant.model';
 import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
 
 import { MatIconModule } from '@angular/material/icon';
 import { TranslocoModule } from '@ngneat/transloco';
-import { RoomPipe } from 'app/room/pipe/room.pipe';
 import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
+import { RoomPipe } from 'app/room/pipe/room.pipe';
 
 @Component({
   selector: 'app-info-assignment',
@@ -19,7 +18,8 @@ import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
     TranslocoLocaleModule,
     RoomPipe,
     RoomNamePipe
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoAssignmentComponent {
   data = inject(MAT_DIALOG_DATA);

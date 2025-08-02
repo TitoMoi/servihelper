@@ -9,10 +9,10 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  inject,
   OnDestroy,
   OnInit,
-  ViewChild,
-  inject
+  ViewChild
 } from '@angular/core';
 import {
   FormArray,
@@ -35,6 +35,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@ngneat/transloco';
 import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
@@ -81,6 +82,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private onlineService = inject(OnlineService);
+  private snackbar = inject(MatSnackBar);
   private cdr = inject(ChangeDetectorRef);
 
   //Angular material datepicker hacked
@@ -116,6 +118,10 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     available: [this.p ? this.p.available : true],
     notAvailableDates: [this.p ? this.p.notAvailableDates : []]
   });
+
+  currentPublisherRegistry$ = this.participantService.getParticipantPublisherRegistry(
+    this.form.controls.id.value
+  );
 
   get getRoomsArray(): ParticipantRoomInterface[] {
     //rooms is the FormArray, value is the array
@@ -161,7 +167,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     }
   }
 
-  setFormAssignTypes() {
+  setFormAssignTypes(): void {
     //Populate control with assign types
     for (const at of this.p.assignTypes) {
       const assignType = this.formBuilder.group({
@@ -176,7 +182,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     }
   }
 
-  addAssignTypes() {
+  addAssignTypes(): void {
     //reset
     this.form.controls.assignTypes = this.formBuilder.array<ParticipantAssignTypeInterface>([]);
     //Populate control with assignTypes
@@ -185,7 +191,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     }
   }
 
-  addAssignType(a: AssignTypeInterface) {
+  addAssignType(a: AssignTypeInterface): void {
     const at = {
       assignTypeId: a.id,
       canPrincipal: true,
@@ -199,7 +205,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     fa.push(assignTypeFormGroup);
   }
 
-  addRooms() {
+  addRooms(): void {
     //reset
     this.form.controls.rooms = this.formBuilder.array<ParticipantRoomInterface>([]);
     //Populate control with rooms
@@ -246,11 +252,41 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     this.addRooms();
   }
 
-  createParticipant() {
+  createParticipant(): void {
     this.participantService.createParticipant(this.form.getRawValue());
   }
 
+  uploadPublisherRegistry(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      //Read file and upload it
+      //We assume the file is a pdf file
+      //If the file is not a pdf, it will throw an error
+      //and the user will be notified
+      //We save the file to source/assets/S21 folder
+      //and don't overwrite the pdf filename
+      const file = input.files[0];
+      this.participantService
+        .uploadPublisherRegistry(file, this.form.controls.id.value)
+        .then(() => {
+          this.snackbar.open('Publisher registry uploaded successfully', 'Close', {
+            duration: 3000
+          });
+        });
+    } else if (input.files && input.files.length === 0) {
+      //No file selected
+      this.snackbar.open('No file selected', 'Close', {
+        duration: 3000
+      });
+    } else {
+      this.snackbar.open('No file selected', 'Close', {
+        duration: 3000
+      });
+    }
+  }
+
   /** code for the datepicker hack*/
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   public dateClass = (date: Date) => {
     if (this.findDate(date) !== -1) {
       return ['selected'];
@@ -259,6 +295,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   };
 
   /** code for the datepicker hack*/
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   public dateChanged(event: MatDatepickerInputEvent<Date>): void {
     if (event.value && this.timeoutExecuted) {
       this.timeoutExecuted = false;
@@ -273,11 +310,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
       if (!this.closeOnSelected) {
         const closeFn = this.datePickerRef.close;
         this.datePickerRef.close = () => {};
-        // eslint-disable-next-line no-underscore-dangle
-        this.datePickerRef[
-          // eslint-disable-next-line @typescript-eslint/dot-notation
-          '_componentRef'
-        ].instance._calendar.monthView._createWeekCells();
+        this.datePickerRef['_componentRef'].instance._calendar.monthView._createWeekCells();
 
         this.timeoutRef = setTimeout(() => {
           this.datePickerRef.close = closeFn;
@@ -289,6 +322,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   }
 
   /** code for the datepicker hack*/
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   public remove(date: Date): void {
     const index = this.findDate(date);
     this.getNotAvailableDates.splice(index, 1);

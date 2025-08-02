@@ -527,5 +527,7 @@
   "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Última fecha completado",
   "PLACEHOLDER_S13_ASSIGNED_TO": "Asignado a",
   "PLACEHOLDER_S13_ASSIGNED_DATE": "Fecha que se asignó",
-  "PLACEHOLDER_S13_COMPLETED_DATE": "Fecha que se devolvió"
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Fecha que se devolvió",
+
+  "PLACEHOLDER_UPLOAD_PUBLISHER_REGISTRY": "Subir registro de publicador"
 }

@@ -502,5 +502,7 @@
   "PLACEHOLDER_S13_LAST_COMPLETED_DATE": "Last completed date",
   "PLACEHOLDER_S13_ASSIGNED_TO": "Assigned to",
   "PLACEHOLDER_S13_ASSIGNED_DATE": "Assigned date",
-  "PLACEHOLDER_S13_COMPLETED_DATE": "Returned date"
+  "PLACEHOLDER_S13_COMPLETED_DATE": "Returned date",
+
+  "PLACEHOLDER_UPLOAD_PUBLISHER_REGISTRY": "Upload publisher registry"
 }

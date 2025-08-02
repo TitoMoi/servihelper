@@ -3,10 +3,10 @@ import {
   ParticipantInterface,
   ParticipantModel
 } from 'app/participant/model/participant.model';
-import { writeJson, readJSONSync } from 'fs-extra';
+import { ensureDirSync, readdir, readJSONSync, writeFile, writeJson } from 'fs-extra';
 import { nanoid } from 'nanoid/non-secure';
 
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ConfigService } from 'app/config/service/config.service';
 import { LockService } from 'app/lock/service/lock.service';
 
@@ -24,7 +24,7 @@ export class ParticipantService {
   //The array of participants in memory
   #participants: ParticipantInterface[] = undefined;
   //The map of participants for look up by id
-  #participantsMap: Map<string, ParticipantInterface> = new Map();
+  #participantsMap = new Map<string, ParticipantInterface>();
 
   /**
    * @param deepClone if should return the cloned array or the reference
@@ -235,7 +235,7 @@ export class ParticipantService {
    * @param id the room id to delete for all the participants
    * @returns true if all participants are updated and saved false otherwise
    */
-  deleteRoom(id: string) {
+  deleteRoom(id: string): void {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.#participants.length; i++) {
       this.#participants[i].rooms = this.#participants[i].rooms.filter(at => at.roomId !== id);
@@ -243,5 +243,29 @@ export class ParticipantService {
       this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);
     }
     this.saveParticipantsToFile();
+  }
+
+  async uploadPublisherRegistry(file: File, participantId: string) {
+    //Given a non json pdf file, save it to source/assets/S21 folder and don't overwrite the pdf filename
+    const filePath = `${this.configService.sourceFilesPath}/S21/${participantId}`;
+    ensureDirSync(filePath);
+
+    const arrayBuffer = new Uint8Array(await file.arrayBuffer());
+    return writeFile(filePath + '/' + file.name, arrayBuffer);
+  }
+
+  async getParticipantPublisherRegistry(participantId: string) {
+    if (!participantId) {
+      return null;
+    }
+    const filePath = `${this.configService.sourceFilesPath}/S21/${participantId}`;
+    ensureDirSync(filePath);
+    //Read file name from the filePath
+    const files = await readdir(filePath);
+    if (files.length === 0) {
+      return null;
+    }
+    //Return the first file in the folder
+    return files[0];
   }
 }
