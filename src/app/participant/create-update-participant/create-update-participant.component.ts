@@ -41,6 +41,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
 import { OnlineService } from 'app/online/service/online.service';
 import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
+import { S21Service } from 'app/services/s21.service';
 import { AutoFocusDirective } from '../../directives/autofocus/autofocus.directive';
 import { RoomPipe } from '../../room/pipe/room.pipe';
 import {
@@ -83,6 +84,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   private activatedRoute = inject(ActivatedRoute);
   private onlineService = inject(OnlineService);
   private snackbar = inject(MatSnackBar);
+  private s21Service = inject(S21Service);
   private cdr = inject(ChangeDetectorRef);
 
   //Angular material datepicker hacked
@@ -119,7 +121,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     notAvailableDates: [this.p ? this.p.notAvailableDates : []]
   });
 
-  currentPublisherRegistry$ = this.participantService.getParticipantPublisherRegistry(
+  currentPublisherRegistryName$ = this.s21Service.getParticipantPublisherRegistryName(
     this.form.controls.id.value
   );
 
@@ -266,13 +268,11 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
       //We save the file to source/assets/S21 folder
       //and don't overwrite the pdf filename
       const file = input.files[0];
-      this.participantService
-        .uploadPublisherRegistry(file, this.form.controls.id.value)
-        .then(() => {
-          this.snackbar.open('Publisher registry uploaded successfully', 'Close', {
-            duration: 3000
-          });
+      this.s21Service.uploadPublisherRegistry(file, this.form.controls.id.value).then(() => {
+        this.snackbar.open('Publisher registry uploaded successfully', 'Close', {
+          duration: 3000
         });
+      });
     } else if (input.files && input.files.length === 0) {
       //No file selected
       this.snackbar.open('No file selected', 'Close', {

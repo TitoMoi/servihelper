@@ -3,18 +3,20 @@ import {
   ParticipantInterface,
   ParticipantModel
 } from 'app/participant/model/participant.model';
-import { ensureDirSync, readdir, readJSONSync, writeFile, writeJson } from 'fs-extra';
+import { readJSONSync, writeJson } from 'fs-extra';
 import { nanoid } from 'nanoid/non-secure';
 
 import { inject, Injectable } from '@angular/core';
 import { ConfigService } from 'app/config/service/config.service';
 import { LockService } from 'app/lock/service/lock.service';
+import { SortService } from 'app/services/sort.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticipantService {
   private configService = inject(ConfigService);
+  private sortService = inject(SortService);
   private lockService = inject(LockService);
 
   readonly filename = 'participant.json';
@@ -76,15 +78,7 @@ export class ParticipantService {
     this.#participantsMap.set(participant.id, participant);
 
     //ORDER THE PARTICIPANTS BY A to Z
-    this.#participants.sort(function (a, b) {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    });
+    this.#participants.sort(this.sortService.sortParticipantsByName);
 
     //save participants with the new participant
     this.saveParticipantsToFile();
@@ -119,15 +113,7 @@ export class ParticipantService {
         //save participants with the updated participant
 
         //ORDER THE PARTICIPANTS BY A to Z
-        this.#participants.sort(function (a, b) {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
-        });
+        this.#participants.sort(this.sortService.sortParticipantsByName);
         break;
       }
     }
@@ -243,29 +229,5 @@ export class ParticipantService {
       this.#participantsMap.set(this.#participants[i].id, this.#participants[i]);
     }
     this.saveParticipantsToFile();
-  }
-
-  async uploadPublisherRegistry(file: File, participantId: string) {
-    //Given a non json pdf file, save it to source/assets/S21 folder and don't overwrite the pdf filename
-    const filePath = `${this.configService.sourceFilesPath}/S21/${participantId}`;
-    ensureDirSync(filePath);
-
-    const arrayBuffer = new Uint8Array(await file.arrayBuffer());
-    return writeFile(filePath + '/' + file.name, arrayBuffer);
-  }
-
-  async getParticipantPublisherRegistry(participantId: string) {
-    if (!participantId) {
-      return null;
-    }
-    const filePath = `${this.configService.sourceFilesPath}/S21/${participantId}`;
-    ensureDirSync(filePath);
-    //Read file name from the filePath
-    const files = await readdir(filePath);
-    if (files.length === 0) {
-      return null;
-    }
-    //Return the first file in the folder
-    return files[0];
   }
 }

@@ -2,8 +2,8 @@
   <mat-sidenav
     #drawer
     fixedInViewport
-    [disableClose]="hideSidenav === false"
     [attr.role]="hideSidenav ? 'dialog' : 'navigation'"
+    [disableClose]="hideSidenav === false"
     [mode]="hideSidenav ? 'over' : 'side'"
     [opened]="hideSidenav === false">
     <mat-toolbar>
@@ -18,78 +18,78 @@
     </mat-toolbar>
     <!-- p-0 -> mat-nav-list has padding top and a gap is visible, this padding fix removes it -->
     <mat-nav-list class="p-0">
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="/">
+      <mat-list-item routerLink="/" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_HOME') }}</span>
-          <mat-icon svgIcon="download"></mat-icon>
+          <mat-icon svgIcon="download" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="assignType">
+      <mat-list-item routerLink="assignType" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span class="white-space-pre-wrap">{{ t('NAV_ASSIGN_TYPE') }}</span>
-          <mat-icon svgIcon="abc"></mat-icon>
+          <mat-icon svgIcon="abc" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="room">
+      <mat-list-item routerLink="room" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_ROOM') }}</span>
-          <mat-icon svgIcon="room"></mat-icon>
+          <mat-icon svgIcon="room" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="note">
+      <mat-list-item routerLink="note" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_NOTE') }}</span>
-          <mat-icon svgIcon="notes"></mat-icon>
+          <mat-icon svgIcon="notes" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="participant">
+      <mat-list-item routerLink="participant" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_PARTICIPANT') }}</span>
-          <mat-icon svgIcon="participants"></mat-icon>
+          <mat-icon svgIcon="participants" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="assignment">
+      <mat-list-item routerLink="assignment" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_ASSIGNMENT') }}</span>
-          <mat-icon svgIcon="assignment"></mat-icon>
+          <mat-icon svgIcon="assignment" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="selectionSheets">
+      <mat-list-item routerLink="selectionSheets" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_REPORTS') }}</span>
-          <mat-icon svgIcon="lists"></mat-icon>
+          <mat-icon svgIcon="lists" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="statistics">
+      <mat-list-item routerLink="statistics" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_STATISTICS') }}</span>
-          <mat-icon svgIcon="statistics"></mat-icon>
+          <mat-icon svgIcon="statistics" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="map">
+      <mat-list-item routerLink="map" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_MAPS') }}</span>
-          <mat-icon svgIcon="map"></mat-icon>
+          <mat-icon svgIcon="map" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="config">
+      <mat-list-item routerLink="config" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_CONFIG') }}</span>
-          <mat-icon svgIcon="config"></mat-icon>
+          <mat-icon svgIcon="config" />
         </div>
       </mat-list-item>
-      <mat-list-item (click)="closeDrawer(drawer)" routerLink="info">
+      <mat-list-item routerLink="info" (click)="closeDrawer(drawer)">
         <div class="d-flex justify-content-between align-items-center">
           <span>{{ t('NAV_INFO') }}</span>
-          <mat-icon svgIcon="info" aria-label="Side nav toggle icon"></mat-icon>
+          <mat-icon aria-label="Side nav toggle icon" svgIcon="info" />
         </div>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar style="background-color: #8866bb" class="justify-content-end">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon svgIcon="menu" aria-label="Side nav toggle icon"></mat-icon>
+    <mat-toolbar class="justify-content-end" style="background-color: #8866bb">
+      <button aria-label="Toggle sidenav" mat-icon-button type="button" (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon" svgIcon="menu" />
       </button>
       <div class="me-auto">
         <span class="servihelper-logo">Servihelper</span>
@@ -97,7 +97,7 @@
       @if ((online$ | async).isOnline; as isOnlineAlias) {
         @if (isOnlineAlias && (netStatusOffline$ | async)) {
           <div class="me-3">
-            <mat-icon id="noWifiIcon" svgIcon="nowifi" color="warning"></mat-icon>
+            <mat-icon color="warning" id="noWifiIcon" svgIcon="nowifi" />
           </div>
         }
         @if (isOnlineAlias) {
@@ -131,11 +131,11 @@
         </mat-form-field>
       </div>
       <div class="d-inline-block me-3">
-        <mat-icon id="avatarIconId" svgIcon="avatar" aria-label="icon" routerLink="role"></mat-icon>
+        <mat-icon aria-label="icon" id="avatarIconId" routerLink="role" svgIcon="avatar" />
       </div>
     </mat-toolbar>
     <div class="m-3">
-      <ng-content></ng-content>
+      <ng-content />
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

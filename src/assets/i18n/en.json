@@ -504,5 +504,7 @@
   "PLACEHOLDER_S13_ASSIGNED_DATE": "Assigned date",
   "PLACEHOLDER_S13_COMPLETED_DATE": "Returned date",
 
-  "PLACEHOLDER_UPLOAD_PUBLISHER_REGISTRY": "Upload publisher registry"
+  "PLACEHOLDER_UPLOAD_PUBLISHER_REGISTRY": "Upload publisher registry",
+  "PUBLISHER_REGISTRY_NOT_FOUND": "Publisher registry not found",
+  "PARTICIPANT_PUBLISHER_REGISTRY_TITLE": "Modify publisher registry"
 }

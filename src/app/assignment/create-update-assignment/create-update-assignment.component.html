@@ -1,5 +1,6 @@
+<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
 <ng-container *transloco="let t">
-  <form [formGroup]="form" novalidate (ngSubmit)="submitAndCreate($event)">
+  <form novalidate [formGroup]="form" (ngSubmit)="submitAndCreate($event)">
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{
@@ -15,10 +16,10 @@
           <div class="row">
             <div class="col">
               <mat-checkbox
-                labelPosition="before"
                 color="primary"
-                (change)="toggleIsMultipleDates($event)"
+                labelPosition="before"
                 [disableRipple]="true"
+                (change)="toggleIsMultipleDates($event)"
                 >{{ t('ASSIGN_CHECK_IS_MULTIPLE') }}</mat-checkbox
               >
             </div>
@@ -31,33 +32,30 @@
                 <mat-label>{{ t('ASSIGN_SELECTION_DATES_SELECT_TITLE') }}</mat-label>
                 <input
                   matInput
-                  [value]="resetModel"
                   [matDatepicker]="multipleDatePicker"
+                  [value]="resetModel"
                   (dateChange)="dateChanged($event)" />
-                <mat-datepicker-toggle matPrefix [for]="multipleDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker-toggle matPrefix [for]="multipleDatePicker" />
                 <mat-datepicker
                   #multipleDatePicker
-                  [startAt]="this.lastDateService.lastDate$ | async"
-                  [dateClass]="dateClass"></mat-datepicker>
+                  [dateClass]="dateClass"
+                  [startAt]="this.lastDateService.lastDate$ | async" />
               </mat-form-field>
             } @else {
               <mat-form-field>
                 <mat-label>{{ t('ASSIGN_CHOOSE_DATE') }}</mat-label>
                 <input
+                  formControlName="date"
+                  matInput
                   required
                   [appautofocus]="isUpdate ? false : true"
-                  matInput
-                  [matDatepicker]="picker"
-                  formControlName="date" />
-                <mat-datepicker-toggle
-                  matPrefix
-                  [for]="picker"
-                  class="mr-3"></mat-datepicker-toggle>
+                  [matDatepicker]="picker" />
+                <mat-datepicker-toggle class="mr-3" matPrefix [for]="picker" />
                 <mat-datepicker
-                  id="assignmentDatepickerId"
                   #picker
+                  id="assignmentDatepickerId"
                   [startAt]="this.lastDateService.lastDate$ | async"
-                  (closed)="warningIfAlreadyHasWork()"></mat-datepicker>
+                  (closed)="warningIfAlreadyHasWork()" />
               </mat-form-field>
             }
           </div>
@@ -65,7 +63,7 @@
             <mat-form-field>
               <mat-label>{{ t('ASSIGN_CHOOSE_SHEET_TITLE') }}</mat-label>
               <mat-select formControlName="sheetTitle">
-                <mat-option value=""></mat-option>
+                <mat-option value="" />
                 @for (title of sheetTitles; track title.id) {
                   <mat-option [value]="title.id">
                     {{ title.name }}
@@ -96,8 +94,8 @@
                 (closed)="warningIfAlreadyHasWork()">
                 @for (assignType of assignTypes; track assignType.id) {
                   <mat-option
-                    [value]="assignType.id"
-                    [style.borderLeft]="getBorderLeftStyle(assignType.color)">
+                    [style.borderLeft]="getBorderLeftStyle(assignType.color)"
+                    [value]="assignType.id">
                     {{ assignType | assignTypeNamePipe }}
                   </mat-option>
                 }
@@ -134,7 +132,7 @@
             <div class="col-12 mb-2">
               <mat-form-field>
                 <mat-label>{{ t('ASSIGN_THEME') }}</mat-label>
-                <input matInput spellcheck="false" formControlName="theme" />
+                <input formControlName="theme" matInput spellcheck="false" />
               </mat-form-field>
             </div>
           }
@@ -142,30 +140,30 @@
             <div class="d-flex align-items-baseline justify-content-between">
               <div>
                 <span class="d-inline-block me-3">
-                  <mat-icon class="me-2" svgIcon="woman" aria-label="icon"></mat-icon>
+                  <mat-icon aria-label="icon" class="me-2" svgIcon="woman" />
                   <mat-checkbox
-                    labelPosition="before"
                     color="primary"
                     formControlName="onlyWoman"
+                    labelPosition="before"
                     [disableRipple]="true"
                     >{{ t('ASSIGN_ONLY_WOMEN') }}</mat-checkbox
                   >
                 </span>
                 <span class="d-inline-block me-3">
-                  <mat-icon class="me-2" svgIcon="man" aria-label="icon"></mat-icon>
+                  <mat-icon aria-label="icon" class="me-2" svgIcon="man" />
                   <mat-checkbox
-                    labelPosition="before"
                     color="primary"
                     formControlName="onlyMan"
+                    labelPosition="before"
                     [disableRipple]="true"
                     >{{ t('ASSIGN_ONLY_MEN') }}</mat-checkbox
                   >
                 </span>
                 <span>
                   <mat-checkbox
-                    labelPosition="before"
                     color="primary"
                     formControlName="onlyExternals"
+                    labelPosition="before"
                     [disableRipple]="true"
                     >{{ t('ASSIGN_ONLY_EXTERNALS') }}</mat-checkbox
                   >
@@ -173,11 +171,11 @@
               </div>
               <div>
                 <span class="d-flex align-items-center justify-content-end">
-                  <mat-icon class="me-2" svgIcon="clock" aria-label="icon"></mat-icon>
+                  <mat-icon aria-label="icon" class="me-2" svgIcon="clock" />
                   <mat-checkbox
-                    labelPosition="before"
-                    formControlName="onlySortByTime"
                     color="primary"
+                    formControlName="onlySortByTime"
+                    labelPosition="before"
                     [disableRipple]="true"
                     >{{ t('ASSIGN_SORT_ONLY_TIME') }}</mat-checkbox
                   >
@@ -204,8 +202,8 @@
                 #principalSelect
                 formControlName="principal"
                 required
-                (selectionChange)="onSelectionChangePrincipal()"
-                [disableRipple]="true">
+                [disableRipple]="true"
+                (selectionChange)="onSelectionChangePrincipal()">
                 <mat-select-trigger *ngIf="principalSelect.value">
                   {{ (principalSelect.value | participantPipe).name }}
                 </mat-select-trigger>
@@ -224,14 +222,14 @@
                         <div class="d-flex align-items-center py-1">
                           @if (participant.hasWork && !isMultipleDates) {
                             <mat-icon
-                              (click)="onIconWarningClick($event, participant)"
+                              aria-label="icon"
                               svgIcon="warning"
-                              aria-label="icon"></mat-icon>
+                              (click)="onIconWarningClick($event, participant)" />
                           } @else if (!participant.hasWork && !isMultipleDates) {
                             <mat-icon
-                              (click)="onPrincipalIconInfoClick($event, participant)"
+                              aria-label="icon"
                               svgIcon="info-blue"
-                              aria-label="icon"></mat-icon>
+                              (click)="onPrincipalIconInfoClick($event, participant)" />
                           } @else {
                             <div></div>
                           }
@@ -247,32 +245,30 @@
                           <span class="me-2">{{ participant.name }}</span>
                           @if (participant.hasCollision && !isMultipleDates) {
                             <mat-icon
+                              aria-label="icon"
                               class="me-2"
                               svgIcon="time"
-                              aria-label="icon"
-                              (click)="onRedClockClick($event, participant)"></mat-icon>
+                              (click)="onRedClockClick($event, participant)" />
                           } @else if (participant.isCloseToOthers && !isMultipleDates) {
                             <mat-icon
-                              svgIcon="warningtime"
                               aria-label="icon"
-                              (click)="onYellowClockSchoolClick($event, participant)"></mat-icon>
+                              svgIcon="warningtime"
+                              (click)="onYellowClockSchoolClick($event, participant)" />
                           } @else if (participant.isCloseToOthersPrayer && !isMultipleDates) {
                             <mat-icon
-                              svgIcon="warningtime"
                               aria-label="icon"
-                              (click)="onYellowClockPrayerClick($event, participant)"></mat-icon>
+                              svgIcon="warningtime"
+                              (click)="onYellowClockPrayerClick($event, participant)" />
                           } @else if (participant.isCloseToOthersTreasuresEtc && !isMultipleDates) {
                             <mat-icon
-                              svgIcon="warningtime"
                               aria-label="icon"
-                              (click)="
-                                onYellowClockTreasuresEtcClick($event, participant)
-                              "></mat-icon>
+                              svgIcon="warningtime"
+                              (click)="onYellowClockTreasuresEtcClick($event, participant)" />
                           } @else if (participant.isStarvingSchool && !isMultipleDates) {
                             <mat-icon
-                              svgIcon="fork"
                               aria-label="icon"
-                              (click)="onStarvingSchoolClick($event)"></mat-icon>
+                              svgIcon="fork"
+                              (click)="onStarvingSchoolClick($event)" />
                           }
                         </div>
                       </div>
@@ -304,8 +300,8 @@
               <mat-select
                 #assistantSelect
                 formControlName="assistant"
-                (selectionChange)="onSelectionChangeAssistant()"
-                [disableRipple]="true">
+                [disableRipple]="true"
+                (selectionChange)="onSelectionChangeAssistant()">
                 <mat-select-trigger *ngIf="assistantSelect.value">
                   {{ (assistantSelect.value | participantPipe).name }}
                 </mat-select-trigger>
@@ -315,14 +311,14 @@
                       <div>
                         @if (participant.hasWork && !isMultipleDates) {
                           <mat-icon
-                            (click)="onIconWarningClick($event, participant)"
+                            aria-label="icon"
                             svgIcon="warning"
-                            aria-label="icon"></mat-icon>
+                            (click)="onIconWarningClick($event, participant)" />
                         } @else if (!participant.hasWork && !isMultipleDates) {
                           <mat-icon
-                            (click)="onAssistantIconInfoClick($event, participant)"
+                            aria-label="icon"
                             svgIcon="info-blue"
-                            aria-label="icon"></mat-icon>
+                            (click)="onAssistantIconInfoClick($event, participant)" />
                         } @else {
                           <div></div>
                         }
@@ -338,9 +334,9 @@
                         <span class="me-2">{{ participant.name }}</span>
                         @if (participant.isCloseToOthers && !isMultipleDates) {
                           <mat-icon
-                            svgIcon="warningtime"
                             aria-label="icon"
-                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')"></mat-icon>
+                            svgIcon="warningtime"
+                            [matTooltip]="t('CONFIG_EXPLAIN_EXHAUST_TOOLTIP')" />
                         }
                       </div>
                     </div>
@@ -353,7 +349,7 @@
             <mat-form-field subscriptSizing="dynamic">
               <mat-label>{{ t('ASSIGN_FOOTER_NOTE') }}</mat-label>
               <mat-select formControlName="footerNote" [disableRipple]="true">
-                <mat-option [value]="undefined"></mat-option>
+                <mat-option [value]="undefined" />
                 @for (note of footerNotes; track note.id) {
                   <mat-option [value]="note.id">
                     {{ note.name }}
@@ -369,34 +365,34 @@
           #cancelBtn
           class="me-3"
           mat-raised-button
-          [disableRipple]="true"
           type="button"
+          [disableRipple]="true"
           [routerLink]="isUpdate ? '../..' : '..'">
           {{ t('BUTTON_CANCEL') }}
         </button>
         <button
           class="me-3"
-          mat-raised-button
           color="primary"
+          mat-raised-button
           type="button"
-          (click)="onSubmit($event)"
           [disabled]="
             form.invalid ||
             (isMultipleDates && !selectedDates.length) ||
             (netStatusOffline$ | async)
-          ">
-          <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
+          "
+          (click)="onSubmit($event)">
+          <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi" />
           {{ isUpdate ? t('BUTTON_UPDATE') : t('BUTTON_SAVE') }}
         </button>
         @if (!isUpdate && !isMultipleDates) {
           <button
             #btnSaveCreateAnother
-            mat-raised-button
             color="accent"
+            mat-raised-button
             type="submit"
             [disableRipple]="true"
             [disabled]="form.invalid || (netStatusOffline$ | async)">
-            <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi"></mat-icon>
+            <mat-icon *ngIf="netStatusOffline$ | async" svgIcon="nowifi" />
             {{ t('BUTTON_SAVE_CREATE_ANOTHER') }}
           </button>
         }

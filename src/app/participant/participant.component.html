@@ -1,41 +1,45 @@
 <span *transloco="let t">
   <div class="d-flex align-items-center">
     <button
-      mat-flat-button
       class="mb-2 me-3"
       color="primary"
+      mat-flat-button
       routerLink="create"
       routerLinkActive="active"
+      type="button"
       [disabled]="netStatusOffline$ | async">
       {{ t('PARTICIPANT_BUTTON_TITLE') }}
-      @if (netStatusOffline$ | async) {
-        <mat-icon svgIcon="nowifi"></mat-icon>
-      }
     </button>
     @if (participants.length) {
       <button
-        mat-raised-button
         class="mb-2 me-3"
         color="accent"
+        mat-raised-button
         routerLink="create-from"
         routerLinkActive="active"
+        type="button"
         [disabled]="netStatusOffline$ | async">
         {{ t('PARTICIPANT_COPY_BUTTON_TITLE') }}
-        @if (netStatusOffline$ | async) {
-          <mat-icon svgIcon="nowifi"></mat-icon>
-        }
       </button>
       <button
         class="mb-2"
-        mat-raised-button
         color="accent"
-        [routerLink]="['/participant', 'assigntypeavailable']"
-        [disabled]="netStatusOffline$ | async">
+        mat-raised-button
+        type="button"
+        [disabled]="netStatusOffline$ | async"
+        [routerLink]="['/participant', 'assigntypeavailable']">
         <span>{{ t('ASSIGNTYPE_AVAILABLE_LIST') }}</span>
-        <mat-icon svgIcon="assigntypeavailable" routerLinkActive="active"></mat-icon>
-        @if (netStatusOffline$ | async) {
-          <mat-icon svgIcon="nowifi"></mat-icon>
-        }
+        <mat-icon routerLinkActive="active" svgIcon="assigntypeavailable" />
+      </button>
+      <button
+        class="mb-2"
+        color="accent"
+        mat-raised-button
+        type="button"
+        [disabled]="netStatusOffline$ | async"
+        [routerLink]="['/participant', 'publisher-registry']">
+        <span>{{ t('PARTICIPANT_PUBLISHER_REGISTRY_TITLE') }}</span>
+        <mat-icon routerLinkActive="active" svgIcon="pdf" />
       </button>
     }
   </div>
@@ -47,8 +51,8 @@
     }
     <mat-checkbox
       class="me-3"
-      labelPosition="before"
       color="primary"
+      labelPosition="before"
       (change)="toggleExternals($event)"
       >{{ t('PARTICIPANT_SHOW_EXTERNAL') }}</mat-checkbox
     >
@@ -71,11 +75,11 @@
         @for (p of participants; track p) {
           <div class="grid-row">
             <div class="grid-item d-flex align-items-center">
-              <mat-icon class="me-1" [svgIcon]="p.isWoman ? 'woman' : 'man'"></mat-icon>
+              <mat-icon class="me-1" [svgIcon]="p.isWoman ? 'woman' : 'man'" />
 
               <span> {{ p.name }}</span>
               @if (!p.available) {
-                <mat-icon class="ms-2 cursor-arrow" svgIcon="unavailable"></mat-icon>
+                <mat-icon class="ms-2 cursor-arrow" svgIcon="unavailable" />
               }
             </div>
             <div class="grid-item d-flex align-items-center">
@@ -83,17 +87,17 @@
             </div>
             <div class="grid-item d-flex align-items-center">
               <mat-icon
-                [routerLink]="['update', p.id]"
+                aria-label="Side nav toggle icon"
                 routerLinkActive="active"
                 svgIcon="edit"
-                aria-label="Side nav toggle icon"></mat-icon>
+                [routerLink]="['update', p.id]" />
             </div>
             <div class="grid-item d-flex align-items-center">
               <mat-icon
-                [routerLink]="['delete', p.id]"
+                aria-label="Side nav toggle icon"
                 routerLinkActive="active"
                 svgIcon="garbage"
-                aria-label="Side nav toggle icon"></mat-icon>
+                [routerLink]="['delete', p.id]" />
             </div>
           </div>
         }

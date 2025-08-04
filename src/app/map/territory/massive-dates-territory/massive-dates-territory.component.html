@@ -1,13 +1,13 @@
 <span *transloco="let t">
   @for (terrGroup of territoryGroups; track terrGroup.id) {
-    <h1 [style.color]="getTerrGroupBorder(terrGroup.color)" class="my-3 text-center">
+    <h1 class="my-3 text-center" [style.color]="getTerrGroupBorder(terrGroup.color)">
       <span class="fw-bold terr-group-text-stroke">{{ terrGroup.name }}</span>
     </h1>
     <hr />
 
     @for (form of formArray; track form; let i = $index) {
       @if (form.controls.groups.value | territoryIncludesTerrGroupPipe: terrGroup) {
-        <ng-container [formGroup]="form" novalidate>
+        <ng-container novalidate [formGroup]="form">
           <div class="row">
             <div class="col-12">
               <div class="ms-3 fw-bold mb-2">{{ form.controls.name.value }}</div>
@@ -35,12 +35,9 @@
                 ) {
                   <mat-form-field>
                     <mat-label>{{ t('ASSIGN_CHOOSE_DATE_ASSIGNED') }}</mat-label>
-                    <input required matInput [matDatepicker]="picker" [formControlName]="j" />
-                    <mat-datepicker-toggle
-                      matPrefix
-                      [for]="picker"
-                      class="mr-3"></mat-datepicker-toggle>
-                    <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
+                    <input matInput required [formControlName]="j" [matDatepicker]="picker" />
+                    <mat-datepicker-toggle class="mr-3" matPrefix [for]="picker" />
+                    <mat-datepicker #picker id="assignmentDatepickerId" />
                   </mat-form-field>
                 }
               </ng-container>
@@ -54,12 +51,9 @@
                 ) {
                   <mat-form-field>
                     <mat-label>{{ t('ASSIGN_CHOOSE_DATE_RETURNED') }}</mat-label>
-                    <input required matInput [matDatepicker]="picker" [formControlName]="j" />
-                    <mat-datepicker-toggle
-                      matPrefix
-                      [for]="picker"
-                      class="mr-3"></mat-datepicker-toggle>
-                    <mat-datepicker id="assignmentDatepickerId" #picker></mat-datepicker>
+                    <input matInput required [formControlName]="j" [matDatepicker]="picker" />
+                    <mat-datepicker-toggle class="mr-3" matPrefix [for]="picker" />
+                    <mat-datepicker #picker id="assignmentDatepickerId" />
                   </mat-form-field>
                 }
               </ng-container>

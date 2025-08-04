@@ -1,0 +1,53 @@
+<div class="row mb-2">
+  <div class="col-auto">
+    <!-- //Select the month for which you want to register publishers -->
+    <mat-form-field>
+      <mat-label>Month</mat-label>
+      <mat-select [formControl]="selectedMonth" (ngModelChange)="onMonthChange($event)">
+        @for (month of months; track $index; let i = $index) {
+          <mat-option [value]="i">{{ month | getMonthNamePipe: lang }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Has participated</th>
+          <th>Bible studies</th>
+          <th>Is aux. pioner</th>
+          <th>Hours</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (group of formGroupArray; track $index) {
+          <tr>
+            <td>{{ group.controls.name.value }}</td>
+            <td><mat-checkbox [formControl]="group.controls.hasParticipated" /></td>
+            <td>
+              <mat-form-field>
+                <input matInput spellcheck="false" [formControl]="group.controls.hasBibleStudies" />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput spellcheck="false" [formControl]="group.controls.hours" />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput spellcheck="false" [formControl]="group.controls.notes" />
+              </mat-form-field>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

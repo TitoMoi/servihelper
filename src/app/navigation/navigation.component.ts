@@ -3,31 +3,31 @@ import { Observable, of } from 'rxjs';
 import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { AsyncPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit,
-  inject
+  inject,
+  OnInit
 } from '@angular/core';
-import { DateAdapter, NativeDateAdapter, MatOptionModule } from '@angular/material/core';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { TranslocoService, TranslocoModule } from '@ngneat/transloco';
-import { shell } from 'electron';
-import { SharedService } from 'app/services/shared.service';
-import { HttpClient } from '@angular/common/http';
-import { GitHubDataInterface } from './model/navigation.model';
-import { RoleInterface } from 'app/roles/model/role.model';
 import { UntypedFormBuilder } from '@angular/forms';
-import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { DateAdapter, MatOptionModule, NativeDateAdapter } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
-import { AsyncPipe } from '@angular/common';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterLink } from '@angular/router';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { OnlineService } from 'app/online/service/online.service';
+import { RoleInterface } from 'app/roles/model/role.model';
+import { SharedService } from 'app/services/shared.service';
+import { shell } from 'electron';
+import { GitHubDataInterface } from './model/navigation.model';
 
 @Component({
   selector: 'app-navigation',
@@ -164,7 +164,9 @@ export class NavigationComponent implements OnInit {
    */
   setLocale(locale) {
     //Save the locale
-    if (locale === 'zhCN') locale = 'zh';
+    if (locale === 'zhCN') {
+      locale = 'zh';
+    }
     this.dateAdapter.setLocale(locale);
   }
 
@@ -179,6 +181,8 @@ export class NavigationComponent implements OnInit {
   }
 
   closeDrawer(drawer: MatSidenav) {
-    if (this.hideSidenav) drawer.close();
+    if (this.hideSidenav) {
+      drawer.close();
+    }
   }
 }

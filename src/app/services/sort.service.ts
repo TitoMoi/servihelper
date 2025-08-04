@@ -5,10 +5,10 @@ import {
 import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
 import { RoomService } from 'app/room/service/room.service';
 
-import { Injectable, inject } from '@angular/core';
-import { ParticipantDynamicInterface } from 'app/participant/model/participant.model';
+import { inject, Injectable } from '@angular/core';
 import { AssignmentService } from 'app/assignment/service/assignment.service';
 import { TerritoryContextInterface } from 'app/map/model/map.model';
+import { ParticipantDynamicInterface } from 'app/participant/model/participant.model';
 
 export type SortOrderType = 'Asc' | 'Desc';
 @Injectable({
@@ -60,7 +60,9 @@ export class SortService {
           const roomBOrder = this.roomService.getRoom(b.room).order;
 
           if (roomAOrder === roomBOrder) {
-            if (assignTypeAOrder === assignTypeBOrder) return 0;
+            if (assignTypeAOrder === assignTypeBOrder) {
+              return 0;
+            }
             return assignTypeAOrder > assignTypeBOrder ? 1 : -1;
           } else {
             return roomAOrder > roomBOrder ? 1 : -1;
@@ -84,7 +86,6 @@ export class SortService {
     return 0;
   }
 
-  // eslint-disable-next-line complexity
   sortByIsManAndByName(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
     if (a.isWoman && !b.isWoman) {
       return 1;
@@ -101,7 +102,6 @@ export class SortService {
     return 0;
   }
 
-  // eslint-disable-next-line complexity
   sortByIsWomanAndByName(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
     if (a.isWoman && !b.isWoman) {
       return -1;
@@ -153,6 +153,16 @@ export class SortService {
   sortParticipantsByGender(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
     // false values first
     return a.isWoman === b.isWoman ? 0 : a.isWoman ? 1 : -1;
+  }
+
+  sortParticipantsByName(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
   }
 
   sortParticipantsByCount(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {

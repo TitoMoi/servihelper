@@ -3,7 +3,6 @@ import { CreateUpdateAssignmentComponent } from 'app/assignment/create-update-as
 import { DeleteAssignmentComponent } from 'app/assignment/delete-assignment/delete-assignment.component';
 import { ImageAssignmentComponent } from 'app/assignment/image-assignment/image-assignment.component';
 import { MoveAssignmentComponent } from 'app/assignment/move-assignment/move-assignment.component';
-import { ReportSelectorComponent } from 'app/report/report-selector/report-selector.component';
 import { AssignTypeComponent } from 'app/assigntype/assigntype.component';
 import { CreateUpdateAssignTypeComponent } from 'app/assigntype/create-update-assigntype/create-update-assigntype.component';
 import { DeleteAssignTypeComponent } from 'app/assigntype/delete-assigntype/delete-assigntype.component';
@@ -16,6 +15,7 @@ import { CreateUpdateParticipantComponent } from 'app/participant/create-update-
 import { DeleteParticipantComponent } from 'app/participant/delete-participant/delete-participant.component';
 import { ParticipantComponent } from 'app/participant/participant.component';
 import { QuestionComponent } from 'app/question/question.component';
+import { ReportSelectorComponent } from 'app/report/report-selector/report-selector.component';
 import { CreateUpdateRoomComponent } from 'app/room/create-update-room/create-update-room.component';
 import { DeleteRoomComponent } from 'app/room/delete-room/delete-room.component';
 import { RoomComponent } from 'app/room/room.component';
@@ -23,27 +23,28 @@ import { SearchComponent } from 'app/search/search.component';
 import { StatisticsComponent } from 'app/statistics/statistics.component';
 
 import { Routes } from '@angular/router';
-import { GroupDeleteAssignmentComponent } from './assignment/group-delete-assignment/group-delete-assignment.component';
-import { CreateFromParticipantComponent } from './participant/create-from-participant/create-from-participant.component';
-import { RolesComponent } from './roles/roles.component';
-import { CreateUpdateRoleComponent } from './roles/create-update-role/create-update-role.component';
-import { DeleteRoleComponent } from './roles/delete-role/delete-role.component';
-import { CreateUpdateSheetTitleComponent } from 'app/sheet-title/create-update-sheet-title/create-update-sheet-title.component';
-import { DeleteSheetTitleComponent } from 'app/sheet-title/delete-sheet-title/delete-sheet-title.component';
+import { DataReadyS13Component } from 'app/map/data-ready-s13/data-ready-s13.component';
 import { MapComponent } from 'app/map/map.component';
-import { CreateUpdateTerritoryComponent } from 'app/map/territory/create-update-territory/create-update-territory.component';
 import { CreateUpdateTerritoryGroupComponent } from 'app/map/territory-group/create-update-territory-group/create-update-territory-group.component';
-import { TerritoryComponent } from 'app/map/territory/territory.component';
-import { TerritoryGroupComponent } from 'app/map/territory-group/territory-group.component';
 import { DeleteTerritoryGroupComponent } from 'app/map/territory-group/delete-territory-group/delete-territory-group.component';
+import { TerritoryGroupComponent } from 'app/map/territory-group/territory-group.component';
+import { CreateUpdateTerritoryComponent } from 'app/map/territory/create-update-territory/create-update-territory.component';
 import { DeleteTerritoryComponent } from 'app/map/territory/delete-territory/delete-territory.component';
-import { ReturnTerritoryComponent } from 'app/map/territory/return-territory/return-territory.component';
 import { HeatmapComponent } from 'app/map/territory/heatmap/heatmap.component';
 import { MassiveDatesTerritoryComponent } from 'app/map/territory/massive-dates-territory/massive-dates-territory.component';
-import { DeletePublicThemeComponent } from 'app/public-theme/delete-public-theme/delete-public-theme.component';
-import { CreateUpdatePublicThemeComponent } from 'app/public-theme/create-update-public-theme/create-update-public-theme.component';
+import { ReturnTerritoryComponent } from 'app/map/territory/return-territory/return-territory.component';
+import { TerritoryComponent } from 'app/map/territory/territory.component';
 import { AvailableParticipantComponent } from 'app/participant/available-participant/available-participant.component';
-import { DataReadyS13Component } from 'app/map/data-ready-s13/data-ready-s13.component';
+import { PublisherRegistryComponent } from 'app/participant/publisher-registry/publisher-registry.component';
+import { CreateUpdatePublicThemeComponent } from 'app/public-theme/create-update-public-theme/create-update-public-theme.component';
+import { DeletePublicThemeComponent } from 'app/public-theme/delete-public-theme/delete-public-theme.component';
+import { CreateUpdateSheetTitleComponent } from 'app/sheet-title/create-update-sheet-title/create-update-sheet-title.component';
+import { DeleteSheetTitleComponent } from 'app/sheet-title/delete-sheet-title/delete-sheet-title.component';
+import { GroupDeleteAssignmentComponent } from './assignment/group-delete-assignment/group-delete-assignment.component';
+import { CreateFromParticipantComponent } from './participant/create-from-participant/create-from-participant.component';
+import { CreateUpdateRoleComponent } from './roles/create-update-role/create-update-role.component';
+import { DeleteRoleComponent } from './roles/delete-role/delete-role.component';
+import { RolesComponent } from './roles/roles.component';
 
 export const routes: Routes = [
   {
@@ -110,6 +111,10 @@ export const routes: Routes = [
   {
     path: 'participant/assigntypeavailable',
     component: AvailableParticipantComponent
+  },
+  {
+    path: 'participant/publisher-registry',
+    component: PublisherRegistryComponent
   },
   {
     path: 'participant/create',
