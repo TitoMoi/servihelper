@@ -46,6 +46,7 @@ export class PublisherRegistryComponent implements OnInit {
       name: [participant.name],
       hasParticipated: [],
       hasBibleStudies: [],
+      isAuxPioner: [],
       hours: [],
       notes: []
     });

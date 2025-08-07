@@ -36,7 +36,7 @@
           <input
             id="zip-upload"
             type="file"
-            [disabled]=""
+            [disabled]="form.invalid"
             (change)="uploadPublisherRegistry($event)" />
         </div>
         <div class="row">

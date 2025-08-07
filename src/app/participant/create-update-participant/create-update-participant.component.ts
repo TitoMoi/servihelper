@@ -118,7 +118,8 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     assignTypes: this.formBuilder.array<ParticipantAssignTypeInterface>([]), //do not wrap this into an [], because [...] creates a formControl wrapper
     rooms: this.formBuilder.array<ParticipantRoomInterface>([]),
     available: [this.p ? this.p.available : true],
-    notAvailableDates: [this.p ? this.p.notAvailableDates : []]
+    notAvailableDates: [this.p ? this.p.notAvailableDates : []],
+    hasPublisherR: [this.p ? this.p.hasPublisherR : false]
   });
 
   currentPublisherRegistryName$ = this.s21Service.getParticipantPublisherRegistryName(
@@ -230,17 +231,21 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.isUpdate) {
-      this.participantService.updateParticipant(this.form.getRawValue());
-    } else {
-      this.createParticipant();
-    }
+    this.updateOrCreateParticipant();
 
     const route = this.isUpdate ? '../..' : '..';
     //navigate to parent
     this.router.navigate([route], {
       relativeTo: this.activatedRoute
     });
+  }
+
+  updateOrCreateParticipant(): void {
+    if (this.isUpdate) {
+      this.participantService.updateParticipant(this.form.getRawValue());
+    } else {
+      this.createParticipant();
+    }
   }
 
   submitAndCreate(): void {
@@ -250,6 +255,7 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     this.form.get('isWoman').reset(false, { emitEvent: false });
     this.form.get('isExternal').reset(false, { emitEvent: false });
     this.form.get('notAvailableDates').reset([], { emitEvent: false });
+    this.form.get('hasPublisherR').reset(false, { emitEvent: false });
     this.addAssignTypes();
     this.addRooms();
   }
@@ -269,6 +275,8 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
       //and don't overwrite the pdf filename
       const file = input.files[0];
       this.s21Service.uploadPublisherRegistry(file, this.form.controls.id.value).then(() => {
+        this.form.controls.hasPublisherR.setValue(true, { emitEvent: false });
+        this.updateOrCreateParticipant();
         this.snackbar.open('Publisher registry uploaded successfully', 'Close', {
           duration: 3000
         });

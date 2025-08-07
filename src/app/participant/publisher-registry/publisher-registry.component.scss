@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  tr {
+    border-bottom: 1px solid #ddd;
+    &:last-child {
+      border-bottom: none;
+    }
+    td,
+    th {
+      padding: 8px;
+      text-align: left;
+      vertical-align: middle;
+    }
+  }
+}
