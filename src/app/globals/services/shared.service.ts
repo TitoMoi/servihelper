@@ -1,17 +1,16 @@
-/* eslint-disable complexity */
 import {
   ParticipantDynamicInterface,
   ParticipantInterface
 } from 'app/participant/model/participant.model';
 
-import { Injectable, inject } from '@angular/core';
-import { AssignmentInterface } from 'app/assignment/model/assignment.model';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
-import { ipcRenderer } from 'electron';
-import { Locale, formatDistanceStrict } from 'date-fns';
+import { inject, Injectable } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
-const { version } = require('../../../package.json');
+import { AssignmentInterface } from 'app/assignment/model/assignment.model';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { formatDistanceStrict, Locale } from 'date-fns';
+import { ipcRenderer } from 'electron';
+const { version } = require('../../../../package.json');
 
 @Injectable({
   providedIn: 'root'
@@ -192,9 +191,10 @@ export class SharedService {
           }
         );
       }
-      if (!participant.distanceBetweenPenultimaAndLast)
+      if (!participant.distanceBetweenPenultimaAndLast) {
         participant.distanceBetweenPenultimaAndLast =
           this.translocoService.translate('SORT_NO_DISTANCE');
+      }
     }
   }
 

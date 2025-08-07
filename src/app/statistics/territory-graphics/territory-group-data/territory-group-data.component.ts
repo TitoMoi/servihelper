@@ -2,11 +2,11 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { TerritoryContextClass } from 'app/map/model/map.model';
 import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
-import { TerritoryService } from 'app/map/territory/service/territory.service';
+import { GraphicService } from 'app/globals/services/graphic.service';
+import { TerritoryContextClass } from 'app/map/model/map.model';
 import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
-import { GraphicService } from 'app/services/graphic.service';
+import { TerritoryService } from 'app/map/territory/service/territory.service';
 
 @Component({
   selector: 'app-territory-group-data',

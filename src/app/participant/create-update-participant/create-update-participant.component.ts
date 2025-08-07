@@ -39,9 +39,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@ngneat/transloco';
 import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
+import { S21Service } from 'app/globals/services/s21.service';
 import { OnlineService } from 'app/online/service/online.service';
 import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
-import { S21Service } from 'app/services/s21.service';
 import { AutoFocusDirective } from '../../directives/autofocus/autofocus.directive';
 import { RoomPipe } from '../../room/pipe/room.pipe';
 import {

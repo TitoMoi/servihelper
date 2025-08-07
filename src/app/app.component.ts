@@ -1,23 +1,23 @@
-import { ConfigService } from 'app/config/service/config.service';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   HostListener,
-  OnInit,
-  inject
+  inject,
+  OnInit
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { PdfService } from './services/pdf.service';
 import { RouterOutlet } from '@angular/router';
-import { NavigationComponent } from './navigation/navigation.component';
-import { OnlineService } from 'app/online/service/online.service';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { ConfigService } from 'app/config/service/config.service';
+import { PdfService } from 'app/globals/services/pdf.service';
 import { LockService } from 'app/lock/service/lock.service';
+import { OnlineService } from 'app/online/service/online.service';
 import { readdirSync } from 'fs-extra';
 import path from 'path';
-import { TranslocoDirective } from '@ngneat/transloco';
-import { MatButtonModule } from '@angular/material/button';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @Component({
   selector: 'app-root',

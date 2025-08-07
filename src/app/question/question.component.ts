@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { SharedService } from 'app/services/shared.service';
 import { TranslocoModule } from '@ngneat/transloco';
+import { SharedService } from 'app/globals/services/shared.service';
 
 @Component({
   selector: 'app-question',

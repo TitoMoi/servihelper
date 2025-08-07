@@ -1,16 +1,16 @@
 import { ParticipantInterface } from 'app/participant/model/participant.model';
 import { ParticipantService } from 'app/participant/service/participant.service';
 
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { AsyncPipe } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { TranslocoModule } from '@ngneat/transloco';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslocoModule } from '@ngneat/transloco';
+import { SortService } from 'app/globals/services/sort.service';
 import { OnlineService } from 'app/online/service/online.service';
-import { SortService } from 'app/services/sort.service';
 
 @Component({
   selector: 'app-participant',

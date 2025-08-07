@@ -5,11 +5,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslocoDirective } from '@ngneat/transloco';
 import { TranslocoDatePipe } from '@ngneat/transloco-locale';
+import { SortService } from 'app/globals/services/sort.service';
 import { TerritoryService } from 'app/map/territory/service/territory.service';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { ParticipantPipe } from 'app/participant/pipe/participant.pipe';
 import { ParticipantDynamicInterface } from 'app/participant/model/participant.model';
-import { SortService } from 'app/services/sort.service';
+import { ParticipantPipe } from 'app/participant/pipe/participant.pipe';
+import { ParticipantService } from 'app/participant/service/participant.service';
 
 @Component({
   selector: 'app-territory-count',

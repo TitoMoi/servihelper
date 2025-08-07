@@ -13,10 +13,10 @@ import {
   inject
 } from '@angular/core';
 import {
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
-  Validators,
-  ReactiveFormsModule
+  Validators
 } from '@angular/forms';
 import { MatOption, MatOptionModule } from '@angular/material/core';
 import {
@@ -25,21 +25,21 @@ import {
   MatDatepickerModule
 } from '@angular/material/datepicker';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
-import { TranslocoService, TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { MultipleImageAssignmentComponent } from '../multiple-image-assignment/multiple-image-assignment.component';
 import { SelectionListHorComponent } from '../selection-list-hor/selection-list-hor.component';
 import { SelectionListComponent } from '../selection-list/selection-list.component';
 
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { SortService } from 'app/services/sort.service';
-import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
-import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
-import { ConfigService } from 'app/config/service/config.service';
-import { ConfigInterface } from 'app/config/model/config.model';
-import { RoleInterface } from 'app/roles/model/role.model';
-import { Observable, Subscription, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
+import { ConfigInterface } from 'app/config/model/config.model';
+import { ConfigService } from 'app/config/service/config.service';
+import { SortService } from 'app/globals/services/sort.service';
+import { RoleInterface } from 'app/roles/model/role.model';
+import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
+import { Observable, Subscription, map } from 'rxjs';
 
 @Component({
   selector: 'app-report-selector',

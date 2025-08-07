@@ -9,27 +9,27 @@ import { ParticipantInterface } from 'app/participant/model/participant.model';
 import { RoomInterface } from 'app/room/model/room.model';
 import autoTable from 'jspdf-autotable';
 
+import { NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { PdfService } from 'app/services/pdf.service';
-import { clipboard } from 'electron';
+import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
+import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
 import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ExportService } from 'app/globals/services/export.service';
+import { PdfService } from 'app/globals/services/pdf.service';
+import { SharedService } from 'app/globals/services/shared.service';
+import { PublicThemePipe } from 'app/public-theme/pipe/public-theme.pipe';
+import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
+import { SheetTitlePipe } from 'app/sheet-title/pipe/sheet-title.pipe';
+import { clipboard } from 'electron';
+import { AssignTypePipe } from '../../assigntype/pipe/assign-type.pipe';
 import { ParticipantPipe } from '../../participant/pipe/participant.pipe';
 import { RoomPipe } from '../../room/pipe/room.pipe';
-import { AssignTypePipe } from '../../assigntype/pipe/assign-type.pipe';
-import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { NgClass } from '@angular/common';
-import { TranslocoModule } from '@ngneat/transloco';
-import { SheetTitlePipe } from 'app/sheet-title/pipe/sheet-title.pipe';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { ExportService } from 'app/services/export.service';
-import { PublicThemePipe } from 'app/public-theme/pipe/public-theme.pipe';
-import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
-import { MatChipsModule } from '@angular/material/chips';
-import { SharedService } from 'app/services/shared.service';
-import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
 
 @Component({
   selector: 'app-image-assignment',

@@ -1,28 +1,28 @@
 /* eslint-disable complexity */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
-import { TerritoryContextClass, TerritoryContextInterface } from '../model/map.model';
-import { TerritoryService } from './service/territory.service';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { TerritoryGroupService } from '../territory-group/service/territory-group.service';
-import { ParticipantPipe } from 'app/participant/pipe/participant.pipe';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { PolygonService } from './service/polygon.service';
-import { clipboard, shell } from 'electron';
-import { OnlineService } from 'app/online/service/online.service';
-import { PdfService } from 'app/services/pdf.service';
-import path from 'path';
-import { ConfigService } from 'app/config/service/config.service';
-import { ensureFileSync, readFileSync, removeSync, writeFile } from 'fs-extra';
-import { filenamifyPath } from 'filenamify';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SortService } from 'app/services/sort.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { ConfigService } from 'app/config/service/config.service';
+import { PdfService } from 'app/globals/services/pdf.service';
+import { SortService } from 'app/globals/services/sort.service';
+import { OnlineService } from 'app/online/service/online.service';
+import { ParticipantPipe } from 'app/participant/pipe/participant.pipe';
 import { ParticipantService } from 'app/participant/service/participant.service';
+import { clipboard, shell } from 'electron';
+import { filenamifyPath } from 'filenamify';
+import { ensureFileSync, readFileSync, removeSync, writeFile } from 'fs-extra';
+import path from 'path';
+import { TerritoryContextClass, TerritoryContextInterface } from '../model/map.model';
+import { TerritoryGroupService } from '../territory-group/service/territory-group.service';
+import { PolygonService } from './service/polygon.service';
+import { TerritoryService } from './service/territory.service';
 
 @Component({
   selector: 'app-territory',

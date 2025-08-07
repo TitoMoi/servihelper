@@ -1,15 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { TerritoryService } from '../territory/service/territory.service';
-import { ParticipantService } from 'app/participant/service/participant.service';
-import { ParticipantPipe } from 'app/participant/pipe/participant.pipe';
 import { TranslocoDatePipe, TranslocoLocaleService } from '@ngneat/transloco-locale';
+import { ParticipantPipe } from 'app/participant/pipe/participant.pipe';
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { TerritoryService } from '../territory/service/territory.service';
 
-import { WordService } from 'app/services/word.service';
-import { MatIconModule } from '@angular/material/icon';
-import { S13TerritoryEntry, TerritoryContextClass } from '../model/map.model';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { WordService } from 'app/globals/services/word.service';
+import { S13TerritoryEntry, TerritoryContextClass } from '../model/map.model';
 
 @Component({
   selector: 'app-data-ready-s13',

@@ -31,20 +31,20 @@ import {
   ViewChild,
   inject
 } from '@angular/core';
-import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
-import { TranslocoService, TranslocoDirective } from '@ngneat/transloco';
-import { SortService } from 'app/services/sort.service';
-import { TranslocoDatePipe } from '@ngneat/transloco-locale';
-import { DateFnsLocaleService } from 'app/services/date-fns-locale.service';
-import { MatIconModule } from '@angular/material/icon';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { ExportService } from 'app/services/export.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { TranslocoDatePipe } from '@ngneat/transloco-locale';
+import { DateFnsLocaleService } from 'app/globals/services/date-fns-locale.service';
+import { ExportService } from 'app/globals/services/export.service';
+import { SharedService } from 'app/globals/services/shared.service';
+import { SortService } from 'app/globals/services/sort.service';
 import { isWithinInterval } from 'date-fns';
-import { SharedService } from 'app/services/shared.service';
 
 @Component({
   selector: 'app-global-count',

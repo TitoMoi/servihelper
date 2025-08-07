@@ -1,13 +1,13 @@
 /* eslint-disable complexity */
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { GraphicService } from 'app/services/graphic.service';
-import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
-import { TerritoryService } from 'app/map/territory/service/territory.service';
-import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
-import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
-import { TerritoryContextClass } from 'app/map/model/map.model';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
+import { GraphicService } from 'app/globals/services/graphic.service';
+import { TerritoryContextClass } from 'app/map/model/map.model';
+import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
+import { TerritoryService } from 'app/map/territory/service/territory.service';
 import { TerritoryGroupDataComponent } from 'app/statistics/territory-graphics/territory-group-data/territory-group-data.component';
 
 @Component({

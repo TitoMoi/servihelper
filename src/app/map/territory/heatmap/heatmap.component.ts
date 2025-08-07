@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -6,7 +7,6 @@ import {
   OnDestroy,
   inject
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -18,13 +18,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@ngneat/transloco';
 import { AutoFocusDirective } from 'app/directives/autofocus/autofocus.directive';
-import { ExportService } from 'app/services/export.service';
-import { PolygonService } from '../service/polygon.service';
-import { Map, Polygon, TileLayer } from 'leaflet';
-import { TerritoryService } from '../service/territory.service';
+import { ExportService } from 'app/globals/services/export.service';
+import { GraphicService } from 'app/globals/services/graphic.service';
 import { TerritoryContextInterface } from 'app/map/model/map.model';
 import { ParticipantService } from 'app/participant/service/participant.service';
-import { GraphicService } from 'app/services/graphic.service';
+import { Map, Polygon, TileLayer } from 'leaflet';
+import { PolygonService } from '../service/polygon.service';
+import { TerritoryService } from '../service/territory.service';
 
 @Component({
   selector: 'app-heatmap',

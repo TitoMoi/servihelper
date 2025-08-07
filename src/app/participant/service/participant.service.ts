@@ -8,8 +8,8 @@ import { nanoid } from 'nanoid/non-secure';
 
 import { inject, Injectable } from '@angular/core';
 import { ConfigService } from 'app/config/service/config.service';
+import { SortService } from 'app/globals/services/sort.service';
 import { LockService } from 'app/lock/service/lock.service';
-import { SortService } from 'app/services/sort.service';
 
 @Injectable({
   providedIn: 'root'

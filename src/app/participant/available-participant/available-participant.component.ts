@@ -7,25 +7,25 @@ import {
   inject
 } from '@angular/core';
 
-import { ParticipantService } from '../service/participant.service';
+import { NgClass } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
+import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
 import { AssignTypePipe } from 'app/assigntype/pipe/assign-type.pipe';
 import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
-import { ParticipantAssignTypeInterface, ParticipantInterface } from '../model/participant.model';
-import { SortService } from 'app/services/sort.service';
-import { ConfigService } from 'app/config/service/config.service';
-import { Observable, Subscription, map } from 'rxjs';
 import { ConfigInterface } from 'app/config/model/config.model';
-import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { ExportService } from 'app/services/export.service';
-import { MatIconModule } from '@angular/material/icon';
-import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
-import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
+import { ConfigService } from 'app/config/service/config.service';
+import { ExportService } from 'app/globals/services/export.service';
+import { SortService } from 'app/globals/services/sort.service';
 import { LockService } from 'app/lock/service/lock.service';
 import { OnlineService } from 'app/online/service/online.service';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { NgClass } from '@angular/common';
+import { Observable, Subscription, map } from 'rxjs';
+import { ParticipantAssignTypeInterface, ParticipantInterface } from '../model/participant.model';
+import { ParticipantService } from '../service/participant.service';
 import { GetNumberOfParticipantsPipe } from './get-number-of-participants.pipe';
 @Component({
   selector: 'app-available-participant',

@@ -23,9 +23,9 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { SharedService } from 'app/globals/services/shared.service';
 import { OnlineService } from 'app/online/service/online.service';
 import { RoleInterface } from 'app/roles/model/role.model';
-import { SharedService } from 'app/services/shared.service';
 import { shell } from 'electron';
 import { GitHubDataInterface } from './model/navigation.model';
 

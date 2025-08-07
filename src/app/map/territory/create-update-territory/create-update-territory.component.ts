@@ -1,4 +1,5 @@
 /* eslint-disable complexity */
+import { CommonModule, Location, NgOptimizedImage } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -9,54 +10,52 @@ import {
   ViewChild,
   inject
 } from '@angular/core';
-import { CommonModule, Location } from '@angular/common';
 import {
-  icon,
-  Map,
-  TileLayer,
-  Polygon,
-  Marker,
-  LeafletMouseEvent,
-  LatLngLiteral,
-  LatLng
-} from 'leaflet';
-import { Subscription, fromEvent } from 'rxjs';
+  FormControl,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import {
-  ReactiveFormsModule,
-  Validators,
-  NonNullableFormBuilder,
-  FormControl
-} from '@angular/forms';
-import { TerritoryService } from '../service/territory.service';
-import { PolygonService } from '../service/polygon.service';
-import { TerrImageService } from '../service/terr-image.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInput, MatInputModule } from '@angular/material/input';
-import { AutoFocusDirective } from 'app/directives/autofocus/autofocus.directive';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { ConfigService } from 'app/config/service/config.service';
+import { AutoFocusDirective } from 'app/directives/autofocus/autofocus.directive';
+import { ExportService } from 'app/globals/services/export.service';
 import {
   PolygonInterface,
   TerritoryContextClass,
   TerritoryContextInterface,
   TerritoryGroupInterface
 } from 'app/map/model/map.model';
+import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
+import { OnlineService } from 'app/online/service/online.service';
 import { ParticipantInterface } from 'app/participant/model/participant.model';
 import { ParticipantService } from 'app/participant/service/participant.service';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
-import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
-import { ExportService } from 'app/services/export.service';
-import { OnlineService } from 'app/online/service/online.service';
-import { NgOptimizedImage } from '@angular/common';
+import {
+  LatLng,
+  LatLngLiteral,
+  LeafletMouseEvent,
+  Map,
+  Marker,
+  Polygon,
+  TileLayer,
+  icon
+} from 'leaflet';
 import { nanoid } from 'nanoid';
 import path from 'path';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription, fromEvent } from 'rxjs';
+import { PolygonService } from '../service/polygon.service';
+import { TerrImageService } from '../service/terr-image.service';
+import { TerritoryService } from '../service/territory.service';
 
 @Component({
   selector: 'app-create-update-territory',

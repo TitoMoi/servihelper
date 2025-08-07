@@ -14,11 +14,11 @@ import { ParticipantService } from 'app/participant/service/participant.service'
 import { RoomService } from 'app/room/service/room.service';
 import { readFileSync } from 'fs';
 import path from 'path';
-import malgun from '../../resources/base64fonts/malgun';
-import meiryo from '../../resources/base64fonts/meiryo';
-import notosans from '../../resources/base64fonts/notosans';
-import notosansbold from '../../resources/base64fonts/notosansbold';
-import simsun from '../../resources/base64fonts/simsun';
+import malgun from '../../../resources/base64fonts/malgun';
+import meiryo from '../../../resources/base64fonts/meiryo';
+import notosans from '../../../resources/base64fonts/notosans';
+import notosansbold from '../../../resources/base64fonts/notosansbold';
+import simsun from '../../../resources/base64fonts/simsun';
 
 @Injectable({
   providedIn: 'root'

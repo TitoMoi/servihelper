@@ -5,6 +5,7 @@ import {
 } from 'app/assignment/model/assignment.model';
 import { AssignmentService } from 'app/assignment/service/assignment.service';
 
+import { AsyncPipe, NgClass } from '@angular/common';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
@@ -14,27 +15,26 @@ import {
   OnInit,
   inject
 } from '@angular/core';
-import { ActivatedRoute, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { LastDateService } from './service/last-date.service';
-import { SortService } from 'app/services/sort.service';
-import { RoomService } from 'app/room/service/room.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { TranslocoDirective } from '@ngneat/transloco';
+import { TranslocoDatePipe } from '@ngneat/transloco-locale';
+import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
 import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { ConfigService } from 'app/config/service/config.service';
+import { SortService } from 'app/globals/services/sort.service';
+import { OnlineService } from 'app/online/service/online.service';
 import { ParticipantService } from 'app/participant/service/participant.service';
+import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
+import { RoomService } from 'app/room/service/room.service';
+import { format } from 'date-fns';
+import { Subscription } from 'rxjs';
+import { AssignTypePipe } from '../assigntype/pipe/assign-type.pipe';
 import { ParticipantPipe } from '../participant/pipe/participant.pipe';
 import { RoomPipe } from '../room/pipe/room.pipe';
-import { AssignTypePipe } from '../assigntype/pipe/assign-type.pipe';
-import { TranslocoDatePipe } from '@ngneat/transloco-locale';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
-import { NgClass, AsyncPipe } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { TranslocoDirective } from '@ngneat/transloco';
-import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
-import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
-import { OnlineService } from 'app/online/service/online.service';
-import { ConfigService } from 'app/config/service/config.service';
-import { format } from 'date-fns';
+import { LastDateService } from './service/last-date.service';
 
 @Component({
   selector: 'app-assignment',

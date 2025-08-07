@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export interface ParticipantInterface {
   id?: string; //On update id is not coming from the form
   name: string;
@@ -8,6 +9,7 @@ export interface ParticipantInterface {
   assignTypes: ParticipantAssignTypeInterface[];
   available: boolean;
   notAvailableDates?: Date[];
+  hasPublisherR?: boolean;
 }
 
 //These values may exist and are calculated under assignments and statistics pages but shouldnt be saved on json file
@@ -44,6 +46,7 @@ export class ParticipantModel {
   assignTypes: ParticipantAssignTypeInterface[];
   available: boolean;
   notAvailableDates?: Date[];
+  hasPublisherR?: boolean;
 
   constructor(participant: ParticipantInterface) {
     this.id = participant.id;
@@ -55,6 +58,7 @@ export class ParticipantModel {
     this.assignTypes = participant.assignTypes;
     this.available = participant.available;
     this.notAvailableDates = participant.notAvailableDates;
+    this.hasPublisherR = participant.hasPublisherR;
   }
 }
 

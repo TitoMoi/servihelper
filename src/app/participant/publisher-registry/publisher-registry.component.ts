@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslocoService } from '@ngneat/transloco';
 import { GetMonthNamePipe } from 'app/globals/pipes/get-month-name.pipe';
-import { S21Service } from 'app/services/s21.service';
+import { S21Service } from 'app/globals/services/s21.service';
 import { PDFDocument } from 'pdf-lib';
 import { ParticipantService } from '../service/participant.service';
 
@@ -30,7 +30,9 @@ export class PublisherRegistryComponent implements OnInit {
   translocoService = inject(TranslocoService);
   fb = inject(FormBuilder);
 
-  participants = this.participantsService.getParticipants(true).filter(p => p.available);
+  participants = this.participantsService
+    .getParticipants(true)
+    .filter(p => p.available && p.hasPublisherR);
 
   months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(x => new Date(2000, x, 2));
 

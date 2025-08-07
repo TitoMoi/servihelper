@@ -1,7 +1,3 @@
-import { ConfigService } from 'app/config/service/config.service';
-import { NoteInterface } from 'app/note/model/note.model';
-import { NoteService } from 'app/note/service/note.service';
-import { copySync, existsSync, readdir, removeSync } from 'fs-extra';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -11,37 +7,41 @@ import {
   ViewChild,
   inject
 } from '@angular/core';
-import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { TranslocoService, TranslocoModule } from '@ngneat/transloco';
+import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { DateFormatStyles } from '@ngneat/transloco-locale';
+import { ConfigService } from 'app/config/service/config.service';
+import { NoteInterface } from 'app/note/model/note.model';
+import { NoteService } from 'app/note/service/note.service';
+import { copySync, existsSync, readdir, removeSync } from 'fs-extra';
 
-import { ConfigInterface, WeekDaysBegin } from './model/config.model';
-import { MatButtonModule } from '@angular/material/button';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatOptionModule } from '@angular/material/core';
-import { MatSelect, MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { SheetTitleService } from 'app/sheet-title/service/sheet-title.service';
-import { SheetTitlePipe } from 'app/sheet-title/pipe/sheet-title.pipe';
+import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
+import { OnlineTemplateComponent } from 'app/config/online-template/online-template.component';
+import { SharedService } from 'app/globals/services/shared.service';
+import { LockService } from 'app/lock/service/lock.service';
+import { OnlineInterface } from 'app/online/model/online.model';
+import { OnlineService } from 'app/online/service/online.service';
 import { PublicThemePipe } from 'app/public-theme/pipe/public-theme.pipe';
 import { PublicThemeService } from 'app/public-theme/service/public-theme.service';
+import { SheetTitlePipe } from 'app/sheet-title/pipe/sheet-title.pipe';
+import { SheetTitleService } from 'app/sheet-title/service/sheet-title.service';
 import path from 'path';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { OnlineService } from 'app/online/service/online.service';
 import { Subscription, take } from 'rxjs';
-import { OnlineInterface } from 'app/online/model/online.model';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { OnlineTemplateComponent } from 'app/config/online-template/online-template.component';
-import { LockService } from 'app/lock/service/lock.service';
-import { SharedService } from 'app/services/shared.service';
-import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ConfigInterface, WeekDaysBegin } from './model/config.model';
 
 @Component({
   selector: 'app-config',
