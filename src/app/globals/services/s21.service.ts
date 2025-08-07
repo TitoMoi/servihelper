@@ -6,7 +6,7 @@ import {
   S21FieldCodesType,
   S21MonthCodesConst
 } from 'app/globals/models/model';
-import { ensureDirSync, ensureFileSync, readdir, readFileSync, writeFile } from 'fs-extra';
+import { ensureDirSync, readdir, readFileSync, remove, writeFile } from 'fs-extra';
 import { PDFDocument } from 'pdf-lib';
 
 import path from 'path';
@@ -19,64 +19,56 @@ export class S21Service {
 
   TotalHoursFieldCode = '904_32_S21_Value';
 
-  async loadPublisherRegistry(participantId: string): Promise<PDFDocument> {
-    const buffer = await this.getPublisherRegistry(participantId);
+  async getPublisherRegistry(participantId: string): Promise<PDFDocument> {
+    if (!participantId) {
+      return Promise.resolve(null);
+    }
+    const buffer = readFileSync(await this.getPublisherRegistryFullPath(participantId));
+    const pdf = await PDFDocument.load(this.toArrayBuffer(buffer));
 
-    const pdfDoc = await this.getPdfFromBuffer(buffer);
     //Get field by name
-    const form = pdfDoc.getForm();
+    const form = pdf.getForm();
+    console.log('Form fields:', form.acroForm.Fields());
     form.acroForm.Fields(); //Load fields
 
-    return pdfDoc;
-
-    /* for (const field of fields.asArray()) {
-      console.log('Field Name:', field);
-    }
-    console.log('AcroFormFields', fields);
-    console.log('Fields', form.getFields());
-    console.log('Field', form.getField('900_1_Text'));
-    console.log('Field2', form.getField('900_2_Text_SanSerif')); */
-  }
-
-  getPdfFromBuffer(buffer: Buffer): Promise<PDFDocument> {
-    return PDFDocument.load(this.toArrayBuffer(buffer));
+    return pdf;
   }
 
   async uploadPublisherRegistry(file: File, participantId: string) {
     //Given a non json pdf file, save it to source/assets/S21 folder and don't overwrite the pdf filename
-    const filePath = await this.getPublisherRegistryFullPath(participantId);
-    ensureFileSync(filePath);
+    const filePath = await this.getPublisherRegistryFullPath(participantId, false, false);
+
+    //Delete all files
+    await remove(filePath);
 
     const arrayBuffer = new Uint8Array(await file.arrayBuffer());
-    return writeFile(filePath + '/' + file.name, arrayBuffer);
-  }
-
-  async getPublisherRegistry(participantId: string): Promise<Buffer> {
-    if (!participantId) {
-      return Promise.resolve(null);
-    }
-    const filePath = await this.getPublisherRegistryFullPath(participantId);
-    return readFileSync(filePath);
+    return writeFile(path.join(filePath, file.name), arrayBuffer);
   }
 
   async updatePublisherRegistry(pdf: PDFDocument, participantId: string): Promise<void> {
     const pdfSerialized = await pdf.save();
-    return writeFile(await this.getPublisherRegistryFullPath(participantId), pdfSerialized);
+    const filePath = await this.getPublisherRegistryFullPath(participantId);
+    return writeFile(filePath, pdfSerialized);
   }
 
-  async getPublisherRegistryFullPath(participantId: string, onlyFileName = false): Promise<string> {
+  async getPublisherRegistryFullPath(
+    participantId: string,
+    onlyFileName = false,
+    includeFileName = true
+  ): Promise<string> {
     if (!participantId) {
       return null;
     }
-    const filePath = `${this.configService.sourceFilesPath}/S21/${participantId}`;
-    ensureDirSync(filePath);
+    const dirPath = path.join(this.configService.sourceFilesPath, 'S21', participantId);
+    ensureDirSync(dirPath);
     //Read file name from the filePath
-    const files = await readdir(filePath);
-    if (files.length === 0) {
-      return null;
+    const files = await readdir(dirPath);
+
+    if (!includeFileName) {
+      return dirPath;
     }
     //Return the first file in the folder
-    return onlyFileName ? files[0] : path.join(filePath, files[0]);
+    return onlyFileName ? files[0] : path.join(dirPath, files[0]);
   }
 
   toArrayBuffer(buffer) {
@@ -137,10 +129,12 @@ export class S21Service {
         checkField.uncheck();
       }
     } else {
-      const field = pdf
-        .getForm()
-        .getTextField(S21FieldCodes[fieldType].replace('XX', S21MonthCodesConst[month]));
-      field.setText(value.toString());
+      if (value) {
+        const field = pdf
+          .getForm()
+          .getTextField(S21FieldCodes[fieldType].replace('XX', S21MonthCodesConst[month]));
+        field.setText(value as string);
+      }
     }
   }
 }

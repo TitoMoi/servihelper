@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -10,7 +10,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoService } from '@ngneat/transloco';
 import { GetMonthNamePipe } from 'app/globals/pipes/get-month-name.pipe';
 import { S21Service } from 'app/globals/services/s21.service';
-import { PDFDocument } from 'pdf-lib';
 import { ParticipantService } from '../service/participant.service';
 @Component({
   selector: 'app-publisher-registry',
@@ -28,7 +27,7 @@ import { ParticipantService } from '../service/participant.service';
   styleUrl: './publisher-registry.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PublisherRegistryComponent implements OnInit {
+export class PublisherRegistryComponent {
   participantsService = inject(ParticipantService);
   s21Service = inject(S21Service);
   translocoService = inject(TranslocoService);
@@ -51,32 +50,22 @@ export class PublisherRegistryComponent implements OnInit {
     return this.fb.group({
       id: [participant.id],
       name: [participant.name],
-      hasParticipated: [],
-      hasBibleStudies: [],
-      isAuxPioner: [],
-      hours: [],
-      notes: []
+      hasParticipated: [null],
+      hasBibleStudies: [null],
+      isAuxPioner: [null],
+      hours: [null],
+      notes: [null]
     });
   });
-
-  ngOnInit(): void {
-    this.loadPublisherRegistry('UDHU5rDPvq');
-  }
-
-  async loadPublisherRegistry(participantId: string): Promise<PDFDocument> {
-    const buffer = await this.s21Service.getPublisherRegistry(participantId);
-    return await this.s21Service.getPdfFromBuffer(buffer);
-  }
-
-  onMonthChange(e: Event) {}
 
   async updatePublisherRegistries(): Promise<void> {
     this.showSpinner = true;
     const promises = [];
     this.formGroupArray.forEach(async group => {
       const participantId = group.controls.id.value;
-      const pdf = await this.loadPublisherRegistry(participantId);
+      const pdf = await this.s21Service.getPublisherRegistry(participantId);
       const monthCode = this.s21Service.dateToMonthCode(this.selectedMonth.value);
+
       this.s21Service.setFieldValue(
         pdf,
         monthCode,
@@ -89,9 +78,8 @@ export class PublisherRegistryComponent implements OnInit {
         'hasBibleStudies',
         group.controls.hasBibleStudies.value
       );
-      console.log(group.value);
       this.s21Service.setFieldValue(pdf, monthCode, 'isPioneer', group.controls.isAuxPioner.value);
-      this.s21Service.setFieldValue(pdf, monthCode, 'hours', group.controls.hours.value.toString());
+      this.s21Service.setFieldValue(pdf, monthCode, 'hours', group.controls.hours.value);
       this.s21Service.setFieldValue(pdf, monthCode, 'notes', group.controls.notes.value);
       promises.push(this.s21Service.updatePublisherRegistry(pdf, participantId));
     });
@@ -100,5 +88,9 @@ export class PublisherRegistryComponent implements OnInit {
     this.snackbar.open('All Publisher registries updated successfully', 'Close', {
       duration: 3000
     });
+  }
+
+  onMonthChange($event: any) {
+    return;
   }
 }
