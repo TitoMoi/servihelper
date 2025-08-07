@@ -122,8 +122,9 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     hasPublisherR: [this.p ? this.p.hasPublisherR : false]
   });
 
-  currentPublisherRegistryName$ = this.s21Service.getParticipantPublisherRegistryName(
-    this.form.controls.id.value
+  currentPublisherRegistryName$ = this.s21Service.getPublisherRegistryFullPath(
+    this.form.controls.id.value,
+    true
   );
 
   get getRoomsArray(): ParticipantRoomInterface[] {

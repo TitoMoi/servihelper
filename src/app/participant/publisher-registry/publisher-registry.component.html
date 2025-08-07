@@ -10,6 +10,18 @@
       </mat-select>
     </mat-form-field>
   </div>
+  <div class="col-auto">
+    <button
+      mat-raised-button
+      type="button"
+      [disabled]="selectedMonth.invalid"
+      (click)="updatePublisherRegistries()">
+      Update registries
+    </button>
+    @if (showSpinner) {
+      <mat-spinner class="ms-4" [diameter]="28" />
+    }
+  </div>
 </div>
 <div class="row">
   <div class="col col-lg-8">

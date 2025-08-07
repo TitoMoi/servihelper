@@ -1,23 +1,27 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoService } from '@ngneat/transloco';
 import { GetMonthNamePipe } from 'app/globals/pipes/get-month-name.pipe';
 import { S21Service } from 'app/globals/services/s21.service';
 import { PDFDocument } from 'pdf-lib';
 import { ParticipantService } from '../service/participant.service';
-
 @Component({
   selector: 'app-publisher-registry',
   imports: [
     MatCheckboxModule,
     MatFormFieldModule,
+    MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
     GetMonthNamePipe,
+    MatProgressSpinnerModule,
     MatSelectModule
   ],
   templateUrl: './publisher-registry.component.html',
@@ -28,6 +32,7 @@ export class PublisherRegistryComponent implements OnInit {
   participantsService = inject(ParticipantService);
   s21Service = inject(S21Service);
   translocoService = inject(TranslocoService);
+  snackbar = inject(MatSnackBar);
   fb = inject(FormBuilder);
 
   participants = this.participantsService
@@ -36,9 +41,11 @@ export class PublisherRegistryComponent implements OnInit {
 
   months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(x => new Date(2000, x, 2));
 
-  selectedMonth = new FormControl();
+  selectedMonth = new FormControl<number>(null, Validators.required);
 
   lang = this.translocoService.getActiveLang();
+
+  showSpinner = false;
 
   formGroupArray = this.participants.map(participant => {
     return this.fb.group({
@@ -57,9 +64,41 @@ export class PublisherRegistryComponent implements OnInit {
   }
 
   async loadPublisherRegistry(participantId: string): Promise<PDFDocument> {
-    const buffer = await this.s21Service.getParticipantPublisherRegistry(participantId);
+    const buffer = await this.s21Service.getPublisherRegistry(participantId);
     return await this.s21Service.getPdfFromBuffer(buffer);
   }
 
   onMonthChange(e: Event) {}
+
+  async updatePublisherRegistries(): Promise<void> {
+    this.showSpinner = true;
+    const promises = [];
+    this.formGroupArray.forEach(async group => {
+      const participantId = group.controls.id.value;
+      const pdf = await this.loadPublisherRegistry(participantId);
+      const monthCode = this.s21Service.dateToMonthCode(this.selectedMonth.value);
+      this.s21Service.setFieldValue(
+        pdf,
+        monthCode,
+        'hasParticipated',
+        group.controls.hasParticipated.value
+      );
+      this.s21Service.setFieldValue(
+        pdf,
+        monthCode,
+        'hasBibleStudies',
+        group.controls.hasBibleStudies.value
+      );
+      console.log(group.value);
+      this.s21Service.setFieldValue(pdf, monthCode, 'isPioneer', group.controls.isAuxPioner.value);
+      this.s21Service.setFieldValue(pdf, monthCode, 'hours', group.controls.hours.value.toString());
+      this.s21Service.setFieldValue(pdf, monthCode, 'notes', group.controls.notes.value);
+      promises.push(this.s21Service.updatePublisherRegistry(pdf, participantId));
+    });
+    await Promise.all([...promises]);
+    this.showSpinner = false;
+    this.snackbar.open('All Publisher registries updated successfully', 'Close', {
+      duration: 3000
+    });
+  }
 }

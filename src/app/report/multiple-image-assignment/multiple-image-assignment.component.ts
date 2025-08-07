@@ -13,12 +13,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  inject,
   Input,
-  OnChanges,
-  inject
+  OnChanges
 } from '@angular/core';
 
-import { AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -49,8 +48,7 @@ import { ensureFileSync, removeSync, writeFile } from 'fs-extra';
     SheetTitlePipe,
     PublicThemePipe,
     MatChipsModule,
-    MatProgressSpinnerModule,
-    AsyncPipe
+    MatProgressSpinnerModule
   ]
 })
 export class MultipleImageAssignmentComponent implements OnChanges {

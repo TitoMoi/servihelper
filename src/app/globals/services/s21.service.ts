@@ -6,8 +6,10 @@ import {
   S21FieldCodesType,
   S21MonthCodesConst
 } from 'app/globals/models/model';
-import { ensureDirSync, readdir, readFileSync, writeFile } from 'fs-extra';
+import { ensureDirSync, ensureFileSync, readdir, readFileSync, writeFile } from 'fs-extra';
 import { PDFDocument } from 'pdf-lib';
+
+import path from 'path';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class S21Service {
   TotalHoursFieldCode = '904_32_S21_Value';
 
   async loadPublisherRegistry(participantId: string): Promise<PDFDocument> {
-    const buffer = await this.getParticipantPublisherRegistry(participantId);
+    const buffer = await this.getPublisherRegistry(participantId);
 
     const pdfDoc = await this.getPdfFromBuffer(buffer);
     //Get field by name
@@ -42,27 +44,27 @@ export class S21Service {
 
   async uploadPublisherRegistry(file: File, participantId: string) {
     //Given a non json pdf file, save it to source/assets/S21 folder and don't overwrite the pdf filename
-    const filePath = `${this.configService.sourceFilesPath}/S21/${participantId}`;
-    ensureDirSync(filePath);
+    const filePath = await this.getPublisherRegistryFullPath(participantId);
+    ensureFileSync(filePath);
 
     const arrayBuffer = new Uint8Array(await file.arrayBuffer());
     return writeFile(filePath + '/' + file.name, arrayBuffer);
   }
 
-  async getParticipantPublisherRegistry(participantId: string): Promise<Buffer> {
+  async getPublisherRegistry(participantId: string): Promise<Buffer> {
     if (!participantId) {
       return Promise.resolve(null);
     }
-    const filePath = `${this.configService.sourceFilesPath}/S21/${participantId}`;
-    const files = await readdir(filePath);
-    if (files.length === 0) {
-      return null;
-    }
-    //If there are files, we assume the first one is the publisher registry
-    return readFileSync(filePath + '/' + files[0]);
+    const filePath = await this.getPublisherRegistryFullPath(participantId);
+    return readFileSync(filePath);
   }
 
-  async getParticipantPublisherRegistryName(participantId: string) {
+  async updatePublisherRegistry(pdf: PDFDocument, participantId: string): Promise<void> {
+    const pdfSerialized = await pdf.save();
+    return writeFile(await this.getPublisherRegistryFullPath(participantId), pdfSerialized);
+  }
+
+  async getPublisherRegistryFullPath(participantId: string, onlyFileName = false): Promise<string> {
     if (!participantId) {
       return null;
     }
@@ -74,7 +76,7 @@ export class S21Service {
       return null;
     }
     //Return the first file in the folder
-    return files[0];
+    return onlyFileName ? files[0] : path.join(filePath, files[0]);
   }
 
   toArrayBuffer(buffer) {
@@ -86,7 +88,37 @@ export class S21Service {
     return arrayBuffer;
   }
 
-  //The month must be the month number
+  dateToMonthCode(month: number): MonthCodesType {
+    switch (month) {
+      case 0:
+        return 'January';
+      case 1:
+        return 'February';
+      case 2:
+        return 'March';
+      case 3:
+        return 'April';
+      case 4:
+        return 'May';
+      case 5:
+        return 'June';
+      case 6:
+        return 'July';
+      case 7:
+        return 'August';
+      case 8:
+        return 'September';
+      case 9:
+        return 'October';
+      case 10:
+        return 'November';
+      case 11:
+        return 'December';
+      default:
+        throw new Error('Invalid month');
+    }
+  }
+
   setFieldValue(
     pdf: PDFDocument,
     month: MonthCodesType,
@@ -94,8 +126,7 @@ export class S21Service {
     value: string | boolean
   ) {
     //Get the month field from the pdf
-
-    const isCheckbox = fieldType.endsWith('Checkbox');
+    const isCheckbox = S21FieldCodes[fieldType].includes('CheckBox');
     if (isCheckbox) {
       const checkField = pdf
         .getForm()
