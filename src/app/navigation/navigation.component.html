@@ -122,7 +122,7 @@
             [value]="currentRoleId"
             (selectionChange)="updateRole($event)">
             <mat-option [value]="administratorKey">{{ t('ROLE_ADMINISTRATOR') }}</mat-option>
-            @for (role of roles; track role) {
+            @for (role of roles; track role.id) {
               <mat-option [value]="role.id">
                 {{ role.name }}
               </mat-option>

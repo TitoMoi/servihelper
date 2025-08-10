@@ -3,11 +3,11 @@ import { APP_CONFIG } from 'environments/environment';
 import { readJSONSync, readJson, writeJSONSync } from 'fs-extra';
 
 import { Injectable } from '@angular/core';
-import { Observable, Subject, distinctUntilChanged, map } from 'rxjs';
+import { OnlineInterface } from 'app/online/model/online.model';
 import { RoleClass, RoleInterface } from 'app/roles/model/role.model';
 import { nanoid } from 'nanoid';
 import path from 'path';
-import { OnlineInterface } from 'app/online/model/online.model';
+import { Observable, Subject, distinctUntilChanged, map } from 'rxjs';
 
 import * as os from 'os';
 
@@ -86,8 +86,6 @@ export class ConfigService {
 
   // The current role id
   role: string;
-
-  constructor() {}
 
   /**
    * To initialize the app

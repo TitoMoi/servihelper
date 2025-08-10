@@ -25,3 +25,20 @@ export const S21FieldCodes = {
 } as const;
 
 export type S21FieldCodesType = keyof typeof S21FieldCodes;
+
+export const S21HeaderFieldCodes = {
+  name: '900_1_Text_SanSerif',
+  birthDate: '900_2_Text_SanSerif',
+  baptismDate: '900_5_Text_SanSerif',
+  men: '900_3_CheckBox',
+  women: '900_4_CheckBox',
+  otherSheeps: '900_6_CheckBox',
+  anointed: '900_7_CheckBox',
+  elder: '900_8_CheckBox',
+  ministerialServant: '900_9_CheckBox',
+  regularPioneer: '900_10_CheckBox',
+  specialPioneer: '900_11_CheckBox',
+  missionary: '900_12_CheckBox'
+} as const;
+
+export type S21HeaderFieldCodesType = keyof typeof S21HeaderFieldCodes;

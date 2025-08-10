@@ -4,9 +4,11 @@ import {
   MonthCodesType,
   S21FieldCodes,
   S21FieldCodesType,
+  S21HeaderFieldCodes,
+  S21HeaderFieldCodesType,
   S21MonthCodesConst
 } from 'app/globals/models/model';
-import { ensureDirSync, readdir, readFileSync, remove, writeFile } from 'fs-extra';
+import { copy, ensureDirSync, readdir, readFileSync, remove, writeFile } from 'fs-extra';
 import { PDFDocument } from 'pdf-lib';
 
 import path from 'path';
@@ -28,10 +30,18 @@ export class S21Service {
 
     //Get field by name
     const form = pdf.getForm();
-    console.log('Form fields:', form.acroForm.Fields());
     form.acroForm.Fields(); //Load fields
 
     return pdf;
+  }
+
+  async preparePublisherRegistry(participantId: string) {
+    const s21templatePath = path.join(this.configService.templatesFilesPath, 'S-21_S.pdf');
+    const filename = await this.getPublisherRegistryFullPath(participantId, true, false);
+    if (!filename) {
+      const dirPath = await this.getPublisherRegistryFullPath(participantId, false, false);
+      return copy(s21templatePath, path.join(dirPath, 'S-21_S.pdf'));
+    }
   }
 
   async uploadPublisherRegistry(file: File, participantId: string) {
@@ -64,11 +74,15 @@ export class S21Service {
     //Read file name from the filePath
     const files = await readdir(dirPath);
 
+    if (onlyFileName) {
+      return files[0];
+    }
+
     if (!includeFileName) {
       return dirPath;
+    } else {
+      return path.join(dirPath, files[0]);
     }
-    //Return the first file in the folder
-    return onlyFileName ? files[0] : path.join(dirPath, files[0]);
   }
 
   toArrayBuffer(buffer) {
@@ -111,6 +125,22 @@ export class S21Service {
     }
   }
 
+  getFieldValue(pdf: PDFDocument, month: MonthCodesType, fieldType: S21FieldCodesType) {
+    //Get the month field from the pdf
+    const isCheckbox = S21FieldCodes[fieldType].includes('CheckBox');
+    if (isCheckbox) {
+      const checkField = pdf
+        .getForm()
+        .getCheckBox(S21FieldCodes[fieldType].replace('XX', S21MonthCodesConst[month]));
+      return checkField.acroField.getValue();
+    } else {
+      const textField = pdf
+        .getForm()
+        .getTextField(S21FieldCodes[fieldType].replace('XX', S21MonthCodesConst[month]));
+      return textField.acroField.getValue().toString();
+    }
+  }
+
   setFieldValue(
     pdf: PDFDocument,
     month: MonthCodesType,
@@ -133,6 +163,40 @@ export class S21Service {
         const field = pdf
           .getForm()
           .getTextField(S21FieldCodes[fieldType].replace('XX', S21MonthCodesConst[month]));
+        field.setText(value as string);
+      }
+    }
+  }
+
+  getHeaderFieldValue(pdf: PDFDocument, fieldType: S21HeaderFieldCodesType) {
+    const isCheckbox = S21HeaderFieldCodes[fieldType].includes('CheckBox');
+    if (isCheckbox) {
+      const checkField = pdf.getForm().getCheckBox(S21HeaderFieldCodes[fieldType]);
+
+      return checkField.isChecked();
+    } else {
+      const textField = pdf.getForm().getTextField(S21HeaderFieldCodes[fieldType]);
+      return textField.getText();
+    }
+  }
+
+  setHeaderFieldValue(
+    pdf: PDFDocument,
+    fieldType: S21HeaderFieldCodesType,
+    value: string | boolean
+  ) {
+    //Get the header field from the pdf
+    const isCheckbox = S21HeaderFieldCodes[fieldType].includes('CheckBox');
+    if (isCheckbox) {
+      const checkField = pdf.getForm().getCheckBox(S21HeaderFieldCodes[fieldType]);
+      if (value) {
+        checkField.check();
+      } else {
+        checkField.uncheck();
+      }
+    } else {
+      if (value) {
+        const field = pdf.getForm().getTextField(S21HeaderFieldCodes[fieldType]);
         field.setText(value as string);
       }
     }

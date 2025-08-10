@@ -35,11 +35,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@ngneat/transloco';
 import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
-import { S21Service } from 'app/globals/services/s21.service';
 import { OnlineService } from 'app/online/service/online.service';
 import { RoomNamePipe } from 'app/room/pipe/room-name.pipe';
 import { AutoFocusDirective } from '../../directives/autofocus/autofocus.directive';
@@ -83,8 +81,6 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private onlineService = inject(OnlineService);
-  private snackbar = inject(MatSnackBar);
-  private s21Service = inject(S21Service);
   private cdr = inject(ChangeDetectorRef);
 
   //Angular material datepicker hacked
@@ -121,11 +117,6 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
     notAvailableDates: [this.p ? this.p.notAvailableDates : []],
     hasPublisherR: [this.p ? this.p.hasPublisherR : false]
   });
-
-  currentPublisherRegistryName$ = this.s21Service.getPublisherRegistryFullPath(
-    this.form.controls.id.value,
-    true
-  );
 
   get getRoomsArray(): ParticipantRoomInterface[] {
     //rooms is the FormArray, value is the array
@@ -263,35 +254,6 @@ export class CreateUpdateParticipantComponent implements OnInit, OnDestroy {
 
   createParticipant(): void {
     this.participantService.createParticipant(this.form.getRawValue());
-  }
-
-  uploadPublisherRegistry(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      //Read file and upload it
-      //We assume the file is a pdf file
-      //If the file is not a pdf, it will throw an error
-      //and the user will be notified
-      //We save the file to source/assets/S21 folder
-      //and don't overwrite the pdf filename
-      const file = input.files[0];
-      this.s21Service.uploadPublisherRegistry(file, this.form.controls.id.value).then(() => {
-        this.form.controls.hasPublisherR.setValue(true, { emitEvent: false });
-        this.updateOrCreateParticipant();
-        this.snackbar.open('Publisher registry uploaded successfully', 'Close', {
-          duration: 3000
-        });
-      });
-    } else if (input.files && input.files.length === 0) {
-      //No file selected
-      this.snackbar.open('No file selected', 'Close', {
-        duration: 3000
-      });
-    } else {
-      this.snackbar.open('No file selected', 'Close', {
-        duration: 3000
-      });
-    }
   }
 
   /** code for the datepicker hack*/

@@ -27,18 +27,6 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-4">
-          Current publisher registry:
-          {{ (currentPublisherRegistryName$ | async) ?? t('PUBLISHER_REGISTRY_NOT_FOUND') }}
-        </div>
-        <div class="col-4">
-          <span>{{ t('PLACEHOLDER_UPLOAD_PUBLISHER_REGISTRY') }}</span>
-          <input
-            id="zip-upload"
-            type="file"
-            [disabled]="form.invalid"
-            (change)="uploadPublisherRegistry($event)" />
-        </div>
         <div class="row">
           <div class="col-auto">
             <mat-checkbox color="primary" formControlName="available" labelPosition="before">{{

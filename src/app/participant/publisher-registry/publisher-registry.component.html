@@ -29,6 +29,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Open details</th>
           <th>Has participated</th>
           <th>Bible studies</th>
           <th>Is aux. pioner</th>
@@ -41,6 +42,9 @@
         @for (group of formGroupArray; track $index) {
           <tr>
             <td>{{ group.controls.name.value }}</td>
+            <td (click)="openRegistryHeaderDetails(group.controls.id.value)">
+              Click me to open details
+            </td>
             <td><mat-checkbox [formControl]="group.controls.hasParticipated" /></td>
             <td>
               <mat-form-field>
