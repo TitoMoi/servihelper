@@ -18,7 +18,7 @@ import {
 import { ParticipantService } from 'app/participant/service/participant.service';
 import { RoomInterface } from 'app/room/model/room.model';
 import { RoomService } from 'app/room/service/room.service';
-import { Subscription, filter, map } from 'rxjs';
+import { filter, map, Subscription } from 'rxjs';
 
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {
@@ -26,10 +26,10 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  inject,
   OnDestroy,
   OnInit,
-  ViewChild,
-  inject
+  ViewChild
 } from '@angular/core';
 import {
   FormControl,

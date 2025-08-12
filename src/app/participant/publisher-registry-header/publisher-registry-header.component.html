@@ -5,7 +5,7 @@
     <div class="col-auto">
       <mat-form-field>
         <mat-label>Publisher name</mat-label>
-        <input matInput [formControl]="form.controls.name" />
+        <input matInput spellcheck="false" [formControl]="form.controls.name" />
       </mat-form-field>
     </div>
   </div>
@@ -13,7 +13,11 @@
     <div class="col-auto">
       <mat-form-field>
         <mat-label>Birth date</mat-label>
-        <input matInput [formControl]="form.controls.birthDate" [matDatepicker]="birthPicker" />
+        <input
+          matInput
+          spellcheck="false"
+          [formControl]="form.controls.birthDate"
+          [matDatepicker]="birthPicker" />
         <mat-datepicker-toggle matIconSuffix [for]="birthPicker" />
         <mat-datepicker #birthPicker />
       </mat-form-field>
@@ -21,7 +25,11 @@
     <div class="col-auto">
       <mat-form-field>
         <mat-label>Baptism date</mat-label>
-        <input matInput [formControl]="form.controls.baptismDate" [matDatepicker]="baptismPicker" />
+        <input
+          matInput
+          spellcheck="false"
+          [formControl]="form.controls.baptismDate"
+          [matDatepicker]="baptismPicker" />
         <mat-datepicker-toggle matIconSuffix [for]="baptismPicker" />
         <mat-datepicker #baptismPicker />
       </mat-form-field>

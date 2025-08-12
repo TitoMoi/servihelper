@@ -8,6 +8,7 @@
           <mat-option [value]="i">{{ month | getMonthNamePipe: lang }}</mat-option>
         }
       </mat-select>
+      <mat-hint>Pick a month first</mat-hint>
     </mat-form-field>
   </div>
   <div class="col-auto">
@@ -23,48 +24,53 @@
     }
   </div>
 </div>
-<div class="row">
-  <div class="col col-lg-8">
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Open details</th>
-          <th>Has participated</th>
-          <th>Bible studies</th>
-          <th>Is aux. pioner</th>
-          <th>Hours</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        @for (group of formGroupArray; track $index) {
+@if (selectedMonth.value) {
+  <div class="row">
+    <div class="col col-lg-8">
+      <table>
+        <thead>
           <tr>
-            <td>{{ group.controls.name.value }}</td>
-            <td (click)="openRegistryHeaderDetails(group.controls.id.value)">
-              Click me to open details
-            </td>
-            <td><mat-checkbox [formControl]="group.controls.hasParticipated" /></td>
-            <td>
-              <mat-form-field>
-                <input matInput spellcheck="false" [formControl]="group.controls.hasBibleStudies" />
-              </mat-form-field>
-            </td>
-            <td><mat-checkbox [formControl]="group.controls.isAuxPioner" /></td>
-            <td>
-              <mat-form-field>
-                <input matInput spellcheck="false" [formControl]="group.controls.hours" />
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field>
-                <input matInput spellcheck="false" [formControl]="group.controls.notes" />
-              </mat-form-field>
-            </td>
+            <th>Name</th>
+            <th>Open details</th>
+            <th>Has participated</th>
+            <th>Bible studies</th>
+            <th>Is aux. pioner</th>
+            <th>Hours</th>
+            <th>Notes</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          @for (group of formGroupArray; track $index) {
+            <tr>
+              <td>{{ group.controls.name.value }}</td>
+              <td (click)="openRegistryHeaderDetails(group.controls.id.value)">
+                <span style="color: blue; cursor: pointer">Click me to open details</span>
+              </td>
+              <td><mat-checkbox [formControl]="group.controls.hasParticipated" /></td>
+              <td>
+                <mat-form-field>
+                  <input
+                    matInput
+                    spellcheck="false"
+                    [formControl]="group.controls.hasBibleStudies" />
+                </mat-form-field>
+              </td>
+              <td><mat-checkbox [formControl]="group.controls.isAuxPioner" /></td>
+              <td>
+                <mat-form-field>
+                  <input matInput spellcheck="false" [formControl]="group.controls.hours" />
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput spellcheck="false" [formControl]="group.controls.notes" />
+                </mat-form-field>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+}

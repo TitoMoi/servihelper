@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoLocaleService } from '@ngneat/transloco-locale';
 import { S21Service } from 'app/globals/services/s21.service';
+import { ParticipantService } from '../service/participant.service';
 
 @Component({
   selector: 'app-publisher-registry-header',
@@ -38,6 +39,7 @@ export class PublisherRegistryHeaderComponent implements OnInit {
   s21Service = inject(S21Service);
   fb = inject(FormBuilder);
   data: { participantId: string } = inject(MAT_DIALOG_DATA);
+  participantService = inject(ParticipantService);
   translocoLocaleService = inject(TranslocoLocaleService);
   snackbar = inject(MatSnackBar);
 
@@ -61,11 +63,15 @@ export class PublisherRegistryHeaderComponent implements OnInit {
   }
 
   async getParticipantHeaderRegistry() {
+    const participant = this.participantService.getParticipant(this.data.participantId);
     const pdf = await this.s21Service.getPublisherRegistry(this.data.participantId);
 
-    this.form.controls.name.setValue(this.s21Service.getHeaderFieldValue(pdf, 'name') as string, {
-      emitEvent: false
-    });
+    this.form.controls.name.setValue(
+      (this.s21Service.getHeaderFieldValue(pdf, 'name') as string) || participant.name,
+      {
+        emitEvent: false
+      }
+    );
     this.form.controls.birthDate.setValue(
       new Date(this.s21Service.getHeaderFieldValue(pdf, 'birthDate') as string),
       {
@@ -78,15 +84,25 @@ export class PublisherRegistryHeaderComponent implements OnInit {
         emitEvent: false
       }
     );
-    this.form.controls.men.setValue(this.s21Service.getHeaderFieldValue(pdf, 'men') as boolean, {
-      emitEvent: false
-    });
-    this.form.controls.women.setValue(
-      this.s21Service.getHeaderFieldValue(pdf, 'women') as boolean,
-      {
-        emitEvent: false
+
+    const s21menHeaderValue = this.s21Service.getHeaderFieldValue(pdf, 'men');
+    const s21womenHeaderValue = this.s21Service.getHeaderFieldValue(pdf, 'women');
+    const hasGender = s21menHeaderValue || s21womenHeaderValue;
+    if (!hasGender) {
+      if (participant.isWoman) {
+        this.form.controls.women.setValue(true);
+      } else {
+        this.form.controls.men.setValue(true);
       }
-    );
+    } else {
+      this.form.controls.men.setValue(s21menHeaderValue as boolean, {
+        emitEvent: false
+      });
+      this.form.controls.women.setValue(s21womenHeaderValue as boolean, {
+        emitEvent: false
+      });
+    }
+
     this.form.controls.otherSheeps.setValue(
       this.s21Service.getHeaderFieldValue(pdf, 'otherSheeps') as boolean,
       {
