@@ -94,7 +94,7 @@ export class S21Service {
     return arrayBuffer;
   }
 
-  dateToMonthCode(month: number): MonthCodesType {
+  monthNumberToNameCode(month: number): MonthCodesType {
     switch (month) {
       case 0:
         return 'January';
@@ -132,12 +132,12 @@ export class S21Service {
       const checkField = pdf
         .getForm()
         .getCheckBox(S21FieldCodes[fieldType].replace('XX', S21MonthCodesConst[month]));
-      return checkField.acroField.getValue();
+      return checkField.isChecked();
     } else {
       const textField = pdf
         .getForm()
         .getTextField(S21FieldCodes[fieldType].replace('XX', S21MonthCodesConst[month]));
-      return textField.acroField.getValue().toString();
+      return textField.getText();
     }
   }
 

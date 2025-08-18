@@ -3,7 +3,7 @@
     <!-- //Select the month for which you want to register publishers -->
     <mat-form-field>
       <mat-label>Month</mat-label>
-      <mat-select [formControl]="selectedMonth" (ngModelChange)="onMonthChange($event)">
+      <mat-select [formControl]="selectedMonth">
         @for (month of months; track $index; let i = $index) {
           <mat-option [value]="i">{{ month | getMonthNamePipe: lang }}</mat-option>
         }
@@ -24,9 +24,9 @@
     }
   </div>
 </div>
-@if (selectedMonth.value) {
+@if (selectedMonth.value >= 0) {
   <div class="row">
-    <div class="col col-lg-8">
+    <div class="col-9">
       <table>
         <thead>
           <tr>
@@ -43,17 +43,19 @@
         <tbody>
           @for (group of formGroupArray; track $index) {
             <tr>
-              <td>{{ group.controls.name.value }}</td>
+              <td>
+                <div>{{ group.controls.name.value }}</div>
+                @if (group.controls.isRegPioner.value) {
+                  <span class="f-small fst-italic">(Regular pioner)</span>
+                }
+              </td>
               <td (click)="openRegistryHeaderDetails(group.controls.id.value)">
                 <span style="color: blue; cursor: pointer">Click me to open details</span>
               </td>
               <td><mat-checkbox [formControl]="group.controls.hasParticipated" /></td>
               <td>
                 <mat-form-field>
-                  <input
-                    matInput
-                    spellcheck="false"
-                    [formControl]="group.controls.hasBibleStudies" />
+                  <input matInput spellcheck="false" [formControl]="group.controls.bibleStudies" />
                 </mat-form-field>
               </td>
               <td><mat-checkbox [formControl]="group.controls.isAuxPioner" /></td>
@@ -71,6 +73,59 @@
           }
         </tbody>
       </table>
+    </div>
+    <div class="col-3">
+      <div class="row mt-5">
+        <div class="col-12">
+          <div>Todos los publicadores activos</div>
+          <div class="fw-bold">{{ allActivePublishers() }}</div>
+        </div>
+        <hr class="m-2" />
+      </div>
+      <div class="row">
+        <h4>Publicadores</h4>
+        <div class="col-12">
+          <div>Cantidad de informes</div>
+          <div class="fw-bold">{{ numberOfReports() }}</div>
+        </div>
+        <div class="col-12">
+          <div>Cursos bíblicos</div>
+          <div class="fw-bold">{{ numberOfBibleStudies() }}</div>
+        </div>
+        <hr class="m-2" />
+      </div>
+      <div class="row">
+        <h4>Precursores auxiliares</h4>
+        <div class="col-12">
+          <div>Cantidad de informes</div>
+          <div class="fw-bold">{{ numberOfReportsAuxPioner() }}</div>
+        </div>
+        <div class="col-12">
+          <div>Horas</div>
+          <div class="fw-bold">{{ HoursAuxPioner() }}</div>
+        </div>
+        <div class="col-12">
+          <div>Cursos bíblicos</div>
+          <div class="fw-bold">{{ numberOfBibleStudiesAuxPioner() }}</div>
+        </div>
+        <hr class="m-2" />
+      </div>
+      <div class="row">
+        <h4>Precursores regulares</h4>
+        <div class="col-12">
+          <div>Cantidad de informes</div>
+          <div class="fw-bold">{{ numberOfReportsRegularPioner() }}</div>
+        </div>
+        <div class="col-12">
+          <div>Horas</div>
+          <div class="fw-bold">{{ HoursRegularPioner() }}</div>
+        </div>
+        <div class="col-12">
+          <div>Cursos bíblicos</div>
+          <div class="fw-bold">{{ numberOfBibleStudiesRegularPioner() }}</div>
+        </div>
+        <hr class="m-2" />
+      </div>
     </div>
   </div>
 }

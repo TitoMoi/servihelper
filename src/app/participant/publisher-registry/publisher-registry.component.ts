@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal
+} from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -13,6 +20,7 @@ import { GetMonthNamePipe } from 'app/globals/pipes/get-month-name.pipe';
 import { S21Service } from 'app/globals/services/s21.service';
 import { PublisherRegistryHeaderComponent } from 'app/participant/publisher-registry-header/publisher-registry-header.component';
 import { ParticipantService } from 'app/participant/service/participant.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-publisher-registry',
   imports: [
@@ -29,7 +37,7 @@ import { ParticipantService } from 'app/participant/service/participant.service'
   styleUrl: './publisher-registry.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PublisherRegistryComponent implements OnInit {
+export class PublisherRegistryComponent implements OnInit, OnDestroy {
   participantsService = inject(ParticipantService);
   s21Service = inject(S21Service);
   translocoService = inject(TranslocoService);
@@ -41,28 +49,162 @@ export class PublisherRegistryComponent implements OnInit {
     .getParticipants(true)
     .filter(p => p.available && !p.isExternal);
 
+  readonly hasHeaderChanges = signal(false);
+
+  readonly allActivePublishers = signal(0);
+
+  readonly numberOfReports = signal(0);
+  readonly numberOfBibleStudies = signal(0);
+
+  readonly numberOfReportsAuxPioner = signal(0);
+  readonly HoursAuxPioner = signal(0);
+  readonly numberOfBibleStudiesAuxPioner = signal(0);
+
+  readonly numberOfReportsRegularPioner = signal(0);
+  readonly HoursRegularPioner = signal(0);
+  readonly numberOfBibleStudiesRegularPioner = signal(0);
+
   months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(x => new Date(2000, x, 2));
 
-  selectedMonth = new FormControl<number>(null, Validators.required);
+  selectedMonth = new FormControl<number>(-1, Validators.required);
 
   lang = this.translocoService.getActiveLang();
 
   showSpinner = false;
 
+  subscription = new Subscription();
+
   formGroupArray = this.participants.map(participant => {
-    return this.fb.group({
+    const group = this.fb.group({
       id: [participant.id],
       name: [participant.name],
       hasParticipated: [null],
-      hasBibleStudies: [null],
+      bibleStudies: [null],
       isAuxPioner: [null],
+      isRegPioner: [null],
       hours: [null],
       notes: [null]
     });
+
+    this.subscription.add(
+      group.valueChanges.subscribe(() => {
+        const allActivePublishers = this.formGroupArray.filter(
+          g => g.controls.hasParticipated.value
+        );
+        this.allActivePublishers.set(allActivePublishers.length);
+
+        const publishers = allActivePublishers.filter(
+          ap => !ap.controls.isAuxPioner.value && !ap.controls.isRegPioner.value
+        );
+
+        this.numberOfReports.set(publishers.length);
+        this.numberOfBibleStudies.set(
+          publishers.reduce((acc, p) => acc + Number(p.controls.bibleStudies.value), 0)
+        );
+        //
+        const auxPioners = allActivePublishers.filter(ap => ap.controls.isAuxPioner.value);
+        this.numberOfReportsAuxPioner.set(auxPioners.length);
+        this.HoursAuxPioner.set(
+          auxPioners.reduce((acc, p) => acc + Number(p.controls.hours.value), 0)
+        );
+        this.numberOfBibleStudiesAuxPioner.set(
+          auxPioners.reduce((acc, p) => acc + Number(p.controls.bibleStudies.value), 0)
+        );
+
+        const regPioners = allActivePublishers.filter(ap => ap.controls.isRegPioner.value);
+        this.numberOfReportsRegularPioner.set(regPioners.length);
+        this.HoursRegularPioner.set(
+          regPioners.reduce((acc, p) => acc + Number(p.controls.hours.value), 0)
+        );
+        this.numberOfBibleStudiesRegularPioner.set(
+          regPioners.reduce((acc, p) => acc + Number(p.controls.bibleStudies.value), 0)
+        );
+      })
+    );
+
+    return group;
   });
 
   ngOnInit(): void {
     this.ensureAllParticipantsHavePublisherRegistry();
+
+    this.subscription.add(
+      this.selectedMonth.valueChanges.subscribe(month => {
+        this.resetStatisticsFields();
+        this.populateParticipantsData(month);
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  resetStatisticsFields() {
+    this.allActivePublishers.set(0);
+    this.numberOfReports.set(0);
+    this.numberOfBibleStudies.set(0);
+    this.numberOfReportsAuxPioner.set(0);
+    this.HoursAuxPioner.set(0);
+    this.numberOfBibleStudiesAuxPioner.set(0);
+    this.numberOfReportsRegularPioner.set(0);
+    this.HoursRegularPioner.set(0);
+    this.numberOfBibleStudiesRegularPioner.set(0);
+  }
+
+  async populateParticipantsData(month: number) {
+    for (const p of this.participants) {
+      const pdfRegistry = await this.s21Service.getPublisherRegistry(p.id);
+      const group = this.formGroupArray.find(g => g.controls.id.value === p.id);
+      const monthName = this.s21Service.monthNumberToNameCode(month);
+
+      /* group.reset({
+      id: [group.controls.id.value],
+      name: [group.controls.name.value],
+      hasParticipated: [null],
+      bibleStudies: [null],
+      isAuxPioner: [null],
+      isRegPioner: [null],
+      hours: [null],
+      notes: [null]
+    }); */
+
+      group.controls.isRegPioner.setValue(
+        this.s21Service.getHeaderFieldValue(pdfRegistry, 'regularPioneer') as boolean,
+        { emitEvent: false }
+      );
+      group.controls.name.setValue(
+        (this.s21Service.getHeaderFieldValue(pdfRegistry, 'name') as string) || p.name,
+        { emitEvent: false }
+      );
+      group.controls.hasParticipated.setValue(
+        this.s21Service.getFieldValue(pdfRegistry, monthName, 'hasParticipated'),
+        { emitEvent: false }
+      );
+      group.controls.bibleStudies.setValue(
+        this.s21Service.getFieldValue(pdfRegistry, monthName, 'bibleStudies'),
+        { emitEvent: false }
+      );
+
+      //Check if is regular
+      const isRegularPioner = this.s21Service.getHeaderFieldValue(pdfRegistry, 'regularPioneer');
+      const isAuxPioner = this.s21Service.getFieldValue(pdfRegistry, monthName, 'isPioneer');
+      if (isRegularPioner) {
+        group.controls.isAuxPioner.disable();
+      } else {
+        group.controls.isAuxPioner.setValue(isAuxPioner, { emitEvent: false });
+      }
+
+      if (!isAuxPioner && !isRegularPioner) {
+        group.controls.hours.disable();
+      }
+      group.controls.hours.setValue(
+        this.s21Service.getFieldValue(pdfRegistry, monthName, 'hours'),
+        { emitEvent: false }
+      );
+      group.controls.notes.setValue(this.s21Service.getFieldValue(pdfRegistry, monthName, 'notes'));
+    }
+    console.log('populated');
   }
 
   ensureAllParticipantsHavePublisherRegistry() {
@@ -79,7 +221,7 @@ export class PublisherRegistryComponent implements OnInit {
     this.formGroupArray.forEach(async group => {
       const participantId = group.controls.id.value;
       const pdf = await this.s21Service.getPublisherRegistry(participantId);
-      const monthCode = this.s21Service.dateToMonthCode(this.selectedMonth.value);
+      const monthCode = this.s21Service.monthNumberToNameCode(this.selectedMonth.value);
 
       this.s21Service.setFieldValue(
         pdf,
@@ -90,8 +232,8 @@ export class PublisherRegistryComponent implements OnInit {
       this.s21Service.setFieldValue(
         pdf,
         monthCode,
-        'hasBibleStudies',
-        group.controls.hasBibleStudies.value
+        'bibleStudies',
+        group.controls.bibleStudies.value
       );
       this.s21Service.setFieldValue(pdf, monthCode, 'isPioneer', group.controls.isAuxPioner.value);
       this.s21Service.setFieldValue(pdf, monthCode, 'hours', group.controls.hours.value);
@@ -105,15 +247,19 @@ export class PublisherRegistryComponent implements OnInit {
     });
   }
 
-  onMonthChange($event: any) {
-    return;
-  }
-
   openRegistryHeaderDetails(participantId: string): void {
-    this.dialog.open(PublisherRegistryHeaderComponent, {
-      width: '940px',
-      height: '640px',
-      data: { participantId }
-    });
+    this.dialog
+      .open(PublisherRegistryHeaderComponent, {
+        width: '940px',
+        height: '640px',
+        data: { participantId }
+      })
+      .afterClosed()
+      .subscribe(hasChanges => {
+        if (hasChanges) {
+          this.resetStatisticsFields();
+          this.populateParticipantsData(this.selectedMonth.value);
+        }
+      });
   }
 }

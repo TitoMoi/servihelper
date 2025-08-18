@@ -17,7 +17,7 @@ export type MonthCodesType = keyof typeof S21MonthCodesConst;
 
 export const S21FieldCodes = {
   hasParticipated: '901_XX_CheckBox',
-  hasBibleStudies: '902_XX_Text_C_SanSerif',
+  bibleStudies: '902_XX_Text_C_SanSerif',
   isPioneer: '903_XX_CheckBox',
   hours: '904_XX_S21_Value',
   notes: '905_XX_Text_SanSerif',

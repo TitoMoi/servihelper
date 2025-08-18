@@ -8,6 +8,7 @@ import {
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
+  MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoLocaleService } from '@ngneat/transloco-locale';
 import { S21Service } from 'app/globals/services/s21.service';
+import { ParticipantPipe } from '../pipe/participant.pipe';
 import { ParticipantService } from '../service/participant.service';
 
 @Component({
@@ -29,7 +31,8 @@ import { ParticipantService } from '../service/participant.service';
     MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ParticipantPipe
   ],
   templateUrl: './publisher-registry-header.component.html',
   styleUrl: './publisher-registry-header.component.scss',
@@ -39,6 +42,7 @@ export class PublisherRegistryHeaderComponent implements OnInit {
   s21Service = inject(S21Service);
   fb = inject(FormBuilder);
   data: { participantId: string } = inject(MAT_DIALOG_DATA);
+  readonly dialogRef = inject(MatDialogRef<PublisherRegistryHeaderComponent>);
   participantService = inject(ParticipantService);
   translocoLocaleService = inject(TranslocoLocaleService);
   snackbar = inject(MatSnackBar);
@@ -67,22 +71,13 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     const pdf = await this.s21Service.getPublisherRegistry(this.data.participantId);
 
     this.form.controls.name.setValue(
-      (this.s21Service.getHeaderFieldValue(pdf, 'name') as string) || participant.name,
-      {
-        emitEvent: false
-      }
+      (this.s21Service.getHeaderFieldValue(pdf, 'name') as string) || participant.name
     );
     this.form.controls.birthDate.setValue(
-      new Date(this.s21Service.getHeaderFieldValue(pdf, 'birthDate') as string),
-      {
-        emitEvent: false
-      }
+      new Date(this.s21Service.getHeaderFieldValue(pdf, 'birthDate') as string)
     );
     this.form.controls.baptismDate.setValue(
-      new Date(this.s21Service.getHeaderFieldValue(pdf, 'baptismDate') as string),
-      {
-        emitEvent: false
-      }
+      new Date(this.s21Service.getHeaderFieldValue(pdf, 'baptismDate') as string)
     );
 
     const s21menHeaderValue = this.s21Service.getHeaderFieldValue(pdf, 'men');
@@ -95,49 +90,25 @@ export class PublisherRegistryHeaderComponent implements OnInit {
         this.form.controls.men.setValue(true);
       }
     } else {
-      this.form.controls.men.setValue(s21menHeaderValue as boolean, {
-        emitEvent: false
-      });
-      this.form.controls.women.setValue(s21womenHeaderValue as boolean, {
-        emitEvent: false
-      });
+      this.form.controls.men.setValue(s21menHeaderValue as boolean);
+      this.form.controls.women.setValue(s21womenHeaderValue as boolean);
     }
 
     this.form.controls.otherSheeps.setValue(
-      this.s21Service.getHeaderFieldValue(pdf, 'otherSheeps') as boolean,
-      {
-        emitEvent: false
-      }
+      this.s21Service.getHeaderFieldValue(pdf, 'otherSheeps') as boolean
     );
     this.form.controls.anointed.setValue(
-      this.s21Service.getHeaderFieldValue(pdf, 'anointed') as boolean,
-      {
-        emitEvent: false
-      }
+      this.s21Service.getHeaderFieldValue(pdf, 'anointed') as boolean
     );
-    this.form.controls.elder.setValue(
-      this.s21Service.getHeaderFieldValue(pdf, 'elder') as boolean,
-      {
-        emitEvent: false
-      }
-    );
+    this.form.controls.elder.setValue(this.s21Service.getHeaderFieldValue(pdf, 'elder') as boolean);
     this.form.controls.ministerialServant.setValue(
-      this.s21Service.getHeaderFieldValue(pdf, 'ministerialServant') as boolean,
-      {
-        emitEvent: false
-      }
+      this.s21Service.getHeaderFieldValue(pdf, 'ministerialServant') as boolean
     );
     this.form.controls.regularPioneer.setValue(
-      this.s21Service.getHeaderFieldValue(pdf, 'regularPioneer') as boolean,
-      {
-        emitEvent: false
-      }
+      this.s21Service.getHeaderFieldValue(pdf, 'regularPioneer') as boolean
     );
     this.form.controls.specialPioneer.setValue(
-      this.s21Service.getHeaderFieldValue(pdf, 'specialPioneer') as boolean,
-      {
-        emitEvent: false
-      }
+      this.s21Service.getHeaderFieldValue(pdf, 'specialPioneer') as boolean
     );
     this.form.controls.missionary.setValue(
       this.s21Service.getHeaderFieldValue(pdf, 'missionary') as boolean
@@ -181,6 +152,8 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     this.s21Service.setHeaderFieldValue(pdf, 'missionary', this.form.controls.missionary.value);
 
     this.s21Service.updatePublisherRegistry(pdf, this.data.participantId);
+
+    this.dialogRef.close(true);
 
     this.snackbar.open('Publisher header registry updated successfully', 'Close', {
       duration: 4000
