@@ -158,16 +158,16 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
       const group = this.formGroupArray.find(g => g.controls.id.value === p.id);
       const monthName = this.s21Service.monthNumberToNameCode(month);
 
-      /* group.reset({
-      id: [group.controls.id.value],
-      name: [group.controls.name.value],
-      hasParticipated: [null],
-      bibleStudies: [null],
-      isAuxPioner: [null],
-      isRegPioner: [null],
-      hours: [null],
-      notes: [null]
-    }); */
+      group.reset({
+        id: group.controls.id.value,
+        name: group.controls.name.value,
+        hasParticipated: [null],
+        bibleStudies: [null],
+        isAuxPioner: [null],
+        isRegPioner: [null],
+        hours: [null],
+        notes: [null]
+      });
 
       group.controls.isRegPioner.setValue(
         this.s21Service.getHeaderFieldValue(pdfRegistry, 'regularPioneer') as boolean,
@@ -190,8 +190,10 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
       const isRegularPioner = this.s21Service.getHeaderFieldValue(pdfRegistry, 'regularPioneer');
       const isAuxPioner = this.s21Service.getFieldValue(pdfRegistry, monthName, 'isPioneer');
       if (isRegularPioner) {
+        group.controls.isAuxPioner.setValue(false, { emitEvent: false });
         group.controls.isAuxPioner.disable();
       } else {
+        group.controls.isAuxPioner.enable();
         group.controls.isAuxPioner.setValue(isAuxPioner, { emitEvent: false });
       }
 
