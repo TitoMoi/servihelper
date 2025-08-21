@@ -114,7 +114,8 @@ export const routes: Routes = [
   },
   {
     path: 'participant/publisher-registry',
-    component: PublisherRegistryComponent
+    component: PublisherRegistryComponent,
+    canDeactivate: [(component: PublisherRegistryComponent) => component.canDeactivate()]
   },
   {
     path: 'participant/create',

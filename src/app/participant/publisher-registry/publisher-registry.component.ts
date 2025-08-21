@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CanDeactivate } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { GetMonthNamePipe } from 'app/globals/pipes/get-month-name.pipe';
 import { S21Service } from 'app/globals/services/s21.service';
@@ -38,7 +39,9 @@ import { Subscription } from 'rxjs';
   styleUrl: './publisher-registry.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PublisherRegistryComponent implements OnInit, OnDestroy {
+export class PublisherRegistryComponent
+  implements OnInit, OnDestroy, CanDeactivate<PublisherRegistryComponent>
+{
   participantsService = inject(ParticipantService);
   s21Service = inject(S21Service);
   translocoService = inject(TranslocoService);
@@ -269,6 +272,7 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
     });
     await Promise.all([...promises]);
     this.showSpinner = false;
+    this.formGroupArray.forEach(group => group.markAsPristine());
     this.snackbar.open('All Publisher registries updated successfully', 'Close', {
       duration: 3000
     });
@@ -301,5 +305,15 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
           this.populateParticipantsData(this.selectedMonth.value, participantId);
         }
       });
+  }
+
+  canDeactivate(): boolean {
+    if (this.hasChanges()) {
+      return confirm('There are unsaved changes. Do you want to leave without saving?');
+    }
+    return true;
+  }
+  hasChanges(): boolean {
+    return this.formGroupArray.some(group => group.dirty);
   }
 }
