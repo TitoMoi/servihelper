@@ -3,44 +3,44 @@
     @if (hasAssignments()) {
       <div class="d-flex align-items-center">
         <mat-icon
+          aria-label="icon"
           class="m-2"
           svgIcon="png"
-          aria-label="icon"
           [matTooltip]="t('ICON_PNG')"
-          (click)="toPng()"></mat-icon>
+          (click)="toPng()" />
         <mat-icon
+          aria-label="icon"
           class="m-2"
           svgIcon="printer"
-          aria-label="icon"
           [matTooltip]="t('ICON_PRINT')"
-          (click)="createHiddenWindowForPrint()"></mat-icon>
+          (click)="createHiddenWindowForPrint()" />
         <mat-icon
+          aria-label="icon"
           class="m-2"
           svgIcon="folder"
-          aria-label="icon"
           [matTooltip]="t('ICON_FOLDER')"
-          (click)="createAssignmentsInFolder()"></mat-icon>
+          (click)="createAssignmentsInFolder()" />
         <mat-chip-listbox aria-label="Fish selection" class="ms-4">
-          <mat-chip-option (click)="toPdfS89()" [matTooltip]="t('S89_TOOLTIP')"
-            ><mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
+          <mat-chip-option [matTooltip]="t('S89_TOOLTIP')" (click)="toPdfS89()"
+            ><mat-icon aria-label="icon" class="m-2" matChipAvatar svgIcon="pdf" />
             <span id="pdfAcronim">S89</span></mat-chip-option
           >
-          <mat-chip-option (click)="toPdfS89M()" [matTooltip]="t('S89M_TOOLTIP')">
-            <mat-icon matChipAvatar class="m-2" svgIcon="pdf" aria-label="icon"></mat-icon>
+          <mat-chip-option [matTooltip]="t('S89M_TOOLTIP')" (click)="toPdfS89M()">
+            <mat-icon aria-label="icon" class="m-2" matChipAvatar svgIcon="pdf" />
             <span id="pdfAcronim">4-S89</span>
           </mat-chip-option>
         </mat-chip-listbox>
         @if (assignmentsInFolderCreated) {
           <button
-            mat-raised-button
-            color="primary"
             class="m-2"
+            color="primary"
+            mat-raised-button
             type="button"
             (click)="openAssignmentsFolder()">
             {{ t('OPEN_ASSIGNMENTS_SHEET_FOLDER') }}
           </button>
         } @else if (showSpinner) {
-          <mat-spinner class="ms-4" [diameter]="28"></mat-spinner>
+          <mat-spinner class="ms-4" [diameter]="28" />
         }
       </div>
     } @else {
@@ -50,7 +50,7 @@
   <div class="m-2">
     {{ t('NUMBER_OF_ASSIGNMENTS') + assignmentsWithNames.length }}
   </div>
-  <div id="assignmentDiv" class="col-auto bg-color-white">
+  <div class="col-auto bg-color-white" id="assignmentDiv">
     <div class="d-flex flex-wrap align-items-start">
       <!-- this style is for the print option that doesnt support class-->
       @for (a of assignmentsWithNames; track a) {

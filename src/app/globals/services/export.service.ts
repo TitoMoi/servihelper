@@ -6,14 +6,12 @@ import { toPng } from 'html-to-image';
   providedIn: 'root'
 })
 export class ExportService {
-  constructor() {}
-
   /**
    *
    * @param elemId the id of the div to export
    * @param filename the name of the file to save
    */
-  async toPng(elemId: string, filename: string = 'image') {
+  async toPng(elemId: string, filename = 'image') {
     //the div
     document.body.style.cursor = 'wait';
     const div = document.getElementById(elemId);

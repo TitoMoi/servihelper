@@ -1,62 +1,58 @@
 <div *transloco="let t" class="d-flex align-items-center mb-1">
   @if (hasAssignments()) {
-    <div id="noColorSectionDiv" class="col-auto border me-3">
+    <div class="col-auto border me-3" id="noColorSectionDiv">
       <div class="d-flex">
         <mat-icon
-          id="iconHeaderId"
           class="m-2 me-3 mb-4"
+          id="iconHeaderId"
           svgIcon="nocolorsection"
-          [matTooltip]="t('ICON_NO_COLOR_SECTION')"></mat-icon>
+          [matTooltip]="t('ICON_NO_COLOR_SECTION')" />
         <mat-icon
           class="m-2"
           svgIcon="pdfnocolor"
           [matTooltip]="t('ICON_PDF_INFINITE')"
-          (click)="toPdf(false, false)"></mat-icon>
+          (click)="toPdf(false, false)" />
         <span class="mx-2 mt-2">
           <div class="d-flex flex-column align-items-center">
             <mat-icon
               svgIcon="midweeklistnocolor"
               [matTooltip]="t('ICON_PDF_BAND_BLACK')"
-              (click)="toPdfBoard(false, true)"></mat-icon>
+              (click)="toPdfBoard(false, true)" />
             <span class="f-small uppercase">{{ t('COMPRESSED') }}</span>
           </div>
         </span>
       </div>
     </div>
-    <div id="colorSectionDiv" class="col-auto border">
+    <div class="col-auto border" id="colorSectionDiv">
       <div class="d-flex">
         <mat-icon
-          id="iconHeaderId"
           class="m-2 me-3 mb-4 reduceIconSize"
+          id="iconHeaderId"
           svgIcon="colorsection"
-          [matTooltip]="t('ICON_COLOR_SECTION')"></mat-icon>
+          [matTooltip]="t('ICON_COLOR_SECTION')" />
         <mat-icon
           class="m-2"
           svgIcon="pdf"
           [matTooltip]="t('ICON_PDF_INFINITE_COLOR')"
-          (click)="toPdf(true, false)"></mat-icon>
-        <mat-icon
-          class="m-2"
-          svgIcon="png"
-          [matTooltip]="t('ICON_PNG')"
-          (click)="toPng()"></mat-icon>
+          (click)="toPdf(true, false)" />
+        <mat-icon class="m-2" svgIcon="png" [matTooltip]="t('ICON_PNG')" (click)="toPng()" />
         <mat-icon
           class="m-2 ms-5"
           svgIcon="midweeklist"
           [matTooltip]="t('ICON_PDF_BAND')"
-          (click)="toPdfBoard(false)"></mat-icon>
+          (click)="toPdfBoard(false)" />
         <mat-icon
           class="m-2"
           svgIcon="weekendcolorlist"
           [matTooltip]="t('ICON_PDF_BAND_WEEKEND')"
-          (click)="toPdfBoard(true)"></mat-icon>
+          (click)="toPdfBoard(true)" />
       </div>
     </div>
   } @else {
     {{ t('REPORT_NO_ASSIGNMENTS') }}
   }
 </div>
-<div id="toPngDivId" style="width: 791px; height: auto" class="bg-color-white">
+<div class="bg-color-white" id="toPngDivId" style="width: 791px; height: auto">
   @if (reportTitle) {
     <div class="fw-bold p-2" [style.textAlign]="'center'">
       {{ reportTitle }}
@@ -88,8 +84,8 @@
         <tr>
           <!-- td id is to find assignType later, not always has name, sometimes has theme -->
           <td
-            [id]="assignment.assignType.id"
             class="ps-3 pt-2"
+            [id]="assignment.assignType.id"
             [style]="
               getBorderRight((assignment.assignType.id | assignTypePipe).color || 'transparent')
             "

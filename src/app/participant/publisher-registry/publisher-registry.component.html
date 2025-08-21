@@ -13,13 +13,35 @@
   </div>
   <div class="col-auto">
     <button
-      mat-raised-button
+      mat-flat-button
       type="button"
       [disabled]="selectedMonth.invalid"
       (click)="updatePublisherRegistries()">
       Update registries
     </button>
-    @if (showSpinner) {
+  </div>
+  <div class="col-auto">
+    <div class="d-flex">
+      <button
+        class="me-2"
+        mat-raised-button
+        type="button"
+        [disabled]="selectedMonth.invalid"
+        (click)="exportPublisherRegistries()">
+        <div class="d-flex">Export publisher registries</div>
+      </button>
+      @if (showSpinner) {
+        <mat-spinner class="ms-4" [diameter]="28" />
+      }
+    </div>
+  </div>
+  <div class="col">
+    @if (assignmentsInFolderCreated()) {
+      <button color="primary" mat-flat-button type="button" (click)="openS21RegistriesInFolder()">
+        Open 21 registries folder
+        <!-- {{ t('OPEN_ASSIGNMENTS_SHEET_FOLDER') }} -->
+      </button>
+    } @else if (showSpinner) {
       <mat-spinner class="ms-4" [diameter]="28" />
     }
   </div>
@@ -32,7 +54,18 @@
           <tr>
             <th>Name</th>
             <th>Open details</th>
-            <th>Has participated</th>
+            <th>
+              <div class="d-flex flex-column align-items-start">
+                <div>Has participated</div>
+                <button
+                  mat-button
+                  type="button"
+                  [disabled]="selectedMonth.invalid"
+                  (click)="markAllHaveParticipated()">
+                  <div class="d-flex">Check all have participated</div>
+                </button>
+              </div>
+            </th>
             <th>Bible studies</th>
             <th>Is aux. pioner</th>
             <th>Hours</th>

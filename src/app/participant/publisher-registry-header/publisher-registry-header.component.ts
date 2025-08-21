@@ -151,7 +151,7 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     );
     this.s21Service.setHeaderFieldValue(pdf, 'missionary', this.form.controls.missionary.value);
 
-    this.s21Service.updatePublisherRegistry(pdf, this.data.participantId);
+    await this.s21Service.updatePublisherRegistry(pdf, this.data.participantId);
 
     this.dialogRef.close(true);
 

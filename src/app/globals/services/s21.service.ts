@@ -8,16 +8,31 @@ import {
   S21HeaderFieldCodesType,
   S21MonthCodesConst
 } from 'app/globals/models/model';
-import { copy, ensureDirSync, readdir, readFileSync, remove, writeFile } from 'fs-extra';
-import { PDFDocument } from 'pdf-lib';
-
+import { ParticipantService } from 'app/participant/service/participant.service';
+import { isDate } from 'date-fns';
+import { shell } from 'electron';
+import { filenamifyPath } from 'filenamify';
+import {
+  copy,
+  copyFile,
+  ensureDirSync,
+  ensureFileSync,
+  readdir,
+  readFileSync,
+  remove,
+  removeSync,
+  writeFile
+} from 'fs-extra';
 import path from 'path';
+import { PDFDocument } from 'pdf-lib';
 
 @Injectable({
   providedIn: 'root'
 })
 export class S21Service {
   configService = inject(ConfigService);
+  participantService = inject(ParticipantService);
+  homeDir = this.configService.homeDir;
 
   TotalHoursFieldCode = '904_32_S21_Value';
 
@@ -83,6 +98,50 @@ export class S21Service {
     } else {
       return path.join(dirPath, files[0]);
     }
+  }
+
+  async exportPublisherRegistry() {
+    removeSync(filenamifyPath(path.join(this.homeDir, 'S21Reports')));
+
+    const participants = this.participantService
+      .getParticipants(true)
+      .filter(p => p.available && !p.isExternal);
+
+    const promises = [];
+    for (const p of participants) {
+      const pdf = await this.getPublisherRegistry(p.id);
+
+      const isRegularPioner = this.getHeaderFieldValue(pdf, 'regularPioneer');
+      const baptisedDate = this.getHeaderFieldValue(pdf, 'baptismDate');
+      const publisherRegistryPathWithFileName = await this.getPublisherRegistryFullPath(
+        p.id,
+        false,
+        true
+      );
+      if (isRegularPioner) {
+        const fileName = filenamifyPath(
+          path.join(this.homeDir, 'S21Reports', 'regularPioners', p.name + '.pdf')
+        );
+        ensureFileSync(fileName);
+        promises.push(copyFile(publisherRegistryPathWithFileName, fileName));
+      }
+
+      if (isDate(baptisedDate)) {
+        const fileName = filenamifyPath(
+          path.join(this.homeDir, 'S21Reports', 'publishers', p.name + '.pdf')
+        );
+        ensureFileSync(fileName);
+        promises.push(copyFile(publisherRegistryPathWithFileName, fileName));
+      }
+      if (!isDate(baptisedDate)) {
+        const fileName = filenamifyPath(
+          path.join(this.homeDir, 'S21Reports', 'not-baptised', p.name + '.pdf')
+        );
+        ensureFileSync(fileName);
+        promises.push(copyFile(publisherRegistryPathWithFileName, fileName));
+      }
+    }
+    return await Promise.all([...promises]);
   }
 
   toArrayBuffer(buffer) {
@@ -200,5 +259,9 @@ export class S21Service {
         field.setText(value as string);
       }
     }
+  }
+
+  openS21RegistriesInFolder() {
+    shell.openPath(path.join(this.homeDir, 'S21Reports'));
   }
 }

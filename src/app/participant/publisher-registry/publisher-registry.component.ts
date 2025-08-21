@@ -21,6 +21,7 @@ import { S21Service } from 'app/globals/services/s21.service';
 import { PublisherRegistryHeaderComponent } from 'app/participant/publisher-registry-header/publisher-registry-header.component';
 import { ParticipantService } from 'app/participant/service/participant.service';
 import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-publisher-registry',
   imports: [
@@ -70,6 +71,7 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
 
   lang = this.translocoService.getActiveLang();
 
+  readonly assignmentsInFolderCreated = signal(false);
   showSpinner = false;
 
   subscription = new Subscription();
@@ -85,6 +87,16 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
       hours: [null],
       notes: [null]
     });
+
+    this.subscription.add(
+      group.controls.isAuxPioner.valueChanges.subscribe(isAuxPioner => {
+        if (isAuxPioner) {
+          group.controls.hours.enable();
+        } else {
+          group.controls.hours.disable();
+        }
+      })
+    );
 
     this.subscription.add(
       group.valueChanges.subscribe(() => {
@@ -152,22 +164,27 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
     this.numberOfBibleStudiesRegularPioner.set(0);
   }
 
-  async populateParticipantsData(month: number) {
-    for (const p of this.participants) {
+  async populateParticipantsData(month: number, participantId?: string) {
+    for (const p of this.participants.filter(part => {
+      return participantId ? part.id === participantId : true;
+    })) {
       const pdfRegistry = await this.s21Service.getPublisherRegistry(p.id);
       const group = this.formGroupArray.find(g => g.controls.id.value === p.id);
       const monthName = this.s21Service.monthNumberToNameCode(month);
 
-      group.reset({
-        id: group.controls.id.value,
-        name: group.controls.name.value,
-        hasParticipated: [null],
-        bibleStudies: [null],
-        isAuxPioner: [null],
-        isRegPioner: [null],
-        hours: [null],
-        notes: [null]
-      });
+      group.reset(
+        {
+          id: group.controls.id.value,
+          name: group.controls.name.value,
+          hasParticipated: [null],
+          bibleStudies: [null],
+          isAuxPioner: [null],
+          isRegPioner: [null],
+          hours: [null],
+          notes: [null]
+        },
+        { emitEvent: false }
+      );
 
       group.controls.isRegPioner.setValue(
         this.s21Service.getHeaderFieldValue(pdfRegistry, 'regularPioneer') as boolean,
@@ -191,14 +208,15 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
       const isAuxPioner = this.s21Service.getFieldValue(pdfRegistry, monthName, 'isPioneer');
       if (isRegularPioner) {
         group.controls.isAuxPioner.setValue(false, { emitEvent: false });
-        group.controls.isAuxPioner.disable();
+        group.controls.isAuxPioner.disable({ emitEvent: false });
       } else {
-        group.controls.isAuxPioner.enable();
+        group.controls.isAuxPioner.enable({ emitEvent: false });
         group.controls.isAuxPioner.setValue(isAuxPioner, { emitEvent: false });
       }
-
       if (!isAuxPioner && !isRegularPioner) {
-        group.controls.hours.disable();
+        group.controls.hours.disable({ emitEvent: false });
+      } else {
+        group.controls.hours.enable({ emitEvent: false });
       }
       group.controls.hours.setValue(
         this.s21Service.getFieldValue(pdfRegistry, monthName, 'hours'),
@@ -215,6 +233,13 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
       promises.push(this.s21Service.preparePublisherRegistry(p.id));
     });
     Promise.all([...promises]).then(() => console.log('all files done'));
+  }
+
+  //Mark all participants as having participated but do not emit the value changes until the end
+  markAllHaveParticipated() {
+    this.formGroupArray.forEach(group => {
+      group.controls.hasParticipated.setValue(true, { emitEvent: false });
+    });
   }
 
   async updatePublisherRegistries(): Promise<void> {
@@ -249,6 +274,19 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
     });
   }
 
+  async exportPublisherRegistries() {
+    this.assignmentsInFolderCreated.set(false);
+    this.showSpinner = true;
+    await this.s21Service.exportPublisherRegistry();
+    this.snackbar.open('All publisher registries have been created');
+    this.showSpinner = false;
+    this.assignmentsInFolderCreated.set(true);
+  }
+
+  openS21RegistriesInFolder() {
+    this.s21Service.openS21RegistriesInFolder();
+  }
+
   openRegistryHeaderDetails(participantId: string): void {
     this.dialog
       .open(PublisherRegistryHeaderComponent, {
@@ -260,7 +298,7 @@ export class PublisherRegistryComponent implements OnInit, OnDestroy {
       .subscribe(hasChanges => {
         if (hasChanges) {
           this.resetStatisticsFields();
-          this.populateParticipantsData(this.selectedMonth.value);
+          this.populateParticipantsData(this.selectedMonth.value, participantId);
         }
       });
   }

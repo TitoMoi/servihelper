@@ -7,14 +7,13 @@ import { BandNamesWithExtType } from 'app/report/model/report.model';
 import { RoomService } from 'app/room/service/room.service';
 import autoTable from 'jspdf-autotable';
 
-/* eslint-disable @typescript-eslint/naming-convention */
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  inject,
   Input,
-  OnChanges,
-  inject
+  OnChanges
 } from '@angular/core';
 
 import { TranslocoLocaleModule, TranslocoLocaleService } from '@ngneat/transloco-locale';
@@ -123,7 +122,6 @@ export class SelectionListComponent implements OnChanges {
    *
    * @param shouldFusionRooms if true, dont create another ag, instead add that assignment to the same ag
    */
-  // eslint-disable-next-line complexity
   getRelatedData(shouldFusionRooms = false) {
     this.assignmentGroups = [];
 
@@ -135,8 +133,12 @@ export class SelectionListComponent implements OnChanges {
     let firstRoomId;
 
     for (const assignment of this.#assignments) {
-      if (!currentDate) currentDate = assignment.date;
-      if (!firstRoomId) firstRoomId = assignment.room;
+      if (!currentDate) {
+        currentDate = assignment.date;
+      }
+      if (!firstRoomId) {
+        firstRoomId = assignment.room;
+      }
 
       if (
         new Date(currentDate).toISOString() !== new Date(assignment.date).toISOString() ||
@@ -170,7 +172,9 @@ export class SelectionListComponent implements OnChanges {
       });
     }
     //last assign group who is out of the loop
-    if (assignGroup.assignments.length) this.assignmentGroups.push(assignGroup);
+    if (assignGroup.assignments.length) {
+      this.assignmentGroups.push(assignGroup);
+    }
   }
 
   /**
@@ -198,9 +202,7 @@ export class SelectionListComponent implements OnChanges {
         theme: 'plain',
         margin: { vertical: 10 },
         didParseCell: data => {
-          // eslint-disable-next-line @typescript-eslint/dot-notation
           const id = data.cell.raw['id'];
-          // eslint-disable-next-line @typescript-eslint/dot-notation
           const localName = data.cell.raw['localName'];
           const assignType = this.assignTypeService.getAssignType(id);
           if (assignType) {
@@ -278,7 +280,9 @@ export class SelectionListComponent implements OnChanges {
   ) {
     let weeks = 0;
     for (const ag of agList) {
-      if (isSameMonth(currentAg.assignments[0].date, ag.assignments[0].date)) weeks++;
+      if (isSameMonth(currentAg.assignments[0].date, ag.assignments[0].date)) {
+        weeks++;
+      }
     }
     return weeks === 5;
   }
@@ -480,10 +484,10 @@ export class SelectionListComponent implements OnChanges {
           //Find the equivalent on room2, paint participants and remove the assignment
           // the room2 assignments are at the end of the ag because are sorted
           const assign = ag.assignments.find(
-            assign => assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
+            assi => assi.room.id !== a.room.id && assi.assignType.type === a.assignType.type
           );
           const index = ag.assignments.findIndex(
-            assign => assign.room.id !== a.room.id && assign.assignType.type === a.assignType.type
+            assi => assi.room.id !== a.room.id && assi.assignType.type === a.assignType.type
           );
           if (assign) {
             participantsNames = this.getParticipantsNames(assign, hasMultipleRooms);
