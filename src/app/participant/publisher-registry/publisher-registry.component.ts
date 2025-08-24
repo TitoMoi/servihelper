@@ -16,7 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CanDeactivate } from '@angular/router';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { GetMonthNamePipe } from 'app/globals/pipes/get-month-name.pipe';
 import { S21Service } from 'app/globals/services/s21.service';
 import { PublisherRegistryHeaderComponent } from 'app/participant/publisher-registry-header/publisher-registry-header.component';
@@ -26,6 +26,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-publisher-registry',
   imports: [
+    TranslocoModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -79,69 +80,71 @@ export class PublisherRegistryComponent
 
   subscription = new Subscription();
 
-  formGroupArray = this.participants.map(participant => {
-    const group = this.fb.group({
-      id: [participant.id],
-      name: [participant.name],
-      hasParticipated: [null],
-      bibleStudies: [null],
-      isAuxPioner: [null],
-      isRegPioner: [null],
-      hours: [null],
-      notes: [null]
-    });
-
-    this.subscription.add(
-      group.controls.isAuxPioner.valueChanges.subscribe(isAuxPioner => {
-        if (isAuxPioner) {
-          group.controls.hours.enable();
-        } else {
-          group.controls.hours.disable();
-        }
-      })
-    );
-
-    this.subscription.add(
-      group.valueChanges.subscribe(() => {
-        const allActivePublishers = this.formGroupArray.filter(
-          g => g.controls.hasParticipated.value
-        );
-        this.allActivePublishers.set(allActivePublishers.length);
-
-        const publishers = allActivePublishers.filter(
-          ap => !ap.controls.isAuxPioner.value && !ap.controls.isRegPioner.value
-        );
-
-        this.numberOfReports.set(publishers.length);
-        this.numberOfBibleStudies.set(
-          publishers.reduce((acc, p) => acc + Number(p.controls.bibleStudies.value), 0)
-        );
-        //
-        const auxPioners = allActivePublishers.filter(ap => ap.controls.isAuxPioner.value);
-        this.numberOfReportsAuxPioner.set(auxPioners.length);
-        this.HoursAuxPioner.set(
-          auxPioners.reduce((acc, p) => acc + Number(p.controls.hours.value), 0)
-        );
-        this.numberOfBibleStudiesAuxPioner.set(
-          auxPioners.reduce((acc, p) => acc + Number(p.controls.bibleStudies.value), 0)
-        );
-
-        const regPioners = allActivePublishers.filter(ap => ap.controls.isRegPioner.value);
-        this.numberOfReportsRegularPioner.set(regPioners.length);
-        this.HoursRegularPioner.set(
-          regPioners.reduce((acc, p) => acc + Number(p.controls.hours.value), 0)
-        );
-        this.numberOfBibleStudiesRegularPioner.set(
-          regPioners.reduce((acc, p) => acc + Number(p.controls.bibleStudies.value), 0)
-        );
-      })
-    );
-
-    return group;
-  });
+  formGroupArray;
 
   ngOnInit(): void {
     this.ensureAllParticipantsHavePublisherRegistry();
+
+    this.formGroupArray = this.participants.map(participant => {
+      const group = this.fb.group({
+        id: [participant.id],
+        name: [participant.name],
+        hasParticipated: [null],
+        bibleStudies: [null],
+        isAuxPioner: [null],
+        isRegPioner: [null],
+        hours: [null],
+        notes: [null]
+      });
+
+      this.subscription.add(
+        group.controls.isAuxPioner.valueChanges.subscribe(isAuxPioner => {
+          if (isAuxPioner) {
+            group.controls.hours.enable();
+          } else {
+            group.controls.hours.disable();
+          }
+        })
+      );
+
+      this.subscription.add(
+        group.valueChanges.subscribe(() => {
+          const allActivePublishers = this.formGroupArray.filter(
+            g => g.controls.hasParticipated.value
+          );
+          this.allActivePublishers.set(allActivePublishers.length);
+
+          const publishers = allActivePublishers.filter(
+            ap => !ap.controls.isAuxPioner.value && !ap.controls.isRegPioner.value
+          );
+
+          this.numberOfReports.set(publishers.length);
+          this.numberOfBibleStudies.set(
+            publishers.reduce((acc, p) => acc + Number(p.controls.bibleStudies.value), 0)
+          );
+          //
+          const auxPioners = allActivePublishers.filter(ap => ap.controls.isAuxPioner.value);
+          this.numberOfReportsAuxPioner.set(auxPioners.length);
+          this.HoursAuxPioner.set(
+            auxPioners.reduce((acc, p) => acc + Number(p.controls.hours.value), 0)
+          );
+          this.numberOfBibleStudiesAuxPioner.set(
+            auxPioners.reduce((acc, p) => acc + Number(p.controls.bibleStudies.value), 0)
+          );
+
+          const regPioners = allActivePublishers.filter(ap => ap.controls.isRegPioner.value);
+          this.numberOfReportsRegularPioner.set(regPioners.length);
+          this.HoursRegularPioner.set(
+            regPioners.reduce((acc, p) => acc + Number(p.controls.hours.value), 0)
+          );
+          this.numberOfBibleStudiesRegularPioner.set(
+            regPioners.reduce((acc, p) => acc + Number(p.controls.bibleStudies.value), 0)
+          );
+        })
+      );
+
+      return group;
+    });
 
     this.subscription.add(
       this.selectedMonth.valueChanges.subscribe(month => {
@@ -153,6 +156,13 @@ export class PublisherRegistryComponent
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  ensureAllParticipantsHavePublisherRegistry() {
+    const participants = this.participantsService.getParticipants(true).filter(p => !p.isExternal);
+    participants.forEach(async p => {
+      this.s21Service.preparePublisherRegistry(p.id);
+    });
   }
 
   resetStatisticsFields() {
@@ -227,15 +237,6 @@ export class PublisherRegistryComponent
       );
       group.controls.notes.setValue(this.s21Service.getFieldValue(pdfRegistry, monthName, 'notes'));
     }
-    console.log('populated');
-  }
-
-  ensureAllParticipantsHavePublisherRegistry() {
-    const promises = [];
-    this.participants.forEach(async p => {
-      promises.push(this.s21Service.preparePublisherRegistry(p.id));
-    });
-    Promise.all([...promises]).then(() => console.log('all files done'));
   }
 
   //Mark all participants as having participated but do not emit the value changes until the end

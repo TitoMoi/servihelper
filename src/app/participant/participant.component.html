@@ -31,16 +31,18 @@
         <span>{{ t('ASSIGNTYPE_AVAILABLE_LIST') }}</span>
         <mat-icon routerLinkActive="active" svgIcon="assigntypeavailable" />
       </button>
-      <button
-        class="mb-2"
-        color="accent"
-        mat-raised-button
-        type="button"
-        [disabled]="netStatusOffline$ | async"
-        [routerLink]="['/participant', 'publisher-registry']">
-        <span>{{ t('PARTICIPANT_PUBLISHER_REGISTRY_TITLE') }}</span>
-        <mat-icon routerLinkActive="active" svgIcon="pdf" />
-      </button>
+      @if (isS21TemplateAvailable()) {
+        <button
+          class="mb-2"
+          color="accent"
+          mat-raised-button
+          type="button"
+          [disabled]="netStatusOffline$ | async"
+          [routerLink]="['/participant', 'publisher-registry']">
+          <span>{{ t('PARTICIPANT_PUBLISHER_REGISTRY_TITLE') }}</span>
+          <mat-icon routerLinkActive="active" svgIcon="pdf" />
+        </button>
+      }
     }
   </div>
   <div class="d-flex align-items-center">

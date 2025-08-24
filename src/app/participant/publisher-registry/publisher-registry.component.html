@@ -1,164 +1,166 @@
-<div class="row mb-2">
-  <div class="col-auto">
-    <!-- //Select the month for which you want to register publishers -->
-    <mat-form-field>
-      <mat-label>Month</mat-label>
-      <mat-select [formControl]="selectedMonth">
-        @for (month of months; track $index; let i = $index) {
-          <mat-option [value]="i">{{ month | getMonthNamePipe: lang }}</mat-option>
-        }
-      </mat-select>
-      <mat-hint>Pick a month first</mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="col-auto">
-    <button
-      mat-flat-button
-      type="button"
-      [disabled]="selectedMonth.invalid"
-      (click)="updatePublisherRegistries()">
-      Update registries
-    </button>
-  </div>
-  <div class="col-auto">
-    <div class="d-flex">
-      <button
-        class="me-2"
-        mat-raised-button
-        type="button"
-        [disabled]="selectedMonth.invalid"
-        (click)="exportPublisherRegistries()">
-        <div class="d-flex">Export publisher registries</div>
-      </button>
-      @if (showSpinner) {
+<span *transloco="let t">
+  <div class="row mb-2">
+    <div class="col-auto">
+      <!-- //Select the month for which you want to register publishers -->
+      <mat-form-field>
+        <mat-label> {{ t('S21_MONTH') }}</mat-label>
+        <mat-select [formControl]="selectedMonth">
+          @for (month of months; track $index; let i = $index) {
+            <mat-option [value]="i">{{ month | getMonthNamePipe: lang }}</mat-option>
+          }
+        </mat-select>
+        <mat-hint>{{ t('S21_PICK_MONTH') }}</mat-hint>
+      </mat-form-field>
+    </div>
+    @if (selectedMonth.value > -1) {
+      <div class="col-auto">
+        <button
+          mat-flat-button
+          type="button"
+          [disabled]="selectedMonth.invalid"
+          (click)="updatePublisherRegistries()">
+          {{ t('S21_UPDATE_BTN') }}
+        </button>
+      </div>
+      <div class="col-auto">
+        <button
+          class="me-2"
+          mat-raised-button
+          type="button"
+          [disabled]="selectedMonth.invalid"
+          (click)="exportPublisherRegistries()">
+          <div class="d-flex">{{ t('S21_EXPORT_BTN') }}</div>
+        </button>
+      </div>
+    }
+    <div class="col">
+      @if (assignmentsInFolderCreated()) {
+        <button color="primary" mat-flat-button type="button" (click)="openS21RegistriesInFolder()">
+          {{ t('S21_OPEN_FOLDER') }}
+          <!-- {{ t('OPEN_ASSIGNMENTS_SHEET_FOLDER') }} -->
+        </button>
+      } @else if (showSpinner) {
         <mat-spinner class="ms-4" [diameter]="28" />
       }
     </div>
   </div>
-  <div class="col">
-    @if (assignmentsInFolderCreated()) {
-      <button color="primary" mat-flat-button type="button" (click)="openS21RegistriesInFolder()">
-        Open 21 registries folder
-        <!-- {{ t('OPEN_ASSIGNMENTS_SHEET_FOLDER') }} -->
-      </button>
-    } @else if (showSpinner) {
-      <mat-spinner class="ms-4" [diameter]="28" />
-    }
-  </div>
-</div>
-@if (selectedMonth.value >= 0) {
-  <div class="row">
-    <div class="col-9">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Open details</th>
-            <th>
-              <div class="d-flex flex-column align-items-start">
-                <div>Has participated</div>
-                <button
-                  mat-button
-                  type="button"
-                  [disabled]="selectedMonth.invalid"
-                  (click)="markAllHaveParticipated()">
-                  <div class="d-flex">Check all have participated</div>
-                </button>
-              </div>
-            </th>
-            <th>Bible studies</th>
-            <th>Is aux. pioner</th>
-            <th>Hours</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          @for (group of formGroupArray; track $index) {
+  @if (selectedMonth.value >= 0) {
+    <div class="row">
+      <div class="col-9">
+        <table>
+          <thead>
             <tr>
-              <td>
-                <div>{{ group.controls.name.value }}</div>
-                @if (group.controls.isRegPioner.value) {
-                  <span class="f-small fst-italic">(Regular pioner)</span>
-                }
-              </td>
-              <td (click)="openRegistryHeaderDetails(group.controls.id.value)">
-                <span style="color: blue; cursor: pointer">Click me to open details</span>
-              </td>
-              <td><mat-checkbox [formControl]="group.controls.hasParticipated" /></td>
-              <td>
-                <mat-form-field>
-                  <input matInput spellcheck="false" [formControl]="group.controls.bibleStudies" />
-                </mat-form-field>
-              </td>
-              <td><mat-checkbox [formControl]="group.controls.isAuxPioner" /></td>
-              <td>
-                <mat-form-field>
-                  <input matInput spellcheck="false" [formControl]="group.controls.hours" />
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field>
-                  <input matInput spellcheck="false" [formControl]="group.controls.notes" />
-                </mat-form-field>
-              </td>
+              <th>{{ t('S21_T_NAME') }}</th>
+              <th>{{ t('S21_T_DETAILS') }}</th>
+              <th>
+                <div class="d-flex flex-column align-items-start">
+                  <div>{{ t('S21_T_HAS_PARTICIPATED') }}</div>
+                  <button
+                    mat-button
+                    type="button"
+                    [disabled]="selectedMonth.invalid"
+                    (click)="markAllHaveParticipated()">
+                    <div class="d-flex">{{ t('S21_T_CHECK_ALL_PARTICIPATED') }}</div>
+                  </button>
+                </div>
+              </th>
+              <th>{{ t('S21_T_BIBLE_STUDIES') }}</th>
+              <th>{{ t('S21_T_IS_AUX_PIONER') }}</th>
+              <th>{{ t('S21_T_HOURS') }}</th>
+              <th>{{ t('S21_T_NOTES') }}</th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            @for (group of formGroupArray; track $index) {
+              <tr>
+                <td>
+                  <div>{{ group.controls.name.value }}</div>
+                  @if (group.controls.isRegPioner.value) {
+                    <span class="f-small fst-italic">{{ t('S21_REGULAR_PIONER') }}</span>
+                  }
+                </td>
+                <td (click)="openRegistryHeaderDetails(group.controls.id.value)">
+                  <span style="color: blue; cursor: pointer">{{ t('S21_OPEN_DETAILS') }}</span>
+                </td>
+                <td><mat-checkbox [formControl]="group.controls.hasParticipated" /></td>
+                <td>
+                  <mat-form-field>
+                    <input
+                      matInput
+                      spellcheck="false"
+                      [formControl]="group.controls.bibleStudies" />
+                  </mat-form-field>
+                </td>
+                <td><mat-checkbox [formControl]="group.controls.isAuxPioner" /></td>
+                <td>
+                  <mat-form-field>
+                    <input matInput spellcheck="false" [formControl]="group.controls.hours" />
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field>
+                    <input matInput spellcheck="false" [formControl]="group.controls.notes" />
+                  </mat-form-field>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="col-3">
+        <div class="row mt-5">
+          <div class="col-12">
+            <div>{{ t('S21_ALL_ACTIVE_PUBLISHERS') }}</div>
+            <div class="fw-bold">{{ allActivePublishers() }}</div>
+          </div>
+          <hr class="m-2" />
+        </div>
+        <div class="row">
+          <h4>{{ t('S21_PUBLISHERS') }}</h4>
+          <div class="col-12">
+            <div>{{ t('S21_NUMBER_REPORTS') }}</div>
+            <div class="fw-bold">{{ numberOfReports() }}</div>
+          </div>
+          <div class="col-12">
+            <div>{{ t('S21_BIBLE_COURSES') }}</div>
+            <div class="fw-bold">{{ numberOfBibleStudies() }}</div>
+          </div>
+          <hr class="m-2" />
+        </div>
+        <div class="row">
+          <h4>{{ t('S21_AUX_PIONERS') }}</h4>
+          <div class="col-12">
+            <div>{{ t('S21_NUMBER_REPORTS') }}</div>
+            <div class="fw-bold">{{ numberOfReportsAuxPioner() }}</div>
+          </div>
+          <div class="col-12">
+            <div>{{ t('S21_HOURS') }}</div>
+            <div class="fw-bold">{{ HoursAuxPioner() }}</div>
+          </div>
+          <div class="col-12">
+            <div>{{ t('S21_BIBLE_COURSES') }}</div>
+            <div class="fw-bold">{{ numberOfBibleStudiesAuxPioner() }}</div>
+          </div>
+          <hr class="m-2" />
+        </div>
+        <div class="row">
+          <h4>{{ t('S21_REGULAR_PIONERS') }}</h4>
+          <div class="col-12">
+            <div>{{ t('S21_NUMBER_REPORTS') }}</div>
+            <div class="fw-bold">{{ numberOfReportsRegularPioner() }}</div>
+          </div>
+          <div class="col-12">
+            <div>{{ t('S21_HOURS') }}</div>
+            <div class="fw-bold">{{ HoursRegularPioner() }}</div>
+          </div>
+          <div class="col-12">
+            <div>{{ t('S21_BIBLE_COURSES') }}</div>
+            <div class="fw-bold">{{ numberOfBibleStudiesRegularPioner() }}</div>
+          </div>
+          <hr class="m-2" />
+        </div>
+      </div>
     </div>
-    <div class="col-3">
-      <div class="row mt-5">
-        <div class="col-12">
-          <div>Todos los publicadores activos</div>
-          <div class="fw-bold">{{ allActivePublishers() }}</div>
-        </div>
-        <hr class="m-2" />
-      </div>
-      <div class="row">
-        <h4>Publicadores</h4>
-        <div class="col-12">
-          <div>Cantidad de informes</div>
-          <div class="fw-bold">{{ numberOfReports() }}</div>
-        </div>
-        <div class="col-12">
-          <div>Cursos bíblicos</div>
-          <div class="fw-bold">{{ numberOfBibleStudies() }}</div>
-        </div>
-        <hr class="m-2" />
-      </div>
-      <div class="row">
-        <h4>Precursores auxiliares</h4>
-        <div class="col-12">
-          <div>Cantidad de informes</div>
-          <div class="fw-bold">{{ numberOfReportsAuxPioner() }}</div>
-        </div>
-        <div class="col-12">
-          <div>Horas</div>
-          <div class="fw-bold">{{ HoursAuxPioner() }}</div>
-        </div>
-        <div class="col-12">
-          <div>Cursos bíblicos</div>
-          <div class="fw-bold">{{ numberOfBibleStudiesAuxPioner() }}</div>
-        </div>
-        <hr class="m-2" />
-      </div>
-      <div class="row">
-        <h4>Precursores regulares</h4>
-        <div class="col-12">
-          <div>Cantidad de informes</div>
-          <div class="fw-bold">{{ numberOfReportsRegularPioner() }}</div>
-        </div>
-        <div class="col-12">
-          <div>Horas</div>
-          <div class="fw-bold">{{ HoursRegularPioner() }}</div>
-        </div>
-        <div class="col-12">
-          <div>Cursos bíblicos</div>
-          <div class="fw-bold">{{ numberOfBibleStudiesRegularPioner() }}</div>
-        </div>
-        <hr class="m-2" />
-      </div>
-    </div>
-  </div>
-}
+  }
+</span>

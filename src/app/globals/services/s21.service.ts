@@ -50,12 +50,31 @@ export class S21Service {
     return pdf;
   }
 
+  isS21TemplateAvailable() {
+    const lang = this.configService.getConfig().lang;
+    switch (lang) {
+      case 'en':
+      case 'es':
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  getS21TemplatePathByLang(onlyFileName = false) {
+    const lang = this.configService.getConfig().lang;
+    if (onlyFileName) {
+      return `S-21_${lang}.pdf`;
+    }
+    return path.join(this.configService.templatesFilesPath, `S-21_${lang}.pdf`);
+  }
+
   async preparePublisherRegistry(participantId: string) {
-    const s21templatePath = path.join(this.configService.templatesFilesPath, 'S-21_S.pdf');
+    const s21templatePath = this.getS21TemplatePathByLang();
     const filename = await this.getPublisherRegistryFullPath(participantId, true, false);
     if (!filename) {
       const dirPath = await this.getPublisherRegistryFullPath(participantId, false, false);
-      return copy(s21templatePath, path.join(dirPath, 'S-21_S.pdf'));
+      return copy(s21templatePath, path.join(dirPath, this.getS21TemplatePathByLang(true)));
     }
   }
 
