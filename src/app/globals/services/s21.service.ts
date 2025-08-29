@@ -55,6 +55,7 @@ export class S21Service {
     switch (lang) {
       case 'en':
       case 'es':
+      case 'ca':
         return true;
       default:
         return false;
@@ -103,7 +104,7 @@ export class S21Service {
     if (!participantId) {
       return null;
     }
-    const dirPath = path.join(this.configService.sourceFilesPath, 'S21', participantId);
+    const dirPath = path.join(this.configService.s21Path, participantId);
     ensureDirSync(dirPath);
     //Read file name from the filePath
     const files = await readdir(dirPath);

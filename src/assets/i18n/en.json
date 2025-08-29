@@ -525,5 +525,7 @@
   "S21_BIBLE_COURSES": "Bible courses",
   "S21_AUX_PIONERS": "Auxiliar pioners",
   "S21_HOURS": "Hours",
-  "S21_REGULAR_PIONERS": "Regular pioners"
+  "S21_REGULAR_PIONERS": "Regular pioners",
+  "S21_HAS_TO_PARTICIPATE_NOTE": "The publisher must check the participation box for the count to be effective",
+  "S21_SAVE_PDF_REMINDER": "pdf files are not saved automatically. Please save before leaving."
 }

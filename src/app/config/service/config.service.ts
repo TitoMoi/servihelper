@@ -66,6 +66,9 @@ export class ConfigService {
   territoryGroupsPath;
   polygonsPath;
 
+  //Sensitive information, NOT under Source path
+  s21Path = path.join(this.assetsFilesPath, 'S21');
+
   // Flag to indicate that config file has changed
   hasChanged = true;
 

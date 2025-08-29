@@ -14,13 +14,16 @@
     </div>
     @if (selectedMonth.value > -1) {
       <div class="col-auto">
-        <button
-          mat-flat-button
-          type="button"
-          [disabled]="selectedMonth.invalid"
-          (click)="updatePublisherRegistries()">
-          {{ t('S21_UPDATE_BTN') }}
-        </button>
+        <div class="d-flex flex-column">
+          <button
+            mat-flat-button
+            type="button"
+            [disabled]="selectedMonth.invalid"
+            (click)="updatePublisherRegistries()">
+            {{ t('S21_UPDATE_BTN') }}
+          </button>
+          <div class="fst-italic fw-bold" style="color: red">{{ t('S21_SAVE_PDF_REMINDER') }}</div>
+        </div>
       </div>
       <div class="col-auto">
         <button
@@ -111,7 +114,7 @@
       <div class="col-3">
         <div class="row mt-5">
           <div class="col-12">
-            <div>{{ t('S21_ALL_ACTIVE_PUBLISHERS') }}</div>
+            <div>{{ t('S21_ALL_ACTIVE_PUBLISHERS') }}*</div>
             <div class="fw-bold">{{ allActivePublishers() }}</div>
           </div>
           <hr class="m-2" />
@@ -159,6 +162,11 @@
             <div class="fw-bold">{{ numberOfBibleStudiesRegularPioner() }}</div>
           </div>
           <hr class="m-2" />
+        </div>
+        <div class="row">
+          <div class="col-auto">
+            <div class="fst-italic">*{{ t('S21_HAS_TO_PARTICIPATE_NOTE') }}</div>
+          </div>
         </div>
       </div>
     </div>
