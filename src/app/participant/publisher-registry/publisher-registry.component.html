@@ -27,7 +27,7 @@
       </div>
       <div class="col-auto">
         <button
-          class="me-2"
+          class="me-5"
           mat-raised-button
           type="button"
           [disabled]="selectedMonth.invalid"
@@ -36,15 +36,24 @@
         </button>
       </div>
     }
-    <div class="col">
+    <div class="col-auto">
       @if (assignmentsInFolderCreated()) {
         <button color="primary" mat-flat-button type="button" (click)="openS21RegistriesInFolder()">
           {{ t('S21_OPEN_FOLDER') }}
-          <!-- {{ t('OPEN_ASSIGNMENTS_SHEET_FOLDER') }} -->
         </button>
       } @else if (showSpinner) {
         <mat-spinner class="ms-4" [diameter]="28" />
       }
+    </div>
+    <div class="col-auto">
+      <button
+        class="ms-5"
+        mat-raised-button
+        type="button"
+        [disabled]="selectedMonth.invalid"
+        (click)="cleanPublisherRegistries()">
+        <div class="d-flex">{{ t('S21_CLEAN_BTN') }}</div>
+      </button>
     </div>
   </div>
   @if (selectedMonth.value >= 0) {

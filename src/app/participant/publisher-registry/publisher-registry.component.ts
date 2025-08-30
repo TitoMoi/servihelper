@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CanDeactivate } from '@angular/router';
+import { CanDeactivate, Router } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { GetMonthNamePipe } from 'app/globals/pipes/get-month-name.pipe';
 import { S21Service } from 'app/globals/services/s21.service';
@@ -49,6 +49,7 @@ export class PublisherRegistryComponent
   snackbar = inject(MatSnackBar);
   dialog = inject(MatDialog);
   fb = inject(FormBuilder);
+  router = inject(Router);
 
   participants = this.participantsService
     .getParticipants(true)
@@ -298,6 +299,15 @@ export class PublisherRegistryComponent
     this.snackbar.open('All publisher registries have been created');
     this.showSpinner = false;
     this.assignmentsInFolderCreated.set(true);
+  }
+
+  async cleanPublisherRegistries() {
+    const isConfirmed = confirm('Please confirm, this operation cant be undone');
+    if (isConfirmed) {
+      this.s21Service.cleanPublisherRegistry();
+      await this.ensureAllParticipantsHavePublisherRegistry();
+      this.router.navigate(['home']);
+    }
   }
 
   openS21RegistriesInFolder() {

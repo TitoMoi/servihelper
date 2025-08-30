@@ -527,5 +527,8 @@
   "S21_HOURS": "Hours",
   "S21_REGULAR_PIONERS": "Regular pioners",
   "S21_HAS_TO_PARTICIPATE_NOTE": "The publisher must check the participation box for the count to be effective",
-  "S21_SAVE_PDF_REMINDER": "pdf files are not saved automatically. Please save before leaving."
+  "S21_SAVE_PDF_REMINDER": "pdf files are not saved automatically. Please save before leaving.",
+  "CONFIG_BACKUP_S21_LABEL_EXPORT": "Export S21",
+  "CONFIG_BACKUP_S21_LABEL_IMPORT": "Import S21 backup",
+  "S21_CLEAN_BTN": "Reset registries"
 }

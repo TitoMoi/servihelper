@@ -119,6 +119,10 @@ export class S21Service {
       return path.join(dirPath, files[0]);
     }
   }
+  cleanPublisherRegistry() {
+    removeSync(path.join(this.configService.s21Path));
+    ensureDirSync(path.join(this.configService.s21Path));
+  }
 
   async exportPublisherRegistry() {
     removeSync(filenamifyPath(path.join(this.homeDir, 'S21Reports')));

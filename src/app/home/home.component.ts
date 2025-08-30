@@ -6,10 +6,10 @@ import { ConfigService } from 'app/config/service/config.service';
 import { NoteService } from 'app/note/service/note.service';
 import { ParticipantService } from 'app/participant/service/participant.service';
 import { RoomService } from 'app/room/service/room.service';
-import { lstatSync, writeFileSync, writeJsonSync } from 'fs-extra';
+import { ensureDirSync, lstatSync, writeFile, writeFileSync, writeJsonSync } from 'fs-extra';
 
 import { AsyncPipe, NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { DateAdapter, NativeDateAdapter } from '@angular/material/core';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
 
   // If zip is loaded and saved
   isZipLoaded = false;
+  readonly isS21ZipLoaded = signal(false);
 
   // If upload button is clicked
   upload = false;
@@ -72,12 +73,22 @@ export class HomeComponent implements OnInit {
 
     this.configService.updateConfig(config);
 
+    this.downloadZIP(zip, 'servihelper-files');
+  }
+
+  downloadS21Files(): void {
+    const zip = new AdmZip();
+    zip.addLocalFolder(this.configService.s21Path);
+    this.downloadZIP(zip, 's21-files');
+  }
+
+  downloadZIP(zip, filename) {
     zip.toBuffer((buffer: Buffer) => {
       const blob = new Blob([buffer], { type: 'application/octet' });
       const zipLink = document.createElement('a');
       zipLink.href = window.URL.createObjectURL(blob);
       //No extension to prevent mac to auto unzip folder
-      zipLink.setAttribute('download', 'servihelper-files');
+      zipLink.setAttribute('download', filename);
       zipLink.click();
     });
   }
@@ -85,6 +96,24 @@ export class HomeComponent implements OnInit {
   getZipContentFromFileEvent(event: Event): File {
     const target = event.target as HTMLInputElement;
     return target.files[0];
+  }
+
+  async uploadZipS21Files(event: Event) {
+    const zipFile = this.getZipContentFromFileEvent(event);
+    const zip = new AdmZip(zipFile.path);
+    const promises = [];
+    // reading archives
+    zip.getEntries().forEach(zipEntry => {
+      const pdfPath = path.join(this.configService.s21Path, zipEntry.entryName);
+      if (zipEntry.isDirectory) {
+        ensureDirSync(pdfPath);
+      } else {
+        const data = zipEntry.getData();
+        promises.push(writeFile(pdfPath, data));
+      }
+    });
+    await Promise.all([...promises]);
+    this.isS21ZipLoaded.set(true);
   }
 
   /** Uploads servihelper files, only for OFFLINE */
@@ -183,7 +212,9 @@ export class HomeComponent implements OnInit {
 
     let lang = this.configService.getConfig().lang;
     this.translocoService = this.translocoService.setActiveLang(lang);
-    if (lang === 'zhCN') lang = 'zh';
+    if (lang === 'zhCN') {
+      lang = 'zh';
+    }
     this.dateAdapter.setLocale(lang);
 
     //If we have some new core assign type we need to add the reference to all the participants
