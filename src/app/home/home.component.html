@@ -56,35 +56,42 @@
       }
     </div>
   </div>
-  <div class="row">
-    <div class="col-auto">
-      <h3 class="mb-2" style="color: red">{{ t('CONFIG_BACKUP_S21_LABEL_IMPORT') }}</h3>
-      <div class="mb-3">
-        <label
-          for="zip-s21-upload"
-          [ngClass]="{
-            'custom-file-upload-success': isS21ZipLoaded(),
-            'custom-file-upload': !isS21ZipLoaded()
-          }">
-          @if (!isS21ZipLoaded()) {
-            <span class="fw-bold">{{ t('CONFIG_ZIP_UPLOAD') }} ...</span>
-          }
-          @if (isS21ZipLoaded()) {
-            <span class="ml-3 d-inline-block fw-bold">{{ t('CONFIG_ZIP_UPLOADED') }}</span>
-          }
-        </label>
-        <input id="zip-s21-upload" type="file" [disabled]="" (change)="uploadZipS21Files($event)" />
+  @if (isS21Available()) {
+    <hr class="my-2" />
+    <div class="row">
+      <div class="col-auto">
+        <h3 class="mb-2" style="color: red">{{ t('CONFIG_BACKUP_S21_LABEL_IMPORT') }}</h3>
+        <div class="mb-3">
+          <label
+            for="zip-s21-upload"
+            [ngClass]="{
+              'custom-file-upload-success': isS21ZipLoaded(),
+              'custom-file-upload': !isS21ZipLoaded()
+            }">
+            @if (!isS21ZipLoaded()) {
+              <span class="fw-bold">{{ t('CONFIG_ZIP_UPLOAD') }} ...</span>
+            }
+            @if (isS21ZipLoaded()) {
+              <span class="ml-3 d-inline-block fw-bold">{{ t('CONFIG_ZIP_UPLOADED') }}</span>
+            }
+          </label>
+          <input
+            id="zip-s21-upload"
+            type="file"
+            [disabled]=""
+            (change)="uploadZipS21Files($event)" />
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-auto">
-      <h3 style="color: red">{{ t('CONFIG_BACKUP_S21_LABEL_EXPORT') }}</h3>
-      <button color="accent" mat-raised-button type="button" (click)="downloadS21Files()">
-        <span class="fw-bold"> {{ t('BUTTON_DOWNLOAD') }}</span>
-      </button>
+    <div class="row">
+      <div class="col-auto">
+        <h3 style="color: red">{{ t('CONFIG_BACKUP_S21_LABEL_EXPORT') }}</h3>
+        <button color="accent" mat-raised-button type="button" (click)="downloadS21Files()">
+          <span class="fw-bold"> {{ t('BUTTON_DOWNLOAD') }}</span>
+        </button>
+      </div>
     </div>
-  </div>
+  }
   @if (noteHome) {
     <div class="border mt-5" [innerHTML]="noteHome.editorHTML"></div>
   }

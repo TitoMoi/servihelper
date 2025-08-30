@@ -554,5 +554,8 @@
   "S21_HOURS": "Hores",
   "S21_REGULAR_PIONERS": "Precursors regulars",
   "S21_HAS_TO_PARTICIPATE_NOTE": "El publicador ha de tindre marcada la casella de participació per a que el recompte siga efectiu",
-  "S21_SAVE_PDF_REMINDER": "Els fitxers pdf no es desen automàticament. Guarda abans d'abandonar aquesta finestra."
+  "S21_SAVE_PDF_REMINDER": "Els fitxers pdf no es desen automàticament. Guarda abans d'abandonar aquesta finestra.",
+  "CONFIG_BACKUP_S21_LABEL_EXPORT": "Exportar S21",
+  "CONFIG_BACKUP_S21_LABEL_IMPORT": "Importar S21 backup",
+  "S21_CLEAN_BTN": "Reiniciar registres"
 }

@@ -15,6 +15,7 @@ import { DateAdapter, NativeDateAdapter } from '@angular/material/core';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { TranslocoLocaleModule } from '@ngneat/transloco-locale';
 import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
+import { S21Service } from 'app/globals/services/s21.service';
 import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
 import { PolygonService } from 'app/map/territory/service/polygon.service';
 import { TerritoryService } from 'app/map/territory/service/territory.service';
@@ -23,6 +24,7 @@ import { OnlineService } from 'app/online/service/online.service';
 import { PublicThemeService } from 'app/public-theme/service/public-theme.service';
 import { SheetTitleService } from 'app/sheet-title/service/sheet-title.service';
 import path from 'path';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -46,7 +48,9 @@ export class HomeComponent implements OnInit {
   private territoryService = inject(TerritoryService);
   private territoryGroupService = inject(TerritoryGroupService);
   private dateAdapter = inject<DateAdapter<NativeDateAdapter>>(DateAdapter);
+  private s21Service = inject(S21Service);
 
+  readonly isS21Available = signal(false);
   // If zip is loaded and saved
   isZipLoaded = false;
   readonly isS21ZipLoaded = signal(false);
@@ -59,8 +63,18 @@ export class HomeComponent implements OnInit {
   isOnline = this.onlineService.getOnline().isOnline;
 
   noteHome: NoteInterface;
+
+  subscription = new Subscription();
   ngOnInit(): void {
     this.noteHome = this.noteService.getNotes().find(n => n.showInHome);
+
+    this.isS21Available.set(this.s21Service.isS21TemplateAvailable());
+
+    this.subscription.add(
+      this.configService.config$.subscribe(() =>
+        this.isS21Available.set(this.s21Service.isS21TemplateAvailable())
+      )
+    );
   }
 
   downloadFiles(): void {
