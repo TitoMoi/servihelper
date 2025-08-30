@@ -252,10 +252,10 @@ export class PublisherRegistryComponent
     }
   }
 
-  //Mark all participants as having participated but do not emit the value changes until the end
+  //Mark all participants as having participated
   markAllHaveParticipated() {
     this.formGroupArray.forEach(group => {
-      group.controls.hasParticipated.setValue(true, { emitEvent: false });
+      group.controls.hasParticipated.setValue(true);
     });
   }
 
