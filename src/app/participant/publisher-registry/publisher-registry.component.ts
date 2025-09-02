@@ -106,6 +106,7 @@ export class PublisherRegistryComponent
             group.controls.hours.reset();
             group.controls.hours.disable();
           }
+          group.controls.hours.updateValueAndValidity();
         })
       );
 
