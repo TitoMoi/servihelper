@@ -99,17 +99,6 @@ export class PublisherRegistryComponent
       });
 
       this.subscription.add(
-        group.controls.hasParticipated.valueChanges.subscribe(hasPart => {
-          if (hasPart) {
-            group.controls.isAuxPioner.enable();
-          } else {
-            group.controls.isAuxPioner.reset();
-            group.controls.isAuxPioner.disable();
-          }
-        })
-      );
-
-      this.subscription.add(
         group.controls.isAuxPioner.valueChanges.subscribe(isAuxPioner => {
           if (isAuxPioner) {
             group.controls.hours.enable();
