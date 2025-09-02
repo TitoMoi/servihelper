@@ -1,81 +1,86 @@
-<h3 mat-dialog-title>Publisher registry header details</h3>
-.
-<mat-dialog-content>
-  <div class="row g-1">
-    <div class="col-auto">
-      <mat-form-field>
-        <mat-label>Publisher name</mat-label>
-        <input matInput spellcheck="false" [formControl]="form.controls.name" />
-        <mat-hint>{{ (data.participantId | participantPipe).name }}</mat-hint>
-      </mat-form-field>
+<span *transloco="let t">
+  <h3 mat-dialog-title>{{ t('S21_HEADER_DETAILS_TITLE') }}</h3>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-auto">
+        <mat-form-field>
+          <mat-label>{{ t('S21_HEADER_DETAILS_PUBLISHER_NAME') }}</mat-label>
+          <input matInput spellcheck="false" [formControl]="form.controls.name" />
+          <mat-hint>{{ (data.participantId | participantPipe).name }}</mat-hint>
+        </mat-form-field>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-auto">
+        <mat-form-field>
+          <mat-label>{{ t('S21_HEADER_DETAILS_BIRTH_DATE') }}</mat-label>
+          <input
+            matInput
+            spellcheck="false"
+            [formControl]="form.controls.birthDate"
+            [matDatepicker]="birthPicker" />
+          <mat-datepicker-toggle matIconSuffix [for]="birthPicker" />
+          <mat-datepicker #birthPicker />
+        </mat-form-field>
+      </div>
+      <div class="col-auto">
+        <mat-form-field>
+          <mat-label>{{ t('S21_HEADER_DETAILS_BAPTISM_DATE') }}</mat-label>
+          <input
+            matInput
+            spellcheck="false"
+            [formControl]="form.controls.baptismDate"
+            [matDatepicker]="baptismPicker" />
+          <mat-datepicker-toggle matIconSuffix [for]="baptismPicker" />
+          <mat-datepicker #baptismPicker />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto">
+        <mat-label>{{ t('S21_HEADER_DETAILS_MEN') }}</mat-label>
+        <mat-checkbox [formControl]="form.controls.men" />
+      </div>
+      <div class="col-auto">
+        <mat-label>{{ t('S21_HEADER_DETAILS_WOMEN') }}</mat-label>
+        <mat-checkbox [formControl]="form.controls.women" />
+      </div>
+      <div class="col-auto">
+        <mat-label>{{ t('S21_HEADER_DETAILS_OTHER_SHEEPS') }}</mat-label>
+        <mat-checkbox [formControl]="form.controls.otherSheeps" />
+      </div>
+      <div class="col-auto">
+        <mat-label>{{ t('S21_HEADER_DETAILS_ANOINTED') }}</mat-label>
+        <mat-checkbox [formControl]="form.controls.anointed" />
+      </div>
+      <div class="col-auto">
+        <mat-label>{{ t('S21_HEADER_DETAILS_ELDER') }}</mat-label>
+        <mat-checkbox [formControl]="form.controls.elder" />
+      </div>
+      <div class="col-auto">
+        <mat-label>{{ t('S21_HEADER_DETAILS_MINISTERIAL_SERVANT') }}</mat-label>
+        <mat-checkbox [formControl]="form.controls.ministerialServant" />
+      </div>
+      <div class="col-auto">
+        <mat-label>{{ t('S21_HEADER_DETAILS_REGULAR_PIONEER') }}</mat-label>
+        <mat-checkbox [formControl]="form.controls.regularPioneer" />
+      </div>
+      <div class="col-auto">
+        <mat-label>{{ t('S21_HEADER_DETAILS_SPECIAL_PIONEER') }}</mat-label>
+        <mat-checkbox [formControl]="form.controls.specialPioneer" />
+      </div>
+      <div class="col-auto">
+        <mat-label>{{ t('S21_HEADER_DETAILS_MISSIONARY') }}</mat-label>
+        <mat-checkbox [formControl]="form.controls.missionary" />
+      </div>
+    </div>
+  </mat-dialog-content>
+  <div class="d-flex align-items-center justify-content-center">
+    <button class="me-3" mat-flat-button type="button" (click)="updatePublisherHeaderRegistry()">
+      {{ t('S21_HEADER_DETAILS_UPDATE_BTN') }}
+    </button>
+    <button mat-button mat-dialog-close type="button">
+      {{ t('S21_HEADER_DETAILS_CANCEL_BTN') }}
+    </button>
   </div>
-  <div class="row g-1">
-    <div class="col-auto">
-      <mat-form-field>
-        <mat-label>Birth date</mat-label>
-        <input
-          matInput
-          spellcheck="false"
-          [formControl]="form.controls.birthDate"
-          [matDatepicker]="birthPicker" />
-        <mat-datepicker-toggle matIconSuffix [for]="birthPicker" />
-        <mat-datepicker #birthPicker />
-      </mat-form-field>
-    </div>
-    <div class="col-auto">
-      <mat-form-field>
-        <mat-label>Baptism date</mat-label>
-        <input
-          matInput
-          spellcheck="false"
-          [formControl]="form.controls.baptismDate"
-          [matDatepicker]="baptismPicker" />
-        <mat-datepicker-toggle matIconSuffix [for]="baptismPicker" />
-        <mat-datepicker #baptismPicker />
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="row g-1">
-    <div class="col-auto">
-      <mat-label>Men</mat-label>
-      <mat-checkbox [formControl]="form.controls.men" />
-    </div>
-    <div class="col-auto">
-      <mat-label>Women</mat-label>
-      <mat-checkbox [formControl]="form.controls.women" />
-    </div>
-    <div class="col-auto">
-      <mat-label>Other sheeps</mat-label>
-      <mat-checkbox [formControl]="form.controls.otherSheeps" />
-    </div>
-    <div class="col-auto">
-      <mat-label>Anointed</mat-label>
-      <mat-checkbox [formControl]="form.controls.anointed" />
-    </div>
-    <div class="col-auto">
-      <mat-label>Elder</mat-label>
-      <mat-checkbox [formControl]="form.controls.elder" />
-    </div>
-    <div class="col-auto">
-      <mat-label>Ministerial servant</mat-label>
-      <mat-checkbox [formControl]="form.controls.ministerialServant" />
-    </div>
-    <div class="col-auto">
-      <mat-label>Regular Pioneer</mat-label>
-      <mat-checkbox [formControl]="form.controls.regularPioneer" />
-    </div>
-    <div class="col-auto">
-      <mat-label>Special Pioneer</mat-label>
-      <mat-checkbox [formControl]="form.controls.specialPioneer" />
-    </div>
-    <div class="col-auto">
-      <mat-label>Missionary</mat-label>
-      <mat-checkbox [formControl]="form.controls.missionary" />
-    </div>
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-flat-button type="button" (click)="updatePublisherHeaderRegistry()">Update</button>
-  <button mat-button mat-dialog-close type="button">Close</button>
-</mat-dialog-actions>
+</span>

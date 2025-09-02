@@ -2,9 +2,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  inject,
   OnDestroy,
-  OnInit,
-  inject
+  OnInit
 } from '@angular/core';
 
 import { NgClass } from '@angular/common';
@@ -15,7 +15,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
 import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
 import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
-import { AssignTypePipe } from 'app/assigntype/pipe/assign-type.pipe';
 import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
 import { ConfigInterface } from 'app/config/model/config.model';
 import { ConfigService } from 'app/config/service/config.service';
@@ -23,14 +22,13 @@ import { ExportService } from 'app/globals/services/export.service';
 import { SortService } from 'app/globals/services/sort.service';
 import { LockService } from 'app/lock/service/lock.service';
 import { OnlineService } from 'app/online/service/online.service';
-import { Observable, Subscription, map } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { ParticipantAssignTypeInterface, ParticipantInterface } from '../model/participant.model';
 import { ParticipantService } from '../service/participant.service';
 import { GetNumberOfParticipantsPipe } from './get-number-of-participants.pipe';
 @Component({
   selector: 'app-available-participant',
   imports: [
-    AssignTypePipe,
     AssignTypeNamePipe,
     TranslocoDirective,
     MatTooltipModule,
@@ -150,7 +148,6 @@ export class AvailableParticipantComponent implements OnInit, OnDestroy {
     return this.assignTypeService.getAssignTypes()?.map(at => at.id);
   }
 
-  // eslint-disable-next-line complexity
   changeAvailability(
     participant: ParticipantInterface,
     assignType: AssignTypeInterface,

@@ -317,9 +317,9 @@ export class PublisherRegistryComponent
   openRegistryHeaderDetails(participantId: string): void {
     this.dialog
       .open(PublisherRegistryHeaderComponent, {
-        width: '940px',
-        height: '640px',
-        data: { participantId }
+        data: { participantId },
+        minHeight: 720,
+        minWidth: 1024
       })
       .afterClosed()
       .subscribe(hasChanges => {

@@ -14,6 +14,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslocoModule } from '@ngneat/transloco';
 import { TranslocoLocaleService } from '@ngneat/transloco-locale';
 import { S21Service } from 'app/globals/services/s21.service';
 import { ParticipantPipe } from '../pipe/participant.pipe';
@@ -22,6 +23,7 @@ import { ParticipantService } from '../service/participant.service';
 @Component({
   selector: 'app-publisher-registry-header',
   imports: [
+    TranslocoModule,
     MatFormFieldModule,
     MatCheckboxModule,
     MatInputModule,

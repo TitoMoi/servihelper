@@ -47,7 +47,7 @@
     </div>
     <div class="col-auto">
       <button
-        class="ms-5"
+        class="ms-auto"
         mat-raised-button
         type="button"
         [disabled]="selectedMonth.invalid"
@@ -59,12 +59,12 @@
   @if (selectedMonth.value >= 0) {
     <div class="row">
       <div class="col-9">
-        <table>
-          <thead>
-            <tr>
+        <div class="table-overflow">
+          <table>
+            <thead>
               <th>{{ t('S21_T_NAME') }}</th>
-              <th>{{ t('S21_T_DETAILS') }}</th>
-              <th>
+              <th class="bg-color-ghostwhite sticky-top">{{ t('S21_T_DETAILS') }}</th>
+              <th class="bg-color-ghostwhite sticky-top">
                 <div class="d-flex flex-column align-items-start">
                   <div>{{ t('S21_T_HAS_PARTICIPATED') }}</div>
                   <button
@@ -76,49 +76,49 @@
                   </button>
                 </div>
               </th>
-              <th>{{ t('S21_T_BIBLE_STUDIES') }}</th>
-              <th>{{ t('S21_T_IS_AUX_PIONER') }}</th>
-              <th>{{ t('S21_T_HOURS') }}</th>
-              <th>{{ t('S21_T_NOTES') }}</th>
-            </tr>
-          </thead>
+              <th class="bg-color-ghostwhite sticky-top">{{ t('S21_T_BIBLE_STUDIES') }}</th>
+              <th class="bg-color-ghostwhite sticky-top">{{ t('S21_T_IS_AUX_PIONER') }}</th>
+              <th class="bg-color-ghostwhite sticky-top">{{ t('S21_T_HOURS') }}</th>
+              <th class="bg-color-ghostwhite sticky-top">{{ t('S21_T_NOTES') }}</th>
+            </thead>
 
-          <tbody>
-            @for (group of formGroupArray; track $index) {
-              <tr>
-                <td>
-                  <div>{{ group.controls.name.value }}</div>
-                  @if (group.controls.isRegPioner.value) {
-                    <span class="f-small fst-italic">{{ t('S21_REGULAR_PIONER') }}</span>
-                  }
-                </td>
-                <td (click)="openRegistryHeaderDetails(group.controls.id.value)">
-                  <span style="color: blue; cursor: pointer">{{ t('S21_OPEN_DETAILS') }}</span>
-                </td>
-                <td><mat-checkbox [formControl]="group.controls.hasParticipated" /></td>
-                <td>
-                  <mat-form-field>
-                    <input
-                      matInput
-                      spellcheck="false"
-                      [formControl]="group.controls.bibleStudies" />
-                  </mat-form-field>
-                </td>
-                <td><mat-checkbox [formControl]="group.controls.isAuxPioner" /></td>
-                <td>
-                  <mat-form-field>
-                    <input matInput spellcheck="false" [formControl]="group.controls.hours" />
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-form-field>
-                    <input matInput spellcheck="false" [formControl]="group.controls.notes" />
-                  </mat-form-field>
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
+            <tbody>
+              @for (group of formGroupArray; track $index) {
+                <tr>
+                  <td>
+                    <div>{{ group.controls.name.value }}</div>
+                    @if (group.controls.isRegPioner.value) {
+                      <span class="f-small fst-italic">{{ t('S21_REGULAR_PIONER') }}</span>
+                    }
+                  </td>
+                  <td (click)="openRegistryHeaderDetails(group.controls.id.value)">
+                    <span style="color: blue; cursor: pointer">{{ t('S21_OPEN_DETAILS') }}</span>
+                  </td>
+                  <td><mat-checkbox [formControl]="group.controls.hasParticipated" /></td>
+                  <td>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        spellcheck="false"
+                        [formControl]="group.controls.bibleStudies" />
+                    </mat-form-field>
+                  </td>
+                  <td><mat-checkbox [formControl]="group.controls.isAuxPioner" /></td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput spellcheck="false" [formControl]="group.controls.hours" />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput spellcheck="false" [formControl]="group.controls.notes" />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="col-3">
         <div class="row mt-5">

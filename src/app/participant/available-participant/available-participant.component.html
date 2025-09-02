@@ -1,7 +1,6 @@
-<!-- eslint-disable prettier/prettier -->
 <ng-container *transloco="let t">
   <div class="d-flex">
-    <mat-icon class="me-2" svgIcon="info-blue" aria-label="icon"></mat-icon>
+    <mat-icon aria-label="icon" class="me-2" svgIcon="info-blue" />
     <div>{{ t('STATISTICS_ROLE_TIP') }}</div>
   </div>
   <div class="table-overflow">
@@ -11,16 +10,17 @@
           <th class="bg-color-white">
             <div>{{ t('PARTICIPANT_AVAILABLE_PRINCIPAL') }}</div>
             <mat-icon
+              aria-label="icon"
               class="m-2 no-print"
               svgIcon="png"
-              aria-label="icon"
               [matTooltip]="t('ICON_PNG')"
-              (click)="toPng('toPngDivId')"></mat-icon>
+              (click)="toPng('toPngDivId')" />
           </th>
           @for (at of assignTypes; track at) {
             <th class="bg-color-ghostwhite sticky-top">
               <button
                 mat-button
+                type="button"
                 [disabled]="isNetStatusOffline"
                 (click)="changeAvailability(null, at, true)">
                 <div class="fw-bold">
@@ -42,6 +42,7 @@
                 <td class="bg-color-white text-center">
                   <button
                     mat-button
+                    type="button"
                     [disabled]="isNetStatusOffline"
                     (click)="changeAvailability(p, at, true)">
                     {{ checkIncludesAssignTypeAsPrincipal(p.assignTypes, at.id) ? '✔' : '' }}
@@ -58,16 +59,17 @@
         <th class="bg-color-white">
           <div>{{ t('PARTICIPANT_AVAILABLE_ASSISTANT') }}</div>
           <mat-icon
+            aria-label="icon"
             class="m-2"
             svgIcon="png"
-            aria-label="icon"
             [matTooltip]="t('ICON_PNG')"
-            (click)="toPng('toPngDivId2')"></mat-icon>
+            (click)="toPng('toPngDivId2')" />
         </th>
         @for (at of assignTypesAssistant; track at) {
           <th class="bg-color-lightyellow sticky-top">
             <button
               mat-button
+              type="button"
               [disabled]="isNetStatusOffline"
               (click)="changeAvailability(null, at, false)">
               <div class="fw-bold">
@@ -89,6 +91,7 @@
               <td class="bg-color-white text-center">
                 <button
                   mat-button
+                  type="button"
                   [disabled]="isNetStatusOffline"
                   (click)="changeAvailability(p, at, false)">
                   {{ checkIncludesAssignTypeAsAssistant(p.assignTypes, at.id) ? '✔' : '' }}
