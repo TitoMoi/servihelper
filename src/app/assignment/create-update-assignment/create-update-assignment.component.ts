@@ -708,7 +708,9 @@ export class CreateUpdateAssignmentComponent implements OnInit, AfterViewInit, O
     const days = assignType?.days;
     if (days) {
       //If we edit an assignment, we get the string iso instead of a real date
-      if (typeof currentDate === 'string') currentDate = parseISO(currentDate);
+      if (typeof currentDate === 'string') {
+        currentDate = parseISO(currentDate);
+      }
 
       //Get all the days before and after, its 1 based index
       let allDays: AssignmentInterface[] = [];

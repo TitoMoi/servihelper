@@ -5,7 +5,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions,
   MatDialogClose,
   MatDialogContent,
   MatDialogRef,
@@ -17,6 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoModule } from '@ngneat/transloco';
 import { TranslocoLocaleService } from '@ngneat/transloco-locale';
 import { S21Service } from 'app/globals/services/s21.service';
+import { parseISO } from 'date-fns';
 import { ParticipantPipe } from '../pipe/participant.pipe';
 import { ParticipantService } from '../service/participant.service';
 
@@ -29,7 +29,6 @@ import { ParticipantService } from '../service/participant.service';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatDialogActions,
     MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
@@ -75,11 +74,13 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     this.form.controls.name.setValue(
       (this.s21Service.getHeaderFieldValue(pdf, 'name') as string) || participant.name
     );
+    console.log('birthDate', this.s21Service.getHeaderFieldValue(pdf, 'birthDate'));
     this.form.controls.birthDate.setValue(
-      new Date(this.s21Service.getHeaderFieldValue(pdf, 'birthDate') as string)
+      parseISO(this.s21Service.getHeaderFieldValue(pdf, 'birthDate') as string)
     );
+    console.log('baptismDate', this.s21Service.getHeaderFieldValue(pdf, 'baptismDate'));
     this.form.controls.baptismDate.setValue(
-      new Date(this.s21Service.getHeaderFieldValue(pdf, 'baptismDate') as string)
+      parseISO(this.s21Service.getHeaderFieldValue(pdf, 'baptismDate') as string)
     );
 
     const s21menHeaderValue = this.s21Service.getHeaderFieldValue(pdf, 'men');
@@ -124,12 +125,12 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     this.s21Service.setHeaderFieldValue(
       pdf,
       'birthDate',
-      this.translocoLocaleService.localizeDate(this.form.controls.birthDate.value as Date)
+      (this.form.controls.birthDate.value as Date).toISOString()
     );
     this.s21Service.setHeaderFieldValue(
       pdf,
       'baptismDate',
-      this.translocoLocaleService.localizeDate(this.form.controls.baptismDate.value as Date)
+      (this.form.controls.baptismDate.value as Date).toISOString()
     );
     this.s21Service.setHeaderFieldValue(pdf, 'men', this.form.controls.men.value);
     this.s21Service.setHeaderFieldValue(pdf, 'women', this.form.controls.women.value);
