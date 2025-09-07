@@ -165,6 +165,20 @@ export class SortService {
     return 0;
   }
 
+  sortNames(name1: string, name2: string) {
+    const name1Array = name1.split(' ') || [];
+    const name2Array = name2.split(' ') || [];
+    if (name1Array.length > 1 && name2Array.length > 1) {
+      if (name1Array[0].toLowerCase() < name2Array[0].toLowerCase()) {
+        return 1;
+      }
+      if (name1Array[0].toLowerCase() > name2Array[0].toLowerCase()) {
+        return -1;
+      }
+      return 0;
+    }
+  }
+
   sortParticipantsByCount(a: ParticipantDynamicInterface, b: ParticipantDynamicInterface) {
     if (a.count < b.count) {
       return -1;

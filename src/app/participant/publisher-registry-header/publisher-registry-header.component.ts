@@ -74,11 +74,9 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     this.form.controls.name.setValue(
       (this.s21Service.getHeaderFieldValue(pdf, 'name') as string) || participant.name
     );
-    console.log('birthDate', this.s21Service.getHeaderFieldValue(pdf, 'birthDate'));
     this.form.controls.birthDate.setValue(
       parseISO(this.s21Service.getHeaderFieldValue(pdf, 'birthDate') as string)
     );
-    console.log('baptismDate', this.s21Service.getHeaderFieldValue(pdf, 'baptismDate'));
     this.form.controls.baptismDate.setValue(
       parseISO(this.s21Service.getHeaderFieldValue(pdf, 'baptismDate') as string)
     );
@@ -122,16 +120,21 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     const pdf = await this.s21Service.getPublisherRegistry(this.data.participantId);
 
     this.s21Service.setHeaderFieldValue(pdf, 'name', this.form.controls.name.value);
-    this.s21Service.setHeaderFieldValue(
-      pdf,
-      'birthDate',
-      (this.form.controls.birthDate.value as Date).toISOString()
-    );
-    this.s21Service.setHeaderFieldValue(
-      pdf,
-      'baptismDate',
-      (this.form.controls.baptismDate.value as Date).toISOString()
-    );
+    if (!isNaN(this.form.controls.birthDate.value.valueOf())) {
+      this.s21Service.setHeaderFieldValue(
+        pdf,
+        'birthDate',
+        (this.form.controls.birthDate.value as Date).toISOString()
+      );
+    }
+
+    if (!isNaN(this.form.controls.baptismDate.value.valueOf())) {
+      this.s21Service.setHeaderFieldValue(
+        pdf,
+        'baptismDate',
+        (this.form.controls.baptismDate.value as Date).toISOString()
+      );
+    }
     this.s21Service.setHeaderFieldValue(pdf, 'men', this.form.controls.men.value);
     this.s21Service.setHeaderFieldValue(pdf, 'women', this.form.controls.women.value);
     this.s21Service.setHeaderFieldValue(pdf, 'otherSheeps', this.form.controls.otherSheeps.value);

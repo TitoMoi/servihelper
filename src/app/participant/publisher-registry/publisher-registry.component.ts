@@ -19,6 +19,7 @@ import { CanDeactivate, Router } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { GetMonthNamePipe } from 'app/globals/pipes/get-month-name.pipe';
 import { S21Service } from 'app/globals/services/s21.service';
+import { SortService } from 'app/globals/services/sort.service';
 import { PublisherRegistryHeaderComponent } from 'app/participant/publisher-registry-header/publisher-registry-header.component';
 import { ParticipantService } from 'app/participant/service/participant.service';
 import { Subscription } from 'rxjs';
@@ -46,6 +47,7 @@ export class PublisherRegistryComponent
   participantsService = inject(ParticipantService);
   s21Service = inject(S21Service);
   translocoService = inject(TranslocoService);
+  sortService = inject(SortService);
   snackbar = inject(MatSnackBar);
   dialog = inject(MatDialog);
   fb = inject(FormBuilder);
@@ -240,8 +242,15 @@ export class PublisherRegistryComponent
       );
       group.controls.notes.setValue(this.s21Service.getFieldValue(pdfRegistry, monthName, 'notes'));
     }
+
+    this.sortFormArrayBySurname();
   }
 
+  sortFormArrayBySurname() {
+    this.formGroupArray = this.formGroupArray.sort((group1, group2) =>
+      this.sortService.sortNames(group1.controls.name.value, group2.controls.name.value)
+    );
+  }
   //Mark all participants as having participated
   markAllHaveParticipated() {
     this.formGroupArray.forEach(group => {
