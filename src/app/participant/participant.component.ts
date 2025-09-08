@@ -8,7 +8,7 @@ import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { ConfigService } from 'app/config/service/config.service';
 import { S21Service } from 'app/globals/services/s21.service';
 import { SortService } from 'app/globals/services/sort.service';

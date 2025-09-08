@@ -25,7 +25,7 @@ import {
   MatDatepickerModule
 } from '@angular/material/datepicker';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
-import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { MultipleImageAssignmentComponent } from '../multiple-image-assignment/multiple-image-assignment.component';
 import { SelectionListHorComponent } from '../selection-list-hor/selection-list-hor.component';
 import { SelectionListComponent } from '../selection-list/selection-list.component';

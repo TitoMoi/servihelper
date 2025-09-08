@@ -17,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AutoFocusDirective } from '../../directives/autofocus/autofocus.directive';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { OnlineService } from 'app/online/service/online.service';
 import { AsyncPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';

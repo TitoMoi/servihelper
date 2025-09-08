@@ -8,7 +8,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { ConfigService } from 'app/config/service/config.service';
 import { PdfService } from 'app/globals/services/pdf.service';
 import { SortService } from 'app/globals/services/sort.service';

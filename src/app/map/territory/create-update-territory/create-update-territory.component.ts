@@ -26,7 +26,7 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ConfigService } from 'app/config/service/config.service';
 import { AutoFocusDirective } from 'app/directives/autofocus/autofocus.directive';
 import { ExportService } from 'app/globals/services/export.service';

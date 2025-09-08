@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { SharedService } from 'app/globals/services/shared.service';
 
 @Component({

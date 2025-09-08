@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { TerritoryGroupInterface } from '../model/map.model';
 import { TerritoryGroupService } from './service/territory-group.service';
 import { OnlineService } from 'app/online/service/online.service';

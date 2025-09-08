@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';
 import { TerritoryService } from 'app/map/territory/service/territory.service';
 import { OnlineService } from 'app/online/service/online.service';

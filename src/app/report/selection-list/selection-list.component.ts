@@ -16,7 +16,7 @@ import {
   OnChanges
 } from '@angular/core';
 
-import { TranslocoLocaleModule, TranslocoLocaleService } from '@ngneat/transloco-locale';
+import { TranslocoLocaleModule, TranslocoLocaleService } from '@jsverse/transloco-locale';
 import {
   AssignmentGroupInterface,
   AssignmentInterface,
@@ -27,7 +27,7 @@ import { AssignTypePipe } from '../../assigntype/pipe/assign-type.pipe';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
 import { ExportService } from 'app/globals/services/export.service';
 import { PublicThemeService } from 'app/public-theme/service/public-theme.service';

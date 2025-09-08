@@ -10,7 +10,7 @@ import {
 
 import { MatButtonModule } from '@angular/material/button';
 import { ActivationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { TranslocoDirective } from '@ngneat/transloco';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { MatRadioGroup, MatRadioModule } from '@angular/material/radio';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subscription, filter, map } from 'rxjs';

@@ -8,8 +8,8 @@ import {
   inject
 } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms';
-import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
-import { DateFormatStyles } from '@ngneat/transloco-locale';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { DateFormatStyles } from '@jsverse/transloco-locale';
 import { ConfigService } from 'app/config/service/config.service';
 import { NoteInterface } from 'app/note/model/note.model';
 import { NoteService } from 'app/note/service/note.service';

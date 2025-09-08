@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { AssignTypeInterface } from 'app/assigntype/model/assigntype.model';
 import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
 import { AssignTypeService } from 'app/assigntype/service/assigntype.service';

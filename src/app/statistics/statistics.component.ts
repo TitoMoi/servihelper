@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { TerritoryCountComponent } from './territory-count/territory-count.component';
 import { GlobalCountComponent } from './global-count/global-count.component';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { Observable, Subscription, map } from 'rxjs';
 import { ConfigService } from 'app/config/service/config.service';
 import { AssignTypeService } from 'app/assigntype/service/assigntype.service';

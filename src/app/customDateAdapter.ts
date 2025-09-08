@@ -2,7 +2,7 @@ import { ConfigService } from 'app/config/service/config.service';
 
 import { Injectable, inject } from '@angular/core';
 import { NativeDateAdapter } from '@angular/material/core';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 
 /** Adapts the native JS Date for use with cdk-based components that work with dates. */
 @Injectable()

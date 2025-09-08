@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { TranslocoDatePipe, TranslocoLocaleService } from '@ngneat/transloco-locale';
+import { TranslocoDatePipe, TranslocoLocaleService } from '@jsverse/transloco-locale';
 import { ParticipantPipe } from 'app/participant/pipe/participant.pipe';
 import { ParticipantService } from 'app/participant/service/participant.service';
 import { TerritoryService } from '../territory/service/territory.service';

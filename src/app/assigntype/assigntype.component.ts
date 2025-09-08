@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { AssignTypeNamePipe } from './pipe/assign-type-name.pipe';
 import { OnlineService } from 'app/online/service/online.service';
 import { ParticipantService } from 'app/participant/service/participant.service';

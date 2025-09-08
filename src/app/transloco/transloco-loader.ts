@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Translation, TranslocoLoader } from '@ngneat/transloco';
+import { Translation, TranslocoLoader } from '@jsverse/transloco';
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoHttpLoader implements TranslocoLoader {

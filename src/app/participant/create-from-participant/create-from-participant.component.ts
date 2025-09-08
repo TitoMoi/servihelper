@@ -11,7 +11,7 @@ import { AutoFocusDirective } from '../../directives/autofocus/autofocus.directi
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { OnlineService } from 'app/online/service/online.service';
 import { MatIconModule } from '@angular/material/icon';
 

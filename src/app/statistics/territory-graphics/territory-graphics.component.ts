@@ -2,7 +2,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { GraphicService } from 'app/globals/services/graphic.service';
 import { TerritoryContextClass } from 'app/map/model/map.model';

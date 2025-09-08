@@ -54,7 +54,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
-import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { AssignTypeNamePipe } from 'app/assigntype/pipe/assign-type-name.pipe';
 import { getLastPrincipalAssignment, getPenultimatePrincipalAssignment } from 'app/functions';
 import { DateFnsLocaleService } from 'app/globals/services/date-fns-locale.service';

@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { AssignmentService } from 'app/assignment/service/assignment.service';
 import { PublicThemeService } from '../service/public-theme.service';
 import { PublicThemeInterface } from '../model/public-theme.model';

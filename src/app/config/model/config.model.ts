@@ -1,4 +1,4 @@
-import { DateFormatStyles } from '@ngneat/transloco-locale';
+import { DateFormatStyles } from '@jsverse/transloco-locale';
 import { RoleInterface } from 'app/roles/model/role.model';
 import { LatLngLiteral } from 'leaflet';
 

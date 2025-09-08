@@ -1,9 +1,9 @@
 /* eslint-disable complexity */
 import { inject, Injectable } from '@angular/core';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import { jsPDF, jsPDFOptions } from 'jspdf';
 
-import { TranslocoLocaleService } from '@ngneat/transloco-locale';
+import { TranslocoLocaleService } from '@jsverse/transloco-locale';
 import {
   AssignmentGroupInterface,
   AssignmentInterface

@@ -4,7 +4,7 @@ import {
 } from 'app/participant/model/participant.model';
 
 import { inject, Injectable } from '@angular/core';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import { AssignmentInterface } from 'app/assignment/model/assignment.model';
 import { AssignTypeService } from 'app/assigntype/service/assigntype.service';
 import { ParticipantService } from 'app/participant/service/participant.service';

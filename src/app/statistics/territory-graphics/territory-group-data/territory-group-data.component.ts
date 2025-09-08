@@ -2,7 +2,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { TranslocoDirective, TranslocoService } from '@ngneat/transloco';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { GraphicService } from 'app/globals/services/graphic.service';
 import { TerritoryContextClass } from 'app/map/model/map.model';
 import { TerritoryGroupService } from 'app/map/territory-group/service/territory-group.service';

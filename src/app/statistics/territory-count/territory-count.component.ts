@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import { TranslocoDirective } from '@ngneat/transloco';
-import { TranslocoDatePipe } from '@ngneat/transloco-locale';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { TranslocoDatePipe } from '@jsverse/transloco-locale';
 import { SortService } from 'app/globals/services/sort.service';
 import { TerritoryService } from 'app/map/territory/service/territory.service';
 import { ParticipantDynamicInterface } from 'app/participant/model/participant.model';

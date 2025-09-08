@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid/non-secure';
 
 import { Injectable, inject } from '@angular/core';
 import { ConfigService } from 'app/config/service/config.service';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Injectable({
   providedIn: 'root'
