@@ -170,10 +170,10 @@ export class SortService {
     const name2Array = name2.split(' ') || [];
     if (name1Array.length > 1 && name2Array.length > 1) {
       if (name1Array[0].toLowerCase() < name2Array[0].toLowerCase()) {
-        return 1;
+        return -1;
       }
       if (name1Array[0].toLowerCase() > name2Array[0].toLowerCase()) {
-        return -1;
+        return 1;
       }
       return 0;
     }

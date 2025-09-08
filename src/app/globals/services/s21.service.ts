@@ -8,6 +8,7 @@ import {
   S21HeaderFieldCodesType,
   S21MonthCodesConst
 } from 'app/globals/models/model';
+import { ParticipantInterface } from 'app/participant/model/participant.model';
 import { ParticipantService } from 'app/participant/service/participant.service';
 import { isDate } from 'date-fns';
 import { shell } from 'electron';
@@ -124,12 +125,8 @@ export class S21Service {
     ensureDirSync(path.join(this.configService.s21Path));
   }
 
-  async exportPublisherRegistry() {
+  async exportPublisherRegistry(participants: Partial<ParticipantInterface>[]) {
     removeSync(filenamifyPath(path.join(this.homeDir, 'S21Reports')));
-
-    const participants = this.participantService
-      .getParticipants(true)
-      .filter(p => p.available && !p.isExternal);
 
     const promises = [];
     for (const p of participants) {

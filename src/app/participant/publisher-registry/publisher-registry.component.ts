@@ -23,6 +23,7 @@ import { SortService } from 'app/globals/services/sort.service';
 import { PublisherRegistryHeaderComponent } from 'app/participant/publisher-registry-header/publisher-registry-header.component';
 import { ParticipantService } from 'app/participant/service/participant.service';
 import { Subscription } from 'rxjs';
+import { ParticipantModel } from '../model/participant.model';
 
 @Component({
   selector: 'app-publisher-registry',
@@ -294,7 +295,22 @@ export class PublisherRegistryComponent
   async exportPublisherRegistries() {
     this.assignmentsInFolderCreated.set(false);
     this.showSpinner = true;
-    await this.s21Service.exportPublisherRegistry();
+    const participants: ParticipantModel[] = this.formGroupArray.map(
+      group =>
+        new ParticipantModel({
+          id: group.controls.id.value,
+          name: group.controls.name.value,
+          assignTypes: null,
+          available: null,
+          isExternal: null,
+          isWoman: null,
+          rooms: null,
+          group: null,
+          hasPublisherR: null,
+          notAvailableDates: null
+        })
+    );
+    await this.s21Service.exportPublisherRegistry(participants);
     this.snackbar.open('All publisher registries have been created');
     this.showSpinner = false;
     this.assignmentsInFolderCreated.set(true);
