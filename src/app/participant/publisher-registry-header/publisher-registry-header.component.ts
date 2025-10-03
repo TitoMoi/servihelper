@@ -68,14 +68,22 @@ export class PublisherRegistryHeaderComponent implements OnInit {
   }
 
   getFormatedDate(stringDate) {
-    if (this.translocoService.getActiveLang() === 'es') {
-      // 3. Parsear manualmente dd/MM/yyyy
-      const [dia, mes, año] = stringDate.split('/').map(Number);
-      return new Date(año, mes - 1, dia);
-    } else {
-      return new Date(stringDate);
+    switch (this.translocoService.getActiveLang()) {
+      case 'es': {
+        // 3. Parsear manualmente dd/MM/yyyy
+        const [dia, mes, año] = stringDate.split('/').map(Number);
+        return new Date(año, mes - 1, dia);
+      }
+      case 'ca': {
+        // 3. Parsear manualmente dd/MM/yyyy
+        const [dia, mes, año] = stringDate.split('/').map(Number);
+        return new Date(año, mes - 1, dia);
+      }
+      default:
+        return new Date(stringDate);
     }
   }
+
   async getParticipantHeaderRegistry() {
     const participant = this.participantService.getParticipant(this.data.participantId);
     const pdf = await this.s21Service.getPublisherRegistry(this.data.participantId);
