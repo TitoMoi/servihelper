@@ -1,6 +1,6 @@
 import { ConfigService } from 'app/config/service/config.service';
 
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { NativeDateAdapter } from '@angular/material/core';
 import { TranslocoService } from '@jsverse/transloco';
 

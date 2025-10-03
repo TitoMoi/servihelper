@@ -13,10 +13,9 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { TranslocoLocaleService } from '@jsverse/transloco-locale';
 import { S21Service } from 'app/globals/services/s21.service';
-import { parseISO } from 'date-fns';
 import { ParticipantPipe } from '../pipe/participant.pipe';
 import { ParticipantService } from '../service/participant.service';
 
@@ -45,6 +44,7 @@ export class PublisherRegistryHeaderComponent implements OnInit {
   data: { participantId: string } = inject(MAT_DIALOG_DATA);
   readonly dialogRef = inject(MatDialogRef<PublisherRegistryHeaderComponent>);
   participantService = inject(ParticipantService);
+  translocoService = inject(TranslocoService);
   translocoLocaleService = inject(TranslocoLocaleService);
   snackbar = inject(MatSnackBar);
 
@@ -67,6 +67,15 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     this.getParticipantHeaderRegistry();
   }
 
+  getFormatedDate(stringDate) {
+    if (this.translocoService.getActiveLang() === 'es') {
+      // 3. Parsear manualmente dd/MM/yyyy
+      const [dia, mes, año] = stringDate.split('/').map(Number);
+      return new Date(año, mes - 1, dia);
+    } else {
+      return new Date(stringDate);
+    }
+  }
   async getParticipantHeaderRegistry() {
     const participant = this.participantService.getParticipant(this.data.participantId);
     const pdf = await this.s21Service.getPublisherRegistry(this.data.participantId);
@@ -74,12 +83,15 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     this.form.controls.name.setValue(
       (this.s21Service.getHeaderFieldValue(pdf, 'name') as string) || participant.name
     );
-    this.form.controls.birthDate.setValue(
-      parseISO(this.s21Service.getHeaderFieldValue(pdf, 'birthDate') as string)
+
+    const birthDateFormatedDate = this.getFormatedDate(
+      this.s21Service.getHeaderFieldValue(pdf, 'birthDate') as string
     );
-    this.form.controls.baptismDate.setValue(
-      parseISO(this.s21Service.getHeaderFieldValue(pdf, 'baptismDate') as string)
+    this.form.controls.birthDate.setValue(birthDateFormatedDate);
+    const baptismFormatedDate = this.getFormatedDate(
+      this.s21Service.getHeaderFieldValue(pdf, 'baptismDate') as string
     );
+    this.form.controls.baptismDate.setValue(baptismFormatedDate);
 
     const s21menHeaderValue = this.s21Service.getHeaderFieldValue(pdf, 'men');
     const s21womenHeaderValue = this.s21Service.getHeaderFieldValue(pdf, 'women');
@@ -124,7 +136,9 @@ export class PublisherRegistryHeaderComponent implements OnInit {
       this.s21Service.setHeaderFieldValue(
         pdf,
         'birthDate',
-        (this.form.controls.birthDate.value as Date).toISOString()
+        (this.form.controls.birthDate.value as Date).toLocaleDateString(
+          this.translocoLocaleService.getLocale()
+        )
       );
     }
 
@@ -132,7 +146,9 @@ export class PublisherRegistryHeaderComponent implements OnInit {
       this.s21Service.setHeaderFieldValue(
         pdf,
         'baptismDate',
-        (this.form.controls.baptismDate.value as Date).toISOString()
+        (this.form.controls.baptismDate.value as Date).toLocaleDateString(
+          this.translocoLocaleService.getLocale()
+        )
       );
     }
     this.s21Service.setHeaderFieldValue(pdf, 'men', this.form.controls.men.value);
