@@ -6,7 +6,14 @@ import { ConfigService } from 'app/config/service/config.service';
 import { NoteService } from 'app/note/service/note.service';
 import { ParticipantService } from 'app/participant/service/participant.service';
 import { RoomService } from 'app/room/service/room.service';
-import { ensureDirSync, lstatSync, writeFile, writeFileSync, writeJsonSync } from 'fs-extra';
+import {
+  ensureDirSync,
+  lstatSync,
+  removeSync,
+  writeFile,
+  writeFileSync,
+  writeJsonSync
+} from 'fs-extra';
 
 import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
@@ -23,6 +30,7 @@ import { NoteInterface } from 'app/note/model/note.model';
 import { OnlineService } from 'app/online/service/online.service';
 import { PublicThemeService } from 'app/public-theme/service/public-theme.service';
 import { SheetTitleService } from 'app/sheet-title/service/sheet-title.service';
+import { filenamifyPath } from 'filenamify';
 import path from 'path';
 import { Subscription } from 'rxjs';
 
@@ -116,6 +124,9 @@ export class HomeComponent implements OnInit {
     const zipFile = this.getZipContentFromFileEvent(event);
     const zip = new AdmZip(zipFile.path);
     const promises = [];
+
+    removeSync(filenamifyPath(this.configService.s21Path));
+
     // reading archives
     zip.getEntries().forEach(zipEntry => {
       const pdfPath = path.join(this.configService.s21Path, zipEntry.entryName);
