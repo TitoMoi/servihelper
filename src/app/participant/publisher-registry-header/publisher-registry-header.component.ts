@@ -67,23 +67,6 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     this.getParticipantHeaderRegistry();
   }
 
-  getFormatedDate(stringDate) {
-    switch (this.translocoService.getActiveLang()) {
-      case 'es': {
-        // 3. Parsear manualmente dd/MM/yyyy
-        const [dia, mes, año] = stringDate.split('/').map(Number);
-        return new Date(año, mes - 1, dia);
-      }
-      case 'ca': {
-        // 3. Parsear manualmente dd/MM/yyyy
-        const [dia, mes, año] = stringDate.split('/').map(Number);
-        return new Date(año, mes - 1, dia);
-      }
-      default:
-        return new Date(stringDate);
-    }
-  }
-
   async getParticipantHeaderRegistry() {
     const participant = this.participantService.getParticipant(this.data.participantId);
     const pdf = await this.s21Service.getPublisherRegistry(this.data.participantId);
@@ -92,11 +75,11 @@ export class PublisherRegistryHeaderComponent implements OnInit {
       (this.s21Service.getHeaderFieldValue(pdf, 'name') as string) || participant.name
     );
 
-    const birthDateFormatedDate = this.getFormatedDate(
+    const birthDateFormatedDate = this.s21Service.getFormatedDate(
       this.s21Service.getHeaderFieldValue(pdf, 'birthDate') as string
     );
     this.form.controls.birthDate.setValue(birthDateFormatedDate);
-    const baptismFormatedDate = this.getFormatedDate(
+    const baptismFormatedDate = this.s21Service.getFormatedDate(
       this.s21Service.getHeaderFieldValue(pdf, 'baptismDate') as string
     );
     this.form.controls.baptismDate.setValue(baptismFormatedDate);
@@ -140,7 +123,10 @@ export class PublisherRegistryHeaderComponent implements OnInit {
     const pdf = await this.s21Service.getPublisherRegistry(this.data.participantId);
 
     this.s21Service.setHeaderFieldValue(pdf, 'name', this.form.controls.name.value);
-    if (!isNaN(this.form.controls.birthDate.value.valueOf())) {
+    if (
+      this.form.controls.birthDate.value &&
+      !isNaN(this.form.controls.birthDate.value.valueOf())
+    ) {
       this.s21Service.setHeaderFieldValue(
         pdf,
         'birthDate',
@@ -150,7 +136,10 @@ export class PublisherRegistryHeaderComponent implements OnInit {
       );
     }
 
-    if (!isNaN(this.form.controls.baptismDate.value.valueOf())) {
+    if (
+      this.form.controls.baptismDate.value &&
+      !isNaN(this.form.controls.baptismDate.value.valueOf())
+    ) {
       this.s21Service.setHeaderFieldValue(
         pdf,
         'baptismDate',

@@ -280,7 +280,7 @@ export class PublisherRegistryComponent
         group.controls.bibleStudies.value
       );
       this.s21Service.setFieldValue(pdf, monthCode, 'isPioneer', group.controls.isAuxPioner.value);
-      this.s21Service.setFieldValue(pdf, monthCode, 'hours', group.controls.hours.value);
+      this.s21Service.setFieldValue(pdf, monthCode, 'hours', String(group.controls.hours.value));
       this.s21Service.setFieldValue(pdf, monthCode, 'notes', group.controls.notes.value);
       promises.push(this.s21Service.updatePublisherRegistry(pdf, participantId));
     });
@@ -311,7 +311,10 @@ export class PublisherRegistryComponent
         })
     );
     await this.s21Service.exportPublisherRegistry(participants);
-    this.snackbar.open('All publisher registries have been created');
+    this.snackbar.open('All publisher registries have been created', 'Close', {
+      duration: 3000
+    });
+
     this.showSpinner = false;
     this.assignmentsInFolderCreated.set(true);
   }
@@ -329,7 +332,7 @@ export class PublisherRegistryComponent
     this.s21Service.openS21RegistriesInFolder();
   }
 
-  openRegistryHeaderDetails(participantId: string): void {
+  openRegistryHeaderDetails(participantId: string) {
     this.dialog
       .open(PublisherRegistryHeaderComponent, {
         data: { participantId },

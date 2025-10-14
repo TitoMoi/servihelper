@@ -552,7 +552,7 @@
   "S21_HOURS": "Horas",
   "S21_REGULAR_PIONERS": "Precursores regulares",
   "S21_HAS_TO_PARTICIPATE_NOTE": "El publicador debe de marcar la casilla de participación para que el recuento sea efectivo",
-  "S21_SAVE_PDF_REMINDER": "Los ficheros pdf no se guardan automáticamente. Guarda antes de abandonar esta ventana.",
+  "S21_SAVE_PDF_REMINDER": "Los ficheros pdf no se guardan automáticamente. Guarda antes de exportar o abandonar esta ventana.",
   "S21_HEADER_DETAILS_TITLE": "Detalles de cabecera",
   "S21_HEADER_DETAILS_PUBLISHER_NAME": "Nombre",
   "S21_HEADER_DETAILS_BIRTH_DATE": "Fecha de nacimiento",

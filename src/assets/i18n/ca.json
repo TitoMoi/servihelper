@@ -554,7 +554,7 @@
   "S21_HOURS": "Hores",
   "S21_REGULAR_PIONERS": "Precursors regulars",
   "S21_HAS_TO_PARTICIPATE_NOTE": "El publicador ha de tindre marcada la casella de participació per a que el recompte siga efectiu",
-  "S21_SAVE_PDF_REMINDER": "Els fitxers pdf no es desen automàticament. Guarda abans d'abandonar aquesta finestra.",
+  "S21_SAVE_PDF_REMINDER": "Els fitxers pdf no es desen automàticament. Guarda abans d'exportar o d'abandonar aquesta finestra.",
   "S21_HEADER_DETAILS_TITLE": "Detalles de cabecera",
   "S21_HEADER_DETAILS_PUBLISHER_NAME": "Nombre",
   "S21_HEADER_DETAILS_BIRTH_DATE": "Fecha de nacimiento",

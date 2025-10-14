@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
 import { ConfigService } from 'app/config/service/config.service';
 import {
   MonthCodesType,
@@ -33,6 +34,8 @@ import { PDFDocument } from 'pdf-lib';
 export class S21Service {
   configService = inject(ConfigService);
   participantService = inject(ParticipantService);
+  translocoService = inject(TranslocoService);
+
   homeDir = this.configService.homeDir;
 
   TotalHoursFieldCode = '904_32_S21_Value';
@@ -125,6 +128,31 @@ export class S21Service {
     ensureDirSync(path.join(this.configService.s21Path));
   }
 
+  //ToDo: Remove it on new major version
+  getFormatedDate(stringDate) {
+    if (!stringDate) {
+      return null;
+    }
+
+    switch (this.translocoService.getActiveLang()) {
+      case 'es': {
+        // 3. Parsear manualmente dd/MM/yyyy
+        const [dia, mes, año] = stringDate.split('/').map(Number);
+        return new Date(año, mes - 1, dia);
+      }
+      case 'ca': {
+        // 3. Parsear manualmente dd/MM/yyyy
+        const [dia, mes, año] = stringDate.split('/').map(Number);
+        return new Date(año, mes - 1, dia);
+      }
+      case 'en': {
+        return new Date(stringDate);
+      }
+      default:
+        return null;
+    }
+  }
+
   async exportPublisherRegistry(participants: Partial<ParticipantInterface>[]) {
     removeSync(filenamifyPath(path.join(this.homeDir, 'S21Reports')));
 
@@ -133,7 +161,7 @@ export class S21Service {
       const pdf = await this.getPublisherRegistry(p.id);
 
       const isRegularPioner = this.getHeaderFieldValue(pdf, 'regularPioneer');
-      const baptisedDate = this.getHeaderFieldValue(pdf, 'baptismDate');
+      const baptisedDate = this.getFormatedDate(this.getHeaderFieldValue(pdf, 'baptismDate'));
       const publisherRegistryPathWithFileName = await this.getPublisherRegistryFullPath(
         p.id,
         false,
